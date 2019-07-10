@@ -258,7 +258,7 @@ function skylabAirlines (){
                         busquedaPorUser();    
 
                     }else{
-                        alert('Debes introducir ADMIN o USER')
+                        alert('Debes introducir ADMIN o USER');
                         adminU();
                     }
                     
