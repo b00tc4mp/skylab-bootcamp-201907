@@ -91,7 +91,7 @@ function addX(arrayUsers){
     while(playing==true){
       var continuePlaying=prompt("Do you want to keep playing? y/n");
       if(continuePlaying=="y"){
-        checkEvery()
+        checkEvery();
         addX(arrayUsers);
       }else{
         console.log("GOODBYE");
