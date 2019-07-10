@@ -28,7 +28,9 @@ var flights = [
     ];
 
 function airlines() {   
-    var user = prompt("Por favor introduza su usuario: "); //login//
+    do var user = prompt("Por favor introduza su usuario: ");
+    while (user =='');
+    //login//
     alert("Bienvenido/a " + user); 
     for (var i = 0; i < flights.length; i++) { //info vuelos//
       if (flights[i].scale === false) console.log('El vuelo con Origen: ' + flights[i].from + ' y Destino: ' + flights[i].to + ' tiene un precio de ' + 
