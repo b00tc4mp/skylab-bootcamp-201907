@@ -9,7 +9,7 @@
        function randomNum(min,max){
            return Math.floor(Math.random() * (max-min)+min)
         
-       }; randomNum(1,20)
+       } randomNum(1,20)
        
    
        function arrReplaceNum(arr, num) {
