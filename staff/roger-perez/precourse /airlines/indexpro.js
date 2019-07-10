@@ -1,7 +1,4 @@
 let carton = [];
-// carton = carton.sort(function() {return Math.random() - 0.5});
-
-
 function rellenaCarton() {
     let aleat = 0;
     for (const i = 0; i < 15; i++) {
@@ -19,76 +16,67 @@ function randomNum(){
     return numeroBombo;
 }
 
-
-
-
-
 let random = randomNum();
 let numSalidos = []
 let fila1Mostrada = false; 
-let fila2Mostrada = false
-let fila3Mostrada = false
-let continuar = false 
-
+let fila2Mostrada = false;
+let fila3Mostrada = false;
+let continuar = false ;
 
 function turno(){
     carton.forEach(function(item,index){
     if (item == random){
         carton[index] = "X"
         
-        }
+        };
     })
 
 
-    let mensaje = confirm(` Ha salido ${random}, tu cartón de momento va asi: ${carton}. Quieres seguir?`)
+    let mensaje = confirm(` Ha salido ${random}, tu cartón de momento va asi: ${carton}. Quieres seguir?`);
 
-    if(mensaje == false){return false
+    if(mensaje == false){return false;
     }
 
-let fila1 = carton.slice(0, 5)
-let fila2 = carton.slice(5, 10)
-let fila3 = carton.slice(10, 15)
-let isLinea1 = fila1.every(checkNumero)
-let isLinea2 = fila2.every(checkNumero)
-let isLinea3 = fila3.every(checkNumero)
-let isCarton = carton.every(checkNumero)
+let fila1 = carton.slice(0, 5);
+let fila2 = carton.slice(5, 10);
+let fila3 = carton.slice(10, 15);
+let isLinea1 = fila1.every(checkNumero);
+let isLinea2 = fila2.every(checkNumero);
+let isLinea3 = fila3.every(checkNumero);
+let isCarton = carton.every(checkNumero);
     
     if(isLinea1 && !fila1Mostrada){
         alert(`Linea! 1 ${carton}`);
-         fila1Mostrada = true 
+         fila1Mostrada = true ;
     }
     if(isLinea2 && !fila2Mostrada){
         alert(`Linea! 2 ${carton}`);
-         fila2Mostrada = true 
+         fila2Mostrada = true ;
     }
     if(isLinea3 && !fila3Mostrada){
         alert(`Linea! 3 ${carton}`);
-         fila3Mostrada = true 
+         fila3Mostrada = true ;
     }
     if(isCarton){alert(`BINGO! ${carton}`) 
-        return false 
+        return false ;
     } 
-    random = randomNum()
+    random = randomNum();
 }
 
 function checkNumero(elemento){
     if(elemento !== "X"){
-        return false
+        return false;
     }
     else{
-        return true
+        return true;
     }
 }
 
-
-
-
 function partida(){
     do{
-    continuar = turno()  }
+    continuar = turno();  }
 
-    while(continuar != false)}
-
+    while(continuar != false);}
 
 function checkNumeroSal(elemento){
     for(let i = 0 ; i < numSalidos.length ; i++){
@@ -100,47 +88,33 @@ function checkNumeroSal(elemento){
  
 }
 
- 
- 
 function añadirNumerosSalidos(){
 
-    const random = randomNum()
+    const random = randomNum();
 
 
     if(checkNumeroSal(random) === false){
-        numSalidos.push(random)
-        partida()
+        numSalidos.push(random);
+        partida();
 
     } 
    else {
-   random = randomNum()
-    añadirNumerosSalidos()}
+   random = randomNum();
+    añadirNumerosSalidos();}
 }
 
-
-
-
-
-
 function play(){
-    let nombre = prompt('dime tu nombre')
-    rellenaCarton()
-    alert(`Hola ${nombre}, binevenido al Bingo, tu cartón es: ${carton}`)
-    añadirNumerosSalidos()
-    let otra = confirm('Otra partida?')
+    let nombre = prompt('dime tu nombre');
+    rellenaCarton();
+    alert(`Hola ${nombre}, binevenido al Bingo, tu cartón es: ${carton}`);
+    añadirNumerosSalidos();
+    let otra = confirm('Otra partida?');
     if (otra == true){
-       carton = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+       carton = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
        carton = carton.sort(function() {return Math.random() - 0.5});
         play()}
 
-    else{alert('Espero que te haya gustado la partida')} 
+    else{alert('Espero que te haya gustado la partida');} 
     }
 
 play()
-
-
-
-
-
-
-
