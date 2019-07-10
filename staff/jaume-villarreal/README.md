@@ -1,1 +1,1 @@
-[Github](http://github.tictools.com)
+[Github](http://github.com/tictools)
