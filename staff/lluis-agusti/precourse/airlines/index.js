@@ -10,7 +10,7 @@ var flights = [
     {id:08, to:"Shangai", from: "Barcelona", cost:800, scale: true},
     {id:09, to:"Sydney", from: "Barcelona", cost:150, scale: true},
     {id:10, to:"Tel-Aviv", from: "Madrid", cost:150, scale: false},
-]
+];
 
 
 function airlines() {
@@ -79,7 +79,6 @@ function airlines() {
             }
         }
     }
-    console.log("FIN DE PROGRAMA");
 }
 
 function airlinesUser() {
