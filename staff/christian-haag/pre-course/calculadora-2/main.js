@@ -8,7 +8,7 @@
 function numOp(val) {
 	let doc = document.getElementById('screen').value;
 	 if(doc === '0'){
-		 document.getElementById('screen').value = ''
+		 document.getElementById('screen').value = '';
 		 document.getElementById('screen').value += val;	
 	 }else{
 		 document.getElementById('screen').value += val;
@@ -23,7 +23,7 @@ function sqrRoot(){
 }
 
 function result() { 
-	let val = document.getElementById('screen').value 
+	let val = document.getElementById('screen').value;
 	let toEval = eval(val); 
 	document.getElementById('screen').value = toEval;
 	if(val === '-2018'){
@@ -32,7 +32,7 @@ function result() {
 }
  
 function clr() { 
-	let val = document.getElementById('screen').value
+	let val = document.getElementById('screen').value;
 	if(val === '-2018'){
 		hideInfo();
 	}
@@ -43,16 +43,16 @@ function bckSpace() {
 	let val = document.getElementById('screen').value;
 	let split = val.split('');
 	let remove = split.pop();
-	let joinVal = split.join('')
+	let joinVal = split.join('');
 	document.getElementById('screen').value = joinVal; 
 }
 
 document.addEventListener('keypress', (val) => {
-	let doc = document.getElementById('screen').value
+	let doc = document.getElementById('screen').value;
 	
 	if(event.keyCode !== 13){
 		if(doc === '0'){
-		document.getElementById('screen').value = ''
+		document.getElementById('screen').value = '';
 		}
 		document.getElementById('screen').value += val.key;
 		

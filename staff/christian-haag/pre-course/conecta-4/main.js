@@ -16,26 +16,26 @@ const Game = {
         _cols: [[],[],[],[],[],[],[]],
         
         get player(){ 
-            return this._player 
+            return this._player;
         },
 
         get bestOption(){
-            return this._bestOption
+            return this._bestOption;
         },
         get option(){
-            return this._option
+            return this._option;
         },
 
         get history(){ 
-            return this._history 
+            return this._history;
         },
         
         get status(){ 
-            return this._status 
+            return this._status; 
         },
 
         get valueOfCell(){ 
-            return this._valueOfCell * 1 
+            return this._valueOfCell * 1;
         },
 
         get winnerLine(){
@@ -47,7 +47,7 @@ const Game = {
         },
 
         get columNum(){
-            return this._columNum
+            return this._columNum;
         },
         get cols(){
             return this._cols;
@@ -61,26 +61,26 @@ const Game = {
         },
 
         set history(historyIn){
-            this._history = historyIn
+            this._history = historyIn;
         },
         set valueOfCell(cellValueIn){
-            this._valueOfCell = cellValueIn
+            this._valueOfCell = cellValueIn;
         },
 
         set winnerLine(lineIn){
-            this._winnerLine = lineIn
+            this._winnerLine = lineIn;
         },
 
         set lastCell(lastCellIn){
-            this._lastCell = lastCellIn
+            this._lastCell = lastCellIn;
         },
 
         set player(playerIn){ 
-            this._player = playerIn 
+            this._player = playerIn; 
         },
 
         set status(statusIn){ 
-            this._status = statusIn 
+            this._status = statusIn; 
         }, 
         set columNum(numIn){
             this._columNum = numIn;
@@ -98,13 +98,13 @@ const Game = {
         let cellValues = [0];
         
         for(let i = 0; i < rows; i++){
-            tableId.innerHTML += `<tr id="${rowNum}"></tr>`
+            tableId.innerHTML += `<tr id="${rowNum}"></tr>`;
             let tableRowId = document.getElementById(`${rowNum}`);
             for(let j = 0; j < cols; j++){
                 tableRowId.innerHTML += `<td data-id="${cellValues[cellValues.length - 1]}"onClick="Game.replyClickId(this.getAttribute('value'))" id="tdId_${cellValues[cellValues.length - 1]}" value="${cellValues[cellValues.length - 1]}"><div class="chip" id="chip${cellValues[cellValues.length - 1]}"></div></td>`
-                cellValues.push((cellValues.length - 1) + 1)
+                cellValues.push((cellValues.length - 1) + 1);
             }
-            rowNum++
+            rowNum++;
         }
     },
 
@@ -116,7 +116,7 @@ const Game = {
         let winner = this.checkWinner(this._data.history);
         let cell = this._data.lastCell;
         //et tableCellId = document.getElementById(`tdId_${cell}`)
-        let chipId = document.getElementById(`chip${cell}`)
+        let chipId = document.getElementById(`chip${cell}`);
         let history = this._data.history;
         
         if(winner){
@@ -132,8 +132,8 @@ const Game = {
                     this._data.history.splice(this._data.lastCell, 1, 'P1');
                     this._data.status = !this._data.status;
                     this.checkWinner(this._data.history);
-                    this.tie()
-                    this.addScore(this.score.winner, history[this._data.winnerLine[0]])  
+                    this.tie();
+                    this.addScore(this.score.winner, history[this._data.winnerLine[0]]); 
                 };
 
             } else {
@@ -146,7 +146,7 @@ const Game = {
                 this._data.history.splice(this._data.lastCell, 1, 'P2');
                 this._data.status = !this._data.status;        
                 this.checkWinner(this._data.history);
-                this.tie()
+                this.tie();
                 this.addScore(this.score.winner, history[this._data.winnerLine[0]]);     
                 };
             };
@@ -155,55 +155,55 @@ const Game = {
     },
 
     getRandomChip(player,array){
-        let rand = Math.floor(Math.random()*array.length)
+        let rand = Math.floor(Math.random()*array.length);
         if(player === 'P1'){
-            return array[rand] 
+            return array[rand]; 
         }else if(player === 'P2'){
-            return array[rand]
+            return array[rand];
         }
     },
     
     highlightWinner(){
         let arr = this._data._winnerLine;
-        let history = this._data.history
+        let history = this._data.history;
         for(let i = 0; i < arr.length; i++){
             let chip = document.getElementById(`chip${arr[i]}`);
             setTimeout(function(){
                 chip.classList.add('winner')  
-          },i * 100) 
+            },i * 100); 
         }; 
         if(history[arr[0]] === 'P1'){
-            document.getElementById('info-child-1').classList.add('info-winner')
-            document.getElementById('info-child-2').style.borderLeft = 'none'
-            document.getElementById('player1').style.color = '#ffff'
-            document.getElementById('player1').innerHTML = 'GANADOR Jugador 1!'
+            document.getElementById('info-child-1').classList.add('info-winner');
+            document.getElementById('info-child-2').style.borderLeft = 'none';
+            document.getElementById('player1').style.color = '#ffff';
+            document.getElementById('player1').innerHTML = 'GANADOR Jugador 1!';
             
              
         }else if(history[arr[0]] === 'P2'){
             if(this._data.player === 'robot'){
-                document.getElementById('info-child-2').classList.add('info-winner')
-                document.getElementById('info-child-1').style.borderLeft = 'none'
-                document.getElementById('player2').style.color = '#ffff'
-                document.getElementById('player2').innerHTML = 'GANADOR Robot!'
+                document.getElementById('info-child-2').classList.add('info-winner');
+                document.getElementById('info-child-1').style.borderLeft = 'none';
+                document.getElementById('player2').style.color = '#ffff';
+                document.getElementById('player2').innerHTML = 'GANADOR Robot!';
             } else {
-                document.getElementById('info-child-2').classList.add('info-winner')
-                document.getElementById('info-child-1').style.borderLeft = 'none'
-                document.getElementById('player2').style.color = '#ffff'
-                document.getElementById('player2').innerHTML = 'GANADOR Jugador 2!'
-            } 
-        }
+                document.getElementById('info-child-2').classList.add('info-winner');
+                document.getElementById('info-child-1').style.borderLeft = 'none';
+                document.getElementById('player2').style.color = '#ffff';
+                document.getElementById('player2').innerHTML = 'GANADOR Jugador 2!';
+            };
+        };
     },
 
     tie(){
         if(this._data.history.every(x => x !== null)){
-            document.getElementById('info-child-1').classList.add('info-winner')
-            document.getElementById('info-child-2').style.borderLeft = 'none'
-            document.getElementById('player1').style.color = '#ffff'
-            document.getElementById('player1').innerHTML = 'EMPATE!'
-            document.getElementById('info-child-2').classList.add('info-winner')
-            document.getElementById('info-child-1').style.borderLeft = 'none'
-            document.getElementById('player2').style.color = '#ffff'
-            document.getElementById('player2').innerHTML = 'EMPATE'
+            document.getElementById('info-child-1').classList.add('info-winner');
+            document.getElementById('info-child-2').style.borderLeft = 'none';
+            document.getElementById('player1').style.color = '#ffff';
+            document.getElementById('player1').innerHTML = 'EMPATE!';
+            document.getElementById('info-child-2').classList.add('info-winner');
+            document.getElementById('info-child-1').style.borderLeft = 'none';
+            document.getElementById('player2').style.color = '#ffff';
+            document.getElementById('player2').innerHTML = 'EMPATE';
             
         }else{
             return
@@ -213,11 +213,11 @@ const Game = {
     addScore(bol, arg){
         if (bol === true){
             if (arg === 'P1'){
-                this.score.player1++
+                this.score.player1++;
                 document.getElementById('p1').innerHTML = this.score.player1;
 
             } else if (arg === 'P2'){
-                this.score.player2++
+                this.score.player2++;
                 document.getElementById('p2').innerHTML = this.score.player2;
             };
 
@@ -227,7 +227,7 @@ const Game = {
     },
 
     setComputer(arr,info){
-        arr.push(info)
+        arr.push(info);
     },
 
     checkWinner(cell){
@@ -270,16 +270,16 @@ const Game = {
             const [a,b,c,d] = lines[i];
 
             if (cell[d] && cell[d] === cell[c] && cell[d] === cell[b] && cell[a] === null) {
-              this._data.bestOption = a
+              this._data.bestOption = a;
 
             } else if(cell[a] && cell[a] === cell[b] && cell[a] === cell[c] && cell[d] === null ){
-                this._data.bestOption = d
+                this._data.bestOption = d;
 
             } else if(cell[a] && cell[a] === cell[b] && cell[a] === cell[d] && cell[c] === null ){
-                this._data.bestOption = c
+                this._data.bestOption = c;
 
             } else if(cell[a] && cell[a] === cell[c] && cell[a] === cell[d] && cell[b] === null ){
-                this._data.bestOption = b
+                this._data.bestOption = b;
             }
         }
         
@@ -287,10 +287,10 @@ const Game = {
             const [a,b,c,d] = lines[i];
 
              if (cell[a] && cell[a] === cell[b] && cell[a] === cell[c] && cell[a] === cell[d]){
-                this._data.winnerLine = lines[i]
+                this._data.winnerLine = lines[i];
                 this.score.winner = true;
                 this.highlightWinner();
-                return  /*document.getElementById('player').innerHTML = 'Winner: ' + cell[a];*/   
+                return   
             }         
         }
         return null;
@@ -339,34 +339,34 @@ const Game = {
         ];
         let arr = this._data.cols
         for(let i = 0; i < columns.length; i++){
-            const[a,b,c,d,e,f,g] = columns[i]
-            arr[0].push([a].join('')*1)
-            arr[1].push([b].join('')*1)
-            arr[2].push([c].join('')*1)
-            arr[3].push([d].join('')*1)
-            arr[4].push([e].join('')*1)
-            arr[5].push([f].join('')*1)
-            arr[6].push([g].join('')*1)
+            const[a,b,c,d,e,f,g] = columns[i];
+            arr[0].push([a].join('')*1);
+            arr[1].push([b].join('')*1);
+            arr[2].push([c].join('')*1);
+            arr[3].push([d].join('')*1);
+            arr[4].push([e].join('')*1);
+            arr[5].push([f].join('')*1);
+            arr[6].push([g].join('')*1);
         }
     },
 
     setChipPosition(column){
-        let obj = this._data.cols[column][this._data.cols[column].length - 1]
-        this._data.lastCell = obj
+        let obj = this._data.cols[column][this._data.cols[column].length - 1];
+        this._data.lastCell = obj;
 
-        console.log(`Cell clicked: ${this._data.valueOfCell}\nColumn selected: ${this._data.columNum}\nChip position: ${this._data.lastCell}`)
+        console.log(`Cell clicked: ${this._data.valueOfCell}\nColumn selected: ${this._data.columNum}\nChip position: ${this._data.lastCell}`);
 
-        let remove = this._data.cols[column].splice(this._data.cols[column].length - 1, 1)
-        this._data.bestOption = null
+        let remove = this._data.cols[column].splice(this._data.cols[column].length - 1, 1);
+        this._data.bestOption = null;
     },
 
     
     robot(){   
         if (Game._data.player === 'robot' && Game._data.status === true){
             
-            console.log('Best move: ' + this._data.bestOption)
-            console.log('Option: ' + this._data.option)
-            console.log('robot active')
+            console.log('Best move: ' + this._data.bestOption);
+            console.log('Option: ' + this._data.option);
+            console.log('robot active');
             let cell = this._data.lastCell;
             let history = this._data.history; 
             
@@ -374,90 +374,90 @@ const Game = {
                 if (this._data.bestOption !== null){ 
                     
                     if (history[(this._data.bestOption) + 7] === null && history[(this._data.bestOption) + 4] === null && history[(this._data.bestOption) + 11 ]!== null) {
-                        console.log('Statement 0')
+                        console.log('Statement 0');
                         this._data.valueOfCell = history[(this._data.bestOption) + 4];
 
                     } else if (history[cell - 1] === 'P1' && history[cell - 2] === 'P1' && history[cell + 1] === null && history[cell + 8] !== null){
-                        console.log('Statement 0.1')
+                        console.log('Statement 0.1');
                         this._data.valueOfCell = cell + 1;
    
                 
                     } else if (history[cell + 1] === 'P1' && history[cell + 2] === 'P1' && history[cell - 1] === null && history[cell + 5] !== null){
-                                console.log('Statement 0.2')
+                                console.log('Statement 0.2');
                                 this._data.valueOfCell = cell - 1;
      
                             
                     } else if (history[(this._data.computer) + 14] === null){
-                                console.log('Statement 0.3')
-                                let p = [[this._data.computer + 1],[this._data.computer + 2], [this._data.computer + 3],[this._data.computer + 4]]
-                                let r = Math.floor(Math.random() * p.length + 1)
+                                console.log('Statement 0.3');
+                                let p = [[this._data.computer + 1],[this._data.computer + 2], [this._data.computer + 3],[this._data.computer + 4]];
+                                let r = Math.floor(Math.random() * p.length + 1);
                                 this._data.valueOfCell = p[r];
                                       
                         
                     } else if (history[(this._data.computer + 7)] === null && history[(this._data.computer + 14)] !== null) {
-                                console.log('Statement 0.4')
-                                let pos = [[this._data.computer + 1],[this._data.computer + 2], [this._data.computer + 3],[this._data.computer + 4]]
-                                let ran = Math.floor(Math.random() * pos.length + 1)
+                                console.log('Statement 0.4');
+                                let pos = [[this._data.computer + 1],[this._data.computer + 2], [this._data.computer + 3],[this._data.computer + 4]];
+                                let ran = Math.floor(Math.random() * pos.length + 1);
                                 this._data.valueOfCell = pos[ran];
               
                     } else {
-                            console.log('Statement 0.5')
+                            console.log('Statement 0.5');
                             this._data.valueOfCell = this._data.bestOption;       
                     };
 
                 } else if (history[cell - 1] === null && history[cell + 1] === 'P2' || history[cell + 1] === 'P1'){
-                            console.log('Statement 1.1')
-                            let restOne =  cell - 1
-                            this._data.valueOfCell = restOne
-           
+                            console.log('Statement 1.1');
+                            let restOne =  cell - 1;
+                            this._data.valueOfCell = restOne;
+                    
 
                 } else if (history[cell - 1] === 'P1' && history[cell + 1] === null || history[cell + 1] === 'P2'){
-                            console.log('Statement 1.2')
-                            let sumOne =  cell + 1
-                            this._data.valueOfCell = sumOne
+                            console.log('Statement 1.2');
+                            let sumOne =  cell + 1;
+                            this._data.valueOfCell = sumOne;
    
                
                 } else if (history[cell-1] === 'P1' && history[cell + 1] === null && history[cell + 8] === null){
                             console.llog('Statement 1.3')
-                            let p = [[cell + 2],[cell - 1]]
-                            let r = Math.floor(Math.random()* position.length + 1)
+                            let p = [[cell + 2],[cell - 1]];
+                            let r = Math.floor(Math.random()* position.length + 1);
                             this._data.valueOfCell = p[r];
                      
                 
                 } else if (history[cell + 1] === 'P1' && history[cell - 1] === null && history[cell + 6] === null){
-                            console.llog('Statement 1.4')
-                            let p = [[cell + 2],[cell - 1]]
-                            let r = Math.floor(Math.random()* position.length + 1)
+                            console.llog('Statement 1.4');
+                            let p = [[cell + 2],[cell - 1]];
+                            let r = Math.floor(Math.random()* position.length + 1);
                             this._data.valueOfCell = p[r];
           
 
                 } else if (history[cell - 1] === 'P2' && history[cell + 1] === null){
-                            console.log('Statement 1.5')
-                            let sumOne =  cell + 1
-                            this._data.valueOfCell = sumOne
+                            console.log('Statement 1.5');
+                            let sumOne =  cell + 1;
+                            this._data.valueOfCell = sumOne;
          
                 } else if (history[cell + 1] === null && history[cell - 1] === null){
-                            console.log('Statement 1.6')
-                            let position = [[cell + 1],[cell - 1]]
-                            let random = Math.floor(Math.random()* position.length)
+                            console.log('Statement 1.6');
+                            let position = [[cell + 1],[cell - 1]];
+                            let random = Math.floor(Math.random()* position.length);
                             this._data.valueOfCell = position[random];
            
                     
                 };
-                document.getElementById('info-child-1').style.borderLeft = '4px solid  #1541e9'
-                document.getElementById('info-child-2').style.borderLeft = 'none'
+                document.getElementById('info-child-1').style.borderLeft = '4px solid  #1541e9';
+                document.getElementById('info-child-2').style.borderLeft = 'none';
 
             
         };
 
         this.setColumNumber();
-        this.setChipPosition(this._data.columNum)
+        this.setChipPosition(this._data.columNum);
     },
 
     pc(){
         this._data.player = 'robot';
-        document.getElementById('player2').innerHTML = 'Robot'
-        console.log('player: ' + this._data.player)
+        document.getElementById('player2').innerHTML = 'Robot';
+        console.log('player: ' + this._data.player);
     },
 
     newGame(){
@@ -467,28 +467,28 @@ const Game = {
            }
         this.score.winner = false;
         this._data.bestOption = [];
-        this._data.history = Array(42).fill(null),
-        this._data.status =  false,
+        this._data.history = Array(42).fill(null);
+        this._data.status =  false;
         this._data.winnerLine = [];
         this._data.lastCell = [];
         this._data.columNum = []; 
         this.setColumns()
         document.getElementById('info-child-1').style.borderLeft = '4px solid  #1541e9';
-        document.getElementById('info-child-2').style.borderLeft = 'none'
-        document.getElementById('info-child-1').classList.remove('info-winner')
-        document.getElementById('info-child-2').classList.remove('info-winner')
-        document.getElementById('player1').innerHTML = ''
-        document.getElementById('player1').innerHTML = 'Jugador 1'
-        document.getElementById('player1').style.color = '#1541e9'
+        document.getElementById('info-child-2').style.borderLeft = 'none';
+        document.getElementById('info-child-1').classList.remove('info-winner');
+        document.getElementById('info-child-2').classList.remove('info-winner');
+        document.getElementById('player1').innerHTML = '';
+        document.getElementById('player1').innerHTML = 'Jugador 1';
+        document.getElementById('player1').style.color = '#1541e9';
 
         if(this._data.player !== 'robot'){
-            document.getElementById('player2').innerHTML = ''
-            document.getElementById('player2').innerHTML = 'Jugador 2'
-            document.getElementById('player2').style.color = '#1541e9'
+            document.getElementById('player2').innerHTML = '';
+            document.getElementById('player2').innerHTML = 'Jugador 2';
+            document.getElementById('player2').style.color = '#1541e9';
         } else {
-            document.getElementById('player2').innerHTML = ''
-            document.getElementById('player2').innerHTML = 'Robot'
-            document.getElementById('player2').style.color = '#1541e9'
+            document.getElementById('player2').innerHTML = '';
+            document.getElementById('player2').innerHTML = 'Robot';
+            document.getElementById('player2').style.color = '#1541e9';
         }
         
     }
@@ -498,8 +498,8 @@ const Game = {
 
 
 (function(){
-    Game.generateTable(6,7)
-    Game.setColumns()
+    Game.generateTable(6,7);
+    Game.setColumns();
 })();
 
 
@@ -515,13 +515,13 @@ document.getElementById('table').addEventListener('click', function(){
             Game.setColumNumber(); 
     
             if (history[cell] !== 'P1' || history[cell] !== 'P2'){
-                    Game.setChipPosition(Game._data.columNum)
+                    Game.setChipPosition(Game._data.columNum);
                     Game.game();
                     if (Game.score.winner === false && Game._data.player === 'robot'){
                             setTimeout(function(){
                                 Game.robot();
                                 Game.game();    
-                            },1500) 
+                            },1500);
                     };
             };
     } else {
@@ -551,14 +551,14 @@ document.getElementById('robot').addEventListener('click', function(){
    
     let bttn = document.getElementById('robot');
     if(toggle == false){
-       bttn.classList.add('robot_focus')
-       toggle = true 
+       bttn.classList.add('robot_focus');
+       toggle = true;
     }else{
-        bttn.classList.remove('robot_focus')
-        Game._data.player = 'human'
-        document.getElementById('player2').innerHTML = 'Jugador 2'
-        toggle = false
-        console.log('player: ' + Game._data.player)
+        bttn.classList.remove('robot_focus');
+        Game._data.player = 'human';
+        document.getElementById('player2').innerHTML = 'Jugador 2';
+        toggle = false;
+        console.log('player: ' + Game._data.player);
     }
 })
 
