@@ -35,7 +35,7 @@ function skylabAirlines (){
         //espacio para que sea mas visual
             console.log('');
         //ciclo para mostrar un recordatorio de que vuelos tienen escala
-            console.log(usuario + ', ' + 'Te recordamos que los siguientes vuelos tienen minimo una escala.')
+            console.log(usuario + ', ' + 'Te recordamos que los siguientes vuelos tienen minimo una escala.');
         for (var j = 0; j < flights.length; j++){
                 if(flights[j].scale === true){
                     console.log(`${flights[j].to} con destino ${flights[j].from}`);
