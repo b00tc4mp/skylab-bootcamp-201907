@@ -2,7 +2,7 @@ var userName = ""
 
 var carton = [];
 var playing = ;
-var rankingName=[]
+var rankingName=[];
 
 var randomNumberArray=[];
 
@@ -52,7 +52,7 @@ function newTurn() {
         if (continuePlaying == "y") {
             numberTurn += 1;
             var numberRan = randomNumber(numberBingo);
-            numberBingo.push(numberRan)
+            numberBingo.push(numberRan);
             console.log("El número que ha salido ha sido: " + numberRan);
 
             
