@@ -117,7 +117,7 @@ function bingoGame (){
             }else{
                 alert('Hasta la proxima!');
             }
-    };
-};
+    }
+}
 
 bingoGame();
