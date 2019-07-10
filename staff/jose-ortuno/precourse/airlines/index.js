@@ -95,7 +95,7 @@ function panel () {
 function verifyTwo () {
     name = prompt('Parece que no he entendido bien su nombre ¿Me lo puede repetir por favor? (PISTA: debe introducir su nombre en la casilla. ¡De nada!)');
     if (name == 'null') {
-        alert('Al pulsar cancelar entedemos que quiere abortar misión. Espramos verlo en otra ocasión. ¡Que pase un buen día!');
+        alert('Al pulsar cancelar entendemos que quiere abortar misión. Esperamos verlo en otra ocasión. ¡Que pase un buen día!');
     } else if (name == '') {
         verifyTwo ();
     } else {
