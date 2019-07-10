@@ -159,10 +159,10 @@ function functionComa() {
     lastCharacterComa=numberTotal.slice(-1);
     //que no se pueda añadir más de una coma (punto) seguidas
     if (lastCharacterComa=== '.'){
-        
+        return null;
     //compruebo que la variable numeroComas no sea mayor que uno. En tal caso no se puede añadir más comas
     } else if (numberComas>=1 || numberPoints>=1){
-       
+        return null;
     }
      else {
         var nodeComa = document.createTextNode(coma);
