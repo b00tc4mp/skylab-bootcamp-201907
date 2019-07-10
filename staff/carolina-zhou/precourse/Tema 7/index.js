@@ -1,33 +1,5 @@
 // PROYECTO 7: Calculator!
 
-/* 
-No funciona: ?
-
-let display = document.getElementsByClassName("display");
-
-let undo = document.getElementById("undo");
-let coma = document.getElementById("coma");
-let ac =  document.getElementById("ac");
-
-let numZero = document.getElementById("zero");
-let numOne = document.getElementById("one");
-let numTwo = document.getElementById("two");
-let numThree = document.getElementById("three");
-let numFour = document.getElementById("four");
-let numFive = document.getElementById("five");
-let numSix = document.getElementById("six");
-let numSeven = document.getElementById("seven");
-let numEight = document.getElementById("eight");
-let numNine = document.getElementById("nine");
-
-let divide = document.getElementById("divide");
-let multiply = document.getElementById("multiply");
-let substract = document.getElementById("substract");
-let add = document.getElementById("add");
-let equal = document.getElementById("equal");
-*/
-
-
 // Variables:
 
 let display = document.querySelector(".display");
@@ -62,6 +34,36 @@ let num2;
 let operation;
 let float = false;
 let equalized = false;
+
+/* 
+Alternativa resuelta (ejemplo):
+
+let display = document.getElementsByClassName("display");
+
+let undo = document.getElementById("undo");
+let coma = document.getElementById("coma");
+let ac =  document.getElementById("ac");
+
+let numZero = document.getElementById("zero");
+let numOne = document.getElementById("one");
+let numTwo = document.getElementById("two");
+let numThree = document.getElementById("three");
+let numFour = document.getElementById("four");
+let numFive = document.getElementById("five");
+let numSix = document.getElementById("six");
+let numSeven = document.getElementById("seven");
+let numEight = document.getElementById("eight");
+let numNine = document.getElementById("nine");
+
+let divide = document.getElementById("divide");
+let multiply = document.getElementById("multiply");
+let substract = document.getElementById("substract");
+let add = document.getElementById("add");
+let equal = document.getElementById("equal");
+
+numOne.addEventListener('click', function() {console.log(numOne.innerHTML); });
+...
+*/
 
 // Funciones:
 
