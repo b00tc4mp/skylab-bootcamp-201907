@@ -20,7 +20,7 @@ document.addEventListener('keypress', function(event) {
 document.addEventListener('keydown', function(event) {
     var input = event.key;
     specials.includes(input) ? specialHandler(input) : {};
-})
+});
 
 // Listeners on mouse input
 document.addEventListener('click', function(event) {
@@ -31,7 +31,7 @@ document.addEventListener('click', function(event) {
         commands.includes(input) ? commandHandler(input) : {};
         operators.includes(input) ? operatorHandler(input) : {};
     }
-})
+});
 
 function numberHandler(input) {
 /* Check if input is an integer or a decimal dot and display it */
