@@ -19,7 +19,7 @@ function newCarboards(){
       [],
       [],
     ];
-    generateCardBoard()
+    generateCardBoard();
   }else{
     console.log(arrayUsers);
 
