@@ -86,14 +86,14 @@ function newTurn() {
 
             if (numberX == 15) {
                 alert("BINGO");
-                var rankingMarks= ""
+                var rankingMarks= "";
                 console.log("Numero de intentos " + numberTurn);
                 rankingName.push({name:userName, puntos:numberTurn})
                 for (var i = 0; i < rankingName.length; i++) {
                 rankingMarks+= "Name: "+ rankingName[i].name+" - Puntuaciones: "+rankingName[i].puntos+"\n"
-                 }
-                 console.log("Las puntuaciones son:")
-                 console.log(rankingMarks)
+                 };
+                 console.log("Las puntuaciones son:");
+                 console.log(rankingMarks);
 
                 var newPlay = prompt("Desea jugar de nuevo?y/n");
                 if (newPlay == "y") {
@@ -139,7 +139,7 @@ function newGame(askForName) {
 
     if(askForName){
       userName= prompt("Nombre");
-      console.log("Bienvenido al bingo " + userName)
+      console.log("Bienvenido al bingo " + userName);
     }
      
      
@@ -154,8 +154,8 @@ function newGame(askForName) {
 }
 
 function newBingocard(){
-  var newCard= prompt("New Bingo Card y/n")
+  var newCard= prompt("New Bingo Card y/n");
   if(newCard=="y"){
-    newGame(false)
+    newGame(false);
   }
 }
