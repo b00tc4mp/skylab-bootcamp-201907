@@ -1,4 +1,4 @@
-var flights = [
+let flights = [
     { id: 00, to: 'Bilbao', from: 'Barcelona', cost: 1600, scale: false },
     { id: 01, to: 'New York', from: 'Barcelona', cost: 700, scale: false },
     { id: 02, to: 'Los Angeles', from: 'Madrid', cost: 1100, scale: true },

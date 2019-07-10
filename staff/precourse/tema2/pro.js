@@ -21,7 +21,7 @@ let create=function(){
     }
     return flight;
 };
-//FUNCIONES
+
 function pro(){
     let control=true;
     do{
@@ -77,9 +77,7 @@ function user(){
         control=prompt("Enter Y for more operations if no press enter.").toLocaleLowerCase();
     }
 }
-/*
-*Function admin
-*/
+
 function admin(){
     let control="y";
     while(control=="y"){

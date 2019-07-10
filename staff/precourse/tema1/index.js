@@ -1,7 +1,7 @@
 let num1, num2;
 num1=prompt("Enter the number 1: ");
 num2=prompt("Enter the number 2: ");
-calculator(num1, num2)
+calculator(num1, num2);
 function calculator(a,b){
     let result=[];
     let control;

@@ -1,6 +1,5 @@
 let result0=true;
 function bingo(){
-    //var gamer=prompt("What´s your name?");
     let result=true;
     let resFat=true;
     while(resFat){
