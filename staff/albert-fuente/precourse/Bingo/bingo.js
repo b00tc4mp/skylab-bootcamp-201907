@@ -106,7 +106,7 @@ function addX(arrayUsers){
 //creates a NEWNUMBER...............................................  NEWNUMBER
 function randNumber(checkNumber){
   let newNumber=Math.floor(Math.random() * 50)+1;
-  if(checkNumber.includes(newNumber)==true){
+  if(checkNumber.includes(newNumber)){
     randNumber(checkNumber)
   }else{
     if(checkNumber.indexOf(newNumber)===-1){
