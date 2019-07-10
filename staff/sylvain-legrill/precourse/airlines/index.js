@@ -27,8 +27,8 @@ var flights = [
     { id: 09, to: 'Sydney', from: 'Barcelona', cost: 150, scale: true },
     { id: 10, to: 'Tel-Aviv', from: 'Madrid', cost: 150, scale: false }
 ];
-console.log('Welcome to Skylab Airlines, what is your name?');
-
+var name = window.prompt("Welcome to Skylab Airlines! Please add your name:", "");
+    document.write("Hello ", name);
 
 for ( let i = 0; i<flights.length; i++){
     if (flights[i].scale == true) {
