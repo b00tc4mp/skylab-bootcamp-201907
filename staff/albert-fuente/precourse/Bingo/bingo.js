@@ -80,7 +80,7 @@ function addX(arrayUsers){
       for(var j=0;j<arrayUsers[i].length;j++){
 
           if(arrayUsers[i][j]==lastNumber){
-            console.log(arrayUsers[i])
+            console.log(arrayUsers[i]);
             arrayUsers[i][j]="X";
           }
 
@@ -107,7 +107,7 @@ function addX(arrayUsers){
 function randNumber(checkNumber){
   let newNumber=Math.floor(Math.random() * 50)+1;
   if(checkNumber.includes(newNumber)){
-    randNumber(checkNumber)
+    randNumber(checkNumber);
   }else{
     if(checkNumber.indexOf(newNumber)===-1){
       checkNumber.push(newNumber);
