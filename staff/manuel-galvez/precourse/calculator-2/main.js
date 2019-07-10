@@ -16,7 +16,7 @@ document.addEventListener('keypress', function(event) {
     numbers.includes(input) ? numberHandler(input) : {};
     commands.includes(input) ? commandHandler(input) : {};
     operators.includes(input) ? operatorHandler(input) : {};
-})
+});
 document.addEventListener('keydown', function(event) {
     var input = event.key;
     specials.includes(input) ? specialHandler(input) : {};
