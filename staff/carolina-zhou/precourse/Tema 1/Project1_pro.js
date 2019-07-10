@@ -40,7 +40,7 @@ function calculatorPro(nums) {
     resultRaiz = raiz.toFixed(3);
     console.log(resultRaiz);
   } 
-}
+};
 
 function pregunta() {
   let response = confirm("¿Quieres calcular de nuevo? Sí (Aceptar) o No (Cancelar)");
@@ -51,6 +51,6 @@ function pregunta() {
   } else {
     console.log("Ok. ¡Vuelve pronto!");
   }
-}
+};
 
 pregunta();
