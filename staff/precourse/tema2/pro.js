@@ -69,7 +69,7 @@ function user(){
                 console.log("-------------\n")
                 let price=prompt("Enter price to search.");
                 flights.map((elemento)=>price==elemento.cost?console.log(`The flight originating in:${elemento.to}, and destination: ${elemento.from}
-                has a cost of ${elemento.cost}€ and ${elemento.scale?"does":"doesn´t"} scale.`):null)
+                has a cost of ${elemento.cost}€ and ${elemento.scale?"does":"doesn´t"} scale.`):null);
             break;
             default:
                 alert("ERROR");
@@ -96,9 +96,6 @@ function admin(){
                 let id=parseInt(prompt("Enter the id: "));
                 remove(id);
                 console.log("-------------\n");
-                //flights.map((elemento)=>{console.log(`The flight originating in:${elemento.to}, and destination: ${elemento.from}
-                //has a cost of ${elemento.cost}€ and ${elemento.scale?"does":"doesn´t"} scale.`)
-                //})
             break;
             default:
                 alert("ERROR!")
