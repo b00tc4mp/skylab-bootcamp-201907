@@ -1,0 +1,27 @@
+.container {
+    width: 50%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.label{
+    margin-right: 20px;
+    font-size: 1em;
+}
+
+input{
+    font-size: 1.25em;
+}
+
+button{
+    width: 142px;
+}
+
+#output{
+    border: 1px solid #999;
+    text-align: center;
+    font-size: 1.5rem;
+    /* font-weight: bold; */
+}
