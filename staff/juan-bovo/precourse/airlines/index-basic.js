@@ -12,7 +12,7 @@ var flights = [
     { id: 10, to: 'Tel-Aviv', from: 'Madrid', cost: 150, scale: false }
 ];
 
-var usuario = ""
+var usuario = "";
 
 function welcome(){
     usuario = prompt('Le damos la bienvenida a Skylab Airlines. ¿Podrías decirnos su nombre?');
@@ -24,7 +24,7 @@ function welcome(){
             console.log(`El vuelo con origen ${flights[i].from} y destino ${flights[i].to} tiene un coste de ${flights[i].cost} y tiene escalas.`);
         } else if (flights[i].scale === false){
             console.log(`El vuelo con origen ${flights[i].from} y destino ${flights[i].to} tiene un coste de ${flights[i].cost} y no tiene escalas.`);
-        }
+        };
     };
     var costoTotalVuelos = 0
     for (var i = 0; i < flights.length; i++){
@@ -35,16 +35,16 @@ function welcome(){
     for (var i = 0; i< flights.length; i++) {
         if (flights[i].scale === true){
         conteoDeEscalas++
-        }
+        };
     };
     var mensaje4 = `\nESCALAS: \n${conteoDeEscalas} de nuestros vuelos tienen escalas.`
     var ultimosDestinos = []
     for (var i = flights.length - 5; i < flights.length ; i++){
         ultimosDestinos.push(flights[i].to);
-    }
+    };
     var mensaje5 = `\nÚLTIMOS DESTINOS DEL DÍA: \n${ultimosDestinos.join(', ')}`;
-    console.log(mensaje3, '\n', mensaje4, '\n', mensaje5)
+    console.log(mensaje3, '\n', mensaje4, '\n', mensaje5);
     return mensaje1;
 }
 
-welcome()
+welcome();
