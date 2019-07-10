@@ -19,7 +19,7 @@ do{
     if(usAd == 1){
       console.log(`Hola Admin`);
       
-      var optAd = prompt(`Elija una de las siguientes opciones ingresando el número:\n1. Nuevo vuelo.\n2. Eliminar vuelo.`)
+      var optAd = prompt(`Elija una de las siguientes opciones ingresando el número:\n1. Nuevo vuelo.\n2. Eliminar vuelo.`);
   
       switch(optAd){
         
