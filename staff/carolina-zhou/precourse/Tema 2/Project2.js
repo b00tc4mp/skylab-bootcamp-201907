@@ -38,9 +38,9 @@ function airlines() {
     let lastDest = [flights[06].to, flights[07].to, flights[08].to, flights[09].to, flights[10].to];
     console.log("Los últimos vuelos tienen destino: " + lastDest);
     
-}
+};
 
-let response1 = prompt("Introduzca su nombre antes de continuar")
+let response1 = prompt("Introduzca su nombre antes de continuar");
 if (response1 === null || response1 === "") {
     console.log("Ha cancelado o introducido un nombre vacío");
 } else {
@@ -99,7 +99,7 @@ function admin() {
 };
 
 function user() {
-    let z = prompt("¿Busca vuelo por precio? Introduzca: MAYOR A, MENOR A o IGUAL A. ¿Busca comprar un vuelo? Introduzca COMPRA.")
+    let z = prompt("¿Busca vuelo por precio? Introduzca: MAYOR A, MENOR A o IGUAL A. ¿Busca comprar un vuelo? Introduzca COMPRA.");
     if (z === "COMPRA") {
         let b = prompt("¿Quiere comprar un vuelo? Introduzca: YES o NO.")
         if (b === "YES") {
@@ -111,7 +111,7 @@ function user() {
             console.log("Error. Elija una de las dos opciones (YES o NO).")
         }
     } else if (z === "MAYOR A" || z === "MENOR A"|| z === "IGUAL A") {
-        let a = prompt("Introduzca la cantidad de dinero en números:")
+        let a = prompt("Introduzca la cantidad de dinero en números:");
 
             if (z === "MAYOR A") {
                 const result1 = flights.filter(flight => flight.cost > a);
