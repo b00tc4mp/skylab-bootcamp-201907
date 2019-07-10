@@ -26,7 +26,7 @@ do{
         // nuevo vuelo:
         case '1': 
         if(flights.length === 15){
-          alert(`¡No puede ingresar más vuelos!`)
+          alert(`¡No puede ingresar más vuelos!`);
         }else{
             var newFlgt = {};
             newFlgt.id = flights.length;
