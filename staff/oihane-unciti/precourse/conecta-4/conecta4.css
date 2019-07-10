@@ -1,0 +1,44 @@
+body{
+ text-align:center;
+margin:0 auto;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+   
+}
+
+th{
+	border-radius: 50%;
+}
+
+table{
+	width: 450;
+	height: 400;
+	margin: 0 auto;
+}
+
+h1{
+	text-align: center;
+}
+
+.button{
+	text-align: center;
+	margin-top: 8px;
+	margin-bottom: 10px;
+}
+
+#turn{
+	text-align: center;
+	margin-bottom: 8px;
+}
+
+#playYou:active {
+  background: yellow;
+}
+
+.active, .btn:hover {
+  background-color: #666;
+  color: white;
+}
