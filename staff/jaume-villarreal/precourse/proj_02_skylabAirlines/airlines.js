@@ -25,7 +25,7 @@ let getAvalaibleFlights = objFlights => {
     listString += `ID: ${flight.id} => FROM: ${flight.from} -> TO: ${flight.to} <<>> COST ${flight.cost}€ <> [SCALES: ${flight.scale}]\n`;
     });
     return(listString);
-}
+};
 
 let averageCost = objFlights => {
     let acc = 0;
@@ -44,7 +44,7 @@ let getScaleFlights = objFlights => {
         }
     }
     return(currentString);
-}
+};
 
 let getLastFlights = (objFlights , qttyFlights) => {
     let init = objFlights.length - qttyFlights;
@@ -53,7 +53,7 @@ let getLastFlights = (objFlights , qttyFlights) => {
         currentString += `Flight ID: ${objFlights[i].id} => Destination: ${objFlights[i].to}\n`;
     }
     return(currentString);
-} 
+};
 
 //MAIN
 const lastFlights = 5;
