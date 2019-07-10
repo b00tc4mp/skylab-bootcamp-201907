@@ -48,8 +48,8 @@ decimalBtn.onclick=()=>{
     displayValElement.innerText=displayVal;
   }
 }
-var performOperation=(clickObj)=>{
-  var operator=clickObj.target.innerText;
+let performOperation=(clickObj)=>{
+  let operator=clickObj.target.innerText;
   switch (operator) {
     case "+":
       pendingVal=displayVal;
