@@ -1,0 +1,98 @@
+
+body{
+    background-color:#E9E9E9;
+    height:100%;
+    width:100%;
+    padding: 0px;
+    
+}
+h1{
+    text-align: center;
+    color:black;
+    font-family: 'Barriecito', cursive;
+    margin: 5%;
+}
+#logo{
+    
+    width: 40px;
+}
+article{
+    margin-left: 10%;
+    margin-top: 20px;
+    width: 70%;
+    text-align: center;¡
+    position: relative;
+    background-color: white;
+    padding: 5%;
+   border: 1px solid black;
+}
+img{
+    width: 75%;
+    border: 2px solid black;
+}
+button{
+    margin: 2%;
+    width: 50%;
+    font-size: 14px;
+}
+ aside{
+     float: right;
+     width: 200px;
+     
+ }
+
+ #pic{
+     max-width: 100%;
+ }
+ input {
+     width: 90%;
+     height: 50px;
+ }
+ #menu li{
+    display: inline-block;
+    margin-left: 15%; 
+ }
+ #menu {
+    font-family: Arial;
+    font-size: 22px;
+    text-decoration: none;
+    padding: 10px;
+    background-color: black;
+    color: #fff;
+    position: sticky;
+    margin: 0px;
+
+    }
+    #menuFooter li{
+        display: inline-block;
+        margin-left: 15%; 
+     }
+    #menuFooter{
+    font-family: Arial;
+    font-size: 22px;
+    text-decoration: none;
+    padding: 10px;
+    background-color: black;
+    color: #fff;
+    position: sticky;
+    margin-top: 2%;
+    }
+    h3{
+        font-family: 'Barriecito', cursive;
+        margin: 5%;
+    }
+a{
+    text-decoration: none;
+    color: white;
+}
+
+.star-rating a {
+    display: inline-block;
+    color: #95a5a6; 
+  }
+  .star-rating:hover a {
+    color: #f39c12; 
+  }
+    .star-rating:hover a:hover ~ a {
+      color: #95a5a6;
+    }
