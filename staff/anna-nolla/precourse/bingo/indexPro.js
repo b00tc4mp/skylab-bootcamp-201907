@@ -37,6 +37,8 @@ function bingo(){
     var turnos = {};
     var points = 0;
     var j = 0;
+    var yes = ["Y", "y", "yes"];
+    var no = ["N", "n", "no"]
     console.log("Bienvenido " + usuario);
 
     puntos();
@@ -103,10 +105,9 @@ function bingo(){
             do {
                 var newGame = prompt("Would you like to play again ?? Y/N");
                 } 
-            while (newGame != "Y" && newGame != "y" && newGame != "yes" 
-            && newGame != "N" && newGame != "n" && newGame != "no");
+            while (!yes.includes(newGame) && !no.includes(newGame));
 
-            if (newGame == "Y" || newGame == "y" || newGame == "yes"){
+            if (yes.includes(newGame)){
                 j = 0;
                 points = 0;
                 getBingo();
@@ -127,10 +128,9 @@ function bingo(){
         do {
             var newBingo = prompt("Would you like new numbers ?? Y/N");
             } 
-        while (newBingo != "Y" && newBingo != "y" && newBingo != "yes" 
-        && newBingo != "N" && newBingo != "n" && newBingo != "no");
+        while (!yes.includes(newBingo) && !no.includes(newBingo));
 
-        if (newBingo == "Y" || newBingo == "y" || newBingo == "yes"){
+        if (yes.includes(newBingo)){
             getBingo();
             showBingo();
             newCard();
@@ -164,10 +164,9 @@ function bingo(){
         do {
             var getNum = prompt("desea continuear ?? Y/N")
             } 
-            while (getNum != "Y" && getNum != "y" && getNum != "yes" 
-            && getNum != "N" && getNum != "n" && getNum != "no");
+            while (!yes.includes(getNum) && !no.includes(getNum));
 
-        if (getNum == "Y" || getNum == "y" || getNum == "yes"){
+        if (yes.includes(getNum)){
             j++;
             showBingo();
             getNumber();  
