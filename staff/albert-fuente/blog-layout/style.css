@@ -27,16 +27,15 @@ li:hover{
 }
 
 .content{
-    display: flex;
+    display: grid;
+    grid-template-columns: 75% 25%;
 }
 
 .left-box{
-    flex:3;
     
     background-color:#fff;
 }
 .right-box{
-    flex:1;
     background-color:orange;
     display: flex;
     flex-direction: column;
@@ -85,4 +84,24 @@ footer{
     color: #fff;
     text-align: center;
     padding: 10px;
+}
+.links{
+    display: flex;
+    flex-direction: column;
+}
+.links a{
+    color: #333;
+    font-size: 15px;
+    text-decoration: none;
+
+}
+@media(max-width:500px){
+    .right-box{
+        background-color: red;
+        display: flex;
+
+    }
+    .left-box{
+        background-color:#fff;
+    }
 }
