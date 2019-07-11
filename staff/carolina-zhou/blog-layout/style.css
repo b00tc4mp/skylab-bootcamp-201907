@@ -126,7 +126,7 @@ textarea {
      padding: 5px;
  }
 
-.side-content {
+aside {
     display: flex;
     flex: 1;
     flex-direction: column;
