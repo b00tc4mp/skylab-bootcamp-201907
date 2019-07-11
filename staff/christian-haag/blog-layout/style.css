@@ -146,6 +146,7 @@ i {
       "section"
       "article"
       "footer";
+    transition: 0.25s ease-in;
   }
   header {
     grid-area: header;
