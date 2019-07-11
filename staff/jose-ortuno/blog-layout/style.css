@@ -33,9 +33,15 @@ nav {
     width: 100%;
     padding: 20px;
     background-color: grey;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+nav ul li {
+    float: left;
+    margin-right: 20px;
 }
 
 nav a {
