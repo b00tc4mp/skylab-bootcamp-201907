@@ -19,13 +19,15 @@ body {
 .container {
   height: 100%;
   display: grid;
-  grid-template-columns: 25% 1fr;
-  grid-template-rows: 25% 1fr auto;
+  grid-template-columns: 25% auto;
+  grid-template-rows: auto auto auto auto;
   grid-template-areas:
+    "header header"
     "aside section"
     "aside article"
     "footer footer";
 }
+
 a {
   text-decoration: none;
   color: black;
@@ -41,6 +43,7 @@ img {
 }
 
 header {
+  grid-area: header;
   margin: 0;
   background-color: aqua;
 }
@@ -59,13 +62,14 @@ header > h1 {
 aside {
   grid-area: aside;
   background-color: rgb(45, 91, 143);
+  height: auto;
 }
 aside > li {
   display: block;
 }
+
 section {
   grid-area: section;
-
   background-color: rgb(144, 98, 182);
 }
 
@@ -125,4 +129,52 @@ i {
 #p-container2 {
   width: 20%;
   font-size: 11px;
+}
+
+@media (max-width: 700px) {
+  .container {
+    height: 100%;
+    display: grid;
+    grid-template-columns: auto;
+    grid-gap: 5px;
+    grid-template-rows: auto auto auto auto auto;
+    justify-content: center;
+
+    grid-template-areas:
+      "header"
+      "aside"
+      "section"
+      "article"
+      "footer";
+  }
+  header {
+    grid-area: header;
+  }
+  aside {
+    grid-area: aside;
+  }
+  section {
+    grid-area: section;
+  }
+  article {
+    grid-area: article;
+  }
+  footer {
+    grid-area: footer;
+  }
+  .footer-container {
+    text-align: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    padding: 0 25px;
+    margin: auto;
+  }
+
+  #p-container,
+  #p-container2 {
+    width: 40%;
+    font-size: 11px;
+  }
 }
