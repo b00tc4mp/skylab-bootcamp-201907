@@ -28,7 +28,7 @@ body {
 
 img {
   float: left;
-  margin: 10px;
+  margin: 10px 25px;
   width: 25%;
 }
 
@@ -38,6 +38,14 @@ header {
 }
 header > p {
   text-align: center;
+}
+
+article > p {
+  padding: 0 15px;
+}
+header > h1 {
+  margin: 0;
+  padding-top: 15px;
 }
 
 aside {
@@ -52,14 +60,17 @@ section {
 
   background-color: rgb(144, 98, 182);
 }
+
 article {
   grid-area: article;
   background-color: rgb(125, 87, 168);
 }
+
 footer {
   grid-area: footer;
   background-color: rgb(104, 61, 161);
 }
+
 li {
   display: inline-block;
   margin: 10px 25px;
@@ -68,8 +79,12 @@ li {
 p {
   margin: 25px;
   text-align: justify;
+  padding: 0 15px;
 }
 
+aside > p {
+  margin-top: 45px;
+}
 h1 {
   margin: 15px;
 }
@@ -84,6 +99,7 @@ h1 {
   padding: 0 25px;
   margin: auto;
 }
+
 #tech {
   width: 300px;
 }
