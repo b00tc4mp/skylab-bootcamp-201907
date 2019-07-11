@@ -1,0 +1,27 @@
+
+
+header{
+    background-color:black;
+    margin-top: auto;
+    text-align: center;
+    color: white;
+}
+
+nav {
+
+    float: left;
+    width: 15%;
+    margin: 0 15px 0 0;
+    
+}
+
+main {
+    margin-left: 25%;
+}
+
+footer{
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+
