@@ -5,10 +5,6 @@ body {
     color: rgb(0, 0, 0);
 }
 
-.footer1 {
-    margin: 40px;
-}
-
 a {
     text-decoration: none; 
     background-color: none;
@@ -56,11 +52,21 @@ div {
   margin-top: 20px;
 }
 
+.nav1 {
+    padding: 4px;
+    background-color: rgba(234, 238, 17, 0.486);
+    margin: 40px;
+    border-radius: 7px;
+    border: 1px solid rgba(100, 94, 94, 0.979);
+
+}
+
 .nav {
     padding: 10px;
     text-align: center;
     background-image: linear-gradient(to bottom right, rgb(255, 255, 255), rgb(121, 121, 121));
     margin-top: 20px;
+   
   }
 
 @media screen and (max-width: 800px) {
