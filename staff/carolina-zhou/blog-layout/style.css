@@ -118,6 +118,14 @@ textarea {
     font-family: Arial;
  }
 
+ button {
+     background-color: black;
+     color: white;
+     margin-top: 1em;
+     border: none;
+     padding: 5px;
+ }
+
 .side-content {
     display: flex;
     flex: 1;
