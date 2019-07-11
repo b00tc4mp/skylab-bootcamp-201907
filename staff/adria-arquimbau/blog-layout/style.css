@@ -2,7 +2,17 @@ body {
   font-family: Arial;
   padding: 100px;
   background-image: linear-gradient(to bottom right, red, yellow);
-    color: azure;
+    color: rgb(0, 0, 0);
+}
+
+.footer1 {
+    margin: 40px;
+}
+
+a {
+    text-decoration: none; 
+    background-color: none;
+    color: rgb(0, 0, 0);
 }
 
 div {
@@ -13,7 +23,7 @@ div {
   padding: 40px;
   font-size: 20px;
   text-align: center;
-  background-image: linear-gradient(to bottom right, blue, green);
+  background-image: linear-gradient(to bottom right, rgb(255, 255, 255), rgb(121, 121, 121));
 }
 
 .leftcolumn { 
@@ -28,7 +38,7 @@ div {
 }
 
 .card {
-  background-image: linear-gradient(to bottom right, blue, green);
+  background-image: linear-gradient(to bottom right, rgb(255, 255, 255), rgb(121, 121, 121));
   padding: 20px;
   margin-top: 20px;
 }
@@ -42,9 +52,16 @@ div {
 .footer {
   padding: 10px;
   text-align: center;
-  background-image: linear-gradient(to bottom right, blue, green);
+  background-image: linear-gradient(to bottom right, rgb(255, 255, 255), rgb(121, 121, 121));
   margin-top: 20px;
 }
+
+.nav {
+    padding: 10px;
+    text-align: center;
+    background-image: linear-gradient(to bottom right, rgb(255, 255, 255), rgb(121, 121, 121));
+    margin-top: 20px;
+  }
 
 @media screen and (max-width: 800px) {
   .leftcolumn, .rightcolumn { 
