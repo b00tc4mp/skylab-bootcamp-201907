@@ -1,0 +1,186 @@
+body{
+    background-color:#fff;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+
+
+}
+header{
+    background-color:#fff;
+    color: #c1c1c1;
+}
+.barra{
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+
+}
+.barra p{
+    letter-spacing: 2px;
+}
+.b{
+    margin: 10px;
+}
+.mucho{
+    color: #ED3D42;
+    font-weight: bold;
+    margin-right: 100px;
+    font-size: 28px;
+}
+.navlinks{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.navlinks li{
+    padding: 10px;
+    list-style: none;
+    color: #c1c1c1 !important;
+
+}
+.navlinks li a{
+    text-decoration: none;
+    font-size: 14px;
+    color: #c1c1c1;
+}
+.navlinks li a:hover{
+    color:black;
+
+
+}
+
+/*SECTION BOXES*/
+.imagenes{
+    display: grid;
+    grid-template-columns:1fr 1fr 1fr;
+    grid-gap: 3px;
+}
+.box{
+
+    background-color:#00C6F7;
+}
+.box2{
+    height:400px;
+    width: 400px;
+    background-image: url("https://placeimg.com/400/400/any");
+}
+.box2:hover{
+    height:400px;
+    width: 400px;
+    background-image: url("https://placeimg.com/400/400/any");
+    opacity:0.5;
+    font-size: 4rem;
+}
+.about{
+    background-color:#F4F4F4;
+    height:400px;
+    width: 400px;
+    letter-spacing: 2px;
+    padding: 5px;
+}
+.less{
+    color: #AEAEAE;
+}
+.about h4{
+    color: #ED3D42;
+}
+
+/* CONTACT */
+#contact{
+    padding-top:100px;
+    color:#555555;
+    font-size: 20px;
+}
+/*CITIES*/
+.cities{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+.cities div{
+    padding: 100px;
+}
+.c{
+    color: #ED3D42;
+    font-weight: bold;
+}
+
+/*FOOTER*/
+footer{
+    display: grid;
+    grid-template-columns: 80% 20%;
+    font-family: 'Roboto', sans-serif;
+    color:#555555;
+
+
+}
+.media{
+    display: flex;
+}
+.media p{
+    padding: 10px;;
+}
+
+@media(max-width:500px){
+
+    .barra{
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    
+    }
+    .b{
+    }
+    .mucho{
+        color: #ED3D42;
+        font-weight: bolder;
+        margin-right: 100px;
+        font-size: 24px;
+    }
+    .none{
+        display: none;
+    }
+    .imagenes{
+        display: grid;
+        grid-template-columns:1fr;
+        grid-gap: 3px;
+    }
+    /* CONTACT */
+
+    #contact{
+        padding-top:100px;
+        color:#555555;
+        font-size: 12px;
+    }
+    /*CITIES*/
+.cities{
+    display: grid;
+    grid-template-columns: 1fr;
+    font-size: 14px;
+}
+.cities div{
+    padding: 10px;
+}
+/*FOOTER*/
+footer{
+    display: grid;
+    grid-template-areas: 
+    "x"
+    "y";
+    font-family: 'Roboto', sans-serif;
+    color:#555555;
+
+
+
+}
+.copy{
+    grid-area: y;
+    padding: 3px;
+}
+.media{
+    display: flex;
+    grid-area: x;
+}
+.media p{
+    padding: 10px;;
+}
+}
