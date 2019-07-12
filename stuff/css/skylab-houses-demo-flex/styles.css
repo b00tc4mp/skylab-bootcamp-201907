@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css?family=Calligraffitti&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+
+/* House pieces */
+
+body {
+    padding: 0;
+    margin: 0;
+    width: 98vw;
+    height: 100vh;
+    background: #4FC1E9;
+}
+
+h1{
+    padding: 0;
+    margin: 0;
+    color: white;
+    font-size: 70px;
+    text-align: center;
+    font-family: 'Calligraffitti', cursive;
+}
+
+h2{
+    padding: 0;
+    margin: 0;
+    letter-spacing: 20px;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+}
+
+.flex-demo{
+    padding: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.house{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.house-structure{
+    display: flex;
+    width: 100px;
+    height: 100px;
+    background: #FFCE54;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 3px solid lightsalmon;
+    outline: 3px solid black;
+    
+}
+
+.house-roof {
+  z-index: 1;
+	border-left: 70px solid transparent;
+	border-right: 70px solid transparent;
+  border-bottom: 50px solid orangered;
+  border-radius: 15px;
+}
+
+.house-window {
+    width: 25px;
+    height: 25px;
+    margin: 5px;
+    background: lightblue;
+    border: 3px solid black
+}
+
+.house-door {
+    width: 25px;
+    height: 40px;
+    margin-left: 3px;
+    margin-right: 3px;
+    border: 3px solid #591717;
+    background: brown;
+}
+
+/* Windmill */
+
+.windmill{
+    padding: 10px;
+    position: relative;
+    top: 7px
+}
+
+.windmill-base {
+    position: relative;
+    border-bottom: 10px solid #F5F7FA;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      height: 0;
+      width: 10px;
+    right: 8px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+  }
+  .windmill-body {
+    z-index: -1;
+      width: 5px;
+      height: 133px;
+      background: #F5F7FA;
+      border-radius: 5px / 70px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    
+  }
+  .windmill-wing1 {
+    position: relative;
+    top: 120px;
+    width: 4px;
+    height: 70px;
+    background: #E6E9ED;
+    border-radius: 4px / 60px;
+    
+    transform:rotate(30deg);
+    animation: rotate 5s infinite linear;
+}
+.windmill-wing2 {
+    position: relative;
+    top: 50px;
+    width: 4px;
+      height: 70px;
+      background: #E6E9ED;
+      border-radius: 4px / 60px;
+    transform:rotate(120deg);
+    animation: rotate2 5s infinite linear;
+  }
+  @keyframes rotate {
+    from {
+      transform: rotate(30deg);
+    }
+    to { 
+      transform: rotate(390deg);
+    }}
+  @keyframes rotate2 {
+    from {
+      transform: rotate(120deg);
+    }
+    to { 
+      transform: rotate(480deg);
+    }}
+
+/* demo house with 2 windows and a door */
+
+.twoWindows {
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.twoWindows div:nth-child(2) {
+    align-self: flex-end;
+}
