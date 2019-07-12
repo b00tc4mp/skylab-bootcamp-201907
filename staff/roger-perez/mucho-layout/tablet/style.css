@@ -3,7 +3,6 @@ body{
     font-family: 'Montserrat', sans-serif;
     font-weight: 300;
     color: #D3D3D3;
-    height: 100 vh;
 
 }
 .principal{
@@ -105,55 +104,4 @@ h5, .hover {
   .principal:hover {
     opacity: 0.09;
     transition: opacity 500ms;
-  }
-  .tablet{
-      display:none;
-  }
-
-  @media (min-width: 700px){
-    .mobile{
-        display: none
-    }
-      .tablet{
-          display: inline-flex;
-          width: 100%;
-          font-size: 12px;
-      }
-    
-     ul.tabMenu{
-         list-style: none;
-        display: inline-flex; 
-        justify-content: space-between; 
-
-    }
-    ul>li{
-       
-        margin-left: 10px;
-    }
-     .alltablet{
-       margin-top: 0px;
-
-    }
-    h3{
-        margin: 0px 0px 5px 10px;
-    }
-    .arrowDown{
-        margin: 0 10px 5px 2px ;
-    }
-    .container{
-        display: flex;
-      flex-flow:row wrap;
-    }
-    .imagenes{
-        width:49%
-    }
-    footer>p{
-        margin:20px;
-        width: 40%;
-    }
-
-
-
-
-
   }
