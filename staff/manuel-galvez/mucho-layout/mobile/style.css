@@ -1,0 +1,182 @@
+@media screen and (max-width: 768px) {
+
+
+    * {
+        padding:0;
+        margin:0;
+        box-sizing:border-box;
+    }
+
+    body {
+        font-family: 'Roboto', sans-serif;
+        font-weight:300;
+        color:rgba(0,0,0,.5);
+    }
+
+    header {
+        width:100vw;
+    }
+
+    nav {
+        height:100%;
+        display:flex;
+        flex-flow:column wrap;
+        justify-content:flex-start;
+    }
+
+    .nav-logo {
+        padding:4vw;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+    }
+
+    .nav-logo>img {
+        object-fit:cover;
+    }
+
+    .nav-content {
+        font-size:14px;
+        max-width:30vw;
+        display:none;
+    }
+
+    .nav-buttons {
+        display:flex;
+        justify-content:space-evenly;
+        flex-flow:row wrap;
+        display:none;
+    }
+
+    .nav-buttons-mobile {
+        width:100vw;
+        border-top: 1px solid rgba(0,0,0, .4);
+        padding:3vw;
+    }
+
+    .nav-buttons-mobile>a {
+        color:rgba(0,0,0,.5);
+        text-decoration:none;
+        font-size:22px;
+        margin:0 6px
+    }
+
+    .nav-hamburger {
+        width:5vw;
+        height:3vw;
+        border-top: 2px solid rgba(0,0,0,.3);
+        border-bottom: 2px solid rgba(0,0,0,.3);
+        margin-right:1vw;
+    }
+
+    .photo-grid {
+        display:flex;
+        flex-flow:column;
+        width:100vw;
+    }
+
+    .photo-grid-item {
+        height:99vw;
+        width:99vw;
+        margin:3px;
+    }
+
+
+    .photo-grid-item>img {
+        object-fit:cover;
+        height:100%;
+        width:100%;
+    }
+
+    .card {
+        background-color: #f4f4f4;
+        display:flex;
+        flex-direction:column;
+        justify-content:flex-start;
+        padding:20px;
+        height:99vw;
+        width:99vw;
+    }
+
+    .card-title {
+        flex:1;
+        color:rgba(255, 0, 0, .8);
+        font-weight:bold;
+        font-size:14px;
+    }
+
+    .card-content {
+        flex:4;
+        font-weight:400;
+        color:rgba(0,0,0,.9);
+        font-size:20px;
+    }
+
+    .greetings-container {
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        padding:30px;
+        width:100vw;
+        margin-bottom:5vw;
+    }
+
+    .greetings-content {
+        width:50vw;
+        font-size:16px;
+        color:rgba(0,0,0,.9);
+        line-height:1.4em;
+    }
+
+    footer {
+        display:flex;
+        flex-direction:column;
+        justify-content:space-between;
+        padding:3vw;
+
+    }
+
+    address {
+        font-style:normal;
+        margin-bottom:4vw;
+        margin-left:2vw;
+    }
+
+    .details {
+        flex:1;
+        align-self:flex-start;
+    }
+
+    .address {
+        margin-top:20px;
+        flex:1;
+        align-self:flex-end;
+    }
+
+
+    .city {
+        font-size:13px;
+        font-weight:bold;
+        color:rgba(255, 0, 0, .8);
+    }
+
+    .phone-number {
+        font-size:13px;
+        color:rgba(0,0,0,.7);
+    }
+
+    .email-address {
+        font-size:13px;
+        color:rgba(0,0,0,.7);
+    }
+
+    .street {
+        font-size:13px;
+        color:rgba(0,0,0,.7);
+    }
+
+    .postal-address {
+        font-size:13px;
+    }
+
+}
