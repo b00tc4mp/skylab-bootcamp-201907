@@ -10,16 +10,16 @@ header{
     color: #c1c1c1;
 }
 .barra{
-    display: flex;
-    flex-direction: row;
-    padding: 20px;
+    display: grid;
+    grid-template-columns: 20% 40% 40%;
+    padding: 2%;
 
 }
 .barra p{
     letter-spacing: 2px;
 }
 .b{
-    margin: 10px;
+    margin: 5%;
 }
 .mucho{
     color: #ED3D42;
@@ -27,13 +27,19 @@ header{
     margin-right: 100px;
     font-size: 28px;
 }
+.test{
+    display: none;
+}
+
 .navlinks{
     display: flex;
-    justify-content: flex-start;
+    flex-direction: row;
+    justify-content: flex-end;
     align-items: flex-start;
+    align-content: center;
 }
 .navlinks li{
-    padding: 10px;
+    padding-right: 10px;
     list-style: none;
     color: #c1c1c1 !important;
 
@@ -45,8 +51,6 @@ header{
 }
 .navlinks li a:hover{
     color:black;
-
-
 }
 
 /*SECTION BOXES*/
@@ -54,27 +58,42 @@ header{
     display: grid;
     grid-template-columns:1fr 1fr 1fr;
     grid-gap: 3px;
+    height:200vh;
 }
 .box{
 
     background-color:#00C6F7;
 }
 .box2{
-    height:400px;
-    width: 400px;
+    background-size: 100%;
     background-image: url("https://placeimg.com/400/400/any");
+    background-repeat: no-repeat;
+    background-position: center;
+    object-fit: cover;
+    width: 100%;
+    max-height: 100%;
 }
 .box2:hover{
-    height:400px;
-    width: 400px;
-    background-image: url("https://placeimg.com/400/400/any");
-    opacity:0.5;
-    font-size: 4rem;
+    opacity:0.7;
+    transition: opacity 500ms;
+}
+#texting{
+    height:100%;
+    width: 100%;
+    position: relative;
+    left: 20%;
+    z-index: 24;
+    color: transparent;
+}
+#texting:hover{
+    opacity: 1 !important;
+    color: black;
+
 }
 .about{
     background-color:#F4F4F4;
-    height:400px;
-    width: 400px;
+    height:100%;
+    width: 100%;
     letter-spacing: 2px;
     padding: 5px;
 }
@@ -90,6 +109,7 @@ header{
     padding-top:100px;
     color:#555555;
     font-size: 20px;
+    padding-left: 10%;
 }
 /*CITIES*/
 .cities{
@@ -97,7 +117,7 @@ header{
     grid-template-columns: 25% 25% 25% 25%;
 }
 .cities div{
-    padding: 100px;
+    padding: 20%;
 }
 .c{
     color: #ED3D42;
@@ -143,6 +163,20 @@ footer{
         display: grid;
         grid-template-columns:1fr;
         grid-gap: 3px;
+        height: 500vh;;
+    }
+    .test{
+        display: inline-block;
+    }
+    .test p{
+        border-top: 1px solid #AEAEAE;
+    }
+    .test p:last-child{
+        padding: 2px;
+        border-bottom: 1px solid #AEAEAE;
+    }
+    .test p:hover{
+        color: black;
     }
     /* CONTACT */
 
@@ -168,9 +202,6 @@ footer{
     "y";
     font-family: 'Roboto', sans-serif;
     color:#555555;
-
-
-
 }
 .copy{
     grid-area: y;
