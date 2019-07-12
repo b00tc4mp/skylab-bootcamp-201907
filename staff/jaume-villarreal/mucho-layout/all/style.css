@@ -185,6 +185,11 @@ footer .contact{
         height: auto;
         overflow: hidden;
     }
+
+    .article-text{
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 /* ================== */
