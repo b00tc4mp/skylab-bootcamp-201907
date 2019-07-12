@@ -1,10 +1,11 @@
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 1200px) {
 
 
     * {
         padding:0;
         margin:0;
         box-sizing:border-box;
+        font-weight:400;
     }
 
     body {
@@ -14,71 +15,67 @@
     }
 
     header {
-        width:100vw;
+        height:120px;
     }
 
     nav {
-        height:100%;
+        margin-top:30px;
         display:flex;
-        flex-flow:column wrap;
-        justify-content:flex-start;
+        flex-flow:row wrap;
+        align-items:flex-start;
+        justify-content:space-between;
+        padding: 0px 30px;
     }
 
     .nav-logo {
-        padding:4vw;
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
+        max-width:10vw;
     }
 
     .nav-logo>img {
-        object-fit:cover;
+        object-fit:contain;
+        height:100%;
+        width:100%;
     }
 
     .nav-content {
-        font-size:14px;
+        color:rgba(0,0,0,.4);
+        font-size:1.2em;
         max-width:30vw;
-        display:none;
     }
 
     .nav-buttons {
         display:flex;
         justify-content:space-evenly;
         flex-flow:row wrap;
-        display:none;
     }
 
-    .nav-buttons-mobile {
-        width:100vw;
-        border-top: 1px solid rgba(0,0,0, .4);
-        padding:3vw;
-    }
-
-    .nav-buttons-mobile>a {
-        color:rgba(0,0,0,.5);
+    .nav-buttons>a {
+        color:rgba(0,0,0,.4);
         text-decoration:none;
-        font-size:22px;
+        font-size:20px;
         margin:0 6px
-    }
-
-    .nav-hamburger {
-        width:5vw;
-        height:3vw;
-        border-top: 2px solid rgba(0,0,0,.3);
-        border-bottom: 2px solid rgba(0,0,0,.3);
-        margin-right:1vw;
     }
 
     .photo-grid {
         display:flex;
-        flex-flow:column;
+        flex-flow:row wrap;
         width:100vw;
     }
 
     .photo-grid-item {
-        height:99vw;
-        width:99vw;
-        margin:3px;
+        height:25vw;
+        width:25vw;
+    }
+
+    #c {
+        height:48vw;
+        width:48vw;
+    }
+
+    #c>img {
+        object-fit:cover;
+        height:100%;
+        width:100%;
     }
 
 
@@ -94,8 +91,8 @@
         flex-direction:column;
         justify-content:flex-start;
         padding:20px;
-        height:99vw;
-        width:99vw;
+        height:49vw;
+        width:49vw;
     }
 
     .card-title {
@@ -118,28 +115,25 @@
         justify-content:center;
         padding:30px;
         width:100vw;
-        margin-bottom:5vw;
+        margin-bottom:50px;
     }
 
     .greetings-content {
         width:50vw;
-        font-size:16px;
+        font-size:25px;
         color:rgba(0,0,0,.9);
         line-height:1.4em;
     }
 
     footer {
         display:flex;
-        flex-direction:column;
-        justify-content:space-between;
-        padding:3vw;
+        justify-content:space-around;
+        padding:20px;
 
     }
 
     address {
         font-style:normal;
-        margin-bottom:4vw;
-        margin-left:2vw;
     }
 
     .details {
@@ -148,25 +142,25 @@
     }
 
     .address {
-        margin-top:20px;
+        margin-top:30px;
         flex:1;
         align-self:flex-end;
     }
 
 
     .city {
-        font-size:13px;
+        font-size:18px;
         font-weight:bold;
         color:rgba(255, 0, 0, .8);
     }
 
     .phone-number {
-        font-size:13px;
+        font-size:18px;
         color:rgba(0,0,0,.7);
     }
 
     .email-address {
-        font-size:13px;
+        font-size:18px;
         color:rgba(0,0,0,.7);
     }
 
