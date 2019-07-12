@@ -52,6 +52,7 @@ main {
 } */
 
 main div img {
+    grid-auto-flow: row;
     width: 99.5%;
     height: auto;
     padding: 0%;
@@ -59,14 +60,32 @@ main div img {
 }
 
 footer {
-    padding: 10px;
+    padding: 20px;
+    display: flex;
     text-align: center;
+    
 }
+
+footer .cr {
+    width: 85%;
+}
+
+footer .rrss {
+    justify-content: space-around;
+    width: 15%;
+    flex-wrap: wrap;
+}
+
+
 
 @media (min-width: 1200px) {
     main div {
         width: 20%;
         overflow: hidden;
+    }
+
+    main div .warro {
+        width: 40%;
     }
 
     main {
@@ -79,6 +98,7 @@ footer {
         width: 25%;
         overflow: hidden;
     }
+
 
     main {
         flex-wrap: wrap;
@@ -96,7 +116,7 @@ footer {
     }
 }
 
-@media (max-width: 700px) and (min-width: 400px) {
+@media (max-width: 700px) and (min-width: 550px) {
     main div {
         width: 50%;
         overflow: hidden;
@@ -108,7 +128,7 @@ footer {
 }
 
 
-@media (max-width: 400px) {
+@media (max-width: 550px) {
     main div {
         width: 100%;
         overflow: hidden;
@@ -116,11 +136,12 @@ footer {
 
     .head1 img {
         width: 50%;
-       height: auto;
+        height: auto;
     }
+
     .head2 img {
-       width: 50%;
-       height: auto;
+        width: 50%;
+        height: auto;
     }
 
     main {
