@@ -23,9 +23,11 @@ header {
     width: 70%;
 }
 
+
 .head2 {
     width: 30%;
 }
+
 
 .head2 img {
     float: right;
@@ -57,7 +59,7 @@ main div img {
 }
 
 footer {
-    padding: 30px;
+    padding: 10px;
     text-align: center;
 }
 
@@ -94,7 +96,7 @@ footer {
     }
 }
 
-@media (max-width: 700px) and (min-width: 500px) {
+@media (max-width: 700px) and (min-width: 400px) {
     main div {
         width: 50%;
         overflow: hidden;
@@ -106,10 +108,19 @@ footer {
 }
 
 
-@media (max-width: 500px) {
+@media (max-width: 400px) {
     main div {
         width: 100%;
         overflow: hidden;
+    }
+
+    .head1 img {
+        width: 50%;
+       height: auto;
+    }
+    .head2 img {
+       width: 50%;
+       height: auto;
     }
 
     main {
