@@ -1,0 +1,64 @@
+/* flex order for each house, demo here */
+
+.oneWindow{
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: center;
+}
+
+.oneWindowOneDoor{
+    justify-content: space-around;
+}
+
+.oneWindowOneDoor div:last-child {
+    align-self: flex-end;
+}
+
+.full-windows{
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.full-windows .house-window{
+    height: 15%;
+}
+
+.twoDoors{
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.threeWindowsOneDoor{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.threeWindowsOneDoor-windows{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.threeWindowsOneDoor-windows .house-window{
+    min-height: 15px;
+    min-width: 15px;
+}
+
+.threeWindowsOneDoor .house-window{
+    height: 15%;
+    width: 15%;
+}
+
+.threeWindowsOneDoor div:nth-child(4){
+    align-self: flex-end; 
+    justify-self: flex-end; 
+}
+
+.twoDoorsOneWindow{
+    align-items: flex-end;
+}
+
+.twoDoorsOneWindow div:nth-child(2){
+    align-self: flex-start;  
+}
