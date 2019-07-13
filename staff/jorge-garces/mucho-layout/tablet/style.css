@@ -124,8 +124,6 @@ body {
 }
 
 @media (min-width: 768px) {
-
-
   .header {
     border: none;
   }
@@ -134,30 +132,29 @@ body {
     border: 0px;
   }
 
+  #hamburger {
+    display: none;
+  }
 
-#hamburger {
-  display: none;
-}
+  .navi {
+    display: flex;
+  }
 
-.navi {
-  display: flex;
-}
+  .navlist {
+    display: flex;
+    list-style: none;
+    margin: 10px;
+    padding: 10px;
+    font-size: 0.8rem;
+  }
 
-.navlist {
-  display: flex;
-  list-style: none;
-  margin: 10px;
-  padding: 10px;
-  font-size: 0.8rem;
-}
+  .navlist li {
+    padding-right: 15px;
+  }
 
-.navlist li {
-  padding-right: 15px;
-}
-
-.header {
-  justify-content: space-between;
-}
+  .header {
+    justify-content: space-between;
+  }
 
   nav {
     display: flex;
@@ -169,7 +166,6 @@ body {
     margin-top: 9px;
     padding-left: 10px;
   }
-
 
   .image {
     width: 50%;
@@ -187,10 +183,8 @@ body {
 
   .articulo {
     min-width: inherit;
-    min-height: 
     margin-left: 4px;
   }
-
 
   .footer-links {
     display: flex;
@@ -228,5 +222,3 @@ body {
     font-size: 1.4rem;
   }
 }
-
-
