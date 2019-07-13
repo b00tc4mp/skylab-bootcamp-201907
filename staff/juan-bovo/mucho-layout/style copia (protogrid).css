@@ -5,8 +5,10 @@
 
 .website--layout {
     box-sizing: border-box;
+    /* display: flex; */
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     width: 100%;
+    /* clear: both; */
 }
 
 .header--separator {
@@ -73,29 +75,32 @@
     border-bottom: 1px solid rgb(182, 182, 182); 
 }
 
-.navigation__title {
+.navigation h3 {
     font-size: 2em;
     font-weight: lighter;
     padding: 3vh 5vh;
 }
 
-.dropdown__menu {
+.navigation ul {
     display: flex;
     list-style: none;
 }
 
-.dropdown__menu--item {
+.navigation a {
     display: block;
     text-decoration: none;
 }
 
-.dropdown__menu {
+.navigation ul {
     display: none;
 }
 
+/*SOLO SE TOCA ESTO*/
+
 .mosaic--grid {
-    display: grid;
-    grid-template-columns: 100%
+    display: flex;
+    flex-wrap: wrap;
+    /* margin-bottom: 10px; */
 }
 
 .project-div {
@@ -105,6 +110,7 @@
 
 .project-div img{
     width: 100%;
+    height: auto;
 }
 
 .project--title {
@@ -119,17 +125,14 @@
     left: 16px;
 }
 
-.about__section {
-    display: grid;
-    grid-template-columns: 100%;
-    gap: 0.2rem;
-}
-
 .project-description {
+    width: 100%;
     background-color: rgb(233, 233, 233);
     height: 20em;
     color: #333;
 }
+
+/*SOLO SE TOCA ESTO*/
 
 footer{
     clear: both;
@@ -196,16 +199,9 @@ footer{
         font-size: 1em;
     }
 
-    .mosaic--grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0.2rem;
-    }
-
-    .about__section {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0.2rem;
+    .project-div {
+        width: 50%;
+        /* margin: 0.2%; */
     }
 
     .approach--paragraph{
@@ -219,12 +215,13 @@ footer{
     .contact--wrapper{
         flex-direction: row;
         justify-content: space-between;
-        font-size: larger;
     }
     
+
     footer{
         padding-left: 0;
     }
+    
 }
 
 @media (min-width: 1000px) {
@@ -241,31 +238,16 @@ footer{
     }
 
     .mosaic--grid {
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: repeat(7, 1fr);
-        gap: 0.1rem 0.2rem;
+        display: flex;
+        flex-wrap: wrap;
     }
 
-    .about__section {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 0.2rem;
+    .project-div {
+        width: 30%;
     }
 
     .project-div__big {
-        grid-column: 1 / 3;
-    }
-
-    #big1 {
-        grid-row: 2 / 4;
-    }
-
-    #big2 {
-        grid-row: 4 / 6;
-    }
-
-    #big3 {
-        grid-row: 6 / 8;
+        width: 60%;
     }
 
     .addresses--wrapper {
@@ -278,9 +260,5 @@ footer{
 
     .contact--data{
         font-size: 0.8em;
-    }
-
-    .contact--wrapper {
-        font-size: x-large;
     }
 }
