@@ -76,6 +76,26 @@ footer .rrss {
     flex-wrap: wrap;
 }
 
+.contenedorNavInf {
+    display: grid;
+    grid-gap: 5px;
+    padding: 5px 10px 5px 5px;
+}
+
+.footerBox p {
+    color: black;
+    text-size-adjust: 20px;
+}
+
+.footerBox h5 {
+    color: red;
+}
+
+.footerBox {
+    background-color: #F4F4F4;
+    color: white;
+    padding: 10px;
+}
 
 
 @media (min-width: 1200px) {
@@ -91,6 +111,9 @@ footer .rrss {
     main {
         flex-wrap: wrap;
     }
+    .contenedorNavInf {
+        grid-template-columns: 33% 33% 33%;
+    }
 }
 
 @media (max-width: 1200px) and (min-width: 900px) {
@@ -103,6 +126,9 @@ footer .rrss {
     main {
         flex-wrap: wrap;
     }
+    .contenedorNavInf {
+        grid-template-columns: 33% 33% 33%;
+    }
 }
 
 @media (max-width: 900px) and (min-width: 700px) {
@@ -113,6 +139,9 @@ footer .rrss {
 
     main {
         flex-wrap: wrap;
+    }
+    .contenedorNavInf {
+        grid-template-columns: 33% 33% 33%;
     }
 }
 
@@ -125,6 +154,10 @@ footer .rrss {
     main {
         flex-wrap: wrap;
     }
+    .contenedorNavInf {
+        grid-template-columns: 50% 50%;
+    }
+
 }
 
 
@@ -132,6 +165,10 @@ footer .rrss {
     main div {
         width: 100%;
         overflow: hidden;
+    }
+
+    .contenedorNavInf {
+        grid-template-columns: 100%;
     }
 
     .head1 img {
