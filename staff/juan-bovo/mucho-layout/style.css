@@ -1,0 +1,193 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    box-sizing: border-box;
+    /* display: flex; */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 100%;
+    clear: both;
+}
+
+/* body>*{
+    border: 1px dashed grey;
+} */
+
+#header_separator {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(182, 182, 182);
+}
+
+#header-p {
+    display: none;
+}
+
+h1 {
+    color: red;
+    font-weight: bold;
+    font-size: 3em;
+    padding: 4vh 0 4vh 4vh;
+}
+
+nav {
+    display: flex;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav a {
+    display: block;
+    text-decoration: none;
+    color: rgb(182, 182, 182);
+    padding: 5px;
+}
+
+nav a:active{
+    background-color: gray;
+}
+
+nav ul {
+    display: none;
+}
+
+nav p {
+    float: right;
+    font-size: 3em;
+    padding: 4vh;
+    color: gray;
+}
+
+nav p:active span{
+    display: none;
+}
+
+nav p:active::before{
+    content: "X";
+}
+
+.navigation {
+    display: flex;
+    text-align: center;
+    border-bottom: 1px solid rgb(182, 182, 182); 
+}
+
+.navigation h3 {
+    font-size: 2em;
+    font-weight: lighter;
+    color: rgb(182, 182, 182);
+    padding: 3vh 5vh;
+}
+
+.navigation ul {
+    display: flex;
+    list-style: none;
+}
+
+.navigation a {
+    display: block;
+    text-decoration: none;
+}
+
+.navigation ul {
+    display: none;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.project-div {
+    position: relative;
+    margin: 10px;
+}
+
+.project-div img{
+    width: 100%;
+    height: auto;
+}
+
+.project-div > h2 {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    color: white;   
+}
+
+.project-div > p {
+    position: absolute;
+    top: 40px;
+    left: 16px;
+    color: white;   
+}
+
+footer{
+    width: 100%;
+    clear: both;
+    margin-top: 20px;
+    padding: 0px 0px 40px 10px;
+}
+
+#adresses {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+#adresses div{
+    width: 90%;
+}
+
+h5 {
+    color: red;
+}
+
+@media (min-width:600px){
+    #header_separator{
+        border: 0;
+        justify-self: center;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    nav p {
+        display: none;
+    }
+
+    nav ul {
+        display: flex;
+        padding-top: 5vh;
+    }
+
+    nav a {
+        font-size: 1em;
+    }
+
+    #navigators {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .navigation {
+        border: 0;
+    }
+
+    .navigation h3 {
+        padding: 1vh;
+        font-size: 1em;
+    }
+
+    .project-div {
+        width: 49%;
+        margin: 0.5%;
+    }
+}
