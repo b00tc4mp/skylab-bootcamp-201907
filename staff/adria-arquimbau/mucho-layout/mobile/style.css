@@ -10,7 +10,7 @@
 body {
     width: 99vw;
     margin: 0 auto;
-    border: 1px solid;
+    /* border: 1px solid; */
 }
 
 header {
@@ -98,21 +98,39 @@ footer .rrss {
 }
 
 
+
+article {
+    display: grid;
+    grid-gap: 5px;
+}
+article img {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
 @media (min-width: 1200px) {
     main div {
         width: 20%;
         overflow: hidden;
     }
 
-    main div .warro {
-        width: 40%;
-    }
+
 
     main {
         flex-wrap: wrap;
     }
     .contenedorNavInf {
         grid-template-columns: 33% 33% 33%;
+    }
+    article {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+    }
+    .bigImg {
+        
     }
 }
 
@@ -129,6 +147,10 @@ footer .rrss {
     .contenedorNavInf {
         grid-template-columns: 33% 33% 33%;
     }
+    article {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    }
 }
 
 @media (max-width: 900px) and (min-width: 700px) {
@@ -142,6 +164,10 @@ footer .rrss {
     }
     .contenedorNavInf {
         grid-template-columns: 33% 33% 33%;
+    }
+    article {
+        grid-template-columns: 1fr 1fr 1fr;
+
     }
 }
 
@@ -158,6 +184,10 @@ footer .rrss {
         grid-template-columns: 50% 50%;
     }
 
+    article {
+        grid-template-columns: 1fr 1fr;
+
+    }
 }
 
 
@@ -183,5 +213,9 @@ footer .rrss {
 
     main {
         flex-direction: column;
+    }
+    article {
+        grid-template-columns: 1fr;
+
     }
 }
