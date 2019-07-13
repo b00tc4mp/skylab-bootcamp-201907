@@ -135,13 +135,13 @@ footer{
     padding: 0px 0px 40px 10px;
 }
 
-#adresses {
+.addresses--wrapper {
     display: flex;
     width: 100%;
     flex-wrap: wrap;
 }
 
-#adresses div{
+.address--location{
     width: 90%;
 }
 
