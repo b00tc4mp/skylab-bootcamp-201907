@@ -1,5 +1,34 @@
 .header {
   display: flex;
+  border-bottom: 1px solid #ccc;
+}
+.header__logo {
+  border: 1px solid;
+}
+.header__presentation {
+  display: none;
+}
+.header__max-nav {
+  display: none;
+}
+.header__min-nav {
+  width: 50%;
+}
+
+.min-nav__icon {
+  width: 10%;
+}
+
+.secondary-nav {
+  display: column;
+  font-size: 100;
+  color: #ccc;
+}
+.secondary-nav__services {
+  border-bottom: 1px solid #cccccc;
+}
+.secondary-nav__industries {
+  border-bottom: 1px solid #cccccc;
 }
 
 /*# sourceMappingURL=style.css.map */
