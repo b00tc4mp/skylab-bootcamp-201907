@@ -1,0 +1,17 @@
+.header__logo {
+  font-family: verdana;
+  font-size: 12px;
+}
+
+.header {
+  background-color: red;
+  width: 500px;
+  height: 500px;
+  margin: 10px;
+  padding: 15px;
+}
+.header__logo {
+  background-color: black;
+}
+
+/*# sourceMappingURL=output.css.map */

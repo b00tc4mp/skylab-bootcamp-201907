@@ -1,0 +1,16 @@
+=sizes($width,$height,$margin,$padding)
+    width: $width
+    height: $height
+    margin: $margin
+    padding: $padding
+%font
+    font-family: verdana
+    font-size: 12px
+
+.header
+    background-color: red 
+    +sizes(500px,500px,10px,15px)
+
+    &__logo
+        background-color: black
+        @extend %font 
