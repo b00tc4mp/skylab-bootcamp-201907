@@ -142,7 +142,7 @@
   position: relative;
   margin: 0.5% 0;
 }
-.mosaic__tile img {
+.mosaic__tile > img {
   width: 100%;
   height: auto;
   display: flex;
@@ -150,7 +150,7 @@
   align-items: center;
   transition: opacity 0.5s ease-out;
 }
-.mosaic__tile img:hover {
+.mosaic__tile > img:hover {
   opacity: 0.25;
 }
 .mosaic__text {
@@ -375,37 +375,40 @@
 
   .mosaic {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-auto-rows: 5%;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(12, 1fr);
     grid-gap: 2px;
   }
   .mosaic__tile {
     width: 100%;
-    height: auto;
-    overflow: hidden;
+  }
+  .mosaic__tile > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .mosaic__article {
     width: 100%;
   }
 
-  .mosaic__tile--expand-grid1 {
+  .tile--expand-grid1 {
     grid-area: 2/1/4/3;
   }
 
-  .mosaic__tile--expand-grid2 {
+  .tile--expand-grid2 {
     grid-area: 4/1/6/3;
   }
 
-  .mosaic__tile--expand-grid3 {
-    grid-area: 4/1/8/3;
+  .tile--expand-grid3 {
+    grid-area: 6/1/8/3;
   }
 
-  .mosaic__tile--expand-grid4 {
-    grid-area: 6/1/10/3;
+  .tile--expand-grid4 {
+    grid-area: 8/1/10/3;
   }
 
-  .mosaic__tile--expand-grid5 {
-    grid-area: 8/1/12/3;
+  .tile--expand-grid5 {
+    grid-area: 10/1/12/3;
   }
 }
 
