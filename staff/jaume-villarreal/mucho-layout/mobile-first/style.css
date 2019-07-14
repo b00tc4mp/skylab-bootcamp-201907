@@ -315,32 +315,23 @@
 @media (min-width: 1024px) {
   .top-navigation {
     padding: 2% 0.5% 1%;
-    padding-justify-content: space-around;
+    padding-justify-content: flex-start;
     padding-align-items: flex-start;
   }
   .top-navigation__logo {
-    width: 15%;
-    padding-left: 3rem;
-  }
-  .top-navigation__logo > img {
-    width: 55%;
-    padding-top: 0.15rem;
-    height: auto;
+    width: 10%;
+    border: 1px solid orange;
   }
   .top-navigation__presentation {
     display: block;
     margin: 0;
-    padding: 1rem 0 0 1rem;
-    width: 45%;
-    font-size: 0.75rem;
-    color: #999;
+    width: 50%;
+    border: 1px solid red;
+    font-size: 0.9rem;
   }
   .top-navigation__max-nav {
     witdh: 25%;
-  }
-
-  .secondary-nav {
-    display: none;
+    border: 10px solid green;
   }
 }
 
