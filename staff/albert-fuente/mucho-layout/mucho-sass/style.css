@@ -25,7 +25,7 @@ header {
   text-decoration: none;
 }
 .barra p a:hover {
-  color: black;
+  color: #000;
 }
 .barra .b {
   margin: 5%;
@@ -58,7 +58,7 @@ header {
   color: #c1c1c1;
 }
 .barra .navlinks li a:hover {
-  color: black;
+  color: #000;
 }
 
 .mobile {
@@ -69,29 +69,80 @@ header {
 /*block images*/
 .imagenes {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 3px;
-  height: 200vh;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-rows: 0.5fr;
+  grid-gap: 7px;
+  height: 180vh;
 }
 
 /*element box from block images*/
 .imagenes__box {
   background-size: 100%;
-  background-image: url("https://placeimg.com/400/400/any");
   background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
 }
 .imagenes__box:hover {
-  opacity: 0.7;
-  transition: opacity 500ms;
+  opacity: 0.75;
+  transition: all 0.5s ease-out;
+  filter: invert(1);
 }
 
 .one {
-  grid-column: 1/3;
+  background-image: url("https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2019/06/19154127/01-634x452@2x.jpg");
+}
+
+.two {
+  background-image: url("https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2017/10/09084320/Thumbnail-634x452@2x.png");
+}
+
+.three {
+  background-image: url("https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2016/08/11024033/PayPal_Logo_Mucho-634x452@2x.png");
+}
+
+.four {
+  background-image: url("https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2019/03/04194725/Alpine_LHead_01-634x452@2x.jpg");
+}
+
+.five {
+  background-image: url("https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2019/02/06003449/190205_Paradigm_Headquarters-1273x909@2x.png");
+}
+
+.six {
+  background-image: url("https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2017/09/11021445/Dolby_Logo_Mucho-2-634x452@2x.png");
 }
 
 .seven {
-  grid-column: 2/4;
+  background-image: url("https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2006/08/01171114/WallpaperThumb-634x452@2x.jpg");
+}
+
+.eight {
+  background-image: url("https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2018/02/28181600/Cover_Vagina_Cottin_feature-634x452@2x.jpg");
+}
+
+.nine {
+  background-image: url("https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2018/02/13232343/Mucho_Baker_Case-study_Image_8000x5333px_1-634x452@2x.jpg");
+}
+
+.ten {
+  background-image: url("https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2018/06/12073017/Margiela_Mucho_Spine-634x452@2x.jpg");
+}
+
+.eleven {
+  background-image: url("https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2019/03/04194725/Alpine_LHead_01-634x452@2x.jpg");
+}
+
+.twelve {
+  background-image: url("https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2019/06/19154127/01-634x452@2x.jpg");
+}
+
+.three {
+  grid-column: 3/5;
+  grid-row: 1/3;
+}
+
+.seven {
+  grid-column: 1/3;
   grid-row: 3/5;
 }
 
@@ -99,15 +150,22 @@ header {
 .imagenes__texting {
   height: 100%;
   width: 100%;
-  text-align: center;
-  left: 0;
+  text-align: left;
+  padding-left: 5%;
+  padding-top: 2%;
   color: transparent;
   margin: 0;
 }
-
 .imagenes__texting:hover {
-  opacity: 1 !important;
-  color: black;
+  z-index: 2;
+  color: black !important;
+}
+.imagenes__texting > h4 {
+  color: #ED3D42;
+}
+
+.paradigm:hover {
+  color: #333 !important;
 }
 
 /*element about from block images*/
@@ -118,6 +176,9 @@ header {
   letter-spacing: 2px;
   padding: 5px;
 }
+.imagenes__about > h4 {
+  color: #ED3D42;
+}
 
 /*modifier from block images*/
 .imagenes--link {
@@ -125,16 +186,12 @@ header {
   text-decoration: none;
 }
 
-.imagenes__about h4 {
-  color: #ED3D42;
-}
-
 /* CONTACT */
 .contact {
-  padding-top: 100px;
+  padding-top: 7%;
   color: #555555;
   font-size: 20px;
-  padding-left: 10%;
+  padding-left: 5%;
 }
 
 /*CITIES*/
@@ -148,6 +205,7 @@ header {
 .cities--city {
   color: #ED3D42;
   font-weight: bold;
+  font-size: 20px;
 }
 
 .cities div {
@@ -164,12 +222,21 @@ footer {
 
 .media {
   display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .media p {
-  padding: 10px;
+  padding-right: 10px;
 }
 
+@media (max-width: 800px) {
+  .cities {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    font-size: 16px;
+  }
+}
 @media (max-width: 500px) {
   .barra {
     display: flex;
@@ -191,16 +258,17 @@ footer {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 3px;
-    height: 500vh;
+    height: 600vh;
   }
 
-  .one {
+  .three {
     grid-column: 1/2;
+    grid-row: 3/4;
   }
 
   .seven {
     grid-column: 1/2;
-    grid-row: 1/2;
+    grid-row: 4/5;
   }
 
   .mobile {
@@ -217,12 +285,12 @@ footer {
   }
 
   .mobile p:hover {
-    color: black;
+    color: #000;
   }
 
   /* CONTACT */
   .contact {
-    padding-top: 100px;
+    padding-top: 16%;
     font-size: 12px;
   }
 
@@ -258,8 +326,6 @@ footer {
   .media p {
     padding: 10px;
   }
-
-  /*COMO APLICAR CORRECTAMENTE MODIFICADORES EN BEM ?????!!!!! */
 }
 
 /*# sourceMappingURL=style.css.map */
