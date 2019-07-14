@@ -1,3 +1,8 @@
+.navigation {
+  width: 95vw;
+  margin: 0 auto 0.5rem;
+}
+
 .foot_info {
   width: 90%;
   margin: 0 auto;
@@ -70,7 +75,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flewx-start;
-  padding: 4.5% 5.5%;
+  padding: 3% 1% 2%;
   bottom: 50px;
   border-bottom: 1px solid #ccc;
 }
@@ -104,7 +109,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 4%;
+  padding: 0 0 0 4%;
   border-bottom: 1px solid #ccc;
 }
 .secondary-nav__row .row__title {
@@ -221,7 +226,7 @@
 }
 @media (min-width: 641px) {
   .top-navigation {
-    padding: 2% 5.5% 1%;
+    padding: 2% 1.25% 1%;
     border: 0;
   }
   .top-navigation__logo > img {
@@ -239,7 +244,7 @@
   .top-navigation__max-nav > ul > li {
     list-style-type: none;
     padding-right: 1rem;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
   }
   .top-navigation__max-nav > ul > li > a {
     text-decoration: none;
@@ -260,12 +265,12 @@
   }
   .secondary-nav__row {
     border-bottom: 0;
-    justify-content: flex-end;
+    justify-content: space-evenly;
     padding: 0;
     width: 8rem;
   }
   .secondary-nav .row__title {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
   }
   .secondary-nav .row__icon {
     width: 20%;
@@ -314,13 +319,13 @@
 }
 @media (min-width: 1024px) {
   .top-navigation {
-    padding: 2% 0.5% 1%;
-    padding-justify-content: space-around;
+    padding: 1.5% 0.5% 1%;
+    padding-justify-content: flex-start;
     padding-align-items: flex-start;
   }
   .top-navigation__logo {
     width: 15%;
-    padding-left: 3rem;
+    padding-top: 1rem;
   }
   .top-navigation__logo > img {
     width: 55%;
@@ -330,10 +335,15 @@
   .top-navigation__presentation {
     display: block;
     margin: 0;
-    padding: 1rem 0 0 1rem;
+    padding: 1rem 0 0 0;
     width: 45%;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 300;
+    line-height: 1.25rem;
     color: #999;
+  }
+  .top-navigation__presentation > span {
+    display: block;
   }
   .top-navigation__max-nav {
     witdh: 25%;
