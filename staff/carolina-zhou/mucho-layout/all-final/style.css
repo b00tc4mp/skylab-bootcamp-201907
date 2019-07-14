@@ -14,6 +14,9 @@ a {
   color: darkgray;
 }
 
+.header {
+  padding: 25px;
+}
 .header__main {
   height: 40px;
   position: sticky;
@@ -112,7 +115,9 @@ a {
   color: black;
   margin: 1em 0 0 1em;
 }
-
+.footer{
+  padding: 25px;
+}
 .footer__address {
   font-style: normal;
   color: grey;
