@@ -1,4 +1,4 @@
-/* Layout all-compo-mosaic-grid */
+/* Layout all - responsive */
 /* ----- ----- RESET ----- ----- */
 * {
     margin: 0;
@@ -28,8 +28,80 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
 /* ----- ----- HEADER ----- ----- */
-/* ... */
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.logo {
+    padding: 17px 20px 47px;
+}
+
+/* mobile */
+/* Border mobile */
+/* .border {
+    border-bottom: 1px solid #969494;
+} */
+
+.logo > i,
+nav {
+    font-size: 1.2rem;
+    align-self: flex-start;
+}
+
+.logo > i,
+nav > ul > li > i {
+    align-self: flex-end;
+}
+
+.claim > p {
+    font-size: 1.2rem;
+    padding: 0 180px 0 120px;
+}
+
+/* ----- ----- HEADER - MENU ----- ----- */
+
+header > nav > ul,
+.logo > nav > ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+.logo > nav > ul > li {
+    align-self: flex-end;
+}
+
+.logo > nav > ul > li {
+    margin-left: 10px;
+}
+
+nav > ul > li {
+    display: flex;
+    flex-direction: row;
+}
+
+nav > ul > li > i {
+    margin-left: 10px;
+}
+
+header > nav > ul > li {
+    padding: 14px 20px 14px;
+}
+
+header > a > img {
+    width: 80%;
+}
+
+header > i {
+    align-self: center;
+}
 /* ----- ----- MAIN ----- ----- */
 
 .mosaic {
@@ -45,6 +117,22 @@ a:hover {
     width: 100%;
     height: 100%;
     margin: 0.3%;
+    position: relative;
+}
+
+.image-wrapper p {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background-color: rgb(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: opacity .3s ease-out;
+}
+
+.image-wrapper p:hover {
+    opacity: 1;
+
 }
 
 .image-wrapper > img {
@@ -78,10 +166,79 @@ a:hover {
     color: black; 
 }
 
-/* ----- ----- MAIN - CLAIM ----- ----- */
 /* ----- ----- FOOTER ----- ----- */
+
+footer {
+    margin-bottom: 25px;
+}
+
+/* ----- ----- FOOTER - CLAIM ----- ----- */
+
+.claim2 {
+    width: 60%;
+}
+
+.claim2 > p {
+    padding: 50px 30px;
+    font-size: 1.7rem;
+}
+
 /* ----- ----- FOOTER - ADDRESS ----- ----- */
-/* ----- ----- FOOTER - SOCIAL ----- ----- */
+
+.address {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.address address {
+    width: 25%;
+}
+
+.address,
+.subfooter {
+    margin: 0 20px;
+}
+
+.address > address {
+    padding: 20px 0;
+}
+
+.address > address > p { 
+    margin-top: 10px;
+}
+
+/* ----- -----  FOOTER - SOCIAL ----- ----- */
+
+.subfooter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.subs {
+    display: flex;
+    flex-direction: row;
+}
+
+.social,
+.subs p  {
+    align-self: flex-end;
+}
+
+.subs p {
+    margin-right: 10px;
+}
+
+.subfooter p {
+    order: -1;
+}
+
+.social > i {
+    margin-right: 5px;
+}
 
 /* ----------------------------- */
 /* MEDIA QUERIES */
@@ -156,7 +313,7 @@ a:hover {
     /* ----- ----- MAIN - MOSAIC - IMG - GRID ----- ----- */
 
     .mosaic {
-        grid-template-columns: repeat( 4, minmax(24vw, 1fr) );
+        grid-template-columns: repeat( auto-fit, minmax(24vw, 1fr) );
     }
 
     .image-3 {
