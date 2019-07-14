@@ -94,10 +94,11 @@ header
     left: 0
     color: transparent
     margin: 0
-
-.imagenes__texting:hover
-    opacity: 1 !important
-    color: $secondary-font-color
+    &:hover
+        opacity: 1 !important
+        color: $secondary-font-color
+    > h4
+        color: $title-color
 
 /*element about from block images*/
 .imagenes__about
@@ -111,9 +112,6 @@ header
 .imagenes--link
     color: $main-font-color
     text-decoration: none
-
-.imagenes__about h4
-    color: $title-color
 
 /* CONTACT */
 .contact
