@@ -110,10 +110,12 @@ a {
 .main__article-title {
   color: red;
   margin: 1em 0 0 1em;
+  font-size: 14px;
 }
 .main__article-text {
   color: black;
   margin: 1em 0 0 1em;
+  font-size: 12px;
 }
 .footer{
   padding: 25px;
@@ -226,7 +228,7 @@ a {
   }
   .main__article {
     margin: 3px;
-    min-width: 45%;
+    max-width: 45%;
   }
 
   .footer__text {
@@ -241,7 +243,6 @@ a {
     padding: 0;
     width: 30%;
   }
-
   .main__content {
     padding: 5px;
     display: grid;
@@ -257,12 +258,10 @@ a {
     margin: 3px;
     min-height: auto;
   }
-
   #img3, #img5, #img8, #img11, #img16 {
     grid-row: span 2;
     grid-column: span 2;
   }
-
   .footer__text {
     width: 50%;
   }
