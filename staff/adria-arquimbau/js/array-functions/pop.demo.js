@@ -1,7 +1,6 @@
-console.log('DEMO: pop');
+console.log('DEMO:  pop');
 
 var array = [1, 2, 3];
-console.log('array', array);
 
 console.log('pop');
 var result = pop(array);
