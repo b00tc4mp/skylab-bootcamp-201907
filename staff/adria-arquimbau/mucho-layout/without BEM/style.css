@@ -34,6 +34,10 @@
 
 }
 
+
+.bigImg:hover{
+    opacity: 0.5;
+}
 .nav {
     display: flex;
     padding: 20px;
