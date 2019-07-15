@@ -1,0 +1,32 @@
+body{
+    background-color: rgba(35, 142, 225, 0.69);
+    color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    box-sizing: border-box;
+}
+header{
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+    margin-left: 3%;
+}
+footer{
+    display: flex;
+    justify-content: center;
+    margin-left: 3%;
+}
+ul{
+    display:flex;
+    flex-direction: row;
+    align-content: space-between;
+    justify-content: center;
+    list-style-type: none;
+}
+li{
+    padding: 3%;
+    background-color: blue;
+    justify-content: space-around;
+    margin:0.3%;
+}
