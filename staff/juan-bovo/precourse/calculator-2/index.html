@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Calculator 2 - Skylab - Juampi</title>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<h1>Calculator 2</h1>
+
+<div class="calculator">
+  <div class="screen"><p id="results">0</p></div>
+  <div class="clear" id="clearAll" title="Clear All" onclick="clearAll()">CA</div>
+  <div class="clear" id="clear" title="Backspace" onclick="backspace()">C</div>
+  <div class="operation" id="divide" onclick="opSign('/')">%</div>
+  <div class="operation" id="multiply" onclick="opSign('*')">x</div>
+  <div class="operation" id="minus" onclick="opSign('-')">-</div>
+  <div class="operation" id="addition" onclick="opSign('+')">+</div>
+  <div class="operation" id="equals" onclick="getResults()">=</div>
+  <div class="button" id="item9" onclick="opNumber(9)">9</div>
+  <div class="button" id="item8" onclick="opNumber(8)">8</div>
+  <div class="button" id="item7" onclick="opNumber(7)">7</div>
+  <div class="button" id="item6" onclick="opNumber(6)">6</div>
+  <div class="button" id="item5" onclick="opNumber(5)">5</div>
+  <div class="button" id="item4" onclick="opNumber(4)">4</div>
+  <div class="button" id="item3" onclick="opNumber(3)">3</div>
+  <div class="button" id="item2" onclick="opNumber(2)">2</div>
+  <div class="button" id="item1" onclick="opNumber(1)">1</div>
+  <div class="button" id="item0" onclick="opNumber(0)">0</div>
+  <div class="button" id="item-comma" onclick="opNumber('.')">,</div>
+</div>
+
+
+
+</body>
+<script src="index.js"></script>
+
+</html>

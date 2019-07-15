@@ -1,0 +1,115 @@
+body{
+    background-color: lightblue;
+    margin: 0%;
+}
+
+header{
+    background-image: url(https://www.bates.edu/wordpress/files/2016/07/pattern1.jpg);
+    background-repeat: repeat-x;
+    background-attachment: fixed;
+    height: 167px;
+}
+nav, aside{
+    background-color: aquamarine;
+}
+nav{
+    height: 100px;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+footer{
+    background-color: darkslategray;
+    margin-top: 25px;
+}
+button{
+    background-color: cornflowerblue;
+    color: white;
+    width: 100px;
+    height: 70px;
+    margin: 10px 10px;
+    border: none; 
+}
+article{
+    border-left: 9px solid burlywood;
+    margin-left: 5px;
+    box-sizing: border-box;
+}
+form{
+    box-sizing: content-box;
+}
+textarea:active{
+    border: 4px inset;
+    border-radius: 3px;
+    content: "";
+}
+input{
+    background-color: cornflowerblue;
+    border: none;
+    padding: 8px 15px;
+    box-sizing: border-box;
+    width: 265px;
+    margin-right: 15px;
+    margin-left:  0.5px;
+}
+aside{
+    border: 4px outset cornflowerblue;
+    margin: 15px 0px;
+    margin-right: 25px;
+    height: 50vw;
+    width: 20vw;
+    box-sizing: content-box;
+    text-align: center; 
+    flex: 1;
+}
+li{
+    list-style-type: none;
+}
+h3{
+    margin:0;
+}
+h1{
+    margin: 5px;
+    display: inline-block;
+    left: 100px;
+}
+h2{
+    padding: 14px;
+}
+ul.lista{
+    margin: 10px 0px;
+    padding: 0px;
+}
+h2{
+    margin-bottom: 9px;
+}
+.parrafo{
+    margin: 8px 0 6px;
+}
+main{
+    width: 77%;
+    display: flex;
+}
+#contact{
+    color: floralwhite
+}
+.margen{
+    margin-left: 10px;
+}
+#follow{
+    margin: 80px 0px 0px 30px;
+    color: floralwhite;
+}
+.bajo{
+    width: 35px;
+    height: 35px;
+}
+#rote{
+    float: inline-start;
+}
+section{
+    margin-right: 100px;
+    flex: 1;
+}

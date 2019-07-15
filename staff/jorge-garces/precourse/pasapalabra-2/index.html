@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Pasapalabra</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lobster|Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="title">
+      <h1>Skylab Pasapalabra</h1>
+    </div>
+
+    <div class="scores" style="display:none">
+      <div id="hall">HALL OF FAME</div>
+      <hr />
+      <div id="generated"><p></p></div>
+    </div>
+
+    <div class="quitter" style="display:none">
+      <div id="quittMsg">QUITTER!</div>
+      <div id="quitters">
+        <p>You got <span id="righties">3</span> answers right</p>
+      </div>
+    </div>
+
+    <div class="welcome" style="display:block">
+      <p>
+        Bienvenido al Pasapalabra de Skylab!<br /><br />
+
+        El juego consiste en acertar las veintisiete palabras, cada una de las
+        cuales se corresponde con una letra de la lista para la que se ofrece
+        una definición relativa a un concepto. Los aciertos se reflejarán en las
+        letras mediante el color verde, mientras que los fallos se mostrarán en
+        color rojo. Si no conoces la respuesta a alguna pregunta pulsa la barra
+        espaciadora y podrás volver a intentarlo más tarde.
+        <br /><br />
+
+        Dispones de tres minutos para completar el juego. Introduce tu nombre y
+        pulsa ENTER para comenzar. Si deseas reiniciar la aplicación haz click
+        en el botón verde.<br /><br />
+
+        SUERTE!!!
+      </p>
+      <div>
+        <input
+          type="text"
+          class="nombre"
+          placeholder="Introduce tu nombre"
+          onkeydown="if (event.keyCode == 13) showButton()"
+        />
+      </div>
+    </div>
+
+    <div class="rosco" style="display:none">
+      <div class="letraz">
+        <div class="row">
+          <div class="cell" id="letterA">A</div>
+          <div class="cell" id="letterB">B</div>
+          <div class="cell" id="letterC">C</div>
+          <div class="cell" id="letterD">D</div>
+          <div class="cell" id="letterE">E</div>
+          <div class="cell" id="letterF">F</div>
+          <div class="cell" id="letterG">G</div>
+          <div class="cell" id="letterH">H</div>
+          <div class="cell" id="letterI">I</div>
+        </div>
+        <div class="row">
+          <div class="cell" id="letterJ">J</div>
+          <div class="cell" id="letterK">K</div>
+          <div class="cell" id="letterL">L</div>
+          <div class="cell" id="letterM">M</div>
+          <div class="cell" id="letterN">N</div>
+          <div class="cell" id="letterÑ">Ñ</div>
+          <div class="cell" id="letterO">O</div>
+          <div class="cell" id="letterP">P</div>
+          <div class="cell" id="letterQ">Q</div>
+        </div>
+        <div class="row" id="row3">
+          <div class="cell" id="letterR">R</div>
+          <div class="cell" id="letterS">S</div>
+          <div class="cell" id="letterT">T</div>
+          <div class="cell" id="letterU">U</div>
+          <div class="cell" id="letterV">V</div>
+          <div class="cell" id="letterW">W</div>
+          <div class="cell" id="letterX">X</div>
+          <div class="cell" id="letterY">Y</div>
+          <div class="cell" id="letterZ">Z</div>
+        </div>
+      </div>
+
+      <div class="timerz">
+        <p id="timer">Tiempo restante: 180 s</p>
+      </div>
+      <div class="pregunta">
+        <p id="question">Bienvenido a Pasapalabra!</p>
+      </div>
+      <div class="answer">
+        <input
+          type="text"
+          name=""
+          id="inputAnswer"
+          placeholder="Introduce tu respuesta"
+          onkeydown="if (event.keyCode == 13)
+          document.getElementById('buttonJs').click()"
+        />
+
+        <input type="button" value="enviar" id="buttonJs" />
+      </div>
+      <div class="resultados">
+        <p id="usuario"><span id="usuario">Nombre</span></p>
+        <p id="right">ACIERTOS: <span id="aciertos">0</span></p>
+        <p id="wrong">FALLOS: <span id="fallos">0</span></p>
+      </div>
+    </div>
+    <div class="botonera">
+      <div class="fila">
+        <div class="columna celda" id="start">START</div>
+      </div>
+    </div>
+
+    <script src="app3.js" type="text/javascript"></script>
+  </body>
+</html>
