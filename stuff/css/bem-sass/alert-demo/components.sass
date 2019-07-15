@@ -1,0 +1,20 @@
+.alert
+    border: 0.1rem solid $base-color
+    border-radius: 1rem
+    padding: 0.5rem
+    background-color: $base-back-color
+
+    &__title
+        color: $base-title-color
+
+    &__body
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+        font-weight: 400
+        font-size: 0.75rem
+
+    &--danger
+        border-color: $warn-color
+        background-color: $warn-back-color
+
+    &--danger > h2
+        color: $warn-title-color
