@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CALCULATOR 2</title>
+        <meta charset="utf 8"/>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+        <script type="text/javascript" src="main.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    </head>
+    <body>
+        <div class="grid-container">
+            <input id="screen" value="0" disabled>
+<!--third row-->
+            <button id="ac-c" class="ac" onmousedown="ac()">AC</button>
+            <button id="change" class="pos-neg" onmousedown="posToNeg()" value="+/-">+/-</button>
+            <button id="perCent" class="operation" onmousedown="cal('%')">%</button>
+            <button id="div" class="operation" onmousedown="cal('/')" value="/">/</button>
+<!--second row-->
+            <button id="num" class="7" onmousedown="op(7)" value="7">7</button>
+            <button id="num" class="8" onmousedown="op(8)" value="8">8</button>
+            <button id="num" class="9" onmousedown="op(9)" value="9">9</button>
+            <button id="mult" class="operation" onmousedown="cal('*')" value="x">x</button>
+<!--third row-->
+            <button id="num" class="4" onmousedown="op(4)" value="4">4</button>
+            <button id="num" class="5" onmousedown="op(5)" value="5">5</button>
+            <button id="num" class="6" onmousedown="op(6)" value="6">6</button>
+            <button id="rest" class="operation" onmousedown="cal('-')" value="-">-</button>
+
+<!--fourth row-->
+            <button id="num" class="1" onmousedown="op(1)" value="1">1</button>
+            <button id="num" class="2" onmousedown="op(2)" value="2">2</button>
+            <button id="num" class="3" onmousedown="op(3)" value="3">3</button>
+            <button id="sum" class="operation" onmousedown="cal('+')" value="+">+</button>
+<!--five row-->
+            <button id="num" class="zero" onmousedown="op(0)" value="0">0</button>
+            <button id="coma" class="coma" onmousedown="coma()" value=",">,</button>
+            <button id="equal" class="equal" onmousedown="result()">=</button>
+        </div>
+
+    </body>
+    <footer>
+
+    </footer>
+</html>
