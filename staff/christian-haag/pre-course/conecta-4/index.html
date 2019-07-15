@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css?family=Major+Mono+Display&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div class="main-container">
+            
+            
+           
+            <div class="table-container">
+                <div class="info">
+                    <h1>CONECTA 4</h1>
+                <div class="info-child-wrapper">
+                    <div class="info-child">
+                        <div id="info-child-1">
+                            <p id="player1">Jugador 1</p>
+                            <p id="p1" class="player-wins">0</p>
+                        </div>
+                    </div> 
+                    <div class="info-child">
+                        <div id="info-child-2">
+                            <p id="player2">Jugador 2</p>
+                            <p id="p2" class="player-wins">0</p>
+                        </div>
+                    </div>
+                    <button id="reset" class="bttn" type='button' onclick="location.reload()">Reset</button>
+                    <button id="robot" class='bttn' type='button' onclick="Game.pc()">Robot</button> 
+                    <button id="new" class="bttn" type='button' onclick='Game.newGame()'>Nueva Partida</button>
+                 </div>
+            </div>
+                
+                    <table>
+                        <tbody id="table">
+                            <!---Javascript-->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </body>
+    <script src="main.js"></script>
+</html>
