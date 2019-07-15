@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Conecta 4</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="info">
+      <p>It's <span id="currentPlayer">RED</span> player's turn.</p>
+    </div>
+    <div class="container">
+      <table id="game_table">
+        <script>
+          // credit: https://github.com/nruffilo
+          for (var row = 0; row <= 5; row++) {
+            for (var col = 0; col <= 6; col++) {
+              document.writeln(
+                "<td id='square_" +
+                  row +
+                  '_' +
+                  col +
+                  "' class='board_square'></td>"
+              );
+            }
+            document.writeln('</tr>');
+          }
+        </script>
+      </table>
+    </div>
+    <div class="buttons">
+      <button onclick="document.location.reload(true)">Restart</button>
+      <button onclick="location.href='http://www.skylabcoders.com/es';">
+        Exit
+      </button>
+    </div>
+    <script type="text/javascript" src="app.js"></script>
+  </body>
+</html>
