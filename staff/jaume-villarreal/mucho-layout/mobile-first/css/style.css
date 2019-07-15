@@ -365,14 +365,6 @@
   }
 }
 @media (min-width: 1103px) {
-  .top-navigation__presentation {
-    font-size: 1.25rem;
-    line-height: 1.5rem;
-  }
-  .top-navigation__max-nav > ul > li > a {
-    font-size: 1.25rem;
-  }
-
   .mosaic {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -409,6 +401,15 @@
 
   .tile--expand-grid5 {
     grid-area: 10/1/12/3;
+  }
+}
+@media (min-width: 1401px) {
+  .top-navigation__presentation {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+  .top-navigation__max-nav > ul > li > a {
+    font-size: 1.25rem;
   }
 }
 
