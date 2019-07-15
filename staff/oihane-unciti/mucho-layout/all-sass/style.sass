@@ -5,7 +5,15 @@ $bkc: lightgray
     margin-left: 0
 
 .menu
-    display: none
+    list-style: none
+    display: flex
+
+    &__li
+      margin-left: 2%  
+      display: none
+
+    &--top
+        display: none
     
 .header
     display: flex
@@ -45,7 +53,7 @@ $bkc: lightgray
         justify-content: flex-end  
 
         &--topmenu
-            margin: 2%
+          
 
     .nav
         display: flex
@@ -120,12 +128,10 @@ $bkc: lightgray
         
     .menu
         display: block
-        padding-right: 50px
-        display: block
         display: flex
         justify-content: flex-end
 
-    .presentation
+    .header__presentation
         display: block
         width: 40%
 

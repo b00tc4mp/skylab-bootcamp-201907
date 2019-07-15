@@ -3,6 +3,18 @@
 }
 
 .menu {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.menu__li {
+  margin-left: 2%;
+  display: none;
+}
+
+.menu--top {
   display: none;
 }
 
@@ -58,9 +70,6 @@
     -webkit-box-pack: end;
         -ms-flex-pack: end;
             justify-content: flex-end;
-  }
-  .menu--topmenu {
-    margin: 2%;
   }
   .nav {
     display: -webkit-box;
@@ -159,8 +168,6 @@
   }
   .menu {
     display: block;
-    padding-right: 50px;
-    display: block;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -168,7 +175,7 @@
         -ms-flex-pack: end;
             justify-content: flex-end;
   }
-  .presentation {
+  .header__presentation {
     display: block;
     width: 40%;
   }
