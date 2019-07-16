@@ -5,23 +5,39 @@ classe => .
 *{ 
     margin:0;
 }
-body{
-    width: 100vw;
 
+header
+#header__button{
+    background-color: black 0.5;
 }
+
 .header__nav{
     display:none;
-}   
-header{
+}
+
+body{
+    width: 100vw;
+}
+
+
+
+/*header{
     width: 100%;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid grey;
+}*/
 
+.header__allservices{
+    color: #000000;
+    display: grid;
+    grid-template-rows: 2;
 }
+
 img{
     margin: 10px;
 }
+
 #hamburger{
     height: 40px;
     width: 40px;
@@ -36,6 +52,7 @@ img{
     .header__nav{
         display:flex;
     }
+
     ul{
         display: flex;
     }
