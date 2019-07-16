@@ -10,3 +10,9 @@ array1.forEach(function(element) {
   console.log(element);
 });
 
+//forEach (array, console.log)
+
+forEach(array, function(element, index, array){
+  console.log(element, index, array)
+})
+
