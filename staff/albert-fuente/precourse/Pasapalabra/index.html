@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Pasapalabra</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+</head>
+
+<body>
+  <h1 id="mainTitle">PASAPALABRA</h1>
+
+  <hr>
+
+  <div id="rosco-parent">
+
+    <div class="tableUsers">
+      <table >
+        <tr>
+          <th>User</th>
+          <th>Points</th>
+        </tr>
+        <table id="myTableResults">
+        </table>
+      </table>
+
+    </div>
+    <div class="rosco">
+      <div class="first-row">
+        <span class="bubble" id="A">A</span><span class="bubble" id="B">B</span><span class="bubble" id="C">C</span><span class="bubble" id="D">D</span><span class="bubble" id="E">E</span>
+        <span class="bubble" id="F">F</span><span class="bubble" id="G">G</span><span class="bubble" id="H">H</span><span class="bubble" id="I">I</span><span class="bubble" id="J">J</span>
+        <span class="bubble" id="K">K</span><span class="bubble" id="L">L</span><span class="bubble" id="M">M</span><span class="bubble" id="N">N</span>
+      </div>
+      <div class="second-row">
+        <span class="bubble" id="Ñ">Ñ</span><span class="bubble" id="O">O</span><span class="bubble" id="P">P</span><span class="bubble" id="Q">Q</span>
+        <span class="bubble" id="R">R</span><span class="bubble" id="S">S</span><span class="bubble" id="T">T</span><span class="bubble" id="U">U</span>
+        <span class="bubble" id="V">V</span><span class="bubble" id="W">W</span><span class="bubble" id="X">X</span><span class="bubble" id="Y">Y</span><span class="bubble" id="Z">Z</span>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="example">
+    <div class="refresh1">
+      <div id="refresh">
+        <h5>Refrescar página</h5>
+      </div>
+
+    </div>
+    <div class="play1">
+      <div class="playButton">
+        <div class="playButton">
+          <button type="button" name="button" id="play">PLAY</button>
+        </div>
+        <div id="stopButton">
+          <button type="button" name="button" id="stop">STOP</button>
+        </div>
+        <div class="">
+          <p id="time"></p>
+          <div id="status"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="controlpanel">
+    <div class="game">
+      <div class="questionBox">
+        <h1 id="question2"></h1>
+      </div>
+      <div class="answerBox">
+        <div id="elemToHide">
+
+          <p id="checkAnswer"></p>
+          <input type="text" id="answer" placeholder="Escribe la respuesta">
+          <input type="submit" onClick="foo()" value="ok">
+          <button type="button" name="button" onclick="pasaBtn()" id="pasaBtn">PASAPALABRA</button>
+
+        </div>
+        <h3>Has acertado<span id="correctAnswers">0</span><i id="checkIfPluralPalabras">palabras</i> y has cometido<span id="incorrectAnswers">0</span><i id="checkIfPlural">errores</i>.</h3>
+      </div>
+    </div>
+
+  </div>
+
+  </div>
+
+
+  <script src="index.js" charset="utf-8"></script>
+</body>
+
+</html>

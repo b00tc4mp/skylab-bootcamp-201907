@@ -1,0 +1,164 @@
+h1{
+    margin: 50px 0 15px;
+    text-align:center;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+}
+
+/* h2{
+    margin: 10px 0 25px;
+    text-align:center;
+} */
+
+#intro{
+    width: 50%;
+    margin: 0 auto;
+    padding: 10px;
+    font-family: 'Roboto', sans-serif;
+    text-align: justify;
+}
+
+#resume{
+    display: none;
+}
+
+#resume-message , #exit-message{
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+}
+
+.resume-score , #exit-score{
+    background-color: #EFF2FB;
+    height: 5rem;
+    margin: 10px auto 20px;
+    padding: 15px;
+    width: 90%;
+}
+
+.resume-score span , #exit-message span{
+    font-weight: bold;
+}
+
+#exit{
+    display: none;
+}
+
+#start-game-btn{
+    display: block;
+    width: 50%;
+    margin: 25px auto 0;
+}
+
+#canvas{
+    width: 100%;
+    margin: 0 auto;
+    padding: 25px;
+    display: none;
+}
+
+.letter-wheel{
+    border: 5px solid #5DADE2;
+    margin: 5px 10px 15px;
+    width: 50px;
+    height: 50px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background-color: #fff;
+    font-family: 'Indie Flower', sans-serif;
+    text-align: center;
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #333;
+}
+
+#wheel{
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+    padding: 20px 10px;
+    background-color: #EBF5FB;
+}
+
+#score-marker{
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 25px; 
+}
+
+#score , #errors , #timer{
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 5px solid;
+    height: 50px;
+    margin-bottom: 10px;
+    text-align: center;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+#score{
+    color: white;
+    background-color: #28B463;
+}
+
+#errors{
+    color: white;
+    background-color: #C0392B;
+}
+
+#timer{
+    color: white;
+    background-color: #5DADE2;
+}
+
+#game-form{
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#quest{
+    background-color: #fcfcfc;
+    width: 75%;
+    height: 7rem;
+    padding: 10px 50px;
+    margin: 0 auto 25px;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-family: 'Indie Flower', sans-serif;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+#answer{
+    border: 0;
+    border-bottom: 1px solid;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    background-color: #EBF5FB;
+    color: #045FB4;
+    width: 75%;
+    height: 3rem;
+    display:block;
+    margin: 0 auto 25px;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Raleway', sans-serif; 
+    font-size: 1.25rem;
+    font-weight: bold;
+    font-style: italic;
+}
+
+
+#button-set{
+    width: 75%;
+    margin: 0 auto 10px;
+    font-family: 'Raleway', sans-serif;
+}

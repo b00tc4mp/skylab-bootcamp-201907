@@ -1,0 +1,96 @@
+
+body{
+  font-family: 'Roboto', sans-serif;
+}
+h1{
+  text-align: center;
+}
+.calc-btn{
+  background-color: #DDDDDD;
+  color: black;
+  width: 25px;
+  height: 45px;
+  border: 1px solid grey;
+  text-align: center;
+  cursor: pointer;
+  font-size: 32px;
+  font-weight: 10px;
+  padding-top: 3px;
+}
+.calc-btn:hover{
+  background-color: orange;
+}
+.calc-btn:active{
+  background-color: white;
+}
+
+.row{
+  display: table;
+  table-layout: fixed;
+  width: 200px;
+}
+.column{
+  display: table-cell;
+}
+#calc-zero{
+  width: 50px;
+  color: white;
+
+}
+#calc-clear{
+  width: 50px;
+}
+#calc-display-val{
+  height: 30px;
+  width: 80px;
+  text-align: right;
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+  border-top: 1px solid grey;
+  font-size: 32px;
+  background-color: #2C3345;
+  color: white;
+  padding-top: 30px;
+  overflow:hidden;
+  white-space: nowrap;
+}
+
+#calc-division{
+  background-color: orange;
+  color: white;
+}
+#calc-division:active{
+  background-color: white;
+}
+#calc-multiply{
+  background-color: orange;
+  color: white;
+}
+#calc-multiply:active{
+  background-color: white;
+}
+#calc-minus{
+  background-color: orange;
+  color: white;
+}
+#calc-minus:active{
+  background-color: white;
+}
+#calc-sum{
+  background-color: orange;
+  color: white;
+}
+#calc-sum:active{
+  background-color: white;
+}
+#calc-equals{
+  background-color: orange;
+  color: white;
+}
+#calc-equals:active{
+  background-color: white;
+}
+#calc-parent{
+  width: 200px;
+  margin: 0px auto;
+}
