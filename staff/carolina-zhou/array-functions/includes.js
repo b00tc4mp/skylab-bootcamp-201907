@@ -8,12 +8,10 @@ function includes(array, value){
 
     switch(a){
         case a = 1:
-            console.log(`Array includes ${value}`);
-            console.log(true);
+            true;
             break;
         case a = 0:
-            console.log(`Array NOT includes ${value}`);
-            console.log(false);
+            false;
             break;
     }   
 }
