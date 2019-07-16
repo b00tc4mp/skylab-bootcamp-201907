@@ -1,11 +1,11 @@
 console.log('DEMO: some');
-
+var result;
 var array = [1, 2, 3];
 console.log('array', array);
 
 
 console.log('some');
-var result = some(array, 1);
+result = some(array, 1);
 console.log(result, 'expected: true');
 console.log(array, "expected: [1, 2, 3]"); 
 
