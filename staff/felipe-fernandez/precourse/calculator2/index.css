@@ -1,0 +1,60 @@
+/* Table */
+
+table {
+    height: 40%;
+    left: 10%;
+    margin: 0 auto;
+    overflow-y: scroll;
+    position: static;
+    width: 30%;
+    border: 1px solid rgb(107, 102, 102);
+    table-layout: fixed;
+    
+  }
+  
+
+  tr {
+    background: #b9bbbb;
+    margin:0;
+     }
+  
+ td {
+    font-size: 18px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    padding: 8%;
+    text-align: center;
+    width: auto;
+    color:rgb(8, 8, 8);
+    border: 1px solid rgb(107, 102, 102);
+    
+   
+  }
+
+  #datazerobig{
+    text-align: right;
+    font-size:40px;
+    background: #192438;
+    color: white;
+    padding:50px;
+    min-width: 100px;
+    width:100px;
+    min-height: 45px;
+    height: 45px;
+    
+    
+  }
+
+  .symbols{
+      background: #c07117;
+      padding: 30px;
+      color: white;
+      font-size:20px;
+      
+  }
+
+  #numberzero{
+    text-align: left;
+    text-indent: 10%;
+  }
+

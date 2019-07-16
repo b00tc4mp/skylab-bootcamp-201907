@@ -1,0 +1,432 @@
+/*
+Hoja de estilos para el juego PASAPALABRA. Índice:
+    -> General
+    -> Main
+        <-> Words
+        <-> Forms
+    -> Footer
+    -> Extras
+        <-> Buttons
+        <-> Colors
+        <-> Images
+    -> Media Queries
+        <-> @1200
+        <-> @1000
+*/
+/*----- ----- GENERAL ----- -----*/
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#1e5799+0,2989d8+27,7db9e8+100 */
+    background: #1e5799; /* Old browsers */
+    background: -moz-linear-gradient(top,  #1e5799 0%, #2989d8 27%, #7db9e8 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #1e5799 0%,#2989d8 27%,#7db9e8 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #1e5799 0%,#2989d8 27%,#7db9e8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=0 ); /* IE6-9 */
+}
+
+html, body {
+    height: 100%;
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+    color: white;
+}
+
+h2 {
+    margin-bottom: 20px; 
+}
+
+h3, p {
+    margin: 10px 0;
+    text-align: justify;
+}
+
+p:last-of-type {
+    margin-bottom: 30px;
+}
+
+/*----- ----- MAIN ----- -----*/
+.container {
+    width: 90%;
+    height: 94%;
+    max-width: 1500px;
+    margin: 0px auto;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.main {
+    margin: 20px;
+    position: relative; 
+    width: 60%;
+    max-width: 650px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-rosco {
+    position: absolute;
+}
+
+.title-rosco .title h1 {
+    font-size: 3em;
+    font-weight: 700;
+    color: white;
+}
+
+.rosco {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    transform: rotate(-90deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scoreboard {
+    display: none;
+    position: absolute;
+    width: 650px;
+    align-self: flex-end;
+}
+
+.btn {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#2989d8+1,1e5799+100 */
+    background: #2989d8; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover,  #2989d8 1%, #1e5799 100%); /* FF3.6-15 */
+    background: -webkit-radial-gradient(center, ellipse cover,  #2989d8 1%,#1e5799 100%); /* Chrome10-25,Safari5.1-6 */
+    background: radial-gradient(ellipse at center,  #2989d8 1%,#1e5799 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2989d8', endColorstr='#1e5799',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    border: 2px solid white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3em;
+    color: white;
+}
+
+.scoreboard-btn {
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.score {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.time {
+    width: 60px;
+    height: 40px;
+    border-radius: 10%;
+    margin-top: 10px;
+}
+
+aside {
+    position: relative;
+    width: 40%;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.scoreforuser p, 
+#rank p {
+    margin-bottom: 10px;
+}
+
+ul,
+ol {
+    margin-left: 20px;
+}
+
+ul li {
+    list-style-type: circle;
+}
+
+#answerInfo {
+    display: none;
+}
+
+/* WORDS */
+#word-a {transform: rotate(0deg) translate(15.25em) rotate(90deg);}
+#word-b {transform: rotate(13.33333333deg) translate(15.25em) rotate(76.66666667deg);}
+#word-c {transform: rotate(26.66666667deg) translate(15.25em) rotate(63.33333333deg);}
+#word-d {transform: rotate(40deg) translate(15.25em) rotate(50deg);}
+#word-e {transform: rotate(53.33333333deg) translate(15.25em) rotate(36.66666667deg);} /* 5 */
+#word-f {transform: rotate(66.66666667deg) translate(15.25em) rotate(23.33333333deg);}
+#word-g {transform: rotate(80deg) translate(15.25em) rotate(10deg);}
+#word-h {transform: rotate(93.33333333deg) translate(15.25em) rotate(-3.333333333deg);}
+#word-i {transform: rotate(106.6666667deg) translate(15.25em) rotate(-16.66666667deg);}
+#word-j {transform: rotate(120deg) translate(15.25em) rotate(-30deg);} /* 10 */
+#word-k {transform: rotate(133.3333333deg) translate(15.25em) rotate(-43.33333333deg);}
+#word-l {transform: rotate(146.6666667deg) translate(15.25em) rotate(-56.66666667deg);}
+#word-m {transform: rotate(160deg) translate(15.25em) rotate(-70deg);}
+#word-n {transform: rotate(173.3333333deg) translate(15.25em) rotate(-83.33333333deg);}
+#word-ñ {transform: rotate(186.6666667deg) translate(15.25em) rotate(-96.66666667deg);} /* 15 */
+#word-o {transform: rotate(200deg) translate(15.25em) rotate(-110deg);}
+#word-p {transform: rotate(213.3333333deg) translate(15.25em) rotate(-123.3333333deg);}
+#word-q {transform: rotate(226.6666667deg) translate(15.25em) rotate(-136.6666667deg);}
+#word-r {transform: rotate(240deg) translate(15.25em) rotate(-150deg);}
+#word-s {transform: rotate(253.3333333deg) translate(15.25em) rotate(-163.3333333deg);} /* 20 */
+#word-t {transform: rotate(266.6666667deg) translate(15.25em) rotate(-176.6666667deg);}
+#word-u {transform: rotate(280deg) translate(15.25em) rotate(-190deg);}
+#word-v {transform: rotate(293.3333333deg) translate(15.25em) rotate(-203.3333333deg);}
+#word-w {transform: rotate(306.6666667deg) translate(15.25em) rotate(-216.6666667deg);}
+#word-x {transform: rotate(320deg) translate(15.25em) rotate(-230deg);} /* 25 */
+#word-y {transform: rotate(333.3333333deg) translate(15.25em) rotate(-243.3333333deg);}
+#word-z {transform: rotate(346.6666667deg) translate(15.25em) rotate(-256.6666667deg);} /* 27 */
+
+/*----- ----- FORMS ----- -----*/
+
+.myform label {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+.myform input[type="text"] {
+    display: block;
+    width: 50%;
+    margin-bottom: 20px;
+    padding: 15px 10px;
+    border: none;
+    border-radius: 6px;
+}
+
+/*----- ----- FOOTER ----- -----*/
+footer {
+    width: 100%;
+}
+
+footer p {
+    text-align: center;
+    font-style: italic;
+    font-size: 0.8em;
+}
+
+/*----- ----- EXTRAS ----- -----*/
+
+button, 
+.myform input[type="submit"] {
+    width: 120px;
+    height: 40px;
+    border: 2px solid white;
+    border-radius: 6px;
+    font-style: italic;
+    color: white;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+button:hover,
+.myform input[type="submit"]:hover {
+    -webkit-box-shadow:0 1px 4px yellow;
+       -moz-box-shadow:0 1px 4px yellow;
+            box-shadow:0 0px 10px yellow;
+}
+
+button:active,
+.myform input[type="submit"]:active {
+    transform: translate(1px, 1px)
+}
+
+.btnextra {
+    display: block;
+    margin-top: 10px;
+}
+
+#error {
+    margin: 30px 0;
+    font-style: italic;
+    color: #c0392b;
+}
+
+
+.shadow {
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3);
+	   -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3);
+	        box-shadow:0 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+.orange {
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffb76b+0,ff7f04+100 */
+    background: #e07c10; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover,  #ffb76b 0%, #ff7f04 100%); /* FF3.6-15 */
+    background: -webkit-radial-gradient(center, ellipse cover,  #ffb76b 0%,#ff7f04 100%); /* Chrome10-25,Safari5.1-6 */
+    background: radial-gradient(ellipse at center,  #ffb76b 0%,#ff7f04 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb76b', endColorstr='#ff7f04',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.green {
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#b4e391+0,61c419+100 */
+    background: #b4e391; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover,  #b4e391 0%, #61c419 100%); /* FF3.6-15 */
+    background: -webkit-radial-gradient(center, ellipse cover,  #b4e391 0%,#61c419 100%); /* Chrome10-25,Safari5.1-6 */
+    background: radial-gradient(ellipse at center,  #b4e391 0%,#61c419 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b4e391', endColorstr='#61c419',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+}
+
+.red {
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#f4674e+0,cc0000+100 */
+    background: #f4674e; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover,  #f4674e 0%, #cc0000 100%); /* FF3.6-15 */
+    background: -webkit-radial-gradient(center, ellipse cover,  #f4674e 0%,#cc0000 100%); /* Chrome10-25,Safari5.1-6 */
+    background: radial-gradient(ellipse at center,  #f4674e 0%,#cc0000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4674e', endColorstr='#cc0000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.active {
+    -webkit-box-shadow:0 1px 4px yellow;
+       -moz-box-shadow:0 1px 4px yellow;
+            box-shadow:0 0px 10px yellow;
+}
+
+img {
+    width: 20px;
+    vertical-align: middle;
+}
+
+/* ----- ----- RESPONSIVE - MEDIA QUERIES ----- ----- */
+
+@media screen and (max-width:1200px) {
+
+    .btn {
+        width: 50px;
+        height: 50px;
+
+    }
+
+    .scoreboard {
+        width: 600px;
+    }
+
+
+    /* WORDS */
+    #word-a {transform: rotate(0deg) translate(13.25em) rotate(90deg);}
+    #word-b {transform: rotate(13.33333333deg) translate(13.25em) rotate(76.66666667deg);}
+    #word-c {transform: rotate(26.66666667deg) translate(13.25em) rotate(63.33333333deg);}
+    #word-d {transform: rotate(40deg) translate(13.25em) rotate(50deg);}
+    #word-e {transform: rotate(53.33333333deg) translate(13.25em) rotate(36.66666667deg);} /* 5 */
+    #word-f {transform: rotate(66.66666667deg) translate(13.25em) rotate(23.33333333deg);}
+    #word-g {transform: rotate(80deg) translate(13.25em) rotate(10deg);}
+    #word-h {transform: rotate(93.33333333deg) translate(13.25em) rotate(-3.333333333deg);}
+    #word-i {transform: rotate(106.6666667deg) translate(13.25em) rotate(-16.66666667deg);}
+    #word-j {transform: rotate(120deg) translate(13.25em) rotate(-30deg);} /* 10 */
+    #word-k {transform: rotate(133.3333333deg) translate(13.25em) rotate(-43.33333333deg);}
+    #word-l {transform: rotate(146.6666667deg) translate(13.25em) rotate(-56.66666667deg);}
+    #word-m {transform: rotate(160deg) translate(13.25em) rotate(-70deg);}
+    #word-n {transform: rotate(173.3333333deg) translate(13.25em) rotate(-83.33333333deg);}
+    #word-ñ {transform: rotate(186.6666667deg) translate(13.25em) rotate(-96.66666667deg);} /* 15 */
+    #word-o {transform: rotate(200deg) translate(13.25em) rotate(-110deg);}
+    #word-p {transform: rotate(213.3333333deg) translate(13.25em) rotate(-123.3333333deg);}
+    #word-q {transform: rotate(226.6666667deg) translate(13.25em) rotate(-136.6666667deg);}
+    #word-r {transform: rotate(240deg) translate(13.25em) rotate(-150deg);}
+    #word-s {transform: rotate(253.3333333deg) translate(13.25em) rotate(-163.3333333deg);} /* 20 */
+    #word-t {transform: rotate(266.6666667deg) translate(13.25em) rotate(-176.6666667deg);}
+    #word-u {transform: rotate(280deg) translate(13.25em) rotate(-190deg);}
+    #word-v {transform: rotate(293.3333333deg) translate(13.25em) rotate(-203.3333333deg);}
+    #word-w {transform: rotate(306.6666667deg) translate(13.25em) rotate(-216.6666667deg);}
+    #word-x {transform: rotate(320deg) translate(13.25em) rotate(-230deg);} /* 25 */
+    #word-y {transform: rotate(333.3333333deg) translate(13.25em) rotate(-243.3333333deg);}
+    #word-z {transform: rotate(346.6666667deg) translate(13.25em) rotate(-256.6666667deg);} /* 27 */
+}
+
+@media screen and (max-width:1000px) {
+
+    html, body {
+        height: auto;
+    }
+
+    .container {
+        flex-direction: column-reverse;
+    }
+
+    .main {
+        width: 100%;
+    }
+
+    .rosco {
+        width: 440px;
+        height: 440px;
+    }
+
+    .btn {
+        width: 40px;
+        height: 40px;
+        border: 2px solid white;
+        font-size: 1.3em;
+    }
+
+    .scoreboard {
+        width: 130px;
+        display: flex;
+        flex-direction: row;
+        top: 90px;
+    }
+
+    .time {
+        margin-right: 10px;
+    }
+
+    aside {
+        width: 100%;
+    }
+
+    /* WORDS */
+    #word-a {transform: rotate(0deg) translate(10.25em) rotate(90deg);}
+    #word-b {transform: rotate(13.33333333deg) translate(10.25em) rotate(76.66666667deg);}
+    #word-c {transform: rotate(26.66666667deg) translate(10.25em) rotate(63.33333333deg);}
+    #word-d {transform: rotate(40deg) translate(10.25em) rotate(50deg);}
+    #word-e {transform: rotate(53.33333333deg) translate(10.25em) rotate(36.66666667deg);} /* 5 */
+    #word-f {transform: rotate(66.66666667deg) translate(10.25em) rotate(23.33333333deg);}
+    #word-g {transform: rotate(80deg) translate(10.25em) rotate(10deg);}
+    #word-h {transform: rotate(93.33333333deg) translate(10.25em) rotate(-3.333333333deg);}
+    #word-i {transform: rotate(106.6666667deg) translate(10.25em) rotate(-16.66666667deg);}
+    #word-j {transform: rotate(120deg) translate(10.25em) rotate(-30deg);} /* 10 */
+    #word-k {transform: rotate(133.3333333deg) translate(10.25em) rotate(-43.33333333deg);}
+    #word-l {transform: rotate(146.6666667deg) translate(10.25em) rotate(-56.66666667deg);}
+    #word-m {transform: rotate(160deg) translate(10.25em) rotate(-70deg);}
+    #word-n {transform: rotate(173.3333333deg) translate(10.25em) rotate(-83.33333333deg);}
+    #word-ñ {transform: rotate(186.6666667deg) translate(10.25em) rotate(-96.66666667deg);} /* 15 */
+    #word-o {transform: rotate(200deg) translate(10.25em) rotate(-110deg);}
+    #word-p {transform: rotate(213.3333333deg) translate(10.25em) rotate(-123.3333333deg);}
+    #word-q {transform: rotate(226.6666667deg) translate(10.25em) rotate(-136.6666667deg);}
+    #word-r {transform: rotate(240deg) translate(10.25em) rotate(-150deg);}
+    #word-s {transform: rotate(253.3333333deg) translate(10.25em) rotate(-163.3333333deg);} /* 20 */
+    #word-t {transform: rotate(266.6666667deg) translate(10.25em) rotate(-176.6666667deg);}
+    #word-u {transform: rotate(280deg) translate(10.25em) rotate(-190deg);}
+    #word-v {transform: rotate(293.3333333deg) translate(10.25em) rotate(-203.3333333deg);}
+    #word-w {transform: rotate(306.6666667deg) translate(10.25em) rotate(-216.6666667deg);}
+    #word-x {transform: rotate(320deg) translate(10.25em) rotate(-230deg);} /* 25 */
+    #word-y {transform: rotate(333.3333333deg) translate(10.25em) rotate(-243.3333333deg);}
+    #word-z {transform: rotate(346.6666667deg) translate(10.25em) rotate(-256.6666667deg);} /* 27 */
+}

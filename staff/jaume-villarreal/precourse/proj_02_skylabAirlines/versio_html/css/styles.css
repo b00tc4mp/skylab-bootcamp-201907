@@ -1,0 +1,161 @@
+/* INDEX.HTML */
+body{
+    margin: 1rem  auto;
+    width: 75%;
+    font-size: .85rem;
+    /* border: 1px solid; */
+}
+
+header{
+    margin: 1rem 0;
+    height: 100px;
+    border-bottom: 1px solid gainsboro;
+}
+
+#logo_Skylab{
+    width: 50px;
+    height: 50px;
+}
+
+#headerUserID{
+    text-align: right;
+    padding-top: 20px;
+    padding-right: 50px;
+}
+
+#headerUserID span{
+    display: inline-block;
+    text-align: center;
+    font-weight: bold;
+    width: 75%;
+    margin-right: 10px;
+    padding: 5px 10px;
+    background-color: gainsboro;
+}
+
+#headerUserID img{
+    cursor: pointer;
+}
+
+#userId{
+    visibility: hidden;
+}
+
+#userId img{
+    display:block;
+    margin: 0 auto;
+    width: 150px;
+}
+
+#presentation{
+    margin-top: 10px;
+    padding-left: 25px;
+    text-align: center;
+}
+
+#buttonSet button{
+    width: 48%;
+}
+
+#presentation span , li span{
+    font-weight: bold;
+}
+
+#infoFlights {
+    border-left: 1px solid gainsboro;
+    visibility: hidden;
+}
+
+#infoFlights p{
+    background-color: darkgray;
+    padding: 10px;
+}
+
+.glyph-icon{ 
+    width:16px;
+    height:16px;
+    margin-right: 10px;
+}
+
+div{
+    margin: 1rem 0;
+}
+
+/* LOGIN FORM */
+#loginForm{
+    width: 50%;
+    margin: 5rem auto 0;
+    padding: 10px 25px 25px;
+    background-color: gainsboro;
+}
+
+#loginForm label , #loginForm small{
+    padding-left: 10px;
+}
+
+#loginForm input{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#userNameHelp{
+    margin-top: .85rem;
+    text-align: center;
+}
+
+#loginForm button{
+    margin-top: .5rem;
+    width: 100%;
+}
+
+
+/* ADMIN.HTML*/
+#infoBoard p{
+    margin: 0 15px 0;
+    padding: 25px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.card{
+    background-color: gainsboro;
+    
+    height: 275px;
+}
+
+.card-img-top{
+    width: 25%;
+    display: block;
+    margin: 10px auto 0;
+}
+.card-title{
+    padding: 5px;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+    text-align: center;
+}
+
+#listCurrentFlightsDB .infoFlight{
+    display: inline-block;
+    width: 50%;
+    margin-left: 10px;
+}
+
+#listCurrentFlightsDB p{
+    display: inline;
+}
+
+.pointer{
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+/* USER.HTML*/
+#contentQuery{
+    border-left:1px solid;
+    margin-left: 10px;
+}
+
+.boxQuery{
+    border: 1px solid rgb(184, 182, 182);
+    padding-left: 10px;
+}
