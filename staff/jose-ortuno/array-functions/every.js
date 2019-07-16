@@ -1,14 +1,11 @@
 function every(array, value) {
 
-    for(var i=0;i<array.length;i++)
-
-    {
+    for(var i = 0; i < array.length; i++) {
         if(array[i]===value){
-    
-        return true;
+            return true;
+        } else  {
+            return false;
+        }
+    }
 
-    } else  {
-        return false;
-    }
-    }
 }
