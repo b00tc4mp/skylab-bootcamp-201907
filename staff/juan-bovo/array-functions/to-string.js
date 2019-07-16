@@ -5,7 +5,7 @@
 
 //array1 = [1, 2, 'a', '1a'];
 
-function toString(arr){
+function toStringo(arr){
     newstring = '';
     for (i = 0; i < arr.length; i++){
         newstring = newstring + arr[i] + ',';

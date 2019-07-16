@@ -7,9 +7,9 @@
 //console.log(array1);
 // expected output: Array [4, 5, 1, 2, 3]
 
-var array1 = [1, 2, 3];
+// var array1 = [1, 2, 3];
 
-function unshift(arr, ...arguments){
+function unshifty(arr, ...arguments){
     console.log(arr)
     var newArray = [];
     var newItems = [...arguments];
@@ -20,8 +20,8 @@ function unshift(arr, ...arguments){
         newArray[i+newItems.length] = arr[i];
     };
     array1 = newArray;
-    console.log(array1) //BORRAR
+    // console.log(array1) //BORRAR
     return newArray.length;
 }
 
-unshift(array1, 4, 5);
+// unshifty(array1, 4, 5);

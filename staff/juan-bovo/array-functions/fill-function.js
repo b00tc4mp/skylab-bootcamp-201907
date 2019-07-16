@@ -1,6 +1,6 @@
 // array1 = [1, 2, 3, 4];
 
-function fill(arr, value, start, end) {
+function filljuan(arr, value, start, end) {
     var newArray = arr;
     if (end) {
         for (var i = start; i < end; i++) {

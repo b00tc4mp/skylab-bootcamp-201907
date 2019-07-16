@@ -16,8 +16,8 @@ console.log(fill(array1, 6)); // expected output: [6, 6, 6, 6]
 console.log('expected output: [6, 6, 6, 6]');
 
 
-function check(result, expected){
-    if (result.toString() !== expected.toString()){
-        console.error('HEY!');
-    }
-}
+// function check(result, expected){
+//     if (result.toString() !== expected.toString()){
+//         console.error('HEY!');
+//     }
+// }
