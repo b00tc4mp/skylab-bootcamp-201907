@@ -1,0 +1,115 @@
+* {
+    /* border: 2px dashed grey; */
+    box-sizing: border-box;
+    padding: 0;
+}
+
+body{
+    width: 90%;
+    margin: 0 auto;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-left: 5px solid #333;
+}
+
+header {
+    padding: 20px 0px 20px 50px;
+    background-color: #333;
+    color: whitesmoke;
+    height: 3em;
+}
+
+h1 {
+    margin: 0;
+}
+
+h3 {
+    margin: 0;
+    padding: 10px 5px;
+}
+
+/* nav {
+
+} */
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    padding-left: 50px;
+    overflow: hidden;
+    background-color: #333;
+}
+  
+li {
+    float: left;
+}
+  
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+  
+li a:hover {
+    background-color: #444;
+}
+
+.main {
+    width: 75%;
+    float: left;
+}
+
+article {
+    margin: 10px;
+    border: 2px solid #333;
+}
+
+article > * {
+    padding-left: 20px;
+}
+
+aside{
+    width: 25%;
+    float: left;
+    background-color: #333;
+}
+
+aside > *{
+    margin: 20px 5px;
+    background-color: whitesmoke;
+    padding: 5px;
+}
+
+.archive {
+    height: 200px;
+}
+
+.tags {
+    height: 200px;
+}
+
+.blogroll {
+    height: 450px;
+}
+
+.blogroll a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+}
+
+footer {
+    width: 100%;
+    clear: both;
+    text-align: right;
+    background-color: #333;
+    color: whitesmoke;
+    padding: 20px;
+}
+
+footer > *{
+    padding-right: 20px;
+}

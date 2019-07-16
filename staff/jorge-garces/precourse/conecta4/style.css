@@ -1,0 +1,66 @@
+body {
+  background: rgb(165, 161, 161);
+}
+
+.board_square {
+  background: #000000;
+  height: 60px;
+  width: 60px;
+  border: 1px solid rgb(151, 150, 150);
+}
+
+.info {
+  font-family: verdana;
+  font-weight: bold;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.piece {
+  height: 50px;
+  width: 50px;
+  display: block;
+  border-radius: 25px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container {
+  margin: auto;
+  display: block;
+  width: 450px;
+  background: rgb(0, 0, 0);
+  cursor: pointer;
+  border: 5px solid black;
+}
+
+.buttons {
+  padding-top: 20px;
+  margin: auto;
+  display: block;
+  width: 210px;
+  text-align: center;
+  cursor: pointer;
+}
+
+button {
+  font-family: verdana;
+  font-weight: bold;
+  min-width: 100px;
+  height: 40px;
+}
+
+/* Player 0 (no player) will have a light-grey background */
+.player0 {
+  background-color: #dddddd; /* hex colors were used, but rgb/rgba could be used as well */
+}
+
+/* player 1 will have a red background */
+.player1 {
+  background-color: #ff0000;
+}
+
+/* player 2 will have a blue background */
+.player2 {
+  background-color: #0000ff;
+}
