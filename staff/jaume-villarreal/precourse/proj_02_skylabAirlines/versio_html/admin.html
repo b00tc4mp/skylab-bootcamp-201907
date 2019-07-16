@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Skylab Airlines - ADMIN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+    <!-- jQuery CDN -->
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    
+    <!-- Bootstrap CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/styles.css">
+
+</head>
+<body>
+    <div class="container">
+        <header class='row'></header>
+    </div>
+    
+    <div class="container">
+        <section id='infoBoard' class='row justify-content-around'>
+                <div class="card col-3">
+                    <img class="card-img-top" src="img/glyph/svg/si-glyph-database.svg" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">DB Capacity</h5>
+                      <p id='limitFlightsDataBase' class="card-text"></p>
+                    </div>                    
+                </div>   
+                
+                <div class="card col-3">
+                    <img class="card-img-top" src="img/glyph/svg/si-glyph-database-plus.svg" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">DB Storage</h5>
+                      <p id='totalFlightsDataBase' class="card-text"></p>
+                    </div>                    
+                </div> 
+
+                <div class="card col-3">
+                    <img class="card-img-top" src="img/glyph/svg/si-glyph-database-upload.svg" alt="Card image cap">
+                    <div class="card-body">
+                    <h5 class="card-title">DB Remaining</h5>
+                    <p id='remainingFlightsDataBase' class="card-text"></p>
+                    </div>                    
+                </div> 
+        </section>
+        <div class='row'>
+            <section id='form' class='col-md-4'>
+                <div id='insertForm'>
+                        <p>Insert a new flight</p>
+                        <div class="form-group">
+                            <!-- <label for="userName">User name</label> -->
+                            <input id="fromInput" type="text" class="form-control" aria-describedby="fromIinputHelp" placeholder="">
+                            <small id="fromInputHelp" class="form-text text-muted">Departure location</small>
+                        </div>
+                        <div class="form-group">
+                            <!-- <label for="userName">User name</label> -->
+                            <input id="toInput" type="text" class="form-control" aria-describedby="toInputHelp" placeholder="">
+                            <small id="toInputHelp" class="form-text text-muted"> Arrival location</small>
+                        </div>
+                        <div class="form-group">
+                            <!-- <label for="userName">User name</label> -->
+                            <input id="costInput" type="number" min='1' class="form-control" aria-describedby="costInputHelp" placeholder="">
+                            <small id="costInputHelp" class="form-text text-muted">Cost</small>
+                        </div>
+                        <div class="form-group">
+                            <!-- <label for="userName">User name</label> -->
+                            <input id="scaleInput" type="text" class="form-control" aria-describedby="scaleNameHelp" placeholder="">
+                            <small id="scaleNameHelp" class="form-text text-muted">Scales (insert 'true'/'false')</small>
+                        </div>
+                        <button id='insertButton' type="submit" class="btn btn-success">Insert</button>
+                </div>
+            </section>
+            <section id='infoDB' class='col-md-8'>
+                <div id='listCurrentFlightsDB'></div>
+            </section>
+        </div>
+    </div>
+    
+    
+     <!-- JS -->
+     <script src="js/models/model.js"></script>
+     <script src="js/forms/admin_insertForm.js"></script>
+     <script src="js/views/admin_view.js"></script>
+     <script src="js/controllers/header.js"></script>
+     <script src='js/controllers/userNameURLparameter.js'></script>
+     <script src="js/controllers/admin_controller.js"></script>
+</body>
+</html>
+
+</html>

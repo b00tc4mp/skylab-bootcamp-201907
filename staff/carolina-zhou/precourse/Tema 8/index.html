@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Juego de Pasapalabra online">
+    <meta name="keywords" content="juego, pasapalabra, pasapalabra online, entretenimiento">
+    <link rel="stylesheet" href="index.css">
+    <title>Skylab Pasapalabra</title>
+</head>
+
+<body>
+
+		<h1>Pasapalabra</h1>
+
+    <div class="ronda">
+        <div id="A" class="letters">A</div>
+        <div id="B" class="letters">B</div>
+        <div id="C" class="letters">C</div>
+        <div id="D" class="letters">D</div>
+        <div id="E" class="letters">E</div>
+        <div id="F" class="letters">F</div>
+        <div id="G" class="letters">G</div>
+        <div id="H" class="letters">H</div>
+        <div id="I" class="letters">I</div>
+        <div id="J" class="letters">J</div>
+        <div id="K" class="letters">K</div>
+        <div id="L" class="letters">L</div>
+        <div id="M" class="letters">M</div>
+        <div id="N" class="letters">N</div>
+        <div id="Ñ" class="letters">Ñ</div>
+        <div id="O" class="letters">O</div>
+        <div id="P" class="letters">P</div>
+        <div id="Q" class="letters">Q</div>
+        <div id="R" class="letters">R</div>
+        <div id="S" class="letters">S</div>
+        <div id="T" class="letters">T</div>
+        <div id="U" class="letters">U</div>
+        <div id="V" class="letters">V</div>
+        <div id="W" class="letters">W</div>
+        <div id="X" class="letters">X</div>
+        <div id="Y" class="letters">Y</div>
+        <div id="Z" class="letters">Z</div>
+    </div>
+
+		<div class="principal">
+			<p id="text"></p>
+      <p><input id="respuesta" placeholder="Respuesta" type="text" onkeypress="validar(event)"/></p>
+      <div>
+			  <button onclick="aceptar()">ACEPTAR</button>
+        <button onclick="pasapalabra()">PASAPALABRA</button>
+      </div>
+      <div class="control">
+			  <button onclick="start()" id="start">Start</button>
+        <button onclick="stop()">Stop</button>
+      </div>
+      <div class="reset">
+			  <button onclick="reset()">Nueva partida</button>
+      </div>
+			<p id="resultado"></p>
+    </div>
+    
+    <div class="timer">
+        <section id="time"></section>
+    </div>
+
+	<script type="text/javascript" src="index.js"></script>
+</body>
+
+</html>
