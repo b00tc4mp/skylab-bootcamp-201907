@@ -1,9 +1,6 @@
-var array = ['a', 'b', 'c'];
-
 function entries (arr) {
-    for (var i = 0; i < array.length; i++) {
-        console.log(`[${i}, "${array[i]}"]`)
+    var result;
+    for (var i = 0; i < arr.length; i++) {
+        result += `[${i}, "${arr[i]}"]`;
     }
 }
-
-// entries (array);

@@ -1,9 +1,8 @@
-var array = [ 0, 1, 2, 3, 4, 5, 6, 7];
-var newArray = [];
-var count = 0;
-var count2 = 0;
+function copyWithin (array, target, start, end) {
+    var newArray = [];
+    var count = 0;
+    var count2 = 0;
 
-function copyWithin (target, start, end) {
     for (var i = start; i < end; i++) {
         newArray[count] = array[i];
         count++;
@@ -15,7 +14,5 @@ function copyWithin (target, start, end) {
         target++;
     }
 
-    console.log(array);
+    return array;
 }
-
-// copyWithin (0, 2, 4);
