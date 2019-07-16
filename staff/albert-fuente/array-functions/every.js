@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 function isBelowThreshold(currentValue) {
   return currentValue < 40;
 }
@@ -14,3 +15,16 @@ function every(arr){
   }
 }
 // expected output: true
+=======
+function every(arr,condition){
+  var result
+  for(var i=0; i<arr.length;i++){
+    if(condition(arr[i]) != true && result != true){
+      result=false;
+    }else{
+      result=true;
+    }
+  }
+  return result;
+}
+>>>>>>> Stashed changes

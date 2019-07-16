@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 
 function map(arr,func){
   result=[];
@@ -7,13 +8,22 @@ function map(arr,func){
     }else{
       result.push(arr[i]);
     }
+=======
+function map(array,expression){
+  var result =[];
+  for(var i=0;i<array.lenght;i++){
+    result[i]=expression(array[i]);
+>>>>>>> Stashed changes
   }
   return result;
 }
 
 
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 // var numbers = [1, 5, 10, 15];
 // var doubles = numbers.map(function(x) {
 //    return x * 2;
