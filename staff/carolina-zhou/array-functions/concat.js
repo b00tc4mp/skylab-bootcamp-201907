@@ -11,7 +11,7 @@ function concat (...arg) {
             count++
         }
     }
-    console.log(newArray,'\nexpected function ["a", "b", "c", "d", "e", "f"]');
+    console.log(newArray,'expected function ["a", "b", "c", "d", "e", "f"]');
 }
 
 // concat(array1, array2);
