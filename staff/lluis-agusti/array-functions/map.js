@@ -1,12 +1,10 @@
 var allArray = [1, 2, 3, 4]
-var result = 0;
+var result = [];
 
-function map() {
+console.log("Array inicial: " + allArray);
+
+function map(array) {
 for (var i = 0; i < allArray.length; i++) {
-   result += allArray[i]*2;
- } console.log(result);
-}
-
-map();
-
-// seria igual que --> var map1 = array1.map(x => x * 2);
+   result[i] = allArray[i];
+ } console.log("Nuevo array: " + result);
+} map();

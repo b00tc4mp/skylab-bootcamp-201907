@@ -2,10 +2,14 @@
 console.log('DEMO: map');
 
 
-var array1 = [1, 4, 9, 16];
+var array = [1, 4, 9, 16];
 
-// pass a function to map
 const map1 = array1.map(x => x * 2);
-
 console.log(map1);
-// expected output: Array [2, 8, 18, 32]
+console.log("Expected: 2, 8, 18, 32");
+
+
+
+
+
+//fer que tb tregui tot el callback
