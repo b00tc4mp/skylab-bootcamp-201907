@@ -8,7 +8,7 @@ function reduceRight(array, reducer, initialValue) {
     }
         
     for (var i = start; i >= 0; i--) {
-        accumulator = reducer(accumulator, arr[i])
+        accumulator = reducer(accumulator, array[i])
     }
     return accumulator
 }

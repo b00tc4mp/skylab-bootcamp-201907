@@ -1,9 +1,20 @@
-function lastIndexOf(array, elemValue) {
-    for (var i = array.length - 1; i >= 0; i--) {
-        if (array[i] === elemValue) {
-            return i   
-        }
-    }
-    return -1
-}
+console.log('------ DEMO: lastIndexOf ------')
+
+var array = ['a', 'b', 'a', 'c', 'a', 'e', 'f']
+console.log('Array: ' + array)
+
+
+
+var valueToBeSearched = 'a'
+console.log('Example 1. Value to be searched: ' + valueToBeSearched)
+
+var result = lastIndexOf(array, valueToBeSearched)
+console.log('Result: ' + result, 'Expected 4')
+
+var valueToBeSearched = 'e'
+console.log('Example 1. Value to be searched: ' + valueToBeSearched)
+
+var result = lastIndexOf(array, valueToBeSearched)
+console.log('Result: ' + result, 'Expected 5')
+
 

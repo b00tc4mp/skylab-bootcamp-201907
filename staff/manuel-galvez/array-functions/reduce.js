@@ -9,7 +9,7 @@ function reduce(array, reducer, initialValue) {
   }
     
   for (var i = start; i < array.length; i++) {
-      accumulator = reducer(accumulator, arr[i])
+      accumulator = reducer(accumulator, array[i])
   }
   return accumulator
 }

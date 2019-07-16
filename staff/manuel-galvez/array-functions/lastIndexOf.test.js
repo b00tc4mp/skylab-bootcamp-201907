@@ -1,9 +1,15 @@
-function lastIndexOf(array, elemValue) {
-    for (var i = array.length - 1; i >= 0; i--) {
-        if (array[i] === elemValue) {
-            return i   
-        }
-    }
-    return -1
-}
+console.log('------ TEST: lastIndexOf ------')
 
+var array = ['a', 'b', 'a', 'c', 'a', 'e', 'f']
+console.log('Array: ' + array)
+
+
+console.log('TEST 1: a')
+var valueToBeSearched = 'a'
+var result = lastIndexOf(array, valueToBeSearched)
+check(result, 4);
+
+console.log('TEST 2: e')
+var valueToBeSearched = 'e'
+var result = lastIndexOf(array, valueToBeSearched)
+check(result, 5);
