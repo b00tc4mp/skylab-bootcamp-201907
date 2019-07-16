@@ -257,7 +257,7 @@ a
         flex-flow: column nowrap
         justify-content: center
         height: 22vh
-        padding: 0
+        padding: 5vh 0 2vh 0
 
         &__logo
             flex: 1
@@ -289,24 +289,22 @@ a
         &__bottom
             display: flex
             flex-direction: column
+            width:98vw
 
         &__item
-            font-size: 2.5rem
             display: flex
-            width: 100vw
             padding: 12px 16px
+            justify-content: space-between
 
             &:last-child
                 border-top: 1px solid #AEAEAE
-
-        >*i 
-            margin-left: 10px
         
 
     .photo-grid
         display: grid
         grid-template-columns: 1fr
         grid-template-rows: repeat(21, 1fr)
+
 
         &__item
             width: 100% 
@@ -339,11 +337,16 @@ a
             grid-row: span 1
     
     .card
+        line-height: 3.5rem
         &__title
             font-size: 2.2rem
+            margin-bottom: 4rem
+
+            &--medium
+                font-size: 2.2rem
 
         &__body
-            font-size: 2.8rem
+            font-size: 3.2rem
 
             &--small-text
                 font-size: 2.2rem
@@ -357,8 +360,13 @@ a
 
         &__body
             font-size: 2.4rem
-    
+
     .location
         height:35vw
         flex-direction: column
+        justify-content: space-between
+
+
+    .social
+        display: flex
         justify-content: space-between

@@ -308,7 +308,7 @@ a {
     flex-flow: column nowrap;
     justify-content: center;
     height: 22vh;
-    padding: 0;
+    padding: 5vh 0 2vh 0;
   }
   .header__logo {
     flex: 1;
@@ -341,18 +341,15 @@ a {
   .menu__bottom {
     display: flex;
     flex-direction: column;
+    width: 98vw;
   }
   .menu__item {
-    font-size: 2.5rem;
     display: flex;
-    width: 100vw;
     padding: 12px 16px;
+    justify-content: space-between;
   }
   .menu__item:last-child {
     border-top: 1px solid #AEAEAE;
-  }
-  .menu > * i {
-    margin-left: 10px;
   }
 
   .photo-grid {
@@ -391,11 +388,18 @@ a {
     grid-row: span 1;
   }
 
+  .card {
+    line-height: 3.5rem;
+  }
   .card__title {
+    font-size: 2.2rem;
+    margin-bottom: 4rem;
+  }
+  .card__title--medium {
     font-size: 2.2rem;
   }
   .card__body {
-    font-size: 2.8rem;
+    font-size: 3.2rem;
   }
   .card__body--small-text {
     font-size: 2.2rem;
@@ -415,6 +419,11 @@ a {
   .location {
     height: 35vw;
     flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .social {
+    display: flex;
     justify-content: space-between;
   }
 }
