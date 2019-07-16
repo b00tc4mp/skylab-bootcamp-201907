@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Skylab Airlines</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+    <!-- jQuery CDN -->
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    
+    <!-- Bootstrap CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/styles.css">
+
+</head>
+<body>
+    <div class="container">
+        <header class='row'></header>
+    </div>
+    
+    <div class="container">
+        <div class='row'>
+            <section id='userId' class='col-md-4'>
+                <div>
+                    <img id='userIcon' src='' alt='user_icon'/>
+                    <p id='presentation'></p>
+                </div> 
+                <div id='buttonSet'>
+                    <button id='adminButton' type="button" class="btn btn-success">admin</button>
+                    <button id='userButton' type="button" class="btn btn-success">user</button>
+                </div>
+            </section>
+
+            <section id='infoFlights' class='col-md-8'>
+                <div>
+                    <p id='nonStopOverFlightsMessage'></p>
+                    <ul id='nonStopOverFlightsList' class='list-group'></ul>    
+                </div>
+                        
+                <div>
+                    <p id='averageCost'></p>
+                </div>
+                
+                <div>
+                    <p id='countStopOverFlights'></p>
+                </div>
+                
+                <div>
+                    <p id='stopOverFlightsMessage'></p>
+                    <ul id='stopOverFlightsList' class='list-group'></ul>
+                </div> 
+            </section>
+
+            
+    
+            
+        </div>
+    </div>
+    
+     <!-- JS -->
+     <script src="js/models/model.js"></script>
+     <script src="js/views/index_view.js"></script>
+     <script src="js/controllers/header.js"></script>
+     <script src="js/controllers/userNameURLparameter.js"></script>
+     <script src="js/controllers/index_controller.js"></script> 
+</body>
+</html>
+
+</html>

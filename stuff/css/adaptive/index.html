@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            /* border: 1px solid black; */
+            /* min-width: 100px; */
+            /* min-height: 100px; */
+            margin: 0;
+            box-sizing: border-box;
+            /* border-collapse: collapse; */
+        }
+
+        header {
+            background-color: orange;
+            /* height: 15%; */
+        }
+
+        main {
+            /* float: left; */
+            /* width: 60%; */
+            background-color: red;
+            /* height: 70%; */
+            height: 60%;
+        }
+
+        nav {
+            /* float: left; */
+            /* width: 20%; */
+            background-color: blue;
+            /* height: 70%; */
+        }
+
+        aside {
+            /* float: right; */
+            /* width: 20%; */
+            background-color: plum;
+            /* height: 70%; */
+        }
+
+        footer {
+            /* clear: both; */
+            background-color: greenyellow;
+            /* height: 15%; */
+        }
+
+        header, footer {
+            height: 10%;
+        }
+
+        nav, aside {
+            height: 10%;
+        }
+
+        body {
+            height: 100vh;
+        }
+
+        @media (min-width: 512px) and (max-width: 768px) {
+            nav {
+                float: left;
+                height: 70%;
+                width: 20%;
+            }
+
+            main {
+                float: right;
+                height: 70%;
+                width: 80%;
+            }
+
+            aside {
+                clear: both;
+            }
+        }
+
+        @media (min-width: 768px) {
+            nav {
+                float: left;
+                height: 80%;
+                width: 20%;
+            }
+
+            main {
+                float: left;
+                height: 80%;
+                width: 60%;
+            }
+
+            aside {
+                float: right;
+                height: 80%;
+                width: 20%;
+            }
+
+            footer {
+                clear: both;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>header</header>
+    <nav>nav</nav>
+    <main>main</main>
+    <aside>aside</aside>
+    <footer>footer</footer>
+</body>
+</html>

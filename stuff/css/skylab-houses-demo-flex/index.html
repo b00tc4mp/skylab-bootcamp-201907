@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="guide.css">
+    <link rel="stylesheet" href="houses.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 class="title">Skylab Houses</h1>
+    <h2 class="subtitle">FLEX DEMO</h2>
+    <section class="flex-demo">
+        <div class="windmill">
+            <div class="windmill-wing1"></div>
+            <div class="windmill-wing2"></div>
+            <div class="windmill-body"></div>
+            <div class="windmill-base"></div>
+        </div>
+        <div class="house">
+            <div class="house-roof"></div>
+            <div class="house-structure twoWindows">
+                <div class="house-window"></div>
+                <div class="house-door"></div>
+                <div class="house-window"></div>
+            </div>
+        </div>
+        <div class="house">
+            <div class="house-roof"></div>
+            <div class="house-structure oneWindow">
+              <!-- house structure -->
+                <div class="house-window"></div>
+                <div class="house-door"></div>
+              <!-- structure end -->
+            </div>
+        </div>
+        <div class="house">
+            <div class="house-roof"></div>
+            <div class="house-structure oneWindowOneDoor">
+              <!-- house structure -->
+                <div class="house-window"></div>
+                <div class="house-door"></div>
+              <!-- structure end -->
+            </div>
+        </div>
+        <div class="house">
+            <div class="house-roof"></div>
+            <div class="house-structure full-windows">
+              <!-- house structure -->
+                <div class="house-window"></div>
+                <div class="house-window"></div>
+                <div class="house-window"></div>
+                <div class="house-window"></div>
+                <div class="house-window"></div>
+                <div class="house-window"></div>
+              <!-- structure end -->
+            </div>
+            <div class="house-structure twoDoors">
+              <!-- house structure -->
+                <div class="house-door"></div>
+                <div class="house-door"></div>
+              <!-- structure end -->
+            </div>
+        </div>
+        <div class="house">
+            <div class="house-roof"></div>
+            <div class="house-structure threeWindowsOneDoor">
+              <!-- house structure -->
+                <div class="threeWindowsOneDoor-windows">
+                    <div class="house-window"></div>
+                    <div class="house-window"></div>
+                </div>
+                <div class="house-window"></div>
+                <div class="house-door"></div>
+              <!-- structure end -->
+            </div>
+        </div>
+        <div class="house">
+            <div class="house-roof"></div>
+            <div class="house-structure twoDoorsOneWindow">
+              <!-- house structure -->
+                <div class="house-door"></div>
+                <div class="house-window"></div>
+                <div class="house-door"></div>
+              <!-- structure end -->
+            </div>
+        </div>
+ 
+<!-- practice -->
+        <div class="house">
+            <div class="house-roof"></div>
+            <div class="house-structure">
+              <!-- house structure -->
+                <!-- TODO HOUSE -->
+              <!-- structure end -->
+            </div>
+        </div>
+        
+    </section>
+
+    <section class="flex-guide">
+        <section class="direction-row">
+            <p>direction: row</p>
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+            </ul>
+        </section>
+        <section class="direction-row reverse">
+            <p>direction: row-reverse</p>
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+            </ul>
+        </section>
+        <section class="direction-column">
+            <p>direction: column</p>
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+            </ul>
+        </section>
+        <section class="direction-column reverse">
+            <p>direction: column-reverse</p>
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+            </ul>
+        </section>
+        </div>
+
+        <hr>
+
+        <div class="flex-wrap-container">
+            <h2>flex-wrap -> Resize the window to see the effects below:</h2>
+            <section class="flex-wrap nowrap">
+                <p>nowrap</p>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                </ul>
+            </section>
+
+            <section class="flex-wrap wrap">
+                <p>wrap</p>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                </ul>
+            </section>
+
+            <section class="flex-wrap wrap-reverse">
+                <p>wrap-reverse</p>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                </ul>
+            </section>
+        </div>
+
+        <hr>
+
+        <div class="justify-content-container">
+            <h2>justify-content</h2>
+            <section class="justify-content flex-start">
+                <p>flex-start</p>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul>
+            </section>
+
+            <section class="justify-content flex-end">
+                <p>flex-end</p>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul>
+            </section>
+
+            <section class="justify-content center">
+                <p>center</p>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul>
+            </section>
+
+            <section class="justify-content space-between">
+                <p>space-between</p>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul>
+            </section>
+
+            <section class="justify-content space-around">
+                <p>space-around</p>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul>
+            </section>
+
+            <section class="justify-content space-evenly">
+                <p>space-evenly</p>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul>
+            </section>
+        </div>
+
+        <hr>
+
+        <div class="align-items-container">
+            <h2>align-items</h2>
+            <section class="align-items flex-start">
+                <p>flex-start</p>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                </ul>
+            </section>
+
+            <section class="align-items flex-end">
+                <p>flex-end</p>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                </ul>
+            </section>
+
+            <section class="align-items center">
+                <p>center</p>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                </ul>
+            </section>
+
+            <section class="align-items stretch">
+                <p>stretch</p>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                </ul>
+            </section>
+
+            <section class="align-items baseline">
+                <p>baseline</p>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                </ul>
+            </section>
+    </section>
+</body>
+
+</html>
