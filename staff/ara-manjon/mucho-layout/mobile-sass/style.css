@@ -1,0 +1,247 @@
+.scrption__text, .adr__red, .adr__text, .bye__text, .about__red {
+  font-size: 0.9rem;
+  font-family: "Open Sans", sans-serif;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100vw;
+}
+
+.hdr {
+  width: 100vw;
+  background-color: #fff;
+  z-index: 4;
+  position: fixed;
+  display: flex;
+  right: 0;
+  justify-content: space-between;
+}
+.hdr__banner {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+  width: 7rem;
+  display: inline-block;
+}
+.hdr__nav {
+  z-index: 4;
+  margin: 1rem;
+  float: right;
+  color: #AEAEAE;
+  display: inline-block;
+}
+.hdr__nav2 {
+  display: none;
+}
+
+.drp {
+  width: 100vw;
+  padding-top: 8.9vh;
+}
+.drp__first {
+  border-top: 0.05rem solid #AEAEAE;
+  border-bottom: 0.05rem solid #AEAEAE;
+  margin: 0 0.2rem 0 0.2rem;
+}
+.drp__keep {
+  width: 100vw;
+  border-bottom: 0.05rem solid #AEAEAE;
+  margin: 0 0.2rem 0 0.2rem;
+}
+.drp__title {
+  font-size: 1.2rem;
+  color: #AEAEAE;
+  padding: 0.7rem 1.5rem;
+  margin: 0;
+  font-weight: 100;
+  font-family: "Open Sans", sans-serif;
+}
+
+.cllg {
+  display: grid;
+  position: relative;
+  margin-top: 0.25rem;
+}
+.cllg__div {
+  display: grid;
+  width: 98vw;
+  margin: 0.05rem 0.25rem;
+  position: relative;
+  padding: 0;
+}
+
+.img__img {
+  width: 98vw;
+  position: relative;
+}
+.img__intro {
+  width: 98vw;
+  color: rgba(255, 255, 255, 0);
+  top: 0;
+  bottom: 0;
+  font-size: 0.75rem;
+  font-weight: 200;
+  padding: 1rem 0 0 1.5rem;
+  position: absolute;
+}
+.img__intro:hover {
+  z-index: 3;
+  width: 98vw;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  position: absolute;
+  font-size: 100%;
+  font-weight: 200;
+  padding: 1rem 0 0 1.5;
+  transition: all 0.5s linear;
+  font-family: "Open Sans", sans-serif;
+  color: #AEAEAE;
+}
+
+.cllg__about {
+  min-height: 30vh;
+  background-color: #f4f4f4;
+  display: grid;
+  width: 98vw;
+  margin: 0.2rem 0.25rem;
+  position: relative;
+  padding: 0;
+}
+
+.about__text {
+  padding: 1rem 1.5rem 4rem 1.5rem;
+  font-size: 1.2rem;
+  color: #000;
+  font-family: "Open Sans", sans-serif;
+}
+.about__text a {
+  color: #AEAEAE;
+  text-decoration: none;
+}
+.about__red {
+  padding: 1.5rem 0 0 1.5rem;
+  font-weight: 900;
+  color: #EC1C24;
+}
+
+.bye__text {
+  padding: 3rem 0 3rem 1.5rem;
+  color: #555555;
+}
+
+.adr__text {
+  padding: 0 0 4rem 1.5rem;
+  color: #555555;
+}
+.adr__red {
+  padding: 0 0 4rem 1.5rem;
+  padding: 0 1.5rem 1rem 1.5rem;
+  color: #EC1C24;
+  font-weight: 900;
+}
+
+.scrption {
+  padding-bottom: 1.5rem;
+}
+.scrption__text {
+  padding: 0.5rem 1.5rem;
+  font-weight: 100;
+  color: #AEAEAE;
+}
+.scrption i {
+  color: #AEAEAE;
+  padding-right: 0.3rem;
+}
+
+@media screen and (min-width: 600px) {
+  .hdr {
+    width: 200vw;
+    padding-left: 0;
+  }
+  .hdr__banner {
+    width: 32vw;
+    margin: 2rem 2rem;
+  }
+  .hdr__nav {
+    display: none;
+  }
+  .hdr__nav2 {
+    z-index: 4;
+    margin: 2rem;
+    float: right;
+    color: #AEAEAE;
+    display: inline-block;
+  }
+
+  .drp {
+    width: 200vw;
+    padding-top: 20vw;
+  }
+  .drp__title {
+    font-size: 2.4rem;
+    padding: 1.4rem 3rem;
+  }
+
+  .img__intro {
+    font-size: 1.4rem;
+    padding: 2rem 0 0 3rem;
+  }
+  .img__intro:hover {
+    font-size: 200%;
+    padding: 2rem 0 0 3rem;
+  }
+
+  .cllg {
+    grid-template-columns: 1fr 1fr;
+    transition: all 0.5s linear;
+  }
+  .cllg__div {
+    width: 33%;
+  }
+
+  .about__text {
+    padding: 2rem 3rem 8rem 3rem;
+    font-size: 200%;
+  }
+  .about__red {
+    padding: 2rem 3rem 8rem 3rem;
+    font-size: 200%;
+  }
+
+  .bye__text {
+    font-size: 5vw;
+    width: 200vw;
+    padding: 6rem 0 6rem 3rem;
+  }
+
+  .adr__text {
+    font-size: 5vw;
+    width: 200vw;
+    padding: 1.5rem 0 6rem 3rem;
+  }
+  .adr__red {
+    font-size: 5vw;
+    width: 200vw;
+    padding: 6rem 0 1.5rem 3rem;
+  }
+
+  .scrption {
+    padding-bottom: 3rem;
+  }
+  .scrption__text {
+    padding: 1rem 3rem;
+    font-size: 5vw;
+    width: 200vw;
+  }
+  .scrption i {
+    padding: 0.2rem;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
