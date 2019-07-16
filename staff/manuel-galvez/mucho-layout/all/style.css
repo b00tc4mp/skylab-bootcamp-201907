@@ -303,21 +303,28 @@ a {
 }
 @media only screen and (max-width: 768px) {
   .header {
-    font-size: 4.5vw;
+    font-size: 4vw;
     display: flex;
     flex-flow: column nowrap;
+    justify-content: center;
+    height: 22vh;
+    padding: 0;
   }
   .header__logo {
-    padding: 0 16px;
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 20px;
   }
   .header__quote {
     display: none;
   }
   .header__menu {
+    flex: 1;
     display: flex;
+    justify-content: flex-end;
+    padding: 0;
     flex-flow: column wrap;
-    justify-content: center;
-    padding: 0 16px;
   }
 
   .menu {
@@ -325,16 +332,24 @@ a {
     flex-direction: column wrap;
     align-items: flex-start;
     justify-content: flex-start;
+    border-bottom: 1px solid #AEAEAE;
+    border-top: 1px solid #AEAEAE;
   }
   .menu__top {
     display: none;
   }
   .menu__bottom {
-    align-self: flex-end;
     display: flex;
+    flex-direction: column;
   }
   .menu__item {
+    font-size: 2.5rem;
     display: flex;
+    width: 100vw;
+    padding: 12px 16px;
+  }
+  .menu__item:last-child {
+    border-top: 1px solid #AEAEAE;
   }
   .menu > * i {
     margin-left: 10px;
@@ -377,13 +392,13 @@ a {
   }
 
   .card__title {
-    font-size: 1.1rem;
+    font-size: 2.2rem;
   }
   .card__body {
-    font-size: 1.4rem;
+    font-size: 2.8rem;
   }
   .card__body--small-text {
-    font-size: 1.1rem;
+    font-size: 2.2rem;
   }
 
   .quote {
@@ -394,12 +409,12 @@ a {
     padding: 0 1.8rem;
   }
   .quote__body {
-    font-size: 1.8rem;
+    font-size: 2.4rem;
   }
 
   .location {
     height: 35vw;
-    flex-flow: column wrap;
+    flex-direction: column;
     justify-content: space-between;
   }
 }
