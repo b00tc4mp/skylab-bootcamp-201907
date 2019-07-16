@@ -1,16 +1,22 @@
 function filter(array, condition) {
 
     newarrays=[];
+    
     if (condition){
+    
         for(var i=0;i<array.length;i++){
+            
             if (array[i].length > condition){
                 newarrays+= array[i] + ' ';
             }
          }
-         return  newarrays;
+         array=newarrays;
+         return  array;
         }
      else {
-            return newarrays;
-     }
+            
+        array=[];
+        return  array;
+            }
     
-}
+    }
