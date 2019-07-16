@@ -1,0 +1,51 @@
+/*
+id => #
+classe => .
+*/
+*{ 
+    margin:0;
+}
+body{
+    width: 100vw;
+
+}
+.header__nav{
+    display:none;
+}   
+header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid grey;
+
+}
+img{
+    margin: 10px;
+}
+#hamburger{
+    height: 40px;
+    width: 40px;
+}
+
+.menu{
+    background-color: red;
+    color
+}
+
+@media (min-width: 600px) {
+    .header__nav{
+        display:flex;
+    }
+    ul{
+        display: flex;
+    }
+    .header__menu{
+        display: inline-block;
+        align-self: center;
+        margin: 0.7rem
+        
+    }
+    #hamburger{
+        display: none;
+    }
+}
