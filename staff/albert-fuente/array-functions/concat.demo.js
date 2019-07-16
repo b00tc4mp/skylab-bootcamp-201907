@@ -1,10 +1,8 @@
-console.log("CONCAT DEMO")
+console.log("CONCAT DEMO");
 
 var arr1=[1,2,3]
 var arr2=[4,5,6]
-<<<<<<< Updated upstream
-=======
-console.log(arr1,arr2, " we want to concat them")
->>>>>>> Stashed changes
+var result=concatAll(arr1,arr2);
 
-console.log(concatAll(arr1,arr2))
+check(result, [1,2,3,4,5,6]);
+

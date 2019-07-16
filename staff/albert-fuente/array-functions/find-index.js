@@ -1,4 +1,4 @@
-function findIndex(arr,value){
+function findIx(arr,value){
   var result=[];
   for(var i in arr){
     if(arr[i]>value){

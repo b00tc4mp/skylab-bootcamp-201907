@@ -1,8 +1,9 @@
-function find(arr,value){
+function find(arr,expression){
   var result=[];
   for(var i in arr){
-    if(arr[i]>value){
+    if(expression(arr[i])){
       result.push(arr[i]);
+      break;
     }
   }
   return result;
