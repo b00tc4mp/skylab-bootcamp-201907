@@ -1,0 +1,30 @@
+.calculadora{
+	background-color: darkcyan;
+	border-radius: 5%;
+	margin: 0%;
+	padding: 5%;
+	width: 275px;
+	height: 280px;
+	}
+
+.calculadora td button{ 
+	width: 60px;
+	height: 50px;
+	padding: 5%;
+	font-size:20px;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	color: black;
+}
+	
+#screen{
+	display: block;
+
+	text-align: right;
+	font-size: 20px;
+	margin-bottom:30px;
+	width: 270px;
+	height: 50px;
+	background-color: darkkhaki;
+	color: white;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

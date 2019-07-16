@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel='stylesheet' type='text/css' href='./index.css'>
+  <link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css'>
+  <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet">
+</head>
+  
+<body>
+<div id="container">
+    <div class= "item" id="titulo">
+        <p id="paragrafoTitulo"> PASAPALABRA SKYLAB</p> 
+     </div>
+
+
+    <div class= "item" id="rosco">
+        <div id="botonesRosco">
+            <div class="letra" id="a">
+                <p class="paragrafoLetra">A</p>
+            </div>
+            <div class="letra" id="b">
+                <p class="paragrafoLetra">B</p>
+            </div>
+            <div class="letra" id="c">
+                <p class="paragrafoLetra">C</p>
+            </div>
+            <div class="letra" id="d">
+                <p class="paragrafoLetra">D</p>
+            </div>
+            <div class="letra" id="e">
+                <p class="paragrafoLetra">E</p>
+            </div>
+            <div class="letra" id="f">
+                <p class="paragrafoLetra">F</p>
+            </div>
+            <div class="letra" id="g">
+                <p class="paragrafoLetra">G</p>
+            </div>
+            <div class="letra" id="h">
+                <p class="paragrafoLetra">H</p>
+            </div>
+            <div class="letra" id="i">
+                <p class="paragrafoLetra">I</p>
+            </div>
+            <div class="letra" id="j">
+                <p class="paragrafoLetra">J</p>
+            </div>
+            <div class="letra" id="k">
+                <p class="paragrafoLetra">K</p>
+            </div>
+            <div class="letra" id="l">
+                <p class="paragrafoLetra">L</p>
+            </div>
+            <div class="letra" id="m">
+                <p class="paragrafoLetra">M</p>
+            </div>
+            <div class="letra" id="n">
+                <p class="paragrafoLetra">N</p>
+            </div>
+            <div class="letra" id="ñ">
+                <p class="paragrafoLetra">Ñ</p>
+            </div>
+            <div class="letra" id="o">
+                <p class="paragrafoLetra">O</p>
+            </div>
+            <div class="letra" id="p">
+                <p class="paragrafoLetra">P</p>
+            </div>
+            <div class="letra" id="q">
+                <p class="paragrafoLetra">Q</p>
+            </div>
+            <div class="letra" id="r">
+                <p class="paragrafoLetra">R</p>
+            </div>
+            <div class="letra" id="s">
+                <p class="paragrafoLetra">S</p>
+            </div>
+            <div class="letra" id="t">
+                <p class="paragrafoLetra">T</p>
+            </div>
+            <div class="letra" id="u">
+                <p class="paragrafoLetra">U</p>
+            </div>
+            <div class="letra" id="v">
+                <p class="paragrafoLetra">V</p>
+            </div>
+            <div class="letra" id="w">
+                <p class="paragrafoLetra">W</p>
+            </div>
+            <div class="letra" id="x">
+                <p class="paragrafoLetra">X</p>
+            </div>
+            <div class="letra" id="y">
+                <p class="paragrafoLetra">Y</p>
+            </div>
+            <div class="letra" id="z">
+                <p class="paragrafoLetra">Z</p>
+            </div>
+            
+            <input type="text" placeholder="Responde y pulsa Enviar o Enter" id="inputRespuestas" ></input>
+            <button id="enviar">Enviar</button>
+            
+        </div>
+
+    </div>
+
+    <div class= "item" id="preguntas">
+         <div id="pRules"> 
+            <p>Esto es el juego llamado Pasapalabra. </p>
+            <p>El juego consiste en responder a cada enunciado con la palabra que 
+            crees que mejor encaja en la definición presentada.</p>
+
+            <p>El sistema de puntuación es el siguiente:</p>
+            <ul>
+                <li>Cada letra acertada es un punto. </li>
+                <li>Si fallas una palabra no se vuelve a repetir y cuenta como fallo</li>
+                <li>Si pones pasapalabra o la letra p, no cuenta como fallo y se queda pendiente 
+                        para el siguiente turno.</li>
+                <li>Gana el que más palabras haya acertado</li>
+            </ul>
+			
+        </div>
+       <!--  Div para el contador -->
+       <div id="countdown">
+        
+       </div>
+        
+        
+       <!--  Div para añadir la opción de seguir jugando -->
+        <div id="keepPlaying">
+            <h3 id="keepPlayingText">¿Quieres seguir jugando?</h3>
+            <button class="buttonsKeepPlaying" id="button1">SI</button>
+            <button class="buttonsKeepPlaying" id="button2">NO</button>
+        </div>
+    </div>
+    <div class= "item" id="score">
+        <p id="pNombre">Escribe tu nombre y presiona ENTER</p>
+        <input type="text" id="inputNombre"></input>
+        <button id="botonjugar"><i class="fas fa-play-circle">PLAY</i></button> 
+        <div id="scoringPoints">
+            <div id="circleGreen" >
+                <h3 id="correct">0</h3>
+            </div>
+            <div id="circleRed">
+                <h3 id="error">0</h3>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script type="text/javascript" src="./index.js"></script>
+
+</body>
+
+</html>

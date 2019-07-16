@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./styles.css">
+    <title>CALCULATOR</title>
+</head>
+<body>
+    <section id="calculator">
+        <div id="display" class="display-max">0</div>
+        <div id="buttonSet">
+            <div class="row">
+                <div class="btn btn-grey btn-double" data-action="clear">C</div>
+                <div class="btn btn-grey btn-undo" data-action="undo">undo</div>
+                <div class="btn btn-orange" data-operator="div">÷</div>
+            </div>
+            <div class="row">
+                <div class="btn btn-grey " data-number="7">7</div>
+                <div class="btn btn-grey" data-number="8">8</div>
+                <div class="btn btn-grey" data-number="9">9</div>
+                <div class="btn btn-orange" data-operator="mult">x</div>
+            </div>
+            <div class="row">
+                <div class="btn btn-grey" data-number="4">4</div>
+                <div class="btn btn-grey" data-number="5">5</div>
+                <div class="btn btn-grey" data-number="6">6</div>
+                <div class="btn btn-orange" data-operator="rest">-</div>
+            </div>
+            <div class="row">
+                <div class="btn btn-grey" data-number="1">1</div>
+                <div class="btn btn-grey" data-number="2">2</div>
+                <div class="btn btn-grey" data-number="3">3</div>
+                <div class="btn btn-orange" data-operator="sum">+</div>
+            </div>
+            <div class="row last-row">
+                <div class="btn btn-grey btn-double" data-number="0">0</div>
+                <div class="btn btn-grey" data-number=".">.</div>
+                <div class="btn btn-orange btn-equal" data-operator="equal">=</div>
+            </div>
+        </div>
+    </section>
+
+    <script src="./main.js"></script>
+</body>
+</html>

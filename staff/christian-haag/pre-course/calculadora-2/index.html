@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Calculator</title>
+		<meta charset="utf 8"/>
+		<link rel="stylesheet" type="text/css" href="style.css"/>
+		<link href="https://fonts.googleapis.com/css?family=Press+Start+2P|VT323" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Quicksand|Varela+Round" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	</head>
+	<body>
+		<div id="info" >
+			<h1>Info</h1>
+			<p>Calculator project for<br/>Skylab pre-course.</p>
+			<div class="flex-colors">
+				<h3 class="firstP">Monokai color ranges:</h3>
+					<div class='colors' style="background:#fc5c94"><div id='c'><span  id="s">&nbsp;&nbsp;#fc5c94&nbsp;</span></div></div>
+					
+					<div class='colors' style="background:#906ad8"><div id='c'><span id="s">&nbsp;&nbsp;#906ad8&nbsp;</span></div></div>
+					
+					<div class='colors' style="background:#c1f161"><div id='c'><span id="s">&nbsp;&nbsp;#c1f161&nbsp;</span></div></div>
+					
+					<div class='colors' style="background:#8de6f7"><div id='c'><span id="s">&nbsp;&nbsp;#8de6f7&nbsp;</span></div></div>
+					
+					<div class='colors' style="background:#ff8802"><div id='c'><span id="s">&nbsp;&nbsp;#ff8802&nbsp;</span></div></div>
+									
+					<div class='colors' style="background:#abaa98"><div id='c'><span id="s">&nbsp;&nbsp;#abaa98&nbsp;</span></div></div>
+					
+					<div class='colors' style="background:#323d44"><div id='c'><span id="s">&nbsp;&nbsp;#323d44&nbsp;</span></div></div>
+				</div>
+			
+				<div class="tech"> 
+					<h3>Technologies used:</h3>
+					<i class="fab fa-html5"></i>
+					<i class="fab fa-css3-alt"></i>
+					<i class="fab fa-js"></i>
+					<p>made by Christian Haag<br/> with &#x2764;</p>
+				</div>
+		</div>
+		
+		<div id='title'>
+			<h2>Monokai <span id='theme'>theme.</span></h2>
+			<h1>Calculator</h1>		
+		</div>
+		
+
+		<div class="grid-container" id="calculator">
+			<input id="screen" value='0' disabled>
+			<button id="other" class="ac" onmousedown="clr()">AC</button>
+			<button id="other" class="return" onmousedown="bckSpace()"><i class="fas fa-backspace"></i></button>
+			<button id="operator" class="sroot" value="sroot" onmousedown="sqrRoot()">&#8730;</button>
+			<button id="operator" class="divide" value="/"  onmousedown="numOp('/')">&#247;</button>
+			
+			<button id="numbers" class="7" value="7" onmousedown="numOp(7)">7</button>
+			<button id="numbers" class="8" value="8" onmousedown="numOp(8)">8</button>
+			<button id="numbers" class="9" value="9" onmousedown="numOp(9)">9</button>
+			<button id="operator" class="mult" value="*" onmousedown="numOp('*')">&#215;</button>
+			
+			<button id="numbers" class="4" value="4" onmousedown="numOp(4)">4</button>
+			<button id="numbers" class="5" value="5" onmousedown="numOp(5)">5</button>
+			<button id="numbers" class="6" value="6" onmousedown="numOp(6)">6</button>
+			<button id="operator" class="subs" value="-" onmousedown="numOp('-')">&#8722;</button>
+			
+			<button id="numbers" class="1" value="1" onmousedown="numOp(1)">1</button>
+			<button id="numbers" class="2" value="2" onmousedown="numOp(2)">2</button>
+			<button id="numbers" class="3" value="3" onmousedown="numOp(3)">3</button>
+			<button id="operator" class="sum" value="+" onmousedown="numOp('+')">&#43;</button>
+			
+			<button id="numbers" class="zero" value="0" onmousedown="numOp(0)">0</button>
+			<button id="numbers" class="coma" value="," onmousedown="numOp('.')">&#44;</button>
+			<button id="equal" class="equal" onmousedown="result(), test()">&#61;</button>
+		</div>
+
+	
+		<script type="application/javascript" src="main.js"></script>
+		
+       
+	</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PasaSkylabra</title>
+
+    <!-- jQuery CDN -->
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    
+    <!-- Bootstrap CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Oswald|Raleway|Roboto&display=swap" rel="stylesheet">  
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/styles.css">
+</head>
+
+<body>
+    <div class='container'>
+        <h1>PasaSkylabra</h1>
+        <!-- <h2>Bienvenidos a PasaSkylabra</h2> -->
+        <section id='intro'>
+            <p>Basado en el exitoso programa de TV, PasaSkylabra supondrá todo un reto para ti. Cada letra guarda la definición de un concepto que debe ser escrito en la caja correspondiente. En caso de desconocer la respuesta, basta con pulsar el botón de <span>PasaSkylabra</span> para acceder a la seguiente letra. Sin embargo, ten cuidado! El tiempo es oro y el reloj no para. Pon a prueba tus conocimientos ¡Adelante!</p>
+            <button id='start-game-btn' class='btn btn-success'>Empezar</button>
+        </section>
+        <section id='canvas'>
+            <div id='wheel-board'>
+                <div id='score-marker' class='row justify-content-around'>
+                    <div id='score' class='col-3'></div>
+                    <div id='timer' class='col-3'></div>
+                    <div id='errors' class='col-3'></div>
+                </div>
+                <div id='wheel' class='d-flex flex-wrap justify-content-center'></div>
+            </div>
+            <div id='game-form'>
+                <div id='quest'></div>
+                <input type="text" id='answer'>
+                <div id='button-set' class='row justify-content-around'>
+                    <button id='check' class='col-3 btn btn-success'>OK</button>
+                    <button id='next-word' class='col-3 btn btn-warning'>PasaSkylabra</button>
+                    <button id='end-game' class='col-3 btn btn-danger'>END</button>
+                </div>
+            </div>
+        </section>
+        <section id='resume'>
+            <div id='resume-message'>
+                <p>Has finalizado la partida. El ranking de partidas es el siguiente:</p>
+                <div id='resume-score'></div>
+                <button id='resume-game' class='btn btn-success'>¿Quieres jugar otra vez?</button>
+            </div>
+        </section>
+        <section id='exit'>
+            <div id='exit-message'>
+                <p>Ha acabado la partida. La puntuación ha sido la siguiente:</p>
+                <p id='exit-score'></p>
+            </div>
+        </section>
+    </div>
+
+    <!-- JS -->
+    <script src="js/model.js"></script>
+    <script src="js/view.js"></script>
+    <script src="js/controller.js"></script>
+</body>
+</html>
