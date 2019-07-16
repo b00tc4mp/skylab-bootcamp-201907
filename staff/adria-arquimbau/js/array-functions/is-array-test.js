@@ -1,4 +1,4 @@
-console.log('DEMO: isArray');
+console.log('TEST: isArray');
 
 var array = [1,2,3];
 
