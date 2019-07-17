@@ -1,4 +1,15 @@
-function flat(array) {
+/**
+ * 
+ * Flatens an array (matrix) to given depth.
+ * 
+ * @example
+ * 
+ * @param {Array} array The array to flatten.
+ * @param {number} depth The level to reach in the flatten.
+ * @throws {TypeError} when input is not an array.
+ * @returns {result} A new array with the flattened original array.
+ */
+function flat(array, depth) {
     if (!(array instanceof Array)) throw TypeError(array + ' is not an array');
  
     var depth = arguments[1];
@@ -17,3 +28,4 @@ function flat(array) {
  
     return result;
  }
+ flat([1,2,3,["a","b","c",[true,false]]],4)

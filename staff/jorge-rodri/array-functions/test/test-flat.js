@@ -11,7 +11,8 @@ var array=[1,2,3,["a","b","c",[true,false]]];
 //case default
 
 var result=dFlat(array);
-check(result,[1,2,3,["a","b","c",[true,false]]]);
+//check(result,[1,2,3,["a","b","c",[true,false]]]);
+var expected=[]
 
 //case depth 2
 

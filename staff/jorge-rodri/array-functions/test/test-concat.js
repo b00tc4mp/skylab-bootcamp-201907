@@ -1,8 +1,3 @@
-function check(expected,result){
-    if(expected.toString()!==result.toString()){
-        console.error(`El resultado esperado es ${expected} y el resultado es ${result}`);
-    }
-}
 try{
     concatD(undefined,undefined);
 } catch(error){
