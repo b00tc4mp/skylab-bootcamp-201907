@@ -1,14 +1,8 @@
-var arr = [1, 2, 3, 4];
+function map(array, expression) {
+    var result = [];
 
-function map(array, op, arg) {
-  var emptyArr = [];
+    for (var i = 0; i < array.length; i++)
+        result[i] = expression(array[i], i, array);
 
-  for (i = 0; i < array.length; i++) {
-    var number = array[i];
-    var result = eval(`${number}${op}${arg}`);
-
-    emptyArr[emptyArr.length] = result;
-  }
-
-  return emptyArr;
+    return result;
 }
