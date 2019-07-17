@@ -10,3 +10,7 @@ console.log(keys(array1), " expected output 012");
 // for (let key of iterator) {
 //   console.log(key); // expected output: 0 1 2
 // }
+
+var result=(keys(array1));
+/* check(result,0 1 2);
+ */

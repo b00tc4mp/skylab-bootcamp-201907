@@ -1,38 +1,46 @@
-console.log("FOR EACH DEMO");
+console.log('TEST forEach');
 
+var array = ['a', 'b', 'c'];
 
-var array1 = ['a', 'b', 'c'];
-console.log(array1, " these are the initial values");
+var outputs = [];
 
-function show(){
-    console.log()
-}
-forEach(array1, function(element,index,array) {
-    console.log(element,index,array)
+forEach(array, function (element, index, array) {    
+    outputs.push([element, index, array]);
 });
-console.log('expected: \n"a" 0 [a,b,c], \n"b" 1 [a,b,c], \n"c" 2 [a,b,c');
+
+check(outputs, [
+    ['a', 0, ['a', 'b', 'c']],
+    ['b', 1, ['a', 'b', 'c']],
+    ['c', 2, ['a', 'b', 'c']]
+]);
 
 
+array = [1, 2, 3];
 
-var array2 = [1, 2, 3];
-console.log(array2, " these are the initial values");
-
-var result=0;
-forEach(array2, function(value){
+var result = 0;
+forEach(array, function (value) {
     result += value;
-    return result;
 });
-console.log(result,'expected: 6');
 
+check(result, 6);
 
-/* arguments es un pseudo array solo funciona dentro de una función
- */
+// case: no arguments
 
- [1,2,3].forEach(function(value){
-     console.log(value);
-     console.log(arguments[0],arguments[1],arguments[2]);
+try {
+    forEach();
+} catch(error) {
+    check(error instanceof TypeError, true);
+    check(error.message, 'missing argument 0 when calling function forEach');
+}
 
- })
+// case: not an array
+
+try {
+    forEach(1);
+} catch(error) {
+    check(error instanceof TypeError, true);
+    check(error.message, '1 is not an array');
+}
 
 
  

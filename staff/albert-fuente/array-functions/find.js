@@ -1,12 +1,14 @@
 function find(arr,expression){
-  var result=[];
+
+  if(!arguments.length) throw TypeError ("ARGUMENTOS NO DECLARADOS");
+  if(!(arr instanceof Array)) throw TypeError (" IS NOT AN ARRAY");
+  if(!(expression instanceof Function)) throw TypeError (expression + " IS NOT A FUNCTION");
+
   for(var i in arr){
     if(expression(arr[i])){
-      result.push(arr[i]);
-      break;
+      return arr[i]
     }
   }
-  return result;
 }
 
 

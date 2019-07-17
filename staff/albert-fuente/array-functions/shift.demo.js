@@ -8,6 +8,13 @@ console.log(miPescado," these are the initial elements");
 
 console.log(shift(miPescado)," expected output is [payaso,mandarin,cirujano]");
 
+var result=(shift(miPescado));
+check(result, ["payaso", "mandarín","cirujano"]);
+
+
+
+
+
 
 //
 //

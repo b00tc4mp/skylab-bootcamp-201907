@@ -1,16 +1,20 @@
-
-function join(arr){
-  result="";
-  for(var i in arr){
-    for(var j in arr[i])
-    result+=(arr[i][j]);
+function join(array, separator) {
+  var string = '';
+  if (separator == '' || separator == undefined) {
+    separator = ',';
   }
-  return result;
-}
 
-
-//
-// var elements = ['Fire', 'Air', 'Water'];
-//
-// console.log(elements.join());
-// expected output: "Fire,Air,Water"
+  if (array.length == 1) {
+    string = array[0];
+    return string;
+  } else {
+    for (var i = 0; i < array.length; i++) {
+      if (i == array.length - 1) {
+        string += array[i];
+      } else {
+        string += array[i] + separator;
+      }
+    }
+    return string;
+  }
+} 

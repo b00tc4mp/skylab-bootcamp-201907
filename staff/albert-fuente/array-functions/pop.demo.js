@@ -13,3 +13,22 @@ result=pop(array);
 
 console.log(result, " expected 2"); //expected 2
 console.log(array, "expected [1]"); //expected: [1]
+
+// case: no arguments
+
+/* try {
+    pop();
+} catch(error) {
+    console.log(error)
+    check(error instanceof TypeError, true);
+    check(error.message, 'missing argument 0 when calling function forEach');
+
+}
+ */
+// case: not an array
+
+try {
+    forEach("W");
+} catch(error) {
+    check(error.message, '1 is not an array');
+}

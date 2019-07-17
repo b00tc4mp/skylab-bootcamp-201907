@@ -14,3 +14,13 @@ check(result,[1, 2, 0, 0, 0])
 
 var result=(fill(array1,5, 1,4));
 check(result,[1, 5, 5, 5, 5])
+
+
+
+try{
+    fill()
+}catch(error){
+    console.log(error)
+    check(error instanceof ReferenceError, true);
+    check(error.message, "Faltan parametros")
+}

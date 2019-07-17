@@ -1,4 +1,13 @@
 function arrayOf(arg) {
+  console.log(arg)
+  if(arg===undefined)throw TypeError("ERROR variable no definida")
+  if (arguments.length === 0) throw TypeError('no tienen length o length = 0');
+
+
+
+
+
+
   var resultado = [];
 
   // Iterar a través de los otros argumentos enviados

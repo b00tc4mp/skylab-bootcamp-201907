@@ -1,8 +1,3 @@
-<<<<<<< Updated upstream
-function unShift(arr,arguments){
-  result=[];
-
-=======
 
 function unshift(arr, ...arguments){
     console.log(arr)
@@ -17,7 +12,6 @@ function unshift(arr, ...arguments){
     array1 = newArray;
     console.log(array1) //BORRAR
     return newArray.length;
->>>>>>> Stashed changes
 }
 
 

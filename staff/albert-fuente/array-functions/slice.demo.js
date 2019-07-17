@@ -6,6 +6,9 @@ console.log(nombres," these are the initial values");
 
 console.log(slice(nombres,1,3), " expected output [Pedro,Miguel]");  
 
+var result=(slice(nombres,1,3));
+check(result,["Pedro", "Miguel"]);
+
 
 // var masculinos = nombres.slice(1, 3);
 

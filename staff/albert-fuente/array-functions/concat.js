@@ -1,5 +1,11 @@
 
 function concatAll(arr1,arr2){
+  if(arr1===undefined||arr2===undefined)throw TypeError("ERROR variable no definida")
+
+
+
+
+
   result=[];
 
   for(var i in arr1){

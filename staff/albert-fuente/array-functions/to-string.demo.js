@@ -5,6 +5,8 @@ console.log(array1," these are the initial values");
 
 console.log(toString(array1)," expected values [1,2,a,1a as strings!]");
 
+var result=(toString(array1));
+check(result,["1", "2", "a", "1a"]);
 
 //
 // console.log(array1.toString());

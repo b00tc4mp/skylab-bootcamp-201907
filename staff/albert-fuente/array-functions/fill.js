@@ -1,4 +1,8 @@
 function fill(arr,numberWanted,fromFill,toFill){
+  if(arr==undefined || numberWanted==undefined || fromFill==undefined || toFill==undefined)throw ReferenceError ("Faltan parametros")
+
+
+
   for(var i=fromFill;i<=toFill;i++){
     arr[i]=numberWanted;
   }

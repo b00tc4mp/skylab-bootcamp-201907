@@ -1,4 +1,9 @@
 function copyWithin(arr, x1,x2){
+  if(arr===undefined)throw TypeError("ERROR variable no definida")
+
+
+
+
   arr[x1]=arr[x2];
   return arr;
 }
