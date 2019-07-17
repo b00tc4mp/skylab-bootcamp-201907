@@ -1,9 +1,15 @@
-var a = ["color: white", "background-color: green"].join(";");
+var a = ["background-color: green", "white"].join(";");
 
-function check(result, expected) {
+function checkAndLogError(result, expected) {
   if (result.toString() !== expected.toString()) {
-    console.error("error: result does not match expected value");
+    console.error(
+      "error: result (" +
+        result +
+        ") does not match expected value (" +
+        expected +
+        ")"
+    );
   } else {
-    console.log("%ccheck: OK!", a);
+    console.log(result + " %c Passed!", a);
   }
 }

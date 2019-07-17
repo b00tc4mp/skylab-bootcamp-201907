@@ -3,6 +3,10 @@ console.log("DEMO forEach");
 var array = ["a", "b", "c"];
 console.log("array", array);
 
+// forEach(array, function (element, index, array) {
+//     console.log(element, index, array);
+// });
+
 forEach(array, console.log);
 
 console.log(
