@@ -1,4 +1,4 @@
-console.log('TEST forEach');
+/* console.log('TEST forEach');
 
 var array = ['a', 'b', 'c'];
 
@@ -24,7 +24,7 @@ forEach(array, function (value) {
 
 check(result, 6);
 
-// case: no arguments
+// case: no arguments */
 
 try {
     forEach(array, expression);

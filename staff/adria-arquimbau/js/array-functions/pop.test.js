@@ -1,19 +1,19 @@
-console.log('TEST: pop');
+// console.log('TEST: pop');
 
-var array = [1, 2, 3];
+// var array = [1, 2, 3];
 
-var result = pop(array);
-check(result, 3);
-check(array, [1, 2]);
+// var result = pop(array);
+// check(result, 3);
+// check(array, [1, 2]);
 
-result = pop(array);
-check(result, 2);
-check(array, [1]);
+// result = pop(array);
+// check(result, 2);
+// check(array, [1]);
 
 
-result = pop(array);
-check(result, 1);
-check(array, []);
+// result = pop(array);
+// check(result, 1);
+// check(array, []);
 
 try {
     forEach(array, expression);
