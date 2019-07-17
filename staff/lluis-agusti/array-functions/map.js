@@ -1,10 +1,14 @@
-var allArray = [1, 2, 3, 4]
-var result = [];
+function map(array, expression) {
 
-console.log("Array inicial: " + allArray);
+if (arguments.length === 0) throw TypeError("no tiene nada! Empty fucking cat");
 
-function map(array) {
-for (var i = 0; i < allArray.length; i++) {
-   result[i] = allArray[i];
- } console.log("Nuevo array: " + result);
-} map();
+if (!(array instanceof Array)) throw TypeError("no es un array y si no es un array no se puede recorrer");
+
+if (!(expression instanceof Function)) throw TypeError(expression + "no es una función");
+
+
+  var result = [];
+  for (var i = 0; i < array.length; i++)
+      result[i] = expression(array[i], i, array);
+  return result;
+}
