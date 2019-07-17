@@ -1,21 +1,16 @@
-// var allArray = [1, 2, 3, 4]
-// var result = 0;
-
-// function map() {
-// for (var i = 0; i < allArray.length; i++) {
-//    result += allArray[i]*2;
-//  } console.log(result);
-// }
-
-// map();
-
-// // seria igual que --> var map1 = array1.map(x => x * 2);
-
 function map(array, expression){
+
+  if (arguments.length === 0) throw TypeError('No hay fucking nada dentro');
+
+  if (!(array instanceof Array)) throw TypeError('No es un array loki');
+
+  if (!(expression instanceof Function)) throw TypeError(expression + ' no es una función');
+
+
   var result = [];
-  
   for (let i = 0; i < array.length; i++) 
-    result[i] = expression(array[i]);
+    result[i] = expression(array[i], i, array);
     
   return result;
 }
+
