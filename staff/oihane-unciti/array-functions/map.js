@@ -1,10 +1,12 @@
-
-
 function map(array, expression) {
-  var result =[];
 
+  if(arguments.length === 0) throw TypeError ("No hay nada dentro");
+  if (!(array instanceof Array)) throw TypeError ("No es un array");
+  if(!(expression instanceof Function)) throw TypeError("No es una función");
+
+  var result =[];
   for (var i = 0; i < array.length; i++) 
-    result[i]= expression(array[i]);
+    result[i]= expression(array[i], i, array);
 
   return result;
 }
