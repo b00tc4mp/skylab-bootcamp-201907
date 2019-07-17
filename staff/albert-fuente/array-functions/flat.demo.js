@@ -7,6 +7,40 @@ var array = [1, 2, 3, ['a', 'b', 'c', [true, false, [undefined, null]]]];
 var result = flat(array);
 check(result, [1, 2, 3, 'a', 'b', 'c', [true, false, [undefined, null]]]);
 
+var expected=[1, 2, 3, 'a', 'b', 'c', [true, false, [undefined, null]]]
+check(result.length===expected.length,true);
+check(result instanceof Array, true)
+
+function checkArrays(result,expected){
+    check(result instanceof Array, true)
+    check(expectedç instanceof Array, true)
+    
+for(var i=0;i<result.length;i++){
+
+    var res=result[i], exp=expected[i];
+    if(res instanceof Array){
+        checkArrays(res,exp);
+    }else if(res indexof Object){
+        check(typeof res, typeof exp) /* para asegurar que es object */
+        checkArrays(Object.keys(res), Object.keys(exp))
+
+    }else check(res,exp);
+    
+}
+
+}
+
+checkArrays(result,expected);
+
+
+
+
+
+
+
+
+
+
 // case: depth 2
 
 var result = flat(array, 2);
