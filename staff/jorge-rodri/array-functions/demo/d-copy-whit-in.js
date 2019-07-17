@@ -2,6 +2,9 @@
  * copyWhitin()
  */
 function copyWhitinD(target,start,end,arr){
+    if(target==undefined||start==undefined||end==undefined||arr==undefined)throw ReferenceError("Missing params.")
+    if(!(arr instanceof Array))throw TypeError("The type of param arr is not Array")
+    if(!(start instanceof Number)||!(end instanceof Number))throw TypeError("'start' or 'end' are not params.")
     let res=[];
     let count=0;
     for(let i=start;i<end+1;i++){
