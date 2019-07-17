@@ -1,7 +1,6 @@
 console.log('TEST: fill');
 
 array1 = [1, 2, 3, 4];
-console.log('array1', array1);
 
 var result1 = filljuan(array1, 0, 2, 4) //,); // expected output: [1, 2, 0, 0]
 check(result1, [1, 2, 0, 0]);
@@ -13,8 +12,9 @@ var result3 = filljuan(array1, 6); // expected output: [6, 6, 6, 6]
 check(result3, [6, 6, 6, 6]);
 
 
-// function check(result, expected){
-//     if (result.toString() !== expected.toString()){
-//         console.error('HEY!');
-//     }
-// }
+try {
+    filljuan()
+} catch (e) {
+    check(e instanceof TypeError, true);
+    check(e.message, 'filljuan debe contener al menos un array y un caracter');
+}
