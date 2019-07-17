@@ -26,9 +26,10 @@ check(result, 6);
 
 // case: no arguments
 
+
 try {
     forEach();
-} catch(error) {
+} catch (error) {
     check(error instanceof TypeError, true);
     check(error.message, 'missing argument 0 when calling function forEach');
 }
@@ -37,7 +38,7 @@ try {
 
 try {
     forEach(1);
-} catch(error) {
+} catch (error) {
     check(error instanceof TypeError, true);
     check(error.message, '1 is not an array');
 }

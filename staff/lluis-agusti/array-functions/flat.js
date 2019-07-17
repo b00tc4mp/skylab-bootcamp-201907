@@ -1,13 +1,33 @@
+/**
+ * Flatens an array (matrix) to the give depth.
+ * 
+ * @param {Array} array The array to flatten.
+ * @param {number} depth The level to reach in the flatern array.
+ * 
+ * @throws TypeError - Message shown when input is not an array.
+ * 
+ * @returns {Array} A new array with the flattened original array.
+ */
 
 
+function flat(array) {
+    if (!(array instanceof Array)) throw TypeError(array + ' is not an array');
 
-function flatMap(array, op1, arg) {
-    var newArr = [];
-    var newArr2 = [];
-    for(i=0; i<array.length; i++){
-        var map = eval(`${array[i]}${op1}${arg}`);
-        var arr = [newArr[i] =+ map];
-        newArr2[i] = arr;
+    var depth = arguments[1];
+    depth = typeof depth === 'undefined' ? 1 : depth;
+    depth = depth < 0? 0 : depth;
+
+    var result = [];
+
+    for (var i = 0; i < array.length; i++) {
+        var element = array[i];
+
+        if (element instanceof Array && depth > 0) {
+            var arr = flat(element, depth - 1);
+
+            for (var j = 0; j < arr.length; j++) result.push(arr[j]);
+        } else result.push(element);
     }
-    return newArr2;
+
+    return result;
 }
