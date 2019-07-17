@@ -1,4 +1,8 @@
 function join(array, separator) {
+  if (arguments.length === 0) throw TypeError('missing argument when calling function join');
+
+  if (!(array instanceof Array)) throw TypeError(array + ' is not an array');
+
     var string = '';
     if (separator == '' || separator == undefined) {
       separator = ',';

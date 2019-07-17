@@ -18,3 +18,19 @@ var result = map(array, function(value,  index, array) {
     return value + '-' + index + '-' + array; 
 });
 check(result, ["1-0-1,2,3", "2-1-1,2,3", "3-2-1,2,3"]);
+
+// case: no arguments
+try {
+    map();
+} catch(error) {
+    check(error instanceof TypeError, true);
+    check(error.message, 'missing argument when calling function map');
+}
+
+// case: not an array
+try {
+    map(1);
+} catch(error) {
+    check(error instanceof TypeError, true);
+    check(error.message, '1 is not an array');
+}

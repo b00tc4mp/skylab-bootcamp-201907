@@ -1,5 +1,5 @@
-function findindex(array , op, value){
-    for (var i = 0 , l = array.length; i < l ; i++){
+function findindex(array, op, value){
+    for (var i = 0; i < array.length ; i++){
         var element = array[i];
         if (eval(`${element}${op}${value}`)){
             return i;
