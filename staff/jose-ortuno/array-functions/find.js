@@ -1,9 +1,5 @@
-function find (array , op, value){
+function find (array , expression){
     for (var i = 0 , l = array.length; i < l ; i++){
-        var element = array[i];
-        if (eval(`${element}${op}${value}`)){
-            return element;
-        }
+        if (expression(array[i])) return array[i];
     }
-    return undefined;
 }

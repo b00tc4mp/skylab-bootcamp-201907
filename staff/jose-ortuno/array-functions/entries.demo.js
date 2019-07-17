@@ -1,6 +1,8 @@
 console.log('DEMO: entries method');
 
 var array = ['a', 'b', 'c'];
+console.log('array', array);
 
-
-console.log(entries (array), '\nexpected method:\n[0, "a"]\n[1, "b"]\n[2, "c"]');
+console.log(entries (1, array), '\nexpected method: [0, "a"]');
+console.log(entries (2, array), '\nexpected method: [1, "b"]');
+console.log(entries (3, array), '\nexpected method: [2, "c"]');
