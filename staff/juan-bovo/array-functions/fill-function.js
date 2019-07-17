@@ -1,11 +1,24 @@
+/**
+ * Fill index positions with a given string, a number or an object.
+ * 
+ * @throws {TypeError} when first input is not an array.
+ * @throws {TypeError}
+ * @throws {TypeError}
+ * @throws {TypeError}
+ * 
+ * @param {*} arr 
+ * @param {*} value 
+ * @param {*} start 
+ * @param {*} end 
+ * 
+ * @version 3.0.0
+ */
+
 // array1 = [1, 2, 3, 4];
 
 function filljuan(arr, value, start, end) {
     if (arguments.length === 0) throw TypeError('filljuan debe contener al menos un array y un caracter');
     if (!(arr instanceof Array)) throw TypeError('filljuan necesita que el primer parámetro sea un array');
-    // if (typeof value !== 'string' || typeof value !== 'number' || typeof value !== 'null' || typeof value !== 'undefined') {
-    //     throw TypeError('El segundo parámetro de filljuan puede ser un number, string, undefined o null');
-    //     }
     if (start && typeof start !== 'number') throw TypeError('la posición inicial debe ser un número entero válido');
     if (end && typeof end !== 'number') throw TypeError('la posición final debe ser un número entero válido');
 
