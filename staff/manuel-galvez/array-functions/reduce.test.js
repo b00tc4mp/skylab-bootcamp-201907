@@ -1,9 +1,69 @@
  suite('reduce', function() {
 
-    test(
-        'wrong number of arguments.', 
-        reduce(),
+
+    /* HAPPY PATH */
+    test('sum all items in array of numbers',
         function() {
+            var result = reduce([1,2,3,4], function(accumulator, val) {
+                return accumulator + val;
+            });
+            check(result, 10);
+        });
+    
+    test('concat all items in array of strings',
+        function() {
+            var result = reduce(['a','b','c','d'], function(accumulator, val) {
+                return accumulator + val;
+            });
+            check(result, 'abcd');
+        });
+
+     test('multiply all items in array of numbers',
+        function() {
+            var result = reduce([1,2,3,4], function(accumulator, val) {
+                return accumulator * val;
+            });
+            check(result, 24);
+        });
+
+     test('multiply all items in array of numbers with initialValue of 2',
+        function() {
+            var result = reduce([1,2,3,4], function(accumulator, val) {
+                return accumulator * val;
+            }, 2);
+            check(result, 48);
+        });
+
+     test('concat all items in array of both strings and numbers',
+        function() {
+            var result = reduce([1,2,'c','d',3], function(accumulator, val) {
+                return accumulator + val;
+            });
+            check(result, '3cd3');
+        });
+    
+    test('concat all items in array of both strings and numbers with intialValue z',
+        function() {
+            var result = reduce([1,2,'c','d',3], function(accumulator, val) {
+                return accumulator + val;
+            }, 'z');
+            check(result, 'z12cd3');
+        });
+    
+    test('concat all items in array of both strings and numbers with array as initialValue',
+        function() {
+            var result = reduce([1,2,'c','d',3], function(accumulator, val) {
+                return accumulator + val;
+            }, [1,2,3]);
+            check(result, '1,2,312cd3');
+        })
+
+    /* EXCEPTIONS PATH */ 
+    test('wrong number of arguments.', 
+        function() {
+            reduce()
+        },
+        function(error){
             check(error instanceof TypeError, true);
             check(error.message, "Wrong number of arguments: two expected (Array, Callback function).");
         });
@@ -11,10 +71,12 @@
 
     test(
         'first argument is not an array',
-        reduce('a', function(accumulator, value) {
-            return accumulator + value
-        }),
         function() {
+            reduce('a', function(accumulator, value) {
+                return accumulator + value
+            })
+        },
+       function(error) {
             check(error instanceof TypeError, true);
             check(error.message, "First argument must be an array.");
         }
@@ -22,21 +84,14 @@
 
     test(
         'second argument is not a function',
-        reduce([1,2,3,4], 'a'),
         function() {
+            reduce([1,2,3,4], 'a')
+        },
+        function(error) {
             check(error instanceof TypeError, true);
-            check(error.message, "Second argument must be a callback function thaht takes 2 arguments (accumulator, value).");
+            check(error.message, "Second argument must be a callback function that takes 2 arguments (accumulator, value).");
         });
     
-    test(
-        'initialValue undefined or number.',
-        reduce([1,2,3,4], function(accumulator, value) {
-            return accumulator + value}, 'aaaaa'),
-            function() {
-                check(error instanceof TypeError, true);
-                check(error.message, "InitialValue must be either undefined or a number.");
-            }
-        );
 
      test(
          'Callback function has no arguments',
@@ -44,8 +99,8 @@
             reduce([1,2,3,4], function() {
             return accumulator + value
         })},
-        function() {
-            check(error instanceof ReferenceError, true);
+        function(error) {
+            check(error instanceof TypeError, true);
             check(error.message, "Callback function must have two arguments (accumulator, value).");
         })
 })
