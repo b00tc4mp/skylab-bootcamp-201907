@@ -1,36 +1,25 @@
-console.log('TEST map');
+suite('map', function () {
+    test('multiply by 10 all items', function () {
+        var array = [1, 2, 3];
+        var coeficient = 10;
+        var result = map(array, function (value) { return value * coeficient; });
 
-var array = [1, 2, 3];
+        checkArrays(result, [10, 20, 30]);
+    });
 
-var coeficient = 10;
+    test('wrap each element between <>', function () {
+        var array = ['1', '2', '3'];
+        var result = map(array, function (value) { return '<' + value + '>'; });
 
-var result = map(array, function(value) { return value * coeficient; });
-check(result, [10, 20, 30]);
+        checkArrays(result, ["<1>", "<2>", "<3>"]);
+    });
 
-array = ['1', '2', '3'];
+    test('concatenate value-index-array', function () {
+        var array = [1, 2, 3];
+        var result = map(array, function (value, index, array) {
+            return value + '-' + index + '-' + array;
+        });
 
-var result = map(array, function(value) { return '<' + value + '>'; });
-check(result, ["<1>", "<2>", "<3>"]);
-
-array = [1, 2, 3];
-
-var result = map(array, function(value,  index, array) { 
-    return value + '-' + index + '-' + array; 
+        checkArrays(result, ["1-0-1,2,3", "2-1-1,2,3", "3-2-1,2,3"]);
+    })
 });
-check(result, ["1-0-1,2,3", "2-1-1,2,3", "3-2-1,2,3"]);
-
-// case: no arguments
-try {
-    map();
-} catch(error) {
-    check(error instanceof TypeError, true);
-    check(error.message, 'missing argument when calling function map');
-}
-
-// case: not an array
-try {
-    map(1);
-} catch(error) {
-    check(error instanceof TypeError, true);
-    check(error.message, '1 is not an array');
-}

@@ -1,15 +1,34 @@
-console.log('TEST some');
+suite("some", function(){
+    test("return true or false", function(){
 
-var array = [1, 2, 3];
+        var words = [1, 3, 5, 7, 13, 15];
+        var result;
+        var expected = true;
+        result = some(words, function (element){
+            if(element > 10) {
+              return true 
+            } else {
+              return false
+            }
+          })
+          check(result, expected);
+    });
 
-var result = some(array, 1);
-check(result, true);
-check(array, [1, 2, 3]); 
+    test("break on undefined array", function(){
+        try {
+            some();
+            throw Error("should not reach this point");
+        } catch (error){
+            check(error.message, 'undefined is not an array');
+        }
+    });
 
-result = some(array, 4);
-check(result, false);
-check(array, [1, 2, 3]);
-
-result = some(array, 3);
-check(result, true);
-check(array, [1, 2, 3]);
+    test("break when dont receive an expression", function(){
+        try{
+            some(["carolina", "zhou", "lin"], "a")
+            throw Error ("should not reach this point");
+        } catch (error){
+            check(error.message, "a is not a function")
+        }
+    });
+});

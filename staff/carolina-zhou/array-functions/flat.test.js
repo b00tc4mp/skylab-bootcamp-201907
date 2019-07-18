@@ -1,55 +1,45 @@
-console.log('TEST flat');
+suite('flat', function () {
+    var array = [1, 2, 3, ['a', 'b', 'c', [true, false, [undefined, null, [{}, function () { }, [NaN]]]]]];
 
-var array = [1, 2, 3, ['a', 'b', 'c', [true, false, [undefined, null, [{}, function () { }, [NaN]]]]]];
+    test('default', function () {
+        var result = flat(array);
+        checkArrays(result, [1, 2, 3, 'a', 'b', 'c', [true, false, [undefined, null, [{}, function () { }, [NaN]]]]]);
+    });
 
-// case: default
+    test('depth 2', function () {
+        var result = flat(array, 2);
+        checkArrays(result, [1, 2, 3, 'a', 'b', 'c', true, false, [undefined, null, [{}, function () { }, [NaN]]]]);
+    });
 
-var result = flat(array);
-check(result, [1, 2, 3, 'a', 'b', 'c', [true, false, [undefined, null, [{}, function () { }, [NaN]]]]]);
+    test('depth 3', function () {
+        var result = flat(array, 3);
+        checkArrays(result, [1, 2, 3, 'a', 'b', 'c', true, false, undefined, null, [{}, function () { }, [NaN]]]);
+    });
 
-// case: depth 2
+    test('depth 4', function () {
+        var result = flat(array, 4);
+        checkArrays(result, [1, 2, 3, 'a', 'b', 'c', true, false, undefined, null, {}, function () { }, [NaN]]);
+    });
 
-var result = flat(array, 2);
-check(result, [1, 2, 3, 'a', 'b', 'c', true, false, [undefined, null, [{}, function () { }, [NaN]]]]);
+    test('depth 5', function () {
+        var result = flat(array, 5);
+        checkArrays(result, [1, 2, 3, 'a', 'b', 'c', true, false, undefined, null, {}, function () { }, NaN]);
+    });
 
-// case: depth 3
+    test('no array', flat, function (error) {
+        check(error instanceof TypeError, true);
+        check(error.message, 'undefined is not an array');
+    });
 
-var result = flat(array, 3);
-check(result, [1, 2, 3, 'a', 'b', 'c', true, false, undefined, null, [{}, function () { }, [NaN]]]);
+    test('string as array', function () { flat('array'); }, function (error) {
+        check(error instanceof TypeError, true);
+        check(error.message, 'array is not an array');
+    });
 
-// case: random depth (1...10)
-
-// var depth = Math.floor(Math.random() * 10) + 1;
-
-var result = flat(array, 4);
-check(result, [1, 2, 3, 'a', 'b', 'c', true, false, undefined, null, {}, function () { }, [NaN]]);
-
-var result = flat(array, 5);
-check(result, [1, 2, 3, 'a', 'b', 'c', true, false, undefined, null, {}, function () { }, NaN]);
-
-// case: no array
-
-try {
-    flat();
-} catch (error) {
-    check(error instanceof TypeError, true);
-    check(error.message, 'undefined is not an array');
-}
-
-// case: string as array
-
-try {
-    flat('array');
-} catch (error) {
-    check(error instanceof TypeError, true);
-    check(error.message, 'array is not an array');
-}
-
-// case: string as array
-
-try {
-    flat(true);
-} catch (error) {
-    check(error instanceof TypeError, true);
-    check(error.message, 'true is not an array');
-}
+    test('boolean as array', function () {
+        flat(true);
+    }, function (error) {
+        check(error instanceof TypeError, true);
+        check(error.message, 'true is not an array');
+    });
+});

@@ -1,4 +1,3 @@
-
 function forEach(array, expression) {
   if (arguments.length === 0) throw TypeError('missing argument 0 when calling function forEach');
 

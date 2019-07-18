@@ -1,7 +1,6 @@
 'use strict';
 
 var text = '>>> TEST A RUDE 💪 <<<';
-
 console.log(text);
 
 /**
