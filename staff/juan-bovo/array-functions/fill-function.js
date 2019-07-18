@@ -1,15 +1,17 @@
 /**
- * Fill index positions with a given string, a number or an object.
+ * Fill index positions with a given string, a number or an array-like object.
+ * 
+ * @param {Array} arr The array to be filled.
+ * @param {*} value The given value to fill the array.
+ * @param {number} start (optional) Array's index position to begin filling, default 0.
+ * @param {number} end (optional) Array's index posistion to end filling, default array.length.
  * 
  * @throws {TypeError} when first input is not an array.
- * @throws {TypeError}
- * @throws {TypeError}
- * @throws {TypeError}
+ * @throws {TypeError} when first parameter is not an array.
+ * @throws {TypeError} when start parameter (optional) is not a natural number.
+ * @throws {TypeError} when end parameter (optional) is not a natural number.
  * 
- * @param {*} arr 
- * @param {*} value 
- * @param {*} start 
- * @param {*} end 
+ * @returns new array.
  * 
  * @version 3.0.0
  */
@@ -38,7 +40,3 @@ function filljuan(arr, value, start, end) {
     }
     return newArray;
 }
-
-// console.log(fill(array1, 0, 2, 4)); // expected output: [1, 2, 0, 0]
-// console.log(fill(array1, 5, 1)); // expected output: [1, 5, 5, 5]
-// console.log(fill(array1, 6)); // expected output: [6, 6, 6, 6]

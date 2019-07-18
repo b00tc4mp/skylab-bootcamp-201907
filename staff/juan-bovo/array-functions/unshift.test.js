@@ -1,18 +1,26 @@
-console.log('TEST: unshift');
+suite('unshift', function(){
+    array1 = [1, 2, 3];
 
-var array1 = [1, 2, 3];
-// console.log('array', array1);
+    test('unshift default', function(){
+        var result = unshifty(array1, 4, 5); //--> console.log incluido en la function;
+        check(result, 5);
+    });
 
-var result = unshifty(array1, 4, 5); //--> console.log incluido en la function;
-check(result, 5);
+    test('first parameter not an array', function() {
+        unshifty (null);
+    
+    }, function(error){
+        check(error instanceof TypeError, true);
+        check(error.message, 'unshifty necesita que el primer parámetro sea un Array');
+    });
 
-// console.log('returns array length');
-// console.log(array1, 'expected: [4, 5, 1, 2, 3]');
 
 
 
-try {
-    unshifty(null)
-} catch(e){
-    check(e instanceof TypeError, true);
-}
+})
+
+
+// try {
+//     unshifty(null)
+// } catch(e){
+// }
