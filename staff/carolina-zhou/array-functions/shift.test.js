@@ -25,14 +25,6 @@ suite('shift', function (){
     check(result,expected); 
     });
 
-/*     test('break on undefined array',function (){
-        try{
-            shift();
-        } catch (error){
-            check(error.message,'undefined is not an array');
-        }
-    });
- */
     test('break on undefined array', shift, function (error) {
         check(error instanceof TypeError, true);
         check(error.message, 'undefined is not an array');

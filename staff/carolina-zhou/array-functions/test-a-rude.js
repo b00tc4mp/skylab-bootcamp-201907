@@ -21,7 +21,13 @@ function check(result, expected) {
 }
 
 /**
- * Checks wether a testing array matches an expected array.
+ * Checks wether a testing array matches an expected array by:
+ * - checking that the testing result and expected result are arrays.
+ * - checking that both their lengths are equal.
+ * - comparing all the array's elements one by one.
+ * If an element is a nested array it goes through the comparation process again.
+ * If an element is an object it checks the type of the testing result and the type of the exepected result and compares
+ * their properties using Object.keys.
  * 
  * @param {*} result 
  * @param {*} expected 
@@ -45,7 +51,8 @@ function checkArrays(result, expected) {
 }
 
 /**
- * 
+ * Tests wether a function works. If everything's correct, it gives a thumbs up; if there's an error, it shows a message describing the error.
+ * It also contemplates cases in which an error is expected but didn't happen.
  * 
  * @param {string} description
  * @param {Function} expression 
@@ -69,8 +76,7 @@ function test(description, expression, handleError) {
 }
 
 /**
- * 
- * 
+ * Comprises all the testing functions.
  * 
  * @param {string} description
  * @param {Function} expression 

@@ -13,31 +13,13 @@ suite("some", function(){
           })
           check(result, expected);
     });
-/* 
-    test("break on undefined array", function(){
-        try {
-            some();
-            throw Error("should not reach this point");
-        } catch (error){
-            check(error.message, 'undefined is not an array');
-        }
-    });
 
-    test("break when dont receive an expression", function(){
-        try{
-            some(["carolina", "zhou", "lin"], "a")
-            throw Error ("should not reach this point");
-        } catch (error){
-            check(error.message, "a is not a function")
-        }
-    });
- */
     test('no array', some, function (error) {
         check(error instanceof TypeError, true);
         check(error.message, 'undefined is not an array');
     });
 
-    test('string as function', function () { some([],'a'); }, function (error) {
+    test('string as function', function () { some(["carolina", "zhou", "lin"],'a'); }, function (error) {
         check(error instanceof TypeError, true);
         check(error.message, 'a is not a function');
     });
