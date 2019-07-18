@@ -5,8 +5,6 @@ function concat (...arg) {
     var count = 0;
 
     for (i = 0; i < arg.length; i++) {
-        console.log(arg[i])
-        if (!(arr[i] instanceof Array)) throw TypeError(`${arg[i]} is not an array`) 
         for (j = 0; j < arg[i].length; j++) {
             newArray[count] = arg[i][j];
             count++
