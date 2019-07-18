@@ -61,7 +61,7 @@
     /* EXCEPTIONS PATH */ 
     test('wrong number of arguments.', 
         function() {
-            reduce()
+            reduce();
         },
         function(error){
             check(error instanceof TypeError, true);
@@ -73,7 +73,7 @@
         'first argument is not an array',
         function() {
             reduce('a', function(accumulator, value) {
-                return accumulator + value
+                return accumulator + value;
             })
         },
        function(error) {
@@ -85,7 +85,7 @@
     test(
         'second argument is not a function',
         function() {
-            reduce([1,2,3,4], 'a')
+            reduce([1,2,3,4], 'a');
         },
         function(error) {
             check(error instanceof TypeError, true);
@@ -97,7 +97,7 @@
          'Callback function has no arguments',
         function() {
             reduce([1,2,3,4], function() {
-            return accumulator + value
+            return accumulator + value;
         })},
         function(error) {
             check(error instanceof TypeError, true);

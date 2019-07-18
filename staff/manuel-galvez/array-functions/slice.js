@@ -1,6 +1,6 @@
 function slice(array, first, last) {
     var cut = [];
-    var negative = -Math.abs(first) 
+    var negative = -Math.abs(first);
     if (first === negative && last === undefined) {
         var positive = Math.abs(negative);
         for (i = array.length-positive; i < array.length; i++) {
