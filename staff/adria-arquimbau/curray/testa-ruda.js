@@ -46,7 +46,7 @@ function expectArrays(result, expected) {
 }
 
 /**
- * TODO
+ * TODOo
  * 
  * @param {string} description
  * @param {Function} expression 
