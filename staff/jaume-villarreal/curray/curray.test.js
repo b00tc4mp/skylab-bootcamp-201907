@@ -41,4 +41,16 @@ describe('Curray', function() {
             ]);
         });
     });
+
+    describe('entries' , function(){
+        it("should return [key:value] pair for each position of the array" , function() {
+            var curray = new Curray('a','b','c');
+
+            var outputs = [];
+            
+            outputs = curray.entries(curray);
+
+            expectArrays(outputs , [[0,'a'] , [1,'b'] , [2,'c']]);
+        });
+    });
 });

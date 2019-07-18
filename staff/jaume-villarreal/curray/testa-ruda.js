@@ -87,6 +87,5 @@ function __fail__(description, error) {
  */
 function describe(description, expression) {
     console.log(description, '🍭');
-
     expression();
 }

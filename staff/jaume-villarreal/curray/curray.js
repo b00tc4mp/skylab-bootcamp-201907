@@ -5,6 +5,7 @@
  * 
  * 
  */
+
 function Curray() {
     this.length = 0;
 
@@ -19,12 +20,15 @@ function Curray() {
     }
 }
 
+
+//push
 Curray.prototype.push = function (element) {
     this[this.length++] = element;
 
     return this.length;
 };
 
+//pop
 Curray.prototype.pop = function() {
     var last = this[--this.length];
 
@@ -33,6 +37,8 @@ Curray.prototype.pop = function() {
     return last;
 };
 
+
+//forEach
 Curray.prototype.forEach = function(expression) {
     if (arguments.length === 0) throw TypeError('missing argument 0 when calling function forEach');
 
@@ -40,4 +46,16 @@ Curray.prototype.forEach = function(expression) {
 
     for (var i = 0; i < this.length; i++)
         expression(this[i], i, this);
+};
+
+
+//entries
+Curray.prototype.entries = function(){
+    var result = [];
+    // var obj = {};
+    for (var i = 0 ; i<this.length ; i++){
+        // result[i] = [Object.keys(obj)[i] * 1 , obj[i]];
+        result[i] = [i,this[i]];
+    }
+    return result;   
 };
