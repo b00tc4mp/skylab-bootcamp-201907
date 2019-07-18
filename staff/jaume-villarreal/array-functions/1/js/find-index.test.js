@@ -5,7 +5,7 @@ suite('findIndex' , function(){
       var result = findIndex(fruitsArray , function(item){
          return item === 'strawberries';
       });
-      check(result , 3)
+      check(result , 3);
    });
 
    test('match found: returns index 0' , function(){
