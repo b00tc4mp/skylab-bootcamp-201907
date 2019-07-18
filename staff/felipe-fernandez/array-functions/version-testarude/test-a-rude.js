@@ -24,8 +24,8 @@ function check(result, expected) {
 /**
  * TODO
  * 
- * @param {*} result 
- * @param {*} expected 
+ * @param {Array} result 
+ * @param {Array} expected 
  */
 function checkArrays(result, expected) {
     check(result instanceof Array, true);
@@ -55,10 +55,14 @@ function checkArrays(result, expected) {
 function test(description, expression, handleError) {
     try {
         expression();
-
+        //When there is an error but doesn't reach the catch. It should be handled here
+        //An example of that is when you forgot a throw in a function or you don't put a correct trhow
+        
         if (handleError) console.error('CASE', description, '👹', "expected an error, but didn't happen");
         else console.log('CASE', description, '👍');
     } catch (error) {
+        //This part handles uncontrolled erros
+        //If the error is controlled, it jumps to the "else" part
         if (handleError)
             try {
                 handleError(error);

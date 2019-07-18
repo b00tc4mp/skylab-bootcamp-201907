@@ -1,6 +1,6 @@
 function fill(array, value, start, end) {
     
-    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function fill')
+    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function fill');
     if (!(array instanceof Array)) throw TypeError(array + ' is not an array');
 
 
