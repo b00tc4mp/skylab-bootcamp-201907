@@ -1,5 +1,5 @@
 /**
- * The some() method tests whether at least one element in the array passes the test implemented by the provided function.
+ * Checks whether at least one element in the array passes the condition implemented by the provided function.
  * @param {function} callback 
  * @param {Array} array 
  * @returns {boolean} 

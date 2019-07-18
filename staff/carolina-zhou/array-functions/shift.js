@@ -1,5 +1,5 @@
 /**
- * Method removes the first element from an array and returns that removed element. This method changes the length of the array.
+ * Removes the first element from an array and returns that removed element. This method changes the length of the array.
  * 
  * @param {Array} array 
  * 

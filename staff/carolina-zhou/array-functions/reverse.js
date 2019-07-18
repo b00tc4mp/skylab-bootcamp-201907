@@ -1,5 +1,5 @@
 /**
- *  method reverses an array in place. The first array element becomes the last, and the last array element becomes the first.
+ *  Reverses an array in place. The first array element becomes the last, and the last array element becomes the first.
  * 
  * @param {Array} Arrays and/or values to concatenate into a new array. If valueN is undefined, concat returns a shallow copy of the existing array on which it is called. See the description below for more details.
  *  
