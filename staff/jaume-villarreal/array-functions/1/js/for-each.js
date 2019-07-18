@@ -1,5 +1,5 @@
 function forEach(array, expression) {
-    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function forEach');
+    // if (arguments.length === 0) throw TypeError('missing argument 0 when calling function forEach');
 
     if (!(array instanceof Array)) throw TypeError(array + ' is not an array');
 
