@@ -18,4 +18,4 @@ function flat(array) {
     }
 
     return result;
-}
+} 
