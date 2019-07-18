@@ -22,10 +22,18 @@ function check(result, expected) {
 }
 
 /**
- * TODO
+ * Compare two arrays and check that they are equal.
+ * Check that result and expected are arrays.
+ * Check that both length are equal.
+ * Compares all array's elements one by one.
+ * If an element is a nested array check they instanceof and
+ * compares them.
+ * If an element is an object checks they typeof and compares
+ * their properties using Object.keys.
  * 
- * @param {*} result 
- * @param {*} expected 
+ * 
+ * @param {*} result The testing value to evalute.
+ * @param {*} expected The expected value to check the result against.
  */
 function checkArrays(result, expected) {
     check(result instanceof Array, true);
@@ -46,11 +54,12 @@ function checkArrays(result, expected) {
 }
 
 /**
- * TODO
+ * Calls every single function that contains each specified caught error created in the
+ * x.test.js file.
  * 
- * @param {string} description
- * @param {Function} expression 
- * @param {Function} handleError 
+ * @param {string} description Describes the error we want to handle with.
+ * @param {Function} expression callback function.
+ * @param {Function} handleError alls the caught error created in the x.test.js file.
  */
 function test(description, expression, handleError) {
     try {
@@ -72,10 +81,12 @@ function test(description, expression, handleError) {
 }
 
 /**
- * TODO
+ * Includes all the tests in a main function.
+ * Each case has its own function with the test within.
  * 
- * @param {string} description
- * @param {Function} expression 
+ * @param {string} description Describes the error we want to handle with.
+ * @param {Function} expression callback function.
+ * 
  */
 function suite(description, expression) {
     console.log('TEST', description, '🍭');
