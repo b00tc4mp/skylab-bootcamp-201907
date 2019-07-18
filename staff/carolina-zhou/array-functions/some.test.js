@@ -1,7 +1,7 @@
 suite("some", function(){
     test("return true or false", function(){
 
-        var words = [1, 3, 5, 7, 13, 15];
+        var words = [1, 3, 5, 7, 11, 15];
         var result;
         var expected = true;
         result = some(words, function (element){
@@ -13,7 +13,7 @@ suite("some", function(){
           })
           check(result, expected);
     });
-
+/* 
     test("break on undefined array", function(){
         try {
             some();
@@ -31,4 +31,15 @@ suite("some", function(){
             check(error.message, "a is not a function")
         }
     });
+ */
+    test('no array', some, function (error) {
+        check(error instanceof TypeError, true);
+        check(error.message, 'undefined is not an array');
+    });
+
+    test('string as function', function () { some([],'a'); }, function (error) {
+        check(error instanceof TypeError, true);
+        check(error.message, 'a is not a function');
+    });
+
 });

@@ -21,7 +21,7 @@ function check(result, expected) {
 }
 
 /**
- * TODO
+ * Checks wether a testing array matches an expected array.
  * 
  * @param {*} result 
  * @param {*} expected 
@@ -45,7 +45,7 @@ function checkArrays(result, expected) {
 }
 
 /**
- * TODO
+ * 
  * 
  * @param {string} description
  * @param {Function} expression 
@@ -54,14 +54,12 @@ function checkArrays(result, expected) {
 function test(description, expression, handleError) {
     try {
         expression();
-
         if (handleError) console.error('CASE', description, '👹', "expected an error, but didn't happen");
         else console.log('CASE', description, '👍');
     } catch (error) {
         if (handleError)
             try {
                 handleError(error);
-
                 console.log('CASE', description, '👍');
             } catch (error) {
                 console.error('CASE', description, '👹', error);
@@ -71,7 +69,8 @@ function test(description, expression, handleError) {
 }
 
 /**
- * TODO
+ * 
+ * 
  * 
  * @param {string} description
  * @param {Function} expression 

@@ -28,7 +28,7 @@ suite('every', function () {
         check(result, false);
     });
 
-    test('break on undefined array', function () {
+/*     test('break on undefined array', function () {
         try {
             every();
             throw Error('should not reach this point');
@@ -36,8 +36,13 @@ suite('every', function () {
             check(error.message, 'undefined is not an array');
         }
     });
+ */
+    test('break on undefined array', every, function (error) {
+        check(error instanceof TypeError, true);
+        check(error.message, 'undefined is not an array');
+    });
 
-    test('break on undefined expression', function () {
+/*     test('break on undefined expression', function () {
         var array = [1, 2, 3];
         try {
             every(array);
@@ -45,5 +50,10 @@ suite('every', function () {
         } catch (error) {
             check(error.message, 'undefined is not a function');
         }
+    }); */
+
+    test('break on undefined expression', function () { every([]); }, function (error) {
+        check(error instanceof TypeError, true);
+        check(error.message, 'undefined is not a function');
     });
 });

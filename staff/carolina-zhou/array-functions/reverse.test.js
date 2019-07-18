@@ -11,13 +11,19 @@ suite("reverse", function(){
         }        
     })
 
-    test("break on undefined array", function(){
+/*     test("break on undefined array", function(){
         try {
-            let noArray = 8;
+            let noArray = 7;
             reverse(noArray)
             throw Error("Should not reach this point")
         } catch (error){
             check(error.message, "8 is not an array")
         }
-    })
+    }) */
+
+    test('break on undefined array', function () { reverse(7); }, function (error) {
+        check(error instanceof TypeError, true);
+        check(error.message, '7 is not an array');
+    });
+
 });
