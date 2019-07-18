@@ -10,7 +10,7 @@ console.log('condition function', biggerThan);
 
 console.log('every');
 var resultEvery= (every(array1,biggerThan));
-console.log(resultEvery, 'expected: true')
+console.log(resultEvery, 'expected: true');
 
 
 var array2 = ['a','b','c','d'];
@@ -23,7 +23,7 @@ console.log('condition function', sameLetter);
 
 console.log('every');
 var resultEvery= (every(array2,sameLetter));
-console.log(resultEvery, 'expected: true')
+console.log(resultEvery, 'expected: true');
 
 
 
@@ -37,4 +37,4 @@ console.log('condition function', sameLetter);
 
 console.log('every');
 var resultEvery= (every(array2,sameLetter));
-console.log(resultEvery, 'expected: false')
+console.log(resultEvery, 'expected: false');

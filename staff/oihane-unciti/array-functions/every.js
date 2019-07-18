@@ -1,5 +1,5 @@
 function every(array, condition) {
-    var result
+    var result;s
     for (var i = 0; i < array.length; i++) {
         if (condition(array[i]) != true && result != true) {
             result = false;
