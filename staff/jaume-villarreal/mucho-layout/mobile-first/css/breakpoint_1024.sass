@@ -1,0 +1,39 @@
+// BREAKPOINTS
+$layout-breakpoint-desktop: 1024px
+
+@media (min-width: $layout-breakpoint-desktop)
+    .top-navigation
+        padding:1.5% .5% 1%
+            justify-content: flex-start
+            align-items: flex-start
+        &__logo
+            width: 15%
+            padding-top: 1rem
+            >img
+                width: 55%
+                padding-top: .15rem
+                height: auto
+        &__presentation
+            display: block
+            margin:0
+            padding: 1rem 0 0 0
+            width: 45%
+            font-size: .85rem
+            font-weight: 300
+            line-height: 1.25rem
+            color: #999
+            >span
+                display: block
+        &__max-nav
+            witdh: 25%
+    
+    .secondary-nav
+        display: none
+    
+    .contact-set
+        flex-direction: row
+        flex-direction: start-flex
+    
+    .contact-card
+        width: 20%
+    
