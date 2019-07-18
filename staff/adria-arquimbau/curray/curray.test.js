@@ -1,5 +1,7 @@
 'use strict';
 
+
+/* case 1 */
 describe('Curray', function() {
     describe('push', function() {
         it('should push a string', function() {
@@ -12,6 +14,8 @@ describe('Curray', function() {
         });
     });
 
+
+    /* case 2 */
     describe('pop', function() {
         it('should pop a string', function() {
             var curray = new Curray('hola', 'mundo');
@@ -24,6 +28,8 @@ describe('Curray', function() {
         });
     });
 
+
+    /* case 3 */
     describe('forEach', function() {
         it('should output each element index and curray', function () {
             var curray = new Curray('a', 'b', 'c');
