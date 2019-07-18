@@ -6,6 +6,8 @@ function login(user, pass) {
 
 var user = 'pepito', pass = 'grillo'; // WHAT if user = 'pepita'
 
+// TRYCATCH BÁSICO
+
 try {
     login(user, pass); 
     console.log('continue... do bank transfer 1.000.000$');
@@ -14,3 +16,8 @@ try {
         alert('wrong input (user or pass)');
     else alert('credentials error');
 }
+
+
+// FUNCION TRYCATCH -->
+
+//test/function

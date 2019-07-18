@@ -10,6 +10,15 @@ for (var i = 0; i < array.length; i++) {
   result = depot;
 }
 
+
+
+
+
+
+
+
+
+
 console.log("Initial Array: 1-2-3-4");
 console.log("Expected String: 1-2-3-4");
 console.log("Result " + result);
