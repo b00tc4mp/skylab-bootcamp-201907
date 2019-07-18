@@ -1,87 +1,46 @@
-console.warn("FLAT DEMO")
+suite('flat', function () {
+   var array = [1, 2, 3, ['a', 'b', 'c', [true, false, [undefined, null, [{}, function () { }, [NaN]]]]]];
 
-var array = [1, 2, 3, ['a', 'b', 'c', [true, false, [undefined, null]]]];
+   test('default', function () {
+       var result = flat(array);
+       checkArrays(result, [1, 2, 3, 'a', 'b', 'c', [true, false, [undefined, null, [{}, function () { }, [NaN]]]]]);
+   });
 
-// case: default
+   test('depth 2', function () {
+       var result = flat(array, 2);
+       checkArrays(result, [1, 2, 3, 'a', 'b', 'c', true, false, [undefined, null, [{}, function () { }, [NaN]]]]);
+   });
 
-var result = flat(array);
-check(result, [1, 2, 3, 'a', 'b', 'c', [true, false, [undefined, null]]]);
+   test('depth 3', function () {
+       var result = flat(array, 3);
+       checkArrays(result, [1, 2, 3, 'a', 'b', 'c', true, false, undefined, null, [{}, function () { }, [NaN]]]);
+   });
 
-var expected=[1, 2, 3, 'a', 'b', 'c', [true, false, [undefined, null]]]
-check(result.length===expected.length,true);
-check(result instanceof Array, true)
+   test('depth 4', function () {
+       var result = flat(array, 4);
+       checkArrays(result, [1, 2, 3, 'a', 'b', 'c', true, false, undefined, null, {}, function () { }, [NaN]]);
+   });
 
-function checkArrays(result,expected){
-    check(result instanceof Array, true)
-    check(expectedç instanceof Array, true)
-    
-for(var i=0;i<result.length;i++){
+   test('depth 5', function () {
+       var result = flat(array, 5);
+       checkArrays(result, [1, 2, 3, 'a', 'b', 'c', true, false, undefined, null, {}, function () { }, NaN]);
+   });
 
-    var res=result[i], exp=expected[i];
-    if(res instanceof Array){
-        checkArrays(res,exp);
-    }else if(res indexof Object){
-        check(typeof res, typeof exp) /* para asegurar que es object */
-        checkArrays(Object.keys(res), Object.keys(exp))
+   test('no array', flat, function (error) {
+       check(error instanceof TypeError, true);
+       check(error.message, 'undefined is not an array');
+   });
 
-    }else check(res,exp);
-    
-}
+   test('string as array', function () { flat('array'); }, function (error) {
+       check(error instanceof TypeError, true);
+       check(error.message, 'array is not an array');
+   });
 
-}
-
-checkArrays(result,expected);
-
-
-
-
-
-
-
-
-
-
-// case: depth 2
-
-var result = flat(array, 2);
-check(result, [1, 2, 3, 'a', 'b', 'c', true, false, [undefined, null]]);
-
-// case: depth 3
-
-var result = flat(array, 3);
-check(result, [1, 2, 3, 'a', 'b', 'c', true, false, undefined, null]);
-
-// case: random depth (1...10)
-
-// var depth = Math.floor(Math.random() * 10) + 1;
-
-var result = flat(array, 4);
-check(result, [1, 2, 3, 'a', 'b', 'c', true, false, undefined, null]);
-
-// case: no array
-
-try {
-   flat();
-} catch (error) {
-   check(error instanceof TypeError, true);
-   check(error.message, 'undefined is not an array');
-}
-
-// case: string as array
-
-try {
-   flat('array');
-} catch (error) {
-   check(error instanceof TypeError, true);
-   check(error.message, 'array is not an array');
-}
-
-// case: string as array
-
-try {
-   flat(true);
-} catch (error) {
-   check(error instanceof TypeError, true);
-   check(error.message, 'true is not an array');
-}
+   test('boolean as array', function () {
+       flat(true);
+   }, function (error) {
+       check(error instanceof TypeError, true);
+       check(error.message, 'true is not an array');
+   });
+});
 

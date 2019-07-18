@@ -1,21 +1,27 @@
-console.log('DEMO: join');
-
-var elements = ['Fire', 'Air', 'Water'];
-console.log('array', elements);
-
-var result= join(elements)
-check(result, "Fire,Air,Water");
-
-console.log('join(elements)');
-var result = join(elements);
-console.log(result, 'Expected: Fire,Air,Water');
-
-console.log("join(elements, '@')");
-var result = join(elements, '@');
-console.log(result, 'Expected: Fire@Air@Water');
-
-var result= join(elements, "@")
-check(result, 'Fire@Air@Water');
-
-
-console.log("----------------------------------------"); 
+suite('TEST join', function () {
+    test('convert array to string by separator', function () {
+        array = [1,2,3];
+        separator = '/';
+        var result = join(array, separator);
+        check(result, '1/2/3');
+    });
+ 
+    test('convert array to string (comma is default separator)', function () {
+        array = [1,2,3];
+        var result = join(array);
+        check(result, '1,2,3');
+    });
+ 
+    test('argument not an array should throw error', function() {
+        array = 1;
+        var result = join(array);
+        check(result, '1,2,3');},
+        function(error) {
+            check(error.message,'argument is not an array')
+        });
+ 
+ 
+ 
+ 
+ 
+ });

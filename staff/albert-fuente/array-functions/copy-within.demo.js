@@ -1,23 +1,33 @@
-console.log("COPYWITHIN DEMO");
+suite('copyWith', function () {
+    test('Happy path', function () {
+        var array = [ 0, 1, 2, 3, 4, 5, 6, 7];
+        
+        var result = copyWithin (array, 0, 2, 4);
 
+        checkArrays(result, [2, 3, 2, 3, 4, 5, 6, 7])
+    })
 
-var array1 = ['a', 'b', 'c', 'd', 'e'];
+    test('missing argument', function() {
+        copyWithin();
+    }, function (error) {
+        check(error instanceof TypeError, true);
+        check(error.message, 'missing argument 0 when calling function copyWithin')
+    })
 
+    test('missing argument', function() {
+        var array = [ 0, 1, 2, 3, 4, 5, 6, 7];
+        copyWithin(array, 0, 2, 8);
+    }, function (error) {
+        check(error instanceof TypeError, true);
+        check(error.message, 'superior range than array length')
+    })
 
-console.log(array1, " values of array1");
+    test('missing argument', function() {
+        var array = [ 0, 1, 2, 3, 4, 5, 6, 7];
 
-var result= (copyWithin(array1, 0,3,4));
-check(result, ["d", "b", "c", "d", "e"]);
-
-var result=(copyWithin(array1, 2,3,4));
-check(result, ["d", "b", "d", "d", "e"]);
-
-
-
-/*solo hay el caso en que la variable es declarada y no definida*/
-var x
-try{
-    console.log(copyWithin());
-}catch(error){
-    console.log(error)
-}
+        copyWithin(array, 0, -1, 4);
+    }, function (error) {
+        check(error instanceof TypeError, true);
+        check(error.message, 'length less than zero is not possible')
+    })
+})

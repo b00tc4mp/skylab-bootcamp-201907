@@ -1,5 +1,13 @@
+suite("array-from", function(){
 
-array=('foo');
+    test('default', function(){
+        array=('foo');
 
-var result=arrayFrom(array);
-check(result,["f", "o", "o"] )
+        var result=arrayFrom(array);
+        checkArrays(result,["f", "o", "o"] );
+    })
+
+
+
+})
+

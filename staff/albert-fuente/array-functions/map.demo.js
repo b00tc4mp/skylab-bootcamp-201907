@@ -1,46 +1,29 @@
-console.log("MAP DEMO");
+suite('map', function () {
+    test('multiply by 10 all items', function () {
+        var array = [1, 2, 3];
+
+        var coeficient = 10;
+
+        var result = map(array, function (value) { return value * coeficient; });
 
 
+        checkArrays(result, [10, 20, 30]);
+    });
 
-var numbers = [1, 2,3];
-console.log("array",array);
-var coeficient=10
+    test('wrap each element between <>', function () {
+        var array = ['1', '2', '3'];
 
-var result= map(array,function(value){
-    return value*coeficient;
-})
+        var result = map(array, function (value) { return '<' + value + '>'; });
+        checkArrays(result, ["<1>", "<2>", "<3>"]);
+    });
 
-console.log(result," expected[10,20,30]")
-check(result, [10,20,30]);
+    test('concatenate value-index-array', function () {
+        var array = [1, 2, 3];
 
-var array = ["1", "2","3"];
-console.log("array",array);
+        var result = map(array, function (value, index, array) {
+            return value + '-' + index + '-' + array;
+        });
 
-var result= map(array,function(value){
-    return "<" + value + "<1>2 3";
-})
-
-console.log(result)
-
-
-var array = [1, 2,3];
-console.log("array",array);
-
-var result= map(array,function(value, index,array){
-    return value +"-"+ index+"-"+array;
-})
-
-
-
-
-
-console.log(result," expected[1-0-123] [2-2-123] [3-2-123]")
-
-
-
-
-// var doubles = numbers.map(function(x) {
-//    return x * 2;
-// });
-// doubles is now [2, 10, 20, 30]
-// numbers is still [1, 5, 10, 15]
+        checkArrays(result, ["1-0-1,2,3", "2-1-1,2,3", "3-2-1,2,3"]);
+    })
+});

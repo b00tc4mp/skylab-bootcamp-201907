@@ -1,17 +1,14 @@
-console.log("CONCAT DEMO");
+function concat (...arg) {
+    if (arg.length === 0) throw TypeError (`missing argument when calling function concat`)
+    if (arg.length === 1) throw TypeError (`missing argument two when calling function concat`)
+    var newArray = [];
+    var count = 0;
 
-var arr1=[1,2,3]
-var arr2=[4,5,6]
-var result=concatAll(arr1,arr2);
-
-check(result, [1,2,3,4,5,6]);
-
-
-/**Variables declaradas y no definidas */
-var m;
-try{
-    concatAll(m)
-}catch(error){
-    console.log(error)
+    for (i = 0; i < arg.length; i++) {
+        for (j = 0; j < arg[i].length; j++) {
+            newArray[count] = arg[i][j];
+            count++
+        }
+    }
+    return newArray;
 }
-

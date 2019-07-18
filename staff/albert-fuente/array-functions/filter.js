@@ -1,32 +1,20 @@
-function filter(array, condition) {
+function filter(array, expression) {
 
-  newarrays=[];
-  
-  if (condition){
-  
-      for(var i=0;i<array.length;i++){
-  
-          if (array[i].length > condition){
-              newarrays+= array[i] + ' ';
-          }
+  if (arguments.length === 0) throw TypeError('missing argument 0 when calling function filter');
+  if (!(array instanceof Array)) throw TypeError(array + ' is not an array');
+
+var newarray=[];
+var j=0;
+
+  for(var i=0;i<array.length;i++) {
+
+      if(expression(array[i])){
+          
+          newarray[j]=array[i];
+          
+          j++;
+
        }
-       return  newarrays;
-      }
-   else {
-          return newarrays;
-          }
-  
-  }
-  
-  
-  
+  }  return newarray;
+}
 
-
-
-
-// var words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
-
-// const result = words.filter(word => word.length > 6);
-
-// console.log(result);
-// expected output: Array ["exuberant", "destruction", "present"]

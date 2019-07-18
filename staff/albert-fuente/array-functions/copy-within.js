@@ -1,25 +1,22 @@
-function copyWithin(arr, x1,x2){
-  if(arr===undefined)throw TypeError("ERROR variable no definida")
+function copyWithin (array, target, start, end) {
+  if (arguments.length === 0) throw TypeError('missing argument 0 when calling function copyWithin');
 
+  if (end > array.length - 1) throw TypeError('superior range than array length')
 
+  if (start < 0) throw TypeError('length less than zero is not possible')
 
+  var newArray = [];
+  var count = 0;
 
-  arr[x1]=arr[x2];
-  return arr;
+  for (var i = start; i < end; i++) {
+      newArray.push(array[i]);
+  }
+  
+  for (var i = 0; i < newArray.length; i++) {
+      array[target] = newArray[count];
+      count++;
+      target++;
+  }
+
+  return array;
 }
-
-
-
-
-
-/* var array1 = ['a', 'b', 'c', 'd', 'e'];
-
-// copy to index 0 the element at index 3
-console.log(array1.copyWithin(0, 3, 4));
-// expected output: Array ["d", "b", "c", "d", "e"]
-
-// copy to index 1 all elements from index 3 to the end
-console.log(array1.copyWithin(1, 3));
-// expected output: Array ["d", "d", "e", "d", "e"]
-
- */

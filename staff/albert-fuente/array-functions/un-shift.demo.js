@@ -1,20 +1,26 @@
-console.log("UNSHIFT DEMO");
+suite('unshift', function(){
+    array1 = [1, 2, 3];
+
+    test('unshift default', function(){
+        var result = unshifty(array1, 4, 5); //--> console.log incluido en la function;
+        check(result, 5);
+    });
+
+    test('first parameter not an array', function() {
+        unshifty (null);
+    
+    }, function(error){
+        check(error instanceof TypeError, true);
+        check(error.message, 'unshifty necesita que el primer parámetro sea un Array');
+    });
 
 
-var array1 = [1, 2, 3];
-console.log(array1, " these are the initial values");
 
 
-/* console.log(unshift(array1, 4, 5), " expected result [4,5,1,2,3");
- */
-var result=(unshift(array1, 4, 5));
-check(result,[4, 5, 1, 2, 3]);
+});
 
 
-// var array1 = [1, 2, 3];
-//
-// console.log(array1.unshift(4, 5));
-// // expected output: 5
-//
-// console.log(array1);
-// expected output: Array [4, 5, 1, 2, 3]
+// try {
+//     unshifty(null)
+// } catch(e){
+// }
