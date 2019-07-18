@@ -23,7 +23,16 @@ suite('filter', function (){
         checkArrays(result2, [1,2,3]);
     });
 
+    test('filter all the items who accomplish the condition passed as a function', function (){
 
+        var array3 = [1,2,3,4];
+     
+        var result3 = filter(array3, function(val){
+            return val > 5;
+        });
+     
+        checkArrays(result3, []);
+     });
    
 
 
