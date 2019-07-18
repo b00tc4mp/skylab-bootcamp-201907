@@ -116,6 +116,17 @@ function forEach(arr, expression) {
 forEach([1,2,3], 3);*/
 
 // .map()
+console.log("\n" + "unshift()");
+
+var array1 = [3, 4, 5];
+
+console.log(array1.unshift(1, 2));
+// expected output: [1,2,3,4,5];
+
+console.log(array1);
+
+
+
 
 console.log("\n" + "map()");
 
@@ -138,7 +149,7 @@ function mapB(arr, expression){
 mapB(arr1, coef);
 
 
-// 
+// te saca el valor de cada elemento del array 
 
 console.log("\n" + "values()");
 
@@ -155,8 +166,17 @@ console.log(result, [1, 2, 3, 4, 5]);
 
 
 
+// añade elementos al inicio del array y devuelve el mismo array 
 
 
+console.log("\n" + "unshift()");
+
+var array1 = [3, 4, 5];
+
+console.log(array1.unshift(1, 2));
+// expected output: [1,2,3,4,5];
+
+console.log(array1);
 
 
 
