@@ -3,33 +3,33 @@ suite('lastIndexOf', function() {
     /* HAPPY PATH */
     test('find last index of repeated string',
         function() {
-            var array = ['a', 'b', 'a', 'c', 'a', 'e', 'f'];
-            var valueToBeSearched = 'a';
-            var result = lastIndexOf(array, valueToBeSearched);
+            var array = ['a', 'b', 'a', 'c', 'a', 'e', 'f']
+            var valueToBeSearched = 'a'
+            var result = lastIndexOf(array, valueToBeSearched)
             check(result, 4);
         });
     
     test('find last index of non-repeated string',
         function() {
-            var array = ['a', 'b', 'a', 'c', 'a', 'e', 'f'];
-            var valueToBeSearched = 'e';
-            var result = lastIndexOf(array, valueToBeSearched);
+            var array = ['a', 'b', 'a', 'c', 'a', 'e', 'f']
+            var valueToBeSearched = 'e'
+            var result = lastIndexOf(array, valueToBeSearched)
             check(result, 5);
         });
 
      test('find last index of non-repeated number',
         function() {
-            var array = ['a', 'b', 'a',1,'c', 'a', 'e', 'f'];
-            var valueToBeSearched = 1 ;
-            var result = lastIndexOf(array, valueToBeSearched);
+            var array = ['a', 'b', 'a',1,'c', 'a', 'e', 'f']
+            var valueToBeSearched = 1 
+            var result = lastIndexOf(array, valueToBeSearched)
             check(result, 3);
         });
 
      test('find last index of array',
         function() {
-            var array = ['a', 'b', 'a',1,'c', [2,3], 'a', 'e', 'f'];
-            var valueToBeSearched = [2,3] ;
-            var result = lastIndexOf(array, valueToBeSearched);
+            var array = ['a', 'b', 'a',1,'c', [2,3], 'a', 'e', 'f']
+            var valueToBeSearched = [2,3] 
+            var result = lastIndexOf(array, valueToBeSearched)
             check(result, 5);
         });
 
@@ -37,7 +37,7 @@ suite('lastIndexOf', function() {
     /* EXCEPTIONS PATH */ 
     test('wrong number of arguments.', 
         function() {
-            lastIndexOf();
+            lastIndexOf()
         },
         function(error){
             check(error instanceof TypeError, true);
@@ -46,7 +46,7 @@ suite('lastIndexOf', function() {
 
      test('first argument is not an array.', 
         function() {
-            lastIndexOf('a', 'a');
+            lastIndexOf('a', 'a')
         },
         function(error){
             check(error instanceof TypeError, true);

@@ -6,15 +6,15 @@ function reduceRight(array, reducer, initialValue) {
     if (reducer.length !== 2) throw TypeError("Callback function must have two arguments (accumulator, value).");
 
     if (initialValue || initialValue === 0) {
-        var accumulator = initialValue;
-        var start = array.length - 1;
+        var accumulator = initialValue
+        var start = array.length - 1
     } else {
-        var accumulator = array[array.length-1];
-        var start = array.length - 2;
+        var accumulator = array[array.length-1]
+        var start = array.length - 2
     }
         
     for (var i = start; i >= 0; i--) {
-        accumulator = reducer(accumulator, array[i]);
+        accumulator = reducer(accumulator, array[i])
     }
-    return accumulator;
+    return accumulator
 }

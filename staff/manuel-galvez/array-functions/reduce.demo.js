@@ -1,4 +1,4 @@
-console.log('------ DEMO: reduce ------');
+console.log('------ DEMO: reduce ------')
 
 
 console.log('Example 1 (Multiply numeric array without initial value)');

@@ -17,3 +17,5 @@ function copyWithin (target, start, end) {
 
     console.log(array);
 }
+
+// copyWithin (0, 2, 4);

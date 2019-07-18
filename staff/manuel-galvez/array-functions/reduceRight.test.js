@@ -62,7 +62,7 @@ suite('reduceRight', function() {
     /* EXCEPTIONS PATH */ 
     test('wrong number of arguments.', 
         function() {
-            reduceRight();
+            reduceRight()
         },
         function(error){
             check(error instanceof TypeError, true);
@@ -86,7 +86,7 @@ suite('reduceRight', function() {
     test(
         'second argument is not a function',
         function() {
-            reduceRight([1,2,3,4], 'a');
+            reduceRight([1,2,3,4], 'a')
         },
         function(error) {
             check(error instanceof TypeError, true);
@@ -97,7 +97,7 @@ suite('reduceRight', function() {
          'Callback function has no arguments',
         function() {
             reduceRight([1,2,3,4], function() {
-            return accumulator + value;
+            return accumulator + value
         })},
         function(error) {
             check(error instanceof TypeError, true);

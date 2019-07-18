@@ -1,7 +1,10 @@
 function join(array, separator) {
+  if (!(array instanceof Array)) throw TypeError(array + ' is not an array');
   var string = '';
-  if (separator == '' || separator == undefined) {
+  if (separator == undefined) {
     separator = ',';
+  } else if (separator == '') {
+    separator = '';
   }
 
   if (array.length == 1) {
