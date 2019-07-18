@@ -2,6 +2,6 @@
  * isArray()
  */
 function isArrayD(arr){
-    let res=arr instanceof Array;
+    var res=arr instanceof Array;
     return res;
 }

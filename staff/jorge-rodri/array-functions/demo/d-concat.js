@@ -3,14 +3,14 @@
  * duda Array.prototype
  */
 function concatD(arr,arrC){
-    if(arr==undefined&&arrC==undefined) throw ReferenceError("Not param in the function");
-    if(!(arr instanceof Array)) throw TypeError("First param is not Array");
-    if(!(arrC instanceof Array)) throw TypeError("Second param is not Array");
-    let ini=arr.length;
-    let count=0;
+    if(arguments.length==0) throw ReferenceError("Not param in the function");
+    if(!(arr instanceof Array)&&!(arrC instanceof Array)) throw TypeError(" param 'first' or 'second' are not Array");
+    var ini=arr.length;
+    var count=0;
+    var res=arr;
     arr.length=arr.length+arrC.length;
-    for(let i=ini;i<arr.length;i++){
-        arr[i]=arrC[count++]
+    for(var i=ini;i<arr.length;i++){
+        res[i]=arrC[count++]
     }
-    return arr
+    return res
 }

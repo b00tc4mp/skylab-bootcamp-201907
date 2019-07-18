@@ -28,4 +28,3 @@ function flat(array, depth) {
  
     return result;
  }
- flat([1,2,3,["a","b","c",[true,false]]],4)

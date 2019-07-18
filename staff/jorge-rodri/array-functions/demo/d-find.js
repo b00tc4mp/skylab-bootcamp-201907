@@ -2,7 +2,7 @@
  * find()
  */
 function dFind(arr, fn){
-    let res;
+    var res;
     for(item in arr){
         if(fn(arr[item])){
             res=arr[item];

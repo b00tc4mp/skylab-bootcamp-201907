@@ -2,7 +2,7 @@
  * forEach()
  */
 function dForEach(arr, expression){
-    for(let i=0;i<arr.length;i++){
+    for(var i=0;i<arr.length;i++){
         expression(arr[i]);
     }
 }
