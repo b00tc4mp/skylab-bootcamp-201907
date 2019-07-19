@@ -70,8 +70,8 @@ Curray.prototype.flat = function(depth) {
 
     var result = new Curray;
 
-    depth = typeof depth === 'undefined' ? 1 : depth;
-    depth = depth < 0? 0 : depth;
+    // depth = typeof depth === 'undefined' ? 1 : depth;
+    // depth = depth < 0? 0 : depth;
 
 
     for (var i = 0; i < this.length; i++) {

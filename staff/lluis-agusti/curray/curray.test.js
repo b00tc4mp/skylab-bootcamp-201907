@@ -134,20 +134,19 @@ describe('Curray', function() {
 
     describe('flat', function() {
     it('should flatten a Curray', function () {
-        var curray1 = new Curray (1, 2, 3, new Curray ('a', 'b', 'c', new Curray (true, false, new Curray (undefined, null, new Curray ({}, function () { }, new Curray (NaN))))));
+        var curray1 = new Curray (1, 2, 3, new Curray ('a', 'b', 'c', new Curray (true, false, new Curray (undefined, null, new Curray ({}, function () { }, new Curray (NaN)))))); 
 
         // DESGLOSAR ARRAY DE ABAJO
         
         console.log("curray1  " + curray1.length);
 
         // var result = new Curray;
-        var result = curray1.flat();
+
+        var result = curray1.flat(1);
 
         console.log("result  " + result.length);
 
-
-        
-        expectArrays(Array.from(result), [1, 2, 3, 'a', 'b', 'c', [true, false, [undefined, null, [{}, function () { }, [NaN]]]]]);
+        expect(Array.from(result), Array.from([1, 2, 3, 'a', 'b', 'c', Array.from([true, false, Array.from([undefined, null, Array.from([{}, function () { }, Array.from([NaN])])])])]));
    });
 });
 });
