@@ -81,3 +81,25 @@ Curray.prototype.fill = function(value, start, end){
     }
     return this;
 }
+
+Curray.prototype.flat = function(depth, ele){
+
+    depth = typeof depth === 'undefined' ? 1 : depth;
+    depth = depth < 0? 0 : depth;
+
+
+    var result = [];
+
+    for (var i = 0; i < this.length; i++) {
+        var element = this[i];
+
+        if (element instanceof Curray && depth > 0) {
+            var arr = this[i].flat(depth - 1, element);
+
+            for (var j = 0; j < arr.length; j++) result.push(arr[j]);
+        } else result.push(element);
+    }
+
+    return result;
+
+}
