@@ -54,5 +54,43 @@ Curray.prototype.concat = function(curray2) {
         concat.push(curray2[i]);
     }
     
-    return concat;  
+
+    return concat;
+    
 };
+
+Curray.prototype.flat = function(curray, depth) {
+    
+    var result = new Curray;
+    
+    depth = typeof depth === 'undefined' ? 1 : depth;
+    depth = depth < 0? 0 : depth;
+
+    
+
+    for (var i = 0; i < curray.length; i++) {
+        var element = curray[i];
+
+        if (element instanceof Curray && depth > 0) {
+            var arr = flat(element, depth - 1);
+
+            for (var j = 0; j < arr.length; j++) result.push(arr[j]);
+        } else result.push(element);
+    }
+
+    return result;
+    
+};
+
+
+
+/* Curray.prototype.copyWithin = function(expression) {
+    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function arrayWithin');
+
+    if (!(curray instanceof Curray)) throw TypeError('1 is not an array');
+
+
+        curray[target] = curray[start];
+
+    return curray;
+}; */
