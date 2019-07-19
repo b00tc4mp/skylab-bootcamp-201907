@@ -8,7 +8,7 @@
 function Curray() {
     this.length = 0;
 
-    if (arguments.length === 1) {
+     if (arguments.length === 1) {
         this.length = arguments[0];
     } else if (arguments.length > 1) {
         for (var i = 0; i < arguments.length; i++) {

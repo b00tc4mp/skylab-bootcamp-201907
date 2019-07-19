@@ -150,7 +150,6 @@ describe('Curray', function() {
         it('check if the value passed is the same of all the items of an array', function(){
 
         var curray =new Curray (1,2,3,4)
-                
         var result2 = curray.every(function(val){
             return val === 1;
         });
