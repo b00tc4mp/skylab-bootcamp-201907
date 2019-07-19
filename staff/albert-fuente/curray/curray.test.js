@@ -92,13 +92,16 @@ describe('Curray', function () {
 //************************************************************************************ */
     describe("flat", function(){
         it("should flat the arrays", function(){
-            var curray = new Curray (1, 2, 3, ('a', 'b', 'c', (true, false)));
+            var curray = new Curray (1, 2, 3, new Curray('a', 'b', 'c', new Curray(true, false)));
 
             var result=curray.flat();
-            expect(result, [1, 2, 3, 'a', 'b', 'c', [true, false]]);
-
+            var expected=[1, 2, 3, 'a', 'b', 'c', [true, false]];
+            for( var i=0; i<result.length;i++){
+                expect(result[i], expected[i])
+            }
         });
     });
+
 //************************************************************************** */
     describe("toString",function(){
         it("should convert something to string",function(){

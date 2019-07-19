@@ -80,7 +80,6 @@ Curray.prototype.unshifty=function(){
 Curray.prototype.flat=function(depth){
 /*     if (!(array instanceof Array)) throw TypeError(array + ' is not an array');
  */
-    var depth = arguments[1];
     depth = typeof depth === 'undefined' ? 1 : depth;
     depth = depth < 0? 0 : depth;
 
@@ -89,8 +88,8 @@ Curray.prototype.flat=function(depth){
     for (var i = 0; i < this.length; i++) {
         var element = this[i];
 
-        if (element instanceof Array && depth > 0) {
-            var arr = flat(element, depth - 1);
+        if (element instanceof Curray && depth > 0) {
+            var arr = this[i].flat(element, depth - 1);
 
             for (var j = 0; j < arr.length; j++) result.push(this[j]);
         } else result.push(element);
