@@ -73,8 +73,27 @@ Curray.prototype.reduce = function(reducer, initialValue) {
     }
 
     return accumulator
+}
 
-};
+
+Curray.prototype.reduceRight = function(reducer, initialValue) {
+    if (arguments.length !== 1 && arguments.length !== 2) throw TypeError("Wrong number of arguments: two expected (Array, Callback function).");
+    if (!(reducer instanceof Function)) throw TypeError("Second argument must be a callback function that takes 2 arguments (accumulator, value).");
+    if (reducer.length !== 2) throw TypeError("Callback function must have two arguments (accumulator, value).");
+    
+    if (initialValue || initialValue === 0) {
+        var accumulator = initialValue
+        var start = array.length - 1
+    } else {
+        var accumulator = this[this.length-1]
+        var start = this.length - 2
+    }
+        
+    for (var i = start; i >= 0; i--) {
+        accumulator = reducer(accumulator, this[i])
+    }
+    return accumulator
+}
 
 
 Curray.prototype.join = function (separator) {
@@ -122,4 +141,23 @@ Curray.prototype.map = function(expression) {
 
   return result;
 }
-  
+
+
+Curray.prototype.every = function(expression) {
+
+    for (var i=0; i < this.length; i++) {
+        if (!expression(this[i]))  return false
+
+    }
+    return true
+}
+
+/* Curray.prototype.reverse = function() {
+
+    for (var i = 0; i <= Math.floor((this.length - 1) / 2); i++) {
+        var a = this[i];
+        this[i] = this[this.length - 1 - i];
+        this[this.length - 1 - i] = a;
+    }
+    return this;
+  } */
