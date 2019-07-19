@@ -1,0 +1,63 @@
+// BREAKPOINTS
+$layout-breakpoint-medium: 641px
+$font-size: .9rem
+
+@media (min-width: $layout-breakpoint-medium)
+    .top-navigation
+        padding:2% 1.25% 1%
+        border: 0
+        &__logo>img
+            padding-top: .75rem
+        &__max-nav
+            display: flex
+            justify-content: space-between
+            >ul
+                display: flex
+                width: 100%
+                padding: 0
+                >li
+                    list-style-type: none
+                    padding-right: 1rem
+                    font-size: $font-size
+                    >a
+                        text-decoration: none
+                        color: #ccc
+                >li:last-child
+                    padding-right: 0
+
+        &__min-nav
+            display: none
+    
+    .secondary-nav
+        flex-direction: row
+        justify-content: flex-end
+        margin-bottom: 2%
+        letter-spacing: 0
+
+        &__row
+            border-bottom: 0
+            justify-content: space-evenly
+            padding: 0
+            width: 8rem
+
+        .row__title
+            font-size: $font-size
+        
+        .row__icon
+            width: 20%
+            height: 75%
+            height: auto
+            >img
+                width: 100%
+                height: 50%
+    
+    .mosaic
+        margin-bottom: 5rem
+        
+    .contact-set
+        flex-direction: row
+        flex-wrap: wrap
+        justify-content: space-between
+
+    .contact-card
+        width: 49.75%
