@@ -1,10 +1,5 @@
 console.log('DEMO: arrayWithin');
 
-
-
-
-
-
 suite('arrayWithin', function () {
         
     test("case1", function(){

@@ -40,5 +40,38 @@ describe('Curray', function() {
                 ['c', 2, curray]
             ]);
         });
+    
     });
+
+
+    describe('arrayConcat', function() {
+        it('should concat 2 elements', function() {
+            var curray = new Curray (1 ,2, 3);
+            var curray2 = new Curray (4, 5, 6);
+
+            var result = curray.concat(curray2);
+            expectArrays(Array.from(result), [1, 2, 3, 4, 5, 6]);
+        });
+    });
+
+
+    describe('flat', function() {
+        it('should flatten a curray to the given depth', function() {
+            var curray1 = new Curray (1, 2, 3, new Curray ("a", "b", "c", new Curray (true, false, new Curray (undefined, null, new Curray ({}, function () { }, new Curray (NaN))))));
+            var result = flat(curray);
+            expectArrays(Array.from(result), [1, 2, 3, 'a', 'b', 'c', [true, false, [undefined, null, [{}, function () { }, [NaN]]]]]);
+    
+        });
+    });
+
+   
+    /* describe('copyWithin', function() {
+        it('copies and modifies the array', function() {
+            var curray = new Curray("a","b","c");
+
+            var result = copyWithin(curray, 2 , 1);
+
+            expect(result, "a", "b", "a");
+        });
+    }); */
 });
