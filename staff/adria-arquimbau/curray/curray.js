@@ -7,12 +7,12 @@
  */
 function Curray() {
     this.length = 0;
-
+''
     if (arguments.length === 1) {
         this.length = arguments[0];
     } else if (arguments.length > 1) {
         for (var i = 0; i < arguments.length; i++) {
-            this[i] = arguments[i];
+              this[i] = arguments[i];
             // this.push(arguments[i]); // TRY not to depend on push here.
         }
         this.length = arguments.length;
@@ -42,15 +42,6 @@ Curray.prototype.forEach = function(expression) {
         expression(this[i], i, this);
 };
 
-// Curray.prototype.copyWithin = function(array, target, start) {
-//     if (arguments.length === 0) throw TypeError('missing argument 0 when calling function copyWithin');
-
-//     if (!(curray instanceof Curray)) throw TypeError("1 is not an array");
-
-//     curray[target] = curray[start];
-//     return curray;
-// };
-
 Curray.prototype.concat = function(curray2) {
     var concat = new Curray;
     for(var i=0; i<this.length; i++){
@@ -62,24 +53,34 @@ Curray.prototype.concat = function(curray2) {
     return concat;
 };
 
+Curray.prototype.flat = function(depth) {
 
-
-/* Curray.prototype.flat = function(curray, depth) {
     depth = typeof depth === 'undefined'? 1: depth;
     depth = depth < 0? 0:depth;
 
-    var result = new Curray;
+    var result = [];
 
-    for (var i = 0; i < this.length; i++) {
-        var element = this[i];
+    for (var i = 0; i < array.length; i++) {
+        var element = array[i];
 
-            if (element instanceof Curray && depth > 0) {
+            if (element instanceof Array && depth > 0) {
                 var arr = flat(element, depth -1);
 
-                for (var j = 0 ;j < array.length; j++) const element = result.push(array[j]);
+                for (var j = 0 ;j < array.length; j++) 
+                result.push(array[j]);
 
             } else result.push(element);
             
         
     } 
-};*/
+
+    Curray.prototype.copyWithin = function(target, start) {
+/*         if (arguments.length === 0) throw TypeError('missing argument 0 when calling function copyWithin');
+   
+        if (!(curray instanceof Curray)) throw TypeError("1 is not an array");
+ */   
+
+
+       return this[target] = this[start];
+    };
+};
