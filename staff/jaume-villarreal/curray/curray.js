@@ -72,7 +72,7 @@ Curray.prototype.find = function(expression){
 // findIndex
 Curray.prototype.findIndex = function(expression){
     if(!arguments.length) throw TypeError ("undefined is not a function");
-    if(!(expression instanceof Function)) throw TypeError(this + "is not a function");
+    if(!(expression instanceof Function)) throw TypeError(this + " is not a function");
 
     for(var i = 0 ; i<this.length ; i++){
         if(expression(this[i])) return i;
@@ -105,4 +105,29 @@ Curray.prototype.concat = function(){
     }
 
     return concat;
+};
+
+//from
+Curray.prototype.from = function(element , expression){
+    if(!arguments.length) throw TypeError("Cannot convert undefined or null to object");
+    
+    var arrayFrom = [];
+    
+    if(!(typeof element === "string" || element instanceof Curray)){
+        arrayFrom = [];
+    }
+    else{
+        if(arguments[1] instanceof Function){
+            for(var i = 0 ; i<element.length ; i++){
+                arrayFrom[i] = expression(element[i]);
+            }
+        }
+        else{
+            for(var i = 0 ; i < element.length ; i++){
+                arrayFrom[i] = element[i];
+            }
+        }
+    }
+
+    return arrayFrom;
 };
