@@ -41,4 +41,112 @@ describe('Curray', function() {
             ]);
         });
     });
+
+    describe('toString', function(){
+        it('should convert something to string', function() {
+            var curray = new Curray(1, 2, 3);
+
+            var result = curray.toString();
+
+            expect(result, "1,2,3")
+        })
+
+        it('should convert several data types, except another array', function(){
+            var curray = new Curray(6, 'bb', 'pepe', 6);
+    
+            var result2 = curray.toString();
+            expect(result2, "6,bb,pepe,6");
+        })
+
+        it('should convert several data types and an array', function(){
+            var curray = new Curray(6, 'bb', 'pepe', 6, [4, 'diez', 33]);
+
+            var result3 = curray.toString();
+            expect(result3, "6,bb,pepe,6,4,diez,33");
+        });
+
+        it('should launch a handleError when using undefined as parameter', function(){
+            var curray = new Curray();
+
+           curray.toString();
+        }, function(error){
+            expect(error instanceof TypeError, true);
+            expect(error.message, 'No se puede leer la propiedad "length" de undefined');
+        });
+
+        it('should launch a handleError when using null as parameter', function(){
+            var curray = new Curray(null);
+            // var result = null;
+
+            curray.toString();
+        }, function(error){
+            expect(error instanceof TypeError, true);
+            expect(error.message, 'No se puede convertir a string un objeto null');
+        });
+
+
+    })
+
+    describe('fill', function(){
+        it('should fill all parameters (mandatory and optional)', function(){
+            var curray = new Curray(1, 2, 3, 4);
+
+            var result = curray.fill(0, 2, 4);
+            var expected = [1, 2, 0, 0];
+
+            for (var i = 0; i < result.length; i++){
+                expect(result[i], expected[i]);
+            }
+
+            // expectArrays(result, [1, 2, 0, 0]);
+        })
+
+        it('should call fill whitout end parameter', function(){
+            var curray = new Curray(1, 2, 3, 4);
+
+            var result = curray.fill(5,1);
+            var expected = [1, 5, 5, 5];
+
+            for (var i = 0; i < result.length; i++){
+                expect(result[i], expected[i]);
+            }
+        })
+
+        it('should call fill just using mandatory parameter', function(){
+            var curray = new Curray(1,2,3,4);
+
+            var result = curray.fill(6);
+            var expected = [6, 6, 6, 6];
+
+            for (var i = 0; i < result.length; i++){
+                expect(result[i], expected[i]);
+            }
+        })
+
+        it('should launch a handleError when is not a curray', function(){
+            var curray = new Curray;
+            curray.fill();
+
+
+        }, function(error){
+            expect(error instanceof TypeError, true);
+            expect(error.message, 'fill debe contener al menos un parámetro');
+        })
+    })
+
+    // describe('unshift', function(){
+    //     it('should add new elements to the begining of a curray', function(){
+    //         var curray = new Curray(1,2,3);
+
+    //         result
+
+    //     })
+
+
+
+    // })
+
+
+
+
 });

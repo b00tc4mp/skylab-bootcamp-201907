@@ -41,3 +41,43 @@ Curray.prototype.forEach = function(expression) {
     for (var i = 0; i < this.length; i++)
         expression(this[i], i, this);
 };
+
+Curray.prototype.toString = function(){
+    if (this.length === 0) throw TypeError('No se puede leer la propiedad "length" de undefined');
+    if (this.length === null) throw TypeError ('No se puede convertir a string un objeto null');
+
+    var newstring = '';
+
+    if (typeof this === 'string'){
+        newstring = this;
+    } else {
+        for (var i = 0; i < this.length; i++){
+            newstring = newstring + this[i] + ',';
+        };
+        newstring = newstring.substring(0, (newstring.length-1))
+    }
+    return newstring;
+}
+
+Curray.prototype.fill = function(value, start, end){
+    if (this.length === 0) throw TypeError('fill debe contener al menos un parámetro');
+    // if (!(this instanceof Array)) throw TypeError('filljuan necesita que el primer parámetro sea un array');
+    // if (start && typeof start !== 'number') throw TypeError('la posición inicial debe ser un número entero válido');
+    // if (end && typeof end !== 'number') throw TypeError('la posición final debe ser un número entero válido');
+
+    // var newArray = this;
+    if (typeof end === 'number') {
+        for (var i = start; i < end; i++) {
+            this[i] = value;
+        }
+    } else if (typeof start === 'number') {
+        for (var i = start; i < this.length; i++){
+            this[i] = value;
+        }
+    } else {
+        for (i = 0; i< this.length; i++){
+            this[i] = value;
+        }
+    }
+    return this;
+}
