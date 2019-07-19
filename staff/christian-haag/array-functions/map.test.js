@@ -39,7 +39,7 @@ suite('Map', function () {
     check(error instanceof TypeError, true);
     check(error.message, 'missing argument 0 when calling function Map')
   });
-  debugger
+
   test('not a function', function () {
     var array = [1, 2, 3]
     map(array, null);
