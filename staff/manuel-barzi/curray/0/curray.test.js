@@ -34,7 +34,7 @@ describe('Curray', function() {
                 outputs.push([element, index, curray]);
             });
     
-            expectArrays(outputs, [
+            expect(outputs, [
                 ['a', 0, curray],
                 ['b', 1, curray],
                 ['c', 2, curray]
