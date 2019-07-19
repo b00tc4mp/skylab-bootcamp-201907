@@ -1,19 +1,33 @@
 'use strict';
 
 describe('Curray', function() {
+
+    /* PUSH: HAPPY PATH */
     describe('push', function() {
         it('should push a string', function() {
             var curray = new Curray();
-
             var result = curray.push('hola mundo');
-
             expect(curray[0], 'hola mundo');
             expect(result, 1);
         });
     });
 
-    describe('pop', function() {
-        it('should pop a string', function() {
+    /* PUSH: EXCEPTION PATH */
+    describe('push', function() {
+        it(
+            'should capture error for push with no arguments', 
+            function() {
+                var curray = new Curray();
+                var result = curray.push();
+        }, function(error) {
+            expect(error instanceof TypeError, true);
+            expect(error.message,'push needs at least one argument (element to be pushed)');
+        }
+    )});
+
+
+    /* POP: HAPPY PATH */
+    describe('pop', function() { it('should pop a string', function() {
             var curray = new Curray('hola', 'mundo');
 
             var result = curray.pop();
@@ -24,6 +38,20 @@ describe('Curray', function() {
         });
     });
 
+    /* POP: EXCEPTION PATH */
+    describe('pop', function() { 
+        it(
+            'should capture no arguments error', function() {
+                var curray = new Curray('hola', 'mundo');
+                var result = curray.pop('aaaa');
+            },
+            function(error) {
+                expect(error instanceof TypeError, true);
+                expect(error.message, "pop accepts no arguments.");
+        });
+    });
+
+    /* FOREACH: HAPPY PATH */
     describe('forEach', function() {
         it('should output each element index and curray', function () {
             var curray = new Curray('a', 'b', 'c');
@@ -42,6 +70,23 @@ describe('Curray', function() {
         });
     });
 
+    /* FOREACH: EXCEPTION PATH */
+    describe('forEach', function() {
+        it(
+            'should capture no arguments error',
+            function () {
+                var curray = new Curray('a', 'b', 'c');
+                var outputs = [];
+                curray.forEach();
+            },
+            function(error) {
+                expect(error instanceof TypeError, true);
+                expect(error.message,'an expression should be passed as argument to forEach');
+            });
+        });
+
+
+    /* INDEXOF: HAPPY PATH */
     describe('indexOf', function() {
         it(
             'should get index of an element',
@@ -50,8 +95,23 @@ describe('Curray', function() {
                 var result = curray.indexOf('camel');
                 expect(result, 2);
             });
-    });
+        });
 
+    /* INDEXOF: EXCEPTION PATH */
+    describe('indexOf', function() {
+        it(
+            'should capture no arguments error',
+            function() {
+                var curray = new Curray('ant', 'bison', 'camel', 'duck', 'bison');
+                var result = curray.indexOf();
+            },
+            function(error) {
+                expect(error instanceof TypeError, true);
+                expect(error.message,'at least one argument must be passed in to indexOf');
+            });
+        });
+
+    /* REDUCE: HAPPY PATH */
     describe('reduce', function() {
         it(
             'sum all items in array of numbers',
@@ -64,6 +124,21 @@ describe('Curray', function() {
                 );
                 expect(result, 10);
             }
+        );
+    });
+
+    /* REDUCE: EXCEPTION PATH*/
+    describe('reduce', function() {
+        it(
+            'capture wrong number o arguments error',
+            function() {
+                var curray = new Curray(1,2,3,4);
+                var result = curray.reduce()
+                },
+                function(error) {
+                    expect(error instanceof TypeError, true);
+                    expect(error.message,'Wrong number of arguments: two expected (Array, Callback function).');
+                }
         );
     });
 

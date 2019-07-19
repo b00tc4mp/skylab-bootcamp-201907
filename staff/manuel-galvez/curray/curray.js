@@ -20,12 +20,13 @@ function Curray() {
 }
 
 Curray.prototype.push = function (element) {
+    if (arguments.length === 0) throw TypeError('push needs at least one argument (element to be pushed)');
     this[this.length++] = element;
 
-    return this.length;
-};
+    return this.length; };
 
 Curray.prototype.pop = function() {
+    if (arguments.length > 0) throw TypeError('pop accepts no arguments.');
     var last = this[--this.length];
 
     delete this[this.length];
@@ -34,7 +35,7 @@ Curray.prototype.pop = function() {
 };
 
 Curray.prototype.forEach = function(expression) {
-    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function forEach');
+    if (arguments.length === 0) throw TypeError('an expression should be passed as argument to forEach');
 
     if (!(expression instanceof Function)) throw TypeError(expression + ' is not a function');
 
@@ -43,7 +44,7 @@ Curray.prototype.forEach = function(expression) {
 };
 
 Curray.prototype.indexOf = function(name) {
-    if (arguments.length === 0) throw Error('indexOf is not defined');
+    if (arguments.length === 0) throw TypeError('at least one argument must be passed in to indexOf');
 
     for (var i = 0; i < this.length; i++) {
         if (name === this[i]) {
@@ -121,12 +122,4 @@ Curray.prototype.map = function(expression) {
 
   return result;
 }
-
-
-
-
-
-
-  
-
   
