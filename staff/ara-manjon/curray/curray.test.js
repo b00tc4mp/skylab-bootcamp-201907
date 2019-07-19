@@ -60,6 +60,7 @@ describe('Curray', function() {
             var curray = new Curray(1, 2, 3, new Curray('a', 'b', 'c', new Curray(true, false)));
             
             var result= curray.flat(1);
+            
             expectArrays(Array.from(result), [1, 2, 3, 'a', 'b', 'c', [true, false]]);
         })
     });
