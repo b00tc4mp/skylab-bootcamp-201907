@@ -72,7 +72,7 @@ function it(description, expression, handleError) {
 }
 
 function __success__(description) {
-    console.log('%c' + description + ' 👍', 'color: green');
+    console.log('%c' + ' >> ' + description + ' 👍', 'color: green');
 }
 
 function __fail__(description, error) {
@@ -88,4 +88,5 @@ function __fail__(description, error) {
 function describe(description, expression) {
     console.log(description, '🍭');
     expression();
+    console.log('\n');
 }
