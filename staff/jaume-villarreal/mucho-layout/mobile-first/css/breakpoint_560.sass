@@ -1,0 +1,13 @@
+// BREAKPOINTS
+$layout-breakpoint-small: 561px
+
+@media (min-width: $layout-breakpoint-small)
+    .mosaic
+        flex-direction: row
+        flex-wrap: wrap
+        justify-content: space-between
+        &__tile
+            width: 49.75%
+            margin: .25% 0
+        &__article
+            width: 49.75%
