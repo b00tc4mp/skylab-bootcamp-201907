@@ -52,9 +52,7 @@ Curray.prototype.forEach = function(expression) {
 //entries
 Curray.prototype.entries = function(){
     var result = [];
-    // var obj = {};
     for (var i = 0 ; i<this.length ; i++){
-        // result[i] = [Object.keys(obj)[i] * 1 , obj[i]];
         result[i] = [i,this[i]];
     }
     return result;   
@@ -74,10 +72,37 @@ Curray.prototype.find = function(expression){
 // findIndex
 Curray.prototype.findIndex = function(expression){
     if(!arguments.length) throw TypeError ("undefined is not a function");
-    if(!(expression instanceof Function)) throw TypeError(expression + " is not a function");
+    if(!(expression instanceof Function)) throw TypeError(this + "is not a function");
 
     for(var i = 0 ; i<this.length ; i++){
         if(expression(this[i])) return i;
     }
     return undefined;
 }
+
+// concat
+Curray.prototype.concat = function(){
+    if(!(this instanceof Curray)) throw TypeError ("expression is not a function");
+
+    var concat = new Curray();
+
+    for(var i = 0 ; i < this.length ; i++){
+        concat.push(this[i])
+    }
+    
+    if (arguments.length > 0){
+        for(var i = 0; i < arguments.length; i++){
+            var item = arguments[i];
+
+            if(item instanceof Curray){
+                for(var j = 0; j <  item.length; j++){
+                    concat.push(item[j]);
+                }
+            }else{
+                concat.push(item)
+            }
+        }
+    }
+
+    return concat;
+};

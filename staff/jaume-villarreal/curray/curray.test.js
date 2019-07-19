@@ -2,152 +2,181 @@
 
 //push
 describe('Curray', function() {
-    describe('push', function() {
-        // HAPPY PATH
-        it(
-            'should push a string',
-            function() {
-                var curray = new Curray();
+    // describe('push', function() {
+    //     // HAPPY PATH
+    //     it(
+    //         'should push a string',
+    //         function() {
+    //             var curray = new Curray();
 
-                var result = curray.push('hola mundo');
+    //             var result = curray.push('hola mundo');
 
-                expect(curray[0], 'hola mundo');
-                expect(result, 1);
-        });
-    });
-    //pop
-    describe('pop', function() {
-        // HAPPY PATH
-        it(
-            'should pop a string',
-            function() {
-                var curray = new Curray('hola', 'mundo');
+    //             expect(curray[0], 'hola mundo');
+    //             expect(result, 1);
+    //     });
+    // });
+    // //pop
+    // describe('pop', function() {
+    //     // HAPPY PATH
+    //     it(
+    //         'should pop a string',
+    //         function() {
+    //             var curray = new Curray('hola', 'mundo');
 
-                var result = curray.pop();
+    //             var result = curray.pop();
 
-                expect(result, 'mundo');
-                expect(curray.length, 1);
-                expect(curray[1], undefined);
-        });
-    });
+    //             expect(result, 'mundo');
+    //             expect(curray.length, 1);
+    //             expect(curray[1], undefined);
+    //     });
+    // });
 
-    // forEach
-    describe('forEach', function() {
-        // HAPPY PATH
-        it(
-            'should output each element index and curray',
-            function () {
-                var curray = new Curray('a', 'b', 'c');
+    // // forEach
+    // describe('forEach', function() {
+    //     // HAPPY PATH
+    //     it(
+    //         'should output each element index and curray',
+    //         function () {
+    //             var curray = new Curray('a', 'b', 'c');
         
-                var outputs = [];
+    //             var outputs = [];
         
-                curray.forEach(function (element, index, curray) {
-                    outputs.push([element, index, curray]);
-                });
+    //             curray.forEach(function (element, index, curray) {
+    //                 outputs.push([element, index, curray]);
+    //             });
         
-                expectArrays(outputs, [
-                    ['a', 0, curray],
-                    ['b', 1, curray],
-                    ['c', 2, curray]
-                ]);
-        });
-    });
+    //             expectArrays(outputs, [
+    //                 ['a', 0, curray],
+    //                 ['b', 1, curray],
+    //                 ['c', 2, curray]
+    //             ]);
+    //     });
+    // });
 
-    // entries
-    describe('entries' , function(){
-        // HAPPY PATH
-        it(
-            "should return [key:value] pair for each position of the array",
-            function() {
-                var curray = new Curray('a','b','c');
+    // // entries
+    // describe('entries' , function(){
+    //     // HAPPY PATH
+    //     it(
+    //         "should return [key:value] pair for each position of the array",
+    //         function() {
+    //             var curray = new Curray('a','b','c');
 
-                var outputs = [];
+    //             var outputs = [];
                 
-                outputs = curray.entries(curray);
+    //             outputs = curray.entries(curray);
 
-                expectArrays(outputs , [[0,'a'] , [1,'b'] , [2,'c']]);
-        });
-    });
+    //             expectArrays(outputs , [[0,'a'] , [1,'b'] , [2,'c']]);
+    //     });
+    // });
     
-    // find
-    describe('find' , function(){
-        // HAPPY PATH
-        it(
-            "should return the value of the first element in the array maior than 1",
-            function() {
-                var curray = new Curray(1,2,3,4,5);
+    // // find
+    // describe('find' , function(){
+    //     // HAPPY PATH
+    //     it(
+    //         "should return the value of the first element in the array maior than 1",
+    //         function() {
+    //             var curray = new Curray(1,2,3,4,5);
                 
-                var item = curray.find(function(element){
-                return element>1;
-            });
+    //             var item = curray.find(function(element){
+    //             return element>1;
+    //         });
 
-            expect(item , 2);
-        });
+    //         expect(item , 2);
+    //     });
 
-         // WRONG PATH
-         it(
-            "should throw error => 3 is not a function" ,
-            function(){
-                var curray = new Curray ('John' , 'Paul' , 'George' , 'Ringo');
-                var index = curray.findIndex(3);
-            } ,
-            function(error){
-                expect(error instanceof TypeError , true);
-                expect(error.message , "3 is not a function")
-            }
-        );
+    //      // WRONG PATH
+    //      it(
+    //         "should throw error => 3 is not a function" ,
+    //         function(){
+    //             var curray = new Curray ('John' , 'Paul' , 'George' , 'Ringo');
+    //             var index = curray.findIndex(3);
+    //         } ,
+    //         function(error){
+    //             expect(error instanceof TypeError , true);
+    //             expect(error.message , "3 is not a function")
+    //         }
+    //     );
         
-        it(
-            "should throw error => undefined is not a function" ,
-            function(){
-                var curray = new Curray ('John' , 'Paul' , 'George' , 'Ringo');
-                var index = curray.findIndex();
-            } ,
-            function(error){
-                expect(error instanceof TypeError , true);
-                expect(error.message , "undefined is not a function")
-            }
-        );
-    });
+    //     it(
+    //         "should throw error => undefined is not a function" ,
+    //         function(){
+    //             var curray = new Curray ('John' , 'Paul' , 'George' , 'Ringo');
+    //             var index = curray.findIndex();
+    //         } ,
+    //         function(error){
+    //             expect(error instanceof TypeError , true);
+    //             expect(error.message , "undefined is not a function")
+    //         }
+    //     );
+    // });
 
-    // findIndex()
-    describe('findIndex' , function(){
+    // // findIndex()
+    // describe('findIndex' , function(){
+    //     // HAPPY PATH
+    //     it(
+    //         "should return the index of the first element in the array maior than 1",
+    //         function(){
+    //             var curray = new Curray('John' , 'Paul' , 'George' , 'Ringo');
+
+    //             var index = curray.findIndex(function(element){
+    //                 return element === 'Ringo';
+    //         });
+
+    //         expect(index , 3);
+    //     });
+
+    //     // WRONG PATH
+    //     it(
+    //         "should throw error => 3 is not a function" ,
+    //         function(){
+    //             var curray = new Curray ('John' , 'Paul' , 'George' , 'Ringo');
+    //             var index = curray.findIndex(3);
+    //         } ,
+    //         function(error){
+    //             expect(error instanceof TypeError , true);
+    //             expect(error.message , "3 is not a function")
+    //         }
+    //     );
+        
+    //     it(
+    //         "should throw error => undefined is not a function" ,
+    //         function(){
+    //             var curray = new Curray ('John' , 'Paul' , 'George' , 'Ringo');
+    //             var index = curray.findIndex();
+    //         } ,
+    //         function(error){
+    //             expect(error instanceof TypeError , true);
+    //             expect(error.message , "undefined is not a function")
+    //         }
+    //     );
+    // })
+
+    // concat()
+    describe('concat' , function(){
         // HAPPY PATH
-        it(
-            "should return the index of the first element in the array maior than 1",
-            function(){
-                // var curray = new Curray('John' , 'Paul' , 'George' , 'Ringo');
-                var curray = new Curray(1,2,3,4,5);
+        // it("should concat two given arrays" , 
+        // function(){
+        //     var curray1 = new Curray(1,2,3);
+        //     var curray2 = new Curray(4,5);
+        //     var curray3 = new Curray(0);
 
-                var index = curray.findIndex(function(element){
-                    return element === 4;
-            });
+        //     curray3 = curray1.concat(curray2);
 
-            expect(index , 3);
-        });
+        //     expectArrays(Array.from(curray3) , [1,2,3,4,5]);
+        // });
 
         // WRONG PATH
-        it(
-            "should throw error => 3 is not a function" ,
+        it("should throw error => 'expression is not a function",
             function(){
-                var curray = new Curray ('John' , 'Paul' , 'George' , 'Ringo');
-                var index = curray.findIndex(3);
-            } ,
+                var curray1 = 1;
+                var curray2 = new Curray(4,5);
+                var curray3 = new Curray(0);
+
+                curray3 = curray1.concat(curray2);
+            },
             function(error){
                 expect(error instanceof TypeError , true);
-                expect(error.message , "3 is not a function")
-            }
-        );
-        
-        it(
-            "should throw error => undefined is not a function" ,
-            function(){
-                var curray = new Curray ('John' , 'Paul' , 'George' , 'Ringo');
-                var index = curray.findIndex();
-            } ,
-            function(error){
-                expect(error instanceof TypeError , true);
-                expect(error.message , "undefined is not a function")
+                expect(error.message , "curray1.concat is not a function");
             }
         );
     })
