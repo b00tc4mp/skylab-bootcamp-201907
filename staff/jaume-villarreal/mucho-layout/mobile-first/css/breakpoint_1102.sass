@@ -1,0 +1,44 @@
+// BREAKPOINTS
+$layout-breakpoint-desktop: 1103px
+
+@media (min-width: $layout-breakpoint-desktop)
+    // .top-navigation
+        
+    //     &__presentation
+    //         font-size: 1.25rem
+    //         line-height: 1.5rem
+    //     &__max-nav
+    //         >ul
+    //             >li
+    //                 >a
+    //                     font-size: 1.25rem
+                    
+    .mosaic
+        display: grid
+        grid-template-columns: repeat(3 , 1fr) 
+        grid-template-rows: repeat(12, 1fr)
+        grid-gap: 2px
+        &__tile
+            width: 100%
+            > img
+                width: 100%
+                height: 100%
+                object-fit: cover
+
+        &__article
+            width: 100%
+    
+    .tile--expand-grid1
+         grid-area: 2 / 1 / 4 / 3
+
+    .tile--expand-grid2
+         grid-area: 4 / 1 / 6 / 3
+    
+    .tile--expand-grid3
+         grid-area: 6 / 1 / 8 / 3
+    
+    .tile--expand-grid4
+         grid-area: 8 / 1 / 10 / 3
+    
+    .tile--expand-grid5
+         grid-area: 10 / 1 / 12 / 3
