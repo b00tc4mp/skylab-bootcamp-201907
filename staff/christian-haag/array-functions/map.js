@@ -1,3 +1,17 @@
+'use strict';
+/**
+ * Creates a new array with the parameters passed to its function applied to the values
+ * 
+ * @param {Array} array 
+ * @param {Function} expression 
+ * 
+ * @trhow {TypeError} 
+ * 
+ * @returns {result} 
+ * 
+ */
+
+
 function map(array, expression) {
   if (arguments.length === 0)
     throw TypeError("missing argument 0 when calling function Map");

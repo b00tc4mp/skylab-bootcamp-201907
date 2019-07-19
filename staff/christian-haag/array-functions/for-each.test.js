@@ -1,50 +1,45 @@
-console.log("TEST forEach");
+suite('forEach', function () {
+  test('outputs element index and array in array', function () {
+    var array = ['a', 'b', 'c'];
 
-var array = ["a", "b", "c"];
+    var outputs = [];
 
-var outputs = [];
+    forEach(array, function (element, index, array) {
+      outputs.push([element, index, array]);
+    });
 
-forEach(array, function(element, index, array) {
-  outputs.push([element, index, array]);
-});
-
-checkAndLogError(outputs, [
-  ["a", 0, ["a", "b", "c"]],
-  ["b", 1, ["a", "b", "c"]],
-  ["c", 2, ["a", "b", "c"]]
-]);
-
-array = [1, 2, 3];
-
-var result = 0;
-
-try {
-  forEach(array, function(value) {
-    result += value;
+    checkArrays(outputs, [
+      ['a', 0, ['a', 'b', 'c']],
+      ['b', 1, ['a', 'b', 'c']],
+      ['c', 2, ['a', 'b', 'c']]
+    ]);
   });
-} catch (perico) {
-  var a = 0;
-}
 
-checkAndLogError(result, 6);
+  test('sums all items (numbers)', function () {
+    var array = [1, 2, 3];
 
-// case: no arguments
+    var result = 0;
+    forEach(array, function (value) {
+      result += value;
+    });
 
-try {
-  forEach();
-} catch (error) {
-  checkAndLogError(error instanceof TypeError, true);
-  checkAndLogError(
-    error.message,
-    "missing argument 0 when calling function forEach"
-  );
-}
+    check(result, 6);
+  });
 
-// case: not an array
+  test('no arguments',
+    function () {
+      forEach();
+    },
 
-try {
-  forEach();
-} catch (error) {
-  checkAndLogError(error instanceof TypeError, true);
-  checkAndLogError(error.message, "1 is not an array");
-}
+    function (error) {
+      check(error instanceof TypeError, true);
+      check(error.message, 'missing argument 0 when calling function forEach');
+    });
+
+  test('not an array', function () {
+    forEach(1);
+  }, function (error) {
+    check(error instanceof TypeError, true);
+    check(error.message, '1 is not an array');
+  });
+});
