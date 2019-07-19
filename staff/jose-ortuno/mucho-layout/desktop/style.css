@@ -1,0 +1,234 @@
+/* Layout Desktop */
+/* ----- ----- RESET ----- ----- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ----- ----- GENERAL ----- ----- */
+body {
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    color: #969494
+}
+
+h2 {
+    color: black;
+}
+
+h3 {
+    font-size: 1em;
+}
+
+a {
+    text-decoration: none;
+    color: #969494
+}
+
+a:hover {
+    text-decoration: underline;
+}
+/* ----- ----- HEADER ----- ----- */
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.logo {
+    padding: 17px 20px 47px;
+}
+
+/* mobile */
+/* Border mobile */
+/* .border {
+    border-bottom: 1px solid #969494;
+} */
+
+.logo > i,
+nav {
+    font-size: 1.2rem;
+    align-self: flex-start;
+}
+
+.logo > i,
+nav > ul > li > i {
+    align-self: flex-end;
+}
+
+.claim > p {
+    font-size: 1.2rem;
+    padding: 0 180px 0 120px;
+}
+
+/* ----- ----- HEADER - MENU ----- ----- */
+
+header > nav > ul,
+.logo > nav > ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+.logo > nav > ul > li {
+    align-self: flex-end;
+}
+
+.logo > nav > ul > li {
+    margin-left: 10px;
+}
+
+nav > ul > li {
+    display: flex;
+    flex-direction: row;
+}
+
+nav > ul > li > i {
+    margin-left: 10px;
+}
+
+header > nav > ul > li {
+    padding: 14px 20px 14px;
+}
+
+header > a > img {
+    width: 80%;
+}
+
+header > i {
+    align-self: center;
+}
+
+/* ----- ----- MAIN ----- ----- */
+
+main {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+/* ----- ----- MAIN - IMG ----- ----- */
+
+main > figure,
+main > section {
+    width: 33.33%;
+    overflow: hidden;
+}
+
+main > figure > img {
+    width: 100%;
+    height: auto;
+    margin: 0 1%;
+}
+
+/* ----- ----- MAIN - TEXT ----- ----- */
+
+.text {
+    height: 300px;
+    padding: 45px 25px;
+    background-color: #F6F6F6;
+    margin: 1%;
+    width: 474px;
+}
+
+main > section > h4 {
+    margin-bottom: 20px;
+}
+
+.text > h4 > a,
+h4 {
+    color: #EC1C24;
+}
+
+main > section > p {
+    margin-bottom: 20px;
+}
+
+/* ----- ----- MAIN - CLAIM ----- ----- */
+
+.claim2 {
+    width: 60%;
+}
+
+.claim2 > p {
+    padding: 50px 30px;
+    font-size: 1.7rem;
+}
+
+/* ----- ----- FOOTER ----- ----- */
+
+footer {
+    margin-bottom: 25px;
+}
+
+/* ----- ----- FOOTER - ADDRESS ----- ----- */
+
+.address {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.address address {
+    width: 25%;
+}
+
+.address,
+.subfooter {
+    margin: 0 20px;
+}
+
+.address > address {
+    padding: 20px 0;
+}
+
+.address > address > p { 
+    margin-top: 10px;
+}
+
+/* ----- -----  FOOTER - SOCIAL ----- ----- */
+
+.subfooter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.subs {
+    display: flex;
+    flex-direction: row;
+}
+
+.social,
+.subs p  {
+    align-self: flex-end;
+}
+
+.subs p {
+    margin-right: 10px;
+}
+
+.subfooter p {
+    order: -1;
+}
+
+.social > i {
+    margin-right: 5px;
+}
+
+/* ----- ----- MEDIA QUERIES ----- ----- */
+
+/* @media screen and (min-width:768) and (max-width:1024px) {
+
+}
+
+@media screen and (min-width:1025px)  {
+
+} */
