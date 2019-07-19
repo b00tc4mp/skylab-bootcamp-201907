@@ -89,7 +89,7 @@ function __fail2__(description, error) {
  * @param {Function} expression 
  */
 function describe(description, expression) {
-    console.log(description, '🍭🍭🍭🍭🍭🍭🍭🍭');
+    console.log(description, '🍭🍭🍭🍭🍭🍭🍭');
 
     expression();
 }
