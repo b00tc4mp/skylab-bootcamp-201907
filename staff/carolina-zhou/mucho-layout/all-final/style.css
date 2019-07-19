@@ -14,6 +14,10 @@ a {
   color: darkgray;
 }
 
+a:hover {
+  color: black;
+}
+
 .header {
   padding: 25px;
 }
@@ -117,7 +121,8 @@ a {
   margin: 1em 0 0 1em;
   font-size: 12px;
 }
-.footer{
+
+.footer {
   padding: 25px;
 }
 .footer__address {
@@ -236,6 +241,14 @@ a {
     margin-bottom: 2em;
   }
 }
+/* --------- header text change  --------- */
+@media (min-width: 1024px) and (max-width: 1460px) {
+  .header__text {
+    display: block;
+    padding: 0;
+    font-size: 13px;
+  }
+}
 /* --------- DESKTOP --------- */
 @media (min-width: 1024px) {
   .header__text {
@@ -243,6 +256,7 @@ a {
     padding: 0;
     width: 30%;
   }
+
   .main__content {
     padding: 5px;
     display: grid;
@@ -258,10 +272,12 @@ a {
     margin: 3px;
     min-height: auto;
   }
+
   #img3, #img5, #img8, #img11, #img16 {
     grid-row: span 2;
     grid-column: span 2;
   }
+
   .footer__text {
     width: 50%;
   }

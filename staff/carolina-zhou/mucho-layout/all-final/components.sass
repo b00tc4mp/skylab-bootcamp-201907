@@ -18,149 +18,147 @@ a:hover
 
 .header 
     padding: 25px
+    &__main 
+        height: 40px
+        position: sticky
+        top: 0px
+        background-color: $background-color-1
+        border-bottom: 1px solid $base-color-1 
+        display: flex
+        justify-content: space-between
 
-        &__main 
-            height: 40px
-            position: sticky
-            top: 0px
-            background-color: $background-color-1
-            border-bottom: 1px solid $base-color-1 
-            display: flex
-            justify-content: space-between
+    &__logo 
+        margin: 0
+        padding: 0
+        max-width: 90px
 
-        &__logo 
-            margin: 0
-            padding: 0
-            max-width: 90px
+    &__text 
+        display: none
 
-        &__text 
-            display: none
+    &__menu-icon 
+        align-self: center
+        max-width: 40px
 
-        &__menu-icon 
-            align-self: center
-            max-width: 40px
+    &__menu-hidden 
+        display: none
 
-        &__menu-hidden 
-            display: none
+    &__submenu 
+        display: flex
+        justify-content: space-between
+        border-bottom: 1px solid $base-color-1 
 
-        &__submenu 
-            display: flex
-            justify-content: space-between
-            border-bottom: 1px solid $base-color-1 
+    &__submenu-text 
+        margin-left: 0
 
-        &__submenu-text 
-            margin-left: 0
+    &__submenu-text:hover
+        color: $hover-color
 
-        &__submenu-text:hover
-            color: $hover-color
+    &__submenu-icon 
+        width: 25px
+        height: 25px
+        margin-right: 7px
+        align-self: center
 
-        &__submenu-icon 
-            width: 25px
-            height: 25px
-            margin-right: 7px
-            align-self: center
-
-        &__submenu-hidden 
-            display: none
+    &__submenu-hidden 
+        display: none
 
 .main
-        &__content 
-            padding: 5px
+    &__content 
+        padding: 5px
 
-        &__imagen 
-            display: flex
-            justify-content: space-between
-            display: block
-            position: relative
-            margin: 0
+    &__imagen 
+        display: flex
+        justify-content: space-between
+        display: block
+        position: relative
+        margin: 0
 
-        &__reveal 
-            position: absolute
-            top: 0
-            left: 0
-            z-index:-1
+    &__reveal 
+        position: absolute
+        top: 0
+        left: 0
+        z-index:-1
 
-        &__title 
-            color: $title-color
-            position: absolute
-            margin: 1em 0 0 1em
-            font-size: 1rem
-            width: 300px
+    &__title 
+        color: $title-color
+        position: absolute
+        margin: 1em 0 0 1em
+        font-size: 1rem
+        width: 300px
 
-        &__subtitle 
-            position: absolute
-            margin: 3em 0 0 1em
-            font-size: 1rem
+    &__subtitle 
+        position: absolute
+        margin: 3em 0 0 1em
+        font-size: 1rem
 
-        &__figure 
-            margin: 0 0 5px 0
+    &__figure 
+        margin: 0 0 5px 0
 
-        &__img 
-            display: block
-            width: 100%
+    &__img 
+        display: block
+        width: 100%
 
-        &__img:hover 
-            opacity: 0.05
-            transition: opacity 500ms
+    &__img:hover 
+        opacity: 0.05
+        transition: opacity 500ms
 
-        &__article 
-            margin-bottom: 5px
-            padding: 20px
-            min-height: 250px
-            background-color: $background-color-2
+    &__article 
+        margin-bottom: 5px
+        padding: 20px
+        min-height: 250px
+        background-color: $background-color-2
 
-        &__article-title 
-            color: $subtitle-color
-            margin: 1em 0 0 1em
-            font-size: 14px
+    &__article-title 
+        color: $subtitle-color
+        margin: 1em 0 0 1em
+        font-size: 14px
 
-        &__article-text 
-            color: $base-color-2
-            margin: 1em 0 0 1em
-            font-size: 12px
+    &__article-text 
+        color: $base-color-2
+        margin: 1em 0 0 1em
+        font-size: 12px
 
 .footer 
     padding: 25px
+    &__address 
+        font-style: normal
+        color: $base-color-3
+        padding: 5px
 
-        &__address 
-            font-style: normal
-            color: $base-color-3
-            padding: 5px
+    &__city-branch 
+        display: flex
+        justify-content: space-between
+        flex-direction: column
 
-        &__city-branch 
-            display: flex
-            justify-content: space-between
-            flex-direction: column
+    &__branch-name 
+        color: $subtitle-color
+        margin-bottom: 0
 
-        &__branch-name 
-            color: $subtitle-color
-            margin-bottom: 0
+    &__branch-info 
+        margin: 0
 
-        &__branch-info 
-            margin: 0
+    &__social-media 
+        margin-top: 2em
+        color: $base-color-1
 
-        &__social-media 
-            margin-top: 2em
-            color: $base-color-1
+    &__list 
+        display: flex
+        margin-left: 15px
+        padding: 0
 
-        &__list 
-            display: flex
-            margin-left: 15px
-            padding: 0
+    &__list-item 
+        padding-right: 15px
+        list-style: none
 
-        &__list-item 
-            padding-right: 15px
-            list-style: none
+    &__list-item:hover
+        color: $hover-color
 
-        &__list-item:hover
-            color: $hover-color
+    &__last-line 
+        display: flex
+        color: $base-color-1
 
-        &__last-line 
-            display: flex
-            color: $base-color-1
-
-        &__copyright 
-            margin-right: 1em
+    &__copyright 
+        margin-right: 1em
 
 /* --------- TABLET  --------- */
 @media (min-width: 562px) 
@@ -214,7 +212,6 @@ a:hover
             display: flex
             margin: 0
 
-
 @media (min-width: 562px) and (max-width: 1024px) 
     .main
         &__content 
@@ -237,6 +234,12 @@ a:hover
         width: 65%
         margin-bottom: 2em
 
+/* --------- header text change  --------- */
+@media (min-width: 1024px) and (max-width: 1460px)
+    .header__text 
+        display: block
+        padding: 0
+        font-size: 14px
 
 /* --------- DESKTOP --------- */
 @media (min-width: 1024px) 
@@ -244,7 +247,7 @@ a:hover
         display: block
         padding: 0
         width: 30%
-
+        
     .main
         &__content 
             padding: 5px
