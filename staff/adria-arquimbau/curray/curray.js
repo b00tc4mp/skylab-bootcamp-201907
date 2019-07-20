@@ -179,4 +179,31 @@ Curray.prototype.fill = function (value, start, end) {
     }
 }
 
+Curray.prototype.join = function(separador){
+    var count = "";
+ 
+    if(!(this instanceof Curray)) {
+        throw TypeError("This is not a Curray");
+    }
+    if (arguments.length === 0){
+        separador = ",";
+    }
+    if (!(separador instanceof String) ){
+        separador = separador.toString();
+    }
+ 
+    for(var i = 0; i < this.length; i++){
+        if(this[i] === null || this[i] === undefined){
+            arr[i] = " ";
+        }
+ 
+        if(i === (this.length -1)){
+            count += this[i];
+        }
+        else{
+            count += this[i] + separador;
+        }
+    }
+    return (count);
+ };
 

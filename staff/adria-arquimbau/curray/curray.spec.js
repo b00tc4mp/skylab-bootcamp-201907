@@ -200,4 +200,25 @@ describe('Curray', function () {
 
     });
 
+    describe("join", function(){
+        it('should join in a string', function() {
+            var curray = new Curray(1,2,3,4,5,6,7,8,9);
+            curray = curray.join("-");
+ 
+            expect(curray, "1-2-3-4-5-6-7-8-9");
+        });
+        it("should put a ',' as separator", function() {
+            var curray = new Curray(1,2,3,4,5,6,7,8,9);
+            curray = curray.join( );
+ 
+            expect(curray, "1,2,3,4,5,6,7,8,9");
+        });
+        it("should convert the numb to string", function() {
+            var curray = new Curray(1,2,3,4,5);
+            curray = curray.join(0);
+ 
+            expect(curray, "102030405");
+        });
+    });
+
 });
