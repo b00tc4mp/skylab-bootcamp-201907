@@ -21,7 +21,6 @@ function Curray() {
 }
 
 Curray.prototype.push = function () {
-    debugger
     for (var i = 0; i < arguments.length; i++){
         this[this.length++] = arguments[i];
     }
@@ -33,11 +32,11 @@ Curray.prototype.pop = function() {
     var last = this[--this.length];
 
     delete this[this.length];
-
     return last;
 };
 
 Curray.prototype.forEach = function(expression) {
+
     if (arguments.length === 0) throw TypeError('missing argument 0 when calling function forEach');
 
     if (!(expression instanceof Function)) throw TypeError(expression + ' is not a function');
@@ -73,4 +72,17 @@ Curray.prototype.join = function(separador){
     }
 
     return (count);
+};
+
+Curray.prototype.concat = function(arguments) {
+    var curray = [];
+
+    for (var i = 0; i < arguments.length; i++) {
+        for (j = 0; j < arguments[i].length; j++) {
+            curray += this[i][j];
+        }
+    }
+    curray = curray.split("");
+
+    return (curray);
 };
