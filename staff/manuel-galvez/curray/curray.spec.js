@@ -40,7 +40,6 @@ describe('Curray', function() {
             });
     });
 
-    /* FOREACH: HAPPY PATH */
     describe('forEach', function() {
         it('should output each element index and curray', function () {
             var curray = new Curray('a', 'b', 'c');
@@ -66,10 +65,9 @@ describe('Curray', function() {
                     curray.forEach();
                 }).toThrowError(TypeError, 'an expression should be passed as argument to forEach')
             })
-        });
+    });
 
 
-    /* INDEXOF: HAPPY PATH */
     describe('indexOf', function() {
         it(
             'should get index of an element',
@@ -140,7 +138,7 @@ describe('Curray', function() {
                 );
                 expect(result).toBeTruthy()
             });
-        });
+    });
     
 
     describe('reverse', function() {
@@ -151,8 +149,7 @@ describe('Curray', function() {
                 var result = curray.reverse()
                 expect(Array.from(result)).toEqual([4,3,2,1])
             });
-        });
-
+    });
 
 
     describe('join', function() {
@@ -163,7 +160,8 @@ describe('Curray', function() {
                 var result = curray.join();
                 expect(result).toBe('Fire,Air,Water');
             });
-        });
+    });
+
 
     describe('includes', function() {
         it(
@@ -172,7 +170,7 @@ describe('Curray', function() {
                 var curray = new Curray(1,2,3,4);
                 var result = curray.includes(4);
                 expect(result).toBeTruthy();
-            })
+            });
     });
 
     describe('map', function() {
@@ -182,22 +180,21 @@ describe('Curray', function() {
                 var curray = new Curray(1,2,3,4);
                 
                 var result = curray.map(function(elem) {
-                    return elem * 10
+                    return elem * 10;
                 });
 
                 var resultArr = Array.from(result);
-                expect(resultArr).toEqual([10,20,30,40])
-            })
+                expect(resultArr).toEqual([10,20,30,40]);
+            });
     });
 
-/*     describe('keys', function() {
+    describe('keys', function() {
         it(
-            'should return a new curray with index instead of values',
+            'should return new curray with indices as values',
             function() {
                 var curray = new Curray('a','b','c','d');
-                var result = curray.keys()
-                expect(Array.from(curray)).toEqual([1,2,3,4])
-            })
-    }); */
-
+                var result =  curray.keys();
+                expect(Array.from(result)).toEqual([0,1,2,3]);
+        });
+    });
 });

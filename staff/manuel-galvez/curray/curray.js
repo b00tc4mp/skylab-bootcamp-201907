@@ -6,6 +6,7 @@
  * 
  */
 function Curray() {
+
     this.length = 0;
 
     if (arguments.length === 1) {
@@ -152,7 +153,7 @@ Curray.prototype.every = function(expression) {
     return true
 }
 
-/* Curray.prototype.reverse = function() {
+Curray.prototype.reverse = function() {
 
     for (var i = 0; i <= Math.floor((this.length - 1) / 2); i++) {
         var a = this[i];
@@ -160,4 +161,16 @@ Curray.prototype.every = function(expression) {
         this[this.length - 1 - i] = a;
     }
     return this;
-  } */
+  }
+
+Curray.prototype.keys = function () {
+    var newCurray = new Curray()
+
+    for (var i = 0; i < this.length; i++) {
+        newCurray[i] = i
+        newCurray['length'] = i + 1
+  }
+  return newCurray
+}
+
+
