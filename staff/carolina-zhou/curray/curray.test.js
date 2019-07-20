@@ -185,15 +185,6 @@ describe('Curray', function() {
     
             expect(result, [10, 20, 30]);
         });
-    
-
-        it('concatenate value-index-array', function () {
-            var curray = new Curray(1, 2, 3);
-            var result = curray.map(function (value, i, curray) { return value + '-' + i + '-' + curray; });
- 
-            result = Array.from(result);
-            expect(result, ["1-0-1,2,3", "2-1-1,2,3", "3-2-1,2,3"]);
-        });
 
         it('should break on no arguments', function (){
             Curray.prototype.map();
