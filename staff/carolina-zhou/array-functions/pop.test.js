@@ -1,20 +1,3 @@
-/* console.log('TEST pop');
-
-var array = [1, 2, 3];
-
-var result = pop(array);
-check(result, 3);
-check(array, [1, 2]);
-
-result = pop(array);
-check(result, 2);
-check(array, [1]);
-
-result = pop(array);
-check(result, 1);
-check(array, []);
- */
-
 suite('pop', function() {
     test('take out the last element from an array', function() {
         var array = [1, 2, 3];

@@ -1,6 +1,5 @@
 function includes(array, value){
     if (arguments.length === 0) throw TypeError('missing argument 0 when calling function forEach');
-
     if (!(array instanceof Array)) throw TypeError(array + ' is not an array');
 
     var a = 0;
@@ -15,4 +14,3 @@ function includes(array, value){
         return false;
     }
 }
-

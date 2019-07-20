@@ -1,10 +1,3 @@
-/**
- * Checks whether at least one element in the array passes the condition implemented by the provided function.
- * @param {function} callback 
- * @param {Array} array 
- * @returns {boolean} 
- */
-
 function some(array, expression){
     if (!(array instanceof Array)) throw TypeError(array + ' is not an array');
     if (typeof expression !== 'function') throw TypeError(expression + ' is not a function');

@@ -1,10 +1,10 @@
 suite("some", function(){
     test("return true or false", function(){
 
-        var words = [1, 3, 5, 7, 11, 15];
+        var array = [1, 3, 5, 7, 11, 15];
         var result;
         var expected = true;
-        result = some(words, function (element){
+        result = some(array, function (element){
             if(element > 10) {
               return true 
             } else {

@@ -1,4 +1,3 @@
-
 function map(array, expression) {
   var result = [];
 
