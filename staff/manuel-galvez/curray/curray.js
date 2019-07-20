@@ -252,12 +252,42 @@ Curray.prototype.concat = function(iterator) {
     }
 
     for (var i = 0; i < iterator.length; i++) {
-        newCurray[newCurray.length] = iterator[i]
-        newCurray['length'] += 1
+        if (iterator[i] instanceof Array || iterator[i] instanceof Curray) {
+            for (var j = 0; j < iterator[i].length; j++) {
+                newCurray[newCurray.length] = iterator[i][j]
+                newCurray['length'] += 1
+            }
+        } else {
+            newCurray[newCurray.length] = iterator[i]
+            newCurray['length'] += 1
+        }
     }
-
     return newCurray
 }
+
+Curray.prototype.copyWithin = function(index, start, end) {
+
+    switch(arguments.length) {
+        case 0:
+            return this;
+        case 1:
+            start = 0;
+            end = index;
+            break;
+        case 2:
+            end = this.length;
+        default:
+            break
+    }
+    debugger;
+    for (var i = start; i < end; i++) {
+        counter = 0
+
+    }
+}
+
+
+
 
 
 

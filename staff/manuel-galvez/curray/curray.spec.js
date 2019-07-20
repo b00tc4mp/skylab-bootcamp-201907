@@ -258,10 +258,10 @@ describe('Curray', function() {
         it(
             'should return a curray listing all elements from two different currays',
             function() {
-                var curray1 = new Curray('a','b','c');
-                var curray2 = new Curray('d','e','f');
+                var curray1 = new Curray('a','b');
+                var curray2 = new Curray({a:'hola', b:'mundo'}, [1,2,3], new Curray('x', 'y', 'z'));
                 var result = curray1.concat(curray2);
-                expect(result).toEqual(new Curray('a','b','c','d', 'e', 'f'))
+                expect(result).toEqual(new Curray('a','b',{a:'hola', b:'mundo'}, 1,2,3,'x','y','z'))
             });
         });
     
@@ -271,12 +271,17 @@ describe('Curray', function() {
             function() {
                 var curray = new Curray('a', 'b', 'c', 1, 'd', 2, 'e');
                 curray.copyWithin(0, 4, 7)
-                expect(curray).toBe(new Curray(1, 'd', 2, 1, 'd', 2, 'e'))
+                expect(curray).toEqual(new Curray('a','b','c',1, 'a', 'a', 'a'))
+        });
+        it(
+            'should return the same curray with one or more element shallow-copied to another location within the same curray',
+            function() {
+                var curray = new Curray('a', 'b', 'c', 1, 'd', 2, 'e');
+                curray.copyWithin(0, 3)
+                expect(curray).toEqual(new Curray('a', 'b', 'c', 'a', 'd', 2, 'e'))
+        });
+    });
 
-            }
-        
-        )
-    })
 
 });
 
