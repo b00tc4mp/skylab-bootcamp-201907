@@ -138,7 +138,8 @@ Curray.prototype.map = function(expression) {
   var result = new Curray()
 
   for (var i = 0; i < this.length; i++)
-    result.push(expression(this[i], i, this))
+    result[i] = expression(this[i], i, this)
+    result['length'] = i
 
   return result;
 }
@@ -172,5 +173,98 @@ Curray.prototype.keys = function () {
   }
   return newCurray
 }
+
+Curray.prototype.fill = function(val, start, end) {
+    if (![1,2,3].includes(arguments.length)) throw TypeError('Wrong number of arguments provided. Only accepts 1, 2 or 3 arguments.');
+
+        switch (arguments.length) {
+            case 1:
+                var start = 0
+                var end = this.length
+                break;
+            case 2:
+                var start = arguments[1]
+                var end = this.length
+                break;
+            case 3:
+                var start = arguments[1]
+                var end = arguments[2]
+                break;
+        }
+        for (var i = start; i < end; i++) {
+                    this[i] = val;
+        }
+        return this;
+}
+
+Curray.prototype.entries = function() {
+    if (arguments.length > 0 ) throw TypeError('entries() accepts no arguments.');
+
+    var newArr = []
+    for (var i = 0; i < this.length; i++) {
+        newArr[i] = [i, this[i]]
+    }
+    // Convert newArray to iterator
+    var arrIterator = newArr[Symbol.iterator]();
+
+    return arrIterator
+}
+
+Curray.prototype.from = function(iterable) {
+    if (arguments.length === 0) throw TypeError('from() requires an iterable as first argument');
+
+    var newCurray = new Curray()
+
+    if (iterable instanceof Array) {
+        for (var i = 0; i < iterable.length; i++) {
+            newCurray[i] = iterable[i]
+            newCurray['length'] = i+1
+        }
+    }
+    // A case for Array-like iterators (not pure Arrays) should be added here
+
+    return newCurray
+}
+
+Curray.prototype.find = function(expression) {
+    if (arguments.length === 0) throw TypeError('find() requires a callback function as first argument');
+
+    for (var i = 0; i < this.length; i++) {
+        if (expression(this[i])) return this[i]
+    }
+}
+
+Curray.prototype.findIndex = function(expression) {
+    if (arguments.length === 0) throw TypeError('findIndex() requires a callback function as first argument');
+
+    for (var i = 0; i < this.length; i++) {
+        if (expression(this[i])) return i
+    }
+}
+
+Curray.prototype.concat = function(iterator) {
+
+    var newCurray = new Curray();
+
+    for (var i = 0; i < this.length; i++) {
+        newCurray[newCurray.length] = this[i]
+        newCurray['length'] += 1 
+    }
+
+    for (var i = 0; i < iterator.length; i++) {
+        newCurray[newCurray.length] = iterator[i]
+        newCurray['length'] += 1
+    }
+
+    return newCurray
+}
+
+
+
+
+
+
+
+
 
 

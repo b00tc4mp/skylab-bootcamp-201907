@@ -197,4 +197,86 @@ describe('Curray', function() {
                 expect(Array.from(result)).toEqual([0,1,2,3]);
         });
     });
+
+    describe('fill', function() {
+        it(
+            'should return modified curray with elements replaced by fill rules',
+            function() {
+                var curray = new Curray('a','b','c','d','e','f');
+                var result =  curray.fill(0, 2, 4);
+                expect(Array.from(result)).toEqual(['a','b',0,0,'e','f']);
+        });
+    });
+
+    describe('entries', function() {
+        it(
+            'should return a curray iterator made of [index, value]',
+            function() {
+                var curray = new Curray('a','b','c','d');
+                var result = curray.entries();
+                expect(result).toEqual([[0,'a'], [1,'b'], [2,'c'], [3,'d']][Symbol.iterator]());
+            });
+        });
+    
+    describe('from', function() {
+        it(
+            'should return a new curray iterator from an Array-like iterable',
+            function() {
+                var curray = new Curray();
+                var result = curray.from(['a', 'b', 'c', 'd']);
+                var expected = new Curray('a', 'b', 'c', 'd');
+                expect(result).toEqual(expected)
+            });
+        });
+    
+    describe('find', function() {
+        it(
+            'should return first element in curray that meets expression condition',
+            function() {
+                var curray = new Curray(5, 12, 8, 130, 44);
+                var result = curray.find(function(elem) {
+                    return elem > 10;
+                });
+                expect(result).toBe(12);
+            });
+        });
+    
+    describe('findIndex', function() {
+        it(
+            'should return the index of the first element in curray that meets expression condition',
+            function() {
+
+                var curray = new Curray(5, 12, 8, 130, 44);
+                var result = curray.findIndex(function(elem) {
+                    return elem > 10;
+                });
+                expect(result).toBe(1)
+            });
+        });
+    
+    describe('concat', function() {
+        it(
+            'should return a curray listing all elements from two different currays',
+            function() {
+                var curray1 = new Curray('a','b','c');
+                var curray2 = new Curray('d','e','f');
+                var result = curray1.concat(curray2);
+                expect(result).toEqual(new Curray('a','b','c','d', 'e', 'f'))
+            });
+        });
+    
+    describe('copyWithin', function() {
+        it(
+            'should return the same curray with one or more element shallow-copied to another location within the same curray',
+            function() {
+                var curray = new Curray('a', 'b', 'c', 1, 'd', 2, 'e');
+                curray.copyWithin(0, 4, 7)
+                expect(curray).toBe(new Curray(1, 'd', 2, 1, 'd', 2, 'e'))
+
+            }
+        
+        )
+    })
+
 });
+
