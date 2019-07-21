@@ -334,8 +334,46 @@ Curray.prototype.sort = function(expression) {
     return this
 }
 
+Curray.prototype.filter = function(expression) {
+
+    var curray = new Curray()
+    for (var i = 0; i < this.length; i++) {
+        if (expression(this[i])) { 
+            curray[curray.length] = this[i]; 
+            curray['length'] += 1;
+        }
+    }
+    return curray
+}
+
+Curray.prototype.toString = function() {
+
+    var result = ''
+    for (var i = 0; i < this.length; i++) {
+        result = result + this[i] + ','
+    }
+
+    return result.slice(0,-1)
+}
+
+Curray.prototype.values = function() {
+
+    var result = new Curray();
+    for (var i = 0; i < this.length; i++) {
+        result[result.length] = this[i];
+        result['length'] += 1;
+    }
+
+    return Array.from(result)[Symbol.iterator]()
 
 
+}
+
+
+// TODO
+// unshift
+// copyWithin
+// splice
 
 
 

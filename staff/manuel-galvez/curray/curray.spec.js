@@ -304,6 +304,19 @@ describe('Curray', function() {
 
         });
 
+       
+    describe('some', function() {
+        it(
+            'should apply condition to each element of curray and return true if met',
+            function() {
+                var curray = new Curray(2, 4, 6, 8, 9);
+                var result = curray.some(function(elem) {
+                    return elem % 2 === 1;
+                });
+                expect(result).toBe(true);
+            });
+        });
+
     describe('sort', function() {
         it(
             'should return sorted curray',
@@ -330,17 +343,37 @@ describe('Curray', function() {
             });
 
         });
-        
-        
-    describe('some', function() {
+    
+    describe('filter', function() {
         it(
-            'should apply condition to each element of curray and return true if met',
+            'should return a new curray with all the elements that meet expression criteria',
             function() {
-                var curray = new Curray(2, 4, 6, 8, 9);
-                var result = curray.some(function(elem) {
-                    return elem % 2 === 1;
-                });
-                expect(result).toBe(true);
+                var curray = new Curray(5, 8, 12, 15, 2, 23);
+                var result = curray.filter(function(elem) {
+                    return elem > 10;
+                })
+                expect(result).toEqual(new Curray(12, 15, 23));
             });
         });
+    
+    describe('toString', function() {
+        it(
+            'should return a string representing all the elements of the Curray',
+            function() {
+                var curray = new Curray(1,2,3,'a','b','c');
+                var result = curray.toString();
+                expect(result).toBe('1,2,3,a,b,c')
+            });
+        });
+    
+    describe('values', function() {
+        it(
+            'should return a new curray iterator object that contains the values for each index of the curray',
+            function() {
+                var curray = new Curray(1,2,3,4,5);
+                var result = curray.values()
+                expect(result).toEqual([1,2,3,4,5][Symbol.iterator]());
+            });
+        });
+        
 });
