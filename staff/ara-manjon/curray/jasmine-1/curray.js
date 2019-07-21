@@ -3,8 +3,10 @@
 /**
  * DIY Array.
  * 
+ * Methods given, are functions that runs like all the methods for arrays, but in this case for the diy array. 
  * 
  */
+
 function Curray() {
     this.length = 0;
 
@@ -208,11 +210,6 @@ Curray.prototype.reduce =  function(expression){
 
 };
 
-/* Curray.prototype.reduce = function () {
-    var acc = 0;
-    for(var i = 0; i < this.length; i++) acc += this[i];
-    return acc;
-}; */
 
 Curray.prototype.reverse = function() {
     var result=[];
@@ -349,39 +346,39 @@ Curray.prototype.sort = function(expression) {
 
 Curray.prototype.slice = function(start, remove, add1, add2) {
 
-    var newArray = [];
-    var n = 0;
+    var result = [];
+    var acc = 0;
     var x = remove;
 
     for (var i = 0; i < this.length; i++) {
         if (i < start) {
-            newArray[n++] = this[i];
+            result[acc++] = this[i];
         } else if (x >= 0) {
             if (x === 0) {
-                newArray[n++] = this[i];
+                result[acc++] = this[i];
                 if (add1 != 0) {
-                    newArray[n++] = add1;
+                    result[acc++] = add1;
                     add1 = 0;
                     if (add2 != 0) {
-                        newArray[n++] = add2;
+                        result[acc++] = add2;
                         add2 = 0;
                     }
                 }
             } else if (x-- === 1) {
                 if (add1 != 0) {
-                    newArray[n++] = add1;
+                    result[acc++] = add1;
                     add1 = 0;
                     if (add2 != 0) {
-                        newArray[n++] = add2;
+                        result[acc++] = add2;
                         add2 = 0;
                     }
                 }
             }
         } else if (this.length > start + remove) {
-            newArray[n++] = array[i];
+            result[acc++] = array[i];
         }
     }
-    return newArray;
+    return result;
 };
 
 
@@ -407,6 +404,19 @@ Curray.prototype.unshift = function() {
         result[i + arguments.length] = this[i];
     };
     return result.length;
+};
+
+
+
+Curray.prototype.lastIndexOf = function(element) {
+    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function lastIndexOf');
+
+    for (var i = this.length+1; i > 0; i--){     
+        if ( this[i] === element ){    
+          return i;
+        }  
+      }
+    return -1;
 };
 
 

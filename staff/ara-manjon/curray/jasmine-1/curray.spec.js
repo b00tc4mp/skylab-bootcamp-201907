@@ -1,3 +1,4 @@
+
 'use strict';
 
 describe('Curray', function () {
@@ -526,31 +527,22 @@ describe('Curray', function () {
         });
     });
 
+    describe('lastIndexOf', function() {
+        it('should find last index of introduced element', function() {
+            var curray = new Curray ('a', 'k', 'a', 'k', 'a', 'k', 'k');
+            var result = curray.lastIndexOf('a');
 
-});
-
-
-/* 
-    describe('reduce', function () {
-        it('return a single value. Result of the reducer function', function () {
-            
-            var curray = new Curray(1,2,3,4);
-
-            var result = curray.reduce(function(accumulator, currentValue){return accumulator+currentValue});
-
-            expect(result).toEqual(10);
+            expect(result).toEqual(4);
         });
-        it('should return false if the element it is not in the curray', function () {
-            var curray = new Curray(1,2,3,4,5);
 
-            var result = curray.includes(10);
+        it('should fail on no arguments', function() {
+            var curray = new Curray();
 
-            expect(result).toEqual(false);
+            expect(function() {
+                curray.lastIndexOf();
+            }).toThrowError(TypeError, 'missing argument 0 when calling function lastIndexOf');
         });
-    }); */
-
-
-
+    })
 
 
 });
