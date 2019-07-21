@@ -139,20 +139,41 @@ Curray.prototype.isCurray = function(element){
 };
 
 //copyWithin
-Curray.prototype.copyWithin = function(target ,start, end){
-    if (target === undefined) throw ReferenceError (target + "is not defined");
-    
+Curray.prototype.copyWithin = function(target,start,end){
     var copy = new Curray();
     for(var i = 0 ; i<this.length ; i++){
         copy.push(this[i]);
     };
 
+    if (arguments.length){
+        //set target
+        target = Math.sign(target) === 1
+                    ? target
+                    : this.length + target;
+        
+        //set start
+        if(typeof start === "number"){
+            if(Math.sign(start) === -1){
+                start = this.length + start;
+            }
+        } else{
+            start = 0;
+        }
+        
+        //set end
+        if(typeof end === "number"){
+            if(Math.sign(end) === -1){
+                end = copy.length + (end-1);
+            }
+            else{
+                end--;
+            }   
+        } else{
+            end = copy.length-(start-1);
+        }
 
-    if (arguments.length === 1){
-        var ini = 0;
-        target = Math.sign(target) === 1 ? target : this.length + target;
-        for(var i = target ; i<this.length ; i++){
-            this[i] = copy[ini++];
+        for(var i = target ; i<end ; i++){
+            this[i] = copy[start++];
         }
     }
     return this;

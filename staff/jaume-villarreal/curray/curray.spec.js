@@ -208,14 +208,39 @@ describe('Curray', function() {
     });
     
     describe('copyWithin' , function(){
-        it("should copy part of an array to another location in the same array and returns it without modifying its length" , function(){
+        it("should copy part of an array to penultimate and last position in the same array and return it without modifying its length" , function(){
             var curray = new Curray (1,2,3,4,5);
 
             var copy = new Curray();
-            copy = curray.copyWithin(-1);
+            copy = curray.copyWithin(-2);
 
-            expect(Array.from(copy)).toEqual([1,2,3,4,1]);
+            expect(Array.from(copy)).toEqual([1,2,3,1,2]);
         });
+
+        it("should copy part of an array using a target and a start position in the same array and return it without modifying its length" , function(){
+            var curray = new Curray(1,2,3,4,5);
+            var copy = new Curray();
+            copy = curray.copyWithin(1,2);
+
+            expect(Array.from(copy)).toEqual([1,3,4,5,5]);
+        });
+
+        it("should copy part of an array using a target and a start and end position in the same array and return it without modifying its length" , function(){
+            var curray = new Curray(1,2,3,4,5);
+            var copy = new Curray();
+            copy = curray.copyWithin(1,2,-2);
+
+            expect(Array.from(copy)).toEqual([1,3,3,4,5]);
+        })
+
+        it("should throw error => target is not defined" , function(){
+            var curray = new Curray(1,2,3,4,5);
+            var copy = new Curray();
+
+            expect(function(){
+                copy = curray.copyWithin(ñ);
+            }).toThrowError(target + " is not defined");
+        })
     });
 
 });
