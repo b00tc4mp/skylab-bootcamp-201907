@@ -1,3 +1,8 @@
+/**
+ * Demo to check that the function find runs.
+ */
+
+
 console.log('DEMO: find');
 
 var array1 = [1, 30, 39, 29, 10, 13];

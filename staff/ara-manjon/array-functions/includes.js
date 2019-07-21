@@ -1,29 +1,18 @@
-var allArray = [1, 2, 3, 4, 5];
-var x = 2;
-
-function includes() {
-    for (i = 0; i < allArray.length; i++) {
-        if ([i] == x) {
-            console.log("true");
-        } else {
-            console.log("false");
-        }
-    }
-}
-includes(x);
+/**
+ * Method determines if the element it is included in the array or not. Returns a boolean.
+ * @param {*} arr The array given.
+ * @param {*} element The element to find in the array.
+ */
 
 
+function includes(arr,element) {
+  var result;
 
-var allArray = [1, 2, 3, 4, 5];
+  for(var i = 0; i < arr.length; i++) {
 
-function includesSwitch(x) {
-for (i = 0; i < allArray.length; i++) {
-  switch(true) {
-    case [i] == x:
-      console.log("true");
-      break;
-    case [i] != x:
-      console.log("false");
-      break;
-  }
-}} includesSwitch(2);
+      if(arr[i]===element) result = true;
+      else if(arr[i] !== element && result === true) result = true;
+      else result = false;
+  
+  } return result;
+}; 

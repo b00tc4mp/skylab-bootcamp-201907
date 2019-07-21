@@ -1,45 +1,25 @@
+/**
+ * Method returns a new string concatening all elements with a separator introduced. If is not introduced () or it is (',') (''), it returns the elements separated with coma.
+ * @param {*} arr The array to modificate.
+ * @param {*} separator The element to add and use to separate each element.
+ */
 
-var array = ["1", "2", "3", "4"];
-var depot = "";
-var result = "";
+function join(arr , separator) {
+    result= '';
+    if(separator == ''|| separator == undefined) separator =',';
 
+    if(arr.length == 1) result =arr[0];
+    else {
+        for ( var i = 0; i < arr.length; i++ )
+            if ( i == arr.length -1 ) result += arr[i];
+            else result += arr[i] + separator;
+    }return result;
 
-
-function join(array) {
-for (var i = 0; i < array.length; i++) {
-  depot += "cosa"
-  for (var j = 0; j < array[i].length; j++) {
-    depot += array[i][j];
-  }
-  result = depot;
-}
-}
-console.log('Function expected: ' + result);
-console.log('Function result: ' + result);
-
-
+};
 
 
 
-var allArray = [1, 2, 3, 4, 5];
-var x = 1;
-
-function includes(x) {
-
-    for (var i = 0, i <= allArray.length-1, i++) {
-        if (allArray[i] == x) {
-            console.log("true");
-        } else {
-            console.log("false");
-        }
-    }
-} includes();
 
 
-for (j = 0, j < allArray.length, j++) {
-    if (allArray[i] == x) {
-        console.log("true");
-    } else {
-        console.log("false");
-    }
-}
+
+

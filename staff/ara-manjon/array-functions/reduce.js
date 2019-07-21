@@ -1,10 +1,11 @@
-var allArray = [1, 2, 3, 4]
-var result = 0;
+/**
+ * Executed a reducer function on each element of the array, resulting a single output value.
+ * @param {*} arr The array to reduce.
+ */
 
-function reduce() {
-for (var i = 0; i < allArray.length; i++) {
-   result += allArray[i];
- } console.log(result);
+function reduce(arr) {
+var acc=0;
+for (var i = 0; i < arr.length; i++) {
+   acc += arr[i];
+ } return acc;
 }
-
-reduce();

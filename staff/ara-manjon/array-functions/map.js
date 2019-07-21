@@ -1,3 +1,7 @@
+/**
+ * Returns a new array after applied the function for each elements.  
+ */
+
 var allArray = [1, 2, 3, 4]
 var result = 0;
 

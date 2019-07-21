@@ -1,10 +1,14 @@
-var array1 = ['one', 'two', 'three'];
-var array2 = [];
+/**
+ * Method to reverse the array. It returns the array modified. The last input becomes the first.
+ * @param {*} arr The array to do the changes.
+ */
 
-function test(){
-    for(var i=0; i<array1.length; i++){
-        array2[i] = array1.pop();
-    }
-    console.log(array2);
+function reverse(arr){
+    var result= [];
+    for(var i = arr.length -1; i>= 0; i--)
+    result.push(arr[i]);
+    
+    return result;
 }
-test();
+
+
