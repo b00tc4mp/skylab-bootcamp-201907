@@ -130,6 +130,7 @@ body {
     padding: 5px;
   }
   .footer__city--branch {
+    padding: 25px;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
