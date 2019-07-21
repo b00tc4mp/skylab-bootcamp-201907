@@ -61,11 +61,7 @@ Curray.prototype.toString = function(){
 
 Curray.prototype.fill = function(value, start, end){
     if (this.length === 0) throw TypeError('fill debe contener al menos un parámetro');
-    // if (!(this instanceof Array)) throw TypeError('filljuan necesita que el primer parámetro sea un array');
-    // if (start && typeof start !== 'number') throw TypeError('la posición inicial debe ser un número entero válido');
-    // if (end && typeof end !== 'number') throw TypeError('la posición final debe ser un número entero válido');
 
-    // var newArray = this;
     if (typeof end === 'number') {
         for (var i = start; i < end; i++) {
             this[i] = value;
@@ -82,11 +78,10 @@ Curray.prototype.fill = function(value, start, end){
     return this;
 }
 
-Curray.prototype.flat = function(depth, ele){
+Curray.prototype.flat = function(depth){
 
     depth = typeof depth === 'undefined' ? 1 : depth;
     depth = depth < 0? 0 : depth;
-
 
     var result = [];
 
@@ -101,5 +96,188 @@ Curray.prototype.flat = function(depth, ele){
     }
 
     return result;
+
+}
+
+Curray.prototype.map = function(expression) {
+
+    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function map');
+
+    var result= this;
+
+    for (var i = 0; i < this.length; i++)
+        result[i] = expression(this[i], i, this);
+
+    return result;
+};
+
+Curray.prototype.unshift = function(element){
+    var inc = arguments.length
+    var length = this.length
+
+    for (var i = length - 1; i >= 0; i--){
+        this[i + inc] = this[i]
+    }
+    for (var j = 0; j < arguments.length; j++){
+        this[j] = arguments[j]
+    }
+    
+    this.length += inc;
+    return this;
+};
+
+// Curray.prototype.unshift = function(...element){
+//     this.length++
+//     for(var i=this.length-1;i>=0;i--){
+//         this[i]=this[i-1];
+//     }
+//
+//      (Georgie Boy no itera sobre el array, además de que está retornando el primer elemento)
+//
+//     this[0]=element
+//     return this.length;
+// };
+
+Curray.prototype.filter=function(expression){
+    /*     if (this.length === 0) throw TypeError('missing argument 0 when calling function filter');*/
+    if(this[0]===undefined) throw TypeError("No se puede convertir a string un objeto null");
+
+    var newarray = [];
+    var j = 0;
+    for(var i = 0; i < this.length; i++){
+        if(expression(this[i])){
+            newarray[j]=this[i];
+            j++;
+        };
+    };
+    return newarray;
+    
+    
+};
+
+
+Curray.prototype.copyWithin=function(target,start,end){
+/*     if (arguments.length === 0) throw TypeError('missing argument 0 when calling function copyWithin');
+  
+    if (end > array.length - 1) throw TypeError('superior range than array length')
+  
+    if (start < 0) throw TypeError('length less than zero is not possible') */
+
+    var newArray = [];
+    var count = 0;
+    for(var i = start; i < end; i++){
+        newArray.push(this[i]);
+    };
+
+    for(var i=0; i<newArray.length;i++){
+        this[target] = newArray[count];
+        count++;
+        target++;
+    };
+};
+
+Curray.prototype.map=function(expression){
+    if(!(expression)) throw TypeError('missing argument 0 when calling function map');
+
+    var result = [];
+    for(var i=0; i<this.length;i++)
+        result[i] = expression(this[i],i,this);
+    return result;
+
+};
+
+Curray.prototype.join = function(separator) {
+    var accumulator = '';
+    if (arguments.length === 0) separator = ",";
+    if (!(separator instanceof String)) separator = separator.toString();
+    for (var i=0; i<this.length; i++) {
+            if (this[i] === undefined || this[i] === null) this[i] = '';
+            if (i === (this.length -1)) accumulator += this[i];
+            else accumulator += this[i] + separator;
+        };
+    return accumulator;
+};
+ 
+Curray.prototype.entries=function(iterator){
+    var i = iterator -1;
+    var result=[];
+    if(i !== this.length){
+        result[0]= i + "," + this[i];
+    }
+    return result;
+}
+
+Curray.prototype.every = function(expression){
+    var result;
+    for(var i = 0; i < this.length; i++){
+        if(expression(this[i]) != true && result !=true){
+            result = false;
+        }else{
+            result = true;
+        }
+    }
+    return result;
+}
+
+Curray.prototype.indexOf = function(value){
+    var result;
+    for(var i in this){
+        if(this[i] === value){
+        result = i;
+            break;
+        } else {
+        result = -1;
+        };
+    };
+    return result;
+};
+
+Curray.prototype.sliceTest = function(begin,end){
+    if (this.length === 0) throw TypeError('missing argument 0 when calling function slice');
+
+        begin = Math.abs(begin);
+        end = Math.abs(end);
+        var result=[];
+        for(var i = begin; i < end ; i++){
+            result.push(this[i]);
+        };
+    return result;
+};
+
+
+Curray.prototype.reduce = function(expression, initialValue){
+
+    var reduction;
+    var result;
+
+    if(initialValue){
+        reduction = expression(initialValue, this[0]);
+        for(var i = 0; i < this.length; i++){
+            if (this[i+1] === undefined) {
+                continue
+            } else {
+                reduction = expression(reduction, this[i+1]);
+            }
+        };
+        result = reduction;
+
+    } else {reduction = this[0];
+        reduction = this[0];
+        for(var i = 0; i < this.length; i++){
+            if (this[i+1] === undefined) {
+                continue
+            } else {
+                reduction = expression(reduction, this[i+1]);
+            }
+        };
+        result = reduction;
+    };
+
+    return result;
+
+
+
+
+    
 
 }
