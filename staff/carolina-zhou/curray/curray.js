@@ -327,8 +327,9 @@ Curray.prototype.sort = function(expression) {
     expression = expression || function (a, b) { return String(a) >= String(b); }
 
     for (var i = 1; i < this.length; i++) {
-      var indexToInsert = 0
-            for (var j = 0; j < sorted.length; j++) {
+        var indexToInsert = 0;
+
+        for (var j = 0; j < sorted.length; j++) {
         if (expression(this[i], sorted[j])) {
           indexToInsert = j + 1;
         } else {
@@ -338,6 +339,20 @@ Curray.prototype.sort = function(expression) {
       sorted.splice(indexToInsert, 0, this[i])
     }
     return sorted;
+
+/*  var done = false;
+    while (!done) {
+        done = true;
+        for (var i = 1; i < this.length; i++) {
+            if (this[i - 1] > this[i]) {
+              done = false;
+              var x = this[i - 1];
+              this[i - 1] = this[i];
+              this[i] = x;
+            }
+        }
+    }
+    return Array.from(this); */
 };
 
 

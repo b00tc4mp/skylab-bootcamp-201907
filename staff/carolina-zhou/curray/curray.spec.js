@@ -471,12 +471,29 @@ describe('Curray', function () {
     })
 
     describe('sort', function() {
-        it('should sort curray', function() {
+        it('should sort curray, case 1', function() {
             var curray = new Curray ('March', 'Jan', 'Feb', 'Dec');
             var result = curray.sort();
     
             expect(result).toEqual(["Dec", "Feb", "Jan", "March"]);
         });
+
+        it('should sort curray, case 2', function() {
+            var curray = new Curray (1, 20, 10, 2);
+            var result = curray.sort();
+    
+            expect(result).toEqual([1, 10, 2, 20]);
+        });
+     
+/*      REVISAR!
+        it('should sort curray, case 3', function() {
+            var curray = new Curray (40, 1, 5, 200);
+            function compare ( a, b ){ return a - b; }
+            var result = curray.sort(compare);
+    
+            expect(result).toEqual([1, 5, 40, 200]);
+        });
+         */
     })
 
     describe('splice', function() {
