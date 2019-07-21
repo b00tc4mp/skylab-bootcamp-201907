@@ -214,24 +214,199 @@ Curray.prototype.reduce =  function(expression){
     return acc;
 }; */
 
+Curray.prototype.reverse = function() {
+    var result=[];
+    for(var i = this.length -1; i>= 0; i--)
+        result.push(this[i]);
 
+    return result;
 
+};
 
+Curray.prototype.shift = function() {
+  /*   this.length= this.length - this.length-1; */
+  var r= this.length - [this.length];
+  var result = this[r]
+  return result;
 
+};
 
+Curray.prototype.some = function( expression ) {
+    var result;
+    for (var i = 0; i < this.length; i++) {
+        if (expression(this[i])) result = true;
+        else if(!(expression(this[i])) && result == true) result = true;
+        else result = false;
+    }return result;
+}
 
-
-
-
-
-/* Curray.prototype.copyWithin = function(target, start) {
+Curray.prototype.copyWithin = function(index, start, end) {
     if (arguments.length === 0) throw TypeError('missing argument 0 when calling function copyWithin');
 
-    // if (!(curray instanceof Curray)) throw TypeError("1 is not an array");
+    for (var i = start; i < end; i++) {
+        this[index++] = this[i];
+    };
+    return this;
+};
 
-        this[target] = this[start];
-        return this;
-}
- */
+
+Curray.prototype.join = function(separator) {
+
+    var resutl = '';
+
+    if (separator == '' || separator == undefined) separator = ',';
+
+    if (this.length == 1) resutl = this[0];
+    else {
+      for (var i = 0; i < this.length; i++) {
+        if (i == this.length - 1) resutl += this[i];
+        else resutl += this[i] + separator;
+        }
+      }
+      return resutl;
+  };
+
+
+Curray.prototype.reduce = function(reducer, initialValue) {
+    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function reduce');
+
+    if (initialValue || initialValue === 0) {
+        var accumulator = initialValue;
+        var start = 0;
+    } else {
+        var accumulator = this[0];
+        var start = 1;
+    }
+
+    for (var i = start; i < this.length; i++) {
+        accumulator = reducer(accumulator, this[i]);
+    }
+    return accumulator;
+};
+
+
+Curray.prototype.reduceRight = function(expression) {
+    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function reduceRight');
+    if (typeof expression !== 'function') throw TypeError(expression + ' is not a function');
+    
+    var result = [];
+    for (var i = this.length -1; i >= 0  ;i--){
+        result = expression(result, this[i]);
+    }
+   return result;
+};
+
+
+Curray.prototype.slice = function(first, last) {
+    if (typeof first !== 'number' && last !== undefined) throw new TypeError(first + ' is not a number');
+    if (typeof last !== 'number' &&  last !== undefined) throw new TypeError(last + ' is not a number');
+    
+
+    var cut = [];
+    var negative = -Math.abs(first) 
+    if (first === -Math.abs(first) && last === undefined) {
+        var positive = Math.abs(negative);
+        for (i = this.length-positive; i < this.length; i++) {
+            cut.push(this[i]);
+        }
+    } else if (first === Math.abs(first) && last === undefined) {
+        for (i = first; i < this.length; i++) {
+            cut.push(this[i]);
+        }
+    } else if (first === undefined && last === undefined) {
+        for (i = 0; i < this.length; i++) {
+            cut.push(this[i]);
+        }
+    } else {
+        for (i = first; i < last; i++) {
+            cut.push(this[i]);
+        }
+    }
+    return cut;
+};
+
+
+Curray.prototype.sort = function(expression) {
+
+    var result = [this[0]]
+    expression = expression || function (a, b) { return String(a) >= String(b); }
+
+    for (var i = 1; i < this.length; i++) {
+      var index = 0
+            for (var j = 0; j < result.length; j++) {
+        if (expression(this[i], result[j])) {
+          index = j + 1;
+        } else {
+          break
+        }
+      }
+      result.splice(index, 0, this[i])
+    }
+    
+    return result;
+};
+
+
+Curray.prototype.slice = function(start, remove, add1, add2) {
+
+    var newArray = [];
+    var n = 0;
+    var x = remove;
+
+    for (var i = 0; i < this.length; i++) {
+        if (i < start) {
+            newArray[n++] = this[i];
+        } else if (x >= 0) {
+            if (x === 0) {
+                newArray[n++] = this[i];
+                if (add1 != 0) {
+                    newArray[n++] = add1;
+                    add1 = 0;
+                    if (add2 != 0) {
+                        newArray[n++] = add2;
+                        add2 = 0;
+                    }
+                }
+            } else if (x-- === 1) {
+                if (add1 != 0) {
+                    newArray[n++] = add1;
+                    add1 = 0;
+                    if (add2 != 0) {
+                        newArray[n++] = add2;
+                        add2 = 0;
+                    }
+                }
+            }
+        } else if (this.length > start + remove) {
+            newArray[n++] = array[i];
+        }
+    }
+    return newArray;
+};
+
+
+Curray.prototype.toString = function() {
+
+    var result = '';
+    for (var i = 0; i < this.length; i++){
+        result = result + this[i] + ',';
+    };
+    result = result.substring(0, (result.length-1))
+
+    return result;
+};
+
+
+Curray.prototype.unshift = function() {
+
+    var result = [];
+    for (var i = 0; i < arguments.length; i++){
+        result[i] = arguments[i];
+    };
+    for (var i = 0; i < this.length; i++){
+        result[i + arguments.length] = this[i];
+    };
+    return result.length;
+};
 
 

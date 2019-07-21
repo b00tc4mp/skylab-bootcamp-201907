@@ -208,21 +208,21 @@ describe('Curray', function () {
     describe('fill', function () {
         it('should return the modified curray with value from start index to the end index', function () {
 
-            var curray = new Curray(1,2,3,4,5,6);
-            var result = curray.fill(0,3,6);
-            var currExpect = new Curray(1,2,3,0,0,0); 
-    
+            var curray = new Curray(1, 2, 3, 4, 5, 6);
+            var result = curray.fill(0, 3, 6);
+            var currExpect = new Curray(1, 2, 3, 0, 0, 0);
+
             expect(curray).toEqual(currExpect);
- 
+
         });
         it('should return the modified curray with value from start index to the end index', function () {
 
-            var curray = new Curray('a','b','c','d');
-            var result = curray.fill(NaN,2);
-            var currExpect = new Curray('a','b',NaN,NaN); 
-    
+            var curray = new Curray('a', 'b', 'c', 'd');
+            var result = curray.fill(NaN, 2);
+            var currExpect = new Curray('a', 'b', NaN, NaN);
+
             expect(curray).toEqual(currExpect);
- 
+
         });
 
 
@@ -233,26 +233,32 @@ describe('Curray', function () {
 
             var curray = new Curray('spray', 'limit', 'elite', 'exuberant', 'destruction', 'present');
 
-            var result = (curray).filter(function (currentValue){ return currentValue.length>6;}); 
-    
+            var result = (curray).filter(function (currentValue) {
+                return currentValue.length > 6;
+            });
+
             expect(Array.from(result)).toEqual(['exuberant', 'destruction', 'present']);
- 
+
         });
 
     });
 
     describe('findIndex', function () {
         it('should return the index of the first value passed the test', function () {
-            var curray = new Curray(1,30,15,22);
+            var curray = new Curray(1, 30, 15, 22);
 
-            var result = (curray).findIndex(function (currentValue){ return currentValue>10;});
+            var result = (curray).findIndex(function (currentValue) {
+                return currentValue > 10;
+            });
 
             expect(result).toEqual(1);
         });
         it('should return -1 if any value pass the test', function () {
-            var curray = new Curray(30,15,22);
+            var curray = new Curray(30, 15, 22);
 
-            var result = (curray).findIndex(function (currentValue){ return currentValue<10;});
+            var result = (curray).findIndex(function (currentValue) {
+                return currentValue < 10;
+            });
 
             expect(result).toEqual(-1);
         });
@@ -260,15 +266,15 @@ describe('Curray', function () {
 
     describe('indexOf', function () {
         it('should return the first index find of the element provided in the curray', function () {
-            
-            var curray = new Curray('green','blue','red','yellow','black','red');
 
-            var result = curray.indexOf('red',3);
+            var curray = new Curray('green', 'blue', 'red', 'yellow', 'black', 'red');
+
+            var result = curray.indexOf('red', 3);
 
             expect(result).toEqual(5);
         });
         it('should return -1 if any value pass the test', function () {
-            var curray = new Curray(1,2,3,4,5);
+            var curray = new Curray(1, 2, 3, 4, 5);
 
             var result = curray.indexOf(10);
 
@@ -278,21 +284,252 @@ describe('Curray', function () {
 
     describe('includes', function () {
         it('should return a boolean value if the curray has or not the element given', function () {
-            
-            var curray = new Curray('green','blue','red','yellow','black','red');
+
+            var curray = new Curray('green', 'blue', 'red', 'yellow', 'black', 'red');
 
             var result = curray.includes('black');
 
             expect(result).toEqual(true);
         });
         it('should return false if the element it is not in the curray', function () {
-            var curray = new Curray(1,2,3,4,5);
+            var curray = new Curray(1, 2, 3, 4, 5);
 
             var result = curray.includes(10);
 
             expect(result).toEqual(false);
         });
     });
+
+    describe('reverse', function () {
+        it('should return the curray modified. The last input becomes the first', function () {
+            var curray = new Curray('one', 'two', 'three');
+
+            var result = curray.reverse();
+
+            expect(Array.from(result)).toEqual(['three', 'two', 'one']);
+            debugger
+        });
+
+        it('should return the curray modified', function () {
+            var curray = new Curray(1, 2, 3, 4, 5);
+
+            var result = curray.reverse();
+
+            expect(result).toEqual([5, 4, 3, 2, 1]);
+
+
+        });
+    })
+
+    describe('shift', function () {
+        it('should return the element removed', function () {
+            var curray = new Curray('one', 'two', 'three');
+
+            var result = curray.shift();
+
+            expect(curray.shift()).toEqual('one');
+
+        });
+
+        it('should return the element removed', function () {
+            var curray = new Curray(1, 2, 3, 4, 5);
+
+            var result = curray.shift();
+
+            expect(curray.shift()).toEqual(1);
+
+        });
+    });
+
+    describe('some', function () {
+        it('should return a boolean. True if some element of the array pass the test, if not, false', function () {
+            var curray = new Curray(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+            var result = (curray).some(function (currentValue) {
+                return currentValue == 10;
+            });
+
+            expect(result).toEqual(false);
+
+        });
+
+        it('should return a boolean. True if some element of the array pass the test, if not, false', function () {
+            var curray = new Curray('dog', 'cat', 'elephant');
+
+            var result = (curray).some(function (currentValue) {
+                return currentValue[0] == 'c';
+            });
+
+            expect(result).toEqual(true);
+
+
+        });
+    });
+
+    describe('copyWhithin', function () {
+        it('should copy part of a curray in the same curray whithou modified the length', function () {
+            var curray = new Curray(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+            var result = (curray).copyWithin(0, 7, 8);
+
+            expect(Array.from(result)).toEqual([8, 2, 3, 4, 5, 6, 7, 8, 9]);
+
+        });
+
+        it('should indicate taht the arguments cannot be 0', function () {
+            var curray = new Curray();
+
+            expect(function () {
+                curray.copyWithin();
+            }).toThrowError(TypeError, 'missing argument 0 when calling function copyWithin');
+
+
+        });
+    });
+
+    describe('join', function () {
+        it('should return a new string concatening all the elements separated by comas', function () {
+            var curray = new Curray('a', 'b', 'c', 'd');
+
+            var result = curray.join();
+
+            expect(result).toEqual("a,b,c,d");
+
+        });
+
+        it('should return a new string concatening all elements separated by +', function () {
+            var curray = new Curray('a', 'b', 'c', 'd');
+            var result = curray.join('+');
+
+            expect(result).toEqual("a+b+c+d");
+
+        });
+    });
+
+    describe('reduce', function () {
+        it('should return a single value. Result of the reducer function', function () {
+            var curray = new Curray(100, 100, 300);
+
+            var result = curray.reduce(function (accumulator, currentValue) {
+                return accumulator + currentValue
+            });
+
+            expect(result).toEqual(500);
+
+        });
+
+        it('should return a single value. Result of the reducer function', function () {
+            var curray = new Curray('a','b','c','d','f');
+
+            var result = curray.reduce(function (accumulator, currentValue) {
+                return accumulator + currentValue
+            });
+
+            expect(result).toEqual('abcdf');
+
+        });
+
+        it('should fail on no arguments', function () {
+            var curray = new Curray();
+
+            expect(function () {
+                curray.reduce();
+            }).toThrowError(TypeError, 'missing argument 0 when calling function reduce');
+        });
+    });
+
+    describe('reduceRight', function () {
+        it('should return a single value, result of apply the reducer function from right to left', function () {
+            var curray = new Curray('z','y','x','w');
+
+            var result = curray.reduceRight(function (acc, curr) {return acc + curr;})
+
+            expect(result).toEqual('wxyz');
+
+        });
+
+        it('should indicate that the expression its not a function', function () {
+            var curray = new Curray();
+
+            expect(function () {
+                curray.reduceRight('func');
+            }).toThrowError(TypeError, 'func is not a function');
+        }); 
+
+        it('should fail on no arguments', function () {
+            var curray = new Curray();
+
+            expect(function () {
+                curray.reduceRight();
+            }).toThrowError(TypeError, 'missing argument 0 when calling function reduceRight');
+        }); 
+
+    });
+
+    describe('slice', function() {
+        it('should copy a portion of a curray into the curray ', function() {
+            var curray = new Curray (1, 2, 3, 4, 5, 6);
+            var result = curray.slice(2, 1, 'n', 'n');
+
+            expect(result).toEqual([1, 2, "n", "n", 4, 5, 6]);
+        });
+
+         it('should return an empty curray', function() {
+            var curray = new Curray (1, 2, 3, 4, 5, 6);
+            var result = curray.slice();
+
+            expect(result).toEqual([]);
+        }); 
+    })
+
+    describe('sort', function() {
+        it('should return the sorted curray', function() {
+            var curray = new Curray (1, 30, 4, 21, 100000);
+            var result = curray.sort();
+    
+            expect(result).toEqual([1, 100000, 21, 30, 4]);
+        });
+
+        it('should return the sorted curray', function() {
+            var curray = new Curray (1, 30, 4, 21, 100000);
+
+
+            var result = curray.sort();
+
+            expect(result).toEqual([1, 100000, 21, 30, 4]);
+        });
+    });
+
+    describe('toString', function() {
+        it('should return curray as a string', function() {
+            
+            var curray = new Curray (1,2,3,4,5,6);
+            var result = curray.toString();
+
+            expect(result).toEqual("1,2,3,4,5,6");
+        });
+    });
+
+    describe('unshift', function() {
+        it('should add elements to the start of curray and return new length, case 1', function() {
+            var array = [1,2,3,4,5,6];
+            var result = array.unshift(-1, 2);
+
+            expect(result).toEqual(8);
+        });
+
+        it('should add elements to the start of curray and return new length, case 2', function() {
+            var array = [1,2,3,4,5,6];
+            var result = array.unshift();
+
+            expect(result).toEqual(6);
+        });
+    });
+
+
+});
+
+
 /* 
     describe('reduce', function () {
         it('return a single value. Result of the reducer function', function () {
