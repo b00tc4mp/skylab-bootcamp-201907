@@ -41,3 +41,232 @@ Curray.prototype.forEach = function(expression) {
     for (var i = 0; i < this.length; i++)
         expression(this[i], i, this);
 };
+
+Curray.prototype.toString= function(){
+    if(this.length===0) throw TypeError("No se puede leer la propiedad length de undefined");
+    if(this.length===null) throw TypeError("No se puede convertir a string un objeto null");
+
+    var newString= "";
+    if(typeof this === "string"){
+        newString=this;
+    }else{
+        for(var i=0; i<this.length; i++){
+            newString+=this[i]+",";
+        };
+        newString=newString.substring(0,(newString.length-1))
+    }
+    return newString;
+}
+
+Curray.prototype.flat = function(depth, element){
+    if(this[0]===undefined) throw TypeError("No se puede convertir a string un objeto null");
+/*     if(!(this instanceof Array)) throw TypeError("No se puede convertir a string un objeto bolean");
+ */
+
+    depth = typeof depth === 'undefined' ? 1 : depth;
+    depth = depth < 0? 0 : depth;
+
+
+    var result = [];
+
+    for (var i = 0; i < this.length; i++) {
+        var element = this[i];
+
+        if (element instanceof Curray && depth > 0) {
+            var arr = this[i].flat(depth - 1, element);
+
+            for (var j = 0; j < arr.length; j++) result.push(arr[j]);
+        } else result.push(element);
+    }
+
+    return result;
+};
+
+Curray.prototype.fill =function(value,start,end){
+    if (this.length === 0) throw TypeError(' debe contener al menos un array y un caracter');
+/*    if (!(this instanceof Array)) throw TypeError(' necesita que el primer parámetro sea un array’'); 
+ */   if (end) {
+       for (var i = start; i < end; i++) {
+           this[i] = value;
+       }
+   } else if (start) {
+       for (var i = start; i < this.length; i++){
+           this[i] = value;
+       }
+   } else {
+       for (i = 0; i< this.length; i++){
+           this[i] = value;
+       }
+   }
+   return this;
+};
+
+Curray.prototype.filter=function(expression){
+    /*     if (this.length === 0) throw TypeError('missing argument 0 when calling function filter');
+     */    if(this[0]===undefined) throw TypeError("No se puede convertir a string un objeto null");
+    
+    
+    
+            var newarray=[];
+            var j=0;
+            for(var i=0;i<this.length;i++){
+                if(expression(this[i])){
+                    newarray[j]=this[i];
+                    j++;
+                }
+            }   return newarray;
+};
+
+
+Curray.prototype.copyWithin=function(target,start,end){
+/*     if (arguments.length === 0) throw TypeError('missing argument 0 when calling function copyWithin');
+  
+    if (end > array.length - 1) throw TypeError('superior range than array length')
+  
+    if (start < 0) throw TypeError('length less than zero is not possible') */
+
+    var newArray=[];
+    var count=0;
+    for(var i=start; i<end;i++){
+        newArray.push(this[i]);
+    }
+    for(var i=0; i<newArray.length;i++){
+        this[target]=newArray[count];
+        count++;
+        target++;
+    }
+}
+
+Curray.prototype.map=function(expression){
+    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function map');
+
+    var result=[];
+    for(var i=0; i<this.length;i++)
+        result[i]=expression(this[i],i,this);
+    return result;
+
+}
+
+Curray.prototype.join = function(separator) {
+    var accumulator = '';
+    if (arguments.length === 0) separator = ",";
+    if (!(separator instanceof String)) separator = separator.toString();
+    for (var i=0; i<this.length; i++) {
+            if (this[i] === undefined || this[i] === null) this[i] = '';
+            if (i === (this.length -1)) accumulator += this[i];
+            else accumulator += this[i] + separator;
+        }
+    return accumulator;
+ };
+ 
+ Curray.prototype.entries=function(iterator){
+     var i=iterator -1;
+     var result=[];
+     if(i !== this.length){
+         result[0]= i + "," + this[i];
+     }
+     return result;
+ }
+
+ Curray.prototype.every=function(expression){
+     var result;
+     for(var i=0;i<this.length;i++){
+         if(expression(this[i]) != true && result !=true){
+             result=false;
+         }else{
+             result=true;
+         }
+     }
+     return result;
+ }
+
+ Curray.prototype.indexOf=function(value){
+     var result;
+     for(var i in this){
+         if(this[i]===value){
+            result=i;
+             break;
+         }else{
+            result=-1;
+         }
+     }
+     return result;
+ }
+
+ Curray.prototype.keys=function(){
+     var result="";
+     for(var i=0; i<this.length;i++){
+         result+=i;
+     }
+     return result;
+ }
+
+ Curray.prototype.reverseTest=function(){
+     var result=[];
+     for(var i=this.length-1;i>=0;i--){
+         result.push(this[i]);
+     }
+/*      this=result;
+ */     return result;
+ }
+
+ Curray.prototype.sliceTest=function(begin,end){
+     begin=Math.abs(begin);
+     end=Math.abs(end);
+     var result=[];
+     for(var i=begin;i<end;i++){
+         result.push(this[i]);
+     }
+     return result;
+ }
+
+  Curray.prototype.lastIndexOf=function(value){
+     var result="";
+     for(var i=0;i<this.length;i++){
+         if(this[i]==value){
+             result=i;
+         }
+     }
+     return result;
+ }
+ 
+ Curray.prototype.unshift = function(element){
+    var inc = arguments.length
+    var length = this.length
+
+    for (var i = length - 1; i >= 0; i--){
+        this[i + inc] = this[i]
+    }
+    for (var j = 0; j < arguments.length; j++){
+        this[j] = arguments[j]
+    }
+    
+    this.length += inc;
+    return this;
+};
+
+
+/*  Curray.prototype.findindex=function(expression){
+    var result;
+    for(var i=0;i<this.length;i++){
+        if(expression(this[i])==true){
+            result.push(this[i]);
+        }
+    }
+
+ } */
+
+
+/* Curray.prototype.concat=function(...arg){
+
+    var newArray=[];
+    var count=0;
+    for(i=0;i<arg.lenght;i++){
+        for(j=0;j<arg[i];j++){
+            newArray[count]=arg[i][j];
+            count++
+        }
+    }
+} */
+
+
