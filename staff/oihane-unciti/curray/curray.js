@@ -228,6 +228,8 @@ Curray.prototype.shift = function (){
 }  
 
 Curray.prototype.slice = function (start, end){
+    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function slice');
+
     var result = "";
     for (var i = start; i < end; i++) { 
         result += this[i];

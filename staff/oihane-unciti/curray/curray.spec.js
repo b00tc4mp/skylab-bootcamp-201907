@@ -309,7 +309,14 @@ describe('Curray', function () {
                 
             expect(result).toEqual("2");
         });
-    });   
-    
 
+        it('should fail on no arguments', function() {
+            var curray = new Curray();
+
+            expect(function() {
+                curray.slice();
+            }).toThrowError(TypeError, 'missing argument 0 when calling function slice');
+        });   
+    });
+    
 });
