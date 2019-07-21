@@ -223,24 +223,50 @@ Curray.prototype.some = function(expression) {
     return check;
 };
 
-Curray.prototype.sort = function() {
-    var result = this;
+// Curray.prototype.sort = function() {
+//     var result = this;
 
-    for (var i = 0; i < result.length; i++) {
-        var x = result[i];
-        var y = result[i + 1]
-        if (x > y) {
-            result[i + 1] = x;
-            result[i] = y;
+//     for (var i = 0; i < result.length; i++) {
+//         var x = result[i];
+//         var y = result[i + 1]
+//         if (x > y) {
+//             result[i + 1] = x;
+//             result[i] = y;
+//         };
+//     };
+
+//     for (var i = 0; i < result.length; i++) {
+//         if (this[i] > this[i + 1]) {
+//             result.sort()
+//         }
+//     }
+//     return result;
+// };
+
+Curray.prototype.sort = function(expression) {
+    var result = this;
+    var condition = 0;
+
+    for (var i = 0; i < this.length; i++) {
+        var a = this[i];
+        var b = this[i + 1]
+        if (expression(a, b) < 0) {
+            this[i + 1] = b;
+            this[i] = a;
+        } else if (expression(a, b) >= 0) {
+            this[i + 1] = a;
+            this[i] = b;
         };
     };
 
-    for (var i = 0; i < result.length; i++) {
-        if (this[i] > this[i + 1]) {
-            result.sort()
+    for (var i = 0; i < this.length; i++) {
+        var a = this[i];
+        var b = this[i + 1]
+        if (expression(a, b) > 0) {
+            this.sort(expression);
         }
     }
-    return result;
+    return this;
 };
 
 Curray.prototype.splice = function() {
@@ -248,19 +274,64 @@ Curray.prototype.splice = function() {
     var deleteCount = arguments[1];
     var limit = start + deleteCount
     var curray = this;
+    var currayCp = [];
+    var currayRs = [];
     var values = [];
     var result = [];
-    var arr = [];
     var count = 0;
+    var count2 = 0;
 
     for (var i = 0; i < this.length; i++) {
-        arr.push(this[i]);
-    }
+        currayCp.push(this[i]);
+    };
 
     if (arguments.length > 2) {
         for (var i = 2; i < arguments.length; i++) {
             values.push(arguments[i]);
-        }
+        };
+
+        if (arguments[1] === 0) {
+            var newLength = arguments[0] + currayCp.length;
+            for (var i = 0; i < newLength; i++) {
+                if (i === arguments[0]) {
+                    currayRs.push(values[count++]);
+                } else {
+                    currayRs.push(currayCp[count2++]);
+                };
+            };
+            // Reconstruction curray father
+            for (var i = 0; i < currayRs.length; i++) {
+                this[i] = currayRs[i];
+            };
+            result = [];
+            this['length'] = currayRs.length;
+            return result;
+
+
+        } else {
+            // first remove the element from the array
+            var newLength = (currayCp.length - deleteCount) + values.length;
+            for (var i = 0; i < newLength; i++) {
+                if (i >= start && i < limit) {
+                    delete currayCp[count2++];
+                    currayRs.push(values[count++]);
+                } else {
+                    currayRs.push(currayCp[count2++]);
+                };
+            };
+            // Reconstruction curray father
+            for (var i = 0; i < this.length; i++) {
+                if (i < currayRs.length) {
+                    this[i] = currayRs[i];
+                } else {
+                    delete this[i];
+                };
+            };
+            result = values;
+            this['length'] = currayRs.length;
+            return result;
+        };
+
     } else {
         for (var i = 0; i < this.length; i++) {
             var element = this[i]
@@ -268,17 +339,16 @@ Curray.prototype.splice = function() {
                 result.push(curray[i]);
             } else {
                 this[count++] = this[i];
-            }
-        }
+            };
+        };
 
         if (this.length !== count) {
             for (var i = count; i < this.length; i++) {
                 var element = this[i]
                 delete this[i];
-            }
-        }
-
+            };
+        };
         this['length'] = count;
         return result;
-    }
+    };
 };

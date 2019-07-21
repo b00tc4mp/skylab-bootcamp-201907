@@ -254,19 +254,44 @@ describe('Curray TEST', function() {
         });
     });
 
+    // describe('sort', function() {
+    //     it('sorts the elements of an array in place and returns the sorted array. Case: numbers', function() {
+    //         var curray = new Curray(5, 3, 6, 2, 1, 4);
+    //         var result = curray.sort();
+    //         var resultArr = Array.from(result);
+    //         expect(resultArr, [1, 2, 3, 4, 5, 6]);
+    //     });
+    //     it('sorts the elements of an array in place and returns the sorted array. Case: words', function() {
+    //         var curray = new Curray('Pepito', 'Manolito', 'Luisito', 'Felipito', 'Jorgito', 'Paquito');
+    //         var result = curray.sort();
+    //         var resultArr = Array.from(result);
+    //         expect(resultArr, ["Felipito", "Jorgito", "Luisito", "Manolito", "Paquito", "Pepito"]);
+    //     });
+    // });
+
     describe('sort', function() {
         it('sorts the elements of an array in place and returns the sorted array. Case: numbers', function() {
-            var curray = new Curray(5, 3, 6, 2, 1, 4);
-            var result = curray.sort();
+            var curray = new Curray(5, 3, 3, 2, 1, 4);
+            var result = curray.sort(function(a, b) {
+                return a - b;
+            });
             var resultArr = Array.from(result);
-            expect(resultArr, [1, 2, 3, 4, 5, 6]);
+            expect(resultArr, [1, 2, 3, 3, 4, 5]);
         });
-        it('sorts the elements of an array in place and returns the sorted array. Case: words', function() {
-            var curray = new Curray('Pepito', 'Manolito', 'Luisito', 'Felipito', 'Jorgito', 'Paquito');
-            var result = curray.sort();
+        it('sorts the elements of an array in place and returns the sorted array. Case: numbers', function() {
+            var curray = new Curray(5, 3, 3, 2, 1, 4);
+            var result = curray.sort(function(a, b) {
+                return b - a;
+            });
             var resultArr = Array.from(result);
-            expect(resultArr, ["Felipito", "Jorgito", "Luisito", "Manolito", "Paquito", "Pepito"]);
+            expect(resultArr, [5, 4, 3, 3, 2, 1]);
         });
+        // it('sorts the elements of an array in place and returns the sorted array. Case: words', function() {
+        //     var curray = new Curray('Pepito', 'Manolito', 'Luisito', 'Felipito', 'Jorgito', 'Paquito');
+        //     var result = curray.sort();
+        //     var resultArr = Array.from(result);
+        //     expect(resultArr, ["Felipito", "Jorgito", "Luisito", "Manolito", "Paquito", "Pepito"]);
+        // });
     });
 
     describe('splice', function() {
@@ -278,17 +303,19 @@ describe('Curray TEST', function() {
             expect(currayArr, [5, 3, 1, 4]);
 
         });
-        it('changes the contents of an array by removing or replacing existing elements and/or adding new elements in place. Case: add', function() {
+        it('changes the contents of an array by removing or replacing existing elements and/or adding new elements in place. Case: Remove and adds the elements', function() {
             var curray = new Curray('Pepito', 'Manolito', 'Luisito', 'Felipito', 'Jorgito', 'Paquito');
             var result = curray.splice(2, 1, 'Fulanito');
             var resultArr = Array.from(curray);
-            expect(resultArr, ["Felipito", "Jorgito", "Luisito", "Manolito", "Paquito", "Pepito"]);
+            expect(result, ['Fulanito']);
+            expect(resultArr, ['Pepito', 'Manolito', 'Fulanito', 'Felipito', 'Jorgito', 'Paquito']);
         });
-        // it('changes the contents of an array by removing or replacing existing elements and/or adding new elements in place. Case: value delete 0', function() {
-        //     var curray = new Curray('Jan', 'March', 'April', 'June');
-        //     var result = curray.splice(1, 0, 'Feb');
-        //     var resultArr = Array.from(result);
-        //     expect(resultArr, ['Jan', 'Feb', 'March', 'April', 'June']);
-        // });
+        it('changes the contents of an array by removing or replacing existing elements and/or adding new elements in place. Case: value delete 0', function() {
+            var curray = new Curray('Jan', 'March', 'April', 'June');
+            var result = curray.splice(1, 0, 'Feb');
+            var resultArr = Array.from(curray);
+            expect(result, []);
+            expect(resultArr, ['Jan', 'Feb', 'March', 'April', 'June']);
+        });
     });
 });

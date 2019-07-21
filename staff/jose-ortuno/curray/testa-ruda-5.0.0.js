@@ -5,11 +5,8 @@ var text = '>>> TESTA 🧠 RUDA 💪 <<<';
 console.log(text);
 
 /**
- * Checks whether a testing result matches an expected value. 
- * In case of matching values, it does nothing. 
- * Otherwise shows an error explaining the unmatching situation.
- * 
- * IMPORTANTE: El resul y el expected, no lo pasa a string
+ * Checks wether a testing result matches an expected value. In case of matching values, 
+ * it does nothing. Otherwise shows an error explaining the unmatching situation.
  * 
  * @param {*} result The testing value to evalute.
  * @param {*} expected The expected value to check the result against.
@@ -25,8 +22,7 @@ function expect(result, expected) {
 }
 
 /**
- * Evolution of the check function. 
- * Test objects and arrays.
+ * TODO
  * 
  * @param {*} result 
  * @param {*} expected 
@@ -50,17 +46,11 @@ function expectArrays(result, expected) {
 }
 
 /**
- * First step of testing. We pass a function as an expression that contains:
- * (1) The execution of the function to be tested
- * (2) The expected result
+ * TODO
  * 
- * We are controlling:
- * (1) The correct execution of the errors
- * (2) The controlled execution of the function
- * 
- * @param {string} description Descripción to test
- * @param {Function} expression Function test and expected results
- * @param {Function} handleError Error checking 
+ * @param {string} description
+ * @param {Function} expression 
+ * @param {Function} handleError 
  */
 function it(description, expression, handleError) {
     try {
@@ -81,33 +71,22 @@ function it(description, expression, handleError) {
     }
 }
 
-/**
- * TODO
- * 
- * @param {String} description 
- */
 function __success__(description) {
     console.log('%c' + description + ' 👍', 'color: green');
 }
 
-/**
- * TODO
- * 
- * @param {String} description 
- * @param {*} error 
- */
 function __fail__(description, error) {
     console.error(description, '👹', error ? error : '');
 }
 
 /**
- * Opening function. Through it we execute the test.
+ * TODO
  * 
- * @param {string} description Function name
- * @param {Function} expression Test code
+ * @param {string} description
+ * @param {Function} expression 
  */
 function describe(description, expression) {
-    console.log('TEST', description, '🍭');
+    console.log(description, '🍭');
 
     expression();
 }
