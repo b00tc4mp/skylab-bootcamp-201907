@@ -197,6 +197,25 @@ describe('Curray', function() {
             }
         );
     });
+
+    describe('isArray' , function(){
+        it("should determine wether the passed value is a Curray" , function(){
+            
+            var curray = new Curray(1,2,3);
+            
+            expect(Curray.prototype.isCurray(curray)).toBe(true);
+        });
+    });
     
-    
+    describe('copyWithin' , function(){
+        it("should copy part of an array to another location in the same array and returns it without modifying its length" , function(){
+            var curray = new Curray (1,2,3,4,5);
+
+            var copy = new Curray();
+            copy = curray.copyWithin(-1);
+
+            expect(Array.from(copy)).toEqual([1,2,3,4,1]);
+        });
+    });
+
 });

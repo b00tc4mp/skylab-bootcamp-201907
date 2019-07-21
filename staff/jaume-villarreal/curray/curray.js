@@ -131,3 +131,30 @@ Curray.prototype.from = function(element , expression){
 
     return arrayFrom;
 };
+
+
+//isArray
+Curray.prototype.isCurray = function(element){
+    return element instanceof Curray;
+};
+
+//copyWithin
+Curray.prototype.copyWithin = function(target ,start, end){
+    if (target === undefined) throw ReferenceError (target + "is not defined");
+    
+    var copy = new Curray();
+    for(var i = 0 ; i<this.length ; i++){
+        copy.push(this[i]);
+    };
+
+
+    if (arguments.length === 1){
+        var ini = 0;
+        target = Math.sign(target) === 1 ? target : this.length + target;
+        for(var i = target ; i<this.length ; i++){
+            this[i] = copy[ini++];
+        }
+    }
+    return this;
+};
+
