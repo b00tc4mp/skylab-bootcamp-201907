@@ -222,8 +222,7 @@ describe('Curray', function() {
         it(
             'should return a new curray iterator from an Array-like iterable',
             function() {
-                var curray = new Curray();
-                var result = curray.from(['a', 'b', 'c', 'd']);
+                var result = Curray.from(['a', 'b', 'c', 'd']);
                 var expected = new Curray('a', 'b', 'c', 'd');
                 expect(result).toEqual(expected)
             });
@@ -264,24 +263,84 @@ describe('Curray', function() {
                 expect(result).toEqual(new Curray('a','b',{a:'hola', b:'mundo'}, 1,2,3,'x','y','z'))
             });
         });
+
+    describe('shift', function() {
+        it(
+            'should pop and return the first element of a Curray',
+            function() {
+                var curray = new Curray('a','b','c','d','e');
+                var result = curray.shift()
+                expect(result).toBe('a');
+            }
+        )
+
+        });
     
-    describe('copyWithin', function() {
+    describe('slice', function() {
         it(
-            'should return the same curray with one or more element shallow-copied to another location within the same curray',
+            'should return a shallow copy of a portion of a Curray',
             function() {
-                var curray = new Curray('a', 'b', 'c', 1, 'd', 2, 'e');
-                curray.copyWithin(0, 4, 7)
-                expect(curray).toEqual(new Curray('a','b','c',1, 'a', 'a', 'a'))
+                var curray = new Curray('a','b','c','d','e','f','g');
+                var result = curray.slice(2, 5);
+                expect(result).toEqual(new Curray('c','d','e'));
+            });
         });
+    
+     describe('sort', function() {
         it(
-            'should return the same curray with one or more element shallow-copied to another location within the same curray',
+            'should return sorted curray',
             function() {
-                var curray = new Curray('a', 'b', 'c', 1, 'd', 2, 'e');
-                curray.copyWithin(0, 3)
-                expect(curray).toEqual(new Curray('a', 'b', 'c', 'a', 'd', 2, 'e'))
+                var curray = new Curray('d', 'a', 'c', 'b')
+                var result = curray.sort(function(a, b) {
+                    if (a > b) {
+                        return 1
+                    } else if (a < b) {
+                        return -1
+                    }
+                    return 0
+                });
+                expect(result).toEqual(new Curray('a', 'b', 'c', 'd'));
+            });
+
         });
-    });
 
+    describe('sort', function() {
+        it(
+            'should return sorted curray',
+            function() {
+                var curray = new Curray(5,3,3,2,1,4)
+                var result = curray.sort(function(a, b) {
+                   return a - b;
 
+                });
+                expect(result).toEqual(new Curray(1,2,3,3,4,5));
+            });
+
+        });
+    
+    describe('sort', function() {
+        it(
+            'should return sorted curray',
+            function() {
+                var curray = new Curray(5,3,3,2,1,4)
+                var result = curray.sort(function(a, b) {
+                   return b - a;
+                });
+                expect(result).toEqual(new Curray(5,4,3,3,2,1));
+            });
+
+        });
+        
+        
+    describe('some', function() {
+        it(
+            'should apply condition to each element of curray and return true if met',
+            function() {
+                var curray = new Curray(2, 4, 6, 8, 9);
+                var result = curray.some(function(elem) {
+                    return elem % 2 === 1;
+                });
+                expect(result).toBe(true);
+            });
+        });
 });
-

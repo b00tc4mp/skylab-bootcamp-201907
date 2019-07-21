@@ -210,12 +210,12 @@ Curray.prototype.entries = function() {
     return arrIterator
 }
 
-Curray.prototype.from = function(iterable) {
+Curray.from = function(iterable) {
     if (arguments.length === 0) throw TypeError('from() requires an iterable as first argument');
 
     var newCurray = new Curray()
 
-    if (iterable instanceof Array) {
+    if (iterable instanceof Array || iterable instanceof Curray) {
         for (var i = 0; i < iterable.length; i++) {
             newCurray[i] = iterable[i]
             newCurray['length'] = i+1
@@ -265,28 +265,74 @@ Curray.prototype.concat = function(iterator) {
     return newCurray
 }
 
-Curray.prototype.copyWithin = function(index, start, end) {
 
-    switch(arguments.length) {
-        case 0:
-            return this;
-        case 1:
-            start = 0;
-            end = index;
-            break;
-        case 2:
-            end = this.length;
-        default:
-            break
-    }
-    debugger;
-    for (var i = start; i < end; i++) {
-        counter = 0
+Curray.prototype.shift = function() {
 
+    var result = this[0];
+
+    for (var i = 1; i < this.length; i++) {
+        this[i-1] = this[i];
     }
+    delete this[this.length-1];
+    this['length'] -= 1;
+
+    return result;
+
 }
 
 
+Curray.prototype.slice = function(start, end) {
+
+    var newCurray = new Curray();
+
+    if (arguments.length === 0) { return newCurray = this };
+    if (arguments.length === 1) { end = this.length; }
+
+    for (var i = start; i < end; i++) {
+        newCurray[newCurray.length] = this[i]
+        newCurray['length'] += 1
+    }
+
+    return newCurray
+
+}
+
+
+Curray.prototype.some = function(expression) {
+
+    for (var i = 0; i < this.length; i++) {
+        if (expression(this[i])) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+Curray.prototype.sort = function(expression) {
+
+    for (var i = 0; i < this.length-1; i++) {
+        var a = this[i];
+        var b = this[i+1];
+        if (expression(a,b) > 0 || expression(a,b) === 1) {
+            this[i] = b;
+            this[i+1] = a;
+        } else {
+            this[i] = a;
+            this[i+1] = b;
+        }
+    }
+
+    for (var i = 0; i < this.length; i++) {
+        var a = this[i];
+        var b = this[i+1];
+        if (expression(a,b) > 0 || expression(a,b) === 1) {
+            this.sort(expression)
+        }
+    }
+
+    return this
+}
 
 
 
