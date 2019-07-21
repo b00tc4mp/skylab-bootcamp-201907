@@ -14,35 +14,25 @@ console.log(text);
  * @version 5.0.0
  */
 function expect(result, expected) {
-    // if (!(isNaN(result) && isNaN(expected)) && result !== expected) // FUCK! isNaN({}) returns true!!!
-    if (!(result != undefined && expected != undefined && result.toString() === 'NaN' && expected.toString() === 'NaN') && result !== expected) // LLUIS we👂u!
-        // if (!(Number.isNaN(result) && Number.isNaN(expected)) && result !== expected) // ROGER 💪 => ERROR! Lluis detected Number.isNaN is ES6
-        //console.error('error: result (' + result + ') does not match expected value (' + expected + ')')
-        throw Error('result (' + result + ') does not match expected value (' + expected + ')');
-}
+    if (result instanceof Array && expected instanceof Array) {
+        expect(result.length === expected.length, true);
 
-/**
- * TODO
- * 
- * @param {*} result 
- * @param {*} expected 
- */
-function expectArrays(result, expected) {
-    expect(result instanceof Array, true);
-    expect(expected instanceof Array, true);
+        for (var i = 0; i < result.length; i++) {
+            var res = result[i], exp = expected[i];
 
-    expect(result.length === expected.length, true);
-
-    for (var i = 0; i < result.length; i++) {
-        var res = result[i], exp = expected[i];
-
-        if (res instanceof Array) {
-            expectArrays(res, exp);
-        } else if (res instanceof Object) {
-            expect(typeof res, typeof exp);
-            expectArrays(Object.keys(res), Object.keys(exp));
-        } else expect(res, exp);
-    }
+            if (res instanceof Array) {
+                expect(res, exp);
+            } else if (res instanceof Object) {
+                expect(typeof res, typeof exp);
+                expect(Object.keys(res), Object.keys(exp));
+            } else expect(res, exp);
+        }
+    } else
+        // if (!(isNaN(result) && isNaN(expected)) && result !== expected) // FUCK! isNaN({}) returns true!!!
+        if (!(result != undefined && expected != undefined && result.toString() === 'NaN' && expected.toString() === 'NaN') && result !== expected) // LLUIS we👂u!
+            // if (!(Number.isNaN(result) && Number.isNaN(expected)) && result !== expected) // ROGER 💪 => ERROR! Lluis detected Number.isNaN is ES6
+            //console.error('error: result (' + result + ') does not match expected value (' + expected + ')')
+            throw Error('result (' + result + ') does not match expected value (' + expected + ')');
 }
 
 /**
