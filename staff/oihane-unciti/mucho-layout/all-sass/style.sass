@@ -1,5 +1,7 @@
 $bkc: lightgray
 
+body 
+    padding-top: 10%
 
 *
     margin-left: 0
@@ -15,64 +17,75 @@ $bkc: lightgray
     &--top
         display: none
     
+    &__red
+        list-style: block
+        padding: 2%
+ 
 .header
     display: flex
-    height: 10%
     border-bottom: 1px solid gray
     padding-bottom: 2vh
+    top: 0
+    left: 0
+    background-color: white
+    width: 100%
+    position: fixed
    
     &__presentation
         display: none
+        width: 40%
+
+.logo
+    padding: 2%
+    width: 20%
 
 .nav
     height: 10%
-    
     &__border
         border-bottom: 1px solid $bkc
+        margin-left: 1%
 
 .article__information
     background-color: $bkc
     border: 1px solid white
     width: 100%
 
-.footer
-    height: 20%
+.square
+    padding: 2%
 
-.social-media
-    display: flex
-    list-style:none
+.footer
+    padding-left: 2%
+
+
 
 @media (min-width: 768px) and (max-width: 1024px)
     .header
         justify-content: space-between 
  
     .menu
-        padding-right: 80px
-        display: block
         display: flex
-        justify-content: flex-end  
-
-        &--topmenu
+        justify-content: flex-end 
+        
+        &__li
+            display: block 
           
 
     .nav
         display: flex
         justify-content: flex-end
         
+        &__border
+            border: 0
+
+        
     .article
         display: flex
         flex-wrap: wrap
-    
-    .article :nth-child(2) 
-        padding-right: 1%    
+     
    
     .article__information
-        width: 49%
-        margin: 0
-        padding: 0 
-          
-    .square
-        padding: 0
+        width: 49.7%
+       
         
     .main__img
         display: flex
@@ -82,43 +95,27 @@ $bkc: lightgray
         width: 50% 
         padding: 0
         
-    .nav__border
-        margin: 2%  
-
     .menu
         display: inline-flex
         list-style:none
+        
+        &__red
+            padding: 5px
 
     .footer
         display: flex
         flex-wrap: wrap
-        margin-left: 5%
-        width: 100%
 
         &__footer__information
-            display: flex
-            font-size: 2vh
+            font-size: 1rem
             width: 100%
 
         &__address
             width: 50%
             margin: 0 
+            justify-content: space-around
 
-    .social_networks
-        display: flex
-
-    .social_networks :nth-child(2) 
-        order: 3
-
-    .social_networks :nth-child(1) 
-        order: 2
-        
-    .social_networks__suscribe
-        padding-left: 20vh
-
-    .content-socialmedia
-        display: flex
-        list-style:none 
+  
 
 /* DESKTOP */
 
@@ -127,13 +124,14 @@ $bkc: lightgray
         margin: 2%
         
     .menu
-        display: block
         display: flex
         justify-content: flex-end
+        &__li
+            display: block
+
 
     .header__presentation
         display: block
-        width: 40%
 
     .header
         justify-content: space-between
@@ -141,6 +139,9 @@ $bkc: lightgray
     .nav
         display: flex
         justify-content: flex-end
+        
+        &__border
+            border: 0
 
     .main__img
         display: grid
@@ -153,6 +154,9 @@ $bkc: lightgray
         width: 100%
         height: auto
         object-fit: cover
+        
+        &:hover 
+            opacity: 0.9
         
     .img__big3 
         grid-column-start: 3
@@ -179,10 +183,8 @@ $bkc: lightgray
         &__information
             margin: 0
             padding: 0
-            width: 33%
-        
-    .nav__border
-        margin: 2%
+            width: 33.1%
+    
 
     .menu
         display: inline-flex
@@ -191,7 +193,7 @@ $bkc: lightgray
     .footer
         display: flex
         flex-wrap: wrap
-        margin-left: 5%
+        margin-left: 2%
         width: 100%
 
         &__information
@@ -202,17 +204,22 @@ $bkc: lightgray
         &__address
             width: 25%
             margin: 0 
-
+    
     .social_networks
         display: flex
+        flex-direction: row-reverse
+        justify-content: space-between
 
-    .social_networks :nth-child(2) 
-        order: 3
+        &__copy
+            margin-rigth: 200px
 
-    .social_networks :nth-child(1) 
-        order: 2
-        
-    .social_networks__suscribe
-        padding-left: 40vh
+    .social_networks__bloc
+        display: flex
+        padding-left: 500px
+    
+    .menu__red
+        padding: 5px
+
+
 
     
