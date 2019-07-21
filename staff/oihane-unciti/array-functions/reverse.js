@@ -8,3 +8,16 @@ function test(){
     console.log(array2);
 }
 test();
+
+Curray.prototype.reverse = function (){
+    var result = "";
+    for (var i = this.length; i > 0; --i) { 
+        if(i != 0){
+            result += this[i] + ",";
+        }else{
+            result += this[i];
+        }
+        
+    } 
+    return result;  
+} 
