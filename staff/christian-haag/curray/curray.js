@@ -272,6 +272,7 @@ Curray.prototype.shift = function (returnCurray) {
     }
 };
 
+//Carolina Zhou's aproach
 Curray.prototype.slice = function (start, end) {
 
     var result = [];
