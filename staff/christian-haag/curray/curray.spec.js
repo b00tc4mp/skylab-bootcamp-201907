@@ -545,7 +545,41 @@ describe('Curray', function () {
             expect(result).toEqual(['0', '1', '2', '3', '4', 'length'])
         });
 
-    })
+    });
+
+    describe('reduce', function () {
+        it('should executes a reducer function on each element of the array, resulting in a single output value', function () {
+            var curray = new Curray(1, 2, 3, 4)
+
+            var result = curray.reduce((function (accumulator, currentValue) {
+                return accumulator + currentValue
+            }));
+
+            expect(result).toBe(10)
+        });
+
+        it('should accept an initialValue and calculate over that value resulting in a single output value', function () {
+            var curray = new Curray(1, 2, 3, 4);
+
+            var result = curray.reduce((function (acc, currVal) {
+                return acc + currVal;
+            }), 10);
+
+            expect(result).toBe(20);
+        });
+
+        it('should multiply all the values of the curray and return a single value', function () {
+            var curray = new Curray(1, 2, 3, 4);
+
+            var result = curray.reduce((function (acc, currVal) {
+                return acc * currVal;
+            }));
+
+            expect(result).toBe(24)
+        })
+    });
+
+
 
 
 

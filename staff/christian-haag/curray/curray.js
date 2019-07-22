@@ -341,4 +341,17 @@ Curray.prototype.unshift = function () {
 Curray.prototype.keys = function () {
     var result = Object.keys(this)
     return result;
-}
+};
+
+Curray.prototype.reduce = function (expression, initialValue) {
+
+    var accumulator = initialValue ? initialValue : this[0];
+    var indexFrom = initialValue ? 0 : 1;
+
+    for (var i = indexFrom; i < this.length; i++) {
+        accumulator = expression(accumulator, this[i])
+    }
+
+    return accumulator;
+};
+
