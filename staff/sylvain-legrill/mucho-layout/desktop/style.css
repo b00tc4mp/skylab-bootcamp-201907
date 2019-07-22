@@ -1,4 +1,3 @@
-/* =====>>>>GENERAL */
 
 html{
     box-sizing: border-box;
@@ -19,12 +18,7 @@ body{
     width: 100%;
 }
 
-
-
-
-/* =====>>>>HEADER */
-
-header{
+.header{
    
     background-color: rgb(255,255,255); 
     padding: 14px 16px;   
@@ -33,39 +27,39 @@ header{
     
 }
 
-#logo-img{
+.header__logoimg{
     width: 100px;
 }
 
-#bars{
+.header__bars{
     display: none;
 }
 
-#presentation{
+.header__presentation{
     display: block;
     width:40%;
 }
 
 
-.nav{
+.header__nav{
     display: flex;
     justify-content:space-between; 
     align-content: flex-start;
  }
 
-.menulist{
+.header__navigator--menulist{
     
     display: flex;
 }
 
-.menulist li {
+.header__navigator--menulist  li {
 
 
 padding: 2%;
 list-style-type: none;  }
 
     
-.navproject{
+.header__navproject{
 
     display: none;
     justify-content: flex-end;
@@ -73,7 +67,7 @@ list-style-type: none;  }
     
     
 }
-.navservices , .navindustries{
+.header__navproject--navservices , .header__navproject--navindustries{
     display: flex;
     align-items: center;
     margin: 2%;
@@ -81,20 +75,22 @@ list-style-type: none;  }
 
 }
 
-.navproject i{
+.header__navproject i{
     margin-left: 10px;
 
 }
 
-/* =====>>>>MAIN */
 
-main{
+
+
+
+.main{
    margin-left: 1%;
    margin-right: 1%;
     
 }
 
-.image-container {
+.main__imagecontainer {
     display: grid;
     grid-template-columns: repeat( 3 , 1fr);
     grid-template-rows: repeat(11, 1fr);
@@ -105,19 +101,20 @@ main{
     position: relative;
     height: 100%;
   }
-img{
+
+.main__imagecontainer img{
     margin: auto;
     max-width: 100%;
     max-height: 100%;
 
 }
 
-img:hover{
+.main__imagecontainer img:hover{
     opacity: 0.05;
     transition: opacity 500ms;
 }
 
-.D , .G , .J , .M, .P{
+.main__imagecontainer--imgD , .main__imagecontainer--imgG , .main__imagecontainer--imgJ , .main__imagecontainer--imgM, .main__imagecontainer--imgP{
     grid-column-start: span 2;
     grid-row-start: span 2;
 }
@@ -129,7 +126,7 @@ img:hover{
 
  
   
-  .mainarticles{
+.main__mainarticles{
     display: grid;
     grid-template-columns: repeat( 3 , 1fr);
     grid-gap: 3px;
@@ -139,7 +136,7 @@ img:hover{
 
 
 
-.we-are-mucho, .talking-and-teaching, .about{
+.main__mainarticles--wearemucho, .main__mainarticles--talkingandteaching, .main__mainarticles--about{
     
     background-color: #F4F4F4;
     padding: 10px;
@@ -148,43 +145,44 @@ img:hover{
 
 
 
-.mainarticles p{
+.main__mainarticles p{
     font-size: 20px;
     padding: 10px;
 }
 
 
 
- h2{
+.main__mainarticles h2{
     color: #EC1C24;
     font-size: 20px;
     padding: 10px;
 }
 
-.we-are-mucho a{
+.main__mainarticles a{
     color: #AEAEAE;
     text-decoration: none;
 }
 
-.contact{
-   
-    padding-top:100px;
-    color:#555555;
-    font-size: 20px;
-}
- 
-/* =====>>>>FOOTER */
 
-footer{
-    margin-top: 10%;
+.footer{
     margin-left: 1%;
-   margin-right: 1%;
+    margin-right: 1%;
     color:#8a8888;
 
 
 }
 
-.footer-addresses{
+.footer__contact{
+   
+    display: grid;
+    grid-template-columns: repeat(2 , 1fr);
+    font-size: 22px;
+    padding-top:100px;
+    color:#555555;
+    font-size: 20px;
+}
+
+.footer__addresses{
     display: grid;
     grid-template-columns: repeat(4 , 1fr);
 
@@ -192,46 +190,45 @@ footer{
 }
 
 
-
- #footer-text {
-    display: grid;
-    grid-template-columns: repeat(2 , 1fr);
-    font-size: 22px;
-}
-
-
-
-.direction{
+.footer__addresses .direction{
     font-size: 14px;
 }
 
 
 
-.cities div{
-    grid-column-start: span 2;
-    padding: 0 0 40px
+.footer__copyrightsuscribe{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: flex-end;
+    color:#AEAEAE;
+    font-size: 14px;
+    
 }
 
-.copyright{
+
+
+
+
+.footer__copyrightsuscribe--subscribe{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-end;
-    
+    align-items: center;
+    word-spacing: 2px;
+
 }
 
-
-
-
-  
-h4 {
-    color: #AEAEAE;
-
-    
+.footer__copyrightsuscribe--subscribe i {
+    margin: 10px;
+    font-size: 17px;
 }
 
+.footer h2{
+    color: #EC1C24;
+    font-size: 14px;
 
-
+}
 
 
 
