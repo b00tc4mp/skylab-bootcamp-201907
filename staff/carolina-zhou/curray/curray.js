@@ -27,6 +27,7 @@ Curray.prototype.push = function (element) {
 
 
 Curray.prototype.pop = function() {
+    if (!(this instanceof Curray)) throw TypeError(this + '.pop is s not a function'); 
 
     var last = this[--this.length];
 
@@ -323,36 +324,38 @@ Curray.prototype.slice = function(first, last) {
 
 Curray.prototype.sort = function(expression) {
 
-    var sorted = [this[0]]
-    expression = expression || function (a, b) { return String(a) >= String(b); }
-
-    for (var i = 1; i < this.length; i++) {
-        var indexToInsert = 0;
-
-        for (var j = 0; j < sorted.length; j++) {
-        if (expression(this[i], sorted[j])) {
-          indexToInsert = j + 1;
-        } else {
-          break
-        }
-      }
-      sorted.splice(indexToInsert, 0, this[i])
-    }
-    return sorted;
-
-/*  var done = false;
-    while (!done) {
+    if (expression) {
+        var done = false;
+        while (!done) {
         done = true;
-        for (var i = 1; i < this.length; i++) {
-            if (this[i - 1] > this[i]) {
-              done = false;
-              var x = this[i - 1];
-              this[i - 1] = this[i];
-              this[i] = x;
+            for (var i = 1; i < this.length; i++) {
+                if (this[i - 1] > this[i]) {
+                done = false;
+                var x = this[i - 1];
+                this[i - 1] = this[i];
+                this[i] = x;
+                }
             }
         }
+        return Array.from(this); 
+    } else {
+        expression = function (a, b) { return String(a) >= String(b); };
+        var sorted = [this[0]]
+    
+        for (var i = 1; i < this.length; i++) {
+            var indexToInsert = 0;
+    
+            for (var j = 0; j < sorted.length; j++) {
+            if (expression(this[i], sorted[j])) {
+              indexToInsert = j + 1;
+            } else {
+              break
+            }
+          }
+          sorted.splice(indexToInsert, 0, this[i])
+        }
+        return sorted;
     }
-    return Array.from(this); */
 };
 
 

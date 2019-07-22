@@ -37,6 +37,14 @@ describe('Curray', function () {
 
             expect(value).toBeUndefined();
         });
+
+        it('should fail on no curray', function() {
+            var curray = 'curray';
+
+            expect(function() {
+                curray.pop();
+            }).toThrowError(TypeError, 'curray.pop is not a function');
+        });
     });
 
     describe('forEach', function () {
@@ -299,7 +307,7 @@ describe('Curray', function () {
                 return element < 10;
             });
 
-            expect(result).toEqual(1);
+            expect(result).toBe(1);
         });
 
         it('should fail on no arguments', function() {
@@ -323,6 +331,14 @@ describe('Curray', function () {
             var result = curray.flat(2);
             expect(result).toEqual([1, 2, 3, 'a', 'b', 'c', true, false]);
         });
+
+/*      REVISAR!
+        it('should flatten three levels', function() {
+            var curray = new Curray (1,2,3,new Curray("a","b","c",new Curray(true,false,new Curray(1))));
+            var result = curray.flat(3);
+            expect(result).toEqual([1, 2, 3, 'a', 'b', 'c', true, false, 1]);
+        });
+         */
     })
 
     describe('indexOf', function() {
@@ -462,7 +478,7 @@ describe('Curray', function () {
             }).toThrowError(TypeError,'a is not a number');
         });
     
-        it('should should break if final is not undefined and is not a number', function (){
+        it('should break if final is not undefined and is not a number', function (){
             var curray = new Curray();
             expect(function() {
                 curray.slice(5, "b");
@@ -485,15 +501,13 @@ describe('Curray', function () {
             expect(result).toEqual([1, 10, 2, 20]);
         });
      
-/*      REVISAR!
         it('should sort curray, case 3', function() {
             var curray = new Curray (40, 1, 5, 200);
-            function compare ( a, b ){ return a - b; }
-            var result = curray.sort(compare);
+            var result = curray.sort(function(a, b){ return a - b; });
     
             expect(result).toEqual([1, 5, 40, 200]);
         });
-         */
+        
     })
 
     describe('splice', function() {
