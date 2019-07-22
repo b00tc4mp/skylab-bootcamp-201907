@@ -275,9 +275,16 @@ Curray.prototype.reduce = function(expression, initialValue){
 
     return result;
 
+}
 
-
-
+Curray.prototype.concat = function(curray){
+    if(arguments.length === 0) throw ReferenceError('missing argument 0 when calling function concat')
+    if(!(curray instanceof Curray)) throw TypeError('param is not Curray');
+    if(this.length==0) throw ReferenceError('Curray is empty');
     
-
+    var res=this;//se refiere al this del Curray cuando lo creamos ejemplo: c.concat(a) siendo c un Curray()
+    for(var i=0;i<curray.length;i++){
+        res[this.length++]=curray[i];
+    }
+    return res;
 }

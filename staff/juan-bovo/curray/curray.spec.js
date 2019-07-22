@@ -267,7 +267,7 @@ describe('Curray', function () {
         });
     });
 
-    describe('reduce (only simple math :) )', function(){
+    describe('reduce', function(){
         it('should return a single value from a reduction', function(){
             var curray = new Curray(1,2,3,4);
             var reducer = (accumulator, currentValue) => accumulator + currentValue;
@@ -304,6 +304,38 @@ describe('Curray', function () {
             expect(result).toEqual(120);
         });
     });
+
+    describe('concat', function(){
+        it('no arguments', function(){
+            var curray1 = new Curray(1,2,3);
+            expect(function(){
+                curray1.concat();
+            }).toThrowError(ReferenceError,'missing argument 0 when calling function concat');
+        })
+        it('param is no Curray', function(){
+            var curray1 =[1,2,3];
+            var curray2 = new Curray(4,5,6);
+            expect(function(){
+                curray2.concat(curray1);
+            }).toThrowError(TypeError, 'param is not Curray');
+        })
+        it('Curray is empty', function(){
+            var curray1 =new Curray();
+            var curray2 = new Curray(4,5,6);
+            expect(function(){
+                curray1.concat(curray2);
+            }).toThrowError(ReferenceError, 'Curray is empty')
+        })
+        it('should create new curray with iterable object', function(){
+            var curray1 = new Curray(1,2,3);
+            var curray2 = new Curray(4,5,6);
+            var result = curray1.concat(curray2); 
+            result=Array.from(result);
+            expect(result).toEqual([1,2,3,4,5,6]);
+        })
+    })
+
+
 
 
 
