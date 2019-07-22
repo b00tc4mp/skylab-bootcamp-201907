@@ -4,13 +4,19 @@ const newLocal = '3';
 describe('Curray', function () {
     describe('push', function () {
         it('should push a string', function () {
-            var curray = new Curray();
+            var curray = new Curray(1);
 
-            var result = curray.push('hola mundo');
+            var result = curray.pushTest(2);
 
-            expect(curray[0]).toBe('hola mundo');
-            expect(result).toBe(1);
+            expect(curray[1]).toBe(2);
+            expect(result).toBe(2);
         });
+        it('should fail on no arguments', function() {
+            var curray=new Curray();
+            expect(function() {
+                curray.pushTest();
+            }).toThrowError(TypeError, 'missing argument 0 when calling function push');
+        }); 
     });
     //************************************************************************************************ */
     describe('pop', function () {
@@ -22,6 +28,12 @@ describe('Curray', function () {
             expect(curray.length).toBe(1);
             expect(curray[1]).toBeUndefined();
         });
+        it('should fail on no arguments', function() {
+            var curray=new Curray();
+            expect(function() {
+                curray.pop();
+            }).toThrowError(TypeError, 'missing argument 0 when calling function pop');
+        }); 
     });
     //************************************************************************************ */
     describe('forEach', function () {
@@ -194,6 +206,12 @@ describe('Curray', function () {
             var result=curray.entries(1);
             expect(result).toEqual([ '0,1' ]);
         });
+        it('should fail on no arguments', function() {
+            var curray1=new Curray();
+            expect(function() {
+                curray1.entries(0,1);
+            }).toThrowError(TypeError, 'missing argument 0 when calling function entries');
+        });
     });
 
     /*************************************************************************** */
@@ -217,6 +235,12 @@ describe('Curray', function () {
             var result=curray1.indexOf(30);
             expect(result).toEqual("1");
         });
+        it('should fail on no arguments', function() {
+            var curray=new Curray();
+            expect(function() {
+                curray.indexOf();
+            }).toThrowError(TypeError, 'missing argument 0 when calling function indexOf');
+        }); 
     });
 
     /***************************************************************************** */
@@ -234,6 +258,12 @@ describe('Curray', function () {
             var result=curray1.reverseTest();
             expect(result).toEqual(['three', 'two', 'one']);
         });
+        it('should fail on no arguments', function() {
+            var curray1=new Curray();
+            expect(function() {
+                curray1.reverseTest(0,1);
+            }).toThrowError(TypeError, 'missing argument 0 when calling function reverse');
+        });
     });
     /***************************************************************************** */
     describe("slice",function(){
@@ -241,6 +271,12 @@ describe('Curray', function () {
             var curray1=new Curray('Rita', 'Pedro', 'Miguel', 'Ana', 'Vanesa');
             var result=curray1.sliceTest(1,3);
             expect(result).toEqual(['Pedro','Miguel']);
+        });
+        it('should fail on no arguments', function() {
+            var curray1=new Curray();
+            expect(function() {
+                curray1.sliceTest(0,1);
+            }).toThrowError(TypeError, 'missing argument 0 when calling function slice');
         });
     });
     /***************************************************************************** */
@@ -250,6 +286,14 @@ describe('Curray', function () {
             var result=curray.lastIndexOf(3);
             expect(result).toEqual(3);
         });
+        it('should fail on no arguments', function() {
+            var curray=new Curray();
+            expect(function() {
+                curray.lastIndexOf(3);
+            }).toThrowError(TypeError, 'missing argument 0 when calling function lastIndexOf');
+        }); 
+
+
     }); 
     /***************************************************************************** */
     describe('unshift', function(){
@@ -274,46 +318,113 @@ describe('Curray', function () {
         });
     
     });
+    /***************************************************************************** */
 
-
-
-
-    /* describe("findindex", function(){
+    describe('concat', function(){
         it("default",function(){
-            
-            function isLargeNumber(element) {
-                return element > 13;
-            }
+            var curray1 = new Curray(1,2,3);
+            var curray2 = new Curray(4,5,6);
+            var result=curray1.concat(curray2);
+            result=Array.from(result);
+            console.log("TEST",result);
+            expect(result).toEqual([ 1, 2, 3, 4, 5, 6 ])
 
-            var array1=new Curray(5, 12, 8, 130, 44);
-            var result=array1.findindex(isLargeNumber);
-            expect(result).toEqual(3);
+
         })
-    }) */
-
-/*     describe("concat",function(){
+        it('no arguments', function(){
+            var curray1 = new Curray(1,2,3);
+            expect(function(){
+                curray1.concat();
+            }).toThrowError(ReferenceError,'missing argument 0 when calling function concat');
+        })
+        it('param is no Curray', function(){
+            var curray1 =[1,2,3];
+            var curray2 = new Curray(4,5,6);
+            expect(function(){
+                curray2.concat(curray1);
+            }).toThrowError(TypeError, 'param is not Curray');
+        })
+        it('Curray is empty', function(){
+            var curray1 =new Curray();
+            var curray2 = new Curray(4,5,6);
+            expect(function(){
+                curray1.concat(curray2);
+            }).toThrowError(ReferenceError, 'Curray is empty')
+        })
+        it('should create new curray with iterable object', function(){
+            var curray1 = new Curray(1,2,3);
+            var curray2 = new Curray(4,5,6);
+            var result = curray1.concat(curray2); 
+            result=Array.from(result);
+            expect(result).toEqual([1,2,3,4,5,6]);
+        });
+    });
+    /********************************************************************** */
+    describe("find",function(){
         it("default",function(){
-            var curray1 = new Curray('a', 'b', 'f');
-            var curray2 = new Curray('d', 'e', 'f');
-      
-            var result = curray1.concat(curray2);
-            expect(result).toEqual(["a", "b", "f", "d", "e", "f"]);
+            var curray=new Curray(5, 12, 8, 130, 44);
+            var result=curray.findTest(function(element) {
+                return element > 10;
+              });
+            expect(result).toEqual(12);
         });
-    }); */
-
-    /************************************************************************* */
-
-    /** UNSHIFT */
-
-    /*************************************************************************** */
-/*     describe("copyWithin",function(){
-        it("should default",function(){
-            var curray=new Curray(0, 1, 2, 3, 4, 5, 6, 7);
-            var result=curray.copyWithin(0, 2, 4);
-            console.log(result);
-            expect(result).toEqual([2, 3, 2, 3, 4, 5, 6, 7]);
+        it('should fail on no arguments', function() {
+            var curray=new Curray();
+            expect(function() {
+                curray.findTest(function(element) {
+                    return element > 10;
+                  });
+            }).toThrowError(TypeError, 'missing argument 0 when calling function find');
         });
-    }); */
+    });
+    /********************************************************************** */
+    describe("find",function(){
+            it("default",function(){
+                var curray=new Curray(5, 12, 8, 130, 44);
+                var result=curray.findIndexTest(function isLargeNumber(element) {
+                    return element > 13;
+                  });
+                expect(result).toEqual(3);
+            });
+            it('should fail on no arguments', function() {
+                var curray=new Curray();
+                expect(function() {
+                    curray.findIndexTest(function isLargeNumber(element) {
+                        return element > 13;
+                      });
+                }).toThrowError(TypeError, 'missing argument 0 when calling function find');
+            }); 
+    });
+    /********************************************************************* */
+    describe("includes",function(){
+        it("default, should check array includes a parameter",function(){
+            var curray=new Curray(1, 2, 3);
+            var result=curray.includesTest(3);
+            expect(result).toBe(true);
+        });
+
+    });
+    /********************************************************************* */
+    describe("some",function(){
+            it("default",function(){
+                var curray=new Curray(1, 2, 3, 4, 5);
+                var result=curray.someTest(function(element) {
+                    return element % 2 === 0;
+                  });
+                expect(result).toBe(true);
+            });
+            it("should fail on no arguments",function(){
+                var curray=new Curray();
+                expect(function(){
+                    curray.someTest(function(element){
+                        return element%2===0;
+                    });
+                }).toThrowError("missing argument 0 when calling function some")
+            })
+    });
+
+
+
 
 
 
