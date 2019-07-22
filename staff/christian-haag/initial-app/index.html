@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>initial-app</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Initial App</h1>
+
+    <section class="panel initial-panel panel--show">
+        <a href="">Register</a> or <a href="">Login</a>
+    </section>
+
+    <section class="panel panel--hide">
+        <form>
+            <label for="name">
+                <input id="name" class="container-register__input" type="text" placeholder="Name" required>
+            </label>
+
+            <label for="surename">
+                <input id="surename" class="container-register__input" type="text" placeholder="Surename" required>
+            </label>
+
+            <label for="email">
+                <input id="email" class="container-register__input" type="email" placeholder="e-mail" required>
+            </label>
+
+            <label for="password">
+                <input id="password" class="container-register__input" type="text" placeholder="Password" required>
+            </label>
+
+            <button type="submit" onclick="InitApp.register();">Register</button>
+        </form>
+        <a href="">back</a>
+    </section>
+
+
+    <section class="panel panel--hide">
+        <form>
+            <label for="email">
+                <input id="email" class="container-register__input" type="email" placeholder="Name" required>
+            </label>
+
+            <label for="password">
+                <input id="password" class="container-register__input" type="text" placeholder="Name" required>
+            </label>
+
+            <button type="submit" onclick="InitApp.login();">Register</button>
+        </form>
+    </section>
+
+
+    <section class="panel--hide">
+        Ok, registration succeed, you can now procced to, <a href="">login</a>
+    </section>
+
+
+    <section class="panel panel--hide">
+        <h2 class="main-page__title">Welome!</h2>
+    </section>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

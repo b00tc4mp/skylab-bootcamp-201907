@@ -1,0 +1,16 @@
+body{
+    display: block;
+    margin: 8px;
+}
+
+section {
+    border: 1px solid black;
+   }
+   
+.panel--hide{
+    display: none;
+}
+
+.panel--show{
+    display: block;
+}
