@@ -3,7 +3,7 @@ console.log("REVERSE DEMO");
 
 //
 var array1 = ['one', 'two', 'three'];
-console.log(array1, " these are the initial values")
+console.log(array1, " these are the initial values");
 
 var result=(reverse(array1));
 

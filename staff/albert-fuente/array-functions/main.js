@@ -71,71 +71,71 @@ Conditional Operators
 
 
 var o={x:1}
-delete o.x
+delete o.x;
 /*solo puedes cargarte propiedades que no estan en global*/
 
-console.log(o)
+console.log(o);
 /*window es un objeto global donde ponemos todas las variables, console es
 un objeto, console.log es un metodo function(argumento)*/
 
-window.console
+window.console;
 
 /*typeof*/
 var o={}
-console.log(typeof o)
+console.log(typeof o);
 
 /*null undefined no pots cambiar son primitius, pero el typof de null
 es objecte*/
 
-console.log(o instanceof Function)
-console.log(o instanceof Date)
+console.log(o instanceof Function);
+console.log(o instanceof Date);
 
 
 /*el operador new crea una nueva instancia del tipo de objeto*/
 
-a=[]
+a=[];
 
-console.log(a instanceof Object, a instanceof Date, a instanceof Array)
+console.log(a instanceof Object, a instanceof Date, a instanceof Array);
 
 f=function (){}
 f=new function(){}
 
 /*operadores*/
-console.log(3>>2)
-console.log(3<<2)
+console.log(3>>2);
+console.log(3<<2);
 
 /*nomes podem emmagatzamar 3 o 0 volts*/
 
-console.log(1|2) /*suma binaria*/
-console.log(8|7)
-console.log(2&2) /*multiplicacion binaria*/
+console.log(1|2); /*suma binaria*/
+console.log(8|7);
+console.log(2&2); /*multiplicacion binaria*/
 
 
-if (Math.random()>0.5) console.log("ok")
+if (Math.random()>0.5) console.log("ok");
 
 
-var age=0
+var age=0;
 switch(true){
     case age <=1:
-        console.log("baby")
+        console.log("baby");
         break;
     case age>1 && age<5:
-        console.log("churumbel")
+        console.log("churumbel");
         break;
     case age>5 && age<13:
-        console.log("youtuber")
+        console.log("youtuber");
         break;
 }
 /*el case ponemos el matching con switch(true)*/
 
-var n=[1,2,3]
-var result=0
-var i=0
+var n=[1,2,3];
+var result=0;
+var i=0;
 while(i<n.length){
-    result += n[i]
-    i++
+    result += n[i];
+    i++;
 }
-console.log(result)
+console.log(result);
 
 
 var n=[1]

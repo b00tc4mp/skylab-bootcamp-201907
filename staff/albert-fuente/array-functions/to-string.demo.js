@@ -1,7 +1,7 @@
 suite('toString', function(){
     var array = [1, 2, 3];
     var array1 = [6, 'bb', 'pepe', 6];
-    var array2 = [6, 'bb', 'pepe', 6, [4, 'diez', 33]]
+    var array2 = [6, 'bb', 'pepe', 6, [4, 'diez', 33]];
 
     test ('default behavior, number data type example', function(){
         var result = toStringo(array);

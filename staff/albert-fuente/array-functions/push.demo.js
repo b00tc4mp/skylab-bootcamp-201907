@@ -1,4 +1,4 @@
-console.log("DEMO PUSH")
+console.log("DEMO PUSH");
 
 var array=[1,2,3];
 
@@ -17,7 +17,7 @@ console.log(array, " expected[1,2,3,'a']"); //expected: [1,2,3,"a"]
 try{
     push();
 }catch(error){
-    console.log(error)
+    console.log(error);
     check(error instanceof TypeError, true);
 }
 

@@ -1,6 +1,6 @@
 
 function reduce(arr){
-  result=0
+  var result=0;
   for(var i in arr){
     result=result+arr[i]
   }

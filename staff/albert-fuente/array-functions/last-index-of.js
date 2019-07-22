@@ -1,5 +1,5 @@
 function lastIndexOf(arr,value){
-  result="";
+  var result="";
   for(var i in arr){
     if(arr[i]==value){
       result=i;

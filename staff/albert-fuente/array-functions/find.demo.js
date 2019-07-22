@@ -18,9 +18,9 @@ try{
 
 
 }catch(error){
-  check(error instanceof TypeError,true)
-  check(error.message, "THIS IS THE LOG NO ARGUMENTS ")
-  console.log(error.stack)
+  check(error instanceof TypeError,true);
+  check(error.message, "THIS IS THE LOG NO ARGUMENTS ");
+  console.log(error.stack);
 } 
 
 
@@ -28,17 +28,17 @@ try{
     find(2);
  
   }catch(error){
-    check(error instanceof TypeError,true)
-    check(error.message, "THIS IS THE LOG NOT ARRAY  ")
-    console.log(error.stack)
+    check(error instanceof TypeError,true);
+    check(error.message, "THIS IS THE LOG NOT ARRAY  ");
+    console.log(error.stack);
   }
 
   try{
     find([1,2,3],3);
  
   }catch(error){
-    check(error instanceof TypeError,true)
-    check(error.message, "THIS IS THE LOG NOT FUNCTION  ")
-    console.log(error.stack)
+    check(error instanceof TypeError,true);
+    check(error.message, "THIS IS THE LOG NOT FUNCTION  ");
+    console.log(error.stack);
   }
   

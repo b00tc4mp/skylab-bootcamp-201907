@@ -1,6 +1,6 @@
 function concat (...arg) {
-    if (arg.length === 0) throw TypeError (`missing argument when calling function concat`)
-    if (arg.length === 1) throw TypeError (`missing argument two when calling function concat`)
+    if (arg.length === 0) throw TypeError (`missing argument when calling function concat`);
+    if (arg.length === 1) throw TypeError (`missing argument two when calling function concat`);
     var newArray = [];
     var count = 0;
 

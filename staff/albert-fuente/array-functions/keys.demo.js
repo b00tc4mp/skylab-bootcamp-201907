@@ -2,7 +2,7 @@ console.log("KEYS DEMO");
 
 
 var array1 = ['a', 'b', 'c'];
-console.log(array1, " these are the initial values")
+console.log(array1, " these are the initial values");
 
 console.log(keys(array1), " expected output 012");
 // var iterator = array1.keys();

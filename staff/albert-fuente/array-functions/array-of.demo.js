@@ -9,9 +9,9 @@ var result=(arrayOf("a",2,"b"));
 check(result,['a',2,'b']);
 
 /*solo hay el caso en que la variable es declarada y no definida*/
-var x
+var x;
 try{
-    arrayOf(x)
+    arrayOf(x);
 }catch(error){
-    console.log(error)
+    console.log(error);
 }

@@ -1,6 +1,6 @@
 
 function unshift(arr, ...arguments){
-    console.log(arr)
+    console.log(arr);
     var newArray = [];
     var newItems = [...arguments];
     for (var i = 0; i < newItems.length; i++){
@@ -10,7 +10,7 @@ function unshift(arr, ...arguments){
         newArray[i+newItems.length] = arr[i];
     };
     array1 = newArray;
-    console.log(array1) //BORRAR
+    console.log(array1); //BORRAR
     return newArray.length;
 }
 

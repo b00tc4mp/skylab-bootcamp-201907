@@ -1,7 +1,7 @@
 function keys(arr){
   result=""
   for(var i in arr){
-    result+=i
+    result+=i;
   }
   return result;
 }

@@ -17,7 +17,7 @@ suite('TEST join', function () {
         var result = join(array);
         check(result, '1,2,3');},
         function(error) {
-            check(error.message,'argument is not an array')
+            check(error.message,'argument is not an array');
         });
  
  

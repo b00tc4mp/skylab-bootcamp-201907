@@ -5,7 +5,7 @@ suite("array-from", function(){
 
         var result=arrayFrom(array);
         checkArrays(result,["f", "o", "o"] );
-    })
+    });
 
 
 

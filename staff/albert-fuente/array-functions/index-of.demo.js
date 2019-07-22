@@ -7,4 +7,4 @@ console.log(indexOf(array,2), " expected output 0");
 
 var result=(indexOf(array,2));
 
-check(result,0)
+check(result,0);

@@ -2,7 +2,7 @@
 function reverse(arr){
   result=[];
   for(var i=arr.length-1;i>=0;i--){
-    result.push(arr[i])
+    result.push(arr[i]);
   }
   arr=result;
   return arr;

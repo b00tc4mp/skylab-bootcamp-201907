@@ -6,7 +6,7 @@ function find(arr,expression){
 
   for(var i in arr){
     if(expression(arr[i])){
-      return arr[i]
+      return arr[i];
     }
   }
 }

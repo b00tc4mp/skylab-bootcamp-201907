@@ -5,11 +5,11 @@ function some(array, value){
     for (let i=0; i< array.length; i++){
 
         if (array[i] === value){
-            console.log(true)
+            console.log(true);
             break
         }
         if (array[i] !== value){
-            console.log(false)
+            console.log(false);
             break
         }
     }

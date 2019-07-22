@@ -2,7 +2,7 @@ console.log("LASTINDEXOF DEMO");
 
 var animals = ['Dodo', 'Tiger', 'Penguin', 'Dodo'];
 
-console.log(animals, " these are the initial values")
+console.log(animals, " these are the initial values");
 
 console.log(lastIndexOf(animals,"Dodo"), "expected output is 3");
 
