@@ -385,7 +385,7 @@ describe('Curray', function () {
 
             expect(function () {
                 curray.some();
-            }).toThrowError(TypeError, 'missing argument 0 when calling function some');
+            }).toThrowError(TypeError, 'missing argument 0');
         });
 
         it('should break when expression is not a function', function () {
