@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- MOBILE VERSION. First tries. No BEM, no Sass. -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="We are Mucho, the global boutique design studio. We create design with meaning from our locations in Barcelona, San Francisco, Paris, and New York.">
+    <title>Mucho | Branding, Packaging and Graphic Design</title>
+    <link rel="shortcut icon" href="https://wearemucho.com/wp-content/themes/mucho-updated/img/icons/favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+      <div class="app-head">
+        <figure>
+            <img class="mucho-logo" alt="WeAreMucho logo" src="https://wearemucho.com/wp-content/themes/mucho-updated/img/logo.svg">
+        </figure>
+
+        <P class="intro">We are a strategy, branding, packaging, and graphic design studio. We create design with meaning from our locations in Barcelona, Paris, San Francisco, New York and Sydney. We’d love to hear from you at info@wearemucho.com</P>
+
+        <nav class="main-menu">
+            <img class="menu-icon" src="data:image/png;base64,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">
+            <ul class="hidden">
+                <li>Work</li>
+                <li>Strategy</li>
+                <li>Sharing</li>
+                <li>About</li>
+                <li>Jobs</li>
+                <li>Shop</li>
+                <li>Contact</li>
+            </ul>
+        </nav>
+      </div>
+
+      <div class="app-subhead">
+        <nav class="submenu">
+            <p>All Services</p>
+            <img class="submenu-icon" src="data:image/png;base64,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">
+            <ul class="hidden">
+                <li>service</li>
+                <li>service</li>
+                <li>service</li>
+                <li>service</li>
+                <li>service</li>
+                <li>service</li>
+                <li>service</li>
+                <li>service</li>
+                <li>service</li>
+                <li>service</li>
+                <li>service</li>
+                <li>service</li>
+                <li>service</li>
+                <li>service</li>
+                <li>service</li>
+            </ul>
+        </nav>
+
+        <nav class="submenu">
+            <p>All Industries</p>
+            <img class="submenu-icon" src="data:image/png;base64,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">            
+            <ul class="hidden">
+                <li>industry</li>
+                <li>industry</li>
+                <li>industry</li>
+                <li>industry</li>
+                <li>industry</li>
+                <li>industry</li>
+                <li>industry</li>
+                <li>industry</li>
+                <li>industry</li>
+                <li>industry</li>
+                <li>industry</li>
+                <li>industry</li>
+                <li>industry</li>
+                <li>industry</li>
+                <li>industry</li>
+                <li>industry</li>
+                <li>industry</li>
+            </ul>            
+        </nav>
+      </div>
+    </header>
+
+    <main>
+
+        <section class="main-content">
+            <div class="imagen">
+                <div class="reveal">
+                   <h1>Title</h1>
+                   <h2>Subtitle</h2>
+                </div>                  
+                <figure>
+                    <img class="img1" alt="Arrels Barcelona" src="https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2019/06/19154127/01-634x452@2x.jpg">
+                </figure>          
+            </div>
+    
+            <div class="imagen">
+                <div class="reveal">
+                   <h1>Title</h1>
+                   <h2>Subtitle</h2>
+                </div>                 
+                <figure>
+                    <img class="img2" alt="Clippings" src="https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2017/10/09084320/Thumbnail-634x452@2x.png">
+                </figure>             
+            </div>
+    
+            <div class="imagen">
+                <div class="reveal">
+                   <h1>Title</h1>
+                   <h2>Subtitle</h2>
+                </div>                 
+                <figure>
+                    <img class="img3" alt="The Ocean Race" src="https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2016/08/11024033/PayPal_Logo_Mucho-634x452@2x.png">
+                </figure>                
+            </div>
+    
+            <div class="imagen">
+                <div class="reveal">
+                   <h1>Title</h1>
+                   <h2>Subtitle</h2>
+                </div>                 
+                <figure>
+                    <img class="img4" alt="Alpine Investors" src="https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2019/03/04194725/Alpine_LHead_01-634x452@2x.jpg">
+                </figure>           
+            </div class="imagen">
+    
+            <div class="imagen">
+                <div class="reveal">
+                   <h1>Title</h1>
+                   <h2>Subtitle</h2>
+                </div>                 
+                <figure>
+                    <img class="img5" alt="Paradigm" src="https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2019/02/06003449/190205_Paradigm_Headquarters-1273x909@2x.png">
+                </figure>           
+            </div>
+    
+            <div class="imagen">
+                <div class="reveal">
+                   <h1>Title</h1>
+                   <h2>Subtitle</h2>
+                </div>                
+                <figure>
+                    <img class="img6" alt="Mucho Talks" src="https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2017/09/11021445/Dolby_Logo_Mucho-2-634x452@2x.png">
+                </figure>                 
+            </div>
+    
+            <div class="imagen">
+                <div class="reveal">
+                   <h1>Title</h1>
+                   <h2>Subtitle</h2>
+                </div>                 
+                <figure>
+                    <img class="img7" alt="Antheia" src="https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2006/08/01171114/WallpaperThumb-634x452@2x.jpg">
+                </figure>               
+            </div>
+    
+            <div class="imagen">
+                <div class="reveal">
+                   <h1>Title</h1>
+                   <h2>Subtitle</h2>
+                </div>                 
+                <figure>
+                    <img class="img8" alt="Venmo Debit Card" src="https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2018/02/28181600/Cover_Vagina_Cottin_feature-634x452@2x.jpg">
+                </figure>               
+            </div>
+    
+            <div class="imagen">
+                <div class="reveal">
+                   <h1>Title</h1>
+                   <h2>Subtitle</h2>
+                </div>                 
+                <figure>
+                    <img class="img9" alt="Baker" src="https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2018/02/13232343/Mucho_Baker_Case-study_Image_8000x5333px_1-634x452@2x.jpg">
+                </figure>              
+            </div>
+    
+            <div class="imagen">
+                <div class="reveal">
+                   <h1>Title</h1>
+                   <h2>Subtitle</h2>
+                </div>                 
+                <figure>
+                    <img class="img10" alt="Martin Margiela Book" src="https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2018/06/12073017/Margiela_Mucho_Spine-634x452@2x.jpg">
+                </figure>              
+            </div>
+    
+            <div class="imagen">
+                <div class="reveal">
+                   <h1>Title</h1>
+                   <h2>Subtitle</h2>
+                </div>                 
+                <figure>
+                    <img class="img11" alt="Cuatrecasas" src="https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2019/03/04194725/Alpine_LHead_01-634x452@2x.jpg">
+                </figure>               
+            </div>
+    
+            <div class="imagen">
+                <div class="reveal">
+                   <h1>Title</h1>
+                   <h2>Subtitle</h2>
+                </div>                 
+                <figure>
+                    <img class="img12" alt="Apple" src="https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2017/10/11022147/Apple_Logo_Mucho-634x452@2x.png">
+                </figure>               
+            </div>
+    
+            <div class="imagen">
+                <div class="reveal">
+                   <h1>Title</h1>
+                   <h2>Subtitle</h2>
+                </div>                 
+                <figure>
+                    <img class="img13" alt=" TeleMadrid" src="https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2017/10/09084320/Thumbnail-634x452@2x.png">
+                </figure>                 
+            </div>
+    
+            <div class="imagen">
+                <div class="reveal">
+                   <h1>Title</h1>
+                   <h2>Subtitle</h2>
+                </div>                 
+                <figure>
+                    <img class="img14" alt="Dolby" src="https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2017/09/11021445/Dolby_Logo_Mucho-2-634x452@2x.png">
+                </figure>               
+            </div>
+    
+            <div class="imagen">
+                <div class="reveal">
+                   <h1>Title</h1>
+                   <h2>Subtitle</h2>
+                </div>                 
+                <figure>
+                    <img class="img15" alt="PayPal" src="https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2016/08/11024033/PayPal_Logo_Mucho-634x452@2x.png">
+                </figure>                 
+            </div>
+    
+            <div class="imagen">
+                <div class="reveal">
+                   <h1>Title</h1>
+                   <h2>Subtitle</h2>
+                </div>                 
+                <figure>
+                    <img class="img16" alt="Movistar+" src="https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2017/02/20153539/Movistar-slides-open_Big-1273x909@2x.jpg">
+                </figure>                 
+            </div>
+    
+            <div class="imagen">
+                 <div class="reveal">
+                   <h1>Title</h1>
+                   <h2>Subtitle</h2>
+                </div>                
+                <figure>
+                    <img class="img17" alt="Wallpaper" src="https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2006/08/01171114/WallpaperThumb-634x452@2x.jpg">
+                </figure>                
+            </div>
+    
+            <div class="imagen">
+                <div class="reveal">
+                   <h1>Title</h1>
+                   <h2>Subtitle</h2>
+                </div>                 
+                <figure>
+                    <img class="img18" alt="Telerama" src="https://d3cffvogsu5dhv.cloudfront.net/wp-content/uploads-new/2018/02/28181600/Cover_Vagina_Cottin_feature-634x452@2x.jpg">
+                </figure>                
+            </div>
+        </section>
+
+        <section class="fixed-section">
+            <article>
+                <h3>@wearemucho</h3>
+                <p>bla bla bla</p>
+            </article>
+            
+            <article>
+                <h3>Talking & Teaching</h3>
+                <p>bla bla bla</p>
+            </article>     
+
+            <article>
+                <h3>About</h3>
+                <p>bla bla bla</p>
+            </article>    
+        </section>
+
+    </main>
+
+    <footer>
+        <address>
+            <p>We look forward to hearing from you. For new business, please contact the closest office directly. For general enquiries, please email us: info@wearemucho.com</p>
+
+          <section class="cities">
+            <div class="city-branch">
+                <h4>Barcelona</h4>
+                <p>telephone</p>
+                <p>email</p>
+                <p>address</p>
+            </div>
+
+            <div class="city-branch">
+                <h4>San Francisco</h4>
+                <p>telephone</p>
+                <p>email</p>
+                <p>address</p>
+            </div>
+            
+            <div class="city-branch">
+                <h4>Paris</h4>
+                <p>telephone</p>
+                <p>email</p>
+                <p>address</p>
+            </div>
+            
+            <div class="city-branch">
+                <h4>New York</h4>
+                <p>telephone</p>
+                <p>email</p>
+                <p>address</p>
+            </div> 
+          </section>
+            
+          <section class="footer-bottom">
+            <div class="social-media">
+                <p>Subscribe</p>
+                <ul>
+                    <li>
+                        <a href="">
+                            <img src="https://wearemucho.com/wp-content/themes/mucho-updated/img/instagram.svg">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <img src="https://wearemucho.com/wp-content/themes/mucho-updated/img/facebook.svg">
+                        </a>                      
+                    </li>
+                    <li>
+                        <a href="">
+                            <img src="https://wearemucho.com/wp-content/themes/mucho-updated/img/linkedin.svg">
+                        </a>                       
+                    </li>
+                    <li>
+                        <a href="">
+                            <img src="https://wearemucho.com/wp-content/themes/mucho-updated/img/medium.svg">
+                        </a>                      
+                    </li>
+                    <li>
+                        <a href="">
+                            <img src="https://wearemucho.com/wp-content/themes/mucho-updated/img/twitter.svg">
+                        </a>                      
+                    </li>
+                </ul>
+            </div>
+
+            <div class="last-line">
+               <p>Copyright © <time>2019</time></p>
+               <p><a href="">Terms</a></p>
+            </div>
+          </section>
+        </address>
+    </footer>
+</body>
+
+</html>
