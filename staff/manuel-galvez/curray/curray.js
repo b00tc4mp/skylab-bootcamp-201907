@@ -45,10 +45,9 @@ Curray.prototype.forEach = function(expression) {
 };
 
 Curray.prototype.indexOf = function(name) {
-    if (arguments.length === 0) throw TypeError('at least one argument must be passed in to indexOf');
 
     for (var i = 0; i < this.length; i++) {
-        if (name === this[i]) {
+        if ((typeof name === typeof this[i]) && (name.toString() === this[i].toString())) {
             return i;
         } else if (i == this.length - 1 || name == undefined) {
             return -1;
@@ -57,8 +56,8 @@ Curray.prototype.indexOf = function(name) {
 };
 
 Curray.prototype.reduce = function(reducer, initialValue) {
-    if (arguments.length !== 1 && arguments.length !== 2) throw TypeError("Wrong number of arguments: two expected (Array, Callback function).");
-    if (!(reducer instanceof Function)) throw TypeError("Second argument must be a callback function that takes 2 arguments (accumulator, value).");
+    if (arguments.length !== 1 && arguments.length !== 2) throw TypeError("Wrong number of arguments: two expected (Callback function, initialValue).");
+    if (!(reducer instanceof Function)) throw TypeError("First argument must be a callback function that takes 2 arguments (accumulator, value).");
     if (reducer.length !== 2) throw TypeError("Callback function must have two arguments (accumulator, value).");
     
     if (initialValue || initialValue === 0) {
@@ -78,8 +77,8 @@ Curray.prototype.reduce = function(reducer, initialValue) {
 
 
 Curray.prototype.reduceRight = function(reducer, initialValue) {
-    if (arguments.length !== 1 && arguments.length !== 2) throw TypeError("Wrong number of arguments: two expected (Array, Callback function).");
-    if (!(reducer instanceof Function)) throw TypeError("Second argument must be a callback function that takes 2 arguments (accumulator, value).");
+    if (arguments.length !== 1 && arguments.length !== 2) throw TypeError("Wrong number of arguments: two expected (Callback function, initialValue).");
+    if (!(reducer instanceof Function)) throw TypeError("First argument must be a callback function that takes 2 arguments (accumulator, value).");
     if (reducer.length !== 2) throw TypeError("Callback function must have two arguments (accumulator, value).");
     
     if (initialValue || initialValue === 0) {
@@ -121,7 +120,6 @@ Curray.prototype.join = function (separator) {
 }
 
 Curray.prototype.includes = function(value) {
-    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function');
     
     for(var i=0; i < this.length; i++){
         var test = false;
@@ -135,17 +133,22 @@ Curray.prototype.includes = function(value) {
 
 Curray.prototype.map = function(expression) {
 
-  var result = new Curray()
+    if (arguments.length === 0) throw TypeError('an expression should be passed as argument to map()');
+    if (!(expression instanceof Function)) throw TypeError("First argument must be a callback function that returns the result of an expression");
 
-  for (var i = 0; i < this.length; i++)
-    result[i] = expression(this[i], i, this)
-    result['length'] = i
+    var result = new Curray()
 
-  return result;
+    for (var i = 0; i < this.length; i++)
+        result[i] = expression(this[i], i, this)
+        result['length'] = i
+
+    return result;
 }
 
 
 Curray.prototype.every = function(expression) {
+    if (arguments.length === 0) throw TypeError('an expression should be passed as argument to every()');
+    if (!(expression instanceof Function)) throw TypeError("First argument must be a callback function that returns the result of an expression");
 
     for (var i=0; i < this.length; i++) {
         if (!expression(this[i]))  return false
@@ -170,8 +173,9 @@ Curray.prototype.keys = function () {
     for (var i = 0; i < this.length; i++) {
         newCurray[i] = i
         newCurray['length'] = i + 1
-  }
-  return newCurray
+    }
+
+    return Array.from(newCurray)[Symbol.iterator]()
 }
 
 Curray.prototype.fill = function(val, start, end) {
@@ -228,6 +232,11 @@ Curray.from = function(iterable) {
 
 Curray.prototype.find = function(expression) {
     if (arguments.length === 0) throw TypeError('find() requires a callback function as first argument');
+    if (!(expression instanceof Function)) throw TypeError("First argument must be a callback function that returns the result of an expression");
+
+    if (expression.length !== 1)  {
+        return undefined 
+    }
 
     for (var i = 0; i < this.length; i++) {
         if (expression(this[i])) return this[i]
@@ -236,6 +245,12 @@ Curray.prototype.find = function(expression) {
 
 Curray.prototype.findIndex = function(expression) {
     if (arguments.length === 0) throw TypeError('findIndex() requires a callback function as first argument');
+    if (!(expression instanceof Function)) throw TypeError("First argument must be a callback function that returns the result of an expression");
+
+     if (expression.length !== 1)  {
+        return -1
+     }
+    
 
     for (var i = 0; i < this.length; i++) {
         if (expression(this[i])) return i
@@ -365,8 +380,25 @@ Curray.prototype.values = function() {
     }
 
     return Array.from(result)[Symbol.iterator]()
+}
 
 
+var arr = [1,2,3,4];
+sumJorge(arr, 0, arr.length, function(a,b) {
+    return a * b;
+});
+
+
+function sumJorge(array, start, end, callback) {
+
+    var accumulator = array[start] 
+    if (start < end) {
+        debugger;
+        accumulator += callback(accumulator, array[start+1])
+        sumJorge(array, start + 1, end, callback);
+    }
+
+    console.log(accumulator);
 }
 
 

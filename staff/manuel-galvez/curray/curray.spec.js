@@ -4,11 +4,18 @@ describe('Curray', function() {
 
     describe('push', function() {
         it(
-            'should push a string', function() {
+            'should push a string to the end of Curray', function() {
             var curray = new Curray();
             var result = curray.push('hola mundo');
             expect(curray[0]).toBe('hola mundo');
             expect(result).toBe(1);
+        });
+        it(
+            'should push a curray to the end of curray', function() {
+            var curray = new Curray(1,2);
+            var result = curray.push(new Curray(1,2,3,4));
+            expect(curray).toEqual(new Curray(1,2,new Curray(1,2,3,4)));
+            expect(result).toBe(3);
         });
 
         it(
@@ -33,6 +40,17 @@ describe('Curray', function() {
         });
 
         it(
+            'should pop a curray from the end of curray', 
+            function() {
+                var curray = new Curray('hola', new Curray(1,2));
+                var result = curray.pop();
+
+                expect(result).toEqual(new Curray(1,2));
+                expect(curray.length).toBe(1);
+                expect(curray[1]).toBeUndefined();
+        });
+
+        it(
             'should fail when an argument is passed', 
             function() {
                 var curray = new Curray('hola', 'mundo');
@@ -41,7 +59,7 @@ describe('Curray', function() {
     });
 
     describe('forEach', function() {
-        it('should output each element index and curray', function () {
+        it('should iterate through each element of curray push value, index and curray', function () {
             var curray = new Curray('a', 'b', 'c');
     
             var outputs = [];
@@ -56,6 +74,18 @@ describe('Curray', function() {
                 ['c', 2, curray]]);
         });
 
+    it('should iterate through each element of curray and concatenate each index and value in a string', function () {
+            var curray = new Curray('a', 'b', 'c');
+    
+            var outputs = '';
+    
+            curray.forEach(function (element, index, curray) {
+                outputs += index + '-' + element
+            });
+    
+            expect(outputs).toBe('0-a1-b2-c')
+        });
+
         it(
             'should capture no arguments error',
             function () {
@@ -64,13 +94,23 @@ describe('Curray', function() {
                 expect(function() {
                     curray.forEach();
                 }).toThrowError(TypeError, 'an expression should be passed as argument to forEach')
-            })
+            });
+        
+        it(
+            'should capture if argument passed is not a expression (function)',
+            function () {
+                var curray = new Curray('a','b','c');
+                expect(function() {
+                    curray.forEach('notAExpression');
+                }).toThrowError('notAExpression is not a function')
+            }
+        )
     });
 
 
     describe('indexOf', function() {
         it(
-            'should get index of an element',
+            'should get index of an element (string)',
             function() {
                 var curray = new Curray('ant', 'bison', 'camel', 'duck', 'bison');
                 var result = curray.indexOf('camel');
@@ -78,18 +118,26 @@ describe('Curray', function() {
             });
 
         it(
-            'should fail on no arguments',
+            'should get index of an element (object)',
             function() {
-                var curray = new Curray('ant', 'bison', 'camel', 'duck', 'bison');
-                expect(function() {
-                    curray.indexOf();
-                }).toThrowError(TypeError, 'at least one argument must be passed in to indexOf');
+                var curray = new Curray('ant', 'bison', new Curray(1,2,3), 'duck', 'bison');
+                var result = curray.indexOf(new Curray(1,2,3));
+                expect(result).toBe(2);
             });
-    });
+
+        it(
+            'should return -1 when no arguments are provided',
+            function() {
+                var curray = new Curray('ant', 'bison', new Curray(1,2,3), 'duck', 'bison');
+                var result = curray.indexOf();
+                expect(result).toBe(-1);
+            });
+
+        });
 
     describe('reduce', function() {
         it(
-            'sum all items in array of numbers',
+            'sum all items in curray of numbers',
             function() {
                 var curray = new Curray(1,2,3,4);
                 var result = curray.reduce(
@@ -99,14 +147,44 @@ describe('Curray', function() {
                 );
                 expect(result).toBe(10);
             });
+        it(
+            'concat all elements in curray of strings and numbers',
+            function() {
+                var curray = new Curray('a','b',3,4,'c');
+                var result = curray.reduce(
+                    function(accumulator, val) {
+                        return accumulator + val
+                    }
+                );
+                expect(result).toBe('ab34c');
+            });
+        
 
         it(
-            'capture wrong number o arguments error',
+            'should throw an error when wrong number of arguments is provided',
             function() {
                 var curray = new Curray(1,2,3,4);
                 expect(function() {
                     curray.reduce()
-                }).toThrowError(TypeError, 'Wrong number of arguments: two expected (Array, Callback function).')
+                }).toThrowError(TypeError, 'Wrong number of arguments: two expected (Callback function, initialValue).')
+            });
+        it(
+            'should throw an error when argument passed is not a function',
+            function() {
+                var curray = new Curray(1,2,3,4);
+                expect(function() {
+                    curray.reduce('thisIsNotAFunction')
+                }).toThrowError(TypeError, 'First argument must be a callback function that takes 2 arguments (accumulator, value).')
+            });
+        it(
+            'should throw an error when wrong number of arguments provided for callback function',
+            function() {
+                var curray = new Curray(1,2,3,4);
+                expect(function() {
+                    curray.reduce(function() {
+                        return false;
+                    });
+                }).toThrowError(TypeError, 'Callback function must have two arguments (accumulator, value).')
             });
     });
 
@@ -123,6 +201,45 @@ describe('Curray', function() {
                 expect(result).toBe(10);
         });
 
+         it(
+            'concat all elements in curray of strings and numbers',
+            function() {
+                var curray = new Curray('a','b',3,4,'c');
+                var result = curray.reduceRight(
+                    function(accumulator, val) {
+                        return accumulator + val
+                    }
+                );
+                expect(result).toBe('c43ba');
+            });
+
+        it(
+            'should throw an error when wrong number of arguments is provided',
+            function() {
+                var curray = new Curray(1,2,3,4);
+                expect(function() {
+                    curray.reduceRight()
+                }).toThrowError(TypeError, 'Wrong number of arguments: two expected (Callback function, initialValue).')
+            });
+        it(
+            'should throw an error when argument passed is not a function',
+            function() {
+                var curray = new Curray(1,2,3,4);
+                expect(function() {
+                    curray.reduceRight('thisIsNotAFunction')
+                }).toThrowError(TypeError, 'First argument must be a callback function that takes 2 arguments (accumulator, value).')
+            });
+        it(
+            'should throw an error when wrong number of arguments provided for callback function',
+            function() {
+                var curray = new Curray(1,2,3,4);
+                expect(function() {
+                    curray.reduceRight(function() {
+                        return false;
+                    });
+                }).toThrowError(TypeError, 'Callback function must have two arguments (accumulator, value).')
+            });
+
     });
 
 
@@ -137,6 +254,24 @@ describe('Curray', function() {
                     }
                 );
                 expect(result).toBeTruthy()
+            });
+        
+        it(
+            'should throw error when no arguments are provided',
+            function() {
+                var curray = new Curray(5,10,15,20,25);
+                expect(function() {
+                    curray.every();
+                }).toThrowError('an expression should be passed as argument to every()');
+            });
+
+        it(
+            'should throw error when argument passed is not a function',
+            function() {
+                var curray = new Curray(5,10,15,20,25);
+                expect(function() {
+                    curray.every('aaaa');
+                }).toThrowError('First argument must be a callback function that returns the result of an expression');
             });
     });
     
@@ -160,8 +295,16 @@ describe('Curray', function() {
                 var result = curray.join();
                 expect(result).toBe('Fire,Air,Water');
             });
-    });
 
+        it(
+            'should join all elements in curray with a specific delimiter.',
+            function() {
+                var curray = new Curray('Fire', 'Air', 'Water');
+                var result = curray.join('--');
+                expect(result).toBe('Fire--Air--Water');
+            });
+        
+    });
 
     describe('includes', function() {
         it(
@@ -171,6 +314,22 @@ describe('Curray', function() {
                 var result = curray.includes(4);
                 expect(result).toBeTruthy();
             });
+        it(
+            'should return false when no arguments passed in',
+            function() {
+                var curray = new Curray(1,2,3,4);
+                var result = curray.includes();
+                expect(result).toBeFalsy();
+            });
+        it(
+            'should return false when value passed in is not found in curray',
+            function() {
+                var curray = new Curray(1,2,3,4);
+                var result = curray.includes(10);
+                expect(result).toBeFalsy();
+            });
+
+
     });
 
     describe('map', function() {
@@ -186,15 +345,41 @@ describe('Curray', function() {
                 var resultArr = Array.from(result);
                 expect(resultArr).toEqual([10,20,30,40]);
             });
+        
+        it(
+            'should throw and error when no arguments are passed in',
+            function() {
+                var curray = new Curray(1,2,3,4);
+                expect(function() {
+                    curray.map()
+                }).toThrowError('an expression should be passed as argument to map()')
+            });
+        
+        it(
+            'should throw and error if argument provided is not a callback function',
+            function() {
+                var curray = new Curray(1,2,3,4);
+                expect(function() {
+                    curray.map('aaaa')
+                }).toThrowError('First argument must be a callback function that returns the result of an expression')
+            });
     });
 
     describe('keys', function() {
         it(
-            'should return new curray with indices as values',
+            'should return an array iterator with original curray indices as values',
             function() {
                 var curray = new Curray('a','b','c','d');
                 var result =  curray.keys();
-                expect(Array.from(result)).toEqual([0,1,2,3]);
+                expect(result).toEqual(['a','b','c','d'][Symbol.iterator]());
+        });
+
+        it(
+            'should return an array iterator with original curray indices as values (mixed values)',
+            function() {
+                var curray = new Curray('a',3,function(){},undefined);
+                var result =  curray.keys();
+                expect(result).toEqual(['a',3,function(){},undefined][Symbol.iterator]());
         });
     });
 
@@ -204,7 +389,23 @@ describe('Curray', function() {
             function() {
                 var curray = new Curray('a','b','c','d','e','f');
                 var result =  curray.fill(0, 2, 4);
-                expect(Array.from(result)).toEqual(['a','b',0,0,'e','f']);
+                expect(result).toEqual(new Curray('a','b',0,0,'e','f'));
+        });
+
+        it(
+            'should return curray with elements replace with first parameter from second parameter index on',
+            function() {
+                var curray = new Curray('a','b','c','d','e','f');
+                var result =  curray.fill(0, 2);
+                expect(result).toEqual(new Curray('a','b',0,0,0,0));
+        });
+
+        it(
+            'should return modified curray with all values replaced by argument provided',
+            function() {
+                var curray = new Curray('a','b','c','d','e','f');
+                var result =  curray.fill(5);
+                expect(result).toEqual(new Curray(5,5,5,5,5,5));
         });
     });
 
@@ -216,6 +417,14 @@ describe('Curray', function() {
                 var result = curray.entries();
                 expect(result).toEqual([[0,'a'], [1,'b'], [2,'c'], [3,'d']][Symbol.iterator]());
             });
+
+        it(
+            'should return a curray iterator made of [index, value] (mixed values)',
+            function() {
+                var curray = new Curray('a',1,function(){},undefined);
+                var result = curray.entries();
+                expect(result).toEqual([[0,'a'], [1,1], [2,function(){}], [3,undefined]][Symbol.iterator]());
+            });
         });
     
     describe('from', function() {
@@ -226,17 +435,53 @@ describe('Curray', function() {
                 var expected = new Curray('a', 'b', 'c', 'd');
                 expect(result).toEqual(expected)
             });
+        
+        it(
+            'should throw an error if no arguments provided',
+            function() {
+                expect(
+                    function() {
+                        Curray.from()
+                    }).toThrowError('from() requires an iterable as first argument');
+            });
+
         });
     
     describe('find', function() {
         it(
-            'should return first element in curray that meets expression condition',
+            'should return first value in curray that meets expression condition',
             function() {
                 var curray = new Curray(5, 12, 8, 130, 44);
                 var result = curray.find(function(elem) {
                     return elem > 10;
                 });
                 expect(result).toBe(12);
+            });
+        
+        it(
+            'should return undefined if no arguments provided to callback function',
+            function() {
+                var curray = new Curray(1,2,3,4);
+                var result = curray.find(function() { return null});
+                expect(result).toBeUndefined();
+            });
+
+        it(
+            'should throw an error if no argument provided',
+            function() {
+                var curray = new Curray(1,2,3,4);
+                expect(function() {
+                    curray.find();
+                }).toThrowError('find() requires a callback function as first argument')
+            });
+
+        it(
+            'should throw an error if argument provided is not a function',
+            function() {
+                var curray = new Curray(1,2,3,4);
+                expect(function() {
+                    curray.find('aaaa');
+                }).toThrowError('First argument must be a callback function that returns the result of an expression')
             });
         });
     
@@ -251,8 +496,33 @@ describe('Curray', function() {
                 });
                 expect(result).toBe(1)
             });
+
+        it(
+            'should return -1 if no arguments provided to callback function',
+            function() {
+                var curray = new Curray(1,2,3,4);
+                var result = curray.findIndex(function() { return null});
+                expect(result).toBe(-1);
+            });
+        
+        it(
+            'should throw an error if no argument provided',
+            function() {
+                var curray = new Curray(1,2,3,4);
+                expect(function() {
+                    curray.findIndex();
+                }).toThrowError('findIndex() requires a callback function as first argument')
+            });
+        it(
+            'should throw an error if argument provided is not a function',
+            function() {
+                var curray = new Curray(1,2,3,4);
+                expect(function() {
+                    curray.findIndex('aaaa');
+                }).toThrowError('First argument must be a callback function that returns the result of an expression')
+            });
         });
-    
+
     describe('concat', function() {
         it(
             'should return a curray listing all elements from two different currays',
