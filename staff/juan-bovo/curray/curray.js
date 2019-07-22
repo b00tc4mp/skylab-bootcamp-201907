@@ -126,20 +126,7 @@ Curray.prototype.unshift = function(element){
     return this;
 };
 
-// Curray.prototype.unshift = function(...element){
-//     this.length++
-//     for(var i=this.length-1;i>=0;i--){
-//         this[i]=this[i-1];
-//     }
-//
-//      (Georgie Boy no itera sobre el array, además de que está retornando el primer elemento)
-//
-//     this[0]=element
-//     return this.length;
-// };
-
 Curray.prototype.filter=function(expression){
-    /*     if (this.length === 0) throw TypeError('missing argument 0 when calling function filter');*/
     if(this[0]===undefined) throw TypeError("No se puede convertir a string un objeto null");
 
     var newarray = [];
@@ -157,12 +144,6 @@ Curray.prototype.filter=function(expression){
 
 
 Curray.prototype.copyWithin=function(target,start,end){
-/*     if (arguments.length === 0) throw TypeError('missing argument 0 when calling function copyWithin');
-  
-    if (end > array.length - 1) throw TypeError('superior range than array length')
-  
-    if (start < 0) throw TypeError('length less than zero is not possible') */
-
     var newArray = [];
     var count = 0;
     for(var i = start; i < end; i++){
@@ -274,8 +255,18 @@ Curray.prototype.reduce = function(expression, initialValue){
     };
 
     return result;
+};
 
-}
+Curray.prototype.reduceRight = function (expression) {
+    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function reduceRight');
+    if (typeof expression !== 'function') throw TypeError(expression + ' is not a function');
+
+    var newArray = []
+    for (var i = this.length - 1; i >= 0; i--) {
+        newArray = expression(newArray, this[i]);
+    }
+    return newArray;
+};
 
 Curray.prototype.concat = function(curray){
     if(arguments.length === 0) throw ReferenceError('missing argument 0 when calling function concat')
@@ -287,4 +278,141 @@ Curray.prototype.concat = function(curray){
         res[this.length++]=curray[i];
     }
     return res;
-}
+};
+
+Curray.prototype.arrayOf = function () {
+    var curray = [];
+
+    for (var i = 0; i < this.length; i++) {
+
+        curray.push(this[i]);
+
+    }
+
+    return curray;
+};
+
+Curray.prototype.splice = function (start, remove, add1, add2) {
+
+    var newArray = [];
+    var n = 0;
+    var x = remove;
+
+    for (var i = 0; i < this.length; i++) {
+        if (i < start) {
+            newArray[n++] = this[i];
+        } else if (x >= 0) {
+            if (x === 0) {
+                newArray[n++] = this[i];
+                if (add1 != 0) {
+                    newArray[n++] = add1;
+                    add1 = 0;
+                    if (add2 != 0) {
+                        newArray[n++] = add2;
+                        add2 = 0;
+                    }
+                }
+            } else if (x-- === 1) {
+                if (add1 != 0) {
+                    newArray[n++] = add1;
+                    add1 = 0;
+                    if (add2 != 0) {
+                        newArray[n++] = add2;
+                        add2 = 0;
+                    }
+                }
+            }
+        } else if (this.length > start + remove) {
+            newArray[n++] = array[i];
+        }
+    }
+    return newArray;
+};
+
+Curray.prototype.sort = function (expression) {
+
+    var sorted = [this[0]]
+    expression = expression || function (a, b) {
+        return String(a) >= String(b);
+    }
+
+    for (var i = 1; i < this.length; i++) {
+        var indexToInsert = 0
+        for (var j = 0; j < sorted.length; j++) {
+            if (expression(this[i], sorted[j])) {
+                indexToInsert = j + 1;
+            } else {
+                break
+            }
+        }
+        sorted.splice(indexToInsert, 0, this[i])
+    }
+    return sorted;
+};
+
+Curray.prototype.lastIndexOf = function (element) {
+    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function lastIndexOf');
+
+    for (var i = this.length + 1; i > 0; i--) {
+        if (this[i] === element) {
+            return i;
+        }
+    }
+    return -1;
+};
+
+Curray.prototype.find = function (expression) {
+    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function find');
+
+    for (var i = 0; i < this.length; i++) {
+        if (expression(this[i])) {
+            return this[i];
+        }
+    }
+};
+
+Curray.prototype.some = function (expression) {
+    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function some');
+    if (typeof expression !== 'function') throw TypeError(expression + ' is not a function');
+
+    for (var i = 0; i < this.length; i++) {
+        if (expression(this[i]) === true) {
+            return true;
+        }
+    }
+    return false;
+};
+
+Curray.prototype.shift = function () {
+
+    var first = this[0];
+    for (var i = 1; i < this.length; i++) {
+        this[i - 1] = this[i];
+    }
+    this.length = this.length - 1;
+    return first;
+};
+
+Curray.prototype.reverse = function () {
+
+    for (var i = 0; i <= Math.floor((this.length - 1) / 2); i++) {
+        var a = this[i];
+        this[i] = this[this.length - 1 - i];
+        this[this.length - 1 - i] = a;
+    }
+    var realrray = Array.from(this);
+    return realrray;
+};
+
+Curray.prototype.includes = function (value) {
+    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function includes');
+
+    for (var i = 0; i < this.length; i++) {
+        var test = false;
+
+        if (this[i] == value) {
+            test = true;
+        }
+    }
+    return test;
+};
