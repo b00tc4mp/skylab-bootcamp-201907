@@ -422,8 +422,83 @@ describe('Curray', function () {
                 }).toThrowError("missing argument 0 when calling function some")
             })
     });
+    /************************************************************************** */
+    describe('reduce', function(){
+        it('correct add curray', function(){
+            var curray = new Curray(0,1,2,3,4);
+            var result = curray.reduce(function(a,b){
+                return a+b;
+            })
+            expect(result).toBe(10);
+        })
+        it('correct multiply curray', function(){
+            var curray =  new Curray(1,2,3,4);
+            var result = curray.reduce(function(a,b){
+                return a*b;
+            });
+            expect(result).toBe(24);
+        });
+    });
+    /******************************************************************************* */
+    describe("sort",function(){
+        it("default",function(){
+            var curray=new Curray(4, 2, 5, 1, 3);
+            var result=curray.sort(function(a, b) {
+                return a - b;
+              });
+            result=Array.from(result);
+            expect(result).toEqual([1, 2, 3, 4, 5]);
+        });
 
+    });
+    /************************************************************************************* */
+    describe('splice', function() {
+        it('should delete some elements and add spme others', function() {
+            var curray = new Curray (1, 2, 3, 4, 5, 6);
+            var result = curray.splice(2, 1, 'a', 'b');
 
+            expect(result).toEqual([1, 2, "a", "b", 4, 5, 6]);
+        });
+
+        it('should return an empty curray', function() {
+            var curray = new Curray (1, 2, 3, 4, 5, 6);
+            var result = curray.splice();
+
+            expect(result).toEqual([]);
+        });
+    });
+    /************************************************************************************* */
+    describe('reduceRight', function() {
+        it('should apply a function against an accumulator and each value of curray from right to left', function() {
+            var curray = new Curray ('A', 'B', 'C');
+            var result = '';
+            var expected = 'CBA';
+    
+            result = curray.reduceRight(function (empty, current) {
+                return empty + current;
+            });
+            for (var i in result) {
+                expect(result[i], expected[i]);
+            }
+
+            expect(result).toEqual(expected);
+        });
+
+        it('should fail on no arguments', function() {
+            var curray = new Curray();
+
+            expect(function() {
+                curray.reduceRight();
+            }).toThrowError(TypeError, 'missing argument 0 when calling function reduceRight');
+        });
+
+        it('should break when expression is not a function', function (){
+            var curray = new Curray();
+            expect(function() {
+                curray.reduceRight('x');
+            }).toThrowError(TypeError,'x is not a function');
+        });
+    });
 
 
 

@@ -324,3 +324,87 @@ Curray.prototype.someTest=function(expression){
 
 }
 
+Curray.prototype.reduce = function(expresion){
+    var result=0;
+    var count=0;
+    for(var i=1;i<this.length;i++){
+        count=expresion(this[i-1],this[i],i,this)
+        result=count;
+        this[i]=count
+    }
+    return result
+}
+
+Curray.prototype.sort = function(expression) {
+
+    for (var i = 0; i < this.length-1; i++) {
+        var a = this[i];
+        var b = this[i+1];
+        if (expression(a,b) > 0 || expression(a,b) === 1) {
+            this[i] = b;
+            this[i+1] = a;
+        } else {
+            this[i] = a;
+            this[i+1] = b;
+        }
+    }
+  
+    for (var i = 0; i < this.length; i++) {
+        var a = this[i];
+        var b = this[i+1];
+        if (expression(a,b) > 0 || expression(a,b) === 1) {
+            this.sort(expression)
+        }
+    }
+  
+    return this
+  }
+
+  Curray.prototype.splice = function(start, remove, add1, add2) {
+
+    var newArray = [];
+    var n = 0;
+    var x = remove;
+
+    for (var i = 0; i < this.length; i++) {
+        if (i < start) {
+            newArray[n++] = this[i];
+        } else if (x >= 0) {
+            if (x === 0) {
+                newArray[n++] = this[i];
+                if (add1 != 0) {
+                    newArray[n++] = add1;
+                    add1 = 0;
+                    if (add2 != 0) {
+                        newArray[n++] = add2;
+                        add2 = 0;
+                    }
+                }
+            } else if (x-- === 1) {
+                if (add1 != 0) {
+                    newArray[n++] = add1;
+                    add1 = 0;
+                    if (add2 != 0) {
+                        newArray[n++] = add2;
+                        add2 = 0;
+                    }
+                }
+            }
+        } else if (this.length > start + remove) {
+            newArray[n++] = array[i];
+        }
+    }
+    return newArray;
+};
+
+Curray.prototype.reduceRight = function(expression) {
+    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function reduceRight');
+    if (typeof expression !== 'function') throw TypeError(expression + ' is not a function');
+    
+    var newArray = []
+    for (var i = this.length -1; i >= 0  ;i--){
+        newArray = expression(newArray, this[i]);
+    }
+   return newArray;
+};
+
