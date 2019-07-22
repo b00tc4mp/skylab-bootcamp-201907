@@ -13,4 +13,4 @@ function sum(array) {
 
         return 0;
     })(0);
-}
+};
