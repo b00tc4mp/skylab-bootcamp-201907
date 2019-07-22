@@ -49,6 +49,7 @@ describe('Curray', function () {
             }).toThrowError(TypeError, 'missing argument 0 when calling function forEach');
         });
     });
+
     describe('concat', function(){
         it('no arguments', function(){
             var curray1 = new Curray(1,2,3);
@@ -218,5 +219,205 @@ describe('Curray', function () {
             });
             expect(result).toBe(24);
         })
+    });
+
+/*     describe("slice",function(){
+        it("default",function(){
+            var curray1=new Curray('Rita', 'Pedro', 'Miguel', 'Ana', 'Vanesa');
+            var result=curray1.slice(1,3);
+            expect(result).toEqual(['Pedro','Miguel']);
+        });
+    }); */
+    describe('copyWithin', function () {
+        it('should copy part of the curray whouth changing the lenght', function () {
+            var curray1 = new Curray();
+
+            curray1 = ([1, 2, 3]);
+
+            var result = curray1.copyWithin(1, 2);
+            expect(result).toEqual([1, 3, 3]);
+        });
+    });
+    describe('arrayOf', function () {
+        it('should introduce the arguments into a new curray', function () {
+            var curray = new Curray(1, 2, 3, 'hello', {}, NaN);
+
+            var result = (curray).arrayOf();
+            expect(Array.from(result)).toEqual([1, 2, 3, 'hello', {}, NaN]);
+        })
+    });
+    describe("join", function () {
+        it('should join in a string', function () {
+            var curray = new Curray(1, 2, 3, 4, 5, 6, 7, 8, 9);
+            curray = curray.join("-");
+
+            expect(curray, "1-2-3-4-5-6-7-8-9");
+        });
+        it("should put a ',' as separator", function () {
+            var curray = new Curray(1, 2, 3, 4, 5, 6, 7, 8, 9);
+            curray = curray.join();
+
+            expect(curray, "1,2,3,4,5,6,7,8,9");
+        });
+        it("should convert the numb to string", function () {
+            var curray = new Curray(1, 2, 3, 4, 5);
+            curray = curray.join(0);
+
+            expect(curray, "102030405");
+        });
+    });
+    describe('splice', function () {
+        it('should delete some elements and add spme others', function () {
+            var curray = new Curray(1, 2, 3, 4, 5, 6);
+            var result = curray.splice(2, 1, 'a', 'b');
+
+            expect(result).toEqual([1, 2, "a", "b", 4, 5, 6]);
+        });
+
+        it('should return an empty curray', function () {
+            var curray = new Curray(1, 2, 3, 4, 5, 6);
+            var result = curray.splice();
+
+            expect(result).toEqual([]);
+        });
+    })
+    describe('sort', function () {
+        it('should sort curray', function () {
+            var curray = new Curray('March', 'Jan', 'Feb', 'Dec');
+            var result = curray.sort();
+
+            expect(result).toEqual(["Dec", "Feb", "Jan", "March"]);
+        });
+    })
+
+    describe('slice', function () {
+        it('should break if first is not a number', function () {
+            var curray = new Curray();
+            expect(function () {
+                curray.slice("a", 6);
+            }).toThrowError(TypeError, 'a is not a number');
+        });
+
+        it('should should break if final is not undefined and is not a number', function () {
+            var curray = new Curray();
+            expect(function () {
+                curray.slice(5, "b");
+            }).toThrowError(TypeError, 'b is not a number');
+        });
+    })
+    describe('reduceRight', function () {
+        it('should apply a function against an accumulator and each value of curray from right to left', function () {
+            var curray = new Curray('A', 'B', 'C');
+            var result = '';
+            var expected = 'CBA';
+
+            result = curray.reduceRight(function (empty, current) {
+                return empty + current;
+            });
+            for (var i in result) {
+                expect(result[i], expected[i]);
+            }
+
+            expect(result).toEqual(expected);
+        });
+
+        it('should fail on no arguments', function () {
+            var curray = new Curray();
+
+            expect(function () {
+                curray.reduceRight();
+            }).toThrowError(TypeError, 'missing argument 0 when calling function reduceRight');
+        });
+
+        it('should break when expression is not a function', function () {
+            var curray = new Curray();
+            expect(function () {
+                curray.reduceRight('x');
+            }).toThrowError(TypeError, 'x is not a function');
+        });
+    })
+
+    it('should filter all the items who accomplish the condition introduced, case 2', function () {
+        var curray = new Curray(1, 2, 3, 4, 5, 6);
+        var result = curray.filter(function (x) {
+            return x < 4;
+        });
+
+        expect(result).toEqual([1, 2, 3]);
+    });
+
+    it('should filter all the items who accomplish the condition introduced, case ', function () {
+        var curray = new Curray(1, 2, 3, 4);
+        var result = curray.filter(function (x) {
+            return x > 5;
+        });
+
+        expect(result).toEqual([]);
+    });
+
+    it('should fail on no arguments', function () {
+        var curray = new Curray();
+
+        expect(function () {
+            curray.filter();
+        }).toThrowError(TypeError, 'missing argument 0 when calling function filter');
+    });
+
+    it('should break when expression is not a function', function () {
+        var curray = new Curray();
+        expect(function () {
+            curray.filter('x');
+        }).toThrowError(TypeError, 'x is not a function');
+    });
+    
+    describe('some', function () {
+        it('should iterate curray and evaluate an expression on at least one of its values', function () {
+            var curray = new Curray(1, 3, 5, 7, 11, 15);
+            var result = curray.some(function (element) {
+                return element > 10
+            });
+
+            expect(result).toEqual(true);
+        });
+
+        it('should fail on no arguments', function () {
+            var curray = new Curray();
+
+            expect(function () {
+                curray.some();
+            }).toThrowError(TypeError, 'missing argument 0 when calling function some');
+        });
+
+        it('should break when expression is not a function', function () {
+            var curray = new Curray();
+            expect(function () {
+                curray.some('x');
+            }).toThrowError(TypeError, 'x is not a function');
+        });
+    })
+
+    describe('shift', function () {
+        it('should remove the first element from curray', function () {
+            var curray = new Curray(1, 2, 3);
+            var result = curray.shift();
+
+            expect(result).toEqual(1);
+        });
+    })
+
+    describe('reverse', function () {
+        it('should reverse curray in place, case 1', function () {
+            var curray = new Curray(1, 2, 3, 4, 5);
+            var result = curray.reverse();
+
+            expect(result).toEqual([5, 4, 3, 2, 1]);
+        });
+
+        it('should reverse curray in place, case 2', function () {
+            var curray = new Curray(5, 4, 3, 2, 1);
+            var result = curray.reverse();
+
+            expect(result).toEqual([1, 2, 3, 4, 5]);
+        });
     })
 });
