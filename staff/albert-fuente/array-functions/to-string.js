@@ -13,7 +13,7 @@ function toStringo(arr){
   if (arr === undefined) throw TypeError('No se puede leer la propiedad "length" de undefined');
   if (arr === null) throw TypeError ('No se puede convertir a string un objeto null');
 
-  newstring = '';
+  var newstring = '';
   if (typeof arr === 'string'){
       newstring = arr;
   } else {

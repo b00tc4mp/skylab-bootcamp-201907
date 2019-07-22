@@ -1,5 +1,7 @@
 function slice(arr,begin,end){
-  result=[];
+  begin=Math.abs(begin);
+  end=Math.abs(end);
+  var result=[];
   for(var i=begin;i<end;i++){
     result.push(arr[i]);
   }

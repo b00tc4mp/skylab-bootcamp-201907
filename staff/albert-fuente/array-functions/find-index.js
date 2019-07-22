@@ -1,12 +1,10 @@
-function findIx(arr,value){
-  var result=[];
-  for(var i in arr){
-    if(arr[i]>value){
-      result=i;
-      break;
+function findIx(arr,expression){
+  for(var i=0;i<arr.length;i++){
+    if(expression(arr[i])){
+      return i;
+
     }
   }
-  return result;
 }
 
 

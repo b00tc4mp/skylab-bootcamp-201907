@@ -1,10 +1,14 @@
 
-function reduce(arr){
+function reduce(arr,expression){
   var result=0;
-  for(var i in arr){
-    result=result+arr[i]
+  var count=0;
+  for(var i=1;i<arr.length;i++){
+    count=expression(arr[i-1],arr[i],i,arr);
+    result=count;
+    arr[i]=count;
   }
   return result;
+
 }
 
 

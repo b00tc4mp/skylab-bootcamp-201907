@@ -1,6 +1,6 @@
 function lastIndexOf(arr,value){
   var result="";
-  for(var i in arr){
+  for(var i=0;i<this.length;i++){
     if(arr[i]==value){
       result=i;
     }

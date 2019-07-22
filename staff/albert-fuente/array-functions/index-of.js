@@ -4,6 +4,8 @@ function indexOf(arr,value){
     if(arr[i]==value){
       result=i;
       break;
+    }else{
+      result=-1;
     }
   }
   return result;

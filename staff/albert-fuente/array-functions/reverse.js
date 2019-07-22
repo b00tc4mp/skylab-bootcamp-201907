@@ -1,6 +1,6 @@
 
 function reverse(arr){
-  result=[];
+  var result=[];
   for(var i=arr.length-1;i>=0;i--){
     result.push(arr[i]);
   }

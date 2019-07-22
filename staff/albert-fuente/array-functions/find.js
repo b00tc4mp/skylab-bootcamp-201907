@@ -4,7 +4,7 @@ function find(arr,expression){
   if(!(arr instanceof Array)) throw TypeError (" IS NOT AN ARRAY");
   if(!(expression instanceof Function)) throw TypeError (expression + " IS NOT A FUNCTION");
 
-  for(var i in arr){
+  for(var i=0;i<this.length;i++){
     if(expression(arr[i])){
       return arr[i];
     }
