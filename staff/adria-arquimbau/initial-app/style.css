@@ -1,0 +1,26 @@
+body{
+    background-color: rgb(3, 95, 64);
+}
+
+section{
+    background-color: rgb(34, 140, 182);
+}
+
+button {
+    border: 1px solid black;
+}
+input{
+    border: 1px solid black;
+}
+.panel {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.panel--show {
+    display: block;
+}
+
+.panel--hide {
+    display: none;
+}
