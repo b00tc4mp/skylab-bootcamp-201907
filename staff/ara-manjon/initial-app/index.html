@@ -1,3 +1,12 @@
+<!-- document.body.childNodes[1].childNodes-->
+
+<!-- document.body.children[0]-->
+
+<!-- console.dir(document.body.children[0])-->
+
+<!--document.createElement('div')-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,19 +21,39 @@
     <main>
         <h1>Initial App</h1>
         <!--Initial Panel-->
-        <section class="panel">
-            <a href="">Register</a> or <a href="">Login</a>
+        <section class="panel panel--show">
+            <a href="">Register</a> or <a href="">Login</a>.
         </section>
 
         <!--Register Panel-->
 
-        <section class="register">
-            <form class="panel">
+        <section class="panel panel--hide">
+            <form>
                 <label for="name">Name:</label>
                 <input type="text" name="name" id="name" required minlength="6" maxlength="15">
-
                 <label for="surname">Surname:</label>
                 <input type="text" name="surname" id="surname">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" required minlength="8" maxlength="15">
+                <button type="submit">Register</button>
+
+            </form>
+            go <a
+        </section>
+
+        <!--Register ok-->
+
+        <section class="panel panel--hide">
+            Ok, registered succeeded, you can now proceded to <a href="">Login</a>
+        </section>
+
+        <!--Login Panel-->
+
+        <section class="panel panel--hide">
+            <form class="panel">
+
 
                 <label for="email">Email:</label>
                 <input type="email" name="email" id="email">
@@ -37,12 +66,6 @@
                     <input type="submit" value="Register">
                 </section>
             </form>
-        </section>
-
-        <!--Register ok-->
-
-        <section  class="register-ok">
-            Ok, registered succeeded, you can now proceded to <a href="">Login</a>
         </section>
 
 
