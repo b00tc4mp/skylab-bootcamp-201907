@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Initial App</title>
+</head>
+<style>
+    .panel--show {display: block;}
+    .panel--hide {display: none;}
+</style>
+
+<body>
+    <h1>Initial App</h1>
+    <section class='initial-panel panel panel--show' id='landing'>
+        <p><a href="" onclick="show('register')">Register </a>or<a href="" onclick=''> Login</a></p>
+    </section>
+    <section class='panel panel--hide' id='register'>
+        <form>
+            <label for="name">Name: </label> <input type="text" id="name">
+            <br>
+            <br>
+            <label for="surname">Surname: </label><input type="text" id="surname">
+            <br>
+            <br>
+            <label for="email">Email: </label><input type="email" id="email">
+            <br>
+            <br>
+            <label for="password">Password: </label> <input type="password" id="password">
+            <br>
+            <br>
+            <button type="submit" onclick="">Register</button>
+        </form>
+    </section>
+    <section class='panel panel--hide' id='regsuccess'>
+        <p>Register success...<br><br>
+            Procced to <a href='' onclick=''>login </a></p>
+    </section>
+    <section>
+        <form class='panel panel--hide' id='login'>
+            <label for="email">Email: </label><input type="text" name="email">
+            <br>
+            <br>
+            <label for="password">Password: </label><input type="text" name="password">
+            <br>
+            <br>
+            <button type="submit" >Login</button>
+        </form>
+
+    </section>
+    <section class='panel panel--hide' id='loginsuccess'>
+        <p>Welcome!</p>
+    </section>
+    </div>
+    <script src='main.js'></script>
+</body>
+
+</html>
