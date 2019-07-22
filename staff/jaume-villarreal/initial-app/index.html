@@ -9,53 +9,55 @@
     </head>
     <body>
         <main class="wrapper">
+            <h1 class="header-1">INITIAL APP</h1>
             <section class="panel panel--show initial-panel">
-                <h1>Initial App</h1>
                     <div class="btn-set">
-                        <a href="" class="btn link--register">Register</a> or <a href="#" class="btn link--login">Login</a>
+                        <a href="" class="btn">Register</a>
+                        <a href="#" class="btn">Login</a>
                     </div>
             </section>
 
             <section class="panel panel--hide form">
                 <h2 class="header-2">Register form</h2>
-                <form class="form--register">
+                <form class="form__input">
                     <label for="name">Name:</label>
-                        <input type="text" id="name">
+                        <input type="text" id="name" required>
                     <label for="surname">Surname:</label>
-                        <input type="text" id="surname">
+                        <input type="text" id="surname" required>
                     <label for="mail">E-mail:</label>
-                        <input type="email" id="mail">
+                        <input type="email" id="mail" required>
                     <label for="password">Password:</label>
-                        <input type="password" id="password">
+                        <input type="password" id="password" required>
                     <div class="btn-set">
-                        <button type="submit" class="btn btn--register">Register</button>
+                        <button type="submit" class="btn">Register</button>
                     </div>
                 </form>
                 <a href="">back</a>
             </section>
             
-            <section class="panel panel--hide registered">
-                <h2>Registered</h2>
+            <section class="panel panel--hide successRegister">
+                <h2 class="header-2">Registered</h2>
                 <p class="text-box">Registered succeeded, you can now proceed to <a href="#">login</a></p>
                 <p class="text-box">Do you want login?</p>
             </section>
             
             <section class="panel panel--hide form">
-                <h2>Login form</h2>
-                <form class="form--login">
+                <h2 class="header-2">Login form</h2>
+                <form class="form__input">
                     <label for="mailLogin">E-mail:</label>
-                        <input type="email" id="mailLogin">
+                        <input type="email" id="logMail">
                     <label for="passwordLogin">Password:</label>
-                        <input type="password" id="passwordLogin">
+                        <input type="password" id="logPassword">
                     <div class="btn-set">
-                        <button type="submit" class="btn btn--register">Login</button>
+                        <button type="submit" class="btn">Login</button>
                     </div>
                 </form>
                 <a href="">back</a>
             </section>
             
             <section class="panel panel--hide landing">
-                <h2 class="text-box">Welcome!</h2>
+                <h2 class="header-2">Welcome!</h2>
+                <a href="">Logout</a>
             </section>
         </main>
 
