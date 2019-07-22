@@ -112,22 +112,6 @@ Curray.prototype.map = function(expression) {
     return result;
 };
 
-// Curray.prototype.flatMap = function(expression) {
-
-//     var currayFlat = new Curray();
-//     var result = new Curray();
-
-//     currayFlat.push(this.flat(1));
-
-//     var x = currayFlat.length;
-
-//     for (var i = 0; i < x; i++) {
-//         var element = currayFlat[i]
-//         result.push(expression(element, i, currayFlat));
-//     };
-//     return result;
-// };
-
 Curray.prototype.includes = function(value, index) {
     var start = 0;
     var end = this.length
@@ -222,26 +206,6 @@ Curray.prototype.some = function(expression) {
     };
     return check;
 };
-
-// Curray.prototype.sort = function() {
-//     var result = this;
-
-//     for (var i = 0; i < result.length; i++) {
-//         var x = result[i];
-//         var y = result[i + 1]
-//         if (x > y) {
-//             result[i + 1] = x;
-//             result[i] = y;
-//         };
-//     };
-
-//     for (var i = 0; i < result.length; i++) {
-//         if (this[i] > this[i + 1]) {
-//             result.sort()
-//         }
-//     }
-//     return result;
-// };
 
 Curray.prototype.sort = function(expression) {
     var result = this;

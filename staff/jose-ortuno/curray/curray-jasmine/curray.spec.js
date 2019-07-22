@@ -40,6 +40,13 @@ describe('Curray TEST', function() {
                 ['c', 2, curray]
             ]);
         });
+        it('should fail on no arguments', function() {
+            var curray = new Curray();
+
+            expect(function() {
+                curray.forEach();
+            }).toThrowError(TypeError, 'missing argument 0 when calling function forEach');
+        });
     });
 
     describe('concat', function() {
@@ -88,32 +95,6 @@ describe('Curray TEST', function() {
         })
     });
 
-    describe('flat', function() {
-        it('should create a new Curray with all the Curray elements that are inside.', function() {
-            var curray = new Curray('a', 'b', 'c');
-            curray[3] = new Curray('d', 'f', 'g');
-            var result = curray.flat(2);
-            var resultArr = Array.from(result);
-            expect(resultArr).toEqual(['a', 'b', 'c', 'd', 'f', 'g']);
-        })
-        
-        // it('create a new Curray with all the Curray elements that are inside in first level.', function() {
-        //     var curray = new Curray();
-        //     curray[0] = new Curray(1)
-        //     curray[1] = new Curray(2)
-        //     curray[2] = new Curray(3)
-        //     curray[3] = new Curray(4)
-        //     curray[4] = new Curray(5)
-        //     curray[5] = new Curray(6)
-        //     curray['length'] = 6
-        //     curray[0] = 1
-        //     curray[0].length = 1;
-        //     var result = curray.flat(1);
-        //     var resultArr = Array.from(result);
-        //     expect(resultArr, [1, 2, 3, 4, 5, 6]);
-        // })
-    });
-
     describe('map', function() {
         it('should creates a new array with the results of calling a provided function', function() {
             var curray = new Curray(1, 2, 3, 4, 5, 6);
@@ -124,24 +105,6 @@ describe('Curray TEST', function() {
             expect(resultArr).toEqual([2, 4, 6, 8, 10, 12]);
         });
     });
-
-    // describe('flatMap', function() {
-    //     it('method first maps each element using a mapping function, then flattens the result into a new array', function() {
-    //         var curray = new Curray();
-    //         curray[0] = new Curray(1)
-    //         curray[1] = new Curray(2)
-    //         curray[2] = new Curray(3)
-    //         curray[3] = new Curray(4)
-    //         curray[4] = new Curray(5)
-    //         curray[5] = new Curray(6)
-    //         curray['length'] = 6;
-    //         var result = curray.flatMap(function(currentValue, index, curray) {
-    //             return currentValue * 2;
-    //         });
-    //         var resultArr = Array.from(result);
-    //         expect(resultArr, [2, 4, 6, 8, 10, 12]);
-    //     });
-    // });
 
     describe('includes', function() {
         it('should check if a certain number exist in the curray. Case: true', function() {
@@ -254,21 +217,6 @@ describe('Curray TEST', function() {
         });
     });
 
-    // describe('sort', function() {
-    //     it('sorts the elements of an array in place and returns the sorted array. Case: numbers', function() {
-    //         var curray = new Curray(5, 3, 6, 2, 1, 4);
-    //         var result = curray.sort();
-    //         var resultArr = Array.from(result);
-    //         expect(resultArr, [1, 2, 3, 4, 5, 6]);
-    //     });
-    //     it('sorts the elements of an array in place and returns the sorted array. Case: words', function() {
-    //         var curray = new Curray('Pepito', 'Manolito', 'Luisito', 'Felipito', 'Jorgito', 'Paquito');
-    //         var result = curray.sort();
-    //         var resultArr = Array.from(result);
-    //         expect(resultArr, ["Felipito", "Jorgito", "Luisito", "Manolito", "Paquito", "Pepito"]);
-    //     });
-    // });
-
     describe('sort', function() {
         it('should sorts the elements of an array in place and returns the sorted array. Case: numbers', function() {
             var curray = new Curray(5, 3, 3, 2, 1, 4);
@@ -286,12 +234,21 @@ describe('Curray TEST', function() {
             var resultArr = Array.from(result);
             expect(resultArr).toEqual([5, 4, 3, 3, 2, 1]);
         });
-        // it('sorts the elements of an array in place and returns the sorted array. Case: words', function() {
-        //     var curray = new Curray('Pepito', 'Manolito', 'Luisito', 'Felipito', 'Jorgito', 'Paquito');
-        //     var result = curray.sort();
-        //     var resultArr = Array.from(result);
-        //     expect(resultArr, ["Felipito", "Jorgito", "Luisito", "Manolito", "Paquito", "Pepito"]);
-        // });
+        it('should sorts the elements of an array in place and returns the sorted array. Case: words', function() {
+            var curray = new Curray('d', 'a', 'c', 'b', 'e');
+            var result = curray.sort(function(a, b) {
+                if (a < b) {
+                    return -1;
+                }
+                if (a > b) {
+                    return 1;
+                }
+                // a equal to b
+                return 0;
+            });
+            var resultArr = Array.from(result);
+            expect(resultArr).toEqual(["a", "b", "c", "d", "e"]);
+        });
     });
 
     describe('splice', function() {
@@ -318,4 +275,42 @@ describe('Curray TEST', function() {
             expect(resultArr).toEqual(['Jan', 'Feb', 'March', 'April', 'June']);
         });
     });
+    
+    describe('unshift', function() {
+        it('should add one or more elements to the beginning of an array and return a new length of the array.', function() {
+            var curray = new Curray(1, 2, 3);
+            var result = curray.unshift(4, 5);
+            var currayArr = Array.from(curray)
+            expect(result).toBe(5);
+            expect(currayArr).toEqual([4, 5, 1, 2, 3]);
+        });
+    });
 });
+
+describe('flat', function(){
+    it('should creates a new array with all sub-array elements concatenated into it recursively' , function(){
+        var curray = new Curray(1,2,3,[4,5]);
+        var result = curray.flat();
+        var result = Array.from(result);
+
+        expect(result).toEqual([1,2,3,4,5]);
+    });
+
+    it('should creates a new array with all sub-array elements concatenated into it recursively', function(){
+        var curray = new Curray(1,2,[1,2,[1,2]]);
+        var result = curray.flat(2);
+        var result = Array.from(result);
+        expect(result).toEqual([1,2,1,2,1,2]);
+    });
+
+});
+
+// describe('flat', function() {
+//     it('should create a new Curray with all the Curray elements that are inside.', function() {
+//         var curray = new Curray('a', 'b', 'c');
+//         curray[3] = new Curray('d', 'f', 'g');
+//         var result = curray.flat(2);
+//         var resultArr = Array.from(result);
+//         expect(resultArr).toEqual(['a', 'b', 'c', 'd', 'f', 'g']);
+//     })
+// });
