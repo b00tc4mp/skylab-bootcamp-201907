@@ -216,3 +216,13 @@ Curray.prototype.fill = function(value,start,end){
     return this;
 };
 
+// filter
+Curray.prototype.filter = function(expression){
+    var filtered = new Curray();
+    for(var i=0 ; i<this.length; i++){
+        if(expression(this[i])) filtered.push(this[i])
+    }
+
+    return filtered;
+}
+

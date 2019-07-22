@@ -282,4 +282,28 @@ describe('Curray', function() {
         });
     });
 
+    describe("filter" , function(){
+        it("should return an array with elements minor 3" , function(){
+            var curray = new Curray(1,2,3,4,5);
+            var filtered = new Curray();
+
+            filtered = curray.filter(function(item){
+                return item < 3;
+            });
+
+            expect(Array.from(filtered)).toEqual([1,2]);
+        });
+        
+        it("should return an array with typeof = 'string'" , function(){
+            var curray = new Curray(1,'a',3,'b',5);
+            var filtered = new Curray();
+
+            filtered = curray.filter(function(item){
+                return typeof item === 'string'
+            });
+
+            expect(Array.from(filtered)).toEqual(['a','b']);
+        });
+    });
+
 });
