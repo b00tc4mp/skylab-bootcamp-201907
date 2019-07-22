@@ -1,0 +1,110 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+.company {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.company__name {
+  font-size: 2rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.company {
+  height: 30vw;
+}
+
+.panel {
+  background: rgba(0, 0, 0, 0.7);
+  width: 80vw;
+  height: 90vw;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 20px;
+  padding: 2rem;
+}
+
+.landing {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.btn {
+  width: 150px;
+  height: 40px;
+  margin: 1vh 0;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+}
+.btn__back {
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+}
+
+.landing {
+  display: none;
+}
+
+.register {
+  display: none;
+}
+.register__form {
+  display: flex;
+  flex-flow: column wrap;
+  align-content: center;
+}
+.register__input {
+  width: 80%;
+  margin: 2vh 0;
+  min-height: 3vh;
+}
+
+.login {
+  display: none;
+}
+.login__form {
+  display: flex;
+  flex-flow: column wrap;
+}
+.login__input {
+  margin: 2vh 0;
+  height: 3vh;
+}
+
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.panel--hide {
+  display: none;
+}
+.panel--show {
+  display: flex;
+}
+
+/*# sourceMappingURL=style.css.map */

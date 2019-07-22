@@ -1,0 +1,100 @@
+*
+    padding: 0
+    margin: 0
+    box-sizing: border-box
+
+body 
+    width: 100vw
+    height: 100vh
+
+.company
+    width: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+
+    &__name
+        font-size: 2rem
+
+.container
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+.company
+    height: 30vw
+
+.panel
+    background: rgba(0,0,0,.7)
+    width: 80vw
+    height: 90vw
+    border-radius: 10px
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    margin: 0 20px
+    padding: 2rem
+
+.landing
+    display: flex
+    flex-flow: column wrap
+
+.btn
+    width: 150px
+    height: 40px 
+    margin: 1vh 0
+    background: rgba(255,255,255,.7)
+    display: flex
+    justify-content: center
+    align-items: center
+    text-decoration: none
+    color: black
+
+    &__back
+        background: rgba(0,0,0,.6)
+        color: white
+
+.landing
+    display: none
+
+.register
+    display: none
+
+    &__form
+        display: flex
+        flex-flow: column wrap
+        align-content: center
+        
+
+    &__input
+        width: 80%
+        margin: 2vh 0
+        min-height: 3vh
+
+
+.login
+    display: none
+
+    &__form
+        display: flex
+        flex-flow: column wrap
+    
+    &__input
+        margin: 2vh 0
+        height: 3vh
+
+.home
+    display: flex
+    justify-content: center
+    align-items: center
+
+
+.panel
+    &--hide 
+        display: none
+    
+    &--show
+        display: flex
+
