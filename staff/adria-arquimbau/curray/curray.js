@@ -2,8 +2,6 @@
 
 /**
  * DIY Array.
- * 
- *  
  */
 function Curray() {
     this.length = 0;
