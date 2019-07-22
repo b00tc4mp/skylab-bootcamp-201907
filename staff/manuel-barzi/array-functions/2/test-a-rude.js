@@ -15,9 +15,9 @@ console.log(text);
  */
 function check(result, expected) {
     // if (!(isNaN(result) && isNaN(expected)) && result !== expected) // FUCK! isNaN({}) returns true!!!
+    // if (!(Number.isNaN(result) && Number.isNaN(expected)) && result !== expected) // ROGER 💪 => ERROR! Lluis detected Number.isNaN is ES6
+    //console.error('error: result (' + result + ') does not match expected value (' + expected + ')')
     if (!(result != undefined && expected != undefined && result.toString() === 'NaN' && expected.toString() === 'NaN') && result !== expected) // LLUIS we👂u!
-        // if (!(Number.isNaN(result) && Number.isNaN(expected)) && result !== expected) // ROGER 💪 => ERROR! Lluis detected Number.isNaN is ES6
-        //console.error('error: result (' + result + ') does not match expected value (' + expected + ')')
         throw Error('result (' + result + ') does not match expected value (' + expected + ')');
 }
 
@@ -74,7 +74,7 @@ function test(description, expression, handleError) {
 /**
  * TODO
  * 
- * @param {string} description
+ * @param {string} description Name of the Array.prototype is going to evaluate.
  * @param {Function} expression 
  */
 function suite(description, expression) {
