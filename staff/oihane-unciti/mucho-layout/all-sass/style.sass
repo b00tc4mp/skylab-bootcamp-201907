@@ -14,11 +14,10 @@ body
     left: 0
     background-color: white
     width: 100%
-    // position: fixed
+    position: fixed
     z-index: 1
     width: 100%
 
-   
     &__presentation
         display: none
         width: 40%
@@ -38,8 +37,6 @@ body
     &__red
         list-style: block
         padding: 2%
- 
-
 
 .logo
     padding: 2%
@@ -47,6 +44,7 @@ body
 
 .nav
     height: 10%
+    width: 100%
     &__border
         border-bottom: 1px solid $bkc
         margin-left: 1%
@@ -64,9 +62,6 @@ body
 .article__information
     background-color: $bkc
     border: 1px solid white
-    width: 100%
-
-
 
 .footer
     padding-left: 2%
@@ -97,30 +92,23 @@ body
         &__li
             display: block 
           
-
     .nav
         display: flex
         justify-content: flex-end
         
         &__border
             border: 0
-
-        
-    .article
-        display: flex
-        flex-wrap: wrap
      
    
     .article__information
-        width: 40%
-       
+        width: 50%
         
-    .main__img
-        display: flex
+    .mosaic
+        flex-direction: row
         flex-wrap: wrap
 
     .img
-        width: 45% 
+        width: 50% 
         padding: 0
         
     .menu
@@ -146,7 +134,6 @@ body
     .social_networks
         flex-direction: row-reverse
         justify-content: space-between
-        
     
     .social_networks__bloc
         flex-direction: row
@@ -156,9 +143,6 @@ body
     
     .social_networks__copy
         width: 40%
-
-
-  
 
 /* DESKTOP */
 
@@ -186,13 +170,11 @@ body
         &__border
             border: 0
 
-    .main__img
+    .mosaic
         display: grid
         grid-template-columns: repeat(4, 25%)
         grid-template-rows: repeat(4, 1fr)
-        height: 30%
-        
-        
+          
     .img 
         width: 100%
         height: auto
@@ -228,7 +210,6 @@ body
             padding: 0
             width: 33.1%
     
-
     .menu
         display: inline-flex
         list-style:none
@@ -251,8 +232,6 @@ body
         &__copy
             margin-rigth: 200px
 
-
-    
     .menu__red
         padding: 5px
 
