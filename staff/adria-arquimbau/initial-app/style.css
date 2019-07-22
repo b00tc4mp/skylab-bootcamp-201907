@@ -1,9 +1,20 @@
 body{
-    background-color: rgb(3, 95, 64);
+    background-color:#F3F2F2;
+    display: grid;
+}
+
+main {
+    justify-content: center;
 }
 
 section{
     background-color: rgb(34, 140, 182);
+    width: 30%;
+    height: 60%;
+}
+
+section a {
+    margin: 10px 0px 0px 0px;
 }
 
 button {
@@ -16,9 +27,21 @@ input{
     border: 1px solid black;
     padding: 10px;
 }
+form div{
+    display: grid;
+}
+
+form div button{
+    padding: 10px;
+    margin: 10px 0px 0px 0px;
+    width: 25%;
+}
 
 .panel--show {
+    width: 30%;
+    height: 50vh;
     display: block;
+    
 }
 
 .panel--hide {
