@@ -12,23 +12,23 @@
             <section class="panel panel--show initial-panel">
                 <h1>Initial App</h1>
                     <div class="btn-set">
-                        <a href="#" class="btn link--register">Register</a> or <a href="#" class="btn link--login">Login</a>
+                        <a href="" class="btn link--register">Register</a> or <a href="#" class="btn link--login">Login</a>
                     </div>
             </section>
 
             <section class="panel panel--hide form">
                 <h2 class="header-2">Register form</h2>
-                <form class="form--register" action="index.html">
-                    <label for="user-name">Name:</label>
-                        <input type="text" name="user-name" name="user-name" id="user-name">
-                    <label for="user-surname">Surname:</label>
-                        <input type="text" name="user-surname" name="user-surname" id="user-surname">
-                    <label for="user-mail-rgister">E-mail:</label>
-                        <input type="email" name="user-mail" name="user-mail-register" id="user-mail-register">
-                    <label for="user-password-resiter">Password:</label>
-                        <input type="password" name="user-password" name="user-password-register" id="user-password-register">
+                <form class="form--register">
+                    <label for="name">Name:</label>
+                        <input type="text" id="name">
+                    <label for="surname">Surname:</label>
+                        <input type="text" id="surname">
+                    <label for="mail">E-mail:</label>
+                        <input type="email" id="mail">
+                    <label for="password">Password:</label>
+                        <input type="password" id="password">
                     <div class="btn-set">
-                        <input type="submit" class="btn btn--register" value="Register">
+                        <button type="submit" class="btn btn--register">Register</button>
                     </div>
                 </form>
                 <a href="">back</a>
@@ -42,15 +42,16 @@
             
             <section class="panel panel--hide form">
                 <h2>Login form</h2>
-                <form class="form--login"  action="index.html">
-                    <label for="user-mail-login">E-mail:</label>
-                        <input type="email" name="user-mail" name="user-mail-login" id="user-mail-login">
-                    <label for="user-password-login">Password:</label>
-                        <input type="password" name="user-password" name="user-password-login" id="user-password-login">
+                <form class="form--login">
+                    <label for="mailLogin">E-mail:</label>
+                        <input type="email" id="mailLogin">
+                    <label for="passwordLogin">Password:</label>
+                        <input type="password" id="passwordLogin">
                     <div class="btn-set">
-                        <input type="submit" class="btn btn--register" value="Login">
+                        <button type="submit" class="btn btn--register">Login</button>
                     </div>
                 </form>
+                <a href="">back</a>
             </section>
             
             <section class="panel panel--hide landing">
