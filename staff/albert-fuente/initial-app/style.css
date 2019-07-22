@@ -1,0 +1,53 @@
+body {
+  background-color: lightblue;
+}
+
+.start {
+  border: 2px solid black;
+  padding: 5px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.start__login {
+  cursor: pointer;
+  padding: 3px;
+}
+
+.start__login:hover {
+  color: blue;
+}
+
+.start__register {
+  cursor: pointer;
+  padding: 3px;
+}
+
+.start__register:hover {
+  color: blue;
+}
+
+.display {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.--panel {
+  padding: 20px;
+  font-weight: bold;
+  border: 2px solid black;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.login {
+  border: 2px solid black;
+  padding: 5px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+/*# sourceMappingURL=style.css.map */
