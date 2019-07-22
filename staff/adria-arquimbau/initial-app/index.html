@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Initial APP </title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main>
+        <h1>Initial-App</h1>
+
+        <!--Initial Panel-->
+        <section class="panel panel--show">
+            <!--Usar ancors porque por semantica si vamos a cambiar
+            de pagina mejor usar ankors porke va a ser un link
+            aunque se use con funcionalidad de boton-->
+            <a href="">Register</a> or <a href="">Login</a>.
+        </section>
+        
+        <!--Register Panel-->
+        <section class="panel panel--hide">
+            <!--Usamos form por semantica-->
+            <!--fiquem type segons el qeu sigui pass text email...-->
+            <form action="">
+                <label for="name">Name</label>
+                <input type="text" id="name">
+                <label for="surname">Surname</label>
+                <input type="text" id="surname">
+                <label for="email">Email</label>
+                <input type="email" id="email">
+                <label for="password">Password</label>
+                <input type="password" id="password">
+                <button>Register</button>
+            </form>
+            <a href="">Back</a>
+        </section>
+
+        <!--Register Succes Panel-->
+        <section class="panel panel--hide">
+            Ok, registered succeded, you can now proceded to <a href="">Login</a>
+
+        </section>
+
+        <!--Register Panel-->
+        <section class="panel panel--hide">
+                <form action="">
+                        
+                        <label for="email">Email</label>
+                        <input type="email" id="email">
+                        <label for="password">Password</label>
+                        <input type="password" id="password">
+                        <button type="">Submit</button>
+                    </form>
+        </section>
+
+        <!--Submit Panel-->
+        <section class="panel panel--hide">
+            <h2>Welcome!</h2>
+        </section>
+
+
+
+         
+        </main>
+            <script src="main.js"></script>
+</body>
+</html>
