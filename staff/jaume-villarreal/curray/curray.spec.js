@@ -232,15 +232,54 @@ describe('Curray', function() {
 
             expect(Array.from(copy)).toEqual([1,3,3,4,5]);
         })
+    });
 
-        it("should throw error => target is not defined" , function(){
+    describe('every' , function(){
+        it("should return true" , function(){
+            var curray = new Curray(5,6,7,8,9);
+            var result = curray.every(function(item){
+                return item > 2;
+            });
+
+            expect(result).toBe(true);
+        });
+
+        it("should return false" , function(){
             var curray = new Curray(1,2,3,4,5);
-            var copy = new Curray();
+            var result = curray.every(function(item){
+                return item > 5
+            });
 
+            expect(result).toBe(false);
+        });
+
+        it("should throw an error => no function invoqued" , function(){
+            var curray = new Curray(1,2,3,4,5);
+            
             expect(function(){
-                copy = curray.copyWithin(ñ);
-            }).toThrowError(target + " is not defined");
-        })
+                var result = curray.every();
+            }).toThrowError(TypeError , "undefined is not a function");
+        });
+    });
+
+    describe("fill" , function(){
+        it("should fill all the array with the invoqued value" , function(){
+            var curray = new Curray(1,2,3,4,5);
+            curray.fill(8);
+            expect(Array.from(curray)).toEqual([8,8,8,8,8]);
+        });
+
+        it("should fill all the array positions with the invoqued value from a start position" , function(){
+            var curray = new Curray(1,2,3,4,5);
+            curray.fill(8,1);
+            expect(Array.from(curray)).toEqual([1,8,8,8,8]);
+        });
+        
+        it("should fill all the array positions with the invoqued value from a start position to a end position" , function(){
+            var curray = new Curray(1,2,3,4,5);
+            curray.fill(8,1,-3);
+            expect(Array.from(curray)).toEqual([1,8,3,4,5]);
+        });
     });
 
 });

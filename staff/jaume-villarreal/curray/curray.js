@@ -179,3 +179,40 @@ Curray.prototype.copyWithin = function(target,start,end){
     return this;
 };
 
+Curray.prototype.every = function(expression){
+    if(!arguments.length) throw TypeError(expression + " is not a function")
+    for(var i =0 ; i<this.length ; i++){
+        if(expression(this[i]) === false) return false;
+    }
+    return true;
+};
+
+//fill
+Curray.prototype.fill = function(value,start,end){
+    
+    if (arguments.length){    
+        //set start
+        if(typeof start === "number"){
+            if(Math.sign(start) === -1){
+                start = this.length + start;
+            }
+        } else{
+            start = 0;
+        }
+        
+        //set end
+        if(typeof end === "number"){
+            if(Math.sign(end) === -1){
+                end = this.length + (end);
+            }
+        } else{
+            end = this.length;
+        }
+
+        for(var i = start ; i<end ; i++){
+            this[i] = value;
+        }
+    }
+    return this;
+};
+
