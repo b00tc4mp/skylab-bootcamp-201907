@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="css/style.css">
+        <title>🦁Initial App</title>
+    </head>
+    <body>
+        <main class="wrapper">
+            <section class="panel panel--show initial-panel">
+                <h1>Initial App</h1>
+                    <div class="btn-set">
+                        <a href="#" class="btn link--register">Register</a> or <a href="#" class="btn link--login">Login</a>
+                    </div>
+            </section>
+
+            <section class="panel panel--hide form">
+                <h2 class="header-2">Register form</h2>
+                <form class="form--register" action="index.html">
+                    <label for="user-name">Name:</label>
+                        <input type="text" name="user-name" name="user-name" id="user-name">
+                    <label for="user-surname">Surname:</label>
+                        <input type="text" name="user-surname" name="user-surname" id="user-surname">
+                    <label for="user-mail-rgister">E-mail:</label>
+                        <input type="email" name="user-mail" name="user-mail-register" id="user-mail-register">
+                    <label for="user-password-resiter">Password:</label>
+                        <input type="password" name="user-password" name="user-password-register" id="user-password-register">
+                    <div class="btn-set">
+                        <input type="submit" class="btn btn--register" value="Register">
+                    </div>
+                </form>
+                <a href="">back</a>
+            </section>
+            
+            <section class="panel panel--hide registered">
+                <h2>Registered</h2>
+                <p class="text-box">Registered succeeded, you can now proceed to <a href="#">login</a></p>
+                <p class="text-box">Do you want login?</p>
+            </section>
+            
+            <section class="panel panel--hide form">
+                <h2>Login form</h2>
+                <form class="form--login"  action="index.html">
+                    <label for="user-mail-login">E-mail:</label>
+                        <input type="email" name="user-mail" name="user-mail-login" id="user-mail-login">
+                    <label for="user-password-login">Password:</label>
+                        <input type="password" name="user-password" name="user-password-login" id="user-password-login">
+                    <div class="btn-set">
+                        <input type="submit" class="btn btn--register" value="Login">
+                    </div>
+                </form>
+            </section>
+            
+            <section class="panel panel--hide landing">
+                <h2 class="text-box">Welcome!</h2>
+            </section>
+        </main>
+
+        <script src="main.js"></script>
+    </body>
+</html>

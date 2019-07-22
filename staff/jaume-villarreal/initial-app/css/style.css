@@ -1,0 +1,20 @@
+.wrapper {
+  width: 75vw;
+  margin: 10vh auto;
+  font-size: 1rem;
+}
+
+.panel {
+  border: 1px solid;
+  width: 75%;
+  margin: 10vh auto;
+  padding: 3rem;
+}
+.panel--show {
+  display: block;
+}
+.panel--hide {
+  display: none;
+}
+
+/*# sourceMappingURL=style.css.map */
