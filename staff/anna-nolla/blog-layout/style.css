@@ -1,0 +1,25 @@
+header{
+    background-color:rgb(165, 205, 212);
+    margin-top: auto;
+    text-align: center;
+    color: rgb(16, 10, 39);
+}
+
+nav {
+    float: left;
+    width: 15%;
+    margin: 0 15px 0 0;
+}
+
+main {
+    margin-left: 25%;
+}
+section{
+    margin-bottom: 10px;   
+}
+
+footer{
+    text-align: center;
+    background-color: rgb(165, 205, 212);
+    color: rgb(13, 5, 56);
+}
