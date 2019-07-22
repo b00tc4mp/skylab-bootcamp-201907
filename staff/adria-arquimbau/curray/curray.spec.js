@@ -129,17 +129,9 @@ describe('Curray', function () {
                 curray1.map();
             }).toThrowError(TypeError, 'missing argument 0 when calling function map');
         });
-
-        //  it('concatenate value-index-array', function () {
-        //      var array = [1, 2, 3];
-
-        //      var result = map(array, function (value, index, array) {
-        //          return value + '-' + index + '-' + array;
-        //      });
-
-        //      expect(result, ["1-0-1,2,3", "2-1-1,2,3", "3-2-1,2,3"]);
-        //  })
     });
+
+//////////////////////////////////////////////////////////////
 
     describe('arrayOf', function () {
         it('should introduce the arguments into a new curray', function () {
@@ -149,6 +141,8 @@ describe('Curray', function () {
             expect(Array.from(result)).toEqual([1, 2, 3, 'hello', {}, NaN]);
         })
     });
+
+//////////////////////////////////////////////////////////////
 
     describe('every', function () {
         it('should check all elements of the curray pass the condition of the function done', function () {
@@ -160,6 +154,8 @@ describe('Curray', function () {
             expect(result).toBe(false);
         })
     });
+
+//////////////////////////////////////////////////////////////
 
     describe('fill', function () {
         it('should fill all the items with the input introduced to and from the desired start index', function () {
@@ -185,20 +181,9 @@ describe('Curray', function () {
             var arrResult = Array.from(result)
             expect(arrResult).toEqual(expected);
         });
-
-        /*
-        describe('fill',function(){
-            it('should fill some elements from an appointed start point to an appointed end point (zero-index location) of the curray', function(){
-                var curray1 = new Curray('a', 'b', 'c', 'd', 'f','g');
-
-                var result = curray1.fill("z", 2);
-
-                expect(Array.from(result)).toEqual(['a', 'b', 'z', 'z', 'z', 'z']);
-            })
-        });
-        */
-
     });
+
+//////////////////////////////////////////////////////////////
 
     describe("join", function(){
         it('should join in a string', function() {
@@ -220,6 +205,8 @@ describe('Curray', function () {
             expect(curray, "102030405");
         });
     });
+
+//////////////////////////////////////////////////////////////
 
     describe('filter', function() {
         it('should filter all the items who accomplish the condition introduced, case 1', function() {
