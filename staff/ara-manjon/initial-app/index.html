@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Inital App</title>
+</head>
+
+<body>
+    <main>
+        <h1>Initial App</h1>
+        <!--Initial Panel-->
+        <section class="panel">
+            <a href="">Register</a> or <a href="">Login</a>
+        </section>
+
+        <!--Register Panel-->
+
+        <section class="register">
+            <form class="panel">
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" required minlength="6" maxlength="15">
+
+                <label for="surname">Surname:</label>
+                <input type="text" name="surname" id="surname">
+
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email">
+
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" required minlength="8" maxlength="15">
+
+
+                <section class="submission">
+                    <input type="submit" value="Register">
+                </section>
+            </form>
+        </section>
+
+        <!--Register ok-->
+
+        <section  class="register-ok">
+            Ok, registered succeeded, you can now proceded to <a href="">Login</a>
+        </section>
+
+
+
+
+
+    </main>
+    <script src="main.js"></script>
+
+</body>
+
+</html>
