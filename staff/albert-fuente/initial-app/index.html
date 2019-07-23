@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Fascinate&display=swap" rel="stylesheet">
+
+    <title>Document</title>
+</head>
+<body>
+    <h1>Initial app</h1>
+    <div class="start --panel">
+        <a class="start__register">Register</a>
+        <a class="start__login">Log in</a>
+    </div>
+
+    <section class="register --panel hide">
+        <form action="">
+            <label for="">Name:</label>
+            <input class="register__name"type="text">
+            <label for="">Surname:</label>
+            <input class="register__surname"type="text">
+            <label for="">Email:</label>
+            <input class="register__email" type="email">
+            <label for="">Password:</label>
+            <input class="register__pw" type="email">
+            <button class="register__button" type="submit">Register</button>
+            <button class="register__backButton" type="submit">Go back</button>
+
+        </form>
+    </section>
+
+    <section class="correctRegistration --panel hide">
+        Ok, registered, you can proceed to <a class="loginBack" href="login">Log in</a>
+    </section>
+
+
+
+    <div class="login --panel hide">
+            <label for="">Email:</label>
+            <input type="email"class="login__email">
+            <label for="">Password:</label>
+            <input type="email" class="login__pw">
+            <p class="credentialError"></p>
+            <button type="sumbit" class="login-button">Log in</button>
+            <button class="login__backButton" type="submit">Go back</button>
+
+    </div>
+
+    <script src="main.js"></script>
+    <script src="curray.js"></script>
+</body>
+</html>

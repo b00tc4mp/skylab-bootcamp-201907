@@ -1,0 +1,63 @@
+$primary-color:black
+$background-color:lightblue
+$secondaryBackground-color:white
+    
+body
+    background-color: $background-color
+
+.--panel
+    border: 2px solid $primary-color
+    padding: 5px
+    background-color: $secondaryBackground-color
+    border-radius: 5px
+    margin: 25%
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75)
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75)
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75)
+    
+.start__login
+    cursor: pointer
+    padding: 3px
+.start__login:hover
+    color: blue
+.start__register
+    cursor: pointer
+    padding: 3px
+.start__register:hover
+    color: blue
+
+.display
+    display: block
+.hide
+    display: none
+
+button
+    margin: 5%
+    padding: 2%
+    border-radius: 5px
+    &:hover
+        background-color: $background-color
+
+h1
+    text-align: center
+    font-family: Fascinate, cursive
+    font-size: 200%
+    border: 3px solid black
+    display: inline-block
+    margin-left: 40%
+    padding: 3%
+    border-radius: 50%
+.credentialError
+    color: red 
+    font-weight: bold
+
+@media (max-width: 800px)
+    h1 
+        margin-left:20%
+    .--panel
+      padding: 10px
+      width: 50%
+    .login__email,
+    .login__pw
+        width: 60%
+
