@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>intial app</title>
-    <link rel='stylesheet' href='style.css'>
+    <title>Intial App</title>
+    <link rel='stylesheet' href='css/style.css'>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,400i|Lobster&display=swap" rel="stylesheet">
 </head>
 <body>
     <main id="panel" class="panel">
-        <h2 class="panel__title-app">Initial APP</h2>
+        <h2 class="panel__title-app">Initial App</h2>
         <!-- Initial panel -->
         <section id="landing" class="landing panel__section panel--show">
             <h1 class="panel__title landing__title-page">Login</h1>
@@ -19,13 +20,14 @@
         <section id="register" class="register panel__section panel--hide">
             <h1 class="panel__title register__title-page">Register</h1>
             <form class="register__form">
-                <input id="name" class="register__input register__form-name" type="text" placeholder="Name">
-                <input id="surname" class="register__input register__form-surname" type="text" placeholder="Surname">
-                <input id="email" class="register__input register__form-email" type="email" placeholder="email*" required>
-                <input id="password" class="register__input register__form-password" type="password" placeholder="password" required>
-                <input id="submit" class="register__input register__form-submit" type="submit" value="Enviar">
+                <input id="name" class="register__input register__form-name" type="text" placeholder="Name*">
+                <input id="surname" class="register__input register__form-surname" type="text" placeholder="Surname*">
+                <input id="email" class="register__input register__form-email" type="email" placeholder="email*">
+                <input id="password" class="register__input register__form-password" type="password" placeholder="password*">
+                <input id="submit" class="register__input register__form-submit" type="submit" value="Send">
             </form>
-            <a href="">back</a>
+            <p class="panel__section--feedback panel--hide"></p>
+            <a class="panel__section--back" href="">back</a>
         </section>
         <!-- Registered page-->
         <section id="registered" class="registered panel__section panel--hide">
@@ -36,11 +38,12 @@
         <section id="login" class="login panel__section  panel--hide">
             <h1 class="panel__title login__title-page">Login</h1>
             <form class="login__form">
-                <input id="email" class="login__input" type="email" placeholder="email" required>
-                <input id="password" class="login__input" type="password" placeholder="password" required>
-                <input id="submit" class="login__input login__form-submit" type="submit" value="Enviar">
+                <input id="email" class="login__input" type="email" placeholder="email">
+                <input id="password" class="login__input" type="password" placeholder="password">
+                <input id="submit" class="login__input login__form-submit" type="submit" value="Send">
             </form>
-            <a href="">back</a>
+            <p class="panel__section--feedback panel--hide"></p>
+            <a class="panel__section--back" href="">back</a>
         </section>
         <!-- Welcome page -->
         <section id="welcome" class="welcome panel__section panel--hide">
@@ -48,6 +51,9 @@
             <p class="welcome__info-page">Welcome!</p>
         </section>
     </main>
-    <script src="main.js"></script>
+    <script src="js/curray.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/logic.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

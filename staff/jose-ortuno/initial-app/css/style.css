@@ -1,0 +1,138 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  color: #95a5a6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-family: "Lato", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+h2 {
+  font-family: "Lobster", cursive;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+a {
+  font-family: "Lato", sans-serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: #e74c3c;
+}
+a:hover {
+  opacity: 0.6;
+}
+
+p {
+  font-family: "Lato", sans-serif;
+  font-size: 1rem;
+}
+
+.panel {
+  width: 70vw;
+  padding: 20px;
+}
+.panel__section {
+  width: 50vw;
+  max-width: 400px;
+  min-width: 300px;
+  text-align: center;
+  border: 1px solid #bdc3c7;
+  border-radius: 1rem;
+  padding: 25px;
+  margin: 20px auto;
+}
+.panel__section--feedback {
+  background: #e74c3c;
+  border-radius: 1rem;
+  padding: 15px;
+  color: #ecf0f1;
+  margin: 10px 0;
+}
+.panel__title {
+  margin: 0 0 20px 0;
+}
+.panel__title-app {
+  text-align: center;
+  padding: 25px;
+}
+.panel--hide {
+  display: none;
+}
+.panel--show {
+  display: block;
+}
+
+.register__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.register__input {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #bdc3c7;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+.register__input:focus {
+  border: 1px solid #e74c3c;
+  border-radius: 1rem;
+  box-shadow: none;
+  outline: 0px;
+}
+.register__input::placeholder {
+  color: #bdc3c7;
+}
+.register__form-submit {
+  background-color: #95a5a6;
+  color: #ecf0f1;
+}
+.register__form-submit:hover {
+  opacity: 0.6;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.login__input {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #bdc3c7;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+.login__input:focus {
+  border: 1px solid #e74c3c;
+  border-radius: 1rem;
+  box-shadow: none;
+  outline: 0px;
+}
+.login__input::placeholder {
+  color: #bdc3c7;
+}
+.login__form-submit {
+  background-color: #95a5a6;
+  color: #ecf0f1;
+}
+.login__form-submit:hover {
+  opacity: 0.6;
+}
+
+/*# sourceMappingURL=style.css.map */
