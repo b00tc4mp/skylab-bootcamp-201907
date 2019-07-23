@@ -24,6 +24,7 @@ function register(name, surname, email, password) {
         if (errors) errors += '\n'
         errors += 'E-mail is empty or blank.'
     } else if (email.length < 7) {
+        if (errors) errors = '\n'
         errors = 'e-mail to short, minimum 7 charachters of length'
     } else if (validateEmail(email) !== true) {
         if (errors) errors = '\n'
@@ -32,10 +33,9 @@ function register(name, surname, email, password) {
         errors = 'email already exists'
     }
 
-
     if (!password.trim()) {
         if (errors) errors += '\n'
-        errors += 'Please enter a password';
+        errors += 'Password is empty or blank';
     } else if (password.length < 8 || password.length >= 10) {
         errors = 'Password must be between 8 and 10 characters'
     }
@@ -62,22 +62,12 @@ function register(name, surname, email, password) {
 function resetAlerts() {
     var alerts = document.getElementsByClassName('alert')
     registerForm.reset()
+    loginForm.reset()
     for (var i = 0; i < alerts.length; i++) {
         alerts[i].innerText = ''
     };
 };
 
-function checkCredentials(email, password) {
-    var exist = flase
-    for (let i = 0; i < users.length; i++) {
-        if (email === users[i]['email'] && password === users[i]['password']) {
-            exist = true
-        } else {
-            exist = false
-        }
-    }
-    return exist
-}
 
 function login(email, password) {
     var errors = ''
@@ -92,5 +82,11 @@ function login(email, password) {
         errors += 'Password is empty or blank'
     }
 
+    if (errors) throw new Error(errors)
 
+    var user = users.find(function (user) {
+        return user.email === email && user.password === password;
+    });
+
+    if (!user) throw new Error('Wrong credentials')
 }

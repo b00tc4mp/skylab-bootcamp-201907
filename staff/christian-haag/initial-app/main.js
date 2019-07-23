@@ -36,7 +36,7 @@ var registerPanel = panels[1];
 
 var registerBacklink = registerPanel.children[1];
 
-loginLink.addEventListener('click', function (event) {
+registerBacklink.addEventListener('click', function (event) {
     event.preventDefault();
 
     tooglePanels(registerPanel, initialPanel)
@@ -61,7 +61,7 @@ registerForm.addEventListener('submit', function (event) {
         tooglePanels(registerPanel, registerSuccessPanel)
 
     } catch (error) {
-        var alert = registerPanel.children[0].children[9]
+        var alert = registerForm.children[9]
         alert.innerText = error.message
     }
 
@@ -83,25 +83,20 @@ successPanelLink.addEventListener('click', function (event) {
 // login panel
 
 var loginPanel = panels[3];
-var loginPanelLink = loginPanel.children[0];
-var alertMessage = loginPanel.children[0].children[5]
-
-loginPanelLink.addEventListener('submit', function (event) {
+var loginForm = loginPanel.children[0];
+var alertMessage = loginForm.children[5]
+loginForm.addEventListener('submit', function (event) {
     event.preventDefault();
 
     var email = event.target.email.value;
     var password = event.target.password.value;
 
-    if (email === users[0]['email'] && password === users[0]['password']) {
-
+    try {
+        login(email, password)
         tooglePanels(loginPanel, welcomePanel)
-        p.innerText = users[0]['name'];
-
-    } else {
-        alertMessage.innerText = 'Wrong credentials, try again!'
+    } catch (error) {
+        alertMessage.innerText = error.message
     }
-
-    loginPanelLink.reset()
 });
 //-----------------------------
 var welcomePanel = panels[4];
