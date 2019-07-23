@@ -1,29 +1,36 @@
+'use strict'
+/**
+ * All UI content here
+ */
+
 var users = new Curray()
 
 var panels = document.getElementsByClassName('panel')
 var div = document.getElementsByClassName('link')
+//--------------------------------------------------------
 //initial-panel
-
-
 var initialPanel = panels[0];
 var initialPanelChild = div[0]
 
 var registerLink = initialPanelChild.children[0];
 var loginLink = initialPanelChild.children[1];
-
+//------------------------
 registerLink.addEventListener('click', function (event) {
-
+    resetAlerts();
     event.preventDefault();
     tooglePanels(initialPanel, registerPanel)
 
 });
-
+//------------------------
 loginLink.addEventListener('click', function (event) {
+    resetAlerts();
 
     event.preventDefault();
     tooglePanels(initialPanel, loginPanel)
 
 });
+//---------------------------------------------------------
+//register Panel
 
 var registerPanel = panels[1];
 
@@ -36,36 +43,31 @@ loginLink.addEventListener('click', function (event) {
 
 });
 
+//--------------------
+
 var registerForm = registerPanel.children[0];
-var alertEmail = registerPanel.children[0].children[9]
 
 registerForm.addEventListener('submit', function (event) {
+
     event.preventDefault();
 
-    var found = users.find(function (element) {
-        return element.email === registerForm.email.value
-    });
-
     var name = event.target.name.value;
-    var surename = event.target.surname.value;
+    var surname = event.target.surname.value;
     var email = event.target.email.value;
     var password = event.target.password.value;
 
-    if (found === undefined || users.length === 0) {
-        users.push({
-            name: name,
-            surename: surename,
-            email: email,
-            password: password
-        });
+    try {
+        register(name, surname, email, password);
         tooglePanels(registerPanel, registerSuccessPanel)
 
-
-    } else {
-        alertEmail.innerText = 'Email already exists!'
+    } catch (error) {
+        var alert = registerPanel.children[0].children[9]
+        alert.innerText = error.message
     }
-    registerForm.reset()
+
 });
+//----------------------------------------------------------
+// register sucess panel
 
 var registerSuccessPanel = panels[2];
 
@@ -77,6 +79,8 @@ successPanelLink.addEventListener('click', function (event) {
     tooglePanels(registerSuccessPanel, loginPanel)
 
 });
+//---------------------------------------------------------
+// login panel
 
 var loginPanel = panels[3];
 var loginPanelLink = loginPanel.children[0];
@@ -99,28 +103,17 @@ loginPanelLink.addEventListener('submit', function (event) {
 
     loginPanelLink.reset()
 });
-
+//-----------------------------
 var welcomePanel = panels[4];
 var p = welcomePanel.children[1]
 var welcomeBackLink = welcomePanel.children[3].children[0]
 
 welcomeBackLink.addEventListener('click', function (event) {
     event.preventDefault();
-
     tooglePanels(welcomePanel, initialPanel)
-
 })
 
-function checkUser() {
-    var found = arr.find(function (element) {
-        return element.a === user
-    })
-    if (found === undefined) {
-        console.log('pushed')
-    } else {
-        console.log('email already exists')
-    }
-}
+//function that toogles the panels
 
 function tooglePanels(panelOff, panelOn) {
 
