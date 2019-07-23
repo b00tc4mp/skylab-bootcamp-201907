@@ -1,21 +1,36 @@
-// users array
-var users = [];
+// users curray
+var users = new Curray();
+
 //panels
 var panels = document.getElementsByClassName("panel");
-
-//initialPanel
 var initialPanel = panels[0];
-var initialBtnSet = initialPanel.children[0]
+var registerPanel = panels[1];
+var successRegisterPanel = panels[2];
+var loginPanel = panels[3];
+var homePanel = panels[4];
 
+// elements
+var initialBtnSet = initialPanel.children[0]
+var registerForm = registerPanel.children[1];
+var loginForm = loginPanel.children[1];
+
+// links
 var registerLink = initialBtnSet.children[0];
 var loginLink = initialBtnSet.children[1];
+var logoutLink = homePanel.children[1];
+var backInitialLink = registerPanel.children[3];
+var backLoginLink = loginPanel.children[3];
+var loginSuccessLink = successRegisterPanel.children[1].children[0];
 
+
+//register link
 registerLink.addEventListener('click' , function(e){
     e.preventDefault();
     toggle(initialPanel);
     toggle(registerPanel);
 });
 
+// login link
 loginLink.addEventListener("click", function(e){ 
     e.preventDefault();
     toggle(initialPanel);
@@ -23,10 +38,7 @@ loginLink.addEventListener("click", function(e){
 });
 
 
-// registerPanel
-var registerPanel = panels[1];
-var registerForm = registerPanel.children[1];
-
+// register
 registerForm.addEventListener("submit" , function(event){
     event.preventDefault();
 
@@ -47,7 +59,7 @@ registerForm.addEventListener("submit" , function(event){
     toggle(successRegisterPanel);
 });
 
-backInitialLink = registerPanel.children[2];
+
 backInitialLink.addEventListener("click" , function(event){
     event.preventDefault();
     toggle(registerPanel);
@@ -57,8 +69,6 @@ backInitialLink.addEventListener("click" , function(event){
 
 
 // successRegisterPanel
-var successRegisterPanel = panels[2];
-var loginSuccessLink = successRegisterPanel.children[1].children[0];
 loginSuccessLink.addEventListener("click" , function(event){
     event.preventDefault();
     toggle(successRegisterPanel);
@@ -68,15 +78,11 @@ loginSuccessLink.addEventListener("click" , function(event){
 
 
 // loginPanel
-var loginPanel = panels[3];
-var loginForm = loginPanel.children[1];
-backLoginLink = loginPanel.children[2];
-
 backLoginLink.addEventListener("click" , function(event){
     event.preventDefault();
     toggle(loginPanel);
     toggle(initialPanel);
-    resetInputs();
+    // resetInputs();
 });
 
 loginForm.addEventListener("submit" , function(event){
@@ -84,33 +90,32 @@ loginForm.addEventListener("submit" , function(event){
     var mail = event.target.logMail.value;
     var password = event.target.logPassword.value;
 
-    var loggedUser;
-
-    var userExists = users.some(function(user){
-        loggedUser = user;
+    var loggedUser = users.find(function(user){
         return(mail === user.mail && password === user.password);
     });
 
-    if(userExists){
+    if(loggedUser !== undefined){
         toggle(loginPanel);
-        toggle(landingPanel);
+        toggle(homePanel);
+        homePanel.children[0].textContent = "Welcome " + loggedUser.name + ' ' + loggedUser.surname;
+
     } else{
         alert("Wrong credentials");
         resetInputs();
     }
 }); 
 
-// landingPanel
-var landingPanel = panels[4];
-var logoutLink = landingPanel.children[1];
+//homePanel
 logoutLink.addEventListener("click" , function(event){
     event.preventDefault();
-    toggle(landingPanel);
+    toggle(homePanel);
     toggle(initialPanel);
     resetInputs();
 })
 
+// ===================
 //auxiliar functions
+// ===================
 var toggle = function(block){
     if(block.classList.contains('panel--hide')){
         block.classList.add("panel--show");
@@ -127,6 +132,12 @@ var resetInputs = function(){
         inputs[i].value='';
     }
 };
+
+
+// var validateString = function (str){
+//     var regex = /^[A-Za-z][A-Za-z\'\-]+([\ A-Za-z][A-Za-z\'\-]+)*/;
+//     return regex.test(str);
+// };
 
 
 
