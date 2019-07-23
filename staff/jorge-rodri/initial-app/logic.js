@@ -21,7 +21,7 @@ function register(name, surname, email, password){
     }else{
         users.push({
             name:name,
-            surname:surnama,
+            surname:surname,
             email:email,
             password:password
         });
