@@ -42,6 +42,18 @@ Curray.prototype.forEach = function (expression) {
         expression(this[i], i, this);
 };
 
+Curray.prototype.find = function (expression) {
+    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function forEach');
+
+    if (!(expression instanceof Function)) throw TypeError(expression + ' is not a function');
+
+    for (var i = 0; i < this.length; i++) {
+        var element = this[i];
+        if (expression(this[i], i, this)) return element;
+    }
+};
+
+
 Curray.prototype.entries = function () {
 
     var result = []
