@@ -17,6 +17,10 @@ var registerbackButton=document.querySelector(".register__backButton");
 var loginbackButton=document.querySelector(".login__backButton");
 var loginButton=document.querySelector(".login-button");
 
+var credentialError=document.querySelector(".credentialError");
+
+//usar curray con find, validar, añadir feedback panel
+
 
 
 var allUsers=[];
@@ -50,13 +54,17 @@ function newUser(name,surname,email,password){
 }
 
 getData=function(event){
-    var nextUser=new newUser(registerName.value,registerSurname.value, registerEmail.value, registerPw.value);
-    console.log(nextUser);
-    allUsers.push(nextUser);
-    correctRegistration.classList.add("display");
-    correctRegistration.classList.remove("hide");
-    register.classList.add("hide");
-    register.classList.remove("display");
+    if(registerName.value=="" || registerSurname.value=="" || registerEmail.value=="" || registerPw.value=="" ){
+        alert("please enter valid data");
+    }else{
+        var nextUser=new newUser(registerName.value,registerSurname.value, registerEmail.value, registerPw.value);
+        console.log(nextUser);
+        allUsers.push(nextUser);
+        correctRegistration.classList.add("display");
+        correctRegistration.classList.remove("hide");
+        register.classList.add("hide");
+        register.classList.remove("display");
+    }
     event.preventDefault();
 }
 getBack=function(){
@@ -80,7 +88,7 @@ checkUsers=function(){
         }
     } 
     if(found==false){
-        alert("USER NOT FOUND");
+        credentialError.innerHTML="Credentials error"
     }else{
         alert("WELCOME");
     }
