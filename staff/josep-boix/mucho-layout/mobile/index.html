@@ -1,30 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mucho-jbv</title>
+    <title>Mucho-layout-jbv</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <header>
         <button id="header__button"><a href="https://wearemucho.com/"><img src="https://wearemucho.com/wp-content/themes/mucho-updated/img/logo.svg" alt="Logo"></a></button> 
-        <img id="header__hamburger" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1200px-Hamburger_icon.svg.png" alt="hamburger">
+        <div> 
+            <img id="header__hamburger" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1200px-Hamburger_icon.svg.png" alt="hamburger">
+                <ul>
+                    <li class="header__menu">Work</li>
+                    <li class="header__menu">Strategy</li>
+                    <li class="header__menu">Sharing</li>
+                    <li class="header__menu">About</li>
+                    <li class="header__menu">Jobs</li>
+                    <li class="header__menu">Shop</li>
+                    <li class="header__menu">Contact</li>
+                </ul>
+        </div>
         <nav class="header__nav">
-            <ul>
-                <li class="header__menu">Work</li>
-                <li class="header__menu">Strategy</li>
-                <li class="header__menu">Sharing</li>
-                <li class="header__menu">About</li>
-                <li class="header__menu">Jobs</li>
-                <li class="header__menu">Shop</li>
-                <li class="header__menu">Contact</li>
-            </ul>
+            <div class="header__allservices">
+                <p>All Industries</p>
+                <i class="fas fa-angle-down"></i>
+            </div>
+            <div class="header__allindustries">
+                <p>All Industries</p>
+                <i class="fas fa-angle-down"></i>
+            </div>
         </nav>
-        <div class="header__allservices">All Services</div>
-        <div class="header__allindustries">All Industries</div>
     </header>
+    <main>
+        <section class="main__images">
+            <figure class="img"><img src="https://source.unsplash.com/random/800x550" alt="foto random"></figure>
+            <figure class="img"><img src="https://source.unsplash.com/random/800x550" alt="foto random"></figure>
+            <figure class="img"><img src="https://cdn2.ticbeat.com/src/uploads/2017/07/luucha-5-paises-contra-contaminacion-810x736.jpg?x32709" alt=""></figure>
+            <figure class="img"><img src="https://source.unsplash.com/random/800x550" alt="foto random"></figure>
+            <figure class="img"><img src="https://source.unsplash.com/random/800x550" alt="foto random"></figure>
+            <figure class="img"><img src="https://mhealthintelligence.com/images/site/features/_normal/2016-04-26-rtls-feature.png" alt=""></figure>
+            <figure class="img"><img src="https://source.unsplash.com/random/800x550" alt="foto random"></figure>
+            <figure class="img"><img src="https://source.unsplash.com/random/800x550" alt="foto random"></figure>
+            <figure class="img"><img src="https://source.unsplash.com/random/800x550" alt="foto random"></figure>
+            <figure class="img"><img src="https://i.blogs.es/df2ed8/impacto-asteroide/1024_2000.jpg" alt="impacto meteorito"></figure>
+            <figure class="img"><img src="https://source.unsplash.com/random/800x550" alt="foto random"></figure>
+            <figure class="img"><img src="https://source.unsplash.com/random/800x550" alt="foto random"></figure>
+            <figure class="img"><img src="https://source.unsplash.com/random/800x550" alt="foto random"></figure>
+        </section>
+        <article>
+            <div class="main__descritption">
+                <h3 class="description--title">@wearemucho</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, quia reiciendis molestiae culpa illum quod in, est consequuntur aspernatur adipisci delectus iste debitis iusto labore facere voluptatum consequatur, deleniti atque.</p>
+            </div>
+            <div class="main__descritption">
+                <h3 class="description--title">Talking & Teaching</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, quia reiciendis molestiae culpa illum quod in, est consequuntur aspernatur adipisci delectus iste debitis iusto labore facere voluptatum consequatur, deleniti atque.</p>
+            </div>
+            <div class="main__descritption">
+                <h3 class="description--title">About</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, quia reiciendis molestiae culpa illum quod in, est consequuntur aspernatur adipisci delectus iste debitis iusto labore facere voluptatum consequatur, deleniti atque.</p>
+            </div>
+        </article>
+    </main>
     
+    <footer>
+        <div class="footer__upper">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo accusantium et amet, ipsum velit delectus, quibusdam ad corrupti labore odit aliquid quia ducimus? Nostrum repellat recusandae provident, minus asperiores dolorum.</p>
+        </div>
+        <div class="footer__medium">
+            <div class="column">
+                <h6 class="footer--city">Barcelona</h6>
+                <p></p>
+                <p></p>
+            </div>
+            <div class="column">
+                <h6 class="footer--city">San Francisco</h6>                <p></p>
+                <p></p>
+            </div>
+            <div class="column">
+                <h6 class="footer--city">Paris</h6>
+                <p></p>
+                <p></p>
+            </div>
+            <div class="column">
+                <h6 class="footer--city">New York</h6>
+                <p></p>
+                <p></p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
