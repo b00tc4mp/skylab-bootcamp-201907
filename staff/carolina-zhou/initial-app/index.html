@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="---">
+    <meta name="keywords" content="---">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Initial-App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="header">
+    <p>Initial-App</p>
+  </header>
+
+  <main>
+    <!-- initial panel -->
+    <section class="panel panel--show">
+      <div class="intro">
+        <h1 class="intro__title">Hello!</h1>
+        <p><a class="intro__register" href="">Register</a> or <a class="intro__login" href="">Login</a></p>
+      </div>
+    </section>
+
+    <!-- register process panel -->
+    <section class="panel panel--hide">
+      <div  class="register">
+        <form>
+            <ul class="register__form">
+                <li class="register__item">
+                    <label class="register__label" for="name">Name</label>
+                    <input class="register__input" id="name" name="name" type="text" required>
+                </li>
+                <li class="register__item">
+                    <label class="register__label" for="surname">Surname</label>
+                    <input class="register__input" id="surname" name="surname" type="text" required>
+                </li>
+                <li class="register__item">
+                    <label class="register__label" for="email">E-mail</label>
+                    <input class="register__input" id="email" name="email" type="text" required>
+                </li>
+                <li class="register__item">
+                    <label class="register__label" for="password">Password</label>
+                    <input class="register__input" id="password" name="password" type="text" required>
+                </li>                
+                <li class="register__item">
+                    <button class="register__button" type="submit" value="submit">Register</button>
+                </li>                
+            </ul>
+        </form>
+        <a class="register__back" href="">go back</a>
+      </div>
+    </section>
+
+    <!-- register confirmation panel -->
+    <section class="panel panel--hide">
+        <div class="confirmation">
+            <p>The registration was successful! Enter password to login.</p>
+            <form>
+                <label class="confirmation__label" for="finalPass">Password:</label>
+                <input class="confirmation__input" id="finalPass" name="password" type="textarea">
+
+                <button class="confirmation__button" type="submit" value="submit">Login</button>
+            </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- login panel -->
+    <section class="panel panel--hide">
+      <div class="login">
+        <form>
+            <ul class="login__form">
+                <li class="login__item">
+                    <label class="login__label" for="userEmail">E-mail</label>
+                    <input class="login__input" id="userEmail" name="email" type="text">
+                </li>
+                <li class="login__item">
+                    <label class="login__label" for="userPassword">Password</label>
+                    <input class="login__input" id="userPassword" name="userPassword" type="text">
+                </li>                
+                <li class="login__item">
+                    <button class="login__button" type="submit" value="submit">Login</button>
+                </li>                
+            </ul>
+        </form>
+        <a class="login__back" href="">back</a>
+      </div>
+    </section>
+
+    <!-- welcome panel -->
+    <section class="panel panel--hide">
+      <div class="home">
+        <h1>Welcome!</h1>
+      </div>
+    </section>
+
+    <!-- wrong info panel -->
+    <section class="panel panel--hide">
+        <div class="error">
+          <p class="error__title">Error</p>
+          <p class="error__message"></p>
+        </div>
+      </section>    
+  </main>
+
+  <footer class="footer">
+    <p>Skylab Coders Academy ❤ Carolina Zhou Lin</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+
+</html>

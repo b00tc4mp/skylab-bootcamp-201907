@@ -1,0 +1,152 @@
+/* --- Initial App --- */
+body {
+  box-sizing: border-box;
+  margin: auto;
+  font-family: sans-serif;
+  background-image: url("https://cdn.pixabay.com/photo/2016/02/11/14/59/fruits-1193727_960_720.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.header {
+  background-color: #ffc400;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 48px;
+  font-weight: bold;
+}
+
+main {
+  height: 100vh;
+}
+
+.panel--show {
+  display: block;
+}
+
+.panel--hide {
+  display: none;
+}
+
+.intro {
+  background-color: rgba(0, 128, 0, 0.45);
+  margin-top: 3em;
+  padding: 30px;
+  text-align: center;
+  color: yellow;
+}
+.intro__title {
+  margin: 0;
+  padding: 25px;
+  font-size: 28px;
+}
+.intro__register, .intro__login {
+  color: darkGreen;
+  text-decoration: none;
+}
+
+.register {
+  background-color: rgba(0, 128, 0, 0.45);
+  color: yellow;
+  margin: 3em auto auto auto;
+  padding: 30px;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+.register__form {
+  padding: 5px;
+}
+.register__item {
+  list-style: none;
+  margin-top: 2em;
+}
+.register__input {
+  width: 95%;
+  margin-top: 0.5em;
+  border: 1px solid darkGray;
+  border-radius: 10px;
+  outline: none;
+  padding: 10px;
+}
+.register__button {
+  border: none;
+  padding: 5px;
+  background-color: #fff000;
+  color: green;
+}
+.register__back {
+  color: darkGreen;
+  text-decoration: none;
+  text-align: right;
+}
+
+.confirmation {
+  text-align: center;
+  width: 70%;
+  margin: auto;
+}
+.confirmation__input {
+  width: 100%;
+  margin-top: 0.5em;
+  border: 1px solid darkGray;
+  border-radius: 10px;
+  outline: none;
+  padding: 10px;
+}
+.confirmation__button {
+  margin-top: 2em;
+  border: none;
+  padding: 5px;
+  background-color: #fff000;
+}
+
+.login {
+  background-color: rgba(0, 128, 0, 0.45);
+  color: yellow;
+  margin: 3em auto auto auto;
+  padding: 30px;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+.login__form {
+  padding: 5px;
+}
+.login__item {
+  list-style: none;
+  margin-top: 2em;
+}
+.login__input {
+  width: 95%;
+  margin-top: 0.5em;
+  border: 1px solid darkGray;
+  border-radius: 10px;
+  outline: none;
+  padding: 10px;
+}
+.login__button {
+  color: green;
+  border: none;
+  padding: 5px;
+  background-color: #fff000;
+}
+.login__back {
+  color: darkGreen;
+  text-decoration: none;
+  text-align: right;
+}
+
+.home {
+  text-align: center;
+}
+
+.footer {
+  background-color: #ffc400;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+/*# sourceMappingURL=style.css.map */
