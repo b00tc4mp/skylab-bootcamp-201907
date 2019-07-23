@@ -1,10 +1,7 @@
 //declarem array buida de users per acabar ficant user mes endevant
 var users = [];
-
-
 //variable per reconeixer els panels, tots els panels tenen el mateix
 var panels = document.getElementsByClassName('panel');
-
 /*------------------------------PANEL INITIAL 0----------------------------------------------------------------------------*/
 // initial panel
 var initialPanel = panels[0]; //es refereix a tot el panel en general, provar sempre a ficar a consola per veure-ho
@@ -16,16 +13,12 @@ registerLink.addEventListener('click', function (event) { //quan fem click a reg
     initialToRegister();
     
 });
-
 /*-----------------------PANEL LOGIN 3 //ES EL 3 QUE ESTA DECLARAT ABAIX QUE ES REUTILITZA---------------------------------*/
-
 loginLink.addEventListener('click', function (event) { //el mateix que abans pero amb el Login i ens porta a loginPanel en ves de Register
     event.preventDefault(); //quan fem un submit la pagina es refresca, aixo fa que no pasi
     initialPanelToLogin();
 });
-
 /*---------------------------PANEL REGISTRO 1-------------------------------------------------------------------------------*/
-
 var registerPanel = panels[1]; //de tots els panels es el segon 'index 1' que es el del formulari de registre
 var registerBackLink = registerPanel.children[1]; // es el back de register panel
 
@@ -54,7 +47,6 @@ registerForm.addEventListener('submit', function (event) {
     });
     registerPanelToRegisterSucces();
 });
-
 /*-------------------------------------PANEL REG. SUCCES 2---------------------------------------------------------------------*/
 var registerSuccessPanel = panels[2];
 var loginLinkTwo = registerSuccessPanel.children[0];
@@ -63,8 +55,6 @@ loginLinkTwo.addEventListener('click', function (event) {
     event.preventDefault();
     registerSuccesToLogin();
 });
-
-
 /*------------------------------------PANEL LOGIN 3----------------------------------------------------------------------*/
 var loginPanel = panels[3]; //definim quin es el login panel
 var loginForm = loginPanel.children[0]; 
@@ -90,12 +80,8 @@ loginForm.addEventListener('submit', function (event) { // i amb el puto boto de
         } else if(users[i].password !== password) {
             confirm("Wrong Password!");  
         }
-
     }
-
-
 });
-
 /*------------------------------------PANEL WELCOME 4----------------------------------------------------------------------*/
 var welcomePanel = panels[4];
 var welcomeForm = welcomePanel.children[0];// no utilitzem de moment
