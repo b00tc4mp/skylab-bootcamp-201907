@@ -8,7 +8,10 @@ section{
     background-color: rgb(34, 140, 182);
     margin: 12% 25%;  
 }
-.errorTextLogin {
+.errorTextLoginWrong {
+    color: red;
+}
+.errorTextLoginWrong {
     color: red;
 }
 .errorTextRegister{

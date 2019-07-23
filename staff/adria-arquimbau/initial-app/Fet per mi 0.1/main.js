@@ -42,9 +42,15 @@ registerForm.addEventListener('submit', function (event) {
     var email = event.target.email.value;
     var password = event.target.password.value;
 
-    if (users) {
-            //que fa aixo aqui???
-    }
+
+    //validation rules de user
+    
+   if (condition) {
+       
+   } else {
+       
+   }
+
     users.push({ //users esta declarat al principi, aki pusheem el objecte de tots els parametres ala rray users
         name: name,
         surname: surname,
@@ -85,10 +91,13 @@ loginForm.addEventListener('submit', function (event) { // i amb el puto boto de
             if (users[i].email == email && users[i].password === password) {
                 loginToWelcome();
             } else {
+                alert(' else de wrong credentials');
+
                 errorTextLoginWrong.innerHTML = 'Wrong credentials';                
             }
         }
     } else {
+        alert('primer else de empty fields');
         errorTextLoginEmpty.innerHTML = 'Empty fields'; //no el detecta per algun motiu JDER
     }
 });
