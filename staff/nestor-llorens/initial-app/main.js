@@ -1,4 +1,4 @@
-var users = [{email: 'email@fake.com'}];
+var users = [];
 
 var panels = document.getElementsByClassName('panel');
 
@@ -48,39 +48,42 @@ var registerForm = registerPanel.children[0];
 registerForm.addEventListener('submit', function (event) {
     event.preventDefault();
 
+    
+
     var name = event.target.name.value;
     var surname = event.target.surname.value;
     var email = event.target.email.value;
     var password = event.target.password.value;
-   
-    // for (i = 0; i < users.length; i++) {
-        
-    //     if (users[i].email === email) alert('email is already in use');
-    //     else {
-    // for (i=0; i< users.length; i++){
-    //     if ((Object.values(users).includes(email)) === true) alert('email already in use');
-    
-    // if ((Object.values(users).includes(email)) === true) alert('email already in use');
-    // else {
-            users.push({
-                name: name,
-                surname: surname,
-                email: email,
-                password: password
-            });
 
+    function find() {
+        debugger
+        for (i=0; i< users.length; i++) {
+            if (users[i].email === email) return true;
+        }
+        return false;
+    }
 
-            registerPanel.classList.remove('panel--show');
-            registerPanel.classList.add('panel--hide');
-
-            registerSuccessPanel.classList.remove('panel--hide');
-            registerSuccessPanel.classList.add('panel--show');
+    if (find() === false) {
+        debugger
+        users.push({
+            name: name,
+            surname: surname,
+            email: email,
+            password: password
         });
 
 
+        registerPanel.classList.remove('panel--show');
+        registerPanel.classList.add('panel--hide');
 
+        registerSuccessPanel.classList.remove('panel--hide');
+        registerSuccessPanel.classList.add('panel--show');
+    }
 
-// }
+    else {
+        document.getElementById("error").innerHTML = 'Wrong email!';
+    }
+    });
 
 
 var registerSuccessPanel = panels[2];
