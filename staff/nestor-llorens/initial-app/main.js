@@ -29,6 +29,8 @@ loginLink.addEventListener('click', function (event) {
     loginPanel.classList.add('panel--show');
 });
 
+// register panel
+
 var registerPanel = panels[1];
 
 var registerBackLink = registerPanel.children[1];
@@ -55,36 +57,27 @@ registerForm.addEventListener('submit', function (event) {
     var email = event.target.email.value;
     var password = event.target.password.value;
 
-    function find() {
-        debugger
-        for (i=0; i< users.length; i++) {
-            if (users[i].email === email) return true;
-        }
-        return false;
-    }
-
-    if (find() === false) {
-        debugger
-        users.push({
-            name: name,
-            surname: surname,
-            email: email,
-            password: password
-        });
-
-
+    try {
+        register(name, surname, email, password);
         registerPanel.classList.remove('panel--show');
         registerPanel.classList.add('panel--hide');
 
         registerSuccessPanel.classList.remove('panel--hide');
         registerSuccessPanel.classList.add('panel--show');
     }
+    catch(error) {
+        var emailFail = registerPanel.children[2];
+        emailFail.innerHTML = error.message;
 
-    else {
-        document.getElementById("error").innerHTML = 'Wrong email!';
+
     }
+
+
+
+        
     });
 
+// register success panel
 
 var registerSuccessPanel = panels[2];
 
@@ -114,6 +107,8 @@ registerSuccessPanel.addEventListener('click', function (event) {
     loginPanel.classList.add('panel--show');
 });
 
+// landing panel
+
 var loginPanelButton = loginPanel.children[0];
 var landingPanel = panels[4];
 
@@ -124,7 +119,6 @@ loginPanelButton.addEventListener('submit', function (event) {
     var password = event.target.password.value;
 
     users.forEach(function (item) {
-        // debugger
         if (item.email === email && item.password === password) {
             loginPanel.classList.remove('panel--show');
             loginPanel.classList.add('panel--hide');
