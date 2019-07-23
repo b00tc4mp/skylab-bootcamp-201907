@@ -4,6 +4,10 @@
  * Business Logic
  */
 
+
+
+// REGISTER + ITS ERRORS
+
 function register(name, surname, email, password) {
     var errors = '';
 
@@ -39,6 +43,12 @@ function register(name, surname, email, password) {
             password: password
         });
 }
+
+
+
+
+// LOGIN + ITS ERRORS
+
 
 function login(email, password) {
     var errors = '';

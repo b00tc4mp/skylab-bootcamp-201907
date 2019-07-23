@@ -2,6 +2,10 @@
 
 /**
  * Presentation
+  * DOCUMENTAR!!!!!!!!!
+ * 
+ * 
+ * 
  */
 
 var panels = document.getElementsByClassName('panel');
@@ -33,7 +37,7 @@ loginLink.addEventListener('click', function (event) {
     loginPanel.classList.add('panel--show');
 });
 
-// register panel
+// register panel 
 
 var registerPanel = panels[1];
 
