@@ -38,10 +38,7 @@ form div button{
 }
 
 .panel--show {
-    width: 30%;
-    height: 50vh;
-    display: block;
-    
+    display: block; 
 }
 
 .panel--hide {
