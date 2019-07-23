@@ -51,6 +51,17 @@ registerBackLink.addEventListener('click', function (event) {
 var registerForm = registerPanel.children[0];
 
 
+function registerUser(user){
+    users.push(user);
+
+    registerPanel.classList.remove('panel--show');
+    registerPanel.classList.add('panel--hide');
+
+    registerSuccessPanel.classList.remove('panel--hide');
+    registerSuccessPanel.classList.add('panel--show');
+
+}
+
 registerForm.addEventListener('submit', function (event) {
     event.preventDefault();
 
@@ -68,45 +79,32 @@ debugger;
         alert("Not credential");
     
     }else{
-        if(users.length == 0){
-             users.push({
-                    name: name,
-                    surname: surname,
-                    email: email,
-                    password: password
-                    });
-
-                    registerPanel.classList.remove('panel--show');
-                    registerPanel.classList.add('panel--hide');
-
-                    registerSuccessPanel.classList.remove('panel--hide');
-                    registerSuccessPanel.classList.add('panel--show');
-
-        }else{
-
+        if(users){
             for(var i =0; i<users.length; i++){
                 if(name == users[i].name || surname == users[i].surname|| email == users[i].email){
                     alert("This user o email exist")
                 }else{
-                        users.push({
+                    registerUser({
                         name: name,
                         surname: surname,
                         email: email,
                         password: password
                         });
-
-                        registerPanel.classList.remove('panel--show');
-                        registerPanel.classList.add('panel--hide');
-
-                        registerSuccessPanel.classList.remove('panel--hide');
-                        registerSuccessPanel.classList.add('panel--show');
                 }
             }
+            
+        }else{
+            registerUser({
+                name: name,
+                surname: surname,
+                email: email,
+                password: password
+                });
+
+            
         }
     }
-       
-
-        
+             
 });
 
 // register success panel

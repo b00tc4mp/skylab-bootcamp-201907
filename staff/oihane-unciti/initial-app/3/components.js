@@ -78,6 +78,28 @@ RegisterPanel.prototype.onRegisterSubmit = function (expression) {
 
     registerForm.addEventListener('submit', expression);
 };
+/**
+ * Login Panel abstraction.
+ * 
+ * @param {HTMLElement} container 
+ */
+function LoginPanel(container) {
+    Panel.call(this, container);
+}
+LoginPanel.prototype = Object.create(Panel.prototype);
+LoginPanel.prototype.constructor = RegisterPanel;
+
+LoginPanel.prototype.backToIni = function (expression) {
+    var loginBackLink = this.container.children[2];
+
+    loginBackLink.addEventListener('click', expression);
+};
+
+LoginPanel.prototype.onNavigateToWelcome = function (expression) {
+    var loginButton = this.container.children[0];
+
+    loginButton.addEventListener('submit', expression);
+};
 
 /**
  * Register Sucessful Panel abstraction.

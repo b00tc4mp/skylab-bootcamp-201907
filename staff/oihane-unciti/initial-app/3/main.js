@@ -59,8 +59,6 @@ registerPanel.onRegisterSubmit(function (event) {
 
 var registerSuccessPanel = new SuccessRegisterPanel(panels[2]);
 
-
-
 registerSuccessPanel.onNavigateLogin(function (event) {
     event.preventDefault();
 
@@ -71,23 +69,17 @@ registerSuccessPanel.onNavigateLogin(function (event) {
 
 // login panel
 
-var loginContainer = panels[3];
 
-var loginPanel = new Panel(loginContainer);
+var loginPanel = new LoginPanel(panels[3]);
 
-var loginBackLink = loginPanel.container.children[2];
 
-loginBackLink.addEventListener('click', function (event) {
+loginPanel.backToIni(function (event) {
     event.preventDefault();
-
     loginPanel.hide();
-
     initialPanel.show();
 });
 
-var loginForm = loginPanel.container.children[0];
-
-loginForm.addEventListener('submit', function (event) {
+loginPanel.onNavigateToWelcome(function (event) {
     event.preventDefault();
 
     var email = event.target.email.value;
@@ -98,6 +90,7 @@ loginForm.addEventListener('submit', function (event) {
 
         loginPanel.hide();
         welcomePanel.show();
+        
     } catch(error) {
         var loginFeedback = loginPanel.container.children[1];
 
@@ -105,9 +98,14 @@ loginForm.addEventListener('submit', function (event) {
     }
 });
 
-var welcomeContainer = panels[4];
 
-var welcomePanel = new Panel(welcomeContainer);
+//welcome Panel
+
+var welcomePanel = new WelcomePanel(panels[4]);
+
+
+
+
 
 
 
