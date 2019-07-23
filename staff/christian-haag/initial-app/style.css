@@ -29,6 +29,7 @@ section {
   display: flex;
   align-content: center;
 }
+
 a {
   margin: 2px 10px;
 }
@@ -51,8 +52,7 @@ button {
 }
 
 img {
-  width: 50%;
-  object-fit: contain;
+  width: 45%;
 }
 
 .panel {
@@ -69,6 +69,11 @@ img {
   margin: 30px 15px;
   padding: 10px 5px;
   border-radius: 7px;
+}
+
+.alert {
+  background-color: #ffffff;
+  color: red;
 }
 
 .link {
