@@ -70,7 +70,7 @@ describe('Curray', function () {
 
             expect(function(){
                 curray.toString();
-            }).toThrowError(TypeError, 'No se puede leer la propiedad "length" de undefined')
+            }).toThrowError(TypeError, 'No se puede leer la propiedad "length" de undefined');
         });
 
         it('should launch a handleError when using null as parameter', function(){
@@ -80,9 +80,7 @@ describe('Curray', function () {
                 curray.toString(null);
             }).toThrowError(TypeError, 'No se puede convertir a string un objeto null');
         });
-
-
-    })
+    });
 
     describe('fill', function(){
         it('should use all parameters (mandatory and optional)', function(){
@@ -90,32 +88,29 @@ describe('Curray', function () {
 
             var result = Array.from(curray.fill(0,2,4));
             expect(result).toEqual([1, 2, 0, 0]);
-            // var result = curray.fill(0,2,4);
-            // expect(result).toEqual({0:1, 1:2, 2:0, 3:0, length:4});
-
-        })
+        });
 
         it('should call fill whitout end parameter', function(){
             var curray = new Curray(1, 2, 3, 4);
     
             var result = Array.from(curray.fill(5,1));
             expect(result).toEqual([1, 5, 5, 5]);
-        })
+        });
 
         it('should call fill just using mandatory parameter', function(){
             var curray = new Curray(1,2,3,4);
     
             var result = Array.from(curray.fill(6));    
             expect(result).toEqual([6, 6, 6, 6]);
-        })
+        });
 
         it('should launch a handleError when curray is empty', function(){
             var curray = new Curray;
 
             expect(function(){
                 curray.fill();
-            }).toThrowError(TypeError, 'fill debe contener al menos un parámetro')
-        })
+            }).toThrowError(TypeError, 'fill debe contener al menos un parámetro');
+        });
 
     })
 
@@ -126,6 +121,7 @@ describe('Curray', function () {
                 var result = curray1.flat();
                 expect(result).toEqual([1, 2, 3, 'a', 'b', 'c', new Curray(true, false)]);
         });
+
         it('should flatten a curray/two level', function() {
             var curray1 = new Curray;
             curray1 = ([1, 2, 3, ['a', 'b', 'c', [true, false]]]) ;
@@ -175,7 +171,6 @@ describe('Curray', function () {
             var curray = new Curray(1,2,3,4,5,6);
 
             var result = Array.from(curray.unshift('a', 'b', 'c'));
-
             expect(result).toEqual(['a', 'b', 'c', 1,2,3,4,5,6]);
         });
 
@@ -190,6 +185,7 @@ describe('Curray', function () {
             expect(result).toEqual([ 'guanchope', 'cosita', 'manomens' ]);
 
         });
+        
         it("should handle no arguments",function(){
             var curray=new Curray();
             expect(function(){
@@ -197,9 +193,7 @@ describe('Curray', function () {
                     return val.length>=4;
                 });
             }).toThrowError(TypeError, "No se puede convertir a string un objeto null");
-           
         });
-
     });
 
 
@@ -209,9 +203,7 @@ describe('Curray', function () {
             var coeficient=10;
             var result = curray.map(function (value) { return value * coeficient; });
             expect(result).toEqual([10, 20, 30]);
-
         });
-        
     });
 
     describe("join",function(){
@@ -220,7 +212,6 @@ describe('Curray', function () {
             var result=curray.join();
             expect(result).toEqual("1,2,3");
         });
-
     });
 
     describe("entries",function(){
@@ -235,12 +226,10 @@ describe('Curray', function () {
         it("default",function(){
             function biggerThan(currentValue){
                 return currentValue>40
-            }
-
+            };
             var curray1=new Curray(1, 30, 39, 29, 10, 13);
             var result=curray1.every(biggerThan);
             expect(result).toBe(false);
-
         });
     });
 
@@ -273,7 +262,6 @@ describe('Curray', function () {
             var reducer = (accumulator, currentValue) => accumulator + currentValue;
 
             var result = curray.reduce(reducer);
-
             expect(result).toEqual(10);
         });
 
@@ -282,7 +270,6 @@ describe('Curray', function () {
             var reducer = (accumulator, currentValue) => accumulator + currentValue;
 
             var result = curray.reduce(reducer, 5);
-
             expect(result).toEqual(15);
         });
 
@@ -291,7 +278,6 @@ describe('Curray', function () {
             var reducer = (accumulator, currentValue) => accumulator * currentValue;
 
             var result = curray.reduce(reducer);
-
             expect(result).toEqual(24);
         });
 
@@ -300,7 +286,6 @@ describe('Curray', function () {
             var reducer = (accumulator, currentValue) => accumulator * currentValue;
 
             var result = curray.reduce(reducer, 5);
-
             expect(result).toEqual(120);
         });
     });
@@ -311,28 +296,31 @@ describe('Curray', function () {
             expect(function(){
                 curray1.concat();
             }).toThrowError(ReferenceError,'missing argument 0 when calling function concat');
-        })
+        });
+
         it('param is no Curray', function(){
             var curray1 =[1,2,3];
             var curray2 = new Curray(4,5,6);
             expect(function(){
                 curray2.concat(curray1);
             }).toThrowError(TypeError, 'param is not Curray');
-        })
+        });
+
         it('Curray is empty', function(){
             var curray1 =new Curray();
             var curray2 = new Curray(4,5,6);
             expect(function(){
                 curray1.concat(curray2);
             }).toThrowError(ReferenceError, 'Curray is empty')
-        })
+        });
+
         it('should create new curray with iterable object', function(){
             var curray1 = new Curray(1,2,3);
             var curray2 = new Curray(4,5,6);
             var result = curray1.concat(curray2); 
             result=Array.from(result);
             expect(result).toEqual([1,2,3,4,5,6]);
-        })
+        });
     });
 
     describe('arrayOf', function () {
@@ -341,7 +329,7 @@ describe('Curray', function () {
 
             var result = (curray).arrayOf();
             expect(Array.from(result)).toEqual([1, 2, 3, 'hello', {}, NaN]);
-        })
+        });
     });
 
     describe('splice', function () {
@@ -384,7 +372,7 @@ describe('Curray', function () {
                 curray.lastIndexOf();
             }).toThrowError(TypeError, 'missing argument 0 when calling function lastIndexOf');
         });
-    })
+    });
 
     describe('find', function () {
         it('should return the value of the first element in curray that satisfies the condition', function () {
@@ -429,7 +417,7 @@ describe('Curray', function () {
                 curray.some('x');
             }).toThrowError(TypeError, 'x is not a function');
         });
-    })
+    });
 
     describe('shift', function () {
         it('should remove the first element from curray', function () {
@@ -438,7 +426,7 @@ describe('Curray', function () {
 
             expect(result).toEqual(1);
         });
-    })
+    });
 
     describe('reverse', function () {
         it('should reverse curray in place, case 1', function () {
@@ -454,7 +442,7 @@ describe('Curray', function () {
 
             expect(result).toEqual([1, 2, 3, 4, 5]);
         });
-    })
+    });
 
     describe('includes', function () {
         it('should search a value in array', function () {
@@ -472,5 +460,4 @@ describe('Curray', function () {
             }).toThrowError(TypeError, 'missing argument 0 when calling function includes');
         });
     });
-
 });

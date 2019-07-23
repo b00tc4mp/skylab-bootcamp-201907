@@ -14,10 +14,10 @@ function Curray() {
         for (var i = 0; i < arguments.length; i++) {
             this[i] = arguments[i];
             // this.push(arguments[i]); // TRY not to depend on push here.
-        }
+        };
         this.length = arguments.length;
-    }
-}
+    };
+};
 
 Curray.prototype.push = function (element) {
     this[this.length++] = element;
@@ -54,7 +54,7 @@ Curray.prototype.toString = function(){
         for (var i = 0; i < this.length; i++){
             newstring = newstring + this[i] + ',';
         };
-        newstring = newstring.substring(0, (newstring.length-1))
+        newstring = newstring.substring(0, (newstring.length-1));
     }
     return newstring;
 }
@@ -112,15 +112,15 @@ Curray.prototype.map = function(expression) {
 };
 
 Curray.prototype.unshift = function(element){
-    var inc = arguments.length
-    var length = this.length
+    var inc = arguments.length;
+    var length = this.length;
 
     for (var i = length - 1; i >= 0; i--){
         this[i + inc] = this[i]
-    }
+    };
     for (var j = 0; j < arguments.length; j++){
         this[j] = arguments[j]
-    }
+    };
     
     this.length += inc;
     return this;
@@ -184,9 +184,9 @@ Curray.prototype.entries=function(iterator){
     var result=[];
     if(i !== this.length){
         result[0]= i + "," + this[i];
-    }
+    };
     return result;
-}
+};
 
 Curray.prototype.every = function(expression){
     var result;
@@ -195,10 +195,10 @@ Curray.prototype.every = function(expression){
             result = false;
         }else{
             result = true;
-        }
-    }
+        };
+    };
     return result;
-}
+};
 
 Curray.prototype.indexOf = function(value){
     var result;
@@ -238,7 +238,7 @@ Curray.prototype.reduce = function(expression, initialValue){
                 continue
             } else {
                 reduction = expression(reduction, this[i+1]);
-            }
+            };
         };
         result = reduction;
 
@@ -249,7 +249,7 @@ Curray.prototype.reduce = function(expression, initialValue){
                 continue
             } else {
                 reduction = expression(reduction, this[i+1]);
-            }
+            };
         };
         result = reduction;
     };
@@ -261,22 +261,22 @@ Curray.prototype.reduceRight = function (expression) {
     if (arguments.length === 0) throw TypeError('missing argument 0 when calling function reduceRight');
     if (typeof expression !== 'function') throw TypeError(expression + ' is not a function');
 
-    var newArray = []
+    var newArray = [];
     for (var i = this.length - 1; i >= 0; i--) {
         newArray = expression(newArray, this[i]);
-    }
+    };
     return newArray;
 };
 
 Curray.prototype.concat = function(curray){
-    if(arguments.length === 0) throw ReferenceError('missing argument 0 when calling function concat')
+    if(arguments.length === 0) throw ReferenceError('missing argument 0 when calling function concat');
     if(!(curray instanceof Curray)) throw TypeError('param is not Curray');
     if(this.length==0) throw ReferenceError('Curray is empty');
     
     var res=this;//se refiere al this del Curray cuando lo creamos ejemplo: c.concat(a) siendo c un Curray()
     for(var i=0;i<curray.length;i++){
         res[this.length++]=curray[i];
-    }
+    };
     return res;
 };
 
@@ -310,8 +310,8 @@ Curray.prototype.splice = function (start, remove, add1, add2) {
                     if (add2 != 0) {
                         newArray[n++] = add2;
                         add2 = 0;
-                    }
-                }
+                    };
+                };
             } else if (x-- === 1) {
                 if (add1 != 0) {
                     newArray[n++] = add1;
@@ -319,13 +319,13 @@ Curray.prototype.splice = function (start, remove, add1, add2) {
                     if (add2 != 0) {
                         newArray[n++] = add2;
                         add2 = 0;
-                    }
-                }
-            }
+                    };
+                };
+            };
         } else if (this.length > start + remove) {
             newArray[n++] = array[i];
-        }
-    }
+        };
+    };
     return newArray;
 };
 
@@ -334,19 +334,19 @@ Curray.prototype.sort = function (expression) {
     var sorted = [this[0]]
     expression = expression || function (a, b) {
         return String(a) >= String(b);
-    }
+    };
 
     for (var i = 1; i < this.length; i++) {
-        var indexToInsert = 0
+        var indexToInsert = 0;
         for (var j = 0; j < sorted.length; j++) {
             if (expression(this[i], sorted[j])) {
                 indexToInsert = j + 1;
             } else {
-                break
-            }
-        }
+                break;
+            };
+        };
         sorted.splice(indexToInsert, 0, this[i])
-    }
+    };
     return sorted;
 };
 
@@ -356,8 +356,8 @@ Curray.prototype.lastIndexOf = function (element) {
     for (var i = this.length + 1; i > 0; i--) {
         if (this[i] === element) {
             return i;
-        }
-    }
+        };
+    };
     return -1;
 };
 
@@ -367,8 +367,8 @@ Curray.prototype.find = function (expression) {
     for (var i = 0; i < this.length; i++) {
         if (expression(this[i])) {
             return this[i];
-        }
-    }
+        };
+    };
 };
 
 Curray.prototype.some = function (expression) {
@@ -378,8 +378,8 @@ Curray.prototype.some = function (expression) {
     for (var i = 0; i < this.length; i++) {
         if (expression(this[i]) === true) {
             return true;
-        }
-    }
+        };
+    };
     return false;
 };
 
@@ -388,7 +388,7 @@ Curray.prototype.shift = function () {
     var first = this[0];
     for (var i = 1; i < this.length; i++) {
         this[i - 1] = this[i];
-    }
+    };
     this.length = this.length - 1;
     return first;
 };
@@ -399,7 +399,7 @@ Curray.prototype.reverse = function () {
         var a = this[i];
         this[i] = this[this.length - 1 - i];
         this[this.length - 1 - i] = a;
-    }
+    };
     var realrray = Array.from(this);
     return realrray;
 };
@@ -412,7 +412,7 @@ Curray.prototype.includes = function (value) {
 
         if (this[i] == value) {
             test = true;
-        }
-    }
+        };
+    };
     return test;
 };
