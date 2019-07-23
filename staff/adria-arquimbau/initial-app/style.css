@@ -6,8 +6,13 @@ body{
 section{
     border-radius: 15px;
     background-color: rgb(34, 140, 182);
-    margin: 12% 25%;
-    
+    margin: 12% 25%;  
+}
+.errorTextLogin {
+    color: red;
+}
+.errorTextRegister{
+    color: red;
 }
 button {
     border: 1px solid black;

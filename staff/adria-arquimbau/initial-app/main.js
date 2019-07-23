@@ -2,6 +2,12 @@
 var users = [];
 //variable per reconeixer els panels, tots els panels tenen el mateix
 var panels = document.getElementsByClassName('panel');
+//creem variables de les clases del error text per fer apareixer quan hi ha error en el login o register
+var errorTextRegister = document.querySelector('.errorTextRegister');
+var errorTextLoginWrong = document.querySelector('.errorTextLoginWrong');
+var errorTextLoginEmpty = document.querySelector('.errorTextLoginEmpty');
+
+
 /*------------------------------PANEL INITIAL 0----------------------------------------------------------------------------*/
 // initial panel
 var initialPanel = panels[0]; //es refereix a tot el panel en general, provar sempre a ficar a consola per veure-ho
@@ -72,14 +78,18 @@ loginForm.addEventListener('submit', function (event) { // i amb el puto boto de
     email = event.target.email.value;
     password = event.target.password.value;
 
-    for (var i = 0; i < users.length; i++) { //for per recorrer el users
-        if (users[i].email == email && users[i].password === password) {
-            loginToWelcome();
-        } else if (users[i].email !== email) {
-            confirm("Wrong email"); 
-        } else if(users[i].password !== password) {
-            confirm("Wrong Password!");  
+    if (email !== undefined || password !== undefined) {
+
+        for (var i = 0; i < users.length; i++) { //for per recorrer el users
+
+            if (users[i].email == email && users[i].password === password) {
+                loginToWelcome();
+            } else {
+                errorTextLoginWrong.innerHTML = 'Wrong credentials';                
+            }
         }
+    } else {
+        errorTextLoginEmpty.innerHTML = 'Empty fields'; //no el detecta per algun motiu JDER
     }
 });
 /*------------------------------------PANEL WELCOME 4----------------------------------------------------------------------*/
