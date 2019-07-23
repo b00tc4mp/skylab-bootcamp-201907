@@ -5,10 +5,7 @@ var startLogin = document.querySelector(".start__login");
 var start = document.querySelector(".start");
 var correctRegistration = document.querySelector(".correctRegistration");
 var loginBack = document.querySelector(".loginBack");
-var registerName = document.querySelector(".register__name");
-var registerSurname = document.querySelector(".register__surname");
-var registerEmail = document.querySelector(".register__email");
-var registerPw = document.querySelector(".register__pw");
+
 var loginEmail = document.querySelector(".login__email");
 var loginPw = document.querySelector(".login__pw");
 
@@ -20,46 +17,20 @@ var loginButton = document.querySelector(".login-button");
 var credentialError = document.querySelector(".credentialError");
 var credentialError2 = document.querySelector(".credentialError2");
 
+var registerName = document.querySelector(".register__name").value;
+var registerSurname = document.querySelector(".register__surname").value;
+var registerEmail = document.querySelector(".register__email").value;
+var registerPw = document.querySelector(".register__pw").value;
 
 
 
-var allUsers = new Curray(1,2);
 
+/* var allUsers = new Curray(1,2);
+ */
 /**DATA LAYER */
 /**BUSINESS DATA */
 /**PRESENTATION */
-function register(name,surname,email,password){
-/**hacer throws de errores */
-if (!registerName.value.trim().length){
-    credentialError.innerHTML = "Name is empty or blank";
-}else if(!registerSurname.value.trim().length){
-    credentialError.innerHTML = "Surname cannot be empty";
-}else if(!registerEmail.value.trim().length){
-    credentialError.innerHTML = "Email cannot be empty";
-}else if(!registerPw.value.trim().length) {
-    credentialError.innerHTML = "Password cannot be empty";
-} else {
-    var found = allUsers.findTest(function (user) {
-        return user.email == registerEmail.value && user.password == registerPw.value;
-    });
-    if (found) {
-        credentialError.innerHTML = "Credentials error";
-        throw new Error(errors)
-    } else {
-        var nextUser = new newUser(registerName.value, registerSurname.value, registerEmail.value, registerPw.value);
-        console.log(nextUser);
-        allUsers.pushTest(nextUser);
-/*         correctRegistration.classList.add("display");
-        correctRegistration.classList.remove("hide");
-        register.classList.add("hide");
-        register.classList.remove("display"); */
-    }
 
-
-}
-event.preventDefault();
-
-}
 
 /********************************************* */
 
@@ -95,7 +66,7 @@ function newUser(name, surname, email, password) {
 }
 
 getData = function (event) {
-    if (!registerName.value.trim().length){
+/*     if (!registerName.value.trim().length){
         credentialError.innerHTML = "Name cannot be empty";
     }else if(!registerSurname.value.trim().length){
         credentialError.innerHTML = "Surname cannot be empty";
@@ -121,7 +92,23 @@ getData = function (event) {
 
     
     }
+    event.preventDefault(); */
     event.preventDefault();
+
+
+    
+    try{
+        registration(registerName,registerSurname,registerEmail,registerPw);
+        correctRegistration.classList.add("display");
+        correctRegistration.classList.remove("hide");
+        register.classList.add("hide");
+        register.classList.remove("display");
+    }catch(error){
+        console.log(error);
+        credentialError.innerText=error
+
+    }
+
 
 /*     try{
         register(name,surname,email,password)
