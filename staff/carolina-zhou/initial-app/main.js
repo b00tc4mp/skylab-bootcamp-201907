@@ -1,11 +1,9 @@
-var users = [{
-        email: "carol.z.lin.95@gmail.com",
-        name: "Carolina",
-        password: "123456",
-        surname: "Zhou"
-}];
+'use strict';
+
+var users = new Curray();
 var panels = document.getElementsByClassName('panel');
 
+var errorPanel = panels[5];
 // initial panel
 var initialPanel = panels[0];
 var registerLink = document.getElementsByClassName('intro__register')[0];
@@ -54,25 +52,31 @@ registerForm.addEventListener('submit', function(event) {
     var surname = event.target.surname.value;
     var email = event.target.email.value;
     var password = event.target.password.value; 
+    var user = users.find(function (user) {
+        return user.email !== email;
+    });
 
-    for(i = 0; i < users.length; i++) {
-        if(email !== users[i].email) {
+    if (user === true || users.length === 0) {
+
+        users.push({
+            name: name,
+            surname: surname,
+            email: email,
+            password: password
+        }); 
+    
+        registerPanel.classList.remove('panel--show');
+        registerPanel.classList.add('panel--hide');
         
-            users.push({
-                name: name,
-                surname: surname,
-                email: email,
-                password: password
-            }); 
-        
-            registerPanel.classList.remove('panel--show');
-            registerPanel.classList.add('panel--hide');
-            
-            registerSuccessPanel.classList.remove('panel--hide');
-            registerSuccessPanel.classList.add('panel--show'); 
-        } else {
-            alert("There is already an account with the provided email address");
-        }
+        registerSuccessPanel.classList.remove('panel--hide');
+        registerSuccessPanel.classList.add('panel--show');
+
+    } else if (user.email === email) {
+
+        errorPanel.classList.remove('panel--hide');
+        errorPanel.classList.add('panel--show');
+
+        document.getElementsByClassName("error__message")[0].innerHTML = "There is already an account with the provided email address";
     }
 });
 
@@ -84,38 +88,63 @@ confirmationForm.addEventListener('submit', function(event) {
     event.preventDefault();
 
     var firstLog = document.getElementById("finalPass").value;
+    var lastUser = users[users.length -1];
 
-        if (firstLog === users[users.length-1].password) {
-            registerSuccessPanel.classList.remove('panel--show');
-            registerSuccessPanel.classList.add('panel--hide');
-            
-            homePanel.classList.remove('panel--hide');
-            homePanel.classList.add('panel--show');
-        } else {
-            alert("Wrong password. Try again.");
-        }
+    if (lastUser.password === firstLog) {
+        registerSuccessPanel.classList.remove('panel--show');
+        registerSuccessPanel.classList.add('panel--hide');
+        
+        homePanel.classList.remove('panel--hide');
+        homePanel.classList.add('panel--show');
+
+        errorPanel.classList.remove('panel--show');
+        errorPanel.classList.add('panel--hide');
+    } else {
+        errorPanel.classList.remove('panel--hide');
+        errorPanel.classList.add('panel--show');
+
+        document.getElementsByClassName("error__message")[0].innerHTML = "Wrong password. Try again.";
+    }
 });
 
 // login panel
 var loginPanel = panels[3];
 var loginForm = loginPanel.children[0];
+var loginBackLink = document.getElementsByClassName('login__back')[0];
+
+loginBackLink.addEventListener('click', function(event) {
+    event.preventDefault();
+
+    loginPanel.classList.remove('panel--show');
+    loginPanel.classList.add('panel--hide');
+    
+    initialPanel.classList.remove('panel--hide');
+    initialPanel.classList.add('panel--show');
+
+    errorPanel.classList.remove('panel--show');
+    errorPanel.classList.add('panel--hide');
+});
 
 loginForm.addEventListener('submit', function(event) {
     event.preventDefault();
 
     var email = document.getElementById("userEmail").value;
     var password = document.getElementById("userPassword").value;
+    var user = users.find(function (user) {
+        return user.email === email && user.password === password;
+    });
 
-    for (i = 0; i < users.length; i++) {
-        if (users[i].email === email && users[i].password === password) {
-            loginPanel.classList.remove('panel--show');
-            loginPanel.classList.add('panel--hide');
-            
-            homePanel.classList.remove('panel--hide');
-            homePanel.classList.add('panel--show');
-        } else {
-            alert("Wrong email or wrong password.")
-        }
+    if (user) {
+        loginPanel.classList.remove('panel--show');
+        loginPanel.classList.add('panel--hide');
+        
+        homePanel.classList.remove('panel--hide');
+        homePanel.classList.add('panel--show');
+    } else {
+        errorPanel.classList.remove('panel--hide');
+        errorPanel.classList.add('panel--show');
+
+        document.getElementsByClassName("error__message")[0].innerHTML = "Wrong credentials!";
     }
 });
 

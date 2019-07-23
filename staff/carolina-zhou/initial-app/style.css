@@ -83,9 +83,12 @@ main {
 }
 
 .confirmation {
-  text-align: center;
+  background-color: rgba(0, 128, 0, 0.45);
+  color: yellow;
+  margin: 3em auto auto auto;
+  padding: 30px;
   width: 70%;
-  margin: auto;
+  text-align: center;
 }
 .confirmation__input {
   width: 100%;
@@ -139,7 +142,24 @@ main {
 }
 
 .home {
+  background-color: rgba(0, 128, 0, 0.45);
+  color: yellow;
+  margin: 3em auto auto auto;
+  padding: 30px;
+  width: 70%;
   text-align: center;
+}
+
+.error {
+  background-color: rgba(100, 0, 0, 0.25);
+  color: darkRed;
+  width: 70%;
+  margin: 1em auto auto auto;
+  padding: 30px;
+}
+.error__title {
+  font-weight: bold;
+  font-size: 22px;
 }
 
 .footer {
