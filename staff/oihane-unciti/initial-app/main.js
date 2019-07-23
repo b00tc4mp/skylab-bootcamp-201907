@@ -8,6 +8,7 @@ var initialPanel = panels[0];
 
 var registerLink = initialPanel.children[0];
 var loginLink = initialPanel.children[1];
+var backRegisterPanel = panels[1].children[1]
 
 
 registerLink.addEventListener('click', function(event) {
@@ -32,7 +33,18 @@ loginLink.addEventListener('click', function(event) {
 
 var registerPanel = panels[1];
 
+
 var registerBackLink = registerPanel.children[1];
+
+backRegisterPanel.addEventListener('click', function(event) {
+    event.preventDefault();
+
+    registerPanel.classList.remove('panel--show');
+    registerPanel.classList.add('panel--hide');
+    
+    initialPanel.classList.remove('panel--hide');
+    initialPanel.classList.add('panel--show');
+});
 
 registerBackLink.addEventListener('click', function(event) {
     event.preventDefault();
@@ -45,6 +57,18 @@ registerBackLink.addEventListener('click', function(event) {
 });
 
 var registerForm = registerPanel.children[0];
+
+var backLoginPanel = panels[3].children[1];
+
+backLoginPanel.addEventListener('click', function(event) {
+    event.preventDefault();
+
+    loginPanel.classList.remove('panel--show');
+    loginPanel.classList.add('panel--hide');
+    
+    initialPanel.classList.remove('panel--hide');
+    initialPanel.classList.add('panel--show');
+});
 
 registerForm.addEventListener('submit', function(event) {
     event.preventDefault();
