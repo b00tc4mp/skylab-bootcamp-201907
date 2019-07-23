@@ -1,0 +1,307 @@
+/* --- ALL VERSION w/media queries. No BEM, no Sass ---*/
+
+/* general */
+body {
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    font-family: sans-serif;
+    font-weight: 300;
+    color: darkgray;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: darkgray;
+}
+
+.hidden, .intro {
+    display: none;
+}
+
+
+/* header */
+header, footer {
+    padding: 25px;
+}
+.app-head {
+    height: 40px;
+    position: sticky;
+    top: 0px;
+    background-color: white;
+    border-bottom: 1px solid darkgray ;
+    display: flex;
+    justify-content: space-between;
+}
+
+header figure {
+    margin: 0;
+    padding: 0;
+    align-self: center; 
+}
+
+.mucho-logo {
+    margin: 0;
+    padding: 0;
+    max-width: 90px;
+}
+
+.menu-icon {
+    align-self: center;
+    max-width: 40px;
+}
+
+.submenu {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid darkgray ;
+}
+
+.submenu p {
+    margin-left: 0;
+}
+
+.submenu p:hover{
+    color: black;
+}
+
+.submenu-icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 7px;
+    align-self: center;
+}
+
+
+/* main */
+.main-content {
+    padding: 5px;
+}
+
+.imagen, .city-branch {
+    display: flex;
+    justify-content: space-between;
+}
+
+.imagen {
+    display: block;
+    position: relative;
+    margin: 0;
+}
+
+.imagen figure {
+    margin: 0 0 5px 0;
+}
+
+.imagen img {
+    display: block;
+    width: 100%;
+}
+
+.imagen img:hover {
+    opacity: 0.05;
+    transition: opacity 500ms;
+}
+
+.reveal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index:-1;
+}
+
+h1, h2 {
+    color: black;
+    display: block;
+    position: absolute;
+    margin: 1em 0 0 1em;
+    font-size: 1rem;
+    width: 300px;
+}
+
+h2 {
+    margin-top: 3em;
+    color: rgb(170, 170, 170)
+}
+
+article {
+    margin-bottom: 5px;
+    padding: 20px;
+    min-height: 250px;
+    background-color: #f0f0f0;
+}
+
+article p, h3 {
+    color: black;
+    margin: 1em 0 0 1em;
+}
+
+h3 {
+    color: red;
+}
+
+
+/* footer */
+address {
+    font-style: normal;
+    color: grey;
+    padding: 5px;
+}
+
+.city-branch {
+    flex-direction: column;
+}
+
+.city-branch h4 {
+    color: red;
+    margin-bottom: 0;
+}
+
+.city-branch p {
+    margin: 0;
+}
+
+.social-media {
+    margin-top: 2em;
+    color: darkgray;
+}
+
+.social-media ul {
+    display: flex;
+    padding: 0;
+}
+
+.social-media ul li {
+    padding-right: 15px;
+}
+
+.social-media img {
+    max-width: 15px;
+    height: 15px;
+}
+
+.last-line {
+    display: flex;
+    color: darkgray;
+}
+
+.last-line p {
+    padding-right: 15px;
+}
+
+
+/* --------- TABLET  --------- */
+@media (min-width: 562px) {
+    /* header */
+    .app-head {
+        border-bottom: none;
+    }
+    .menu-icon {
+        display: none;
+    }
+    .main-menu ul {
+        display: flex;
+    }
+    .main-menu ul li {
+        padding-left: 15px;
+    }
+    .app-subhead {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .submenu {
+        border-bottom: none;
+        margin-left: 1em;
+    }
+    .submenu-icon {
+        margin-left: 10px;
+    }
+
+    /* footer */
+    .cities {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .city-branch {
+        flex: 2 1 auto;
+        width: 50%;
+        height: 200px;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row-reverse;
+        margin-top: 2em;
+    }
+}
+
+@media (min-width: 562px) and (max-width: 1024px) {
+    /* main */
+    .main-content {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .imagen {
+        display: block;
+        position: relative;
+        max-width: 50%;
+    }
+    .imagen figure {
+        padding: 3px;
+    }
+    article {
+        margin: 3px;
+        min-width: 45%;
+    }
+
+    /* footer */
+    address > p {
+        width: 65%;
+        margin-bottom: 2em;
+    }
+}
+
+/* --------- DESKTOP --------- */
+@media (min-width: 1024px) {
+    .intro {
+        display: block;
+        padding: 0;
+        width: 30%;
+    }
+    /* main */
+    .main-content {
+        padding: 5px;
+        display: grid;
+        grid-template-columns: 25% 25% 25% 25%;
+        grid-template-rows: repeat(9, 1fr);
+        grid-auto-flow: dense;
+    }
+    .imagen figure {
+        margin: auto;
+        padding: 3px;
+    }
+    article {
+        margin: 3px;
+        min-height: auto;
+    }
+    #img3, #img5, #img8, #img11, #img16 {
+        grid-row: span 2;
+        grid-column: span 2;
+    }
+
+    /* footer */
+    address > p {
+        width: 50%;
+    }
+    .city-branch {
+        width: auto;
+        height: 200px;
+    }
+}
