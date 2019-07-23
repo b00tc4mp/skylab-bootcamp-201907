@@ -288,7 +288,7 @@ describe('Curray TEST', function() {
 });
 
 describe('flat', function(){
-    it('should creates a new array with all sub-array elements concatenated into it recursively' , function(){
+    it('should creates a new array with all sub-array elements concatenated into it recursively. CASE: no arguments' , function(){
         var curray = new Curray(1,2,3,[4,5]);
         var result = curray.flat();
         var result = Array.from(result);
@@ -296,7 +296,7 @@ describe('flat', function(){
         expect(result).toEqual([1,2,3,4,5]);
     });
 
-    it('should creates a new array with all sub-array elements concatenated into it recursively', function(){
+    it('should creates a new array with all sub-array elements concatenated into it recursively. CASE: two depth', function(){
         var curray = new Curray(1,2,[1,2,[1,2]]);
         var result = curray.flat(2);
         var result = Array.from(result);
@@ -314,3 +314,35 @@ describe('flat', function(){
 //         expect(resultArr).toEqual(['a', 'b', 'c', 'd', 'f', 'g']);
 //     })
 // });
+
+describe('reduce', function(){
+    it('should executes a reducer function (that you provide) on each element of the array, resulting in a single output value. CASE: sum' , function(){
+        var curray = new Curray(1,2,3);
+        var result = curray.reduce(function(acumulator, currentValue, index, curray) {
+            return acumulator + currentValue;
+        });
+        expect(result).toBe(6);
+    });
+    it('should executes a reducer function (that you provide) on each element of the array, resulting in a single output value. CASE: rest' , function(){
+        var curray = new Curray(6,2,1);
+        var result = curray.reduce(function(acumulator, currentValue, index, curray) {
+            return acumulator - currentValue;
+        });
+        expect(result).toBe(3);
+    });
+    it('should executes a reducer function (that you provide) on each element of the array, resulting in a single output value. CASE: mult' , function(){
+        var curray = new Curray(1,2,3);
+        var result = curray.reduce(function(acumulator, currentValue, index, curray) {
+            return acumulator * currentValue;
+        });
+        expect(result).toBe(6);
+    });
+    it('should executes a reducer function (that you provide) on each element of the array, resulting in a single output value. CASE: div' , function(){
+        var curray = new Curray(12,2,2);
+        var result = curray.reduce(function(acumulator, currentValue, index, curray) {
+            return acumulator / currentValue;
+        });
+        expect(result).toBe(3);
+    });
+
+});

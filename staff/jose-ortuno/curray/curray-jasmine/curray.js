@@ -381,3 +381,16 @@ Curray.prototype.flat = function() {
 //     };
 //     return newCurray;
 // }
+
+Curray.prototype.reduce = function(expresion) {
+    var value = 0;
+    for (var i = 1; i < curray.length; i++) {
+        var count = i - 1
+        if (i === 1) {
+            value = expresion(curray[count], curray[i], i, curray);
+        } else {
+            value = expresion(value, curray[i], i, curray);
+        }
+    }
+    return value;
+}
