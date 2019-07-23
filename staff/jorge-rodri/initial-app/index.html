@@ -1,50 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>initial-app</title>
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Hanalei&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <main>
-            <h1>Initial App</h1>
-        <!---initial section--->
-        <section>
-                <a href="">Register</a> or <a href="">Log in</a>
+    <main class="panel--settings">
+        <h1 class="panel__title">Initial App</h1>
+
+        <!-- initial panel -->
+        <section class="panel panel--show">
+            <a href="">Register</a> <a href="">Login</a>
         </section>
-        <!--register panel-->
-        <section>
-            <form>
+
+        <!-- register panel -->
+        <section class="panel panel--hide">
+            <form class="panel__form">
                 <label for="name">Name</label>
-                <input type="text"id="name">
+                <input type="text" id="name">
                 <label for="surname">Surname</label>
-                <input type="text"id="surname">
-                <label for="email">Email</label>
-                <input type="text"id="email">
+                <input type="text" id="surname">
+                <label for="email">E-mail</label>
+                <input type="text" id="email">
                 <label for="password">Password</label>
-                <input type="text"id="password">
+                <input type="password" id="password">
                 <button type="submit">Register</button>
             </form>
+            <h4 id="wrong"></h4>
+            <a class="link--position" href="">back</a>
         </section>
-        <!--register success pane1-->
-        <section>
-            Ok, refistered succeeded <a href="">login</a>
+
+        <!-- register success panel -->
+        <section class="panel panel--hide">
+            Ok, registered succeeded, you can now proceed to <a href="">login</a>.
         </section>
-        <!--panel section-->
-        <section>
+
+        <!-- register panel -->
+        <section class="panel panel--hide">
             <form>
-                <label for="email">Email</label>
-                <input type="text"id="email">
+                <label for="email">E-mail</label>
+                <input type="email" id="email">
                 <label for="password">Password</label>
-                <input type="text"id="password">
-                <button type="submit">Register</button>
+                <input type="password" id="password">
+                <button type="submit">Login</button>
             </form>
+            <a href="">back</a>
         </section>
-        <section>
-            <h1>Welcome</h1>
+
+        <!-- welcome panel -->
+        <section class="panel panel--hide">
+            <h2>Welcome!</h2>
         </section>
     </main>
+
+    <script src="curray.js"></script>
+    <script src="data.js"></script>
+    <script src="logic.js"></script>
     <script src="main.js"></script>
 </body>
+
 </html>
