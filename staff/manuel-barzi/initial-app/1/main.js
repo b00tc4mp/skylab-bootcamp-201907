@@ -1,29 +1,19 @@
 'use strict';
 
 /**
- * var users= where keep all the users registered.
- * var panel= all html panels.
+ * Presentation
  */
 
-
-
 var panels = document.getElementsByClassName('panel');
-/* var errorText = document.querySelector('.errorText');
-var registerFeedback = resgisterPanel.children[1] 
 
-function validateEmail(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@“]+(\.[^<>()\[\]\\.,;:\s@“]+)*)|(“.+“))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-}*/
+// initial panel
 
+var initialPanel = panels[0];
 
+var registerLink = initialPanel.children[0];
+var loginLink = initialPanel.children[1];
 
-var initialPanel = panels[0]; //-------------------------Initial Panel---------------------------[0]of panels 
-//option register
-var registerLink = initialPanel.children[0]; //a>Register
-var loginLink = initialPanel.children[1]; //a>Login
-
-registerLink.addEventListener('click', function (event) { //child[1] of initialPanel 
+registerLink.addEventListener('click', function (event) {
     event.preventDefault();
 
     initialPanel.classList.remove('panel--show');
@@ -31,11 +21,9 @@ registerLink.addEventListener('click', function (event) { //child[1] of initialP
 
     registerPanel.classList.remove('panel--hide');
     registerPanel.classList.add('panel--show');
-
 });
-//option login
 
-loginLink.addEventListener('click', function (event) { //child[1] of initialPanel 
+loginLink.addEventListener('click', function (event) {
     event.preventDefault();
 
     initialPanel.classList.remove('panel--show');
@@ -43,12 +31,24 @@ loginLink.addEventListener('click', function (event) { //child[1] of initialPane
 
     loginPanel.classList.remove('panel--hide');
     loginPanel.classList.add('panel--show');
-
 });
 
-var registerPanel = panels[1]; //-------------------------Register Panel----------------------------[1]of panels 
+// register panel
 
-// form register
+var registerPanel = panels[1];
+
+var registerBackLink = registerPanel.children[2];
+
+registerBackLink.addEventListener('click', function (event) {
+    event.preventDefault();
+
+    registerPanel.classList.remove('panel--show');
+    registerPanel.classList.add('panel--hide');
+
+    initialPanel.classList.remove('panel--hide');
+    initialPanel.classList.add('panel--show');
+});
+
 var registerForm = registerPanel.children[0];
 
 registerForm.addEventListener('submit', function (event) {
@@ -68,35 +68,19 @@ registerForm.addEventListener('submit', function (event) {
         registerSuccessPanel.classList.remove('panel--hide');
         registerSuccessPanel.classList.add('panel--show');
     } catch (error) {
-
-        var registerFeedback = registerPanel.childre[1]; // panel__feedback
+        var registerFeedback = registerPanel.children[1];
 
         registerFeedback.innerText = error.message;
-
     }
-
 });
 
-// option back return
-var registerBackLink = registerPanel.children[2];
+// register success panel
 
-registerBackLink.addEventListener('click', function (event) {
-    event.preventDefault();
+var registerSuccessPanel = panels[2];
 
-    registerPanel.classList.remove('panel--show');
-    registerPanel.classList.add('panel--hide');
+var registerSuccessLoginLink = registerSuccessPanel.children[0];
 
-    initialPanel.classList.remove('panel--hide');
-    initialPanel.classList.add('panel--show');
-
-});
-
-var registerSuccessPanel = panels[2]; //-------------------------Success Panel----------------------------[2]of panels 
-
-//option login return
-var loginBackLink = registerSuccessPanel.children[0];
-
-loginBackLink.addEventListener('click', function (event) {
+registerSuccessPanel.addEventListener('click', function (event) {
     event.preventDefault();
 
     registerSuccessPanel.classList.remove('panel--show');
@@ -104,13 +88,25 @@ loginBackLink.addEventListener('click', function (event) {
 
     loginPanel.classList.remove('panel--hide');
     loginPanel.classList.add('panel--show');
-
-
 });
-var loginPanel = panels[3]; //-------------------------Login Panel----------------------------[3]of panels 
-//form login
+
+// login panel
+
+var loginPanel = panels[3];
+
+var loginBackLink = loginPanel.children[2];
+
+loginBackLink.addEventListener('click', function (event) {
+    event.preventDefault();
+
+    loginPanel.classList.remove('panel--show');
+    loginPanel.classList.add('panel--hide');
+
+    initialPanel.classList.remove('panel--hide');
+    initialPanel.classList.add('panel--show');
+});
+
 var loginForm = loginPanel.children[0];
-var loginSuccessPanel = panels[4];
 
 loginForm.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -126,12 +122,12 @@ loginForm.addEventListener('submit', function (event) {
 
         welcomePanel.classList.remove('panel--hide');
         welcomePanel.classList.add('panel--show');
-
-    } catch (error) {
+    } catch(error) {
         var loginFeedback = loginPanel.children[1];
+
         loginFeedback.innerText = error.message;
     }
-
 });
 
 var welcomePanel = panels[4];
+
