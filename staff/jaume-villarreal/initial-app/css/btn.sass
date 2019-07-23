@@ -1,3 +1,10 @@
+.btn-set
+        display: flex
+        flex-direction: column
+        width: 90%
+        justify-content: center
+        align-items: center
+
 .btn
     display: flex
     justify-content: center
@@ -12,7 +19,30 @@
     text-decoration: none
     color: #333
     transition: .5
+    &--form
+        width: 100%
     &:hover
         background-color: green
         border: 2px solid green
         color: white
+    &--back
+        position: absolute
+        width: 2rem
+        top: 0
+        left: 0
+        background-color: #999
+        opacity: .75
+        border: none
+        &:hover
+            background-color: orange
+            border: none
+            opacity: 1
+            font-weight: bold
+            color: white
+    &--inline
+        display: inline-block
+        padding: .5rem
+        border: 1px solid #999
+        width: 5rem
+        text-align: center
+        margin: 0 .25rem 0 0
