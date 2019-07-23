@@ -47,16 +47,16 @@ registerForm.addEventListener("submit" , function(event){
     var mail = event.target.mail.value;
     var password = event.target.password.value;
 
-    users.push({
-        name: name,
-        surname: surname,
-        mail: mail,
-        password: password
-    });
-
-    resetInputs();
-    toggle(registerPanel);
-    toggle(successRegisterPanel);
+    try{
+        register(name , surname , mail , password);
+        toggle(registerPanel);
+        toggle(successRegisterPanel);
+        resetInputs();
+    } catch(error){
+        var registerFeedback = registerPanel.getElementsByClassName('panel__feedback')[0];
+        registerFeedback.style.display = "block";
+        registerFeedback.innerText = error.message;
+    }  
 });
 
 
@@ -65,6 +65,7 @@ backInitialLink.addEventListener("click" , function(event){
     toggle(registerPanel);
     toggle(initialPanel);
     resetInputs();
+    resetFeedback();
 });
 
 
@@ -82,26 +83,24 @@ backLoginLink.addEventListener("click" , function(event){
     event.preventDefault();
     toggle(loginPanel);
     toggle(initialPanel);
-    // resetInputs();
+    resetInputs();
+    resetFeedback();
 });
 
 loginForm.addEventListener("submit" , function(event){
     event.preventDefault();
+
     var mail = event.target.logMail.value;
     var password = event.target.logPassword.value;
-
-    var loggedUser = users.find(function(user){
-        return(mail === user.mail && password === user.password);
-    });
-
-    if(loggedUser !== undefined){
+    
+    try{
+        login(mail , password);
         toggle(loginPanel);
         toggle(homePanel);
-        homePanel.children[0].textContent = "Welcome " + loggedUser.name + ' ' + loggedUser.surname;
-
-    } else{
-        alert("Wrong credentials");
-        resetInputs();
+    } catch(error){
+        var registerFeedback = loginPanel.getElementsByClassName('panel__feedback')[0];
+        registerFeedback.style.display = "block";
+        registerFeedback.innerText = error.message;
     }
 }); 
 
@@ -133,11 +132,13 @@ var resetInputs = function(){
     }
 };
 
-
-// var validateString = function (str){
-//     var regex = /^[A-Za-z][A-Za-z\'\-]+([\ A-Za-z][A-Za-z\'\-]+)*/;
-//     return regex.test(str);
-// };
+var resetFeedback = function(){
+    feedbackPanel = document.getElementsByClassName('panel__feedback');
+    for(var i = 0 ; i<feedbackPanel.length ; i++){
+        feedbackPanel[i].style.display = "none";
+        feedbackPanel[i].innerText = "";
+    }
+};
 
 
 

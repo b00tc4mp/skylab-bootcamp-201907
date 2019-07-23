@@ -2,22 +2,23 @@ html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-size: 16px;
 }
 
 body {
   width: 75vw;
-  margin: 2rem auto;
+  margin: 1rem auto;
 }
 
 .wrapper {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: "Darker Grotesque", sans-serif;
   width: 90%;
 }
 
 .header-1 {
   font-size: 3rem;
   width: 75%;
-  margin: 0 auto 2rem;
+  margin: 0 auto 1rem;
   text-align: center;
   color: #666;
 }
@@ -31,7 +32,7 @@ body {
   width: 75%;
   height: auto;
   margin: 0 auto;
-  padding: 1rem 3rem;
+  padding: 0.5rem 3rem;
   border-radius: 1rem;
   background-color: #f9f9f9;
 }
@@ -43,6 +44,12 @@ body {
 }
 .panel--hide {
   display: none;
+}
+.panel__feedback {
+  display: none;
+  color: red;
+  text-align: center;
+  padding: 0.25rem;
 }
 
 .btn-set {
@@ -59,8 +66,8 @@ body {
   align-items: center;
   width: 10rem;
   margin: 1rem;
-  padding: 1rem;
-  font-size: 1rem;
+  padding: 0.5rem;
+  font-size: 1.25rem;
   background-color: #c9c9c9;
   border-radius: 0.5rem;
   border: 2px solid #c0c0c0;
@@ -70,11 +77,7 @@ body {
 }
 .btn--form {
   width: 100%;
-}
-.btn:hover {
-  background-color: green;
-  border: 2px solid green;
-  color: white;
+  font-size: 1.25rem;
 }
 .btn--back {
   width: 8rem;
@@ -92,6 +95,14 @@ body {
   text-align: center;
   margin: 0 0.25rem 0 0;
 }
+.btn:hover {
+  background-color: green;
+  border: 2px solid green;
+  color: white;
+}
+.btn:focus {
+  outline: none;
+}
 
 .form__input {
   width: 75%;
@@ -102,7 +113,7 @@ body {
 }
 .form__input > label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
   align-self: flex-start;
 }
 .form__input > input {
@@ -111,8 +122,9 @@ body {
   height: 1.5rem;
   padding: 0.25rem;
   text-align: center;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.75rem;
   font-size: 1rem;
+  outline: none;
 }
 
 /*# sourceMappingURL=style.css.map */
