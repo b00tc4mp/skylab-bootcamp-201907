@@ -1,12 +1,17 @@
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   width: 75vw;
-  margin: 1rem auto;
+  margin: 2rem auto;
 }
 
 .wrapper {
-  box-sizing: border-box;
   font-family: Helvetica, Arial, sans-serif;
-  width: 100%;
+  width: 90%;
 }
 
 .header-1 {
@@ -21,12 +26,6 @@ body {
   color: #666;
 }
 
-.wrapper {
-  width: 75vw;
-  margin: 10vh auto;
-  font-size: 1rem;
-}
-
 .panel {
   border: 1px solid #c9c9c9;
   width: 75%;
@@ -35,7 +34,6 @@ body {
   padding: 1rem 3rem;
   border-radius: 1rem;
   background-color: #f9f9f9;
-  position: relative;
 }
 .panel--show {
   display: flex;
@@ -79,19 +77,11 @@ body {
   color: white;
 }
 .btn--back {
-  position: absolute;
-  width: 2rem;
-  top: 0;
-  left: 0;
-  background-color: #999;
-  opacity: 0.75;
-  border: none;
+  width: 8rem;
 }
 .btn--back:hover {
-  background-color: orange;
-  border: none;
-  opacity: 1;
-  font-weight: bold;
+  background-color: #1DA5F3;
+  border-color: #1DA5F3;
   color: white;
 }
 .btn--inline {
@@ -113,14 +103,15 @@ body {
 .form__input > label {
   display: block;
   margin-bottom: 0.5rem;
+  align-self: flex-start;
 }
 .form__input > input {
   display: block;
   width: 90%;
-  height: 2rem;
+  height: 1.5rem;
   padding: 0.25rem;
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
   font-size: 1rem;
 }
 
