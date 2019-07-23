@@ -1,4 +1,4 @@
-var users = [];
+var users = new Curray()
 
 var panels = document.getElementsByClassName('panel')
 var div = document.getElementsByClassName('link')
