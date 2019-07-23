@@ -10,3 +10,11 @@
 .panel--hide {
     display: none;
 }
+
+.letter--hide{
+    display : none;
+    color : red;
+}
+.letter--show {
+    display: block;
+}
