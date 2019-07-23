@@ -104,7 +104,7 @@ describe('Curray', function() {
         });
     });
 
-    describe("some", function(){
+    describe("reduce", function(){
         it("should return the the sum of the values *10", function(){
             var curray = new Curray(1, 2, 3, 4, 5);
 
@@ -112,7 +112,7 @@ describe('Curray', function() {
                 return value * 10;
             }
 
-            curray = curray.reduce(curray, suma);
+            curray = curray.reduce(suma);
             expect(curray).toBe(150);
         });
     });
@@ -124,27 +124,91 @@ describe('Curray', function() {
                 return value <= 5;
              }
             
-            var result = curray.filter(curray, mayor);
+            var result = curray.filter(mayor);
             expect(result).toEqual(new Curray(1,2,3,4,5));
         });
     });
 
     describe("from", function(){
-        it("should return the values lower than 5", function(){
-            var curray = new Curray(1, 2, 3, 4, 5, 6, 7, 8, 9);
-            
+        it("should return all the values * 10", function(){
+            var curray = new Curray(6, 7, 8, 9);
+
             function suma(value){
                 return value * 10;
             }
+            suma();
+            var result = curray.from(suma);
             
-            var result = curray.from(5, suma);
             expect(result).toEqual(new Curray(60, 70, 80, 90));
-        });
-        
+        }); 
     });
 
+    describe("every", function(){
+        it("return true ", function(){
+            var curray = new Curray(1,2,3,4);
 
+            function menor(value){
+                return value < 5;
+            }
 
-});
+            var result = curray.every(menor);
+            expect(result).toBe(true);
+       });
+       it("return false", function(){
+        var curray = new Curray(1,2,3,4,5,6);
 
+        function menor(value){
+            return value < 5;
+        }
 
+        var result = curray.every(menor);
+        expect(result).toBe(false);
+        });
+    });
+
+    describe("includes", function(){
+        it("return true ", function(){
+            var curray = new Curray(1,2,3,4);
+
+            var result = curray.includes(3);
+            expect(result).toBe(true);
+       });
+       it("return false ", function(){
+        var curray = new Curray(1,2,3,4);
+
+        var result = curray.includes(3,3);
+        expect(result).toBe(false);
+        });
+    });
+
+    describe("isCurray", function(){
+        it("return true ", function(){
+            var curray = new Curray(1,2,3,4);
+
+            var result = curray.isCurray();
+            expect(result).toBe(true);
+       });
+    });
+
+   describe("map", function(){
+        it("return true ", function(){
+            var curray = new Curray(1,2,3,4);
+
+            function suma(value){
+                return value * 10;
+                }
+
+            var result = curray.map(suma);
+            expect(result).toEqual(new Curray(10, 20, 30, 40));
+       });
+    });
+
+/*    describe("unshift", function(){
+        it("return modified curray with the new arguments and the lenth of this inresult", function(){
+            var curray = new Curray(3,4,5);
+
+            curray.unshift(1,2,5,7);
+            expect(curray).toEqual(new Curray(1,2,5,7,3,4,5))
+       });
+    }); */
+});  

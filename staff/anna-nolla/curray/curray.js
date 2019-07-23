@@ -26,7 +26,7 @@ Curray.prototype.push = function (element) {
 };
 
 Curray.prototype.pop = function () {
-    var last = this[--this.length];
+    var last = this[--this.length];this.length + arguments.length;
 
     delete this[this.length];
     return last;
@@ -63,9 +63,11 @@ Curray.prototype.flat = function (depth) {
         var element = this[i];
 
         if (element instanceof Curray && depth > 0) {
-            var arr = this[i].flat(depth - 1, element);
+            var curr = this[i].flat(depth - 1, element);
 
-            for (var j = 0; j < arr.length; j++) result.push(arr[j]);
+            for (var j = 0; j < curr.length; j++) {
+                result.push(curr[j]);
+            }
         } else result.push(element);
     }
 
@@ -81,35 +83,26 @@ Curray.prototype.copyWithin = function (target, start) {
 
 Curray.prototype.map = function (expression) {
 
-    if (arguments.length === 0) throw TypeError('missing argument');
-    var result = this;
+    if (arguments.length === 0) {
+        throw TypeError('missing argument');
+    }
+    var result = new Curray();
 
     for (var i = 0; i < this.length; i++)
-        result[i] = expression(this[i], i, this);
+        result.push(expression(this[i]));
 
     return result;
 };
 
-Curray.prototype.arrayOf = function () {
-    var curray = [];
-
-    for (var i = 0; i < this.length; i++) {
-        curray.push(this[i]);
-    }
-    return curray;
-};
-
 Curray.prototype.every = function (expression) {
-    var result = true;
 
     for (var i = 0; i < this.length; i++) {
-        if (expression(this[i]) && result == true) {
-            return true;
-        } else {
+        if (!expression(this[i])) {
             return false;
-        }
-        return result;
-    }
+        } 
+        else continue;   
+    } 
+    return true;
 };
 
 Curray.prototype.fill = function (value, start, end) {
@@ -141,9 +134,6 @@ Curray.prototype.fill = function (value, start, end) {
 Curray.prototype.join = function(separador){
     var count = "";
 
-    if(!(this instanceof Curray)) {
-        throw TypeError("This is not a Curray");
-    }
     if (arguments.length === 0){
         separador = ",";
     }
@@ -169,7 +159,6 @@ Curray.prototype.some = function(curr, expresion){
     if(!(this instanceof Curray)) {
         throw TypeError("This is not a Curray");
     }
-
     for(var i = 0; i < curr.length; i++){
         if(expresion(curr[i])){
             return true;
@@ -181,44 +170,81 @@ Curray.prototype.some = function(curr, expresion){
     return false;
 };
 
-Curray.prototype.reduce = function(curr, expresion){
+Curray.prototype.reduce = function(expresion){
     var result = null;
 
-    for(var i = 0; i < curr.length; i++){
-        result += expresion(curr[i]);
+    for(var i = 0; i < this.length; i++){
+        result += expresion(this[i]);
     }
     return result;
-}
-
-function suma(value){
-    return value * 10;
 };
 
-Curray.prototype.filter = function(curr, expresion){
-    var result = new Curray;
-    if(!(curr instanceof Curray)) {
-        throw TypeError("This is not an array");
-    }
-    for(var i = 0; i < curr.length; i++){
-        if(expresion(curr[i])){
-            result.push(curr[i]);
-        }
-    }
-    return result;
-}
-
-Curray.prototype.from = function(curr, expresion){
-    var result = new Curray;
+Curray.prototype.from = function(expresion){
+    var result = new Curray();
  
     if (expresion === undefined){
-        for(var i = 0; i < curr.length; i++){
-            result.push(curr[i]);
+        for(var i = 0; i < this.length; i++){
+            result.push(this[i]);
         }
         return result;
     }
 
-    for(var i = 0; i < curr.length; i++){
-        result.push(expresion(curr[i]));
+    for(var i = 0; i < this.length; i++){
+        result.push(expresion(this[i]));
     }
     return result;
-}
+};
+
+Curray.prototype.filter = function filter(expresion){
+    var result = new Curray();
+
+    for(var i = 0; i < this.length; i++){
+        if(expresion(this[i])){
+            result.push(this[i]);
+        }
+    }
+    return result;
+};
+
+Curray.prototype.includes = function includes (argument, index){
+
+    if(!(this instanceof Curray)) {
+        throw TypeError("This is not an array");
+    }
+    if (index === undefined){
+        index = 0;
+    }
+    if (index < 0){
+        index = this.length + index;
+    }
+
+    for(var i = index; i < this.length; i++){
+
+        if(argument === this[i]){
+            return true
+        } 
+        else continue;   
+    }
+    return false;
+};
+
+Curray.prototype.isCurray = function isCurray(){
+    if (this instanceof Curray){
+        return true;
+    }
+    else return false;
+// if its not true it will throw error (its not a function)
+};
+
+Curray.prototype.unshift = function unshift(){
+    var increment = arguments.length;
+  
+    for (var i = this.length -1; i >= 0; i--){
+        this[i + increment] = this[i];
+    }   
+    for (var j = 0; j < arguments.length; j++){
+        this[j] = arguments[j];
+    }
+    
+    return this.length + arguments.length;;
+};
