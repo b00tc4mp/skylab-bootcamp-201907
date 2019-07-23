@@ -3,12 +3,17 @@
 // FIND DE CURRAY
 // NO USERS WITH SAME EMAIL
 // foirm errors w3schiols
-// PISH POP FUND
-// VALIDAR AMB REGEX ELS INPUTS DELS FORMUILARIS
-
+// function validateEmail(email) {
+//     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//     return re.test(String(email).toLowerCase());
+// }
 
 var users = [];
-var usersCurray = new Curray;
+
+var errorTextRegister = document.querySelector(".errorTextRegister");
+var errorTextLoginEmpty = document.querySelector(".errorTextLoginEmpty");
+var errorTextLoginWrong = document.querySelector(".errorTextLoginWrong");
+
 
 var panels = document.getElementsByClassName('panel');
 
@@ -81,7 +86,9 @@ registerForm.addEventListener('submit', function(event) {
     registerSuccessPanel.classList.add('panel--show');
 
 
-} else alert("Empty field/s");
+} else {
+    errorTextRegister.innerHTML = "Empty fields!";
+}
 
 
 });
@@ -129,13 +136,14 @@ if (email !== undefined || password !== undefined) {
             welcomePanel.classList.remove('panel--hide');
             welcomePanel.classList.add('panel--show');
             
-        } else alert("Wrong Password");
+        } errorTextLoginWrong.innerHTML = "Wrong login information!";
+        
     }
-} else alert("Empty field/s")
+} errorTextLoginEmpty.innerHTML = "Empty fields!";
 });
  
 
-// WELCOME PANEL
+// WELCOME PANEL panels[4]
 
 
 var welcomePanel = panels[4];
