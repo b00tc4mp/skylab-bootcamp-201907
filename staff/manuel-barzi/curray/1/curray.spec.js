@@ -41,12 +41,26 @@ describe('Curray', function () {
             ]);
         });
 
-        it('should fail on no arguments', function() {
+        it('should fail on no arguments', function () {
             var curray = new Curray();
 
-            expect(function() {
+            expect(function () {
                 curray.forEach();
             }).toThrowError(TypeError, 'missing argument 0 when calling function forEach');
+        });
+    });
+
+    describe('find', function () {
+        it('should find existing item on expression matching', function () {
+            var item0 = { name: 'John', age: 34 };
+            var item1 = { name: 'Anna', age: 26 };
+            var curray = new Curray(item0, item1);
+
+            var item = curray.find(function (element) {
+                return element.name === 'Anna';
+            });
+
+            expect(item).toEqual(item1);
         });
     });
 });
