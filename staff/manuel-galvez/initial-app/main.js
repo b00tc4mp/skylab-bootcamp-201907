@@ -14,6 +14,7 @@ var loginLink = document.querySelector('.btn__login');
 var registerBack = document.querySelector('.register__back');
 var loginBack = document.querySelector('.login__back');
 var loginRegisteredLink = document.querySelector('.registered__login');
+var logoutLink = document.querySelector('.btn__logout')
 /* Forms */
 var registerForm = document.querySelector('.register__form');
 var loginForm = document.querySelector('.login__form');
@@ -27,13 +28,22 @@ registerBack.addEventListener('click', displayLanding)
 registerForm.addEventListener('submit', submitRegister)
 loginForm.addEventListener('submit', submitLogin)
 loginRegisteredLink.addEventListener('click', displayLogin)
+logoutLink.addEventListener('click', displayLanding)
+
+function resetInputs() {
+
+    var inputs = document.getElementsByClassName('form__input');
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].value = '';
+    }
+}
 
 
 function displayLanding(event) {
 
     event.preventDefault()
 
-    var parent = event.target.parentElement
+    var parent = event.target.parentElement.parentElement
     parent.classList.add('panel--hide');
     parent.classList.remove('panel--show');
 
@@ -63,24 +73,34 @@ function submitRegister(event) {
     registeredPanel.classList.add('panel--hide')
 
 
+    resetInputs();
 }
 
 function submitLogin(event) {
 
+    event.preventDefault()
+
+    var name = event.target.name.value;
     var email = event.target.email.value;
     var password = event.target.password.value;
-    console.log(email, password)
+    var userFound
 
-    debugger;
-    users.forEach(function(user) {
-        if (user.email === email && user.password === password) {
-            loginPanel.classList.add('panel--hide')
-            loginPanel.classList.remove('panel--show')
-            homePanel.classList.add('panel--show')
-            homePanel.classList.remove('panel--hide')
-            homeTitle.textContent = 'Welcome, ' + user.name + ' ' + user.surname
-        }
+    var userExists = users.some(function(user) {
+        userFound = user;
+        return (user.email === email && user.password === password)
     });
+
+    if (userExists) {
+        loginPanel.classList.add('panel--hide')
+        loginPanel.classList.remove('panel--show')
+        homePanel.classList.add('panel--show')
+        homePanel.classList.remove('panel--hide')
+        homeTitle.textContent = 'Welcome, ' + userFound.name + ' ' + userFound.surname
+    } else {
+        alert('Email or password incorrect')
+    }
+
+    resetInputs();
 
 } 
 
@@ -88,6 +108,8 @@ function displayRegister(event) {
 
     event.preventDefault()
 
+    resetInputs();
+    var name = event.target.name.value;
     var container = document.querySelector('.container');
     container.children[0].classList.add('panel--hide')
     container.children[0].classList.remove('panel--show')
@@ -99,10 +121,11 @@ function displayLogin(event) {
 
     event.preventDefault()
 
-    var parentPanel = event.target.parentElement
+    resetInputs();
+    var name = event.target.name.value;
+    var parentPanel = event.target.parentElement.parentElement
     parentPanel.classList.add('panel--hide')
     parentPanel.classList.remove('panel--show')
     loginPanel.classList.add('panel--show')
     loginPanel.classList.remove('panel--hide')
 }
-
