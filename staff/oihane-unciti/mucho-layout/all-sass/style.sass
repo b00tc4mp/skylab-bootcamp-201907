@@ -5,6 +5,7 @@ body
     width: 99vw
     margin: 0 auto
     border: 2px solid
+    box-sizing: border-box
 
 .header
     display: flex
@@ -25,11 +26,13 @@ body
 .menu
     list-style: none
     display: flex
-    width: 40%
+    width: 30%
+    background-color: red
+    margin-right: 0.5em
 
     &__li
-      margin-left: 2%  
-      display: none
+        margin-left: 2%
+        display: none
 
     &--top
         display: none
@@ -60,15 +63,16 @@ body
     height: auto
 
 .article__information
+    width: 100%
     background-color: $bkc
     border: 1px solid white
 
 .footer
-    padding-left: 2%
-    width: 100%
+    width: 95%
+    margin: 0 auto
+    background-color: blue
 
     &__information
-        background-color: green
         width: 100%
 
 .social_networks
@@ -98,11 +102,7 @@ body
         
         &__border
             border: 0
-     
-   
-    .article__information
-        width: 50%
-        
+
     .mosaic
         flex-direction: row
         flex-wrap: wrap
@@ -110,21 +110,21 @@ body
     .img
         width: 50% 
         padding: 0
-        
+    
+    .article__information
+        width: 50%
+        padding: 0
+
     .menu
         display: inline-flex
         list-style:none
         
         &__red
-            padding: 5px
+           
 
     .footer
         display: flex
         flex-wrap: wrap
-
-        &__footer__information
-            font-size: 1rem
-            width: 100%
 
         &__address
             width: 50%
@@ -137,12 +137,17 @@ body
     
     .social_networks__bloc
         flex-direction: row
-        justify-content: flex-end
+        justify-content: space-between
         align-items: center
         width: 40%
     
     .social_networks__copy
         width: 40%
+
+    .menu__social
+        width: 70%
+        justify-content: space-between
+
 
 /* DESKTOP */
 
@@ -201,39 +206,27 @@ body
         grid-row-start: 4
         grid-row-end: 6
         
-    .article
-        display: flex 
-        flex-wrap: wrap
 
-        &__information
-            margin: 0
-            padding: 0
-            width: 33.1%
-    
+    .article__information
+        width: 100%
+        
     .menu
-        display: inline-flex
         list-style:none
 
     .footer
         display: flex
         flex-wrap: wrap
-        margin-left: 2%
         width: 100%
-
-        &__information
-            display: flex
-            font-size: 2vh
-            width: 100%
-
+            
         &__address
             width: 25%
-            margin: 0 
 
         &__copy
             margin-rigth: 200px
 
     .menu__red
-        padding: 5px
+        justify-content: space-around
+   
 
 
 
