@@ -1,0 +1,19 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+  }
+  
+  .panel {
+    border: 5px solid lightblue;
+    background-color: lightblue;
+    padding: 10px;
+    position: center;
+  }
+  
+  .panel--show {
+    display: block;
+  }
+  
+  .panel--hide {
+    display: none;
+  }
