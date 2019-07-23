@@ -31,13 +31,21 @@ function register(name, surname, email, password) {
 
     if (errors)
         throw new Error(errors);
-    else
+    else{
+        /** cuando el usuario existe */
+        var user=users.find(function(user){
+            return user.email===email
+        });
+        if(user) throw new Error("E-mail is alrady registered.");
         users.push({
             name: name,
             surname: surname,
             email: email,
             password: password
         });
+
+    }
+       
 }
 
 function login(email, password) {
@@ -63,3 +71,9 @@ function login(email, password) {
 
     if (!user) throw new Error('Wrong credentials.');
 }
+
+
+function validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+ }
