@@ -7,7 +7,12 @@ var users = [];
 var actualUser = [];
 var panels = document.getElementsByClassName('panel');
 var errorText = document.querySelector('.errorText');
+var registerFeedback = resgisterPanel.children[1]
 
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@“]+(\.[^<>()\[\]\\.,;:\s@“]+)*)|(“.+“))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
 
 
 
@@ -51,22 +56,26 @@ registerForm.addEventListener('submit', function (event) {
     var surname = event.target.surname.value;
     var email = event.target.email.value;
     var password = event.target.password.value;
-    users.push({
-        name: name,
-        surname: surname,
-        email: email,
-        password: password
-    });
 
-    registerPanel.classList.remove('panel--show');
-    registerPanel.classList.add('panel--hide');
+    if (!name.trim().length) registerFeedback.innerHTML = 'wrong name';
+    else {
+        users.push({
+            name: name,
+            surname: surname,
+            email: email,
+            password: password
+        });
 
-    registerSuccessPanel.classList.remove('panel--hide');
-    registerSuccessPanel.classList.add('panel--show');
+        registerPanel.classList.remove('panel--show');
+        registerPanel.classList.add('panel--hide');
+
+        registerSuccessPanel.classList.remove('panel--hide');
+        registerSuccessPanel.classList.add('panel--show');
+    }
 });
 
 // option back return
-var registerBackLink = registerPanel.children[1];
+var registerBackLink = registerPanel.children[2];
 
 registerBackLink.addEventListener('click', function (event) {
     event.preventDefault();
@@ -104,26 +113,38 @@ loginForm.addEventListener('submit', function (event) {
     event.preventDefault();
 
     email = event.target.email.value
+
+    var e = validateEmail(email);
+
+    if (e === true) {
+        email = event.target.email.value;
+    } else {
+        errorText.innerHTML = 'Wrong credencials!';
+        email = ''
+    }
+
+
     password = event.target.password.value;
 
     for (prop in users) {
         if (users[prop].email === email && users[prop].password === password) {
             actualUser.push(users[prop]);
 
-            var log=loginSuccessPanel.children[0].innerHTML='Welcome '+users[prop].name;
+            var log = loginSuccessPanel.children[0].innerHTML = 'Welcome ' + users[prop].name;
             loginPanel.classList.remove('panel--show');
             loginPanel.classList.add('panel--hide');
             loginSuccessPanel.classList.remove('panel--hide');
             loginSuccessPanel.classList.add('panel--show');
 
         } else if (users[prop].email !== email || users[prop].password !== password) {
-            
-            errorText.innerHTML = 'Wrong credencials';
+
+            errorText.innerHTML = 'Wrong credencials!';
 
         } else if (users[prop].email !== email && users[prop].password !== password) {
 
             errorText.innerHTML = 'Please, register to continue.';
+        } else {
+            errorText.innerHTML = 'Please, register to continue.';
         }
     }
 });
-
