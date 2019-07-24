@@ -1,4 +1,31 @@
+*{
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+    color: grey;
+    background-color: snow;
+    font-family: 'Courier New', Courier, monospace;
+    box-sizing: border-box;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px 10px 10px;
+    border-bottom: 2px solid grey;
+}
+#header__logo{
+    height: 55px;
+    width: 75px;
+    font-size: 10px;
+}
 #header__hamburger{
     height: 20px ;
     width: 20px;
+    margin: 10px 10px 10px auto;
+}
+.header__navigator{
+    display: none;
+}
+.header__navigator--list{
+    
 }
