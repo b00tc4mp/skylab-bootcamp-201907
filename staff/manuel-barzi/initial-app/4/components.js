@@ -70,6 +70,10 @@ InitialPanel.prototype.onNavigateToLogin = function (expression) {
  */
 function RegisterPanel(container) {
     Panel.call(this, container);
+
+    var feedbackPanel = new FeedbackPanel(this.container.children[1]);
+    feedbackPanel.hide();
+    this.feedback = feedbackPanel;
 }
 
 RegisterPanel.prototype = Object.create(Panel.prototype);
@@ -101,9 +105,15 @@ RegisterPanel.prototype.onSubmitRegister = function (expression) {
 };
 
 RegisterPanel.prototype.showFeedback = function (message) {
-    var registerFeedback = this.container.children[1];
+    this.feedback.setMessage(message);
+    this.feedback.show();
+};
 
-    registerFeedback.innerText = message;
+RegisterPanel.prototype.show = function() {
+    this.feedback.hide();
+
+    //this.show(); // ERROR infinite recursion loop
+    Panel.prototype.show.call(this);
 };
 
 /**
@@ -135,6 +145,10 @@ RegisterSuccessPanel.prototype.onNavigateToLogin = function (expression) {
  */
 function LoginPanel(container) {
     Panel.call(this, container);
+
+    var feedbackPanel = new FeedbackPanel(this.container.children[1]);
+    feedbackPanel.hide();
+    this.feedback = feedbackPanel;
 }
 
 LoginPanel.prototype = Object.create(Panel.prototype);
@@ -164,10 +178,16 @@ LoginPanel.prototype.onSubmitLogin = function (expression) {
 };
 
 LoginPanel.prototype.showFeedback = function (message) {
-    var loginFeedback = this.container.children[1];
+    this.feedback.setMessage(message);
+    this.feedback.show();
+};
 
-    loginFeedback.innerText = message;
-}
+LoginPanel.prototype.show = function() {
+    this.feedback.hide();
+
+    //this.show(); // ERROR infinite recursion loop
+    Panel.prototype.show.call(this);
+};
 
 /**
  * Welcome Panel abstraction.
@@ -191,4 +211,18 @@ WelcomePanel.prototype.onClickLogout = function (expression) {
     });
 };
 
-// TODO (FeedbackPanel?)
+/**
+ * Feedback Panel abstraction.
+ * 
+ * @param {*} container 
+ */
+function FeedbackPanel(container) {
+    Panel.call(this, container);
+}
+
+FeedbackPanel.prototype = Object.create(Panel.prototype);
+FeedbackPanel.prototype.constructor = FeedbackPanel;
+
+FeedbackPanel.prototype.setMessage = function(message) {
+    this.container.innerText = message;
+};
