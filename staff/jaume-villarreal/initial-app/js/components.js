@@ -31,6 +31,14 @@ Panel.prototype.hide = function () {
     this.container.classList.add('panel--hide');
 };
 
+Panel.prototype.resetInputs = function(){
+    var inputs = this.container.getElementsByTagName("input");
+    for(var i = 0 ; i<inputs.length ; i++){
+        inputs[i].value='';
+    };
+};
+
+
 /**
  * Initial Panel abstraction.
  * 
@@ -93,9 +101,14 @@ RegisterPanel.prototype.onRegisterSubmit = function (expression) {
  RegisterSuccessPanel.prototype = Object.create(Panel.prototype);
  RegisterSuccessPanel.prototype.constructor = RegisterSuccessPanel;
 
- RegisterSuccessPanel.prototype.onSuccessRegister = function(expression){
-    var registerSuccessLink = this.container.children[1].children[0];
-    registerSuccessLink.addEventListener("click" , expression);
+ RegisterSuccessPanel.prototype.onNavigateToInit = function(expression){
+    var toInitLink = this.container.children[2].children[0];
+    toInitLink.addEventListener("click" , expression);
+ }
+ 
+ RegisterSuccessPanel.prototype.onNavigateToLogin = function(expression){
+    var toLoginLink = this.container.children[2].children[1];
+    toLoginLink.addEventListener("click" , expression);
  }
 
  /**
@@ -111,8 +124,8 @@ RegisterPanel.prototype.onRegisterSubmit = function (expression) {
  FeedbackPanel.prototype = Object.create(Panel.prototype);
  FeedbackPanel.prototype.constructor = FeedbackPanel;
 
- FeedbackPanel.prototype.showErrors = function(stringErrors){
-     this.container.innerText = stringErrors;
+ FeedbackPanel.prototype.showErrors = function(error){
+     this.container.innerText = error;
  };
 
 
@@ -153,9 +166,12 @@ function HomePanel(container){
 HomePanel.prototype = Object.create(Panel.prototype);
 HomePanel.prototype.constructor = HomePanel;
 
-HomePanel.prototype.onLogout = function(expression){
+HomePanel.prototype.onClickLogout = function(expression){
     backLogoutLink = this.container.children[1];
-    backLogoutLink.addEventListener('click' , expression);
+    backLogoutLink.addEventListener('click' , function(){
+        event.preventDefault();
+        expression();
+    });
 }
  
 

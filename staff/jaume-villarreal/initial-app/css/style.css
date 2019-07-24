@@ -20,11 +20,19 @@ body {
   width: 75%;
   margin: 0 auto 1rem;
   text-align: center;
-  color: #666;
+  color: #1DA5F3;
+  font-family: Play, sans-serif;
 }
 
 .header-2 {
+  width: 100%;
+  border-top: 1px solid #999999;
+  border-bottom: 1px solid #999999;
+  padding: 0.5rem;
   color: #666;
+  font-family: Play, sans-serif;
+  text-align: center;
+  background-color: #33333310;
 }
 
 .panel {
@@ -34,7 +42,9 @@ body {
   margin: 0 auto;
   padding: 0.5rem 3rem;
   border-radius: 1rem;
-  background-color: #f9f9f9;
+  -webkit-box-shadow: 0px 5px 8px 1px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 5px 8px 1px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 5px 8px 1px rgba(0, 0, 0, 0.25);
 }
 .panel--show {
   display: flex;
@@ -46,7 +56,6 @@ body {
   display: none;
 }
 .panel__feedback {
-  display: none;
   color: red;
   text-align: center;
   padding: 0.25rem;
@@ -110,6 +119,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-size: 1.25rem;
 }
 .form__input > label {
   display: block;
@@ -121,10 +131,13 @@ body {
   width: 90%;
   height: 1.5rem;
   padding: 0.25rem;
+  font-family: "Darker Grotesque", sans-serif;
   text-align: center;
   margin-bottom: 0.75rem;
   font-size: 1rem;
   outline: none;
+  font-size: 1.5rem;
+  color: #1DA5F3;
 }
 
 /*# sourceMappingURL=style.css.map */
