@@ -14,7 +14,7 @@
 
 <body>
   <header class="header">
-    <p>Initial-App</p>
+    <p>Initial-App a.k.a Useless-App</p>
   </header>
 
   <main>
@@ -33,19 +33,19 @@
             <ul class="register__form">
                 <li class="register__item">
                     <label class="register__label" for="name">Name</label>
-                    <input class="register__input" id="name" name="name" type="text" required>
+                    <input class="register__input" id="name" name="name" type="text">
                 </li>
                 <li class="register__item">
                     <label class="register__label" for="surname">Surname</label>
-                    <input class="register__input" id="surname" name="surname" type="text" required>
+                    <input class="register__input" id="surname" name="surname" type="text" >
                 </li>
                 <li class="register__item">
                     <label class="register__label" for="email">E-mail</label>
-                    <input class="register__input" id="email" name="email" type="text" required>
+                    <input class="register__input" id="email" name="email" type="text" >
                 </li>
                 <li class="register__item">
                     <label class="register__label" for="password">Password</label>
-                    <input class="register__input" id="password" name="password" type="text" required>
+                    <input class="register__input" id="password" name="password" type="text" >
                 </li>                
                 <li class="register__item">
                     <button class="register__button" type="submit" value="submit">Register</button>
@@ -56,7 +56,7 @@
       </div>
     </section>
 
-    <!-- register confirmation panel -->
+    <!-- register success panel -->
     <section class="panel panel--hide">
         <div class="confirmation">
             <p>The registration was successful! Enter password to login.</p>
@@ -96,16 +96,17 @@
     <section class="panel panel--hide">
       <div class="home">
         <h1>Welcome!</h1>
+        <a class="home__logout" href="">Log out</a>
       </div>
     </section>
 
-    <!-- wrong info panel -->
+    <!-- error panel -->
     <section class="panel panel--hide">
         <div class="error">
           <p class="error__title">Error</p>
           <p class="error__message"></p>
         </div>
-      </section>    
+    </section>    
   </main>
 
   <footer class="footer">
@@ -113,6 +114,9 @@
   </footer>
 
   <script src="curray.js"></script>
+  <script src="data.js"></script>
+  <script src="logic.js"></script>
+  <script src="components.js"></script>
   <script src="main.js"></script>
 </body>
 
