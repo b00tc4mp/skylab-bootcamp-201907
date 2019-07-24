@@ -15,8 +15,6 @@ function Component(container) {
     this.container = container;
 }
 
-
-
  /*--------------------------------------PADRE-------------------------------------*/
 
  /**
@@ -25,13 +23,15 @@ function Component(container) {
  * @param {HTMLElement} container 
  */
 
+ //es el pare, fill de component
 function Panel(container) {
-    Component.call(this, container);
+    Component.call(this, container); //cridem el pare per heredar els components
 }
 
 Panel.prototype = Object.create(Component.prototype);
 Panel.prototype.constructor = Panel;
 
+//li declarem dos funcions que son show/enseñar panel i hide/amagar panel
 Panel.prototype.show = function () {
     this.container.classList.remove('panel--hide');
     this.container.classList.add('panel--show');
@@ -44,7 +44,8 @@ Panel.prototype.hide = function () {
 
   /*--------------------------------------NIETOS en plural-------------------------------------*/
 //declaramos todos los nietos aqui que heredan del padre e abuelo
-
+//aqui ja tenim tots els panels individuals de cada panel del html amb el seu nom particular
+//cada un hereda la funcio de mostrar i treure de el pare
 
 //INITIAL PANEL//////////////////////////////////////////
 /**
