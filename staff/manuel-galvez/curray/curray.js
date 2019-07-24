@@ -14,7 +14,6 @@ function Curray() {
     } else if (arguments.length > 1) {
         for (var i = 0; i < arguments.length; i++) {
             this[i] = arguments[i];
-            // this.push(arguments[i]); // TRY not to depend on push here.
         }
         this.length = arguments.length;
     }
@@ -400,16 +399,6 @@ function sumJorge(array, start, end, callback) {
 
     console.log(accumulator);
 }
-
-
-// TODO
-// unshift
-// copyWithin
-// splice
-
-
-
-
 
 
 
