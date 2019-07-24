@@ -4,13 +4,7 @@
  * Business Logic
  */
 
-<<<<<<< HEAD
-
-
-// REGISTER + ITS ERRORS
-=======
 var EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
->>>>>>> develop
 
 function register(name, surname, email, password) {
     var errors = '';
@@ -54,16 +48,11 @@ function register(name, surname, email, password) {
             name: name,
             surname: surname,
             email: email,
-            password: password
+            password: password,
+            status: 0
         });
     }
 }
-
-
-
-
-// LOGIN + ITS ERRORS
-
 
 function login(email, password) {
     var errors = '';
@@ -85,6 +74,12 @@ function login(email, password) {
     var user = users.find(function (user) {
         return user.email === email && user.password === password;
     });
+    if(user){ user.status = 1;}
 
     if (!user) throw new Error('Wrong credentials.');
+}
+
+
+function logOut(){
+    this.status = 0;
 }

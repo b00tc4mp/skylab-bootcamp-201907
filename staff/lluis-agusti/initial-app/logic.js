@@ -30,31 +30,23 @@ function register(name, surname, email, password) {
         if (errors) errors += '\n';
         errors += "Password is empty or blank.";
     }
-    if (errors)
+    if (errors) { /// DEIXA DE LIARLA
         throw new Error(errors);
-    else
-        users.push({
+    } else if (users.length < 0) {
+
+        var us= users.find(function (user) {
+            return user.email !== email;
+        }
+    } else if (users.length == 0) {
+            users.push({
             name: name,
             surname: surname,
             email: email,
             password: password
-        });
+        })
+        
+    }
 }
-
-
-
-
-
-
-
-var checkExisting = users.find(function (user) {
-    return users.email !== email;
-});
-
-if 
-
-
-
 
 
 
@@ -77,8 +69,12 @@ function login(email, password) {
     if (errors) throw new Error(errors);
 
     var user = users.find(function (user) {
-        return user.email === email && user.password === password; // LO MISMO QUE UN FOR + IF PERO USANDO FIND Y EMITIENDO UN true/false directamente.
+        return user.email === email && user.password === password; // LO MISMO QUE UN FOR + IF PERO USANDO FIND Y EMITIENDO UN true/false directae
     });
 
     if (!user) throw new Error("Wrong login information.");
 }
+
+
+var user = users.find(function (user) {
+    return user.email !== email;
