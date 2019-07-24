@@ -15,17 +15,13 @@ var panels = document.getElementById('panel');
 var initialPanel = new InitialPanel(panels.children[1]);
 
 // NAV: initialContainer --> registerPanel 
-initialPanel.onNavigateToRegister(function (event) {
-    event.preventDefault();
-
+initialPanel.onNavigateToRegister(function () {
     initialPanel.hide();
     registerPanel.show();
 });
 
 // NAV: initialContainer --> loginPanel 
-initialPanel.onNavigateToLogin(function (event) {
-    event.preventDefault();
-
+initialPanel.onNavigateToLogin(function () {
     initialPanel.hide();
     loginPanel.show();
 });
@@ -38,34 +34,22 @@ initialPanel.onNavigateToLogin(function (event) {
 var registerPanel = new RegisterPanel(panels.children[2]);
 
 // NAV: Register --> initialContainer 
-registerPanel.onNavigateBack(function(event) {
-    event.preventDefault()
-
+registerPanel.onNavigateBack(function() {
     registerPanel.hide();
     initialPanel.show();
 });
 
  // NAV: Register --> Registered
- // GET: data users
- registerPanel.onRegisterSubmit(function(event) {
-    event.preventDefault()
-    
-    var name = event.target.name.value;
-    var surname = event.target.surname.value;
-    var email = event.target.email.value;
-    var password = event.target.password.value;
-
+ // PUSH-->COMPO: data user
+ registerPanel.onRegisterSubmit(function(name, surname, email, password) {
     try {
         userRegister(name, surname, email, password);
 
         registerPanel.hide();
         registerSuccesPanel.show();
-        feedbackPanel.hide();
 
     } catch (error) {
-
-        feedbackPanel.show();
-        feedbackPanel.showFeedbackError(error.message);
+        registerPanel.showFeedback(error.message);
     }
 });
 
@@ -77,9 +61,7 @@ registerPanel.onNavigateBack(function(event) {
 var registerSuccesPanel = new RegisterSuccesPanel(panels.children[3]);
 
 // NAV: Registered --> Login
-registerSuccesPanel.onNavigateToLogin(function(event) {
-    event.preventDefault();
-
+registerSuccesPanel.onNavigateToLogin(function() {
     registerSuccesPanel.hide();
     loginPanel.show();
 });
@@ -92,31 +74,21 @@ registerSuccesPanel.onNavigateToLogin(function(event) {
 var loginPanel = new LoginPanel(panels.children[4]);
 
 // NAV: Login --> Initial container
-loginPanel.onNavigateBack(function(event) {
-    event.preventDefault();
-
+loginPanel.onNavigateBack(function() {
     loginPanel.hide();
     initialPanel.show();
 });
 
  // NAV: Login --> Welcome page 
  // BEHAVIOR: Check if the user exists.
- loginPanel.onNavigateToWelcome(function(event) {
-    event.preventDefault()
-
-    var email = event.target.email.value;
-    var password = event.target.password.value;
-
+ loginPanel.onNavigateToWelcome(function(email, password) {
     try {
         userLogin(email, password);
         
         loginPanel.hide();
         welcomePanel.show();
-        feedbackPanel.hide();
     } catch (error) {
-
-        feedbackPanel.show();
-        feedbackPanel.showFeedbackError(error.message);
+        loginPanel.showFeedback(error.message);
     }
    
 });
@@ -129,9 +101,8 @@ loginPanel.onNavigateBack(function(event) {
 
 var welcomePanel = new WelcomePanel(panels.children[5]);
 
-welcomePanel.logout(function(event) {
-    event.preventDefault()
-
+// NAV: Welcome --> Initial panel
+welcomePanel.onClickLogout(function() {
     welcomePanel.hide();
     initialPanel.show();
 })
@@ -142,24 +113,7 @@ welcomePanel.logout(function(event) {
  * FEEDBACK PANEL
  */
 
-var feedbackPanel = new FeedbackPanel(panels.children[6]);
+// var feedbackPanel = new FeedbackPanel(panels.children[6]);
 
-// ---------------------------------------------------
 
-// TOOLS
-/**
- * Function that allows desactivate a elemnt of the DOM.
- */
-function turnOff(page) {
-    page.classList.remove('panel--show');
-    page.classList.add('panel--hide');
-};
-
-/**
- * Function that allows activate a elemnt of the DOM.
- */
-function turnOn(page) {
-    page.classList.remove('panel--hide');
-    page.classList.add('panel--show');
-};
 
