@@ -66,7 +66,7 @@ registerSuccessPanel.onNavigateLogin(function (event) {
     loginPanel.show();
 });
 
-
+ 
 // login panel
 
 
