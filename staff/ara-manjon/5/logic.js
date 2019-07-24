@@ -76,3 +76,43 @@ function login(email, password) {
 
     if (!user) throw new Error('Wrong credentials.');
 }
+
+function search(query){
+
+    var request = new XMLHttpRequest()
+
+    request.open('get', 'http://duckling-api.herokuapp.com/api/search?q=' + query);
+
+    request.onload = function() {
+        var results = JSON.parse(request.responseText);
+
+        var ul = document.getElementsByClassName("outputduck")[0];   
+        ul.innerHTML = '';
+    
+        document.body.appendChild(ul);
+        
+        results.forEach(function(item) { 
+
+    
+            var li = document.createElement('li');
+    
+            var h3 = document.createElement('h3');
+    
+            h3.innerText = item.title;
+    
+            li.appendChild(h3);
+    
+            var img = document.createElement('img');
+    
+            img.src = item.imageUrl;
+    
+            li.appendChild(img);
+    
+            ul.appendChild(li);
+        });
+    };
+    
+    request.send();
+
+
+}

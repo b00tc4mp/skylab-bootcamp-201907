@@ -73,8 +73,32 @@ loginPanel.onSubmitLogin(function (email, password) {
 
 var welcomePanel = new WelcomePanel(panels[4]);
 
-welcomePanel.onClickLogout(function() {
+ welcomePanel.onClickLogout(function() {
     welcomePanel.hide();
     initialPanel.show();
+}); 
+
+welcomePanel.onClickSearch(function() {
+    welcomePanel.hide();
+    searchPanel.show();
+}); 
+
+// search panel
+
+var searchPanel = new SearchPanel(panels[5]);
+
+ searchPanel.onNavigateBack(function() {
+    searchPanel.hide();
+    initialPanel.show();
+}); 
+
+searchPanel.onSubmitSearch(function(query){
+
+    try{
+        search(query);
+    }catch(error){
+        loginPanel.showFeedback(error.message);
+    }
 });
+
 

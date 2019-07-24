@@ -176,28 +176,6 @@ LoginPanel.prototype.onSubmitLogin = function (expression) {
 };
 
 /**
- * Welcome Panel abstraction.
- * 
- * @param {HTMLElement} container 
- */
-function WelcomePanel(container) {
-    Panel.call(this, container);
-}
-
-WelcomePanel.prototype = Object.create(Panel.prototype);
-WelcomePanel.prototype.constructor = WelcomePanel;
-
-WelcomePanel.prototype.onClickLogout = function (expression) {
-    var logoutButton = this.container.children[1];
-
-    logoutButton.addEventListener('click', function (event) {
-        event.preventDefault();
-
-        expression();
-    });
-};
-
-/**
  * Feedback Panel abstraction.
  * 
  * @param {*} container 
@@ -212,3 +190,70 @@ FeedbackPanel.prototype.constructor = FeedbackPanel;
 FeedbackPanel.prototype.setMessage = function(message) {
     this.container.innerText = message;
 };
+
+/**
+ * Welcome Panel abstraction.
+ * 
+ * @param {HTMLElement} container 
+ */
+function WelcomePanel(container) {
+    Panel.call(this, container);
+}
+
+WelcomePanel.prototype = Object.create(Panel.prototype);
+WelcomePanel.prototype.constructor = WelcomePanel;
+
+WelcomePanel.prototype.onClickLogout = function (expression) {
+
+    var logoutButton = this.container.children[1];
+
+    logoutButton.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        expression();
+    });
+}; 
+
+WelcomePanel.prototype .onClickSearch = function (expression){
+    var searchButton = this.container.children[2];
+    searchButton.addEventListener('click',function(event){
+        event.preventDefault();
+        expression();
+    });
+};
+
+/**
+ * Search Panel Abstraction
+ * @param {HTMLElement} container 
+ */
+
+function SearchPanel(container){
+    Panel.call(this, container)
+}
+SearchPanel.prototype = Object.create(Panel.prototype);
+SearchPanel.prototype.contructor = SearchPanel;
+
+SearchPanel.prototype.onSubmitSearch = function(expression){
+    var form = this.container.children[0];
+
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        
+
+        var query = event.target.query.value;
+
+        expression(query);
+    });
+
+};
+
+SearchPanel.prototype.onNavigateBack = function(expression){
+    var backButton = this.container.children[2];
+
+    backButton.addEventListener('click',function(event){
+        event.preventDefault();
+
+        expression();
+    });
+};
+
