@@ -105,9 +105,9 @@ homePanel.onClickLogout(function(event){
 //gallery Panel
 var galleryPanel = new GallerySearchPanel(panels[5]);
 
-var prova = galleryPanel.searchBox.onSearchSubmit(function(query){
-    console.log(query);
-})
+galleryPanel.searchBox.onSearchSubmit(function(query){
+    showGallery(query);
+});
 
 
 

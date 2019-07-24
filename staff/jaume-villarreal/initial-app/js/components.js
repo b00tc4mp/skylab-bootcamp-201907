@@ -218,7 +218,6 @@ HomePanel.prototype.onClickLogout = function(expression){
 
     backLogoutLink.addEventListener('click' , function(){
         event.preventDefault();
-        // event.stopPropagation();
         expression();
     });
 };
@@ -241,7 +240,8 @@ SearchPanel.prototype.onSearchSubmit = function(expression){
 
     toSearch.addEventListener('submit',function(event){
         event.preventDefault();
-
+        var galleryDiv = panels[5].getElementsByTagName('div')
+    
         var query = event.target.query.value;
         expression(query);
     })
@@ -263,10 +263,9 @@ SearchPanel.prototype.onSearchSubmit = function(expression){
  GallerySearchPanel.prototype = Object.create(Panel.prototype);
  GallerySearchPanel.prototype.constructor = GallerySearchPanel;
 
- GallerySearchPanel.showGallery = function(expression){
-    // expression(this.search.onSearchSubmit(query));
-    console.log(expression)
- };
+//  GallerySearchPanel.resetGallery = function(fu){
+//     this.container.remove(this.container.children[1]);
+//  };
 
 
  
