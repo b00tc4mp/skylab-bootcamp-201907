@@ -20,9 +20,7 @@
         display: none
 
     &__feedback
-        +round-border(0.1rem, 1rem, solid, $panel-color)
         color: red
-        padding: 0.5rem
     
 .alert
     @extend %base-panel
@@ -75,6 +73,8 @@
 
 .feedback
     @extend %base-panel
+
+    +round-border(0.1rem, 1rem, solid, $panel-color)
 
     &--success
         background-color: greenyellow
