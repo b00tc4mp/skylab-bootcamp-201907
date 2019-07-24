@@ -1,5 +1,7 @@
-'user stric';
+'use strict';
+
 /**
  * Data
  */
-var users=new Curray()
+
+var users = new Curray();
