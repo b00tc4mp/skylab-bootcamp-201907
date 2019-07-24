@@ -54,39 +54,86 @@ InitialPanel.prototype.constructor = InitialPanel;
 InitialPanel.prototype.onNavigateToRegister = function (expression) {
     var registerLink = this.container.children[0].children[0];
 
-    registerLink.addEventListener('click', expression);
+    registerLink.addEventListener('click', function(event){
+        event.preventDefault();
+        expression();
+    });
 };
 
 InitialPanel.prototype.onNavigateToLogin = function (expression) {
     var loginLink = this.container.children[0].children[1];
 
-    loginLink.addEventListener('click', expression);
+    loginLink.addEventListener('click', function(event){
+        event.preventDefault();
+        expression();
+    });
 };
 
 /**
+ * Submit Back Panel abstraction.
+ * 
+ * @param {HTMLElement}
+ */
+
+ function SubmitBackPanel(container){
+    Panel.call(this,container);
+
+
+    var feedBackPanel = new FeedbackPanel(this.container.children[2]); //composite pattern
+    feedBackPanel.hide();
+    this.feedback = feedBackPanel
+ }
+
+SubmitBackPanel.prototype = Object.create(Panel.prototype);
+SubmitBackPanel.prototype.constructor = SubmitBackPanel;
+
+SubmitBackPanel.prototype.onNavigateBack = function(expression){
+    var backLink = this.container.children[3];
+
+    backLink.addEventListener('click', function(event){
+        event.preventDefault();
+        this.container.resetInputs();
+        expression();
+    });
+};
+
+SubmitBackPanel.prototype.showFeedback = function(message){
+    this.feedback.setMessage(message);
+    this.feedback.show();
+};
+
+SubmitBackPanel.prototype.show = function(){
+    this.feedback.hide();
+    Panel.prototype.show.call(this); //extends parent method by calling it
+};
+ 
+ 
+ /**
  * Register Panel abstraction.
  * 
  * @param {HTMLElement} container 
  */
 function RegisterPanel(container) {
-    Panel.call(this, container);
+    SubmitBackPanel.call(this, container);
 }
 
-RegisterPanel.prototype = Object.create(Panel.prototype);
+RegisterPanel.prototype = Object.create(SubmitBackPanel.prototype);
 RegisterPanel.prototype.constructor = RegisterPanel;
-
-RegisterPanel.prototype.onNavigateBack = function (expression) {
-    var registerBackLink = this.container.children[3];
-
-    registerBackLink.addEventListener('click', expression);
-};
 
 RegisterPanel.prototype.onRegisterSubmit = function (expression) {
     var registerForm = this.container.children[1];
-    // var submitButtonForm = registerForm.children[8].children[0];
+    registerForm.addEventListener('submit', function(){
+        event.preventDefault();
 
-    registerForm.addEventListener('submit', expression);
+        var name = event.target.name.value;
+        var surname = event.target.surname.value;
+        var email = event.target.mail.value;
+        var password = event.target.password.value;
+
+        expression(name , surname , email , password);
+    });
 };
+
 
 /**
  * Register Success Panel abstraction.
@@ -103,12 +150,18 @@ RegisterPanel.prototype.onRegisterSubmit = function (expression) {
 
  RegisterSuccessPanel.prototype.onNavigateToInit = function(expression){
     var toInitLink = this.container.children[2].children[0];
-    toInitLink.addEventListener("click" , expression);
+    toInitLink.addEventListener("click" , function(event){
+        event.preventDefault();
+        expression();
+    });
  }
  
  RegisterSuccessPanel.prototype.onNavigateToLogin = function(expression){
     var toLoginLink = this.container.children[2].children[1];
-    toLoginLink.addEventListener("click" , expression);
+    toLoginLink.addEventListener("click" , function(event){
+        event.preventDefault();
+        expression();
+    });
  }
 
  /**
@@ -124,8 +177,8 @@ RegisterPanel.prototype.onRegisterSubmit = function (expression) {
  FeedbackPanel.prototype = Object.create(Panel.prototype);
  FeedbackPanel.prototype.constructor = FeedbackPanel;
 
- FeedbackPanel.prototype.showErrors = function(error){
-     this.container.innerText = error;
+ FeedbackPanel.prototype.setMessage = function(message){
+     this.container.innerText = message;
  };
 
 
@@ -136,16 +189,11 @@ RegisterPanel.prototype.onRegisterSubmit = function (expression) {
  */
 
  function LoginPanel(container){
-     Panel.call(this,container);
+     SubmitBackPanel.call(this,container);
  }
 
- LoginPanel.prototype = Object.create(Panel.prototype);
+ LoginPanel.prototype = Object.create(SubmitBackPanel.prototype);
  LoginPanel.prototype.constructor = LoginPanel;
-
- LoginPanel.prototype.onNavigateInit = function(expression){
-     var backLoginLink = this.container.children[3];
-     backLoginLink.addEventListener('click' , expression);
- }
 
  LoginPanel.prototype.onSuccessLogin = function(expression){
      var loginForm = this.container.children[1];
@@ -168,6 +216,7 @@ HomePanel.prototype.constructor = HomePanel;
 
 HomePanel.prototype.onClickLogout = function(expression){
     backLogoutLink = this.container.children[1];
+
     backLogoutLink.addEventListener('click' , function(){
         event.preventDefault();
         expression();
