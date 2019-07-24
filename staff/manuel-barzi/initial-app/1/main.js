@@ -1,6 +1,8 @@
 'use strict';
 
-var users = new Curray();
+/**
+ * Presentation
+ */
 
 var panels = document.getElementsByClassName('panel');
 
@@ -35,7 +37,7 @@ loginLink.addEventListener('click', function (event) {
 
 var registerPanel = panels[1];
 
-var registerBackLink = registerPanel.children[1];
+var registerBackLink = registerPanel.children[2];
 
 registerBackLink.addEventListener('click', function (event) {
     event.preventDefault();
@@ -57,20 +59,19 @@ registerForm.addEventListener('submit', function (event) {
     var email = event.target.email.value;
     var password = event.target.password.value;
 
-    // TODO validation rules!
+    try {
+        register(name, surname, email, password);
 
-    users.push({
-        name: name,
-        surname: surname,
-        email: email,
-        password: password
-    });
+        registerPanel.classList.remove('panel--show');
+        registerPanel.classList.add('panel--hide');
 
-    registerPanel.classList.remove('panel--show');
-    registerPanel.classList.add('panel--hide');
+        registerSuccessPanel.classList.remove('panel--hide');
+        registerSuccessPanel.classList.add('panel--show');
+    } catch (error) {
+        var registerFeedback = registerPanel.children[1];
 
-    registerSuccessPanel.classList.remove('panel--hide');
-    registerSuccessPanel.classList.add('panel--show');
+        registerFeedback.innerText = error.message;
+    }
 });
 
 // register success panel
@@ -93,7 +94,7 @@ registerSuccessPanel.addEventListener('click', function (event) {
 
 var loginPanel = panels[3];
 
-var loginBackLink = loginPanel.children[1];
+var loginBackLink = loginPanel.children[2];
 
 loginBackLink.addEventListener('click', function (event) {
     event.preventDefault();
@@ -113,21 +114,19 @@ loginForm.addEventListener('submit', function (event) {
     var email = event.target.email.value;
     var password = event.target.password.value;
 
-    // TODO validation rules!
-
-    var user = users.find(function (user) {
-        return user.email === email && user.password === password;
-    });
-
-    if (user) {
-        console.log(user);
+    try {
+        login(email, password);
 
         loginPanel.classList.remove('panel--show');
         loginPanel.classList.add('panel--hide');
 
         welcomePanel.classList.remove('panel--hide');
         welcomePanel.classList.add('panel--show');
-    } else console.error('wrong credentials');
+    } catch(error) {
+        var loginFeedback = loginPanel.children[1];
+
+        loginFeedback.innerText = error.message;
+    }
 });
 
 var welcomePanel = panels[4];
