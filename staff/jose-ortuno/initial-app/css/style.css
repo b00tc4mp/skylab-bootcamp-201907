@@ -32,6 +32,7 @@ a {
   font-style: italic;
   font-size: 1rem;
   color: #e74c3c;
+  transition: 0.5s;
 }
 a:hover {
   opacity: 0.6;
@@ -40,6 +41,7 @@ a:hover {
 p {
   font-family: "Lato", sans-serif;
   font-size: 1rem;
+  line-height: 1.2rem;
 }
 
 .panel {
@@ -88,6 +90,7 @@ p {
   border: 1px solid #bdc3c7;
   border-radius: 1rem;
   cursor: pointer;
+  transition: 0.5s;
 }
 .register__input:focus {
   border: 1px solid #e74c3c;
@@ -101,6 +104,7 @@ p {
 .register__form-submit {
   background-color: #95a5a6;
   color: #ecf0f1;
+  transition: 0.5s;
 }
 .register__form-submit:hover {
   opacity: 0.6;
@@ -117,6 +121,7 @@ p {
   border: 1px solid #bdc3c7;
   border-radius: 1rem;
   cursor: pointer;
+  transition: 0.5s;
 }
 .login__input:focus {
   border: 1px solid #e74c3c;
@@ -130,9 +135,19 @@ p {
 .login__form-submit {
   background-color: #95a5a6;
   color: #ecf0f1;
+  transition: 0.5s;
 }
 .login__form-submit:hover {
   opacity: 0.6;
+}
+
+.error {
+  background: #e74c3c;
+  border-radius: 1rem;
+  padding: 15px;
+  color: #ecf0f1;
+  margin: 10px 0;
+  text-align: center;
 }
 
 /*# sourceMappingURL=style.css.map */

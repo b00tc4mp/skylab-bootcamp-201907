@@ -16,25 +16,24 @@
             <h1 class="panel__title landing__title-page">Login</h1>
             <a href="" class="landing__register-link">Register</a> or <a href="" class="landing__login-link">Login</a>
         </section>
-        <!-- Register page-->
+        <!-- Register panel-->
         <section id="register" class="register panel__section panel--hide">
             <h1 class="panel__title register__title-page">Register</h1>
             <form class="register__form">
                 <input id="name" class="register__input register__form-name" type="text" placeholder="Name*">
                 <input id="surname" class="register__input register__form-surname" type="text" placeholder="Surname*">
-                <input id="email" class="register__input register__form-email" type="email" placeholder="email*">
-                <input id="password" class="register__input register__form-password" type="password" placeholder="password*">
+                <input id="email" class="register__input register__form-email" type="email" placeholder="E-mail*">
+                <input id="password" class="register__input register__form-password" type="password" placeholder="Password*">
                 <input id="submit" class="register__input register__form-submit" type="submit" value="Send">
             </form>
-            <p class="panel__section--feedback panel--hide"></p>
             <a class="panel__section--back" href="">back</a>
         </section>
-        <!-- Registered page-->
+        <!-- Registered panel-->
         <section id="registered" class="registered panel__section panel--hide">
             <h1 class="panel__title registered__title-page">Register ok</h1>
             <p class="registered__text-info">Proceed to <a href="">login</a></p>
         </section>
-        <!-- Login page -->
+        <!-- Login panel -->
         <section id="login" class="login panel__section  panel--hide">
             <h1 class="panel__title login__title-page">Login</h1>
             <form class="login__form">
@@ -42,18 +41,23 @@
                 <input id="password" class="login__input" type="password" placeholder="password">
                 <input id="submit" class="login__input login__form-submit" type="submit" value="Send">
             </form>
-            <p class="panel__section--feedback panel--hide"></p>
             <a class="panel__section--back" href="">back</a>
         </section>
-        <!-- Welcome page -->
+        <!-- Welcome panel -->
         <section id="welcome" class="welcome panel__section panel--hide">
             <h1 class="panel__title welcome__title-page">Login ok</h1>
             <p class="welcome__info-page">Welcome!</p>
+            <a class="panel__section--back" href="">Logout</a>
+        </section>
+        <!-- Error panel -->
+        <section id="error" class="error panel--hide">
+            <p class=""></p>
         </section>
     </main>
     <script src="js/curray.js"></script>
     <script src="js/data.js"></script>
     <script src="js/logic.js"></script>
+    <script src="js/components.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
