@@ -15,7 +15,7 @@
 
         <!-- initial panel -->
         <section class="panel panel--show">
-            <a href="">Register</a> or <a href="">Login</a>.
+            <a class="panel__button" href="">Register</a> or <a class="panel__button" href="">Login</a>.
         </section>
 
         <!-- register panel -->
@@ -32,7 +32,7 @@
                 <button type="submit">Register</button>
             </form>
             <p class="panel__feedback feedback feedback--error">A message.</p>
-            <a href="">back</a>
+            <a class="panel__button" href="">back</a>
         </section>
 
         <!-- register success panel -->
@@ -50,13 +50,25 @@
                 <button type="submit">Login</button>
             </form>
             <p class="panel__feedback feedback feedback--error">A message.</p>
-            <a href="">back</a>
+            <a class="panel__button" href="">back</a>
         </section>
 
-        <!-- welcome panel -->
+        <!-- welcome panel 4-->
         <section class="panel panel--hide">
             <h2>Welcome!</h2>
-            <button>Logout</button>
+            <button class="panel__button">Logout</button>
+            <button class="panel__button">Go to Search</button>
+        </section>
+
+        <!-- search panel 5-->
+        <section class="panel panel--hide">
+            <h2>Do you want to search some duck?</h2>
+            <form action="">
+                <input type="text" id="ducks" placeholder="Search Ducks">
+                <button class="pannel__button" type="submit">Search</button>
+            </form>          
+            <p class="outputduck"></p>          
+            <a class="panel__button" href="">back</a>
         </section>
     </main>
 

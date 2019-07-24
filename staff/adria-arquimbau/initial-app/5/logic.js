@@ -6,6 +6,8 @@
 
 var EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+
+
 function register(name, surname, email, password) {
     var errors = '';
 
@@ -53,6 +55,10 @@ function register(name, surname, email, password) {
     }
 }
 
+
+
+
+
 function login(email, password) {
     var errors = '';
 
@@ -75,4 +81,44 @@ function login(email, password) {
     });
 
     if (!user) throw new Error('Wrong credentials.');
+}
+
+
+
+
+
+function searchRequest(search) {
+
+    var errors = "";
+
+    if (!search.trim()) {
+        errors += "search is empty or blank."
+    }
+
+    var request = new XMLHttpRequest()
+
+    request.open('get', 'http://duckling-api.herokuapp.com/api/search?q=' + search);
+
+    request.onload = function () {
+        var results = JSON.parse(request.responseText);
+
+        var ul = document.createElement('ul');
+        document.body.appendChild(ul);
+
+        //console.log(results);
+        results.forEach(function (item) {
+            //console.log(item.title, item.imageUrl);
+
+            var li = document.createElement('li');
+            var h3 = document.createElement('h3');
+
+            h3.innerText = item.title;
+            li.appendChild(h3);
+            var img = document.createElement('img');
+            img.src = item.imageUrl;
+            li.appendChild(img);
+            ul.appendChild(li);
+        });
+    };
+    request.send();
 }

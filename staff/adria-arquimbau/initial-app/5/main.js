@@ -4,7 +4,7 @@
  * Presentation // part visual de la web app on hi lleném el funcionament de logic i data (busines i data)
  */
 
- //variable per reconeixer els panels, tots els panels tenen el mateix
+//variable per reconeixer els panels, tots els panels tenen el mateix
 var panels = document.getElementsByClassName('panel');
 
 
@@ -45,8 +45,8 @@ var registerPanel = new RegisterPanel(panels[1]);
 
 //funcio daquest objecte que es anar enrera
 registerPanel.onNavigateBack(function () {
-    registerPanel.hide();//quin apaguem
-    initialPanel.show();//quin encenem
+    registerPanel.hide(); //quin apaguem
+    initialPanel.show(); //quin encenem
 });
 
 //funcio per registrarte
@@ -112,7 +112,7 @@ loginPanel.onSubmitLogin(function (email, password) {
         //en OK de login apagem panel iniciem welcome
         loginPanel.hide();
         welcomePanel.show();
-    } catch(error) {
+    } catch (error) {
 
         //en cas de error iniciem funcio de
         //capturar i imprimir
@@ -131,8 +131,35 @@ loginPanel.onSubmitLogin(function (email, password) {
 // welcome panel
 var welcomePanel = new WelcomePanel(panels[4]);
 //funcio easy de anar enrera
-welcomePanel.onClickLogout(function() {
+welcomePanel.onClickLogout(function () {
     welcomePanel.hide();
     initialPanel.show();
 });
 
+welcomePanel.onNavigateToSearch(function () {
+    welcomePanel.hide();
+    searchPanel.show();
+});
+
+
+
+
+
+
+
+
+
+
+
+/*------------------------------------PANEL SEARCH 5-----------------*/
+// search panel
+var searchPanel = new SearchPanel(panels[5]);
+
+searchPanel.onNavigateBack(function () {
+    searchPanel.hide();
+    welcomePanel.show();
+});
+
+searchPanel.onSearch(function () {
+
+});
