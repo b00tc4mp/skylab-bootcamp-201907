@@ -1,130 +1,99 @@
 'use strict';
 
-var users = new Curray();
+/**
+ * Presentation
+ */
 
 var panels = document.getElementsByClassName('panel');
 
 // initial panel
 
-var initialPanel = panels[0];
+var initialPanel = new InitialPanel(panels[0]);
 
-var registerLink = initialPanel.children[0];
-var loginLink = initialPanel.children[1];
-
-registerLink.addEventListener('click', function (event) {
+initialPanel.onNavigateToRegister(function (event) {
     event.preventDefault();
 
-    initialPanel.classList.remove('panel--show');
-    initialPanel.classList.add('panel--hide');
-
-    registerPanel.classList.remove('panel--hide');
-    registerPanel.classList.add('panel--show');
+    initialPanel.hide();
+    registerPanel.show();
 });
 
-loginLink.addEventListener('click', function (event) {
+initialPanel.onNavigateToLogin(function (event) {
     event.preventDefault();
 
-    initialPanel.classList.remove('panel--show');
-    initialPanel.classList.add('panel--hide');
-
-    loginPanel.classList.remove('panel--hide');
-    loginPanel.classList.add('panel--show');
+    initialPanel.hide();
+    loginPanel.show();
 });
 
 // register panel
 
-var registerPanel = panels[1];
+var registerPanel = new RegisterPanel(panels[1]);
 
-
-var registerBackLink = registerPanel.children[2 ];
-registerBackLink.addEventListener('click', function (event) {
+registerPanel.onNavigateBack(function (event) {
     event.preventDefault();
 
-    registerPanel.classList.remove('panel--show');
-    registerPanel.classList.add('panel--hide');
-
-    initialPanel.classList.remove('panel--hide');
-    initialPanel.classList.add('panel--show');
+    registerPanel.hide();
+    initialPanel.show();
 });
 
-var registerForm = registerPanel.children[0];
-
-registerForm.addEventListener('submit', function (event) {
+registerPanel.onRegisterSubmit(function (event) {
     event.preventDefault();
 
     var name = event.target.name.value;
     var surname = event.target.surname.value;
     var email = event.target.email.value;
     var password = event.target.password.value;
-    
+
     try {
         register(name, surname, email, password);
 
-        registerPanel.classList.remove('panel--show');
-        registerPanel.classList.add('panel--hide');
-
-        registerSuccessPanel.classList.remove('panel--hide');
-        registerSuccessPanel.classList.add('panel--show');
+        registerPanel.hide();
+        registerSuccessPanel.show();
     } catch (error) {
-        var registerFeedback = registerPanel.children[1];
+        var registerFeedback = registerPanel.container.children[1];
 
         registerFeedback.innerText = error.message;
     }
 });
+
 // register success panel
 
-var registerSuccessPanel = panels[2];
+var registerSuccessPanel = new RegisterSuccesPanel(panels[2]);
 
-var registerSuccessLoginLink = registerSuccessPanel.children[0];
-
-registerSuccessPanel.addEventListener('click', function (event) {
+registerSuccessPanel.onSuccessToLogin(function(event){
     event.preventDefault();
 
-    registerSuccessPanel.classList.remove('panel--show');
-    registerSuccessPanel.classList.add('panel--hide');
-
-    loginPanel.classList.remove('panel--hide');
-    loginPanel.classList.add('panel--show');
+    registerSuccessPanel.hide()
+    loginPanel.show();
 });
 
 // login panel
 
-var loginPanel = panels[3];
+var loginPanel = new LoginPanel(panels[3]);
 
-var loginBackLink = loginPanel.children[1];
-
-loginBackLink.addEventListener('click', function (event) {
+loginPanel.onNavigateBackInitial = function(event){
     event.preventDefault();
 
-    loginPanel.classList.remove('panel--show');
-    loginPanel.classList.add('panel--hide');
+    loginPanel.hide();
+    initialPanel.show();
+}
 
-    initialPanel.classList.remove('panel--hide');
-    initialPanel.classList.add('panel--show');
-});
-
-var loginForm = loginPanel.children[0];
-
-loginForm.addEventListener('submit', function (event) {
-    event.preventDefault();
+loginPanel.onLoginSubmit(function(event){
+    event.preventDefault()
 
     var email = event.target.email.value;
     var password = event.target.password.value;
-
+    
     try {
         login(email, password);
-
-        loginPanel.classList.remove('panel--show');
-        loginPanel.classList.add('panel--hide');
-
-        welcomePanel.classList.remove('panel--hide');
-        welcomePanel.classList.add('panel--show');
+    
+        loginPanel.hide();
+        welcomePanel.show();
     } catch(error) {
-        var loginFeedback = loginPanel.children[1];
-
+        var loginFeedback = loginPanel.container.children[1];
+    
         loginFeedback.innerText = error.message;
     }
-});
+})
 
-var welcomePanel = panels[4];
+var welcomePanel = new WelcomePanel(panels[4]);
 
