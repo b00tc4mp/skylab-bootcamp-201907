@@ -54,7 +54,7 @@ Panel.prototype.hide = function () {
 
 
 
-  /*--------------------------------------NIETOS en plural-------------------------------------*/
+  /*--------------------------------------HIJOS en plural-------------------------------------*/
 //declaramos todos los nietos aqui que heredan del padre e abuelo
 //aqui ja tenim tots els panels individuals de cada panel del html amb el seu nom particular
 //cada un hereda la funcio de mostrar i treure de el pare
