@@ -4,6 +4,7 @@
  * Business Logic // part busines de la web app on hi tenim les funcions logiques de la part visual
  */
 
+//variable regex que diu les coincidencies de email per ser valid
 var EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 
@@ -30,7 +31,7 @@ var EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))
         if (errors) errors += '\n';
 
         errors += 'E-mail is empty or blank.';
-    } else if (!EMAIL_REGEX.test(email)) {
+    } else if (!EMAIL_REGEX.test(email)) { //test del email, que es una excepcio de js perke testeji la variable regex
         if (errors) errors += '\n';
 
         errors += 'E-mail is not valid.';

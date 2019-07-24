@@ -121,43 +121,12 @@ loginPanel.onLoginSubmit(function (event) {
 /*------------------------------------PANEL WELCOME 4----------------------------------------------------------------------*/
 //welcome panel
 
+var welcomePanel = new WelcomePanel(panels[4]);
 
-var welcomeContainer = panels[4];
-var welcomePanel = new Panel(welcomeContainer);
-
-
-
-
-/*var loginContainer = panels[3];
-var loginPanel = new Panel(loginContainer);
-
-var loginBackLink = loginPanel.container.children[2];
-
-loginBackLink.addEventListener('click', function (event) {
+//funcio easy de anar enrera
+welcomePanel.onNavigateBack(function (event) { //anem a inital panel per si volem registrar mes gent etc...
     event.preventDefault();
 
-    loginPanel.hide();
-
+    welcomePanel.hide();
     initialPanel.show();
 });
-
-var loginForm = loginPanel.container.children[0];
-
-loginForm.addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    var email = event.target.email.value;
-    var password = event.target.password.value;
-
-    try {
-        login(email, password);
-
-        loginPanel.hide();
-        welcomePanel.show();
-    } catch(error) {
-        var loginFeedback = loginPanel.container.children[1];
-
-        loginFeedback.innerText = error.message;
-    }
-});
- */

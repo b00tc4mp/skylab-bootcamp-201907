@@ -1,7 +1,10 @@
 /*--------------------------------------ABUELO-------------------------------------*/
 
+
+
+
  /**
- * Register Panel abstraction.
+ * Component  abstraction.
  * 
  * @param {HTMLElement} container 
  */
@@ -15,10 +18,16 @@ function Component(container) {
     this.container = container;
 }
 
+
+
+
  /*--------------------------------------PADRE-------------------------------------*/
 
+
+
+
  /**
- * Register Panel abstraction.
+ * Panel abstraction.
  * 
  * @param {HTMLElement} container 
  */
@@ -42,10 +51,17 @@ Panel.prototype.hide = function () {
     this.container.classList.add('panel--hide');
 };
 
+
+
+
   /*--------------------------------------NIETOS en plural-------------------------------------*/
 //declaramos todos los nietos aqui que heredan del padre e abuelo
 //aqui ja tenim tots els panels individuals de cada panel del html amb el seu nom particular
 //cada un hereda la funcio de mostrar i treure de el pare
+
+
+
+
 
 //INITIAL PANEL//////////////////////////////////////////
 /**
@@ -72,6 +88,10 @@ InitialPanel.prototype.onNavigateToLogin = function (expression) {
 
     loginLink.addEventListener('click', expression);
 };
+
+
+
+
 
 //REGISTER PANEL//////////////////////////////////////////
 /**
@@ -101,9 +121,11 @@ RegisterPanel.prototype.onRegisterSubmit = function (expression) {
 
 
 
+
+
 //REGISTER SUCCES PANEL//////////////////////////////////////////
 /**
- * Register Panel abstraction.
+ * Register Success Panel abstraction.
  * 
  * @param {HTMLElement} container 
  */
@@ -123,9 +145,11 @@ RegisterSuccessPanel.prototype.onNavigateToLogin = function (expression) {
 
 
 
+
+
 //LOGIN PANEL//////////////////////////////////////////
 /**
- * Register Panel abstraction.
+ * Login Panel abstraction.
  * 
  * @param {HTMLElement} container 
  */
@@ -152,6 +176,26 @@ LoginPanel.prototype.onLoginSubmit = function (expression) {
 
 
 
+
+//WELCOME PANEL//////////////////////////////////////////
+/**
+ * Welcome Panel abstraction.
+ * 
+ * @param {HTMLElement} container 
+ */
+
+function WelcomePanel(container) {
+    Panel.call(this, container);
+}
+
+WelcomePanel.prototype = Object.create(Panel.prototype);
+WelcomePanel.prototype.constructor = WelcomePanel;
+
+WelcomePanel.prototype.onNavigateBack = function (expression) {
+    var registerBackLink = this.container.children[1];
+
+    registerBackLink.addEventListener('click', expression);
+};
 
 
 
