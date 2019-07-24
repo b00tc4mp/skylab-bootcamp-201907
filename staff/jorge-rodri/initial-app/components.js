@@ -197,6 +197,17 @@ WelcomePanel.prototype.onClickLogout = function (expression) {
     });
 };
 
+WelcomePanel.prototype.onSearch = function(expression){
+    var searchForm = this.container.children[2];
+    searchForm.addEventListener('submit', function(event){
+        event.preventDefault();
+
+        var search = event.target.search.value;
+
+        expression(search);
+    });
+};
+
 /**
  * Feedback Panel abstraction.
  * 
