@@ -7,7 +7,7 @@ function register(name, surname, email, password) {
     var errors = ''
 
     var found = users.find(function (element) {
-        return element.email === registerForm.email.value
+        return element.email === email
     });
 
     if (!name.trim()) {
@@ -61,8 +61,8 @@ function register(name, surname, email, password) {
 
 function resetAlerts() {
     var alerts = document.getElementsByClassName('alert')
-    registerForm.reset()
-    loginForm.reset()
+    registerPanel.container.children[0].reset();
+    loginPanel.container.children[0].reset();
     for (var i = 0; i < alerts.length; i++) {
         alerts[i].innerText = ''
     };
