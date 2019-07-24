@@ -1,0 +1,122 @@
+form, main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #47cf73;
+}
+
+body {
+  display: flex;
+}
+
+main {
+  height: 50%;
+  text-align: center;
+  margin: auto;
+}
+
+section {
+  display: flex;
+  align-content: center;
+}
+
+a {
+  margin: 2px 20px;
+  text-decoration: none;
+  color: black;
+}
+
+h1 {
+  color: #47cf73;
+}
+
+form {
+  margin: 10px 20px;
+  align-content: space-around;
+}
+
+.panel {
+  margin-top: 35px;
+  width: 350px;
+  height: auto;
+  background-color: #f5f5f5;
+  border-radius: 7px;
+}
+
+.text {
+  background-color: #ffffff;
+  margin: 30px 15px;
+  padding: 10px 5px;
+  border-radius: 7px;
+}
+
+.alert {
+  background-color: #ffffff;
+  color: red;
+}
+
+.link {
+  margin: 50px 15px;
+}
+
+.link > a {
+  margin: 0 20px;
+}
+
+.panel--hide {
+  display: none;
+}
+.panel--show {
+  display: block;
+}
+
+.button {
+  text-align: center;
+  margin: 5px auto;
+  width: 70px;
+  height: 20px;
+  border: none;
+  border-radius: 15px;
+  background-color: #47cf73;
+}
+.button--a {
+  width: 150px;
+  padding: 10px;
+  background-color: #47cf73;
+  border-radius: 10px;
+}
+.button--a:hover {
+  background-color: white;
+  border: 2px solid #47cf73;
+  color: #47cf73;
+}
+.button--a:active {
+  font-weight: bold;
+  border: 1px solid #47cf73;
+}
+
+.button:hover {
+  background-color: white;
+  border: 2px solid #47cf73;
+  color: #47cf73;
+}
+
+.button:active {
+  font-weight: bold;
+  border: 1px solid #47cf73;
+}
+
+/*# sourceMappingURL=style.css.map */
