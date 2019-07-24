@@ -303,20 +303,27 @@ describe('flat', function(){
         expect(result).toEqual([1,2,1,2,1,2]);
     });
 
+    it('should creates a new array with all sub-array elements concatenated into it recursively. CASE: one depth', function(){
+        var curray = new Curray([1,2],[1,2],[1,2]);
+        var result = curray.flat(1);
+        var result = Array.from(result);
+        expect(result).toEqual([1,2,1,2,1,2]);
+    });
 });
 
-// describe('flat', function() {
-//     it('should create a new Curray with all the Curray elements that are inside.', function() {
-//         var curray = new Curray('a', 'b', 'c');
-//         curray[3] = new Curray('d', 'f', 'g');
-//         var result = curray.flat(2);
-//         var resultArr = Array.from(result);
-//         expect(resultArr).toEqual(['a', 'b', 'c', 'd', 'f', 'g']);
-//     })
-// });
+describe('flatMap', function(){
+    it('should creates a new array with all sub-array elements concatenated into it recursively. CASE: one depth', function(){
+        var curray = new Curray([1,2],[1,2],[1,2]);
+        var result = curray.flat(1);
+        var result = Array.from(result);
+        expect(result).toEqual([1,2,1,2,1,2]);
+    });
+});
+
+
 
 describe('reduce', function(){
-    it('should executes a reducer function (that you provide) on each element of the array, resulting in a single output value. CASE: sum' , function(){
+    it('should first maps each element using a mapping function, then flattens the result into a new array. It is identical to a map() followed by a flat() of depth 1, but flatMap() is often quite useful, as merging both into one method is slightly more efficient. CASE: sum' , function(){
         var curray = new Curray(1,2,3);
         var result = curray.reduce(function(acumulator, currentValue, index, curray) {
             return acumulator + currentValue;
@@ -346,3 +353,34 @@ describe('reduce', function(){
     });
 
 });
+
+describe('reduceRight', function() {
+    it('applies a function against an accumulator and each value of the array (from right-to-left) to reduce it to a single value. CASE: sum', function() {
+        var curray = new Curray(1,2,3);
+        var result = curray.reduceRight(function(acumulator, currentValue, index, curray) {
+            return acumulator + currentValue;
+        })
+        expect(result).toBe(6);
+    })
+    it('applies a function against an accumulator and each value of the array (from right-to-left) to reduce it to a single value. CASE: rest', function() {
+        var curray = new Curray(1,2,6);
+        var result = curray.reduceRight(function(acumulator, currentValue, index, curray) {
+            return acumulator - currentValue;
+        })
+        expect(result).toBe(3);
+    })
+    it('applies a function against an accumulator and each value of the array (from right-to-left) to reduce it to a single value. CASE: mult', function() {
+        var curray = new Curray(1,2,3);
+        var result = curray.reduceRight(function(acumulator, currentValue, index, curray) {
+            return acumulator * currentValue;
+        })
+        expect(result).toBe(6);
+    })
+    it('applies a function against an accumulator and each value of the array (from right-to-left) to reduce it to a single value. CASE: div', function() {
+        var curray = new Curray(2,2,12);
+        var result = curray.reduceRight(function(acumulator, currentValue, index, curray) {
+            return acumulator / currentValue;
+        })
+        expect(result).toBe(3);
+    })
+})

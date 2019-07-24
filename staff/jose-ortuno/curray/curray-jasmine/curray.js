@@ -351,45 +351,35 @@ Curray.prototype.flat = function() {
     return result;
  };
 
- // Curray.prototype.flat = function(depth, memo) {
-//     // if (!(array instanceof Array)) throw TypeError(array + ' is not an array');
 
-//     depth === undefined? depth = 1 : depth;
-
-//     if(memo === undefined) {
-//         var newCurray = new Curray();
-//     } else {
-//         var newCurray = memo;
-//     };
-
-//     if (depth > 1) {
-//         var count = this.length + 1;
-//     } else {
-//         var count = this.length
-//     };
-
-//     if(depth !== 0) {
-//         for (var i = 0; i < count; i++) {
-//             var element = this[i];
-//             if(element instanceof Object) {
-//                 depth--
-//                 element.flat(depth, newCurray);
-//             } else {
-//                 newCurray.push(element);
-//             };
-//         };
-//     };
-//     return newCurray;
-// }
 
 Curray.prototype.reduce = function(expresion) {
     var value = 0;
-    for (var i = 1; i < curray.length; i++) {
+    for (var i = 1; i < this.length; i++) {
         var count = i - 1
         if (i === 1) {
-            value = expresion(curray[count], curray[i], i, curray);
+            value = expresion(this[count], this[i], i, this);
         } else {
-            value = expresion(value, curray[i], i, curray);
+            value = expresion(value, this[i], i, this);
+        }
+    }
+    return value;
+}
+
+Curray.prototype.reduceRight = function(expresion) {
+    var curray = this
+    var value = 0;
+    for (var i = this.length - 2; i >= 0; i--) {
+        var count = this.length - 1
+        var a = this[count]
+        var b = this[i]
+        var c = i
+        var d = this
+
+        if (i === this.length - 2) {
+            value = expresion(this[count], this[i], i, this);
+        } else {
+            value = expresion(value, this[i], i, this);
         }
     }
     return value;
