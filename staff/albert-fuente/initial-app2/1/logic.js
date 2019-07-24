@@ -47,7 +47,8 @@ function register(name, surname, email, password) {
             name: name,
             surname: surname,
             email: email,
-            password: password
+            password: password,
+            status:0
         });
 
     }
@@ -76,6 +77,7 @@ function login(email, password) {
     var user = users.find(function (user) {
         return user.email === email && user.password === password;
     });
+    if(user){user.status=1}
 
     if (!user) throw new Error('Wrong credentials.');
 }
