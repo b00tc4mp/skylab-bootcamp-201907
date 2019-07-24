@@ -1,0 +1,50 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 99vw;
+  margin: 0 auto;
+}
+
+main {
+  width: 40vw;
+  height: 60vh;
+  margin: 20vh auto;
+  background-color: #a6a891;
+  text-align: center;
+}
+
+input {
+  display: inline-block;
+}
+
+label {
+  display: block;
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+}
+
+.panel {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 18px;
+  display: inline-block;
+}
+.panel--show {
+  display: block;
+}
+.panel--hide {
+  display: none;
+}
+.panel__wrongCredentials {
+  color: red;
+}
+.panel__backLink {
+  display: inline-block;
+  padding: 10%;
+}
+
+/*# sourceMappingURL=style.css.map */
