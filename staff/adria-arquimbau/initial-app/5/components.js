@@ -1,3 +1,4 @@
+
 /*--------------------------------------ABUELO-------------------------------------*/
 
 /**
@@ -9,9 +10,8 @@
 function Component(container) {
     //apliquem un condicionant que si el container que usem no es un HTMLElement, que ve a ser 
     //per lo de que va enllaçat a panels de html que ens dongi error 
-    if (!(container instanceof HTMLElement)) throw new TypeError(container + ' is not an HTMLElement');
-    /*para ver si en algun momento un heredero
-        de component no esta asociado a un HTMLElement que nos lanze error */
+    if (!(container instanceof HTMLElement)) throw new TypeError(container + ' is not an HTMLElement');/*para ver si en algun momento un heredero
+    de component no esta asociado a un HTMLElement que nos lanze error */
     this.container = container;
 }
 
@@ -25,14 +25,14 @@ function Component(container) {
 
 
 
-/*--------------------------------------PADRE-------------------------------------*/
+ /*--------------------------------------PADRE-------------------------------------*/
 
 /**
  * Panel abstraction.
  * 
  * @param {HTMLElement} container 
  */
-//es el pare, osigui, fill de component
+ //es el pare, osigui, fill de component
 
 function Panel(container) {
     Component.call(this, container); //cridem el pare per heredar els components
@@ -64,7 +64,7 @@ Panel.prototype.hide = function () {
 
 
 
-/*--------------------------------------HIJOS en plural-------------------------------------*/
+ /*--------------------------------------HIJOS en plural-------------------------------------*/
 //declaramos todos los nietos aqui que heredan del padre e abuelo
 //TENIM dividit en els panels normals i un altrre model que es SUBMIT
 //on SUBMIT englobara el panel de login i register per heredar la funcionalitat de fer submit amb les dades/aqui ja tenim tots els panels individuals de cada panel del html amb el seu nom particular
@@ -82,7 +82,7 @@ function InitialPanel(container) {
 }
 
 InitialPanel.prototype = Object.create(Panel.prototype); //creem objecte constructor de Panel
-InitialPanel.prototype.constructor = InitialPanel;
+InitialPanel.prototype.constructor = InitialPanel; 
 
 // expressem de la funcio onNavi... on esta posicio del boto, el event.predefault que ens diu que no
 //recargui
@@ -205,7 +205,7 @@ WelcomePanel.prototype.onNavigateToSearch = function (expression) {
  * @param {HTMLElement} container 
  */
 
-//panel de buscar amb buscador 
+ //panel de buscar amb buscador 
 function SearchPanel(container) {
     Panel.call(this, container);
 }
@@ -258,7 +258,7 @@ function FeedbackPanel(container) {
 FeedbackPanel.prototype = Object.create(Panel.prototype);
 FeedbackPanel.prototype.constructor = FeedbackPanel;
 
-FeedbackPanel.prototype.setMessage = function (message) {
+FeedbackPanel.prototype.setMessage = function(message) {
     this.container.innerText = message;
 };
 
@@ -305,7 +305,7 @@ SubmitBackPanel.prototype.showFeedback = function (message) {
     this.feedback.show();
 };
 
-SubmitBackPanel.prototype.show = function () {
+SubmitBackPanel.prototype.show = function() {
     this.feedback.hide();
 
     //this.show(); // ERROR infinite recursion loop
@@ -320,11 +320,11 @@ SubmitBackPanel.prototype.show = function () {
 
 
 
-/*--------------------------------------NIETOS en plural-------------------------------------*/
+ /*--------------------------------------NIETOS en plural-------------------------------------*/
 
 
 
-//REGISTER PANEL//////////////////////////////////////////
+ //REGISTER PANEL//////////////////////////////////////////
 
 /**
  * Register Panel abstraction.
@@ -382,7 +382,7 @@ LoginPanel.prototype.onSubmitLogin = function (expression) {
     form.addEventListener('submit', function (event) {
         event.preventDefault();
 
-        var email = event.target.email.value;
+        var email = event.target.email.value;   
         var password = event.target.password.value;
 
         expression(email, password);
