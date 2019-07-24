@@ -64,7 +64,7 @@ registerSuccessPanel.onNavigateToLogin(function(event){
 
 // // loginPanel
 var loginPanel = new LoginPanel(panels[3]);
-var feedbackLoginPanel = new FeedbackPanel(panels[3] .children[2]);
+var feedbackLoginPanel = new FeedbackPanel(panels[3].children[2]);
 
 loginPanel.onNavigateBack(function(event){
     loginPanel.resetInputs();
@@ -95,12 +95,23 @@ loginPanel.onSuccessLogin(function(event){
 });
 
 
-// //homePanel
+//homePanel
 var homePanel = new HomePanel(panels[4]);
 homePanel.onClickLogout(function(event){
     homePanel.hide();
     initialPanel.show();
 });
+
+//gallery Panel
+var galleryPanel = new GallerySearchPanel(panels[5]);
+
+var prova = galleryPanel.searchBox.onSearchSubmit(function(query){
+    console.log(query);
+})
+
+
+
+
     
 
 

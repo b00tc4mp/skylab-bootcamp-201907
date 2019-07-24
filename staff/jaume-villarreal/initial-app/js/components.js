@@ -78,10 +78,9 @@ InitialPanel.prototype.onNavigateToLogin = function (expression) {
  function SubmitBackPanel(container){
     Panel.call(this,container);
 
-
     var feedBackPanel = new FeedbackPanel(this.container.children[2]); //composite pattern
     feedBackPanel.hide();
-    this.feedback = feedBackPanel
+    this.feedback = feedBackPanel;
  }
 
 SubmitBackPanel.prototype = Object.create(Panel.prototype);
@@ -92,7 +91,7 @@ SubmitBackPanel.prototype.onNavigateBack = function(expression){
 
     backLink.addEventListener('click', function(event){
         event.preventDefault();
-        this.container.resetInputs();
+        // this.container.resetInputs();
         expression();
     });
 };
@@ -122,7 +121,7 @@ RegisterPanel.prototype.constructor = RegisterPanel;
 
 RegisterPanel.prototype.onRegisterSubmit = function (expression) {
     var registerForm = this.container.children[1];
-    registerForm.addEventListener('submit', function(){
+    registerForm.addEventListener('submit', function(event){
         event.preventDefault();
 
         var name = event.target.name.value;
@@ -215,13 +214,62 @@ HomePanel.prototype = Object.create(Panel.prototype);
 HomePanel.prototype.constructor = HomePanel;
 
 HomePanel.prototype.onClickLogout = function(expression){
-    backLogoutLink = this.container.children[1];
+    backLogoutLink = this.container.children[2];
 
     backLogoutLink.addEventListener('click' , function(){
         event.preventDefault();
+        // event.stopPropagation();
         expression();
     });
+};
+
+
+ /**
+ * Search Panel abstraction.
+ * 
+ * @param {HTMLElement} container 
+ */
+function SearchPanel(container){
+    Panel.call(this,container);
 }
+
+SearchPanel.prototype = Object.create(Panel.prototype);
+SearchPanel.prototype.constructor = SearchPanel;
+
+SearchPanel.prototype.onSearchSubmit = function(expression){
+    var toSearch = this.container;
+
+    toSearch.addEventListener('submit',function(event){
+        event.preventDefault();
+
+        var query = event.target.query.value;
+        expression(query);
+    })
+};
+
+
+/**
+ * Gallery Search Panel abstraction.
+ * 
+ * @param {HTMLElement} container 
+ */
+
+ function GallerySearchPanel(container){
+    Panel.call(this,container);
+    var searchPanel = new SearchPanel(this.container.children[0]); //composite pattern
+    this.searchBox = searchPanel;  
+ }
+
+ GallerySearchPanel.prototype = Object.create(Panel.prototype);
+ GallerySearchPanel.prototype.constructor = GallerySearchPanel;
+
+ GallerySearchPanel.showGallery = function(expression){
+    // expression(this.search.onSearchSubmit(query));
+    console.log(expression)
+ };
+
+
  
+
 
 
