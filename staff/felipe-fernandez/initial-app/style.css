@@ -34,7 +34,7 @@ button {
   display: inline-block;
 }
 .panel--show {
-  display: block;
+  display: flex;
 }
 .panel--hide {
   display: none;
@@ -45,6 +45,14 @@ button {
 .panel__backLink {
   display: inline-block;
   padding: 10%;
+}
+
+section {
+  justify-content: center;
+}
+
+form {
+  justify-content: center;
 }
 
 /*# sourceMappingURL=style.css.map */

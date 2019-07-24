@@ -26,10 +26,10 @@
                 <input type="text" id="email" >
                 <label for="password">Password</label>
                 <input type="password" id="password" >
-
                 <button type="submit">Register</button>
                
             </form>
+            <p class="panel__wrongCredentials feedback feedback--error"></p>
             <a class="panel__backLink" href="">Back</a>
         <!-- register success panel -->   
         </section>
@@ -47,7 +47,7 @@
             <input type="text" id="password" >     
             <button type="submit">Login</button>
             </form>
-           
+            <p class="panel__wrongCredentials feedback feedback--error"></p>
             <a class="panel__backLink" href="">Back</a>
         </section>
 
@@ -57,10 +57,7 @@
             <button>Logout</button>
         </section> 
 
-        <!-- feedback panel-->
-        <section  class="panel panel--hide panel__wrongCredentials">
-            <p class="panel__wrongCredentials"></p>
-        </section>
+       
     </main>
 
 <script src="curray.js"></script> 

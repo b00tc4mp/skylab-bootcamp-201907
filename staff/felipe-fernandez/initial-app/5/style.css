@@ -1,0 +1,85 @@
+.feedback, .confirm, .alert, .panel {
+  padding: 0.5rem;
+  margin: 1.5rem;
+}
+
+.panel {
+  border: 0.1rem solid gray;
+  border-radius: 1rem;
+  background-color: lightgray;
+}
+.panel--show {
+  display: block;
+}
+.panel--hide {
+  display: none;
+}
+.panel__feedback {
+  border: 0.1rem solid gray;
+  border-radius: 1rem;
+  color: red;
+  padding: 0.5rem;
+}
+
+.alert {
+  border: 0.1rem solid skyblue;
+  border-radius: 1rem;
+  background-color: rgba(135, 206, 235, 0.4);
+}
+.alert__title {
+  color: #0073ff;
+}
+.alert__body {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-weight: 400;
+  font-size: 0.75rem;
+}
+.alert__accept {
+  border: 0.1rem solid skyblue;
+  border-radius: 1rem;
+}
+.alert--danger {
+  border-color: tomato;
+  background-color: rgba(255, 99, 71, 0.283);
+}
+.alert--danger > h2 {
+  color: #ff411f;
+}
+.alert--danger > button {
+  border-color: tomato;
+}
+
+.confirm {
+  border: 0.1rem solid plum;
+  border-radius: 1rem;
+  background-color: #ffcccc;
+}
+.confirm__title {
+  color: violet;
+}
+.confirm__body {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-weight: 400;
+  font-size: 0.75rem;
+}
+.confirm__accept {
+  border: 0.1rem solid plum;
+  border-radius: 1rem;
+}
+.confirm__cancel {
+  border: 0.1rem solid plum;
+  border-radius: 1rem;
+}
+
+.feedback--success {
+  background-color: greenyellow;
+}
+.feedback--warning {
+  background-color: yellow;
+}
+.feedback--error {
+  background-color: red;
+  color: white;
+}
+
+/*# sourceMappingURL=style.css.map */
