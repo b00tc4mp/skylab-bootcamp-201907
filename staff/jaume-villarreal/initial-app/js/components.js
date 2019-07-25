@@ -222,13 +222,13 @@ function Search(container){
 Search.prototype = Object.create(Component.prototype);
 Search.prototype.constructor = Search;
 
-Search.prototype.onSearchSubmit = function(expression){
+Search.prototype.onSearch = function(expression){
     var form = this.container;
 
     form.addEventListener('submit',function(event){
         event.preventDefault();
 
-        var query = form.query.value;
+        var query = event.target.query.value;
         expression(query);
     })
 };
@@ -248,7 +248,7 @@ Results.prototype = Object.create(Component.prototype);
 Results.prototype.constructor = Results;
 
 Results.prototype.listItems = function(items){
-    var ul = this.container.getElementsByClassName('gallery');
+    var ul = this.container.getElementsByTagName('ul')[0];
     ul.innerHTML = '';
 
     items.forEach(function(item){
@@ -256,4 +256,8 @@ Results.prototype.listItems = function(items){
         ul.appendChild(li);
         this.paintItem(li,item);
     }.bind(this));
+}
+
+Results.prototype.paintItem = function(li , item){
+    li.innerText = item;
 }

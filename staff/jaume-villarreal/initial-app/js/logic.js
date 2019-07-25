@@ -76,5 +76,22 @@ var logic = {
         });
 
         if (!user) throw new Error('Wrong credentials.');
+    },
+
+    searchDucks : function(query , expression){
+        var request = new XMLHttpRequest();
+
+        request.open('get' , 'http://duckling-api.herokuapp.com/api/search?q=' + query);
+
+        request.onload = function(){
+            var ducks = JSON.parse(request.responseText);
+            expression(ducks);
+        }
+
+        request.send();
+    },
+
+    retrieveDuck: function(id, expression) {
+        // TODO http://duckling-api.herokuapp.com/api/ducks/5c3853aebd1bde8520e66ed3
     }
 };

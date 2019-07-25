@@ -81,45 +81,36 @@ login.onSuccessLogin(function(event){
     try{
         logic.login(mail , password);
 
-        loginPanel.resetInputs();
+        login.resetInputs();
         
-        loginPanel.hide();
-        feedbackLoginPanel.hide();
-        homePanel.show();
+        login.hide();
+        feedbackLogin.hide();
+        home.show();
 
     } catch(error){
-        loginPanel.showFeedback(error.message);
+        login.showFeedback(error.message);
     }
 });
 
 
-// //homePanel
-// var home = new Home(panels[4]);
+// //home
+var home = new DuckHome(panels[4]);
 
-// home.onClickLogout(function(event){
-//     homePanel.hide();
-//     initialPanel.show();
+home.onClickLogout(function(event){
+    home.hide();
+    initial.show();
+});
+
+home.search.onSearch(function(query){
+    logic.searchDucks(query , function(results){
+        home.results.listItems(results);
+    })
+});
+
+// home.results.onItemClick(function(id) {
+//     logic.retrieveDuck(id, function(duck) {
+//         // TODO show DuckDetail, hide DuckResults
+//         //home.results.hide();
+//         //home.detail.describeDuck(duck);
+//         //home.detail.show();
 // });
-
-// //searchPanel
-// var searchForm = new Search(panels[5].children[1]);
-
-// searchForm.onSearchSubmit(function(query){  
-//     var items = logic.getItems(query);
-//     gallery.showItems(items);  
-    
-// });
-
-// //galleryPanel
-// var gallery = new Results(document.getElementsByClassName('gallery')[0]);
-
-
-
-
-
-
-    
-
-
-
-
