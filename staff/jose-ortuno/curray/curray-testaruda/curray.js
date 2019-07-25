@@ -1,5 +1,7 @@
 'use strict';
 
+// Curray testaruda
+
 /**
  *  DIY Array.
  */
@@ -17,12 +19,16 @@ function Curray () {
 };
 
 Curray.prototype.push = function (element) {
+    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function push');
+
     this[this.length++] = element;
 
     return this.length;
 };
 
 Curray.prototype.pop = function() {
+    if (typeof this === 'string') throw TypeError(this + 'is not a curray');
+
     var last = this[--this.length];
 
     delete this[this.length];

@@ -57,6 +57,34 @@ describe('Curray TEST', function() {
             var resultArr = Array.from(result);
             expect(resultArr).toEqual(["a", "b", "c", "d", "e", "f"]);
         });
+
+        it('should merge two or more arrays', function(){
+            var curray = new Curray (1, 2, 3, 4, 5);
+            var curray2 = new Curray (6,7,8,9);
+            var result = curray.concat(curray2);
+            result= Array.from(result);
+            
+            expect(result).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+        });
+
+        it('should merge two or more arrays', function(){
+            var curray = new Curray (1, 2, 3, 4, 5);
+            var curray2 = new Curray (1,2,4,[5,3]);
+            var result = curray.concat(curray2);
+            result= Array.from(result);
+            
+            expect(result).toEqual([1, 2, 3, 4, 5,1,2,4,[5,3]]);
+
+        });
+
+        it('should fail on no arguments', function() {
+            var curray = new Curray (1, 2, 3, 4, 5);
+            var curray2 = new Curray ();
+
+            expect(function() {
+                curray.concat(curray2);
+            }).toThrowError(TypeError, 'missing argument when calling function concat');
+        });
     });
 
     describe('copyWithin', function() {
@@ -75,6 +103,33 @@ describe('Curray TEST', function() {
                 return element < 10;
             });
             expect(result).toBe(1);
+        });
+
+        it('should return the value of the first element in the array that satisfies the provided testing function', function(){
+            var curray= new Curray(5, 12, 8, 130, 44);
+            var result= curray.find(function(element){
+                return element > 100;
+
+            });
+            expect(result).toBe(130);
+           
+        });
+
+        it('should return the value of the first element in the array that satisfies the provided testing function', function(){
+            var curray= new Curray(5, 12, 8, 130, 44);
+            var result= curray.find(function(element){
+                return element < 4;
+
+            });
+            expect(result).toBeUndefined();
+        });
+
+        it('curray length 0 when calling function find', function (){
+            var curray = new Curray();
+           
+            expect(function(){
+                curray.find();
+            }).toThrowError(TypeError,'missing argument when calling function find'); 
         });
     });
 
@@ -137,19 +192,6 @@ describe('Curray TEST', function() {
         });
     });
 
-    describe('indexOf', function() {
-        it('should check certain number into a Curray. In case true, return index.', function() {
-            var curray = new Curray(1, 2, 3, 4, 5, 6);
-            var result = curray.indexOf(3);
-            expect(result).toBe(2);
-        });
-        it('should check certain number into a Curray. In case false, return -1.', function() {
-            var curray = new Curray(1, 2, 3, 4, 5, 6);
-            var result = curray.indexOf(8);
-            expect(result).toBe(-1);
-        });
-    });
-
     describe('join', function() {
         it('should verify a new string concatenated from a Curray. Insert a comma.', function() {
             var curray = new Curray(1, 2, 3, 4, 5, 6);
@@ -166,6 +208,26 @@ describe('Curray TEST', function() {
             var result = curray.join();
             expect(result).toEqual('1, 2, 3, 4, 5, 6');
         });
+        it('should create and returns a new string by concatenating all of the elements in an array', function(){
+            var curray = new Curray('Fire', 'Air', 'Water');
+            var result = curray.join('');
+
+            expect(result).toEqual('FireAirWater');
+        });
+        it('should create and returns a new string by concatenating all of the elements in an array', function(){
+            var curray = new Curray('Fire', 'Air', 'Water');
+            var result = curray.join('-');
+
+            expect(result).toEqual('Fire-Air-Water');
+        }); 
+
+        it('should create and returns a new string by concatenating all of the elements in an array', function(){
+            var curray = new Curray('Fire', 'Air', 'Water');
+            var result = curray.join('Hacker');
+
+            expect(result).toEqual('FireHackerAirHackerWater');
+
+        }); 
     });
 
     describe('lastIndexOf', function() {
@@ -196,6 +258,20 @@ describe('Curray TEST', function() {
             var result = curray.shift();
             expect(result).toBe(5);
         });
+        it('should delete the first item of the array passed', function(){
+            var curray = new Curray('a', 'b', 'c','d');
+            var result = curray.shift();
+
+            expect(result).toBe('a');
+
+        });
+
+        it ('should delete the first item of the array passed', function(){
+            var curray = new Curray();
+            var result = curray.shift();
+
+            expect(result).toBeUndefined();
+        });
     });
 
     describe('slice', function() {
@@ -214,6 +290,21 @@ describe('Curray TEST', function() {
                 return element > 5;
             });
             expect(result).toBe(true);
+        });
+        it('should test whether at least one element in the array passes the test ', function(){
+            var curray = new Curray (1, 2, 3, 4, 5);
+            var result = curray.some(function(element){
+                return element % 2 === 0;
+            });
+            expect(result).toBe(true);
+
+        });
+        it('has no arguments', function (){
+            var curray = new Curray();
+           
+            expect(function(){
+                curray.some();
+            }).toThrowError(TypeError,'undefined is not a function');
         });
     });
 
@@ -249,6 +340,14 @@ describe('Curray TEST', function() {
             var resultArr = Array.from(result);
             expect(resultArr).toEqual(["a", "b", "c", "d", "e"]);
         });
+        it('there is not a function', function (){
+            var curray = new Curray();
+           
+            expect(function(){
+                curray.sort();
+            }).toThrowError(TypeError,'undefined is not defined');
+           
+        });
     });
 
     describe('splice', function() {
@@ -275,7 +374,7 @@ describe('Curray TEST', function() {
             expect(resultArr).toEqual(['Jan', 'Feb', 'March', 'April', 'June']);
         });
     });
-    
+
     describe('unshift', function() {
         it('should add one or more elements to the beginning of an array and return a new length of the array.', function() {
             var curray = new Curray(1, 2, 3);
@@ -285,102 +384,175 @@ describe('Curray TEST', function() {
             expect(currayArr).toEqual([4, 5, 1, 2, 3]);
         });
     });
-});
 
-describe('flat', function(){
-    it('should creates a new array with all sub-array elements concatenated into it recursively. CASE: no arguments' , function(){
-        var curray = new Curray(1,2,3,[4,5]);
-        var result = curray.flat();
-        var result = Array.from(result);
-
-        expect(result).toEqual([1,2,3,4,5]);
-    });
-
-    it('should creates a new array with all sub-array elements concatenated into it recursively. CASE: two depth', function(){
-        var curray = new Curray(1,2,[1,2,[1,2]]);
-        var result = curray.flat(2);
-        var result = Array.from(result);
-        expect(result).toEqual([1,2,1,2,1,2]);
-    });
-
-    it('should creates a new array with all sub-array elements concatenated into it recursively. CASE: one depth', function(){
-        var curray = new Curray([1,2],[1,2],[1,2]);
-        var result = curray.flat(1);
-        var result = Array.from(result);
-        expect(result).toEqual([1,2,1,2,1,2]);
-    });
-});
-
-describe('flatMap', function(){
-    it('should creates a new array with all sub-array elements concatenated into it recursively. CASE: one depth', function(){
-        var curray = new Curray([1,2],[1,2],[1,2]);
-        var result = curray.flat(1);
-        var result = Array.from(result);
-        expect(result).toEqual([1,2,1,2,1,2]);
-    });
-});
-
-
-
-describe('reduce', function(){
-    it('should first maps each element using a mapping function, then flattens the result into a new array. It is identical to a map() followed by a flat() of depth 1, but flatMap() is often quite useful, as merging both into one method is slightly more efficient. CASE: sum' , function(){
-        var curray = new Curray(1,2,3);
-        var result = curray.reduce(function(acumulator, currentValue, index, curray) {
-            return acumulator + currentValue;
+    describe('flat', function(){
+        it('should creates a new array with all sub-array elements concatenated into it recursively. CASE: no arguments' , function(){
+            var curray = new Curray(1,2,3,[4,5]);
+            var result = curray.flat();
+            var result = Array.from(result);
+    
+            expect(result).toEqual([1,2,3,4,5]);
         });
-        expect(result).toBe(6);
-    });
-    it('should executes a reducer function (that you provide) on each element of the array, resulting in a single output value. CASE: rest' , function(){
-        var curray = new Curray(6,2,1);
-        var result = curray.reduce(function(acumulator, currentValue, index, curray) {
-            return acumulator - currentValue;
+    
+        it('should creates a new array with all sub-array elements concatenated into it recursively. CASE: two depth', function(){
+            var curray = new Curray(1,2,[1,2,[1,2]]);
+            var result = curray.flat(2);
+            var result = Array.from(result);
+            expect(result).toEqual([1,2,1,2,1,2]);
         });
-        expect(result).toBe(3);
-    });
-    it('should executes a reducer function (that you provide) on each element of the array, resulting in a single output value. CASE: mult' , function(){
-        var curray = new Curray(1,2,3);
-        var result = curray.reduce(function(acumulator, currentValue, index, curray) {
-            return acumulator * currentValue;
+    
+        it('should creates a new array with all sub-array elements concatenated into it recursively. CASE: one depth', function(){
+            var curray = new Curray([1,2],[1,2],[1,2]);
+            var result = curray.flat(1);
+            var result = Array.from(result);
+            expect(result).toEqual([1,2,1,2,1,2]);
         });
-        expect(result).toBe(6);
-    });
-    it('should executes a reducer function (that you provide) on each element of the array, resulting in a single output value. CASE: div' , function(){
-        var curray = new Curray(12,2,2);
-        var result = curray.reduce(function(acumulator, currentValue, index, curray) {
-            return acumulator / currentValue;
-        });
-        expect(result).toBe(3);
     });
 
+    describe('reduce', function(){
+        it('should first maps each element using a mapping function, then flattens the result into a new array. It is identical to a map() followed by a flat() of depth 1, but flatMap() is often quite useful, as merging both into one method is slightly more efficient. CASE: sum' , function(){
+            var curray = new Curray(1,2,3);
+            var result = curray.reduce(function(acumulator, currentValue, index, curray) {
+                return acumulator + currentValue;
+            });
+            expect(result).toBe(6);
+        });
+        it('should executes a reducer function (that you provide) on each element of the array, resulting in a single output value. CASE: rest' , function(){
+            var curray = new Curray(6,2,1);
+            var result = curray.reduce(function(acumulator, currentValue, index, curray) {
+                return acumulator - currentValue;
+            });
+            expect(result).toBe(3);
+        });
+        it('should executes a reducer function (that you provide) on each element of the array, resulting in a single output value. CASE: mult' , function(){
+            var curray = new Curray(1,2,3);
+            var result = curray.reduce(function(acumulator, currentValue, index, curray) {
+                return acumulator * currentValue;
+            });
+            expect(result).toBe(6);
+        });
+        it('should executes a reducer function (that you provide) on each element of the array, resulting in a single output value. CASE: div' , function(){
+            var curray = new Curray(12,2,2);
+            var result = curray.reduce(function(acumulator, currentValue, index, curray) {
+                return acumulator / currentValue;
+            });
+            expect(result).toBe(3);
+        });
+    
+    });
+    
+    describe('reduceRight', function() {
+        it('applies a function against an accumulator and each value of the array (from right-to-left) to reduce it to a single value. CASE: sum', function() {
+            var curray = new Curray(1,2,3);
+            var result = curray.reduceRight(function(acumulator, currentValue, index, curray) {
+                return acumulator + currentValue;
+            })
+            expect(result).toBe(6);
+        })
+        it('applies a function against an accumulator and each value of the array (from right-to-left) to reduce it to a single value. CASE: rest', function() {
+            var curray = new Curray(1,2,6);
+            var result = curray.reduceRight(function(acumulator, currentValue, index, curray) {
+                return acumulator - currentValue;
+            })
+            expect(result).toBe(3);
+        })
+        it('applies a function against an accumulator and each value of the array (from right-to-left) to reduce it to a single value. CASE: mult', function() {
+            var curray = new Curray(1,2,3);
+            var result = curray.reduceRight(function(acumulator, currentValue, index, curray) {
+                return acumulator * currentValue;
+            })
+            expect(result).toBe(6);
+        })
+        it('applies a function against an accumulator and each value of the array (from right-to-left) to reduce it to a single value. CASE: div', function() {
+            var curray = new Curray(2,2,12);
+            var result = curray.reduceRight(function(acumulator, currentValue, index, curray) {
+                return acumulator / currentValue;
+            })
+            expect(result).toBe(3);
+        })
+    })
+
+    describe('fill', function() {
+        it('fill all the items with the input passed to a fill from the start index you passed', function () {
+            var curray = new Curray(1, 2, 3, 4, 5);
+            var result = curray.fill(5, 1);
+            var result = Array.from(result)
+            expect(result).toEqual([1, 5, 5, 5, 5]); 
+
+        });
+        it ('fill all the items with the input passed to a fill from the start index you passed', function(){
+            var curray = new Curray(1, 2, 3, 4, 5);
+            var result = curray.fill(5);
+            var expected =  [5, 5, 5, 5, 5];
+            var arrResult = Array.from(result)
+            expect(arrResult).toEqual(expected); 
+        });
+        it('has no arguments', function (){
+            var curray = new Curray();
+            expect(function(){
+                curray.fill();
+            }).toThrowError(TypeError,'missing argument 0 when calling function fill');
+        });
+    });
+
+    describe('filter', function (){
+        it('filter all the items who accomplish the condition passed as a function', function(){
+            var curray = new Curray('hol', 'adi', 'guanchope','cosita','manomens');
+                
+            var result = curray.filter(function(val){
+                return val.length >= 4;
+            });
+            var expected=['guanchope','cosita','manomens'];
+            var arrResult = Array.from(result)
+            expect(arrResult).toEqual(expected); 
+        });
+
+        it('filter all the items who accomplish the condition passed as a function', function (){
+            var curray = new Curray (1,2,3,4,5,6);             
+            var result2 = curray.filter(function(val){
+                return val < 4;
+            });
+
+            var expected=[1,2,3];
+            var arrResult = Array.from(result2)
+            expect(arrResult).toEqual(expected); 
+
+            
+        });
+
+        it('has no arguments', function (){
+            var curray = new Curray();
+
+            expect(function(){
+                curray.filter();
+            }).toThrowError(TypeError,'missing argument 0 when calling function filter');
+        });
+    });
+
+    describe('findIndex', function(){
+        it('should return the index of the first element in the array that satisfies the provided testing function', function(){
+            var curray = new Curray(5, 12, 8, 130, 44);
+            var result = curray.findIndex(function(element){
+                return element > 11;
+            });
+            expect(result).toBe(1);
+        });
+
+        it('should return the value of the first element in the array that satisfies the provided testing function', function(){
+            var curray= new Curray(5, 12, 8, 130, 44);
+            var result= curray.findIndex(function(element){
+                return element < 4;
+
+            });
+            expect(result).toBeUndefined();
+        });
+
+        it('has no arguments', function (){
+            var curray = new Curray();
+           
+            expect(function(){
+                curray.findIndex();
+            }).toThrowError(TypeError,'undefined is not a function');
+        });
+    });
 });
-
-describe('reduceRight', function() {
-    it('applies a function against an accumulator and each value of the array (from right-to-left) to reduce it to a single value. CASE: sum', function() {
-        var curray = new Curray(1,2,3);
-        var result = curray.reduceRight(function(acumulator, currentValue, index, curray) {
-            return acumulator + currentValue;
-        })
-        expect(result).toBe(6);
-    })
-    it('applies a function against an accumulator and each value of the array (from right-to-left) to reduce it to a single value. CASE: rest', function() {
-        var curray = new Curray(1,2,6);
-        var result = curray.reduceRight(function(acumulator, currentValue, index, curray) {
-            return acumulator - currentValue;
-        })
-        expect(result).toBe(3);
-    })
-    it('applies a function against an accumulator and each value of the array (from right-to-left) to reduce it to a single value. CASE: mult', function() {
-        var curray = new Curray(1,2,3);
-        var result = curray.reduceRight(function(acumulator, currentValue, index, curray) {
-            return acumulator * currentValue;
-        })
-        expect(result).toBe(6);
-    })
-    it('applies a function against an accumulator and each value of the array (from right-to-left) to reduce it to a single value. CASE: div', function() {
-        var curray = new Curray(2,2,12);
-        var result = curray.reduceRight(function(acumulator, currentValue, index, curray) {
-            return acumulator / currentValue;
-        })
-        expect(result).toBe(3);
-    })
-})

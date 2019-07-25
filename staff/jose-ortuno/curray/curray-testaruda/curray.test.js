@@ -96,22 +96,6 @@ describe('Curray TEST', function() {
             var resultArr = Array.from(result);
             expect(resultArr, ['a', 'b', 'c', 'd', 'f', 'g']);
         })
-        
-        // it('create a new Curray with all the Curray elements that are inside in first level.', function() {
-        //     var curray = new Curray();
-        //     curray[0] = new Curray(1)
-        //     curray[1] = new Curray(2)
-        //     curray[2] = new Curray(3)
-        //     curray[3] = new Curray(4)
-        //     curray[4] = new Curray(5)
-        //     curray[5] = new Curray(6)
-        //     curray['length'] = 6
-        //     curray[0] = 1
-        //     curray[0].length = 1;
-        //     var result = curray.flat(1);
-        //     var resultArr = Array.from(result);
-        //     expect(resultArr, [1, 2, 3, 4, 5, 6]);
-        // })
     });
 
     describe('map', function() {
@@ -124,24 +108,6 @@ describe('Curray TEST', function() {
             expect(resultArr, [2, 4, 6, 8, 10, 12]);
         });
     });
-
-    // describe('flatMap', function() {
-    //     it('method first maps each element using a mapping function, then flattens the result into a new array', function() {
-    //         var curray = new Curray();
-    //         curray[0] = new Curray(1)
-    //         curray[1] = new Curray(2)
-    //         curray[2] = new Curray(3)
-    //         curray[3] = new Curray(4)
-    //         curray[4] = new Curray(5)
-    //         curray[5] = new Curray(6)
-    //         curray['length'] = 6;
-    //         var result = curray.flatMap(function(currentValue, index, curray) {
-    //             return currentValue * 2;
-    //         });
-    //         var resultArr = Array.from(result);
-    //         expect(resultArr, [2, 4, 6, 8, 10, 12]);
-    //     });
-    // });
 
     describe('includes', function() {
         it('check if a certain number exist in the curray. Case: true', function() {
@@ -254,21 +220,6 @@ describe('Curray TEST', function() {
         });
     });
 
-    // describe('sort', function() {
-    //     it('sorts the elements of an array in place and returns the sorted array. Case: numbers', function() {
-    //         var curray = new Curray(5, 3, 6, 2, 1, 4);
-    //         var result = curray.sort();
-    //         var resultArr = Array.from(result);
-    //         expect(resultArr, [1, 2, 3, 4, 5, 6]);
-    //     });
-    //     it('sorts the elements of an array in place and returns the sorted array. Case: words', function() {
-    //         var curray = new Curray('Pepito', 'Manolito', 'Luisito', 'Felipito', 'Jorgito', 'Paquito');
-    //         var result = curray.sort();
-    //         var resultArr = Array.from(result);
-    //         expect(resultArr, ["Felipito", "Jorgito", "Luisito", "Manolito", "Paquito", "Pepito"]);
-    //     });
-    // });
-
     describe('sort', function() {
         it('sorts the elements of an array in place and returns the sorted array. Case: numbers', function() {
             var curray = new Curray(5, 3, 3, 2, 1, 4);
@@ -286,12 +237,6 @@ describe('Curray TEST', function() {
             var resultArr = Array.from(result);
             expect(resultArr, [5, 4, 3, 3, 2, 1]);
         });
-        // it('sorts the elements of an array in place and returns the sorted array. Case: words', function() {
-        //     var curray = new Curray('Pepito', 'Manolito', 'Luisito', 'Felipito', 'Jorgito', 'Paquito');
-        //     var result = curray.sort();
-        //     var resultArr = Array.from(result);
-        //     expect(resultArr, ["Felipito", "Jorgito", "Luisito", "Manolito", "Paquito", "Pepito"]);
-        // });
     });
 
     describe('splice', function() {

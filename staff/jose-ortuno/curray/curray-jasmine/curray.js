@@ -1,5 +1,7 @@
 'use strict';
 
+// Curray Jasmine
+
 /**
  *  DIY Array.
  */
@@ -55,8 +57,8 @@ Curray.prototype.concat = function(element) {
 };
 
 Curray.prototype.copyWithin = function(target, start, end) {
-    // if (end > array.length - 1) throw TypeError('superior range than array length');
-    // if (start < 0) throw TypeError('length less than zero is not possible');
+
+    if (start < 0) throw TypeError('length less than zero is not possible');
 
     for (var i = start; i < end; i++) {
         this[target++] = this[i];
@@ -75,7 +77,7 @@ Curray.prototype.find = function(expression) {
 };
 
 Curray.prototype.every = function(expression) {
-    if (this.length === 0) throw TypeError('curray length 0 when calling function forEach');
+    if (this.length === 0) throw TypeError('curray length 0 when calling function every');
 
     for (var i = 0; i < this.length; i++) {
         var check = true && expression(this[i])
@@ -84,7 +86,6 @@ Curray.prototype.every = function(expression) {
 };
 
 Curray.prototype.map = function(expression) {
-    // if (!(array instanceof Array)) throw TypeError(array + ' is not an array');
 
     var curray = this;
     var x = this.length;
@@ -183,6 +184,8 @@ Curray.prototype.slice = function(start, end) {
 
 Curray.prototype.some = function(expression) {
 
+    if (arguments.length === 0) throw TypeError('undefined is not a function');
+
     for (var i = 0; i < this.length; i++) {
         var element = this[i];
         var check = false || expression(element, i, this);
@@ -192,6 +195,9 @@ Curray.prototype.some = function(expression) {
 };
 
 Curray.prototype.sort = function(expression) {
+    
+    if (!(expression instanceof Function)) throw TypeError(expression + ' is not defined');
+    
     var result = this;
 
     for (var i = 0; i < this.length - 1; i++) {
@@ -384,3 +390,60 @@ Curray.prototype.reduceRight = function(expresion) {
     }
     return value;
 }
+
+Curray.prototype.fill = function(value, start, end){
+
+    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function fill');
+      
+      var i=0;
+      var j=0;
+      
+      if (end){
+          j=start;
+          for (j; j<end; j++){
+            this[j]=value;
+          }
+          return this;
+      } else if (start){
+          i=start;
+          for (i; i<this.length-1; i++){
+              this[i]=value;
+          }
+          return  this;
+      } else {
+          for (var i=0; i<this.length-1; i++){
+            this[i]=value;
+          }
+        return  this;
+      }
+};
+
+Curray.prototype.filter = function (expression){
+
+    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function filter');
+
+    var newarray=[];
+    var j=0;
+
+        for(var i=0;i<this.length;i++) {
+            if(expression(this[i])){
+                newarray[j]=this[i];
+                j++;
+            }
+        }  return newarray;
+};
+
+Curray.prototype.findIndex = function(expression){
+
+    if (arguments.length === 0) throw TypeError('undefined is not a function');
+
+    for (var i=0; i<this.length; i++){
+        if(expression(this[i])){
+           
+            return i;
+
+        }
+
+    }
+    return undefined;
+};
