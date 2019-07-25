@@ -15,10 +15,7 @@
   display: none;
 }
 .panel__feedback {
-  border: 0.1rem solid gray;
-  border-radius: 1rem;
   color: red;
-  padding: 0.5rem;
 }
 
 .alert {
@@ -71,6 +68,10 @@
   border-radius: 1rem;
 }
 
+.feedback {
+  border: 0.1rem solid gray;
+  border-radius: 1rem;
+}
 .feedback--success {
   background-color: greenyellow;
 }

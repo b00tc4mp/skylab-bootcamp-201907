@@ -48,8 +48,7 @@ function register(name, surname, email, password) {
             name: name,
             surname: surname,
             email: email,
-            password: password,
-            status: 0
+            password: password
         });
     }
 }
@@ -74,59 +73,6 @@ function login(email, password) {
     var user = users.find(function (user) {
         return user.email === email && user.password === password;
     });
-    if(user){ user.status = 1;}
 
     if (!user) throw new Error('Wrong credentials.');
 }
-
-
-function searchRequest(search) {
-
-    var errors="";
-
-    if (!search.trim()){
-        errors += "search is empty or blank."
-    }
-
-    var request = new XMLHttpRequest()
-
-request.open('get', 'http://duckling-api.herokuapp.com/api/search?q=' + search);
-
-request.onload = function() {
-    var results = JSON.parse(request.responseText);
-
-    var ul = document.getElementsByClassName('outputduck')[0];
-
-    ul.innerHTML = '';
-	
-	results.forEach(function(item) {
-
-		var li = document.createElement('li');
-
-        var h3 = document.createElement('h3');
-
-		h3.innerText = item.title;
-
-		li.appendChild(h3);
-
-        var img = document.createElement('img');
-
-		img.src = item.imageUrl;
-
-		li.appendChild(img);
-
-		ul.appendChild(li);
-	});
-};
-
-request.send();
-}
-
-
-
-
-
-
-// function logOut(){
-//     this.status = 0;
-// }

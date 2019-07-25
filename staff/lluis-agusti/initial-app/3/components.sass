@@ -36,6 +36,8 @@
         margin: 4px 2px
         cursor: pointer
 
+
+
 .alert
     @extend %base-panel
 
@@ -74,6 +76,7 @@
     &__title
         color: $confirm-title-color
 
+
     &__body
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
         font-weight: 400
@@ -84,3 +87,29 @@
     
     &__cancel
         +round-border(0.1rem, 1rem, solid, $confirm-color)
+
+ul
+    width: 95%
+    display: flex
+    flex-wrap: wrap
+    padding: 0%
+
+li
+    max-width: 200px
+    margin: 2%
+
+h3
+    max-width: 200px
+    margin: 2%
+    height: 1.9rem
+
+img
+    max-width: 200px
+    margin: 2%
+    padding-top: 1rem
+    &:hover
+
+
+h1
+    font-family: $font-initial-app
+    text-align: center

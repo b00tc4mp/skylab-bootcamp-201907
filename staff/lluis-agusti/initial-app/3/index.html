@@ -13,12 +13,13 @@
     <main>
         <h1>Initial App</h1>
 
-        <!-- initial panel -->
+        <!-- Initial panel -->
         <section class="panel panel--show">
-            <a class="panel__button" href="">Register</a> or <a class="panel__button" href="">Login</a>.
+            <a class="panel__button panel__button--modif" href="">Register</a> or <a class="panel__button" href="">Login</a>.
         </section>
 
-        <!-- register panel -->
+
+        <!-- Register panel -->
         <section class="panel panel--hide">
             <form>
                 <label for="name">Name</label>
@@ -35,12 +36,14 @@
             <a class="panel__button" href="">back</a>
         </section>
 
-        <!-- register success panel -->
+
+        <!-- Register success panel -->
         <section class="panel panel--hide">
-            Ok, registered succeeded, you can now proceed to <a href="">login</a>.
+            Ok, registered succeeded, you can now proceed to <a class="panel__button" href="">login</a>.
         </section>
 
-        <!-- login panel -->
+
+        <!-- Login panel -->
         <section class="panel panel--hide">
             <form>
                 <label for="email">E-mail</label>
@@ -54,24 +57,35 @@
         </section>
 
         
-        <!-- welcome panel -->
-        <section class="panel panel--hide">
+        <!-- Welcome panel -->
+        <section class="panel panel--show">
             <h2>Welcome!</h2>
-            <a class="panel__button" href="">logout</a>
+            <form>
+                <input type="text" id="ducks" placeholder="SearchDucks">
+                <button class="panel__button" type="submit">Search</button>
+            </form>
+            <ul class="outputduck"></ul>
+
+            <!-- <a class="panel__button" href="">logout</a> -->
         </section>
 
-
-
-        <!-- error register panel -->
-        <section class="panel panel--hide">
+        <!-- Welcome New -->
+        <section class="panel panel--show">
+            <form>
+                <input type="text" id="ducks" placeholder="SearchDucks">
+                <button class="panel__button" type="submit">Search</button>
+            </form>
             
-            <p class="panel__feedback"></p>
         </section>
-
-
+            <!-- <a class="panel__button" href="">logout</a> -->
+        </section>
+        <section>
+            results
+        </section>
 
 
     </main>
+
 
     <script src="curray.js"></script>
     <script src="data.js"></script>
@@ -81,3 +95,4 @@
 </body>
 
 </html>
+

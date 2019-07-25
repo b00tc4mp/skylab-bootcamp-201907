@@ -82,4 +82,32 @@
   border-radius: 1rem;
 }
 
+ul {
+  width: 95%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0%;
+}
+
+li {
+  max-width: 200px;
+  margin: 2%;
+}
+
+h3 {
+  max-width: 200px;
+  margin: 2%;
+  height: 1.9rem;
+}
+
+img {
+  max-width: 200px;
+  margin: 2%;
+  padding-top: 1rem;
+}
+h1 {
+  font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+  text-align: center;
+}
+
 /*# sourceMappingURL=style.css.map */
