@@ -6,15 +6,58 @@
     padding: 0.5rem
     margin: 1.5rem
 
+body
+    font-family: 'Fascinate', cursive
+    background: #f8f8f8
+h1
+    font-size: 3rem
+    text-align: center
+
+
+.center
+    margin-top: 10%
+
+ul
+    widows: 95%
+    display: flex
+    flex-wrap: wrap
+    padding: 0%
+h3 
+    max-width: 200px
+    margin:2%
+    margin-bottom: 10%
+    height: 1.9rem
+img
+    max-width: 200px
+    margin:2%
+    border: 2px solid black
+    border-radius: 50%
+    &:hover
+            border: 2px solid red
+            filter: invert(100%)
+            transform: scale(0.9)
+            transition-duration: 0.5s
+
+li
+    max-width: 200px
+    margin:2%
+
+
+
 .panel
     @extend %base-panel
 
-    +round-border(0.1rem, 1rem, solid, $panel-color)
+    +round-border(0.5rem, 1rem, solid, #f96d15)
     
-    background-color: $panel-back-color
+    
+    background-color: #a4d7e1
 
     &--show
-        display: block
+        display: flex
+        justify-content: center
+        align-items: center
+        & a,label
+            padding: 15px
     
     &--hide
         display: none

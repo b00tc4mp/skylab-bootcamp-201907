@@ -3,13 +3,70 @@
   margin: 1.5rem;
 }
 
+body {
+  font-family: "Fascinate", cursive;
+  background: #f8f8f8;
+}
+
+h1 {
+  font-size: 3rem;
+  text-align: center;
+}
+
+.center {
+  margin-top: 10%;
+}
+
+ul {
+  widows: 95%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0%;
+}
+
+h3 {
+  max-width: 200px;
+  margin: 2%;
+  margin-bottom: 10%;
+  height: 1.9rem;
+}
+
+img {
+  max-width: 200px;
+  margin: 2%;
+  border: 2px solid black;
+  border-radius: 50%;
+}
+img:hover {
+  border: 2px solid red;
+  filter: invert(100%);
+  transform: scale(0.9);
+  transition-duration: 0.5s;
+  animation:spinner 0.9s linear infinite;
+}
+@keyframes spinner{
+  to{
+    transform: rotate(360deg);
+  }
+}
+
+li {
+  max-width: 200px;
+  margin: 2%;
+}
+
 .panel {
-  border: 0.1rem solid gray;
+  border: 0.5rem solid #f96d15;
   border-radius: 1rem;
-  background-color: lightgray;
+  background-color: #a4d7e1;
 }
 .panel--show {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.panel--show a, .panel--show label {
+  padding: 15px;
 }
 .panel--hide {
   display: none;
