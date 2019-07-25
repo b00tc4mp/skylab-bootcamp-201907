@@ -55,9 +55,23 @@
 
         <!-- welcome panel -->
         <section class="panel panel--hide">
-            <h2>Welcome!</h2>
+            <h2 id="welcome">Welcome!</h2>
+            <form action="">
+                <label for="Search Color:">Search Color</label>
+                <input type="text" id="search">
+                <button type="submit">Search</button>
+            </form>
             <button>Logout</button>
         </section>
+        <section class="panel panel--hide">
+            <ul id="uls"></ul>
+            <p id="duckError">Search patitos</p>
+        </section>
+
+
+
+
+
     </main>
 
     <script src="curray.js"></script>

@@ -64,7 +64,6 @@ loginPanel.onSubmitLogin(function (email, password) {
 
         loginPanel.hide();
         welcomePanel.show();
-        ducksPanel.show();
     } catch(error) {
         loginPanel.showFeedback(error.message);
     }
@@ -73,14 +72,13 @@ loginPanel.onSubmitLogin(function (email, password) {
 // welcome panel
 
 var welcomePanel = new WelcomePanel(panels[4]);
-var ducksPanel=new WelcomePanel(panels[5])
 
 welcomePanel.onClickLogout(function() {
     welcomePanel.hide();
     initialPanel.show();
 });
 welcomePanel.onSearch(function() {
-    ducksPanel.show();
+    welcomePanel.hide();
 });
 
 // Patitos panel

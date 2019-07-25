@@ -80,8 +80,10 @@ function login(email, password) {
 
 function searchRequest(search){
     var errors="";
-    var duckError=document.getElementById("duckError")
-    var ul=document.getElementById("uls");
+    
+    
+    
+    
 
     var request = new XMLHttpRequest()
     
@@ -93,11 +95,10 @@ function searchRequest(search){
             
             var welcome=document.getElementById("welcome");
             welcome.innerText="Encuentra tu pato"
-            
+            var ul=document.getElementById("uls");
             ul.innerHTML = '';
-            duckError.innerText="";
             
-     
+            document.body.appendChild(ul);
             //console.log(results);
             results.forEach(function(item) { 
                 //console.log(item.title, item.imageUrl);
@@ -122,9 +123,6 @@ function searchRequest(search){
         }
         else{
             ul.innerHTML = '';
-            duckError.innerText="No ducks were found, please try again";
-
-            
         }
 /*         var ul = document.createElement('ul');
  */
