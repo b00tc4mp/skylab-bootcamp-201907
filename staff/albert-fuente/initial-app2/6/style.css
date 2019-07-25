@@ -39,15 +39,15 @@ img {
 }
 img:hover {
   border: 2px solid red;
-  filter: invert(100%);
-  transform: scale(0.9);
-  transition-duration: 0.5s;
-  animation:spinner 0.9s linear infinite;
+  filter: invert(1);
+  transition: all 0.5s ease-out;
+  transform: rotate(360deg) scale(0.7);
+  transition: all 0.5s ease-out;
+  cursor: pointer;
 }
-@keyframes spinner{
-  to{
-    transform: rotate(360deg);
-  }
+
+.image:active {
+  border: 5px solid red;
 }
 
 li {

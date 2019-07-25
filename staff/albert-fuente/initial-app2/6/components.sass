@@ -1,3 +1,8 @@
+@mixin  easeIn
+    transition: all 0.5s ease-out
+@mixin filter
+    filter: invert(1)
+
 =round-border($width, $radius, $style, $color)
     border: $width $style $color
     border-radius: $radius
@@ -27,6 +32,7 @@ h3
     margin:2%
     margin-bottom: 10%
     height: 1.9rem
+
 img
     max-width: 200px
     margin:2%
@@ -34,9 +40,13 @@ img
     border-radius: 50%
     &:hover
             border: 2px solid red
-            filter: invert(100%)
-            transform: scale(0.9)
-            transition-duration: 0.5s
+            @include filter
+            @include easeIn
+            transform: rotate(360deg) scale(0.7)
+            @include easeIn
+            cursor: pointer
+.image:active
+    border: 5px solid red
 
 li
     max-width: 200px
