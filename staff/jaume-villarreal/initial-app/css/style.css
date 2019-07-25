@@ -145,21 +145,29 @@ body {
 .gallery {
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   color: #1DA5F3;
 }
 .gallery__img {
   width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
-.gallery__img > h3 {
-  width: 100%;
-  text-align: center;
+.gallery__img > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: auto;
+  margin: 0.25rem;
+  padding: 0.25rem;
 }
-.gallery__img > img {
+.gallery__img > div > img {
   width: 100%;
-  border: 1px solid;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -214,7 +214,7 @@ HomePanel.prototype = Object.create(Panel.prototype);
 HomePanel.prototype.constructor = HomePanel;
 
 HomePanel.prototype.onClickLogout = function(expression){
-    backLogoutLink = this.container.children[2];
+    backLogoutLink = this.container.children[1];
 
     backLogoutLink.addEventListener('click' , function(){
         event.preventDefault();
@@ -254,21 +254,34 @@ SearchPanel.prototype.onSearchSubmit = function(expression){
  * @param {HTMLElement} container 
  */
 
- function GallerySearchPanel(container){
+ function GalleryPanel(container){
     Panel.call(this,container);
-    var searchPanel = new SearchPanel(this.container.children[0]); //composite pattern
-    this.searchBox = searchPanel;  
  }
 
- GallerySearchPanel.prototype = Object.create(Panel.prototype);
- GallerySearchPanel.prototype.constructor = GallerySearchPanel;
+GalleryPanel.prototype = Object.create(Panel.prototype);
+GalleryPanel.prototype.constructor = GalleryPanel;
 
-//  GallerySearchPanel.resetGallery = function(fu){
-//     this.container.remove(this.container.children[1]);
-//  };
+GalleryPanel.prototype.showItems = function(items){
+    var container = document.getElementsByClassName('gallery')[0];
 
+    container.innerHTML = "";
+    
+    var divGallery = document.createElement('div');
 
- 
+    divGallery.className = "gallery__img";
 
+    container.appendChild(divGallery);
 
-
+    items.forEach(function(item) {
+        var container = document.getElementsByClassName('gallery')[0];
+        container.innerHTML = "";
+        var divImg = document.createElement('div');
+        divGallery.appendChild(divImg)
+        var h3 = document.createElement('h3');
+        h3.innerText = item.title;
+        divImg.appendChild(h3);
+        var img = document.createElement('img');
+        img.src = item.imageUrl;
+        divImg.appendChild(img);
+    });
+};

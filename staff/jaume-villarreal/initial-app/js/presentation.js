@@ -46,8 +46,7 @@ registerPanel.onRegisterSubmit(function (name , surname , email , password) {
     }
 });
 
-
-// // successRegisterPanel
+// successRegisterPanel
 var registerSuccessPanel = new RegisterSuccessPanel(panels[2]);
 
 registerSuccessPanel.onNavigateToInit(function(event){
@@ -61,8 +60,7 @@ registerSuccessPanel.onNavigateToLogin(function(event){
 });
 
 
-
-// // loginPanel
+// loginPanel
 var loginPanel = new LoginPanel(panels[3]);
 var feedbackLoginPanel = new FeedbackPanel(panels[3].children[2]);
 
@@ -102,12 +100,17 @@ homePanel.onClickLogout(function(event){
     initialPanel.show();
 });
 
-//gallery Panel
-var galleryPanel = new GallerySearchPanel(panels[5]);
+//searchPanel
+var searchForm = new SearchPanel(panels[5].children[0]);
 
-galleryPanel.searchBox.onSearchSubmit(function(query){
-    showGallery(query);
+searchForm.onSearchSubmit(function(query){  
+    var items = getItems(query);
+    galleryPanel.showItems(items);  
+    
 });
+
+//galleryPanel
+var galleryPanel = new GalleryPanel(panels[5].children[0]);
 
 
 
