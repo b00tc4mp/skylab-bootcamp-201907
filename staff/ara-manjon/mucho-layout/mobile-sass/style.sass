@@ -15,213 +15,112 @@ $smallLet: 0.9rem
  
 *
     margin: 0
+    padding: 0
     box-sizing: border-box 
 html,
 body 
     width: 100vw
-.hdr
-    width: 100vw
-    background-color: $white
-    z-index: 4
-    position: fixed
-    display: flex
-    right: 0
-    justify-content: space-between
-
-    &__banner
-        margin: 1rem 0
-        padding-left: $paddingLeft
-        width: 7rem
-        display: inline-block
-    
-    &__nav
-        z-index: 4
-        margin: 1rem
-        float: right
-        color: $colorLet
-        display: inline-block
-    &__nav2
-        display: none
-
-.drp
-    width: 100vw
-    padding-top: 8.9vh
-    &__first
-        border-top: $border
-        border-bottom: $border
-        margin: 0 0.2rem 0 0.2rem
-    &__keep
-        width: 100vw
-        border-bottom: $border
-        margin: 0 0.2rem 0 0.2rem
-    &__title
-        font-size: 1.2rem
-        color: $colorLet
-        padding: 0.7rem 1.5rem
-        margin: 0
-        font-weight: 100
-        font-family: $fontFam
-
+div
+    display: grid
 .cllg
     display: grid
-    position: relative
+    width: 100%
     margin-top: 0.25rem
-
+    grid-template-column: 1fr 1fr
+    
     &__div
-        display: grid
-        width: 98vw
+        grid-column-start: 1
+        grid-column-end: 2
         margin: 0.05rem 0.25rem
         position: relative
         padding: 0
 .img
     &__img
-        width: 98vw
+        width: 100%
         position: relative
     &__intro
-        width: 98vw
+        width: 100%
         color: rgba($white, 0)
         top: 0
         bottom: 0
-        font-size: 0.75rem
+        font-size: 0rem
         font-weight: 200
         padding: 1rem 0 0 1.5rem
         position: absolute
-
         &:hover
             z-index: 3
-            width: 98vw
+            width: 100%
             top: 0
             bottom: 0
             background-color: rgba($white, .9)
             position: absolute
-            font-size: 100%
+            font-size: 0.7rem
             font-weight: 200
             padding: 1rem 0 0 1.5
             transition: all 0.5s linear
             font-family: $fontFam
             color: $colorLet
-        
-.cllg
-    &__about
-        min-height: 30vh
-        background-color: $backColor
-        display: grid
-        width: 98vw
-        margin: 0.2rem 0.25rem
-        position: relative
-        padding: 0
-.about
-    &__text
-        padding: 1rem 1.5rem 4rem 1.5rem
-        font-size: 1.2rem
-        color: $black
-        font-family: $fontFam
-        a
-            color: $colorLet
-            text-decoration: none
-    &__red
-        padding: 1.5rem 0 0 1.5rem
-
-        @extend %small-let-grey
-        font-weight: 900
-        color: $red
-.bye
-    &__text
-        @extend %small-let-grey
-
-        padding: 3rem 0 3rem 1.5rem
-        color: $hard-grey
-
-
-.adr
-    &__text
-        padding: 0 0 4rem 1.5rem
-        color: $hard-grey
-        @extend %small-let-grey
-
-    &__red
-        padding: 0 0 4rem 1.5rem
-        padding: 0 1.5rem 1rem 1.5rem
-        color: $red
-        font-weight: 900
-        @extend %small-let-grey
-
-.scrption
-    padding-bottom: 1.5rem
-    &__text
-        padding: 0.5rem 1.5rem
-        font-weight: 100
-        color: $colorLet
-        @extend %small-let-grey
-
-    i 
-        color: $colorLet
-        padding-right: 0.3rem
-
-@media screen and (min-width: 600px)
-    .hdr
-        width: 200vw
-        padding-left:0
-        &__banner
-            width: 32vw
-            margin: 2rem 2rem
-        &__nav
-            display: none
-        &__nav2
-            z-index: 4
-            margin: 2rem
-            float: right
-            color: $colorLet
-            display: inline-block
-    .drp
-        width: 200vw
-        padding-top: 20vw
-        &__title
-            font-size: 2.4rem
-            padding: 1.4rem 3rem
-    .img
-        &__intro
-            font-size: 1.4rem
-            padding: 2rem 0 0 3rem
-            &:hover
-                font-size: 200%
-                padding: 2rem 0 0 3rem
-    .cllg        
-        grid-template-columns: 1fr 1fr        
-        transition: all 0.5s linear
-        &__div
-            width: 33%
+            
+/*     .cllg
+        &__about
+            min-height: 30vh
+            background-color: $backColor
+            display: grid
+            width: 98vw
+            margin: 0.2rem 0.25rem
+            position: relative
+            padding: 0
     .about
         &__text
-            padding: 2rem 3rem 8rem 3rem
-            font-size: 200%
+            padding: 1rem 1.5rem 4rem 1.5rem
+            font-size: 1.2rem
+            color: $black
+            font-family: $fontFam
+            a
+                color: $colorLet
+                text-decoration: none
         &__red
-            padding: 2rem 3rem 8rem 3rem
-            font-size: 200%
+            padding: 1.5rem 0 0 1.5rem
+            @extend %small-let-grey  
+            font-weight: 900
+            color: $red
     .bye
         &__text
-            font-size: 5vw
-            width: 200vw
-            padding: 6rem 0 6rem 3rem
+            @extend %small-let-grey   
+
+            padding: 3rem 0 3rem 1.5rem
+            color: $hard-grey
+
+
     .adr
         &__text
-            font-size: 5vw
-            width: 200vw
-            padding: 1.5rem 0 6rem 3rem
-        &__red
-            font-size: 5vw
-            width: 200vw
-            padding: 6rem 0 1.5rem 3rem
-    .scrption
-        padding-bottom: 3rem
-        &__text
-            padding: 1rem 3rem
-            font-size: 5vw
-            width: 200vw
-        i
-            padding: 0.2rem
-            
+            padding: 0 0 4rem 1.5rem
+            color: $hard-grey
+            @extend %small-let-grey   
 
+        &__red
+            padding: 0 0 4rem 1.5rem
+            padding: 0 1.5rem 1rem 1.5rem
+            color: $red
+            font-weight: 900
+            @extend %small-let-grey   
+
+    .scrption
+        padding-bottom: 1.5rem
+        &__text
+            padding: 0.5rem 1.5rem
+            font-weight: 100
+            color: $colorLet
+            @extend %small-let-grey
+
+        i 
+            color: $colorLet
+            padding-right: 0.3rem */
+
+
+
+            
+ 
 
 
 
