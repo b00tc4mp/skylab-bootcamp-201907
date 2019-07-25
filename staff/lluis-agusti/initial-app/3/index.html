@@ -57,31 +57,25 @@
         </section>
 
         
-        <!-- Welcome panel -->
-        <section class="panel panel--show">
-            <h2>Welcome!</h2>
-            <form>
-                <input type="text" id="ducks" placeholder="SearchDucks">
-                <button class="panel__button" type="submit">Search</button>
-            </form>
-            <ul class="outputduck"></ul>
-
-            <!-- <a class="panel__button" href="">logout</a> -->
-        </section>
-
-        <!-- Welcome New -->
-        <section class="panel panel--show">
-            <form>
-                <input type="text" id="ducks" placeholder="SearchDucks">
-                <button class="panel__button" type="submit">Search</button>
-            </form>
-            
-        </section>
-            <!-- <a class="panel__button" href="">logout</a> -->
-        </section>
-        <section>
-            results
-        </section>
+        <!-- Welcome + Search + Results -->
+        <section class="panel _hide">
+                <h2>Welcome!</h2>
+                <button>Logout</button>
+                <section class="panel">
+                    <h3>Search</h3>
+                    <form>
+                        <input type="text" name="query">
+                        <button>Search</button>
+                    </form>
+                    <p class="panel__feedback feedback feedback--error">A message.</p>
+                </section>
+                <section class="panel">
+                    <ul>
+                        <li>li</li>
+                        <li>li</li>
+                    </ul>
+                </section>
+            </section>
 
 
     </main>
@@ -91,6 +85,7 @@
     <script src="data.js"></script>
     <script src="logic.js"></script>
     <script src="components.js"></script>
+    <script src="custom-components.js"></script>
     <script src="main.js"></script>
 </body>
 

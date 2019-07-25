@@ -95,3 +95,27 @@ home.search.onSearch(function (query) {
 // home.results.paintItem = function(li, item) {
 //     new Duck(li, item);
 // };
+
+
+
+
+
+
+// DETAILED PATO
+
+home.search.onSearch(function (id) {
+    var request = new XMLHttpRequest()
+
+    request.open('get', 'http://duckling-api.herokuapp.com/api/ducks/' + id);
+
+    request.onload = function () {
+        var results = JSON.parse(request.responseText);
+
+        home.results.listItems(results);
+    };
+
+    request.send();
+});
+
+
+request.open('get', 'http://duckling-api.herokuapp.com/api/ducks/' + id);

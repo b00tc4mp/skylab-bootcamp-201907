@@ -30,73 +30,8 @@ DuckHome.prototype.onClickLogout = function (expression) {
     });
 };
 
-// /**
-//  * Duck abstraction.
-//  * @param {*} container 
-//  */
-// function Duck(container, info) {
-//     Component.call(this, container);
-
-//     var h3 = document.createElement('h3');
-
-//     h3.innerText = info.title;
-
-//     container.appendChild(h3);
-
-//     var img = document.createElement('img');
-
-//     img.src = info.imageUrl;
-
-//     container.appendChild(img);
-// }
-
-// Duck.prototype = Object.create(Component.prototype);
-// Duck.prototype.constructor = Duck;
-
 /**
  * Duck Results abstraction.
- * 
- * @param {HTMLElement} container 
- */
-function DuckResults(container) {
-    Results.call(this, container);
-}
-
-DuckResults.prototype = Object.create(Results.prototype);
-DuckResults.prototype.constructor = DuckResults;
-
-DuckResults.prototype.paintItem = function (li, item) {
-    var h3 = document.createElement('h3');
-
-    h3.innerText = item.title;
-
-    li.appendChild(h3);
-
-    var img = document.createElement('img');
-
-    img.src = item.imageUrl;
-
-    li.appendChild(img);
-};
-
-
-// addEventlistener + eventPReventDefault
-// lista igual, pero con los elementos del detalle 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * Duck Results detail abstraction.
  * 
  * @param {HTMLElement} container 
  */
