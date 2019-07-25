@@ -1,12 +1,17 @@
-.feedback, .confirm, .alert, .panel {
+.confirm, .alert, .panel {
   padding: 0.5rem;
   margin: 1.5rem;
+}
+
+body {
+  background-image: url("https://images.thestar.com/iaCkYOTaIGCYYGnTbNeoz2ua4jY=/1200x806/smart/filters:cb(2700061000)/https://www.thestar.com/content/dam/thestar/news/queenspark/2017/05/29/ontario-tories-cry-fowl-over-120k-for-a-giant-rubber-duck/giant-duck.jpg");
+  background-size: cover;
 }
 
 .panel {
   border: 0.1rem solid gray;
   border-radius: 1rem;
-  background-color: lightgray;
+  background-color: rgba(211, 211, 211, 0.5);
 }
 .panel--show {
   display: block;
@@ -16,6 +21,19 @@
 }
 .panel__feedback {
   color: red;
+}
+.panel__button {
+  background-color: #ffd208;
+  border: none;
+  border-radius: 0.5rem;
+  color: black;
+  padding: 4px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 2px 2px;
+  cursor: pointer;
 }
 
 .alert {
@@ -68,19 +86,20 @@
   border-radius: 1rem;
 }
 
-.feedback {
-  border: 0.1rem solid gray;
-  border-radius: 1rem;
+.duckstyles {
+  width: 80vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
-.feedback--success {
-  background-color: greenyellow;
+
+li {
+  grid-template-columns: 22% auto;
+  grid-template-rows: 22% auto;
 }
-.feedback--warning {
-  background-color: yellow;
-}
-.feedback--error {
-  background-color: red;
-  color: white;
+
+img {
+  grid-row: 1/span 2;
+  grid-column: 1/span 2;
 }
 
 /*# sourceMappingURL=style.css.map */

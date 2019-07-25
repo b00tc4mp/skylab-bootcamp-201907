@@ -164,6 +164,16 @@ function WelcomePanel(container) {
 WelcomePanel.prototype = Object.create(Panel.prototype);
 WelcomePanel.prototype.constructor = WelcomePanel;
 
+WelcomeBackPanel.prototype.logOut = function (expression) {
+    var logOut = this.container.children[2];
+
+    logOut.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        expression();
+    });
+};
+
 WelcomePanel.prototype.onSearch = function (expression) {
     var form = this.container.children[1];
 

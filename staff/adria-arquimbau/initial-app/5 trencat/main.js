@@ -67,7 +67,7 @@ registerPanel.onSubmitRegister(function (name, surname, email, password) {
     }
 });
 
-
+ 
 
 
 
@@ -130,12 +130,13 @@ loginPanel.onSubmitLogin(function (email, password) {
 /*------------------------------------PANEL WELCOME 4-----------------*/
 // welcome panel
 var welcomePanel = new WelcomePanel(panels[4]);
-//funcio easy de anar enrera
-// welcomePanel.onClickLogout(function() {
-//     welcomePanel.hide();
-//     initialPanel.show();
-// });
 
+welcomePanel.logOut(function () {
+    welcomePanel.hide();//quin apaguem
+    initialPanel.show();//quin encenem
+});
+
+//funcio per fer el onsearch especific
 welcomePanel.onSearch(function (query) {
     try {
         searchRequest(query);

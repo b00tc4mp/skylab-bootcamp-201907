@@ -95,11 +95,13 @@ request.open('get', 'http://duckling-api.herokuapp.com/api/search?q=' + search);
 request.onload = function() {
     var results = JSON.parse(request.responseText);
 
-    var ul = document.getElementsByClassName('outputduck')[0];
 
+    var ul = document.getElementsByClassName('outputduck')[0];
     ul.innerHTML = '';
 	
+	//console.log(results);
 	results.forEach(function(item) {
+		//console.log(item.title, item.imageUrl);
 
 		var li = document.createElement('li');
 
