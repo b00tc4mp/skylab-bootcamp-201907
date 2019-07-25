@@ -1,0 +1,19 @@
+// {type:class}
+// {direction:topDown}
+// {generate:true}
+
+[note: -> is-a | --> has-a {bg:cornsilk}]
+
+[Component]<-[Landin]
+[Component]<-[SubmitBack]
+[SubmitBack]<-[Register]
+[Component]<-[RegisterSucces]
+[SubmitBack]<-[Login]
+[Component]<-[Home (W)]
+[Component]<-[Feedback]
+[Feedback]<-.-[Login]
+[Feedback]<-.-[Register]
+[Component]->[Search]
+[SubmitBack]<-[Search]
+[Home (W)]-.->[Search]
+[Search]-.->[Feedback]

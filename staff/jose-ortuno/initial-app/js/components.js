@@ -14,6 +14,8 @@ function Component(container) {
     this.container = container;
 }
 
+// TODO: PAnel lo eliminamos y todo es compo
+
 // ---------------------------------------------------
 
 /**
@@ -216,6 +218,8 @@ LoginPanel.prototype.onNavigateToWelcome = function(expression) {
 
 // ---------------------------------------------------
 
+// TODO: ahora se llama home
+
 /**
  * WELCOME PANEL abstraction
  * 
@@ -237,6 +241,73 @@ WelcomePanel.prototype.onClickLogout = function(expression) {
         expression();
     });
 };
+
+// ---------------------------------------------------
+
+/**
+ * SEARCH Panel
+ * 
+ * @param {HTMLElemnet} container 
+ */
+function SearchPanel(container) {
+    Panel.call(this, container);
+}
+
+// HERENCIA
+SearchPanel.prototype = Object.create(Panel.prototype);
+SearchPanel.prototype.constructor = SearchPanel;
+
+// FORM
+SearchPanel.prototype.onSubmitSearch = function(expression) {
+    var searchLink = this.container.children[1];
+
+    searchLink.addEventListener('submit', function(event) {
+        event.preventDefault()
+
+        var query = event.target.search.value;
+
+        expression(query);
+    });
+};
+
+// TODO: Quiero que dependa de SubmitBackPanel y no de Panel.
+
+// ---------------------------------------------------
+
+/**
+ * PRODUCT PANEL abstraction
+ * 
+ * @param {HTMLElemnet} container 
+ */
+function ProductPanel(container) {
+    Panel.call(this, container);
+}
+
+// HERENCIA
+ProductPanel.prototype = Object.create(Panel.prototype);
+ProductPanel.prototype.constructor = ProductPanel;
+
+ProductPanel.prototype.showProducts = function(results){
+    var ul = document.createElement('ul');
+    ul.classList.add("product__container");
+    var list = document.getElementsByTagName('section')[6]
+    list.innerText = '';
+    list.appendChild(ul);
+
+    results.forEach(function(item) {
+        var li = document.createElement('li');
+        li.classList.add("product__element");
+        var h3 = document.createElement('h3');
+        h3.classList.add("product__info");
+        h3.innerText = item.title;
+        li.appendChild(h3);
+        var img = document.createElement('img');
+        img.classList.add("product__img");
+        img.src = item.imageUrl;
+        li.appendChild(img);
+        ul.appendChild(li);
+    });
+}
 
 // ---------------------------------------------------
 

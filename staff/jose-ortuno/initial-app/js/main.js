@@ -87,6 +87,7 @@ loginPanel.onNavigateBack(function() {
         
         loginPanel.hide();
         welcomePanel.show();
+        searchPanel.show();
     } catch (error) {
         loginPanel.showFeedback(error.message);
     }
@@ -110,10 +111,33 @@ welcomePanel.onClickLogout(function() {
 // ---------------------------------------------------
 
 /**
- * FEEDBACK PANEL
+ * SEARCH PANEL
+ */
+var searchPanel = new SearchPanel(panels.children[6])
+
+searchPanel.onSubmitSearch(function(query){
+    try {
+        var result = searchApi(query);
+        
+        productPanel.showProducts(result);
+        productPanel.show();
+      
+    } catch (error) {
+        alert(error.message)
+    }
+ });
+
+// ---------------------------------------------------
+
+/**
+ * PRODUCT PANEL
  */
 
-// var feedbackPanel = new FeedbackPanel(panels.children[6]);
+var productPanel = new ProductPanel(panels.children[7])
+
+
+
+// ---------------------------------------------------
 
 
 
