@@ -605,38 +605,113 @@ describe('Curray', function() {
     
 
     describe('reduce', function(){
-
-        it('should execute a reducer function (that you provide) on each element', function(){
-            var curray = new Curray(1,2,3,4,5);
-            var result = curray.reduce(function(acc, cur){
-                return acc + cur;
+        it('should first maps each element using a mapping function, then flattens the result into a new array. It is identical to a map() followed by a flat() of depth 1, but flatMap() is often quite useful, as merging both into one method is slightly more efficient. CASE: sum' , function(){
+            var curray = new Curray(1,2,3);
+            var result = curray.reduce(function(acumulator, currentValue, index, curray) {
+                return acumulator + currentValue;
             });
-
-            expect(result).toBe(15);
-        }); 
-
-        it('should execute a reducer function (that you provide) on each element', function(){
-            var curray = new Curray(1,2,3,4,5);
-            var result = curray.reduce(function(acc, cur){
-                return acc + cur;
-            },10);
-
-            expect(result).toBe(25);
+            expect(result).toBe(6);
         });
 
+        it('should executes a reducer function (that you provide) on each element of the array, resulting in a single output value. CASE: rest' , function(){
+            var curray = new Curray(6,2,1);
+            var result = curray.reduce(function(acumulator, currentValue, index, curray) {
+                return acumulator - currentValue;
+            });
+            expect(result).toBe(3);
+        });
 
-        it('there are no arguments', function (){
-            var curray = new Curray();
-           
-            expect(function(){
-                curray.reduce();
-            }).toThrowError(TypeError,'undefined is not a function');
-           
-            
+        it('should executes a reducer function (that you provide) on each element of the array, resulting in a single output value. CASE: mult' , function(){
+            var curray = new Curray(1,2,3);
+            var result = curray.reduce(function(acumulator, currentValue, index, curray) {
+                return acumulator * currentValue;
+            });
+            expect(result).toBe(6);
+        });
+
+        it('should executes a reducer function (that you provide) on each element of the array, resulting in a single output value. CASE: div' , function(){
+            var curray = new Curray(12,2,2);
+            var result = curray.reduce(function(acumulator, currentValue, index, curray) {
+                return acumulator / currentValue;
+            });
+            expect(result).toBe(3);
+        });
+    
+    });
+
+    describe('splice', function() {
+        it('should changes the contents of an array by removing or replacing existing elements and/or adding new elements in place. Case: delete', function() {
+            var curray = new Curray(5, 3, 6, 2, 1, 4);
+            var result = curray.splice(2, 2);
+            var currayArr = Array.from(curray)
+            expect(result).toEqual([6, 2]);
+            expect(currayArr).toEqual([5, 3, 1, 4]);
+
+        });
+
+        it('should changes the contents of an array by removing or replacing existing elements and/or adding new elements in place. Case: Remove and adds the elements', function() {
+            var curray = new Curray('Pepito', 'Manolito', 'Luisito', 'Felipito', 'Jorgito', 'Paquito');
+            var result = curray.splice(2, 1, 'Fulanito');
+            var resultArr = Array.from(curray);
+            expect(result).toEqual(['Fulanito']);
+            expect(resultArr).toEqual(['Pepito', 'Manolito', 'Fulanito', 'Felipito', 'Jorgito', 'Paquito']);
+        });
+
+        it('should changes the contents of an array by removing or replacing existing elements and/or adding new elements in place. Case: value delete 0', function() {
+            var curray = new Curray('Jan', 'March', 'April', 'June');
+            var result = curray.splice(1, 0, 'Feb');
+            var resultArr = Array.from(curray);
+            expect(result).toEqual([]);
+            expect(resultArr).toEqual(['Jan', 'Feb', 'March', 'April', 'June']);
+        });
+    });
+
+    
+    describe('copyWithin', function() {
+        it('should copies part of a Curray to another location in the same Curray', function() {
+            var curray = new Curray(0, 1, 2, 3, 4, 5, 6, 7);
+            var result = curray.copyWithin(0, 2, 4);
+            var resultArr = Array.from(result);
+            expect(resultArr).toEqual([2, 3, 2, 3, 4, 5, 6, 7]);
+        });
+    });
+
+    describe('reduceRight', function() {
+        it('applies a function against an accumulator and each value of the array (from right-to-left) to reduce it to a single value. CASE: sum', function() {
+            var curray = new Curray(1,2,3);
+            var result = curray.reduceRight(function(acumulator, currentValue, index, curray) {
+                return acumulator + currentValue;
+            });
+            expect(result).toBe(6);
+        });
+
+        it('applies a function against an accumulator and each value of the array (from right-to-left) to reduce it to a single value. CASE: rest', function() {
+            var curray = new Curray(1,2,6);
+            var result = curray.reduceRight(function(acumulator, currentValue, index, curray) {
+                return acumulator - currentValue;
+            });
+            expect(result).toBe(3);
+        });
+
+        it('applies a function against an accumulator and each value of the array (from right-to-left) to reduce it to a single value. CASE: mult', function() {
+            var curray = new Curray(1,2,3);
+            var result = curray.reduceRight(function(acumulator, currentValue, index, curray) {
+                return acumulator * currentValue;
+            });
+
+            expect(result).toBe(6);
+        });
+
+        it('applies a function against an accumulator and each value of the array (from right-to-left) to reduce it to a single value. CASE: div', function() {
+            var curray = new Curray(2,2,12);
+            var result = curray.reduceRight(function(acumulator, currentValue, index, curray) {
+                return acumulator / currentValue;
+            });
+
+            expect(result).toBe(3);
         });
 
     });
-  
   
    
 });

@@ -402,23 +402,133 @@ Curray.prototype.map = function(expression) {
 };
 
 
-Curray.prototype.reduce = function(expression, initial){
-
-    if (arguments.length === 0) throw TypeError('undefined is not a function');
-
-    initial===undefined ? initial=0 : initial;
-
-    var newarray;
-
-    initial===undefined ? newarray=0: newarray=initial;
-
-    var array = this;
-    
-    for (var i=0; i<this.length; i++){
-       
-        newarray = newarray + array[i];
-       
+Curray.prototype.reduce = function(expresion) {
+    var value = 0;
+    for (var i = 1; i < this.length; i++) {
+        var count = i - 1
+        if (i === 1) {
+            value = expresion(this[count], this[i], i, this);
+        } else {
+            value = expresion(value, this[i], i, this);
+        }
     }
-    
-    return newarray;
+    return value;
+}
+
+
+Curray.prototype.reduceRight = function(expresion) {
+    var curray = this
+    var value = 0;
+    for (var i = this.length - 2; i >= 0; i--) {
+        var count = this.length - 1
+        var a = this[count]
+        var b = this[i]
+        var c = i
+        var d = this
+
+        if (i === this.length - 2) {
+            value = expresion(this[count], this[i], i, this);
+        } else {
+            value = expresion(value, this[i], i, this);
+        }
+    }
+    return value;
+}
+
+
+Curray.prototype.splice = function() {
+    var start = arguments[0];
+    var deleteCount = arguments[1];
+    var limit = start + deleteCount
+    var curray = this;
+    var currayCp = [];
+    var currayRs = [];
+    var values = [];
+    var result = [];
+    var count = 0;
+    var count2 = 0;
+
+    for (var i = 0; i < this.length; i++) {
+        currayCp.push(this[i]);
+    };
+
+    if (arguments.length > 2) {
+        for (var i = 2; i < arguments.length; i++) {
+            values.push(arguments[i]);
+        };
+
+        if (arguments[1] === 0) {
+            var newLength = arguments[0] + currayCp.length;
+            for (var i = 0; i < newLength; i++) {
+                if (i === arguments[0]) {
+                    currayRs.push(values[count++]);
+                } else {
+                    currayRs.push(currayCp[count2++]);
+                };
+            };
+           
+            for (var i = 0; i < currayRs.length; i++) {
+                this[i] = currayRs[i];
+            };
+            result = [];
+            this['length'] = currayRs.length;
+            return result;
+
+
+        } else {
+            
+            var newLength = (currayCp.length - deleteCount) + values.length;
+            for (var i = 0; i < newLength; i++) {
+                if (i >= start && i < limit) {
+                    delete currayCp[count2++];
+                    currayRs.push(values[count++]);
+                } else {
+                    currayRs.push(currayCp[count2++]);
+                };
+            };
+           
+            for (var i = 0; i < this.length; i++) {
+                if (i < currayRs.length) {
+                    this[i] = currayRs[i];
+                } else {
+                    delete this[i];
+                };
+            };
+            result = values;
+            this['length'] = currayRs.length;
+            return result;
+        };
+
+    } else {
+        for (var i = 0; i < this.length; i++) {
+            var element = this[i]
+            if (i >= start && i < limit) {
+                result.push(curray[i]);
+            } else {
+                this[count++] = this[i];
+            };
+        };
+
+        if (this.length !== count) {
+            for (var i = count; i < this.length; i++) {
+                var element = this[i]
+                delete this[i];
+            };
+        };
+        this['length'] = count;
+        return result;
+    };
 };
+
+
+
+Curray.prototype.copyWithin = function(target, start, end) {
+   
+    for (var i = start; i < end; i++) {
+        this[target++] = this[i];
+    };
+    return this;
+};
+
+
+
