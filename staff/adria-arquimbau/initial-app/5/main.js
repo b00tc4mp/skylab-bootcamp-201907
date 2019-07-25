@@ -142,7 +142,7 @@ welcomePanel.onSearch(function (query) {
 
     } catch(error) {
 
-        // loginPanel.showFeedback(error.message);
+        loginPanel.showFeedback(error.message);
     }
 
 });
