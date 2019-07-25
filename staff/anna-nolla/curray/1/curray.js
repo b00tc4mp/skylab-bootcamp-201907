@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * DIY Array, i.e. Currate ese Array!.
+ * DIY Array.
  * 
- * @version 1.1.0
+ * 
  */
 function Curray() {
     this.length = 0;
@@ -41,14 +41,3 @@ Curray.prototype.forEach = function(expression) {
     for (var i = 0; i < this.length; i++)
         expression(this[i], i, this);
 };
-
-Curray.prototype.find = function(expression) {
-    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function forEach');
-
-    if (!(expression instanceof Function)) throw TypeError(expression + ' is not a function');
-
-    for (var i = 0; i < this.length; i++) {
-        var element = this[i];
-        if (expression(this[i], i, this)) return element;
-    }
-}

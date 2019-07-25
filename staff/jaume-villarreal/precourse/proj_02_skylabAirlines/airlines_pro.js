@@ -1,6 +1,6 @@
 // ============DATA MODEL=============
 // flights data
-var flights = [
+const flights = [
     { id: 0, to: 'Bilbao', from: 'Barcelona', cost: 1600, scale: false },
     { id: 1, to: 'New York', from: 'Barcelona', cost: 700, scale: false },
     { id: 2, to: 'Los Angeles', from: 'Madrid', cost: 1100, scale: true },
@@ -15,7 +15,7 @@ var flights = [
 ];
 
 // users data
-var users = [
+const users = [
     { name: 'Jaume Villarreal' , gender: 'm' , profile: 'admin'},
     { name: 'John Lennon' , gender: 'm', profile: 'admin'},
     { name: 'Paul McCartney' , gender: 'm' , profile: 'user'},
@@ -33,28 +33,28 @@ var users = [
     { name: 'Amidala' , gender: 'm' , profile: 'admin'},
     { name: 'Wonder Woman' , gender: 'm' , profile: 'admin'},
     { name: 'Siri Apple' , gender: 'm' , profile: 'user'}
-]
+];
 
 // ============METHODS=============
 
 
-let getUserProfile = (arrayUsers , name) => {
+const getUserProfile = (arrayUsers , name) => {
     for(let i = 0 , arrayLength = arrayUsers.length ; i<arrayLength ; i++){
         if(name === arrayUsers[i].name){
             return arrayUsers[i].profile;
         }
     }
     return false;
-}
+};
 
 // check prompt => validation system depending on array length ===>> called by insertPrompt() 
-let checkPrompt = array => {
+const checkPrompt = array => {
     let flag = array.length == 4 ? true : false ;
     return flag;
-}
+};
 
 // insert prompt => insert pseudoform ===> called by insertFlight()
-let insertPrompt = () => {
+const insertPrompt = () => {
     let insertString = prompt('Insert a new flight data [to - from - cost - scale] separated by commas.');
     let insertArray = insertString.split(',');
     if(checkPrompt(insertArray)){
@@ -63,27 +63,27 @@ let insertPrompt = () => {
     else{
         alert('Wrong data')
         insertFlight(flights , counterID);
-    }
-}
+    };
+};
 
 // delete prompt => insert id flight to delete ===> called by deleteFlight()
-let deletePrompt = () => {
+const deletePrompt = () => {
     let insertString = prompt('Insert an ID flight, please.');
     let insertID = parseInt(insertString);
     return insertID;
-}
+};
 
 //show avalaible flights => list of avalaible flights ===> called by insertFlig
-let getAvalaibleFlights = flights => {
+const getAvalaibleFlights = flights => {
     let listString = '';
     flights.forEach(flight => {
     listString += `ID: ${flight.id} => FROM: ${flight.from} -> TO: ${flight.to} <<>> COST ${flight.cost}€ <> [SCALES: ${flight.scale}]\n`;
     });
     return(listString);
-}
+};
 
 // insert flight => insert a new flight in data object ===> called by getActionUser()
-let insertFlight = (flights , counterID) => {
+const insertFlight = (flights , counterID) => {
     let insertDataFlight = insertPrompt();
     if(checkPrompt(insertDataFlight) && flights.length<limitInsert){
         let insertRow = {id: counterID, to: insertDataFlight[0], from: insertDataFlight[1], cost: insertDataFlight[2], scale: insertDataFlight[3]};
@@ -97,24 +97,24 @@ let insertFlight = (flights , counterID) => {
         };  
         console.log(getAvalaibleFlights(flights));
     }else{
-        alert('DB capacity excedeed.')
-    }
-}
+        alert('DB capacity excedeed.');
+    };
+};
 
 // delete flight => delete a flight in data object by ID===> called by getActionUser()
-let deleteFlight = (flights) => {
+const deleteFlight = (flights) => {
     let insertID = deletePrompt();
     flights.splice(insertID, 1);
     console.log(getAvalaibleFlights(flights));
 };
 
 // get action user => get the action choosen by admin profile ===> called by actionUser()
-let getActionAdmin = () => {
+const getActionAdmin = () => {
     let action = prompt('Insert flight=> press "i" \nDelete flight => press "d" \nexit => press "q"');
     return action;
 }
 
-let filterFlightsByCost = (flights) => {
+const filterFlightsByCost = (flights) => {
     let average = parseInt(prompt('Insert a price, please'));
     let actionCost = prompt("List of flights depending on price.\nPress 'm' for minus, 'e' for equal or 'p' for plus");
     let arrayByCost = [];
@@ -132,10 +132,10 @@ let filterFlightsByCost = (flights) => {
     let cancelPurchase = `Thanky you for your visit! See you soon.`;
     let userPurchase = flightByID!=null ? okPurchase : cancelPurchase;
     alert (userPurchase);
-}
+};
 
 
-let actionUser = (users , userName , flights , counterID) => {
+const actionUser = (users , userName , flights , counterID) => {
     let userProfile = getUserProfile(users , userName);
     switch(userProfile){
         case 'admin':   
@@ -165,9 +165,9 @@ let actionUser = (users , userName , flights , counterID) => {
 
 // ============MAIN=============
 let counterID = flights.length;
-let limitInsert = 15;
+const limitInsert = 15;
 
-let userName = prompt('Insert your name, please');
+const userName = prompt('Insert your name, please');
 actionUser(users , userName , flights , counterID);
     
 

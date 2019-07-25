@@ -1,0 +1,87 @@
+=round-border($width, $radius, $style, $color)
+    border: $width $style $color
+    border-radius: $radius
+
+%base-panel
+    padding: 0.5rem
+    margin: 1.5rem
+
+.panel
+    @extend %base-panel
+
+    +round-border(0.1rem, 1rem, solid, $panel-color)
+    
+    background-color: $panel-back-color
+
+    &--show
+        display: block
+    
+    &--hide
+        display: none
+
+    &__feedback
+        color: red
+    
+.alert
+    @extend %base-panel
+
+    +round-border(0.1rem, 1rem, solid, $alert-color)
+    
+    background-color: $alert-back-color
+
+    &__title
+        color: $alert-title-color
+
+    &__body
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+        font-weight: 400
+        font-size: 0.75rem
+    
+    &__accept
+        +round-border(0.1rem, 1rem, solid, $alert-color)
+
+    &--danger
+        border-color: $alert-warn-color
+        background-color: $alert-warn-back-color
+
+    &--danger > h2
+        color: $alert-warn-title-color
+    
+    &--danger > button
+        border-color: $alert-warn-color
+
+.confirm
+    @extend %base-panel
+
+    +round-border(0.1rem, 1rem, solid, $confirm-color)
+    
+    background-color: $confirm-back-color
+
+    &__title
+        color: $confirm-title-color
+
+    &__body
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+        font-weight: 400
+        font-size: 0.75rem
+    
+    &__accept
+        +round-border(0.1rem, 1rem, solid, $confirm-color)
+    
+    &__cancel
+        +round-border(0.1rem, 1rem, solid, $confirm-color)
+
+.feedback
+    @extend %base-panel
+
+    +round-border(0.1rem, 1rem, solid, $panel-color)
+
+    &--success
+        background-color: greenyellow
+
+    &--warning
+        background-color: yellow
+
+    &--error
+        background-color: red
+        color: white
