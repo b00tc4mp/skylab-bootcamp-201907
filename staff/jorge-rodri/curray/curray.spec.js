@@ -221,13 +221,7 @@ describe('Curray', function () {
         })
     });
 
-/*     describe("slice",function(){
-        it("default",function(){
-            var curray1=new Curray('Rita', 'Pedro', 'Miguel', 'Ana', 'Vanesa');
-            var result=curray1.slice(1,3);
-            expect(result).toEqual(['Pedro','Miguel']);
-        });
-    }); */
+
     describe('copyWithin', function () {
         it('should copy part of the curray whouth changing the lenght', function () {
             var curray1 = new Curray();
@@ -240,41 +234,41 @@ describe('Curray', function () {
     });
     describe('arrayOf', function () {
         it('should introduce the arguments into a new curray', function () {
-            var curray = new Curray(1, 2, 3, 'hello', {}, NaN);
+            var curray = new Curray(1, 2, 3, 'world', {}, NaN);
 
             var result = (curray).arrayOf();
-            expect(Array.from(result)).toEqual([1, 2, 3, 'hello', {}, NaN]);
+            expect(Array.from(result)).toEqual([1, 2, 3, 'world', {}, NaN]);
         })
     });
     describe("join", function () {
-        it('should join in a string', function () {
-            var curray = new Curray(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        it('should join curray', function () {
+            var curray = new Curray(1, 2, 3, 4, 5);
             curray = curray.join("-");
 
-            expect(curray, "1-2-3-4-5-6-7-8-9");
+            expect(curray, "1-2-3-4-5");
         });
-        it("should put a ',' as separator", function () {
+        it("put',' as separator", function () {
             var curray = new Curray(1, 2, 3, 4, 5, 6, 7, 8, 9);
             curray = curray.join();
 
             expect(curray, "1,2,3,4,5,6,7,8,9");
         });
-        it("should convert the numb to string", function () {
-            var curray = new Curray(1, 2, 3, 4, 5);
+        it("convert the numb to string", function () {
+            var curray = new Curray(1, 2, 3);
             curray = curray.join(0);
 
-            expect(curray, "102030405");
+            expect(curray, "10203");
         });
     });
     describe('splice', function () {
-        it('should delete some elements and add spme others', function () {
+        it('should delete some elements', function () {
             var curray = new Curray(1, 2, 3, 4, 5, 6);
-            var result = curray.splice(2, 1, 'a', 'b');
+            var result = curray.splice(1, 1, 'a', 'b');
 
             expect(result).toEqual([1, 2, "a", "b", 4, 5, 6]);
         });
 
-        it('should return an empty curray', function () {
+        it('empty curray', function () {
             var curray = new Curray(1, 2, 3, 4, 5, 6);
             var result = curray.splice();
 
@@ -282,7 +276,7 @@ describe('Curray', function () {
         });
     })
     describe('sort', function () {
-        it('should sort curray', function () {
+        it('must order curray', function () {
             var curray = new Curray('March', 'Jan', 'Feb', 'Dec');
             var result = curray.sort();
 
