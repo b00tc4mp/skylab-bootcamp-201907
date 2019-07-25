@@ -356,3 +356,16 @@ Curray.prototype.reduce = function (expression, initialValue) {
     return accumulator;
 };
 
+Curray.prototype.reduceRight = function (expression, initialValue) {
+
+    var accumulator = initialValue ? initialValue : this[0];
+
+    var indexFrom = initialValue ? 0 : 1;
+
+    for (var i = (this.length - 1); i >= indexFrom; i--) {
+        accumulator = expression(accumulator, this[i])
+
+    }
+
+    return accumulator
+}
