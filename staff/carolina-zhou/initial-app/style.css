@@ -1,25 +1,32 @@
 /* --- Initial App --- */
-body {
+.body {
+  background-image: url("https://cdn.pixabay.com/photo/2016/02/11/14/59/fruits-1193727_960_720.png");
+  background-repeat: repeat;
+  background-size: contain;
   box-sizing: border-box;
   margin: auto;
   font-family: sans-serif;
   font-size: 22px;
-  background-image: url("https://cdn.pixabay.com/photo/2016/02/11/14/59/fruits-1193727_960_720.png");
-  background-repeat: no-repeat;
-  background-size: cover;
+  overflow: auto;
 }
-
-.header {
-  background-color: #ffc400;
+.body__header {
+  background-color: black;
   color: white;
   padding: 15px;
   text-align: center;
   font-size: 48px;
   font-weight: bold;
 }
-
-main {
-  height: 100vh;
+.body__main {
+  min-height: 80vh;
+  margin-bottom: 5em;
+}
+.body__footer {
+  background-color: black;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  margin-top: -50px;
 }
 
 .panel--show {
@@ -31,13 +38,13 @@ main {
 }
 
 .intro {
-  background-color: rgba(0, 128, 0, 0.65);
+  background-color: rgba(100, 100, 100, 0.65);
+  color: yellow;
   margin: 3em auto auto auto;
   padding: 30px;
-  text-align: center;
-  color: yellow;
+  width: 70%;
   font-size: 28px;
-  max-width: 70%;
+  text-align: center;
 }
 .intro__title {
   margin: 0;
@@ -49,7 +56,7 @@ main {
 }
 
 .register {
-  background-color: rgba(0, 128, 0, 0.65);
+  background-color: rgba(100, 100, 100, 0.65);
   color: yellow;
   margin: 3em auto auto auto;
   padding: 30px;
@@ -70,13 +77,15 @@ main {
   border: 1px solid darkGray;
   border-radius: 10px;
   outline: none;
-  padding: 10px;
+  padding: 15px;
+  font-size: 18px;
 }
 .register__button {
-  border: none;
-  padding: 10px;
   background-color: #fff000;
   color: green;
+  border: none;
+  padding: 15px;
+  font-size: 18px;
   font-size: 22px;
 }
 .register__back {
@@ -86,7 +95,7 @@ main {
 }
 
 .confirmation {
-  background-color: rgba(0, 128, 0, 0.65);
+  background-color: rgba(100, 100, 100, 0.65);
   color: yellow;
   margin: 3em auto auto auto;
   padding: 30px;
@@ -94,23 +103,21 @@ main {
   text-align: center;
 }
 .confirmation__input {
-  width: 100%;
+  width: 95%;
   margin-top: 0.5em;
   border: 1px solid darkGray;
   border-radius: 10px;
   outline: none;
-  padding: 10px;
+  padding: 15px;
+  font-size: 18px;
 }
 .confirmation__button {
   margin-top: 2em;
-  border: none;
-  padding: 10px;
   font-size: 22px;
-  background-color: #fff000;
 }
 
 .login {
-  background-color: rgba(0, 128, 0, 0.65);
+  background-color: rgba(100, 100, 100, 0.65);
   color: yellow;
   margin: 3em auto auto auto;
   padding: 30px;
@@ -131,14 +138,15 @@ main {
   border: 1px solid darkGray;
   border-radius: 10px;
   outline: none;
-  padding: 10px;
+  padding: 15px;
+  font-size: 18px;
 }
 .login__button {
+  background-color: #fff000;
   color: green;
   border: none;
-  padding: 10px;
-  font-size: 22px;
-  background-color: #fff000;
+  padding: 15px;
+  font-size: 18px;
 }
 .login__back {
   color: lightGreen;
@@ -147,12 +155,33 @@ main {
 }
 
 .home {
-  background-color: rgba(0, 128, 0, 0.65);
+  background-color: rgba(100, 100, 100, 0.65);
   color: yellow;
   margin: 3em auto auto auto;
   padding: 30px;
   width: 70%;
   text-align: center;
+}
+.home__label {
+  display: none;
+}
+.home__input {
+  width: 95%;
+  margin-top: 0.5em;
+  border: 1px solid darkGray;
+  border-radius: 10px;
+  outline: none;
+  padding: 15px;
+  font-size: 18px;
+  width: 80%;
+  margin-bottom: 2em;
+}
+.home__button {
+  background-color: #fff000;
+  color: green;
+  border: none;
+  padding: 15px;
+  font-size: 18px;
 }
 .home__logout {
   color: lightGreen;
@@ -172,12 +201,29 @@ main {
   font-size: 22px;
 }
 
-.footer {
-  background-color: #ffc400;
-  color: white;
-  margin-top: 2em;
-  padding: 15px;
-  text-align: center;
+.search {
+  background-color: rgba(100, 100, 100, 0.65);
+  color: yellow;
+  margin: 3em auto auto auto;
+  padding: 30px;
+  width: 70%;
+  width: 80vw;
+}
+.search__list {
+  color: yellow;
+  font-size: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+}
+.search__item {
+  list-style: none;
+  margin: 2em;
+  padding: 10px;
+}
+.search__image {
+  max-width: 80%;
 }
 
 /*# sourceMappingURL=style.css.map */

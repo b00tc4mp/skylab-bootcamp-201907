@@ -46,14 +46,59 @@ InitialPanel.prototype.constructor = InitialPanel;
 InitialPanel.prototype.onNavigateToRegister = function (expression) {
     var registerLink = document.getElementsByClassName('intro__register')[0];
 
-    registerLink.addEventListener('click', expression);
+    registerLink.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        expression();
+    });
 };
 
 InitialPanel.prototype.onNavigateToLogin = function (expression) {
     var loginLink = document.getElementsByClassName('intro__login')[0];
 
-    loginLink.addEventListener('click', expression);
+    loginLink.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        expression();
+    });
 };
+
+/**
+ * Submit Back Panel abstraction.
+ * 
+ * @param {HTMLElement} container 
+ */
+function SubmitBackPanel(container) {
+    Panel.call(this, container);
+
+    /* var feedbackPanel = new FeedbackPanel(document.getElementsByClassName("feedback")[0]);
+    feedbackPanel.hide();
+    this.feedback = feedbackPanel; */
+}
+
+SubmitBackPanel.prototype = Object.create(Panel.prototype);
+SubmitBackPanel.prototype.constructor = SubmitBackPanel;
+
+SubmitBackPanel.prototype.onNavigateBack = function (expression) {
+    var backLink = this.container.children[0].children[1];
+
+    backLink.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        expression();
+    });
+};
+
+/* SubmitBackPanel.prototype.showFeedback = function (message) {
+    this.feedback.setMessage(message);
+    this.feedback.show();
+};
+
+SubmitBackPanel.prototype.show = function() {
+    this.feedback.hide();
+    //this.show(); // ERROR infinite recursion loop
+    Panel.prototype.show.call(this);
+}; */
 
 /**
  * Register Panel abstraction.
@@ -61,22 +106,25 @@ InitialPanel.prototype.onNavigateToLogin = function (expression) {
  * @param {HTMLElement} container 
  */
 function RegisterPanel(container) {
-    Panel.call(this, container);
+    SubmitBackPanel.call(this, container);
 }
 
-RegisterPanel.prototype = Object.create(Panel.prototype);
+RegisterPanel.prototype = Object.create(SubmitBackPanel.prototype);
 RegisterPanel.prototype.constructor = RegisterPanel;
-
-RegisterPanel.prototype.onNavigateBack = function (expression) {
-    var registerBackLink = document.getElementsByClassName('register__back')[0];
-
-    registerBackLink.addEventListener('click', expression);
-};
 
 RegisterPanel.prototype.onRegisterSubmit = function (expression) {
     var registerForm = this.container.children[0];
 
-    registerForm.addEventListener('submit', expression);
+    registerForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        var name = event.target.name.value;
+        var surname = event.target.surname.value;
+        var email = event.target.email.value;
+        var password = event.target.password.value;
+
+        expression(name, surname, email, password);
+    });
 };
 
 /**
@@ -94,8 +142,14 @@ RegisterSuccessPanel.prototype.constructor = RegisterSuccessPanel;
 RegisterSuccessPanel.prototype.firstLog = function (expression) {
     var confirmationForm = this.container.children[0];
 
-    confirmationForm.addEventListener('submit', expression);
+    confirmationForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        var password = document.getElementById("finalPass").value;
+
+        expression(password);
+    });
 };
+
 
 /**
  * Login Panel abstraction.
@@ -103,22 +157,23 @@ RegisterSuccessPanel.prototype.firstLog = function (expression) {
  * @param {HTMLElement} container 
  */
 function LoginPanel(container) {
-    Panel.call(this, container);
+    SubmitBackPanel.call(this, container);
 }
 
-LoginPanel.prototype = Object.create(Panel.prototype);
+LoginPanel.prototype = Object.create(SubmitBackPanel.prototype);
 LoginPanel.prototype.constructor = LoginPanel;
-
-LoginPanel.prototype.onNavigateBack = function (expression) {
-    var loginBackLink = document.getElementsByClassName('login__back')[0];
-
-    loginBackLink.addEventListener('click', expression);
-};
 
 LoginPanel.prototype.onLoginSubmit = function (expression) {
     var loginForm = this.container.children[0];
 
-    loginForm.addEventListener('submit', expression);
+    loginForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        var email = document.getElementById("userEmail").value;
+        var password = document.getElementById("userPassword").value;
+        
+        expression(email, password);
+    });
 };
 
 /**
@@ -133,11 +188,45 @@ function HomePanel(container) {
 HomePanel.prototype = Object.create(Panel.prototype);
 HomePanel.prototype.constructor = HomePanel;
 
-HomePanel.prototype.logOut = function (expression) {
-    var logOutLink = document.getElementsByClassName('home__logout')[0];
+HomePanel.prototype.onClickLogout = function (expression) {
+    var logoutButton = document.getElementsByClassName('home__logout')[0];
 
-    logOutLink.addEventListener('click', expression);
+    logoutButton.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        expression();
+    });
 };
+
+HomePanel.prototype.onSearch = function (expression) {
+    var searchForm = document.getElementsByClassName("home__form")[0];
+
+    searchForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        var query = document.getElementsByClassName("home__input")[0].value;
+        
+        expression(query);
+    });
+};
+
+
+/**
+ * Feedback Panel abstraction.
+ * 
+ * @param {*} container 
+ */
+/* function FeedbackPanel(container) {
+    Panel.call(this, container);
+}
+
+FeedbackPanel.prototype = Object.create(Panel.prototype);
+FeedbackPanel.prototype.constructor = FeedbackPanel;
+
+FeedbackPanel.prototype.setMessage = function(message) {
+    this.container.innerText = message;
+};
+ */
 
 /**
  * Error Panel abstraction.
@@ -150,3 +239,20 @@ function ErrorPanel(container) {
 
 ErrorPanel.prototype = Object.create(Panel.prototype);
 ErrorPanel.prototype.constructor = ErrorPanel;
+
+ErrorPanel.prototype.showErrorMessage = function (error) {
+    document.getElementsByClassName("error__message")[0].innerHTML = error; 
+};
+
+
+/**
+ * Search Panel abstraction.
+ * 
+ * @param {HTMLElement} container 
+ */
+function SearchPanel(container) {
+    Panel.call(this, container);
+}
+
+SearchPanel.prototype = Object.create(Panel.prototype);
+SearchPanel.prototype.constructor = SearchPanel;

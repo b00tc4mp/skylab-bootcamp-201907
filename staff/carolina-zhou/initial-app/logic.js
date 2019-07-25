@@ -34,25 +34,7 @@ function register(name, surname, email, password) {
 
         errors += 'Password is empty or blank.\n';
     }
-/* 
-    for(var i = 0; i < users.length; i++) {
-        if (users[i].email === email) {
-            if (errors) errors += '\n';
 
-            errors += 'There is already an account with the provided e-mail address.';
-        }
-    }
-
-    if (errors)
-        throw new Error(errors);
-    else
-        users.push({
-            name: name,
-            surname: surname,
-            email: email,
-            password: password
-    }); 
-*/
     if (errors)
         throw new Error(errors);
     else {
@@ -93,12 +75,58 @@ function login(email, password) {
     });
 
     if (!user) throw new Error('Wrong credentials.');
-/* 
-    for(var j = 0; j < users.length; j++) {
-        if ((users[j].email !== email || users[j].password !== password) && (email !== "" && password !== "")) {
-            errors = 'Wrong credentials.';
-        }
-    }
- */
+
     if (errors) throw new Error(errors);
+}
+
+function firstLogin(password) {
+    var errors = '';
+    var lastUser = users[users.length -1];
+
+    if (lastUser.password !== password) {
+        errors += 'Wrong password. Try again.';
+    }
+    
+    if (errors) throw new Error(errors);
+}
+
+function search(query) {
+    var errors="";
+
+    if (!query.trim()){
+        errors += "Search is empty or blank."
+    }
+    if (errors) throw new Error(errors);
+    
+    
+    var request = new XMLHttpRequest()
+    request.open('get', 'http://duckling-api.herokuapp.com/api/search?q=' + query);
+    request.onload = function() {
+        var results = JSON.parse(request.responseText);
+        var ul = document.getElementsByClassName('search__duck')[0];
+        ul.innerHTML = '';
+/*         var ul = document.createElement('ul');
+        var searchSection = panels[6].children[0];
+        searchSection.appendChild(ul); */
+        
+        results.forEach(function(item) { 
+    
+            var li = document.createElement('li');
+            var h3 = document.createElement('h3');
+    
+            h3.innerText = item.title;
+            li.appendChild(h3);
+    
+            var img = document.createElement('img');
+    
+            img.src = item.imageUrl;
+            li.appendChild(img);
+            ul.appendChild(li);
+
+            li.className = "search__item";
+            ul.className = "search__list";
+            img.className = "search__image";
+        });
+    };
+    request.send();
 }
