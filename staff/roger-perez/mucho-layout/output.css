@@ -122,12 +122,48 @@ h5 {
 .footer__adress {
   width: 100%;
   height: auto;
-  margin: 2rem;
+  margin: 2re;
   padding: 0;
 }
 
 h4 {
   color: red;
+}
+
+@media (min-width: 600px) {
+  .header {
+    display: flex;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    border-bottom: 0.05rem solid #D3D3D3;
+    justify-content: space-between;
+  }
+  .header__img--logo {
+    width: 175px;
+    height: auto;
+    margin: 10px;
+    padding: 0;
+  }
+  .header__nav--tab {
+    display: block;
+  }
+  .header__menu--tab li {
+    display: inline-block;
+    margin: 10px;
+  }
+  .header__button {
+    display: none;
+  }
+
+  .container {
+    display: flex;
+  }
+  .container__imagenes {
+    width: 50%;
+    justify-content: space-around;
+  }
 }
 
 /*# sourceMappingURL=output.css.map */

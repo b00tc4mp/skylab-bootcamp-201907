@@ -83,5 +83,29 @@ h5
 h4
     color: red
 
+@media (min-width: 600px)
+    .header
+        display: flex
+        +sizes(100%,auto,0,0)
+        border-bottom: 0.05rem solid #D3D3D3
+        justify-content: space-between
+        
+        &__img--logo
+            +sizes(175px,auto,10px,0)
+
+        &__nav--tab
+            display: block
+        &__menu--tab li
+            display: inline-block
+            margin: 10px
+        &__button
+            display: none
+
+    .container
+        display: flex
+        
+        &__imagenes
+            width: 50%
+            justify-content: space-around
 
 
