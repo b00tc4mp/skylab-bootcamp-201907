@@ -66,7 +66,7 @@ Initial.prototype.onNavigateToLogin = function (expression) {
  function SubmitBack(container){
     Component.call(this,container);
 
-    var feedback = new FeedbackPanel(this.container.children[2]); //composite pattern
+    var feedback = new Feedback(this.container.children[2]); //composite pattern
     feedback.hide();
     this.feedback = feedback;
  }
@@ -95,18 +95,18 @@ SubmitBack.prototype.show = function(){
  
  
  /**
- * Register Panel abstraction.
+ * Register abstraction.
  * 
  * @param {HTMLElement} container 
  */
-function RegisterPanel(container) {
-    SubmitBackPanel.call(this, container);
+function Register(container) {
+    SubmitBack.call(this, container);
 }
 
-RegisterPanel.prototype = Object.create(SubmitBackPanel.prototype);
-RegisterPanel.prototype.constructor = RegisterPanel;
+Register.prototype = Object.create(SubmitBack.prototype);
+Register.prototype.constructor = Register;
 
-RegisterPanel.prototype.onRegisterSubmit = function (expression) {
+Register.prototype.onRegisterSubmit = function (expression) {
     var registerForm = this.container.children[1];
     registerForm.addEventListener('submit', function(event){
         event.preventDefault();
@@ -122,19 +122,19 @@ RegisterPanel.prototype.onRegisterSubmit = function (expression) {
 
 
 /**
- * Register Success Panel abstraction.
+ * Register Success abstraction.
  * 
  * @param {HTMLElement} container 
  */
 
- function RegisterSuccessPanel (container){
-     Panel.call(this, container);
+ function RegisterSuccess (container){
+     Component.call(this, container);
  }
 
- RegisterSuccessPanel.prototype = Object.create(Panel.prototype);
- RegisterSuccessPanel.prototype.constructor = RegisterSuccessPanel;
+ RegisterSuccess.prototype = Object.create(Component.prototype);
+ RegisterSuccess.prototype.constructor = RegisterSuccess;
 
- RegisterSuccessPanel.prototype.onNavigateToInit = function(expression){
+ RegisterSuccess.prototype.onNavigateToInit = function(expression){
     var toInitLink = this.container.children[2].children[0];
     toInitLink.addEventListener("click" , function(event){
         event.preventDefault();
@@ -142,7 +142,7 @@ RegisterPanel.prototype.onRegisterSubmit = function (expression) {
     });
  }
  
- RegisterSuccessPanel.prototype.onNavigateToLogin = function(expression){
+ RegisterSuccess.prototype.onNavigateToLogin = function(expression){
     var toLoginLink = this.container.children[2].children[1];
     toLoginLink.addEventListener("click" , function(event){
         event.preventDefault();
@@ -156,51 +156,51 @@ RegisterPanel.prototype.onRegisterSubmit = function (expression) {
  * @param {HTMLElement} container 
  */
 
- function FeedbackPanel (container){
-     Panel.call(this,container);
+ function Feedback (container){
+     Component.call(this,container);
  }
 
- FeedbackPanel.prototype = Object.create(Panel.prototype);
- FeedbackPanel.prototype.constructor = FeedbackPanel;
+ Feedback.prototype = Object.create(Component.prototype);
+ Feedback.prototype.constructor = Feedback;
 
- FeedbackPanel.prototype.setMessage = function(message){
+ Feedback.prototype.setMessage = function(message){
      this.container.innerText = message;
  };
 
 
  /**
- * Login Panel abstraction.
+ * Login abstraction.
  * 
  * @param {HTMLElement} container 
  */
 
- function LoginPanel(container){
-     SubmitBackPanel.call(this,container);
+ function Login(container){
+     SubmitBack.call(this,container);
  }
 
- LoginPanel.prototype = Object.create(SubmitBackPanel.prototype);
- LoginPanel.prototype.constructor = LoginPanel;
+ Login.prototype = Object.create(SubmitBack.prototype);
+ Login.prototype.constructor = Login;
 
- LoginPanel.prototype.onSuccessLogin = function(expression){
+ Login.prototype.onSuccessLogin = function(expression){
      var loginForm = this.container.children[1];
      loginForm.addEventListener('submit' , expression);
  }
 
 
   /**
- * Home Panel abstraction.
+ * Home abstraction.
  * 
  * @param {HTMLElement} container 
  */
 
-function HomePanel(container){
-    Panel.call(this,container);
+function Home(container){
+    Component.call(this,container);
 }
 
-HomePanel.prototype = Object.create(Panel.prototype);
-HomePanel.prototype.constructor = HomePanel;
+Home.prototype = Object.create(Component.prototype);
+Home.prototype.constructor = Home;
 
-HomePanel.prototype.onClickLogout = function(expression){
+Home.prototype.onClickLogout = function(expression){
     backLogoutLink = this.container.children[1];
 
     backLogoutLink.addEventListener('click' , function(){
@@ -215,52 +215,45 @@ HomePanel.prototype.onClickLogout = function(expression){
  * 
  * @param {HTMLElement} container 
  */
-function SearchPanel(container){
-    Panel.call(this,container);
+function Search(container){
+    Component.call(this,container);
 }
 
-SearchPanel.prototype = Object.create(Panel.prototype);
-SearchPanel.prototype.constructor = SearchPanel;
+Search.prototype = Object.create(Component.prototype);
+Search.prototype.constructor = Search;
 
-SearchPanel.prototype.onSearchSubmit = function(expression){
-    var toSearch = this.container;
+Search.prototype.onSearchSubmit = function(expression){
+    var form = this.container;
 
-    toSearch.addEventListener('submit',function(event){
+    form.addEventListener('submit',function(event){
         event.preventDefault();
-        var galleryDiv = panels[5].getElementsByTagName('div')
-    
-        var query = event.target.query.value;
+
+        var query = form.query.value;
         expression(query);
     })
 };
 
 
 /**
- * Gallery Search Panel abstraction.
+ * Results Search Panel abstraction.
  * 
  * @param {HTMLElement} container 
  */
 
- function GalleryPanel(container){
-    Panel.call(this,container);
- }
-
-GalleryPanel.prototype = Object.create(Panel.prototype);
-GalleryPanel.prototype.constructor = GalleryPanel;
-
-GalleryPanel.prototype.showItems = function(items){
-    var container = document.getElementsByClassName('gallery')[0];
-
-    container.innerHTML = "";
-
-    items.forEach(function(item) {
-        var li = document.createElement('li');
-        var h3 = document.createElement('h3');
-        h3.innerText = item.title;
-        li.appendChild(h3);
-        var img = document.createElement('img');
-        img.src = item.imageUrl;
-        li.appendChild(img);
-        container.appendChild(li);
-    });
+function Results(container){
+    Component.call(this , container);
 };
+
+Results.prototype = Object.create(Component.prototype);
+Results.prototype.constructor = Results;
+
+Results.prototype.listItems = function(items){
+    var ul = this.container.getElementsByClassName('gallery');
+    ul.innerHTML = '';
+
+    items.forEach(function(item){
+        var li = document.createElement('li');
+        ul.appendChild(li);
+        this.paintItem(li,item);
+    }.bind(this));
+}

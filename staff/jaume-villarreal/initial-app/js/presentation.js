@@ -35,7 +35,7 @@ register.onNavigateBack(function (event) {
 
 register.onRegisterSubmit(function (name , surname , email , password) {
     try {
-        register(name, surname, email, password);
+        logic.register(name, surname, email, password);
 
         register.resetInputs();
         
@@ -47,39 +47,39 @@ register.onRegisterSubmit(function (name , surname , email , password) {
 });
 
 // Register Success
-var registerSuccessPanel = new RegisterSuccessPanel(panels[2]);
+var registerSuccess = new RegisterSuccess(panels[2]);
 
-registerSuccessPanel.onNavigateToInit(function(event){
-    registerSuccessPanel.hide();
-    initialPanel.show();
+registerSuccess.onNavigateToInit(function(event){
+    registerSuccess.hide();
+    initial.show();
 });
 
-registerSuccessPanel.onNavigateToLogin(function(event){
-    registerSuccessPanel.hide();
-    loginPanel.show();
+registerSuccess.onNavigateToLogin(function(event){
+    registerSuccess.hide();
+    login.show();
 });
 
 
 // loginPanel
-var loginPanel = new LoginPanel(panels[3]);
-var feedbackLoginPanel = new FeedbackPanel(panels[3].children[2]);
+var login = new Login(panels[3]);
+var feedbackLogin = new Feedback(panels[3].children[2]);
 
-loginPanel.onNavigateBack(function(event){
-    loginPanel.resetInputs();
+login.onNavigateBack(function(event){
+    login.resetInputs();
 
-     loginPanel.hide();
-     feedbackLoginPanel.hide();
-     initialPanel.show();
+     login.hide();
+     feedbackLogin.hide();
+     initial.show();
 });
 
-loginPanel.onSuccessLogin(function(event){
+login.onSuccessLogin(function(event){
     event.preventDefault();
 
     var mail = event.target.logMail.value;
     var password = event.target.logPassword.value;
     
     try{
-        login(mail , password);
+        logic.login(mail , password);
 
         loginPanel.resetInputs();
         
@@ -93,24 +93,27 @@ loginPanel.onSuccessLogin(function(event){
 });
 
 
-//homePanel
-var homePanel = new HomePanel(panels[4]);
-homePanel.onClickLogout(function(event){
-    homePanel.hide();
-    initialPanel.show();
-});
+// //homePanel
+// var home = new Home(panels[4]);
 
-//searchPanel
-var searchForm = new SearchPanel(panels[5].children[1]);
+// home.onClickLogout(function(event){
+//     homePanel.hide();
+//     initialPanel.show();
+// });
 
-searchForm.onSearchSubmit(function(query){  
-    var items = getItems(query);
-    galleryPanel.showItems(items);  
+// //searchPanel
+// var searchForm = new Search(panels[5].children[1]);
+
+// searchForm.onSearchSubmit(function(query){  
+//     var items = logic.getItems(query);
+//     gallery.showItems(items);  
     
-});
+// });
 
-//galleryPanel
-var galleryPanel = new GalleryPanel(document.getElementsByClassName('gallery')[0]);
+// //galleryPanel
+// var gallery = new Results(document.getElementsByClassName('gallery')[0]);
+
+
 
 
 
