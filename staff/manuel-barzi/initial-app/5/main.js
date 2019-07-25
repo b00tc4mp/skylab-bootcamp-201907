@@ -78,3 +78,11 @@ welcomePanel.onClickLogout(function() {
     initialPanel.show();
 });
 
+welcomePanel.onSearch(function(query) {
+    try{
+        searchRequest(query);
+    } catch(error){
+        // welcomePanel.showFeedback(error.message)
+        console.log(error); 
+    }
+});

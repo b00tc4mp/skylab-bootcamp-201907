@@ -82,5 +82,9 @@
   background-color: red;
   color: white;
 }
+.duckShow{
+  display: grid;
+  grid-auto-columns: 0rem;
+}
 
 /*# sourceMappingURL=style.css.map */

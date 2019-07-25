@@ -54,9 +54,16 @@
         </section>
 
         <!-- welcome panel -->
-        <section class="panel panel--hide">
+        <section class="panel panel--show">
             <h2>Welcome!</h2>
-            <button>Logout</button>
+            <form>
+                <input type="text" id="query" placeholder="query">
+                <button class="searchButton" type="submit">Search</button>
+            </form>
+            <button class="logoutButton">Logout</button>
+            <ul class="outputQuery"></ul>
+            <div class="duckShow"></div>
+            <p class="panel__feedback feedback feedback--error">A message.</p>
         </section>
     </main>
 

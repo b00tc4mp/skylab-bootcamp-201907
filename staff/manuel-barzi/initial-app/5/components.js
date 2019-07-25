@@ -3,6 +3,7 @@
  * 
  * @param {HTMLElement} container 
  */
+
 function Component(container) {
     if (!(container instanceof HTMLElement)) throw new TypeError(container + ' is not an HTMLElement');
 
@@ -188,12 +189,24 @@ WelcomePanel.prototype = Object.create(Panel.prototype);
 WelcomePanel.prototype.constructor = WelcomePanel;
 
 WelcomePanel.prototype.onClickLogout = function (expression) {
-    var logoutButton = this.container.children[1];
+    var logoutButton = this.container.children[3];
 
     logoutButton.addEventListener('click', function (event) {
         event.preventDefault();
 
         expression();
+    });
+};
+
+WelcomePanel.prototype.onSearch = function (expression) {
+    var searchButton = this.container.children[1];
+
+    searchButton.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        var query = event.target.query.value;
+        document.querySelector(".duckShow").innerText=""
+        expression(query);
     });
 };
 
