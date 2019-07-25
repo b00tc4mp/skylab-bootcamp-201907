@@ -179,38 +179,6 @@ Feedback.prototype.setMessage = function (message) {
     this.container.innerText = message;
 };
 
-// /**
-//  * Home abstraction.
-//  * 
-//  * @param {HTMLElement} container 
-//  */
-// function Home(container) {
-//     Component.call(this, container);
-
-//     var sections = this.container.getElementsByTagName('section');
-
-//     var search = new Search(sections[0]);
-
-//     this.search = search;
-
-//     var results = new Results(sections[1]);
-
-//     this.results = results;
-// }
-
-// Home.prototype = Object.create(Component.prototype);
-// Home.prototype.constructor = Home;
-
-// Home.prototype.onClickLogout = function (expression) {
-//     var logout = this.container.children[1];
-
-//     logout.addEventListener('click', function (event) {
-//         event.preventDefault();
-
-//         expression();
-//     });
-// };
-
 /**
  * Search abstraction.
  * 
@@ -256,39 +224,6 @@ Results.prototype.listItems = function (items) {
 
         this.paintItem(li, item);
     }.bind(this)); // WATCH this
-};
-
-Results.prototype.paintItem = function(li, item) {
-    li.innerText = item;
-};
-
-
-
-
-// Haremos otro results DuckResults
-// Haremos otro results DuckResults
-// Haremos otro results DuckResults
-
-
-
-function ResultsDetailed(container) {
-    Component.call(this, container);
-}
-
-Results.prototype = Object.create(Component.prototype);
-Results.prototype.constructor = Results;
-
-Results.prototype.listItems = function (items) {
-    var ul = this.container.getElementsByTagName('ul')[0];
-    ul.innerHTML = '';
-
-    items.forEach(function (item) {
-        var li = document.createElement('li');
-
-        ul.appendChild(li);
-
-        this.paintItem(li, item);
-    }.bind(this));
 };
 
 Results.prototype.paintItem = function(li, item) {
