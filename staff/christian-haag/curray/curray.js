@@ -369,3 +369,28 @@ Curray.prototype.reduceRight = function (expression, initialValue) {
 
     return accumulator
 }
+
+Curray.prototype.sort = function (expression) {
+    var result = this;
+
+    for (var i = 0; i < this.length - 1; i++) {
+        var a = this[i];
+        var b = this[i + 1]
+        if (expression(a, b) < 0) {
+            this[i + 1] = b;
+            this[i] = a;
+        } else if (expression(a, b) >= 0) {
+            this[i + 1] = a;
+            this[i] = b;
+        };
+    };
+
+    for (var i = 0; i < this.length; i++) {
+        var a = this[i];
+        var b = this[i + 1]
+        if (expression(a, b) > 0) {
+            this.sort(expression);
+        }
+    }
+    return this;
+};

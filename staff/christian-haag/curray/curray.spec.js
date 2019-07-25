@@ -611,7 +611,39 @@ describe('Curray', function () {
         })
     });
 
-
+    describe('sort', function () {
+        it('should sorts the elements of an array in place and returns the sorted array. Case: numbers', function () {
+            var curray = new Curray(5, 3, 3, 2, 1, 4);
+            var result = curray.sort(function (a, b) {
+                return a - b;
+            });
+            var resultArr = Array.from(result);
+            expect(resultArr).toEqual([1, 2, 3, 3, 4, 5]);
+        });
+        it('should sorts the elements of an array in place and returns the sorted array. Case: numbers', function () {
+            var curray = new Curray(5, 3, 3, 2, 1, 4);
+            var result = curray.sort(function (a, b) {
+                return b - a;
+            });
+            var resultArr = Array.from(result);
+            expect(resultArr).toEqual([5, 4, 3, 3, 2, 1]);
+        });
+        it('should sorts the elements of an array in place and returns the sorted array. Case: words', function () {
+            var curray = new Curray('d', 'a', 'c', 'b', 'e');
+            var result = curray.sort(function (a, b) {
+                if (a < b) {
+                    return -1;
+                }
+                if (a > b) {
+                    return 1;
+                }
+                // a equal to b
+                return 0;
+            });
+            var resultArr = Array.from(result);
+            expect(resultArr).toEqual(["a", "b", "c", "d", "e"]);
+        });
+    });
 
 
 
