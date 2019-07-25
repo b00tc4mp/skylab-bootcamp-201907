@@ -4,6 +4,9 @@
  * Business Logic
  */
 
+var EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+
 function register(name, surname, email, password) {
     var errors = '';
 
@@ -15,6 +18,9 @@ function register(name, surname, email, password) {
         if (errors) errors += '\n';
 
         errors += 'Surname is empty or blank.';
+    } else if(!EMAIL_REGEX.test(email)){
+        if(errors) errors += "\n";
+        errors += 'E-mail is not valid.';
     }
 
     if (!email.trim()) {
@@ -41,7 +47,8 @@ function register(name, surname, email, password) {
             name: name,
             surname: surname,
             email: email,
-            password: password
+            password: password,
+            status:0
         });
 
     }
@@ -55,6 +62,8 @@ function login(email, password) {
         if (errors) errors += '\n';
 
         errors += 'E-mail is empty or blank.';
+    }else if (!EMAIL_REGEX.test(email)) {
+        errors += 'E-mail is not valid.';
     }
 
     if (!password.trim()) {
@@ -68,6 +77,7 @@ function login(email, password) {
     var user = users.find(function (user) {
         return user.email === email && user.password === password;
     });
+    if(user){user.status=1}
 
     if (!user) throw new Error('Wrong credentials.');
 }
