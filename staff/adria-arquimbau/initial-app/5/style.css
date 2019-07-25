@@ -86,20 +86,28 @@ body {
   border-radius: 1rem;
 }
 
-.duckstyles {
-  width: 80vw;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+ul {
+  width: 95%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
 }
 
 li {
-  grid-template-columns: 22% auto;
-  grid-template-rows: 22% auto;
+  max-width: 200px;
+  margin: 2%;
+}
+
+h3 {
+  max-width: 200px;
+  margin: 2%;
+  height: 1.9rem;
 }
 
 img {
-  grid-row: 1/span 2;
-  grid-column: 1/span 2;
+  max-width: 200px;
+  margin: 2%;
+  padding-top: 1rem;
 }
 
 /*# sourceMappingURL=style.css.map */
