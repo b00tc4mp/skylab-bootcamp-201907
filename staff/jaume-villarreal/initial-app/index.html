@@ -11,13 +11,16 @@
     <body>
         <main class="wrapper">
             <h1 class="header-1">INITIAL APP</h1>
+            
+            <!-- Landing -->
             <section class="panel panel--show initial-panel">
                     <div class="btn-set">
                         <a href="" class="btn">Register</a>
                         <a href="#" class="btn">Login</a>
                     </div>
             </section>
-
+            
+            <!-- Register -->
             <section class="panel panel--hide form">
                 <h2 class="header-2">Register form</h2>
                 <form class="form__input">
@@ -37,6 +40,7 @@
                 <a class="btn btn--back" href="">Back</a>
             </section>
             
+            <!-- Register Success -->
             <section class="panel panel--hide successRegister">
                 <h2 class="header-2">Registered</h2>
                 <p class="text-box">Registered succeeded</p>
@@ -46,6 +50,7 @@
                 </div>
             </section>
             
+            <!-- Login -->
             <section class="panel panel--hide form">
                 <h2 class="header-2">Login form</h2>
                 <form class="form__input">
@@ -61,13 +66,17 @@
                 <a class="btn btn--back" href="">Back</a>
             </section>
             
+            <!-- Home -->
             <section class="panel _panel--hide home">
                 <h2 class="header-2">Welcome!</h2>
                 <a class="btn" href="">Logout</a>
+                <!-- Search -->
                 <section class="panel">
+                    <h3>Search your duck</h3>
                     <form class="panel--show form form__search">
                         <input type="text" id="query">
                         <button type="submit" class="btn btn--query">Search</button>
+                        <p class="panel__feedback panel--hide"></p>
                     </form>
                     <ul class="gallery"></ul>
                 </section>

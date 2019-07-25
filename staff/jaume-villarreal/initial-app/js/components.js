@@ -9,29 +9,17 @@ function Component(container) {
     this.container = container;
 }
 
-/**
- * Panel abstraction.
- * 
- * @param {HTMLElement} container 
- */
-function Panel(container) {
-    Component.call(this, container);
-}
-
-Panel.prototype = Object.create(Component.prototype);
-Panel.prototype.constructor = Panel;
-
-Panel.prototype.show = function () {
+Component.prototype.show = function () {
     this.container.classList.remove('panel--hide');
     this.container.classList.add('panel--show');
 };
 
-Panel.prototype.hide = function () {
+Component.prototype.hide = function () {
     this.container.classList.remove('panel--show');
     this.container.classList.add('panel--hide');
 };
 
-Panel.prototype.resetInputs = function(){
+Component.prototype.resetInputs = function(){
     var inputs = this.container.getElementsByTagName("input");
     for(var i = 0 ; i<inputs.length ; i++){
         inputs[i].value='';
@@ -40,18 +28,18 @@ Panel.prototype.resetInputs = function(){
 
 
 /**
- * Initial Panel abstraction.
+ * Initial  abstraction.
  * 
  * @param {HTMLElement} container 
  */
-function InitialPanel(container) {
-    Panel.call(this, container);
+function Initial(container) {
+    Component.call(this, container);
 }
 
-InitialPanel.prototype = Object.create(Panel.prototype);
-InitialPanel.prototype.constructor = InitialPanel;
+Initial.prototype = Object.create(Component.prototype);
+Initial.prototype.constructor = Initial;
 
-InitialPanel.prototype.onNavigateToRegister = function (expression) {
+Initial.prototype.onNavigateToRegister = function (expression) {
     var registerLink = this.container.children[0].children[0];
 
     registerLink.addEventListener('click', function(event){
@@ -60,7 +48,7 @@ InitialPanel.prototype.onNavigateToRegister = function (expression) {
     });
 };
 
-InitialPanel.prototype.onNavigateToLogin = function (expression) {
+Initial.prototype.onNavigateToLogin = function (expression) {
     var loginLink = this.container.children[0].children[1];
 
     loginLink.addEventListener('click', function(event){
@@ -70,40 +58,39 @@ InitialPanel.prototype.onNavigateToLogin = function (expression) {
 };
 
 /**
- * Submit Back Panel abstraction.
+ * Submit Back abstraction.
  * 
  * @param {HTMLElement}
  */
 
- function SubmitBackPanel(container){
-    Panel.call(this,container);
+ function SubmitBack(container){
+    Component.call(this,container);
 
-    var feedBackPanel = new FeedbackPanel(this.container.children[2]); //composite pattern
-    feedBackPanel.hide();
-    this.feedback = feedBackPanel;
+    var feedback = new FeedbackPanel(this.container.children[2]); //composite pattern
+    feedback.hide();
+    this.feedback = feedback;
  }
 
-SubmitBackPanel.prototype = Object.create(Panel.prototype);
-SubmitBackPanel.prototype.constructor = SubmitBackPanel;
+SubmitBack.prototype = Object.create(Component.prototype);
+SubmitBack.prototype.constructor = SubmitBack;
 
-SubmitBackPanel.prototype.onNavigateBack = function(expression){
+SubmitBack.prototype.onNavigateBack = function(expression){
     var backLink = this.container.children[3];
 
     backLink.addEventListener('click', function(event){
         event.preventDefault();
-        // this.container.resetInputs();
         expression();
     });
 };
 
-SubmitBackPanel.prototype.showFeedback = function(message){
+SubmitBack.prototype.showFeedback = function(message){
     this.feedback.setMessage(message);
     this.feedback.show();
 };
 
-SubmitBackPanel.prototype.show = function(){
+SubmitBack.prototype.show = function(){
     this.feedback.hide();
-    Panel.prototype.show.call(this); //extends parent method by calling it
+    Component.prototype.show.call(this); //extends parent method by calling it
 };
  
  
@@ -265,23 +252,15 @@ GalleryPanel.prototype.showItems = function(items){
     var container = document.getElementsByClassName('gallery')[0];
 
     container.innerHTML = "";
-    
-    var divGallery = document.createElement('div');
-
-    divGallery.className = "gallery__img";
-
-    container.appendChild(divGallery);
 
     items.forEach(function(item) {
-        var container = document.getElementsByClassName('gallery')[0];
-        container.innerHTML = "";
-        var divImg = document.createElement('div');
-        divGallery.appendChild(divImg)
+        var li = document.createElement('li');
         var h3 = document.createElement('h3');
         h3.innerText = item.title;
-        divImg.appendChild(h3);
+        li.appendChild(h3);
         var img = document.createElement('img');
         img.src = item.imageUrl;
-        divImg.appendChild(img);
+        li.appendChild(img);
+        container.appendChild(li);
     });
 };

@@ -7,46 +7,46 @@ var panels = document.getElementsByClassName("panel");
 
 // initial panel
 
-var initialPanel = new InitialPanel(panels[0]);
+var initial = new Initial(panels[0]);
 
-initialPanel.onNavigateToRegister(function (event) {
-    initialPanel.hide();
-    registerPanel.show();
+initial.onNavigateToRegister(function (event) {
+    initial.hide();
+    register.show();
 });
 
-initialPanel.onNavigateToLogin(function (event) {
-    initialPanel.hide();
-    loginPanel.show();
+initial.onNavigateToLogin(function (event) {
+    initial.hide();
+    login.show();
 });
 
 
 // register panel
 
-var registerPanel = new RegisterPanel(panels[1]);
-var feedbackRegisterPanel = new FeedbackPanel(panels[1].children[2]);
+var register = new Register(panels[1]);
+var feedback = new Feedback(panels[1].children[2]);
 
-registerPanel.onNavigateBack(function (event) {
-    registerPanel.resetInputs();
+register.onNavigateBack(function (event) {
+    register.resetInputs();
 
-    registerPanel.hide();
-    feedbackRegisterPanel.hide();
-    initialPanel.show();
+    register.hide();
+    feedback.hide();
+    initial.show();
 });
 
-registerPanel.onRegisterSubmit(function (name , surname , email , password) {
+register.onRegisterSubmit(function (name , surname , email , password) {
     try {
         register(name, surname, email, password);
 
-        registerPanel.resetInputs();
+        register.resetInputs();
         
-        registerPanel.hide();
-        registerSuccessPanel.show();
+        register.hide();
+        registerSuccess.show();
     } catch (error) {
-        registerPanel.showFeedback(error.message);
+        register.showFeedback(error.message);
     }
 });
 
-// successRegisterPanel
+// Register Success
 var registerSuccessPanel = new RegisterSuccessPanel(panels[2]);
 
 registerSuccessPanel.onNavigateToInit(function(event){
@@ -101,7 +101,7 @@ homePanel.onClickLogout(function(event){
 });
 
 //searchPanel
-var searchForm = new SearchPanel(panels[5].children[0]);
+var searchForm = new SearchPanel(panels[5].children[1]);
 
 searchForm.onSearchSubmit(function(query){  
     var items = getItems(query);
@@ -110,7 +110,7 @@ searchForm.onSearchSubmit(function(query){
 });
 
 //galleryPanel
-var galleryPanel = new GalleryPanel(panels[5].children[0]);
+var galleryPanel = new GalleryPanel(document.getElementsByClassName('gallery')[0]);
 
 
 
