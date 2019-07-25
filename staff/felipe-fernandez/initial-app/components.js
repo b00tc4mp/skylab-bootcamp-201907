@@ -124,15 +124,6 @@ RegisterPanel.prototype= Object.create(SubmitBackPanel.prototype);
 RegisterPanel.prototype.constructor = RegisterPanel;
 
 
-/* RegisterPanel.prototype.onNavigateBack = function (expression){
-    var registerBackLink = this.container.children[2];
-
-    registerBackLink.addEventListener('click',function(event){
-        event.preventDefault();
-        expression();
-
-    });
-}; */
 
 RegisterPanel.prototype.onSubmitRegister = function (expression) {
     var registerForm = this.container.children[0];
@@ -149,17 +140,6 @@ RegisterPanel.prototype.onSubmitRegister = function (expression) {
     }); 
 
 };
-
-/* RegisterPanel.prototype.showFeedback = function(message){
-    this.feedback.showError(message);
-    this.feedback.show();
-};
-
-RegisterPanel.prototype.show= function(){
-    this.feedback.hide();
-    Panel.prototype.show.call(this);
-} */
-
 
 // TODO RegisterSuccesPanel, LoginPanel, WelcomePanel... (FeedbackPanel?)
 
@@ -221,6 +201,7 @@ LoginPanel.prototype.onSubmitLogin = function(expression){
 
     });
 };
+
 /* 
 LoginPanel.prototype.showFeedback = function(message){
     this.feedback.showError(message);
@@ -275,3 +256,77 @@ FeedbackPanel.prototype.showError = function(error){
 
 
 
+
+
+/**
+ * Search panel abstraction
+ * 
+ * @param {HTMLElement} container 
+ */
+function SearchPanel(container){
+    Panel.call(this, container);
+
+}
+
+SearchPanel.prototype = Object.create (Panel.prototype);
+SearchPanel.prototype.constructor = SearchPanel;
+
+SearchPanel.prototype.onSubmitSearch = function(expression){
+    var searchButton = this.container.children[0];
+
+    searchButton.addEventListener('submit',function(event){
+
+        var query = event.target.search.value;
+      
+        event.preventDefault();
+        expression(query);
+    });
+}
+
+
+
+/**
+ * Show product 
+ * @param {HTMLElement} container 
+ */
+function ShowProducts(container){
+    Panel.call(this, container);
+}
+
+
+ShowProducts.prototype= Object.create(Panel.prototype);
+ShowProducts.prototype.constructor= ShowProducts;
+
+ShowProducts.prototype.showProducts = function(result){
+
+   
+    var ul = document.createElement('ul');
+    ul.classList.add('products__container');
+    var list = document.getElementsByTagName('section')[6];
+    list.innerText='';
+    list.appendChild(ul);
+
+    result.forEach(function(item) { 
+        //console.log(item.title, item.imageUrl);
+
+        var li = document.createElement('li');
+        li.classList.add('products__element');
+
+        var h3 = document.createElement('h3');
+      
+        h3.innerText = item.title;
+        h3.classList.add('products__info');
+
+        li.appendChild(h3);
+
+        var img = document.createElement('img');
+        img.classList.add('products__img');
+        
+        img.src = item.imageUrl;
+
+        li.appendChild(img);
+        ul.appendChild(li);
+
+       
+    });
+}

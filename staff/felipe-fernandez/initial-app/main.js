@@ -101,6 +101,7 @@ loginPanel.onSubmitLogin(function(email, password){
 
         loginPanel.hide();
         welcomePanel.show();
+        searchPanel.show();
 
     } catch (error){
         loginPanel.showFeedback(error.message);
@@ -115,11 +116,25 @@ var welcomePanel =  new WelcomePanel(panels[4]);
 
 welcomePanel.onClickLogout(function(){
     resetInputs(); 
-    
+   
     welcomePanel.hide();
     initialPanel.show();
+    searchPanel.hide();
+   
 
 });
 
+
+
+var searchPanel = new SearchPanel(panels[5]);
+
+
+var products = new ShowProducts(panels[6]);
+
+searchPanel.onSubmitSearch(function(query){
+
+    var results= searchApi(query); 
+    products.showProducts(results);
+});
 
 

@@ -5,18 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Source+Sans+Pro&display=swap" rel="stylesheet">
     <title>Initial-app</title>
 </head>
 <body>
     <main>
-        <h1>Initial App</h1>
+        <h1>INITIAL APP</h1>
         <!--Initial app-->
-        <section class="initial-panel panel panel--show">
+        <section class="container initial-panel panel panel--show">
             <a href="">Register</a> or
             <a href="" >Login</a>
         </section>
         <!-- register panel -->    
-        <section class="panel panel--hide">
+        <section class="container panel panel--hide">
             <form action="">
                 <label for="name">Name</label>
                 <input type="text" id="name" >
@@ -33,12 +34,12 @@
             <a class="panel__backLink" href="">Back</a>
         <!-- register success panel -->   
         </section>
-        <section class="panel panel--hide">
+        <section class="container panel panel--hide">
             Ok, register succed <a href="">login</a>
         </section>
         
            <!-- login panel -->
-        <section class="panel panel--hide">
+        <section class="container panel panel--hide">
             <form action="">
 
             <label for="email">E-mail</label>
@@ -52,10 +53,26 @@
         </section>
 
           <!-- welcome panel -->
-        <section class="panel panel--hide">
+        <section class="container panel panel--hide">
             <h2>Welcome!</h2>
             <button>Logout</button>
+            
         </section> 
+
+        <!--search bar panel-->
+        <section class="panel panel--show">
+            <form>
+                <label for="search">Search</label>
+                <input type="text" id="search">
+                <button type="submit">Send</button>
+            </form>
+        </section>
+
+        <!--product show panel-->   
+
+        <section class=" panel panel--show product">
+        
+        </section>
 
        
     </main>

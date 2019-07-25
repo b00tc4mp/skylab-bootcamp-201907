@@ -89,3 +89,15 @@ function login(email, password) {
 
     if (!user) throw new Error('Wrong credentials.');
 }
+
+function searchApi(query){
+
+        var request = new XMLHttpRequest()
+
+        request.open('get', 'http://duckling-api.herokuapp.com/api/search?q=' + query, false);
+
+        request.send();
+
+        return JSON.parse(request.responseText);
+              
+    }
