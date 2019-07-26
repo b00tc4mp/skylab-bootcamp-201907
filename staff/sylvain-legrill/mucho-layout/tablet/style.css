@@ -31,8 +31,7 @@ body{
 
 .header__nav{
     display: flex;
-    justify-content:space-between;  
-    align-items: center;
+    justify-content:space-between;
 }
 
 .header__logoimg {
@@ -98,6 +97,7 @@ list-style-type: none;  }
     align-content: stretch;
     width: 49.8%;
     height: 49.8%;
+    padding-bottom: 3px;
 
 }
 
