@@ -79,30 +79,14 @@ var logic = {
     },
 
     searchDucks: function (query, expression) {
-        var request = new XMLHttpRequest()
+        // TODO validate query, expression
 
-        request.open('get', 'http://duckling-api.herokuapp.com/api/search?q=' + query);
-
-        request.onload = function () {
-            var ducks = JSON.parse(request.responseText);
-
-            expression(ducks);
-        };
-
-        request.send();
+        call('http://duckling-api.herokuapp.com/api/search?q=' + query, expression);
     },
 
-    retrieveDuck: function(id, expression) {
-        var request = new XMLHttpRequest()
+    retrieveDuck: function (id, expression) {
+        // TODO validate id, expression
 
-        request.open('get', 'http://duckling-api.herokuapp.com/api/ducks/' + id);
-
-        request.onload = function () {
-            var duck = JSON.parse(request.responseText);
-
-            expression(duck);
-        };
-
-        request.send();
+        call('http://duckling-api.herokuapp.com/api/ducks/' + id, expression);
     }
 };
