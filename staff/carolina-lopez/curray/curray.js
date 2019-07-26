@@ -133,25 +133,6 @@ function flat(array) {
     return result;
 }
 
-/* Curray.prototype.flat = function (){
-    var depth = arguments[1];
-   depth = typeof depth === 'undefined'? 1 : depth;
-
-    var result = new Curray;
-
-    for(var i = 0; i < this.length; i++){
-        var element = this[i];
-
-            if(element instanceof Curray && depth > 0){
-                var arr = flat(element, depth -1);
-
-                for(var j = 0; j < arr.length; j++)
-                    result.push(arr[j]);
-                
-            } else result.push(element);
-    }return result;
-} */ 
-
 Curray.prototype.flat = function(depth){
 
     depth = typeof depth === 'undefined' ? 1 : depth;
@@ -174,11 +155,6 @@ Curray.prototype.flat = function(depth){
 
 Curray.prototype.lastIndexOf = function (value, io) {
 
-   /*  if(io === undefined){
-        return io = 0;
-    } else if (io){
-        return io;
-    } */
     for(var i = this.length; i >= 0; i--){
         if(this[i] === value) {
             return i;
@@ -186,20 +162,18 @@ Curray.prototype.lastIndexOf = function (value, io) {
     } return -1;
 }
 
-/* Curray.prototype.reduce = function (reducer, initialValue){
-
-    if(initialValue || initialValue === 0){
-        var accumulator = initialValue;
-        var start = 0;
-    } else {
-        var accumulator = this[0];
-        var start = 1;
-    }
-
-    for(var i = start; i < this.length; i++){
-        accumulator = reducer (accumulator, this[i])
-    } return accumulator;
-} */
+Curray.prototype.reduce = function(expresion) {
+  var value = 0;
+  for (var i = 1; i < this.length; i++) {
+      var count = i - 1
+      if (i === 1) {
+          value = expresion(this[count], this[i], i, this);
+      } else {
+          value = expresion(value, this[i], i, this);
+      }
+  }
+  return value;
+}
 
 Curray.prototype.reverse = function(){
     for(var i = 0; i <= Math.floor((this.length-1)/2); i++){

@@ -69,7 +69,7 @@ describe('Curray', function () {
     });
 
     describe('map', function() {
-        it('should map', function() {
+        it('should creates a new array with the results of calling a provided function on every element in the calling array', function() {
             var curray = new Curray(1,2,3,4);
 
             var coeficient = 10;
@@ -196,19 +196,19 @@ describe('Curray', function () {
         })
     });  
 
-    /* describe('reduce', function (){ 
-        it('should reduce', function(){
+    describe('reduce', function(){
+        it('should executes a reducer function (that you provide) on each element of the array, resulting in a single output value.' , function(){
             var curray = new Curray(1,2,3);
-
-            var result= curray.reduce();
-
+            var result = curray.reduce(function(acumulator, currentValue, index, curray) {
+                return acumulator + currentValue;
+            });
             expect(result).toBe(6);
-        })
-
-    }) */
+        });
+    
+    });
 
     describe('reverse', function(){
-        it('should', function(){
+        it('should reverses an array', function(){
             var curray = new Curray(1,2,3,4);
 
             var result = curray.reverse();
@@ -220,7 +220,7 @@ describe('Curray', function () {
     })
 
     describe('shift', function(){
-        it('should...', function(){
+        it('should removes the first element from an array and returns that removed element', function(){
             var curray = new Curray(1,2,3)
 
             var result = curray.shift();
@@ -230,7 +230,7 @@ describe('Curray', function () {
     })
 
     describe('slice', function(){
-        it('shoul...', function(){
+        it('shoul returns a shallow copy of a portion of an array into a new array', function(){
             var curray = new Curray('lala','lele','lili','lolo','lulu');
 
             var result = curray.slice(1,3);
@@ -263,17 +263,6 @@ describe('Curray', function () {
             expect(result).toBe(false);
         })
     }); 
-
-   /*  describe('sort', function (){
-
-    }) */
-
-    describe('splice', function(){
-
-    });
-
-
-
 });
 
 
