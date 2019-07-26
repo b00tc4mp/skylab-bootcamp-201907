@@ -116,11 +116,8 @@ describe('logic', function () {
                 expect(duck.imageUrl).toBeDefined();
                 expect(duck.price).toBeDefined();
                 expect(duck.link).toBeDefined();
-<<<<<<< HEAD
-=======
 
                 done();
->>>>>>> develop
             });
         });
     });
