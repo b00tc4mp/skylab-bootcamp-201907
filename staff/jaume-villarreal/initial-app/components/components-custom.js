@@ -13,8 +13,7 @@
 
     this.results = new Ducks(sections[1]);
 
-    var detail = new DuckDetail(sections[2]);
-    this.detail = detail;
+    this.detail = new DuckDetail(sections[2]);
  }
 
  DuckHome.prototype = Object.create(Component.prototype);
@@ -85,7 +84,7 @@ DuckDetail.prototype.displayDuck = function(duck){
     title.innerText = duck.title;
 
     var image = this.container.getElementsByTagName('img')[0];
-    image.innerText = duck.image;
+    image.src = duck.imageUrl;
 
     var price = this.container.getElementsByTagName('span')[0];
     price.innerText = duck.price;

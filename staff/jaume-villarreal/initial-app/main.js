@@ -102,12 +102,13 @@ home.onClickLogout(function(event){
 });
 
 home.search.onSearch(function(query){
+    home.results.show();
     logic.searchDucks(query , function(results){
         home.results.listItems(results);
     })
 });
 
-home.results.onClickItem(function(id) {
+home.results.onClickItem = (function(id) {
     logic.retrieveDuck(id, function(duck) {
         home.results.hide();
         home.detail.displayDuck(duck);

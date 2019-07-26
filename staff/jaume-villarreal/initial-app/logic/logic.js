@@ -79,12 +79,10 @@ var logic = {
     },
 
     searchDucks : function(query , expression){
-        var endPoint = 'http://duckling-api.herokuapp.com/api/search?q=';
-        call(endPoint + query , expression);
+        call('http://duckling-api.herokuapp.com/api/search?q=' + query , expression);
     },
 
     retrieveDuck: function(id, expression) {
-        var endPoint = "http://duckling-api.herokuapp.com/api/ducks/";
-        call(endPoint + id , expression);
+        call("http://duckling-api.herokuapp.com/api/ducks/" + id , expression);
     }
 };
