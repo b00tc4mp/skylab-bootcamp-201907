@@ -1,0 +1,35 @@
+.panel {
+    border: 0.5rem dotted CornflowerBlue;
+    border-radius: 1rem;
+    background-color: skyblue;
+    width: 300px;
+    height: 500px;
+  }
+
+.panel--show {
+
+}
+
+.panel--hide {
+    display: none;
+}
+
+.screenOne {
+    /* display: none; */
+}
+
+.screenTwo {
+    /* display: none; */
+}
+
+.screenThree {
+    /* display: none; */
+}
+
+.screenFour {
+    /* display: none; */
+}
+
+.screenFive {
+    /* display: none; */
+}

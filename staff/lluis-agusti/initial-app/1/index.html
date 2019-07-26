@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <h1>Initial App</h1>
+
+        <!-- initial panels[0] -->
+        <section class="panel panel--show">
+            <a href=""class="button">Register</a> or <a href=""class="button">Login</a>.
+        </section>
+
+        <!-- register panels[1] -->
+        <section class="panel panel--hide">
+            <form class="form">
+                <label for="name">Name</label>
+                <input type="text" id="name"  minlength="3" maxlength="19" placeholder="Name"><br><br>
+                <label for="surname">Surname</label>
+                <input type="text" id="surname" minlength="2" maxlength="19" placeholder="Surname"><br><br>
+                <label for="email">E-mail</label>
+                <input type="email" id="email"  minlength="5" maxlength="19" placeholder="Email"><br><br>
+                <label for="password">Password</label>
+                <input type="password" id="password" minlength="5" maxlength="19" placeholder="Password"><br><br>
+                <button class="button" type="submit">Register</button>
+            </form>
+            <p class="panel__feedback"></p>
+            <a class="button" href="">Back</a>
+        </section>
+
+        <!-- register success panels[2] -->
+        <section class="panel panel--hide">
+            Ok, registered succeeded, you can now proceed to <a href="" class="button">login</a>.
+        </section>
+
+        <!-- login panels[3] -->
+        <section class="panel panel--hide">
+            <form class="formstyle">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" minlength="5" maxlength="19" placeholder="Email"><br><br>
+                <label for="password">Password</label>
+                <input type="password" id="password"  minlength="4" maxlength="19"  placeholder="Password"><br><br>
+                <button class="button" type="submit">Login</button>
+            </form>
+            <p class="panel__feedback"></p>
+            <a class="button" href="">back</a>
+        </section>
+
+        <!-- welcome panels[4] -->
+        <section class="panel panel--hide">
+            <h2>Welcome!</h2>
+            <h2 class="userprint"></h2>
+            <a class="button" href="">back to the future</a>
+        </section>
+    </main>
+
+    <script src="curray.js"></script>
+    <script src="data.js"></script>
+    <script src="logic.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
