@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <h1>Initial App</h1>
+
+        <!-- Landing -->
+        <section class="panel show">
+            <a href="">Register</a> or <a href="">Login</a>.
+        </section>
+
+        <!-- Register -->
+        <section class="panel hide">
+            <form>
+                <label for="name">Name</label>
+                <input type="text" id="name">
+                <label for="surname">Surname</label>
+                <input type="text" id="surname">
+                <label for="email">E-mail</label>
+                <input type="email" id="email">
+                <label for="password">Password</label>
+                <input type="password" id="password">
+                <button type="submit">Register</button>
+            </form>
+            <p class="panel__feedback feedback feedback--error">A message.</p>
+            <a href="">back</a>
+        </section>
+
+        <!-- Register Success -->
+        <section class="panel hide">
+            Ok, registered succeeded, you can now proceed to <a href="">login</a>.
+        </section>
+
+        <!-- Login -->
+        <section class="panel hide">
+            <form>
+                <label for="email">E-mail</label>
+                <input type="email" id="email">
+                <label for="password">Password</label>
+                <input type="password" id="password">
+                <button type="submit">Login</button>
+            </form>
+            <p class="panel__feedback feedback feedback--error">A message.</p>
+            <a href="">back</a>
+        </section>
+
+        <!-- Home -->
+        <section class="panel _hide">
+            <h2>Welcome!</h2>
+            <button>Logout</button>
+
+            <!-- Search -->
+            <section class="panel">
+                <h3>Search</h3>
+                <form>
+                    <input type="text" name="query">
+                    <button>Search</button>
+                </form>
+                <p class="panel__feedback feedback feedback--error">A message.</p>
+            </section>
+
+            <!-- Results -->
+            <section class="panel">
+                <ul>
+                    <li>Duck 1</li>
+                    <li>Duck 2</li>
+                    <li>Duck 3</li>
+                </ul>
+            </section>
+
+            <!-- Detail -->
+            <section class="panel hide">
+                <h3>Title</h3>
+                <img src="http://whetever.com/image.jpg">
+                <span>Price</span>
+                <p>Description</p>
+                <a href="">Link</a>
+            </section>
+        </section>
+    </main>
+
+    <script src="curray.js"></script>
+    <script src="data.js"></script>
+    <script src="call.js"></script>
+    <script src="logic.js"></script>
+    <script src="components.js"></script>
+    <script src="custom-components.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
