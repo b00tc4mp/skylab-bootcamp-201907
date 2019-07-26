@@ -8,15 +8,13 @@
 function DuckHome(container) {
     Component.call(this, container);
 
-    var sections = this.container.getElementsByTagName('section');
-
-    var search = new Search(sections[0]);
+    var search = new Search(container.getElementsByClassName('search')[0]);
     this.search = search;
 
-    var results = new DuckResults(sections[1]);
+    var results = new DuckResults(container.getElementsByClassName('duck-results')[0]);
     this.results = results;
 
-    var detail = new DuckDetail(sections[2]);
+    var detail = new DuckDetail(container.getElementsByClassName('duck-detail')[0]);
     this.detail = detail;
 }
 
