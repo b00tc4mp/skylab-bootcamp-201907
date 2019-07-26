@@ -1,31 +1,4 @@
-/**
- * Component abstraction.
- * 
- * @param {HTMLElement} container 
- */
-function Component(container) {
-    if (!(container instanceof HTMLElement)) throw new TypeError(container + ' is not an HTMLElement');
-
-    this.container = container;
-}
-
-Component.prototype.show = function () {
-    this.container.classList.remove('panel--hide');
-    this.container.classList.add('panel--show');
-};
-
-Component.prototype.hide = function () {
-    this.container.classList.remove('panel--show');
-    this.container.classList.add('panel--hide');
-};
-
-Component.prototype.resetInputs = function(){
-    var inputs = this.container.getElementsByTagName("input");
-    for(var i = 0 ; i<inputs.length ; i++){
-        inputs[i].value='';
-    };
-};
-
+"use strict"
 
 /**
  * Initial  abstraction.
@@ -56,6 +29,7 @@ Initial.prototype.onNavigateToLogin = function (expression) {
         expression();
     });
 };
+"use strict"
 
 /**
  * Submit Back abstraction.
@@ -94,6 +68,8 @@ SubmitBack.prototype.show = function(){
 };
  
  
+ "use strict"
+
  /**
  * Register abstraction.
  * 
@@ -120,6 +96,8 @@ Register.prototype.onRegisterSubmit = function (expression) {
     });
 };
 
+
+"use strict"
 
 /**
  * Register Success abstraction.
@@ -150,7 +128,9 @@ Register.prototype.onRegisterSubmit = function (expression) {
     });
  }
 
- /**
+
+"use strict"
+/**
  * Feedback Panel abstraction.
  * 
  * @param {HTMLElement} container 
@@ -167,6 +147,8 @@ Register.prototype.onRegisterSubmit = function (expression) {
      this.container.innerText = message;
  };
 
+
+"use strict"
 
  /**
  * Login abstraction.
@@ -187,7 +169,9 @@ Register.prototype.onRegisterSubmit = function (expression) {
  }
 
 
-  /**
+"use strict"
+
+/**
  * Home abstraction.
  * 
  * @param {HTMLElement} container 
@@ -210,7 +194,9 @@ Home.prototype.onClickLogout = function(expression){
 };
 
 
- /**
+"use strict"
+
+/**
  * Search Panel abstraction.
  * 
  * @param {HTMLElement} container 
@@ -233,6 +219,8 @@ Search.prototype.onSearch = function(expression){
     })
 };
 
+
+"use strict"
 
 /**
  * Results Search Panel abstraction.
