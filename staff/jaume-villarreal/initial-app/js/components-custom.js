@@ -15,7 +15,6 @@
 
     var detail = new DuckDetail(sections[2]);
     this.detail = detail;
-
  }
 
  DuckHome.prototype = Object.create(Component.prototype);
@@ -60,11 +59,11 @@ Ducks.prototype.paintItem = function(li , duck){
     li.addEventListener('click', function(event) {
         event.preventDefault();
 
-        this.onItemClick(duck.id);
+        this.onClickItem(duck.id);
     }.bind(this));
 }
 
-Ducks.prototype.onItemClick = function(id){
+Ducks.prototype.onClickItem = function(id){
     console.log(id);
 }
 
@@ -80,4 +79,21 @@ function DuckDetail (container){
 
 DuckDetail.prototype = Object.create(Component.prototype);
 DuckDetail.prototype.constructor = DuckDetail;
+
+DuckDetail.prototype.displayDuck = function(duck){
+    var title = this.container.getElementsByTagName('h3')[0];
+    title.innerText = duck.title;
+
+    var image = this.container.getElementsByTagName('img')[0];
+    image.innerText = duck.image;
+
+    var price = this.container.getElementsByTagName('span')[0];
+    price.innerText = duck.price;
+
+    var description = this.container.getElementsByTagName('p')[0];
+    description.innerText = duck.description;
+    
+    var link = this.container.getElementsByTagName('a')[0];
+    link.innerText = duck.link;
+}
 

@@ -79,19 +79,12 @@ var logic = {
     },
 
     searchDucks : function(query , expression){
-        var request = new XMLHttpRequest();
-
-        request.open('get' , 'http://duckling-api.herokuapp.com/api/search?q=' + query);
-
-        request.onload = function(){
-            var ducks = JSON.parse(request.responseText);
-            expression(ducks);
-        }
-
-        request.send();
+        var endPoint = 'http://duckling-api.herokuapp.com/api/search?q=';
+        call(endPoint + query , expression);
     },
 
     retrieveDuck: function(id, expression) {
-        // TODO http://duckling-api.herokuapp.com/api/ducks/5c3853aebd1bde8520e66ed3
+        var endPoint = "http://duckling-api.herokuapp.com/api/ducks/";
+        call(endPoint + id , expression);
     }
 };

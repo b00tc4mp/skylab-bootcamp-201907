@@ -107,10 +107,10 @@ home.search.onSearch(function(query){
     })
 });
 
-// home.results.onItemClick(function(id) {
-//     logic.retrieveDuck(id, function(duck) {
-//         // TODO show DuckDetail, hide DuckResults
-//         //home.results.hide();
-//         //home.detail.describeDuck(duck);
-//         //home.detail.show();
-// });
+home.results.onClickItem(function(id) {
+    logic.retrieveDuck(id, function(duck) {
+        home.results.hide();
+        home.detail.displayDuck(duck);
+        home.detail.show();
+    })
+});
