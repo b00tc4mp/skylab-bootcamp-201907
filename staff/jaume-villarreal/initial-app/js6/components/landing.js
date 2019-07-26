@@ -9,25 +9,49 @@ function Landing(container) {
     Component.call(this, container);
 }
 
-Landing.prototype = Object.create(Component.prototype);
-Landing.prototype.constructor = Landing;
+// Landing.prototype = Object.create(Component.prototype);
+// Landing.prototype.constructor = Landing;
 
-Landing.prototype.onNavigateToRegister = function (expression) {
-    var register = this.container.children[0];
+// Landing.prototype.onNavigateToRegister = function (expression) {
+//     var register = this.container.children[0];
 
-    register.addEventListener('click', function (event) {
-        event.preventDefault();
+//     register.addEventListener('click', function (event) {
+//         event.preventDefault();
 
-        expression();
-    });
-};
+//         expression();
+//     });
+// };
 
-Landing.prototype.onNavigateToLogin = function (expression) {
-    var login = this.container.children[1];
+// Landing.prototype.onNavigateToLogin = function (expression) {
+//     var login = this.container.children[1];
 
-    login.addEventListener('click', function (event) {
-        event.preventDefault();
+//     login.addEventListener('click', function (event) {
+//         event.preventDefault();
 
-        expression();
-    });
-};
+//         expression();
+//     });
+// };
+
+class Landing extends Component{
+    constructor(container){
+        super(container)
+    }
+
+    onNavigateToRegister(expression){
+        const register = this.container.getElementsByTagName('a')[0];
+
+        login.addEventListener('click' , function(event){
+            event.preventDefault()
+            expression()
+        })
+    }
+
+    onNavigateToLogin(expression){
+        const login = this.container.getElementsByTagName('a')[1];
+
+        login.addEventListener('click' , function(event){
+            event.preventDefault()
+            expression()
+        })
+    }
+}
