@@ -2,6 +2,12 @@
     border: $width $style $color
     border-radius: $radius
 
+.show
+    display: block
+    
+.hide
+    display: none
+
 %base-panel
     padding: 0.5rem
     margin: 1.5rem
@@ -12,12 +18,6 @@
     +round-border(0.1rem, 1rem, solid, $panel-color)
     
     background-color: $panel-back-color
-
-    &--show
-        display: block
-    
-    &--hide
-        display: none
 
     &__feedback
         color: red

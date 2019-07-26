@@ -1,3 +1,11 @@
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
 .feedback, .confirm, .alert, .panel {
   padding: 0.5rem;
   margin: 1.5rem;
@@ -7,12 +15,6 @@
   border: 0.1rem solid gray;
   border-radius: 1rem;
   background-color: lightgray;
-}
-.panel--show {
-  display: block;
-}
-.panel--hide {
-  display: none;
 }
 .panel__feedback {
   color: red;
