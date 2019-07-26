@@ -93,6 +93,16 @@ var logic = {
     },
 
     retrieveDuck: function(id, expression) {
-        // TODO http://duckling-api.herokuapp.com/api/ducks/5c3853aebd1bde8520e66ed3
+        var request = new XMLHttpRequest()
+
+        request.open('get', 'http://duckling-api.herokuapp.com/api/ducks/' + id);
+
+        request.onload = function () {
+            var duck = JSON.parse(request.responseText);
+
+            expression(duck);
+        };
+
+        request.send();
     }
 };

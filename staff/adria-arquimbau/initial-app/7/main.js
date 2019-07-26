@@ -76,7 +76,7 @@ var home = new DuckHome(panels[4]);
 home.onClickLogout(function () {
     home.hide();
     landing.show();
-});
+});XMLDocument
 
 home.search.onSearch(function (query) {
     logic.searchDucks(query, function(results) {
@@ -87,8 +87,8 @@ home.search.onSearch(function (query) {
 home.results.onItemClick(function(id) {
     logic.retrieveDuck(id, function(duck) {
         // TODO show DuckDetail, hide DuckResults
-        //home.results.hide();
-        //home.detail.describeDuck(duck);
-        //home.detail.show();
+        home.results.hide();
+        home.detail.describeDuck(duck);
+        home.detail.show();
     });
 });
