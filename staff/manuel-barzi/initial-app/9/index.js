@@ -4,11 +4,9 @@
  * Presentation
  */
 
-var panels = document.getElementsByClassName('panel');
-
 // initial panel
 
-var landing = new Landing(panels[0]);
+var landing = new Landing(document.getElementsByClassName('landing')[0]);
 
 landing.onNavigateToRegister(function () {
     landing.hide();
@@ -22,7 +20,7 @@ landing.onNavigateToLogin(function () {
 
 // register panel
 
-var register = new Register(panels[1]);
+var register = new Register(document.getElementsByClassName('register')[0]);
 
 register.onNavigateBack(function () {
     register.hide();
@@ -42,7 +40,7 @@ register.onSubmitRegister(function (name, surname, email, password) {
 
 // register success panel
 
-var registerSuccess = new RegisterSuccess(panels[2]);
+var registerSuccess = new RegisterSuccess(document.getElementsByClassName('register-success')[0]);
 
 registerSuccess.onNavigateToLogin(function () {
     registerSuccess.hide();
@@ -51,7 +49,7 @@ registerSuccess.onNavigateToLogin(function () {
 
 // login panel
 
-var login = new Login(panels[3]);
+var login = new Login(document.getElementsByClassName('login')[0]);
 
 login.onNavigateBack(function () {
     login.hide();
@@ -71,7 +69,7 @@ login.onSubmitLogin(function (email, password) {
 
 // welcome panel
 
-var home = new DuckHome(panels[4]);
+var home = new DuckHome(document.getElementsByClassName('duck-home')[0]);
 
 home.onClickLogout(function () {
     home.hide();
@@ -87,6 +85,7 @@ home.onClickLogout(function () {
 home.search.onSearch(function (query) {
     logic.searchDucks(query, function(ducks) {
         home.results.listItems(ducks);
+        home.results.show();
     });
 });
 
