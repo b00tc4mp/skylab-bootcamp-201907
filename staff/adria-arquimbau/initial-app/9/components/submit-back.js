@@ -1,11 +1,42 @@
-'use strict';
-
 /**
  * Submit Back abstraction.
  * 
  * @param {HTMLElement} container 
  */
-function SubmitBack(container) {
+
+class SubmitBack extends Component {
+    constructor (container) {
+        super (container)
+        const feedback = new Feedback(this.container.children[1])
+        feedback.hide()
+        this.feedback = feedback
+    }
+
+    onNavigateBack = expression => {
+        const back = this.container.children[2]
+
+        back.addEventListener('click', event => {
+            event.preventDefault();
+    
+            expression();
+        })
+    }
+
+    showFeedback = message => {
+        this.feedback.setMessage(message)
+        this.feedback.show()
+    }
+    
+    show(){
+        this.feedback.hide()
+        //component.show(this)
+        super.show()
+    }
+}
+
+
+/* 
+ function SubmitBack(container) {
     Component.call(this, container);
 
     var feedback = new Feedback(this.container.children[1]);
@@ -37,3 +68,5 @@ SubmitBack.prototype.show = function () {
     //this.show(); // ERROR infinite recursion loop
     Component.prototype.show.call(this);
 };
+
+*/

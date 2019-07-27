@@ -1,10 +1,45 @@
-'use strict';
-
 /**
  * Ducks abstraction.
  * 
  * @param {HTMLElement} container 
  */
+
+class DuckResults extends container {
+    constructor(container) {
+        super(container)
+    }
+
+    paintItem = (li, duck) => {
+        const h3 = document.createElement('h3')
+
+        h3.innerText = duck.title
+
+        li.appendChild(h3)
+
+        const img = document.createElement('img')
+        img.src = duck.imageUrl
+
+        li.appendChild(img)
+
+        li.addEventListener('click', event => {
+            event.preventDefault()
+
+            this.onClickItem(duck.id)
+        })
+    }
+
+    onClickItem = id => {
+        console.log(id)
+    }
+}
+
+
+
+
+
+
+
+/*
 function DuckResults(container) {
     Results.call(this, container);
 }
@@ -33,4 +68,4 @@ DuckResults.prototype.paintItem = function (li, duck) {
 
 DuckResults.prototype.onClickItem = function(id) {
     console.log(id);
-};
+}; */

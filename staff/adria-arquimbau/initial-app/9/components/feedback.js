@@ -1,10 +1,22 @@
-'use strict';
-
 /**
  * Feedback abstraction.
  * 
  * @param {*} container 
  */
+
+ class Feedback extends Component {
+     constructor(container){ 
+         super(container) 
+    }
+
+    setMessage = message => { 
+         this.container.innerText = message 
+    }
+}
+
+ 
+
+/*
 function Feedback(container) {
     Component.call(this, container);
 }
@@ -14,4 +26,4 @@ Feedback.prototype.constructor = Feedback;
 
 Feedback.prototype.setMessage = function (message) {
     this.container.innerText = message;
-};
+};    */

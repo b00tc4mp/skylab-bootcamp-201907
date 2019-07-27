@@ -1,10 +1,37 @@
-'use strict';
-
 /**
  * Landing abstraction.
  * 
  * @param {HTMLElement} container 
  */
+
+class Landing extends Component {
+    constructor(container) { 
+        super(container) 
+    }
+
+    onNavigateToRegister = expression => { 
+        const register = this.container.children[0] 
+        register.addEventListener('click', event => {
+            event.preventDefault()   
+            expression()
+        })
+    }
+
+    onNavigateToLogin = expression => { 
+        const login = this.container.children[1] 
+        register.addEventListener('click', event => {
+            event.preventDefault()   
+            expression()
+        })
+    }
+
+}
+
+
+
+
+
+/*
 function Landing(container) {
     Component.call(this, container);
 }
@@ -30,4 +57,4 @@ Landing.prototype.onNavigateToLogin = function (expression) {
 
         expression();
     });
-};
+};  */
