@@ -2,23 +2,43 @@
     @extend %main-content-box
 
     margin-bottom: 2em
-    padding: 2em
-    background-color: rgba(0, 0, 0, 0.1)
-    display: flex
-    flex-direction: column
-    justify-content: center
+    padding: 5em
+    background-color: $terciary-bg-color
+
+    &__title
+        font-size: 33px
 
     &__photo
         max-width: 80%
-        margin: auto auto 1em auto
+        margin: auto
+        border-radius: 3em
 
     &__price
-        background-color: black
+        background-color: grey
         color: white
-        padding: 5px
+        margin: 2em auto 2em auto
+        border-radius: 3em
+        padding: 25px
+        width: 30%
+        align-self: center
+        font-weight: bold
 
     &__link
-        @extend %link
+        color: black
+        font-weight: bold
+        text-decoration: none 
 
     &__link:hover
-        color: pink
+        color: gray
+
+    &__back
+        @extend %link
+        margin: 1em auto 2em auto
+
+    &__back:hover
+        color: $hover-text-color
+
+    &.show
+        display: flex
+        flex-direction: column
+        align-content: center

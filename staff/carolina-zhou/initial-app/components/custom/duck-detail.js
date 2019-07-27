@@ -24,5 +24,15 @@ class DuckDetail extends Component {
         const link = this.container.getElementsByTagName('a')[0];
         link.href = duck.link;
     }
+
+    onNavigateToResults(expression) {
+        const results = document.getElementsByClassName('duck-detail__back')[0];
+
+        results.addEventListener('click', event => {
+            event.preventDefault();
+
+            expression();
+        });
+    }
 }
 

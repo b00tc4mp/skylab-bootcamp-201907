@@ -2,7 +2,7 @@
  * Presentation
  */
 
-// initial panel
+// initial 
 
 const landing = new Landing(document.getElementsByClassName('landing')[0]);
 
@@ -16,7 +16,7 @@ landing.onNavigateToLogin(() => {
     login.show();
 });
 
-// register panel
+// register 
 
 const register = new Register(document.getElementsByClassName('register')[0]);
 
@@ -36,7 +36,7 @@ register.onSubmitRegister((name, surname, email, password) => {
     }
 });
 
-// register success panel
+// register success 
 
 const registerSuccess = new RegisterSuccess(document.getElementsByClassName('register-success')[0]);
 
@@ -45,7 +45,7 @@ registerSuccess.onNavigateToLogin(() => {
     login.show();
 });
 
-// login panel
+// login 
 
 const login = new Login(document.getElementsByClassName('login')[0]);
 
@@ -65,13 +65,14 @@ login.onSubmitLogin((email, password) => {
     }
 });
 
-// welcome panel
+// home
 
 const home = new DuckHome(document.getElementsByClassName('duck-home')[0]);
 
 home.onClickLogout(() => {
     home.hide();
     landing.show();
+    home.results.hide();
 });
 
 
@@ -94,3 +95,8 @@ home.results.onClickItem = id => {
         home.detail.show();
     });
 };
+
+home.detail.onNavigateToResults(() => {
+    home.detail.hide();
+    home.results.show();
+});

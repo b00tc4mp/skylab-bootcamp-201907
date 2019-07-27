@@ -44,7 +44,7 @@
   text-align: center;
 }
 
-.duck-detail__link, .register-success__login, .register__back, .login__back {
+.duck-detail__back, .register-success__login, .register__back, .login__back {
   color: grey;
   text-decoration: none;
 }
@@ -76,7 +76,7 @@
   text-decoration: none;
 }
 .landing__register:hover, .landing__login:hover {
-  color: pink;
+  color: deeppink;
 }
 
 .login__form {
@@ -87,7 +87,7 @@
   margin-top: 2em;
 }
 .login__back:hover {
-  color: pink;
+  color: deeppink;
 }
 
 .register__form {
@@ -101,11 +101,11 @@
   font-size: 22px;
 }
 .register__back:hover {
-  color: pink;
+  color: deeppink;
 }
 
 .register-success__login:hover {
-  color: pink;
+  color: deeppink;
 }
 
 .feedback {
@@ -150,28 +150,51 @@
   padding: 10px;
 }
 .duck-results__image {
-  max-width: 300px;
+  max-width: 80%;
+  border-radius: 2em;
 }
 
 .duck-detail {
   margin-bottom: 2em;
-  padding: 2em;
+  padding: 5em;
   background-color: rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+}
+.duck-detail__title {
+  font-size: 33px;
 }
 .duck-detail__photo {
   max-width: 80%;
-  margin: auto auto 1em auto;
+  margin: auto;
+  border-radius: 3em;
 }
 .duck-detail__price {
-  background-color: black;
+  background-color: grey;
   color: white;
-  padding: 5px;
+  margin: 2em auto 2em auto;
+  border-radius: 3em;
+  padding: 25px;
+  width: 30%;
+  align-self: center;
+  font-weight: bold;
+}
+.duck-detail__link {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
 }
 .duck-detail__link:hover {
-  color: pink;
+  color: gray;
+}
+.duck-detail__back {
+  margin: 1em auto 2em auto;
+}
+.duck-detail__back:hover {
+  color: deeppink;
+}
+.duck-detail.show {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
 }
 
 /*# sourceMappingURL=index.css.map */
