@@ -1,0 +1,24 @@
+.duck-detail
+    @extend %main-content-box
+
+    margin-bottom: 2em
+    padding: 2em
+    background-color: rgba(0, 0, 0, 0.1)
+    display: flex
+    flex-direction: column
+    justify-content: center
+
+    &__photo
+        max-width: 80%
+        margin: auto auto 1em auto
+
+    &__price
+        background-color: black
+        color: white
+        padding: 5px
+
+    &__link
+        @extend %link
+
+    &__link:hover
+        color: pink

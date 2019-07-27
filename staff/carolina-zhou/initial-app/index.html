@@ -1,138 +1,140 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="---">
-    <meta name="keywords" content="---">
+    <meta name="description" content="Application to search for cute rubber ducks">
+    <meta name="keywords" content="application, ducks, rubber ducks, toys, skylab">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Initial-App</title>
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Cousine" rel="stylesheet">
+    <link rel="stylesheet" href="style/index.css">
 </head>
 
 <body class="body">
-  <header class="body__header">
-    <p>Initial-App a.k.a Useless-App</p>
-  </header>
-
-  <main class="body__main">
-    <!-- Initial -->
-    <section class="panel panel--show">
-      <div class="intro">
-        <h1 class="intro__title">Hello!</h1>
-        <p><a class="intro__register" href="">Register</a> or <a class="intro__login" href="">Login</a></p>
-      </div>
-    </section>
-
-    <!-- Register Process -->
-    <section class="panel panel--hide">
-      <div  class="register">
-        <form>
-            <ul class="register__form">
-                <li class="register__item">
-                    <label class="register__label" for="name">Name</label>
-                    <input class="register__input" id="name" name="name" type="text">
-                </li>
-                <li class="register__item">
-                    <label class="register__label" for="surname">Surname</label>
-                    <input class="register__input" id="surname" name="surname" type="text" >
-                </li>
-                <li class="register__item">
-                    <label class="register__label" for="email">E-mail</label>
-                    <input class="register__input" id="email" name="email" type="text" >
-                </li>
-                <li class="register__item">
-                    <label class="register__label" for="password">Password</label>
-                    <input class="register__input" id="password" name="password" type="text" >
-                </li>                
-                <li class="register__item">
-                    <button class="register__button" type="submit" value="submit">Register</button>
-                </li>                
-            </ul>
-        </form>
-        <!-- <p class="register__feedback feedback feedback--error">A message.</p> -->
-        <a class="register__back" href="">go back</a>
-      </div>
-    </section>
-
-    <!-- Register Success -->
-    <section class="panel panel--hide">
-        <div class="confirmation">
-            <p>The registration was successful! Enter password to login.</p>
-            <form>
-                <label class="confirmation__label" for="finalPass">Password:</label>
-                <input class="confirmation__input" id="finalPass" name="password" type="textarea">
-
-                <button class="confirmation__button" type="submit" value="submit">Login</button>
-            </form>
-            <!-- <p class="confirmation__feedback feedback feedback--error">A message.</p> -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Login -->
-    <section class="panel panel--hide">
-      <div class="login">
-        <form>
-            <ul class="login__form">
-                <li class="login__item">
-                    <label class="login__label" for="userEmail">E-mail</label>
-                    <input class="login__input" id="userEmail" name="email" type="text">
-                </li>
-                <li class="login__item">
-                    <label class="login__label" for="userPassword">Password</label>
-                    <input class="login__input" id="userPassword" name="userPassword" type="text">
-                </li>                
-                <li class="login__item">
-                    <button class="login__button" type="submit" value="submit">Login</button>
-                </li>                
-            </ul>
-        </form>
-        <!-- <p class="login__feedback feedback feedback--error">A message.</p> -->
-        <a class="login__back" href="">go back</a>
-      </div>
-    </section>
-
-    <!-- Home -->
-    <section class="panel panel--hide">
-      <div class="home">
-        <h1>Welcome!</h1>
-        <form class="home__form">
-          <label class="home__label" for="search">Search</label>
-          <input class="home__input" id="search" name="search" type="text" placeholder="Search..." >
-          <button class="home__button" type="submit" value="submit">Search!</button>
-        </form>
-        <buttton class="home__logout">Log out</button>
-      </div>
-    </section>
-
-    <!-- Error -->
-    <section class="panel panel--hide">
-        <div class="error">
-          <p class="error__title">Error</p>
-          <p class="error__message"></p>
-        </div>
-    </section> 
+    <header class="body__header">
+        <h1>Initial-App</h1>
+        <p>(a.k.a Patito-App)</p>
+    </header>
     
-    <!-- Search -->
-    <section class="panel panel--hide">
-      <div class="search">
-        <ul class="search__duck"></ul>
-      </div>
-    </section>  
-  </main>
+    <main class="body__main">
 
-  <footer class="body__footer">
-    <p>Skylab Coders Academy ❤ Carolina Zhou Lin</p>
-  </footer>
+        <!-- Landing -->
+        <section class="landing show">
+            <h2 class="landing__title">Hello!</h2>
+            <a class="landing__register" href="">Register</a> or <a class="landing__login" href="">Login</a>
+        </section>
 
-  <script src="curray.js"></script>
-  <script src="data.js"></script>
-  <script src="logic.js"></script>
-  <script src="components.js"></script>
-  <script src="main.js"></script>
+        <!-- Register -->
+        <section class="register hide">
+            <form>
+                <ul class="register__form">
+                    <li class="register__item">
+                        <label class="register__label" for="name">Name</label>
+                        <input class="register__input" id="name" name="name" type="text">
+                    </li>
+                    <li class="register__item">
+                        <label class="register__label" for="surname">Surname</label>
+                        <input class="register__input" id="surname" name="surname" type="text" >
+                    </li>
+                    <li class="register__item">
+                        <label class="register__label" for="email">E-mail</label>
+                        <input class="register__input" id="email" name="email" type="text" >
+                    </li>
+                    <li class="register__item">
+                        <label class="register__label" for="password">Password</label>
+                        <input class="register__input" id="password" name="password" type="text" >
+                    </li>                
+                    <li class="register__item">
+                        <button class="register__button" type="submit" value="submit">Register</button>
+                    </li>                
+                </ul>
+            </form>
+            <p class="panel__feedback feedback feedback--error">A message.</p>
+            <a class="register__back" href="">go back</a>
+        </section>
+
+        <!-- Register Success -->
+        <section class="register-success hide">
+            <p>The registration was successful! You can now proceed to <a  class="register-success__login"  href="">login</a></p>
+        </section>
+
+        <!-- Login -->
+        <section class="login hide">
+            <form>
+                <ul class="login__form">
+                    <li class="login__item">
+                        <label class="login__label" for="userEmail">E-mail</label>
+                        <input class="login__input" id="userEmail" name="email" type="text">
+                    </li>
+                    <li class="login__item">
+                        <label class="login__label" for="userPassword">Password</label>
+                        <input class="login__input" id="userPassword" name="userPassword" type="text">
+                    </li>                
+                    <li class="login__item">
+                        <button class="login__button" type="submit" value="submit">Login</button>
+                    </li>                
+                </ul>
+            </form>
+            <p class="panel__feedback feedback feedback--error">A message.</p>
+            <a class="login__back" href="">go back</a>
+        </section>
+
+        <!-- Home -->
+        <section class="duck-home hide">
+            <h2>Welcome!</h2>
+            <button class="duck-home__logout">Logout</button>
+
+            <!-- Search -->
+            <section class="search">
+                <h3>Search</h3>
+                <form class="search__form">
+                    <label class="search__label" for="search">Search</label>
+                    <input class="search__input" id="search" name="search" type="text" placeholder="Patito, patito..." >
+                    <button class="search__button" type="submit" value="submit">Go!</button>
+                </form>
+                <p class="panel__feedback feedback feedback--error hide">A message.</p>
+            </section>
+
+            <!-- Results -->
+            <section class="duck-results hide">
+                <ul class="duck-results__list">
+                </ul>
+            </section>
+
+            <!-- Detail -->
+            <section class="duck-detail hide">
+                <h3>Title</h3>
+                <img class="duck-detail__photo" src="">
+                <span class="duck-detail__price">Price</span>
+                <p>Description</p>
+                <a class="duck-detail__link" href="">Link</a>
+            </section>
+        </section>
+    </main>
+
+    <footer class="body__footer">
+        <p>Skylab Coders Academy ❤ Carolina Zhou Lin</p>
+    </footer>
+
+    <script src="utils/call.js"></script>
+    <script src="utils/curray.js"></script>
+    <script src="data/index.js"></script>
+    <script src="logic/index.js"></script>
+    <script src="components/component.js"></script>
+    <script src="components/landing.js"></script>
+    <script src="components/submit-back.js"></script>
+    <script src="components/register.js"></script>
+    <script src="components/register-success.js"></script>
+    <script src="components/login.js"></script>
+    <script src="components/feedback.js"></script>
+    <script src="components/search.js"></script>
+    <script src="components/results.js"></script>
+    <script src="components/custom/duck-home.js"></script>
+    <script src="components/custom/duck-results.js"></script>
+    <script src="components/custom/duck-detail.js"></script>
+    <script src="index.js"></script>
 </body>
 
 </html>

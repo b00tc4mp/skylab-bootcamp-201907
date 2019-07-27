@@ -1,0 +1,33 @@
+@mixin header-footer-style
+    background-color: $primary-bg-color
+    color: $secondary-text-color
+    padding: 15px
+    text-align: center
+
+.body
+    background-image: url("https://images.pexels.com/photos/988872/pexels-photo-988872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260")
+    background-repeat: no-repeat
+    background-size: cover
+    box-sizing: border-box
+    margin: auto
+    font-family: "Cousine", sans-serif
+    font-size: 22px
+    &__header
+        @include header-footer-style
+
+    &__main
+        margin: 3em auto 5em auto
+        min-height: 100vh
+
+    &__footer
+        @include header-footer-style
+
+        width: 100%
+        font-size: 14px
+        margin-top: -50px
+    
+.show
+    display: block
+    
+.hide
+    display: none

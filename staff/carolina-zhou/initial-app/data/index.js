@@ -1,10 +1,8 @@
-'use strict';
-
 /**
  * Data
  */
 
-var users = new Curray();
+const users = new Curray();
 users.push({
     email: "carol.z.lin.95@gmail.com",
     name: "Carolina",
