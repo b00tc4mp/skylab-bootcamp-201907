@@ -23,6 +23,7 @@ landing.onNavigateToLogin(function () {
 var register = new Register(document.getElementsByClassName('register')[0]);
 
 register.onNavigateBack(function () {
+    register.resetForm();
     register.hide();
     landing.show();
 });
@@ -32,6 +33,7 @@ register.onSubmitRegister(function (name, surname, email, password) {
         logic.register(name, surname, email, password);
 
         register.hide();
+        register.resetForm();
         registerSuccess.show();
     } catch (error) {
         register.showFeedback(error.message);
@@ -52,6 +54,7 @@ registerSuccess.onNavigateToLogin(function () {
 var login = new Login(document.getElementsByClassName('login')[0]);
 
 login.onNavigateBack(function () {
+    login.resetForm();
     login.hide();
     landing.show();
 });
@@ -61,6 +64,7 @@ login.onSubmitLogin(function (email, password) {
         logic.login(email, password);
 
         login.hide();
+        login.resetForm();
         home.show();
     } catch (error) {
         login.showFeedback(error.message);
@@ -83,10 +87,15 @@ home.onClickLogout(function () {
 // };
 
 home.search.onSearch(function (query) {
-    logic.searchDucks(query, function(ducks) {
-        home.results.listItems(ducks);
-        home.results.show();
-    });
+    logic.searchDucks(query, function(ducks){
+        try{
+            home.results.listItems(ducks);
+            home.results.show();
+        }
+        catch(error){
+            home.search.showFeedback(error.message)
+        }
+    })
 });
 
 home.results.onClickItem = function(id) {
@@ -96,3 +105,8 @@ home.results.onClickItem = function(id) {
         home.detail.show();
     });
 };
+
+home.detail.onNavigateToResults(function(){
+    home.detail.hide();
+    home.results.show();
+})

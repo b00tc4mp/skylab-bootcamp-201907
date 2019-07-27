@@ -1,14 +1,12 @@
-'use strict';
-
 /**
  * Business Logic
  */
 
-var EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-var logic = {
-    register: function (name, surname, email, password) {
-        var errors = '';
+const logic = {
+    register: (name, surname, email, password) => {
+        let errors = '';
 
         if (!name.trim()) {
             errors += 'Name is empty or blank.';
@@ -39,9 +37,7 @@ var logic = {
         if (errors)
             throw new Error(errors);
         else {
-            var user = users.find(function (user) {
-                return user.email === email;
-            });
+            const user = users.find(user => user.email === email);
 
             if (user) throw new Error('E-mail is already registered.');
 
@@ -54,8 +50,8 @@ var logic = {
         }
     },
 
-    login: function (email, password) {
-        var errors = '';
+    login: (email, password) => {
+        let errors = '';
 
         if (!email.trim()) {
             errors += 'E-mail is empty or blank.';
@@ -71,22 +67,29 @@ var logic = {
 
         if (errors) throw new Error(errors);
 
-        var user = users.find(function (user) {
-            return user.email === email && user.password === password;
-        });
+        var user = users.find(user => user.email === email && user.password === password);
 
         if (!user) throw new Error('Wrong credentials.');
     },
 
     searchDucks: function (query, expression) {
-        // TODO validate query, expression
+        if(!arguments.length) throw new Error('expected 0 arguments')
+        
+        if(arguments.length === 1) throw new TypeError('expected expression in arguments[1]')
 
+        if(!(arguments[1] instanceof Function)) throw new TypeError('undefined is not a function')
+        
         call('http://duckling-api.herokuapp.com/api/search?q=' + query, expression);
     },
 
     retrieveDuck: function (id, expression) {
         // TODO validate id, expression
+        if(!arguments.length) throw new Error('expected 0 arguments')
+        
+        if(arguments.length === 1) throw new TypeError('expected expression in arguments[1]')
 
+        if(!(arguments[1] instanceof Function)) throw new TypeError('undefined is not a function')
+        
         call('http://duckling-api.herokuapp.com/api/ducks/' + id, expression);
     }
 };
