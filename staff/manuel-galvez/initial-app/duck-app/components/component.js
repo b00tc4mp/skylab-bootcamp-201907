@@ -12,6 +12,10 @@ class Component {
     show() {
         this.container.classList.remove('hide')
         this.container.classList.add('show')
+        // Clear inputs if exist
+        document.querySelectorAll('input').forEach(input => {
+            input.value = ''
+        })
     }
     hide() {
         this.container.classList.remove('show')

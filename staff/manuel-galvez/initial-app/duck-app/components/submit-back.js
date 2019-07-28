@@ -5,7 +5,7 @@
  *
  */
 
-class SubmitBack extends Component {
+class SubmitBack extends FeedbackAttached {
 	constructor(container) {
 		super(container)
 	}

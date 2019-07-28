@@ -1,6 +1,12 @@
+/**
+ * 
+ * Duck App
+ * Presentation
+ * 
+ */
+
 /** Landing */
 const landing = new Landing(document.querySelector(".landing"))
-
 landing.onNavigateToRegister(() => {
 	landing.hide()
 	register.show()
@@ -24,9 +30,8 @@ register.onSubmitRegister((name, surname, email, password) => {
 		logic.register(name, surname, email, password)
 		register.hide()
 		registerSuccess.show()
-		console.log(users)
 	} catch (error) {
-		console.log("Register error")
+		register.showFeedback(error.message)
 	}
 })
 
@@ -44,7 +49,7 @@ login.onSubmitLogin((email, password) => {
 		login.hide()
 		home.show()
 	} catch (error) {
-		console.log("Login error")
+		login.showFeedback(error.message)
 	}
 })
 
@@ -63,3 +68,11 @@ home.onLogout(() => {
 	home.hide()
 	landing.show()
 })
+
+const search = new Search(document.querySelector(".search"))
+search.onSearch(query => {
+	logic.searchDucks(query, ducks => {
+		
+	})
+})
+
