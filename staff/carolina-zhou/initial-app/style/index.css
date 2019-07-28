@@ -148,10 +148,30 @@
 .duck-results__item {
   margin: 2em;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .duck-results__image {
-  max-width: 80%;
+  max-width: 300px;
   border-radius: 2em;
+}
+.duck-results__favorites {
+  background-color: grey;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 1em;
+  max-width: 70%;
+}
+.duck-results__favorites:hover {
+  background-color: deeppink;
+}
+.duck-results__favorites:active {
+  background-color: black;
+  color: white;
 }
 
 .duck-detail {

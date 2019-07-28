@@ -15,6 +15,10 @@ class DuckHome extends Component {
 
         let detail = new DuckDetail(container.getElementsByClassName('duck-detail')[0]);
         this.detail = detail;
+
+        const feedback = new Feedback(container.getElementsByClassName('feedback')[0]);
+        feedback.hide();
+        this.feedback = feedback;
     }
 
     onClickLogout(expression) {
@@ -25,5 +29,10 @@ class DuckHome extends Component {
 
             expression();
         });
+    }
+
+    showFeedback = message => {
+        this.feedback.setMessage(message);
+        this.feedback.show();
     }
 }

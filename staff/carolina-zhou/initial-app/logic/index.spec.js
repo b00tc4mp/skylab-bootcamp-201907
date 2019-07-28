@@ -1,6 +1,6 @@
 describe('logic', () => {
     beforeEach(() => {
-        users = new Curray();
+        const users = new Curray();
     });
 
     describe('register', () => {

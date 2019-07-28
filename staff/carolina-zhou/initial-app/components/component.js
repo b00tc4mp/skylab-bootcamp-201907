@@ -19,4 +19,12 @@ class Component {
         this.container.classList.remove('show');
         this.container.classList.add('hide');
     }
+
+    clearInputs() {
+        let inputs = document.getElementsByTagName("input");
+
+        for (let i = 0; i < inputs.length; i++) {
+            inputs[i].value = "";
+        }
+    }
 }

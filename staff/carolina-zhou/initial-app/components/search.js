@@ -14,7 +14,7 @@ class Search extends Component {
         form.addEventListener('submit', event => {
             event.preventDefault();
 
-            let query = form.search.value;
+            let query = form.query.value;
 
             expression(query);
         });

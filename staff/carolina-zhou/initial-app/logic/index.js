@@ -47,7 +47,8 @@ const logic = {
                 name: name,
                 surname: surname,
                 email: email,
-                password: password
+                password: password,
+                favorites: []
             });
         }
     },
@@ -77,7 +78,13 @@ const logic = {
     },
 
     searchDucks: function (query, expression) {
-        // TODO validate query, expression
+        let errors = '';
+
+        if (!query.trim()) {
+            errors += 'Search is empty or blank.';
+        }
+
+        if (errors) throw new Error(errors);
 
         call('http://duckling-api.herokuapp.com/api/search?q=' + query, expression);
     },

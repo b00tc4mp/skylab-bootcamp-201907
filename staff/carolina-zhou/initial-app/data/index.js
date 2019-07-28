@@ -2,10 +2,11 @@
  * Data
  */
 
-const users = new Curray();
+let users = new Curray();
 users.push({
     email: "carol.z.lin.95@gmail.com",
     name: "Carolina",
     password: "123456",
-    surname: "Zhou"
+    surname: "Zhou",
+    favorites: []
 }); 

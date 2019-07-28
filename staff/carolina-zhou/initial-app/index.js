@@ -22,6 +22,7 @@ const register = new Register(document.getElementsByClassName('register')[0]);
 
 register.onNavigateBack(() => {
     register.hide();
+    register.clearInputs();
     landing.show();
 });
 
@@ -30,6 +31,7 @@ register.onSubmitRegister((name, surname, email, password) => {
         logic.register(name, surname, email, password);
 
         register.hide();
+        register.clearInputs();
         registerSuccess.show();
     } catch (error) {
         register.showFeedback(error.message);
@@ -42,6 +44,7 @@ const registerSuccess = new RegisterSuccess(document.getElementsByClassName('reg
 
 registerSuccess.onNavigateToLogin(() => {
     registerSuccess.hide();
+    registerSuccess.clearInputs();
     login.show();
 });
 
@@ -51,14 +54,16 @@ const login = new Login(document.getElementsByClassName('login')[0]);
 
 login.onNavigateBack(() => {
     login.hide();
+    login.clearInputs();
     landing.show();
 });
 
 login.onSubmitLogin((email, password) => {
     try {
         logic.login(email, password);
-
+        
         login.hide();
+        login.clearInputs();
         home.show();
     } catch (error) {
         login.showFeedback(error.message);
@@ -70,9 +75,12 @@ login.onSubmitLogin((email, password) => {
 const home = new DuckHome(document.getElementsByClassName('duck-home')[0]);
 
 home.onClickLogout(() => {
+
     home.hide();
     landing.show();
     home.results.hide();
+    home.results.clearInputs();
+    home.feedback.hide();
 });
 
 
@@ -82,10 +90,19 @@ home.onClickLogout(() => {
 // };
 
 home.search.onSearch(query => {
-    logic.searchDucks(query, ducks => {
-        home.results.listItems(ducks);
-        home.results.show();
-    });
+    try {
+        logic.searchDucks(query, ducks => {
+            try {
+                home.results.listItems(ducks);
+                home.results.show();
+            } catch (error) {
+                home.showFeedback(error.message);
+            }
+        });
+        home.feedback.hide();
+    } catch (error) {
+        home.showFeedback(error.message);
+    }
 });
 
 home.results.onClickItem = id => {
@@ -93,6 +110,12 @@ home.results.onClickItem = id => {
         home.results.hide();
         home.detail.displayDuck(duck);
         home.detail.show();
+    });
+};
+
+home.results.addToFavorites = id => {
+    logic.retrieveDuck(id, duck => {
+        users.push(duck);
     });
 };
 
