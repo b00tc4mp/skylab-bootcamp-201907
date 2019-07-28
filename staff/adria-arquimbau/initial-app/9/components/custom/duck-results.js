@@ -4,7 +4,7 @@
  * @param {HTMLElement} container 
  */
 
-class DuckResults extends container {
+class DuckResults extends Component {
     constructor(container) {
         super(container)
     }

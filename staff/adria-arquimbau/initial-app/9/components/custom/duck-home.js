@@ -4,7 +4,7 @@
  * @param {HTMLElement} container 
  */
 
-class DuckHome extends container {
+class DuckHome extends Component {
     constructor(container) {
         super(container)
 

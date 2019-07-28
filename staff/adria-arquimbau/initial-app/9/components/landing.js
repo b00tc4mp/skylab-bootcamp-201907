@@ -19,7 +19,7 @@ class Landing extends Component {
 
     onNavigateToLogin = expression => { 
         const login = this.container.children[1] 
-        register.addEventListener('click', event => {
+        login.addEventListener('click', event => {
             event.preventDefault()   
             expression()
         })

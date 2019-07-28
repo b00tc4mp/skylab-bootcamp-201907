@@ -5,7 +5,7 @@
  */
 
 class Register extends SubmitBack {
-    constructor(this, container) {
+    constructor(container) {
         super(container)
     }
 

@@ -6,7 +6,7 @@
  */
 
 class Results extends Component {
-    constructor (this, contain) {
+    constructor (contain) {
         super(container)
     }
 

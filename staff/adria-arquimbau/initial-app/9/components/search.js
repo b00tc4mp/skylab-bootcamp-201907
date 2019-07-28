@@ -5,7 +5,7 @@
  */
 
  class Search extends Component {
-    constructor(this, container){
+    constructor(container){
         super(container)
     }
 

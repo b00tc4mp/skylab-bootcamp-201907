@@ -1,8 +1,11 @@
-
 /**
  * Presentation
  */
 
+//INITIAL PANEL
+
+
+            
 // initial panel
 
 var landing = new Landing(document.getElementsByClassName('landing')[0]);
