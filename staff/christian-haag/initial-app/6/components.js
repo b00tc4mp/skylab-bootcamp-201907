@@ -207,9 +207,8 @@ Search.prototype.onSearch = function (expression) {
     form.addEventListener('submit', function (event) {
         event.preventDefault();
 
-
         var query = form.query.value;
-        console.log(query)
+
         expression(query);
     });
 };
@@ -233,19 +232,16 @@ Results.prototype.constructor = Results
 
 
 Results.prototype.listItems = function (items) {
-    var div = this.container.getElementsByTagName('div')[0];
-    div.innerHTML = "";
+    var ul = this.container.getElementsByTagName('ul')[0];
+    ul.innerHTML = "";
 
     items.forEach(function (item) {
-        var ul = document.createElement('ul');
-        div.appendChild(ul);
-
         var li = document.createElement('li')
         ul.appendChild(li);
 
-        this.paintItem(li, item);
+        this.paintItem(li, item)
 
-    }.bind(this));
+    }.bind(this))
 };
 
 Results.prototype.paintItem = function (li, item) {

@@ -6,22 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/index.css">
 </head>
 
 <body>
 
     <main>
-        <h1>Initial App</h1>
+        <h1>Duck Store</h1>
 
         <!-- Landing -->
-        <section class="panel show">
+        <section class="landing show">
             <div class="link"><a class="button--a" href="">Register</a> or <a class="button--a" href="">Login</a>
             </div>
         </section>
 
         <!-- REgister -->
-        <section class="panel hide">
+        <section class="register hide">
             <form>
                 <label for="name">Name*</label>
                 <input type="text" id="name">
@@ -38,12 +38,12 @@
         </section>
 
         <!-- Register Succes -->
-        <section class="panel hide">
+        <section class="register-success hide">
             <p class="text"> Ok, registered succeeded, you can now proceed to <a href="">login</a>.</p>
         </section>
 
         <!-- Login -->
-        <section class="panel hide">
+        <section class="login hide">
             <form>
                 <label for="email">E-mail*</label>
                 <input type="email" id="email">
@@ -56,7 +56,7 @@
         </section>
 
         <!-- Home -->
-        <section class="panel hide">
+        <section class="home hide">
             <h2>Welcome!</h2>
 
             <!-- Search -->
@@ -76,23 +76,31 @@
             </div>
         </section>
 
-        <!-- Results -->
-        <section class="panel product hide">
-            <ul class="img-panel">
-                <!--dynamic Js load--->
-            </ul>
+        <!-- Product Panel -->
+        <section class="product-panel hide">
+            <!-- Results -->
+            <section class="product hide">
+                <ul class="img-panel">
+                    <!--dynamic Js load--->
+                </ul>
+            </section>
+            <!-- Details -->
+            <section class="duck-list hide">
+                <h3></h3>
+                <img class="duck-detail__photo">
+                <p class="duck-detail__price"></p>
+                <p class="duck-detail__description"></p>
+                <a class="duck-detail__link">+info</a>
+            </section>
+
         </section>
-
-        <!-- Details -->
-        <section class="panel"></section>
-
-        </section>
-
     </main>
+
+    <script src="calls.js"></script>
     <script src="curray.js"></script>
     <script src="data.js"></script>
-    <script src="components.js"></script>
     <script src="logic.js"></script>
+    <script src="components.js"></script>
     <script src="custom-components.js"></script>
     <script src="main.js"></script>
 </body>

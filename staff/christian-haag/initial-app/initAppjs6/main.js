@@ -4,40 +4,37 @@
  */
 
 
+let panels = (className, index) => document.getElementsByClassName(className)[index];
 
-var panels = document.getElementsByClassName('panel')
 
-//--------------------------------------------------------
 //initial-panel
-var landing = new Landing(panels[0])
+let landing = new Landing(panels('landing', 0))
 
 
-//------------------------
+
 landing.onNavigateToRegister(function () {
-    //resetFormAlerts();
+
+    logic.resetFormAlerts();
     landing.hide();
     register.show();
 });
-//------------------------
+
 landing.onNavigateToLogin(function () {
 
-    //resetFormAlerts();
-
+    logic.resetFormAlerts();
     landing.hide();
     login.show();
 
 });
-//---------------------------------------------------------
+
 //register Panel
 
-var register = new Register(panels[1])
+let register = new Register(panels('register', 0))
 
 register.onNavigateBack(function () {
     register.hide();
     landing.show();
 });
-
-//--------------------
 
 register.onSubmitRegister(function (name, surname, email, password) {
 
@@ -52,21 +49,21 @@ register.onSubmitRegister(function (name, surname, email, password) {
     }
 
 });
-//----------------------------------------------------------
+
 // register sucess panel
 
-var registerSuccessPanel = new RegisterSuccess(panels[2])
+let registerSuccessPanel = new RegisterSuccess(panels('register-success', 0))
 
 registerSuccessPanel.onNavigateToLogin(function () {
     registerSuccessPanel.hide()
     login.show();
 
 });
-// //---------------------------------------------------------
+
 // // login panel
 
-var login = new Login(panels[3])
-//var loginForm = loginPanel.container.children[0];
+let login = new Login(panels('login', 0))
+
 login.onNavigateBack(function () {
     login.hide()
     landing.show();
@@ -84,28 +81,30 @@ login.onSubmitLogin(function (email, password) {
     }
 });
 // //-----------------------------
-var home = new DuckHome(panels[4]);
-var resultPanel = new ResultPanel(panels[5]);
+let home = new DuckHome(panels('home', 0));
+let resultPanel = new ResultPanel(panels('product-panel', 0));
 
 home.onClickLogout(function () {
     home.hide();
+    logic.hideSection(resultPanel);
     landing.show();
 })
 
 home.search.onSearch(function (query) {
+
     logic.searchDucks(query, function (results) {
         resultPanel.result.listItems(results);
+        resultPanel.show()
+        resultPanel.result.show()
     });
-    resultPanel.show()
 });
 
-// home.refreshProducts(function () {
-//     productPanel.hide();
-// })
 
+resultPanel.result.onClickItem(id => {
+    logic.searchDuckDetails(id, function (duck) {
+        resultPanel.detail.displayDuck(duck);
+        resultPanel.result.hide();
+        resultPanel.detail.show();
+    });
 
-
-// productPanel.hideOnLogOut(function () {
-//     productPanel.hide();
-//     landing.show();
-// })
+})
