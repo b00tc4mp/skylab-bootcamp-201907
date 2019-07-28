@@ -1,68 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Initial App</title>
+    <link rel='stylesheet' href='styles/index.css'>
 </head>
-
 <body>
     <main>
         <h1>Initial App</h1>
-
-        <!-- initial panel -->
-        <section class="panel panel--show">
-            <a href="">Register</a> or <a href="">Login</a>.
+       
+       <!-- home page -->
+        <section class='home show'>
+            <a href='' class='enrollButton'>Enroll</a> or <a href='' class='signInButton'>Sign in</a>
         </section>
 
-        <!-- register panel -->
-        <section class="panel panel--hide">
+        <!-- enroll -->
+        <section class='enroll hide'>
             <form>
-                <label for="name">Name</label>
-                <input type="text">
-                <label for="surname">Surname</label>
-                <input type="text" id="surname">
-                <label for="email">E-mail</label>
-                <input type="email" id="email">
-                <label for="password">Password</label>
-                <input type="password" id="password">
-                <button type="submit">Register</button>
+                <label for='name'>Name</label>
+                <input type='text' id='name'>
+                <label for='lastName'>Last Name</label>
+                <input type='text' id='lastName'>
+                <label for='email'>E-mail</label>
+                <input type='text' id='email'>
+                <label for='pass'>Pass</label>
+                <input type='text' id='password'>
+                <button type='submit'class='enroll'>Enroll</button>
             </form>
+        </section>
+
+        <!-- enroll success -->
+        <section class='enrollSuccess hide'>
+            <h2>Thank you for enrolling!</h2>
+            <p>You can now procced to <a href=''>Sign in</a></p>
             
-            <a href="">back</a>
-            <h2 class="mailFail"></h2>
         </section>
 
-        <!-- register success panel -->
-        <section class="panel panel--hide">
-            Ok, registered succeeded, you can now proceed to <a href="">login</a>.
-        </section>
-
-        <!-- login panel -->
-        <section class="panel panel--hide">
+        <!-- sign in -->
+        <section class='signIn hide'>
             <form>
-                <label for="email">E-mail</label>
-                <input type="email" id="email">
-                <label for="password">Password</label>
-                <input type="password" id="password">
-                <button type="submit">Login</button>
+                <label for=email>E-mail</label>
+                <input type='text' id='email'>
+                <label for='pass'>Pass</label>
+                <input type='text' id='pass'>
+                <button type='submit' class='signIn'>Sign in</button>
             </form>
-            <a href="">back</a>
         </section>
 
-        <!-- welcome panel -->
-        <section class="panel panel--hide">
-            <h2>Welcome</h2>
-            <h2 id='user'></h2>
+        <!-- landing -->
+        <section class='landing hide'>
+            <h2>Welcome user!</h2>
         </section>
     </main>
-
-    <script src="main.js"></script>
-    <script src="data.js"></script>
     <script src="logic.js"></script>
-</body>
+    <!-- <script src="utils/call.js"></script> -->
+    <!-- <script src="utils/curray.js"></script> -->
+    <!-- <script src="data/index.js"></script> -->
+    <!-- <script src="logic/index.js"></script> -->
+    <script src="components/index.js"></script>
+    <!-- <script src="components/landing.js"></script> -->
+    <!-- <script src="components/submit-back.js"></script> -->
+    <!-- <script src="components/register.js"></script> -->
+    <!-- <script src="components/register-success.js"></script> -->
+    <!-- <script src="components/login.js"></script> -->
+    <!-- <script src="components/feedback.js"></script> -->
+    <!-- <script src="components/search.js"></script> -->
+    <!-- <script src="components/results.js"></script> -->
+    <!-- <script src="components/custom/duck-home.js"></script> -->
+    <!-- <script src="components/custom/duck-results.js"></script> -->
+    <!-- <script src="components/custom/duck-detail.js"></script> -->
+    <script src="index.js"></script>
 
+</body>
 </html>
