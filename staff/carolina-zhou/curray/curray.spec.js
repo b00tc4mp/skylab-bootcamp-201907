@@ -331,14 +331,6 @@ describe('Curray', function () {
             var result = curray.flat(2);
             expect(result).toEqual([1, 2, 3, 'a', 'b', 'c', true, false]);
         });
-
-/*      REVISAR!
-        it('should flatten three levels', function() {
-            var curray = new Curray (1,2,3,new Curray("a","b","c",new Curray(true,false,new Curray(1))));
-            var result = curray.flat(3);
-            expect(result).toEqual([1, 2, 3, 'a', 'b', 'c', true, false, 1]);
-        });
-         */
     })
 
     describe('indexOf', function() {
