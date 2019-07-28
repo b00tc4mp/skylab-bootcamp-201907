@@ -27,7 +27,7 @@
             this.onClickItem(duck.id)
         })/* .bind(this)); NO NECESARIO */
     }
-    onClickItem = id => {
+    onClickItem(id) {
         console.log(id)
     }
  }

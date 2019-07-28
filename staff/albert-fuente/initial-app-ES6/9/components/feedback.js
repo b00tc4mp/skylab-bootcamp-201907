@@ -9,7 +9,7 @@ class Feedback extends Component{
     constructor(container){
         super(container)
     }
-    setMessage = message => {
+    setMessage (message) {
         this.container.innerText = message
     }
 }

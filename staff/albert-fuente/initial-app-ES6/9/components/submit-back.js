@@ -12,7 +12,7 @@
         feedback.hide()
         this.feedback = feedback 
      }
-     onNavigateBack = expression => {
+     onNavigateBack(expression) {
         const back = this.container.children[2]
     
         back.addEventListener('click', event => {
@@ -21,16 +21,16 @@
             expression()
         })
     }
-    showFeedback = function (message) {
+    showFeedback(message) {
         this.feedback.setMessage(message);
         this.feedback.show();
     };
-    show = function () {
-        this.feedback.hide();
-    
-        //this.show(); // ERROR infinite recursion loop
-        Component.prototype.show.call(this);
-    };
+    show(){
+        this.feedback.hide()
+        // Component.prototype.show.call(this);
+        super.show()
+    }
+
  }
 
 

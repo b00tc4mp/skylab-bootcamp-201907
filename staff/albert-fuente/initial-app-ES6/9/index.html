@@ -7,14 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="style/index.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Farro&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <main>
+        <div class="back">
+            
         <h1>Initial App</h1>
 
         <!-- Landing -->
-        <section class="landing show">
+        <section class="landing show position1">
             <a href="">Register</a> or <a href="">Login</a>.
         </section>
 
@@ -32,7 +36,7 @@
                 <button type="submit">Register</button>
             </form>
             <p class="panel__feedback feedback feedback--error hide">A message.</p>
-            <a href="">back</a>
+            <a href=""><i class="fas fa-arrow-circle-left"></i>back</a>
         </section>
 
         <!-- Register Success -->
@@ -50,7 +54,7 @@
                 <button type="submit">Login</button>
             </form>
             <p class="panel__feedback feedback feedback--error hide">A message.</p>
-            <a href="">back</a>
+            <a href=""><i class="fas fa-arrow-circle-left"></i>back</a>
         </section>
 
         <!-- Home -->
@@ -58,36 +62,49 @@
             <h2>Welcome!</h2>
             <button>Logout</button>
 
-            <!-- Search -->
-            <section class="search">
-                <h3>Search</h3>
-                <form>
-                    <input type="text" name="query">
-                    <button>Search</button>
-                </form>
-                <p class="panel__feedback feedback feedback--error hide">A message.</p>
-            </section>
-
-            <!-- Results -->
-            <section class="duck-results hide">
-                <ul>
-                    <li>Duck 1</li>
-                    <li>Duck 2</li>
-                    <li>Duck 3</li>
-                </ul>
-            </section>
-
-            <!-- Detail -->
-            <section class="duck-detail hide">
-                <h3>Title</h3>
-                <img class="duck-detail__photo" src="http://whetever.com/image.jpg">
-                <span class="duck-detail__price">Price</span>
-                <p>Description</p>
-                <a href="">Link</a>
-                <a href="">back</a>
+            <div class="mainGrid">
                 
+            <!-- Search -->
+            <section class="search ">
+                    <h3>Search</h3>
+                    <form>
+                        <input type="text" name="query">
+                        <button>Search</button>
+                    </form>
+                    <p class="panel__feedback feedback feedback--error hide">A message.</p>
+                </section>
+    
+                <!-- Results -->
+                <section class="duck-results hide">
+                    <ul>
+                        <li>Duck 1</li>
+                        <li>Duck 2</li>
+                        <li>Duck 3</li>
+                    </ul>
+                </section>
+    
+                <!-- Detail -->
+                <section class="duck-detail hide">
+                    <h3>Title</h3>
+                    <img class="duck-detail__photo" src="http://whetever.com/image.jpg">
+                    <span class="duck-detail__price">Price</span>
+                    <p>Description</p>
+                    <a href="" target="_blank">Link</a>
+                    <a href=""><i class="fas fa-arrow-circle-left"></i>back</a>
+                    <button class="duck-detail__fav"><i class="fas fa-2x fa-heart"></i></button>
+                </section>
+    
+                <!-- Favourites -->
+                <section class="duck-favourite">
+                    <h3>Favourites: </h3>
+                    <ul id="favs"></ul>              
+                </section>
             </section>
-        </section>
+
+            </div>
+
+
+        </div>
     </main>
 
     <script src="utils/call.js"></script>
@@ -106,6 +123,8 @@
     <script src="components/custom/duck-home.js"></script>
     <script src="components/custom/duck-results.js"></script>
     <script src="components/custom/duck-detail.js"></script>
+    <script src="components/custom/duck-favorite.js"></script>
+
     <script src="index.js"></script>
 </body>
 

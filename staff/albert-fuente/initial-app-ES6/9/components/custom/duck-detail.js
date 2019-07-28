@@ -8,8 +8,8 @@ class DuckDetail extends Component{
     constructor(container){
         super(container)
     }
-    displayDuck = duck => {
-        const title = this.container.getElementsByTagName('h3')[0]
+    displayDuck (duck) {
+        let title = this.container.getElementsByTagName('h3')[0]
         title.innerText = duck.title
     
         const image = this.container.getElementsByTagName('img')[0]
@@ -25,7 +25,7 @@ class DuckDetail extends Component{
         link.href = duck.link
     }
     //FUNCTION FOR BACK BUTTON
-    onNavigateBack = expression => {
+    onNavigateBack (expression) {
         const back = this.container.children[5]
     
         back.addEventListener('click', event => {
@@ -34,6 +34,25 @@ class DuckDetail extends Component{
             expression()
         })
     }
+    //FUNCTION ADD TO FAVORITES
+    favourites(expression){
+        const fav=this.container.children[6]
+
+        const ul = document.getElementById('fav')
+
+        fav.addEventListener("click",event=>{
+            event.preventDefault();
+            alert("FAVORITO")
+            let h3 = document.createElement('h3')
+            let li=document.createElement("li")
+            h3.innerText = duck.title    
+            li.appendChild(h3)
+            ul.appendChild(li)
+    
+            expression()
+        })
+    }
+
 
 }
 

@@ -8,7 +8,7 @@ class Login extends SubmitBack{
     constructor(container){
         super(container)
     }
-    onSubmitLogin = expression => {
+    onSubmitLogin(expression) {
         const form = this.container.children[0]
     
         form.addEventListener('submit', event=> {

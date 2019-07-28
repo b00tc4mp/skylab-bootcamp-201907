@@ -16,8 +16,11 @@
 
         let detail = new DuckDetail(container.getElementsByClassName('duck-detail')[0])
         this.detail = detail
+
+        let favorite= new DuckFavourite(container.getElementsByClassName("duck-favourite")[0])
+        this.favorite=favorite
      }
-     onClickLogout = expression => {
+     onClickLogout(expression)  {
         let logout = this.container.children[1]
     
         logout.addEventListener('click', event => {

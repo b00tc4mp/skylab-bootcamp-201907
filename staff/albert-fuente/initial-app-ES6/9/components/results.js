@@ -6,7 +6,7 @@
      constructor(container){
          super(container)
      }
-     listItems = items => {
+     listItems(items){
         const ul = this.container.getElementsByTagName('ul')[0]
         ul.innerHTML = ''
     
@@ -18,7 +18,7 @@
             this.paintItem(li, item)
         })/* .bind(this)) */ // WATCH this UNBIND
     }
-    paintItem = (li, item) => {
+    paintItem (li, item) {
         li.innerText = item;
     };
 

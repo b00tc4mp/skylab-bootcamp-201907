@@ -99,6 +99,9 @@ home.detail.onNavigateBack( ()=>{
     home.results.show()
     home.detail.hide()
 })
+home.detail.favourites( ()=>{
+    
+})
 
 
 

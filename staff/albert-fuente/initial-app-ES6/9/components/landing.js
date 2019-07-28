@@ -8,7 +8,7 @@ class Landing extends Component {
     constructor(container) {
         super(container)
     }
-    onNavigateToRegister = expression => {
+    onNavigateToRegister (expression)  {
         const register = this.container.children[0];
 
         register.addEventListener('click', event => {
@@ -18,7 +18,7 @@ class Landing extends Component {
         })
     }
 
-    onNavigateToLogin = expression => {
+    onNavigateToLogin (expression) {
         const register = this.container.children[1];
 
         register.addEventListener('click', event => {

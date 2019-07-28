@@ -9,7 +9,7 @@
      constructor(container){
          super(container)
      }
-     onSubmitRegister = expression => {
+     onSubmitRegister (expression) {
         const form = this.container.children[0]
     
         form.addEventListener('submit', event => {
