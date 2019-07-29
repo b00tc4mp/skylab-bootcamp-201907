@@ -22,6 +22,11 @@ class DuckResults extends Results {
 
         li.appendChild(img)
 
+        const fav = document.createElement('button')
+        fav.innerText = 'Add to Favorite'
+
+        li.appendChild(fav)
+
         li.addEventListener('click', event => {
             event.preventDefault()
 
