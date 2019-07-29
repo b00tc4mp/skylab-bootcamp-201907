@@ -1,0 +1,199 @@
+*{
+    margin: 0;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(219, 212, 212);
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;  
+    justify-content: flex-start;
+    padding: 5px; 
+}
+
+.navImage{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 10px; 
+    width:100%;
+}
+
+.navImage>i{
+
+    display: none;
+}
+
+.navImage>ul{
+    display: flex;
+    justify-content: space-between;
+}
+
+.navImage>h4{
+   
+    width:35%;
+    font-weight: 100;
+    color:  rgb(182, 182, 182);
+}
+
+
+ul>li{
+    list-style-type: none;
+    padding:3px;
+    font-size: 16px;
+    color: rgb(182, 182, 182);
+    
+}
+
+.navAll{
+    display: none;
+    width: 100%;
+    justify-content: flex-end;
+      
+}
+
+.subNav{
+    display: flex;
+    justify-content:space-between;  
+    padding: 15px 10px;
+    
+}
+
+.subNav>h3{
+    font-size: 18px;
+    padding-left:3px;
+    font-weight: 100;
+    font-size: 16px;
+    color: rgb(182, 182, 182);
+}
+#mucho{
+    width: 90px;
+}
+
+main{
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-start;   
+    
+    
+ }
+
+ 
+figure{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2px;
+}
+ 
+
+figure>img{
+     width:33%;
+     padding: 1px;
+     flex-grow:1;
+}
+
+section{
+
+    display: flex;
+    justify-content:flex-start; 
+    
+}
+article{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width:49.5%;
+    background-color: rgb(241, 241, 241);
+    margin: 2px 1px;
+    padding:30px;
+    
+    
+}
+article>p{
+    color: black;
+    font-size: 20px;
+    margin: 10px 20px 20px;
+    
+}
+article>h3{
+    font-size: 16px;
+    color:red;
+    margin: 15px 20px;
+}
+
+footer{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+}
+
+.salutation{
+    display: flex;
+    justify-content: flex-start;
+    width:60%;
+    
+}
+
+ div>h3{
+    color: rgb(136, 136, 136);
+    justify-content: center;
+    padding: 20px;
+    margin: 10px 0;
+    font-size:25px;
+} 
+
+.cities{
+    display:flex;
+    flex-direction: row;  
+} 
+
+div>p{
+    font-size: 16px;
+    color: rgb(158, 158, 158);
+}
+
+.city{
+    color: red;
+    font-size: 16px;
+   
+}
+
+.citydirection{
+    padding: 20px;
+    width: 33%;
+}
+
+.direction{
+    margin: 10px 0;
+}
+
+.copyright{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    margin: 10px;
+}
+.copyright>div>h4{
+   
+    font-size: 16px;
+    color: rgb(211, 208, 208);
+    margin: 20px 20px;
+   
+}
+
+
+.copyright>div>i{
+    margin: 10 auto;
+    padding: 20px;
+}
+.subscribe{
+    display: flex;
+
+}
