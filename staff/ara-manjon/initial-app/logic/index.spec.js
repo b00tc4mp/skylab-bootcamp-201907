@@ -1,88 +1,87 @@
-'use strict';
 
-describe('logic', function () {
-    beforeEach(function () {
-        users = new Curray();
-    });
+describe('logic', () => {
+    beforeEach(() => {
+        users = new Curray()
+    })
 
-    describe('register', function () {
-        it('should succeed on correct data', function () {
-            var user = {
+    describe('register', () => {
+        it('should succeed on correct data', () => {
+            const user = {
                 name: 'Manuel',
                 surname: 'Barzi',
                 email: 'manuelbarzi@gmail.com',
                 password: '123'
-            };
+            }
 
-            register(user.name, user.surname, user.email, user.password);
+            register(user.name, user.surname, user.email, user.password)
 
-            var _user = users.pop();
+            const _user = users.pop()
 
-            expect(_user).toEqual(user);
-        });
+            expect(_user).toEqual(user)
+        })
 
-        it('should fail on empty name', function () {
-            expect(function () {
-                register('', 'Barzi', 'manuelbarzi@gmail.com', '123');
-            }).toThrowError(Error, 'Name is empty or blank.');
-        });
+        it('should fail on empty name', () => {
+            expect(() => {
+                register('', 'Barzi', 'manuelbarzi@gmail.com', '123')
+            }).toThrowError(Error, 'Name is empty or blank.')
+        })
 
-        it('should fail on non-valid e-mail', function () {
-            expect(function () {
-                register('Manuel', 'Barzi', 'manuelbarzi#gmail.com', '123');
-            }).toThrowError(Error, 'E-mail is not valid.');
-        });
+        it('should fail on non-valid e-mail', () => {
+            expect(() => {
+                register('Manuel', 'Barzi', 'manuelbarzi#gmail.com', '123')
+            }).toThrowError(Error, 'E-mail is not valid.')
+        })
 
-        describe('when user already exists', function () {
-            var user = {
+        describe('when user already exists', () => {
+            const user = {
                 name: 'John-' + Math.random(),
                 surname: 'Doe-' + Math.random(),
                 email: 'johndoe-' + Math.random() + '@mail.com',
                 password: '123-' + Math.random()
-            };
+            }
 
-            beforeEach(function () {
-                users.push(user);
-            });
+            beforeEach(() => {
+                users.push(user)
+            })
 
-            it('should fail on already existing e-mail', function () {
-                expect(function () {
-                    register(user.name, user.surname, user.email, user.password);
-                }).toThrowError(Error, 'E-mail is already registered.');
-            });
-        });
-    });
+            it('should fail on already existing e-mail', () => {
+                expect(() => {
+                    register(user.name, user.surname, user.email, user.password)
+                }).toThrowError(Error, 'E-mail is already registered.')
+            })
+        })
+    })
 
-    describe('login', function () {
-        var user = {
+    describe('login', () => {
+        const user = {
             name: 'John-' + Math.random(),
             surname: 'Doe-' + Math.random(),
             email: 'johndoe-' + Math.random() + '@mail.com',
             password: '123-' + Math.random()
-        };
+        }
 
-        beforeEach(function () {
-            users.push(user);
-        });
+        beforeEach(() => {
+            users.push(user)
+        })
 
-        it('should succeed on correct data', function () {
-            expect(function () {
-                login(user.email, user.password);
-            }).not.toThrow();
-        });
+        it('should succeed on correct data', () => {
+            expect(() => {
+                login(user.email, user.password)
+            }).not.toThrow()
+        })
 
-        it('should fail on empty email', function () {
-            expect(function () {
+        it('should fail on empty email', () => {
+            expect(() => {
                 login('', user.password);
-            }).toThrowError(Error, 'E-mail is empty or blank.');
-        });
+            }).toThrowError(Error, 'E-mail is empty or blank.')
+        })
 
-        it('should fail on non-valid e-mail', function () {
-            expect(function () {
-                login('manuelbarzi#gmail.com', '123');
-            }).toThrowError(Error, 'E-mail is not valid.');
-        });
-    });
+        it('should fail on non-valid e-mail', () =>{
+            expect(()=> {
+                login('manuelbarzi#gmail.com', '123')
+            }).toThrowError(Error, 'E-mail is not valid.')
+        })
+    })
 
     describe('search ducks', () => {
         it('should succed on matching criteria', done => {
@@ -101,7 +100,7 @@ describe('logic', function () {
                 })
                 done()
             })
-        })
+        })//cuando no hay resultados y cuando el usuario introduce un string vacio
     })
 
     describe('retrive duck', () => {
@@ -120,5 +119,9 @@ describe('logic', function () {
 
             })
         })
+    })
+
+    describe('add duck to favorites',()=>{
+        it('should')
     })
 })

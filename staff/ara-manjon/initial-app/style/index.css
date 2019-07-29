@@ -1,62 +1,3 @@
-.feedback {
-  color: red;
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
-  font-size: 1rem;
-  font-weight: 200;
-  line-height: 20px;
-  margin: 1px;
-  text-align: center;
-  background-color: none;
-}
-
-.login__button {
-  appearance: none;
-}
-
-.back {
-  position: absolute;
-}
-
-.register-success__button {
-  appearance: none;
-}
-
-.back {
-  position: absolute;
-}
-
-.results__button {
-  appearance: none;
-}
-
-.back {
-  position: absolute;
-}
-
-.register__button {
-  appearance: none;
-}
-
-.back {
-  position: absolute;
-}
-
-.search__button {
-  appearance: none;
-}
-
-.back {
-  position: absolute;
-}
-
-.submit-back__button {
-  appearance: none;
-}
-
-.back {
-  position: absolute;
-}
-
 .duck-detail__photo {
   width: 333px;
 }
@@ -69,53 +10,46 @@
   width: 333px;
 }
 
-.landing, .login, .register-success, .results, .register, .search, .submit-back, .duck-detail, .duck-home, .duck-results {
+.landing,
+.register,
+.register-success,
+.submit-back,
+.login,
+.search, .duck-detail, .duck-home, .duck-results {
   padding: 0.5rem;
   border: 0.01rem solid #0f0f0f;
   border-radius: 0.1rem;
   background-color: #0f0f0f;
-  height: 30vh;
+  height: 20vh;
+  min-width: 100px;
 }
 
-.landing__button, .login__button, .back, .register-success__button, .results__button, .register__button, .search__button, .submit-back__button, .duck-detail, .duck-home, .duck-results {
+.but, .duck-detail, .duck-home, .duck-results {
   color: #fbff00;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   text-decoration: none;
   line-height: 50px;
-  weight: 500;
+  font-weight: 500;
   font-size: 1.5rem;
-  margin: 10px;
   text-align: center;
 }
-.landing__button:hover, .login__button:hover, .back:hover, .register-success__button:hover, .results__button:hover, .register__button:hover, .search__button:hover, .submit-back__button:hover, .duck-detail:hover, .duck-home:hover, .duck-results:hover {
+.but:hover, .duck-detail:hover, .duck-home:hover, .duck-results:hover {
   color: rgba(251, 255, 0, 0.8);
 }
 
-.landing, .login label, .register-success label, .results label, .register label, .submit-back label {
+.landing label,
+.register label,
+.register-success label,
+.submit-back label,
+.login label,
+.search label {
   color: #ffffff;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-size: 1rem;
   font-weight: 200;
-  line-height: 100px;
+  line-height: 30px;
   margin: 10px;
   text-align: center;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  width: 100vw;
-}
-body h1 {
-  text-align: center;
-  font-family: "Open Sans", Helvetica, sans-serif;
-  font-weight: 500;
-  writing-mode: vertical-lr;
-  transform: rotate(180deg);
-  font-size: 2rem;
-  color: #2b2b2b;
-  padding: 10px;
-  line-height: 0px;
 }
 
 .show {
@@ -126,12 +60,12 @@ body h1 {
   display: none;
 }
 
-body {
+.background {
   margin: 0;
   padding: 0;
   width: 100vw;
 }
-body h1 {
+.background h1 {
   text-align: center;
   font-family: "Open Sans", Helvetica, sans-serif;
   font-weight: 500;
@@ -141,6 +75,61 @@ body h1 {
   color: #2b2b2b;
   padding: 10px;
   line-height: 0px;
+}
+
+.landing,
+.register,
+.register-success,
+.submit-back,
+.login,
+.search {
+  text-align: center;
+}
+.landing label,
+.register label,
+.register-success label,
+.submit-back label,
+.login label,
+.search label {
+  top: 2px;
+  text-align: center;
+}
+
+.but {
+  display: inline-block;
+  appearance: none;
+  border: none;
+  margin: 0;
+  height: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: all 250ms cubic-bezier(0.675, 0.42, 0.09, 0.87);
+}
+.but:not([disabled]):hover, .but:not([disabled]):focus {
+  color: rgba(251, 255, 0, 0.8);
+}
+.but:focus {
+  outline: none;
+  box-shadow: none;
+}
+.but[disabled] {
+  cursor: not-allowed;
+}
+
+.feedback {
+  color: red;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 200;
+  line-height: 15px;
+  margin: 1px;
+  text-align: center;
+  background-color: none;
+  padding: 1px;
+}
+
+.back {
+  background-color: white;
 }
 
 /*# sourceMappingURL=index.css.map */

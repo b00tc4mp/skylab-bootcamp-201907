@@ -9,5 +9,6 @@ users.push({
     name: 'a',
     surname: 'm',
     email: 'a@gmail.com',
-    password: '123'
+    password: '123',
+    favorites: new Curray()
 });

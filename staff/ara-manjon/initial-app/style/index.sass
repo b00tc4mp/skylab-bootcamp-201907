@@ -14,21 +14,89 @@
 @import ../components/panel
 @import ../components/component
    
-    
-body
+
+.background
     margin: 0
+
     padding: 0
+
     width: 100vw
     h1
         text-align: center
+
         font-family: 'Open Sans', Helvetica, sans-serif
+
         font-weight: 500
+
         writing-mode: vertical-lr
+
         transform: rotate(180deg)
+
         font-size: 2rem
+
         color: #2b2b2b
+
         padding: 10px
+
         line-height: 0px
+
+.landing,
+.register,
+.register-success,
+.submit-back,
+.login,
+.search
+
+    @extend %base-panel
+    text-align: center
+
+    label
+        @extend %letters
+        top: 2px
+        text-align: center
+    
+.but
+    @extend %text-link
+    display: inline-block
+    appearance: none
+    border: none
+    margin: 0
+    height: 0
+    padding: 0
+    cursor: pointer
+    transition: all 250ms cubic-bezier(0.675, 0.420, 0.090, 0.870)
+
+    &:not([disabled]):hover,
+    &:not([disabled]):focus 
+        color: $color-link-hover
+    &:focus 
+        outline: none
+        box-shadow: none
+    &[disabled] 
+        cursor: not-allowed
+
+.feedback
+    color: red
+
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif
+
+    font-size: 0.8rem
+
+    font-weight: 200
+
+    line-height: 15px
+
+    margin: 1px
+
+    text-align: center 
+        
+    background-color: none
+
+    padding: 1px
+
+
+
+
 
 
 

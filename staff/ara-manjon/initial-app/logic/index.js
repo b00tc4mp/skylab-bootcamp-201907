@@ -46,7 +46,8 @@ const logic = {
                 name,
                 surname,
                 email,
-                password
+                password,
+                favorites: new Curray()
             })
         }
     },
@@ -76,14 +77,18 @@ const logic = {
     },
     searchDucks: (query, expression) => {
 
-        let errors= ''
-        if(!query.trim()){
+        if(typeof query !== 'string') throw new TypeError(`${query} in not a string`)
+        if(typeof expression !== 'function') throw new TypeError(`${expression} in not a function`)
+
+/*         if(!query.trim()){
             errors += 'Query is empty or blanck.'
         }
 
-        if(errors) throw new Error(errors)
+        if(errors) throw new Error(errors) */
 
-        call('http://duckling-api.herokuapp.com/api/search?q=' + query, expression)
+        call('http://duckling-api.herokuapp.com/api/search?q=' + query, result =>{
+            expressi
+        })
 
     },
     retrieveDuck: (id, expression) => {
