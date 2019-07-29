@@ -1,0 +1,149 @@
+*{
+    margin: 0;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(219, 212, 212);
+}
+
+header{
+    display: flex;
+    flex-direction: column;
+    padding: 5px; 
+}
+
+.navImage{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(209, 205, 205);
+    padding: 15px 10px; 
+    
+}
+.navImage>h4{
+    display:none;
+}
+.navImage>ul{
+    display: none;
+
+}
+.subNav{
+    display: flex;
+    justify-content:space-between;  
+    border-bottom: 1px solid rgb(209, 205, 205);
+    padding: 15px 10px;
+}
+
+.subNav>h3{
+    font-size: 18px;
+    color:rgb(175, 168, 168);
+    padding-left:3px;
+    font-weight: 100;
+}
+
+#mucho{
+    width: 90px;
+}
+
+main{
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-start;   
+}
+
+figure{
+    padding: 2px;
+}
+ 
+
+figure>img{
+     width:100%;
+     height: auto;
+}
+
+section{
+    display: flex;
+    flex-direction: column;
+
+}
+article{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgb(241, 241, 241);
+    margin: 2px 2px;
+    
+}
+article>p{
+    color: black;
+    font-size: 20px;
+    margin: 10px 20px 20px;
+    
+}
+article>h3{
+    font-size: 16px;
+    color:red;
+    margin: 15px 20px;
+}
+
+footer{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+}
+
+ div>h3{
+    color: rgb(136, 136, 136);
+    justify-content: center;
+    padding: 20px;
+    margin: 10px 0;
+    font-size:15px;
+} 
+
+.cities{
+    display:flex;
+    flex-direction: column;
+} 
+
+div>p{
+    font-size: 16px;
+    color: rgb(158, 158, 158);
+}
+
+.city{
+    color: red;
+    font-size: 16px;
+    padding: 0;
+}
+
+.citydirection{
+    padding: 20px;
+}
+
+.direction{
+    margin: 10px 0;
+}
+
+.copyright{
+    margin: 20px 20px;
+}
+
+.copyright>div>h4{
+    font-size: 16px;
+    color: rgb(211, 208, 208);
+    margin: 10px 0;
+}
+.subscribe{
+    margin: 10px 0;
+} 
+
+.copyright>div>i{
+    margin: 10px 0;
+}
+.fab{
+    margin-left: 20px;
+} 
