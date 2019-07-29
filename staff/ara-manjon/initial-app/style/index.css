@@ -1,0 +1,146 @@
+.feedback {
+  color: red;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  font-weight: 200;
+  line-height: 20px;
+  margin: 1px;
+  text-align: center;
+  background-color: none;
+}
+
+.login__button {
+  appearance: none;
+}
+
+.back {
+  position: absolute;
+}
+
+.register-success__button {
+  appearance: none;
+}
+
+.back {
+  position: absolute;
+}
+
+.results__button {
+  appearance: none;
+}
+
+.back {
+  position: absolute;
+}
+
+.register__button {
+  appearance: none;
+}
+
+.back {
+  position: absolute;
+}
+
+.search__button {
+  appearance: none;
+}
+
+.back {
+  position: absolute;
+}
+
+.submit-back__button {
+  appearance: none;
+}
+
+.back {
+  position: absolute;
+}
+
+.duck-detail__photo {
+  width: 333px;
+}
+.duck-detail__price {
+  background-color: yellow;
+  color: red;
+}
+
+.duck-results img {
+  width: 333px;
+}
+
+.landing, .login, .register-success, .results, .register, .search, .submit-back, .duck-detail, .duck-home, .duck-results {
+  padding: 0.5rem;
+  border: 0.01rem solid #0f0f0f;
+  border-radius: 0.1rem;
+  background-color: #0f0f0f;
+  height: 30vh;
+}
+
+.landing__button, .login__button, .back, .register-success__button, .results__button, .register__button, .search__button, .submit-back__button, .duck-detail, .duck-home, .duck-results {
+  color: #fbff00;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  line-height: 50px;
+  weight: 500;
+  font-size: 1.5rem;
+  margin: 10px;
+  text-align: center;
+}
+.landing__button:hover, .login__button:hover, .back:hover, .register-success__button:hover, .results__button:hover, .register__button:hover, .search__button:hover, .submit-back__button:hover, .duck-detail:hover, .duck-home:hover, .duck-results:hover {
+  color: rgba(251, 255, 0, 0.8);
+}
+
+.landing, .login label, .register-success label, .results label, .register label, .submit-back label {
+  color: #ffffff;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  font-weight: 200;
+  line-height: 100px;
+  margin: 10px;
+  text-align: center;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+}
+body h1 {
+  text-align: center;
+  font-family: "Open Sans", Helvetica, sans-serif;
+  font-weight: 500;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  font-size: 2rem;
+  color: #2b2b2b;
+  padding: 10px;
+  line-height: 0px;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+}
+body h1 {
+  text-align: center;
+  font-family: "Open Sans", Helvetica, sans-serif;
+  font-weight: 500;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  font-size: 2rem;
+  color: #2b2b2b;
+  padding: 10px;
+  line-height: 0px;
+}
+
+/*# sourceMappingURL=index.css.map */
