@@ -18,43 +18,46 @@
 
         <!-- enroll -->
         <section class='enroll hide'>
-            <form>
+            <form class='enrollForm'>
                 <label for='name'>Name</label>
-                <input type='text' id='name'>
+                <input type='text' class='name' name='name'>
                 <label for='lastName'>Last Name</label>
-                <input type='text' id='lastName'>
+                <input type='text' class='lastName' name='lastName'>
                 <label for='email'>E-mail</label>
-                <input type='text' id='email'>
+                <input type='email' class='email' name='email'>
                 <label for='pass'>Pass</label>
-                <input type='text' id='password'>
-                <button type='submit'class='enroll'>Enroll</button>
+                <input type='password' class='pass' name='pass'>
+                <button type='submit'>Enroll</button>
             </form>
+            <button type='click' class='backButton'>Back</button>
         </section>
 
         <!-- enroll success -->
         <section class='enrollSuccess hide'>
             <h2>Thank you for enrolling!</h2>
-            <p>You can now procced to <a href=''>Sign in</a></p>
-            
+            You can now procced to <a href='' class='signInButton'>Sign in</a>
         </section>
 
         <!-- sign in -->
         <section class='signIn hide'>
-            <form>
+            <form class='signInForm'>
                 <label for=email>E-mail</label>
-                <input type='text' id='email'>
+                <input type='text' class='email' name='email'>
                 <label for='pass'>Pass</label>
-                <input type='text' id='pass'>
-                <button type='submit' class='signIn'>Sign in</button>
+                <input type='text' class='pass' name='pass'>
+                <button type='submit'>Sign in</button>
             </form>
+            <button type='click' class='backButton'>Back</button>
         </section>
 
         <!-- landing -->
         <section class='landing hide'>
             <h2>Welcome user!</h2>
+            <button type='click' class='logOutButton'>Log Out</button>
         </section>
     </main>
-    <script src="logic.js"></script>
+    <script src="logic/logic.js"></script>
+    <script src="data/data.js"></script>
     <!-- <script src="utils/call.js"></script> -->
     <!-- <script src="utils/curray.js"></script> -->
     <!-- <script src="data/index.js"></script> -->
