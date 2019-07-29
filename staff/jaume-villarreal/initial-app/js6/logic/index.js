@@ -45,7 +45,8 @@ const logic = {
                 name: name,
                 surname: surname,
                 email: email,
-                password: password
+                password: password,
+                favorites: []
             });
         }
     },
@@ -73,7 +74,9 @@ const logic = {
     },
 
     searchDucks: function (query, expression) {
-        if(!arguments.length) throw new Error('expected 0 arguments')
+        // if(!arguments.length) throw new Error('expected 0 arguments')
+
+        if(arguments[0] === undefined) throw new TypeError('expected query in argument[0]')
         
         if(arguments.length === 1) throw new TypeError('expected expression in arguments[1]')
 

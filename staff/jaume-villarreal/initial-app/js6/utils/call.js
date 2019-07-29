@@ -9,8 +9,7 @@ const call = (url, expression) => {
     request.open('get', url);
 
     request.onload = () => {
-        var results = JSON.parse(request.responseText);
-
+        const results = JSON.parse(request.responseText).error ? [] : JSON.parse(request.responseText);
         expression(results);
     };
 

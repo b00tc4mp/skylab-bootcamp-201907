@@ -31,8 +31,8 @@ class SubmitBack extends Component{
         super.show()
     }
 
-    resetForm(){
-        const inputs = [...this.container.querySelector('form').getElementsByTagName('input')];
-        inputs.forEach(input => input.value = '')
-    }
+    // resetForm(){
+    //     const inputs = [...this.container.querySelector('form').getElementsByTagName('input')];
+    //     inputs.forEach(input => input.value = '')
+    // }
 }

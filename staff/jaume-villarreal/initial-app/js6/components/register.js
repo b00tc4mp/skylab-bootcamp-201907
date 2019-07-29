@@ -10,7 +10,7 @@ class Register extends SubmitBack{
     }
 
     onSubmitRegister(expression){
-        const form = this.container.children[0]
+        const form = this.container.getElementsByTagName('form')[0]
         form.addEventListener('submit' , function(event){
             event.preventDefault()
 

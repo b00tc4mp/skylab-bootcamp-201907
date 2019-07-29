@@ -16,4 +16,8 @@ class Component{
         this.container.classList.remove('show')
         this.container.classList.add('hide')
     }
+    resetForm(){
+        const inputs = [...this.container.querySelector('form').getElementsByTagName('input')];
+        inputs.forEach(input => input.value = '')
+    }
 }

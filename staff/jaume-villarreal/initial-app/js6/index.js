@@ -7,7 +7,6 @@
 // initial panel
 
 var landing = new Landing(document.getElementsByClassName('landing')[0]);
-
 landing.onNavigateToRegister(function () {
     landing.hide();
     register.show();
@@ -75,8 +74,11 @@ login.onSubmitLogin(function (email, password) {
 
 var home = new DuckHome(document.getElementsByClassName('duck-home')[0]);
 
-home.onClickLogout(function () {
+home.onClickLogout(()=>{
     home.hide();
+    home.search.resetForm();
+    home.search.feedback.hide();
+    home.results.resetResults();
     landing.show();
 });
 
@@ -86,16 +88,25 @@ home.onClickLogout(function () {
 //     console.log(duck);
 // };
 
+//MODIFICAR!!!
 home.search.onSearch(function (query) {
-    logic.searchDucks(query, function(ducks){
-        try{
-            home.results.listItems(ducks);
-            home.results.show();
-        }
-        catch(error){
-            home.search.showFeedback(error.message)
-        }
-    })
+    try{
+        logic.searchDucks(query, function(ducks){
+            if(ducks.length){
+                home.results.listItems(ducks);
+                home.results.show();
+                home.search.feedback.hide();
+            }else{
+                home.search.showFeedback('No matches for this query');
+            }
+            home.feedback.hide();
+        })
+    }
+    catch(error){
+        console.log(query)
+        home.search.showFeedback('No query')
+    }
+    
 });
 
 home.results.onClickItem = function(id) {

@@ -110,6 +110,12 @@ describe('logic', function () {
             }).toThrowError(Error , 'expected 0 arguments');
         })
 
+        it("should throw an error => query is undefined" , function(){
+            expect(function(){
+                logic.searchDucks(undefined , );
+            }).toThrowError(TypeError , "expected query in argument[0]")
+        })
+
         it('should throw an error => arguments[1] is not declared' , function(){
             expect(function(){
                 logic.searchDucks('orange');

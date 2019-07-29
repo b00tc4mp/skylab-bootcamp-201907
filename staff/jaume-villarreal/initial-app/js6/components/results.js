@@ -8,8 +8,6 @@ class Results extends Component{
     }
 
     listItems(items){
-
-        console.log(items.error)
         if(items.error){
             throw new Error(items.error)
         }
@@ -19,14 +17,20 @@ class Results extends Component{
 
             items.forEach( item => {
                 const li = document.createElement('li')
+
                 ul.appendChild(li)
-                this.paintItem(li , item)
+
+                this.paintItem(li , item) //extended in duck-results.js
             })
-        }
-        
+        } 
     }
 
     paintItem(li , item){
         li.innerText = item
+    }
+
+     resetResults(){
+        const ul = this.container.getElementsByTagName('ul')[0]
+        ul.innerHTML = '';
     }
 }

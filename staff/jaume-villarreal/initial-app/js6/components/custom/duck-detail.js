@@ -23,7 +23,7 @@ class DuckDetail extends Component{
         description.innerText = duck.description
         
         const link = this.container.getElementsByTagName('a')[0]
-        link.innerText = duck.link
+        link.href = duck.link
     }
 
     onNavigateToResults(expression){

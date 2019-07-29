@@ -5,22 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Initial App</title>
+    <link href="https://fonts.googleapis.com/css?family=Darker+Grotesque|Play:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style/index.css">
 </head>
 
 <body>
-    <main>
+    <main class="wrapper">
         <h1>Initial App</h1>
 
         <!-- Landing -->
         <section class="landing show">
-            <a href="">Register</a> or <a href="">Login</a>.
+            <a href="" class="btn">Register</a>
+            <a href="" class="btn">Login</a>
         </section>
 
         <!-- Register -->
         <section class="register hide">
-            <form>
+            <form class='form form__register'>
                 <label for="name">Name</label>
                 <input type="text" id="name">
                 <label for="surname">Surname</label>
@@ -29,41 +31,41 @@
                 <input type="email" id="email">
                 <label for="password">Password</label>
                 <input type="password" id="password">
-                <button type="submit">Register</button>
+                <button type="submit" class="btn btn__submit">Register</button>
             </form>
             <p class="panel__feedback feedback feedback--error">A message.</p>
-            <a href="">back</a>
+            <a href="" class="btn btn__back">back</a>
         </section>
 
         <!-- Register Success -->
         <section class="register-success hide">
-            Ok, registered succeeded, you can now proceed to <a href="">login</a>.
+            Ok, registered succeeded, you can now proceed to login <a href="" class="btn">Login</a>
         </section>
 
         <!-- Login -->
         <section class="login hide">
-            <form>
+            <form class='form form__login'>
                 <label for="email">E-mail</label>
                 <input type="email" id="email">
                 <label for="password">Password</label>
                 <input type="password" id="password">
-                <button type="submit">Login</button>
+                <button type="submit" class="btn btn__submit">Login</button>
             </form>
             <p class="panel__feedback feedback feedback--error">A message.</p>
-            <a href="">back</a>
+            <a href="" class="btn btn__back">back</a>
         </section>
 
         <!-- Home -->
         <section class="duck-home hide">
             <h2>Welcome!</h2>
-            <button>Logout</button>
+            <a href="" class="btn">Logout</a>
 
             <!-- Search -->
             <section class="search">
                 <h3>Search</h3>
-                <form>
+                <form class='form form__search'>
                     <input type="text" name="query">
-                    <button>Search</button>
+                    <button class="btn btn__submit">Search</button>
                 </form>
                 <p class="panel__feedback feedback feedback--error hide">A message.</p>
             </section>
@@ -80,11 +82,12 @@
             <!-- Detail -->
             <section class="duck-detail hide">
                 <h3>Title</h3>
+                <!-- <button class="favorite">Favorite</button> -->
                 <img class="duck-detail__photo" src="http://whetever.com/image.jpg">
                 <span class="duck-detail__price">Price</span>
                 <p>Description</p>
-                <a href="">Link</a>
-                <a href="">Back</a>
+                <a href="" class="btn">Link</a>
+                <a href="" class="btn btn__back">Back</a>
             </section>
         </section>
     </main>
