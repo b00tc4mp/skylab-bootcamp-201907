@@ -83,7 +83,6 @@ home.search.onSearch(query => {
 		logic.searchDucks(query, results => {
 			try {
 				const [ducks, request] = [...results]
-				logic.validateRequest(ducks, request)
 				home.results.listItems(ducks)
 				home.results.show()
 				login.showFeedback(error.message)

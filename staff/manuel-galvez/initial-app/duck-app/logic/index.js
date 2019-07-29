@@ -2,74 +2,56 @@ const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"
 
 const logic = {
 	register: (name, surname, email, password) => {
-		// Input validation
-		let errors = ""
+		if (name == undefined) throw new TypeError(`Name is undefined.`)
+		if (!name.trim()) throw new Error(`Name is empty or blank.`)
 
-		if (!name.trim()) {
-			errors += "Name is empty or blank."
-		}
-		if (!surname.trim()) {
-			if (errors) errors += "\n"
-			errors += "Surname is empty or blank."
-		}
+		if (surname == undefined) throw new Error(`Surname is undefined.`)
+		if (!surname.trim()) throw new Error(`Surname is empty or blank.`)
 
+		if (email == undefined) throw new Error(`Email is undefined.`)
 		if (!email.trim()) {
-			if (errors) errors += "\n"
-			errors += "E-mail is empty or blank."
+			throw new Error(`Email is empty or blank.`)
 		} else if (!EMAIL_REGEX.test(email)) {
-			if (errors) errors += "\n"
-
-			errors += "E-mail is not valid."
+			throw new Error("E-mail is invalid.")
 		}
 
+		if (password == undefined) throw new Error(`Password is undefined.`)
 		if (!password.trim()) {
-			if (errors) errors += "\n"
-
-			errors += "Password is empty or blank."
+			throw new Error(`Password is empty or blank.`)
 		} else if (password.trim().length < 4) {
-			if (errors) errors += "\n"
-			errors += "Password is less than 4 characters."
+			throw new Error("Password is less than 4 characters.")
 		}
 
-		if (errors) throw new Error(errors)
-		else {
-			// Database check
-			const user = users.find(user => {
-				return user.email === email && user.password === password
-			})
+		// Database check
+		const user = users.find(user => {
+			return user.email === email && user.password === password
+		})
 
-			if (user) throw new Error("E-mail is already registered.")
+		if (user) throw new Error("E-mail is already registered.")
 
-			users.push({
-				name: name,
-				surname: surname,
-				email: email,
-				password: password,
-				favorites: []
-			})
-		}
+		users.push({
+			name: name,
+			surname: surname,
+			email: email,
+			password: password,
+			favorites: []
+		})
 	},
 
 	login: (email, password) => {
-		let errors = ""
-
+		if (email == undefined) throw new Error(`Email is undefined.`)
 		if (!email.trim()) {
-			if (errors) errors += "\n"
-			errors += "E-mail is empty or blank."
+			throw new Error(`Email is empty or blank.`)
 		} else if (!EMAIL_REGEX.test(email)) {
-			if (errors) errors += "\n"
-			errors += "E-mail is invalid."
+			throw new Error("E-mail is invalid.")
 		}
 
+		if (password == undefined) throw new Error(`Password is undefined.`)
 		if (!password.trim()) {
-			if (errors) errors += "\n"
-			errors += "Password is empty or blank."
+			throw new Error(`Password is empty or blank.`)
 		} else if (password.trim().length < 4) {
-			if (errors) errors += "\n"
-			errors += "Password is less than 4 characters."
+			throw new Error("Password is less than 4 characters.")
 		}
-
-		if (errors) throw new Error(errors)
 
 		const user = users.find(user => {
 			return user.email === email && user.password === password
