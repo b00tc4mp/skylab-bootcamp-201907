@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
     <link rel="stylesheet" href="styles/index.css">
 </head>
 
-<body>
+<body background="resources/img1.jpg">
 
     <main>
-        <h1>Duck Store</h1>
+        <h1>Ducky Duck Store</h1>
 
         <!-- Landing -->
         <section class="landing show">
@@ -22,7 +23,7 @@
 
         <!-- REgister -->
         <section class="register hide">
-            <form>
+            <form class="register-form">
                 <label for="name">Name*</label>
                 <input type="text" id="name">
                 <label for="surname">Surname*</label>
@@ -44,7 +45,7 @@
 
         <!-- Login -->
         <section class="login hide">
-            <form>
+            <form class="login-form">
                 <label for="email">E-mail*</label>
                 <input type="email" id="email">
                 <label for="password">Password*</label>
@@ -57,21 +58,31 @@
 
         <!-- Home -->
         <section class="home hide">
-            <h2>Welcome!</h2>
-
-            <!-- Search -->
-            <section>
-                <form id='form'>
-                    <input type="text" name="query" id="query">
-                    <div class="home-buttons">
-                        <button type="submit" class="button button--style2">Search</button>
-                        <!-- <button type="submit" class="button button--style2">Refresh</button> -->
-                    </div>
-                </form>
+            <section class="home-panel">
+                <div class="home-panel__greetings">
+                    <h2 class="home-panel__greetings--title">Welcome!</h2>
+                    <article>
+                        <p>Hello<span class="user-name"></span>! Greetings from the
+                            Ducky Duck store, where all your duck dreams come true.</p>
+                        <p>Everything and everybody you can imagine becomes a duck in Ducky Duck Store.</p>
+                        <p>Enter your query and hit the search button to enjoy all our Ducky Ducks</p>
+                    </article>
+                </div>
+                <!-- Search -->
+                <div class='home-panel__form'>
+                    <form>
+                        <div class="home-panel__input-box">
+                            <input class="home-panel__input-box--size" type="text" name="query" id="query">
+                        </div>
+                        <p class="alert"></p>
+                        <div class="home-buttons">
+                            <button type="submit" class="button button--style2">Search</button>
+                        </div>
+                    </form>
+                </div>
             </section>
 
             <div class="anch">
-                <p class="alert"></p>
                 <button class="button button--style1">Logout</button>
             </div>
         </section>
@@ -86,11 +97,17 @@
             </section>
             <!-- Details -->
             <section class="duck-list hide">
-                <h3></h3>
+                <h2 class="duck-detail__title"></h2>
                 <img class="duck-detail__photo">
+                <i class="fas fa-heart"></i>
                 <p class="duck-detail__price"></p>
                 <p class="duck-detail__description"></p>
                 <a class="duck-detail__link">+info</a>
+                <button class="button button--style1">Back</button>
+            </section>
+
+            <section class="duck-fav hide">
+
             </section>
 
         </section>
@@ -99,10 +116,23 @@
     <script src="calls.js"></script>
     <script src="curray.js"></script>
     <script src="data.js"></script>
-    <script src="logic.js"></script>
-    <script src="components.js"></script>
-    <script src="custom-components.js"></script>
-    <script src="main.js"></script>
+    <script src="logic/logic.js"></script>
+
+    <script src="components/component.js"></script>
+    <script src="components/landing.js"></script>
+    <script src="components/submit-back.js"></script>
+    <script src="components/register.js"></script>
+    <script src="components/register-success.js"></script>
+    <script src="components/login.js"></script>
+    <script src="components/feedback.js"></script>
+    <script src="components/search.js"></script>
+    <script src="components/result.js"></script>
+    <script src="components/custom-components/result-panel.js"></script>
+    <script src="components/custom-components/duck-home.js"></script>
+    <script src="components/custom-components/duck-result.js"></script>
+    <script src="components/custom-components/duck-detail.js"></script>
+
+    <script src="index.js"></script>
 </body>
 
 </html>

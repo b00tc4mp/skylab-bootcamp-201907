@@ -2,21 +2,32 @@
 /**
  * All logic here
  */
-var logic = {
-    searchDucks: function (query, expression) {
-        call('http://duckling-api.herokuapp.com/api/search?q=' + query, expression)
+let logic = {
+    searchDucks: (query, expression) => {
+        let error = ''
+        if (!query.trim()) {
+            error = 'Search bar is Empty'
+        } else {
+
+            call('http://duckling-api.herokuapp.com/api/search?q=' + query, expression)
+        }
+
+        if (error) {
+            throw new Error(error)
+        }
     },
 
-    searchDuckDetails: function (id, expression) {
+    searchDuckDetails: (id, expression) => {
         call('http://duckling-api.herokuapp.com/api/ducks/' + id, expression)
     },
 
-    register: function (name, surname, email, password) {
-        var errors = ''
+    register: (name, surname, email, password) => {
+        let errors = ''
 
-        var found = users.find(function (element) {
+        let found = users.find(element => {
             return element.email === email
         });
+
 
         if (!name.trim()) {
             if (errors) errors += '\n'
@@ -34,7 +45,7 @@ var logic = {
         } else if (email.length < 7) {
             if (errors) errors = '\n'
             errors = 'e-mail to short, minimum 7 charachters of length'
-        } else if (this.validateEmail(email) !== true) {
+        } else if (/\S+@\S+\.\S+/.test(email) !== true) {
             if (errors) errors = '\n'
             errors = 'Your e-mail format is not correct'
         } else if (found !== undefined) {
@@ -60,20 +71,30 @@ var logic = {
         }
     },
 
-    validateEmail: function (email) {
-        return /\S+@\S+\.\S+/.test(email)
-    },
 
 
-    resetFormAlerts: function () {
+
+    resetFormAlerts: () => {
         let regiPanel = panels('register', 0).children[0]
         let logiPanel = panels('login', 0).children[0];
         let alerts = document.getElementsByClassName('alert')
         regiPanel.reset();
         logiPanel.reset();
-        for (var i = 0; i < alerts.length; i++) {
+        for (let i = 0; i < alerts.length; i++) {
             alerts[i].innerText = ''
         };
+    },
+
+    userName: email => {
+        let name = document.getElementsByClassName('user-name')[0]
+        let user = users.find(user => {
+            return user.email === email
+        })
+        if (user) {
+            name.innerText = ` ${user.name}`
+        } else {
+            name.innerText = ` ${user[user.length - 1].name}`
+        }
     },
 
     hideSection: section => {
@@ -82,8 +103,10 @@ var logic = {
         section.hide();
     },
 
-    login: function (email, password) {
-        var errors = ''
+
+
+    login: (email, password) => {
+        let errors = ''
 
         if (!email.trim()) {
             if (errors) errors += '\n'
@@ -97,11 +120,12 @@ var logic = {
 
         if (errors) throw new Error(errors)
 
-        var user = users.find(function (user) {
+        let user = users.find(user => {
             return user.email === email && user.password === password;
         });
 
         if (!user) throw new Error('Wrong credentials')
+
     }
 
 }

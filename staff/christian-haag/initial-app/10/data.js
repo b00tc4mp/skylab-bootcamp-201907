@@ -10,3 +10,5 @@ users.push({
     email: 'a@mail.com',
     password: '123'
 })
+
+let favourites = new Curray();

@@ -8,7 +8,7 @@ let panels = (className, index) => document.getElementsByClassName(className)[in
 
 
 //initial-panel
-let landing = new Landing(panels('landing', 0))
+const landing = new Landing(panels('landing', 0))
 
 
 
@@ -29,7 +29,7 @@ landing.onNavigateToLogin(function () {
 
 //register Panel
 
-let register = new Register(panels('register', 0))
+const register = new Register(panels('register', 0))
 
 register.onNavigateBack(function () {
     register.hide();
@@ -52,7 +52,7 @@ register.onSubmitRegister(function (name, surname, email, password) {
 
 // register sucess panel
 
-let registerSuccessPanel = new RegisterSuccess(panels('register-success', 0))
+const registerSuccessPanel = new RegisterSuccess(panels('register-success', 0))
 
 registerSuccessPanel.onNavigateToLogin(function () {
     registerSuccessPanel.hide()
@@ -62,7 +62,7 @@ registerSuccessPanel.onNavigateToLogin(function () {
 
 // // login panel
 
-let login = new Login(panels('login', 0))
+const login = new Login(panels('login', 0))
 
 login.onNavigateBack(function () {
     login.hide()
@@ -72,7 +72,7 @@ login.onNavigateBack(function () {
 login.onSubmitLogin(function (email, password) {
     try {
         logic.login(email, password)
-
+        logic.userName(email)
         login.hide()
         home.show()
 
@@ -81,8 +81,8 @@ login.onSubmitLogin(function (email, password) {
     }
 });
 // //-----------------------------
-let home = new DuckHome(panels('home', 0));
-let resultPanel = new ResultPanel(panels('product-panel', 0));
+const home = new DuckHome(panels('home', 0));
+const resultPanel = new ResultPanel(panels('product-panel', 0));
 
 home.onClickLogout(function () {
     home.hide();
@@ -91,12 +91,19 @@ home.onClickLogout(function () {
 })
 
 home.search.onSearch(function (query) {
+    try {
+        home.onSearchError.hide();
+        logic.searchDucks(query, function (results) {
+            resultPanel.result.listItems(results);
+            resultPanel.show()
+            resultPanel.result.show()
+            resultPanel.detail.hide()
+        });
 
-    logic.searchDucks(query, function (results) {
-        resultPanel.result.listItems(results);
-        resultPanel.show()
-        resultPanel.result.show()
-    });
+    } catch (error) {
+        home.showFeedBack(error.message)
+
+    }
 });
 
 
@@ -108,3 +115,10 @@ resultPanel.result.onClickItem(id => {
     });
 
 })
+
+resultPanel.detail.onClickBack(() => {
+    resultPanel.detail.hide();
+    resultPanel.result.show();
+})
+
+
