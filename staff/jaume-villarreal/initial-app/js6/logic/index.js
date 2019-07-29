@@ -81,9 +81,13 @@ const logic = {
         if(typeof expression !== 'function') throw new TypeError (`${expression} is not a function`)
         
         call('http://duckling-api.herokuapp.com/api/search?q=' + query, (error , result) => {
-            if(error)
-                expression(new Error (`fail search with criteria ${query}`))
-            else
+            if(error){
+                if(error.status<500){
+                    expression(undefined , [])
+                }else{
+                    expression(new Error (`fail search with criteria ${query}`))
+                }
+            }else
                 expression(undefined , result)
         });
     },

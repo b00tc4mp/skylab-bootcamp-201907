@@ -18,7 +18,7 @@ class Search extends Component{
 
         form.addEventListener('submit' , function(event){
             event.preventDefault()
-            const query = !(form.query.value) || !(form.query.value.trim()) ? undefined : form.query.value
+            const query = form.query.value
             expression(query)
         })
     }

@@ -88,32 +88,32 @@ home.onClickLogout(()=>{
 //     console.log(duck);
 // };
 
-//MODIFICAR!!!
 home.search.onSearch(function (query) {
-    try{
-        logic.searchDucks(query, function(ducks){
-            if(ducks.length){
-                home.results.listItems(ducks);
-                home.results.show();
-                home.search.feedback.hide();
-            }else{
-                home.search.showFeedback('No matches for this query');
-            }
-            home.feedback.hide();
-        })
-    }
-    catch(error){
-        console.log(query)
-        home.search.showFeedback('No query')
-    }
-    
+    logic.searchDucks(query, (error , ducks) => {
+        if(error){
+            console.log('errorrrrrrr' , error.message)
+            // home.search.showFeedback(error.message);
+            alert(error.message)
+            
+        }else{
+            home.results.listItems(ducks);
+            home.results.show();
+            home.search.feedback.hide();
+        }
+        home.search.feedback.hide();
+    })
 });
 
 home.results.onClickItem = function(id) {
-    logic.retrieveDuck(id, function(duck) {
-        home.results.hide();
-        home.detail.displayDuck(duck);
-        home.detail.show();
+    logic.retrieveDuck(id, function(error , duck) {
+        if(error){
+            alert(error.message)
+        } else {
+            home.results.hide();
+            home.detail.displayDuck(duck);
+            home.detail.show();
+        }
+        
     });
 };
 
