@@ -9,6 +9,8 @@ class DuckDetail extends Results {
         super(container)
     }
 
+    
+
     displayDuck = (duck) => {
         let title = this.container.getElementsByTagName('h3')[0]
         title.innerText = duck.title
@@ -25,6 +27,10 @@ class DuckDetail extends Results {
         let link = this.container.getElementsByTagName('a')[0]
         link.href = duck.link
 
+        let favorite = new DuckFavorite(container.getElementsByTagName('button')[0])
+        this.favorite = favorite
+    
+
     }
 
     onNavigateBack = (expression) => {
@@ -36,4 +42,14 @@ class DuckDetail extends Results {
             expression()
         })
     }
+    onClickFavorite = (expression) => {
+        let favorite = this.container.getElementsByTagName('button')[0]
+
+        favorite.addEventListener('click', (event) => {
+            event.preventDefault()
+
+            expression()
+        })
+    }
+    
 }

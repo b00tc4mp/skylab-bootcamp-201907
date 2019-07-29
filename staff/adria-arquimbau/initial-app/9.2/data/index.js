@@ -5,8 +5,8 @@
 const users = new Curray()
 
 users.push({
-    name: 'l',
+    name: 'a',
     surname: 'a',
-    email: 'a@gmail.com',
-    password: '1'
+    email: 'a@a.com',
+    password: 'a'
 })

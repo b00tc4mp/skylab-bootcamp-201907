@@ -6,7 +6,7 @@
   display: none;
 }
 
-.duck-detail, .duck-results, .duck-home, .search, .feedback, .register-success, .register, .login, .landing {
+.duck-favourites, .duck-detail, .duck-results, .duck-home, .search, .feedback, .register-success, .register, .login, .landing {
   padding: 0.5rem;
   margin: 1.5rem;
   border: 0.1rem solid gray;
@@ -62,6 +62,17 @@
   width: 333px;
 }
 .duck-detail__price {
+  background-color: yellow;
+  color: red;
+}
+
+.duck-favourites {
+  background-color: plum;
+}
+.duck-favourites__photo {
+  width: 333px;
+}
+.duck-favourites__price {
   background-color: yellow;
   color: red;
 }

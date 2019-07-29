@@ -4,6 +4,8 @@
  * @param {HTMLElement} container 
  */
 
+
+ //Class Component (es sol dir aixi generic 'conveni') pare amb funcions generiques per heredar a totes les clases
 class Component{
     constructor(container){
         if (!(container instanceof HTMLElement)) throw new TypeError(container + ' is not an HTMLElement')

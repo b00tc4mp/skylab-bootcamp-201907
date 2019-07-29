@@ -65,9 +65,10 @@ login.onSubmitLogin( (email, password) => {
     }
 })
 
-// welcome panel
-
+// home panel
 const home = new DuckHome(document.getElementsByClassName('duck-home')[0])
+const favorite = new DuckFavorite(document.getElementsByClassName('duck-favorite')[0])
+
 
 home.onClickLogout( () => {
     home.hide()
@@ -79,6 +80,11 @@ home.search.onSearch( query => {
         home.results.listItems(ducks)
         home.results.show()
     })
+})
+
+home.onClickFavorite( () => {
+    home.hide()
+    favorite.show()
 })
 
 home.results.onClickItem = id => {
@@ -95,3 +101,10 @@ detailback.onNavigateBack( () => {
     detailback.hide()
     home.results.show()
 })
+
+favorites.onNavigateBack( () => {
+    favorites.hide()
+    home.search.show()
+})
+
+

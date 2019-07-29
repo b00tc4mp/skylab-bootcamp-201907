@@ -4,6 +4,8 @@
  * @param {HTMLElement} container 
  */
 
+
+//CLase landing heredant de components amb funcionalitats de
 class Landing extends Component {
     constructor (container){
         super(container)
