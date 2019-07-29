@@ -17,5 +17,5 @@ call = (url, expression) => {
 		//TODO
 	}
 
-	request.send()
+	xhr.send()
 }

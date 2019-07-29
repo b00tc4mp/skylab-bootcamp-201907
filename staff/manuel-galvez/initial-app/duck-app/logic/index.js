@@ -1,6 +1,7 @@
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+let loggedUser
+let referer
 
-debugger
 const logic = {
 	register: (name, surname, email, password) => {
 		if (name == undefined) throw new TypeError(`Name is undefined.`)
@@ -76,7 +77,7 @@ const logic = {
 				if (error) {
 					if (error.status < 500) expression(undefined, [])
 					else expression(new Error(`fail search with criteria ${query}`))
-				} else expresssion(undefined, result)
+				} else expression(undefined, result)
 			}
 		)
 	},
@@ -100,12 +101,20 @@ const logic = {
 
 	retrieveFavorites: expression => {
 		const favs = []
+		let count = 0
+		let _error
+
 		loggedUser.favorites.forEach(duckID => {
-			logic.retrieveDuck(duckID, result => {
-				const [duck, request] = [...result]
-				favs.push(duck)
-				if (favs.length === loggedUser.favorites.length) {
-					expression(favs)
+			logic.retrieveDuck(duckID, (error, duck) => {
+				if (error) {
+					_error = error
+				} else {
+					favs.push(duck)
+				}
+				count++
+				if (count === loggedUser.favorites.length) {
+					if (_error) expression(_error)
+					else expression(undefined, favs)
 				}
 			})
 		})
