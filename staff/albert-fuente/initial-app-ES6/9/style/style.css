@@ -14,69 +14,20 @@
   background-color: lightgray;
 }
 .landing {
-  padding: 40px;
-  margin-right: 60%;
-}
-
-.landing__button {
-  color: black;
-  text-decoration: none;
-  background-color: red;
-  padding: 2%;
-  border-radius: 10%;
-  border: 2px solid #333;
+  display: inline-block;
+  background-color: blue;
 }
 
 .login {
   background-color: orange;
-  margin-right: 50%;
-}
-.login label {
-  padding-top: 10px;
-  font-weight: bold;
-}
-
-.login__button {
-  margin: 1%;
-  margin-left: 10%;
-  color: black;
-  text-decoration: none;
-  background-color: grey;
-  padding: 5px;
-  border: 2px solid #333;
-  cursor: pointer;
-  font-weight: bold;
 }
 
 .register {
   background-color: gold;
-  margin-right: 50%;
-}
-
-.register__form {
-  display: grid;
-}
-.register__form label {
-  padding-top: 10px;
-  font-weight: bold;
-}
-
-.register__button {
-  margin: 1%;
-  margin-left: 20%;
-  margin-right: 20%;
-  color: black;
-  text-decoration: none;
-  background-color: grey;
-  padding: 5px;
-  border: 2px solid #333;
-  cursor: pointer;
-  font-weight: bold;
 }
 
 .register-success {
   background-color: salmon;
-  margin-right: 50%;
 }
 
 .feedback--success {
@@ -208,4 +159,4 @@ h1 {
   color: #ED091C;
 }
 
-/*# sourceMappingURL=index.css.map */
+/*# sourceMappingURL=style.css.map */
