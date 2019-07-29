@@ -22,16 +22,6 @@ describe('Curray', function () {
         });
     })
 
-    describe('entries', function(){
-        it ('should return a new array iterator, with keys and values of the initial array', function(){
-            var curray = new Curray('a','b','c')
-            var result = curray.entries();
-
-            var arrResult = Array.from(result);
-            expect (arrResult).toEqual([0,'a'],[1,'b'],[2,'c']);
-
-        });
-    });
 
     
     describe('every', function(){
@@ -282,27 +272,19 @@ describe('Curray', function () {
     });
 
     describe("slice", function(){
-        it ("should return a shallow copy of the initial array with only 2 sliced elements", function(){
-            var curray = new Curray ("banana", "orange", "lemon", "cherry", "avocado", "apple");
-            
-            var result = curray.slice(1, 3);
-            // var arrResult = Array.from(result);
-
-            expect(result).toEqual(["orange", "lemon"]);
-    
-            
-        });
-        
-        it ("should return a shallow copy of the initial array with the sliced elements", function(){
-            var curray = new Curray ("banana", "orange", "lemon", "cherry", "avocado", "apple");
-            
-            var result = curray.slice(2);
-            // var arrResult = Array.from(result);
-
-            expect(result).toEqual(["lemon", "cherry", "avocado", "apple"]);
-    
-            
-        });
+        it('should break if first is not a number', function() {
+            var curray = new Curray();
+            expect(function() {
+              curray.slice('a', 6);
+            }).toThrowError(TypeError, 'a is not a number');
+          });
+      
+          it('should should break if final is not undefined and is not a number', function() {
+            var curray = new Curray();
+            expect(function() {
+              curray.slice(5, 'b');
+            }).toThrowError(TypeError, 'b is not a number');
+          });
     });
 
     describe('some', function(){

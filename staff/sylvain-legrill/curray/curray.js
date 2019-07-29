@@ -29,10 +29,6 @@ Curray.prototype.concat = function(element) {
     return this;
 };
 
-Curray.prototype.entries = function(){
-    
-   
-}; 
 
 Curray.prototype.every = function(value){
     //if (!(expression instanceof Function)) throw TypeError(expression + ' is not a function');
@@ -115,6 +111,17 @@ Curray.prototype.filter = function(expression){
    }  return newExp;
 
 };
+
+Curray.prototype.find = function(expression) {
+    if (arguments.length === 0) throw TypeError('missing argument 0 when calling function forEach');
+
+    if (!(expression instanceof Function)) throw TypeError(expression + ' is not a function');
+
+    for (var i = 0; i < this.length; i++) {
+        var element = this[i];
+        if (expression(this[i], i, this)) return element;
+    }
+}
 
 Curray.prototype.flat = function(depth) {
     
@@ -275,9 +282,34 @@ Curray.prototype.shift = function(){
    
 };
 
-Curray.prototype.slice = function() {
-   
-};
+Curray.prototype.slice = function(first, last) {
+    if (typeof first !== 'number' && last !== undefined)
+      throw new TypeError(first + ' is not a number');
+    if (typeof last !== 'number' && last !== undefined)
+      throw new TypeError(last + ' is not a number');
+  
+    var cut = [];
+    var negative = -Math.abs(first);
+    if (first === -Math.abs(first) && last === undefined) {
+      var positive = Math.abs(negative);
+      for (i = this.length - positive; i < this.length; i++) {
+        cut.push(this[i]);
+      }
+    } else if (first === Math.abs(first) && last === undefined) {
+      for (i = first; i < this.length; i++) {
+        cut.push(this[i]);
+      }
+    } else if (first === undefined && last === undefined) {
+      for (i = 0; i < this.length; i++) {
+        cut.push(this[i]);
+      }
+    } else {
+      for (i = first; i < last; i++) {
+        cut.push(this[i]);
+      }
+    }
+    return cut;
+  };
 
 
 Curray.prototype.some = function(expression) {
