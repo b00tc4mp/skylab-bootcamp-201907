@@ -1,13 +1,10 @@
-function call(url, expression) {
-	var request = new XMLHttpRequest()
+call = (url, expression) => {
+	const request = new XMLHttpRequest()
 
 	request.open("get", url)
-
-	request.onload = function() {
-		var results = JSON.parse(request.responseText)
-
-		expression(results)
+	request.onload = () => {
+		const ducks = JSON.parse(request.responseText)
+		expression([ducks, request])
 	}
-
 	request.send()
 }

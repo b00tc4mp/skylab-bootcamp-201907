@@ -56,6 +56,7 @@
 			<section class="duck-home hide">
 				<h2>Welcome!</h2>
 				<button>Logout</button>
+				<button>Favorites</button>
 
 				<!-- Search -->
 				<section class="search">
@@ -81,10 +82,20 @@
 				<!-- Detail -->
 				<section class="duck-detail hide">
 					<h3>Title</h3>
-					<img class="duck-detail__photo" src="http://whetever.com/image.jpg" />
+					<img class="duck-detail__photo" src="#" />
 					<span class="duck-detail__price">Price</span>
 					<p>Description</p>
+					<a href="">Back</a>
 					<a href="">Link</a>
+					<a href="">Favorite</a>
+				</section>
+				<!-- Favorite -->
+				<section class="duck-favorites hide">
+					<ul>
+						<li>Duck 1</li>
+						<li>Duck 2</li>
+						<li>Duck 3</li>
+					</ul>
 				</section>
 			</section>
 		</main>
@@ -92,7 +103,7 @@
 		<script src="utils/call.js"></script>
 		<script src="utils/curray.js"></script>
 		<script src="data/index.js"></script>
-		<script src="logic/logic.js"></script>
+		<script src="logic/index.js"></script>
 		<script src="components/component.js"></script>
 		<script src="components/landing.js"></script>
 		<script src="components/feedback-attached.js"></script>
@@ -106,6 +117,7 @@
 		<script src="components/custom/duck-home.js"></script>
 		<script src="components/custom/duck-results.js"></script>
 		<script src="components/custom/duck-detail.js"></script>
+		<script src="components/custom/duck-favorites.js"></script>
 		<script src="index.js"></script>
 	</body>
 </html>

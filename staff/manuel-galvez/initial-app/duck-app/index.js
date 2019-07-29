@@ -1,8 +1,8 @@
 /**
- * 
+ *
  * Duck App
  * Presentation
- * 
+ *
  */
 
 /** Landing */
@@ -35,24 +35,6 @@ register.onSubmitRegister((name, surname, email, password) => {
 	}
 })
 
-/** Login **/
-const login = new Login(document.querySelector(".login"))
-
-login.onNavigateBack(() => {
-	landing.show()
-	login.hide()
-})
-
-login.onSubmitLogin((email, password) => {
-	try {
-		logic.login(email, password)
-		login.hide()
-		home.show()
-	} catch (error) {
-		login.showFeedback(error.message)
-	}
-})
-
 /** Success Register **/
 const registerSuccess = new RegisterSuccess(
 	document.querySelector(".register-success")
@@ -62,17 +44,84 @@ registerSuccess.onNavigateToLogin(() => {
 	login.show()
 })
 
+/** Login **/
+const login = new Login(document.querySelector(".login"))
+
+login.onNavigateBack(() => {
+	landing.show()
+	login.hide()
+})
+
+let loggedUser
+login.onSubmitLogin((email, password) => {
+	try {
+		loggedUser = logic.login(email, password)
+		login.hide()
+		home.show()
+	} catch (error) {
+		login.showFeedback(error.message)
+	}
+})
+
 /** Home **/
 const home = new DuckHome(document.querySelector(".duck-home"))
-home.onLogout(() => {
+home.onClickLogout(() => {
 	home.hide()
 	landing.show()
 })
 
-const search = new Search(document.querySelector(".search"))
-search.onSearch(query => {
-	logic.searchDucks(query, ducks => {
-		
+home.onClickFavorites(() => {
+	logic.retrieveFavorites(favoriteResults => {
+		home.favorites.listItems(favoriteResults)
+		home.favorites.show()
+		home.results.hide()
 	})
 })
 
+home.search.onSearch(query => {
+	try {
+		logic.searchDucks(query, results => {
+			try {
+				const [ducks, request] = [...results]
+				logic.validateRequest(ducks, request)
+				home.results.listItems(ducks)
+				home.results.show()
+				login.showFeedback(error.message)
+			} catch (error) {
+				login.showFeedback(error.message)
+			}
+		})
+	} catch (error) {
+		login.showFeedback(error.message)
+	}
+})
+
+home.results.onClickItem = id => {
+	logic.retrieveDuck(id, result => {
+		const [duck, request] = [...result]
+		home.results.hide()
+		home.detail.displayDuck(duck)
+		home.detail.show()
+	})
+}
+
+home.detail.onNavigateBack(() => {
+	home.show()
+	home.search.show()
+	home.results.show()
+	home.detail.hide()
+})
+
+home.detail.onToggleFavorite(id => {
+	logic.favorite(id)
+})
+
+home.favorites.onClickItem = id => {
+	logic.retrieveDuck(id, result => {
+		const [duck, request] = [...result]
+		home.results.hide()
+		home.favorites.hide()
+		home.detail.displayDuck(duck)
+		home.detail.show()
+	})
+}

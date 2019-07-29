@@ -10,7 +10,7 @@ class SubmitBack extends FeedbackAttached {
 		super(container)
 	}
 
-	onNavigateBack(expression) {
+	onNavigateBack = expression => {
 		const backLink = this.container.querySelector("a")
 		backLink.addEventListener("click", event => {
 			event.preventDefault()

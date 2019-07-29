@@ -1,11 +1,11 @@
 /**
  *
- * Duck Results Abstraction
+ * Duck Favorite abstraction
  * @params {HTMLElement}
  *
  */
 
-class DuckResults extends Results {
+class DuckFavorites extends Results {
 	constructor(container) {
 		super(container)
 	}

@@ -11,11 +11,11 @@ class Search extends FeedbackAttached {
 	}
 
 	onSearch = expression => {
-		const searchForm = this.container.querySelector('form')
+		const searchForm = this.container.querySelector("form")
 
-		searchForm.addEventListener('submit', event => {
+		searchForm.addEventListener("submit", event => {
 			event.preventDefault()
-			const query = event.target.query.value
+			const query = searchForm.query.value
 			expression(query)
 		})
 	}
