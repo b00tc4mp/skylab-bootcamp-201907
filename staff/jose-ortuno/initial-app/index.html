@@ -1,80 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Intial App</title>
-    <link rel='stylesheet' href='css/style.css'>
+    <title>Document</title>
+    <link rel="stylesheet" href="style/index.css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,400i|Lobster&display=swap" rel="stylesheet">
 </head>
-<body>
-    <main id="panel" class="panel">
-        <h1 class="panel__title-app">Initial App</h1>
-        <!-- Initial panel -->
-        <section id="landing" class="landing panel__section panel--show">
-            <h2 class="panel__title landing__title-page">Login</h2>
-            <a href="" class="landing__register-link">Register</a> or <a href="" class="landing__login-link">Login</a>
-        </section>
-        
-        <!-- Register panel-->
-        <section id="register" class="register panel__section panel--hide">
-            <h2 class="panel__title register__title-page">Register</h2>
-            <form class="form">
-                <input id="name" class="form__input" type="text" placeholder="Name*">
-                <input id="surname" class="form__input" type="text" placeholder="Surname*">
-                <input id="email" class="form__input" type="email" placeholder="E-mail*">
-                <input id="password" class="form__input" type="password" placeholder="Password*">
-                <input id="submit" class="form__input form--submit" type="submit" value="Send">
-            </form>
-            <p class="error panel--hide">A message.</p>
-            <a class="panel__section--back" href="">back</a>
-        </section>
-        
-        <!-- Registered panel-->
-        <section id="registered" class="registered panel__section panel--hide">
-            <h2 class="panel__title registered__title-page">Register ok</h2>
-            <p class="registered__text-info">Proceed to <a href="">login</a></p>
-        </section>
-        
-        <!-- Login panel -->
-        <section id="login" class="login panel__section  panel--hide">
-            <h2 class="panel__title login__title-page">Login</h2>
-            <form class="form">
-                <input id="email" class="form__input" type="email" placeholder="email">
-                <input id="password" class="form__input" type="password" placeholder="password">
-                <input id="submit" class="form__input form--submit" type="submit" value="Send">
-            </form>
-            <p class="error panel--hide">A message.</p>
-            <a class="panel__section--back" href="">back</a>
-        </section>
-        
-        <!-- Welcome panel -->
-        <section id="welcome" class="welcome panel__section panel--hide">
-            <h2 class="panel__title welcome__title-page">Login ok</h2>
-            <p class="welcome__info-page">Welcome!</p>
-            <a class="panel__section--back" href="">Logout</a>
-        </section>
-        
-        <!-- Search panel -->
-        <section id="search" class="login panel__section  panel--hide">
-            <h2 class="panel__title login__title-page">Find your favorite duck:</h2>
-            <form class="form">
-                <input class="form__input" type="text" id="search" placeholder="Search">
-                <button class="form__input form--submit" type="submit">Quak!</button>
-            </form>
-            <!-- <a class="panel__section--back" href="">back</a> -->
-        </section>
-        
-        <!-- Product panel -->
-        <section id="product" class="product panel__section panel--hide">
 
+<body>
+    <main>
+        <h1>QuApp!</h1>
+
+        <!-- Landing -->
+        <section class="landing show">
+            <a href="">Register</a> or <a href="">Login</a>.
+        </section>
+
+        <!-- Register -->
+        <section class="register hide">
+            <form>
+                <label for="email">Name</label>
+                <input type="text" id="name" placeholder="Name">
+                <label for="email">Surname</label>
+                <input type="text" id="surname" placeholder="Surname">
+                <label for="email">email</label>
+                <input type="email" id="email" placeholder="email">
+                <label for="email">Password</label>
+                <input type="password" id="password" placeholder="Password">
+                <button type="submit">Register</button>
+            </form>
+            <p class="panel__feedback feedback feedback--error">A message.</p>
+            <a class="back" href="">back</a>
+        </section>
+
+        <!-- Register Success -->
+        <section class="register-success hide">
+            Ok, registered succeeded, you can now proceed to <a href="">login</a>.
+        </section>
+
+        <!-- Login -->
+        <section class="login hide">
+            <form>
+                <label for="email">E-mail</label>
+                <input type="email" id="email" placeholder="email">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="password">
+                <button type="submit">Login</button>
+            </form>
+            <p class="panel__feedback feedback feedback--error">A message.</p>
+            <a class="back" href="">back</a>
+        </section>
+
+        <!-- Home -->
+        <section class="duck-home hide">
+            <h2>Welcome!</h2>
+            <button>Logout</button>
+            <button>Favorites</button>
+
+            <!-- Search -->
+            <section class="search">
+                <h3>Search</h3>
+                <form>
+                    <input type="text" name="query">
+                    <button>Search</button>
+                </form>
+                <p class="panel__feedback feedback feedback--error hide">A message.</p>
+            </section>
+
+            <!-- Results -->
+            <section class="duck-results hide">
+                <ul>
+                    <li>Duck 1</li>
+                    <li>Duck 2</li>
+                    <li>Duck 3</li>
+                </ul>
+            </section>
+
+            <!-- Detail -->
+            <section class="duck-detail hide">
+                <h3>Title</h3>
+                <img class="duck-detail__photo" src="">
+                <span class="duck-detail__price">Price</span>
+                <p>Description</p>
+                <a href="">link</a>
+                <a class="back" href="">back</a>
+                <a href="">add favorite</a>
+            </section>
+
+            <!-- Favorites -->
+            <section class="duck-favorites hide">
+                <ul>
+                    <li>Duck 1</li>
+                    <li>Duck 2</li>
+                    <li>Duck 3</li>
+                </ul>
+                <a class="back" href="">back</a>
+            </section>
         </section>
     </main>
-    <script src="js/curray.js"></script>
-    <script src="js/data.js"></script>
-    <script src="js/logic.js"></script>
-    <script src="js/components.js"></script>
-    <script src="js/main.js"></script>
+
+    <script src="utils/call.js"></script>
+    <script src="utils/curray.js"></script>
+    <script src="data/index.js"></script>
+    <script src="logic/index.js"></script>
+    <script src="components/component.js"></script>
+    <script src="components/landing.js"></script>
+    <script src="components/submit-back.js"></script>
+    <script src="components/register.js"></script>
+    <script src="components/register-success.js"></script>
+    <script src="components/login.js"></script>
+    <script src="components/feedback.js"></script>
+    <script src="components/search.js"></script>
+    <script src="components/results.js"></script>
+    <script src="components/custom/duck-home.js"></script>
+    <script src="components/custom/duck-results.js"></script>
+    <script src="components/custom/duck-detail.js"></script>
+    <script src="components/custom/duck-favorites.js"></script>
+    <script src="index.js"></script>
 </body>
+
 </html>
