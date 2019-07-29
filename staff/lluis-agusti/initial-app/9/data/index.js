@@ -9,8 +9,7 @@ users.push({
     surname: 'a',
     email: 'a@gmail.com',
     password: '1',
-    status: 0,
-    favourites: ["5c3853aebd1bde8520e66ee8", " ", " "]
+    favourites: new Curray() //se puede poner sin paréntesis?
 })
 
-// MODO GUARDAR 
+// MODO GUARDAR

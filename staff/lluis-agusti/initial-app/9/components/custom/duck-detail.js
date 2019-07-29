@@ -49,13 +49,13 @@ class DuckDetail extends Results {
         //     this.onClickItem(duck.id)
         // })
 
-        // button.addEventListener('click', (event) => {
-        //     event.preventDefault()
-        //     users[favourites].push(duck.id)
-
-        //     this.onClickItem(duck.id)
-        // })
-
+        
+        favouriteOrNot.addEventListener('click', (event) => {
+             event.preventDefault()
+             alert("ID " + duck.id + "pushed to users[0].favourites")
+             users[0].favourites.push(duck.id)
+            this.onClickItem(duck.id)
+         })
     }
 
     onNavigateBack = expression => {

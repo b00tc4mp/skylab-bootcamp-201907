@@ -114,3 +114,4 @@ detailback.onNavigateBack( () => {
     detailback.hide()
     home.results.show()
 })
+

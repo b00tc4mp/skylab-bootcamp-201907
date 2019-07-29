@@ -4,7 +4,7 @@
 
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-let logic = {
+const logic = {
     register: (name, surname, email, password) => {
         let errors = ''
 
@@ -93,7 +93,6 @@ let logic = {
         // TODO validate id, expression
 
         call('http://duckling-api.herokuapp.com/api/ducks/' + id, expression)
-    }
-
+    },
 
 }
