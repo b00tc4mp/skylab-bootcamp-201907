@@ -83,16 +83,24 @@ home.onClickLogout(function () {
 // };
 
 home.search.onSearch(function (query) {
-    logic.searchDucks(query, function(ducks) {
-        home.results.listItems(ducks);
-        home.results.show();
+    logic.searchDucks(query, function(error, ducks) {
+        if (error) {
+            alert(error.message);
+        } else {
+            home.results.listItems(ducks);
+            home.results.show();
+        }
     });
 });
 
 home.results.onClickItem = function(id) {
-    logic.retrieveDuck(id, function(duck) {
-        home.results.hide();
-        home.detail.displayDuck(duck);
-        home.detail.show();
+    logic.retrieveDuck(id, function(error, duck) {
+        if (error) {
+            alert(error.message)
+        } else {
+            home.results.hide();
+            home.detail.displayDuck(duck);
+            home.detail.show();
+        }
     });
 };

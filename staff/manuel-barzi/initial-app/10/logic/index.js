@@ -49,7 +49,8 @@ const logic = {
                 name: name,
                 surname: surname,
                 email: email,
-                password: password
+                password: password,
+                favorites: new Curray
             })
         }
     },
@@ -103,5 +104,63 @@ const logic = {
             else
                 expression(undefined, result)
         })
+    },
+
+    addDuckToFavorites(email, id, expression) {
+        // TODO validate args (type and content, where it applies)
+
+        const user = users.find(user => user.email === email)
+
+        if (!user) throw Error(`user with email ${email} not found`)
+
+        call('http://duckling-api.herokuapp.com/api/ducks/' + id, (error, result) => {
+            if (error)
+                expression(new Error(`cannot retrieve duck with id ${id}`))
+            else {
+                // TODO do not add fav if already exists
+                user.favorites.push(id)
+
+                expression()
+            }
+        })
+    },
+
+    removeDuckFromFavorites() {
+        // TODO
+    },
+
+    retrieveFavoriteDucks(email, expression) {
+        // TODO valide args
+
+        const user = users.find(user => user.email === email)
+
+        if (!user) throw Error(`user with email ${email} not found`)
+
+        const { favorites } = user
+
+        if (!favorites.length) expression([])
+        else {
+            let count = 0
+            const ducks = []
+            let _error
+
+            favorites.forEach(id => {
+                call('http://duckling-api.herokuapp.com/api/ducks/' + id, (error, duck) => {
+                    if (error) {
+                        if (!_error) _error = error
+                    } else {
+                        ducks.push(duck)
+                    }
+                
+                    count++
+
+                    if (count === favorites.length) {
+                        if (_error) expression(_error)
+                        else expression(undefined, ducks)
+                    }
+                })
+            })
+        }
+
     }
 }
