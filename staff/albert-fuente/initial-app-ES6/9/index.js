@@ -58,6 +58,8 @@ login.onNavigateBack( ()=> {
 login.onSubmitLogin( (email, password) =>{
     try {
         logic.login(email, password)
+        document.querySelector("h1").style.display="none"
+
 
         login.hide()
         home.show()
@@ -99,7 +101,7 @@ home.detail.onNavigateBack( ()=>{
     home.results.show()
     home.detail.hide()
 })
-home.detail.favourites( ()=>{
+home.detail.addFav( ()=>{
     
 })
 

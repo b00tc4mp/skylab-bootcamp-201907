@@ -10,7 +10,7 @@ class DuckFavourite extends Component{
         super(container)
     }
     // show hide
-    listItem (title) {
+   /*  listItem (title) {
         const ul = this.container.getElementsByTagName('ul')[0]
 
         let li=document.createElement("li")
@@ -21,7 +21,7 @@ class DuckFavourite extends Component{
 
         ul.appendChild(li)
 
-    }
+    } */
 
 
 }

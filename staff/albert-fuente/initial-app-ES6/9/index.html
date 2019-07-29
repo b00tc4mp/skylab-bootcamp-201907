@@ -19,12 +19,12 @@
 
         <!-- Landing -->
         <section class="landing show position1">
-            <a href="">Register</a> or <a href="">Login</a>.
+            <a class="landing__button" href="">Register</a> or <a class="landing__button" href="">Login</a>.
         </section>
 
         <!-- Register -->
         <section class="register hide">
-            <form>
+            <form class="register__form">
                 <label for="name">Name</label>
                 <input type="text" id="name">
                 <label for="surname">Surname</label>
@@ -33,7 +33,7 @@
                 <input type="email" id="email">
                 <label for="password">Password</label>
                 <input type="password" id="password">
-                <button type="submit">Register</button>
+                <button class="register__button" type="submit">Register</button>
             </form>
             <p class="panel__feedback feedback feedback--error hide">A message.</p>
             <a href=""><i class="fas fa-arrow-circle-left"></i>back</a>
@@ -51,7 +51,7 @@
                 <input type="email" id="email">
                 <label for="password">Password</label>
                 <input type="password" id="password">
-                <button type="submit">Login</button>
+                <button type="submit" class="login__button">Login</button>
             </form>
             <p class="panel__feedback feedback feedback--error hide">A message.</p>
             <a href=""><i class="fas fa-arrow-circle-left"></i>back</a>
@@ -85,13 +85,14 @@
     
                 <!-- Detail -->
                 <section class="duck-detail hide">
-                    <h3>Title</h3>
+                    <h3 class="duckTitle">Title</h3>
                     <img class="duck-detail__photo" src="http://whetever.com/image.jpg">
                     <span class="duck-detail__price">Price</span>
                     <p>Description</p>
                     <a href="" target="_blank">Link</a>
                     <a href=""><i class="fas fa-arrow-circle-left"></i>back</a>
                     <button class="duck-detail__fav"><i class="fas fa-2x fa-heart"></i></button>
+                    <p id="favTest"></p>
                 </section>
     
                 <!-- Favourites -->

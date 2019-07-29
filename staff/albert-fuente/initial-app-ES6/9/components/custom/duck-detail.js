@@ -23,6 +23,19 @@ class DuckDetail extends Component{
     
         const link = this.container.getElementsByTagName('a')[0]
         link.href = duck.link
+
+        const fav=this.container.getElementsByClassName("duck-detail__fav")[0]
+        fav.dataset.value=duck.title
+
+
+
+        
+
+
+
+
+
+
     }
     //FUNCTION FOR BACK BUTTON
     onNavigateBack (expression) {
@@ -34,24 +47,58 @@ class DuckDetail extends Component{
             expression()
         })
     }
-    //FUNCTION ADD TO FAVORITES
-    favourites(expression){
-        const fav=this.container.children[6]
 
-        const ul = document.getElementById('fav')
+    addFav(expression){
+        const fav=this.container.getElementsByClassName("duck-detail__fav")[0]
+            
+    
+        fav.addEventListener("click",event=>{
+            event.preventDefault();
+            
+            const ul = document.getElementById('favs')
+            alert("FAVORITO: "+ fav.dataset.value)
+            const h3 = document.createElement('h3')
+            const li=document.createElement("li")
+            h3.innerText = fav.dataset.value
+            li.appendChild(h3)
+            ul.appendChild(li)
+
+
+/*          const h3 = document.createElement('h3')
+            const li=document.createElement("li")
+            users[0].favourite.push(duck.title)
+            h3.innerText = users[0].favourite 
+            
+            li.appendChild(h3)
+            ul.appendChild(li) */
+    
+            expression(fav.dataset.value)
+        })
+    
+    }
+    //FUNCTION ADD TO FAVORITES
+/*     favourites(expression){
+        const fav=this.container.getElementsByClassName("duck-detail__fav")[0]
+        
 
         fav.addEventListener("click",event=>{
             event.preventDefault();
-            alert("FAVORITO")
-            let h3 = document.createElement('h3')
-            let li=document.createElement("li")
-            h3.innerText = duck.title    
+            
+            const ul = document.getElementById('favs')
+            let title=document.querySelector(".duckTitle").innerText
+            alert("FAVORITO: " + title)
+            const fav=document.querySelector("#favTest")
+            fav.innerText=title
+            const h3 = document.createElement('h3')
+            const li=document.createElement("li")
+            h3.innerText = title    
+            
             li.appendChild(h3)
             ul.appendChild(li)
     
             expression()
         })
-    }
+    } */
 
 
 }

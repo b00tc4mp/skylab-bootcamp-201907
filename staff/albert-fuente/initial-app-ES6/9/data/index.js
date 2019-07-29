@@ -8,7 +8,8 @@ users.push({
     name: 'Manuel',
     surname: 'Barzi',
     email: 'manuelbarzi@gmail.com',
-    password: '123'
+    password: '123',
+    favourite:[]
 })
 
 
