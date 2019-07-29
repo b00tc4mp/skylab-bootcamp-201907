@@ -4,20 +4,26 @@ const call = (url, expression) => {
 
     // if (!URL_REGEX.test(url)) throw Error('worng URL')
     
-    var request = new XMLHttpRequest()
+    var xhr = new XMLHttpxhr()
 
-    request.open('get', url);
+    xhr.open('get', url);
 
-    request.onload = () => {
-        const results = JSON.parse(request.responseText).error ? [] : JSON.parse(request.responseText);
-        expression(results);
+    xhr.onload = () => {
+        if(xhr.status < 300){
+            const results = JSON.parse(xhr.responseText).error ? [] : JSON.parse(xhr.responseText);
+            expression(undefined , results)
+        } else if(xhr.status >= 400){
+            const error = new Error (xhr.status)
+            error.status = xhr.status
+            expression(error)
+        }
     };
 
-    // request.onerror = (e) => {
+    // xhr.onerror = (e) => {
     //     alert("Error " + e.target.status + " occurred while receiving the document.");
     // }
 
-    request.send();
+    xhr.send();
 }
 
 

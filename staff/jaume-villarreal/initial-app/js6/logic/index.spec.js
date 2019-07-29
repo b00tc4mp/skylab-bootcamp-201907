@@ -11,7 +11,8 @@ describe('logic', function () {
                 name: 'Manuel',
                 surname: 'Barzi',
                 email: 'manuelbarzi@gmail.com',
-                password: '123'
+                password: '123',
+                favorites: []
             };
 
             logic.register(user.name, user.surname, user.email, user.password);
@@ -104,28 +105,28 @@ describe('logic', function () {
             });
         });
 
-        it('sholud throw an error => no arguments declared' , function(){
-            expect(function(){
+        it('sholud throw an error => undefined query' , function(){
+            expect(() => {
                 logic.searchDucks();
-            }).toThrowError(Error , 'expected 0 arguments');
+            }).toThrowError(TypeError , 'undefined is not a string');
         })
 
-        it("should throw an error => query is undefined" , function(){
-            expect(function(){
-                logic.searchDucks(undefined , );
-            }).toThrowError(TypeError , "expected query in argument[0]")
+        it("should throw an error => query is not a string" , function(){
+            expect(() => {
+                logic.searchDucks(2 , );
+            }).toThrowError(TypeError , "2 is not a string")
         })
 
-        it('should throw an error => arguments[1] is not declared' , function(){
+        it('should throw an error => expression is not declared' , function(){
             expect(function(){
                 logic.searchDucks('orange');
-            }).toThrowError(TypeError , 'expected expression in arguments[1]')
+            }).toThrowError(TypeError , 'undefined is not a function')
         })
 
-        it('should throw an error => arguments[1] is not an expression' , function(){
+        it('should throw an error => expression is not an expression' , function(){
             expect(function(){
                 logic.searchDucks('orange' , 2)
-            }).toThrowError(TypeError , `undefined is not a function`)
+            }).toThrowError(TypeError , `2 is not a function`)
         })
     });
 
@@ -133,33 +134,43 @@ describe('logic', function () {
         it('should succeed on valid id', function (done) {
             const id = '5c3853aebd1bde8520e66ee8';
 
-            logic.retrieveDuck(id, function (duck) {
+            logic.retrieveDuck(id , (error , duck) => {
+                expect(error).toBeUnefined();
                 expect(duck).toBeDefined();
                 expect(duck.id).toBe(id);
                 expect(duck.title).toBeDefined();
                 expect(duck.imageUrl).toBeDefined();
                 expect(duck.price).toBeDefined();
                 expect(duck.link).toBeDefined();
+                done();
+            });
+        });
+        
+        it('should succeed on no valid id', function (done) {
+            const id = '123';
 
+            logic.retrieveDuck(id , (error , duck) => {
+                expect(error).toBeDefined();
+                expect(duck).toBeUndefined();
                 done();
             });
         });
 
         it('should throw an error => expected 0 arguments' , function(){
-            expect(function(){
+            expect( () => {
                 logic.retrieveDuck()
             }).toThrowError(Error , 'expected 0 arguments')
         })
 
         it('should throw error => argument[1] is undefined' , function(){
-            expect(function(){
+            expect( () => {
                 const id = '5c3853aebd1bde8520e66ee8';
                 logic.retrieveDuck(id)
             }).toThrowError(TypeError , 'expected expression in arguments[1]')
         })
 
         it('should throw error => argument[1] is not an expression' , function(){
-            expect(function(){
+            expect( () => {
                 const id = '5c3853aebd1bde8520e66ee8';
                 logic.retrieveDuck(id , 2)
             }).toThrowError(TypeError , 'undefined is not a function')

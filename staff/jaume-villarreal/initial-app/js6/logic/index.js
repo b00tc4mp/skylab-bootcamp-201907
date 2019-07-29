@@ -76,23 +76,29 @@ const logic = {
     searchDucks: function (query, expression) {
         // if(!arguments.length) throw new Error('expected 0 arguments')
 
-        if(arguments[0] === undefined) throw new TypeError('expected query in argument[0]')
+        if(typeof query !== 'string') throw new TypeError (`${query} is not a string`)
         
-        if(arguments.length === 1) throw new TypeError('expected expression in arguments[1]')
-
-        if(!(arguments[1] instanceof Function)) throw new TypeError('undefined is not a function')
+        if(typeof expression !== 'function') throw new TypeError (`${expression} is not a function`)
         
-        call('http://duckling-api.herokuapp.com/api/search?q=' + query, expression);
+        call('http://duckling-api.herokuapp.com/api/search?q=' + query, (error , result) => {
+            if(error)
+                expression(new Error (`fail search with criteria ${query}`))
+            else
+                expression(undefined , result)
+        });
     },
 
     retrieveDuck: function (id, expression) {
-        // TODO validate id, expression
-        if(!arguments.length) throw new Error('expected 0 arguments')
         
-        if(arguments.length === 1) throw new TypeError('expected expression in arguments[1]')
-
-        if(!(arguments[1] instanceof Function)) throw new TypeError('undefined is not a function')
+        // if(!arguments.length) throw new Error('expected 0 arguments')
         
-        call('http://duckling-api.herokuapp.com/api/ducks/' + id, expression);
+        // if(typeof expression !== 'function') throw new TypeError (`${expression} is not a function`)
+        
+        call('http://duckling-api.herokuapp.com/api/ducks/' + id, (error , result) => {
+            if(error)
+                expression(new Error (`cannot retrieve duck with id ${id}`))
+            else
+                expression(undefined , result)
+        });
     }
 };
