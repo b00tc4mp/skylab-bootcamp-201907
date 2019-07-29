@@ -1,10 +1,21 @@
 call = (url, expression) => {
-	const request = new XMLHttpRequest()
+	const xhr = new XMLHttpRequest()
 
-	request.open("get", url)
-	request.onload = () => {
-		const ducks = JSON.parse(request.responseText)
-		expression([ducks, request])
+	xhr.open("get", url)
+	xhr.onload = () => {
+		if (xhr.status < 300) {
+			const results = JSON.parse(xhr.responseText)
+			expression(undefined, results)
+		} else if (xhr.status >= 300) {
+			const error = new Error(xhr.status)
+			error.status = xhr.status
+			expression(error)
+		}
 	}
+
+	xhr.onerror = error => {
+		//TODO
+	}
+
 	request.send()
 }

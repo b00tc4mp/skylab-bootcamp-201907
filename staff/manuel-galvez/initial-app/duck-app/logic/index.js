@@ -1,5 +1,6 @@
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
+debugger
 const logic = {
 	register: (name, surname, email, password) => {
 		if (name == undefined) throw new TypeError(`Name is undefined.`)
@@ -63,20 +64,31 @@ const logic = {
 	},
 
 	searchDucks: (query, expression) => {
-		if (!query.trim()) {
-			throw new Error("Query is empty or blank.")
-		}
-		call(`http://duckling-api.herokuapp.com/api/search?q=${query}`, expression)
+		if (typeof query !== "string")
+			throw new TypeError(`${query} is not a string`)
+
+		if (typeof expression !== "function")
+			throw TypeError(`${expression} is not a function`)
+
+		call(
+			`http://duckling-api.herokuapp.com/api/search?q=${query}`,
+			(error, result) => {
+				if (error) {
+					if (error.status < 500) expression(undefined, [])
+					else expression(new Error(`fail search with criteria ${query}`))
+				} else expresssion(undefined, result)
+			}
+		)
 	},
 
 	retrieveDuck: (duckID, expression) => {
-		call(`http://duckling-api.herokuapp.com/api/ducks/${duckID}`, expression)
-	},
-
-	validateRequest: (results, request) => {
-		if (request.status != 201) {
-			throw new Error(response["error"])
-		}
+		call(
+			`http://duckling-api.herokuapp.com/api/ducks/${duckID}`,
+			(error, result) => {
+				if (error) expression(new Error(`cannot retrieve duck with id ${id}`))
+				else expression(undefined, result)
+			}
+		)
 	},
 
 	favorite: id => {

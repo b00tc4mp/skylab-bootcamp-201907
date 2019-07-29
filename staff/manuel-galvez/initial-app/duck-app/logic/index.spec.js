@@ -156,6 +156,4 @@ describe("logic", () => {
 			})
 		})
 	})
-
-	// End of Logic
 })
