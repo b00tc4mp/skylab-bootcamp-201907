@@ -265,7 +265,7 @@ describe('Curray', function () {
             var curray = new Curray(1, 2, 3, 4, 5, 6);
             var result = curray.splice(1, 1, 'a', 'b');
 
-            expect(result).toEqual([1, 2, "a", "b", 4, 5, 6]);
+            expect(result).toEqual([1, "a", "b", 3, 4, 5, 6]);
         });
 
         it('empty curray', function () {
