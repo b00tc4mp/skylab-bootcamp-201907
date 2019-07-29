@@ -14,100 +14,99 @@
         <h1>Initial App</h1>
 
         <!-- Landing -->
-        <section class="panel show">
-            <a href="">Register</a> or <a href="">Login</a>.
+        <section class="landing show">
+            <a class="btn" href="">Register</a> or <a class="btn" href="">Login</a>.
         </section>
 
         <!-- Register -->
-        <section class="panel hide">
+        <section class="register hide">
             <form>
                 <label for="name">Name</label>
-                <input type="text" id="name">
+                <input type="text" id="name" placeholder="Name">
                 <label for="surname">Surname</label>
-                <input type="text" id="surname">
+                <input type="text" id="surname" placeholder="Surname">
                 <label for="email">E-mail</label>
-                <input type="email" id="email">
+                <input type="email" id="email" placeholder="Email">
                 <label for="password">Password</label>
-                <input type="password" id="password">
-                <button type="submit">Register</button>
+                <input type="password" id="password" placeholder="Password">
+                <button class="btn" type="submit">Register</button>
             </form>
-            <p class="panel__feedback feedback feedback--error">A message.</p>
-            <a href="">back</a>
+            <p class="panel__feedback feedback feedback--error"></p>
+            <a class="btn" href="">back</a>
         </section>
 
         <!-- Register Success -->
-        <section class="panel hide">
-            Ok, registered succeeded, you can now proceed to <a href="">login</a>.
+        <section class="register-success hide">
+            Ok, registered succeeded, you can now proceed to <a class="btn" href="">login</a>.
         </section>
 
         <!-- Login -->
-        <section class="panel hide">
+        <section class="login hide">
             <form>
                 <label for="email">E-mail</label>
-                <input type="email" id="email">
+                <input type="email" id="email" placeholder="Email">
                 <label for="password">Password</label>
-                <input type="password" id="password">
-                <button type="submit">Login</button>
+                <input type="password" id="password" placeholder="Password">
+                <button class="btn" type="submit">Login</button>
             </form>
-            <p class="panel__feedback feedback feedback--error">A message.</p>
-            <a href="">back</a>
+            <p class="panel__feedback feedback feedback--error"></p>
+            <a class="btn" href="">back</a>
         </section>
 
         <!-- Home -->
-        <section class="panel _hide">
+        <section class="duck-home hide">
             <h2>Welcome!</h2>
             <button>Logout</button>
 
             <!-- Search -->
-            <section class="panel">
+            <section class="search">
                 <h3>Search</h3>
                 <form>
                     <input type="text" name="query">
-                    <button>Search</button>
+                    <button class="btn" >Search</button>
                 </form>
-                <p class="panel__feedback feedback feedback--error">A message.</p>
+                <p class="panel__feedback feedback feedback--error hide">A message.</p>
             </section>
 
             <!-- Results -->
-            <section class="panel">
+            <section class="duck-results hide">
                 <ul>
-                    <li>Duck 1</li>
-                    <li>Duck 2</li>
-                    <li>Duck 3</li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
                 </ul>
             </section>
 
             <!-- Detail -->
-            <section class="panel hide">
+            <section class="duck-detail hide">
+                <button>I love it!</button>
                 <h3>Title</h3>
-                <img src="http://whetever.com/image.jpg">
-                <span>Price</span>
+                <img class="duck-detail__photo" src="">
+                <span class="duck-detail__price">Price</span>
                 <p>Description</p>
-                <a href="">Link</a>
+                <a class="btn" href="">Link</a>
+                <a class="btn" href="">back</a>
             </section>
         </section>
     </main>
-    
+
     <script src="utils/call.js"></script>
     <script src="utils/curray.js"></script>
     <script src="data/index.js"></script>
     <script src="logic/index.js"></script>
     <script src="components/component.js"></script>
-    <script src="components/feedback.js"></script>
     <script src="components/landing.js"></script>
-    <script src="components/login.js"></script>
-    <script src="components/register-success.js"></script>
-    <script src="components/register.js"></script>
-    <script src="components/results.js"></script>
-    <script src="components/search.js"></script>
     <script src="components/submit-back.js"></script>
+    <script src="components/register.js"></script>
+    <script src="components/register-success.js"></script>
+    <script src="components/login.js"></script>
+    <script src="components/feedback.js"></script>
+    <script src="components/search.js"></script>
+    <script src="components/results.js"></script>
     <script src="components/custom/duck-home.js"></script>
     <script src="components/custom/duck-results.js"></script>
     <script src="components/custom/duck-detail.js"></script>
-
-
     <script src="index.js"></script>
-    
 </body>
 
 </html>

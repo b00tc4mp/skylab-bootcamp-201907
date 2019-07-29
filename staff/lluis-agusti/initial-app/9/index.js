@@ -1,99 +1,116 @@
-'use strict';
-
 /**
  * Presentation
  */
 
-var panels = document.getElementsByClassName('panel');
-
 // initial panel
 
-var landing = new Landing(panels[0]);
+const landing = new Landing(document.getElementsByClassName('landing')[0])
 
-landing.onNavigateToRegister(function () {
-    landing.hide();
-    register.show();
-});
+landing.onNavigateToRegister( () => {
+    landing.hide()
+    register.show()
+})
 
-landing.onNavigateToLogin(function () {
-    landing.hide();
-    login.show();
-});
+landing.onNavigateToLogin( () =>{
+    landing.hide()
+    login.show()
+})
 
 // register panel
 
-var register = new Register(panels[1]);
+const register = new Register(document.getElementsByClassName('register')[0])
 
-register.onNavigateBack(function () {
-    register.hide();
-    landing.show();
-});
+register.onNavigateBack( () => {
+    register.hide()
+    register.clearInputs()
+    landing.show()
+})
 
-register.onSubmitRegister(function (name, surname, email, password) {
+register.onSubmitRegister( (name, surname, email, password, favourites) => {
+    
     try {
-        logic.register(name, surname, email, password);
+        logic.register(name, surname, email, password, favourites)
 
-        register.hide();
-        registerSuccess.show();
+        register.hide()
+        register.clearInputs()
+        registerSuccess.show()
     } catch (error) {
-        register.showFeedback(error.message);
+        register.showFeedback(error.message)
     }
-});
+})
 
 // register success panel
 
-var registerSuccess = new RegisterSuccess(panels[2]);
+const registerSuccess = new RegisterSuccess(document.getElementsByClassName('register-success')[0])
 
-registerSuccess.onNavigateToLogin(function () {
-    registerSuccess.hide();
-    login.show();
-});
+registerSuccess.onNavigateToLogin( () => {
+    registerSuccess.hide()
+    register.clearInputs()
+    login.clearInputs()
+    login.show()
+})
 
 // login panel
 
-var login = new Login(panels[3]);
+const login = new Login(document.getElementsByClassName('login')[0])
 
-login.onNavigateBack(function () {
-    login.hide();
-    landing.show();
-});
+login.onNavigateBack( () => {
+    login.hide()
+    login.clearInputs()
+    landing.show()
+})
 
-login.onSubmitLogin(function (email, password) {
+login.onSubmitLogin( (email, password) => {
     try {
-        logic.login(email, password);
+        logic.login(email, password)
 
-        login.hide();
-        home.show();
+        login.hide()
+        login.clearInputs()
+        home.show()
     } catch (error) {
-        login.showFeedback(error.message);
+        login.showFeedback(error.message)
     }
-});
+})
 
 // welcome panel
 
-var home = new DuckHome(panels[4]);
+const home = new DuckHome(document.getElementsByClassName('duck-home')[0])
 
-home.onClickLogout(function () {
-    home.hide();
-    landing.show();
-});
+home.onClickLogout( () => {
+    home.hide()
+    home.results.hide()
+    landing.show()
+})
 
+home.search.onSearch(query => {
+    try {
+        logic.searchDucks(query, (ducks) => {
+            try {
+                home.results.listItems(ducks)
+                home.results.clearInputs()
+                home.results.show()
+            } catch (error) {
+                home.showFeedback(error.message)
+            }
+            home.showFeedback.hide()
+        })
+    } catch (error) {
+        home.showFeedback(error.message)
+    }
+})
 
-// delete Ducks.prototype.paintItem; // WHAT if...
-// home.results.paintItem = function(li, duck) { // WHAT if...
-//     console.log(duck);
-// };
+home.results.onClickItem = id => {
+    logic.retrieveDuck(id, (duck) => {
+        home.results.hide()
+        home.detail.displayDuck(duck)
+        home.clearInputs()
+        home.detail.show()
+    })
+}
 
-home.search.onSearch(function (query) {
-    logic.searchDucks(query, function(ducks) {
-        home.results.listItems(ducks);
-    });
-});
+const detailback = new DuckDetail(document.getElementsByClassName('duck-detail')[0])
 
-home.results.onClickItem = function(id) {
-    logic.retrieveDuck(id, function(duck) {
-        home.results.hide();
-        home.detail.displayDuck(duck);
-        home.detail.show();
-    });
-};
+detailback.onNavigateBack( () => {
+    detailback.hide()
+    home.results.show()
+})

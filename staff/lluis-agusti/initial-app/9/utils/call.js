@@ -1,13 +1,13 @@
-function call(url, expression) {
-    var request = new XMLHttpRequest()
+ call = (url, expression) => {
+    const request = new XMLHttpRequest()
 
-    request.open('get', url);
+    request.open('get', url)
 
-    request.onload = function () {
-        var results = JSON.parse(request.responseText);
+    request.onload = () => {
+        const results = JSON.parse(request.responseText)
 
-        expression(results);
-    };
+        expression(results)
+    }
 
-    request.send();
+    request.send()
 }

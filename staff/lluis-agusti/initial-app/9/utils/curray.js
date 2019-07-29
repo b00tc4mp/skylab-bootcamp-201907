@@ -1,23 +1,51 @@
-'use strict';
 
-/**
- * DIY Array, i.e. Currate ese Array!.
- * 
- * @version 1.1.0
- */
-function Curray() {
-    this.length = 0;
+// passar a es6!!! va en el contructor!!!! 12 14 vba en el costructor
 
-    if (arguments.length === 1) {
-        this.length = arguments[0];
-    } else if (arguments.length > 1) {
-        for (var i = 0; i < arguments.length; i++) {
-            this[i] = arguments[i];
-            // this.push(arguments[i]); // TRY not to depend on push here.
-        }
-        this.length = arguments.length;
-    }
-}
+// class Curray {
+
+//     constructor() {
+
+
+//         this.length = 0;
+
+//         if (arguments.length === 1) {
+//             this.length = arguments[0];
+//         } else if (arguments.length > 1) {
+//             for (var i = 0; i < arguments.length; i++) {
+//                 this[i] = arguments[i];
+//             }
+//             this.length = arguments.length;
+//         }
+//  }
+// }
+
+
+
+
+
+
+
+ /**
+  * DIY Array, i.e. Currate ese Array!.
+  * 
+  * @version 1.1.0
+  */
+
+ function Curray() {
+     this.length = 0;
+
+     if (arguments.length === 1) {
+         this.length = arguments[0];
+     } else if (arguments.length > 1) {
+         for (var i = 0; i < arguments.length; i++) {
+             this[i] = arguments[i];
+             // this.push(arguments[i]); // TRY not to depend on push here.
+         }
+         this.length = arguments.length;
+     }
+ }
+
+
 
 Curray.prototype.push = function (element) {
     this[this.length++] = element;

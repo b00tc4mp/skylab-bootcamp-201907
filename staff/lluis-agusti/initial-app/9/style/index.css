@@ -1,3 +1,7 @@
+body {
+  font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+}
+
 .show {
   display: block;
 }
@@ -6,83 +10,106 @@
   display: none;
 }
 
-.feedback, .confirm, .alert, .panel {
+ul {
+  width: 95%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0%;
+}
+
+li {
+  max-width: 200px;
+  margin: 2%;
+}
+
+h3 {
+  max-width: 200px;
+  margin: 2%;
+  height: 1.9rem;
+}
+
+img {
+  max-width: 200px;
+  margin: 2%;
+  padding-top: 1rem;
+}
+
+h1 {
+  text-align: center;
+}
+
+.btn {
+  background-color: skyblue;
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.duck-detail, .duck-results, .duck-home, .search, .feedback, .register-success, .register, .login, .landing {
   padding: 0.5rem;
   margin: 1.5rem;
-}
-
-.panel {
-  border: 0.1rem solid gray;
+  align-content: center;
+  border: 0.1rem solid lightgray;
   border-radius: 1rem;
+  background-color: #c2c2c2;
+}
+.landing {
   background-color: lightgray;
 }
-.panel__feedback {
-  color: red;
+
+.login {
+  background-color: lightgray;
 }
 
-.alert {
-  border: 0.1rem solid skyblue;
-  border-radius: 1rem;
-  background-color: rgba(135, 206, 235, 0.4);
-}
-.alert__title {
-  color: #0073ff;
-}
-.alert__body {
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  font-weight: 400;
-  font-size: 0.75rem;
-}
-.alert__accept {
-  border: 0.1rem solid skyblue;
-  border-radius: 1rem;
-}
-.alert--danger {
-  border-color: tomato;
-  background-color: rgba(255, 99, 71, 0.283);
-}
-.alert--danger > h2 {
-  color: #ff411f;
-}
-.alert--danger > button {
-  border-color: tomato;
+.register {
+  background-color: lightgray;
 }
 
-.confirm {
-  border: 0.1rem solid plum;
-  border-radius: 1rem;
-  background-color: #ffcccc;
-}
-.confirm__title {
-  color: violet;
-}
-.confirm__body {
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  font-weight: 400;
-  font-size: 0.75rem;
-}
-.confirm__accept {
-  border: 0.1rem solid plum;
-  border-radius: 1rem;
-}
-.confirm__cancel {
-  border: 0.1rem solid plum;
-  border-radius: 1rem;
+.register-success {
+  background-color: lightgray;
 }
 
-.feedback {
-  border: 0.1rem solid gray;
-  border-radius: 1rem;
-}
 .feedback--success {
-  background-color: greenyellow;
+  background-color: #80dc6a;
 }
 .feedback--warning {
-  background-color: yellow;
+  background-color: #fd927b;
 }
 .feedback--error {
-  background-color: red;
+  background-color: #fd927b;
   color: white;
+}
+
+.search {
+  background-color: lightgray;
+}
+
+.duck-home {
+  background-color: lightgray;
+}
+
+.duck-results {
+  background-color: lightgray;
+}
+.duck-results img {
+  width: 333px;
+}
+
+.duck-detail {
+  background-color: lightgray;
+}
+.duck-detail__photo {
+  width: 333px;
+}
+.duck-detail__price {
+  color: #e16c6c;
 }
 
 /*# sourceMappingURL=index.css.map */
