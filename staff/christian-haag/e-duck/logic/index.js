@@ -50,7 +50,7 @@ const logic = {
                 surname: surname,
                 email: email,
                 password: password,
-                favorites: new Curray
+                favorites: new Array
             })
         }
     },
@@ -125,8 +125,28 @@ const logic = {
         })
     },
 
-    removeDuckFromFavorites() {
-        // TODO
+    removeDuckFromFavorites(email, id) {
+        // TODO validate args
+
+        const user = users.find(user => user.email === email)
+
+        if (!user) throw Error(`user with email ${email} not found`)
+
+        const { favorites } = user
+
+        // const _favorites = new Curray
+
+        // favorites.forEach(favorite => {
+        //     favorite !== id && _favorites.push(favorite)
+        // })
+
+        // user.favorites = _favorites
+
+        // NOW switching to Array
+
+        const index = favorites.findIndex(favorite => favorite === id)
+
+        favorites.splice(index, 1)
     },
 
     retrieveFavoriteDucks(email, expression) {
