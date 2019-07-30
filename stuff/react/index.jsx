@@ -1,6 +1,6 @@
 const { Component } = React
 
-class Calc extends Component { // Calculator IS-A Component
+class Calculator extends Component { // Calculator IS-A Component
     constructor() {
         super()
 
@@ -35,4 +35,4 @@ function Result(props) {
     return <span className="calculator__result">{props.value}</span>
 }
 
-ReactDOM.render(<Calc />, document.querySelector('#root'))
+ReactDOM.render(<Calculator />, document.querySelector('#root'))
