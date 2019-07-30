@@ -3,6 +3,7 @@
  * 
  * @param {HTMLElement} container 
  */
+
 class DuckDetail extends Component {
     constructor(container) {
         super(container)
