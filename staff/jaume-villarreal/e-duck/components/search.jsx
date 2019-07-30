@@ -1,4 +1,3 @@
-
 function Search(props) {
     return <form onSubmit={event => {
         event.preventDefault()
@@ -8,6 +7,6 @@ function Search(props) {
         props.onSearch(query)
     }}>
         <input type="text" name="query" />
-        <button> 🔍 </button>
+        <button>🔍</button>
     </form>
 }
