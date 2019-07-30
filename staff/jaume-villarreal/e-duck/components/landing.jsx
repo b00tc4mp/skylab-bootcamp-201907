@@ -1,10 +1,10 @@
-const { Component } = React
-
-class Landing extends Component {
+class Landing extends React.Component {
     constructor() {
         super()
 
-        this.state = { ducks: [], duck: undefined , login : false , register : false}
+        this.state = {
+            register: true, ducks: [], duck: undefined
+        }
 
         this.handleSearch = this.handleSearch.bind(this)
         this.handleRetrieveDuck = this.handleRetrieveDuck.bind(this)
@@ -22,20 +22,24 @@ class Landing extends Component {
             if (error) console.error(error)
             else this.setState({ duck })
         })
+
+
     }
 
     render() {
         return <>
-            <a href="">Register</a>
-            <a href="">Login</a>
-            <Search onSearch={this.handleSearch} />
 
-            {!this.state.duck ?
-                <Results items={this.state.ducks} paintItem={duck => {
-                    return <DuckItem duck={duck} />
-                }} onItem={this.handleRetrieveDuck} />
-                :
-                <DuckDetail duck={this.state.duck} onBack={() => this.setState({ duck: undefined})} />}
+            {this.state.register && <Search onSearch={this.handleSearch} />}
+
+            {
+                !this.state.duck ?
+                    <Results items={this.state.ducks} paintItem={duck => {
+                        return <DuckItem duck={duck} />
+                    }} onItem={this.handleRetrieveDuck} />
+                    :
+                    <DuckDetail duck={this.state.duck} onBack={() => this.setState({ duck: undefined })} />
+            }
+
         </>
     }
 }
