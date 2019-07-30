@@ -1,9 +1,9 @@
 const { Component } = React
 
 function Landing() {
-    return <>
+    return <div>
         <Search />
-    </>
+    </div>
 }
 
 class Search extends Component {
