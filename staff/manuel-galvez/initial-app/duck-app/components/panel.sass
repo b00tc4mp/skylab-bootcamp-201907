@@ -1,0 +1,51 @@
+%panel
+    padding: 0.5rem
+    margin: 1.5rem
+
+    +round-border(0.1rem, 1rem, solid, $panel-color)
+    
+    background-color: $panel-back-color
+
+    &__feedback
+        color: red
+
+
+
+.btn
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 15rem 
+    height: 3rem 
+    max-width:15rem
+    margin: 1vh 0
+    text-decoration: none
+    border-radius: 3px
+
+    &--blue
+        background-color: #0791D0
+        color: white
+
+    &--white
+        border: 1px solid #0791D0
+        color: #0791D0
+
+    &__submit
+        background-color: #0791D0
+        color: white
+        box-shadow: 0
+        border: 0
+        align-self: center
+        font-size: 1.05rem
+    
+    &__back
+        width: 7rem
+        max-height: 2.5rem
+        border: 1px solid #0791D0
+        color: #0791D0
+    
+    &__logout
+        width: 7rem
+        height: 2.5rem
+        border: 1px solid #0791D0
+        color: #0791D
