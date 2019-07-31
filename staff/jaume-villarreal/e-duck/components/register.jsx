@@ -1,62 +1,23 @@
-class Register extends React.Component {
-    constructor() {
-        super() 
-    }
+function Register({ onRegister, onBack }) {
+    return <>
+        <h1>Register</h1>
+        <form onSubmit={event => {
+            event.preventDefault()
 
-    handleSubmit = event => {
-        event.preventDefault()
-        const name = document.querySelector('#name').value
-        const surname = document.querySelector('#surname').value
-        const email = document.querySelector('#email').value
-        const password = document.querySelector('#password').value
+            const { target: { name: { value: name }, surname: { value: surname }, email: { value: email }, password: { value: password } } } = event
 
-        // const {target : {name: {value: name}, surname: {value: surname} , email:{value: email} password: {value: password}}
-        
-        logic.register(name , surname , email , password)
-    }
+            onRegister(name, surname, email, password)
+        }}>
+            <input type="text" name="name" />
+            <input type="text" name="surname" />
+            <input type="email" name="email" />
+            <input type="password" name="password" />
+            <button>Register</button>
+        </form>
+        <a href="" onClick={event => {
+            event.preventDefault()
 
-
-    render() {
-        return <div>
-
-            <form onSubmit={this.handleSubmit}>
-                <p>
-                    <label htmlFor = "name">Name</label>
-                    <input
-                        type="text"
-                        name="name" 
-                        id="name" /> 
-                </p>
-                <p>
-                    <label htmlFor = "surname">Surname</label>
-                    <input
-                        type="text"
-                        name="surname"
-                        id="surname" />
-                </p>
-                <p>
-                    <label htmlFor="email">Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        id="email" />
-                
-                </p>
-                <p>
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        name="password"
-                        id="password" />
-                </p>
-                <button>Submit</button>
-            </form>
-
-            <a href="" onClick={event => {
-                event.preventDefault()
-                this.props.back()
-            }}>Go back</a>
-        </div>
-    }
+            onBack()
+        }}>Go back</a>
+    </>
 }
-

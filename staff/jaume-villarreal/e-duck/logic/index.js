@@ -55,7 +55,7 @@ const logic = {
         }
     },
 
-    login(email, password) {
+    authenticate(email, password) {
         let errors = ''
 
         if (!email.trim()) {

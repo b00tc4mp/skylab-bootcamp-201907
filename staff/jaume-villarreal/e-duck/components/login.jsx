@@ -1,41 +1,21 @@
-class Login extends React.Component {
-    constructor() {
-        super()
-    }
+function Login({ onLogin, onBack }) {
+    return <>
+        <h1>Login</h1>
+        <form onSubmit={event => {
+            event.preventDefault()
 
-    handleSubmit = event => {
-        event.preventDefault()
-        const email = document.querySelector("#email").value
-        const password = document.querySelector("#password").value
+            const { target: { email: { value: email }, password: { value: password } } } = event
 
-        logic.login(email , password)
-
-        console.log(`${email} is logged`)
-    }
-
-
-
-    render() {
-        return <div>
-            <form onSubmit={this.handleSubmit}>
-                <p>
-                    <label htmlFor = "email">Email</label>
-                    <input type="email" name="email" id="email" />
-                </p>
-
-                <p>
-                    <label htmlFor="password">Password</label>
-                    <input type="password" name="password" id="password" />
-                </p>    
-                
-                <button>Login</button>
-            </form>
-
-
+            onLogin(email, password)
+        }}>
+            <input type="email" name="email" />
+            <input type="password" name="password" />
+            <button>Login</button>
             <a href="" onClick={event => {
                 event.preventDefault()
-                this.props.back()
+
+                onBack()
             }}>Go back</a>
-        </div>
-    }
+        </form>
+    </>
 }

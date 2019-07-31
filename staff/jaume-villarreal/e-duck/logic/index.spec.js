@@ -56,7 +56,7 @@ describe('logic', () => {
         })
     })
 
-    describe('login', () => {
+    describe('authenticate', () => {
         const user = {
             name: 'John-' + random(),
             surname: 'Doe-' + random(),
@@ -70,19 +70,21 @@ describe('logic', () => {
 
         it('should succeed on correct data', () => {
             expect(() => {
-                logic.login(user.email, user.password)
+                const _user = logic.authenticate(user.email, user.password)
+
+                expect(_user).toBeUndefined()
             }).not.toThrow()
         })
 
         it('should fail on empty email', () => {
             expect(() => {
-                logic.login('', user.password)
+                logic.authenticate('', user.password)
             }).toThrowError(Error, 'E-mail is empty or blank.')
         })
 
         it('should fail on non-valid e-mail', () => {
             expect(() => {
-                logic.login('manuelbarzi#gmail.com', '123')
+                logic.authenticate('manuelbarzi#gmail.com', '123')
             }).toThrowError(Error, 'E-mail is not valid.')
         })
     })
@@ -275,5 +277,9 @@ describe('logic', () => {
                 done()
             })
         })
+    })
+
+    describe("retrieve user" , function(){
+        
     })
 })
