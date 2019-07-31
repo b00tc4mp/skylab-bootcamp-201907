@@ -9,6 +9,8 @@ class Register extends React.Component {
         const surname = document.querySelector('#surname').value
         const email = document.querySelector('#email').value
         const password = document.querySelector('#password').value
+
+        // const {target : {name: {value: name}, surname: {value: surname} , email:{value: email} password: {value: password}}
         
         logic.register(name , surname , email , password)
     }
@@ -17,7 +19,7 @@ class Register extends React.Component {
     render() {
         return <div>
 
-            <form className="form__register" onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit}>
                 <p>
                     <label htmlFor = "name">Name</label>
                     <input
