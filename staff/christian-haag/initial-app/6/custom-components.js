@@ -27,6 +27,17 @@ DuckHome.prototype.onClickLogout = function (expression) {
     });
 }
 
+
+function ResultPanel(container) {
+    Component.call(this, container)
+    var result = new DuckResult(panels[5])
+    this.result = result
+}
+
+ResultPanel.prototype = Object.create(Component.prototype)
+ResultPanel.prototype.constructor = ResultPanel
+
+
 /**
  * 
  * Ducks abstraction.
@@ -34,21 +45,22 @@ DuckHome.prototype.onClickLogout = function (expression) {
  * @param {*} container 
  */
 
-function Ducks(container) {
+function DuckResult(container) {
     Results.call(this, container);
 }
 
-Ducks.prototype = Object.create(Results.prototype);
-Ducks.prototype.constructor = Ducks;
+DuckResult.prototype = Object.create(Results.prototype);
+DuckResult.prototype.constructor = DuckResult;
 
-Ducks.prototype.paintItem = function (li, item) {
+DuckResult.prototype.paintItem = function (li, item) {
+
     var h3 = document.createElement('h3');
     h3.innerText = item.title;
     li.appendChild(h3);
 
     var img = document.createElement('img');
     img.src = item.imageUrl
-    li.appendChild(img);
+    li.appendChild(img)
 
     var p = document.createElement('p');
     p.innerText = item.price
@@ -60,6 +72,6 @@ Ducks.prototype.paintItem = function (li, item) {
     }.bind(this));
 };
 
-Ducks.prototype.onItemClick = function (id) {
+DuckResult.prototype.onItemClick = function (id) {
     console.log(id)
 }

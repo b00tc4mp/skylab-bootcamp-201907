@@ -1,0 +1,220 @@
+.body {
+  background-image: url("https://images.pexels.com/photos/988872/pexels-photo-988872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-sizing: border-box;
+  margin: auto;
+  font-family: "Cousine", sans-serif;
+  font-size: 22px;
+}
+.body__header {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+.body__main {
+  margin: 3em auto 5em auto;
+  min-height: 100vh;
+}
+.body__footer {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 15px;
+  text-align: center;
+  width: 100%;
+  font-size: 14px;
+  margin-top: -50px;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.duck-detail, .duck-results, .duck-home, .search, .feedback, .register-success, .register, .login, .landing {
+  background-color: rgba(255, 255, 255, 0.5);
+  margin: auto;
+  border-radius: 3em;
+  padding: 30px;
+  width: 70%;
+  text-align: center;
+}
+
+.duck-detail__back, .register-success__login, .register__back, .login__back {
+  color: grey;
+  text-decoration: none;
+}
+
+.search__input, .register__input, .login__input {
+  width: 95%;
+  margin-top: 0.5em;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  padding: 15px;
+  font-size: 18px;
+}
+
+.duck-home__logout, .search__button, .register__button, .login__button {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 15px;
+  font-size: 18px;
+}
+
+.landing__title {
+  margin: 0;
+  padding: 25px;
+}
+.landing__register, .landing__login {
+  color: grey;
+  text-decoration: none;
+}
+.landing__register:hover, .landing__login:hover {
+  color: deeppink;
+}
+
+.login__form {
+  padding: 5px;
+}
+.login__item {
+  list-style: none;
+  margin-top: 2em;
+}
+.login__back:hover {
+  color: deeppink;
+}
+
+.register__form {
+  padding: 5px;
+}
+.register__item {
+  list-style: none;
+  margin-top: 2em;
+}
+.register__button {
+  font-size: 22px;
+}
+.register__back:hover {
+  color: deeppink;
+}
+
+.register-success__login:hover {
+  color: deeppink;
+}
+
+.feedback {
+  margin-bottom: 2em;
+  font-size: 16px;
+}
+.feedback--error {
+  background-color: rgba(100, 0, 0, 0.65);
+  color: white;
+}
+
+.search {
+  margin: 2em auto 2em auto;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.search__label {
+  display: none;
+}
+.search__button {
+  background-color: grey;
+  margin: 1em auto 1em auto;
+}
+
+.duck-home {
+  min-width: 85vw;
+}
+.duck-results {
+  margin-bottom: 2em;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.duck-results__list {
+  display: grid;
+  grid-template-columns: 1;
+  align-items: center;
+  justify-items: center;
+  list-style: none;
+  padding: 0;
+  font-size: 16px;
+}
+.duck-results__item {
+  margin: 2em;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.duck-results__image {
+  max-width: 300px;
+  border-radius: 2em;
+}
+.duck-results__favorites {
+  background-color: grey;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 1em;
+  max-width: 70%;
+}
+.duck-results__favorites:hover {
+  background-color: deeppink;
+}
+.duck-results__favorites:active {
+  background-color: black;
+  color: white;
+}
+
+.duck-detail {
+  margin-bottom: 2em;
+  padding: 5em;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.duck-detail__title {
+  font-size: 33px;
+}
+.duck-detail__photo {
+  max-width: 80%;
+  margin: auto;
+  border-radius: 3em;
+}
+.duck-detail__price {
+  background-color: grey;
+  color: white;
+  margin: 2em auto 2em auto;
+  border-radius: 3em;
+  padding: 25px;
+  width: 30%;
+  align-self: center;
+  font-weight: bold;
+}
+.duck-detail__link {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+}
+.duck-detail__link:hover {
+  color: gray;
+}
+.duck-detail__back {
+  margin: 1em auto 2em auto;
+}
+.duck-detail__back:hover {
+  color: deeppink;
+}
+.duck-detail.show {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+/*# sourceMappingURL=index.css.map */

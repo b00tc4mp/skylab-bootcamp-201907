@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <section class="company">
+            <img class="company__logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3IrM51fjS516VwTYVQLoc6KlAFFoO8Kf0BXedUNGiwNosr0ih">
+            <h1 class="company__name">Initial App</h1>
+        </section>
+    </header>
+    <main>
+        <div class="container">
+            <section class="landing panel panel--show">
+                <div class="panel__header">
+                    <div class="landing__alert panel__alert panel__alert--hide">This is an alert</div>
+                </div>
+                <div class="panel__content">
+                    <a href="#" class="landing__item btn btn__register">Register</a>
+                    <a href="#" class="landing__item btn btn__login">Login</a>
+                </div>
+            </section>
+            <section class="register panel panel--hide">
+                <div class="panel__header">
+                    <div class="register__alert panel__alert panel__alert--hide">This is an alert</div>
+                </div>
+                <div class="panel__content">
+                    <form class="register__form form">
+                        <label for="register-name">Name</label>
+                        <input class="register__input register__name form__input" type="text" id="register-name" name="name" required>
+                        <label for="register-surname">Surname</label>
+                        <input class="register__input register__surname form__input" type="text" id="register-surname" name="surname" required>
+                        <label for="register-email">Email</label>
+                        <input class="register__input register__email form__input" type="email" id="register-email" name="email" required>
+                        <label for="register-password">Password</label>
+                        <input class="register__input register__password form__input" type="password" id="register-password" name="password" required>
+                        <input class="register__submit btn btn__submit" type="submit" value="Submit">
+                    </form>
+                    <a href="#" class="register__back btn btn__back">Back</a>
+                </div>
+            </section>
+            <section class="login panel panel--hide">
+                <div class="panel__header">
+                    <div class="login__alert panel__alert panel__alert--hide">This is an alert</div>
+                </div>
+                <div class="panel__content">
+                    <form class="login__form form">
+                        <label for="login-email">Email</label>
+                        <input class="login__input login__email form__input" type="email" id="login-email" name="email" required>
+                        <label for="login-password">Password</label>
+                        <input class="login__input login__password form__input" type="password" id="login-password" name="password" required>
+                        <input class="login__submit btn btn__submit" type="submit" value="Submit">
+                    </form>
+                    <a href="#" class="login__back btn btn__back">Back</a>
+                </div>
+           </section>
+            <section class="registered panel panel--hide">
+                <div class="panel__header">
+                    <div class="registered__alert panel__alert panel__alert--hide">This is an alert</div>
+                </div>
+                <div class="panel__content">
+                    <h3 class="registered__message">You were registered successfully!</h3>
+                    <a href="#" class="registered__login btn btn__login">Login</a>
+                </div>
+            </section>
+            <section class="home panel panel--hide">
+                <div class="panel__header">
+                    <div class="home__alert panel__alert panel__alert--hide">This is an alert</div>
+                </div>
+                <div class="panel__content">
+                    <h1 class="home__title">Welcome, John Doe</h1>
+                    <a href="#" class="home__btn btn btn__logout">Logout</a>
+                </div>
+            </section>
+        </div>
+    <footer>
+    </footer>
+    <script src="main.js"></script>
+</body>
+</html>
