@@ -280,6 +280,34 @@ describe('logic', () => {
     })
 
     describe("retrieve user" , function(){
-        
+        // let name, surname, email, password
+
+        const _user = {
+                name: 'Manuel',
+                surname: 'Barzi',
+                email: 'barzi@gmail.com',
+                password: '123',
+                favorites: new Array
+            }
+
+            users.push(_user.name, _user.surname, _user.email, _user.password)
+
+        it("should retrieve a logged user" , () => {
+
+        debugger
+           const _user = logic.retrieveUser("barzi@gmail.com");
+           
+           expect(_user).toEqual({name , surname , email} = users[0])
+        })
+
+        // it("should return undefined" , () =>{
+        //     const _user = logic. retrieveUser("a@mail.es")
+        //     expect(_user).not.toEqual({name , surname , email} = users[0])
+        // })
+
+        // it("should return undefined" , ()=>{
+        //     const _user = logic.retrieveUser("a@mail.es")
+        //     expect(_user).toBeUndefined
+        // })
     })
 })

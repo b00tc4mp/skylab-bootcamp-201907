@@ -181,6 +181,20 @@ const logic = {
                 })
             })
         }
+    },
 
+    retrieveUser(_email){
+        debugger
+        if(!_email) throw Error ("e-mail is not defined")
+
+        if(!_email.trim()) throw Error ("e-mail is empty or blank")
+        
+        if(typeof _email !== 'string') throw TypeError (`${_email} is not a string`)
+        
+        if(!EMAIL_REGEX.test(_email)) throw Error ("e-mail ha a wrong format")
+        
+
+        const user = users.find( user => user.email === _email)
+        return { name , surname , email: {email: usermail} } = user
     }
 }
