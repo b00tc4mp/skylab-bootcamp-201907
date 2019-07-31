@@ -1,0 +1,349 @@
+.scrption__text, .adr__red, .adr__text, .bye__text, .about__red {
+  font-size: 0.9rem;
+  font-family: "Open Sans", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  margin: 0 auto;
+}
+
+.hdr {
+  top: 0;
+  width: 100%;
+  min-width: 20%;
+  max-height: 20%;
+  background-color: #fff;
+  z-index: 4;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+}
+.hdr__banner {
+  margin-top: 15px;
+  padding-top: 7px;
+  padding-left: 14px;
+  border: 0;
+  max-width: 100%;
+  max-height: 30px;
+  min-height: 10px;
+  display: inline-block;
+}
+.hdr__nav div {
+  width: 40%;
+  border-bottom: 1px solid #AEAEAE;
+  border-top: 1px solid #AEAEAE;
+  height: 12px;
+  margin: 2rem 2rem;
+  float: right;
+  color: #AEAEAE;
+}
+
+.drp {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding-top: 80px;
+  margin: 0;
+}
+.drp__first {
+  width: 100%;
+  border-top: 0.05rem solid #AEAEAE;
+  border-bottom: 0.05rem solid #AEAEAE;
+  margin: 0;
+}
+.drp__keep {
+  width: 100%;
+  border-bottom: 0.05rem solid #AEAEAE;
+  margin: 0;
+}
+.drp__title {
+  width: 100%;
+  font-size: 1.2rem;
+  color: #AEAEAE;
+  padding: 0.5rem 0 0rem 1rem;
+  margin: 0.1rem 0.1rem;
+  font-weight: 100;
+  font-family: "Open Sans", sans-serif;
+}
+
+.cllg {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  width: 100%;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+.cllg__div {
+  width: 98%;
+}
+
+.img {
+  margin: 1rem;
+}
+.img__img {
+  width: 100%;
+  heigth: auto;
+}
+.img__intro {
+  width: 100%;
+  color: rgba(255, 255, 255, 0);
+  top: 0;
+  bottom: 0;
+  font-size: 0rem;
+  font-weight: 200;
+  padding: 0;
+  position: absolute;
+}
+.img__intro:hover {
+  display: none;
+  z-index: 3;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  position: absolute;
+  font-size: 0.7rem;
+  font-weight: 200;
+  padding: 1rem 0 0 1.5;
+  transition: all 0.5s linear;
+  font-family: "Open Sans", sans-serif;
+  color: #AEAEAE;
+}
+
+.about {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  justify-content: center;
+  align-items: center;
+  padding-top: 70px;
+}
+.about__about {
+  background-color: #f4f4f4;
+  width: 100%;
+  margin: 0.2rem auto;
+  height: 350px;
+  padding: 0;
+}
+.about__text {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-size: 1.2rem;
+  color: #000;
+  font-family: "Open Sans", sans-serif;
+}
+.about__text a {
+  color: #AEAEAE;
+  text-decoration: none;
+}
+.about__red {
+  padding: 1.5rem 0 0 1.5rem;
+  font-weight: 900;
+  color: #EC1C24;
+}
+
+.bye {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+}
+.bye__text {
+  padding: 3rem 0 3rem 1.5rem;
+  color: #555555;
+}
+
+.adr {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  width: 95%;
+}
+.adr__adr {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  width: 95%;
+}
+.adr__text {
+  padding: 0 0 4rem 1.5rem;
+  color: #555555;
+}
+.adr__red {
+  padding: 0 0 4rem 1.5rem;
+  padding: 0 1.5rem 1rem 1.5rem;
+  color: #EC1C24;
+  font-weight: 900;
+}
+
+.scrption {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  width: 95%;
+  padding-bottom: 1.5rem;
+}
+.scrption__text {
+  padding: 0.5rem 1.5rem;
+  font-weight: 100;
+  color: #AEAEAE;
+}
+.scrption i {
+  color: #AEAEAE;
+  padding-right: 0.3rem;
+}
+
+@media (min-width: 600px) {
+  .cllg {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-content: stretch;
+  }
+  .cllg__div {
+    width: 49%;
+  }
+
+  .img {
+    width: 100%;
+  }
+  .img__intro {
+    display: none;
+  }
+
+  .about {
+    display: flex;
+    flex-flow: row wrap;
+  }
+  .about__about {
+    align-items: left;
+    width: 49%;
+    height: 270px;
+  }
+
+  .bye {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+  }
+  .bye__text {
+    font-size: 1.5rem;
+    font-family: "Open Sans", sans-serif;
+    padding: 3rem 0 3rem 1.5rem;
+    color: #555555;
+  }
+
+  .adr {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-content: strech;
+    width: 95%;
+  }
+  .adr__adr {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+  }
+  .adr__text {
+    width: 45%;
+    padding: 0 0 4rem 1.5rem;
+    color: #555555;
+    font-size: 0.9rem;
+    font-family: "Open Sans", sans-serif;
+  }
+  .adr__red {
+    width: 45%;
+    padding: 0 0 4rem 1.5rem;
+    padding: 0 1.5rem 1rem 1.5rem;
+    color: #EC1C24;
+    font-weight: 900;
+    font-size: 0.9rem;
+    font-family: "Open Sans", sans-serif;
+  }
+}
+@media (min-width: 1000px) {
+  .hdr {
+    min-height: 8%;
+    height: 5px;
+  }
+
+  .drp {
+    display: none;
+  }
+
+  .cllg {
+    padding-top: 5%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-content: stretch;
+  }
+  .cllg__div {
+    width: 33%;
+  }
+
+  .about {
+    display: flex;
+    flex-flow: row wrap;
+  }
+  .about__about {
+    align-self: left;
+    width: 33%;
+    height: 270px;
+  }
+
+  .adr {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-content: strech;
+    width: 95%;
+  }
+  .adr__adr {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+  }
+  .adr__text {
+    width: 100%;
+  }
+  .adr__red {
+    width: 100%;
+  }
+}
+/*     .adr
+ *      display: grid
+ *      flex-flow: row wrap
+ *      justify-content: space-around
+ *      align-items: stretch
+ *      &__adr
+ *          width: 45%
+ *      &__text
+ *          width: 45%
+ *      &__red
+ *          width: 45% */
+
+/*# sourceMappingURL=style.css.map */

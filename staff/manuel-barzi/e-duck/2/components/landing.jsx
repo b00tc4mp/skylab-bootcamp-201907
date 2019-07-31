@@ -4,7 +4,7 @@ class Landing extends Component {
     constructor() {
         super()
 
-        this.state = { ducks: [], duck: undefined }
+        this.state = { query: undefined, ducks: [], duck: undefined }
 
         this.handleSearch = this.handleSearch.bind(this)
         this.handleRetrieveDuck = this.handleRetrieveDuck.bind(this)
@@ -12,12 +12,15 @@ class Landing extends Component {
         this.handleRegister = this.handleRegister.bind(this)
         this.handleLogin = this.handleLogin.bind(this)
         this.handleLogout = this.handleLogout.bind(this)
+        this.handleToggleFavDuck = this.handleToggleFavDuck.bind(this)
     }
 
-    handleSearch(query) {
-        logic.searchDucks(query, (error, ducks) => {
+    handleSearch(query = this.state.query) {
+        const { props: { user } } = this
+
+        logic.searchDucks(user, query, (error, ducks) => {
             if (error) console.error(error)
-            else this.setState({ ducks })
+            else this.setState({ ducks, query })
         })
     }
 
@@ -50,14 +53,22 @@ class Landing extends Component {
         this.props.onLogout()
     }
 
-    render() {
-        const { state: { ducks, duck }, handleSearch, handleRetrieveDuck, handleRegister, handleBackFromDetail, handleLogin, handleLogout, props: { user } } = this
+    handleToggleFavDuck() {
+        const { props: { user, onLogin }, handleSearch } = this
+        
+        user? handleSearch() : onLogin()
+    }
 
-        // TODO const _user = logic.retrieveUser(user)
+    render() {
+        const { state: { ducks, duck }, handleSearch, handleRetrieveDuck, handleRegister, handleBackFromDetail, handleLogin, handleLogout, handleToggleFavDuck, props: { user } } = this
+
+        let _user
+
+        if (user) _user = logic.retrieveUser(user)
 
         return <>
             <header>
-                {/* TODO <p>Hello, {_user.name}</p> */}
+                {_user && <p>Hello, {_user.name}</p>}
                 <nav>
                     {!user ? <ul>
                         <li><a href="" onClick={handleRegister}>Register</a></li>
@@ -75,7 +86,7 @@ class Landing extends Component {
 
             {!duck ?
                 <Results items={ducks} paintItem={duck => {
-                    return <DuckItem duck={duck} />
+                    return <DuckItem duck={duck} user={user} onToggle={handleToggleFavDuck} />
                 }} onItem={handleRetrieveDuck} />
                 :
                 <DuckDetail duck={duck} onBack={handleBackFromDetail} />}
