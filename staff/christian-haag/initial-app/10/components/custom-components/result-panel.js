@@ -15,8 +15,6 @@ class ResultPanel extends Component {
         let detail = new DuckDetail(container.children[1])
         this.detail = detail
 
-        let fav = new Favourite(container.children[2])
-        this.fav = fav
     }
 
 }
