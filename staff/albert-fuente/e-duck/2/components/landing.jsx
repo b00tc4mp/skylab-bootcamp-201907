@@ -110,23 +110,30 @@ function Register(props) {
         <input type='text' id='email' placeholder='email'/>
         <input type='password' id='password' placeholder='password'/>
         <button>🔍</button>
-        <a href=''>back</a>
+        <a href='' onClick={event=>{
+            event.preventDefault()
+            onBack()
+        }}>Go back</a>
       </form>
     )
   }
 
 
-function Login(props) {
+function Login(login,onBack) {
     return <form onSubmit={event => {
         event.preventDefault()
   
         const { target: { email: { value : email}, password: {value: password} } } = event
-  
-        props.login(email, password)
+        //PROPS no cal posar directament ho pases com argument el login dins la funcio 
+        login(email, password)
     }}>
         <input type="email" name="email" placeholder="email"/>
         <input type="password" id="password" placeholder="password"/>
-        <button></button>
+        <button>Login</button>
+        <a href="" onClick={event=>{
+            event.preventDefault()
+            onBack()
+        }}>Go Back</a>
     </form>
   }
 
@@ -147,12 +154,13 @@ function Initial(props) {
     </>
 }
 
-function RegisterSuccess(props) {
+function RegisterSuccess(onLogin) {
     return <> Ok, registered succeeded, you can now proceed to
     <a href="" onClick={ event => {
         event.preventDefault()
 
         console.log('Going to login')
+        onLogin()
     }}>Login</a> 
     
     </>
