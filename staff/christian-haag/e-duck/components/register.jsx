@@ -1,26 +1,24 @@
-class Register extends React.Component {
-    constructor() {
-        super()
-    }
+function Register({ onRegister, onBack }) {
+    return <>
+        <h2>Register</h2>
+        <form onSubmit={event => {
+            event.preventDefault()
 
-    render() {
-        return <>
-            <h2>Register</h2>
-            <form >
-                <label id="name">Name</label>
-                <input type="text" name="name" id="name" />
-                <label id="surname">Surname</label>
-                <input type="text" name="surname" id="surname" />
-                <label id="email">email</label>
-                <input type="email" name="email" id="email" />
-                <label id="password">password</label>
-                <input type="password" name="password" id="password" />
-            </form>
-            <a href="" onClick={event => {
-                event.preventDefault()
-                this.props.back()
-            }}>Go back</a>
-        </>
-    }
+            const { target: { name: { value: name }, surname: { value: surname }, email: { value: email }, password: { value: password } } } = event
+
+            onRegister(name, surname, email, password)
+        }}>
+            <input type="text" name="name" />
+            <input type="text" name="surname" />
+            <input type="email" name="email" />
+            <input type="password" name="password" />
+            <button>Register</button>
+        </form>
+        <a href="" onClick={event => {
+            event.preventDefault()
+            onBack()
+        }}>Go back</a>
+    </>
 }
+
 

@@ -55,7 +55,7 @@ const logic = {
         }
     },
 
-    login(email, password) {
+    authenticate(email, password) {
         let errors = ''
 
         if (!email.trim()) {
@@ -171,7 +171,7 @@ const logic = {
                     } else {
                         ducks.push(duck)
                     }
-                
+
                     count++
 
                     if (count === favorites.length) {

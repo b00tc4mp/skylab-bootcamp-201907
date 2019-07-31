@@ -3,57 +3,60 @@ class App extends React.Component {
     constructor() {
         super();
 
-        this.state = {
-            landing: true,
-            openRegister: false,
-            openLogin: false,
-            openFav: false
-        }
+        this.state = { view: 'landing', email: undefined } // 'register', 'login', ...
 
-        this.handleBack = this.handleBack.bind(this)
-
+        this.handleGoToRegister = this.handleGoToRegister.bind(this)
+        this.handleBackToLanding = this.handleBackToLanding.bind(this)
+        this.handleGoToLogin = this.handleGoToLogin.bind(this)
+        this.handleLogin = this.handleLogin.bind(this)
+        this.handleRegister = this.handleRegister.bind(this)
+        this.handleLogout = this.handleLogout.bind(this)
     }
 
+    handleGoToRegister() {
+        this.setState({ view: 'register' })
+    }
 
+    handleBackToLanding() {
+        this.setState({ view: 'landing' })
+    }
 
-    handleBack() {
-        this.setState({ landing: true, openFav: false })
+    handleRegister(name, surname, email, password) {
+        try {
+            logic.register(name, surname, email, password)
+
+            this.setState({ view: 'register-success' })
+        } catch (error) {
+            // TODO
+        }
+    }
+
+    handleGoToLogin() {
+        this.setState({ view: 'login' })
+    }
+
+    handleLogin(email, password) {
+        try {
+            logic.authenticate(email, password)
+
+            this.setState({ view: 'landing', email })
+        } catch (error) {
+            // TODO
+        }
+    }
+
+    handleLogout() {
+        this.setState({ email: undefined })
     }
 
     render() {
+        const { state: { view, email }, handleGoToRegister, handleRegister, handleBackToLanding, handleGoToLogin, handleLogin, handleLogout } = this
+
         return <>
-            {this.state.landing && <button onClick={event => {
-                event.preventDefault()
-                this.setState({ landing: false, openRegister: true })
-            }}>Register</button>
-            }
-            {this.state.openRegister && <Register back={() => this.setState({ landing: true, openRegister: false })} />}
-
-            {this.state.landing && <button onClick={event => {
-                event.preventDefault()
-                this.setState({ landing: false, openLogin: true, openRegister: false })
-            }}>Login</button>
-            }
-
-            {this.state.landing && <button onClick={event => {
-                event.preventDefault()
-                this.setState({ openFav: true, landing: false })
-            }}>To Favorites</button>
-            }
-
-            {this.state.openFav && <Favorite onBack={this.handleBack} />}
-
-
-            {this.state.openLogin && <Login back={() => this.setState({ landing: true, openLogin: false })} />}
-
-            {this.state.landing && <Landing />}
-
-
-
+            {view === 'landing' && <Landing onRegister={handleGoToRegister} onLogin={handleGoToLogin} user={email} onLogout={handleLogout} />}
+            {view === 'register' && <Register onBack={handleBackToLanding} onRegister={handleRegister} />}
+            {view === 'register-success' && <RegisterSuccess onLogin={handleGoToLogin} />}
+            {view === 'login' && <Login onBack={handleBackToLanding} onLogin={handleLogin} />}
         </>
     }
-
-
-
-
 }
