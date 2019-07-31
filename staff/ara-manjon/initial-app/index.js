@@ -1,112 +1,123 @@
-// landing panel
+'use strict';
 
-const landing = new Landing(document.getElementsByClassName('landing')[0])
+/**
+ * Presentation
+ */
 
-landing.onNavigateToRegister(() => {
-    landing.hide()
-    register.show()
-})
+// initial panel
 
-landing.onNavigateToLogin(() => {
-    landing.hide()
-    login.show()
-})
+const landing = new Landing(document.getElementsByClassName('landing')[0]);
+
+landing.onNavigateToRegister(function () {
+    landing.hide();
+    register.show();
+});
+
+landing.onNavigateToLogin(function () {
+    landing.hide();
+    login.show();
+});
 
 // register panel
 
+const register = new Register(document.getElementsByClassName('register')[0]);
 
-const register = new Register(document.getElementsByClassName('register')[0])
+register.onNavigateBack(function () {
+    register.hide();
+    landing.show();
+});
 
-register.onNavigateBack(() => {
-    register.hide()
-    landing.show()
-})
-
-
-register.onSubmitRegister((name, surname, email, password) => {
-
+register.onSubmitRegister(function (name, surname, email, password) {
     try {
-        logic.register(name, surname, email, password)
+        logic.register(name, surname, email, password);
 
-        register.hide()
-        registerSuccess.show()
+        register.hide();
+        registerSuccess.show();
     } catch (error) {
-        register.showFeedback(error.message)
-
+        register.showFeedback(error.message);
     }
-})
+});
 
 // register success panel
 
-const registerSuccess = new RegisterSuccess(document.getElementsByClassName('register-success')[0])
+const registerSuccess = new RegisterSuccess(document.getElementsByClassName('register-success')[0]);
 
-registerSuccess.onNavigateToLogin(() => {
-    registerSuccess.hide()
-    login.show()
-})
+registerSuccess.onNavigateToLogin(function () {
+    registerSuccess.hide();
+    login.show();
+});
 
 // login panel
 
-const login = new Login(document.getElementsByClassName('login')[0])
+const login = new Login(document.getElementsByClassName('login')[0]);
 
-login.onNavigateBack(() => {
+login.onNavigateBack(function () {
+    login.hide();
+    landing.show();
+});
 
-    login.hide()
-    landing.show()
-
-})
-
-
-login.onSubmitLogin((email, password) => {
-
+login.onSubmitLogin(function (email, password) {
     try {
         logic.login(email, password);
 
-        login.hide()
-        home.show()
-
+        login.hide();
+        home.show();
     } catch (error) {
-        login.showFeedback(error.message)
-
+        login.showFeedback(error.message);
     }
-})
+});
 
-// home panel
+// welcome panel
 
-const home = new DuckHome(document.getElementsByClassName('duck-home')[0])
+const home = new DuckHome(document.getElementsByClassName('duck-home')[0]);
 
-home.onClickLogout(() => {
-    home.hide()
-    home.results.hide()
-    home.feedback.hide()
-    landing.show()
-})
+home.onClickLogout(function () {
+    home.hide();
+    landing.show();
+});
 
-home.search.onSearch(query => {
-    try {
-        logic.searchDucks(query, (ducks) => {
-            try {
-                home.results.listItems(ducks)
-                home.results.show()
-            } catch (error) {
-                home.showFeedback(error.message)
-            }
-            home.feedback.hide()
-        })
-    } catch (error) {
-        home.showFeedback(error.message)
-    }
-})
 
-home.results.onClickItem = (id) => {
-    logic.retrieveDuck(id, (duck) => {
-        home.results.hide()
-        home.detail.displayDuck(duck)
-        home.detail.show()
-    })
-}
+// delete Ducks.prototype.paintItem; // WHAT if...
+// home.results.paintItem = function(li, duck) { // WHAT if...
+//     console.log(duck);
+// };
+
+home.search.onSearch(function (query) {
+    logic.searchDucks(query, function(error, ducks) {
+        if (error) {
+            alert(error.message);
+        } else {
+            home.results.listItems(ducks);
+            home.results.show();
+        }
+    });
+});
+
+home.results.onClickItem = function(id) {
+    logic.retrieveDuck(id, function(error, duck) {
+        if (error) {
+            alert(error.message)
+        } else {
+            home.results.hide();
+            home.detail.displayDuck(duck);
+            home.detail.show();
+        }
+    });
+};
+
+home.results.onAddItem = function(id) {
+    logic.addDuckToFavorites(id, function(error, duck) {
+        if (error) {
+            alert(error.message)
+        } else {
+            alert(duck);
+
+        }
+    });
+};
 
 home.detail.onClickBack( () => {
     home.detail.hide()
     home.results.show()
 })
+

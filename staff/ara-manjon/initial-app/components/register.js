@@ -1,20 +1,21 @@
+'use strict'
 
 /**
  * Register abstraction.
  * 
  * @param {HTMLElement} container 
  */
-
-class Register extends SubmitBack{
-    constructor(container){
-       super(container)
+class Register extends SubmitBack {
+    constructor(container) {
+        super(container)
     }
-
-    onSubmitRegister = expression => {
+    
+    onSubmitRegister(expression) {
         const form = this.container.children[0]
-        form.addEventListener('submit',event => {
+    
+        form.addEventListener('submit', event => {
             event.preventDefault()
-
+    
             const name = event.target.name.value
             const surname = event.target.surname.value
             const email = event.target.email.value
@@ -22,5 +23,5 @@ class Register extends SubmitBack{
     
             expression(name, surname, email, password)
         })
-    } 
+    }
 }

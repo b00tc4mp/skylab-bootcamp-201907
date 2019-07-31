@@ -5,21 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Initial-app</title>
+    <title>Document</title>
     <link rel="stylesheet" href="style/index.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet">
 </head>
 
-<body class="background">
+<body>
     <main>
         <h1>Initial App</h1>
 
-        <!-- initial panel -->
+        <!-- Landing -->
         <section class="landing show">
-            <a class ="landing but" href="">/register</a> <a class ="landing but" href="">/login</a>
+            <a href="">Register</a> or <a href="">Login</a>.
         </section>
 
-        <!-- register panel -->
+        <!-- Register -->
         <section class="register hide">
             <form>
                 <label for="name">Name</label>
@@ -29,64 +28,77 @@
                 <label for="email">E-mail</label>
                 <input type="email" id="email">
                 <label for="password">Password</label>
-                <input type="password" id="password"><br>
-                <button class = "register but" type="submit">/register</button>
+                <input type="password" id="password">
+                <button type="submit">Register</button>
             </form>
-            <p class="feedback feedback--error"></p>
-            <a class ="back but" href="">/back</a>
+            <p class="panel__feedback feedback feedback--error">A message.</p>
+            <a href="">back</a>
         </section>
 
-        <!-- register success panel -->
+        <!-- Register Success -->
         <section class="register-success hide">
-            Ok, registered succeeded, you can now proceed to <a href="">/login</a>.
+            Ok, registered succeeded, you can now proceed to <a href="">login</a>.
         </section>
 
-        <!-- register panel -->
+        <!-- Login -->
         <section class="login hide">
             <form>
                 <label for="email">E-mail</label>
                 <input type="email" id="email">
                 <label for="password">Password</label>
                 <input type="password" id="password">
-                <button class= "login but"type="submit">/login</button>
+                <button type="submit">Login</button>
             </form>
-            <p class="feedback feedback--error"></p>
-            <a class ="back but" href="">/back</a>
+            <p class="panel__feedback feedback feedback--error">A message.</p>
+            <a href="">back</a>
         </section>
 
         <!-- Home -->
         <section class="duck-home hide">
             <h2>Welcome!</h2>
-            <button class ="back but">/logout</button>
+            <button>Logout</button>
 
             <!-- Search -->
             <section class="search">
                 <h3>Search</h3>
                 <form>
                     <input type="text" name="query">
-                    <button class ="back">Search</button>
+                    <button>Search</button>
                 </form>
-                <p class="feedback feedback--error">A message.</p>
+                <p class="panel__feedback feedback feedback--error hide">A message.</p>
             </section>
 
             <!-- Results -->
             <section class="duck-results hide">
                 <ul>
-                    <li></li>
+                    <li>Duck 1</li>
+                    <li>Duck 2</li>
+                    <li>Duck 3</li>
                 </ul>
             </section>
 
             <!-- Detail -->
             <section class="duck-detail hide">
                 <h3>Title</h3>
-                <img class="duck-detail__photo" src="">
+                <img class="duck-detail__photo" src="http://whetever.com/image.jpg">
                 <span class="duck-detail__price">Price</span>
                 <p>Description</p>
-                <a class="detail--a"href="">Link</a>
-                <a class= "detail__back back" href="">/back</a>
+                <a href="">Link</a>
+                <a href="">back</a>
             </section>
+            
+            <!-- Favs -->
+            <div id="root"></div>
         </section>
     </main>
+
+
+    <script src="vendor/react/16.8.6/react.development.js"></script>
+    <script src="vendor/react/16.8.6/react-dom.development.js"></script>
+    <script src="vendor/babel/7.5.5/babel.min.js"></script>
+
+    <!-- <script src="index.js"></script> -->
+    <script src="index.jsx" type="text/babel"></script>
 
     <script src="utils/call.js"></script>
     <script src="utils/curray.js"></script>

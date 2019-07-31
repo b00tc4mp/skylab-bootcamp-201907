@@ -1,3 +1,4 @@
+'use strict';
 
 /**
  * Data
@@ -5,10 +6,10 @@
 
 let users = new Curray()
 
-users.push({
-    name: 'a',
-    surname: 'm',
-    email: 'a@gmail.com',
-    password: '123',
-    favorites: new Curray()
-});
+// users.push({
+//     name: 'Manuel',
+//     surname: 'Barzi',
+//     email: 'manuelbarzi@gmail.com',
+//     password: '123',
+//     favorites: new Curray()
+// })

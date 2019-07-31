@@ -1,16 +1,16 @@
+'use strict'
 
 /**
  * Landing abstraction.
  * 
  * @param {HTMLElement} container 
  */
-
-class Landing extends Component{
-    constructor(container){
+class Landing extends Component {
+    constructor(container) {
         super(container)
     }
 
-    onNavigateToRegister = expression => {
+    onNavigateToRegister(expression) {
         const register = this.container.children[0]
 
         register.addEventListener('click', event => {
@@ -19,14 +19,14 @@ class Landing extends Component{
             expression()
         })
     }
-    onNavigateToLogin = expression => {
+
+    onNavigateToLogin(expression) {
         const login = this.container.children[1]
 
-        login.addEventListener('click', event =>{
+        login.addEventListener('click', event => {
             event.preventDefault()
 
             expression()
         })
     }
-
 }

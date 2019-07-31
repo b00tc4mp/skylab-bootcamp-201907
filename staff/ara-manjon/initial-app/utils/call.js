@@ -1,15 +1,26 @@
+function call(url, expression) {
+    const xhr = new XMLHttpRequest()
 
+    xhr.open('get', url)
 
-call = (url, expression) => {
-    const request = new XMLHttpRequest()
+    xhr.onload = function () {
+        if (xhr.status < 300) {
+            const results = JSON.parse(xhr.responseText)
 
-    request.open('get', url)
+            expression(undefined, results)
+        } else if(xhr.status >= 300) {
+            const error = new Error(xhr.status)
 
-    request.onload = () => {
-        let results = JSON.parse(request.responseText)
+            error.status = xhr.status
 
-        expression(results)
+            expression(error)
+        }
     }
 
-    request.send()
+    xhr.onerror = function(error) {
+        
+        expression()
+    }
+
+    xhr.send()
 }
