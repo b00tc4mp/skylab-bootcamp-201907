@@ -6,20 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Lacquer&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style/index.css">
 </head>
 
 <body>
     <main>
         <h1>Initial App</h1>
 
-        <!-- initial panel -->
-        <section class="panel panel--show">
-            <a href="">Register</a> or <a href="">Login</a>.
+        <!-- Landing -->
+        <section class="landing show">
+            <a href="">Register</a> or <a href="">Login</a>
         </section>
 
-        <!-- register panel -->
-        <section class="panel panel--hide">
+        <!-- Register -->
+        <section class="register hide">
             <form>
                 <label for="name">Name</label>
                 <input type="text" id="name">
@@ -35,13 +36,13 @@
             <a href="">back</a>
         </section>
 
-        <!-- register success panel -->
-        <section class="panel panel--hide">
+        <!-- Register Success -->
+        <section class="register-success hide">
             Ok, registered succeeded, you can now proceed to <a href="">login</a>.
         </section>
 
-        <!-- login panel -->
-        <section class="panel panel--hide">
+        <!-- Login -->
+        <section class="login hide">
             <form>
                 <label for="email">E-mail</label>
                 <input type="email" id="email">
@@ -53,24 +54,64 @@
             <a href="">back</a>
         </section>
 
-        <!-- welcome panel -->
-        <section class="panel panel--hide">
+        <!-- Home -->
+        <section class="duck-home hide">
             <h2>Welcome!</h2>
-            <h3>Search Ducks</h3>
-            <form method="GET">
-                <label for="search">Search</label>
-                <input type="text" id="search">
-                <button type="submit">search</button>
-            </form>
             <button>Logout</button>
+
+            <!-- Search -->
+            <section class="search">
+                <h3>Search</h3>
+                <form>
+                    <input type="text" name="query">
+                    <button>Search</button>
+                </form>
+                <p class="panel__feedback feedback feedback--error hide">A message.</p>
+            </section>
+
+            <!-- Results -->
+            <section class="duck-results hide">
+                <ul>
+                    <li>Duck 1</li>
+                    <li>Duck 2</li>
+                    <li>Duck 3</li>
+                </ul>
+            </section>
+
+            <!-- Detail -->
+            <section class="duck-detail hide">
+                <h3>Title</h3>
+                <img class="duck-detail__photo" src="http://whetever.com/image.jpg">
+                <span class="duck-detail__price">Price</span>
+                <p>Description</p>
+                <a href="">Link</a>
+                <button class="duck-detail__favourite"></button>
+            </section>
+
+            <!-- Favourite -->
+            <section class="duck-favourite">
+                <h3>Favourite</h3>
+            </section>
         </section>
     </main>
 
-    <script src="curray.js"></script>
-    <script src="data.js"></script>
-    <script src="logic.js"></script>
-    <script src="components.js"></script>
-    <script src="main.js"></script>
+    <script src="utils/call.js"></script>
+    <script src="utils/curray.js"></script>
+    <script src="data/index.js"></script>
+    <script src="logic/index.js"></script>
+    <script src="components/component.js"></script>
+    <script src="components/landing.js"></script>
+    <script src="components/submit-back.js"></script>
+    <script src="components/register.js"></script>
+    <script src="components/register-success.js"></script>
+    <script src="components/login.js"></script>
+    <script src="components/feedback.js"></script>
+    <script src="components/search.js"></script>
+    <script src="components/results.js"></script>
+    <script src="components/custom/duck-home.js"></script>
+    <script src="components/custom/duck-results.js"></script>
+    <script src="components/custom/duck-detail.js"></script>
+    <script src="index.js"></script>
 </body>
 
 </html>
