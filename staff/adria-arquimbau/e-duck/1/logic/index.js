@@ -4,6 +4,9 @@
  * Business Logic
  */
 
+let __loggedUser__ = ''
+let __registerOk__ = false
+
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
 const logic = {
@@ -52,6 +55,8 @@ const logic = {
                 password: password,
                 favorites: new Array
             })
+
+            __registerOk__ = true
         }
     },
 
@@ -77,6 +82,8 @@ const logic = {
         })
 
         if (!user) throw new Error('Wrong credentials.')
+
+        __loggedUser__ = user.email
     },
 
     searchDucks(query, expression) {
