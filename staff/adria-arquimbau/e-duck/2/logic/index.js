@@ -95,7 +95,7 @@ const logic = {
         })
     },
 
-    retrieveDuck(id, Expression) {
+    retrieveDuck(id, expression) {
         // TODO validate id, expression
 
         call('http://duckling-api.herokuapp.com/api/ducks/' + id, (error, result) => {
@@ -130,7 +130,7 @@ const logic = {
 
         const user = users.find(user => user.email === email)
 
-        if (!user) throw error(`user with email ${email} not found`)
+        if (!user) throw Error(`user with email ${email} not found`)
 
         const { favorites } = user
 
@@ -176,17 +176,18 @@ const logic = {
 
                     if (count === favorites.length) {
                         if (_error) expression(_error)
-                        else expresion(undefined, ducks)
+                        else expression(undefined, ducks)
                     }
                 })
             })
         }
 
-    }
+    },
 
-    retrieveUser(user) {
-        user = users.find( user => user.email === user || email )
+    retrieveUser(email) {
+        const _user = users.find(user => user.email === email)
 
+        return _user.name
     }
 
 }

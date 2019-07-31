@@ -278,4 +278,10 @@ describe('logic', () => {
             })
         })
     })
+
+    describe('Should show user name when logged in', () => {
+        
+
+    })
+
 })

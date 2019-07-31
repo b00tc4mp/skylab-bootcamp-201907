@@ -63,6 +63,7 @@ class Landing extends Component {
                         <li><a href="" onClick={handleRegister}>Register</a></li>
                         <li><a href="" onClick={handleLogin}>Login</a></li>
                     </ul> : <ul>
+                            <li>Hello, {logic.retrieveUser(user)}</li>
                             <li><a href="" onClick={handleLogout}>Logout</a></li>
                         </ul>}
 
