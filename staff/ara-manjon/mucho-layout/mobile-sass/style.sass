@@ -1,0 +1,315 @@
+$white: #fff
+$paddingLeft: 1.5rem
+$colorLet: #AEAEAE
+$border: 0.05rem solid #AEAEAE
+$borderTablet: 0.1rem solid #AEAEAE
+$fontFam: 'Open Sans', sans-serif
+$backColor: #f4f4f4
+$black: #000
+$red: #EC1C24 
+$hard-grey: #555555
+$smallLet: 0.9rem
+
+%small-let-grey
+    font-size: 0.9rem
+    font-family: $fontFam
+ 
+*
+    margin: 0
+    padding: 0
+    box-sizing: border-box 
+body 
+    width: 100vw
+    margin: 0 auto
+
+.hdr
+    top: 0
+    width: 100%
+    min-width: 20%
+    max-height: 20%
+    background-color: $white
+    z-index: 4
+    position: fixed
+    // right: 0
+    display: flex
+    justify-content: space-between
+    margin: 0
+    padding: 0
+
+    &__banner
+        margin-top: 15px
+        padding-top: 7px
+        padding-left: 14px
+        border:0
+        max-width: 100%
+        max-height: 30px
+        min-height: 10px
+        display: inline-block
+    
+    &__nav
+        div
+            width: 40%
+            border-bottom: 1px solid $colorLet
+            border-top: 1px solid $colorLet
+            height: 12px
+            margin: 2rem 2rem
+            float: right
+            color: $colorLet
+.drp
+    display: flex
+    flex-direction: column
+    width: 100%
+    justify-content: center
+    align-items: center
+    padding-top: 80px
+    margin: 0
+    &__first
+        width: 100%
+        border-top: $border
+        border-bottom: $border
+        margin: 0
+    &__keep
+        width: 100%
+        border-bottom: $border
+        margin: 0
+    &__title
+        width: 100%
+        font-size: 1.2rem
+        color: $colorLet
+        padding: 0.5rem 0 0rem 1rem
+        margin: 0.1rem 0.1rem
+        font-weight: 100
+        font-family: $fontFam
+
+.cllg
+    display: flex
+    flex-direction: column
+    padding: 0
+    width: 100%
+    align-items: center
+    margin-top: 0.5rem
+    &__div
+        width: 98%
+.img
+    margin: 1rem
+    &__img
+        width: 100%
+        heigth: auto
+    &__intro
+        width: 100%
+        color: rgba($white, 0)
+        top: 0
+        bottom: 0
+        font-size: 0rem
+        font-weight: 200
+        padding: 0
+        position: absolute
+
+        &:hover
+            display: none
+            z-index: 3
+            width: 100%
+            top: 0
+            bottom: 0
+            background-color: rgba($white, .9)
+            position: absolute
+            font-size: 0.7rem
+            font-weight: 200
+            padding: 1rem 0 0 1.5
+            transition: all 0.5s linear
+            font-family: $fontFam
+            color: $colorLet
+
+.about
+    display: flex
+    flex-direction: column
+    width: 95%
+    justify-content: center
+    align-items: center
+    padding-top: 70px    
+    &__about
+        background-color: $backColor
+        width: 100%
+        margin: 0.2rem auto
+        height: 350px
+        padding: 0
+    &__text
+        width: 100%
+        padding: 1rem 1.5rem
+        font-size: 1.2rem
+        color: $black
+        font-family: $fontFam
+        a
+            color: $colorLet
+            text-decoration: none
+    &__red
+        padding: 1.5rem 0 0 1.5rem
+        @extend %small-let-grey
+        font-weight: 900
+        color: $red 
+.bye
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    width: 95%
+    &__text
+        @extend %small-let-grey
+
+        padding: 3rem 0 3rem 1.5rem
+        color: $hard-grey
+
+
+.adr
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: left
+    width: 95%
+    &__adr
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: left
+        width: 95%
+    &__text
+        padding: 0 0 4rem 1.5rem
+        color: $hard-grey
+        @extend %small-let-grey
+
+    &__red
+        padding: 0 0 4rem 1.5rem
+        padding: 0 1.5rem 1rem 1.5rem
+        color: $red
+        font-weight: 900
+        @extend %small-let-grey
+
+.scrption
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: left
+    width: 95%
+    padding-bottom: 1.5rem
+    &__text
+        padding: 0.5rem 1.5rem
+        font-weight: 100
+        color: $colorLet
+        @extend %small-let-grey
+
+    i 
+        color: $colorLet
+        padding-right: 0.3rem
+
+@media (min-width: 600px)
+    .cllg
+        display: flex
+        flex-flow: row wrap
+        justify-content: space-around
+        align-content: stretch
+        &__div
+            width: 49%
+    .img
+        width: 100%
+        &__intro
+            display: none
+
+    .about
+        display: flex
+        flex-flow: row wrap
+        &__about
+            align-items: left
+            width: 49%
+            height: 270px
+    .bye
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        width: 95%
+        &__text
+            font-size: 1.5rem
+            font-family: $fontFam
+            padding: 3rem 0 3rem 1.5rem
+            color: $hard-grey
+
+    .adr
+        display: flex
+        flex-flow: row wrap
+        justify-content: space-around
+        align-content: strech
+        width: 95%
+        &__adr
+            width: 45%
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: left
+        &__text
+            width: 45%
+            padding: 0 0 4rem 1.5rem
+            color: $hard-grey
+            font-size: .9rem
+            font-family: $fontFam
+
+        &__red
+            width: 45%
+            padding: 0 0 4rem 1.5rem
+            padding: 0 1.5rem 1rem 1.5rem
+            color: $red
+            font-weight: 900
+            font-size: .9rem
+            font-family: $fontFam
+
+@media (min-width: 1000px)
+    .hdr
+        min-height: 8%
+        height: 5px
+    .drp
+        display: none
+    .cllg
+        padding-top: 5%
+        display: flex
+        flex-flow: row wrap
+        justify-content: space-around
+        align-content: stretch
+        &__div
+            width: 33%
+
+    .about
+        display: flex
+        flex-flow: row wrap
+        &__about
+            align-self: left
+            width: 33%
+            height: 270px
+    .adr
+        display: flex
+        flex-flow: row wrap
+        justify-content: space-around
+        align-content: strech
+        width: 95%
+        &__adr
+            width: 20%
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: left
+        &__text
+            width: 100%
+        &__red
+            width: 100%
+
+
+
+/*     .adr
+        display: grid
+        flex-flow: row wrap
+        justify-content: space-around
+        align-items: stretch
+        &__adr
+            width: 45%
+        &__text
+            width: 45%
+        &__red
+            width: 45% */
