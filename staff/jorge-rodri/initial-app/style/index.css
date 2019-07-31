@@ -1,0 +1,210 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #E7F1F0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  color: #B1BBE2;
+  font-family: "Lacquer", sans-serif;
+  text-align: center;
+}
+
+.show {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hide {
+  display: none;
+}
+
+.duck-detail, .duck-results, .feedback {
+  padding: 0.5rem;
+  margin: 1.5rem;
+  border: 0.1rem solid gray;
+  border-radius: 1rem;
+  background-color: lightgray;
+}
+.landing {
+  -moz-box-shadow: 3px 3px 5px 6px #ccc;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+  box-shadow: 3px 3px 5px 6px #ccc;
+  width: 30vw;
+  height: 20vh;
+  border: 1px solid grey;
+  border-radius: 0.5rem;
+  background-color: #C0EAF0;
+  font-family: "Lacquer", sans-serif;
+}
+.landing > a {
+  background-color: #4FC0CD;
+  color: #2A3334;
+  padding: 0 1em;
+  text-decoration: none;
+  border: 1px outset grey;
+  border-radius: 0.5rem;
+}
+.landing > a:nth-child(1) {
+  margin-top: 5vh;
+}
+
+.login {
+  -moz-box-shadow: 3px 3px 5px 6px #ccc;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+  box-shadow: 3px 3px 5px 6px #ccc;
+  width: 30vw;
+  height: 30vh;
+  border: 1px solid grey;
+  border-radius: 0.5rem;
+  background-color: #C0EAF0;
+  font-family: "Lacquer", sans-serif;
+}
+.login > form {
+  margin-top: 5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login > form > button {
+  margin-top: 0.5vh;
+  background-color: #7AE6F3;
+}
+.login > a {
+  text-decoration: none;
+  color: #B1BBE2;
+}
+
+.register {
+  -moz-box-shadow: 3px 3px 5px 6px #ccc;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+  box-shadow: 3px 3px 5px 6px #ccc;
+  width: 32vw;
+  height: 35vh;
+  border: 1px solid grey;
+  border-radius: 0.5rem;
+  background-color: #C0EAF0;
+  font-family: "Lacquer", sans-serif;
+}
+.register > form {
+  margin-top: 2vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.register > form > button {
+  margin-top: 0.5vh;
+  background-color: #7AE6F3;
+}
+.register > a {
+  text-decoration: none;
+  color: #B1BBE2;
+}
+
+.register-success {
+  -moz-box-shadow: 3px 3px 5px 6px #ccc;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+  box-shadow: 3px 3px 5px 6px #ccc;
+  width: 32vw;
+  height: 35vh;
+  border: 1px solid grey;
+  border-radius: 0.5rem;
+  background-color: #C0EAF0;
+  font-family: "Lacquer", sans-serif;
+  text-align: center;
+  padding-top: 12vh;
+}
+.register-success > a {
+  text-decoration: none;
+  color: #B1BBE2;
+  background-color: #4FC0CD;
+  border: 1px outset grey;
+  border-radius: 0.5rem;
+  padding: 0.5em 1em;
+  margin-top: 0.5em;
+}
+
+.feedback--success {
+  background-color: greenyellow;
+}
+.feedback--warning {
+  background-color: yellow;
+}
+.feedback--error {
+  background-color: red;
+  color: white;
+}
+
+.search {
+  width: 30vw;
+  height: 30vh;
+  border: 1px solid grey;
+  border-radius: 0.5rem;
+  background-color: #81ADB2;
+  font-family: "Lacquer", sans-serif;
+}
+.search > form {
+  margin-top: 5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.search > form > button {
+  margin-top: 0.5vh;
+  background-color: #7AE6F3;
+}
+.search > h3 {
+  color: #788385;
+  text-align: center;
+}
+
+.duck-home {
+  -moz-box-shadow: 3px 3px 5px 6px #ccc;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+  box-shadow: 3px 3px 5px 6px #ccc;
+  width: 45vw;
+  height: 60vh;
+  border: 1px solid grey;
+  border-radius: 0.5rem;
+  background-color: #C0EAF0;
+  font-family: "Lacquer", sans-serif;
+}
+.duck-home > button {
+  margin-top: 0.5vh;
+  background-color: #7AE6F3;
+}
+
+.duck-results {
+  background-color: skyblue;
+}
+.duck-results img {
+  width: 333px;
+}
+
+.duck-detail {
+  background-color: plum;
+}
+.duck-detail__photo {
+  width: 333px;
+}
+.duck-detail__price {
+  background-color: yellow;
+  color: red;
+}
+.duck-detail__favourite {
+  border: 1px solid #57AB44;
+  padding: 10px;
+  border-radius: 2em;
+  background-color: #9CEC8B;
+}
+.duck-detail__favourite:hover {
+  background-color: rgba(102, 255, 51, 0.4);
+}
+
+/*# sourceMappingURL=index.css.map */
