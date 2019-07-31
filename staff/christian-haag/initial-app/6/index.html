@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main>
+        <h1>Initial App</h1>
+
+        <!-- Landing -->
+        <section class="panel show">
+            <div class="link"><a class="button--a" href="">Register</a> or <a class="button--a" href="">Login</a>
+            </div>
+        </section>
+
+        <!-- REgister -->
+        <section class="panel hide">
+            <form>
+                <label for="name">Name*</label>
+                <input type="text" id="name">
+                <label for="surname">Surname*</label>
+                <input type="text" id="surname">
+                <label for="email">E-mail*</label>
+                <input type="text" id="email">
+                <label for="password">Password*</label>
+                <input type="password" id="password">
+                <button class="button button--style1" type="submit">Register</button>
+            </form>
+            <p class="alert"></p>
+            <a href="">back</a>
+        </section>
+
+        <!-- Register Succes -->
+        <section class="panel hide">
+            <p class="text"> Ok, registered succeeded, you can now proceed to <a href="">login</a>.</p>
+        </section>
+
+        <!-- Login -->
+        <section class="panel hide">
+            <form>
+                <label for="email">E-mail*</label>
+                <input type="email" id="email">
+                <label for="password">Password*</label>
+                <input type="password" id="password">
+                <button class="button button--style1" type="submit">Login</button>
+            </form>
+            <p class="alert"></p>
+            <a href="">back</a>
+        </section>
+
+        <!-- Home -->
+        <section class="panel hide">
+            <h2>Welcome!</h2>
+
+            <!-- Search -->
+            <section>
+                <form id='form'>
+                    <input type="text" name="query" id="query">
+                    <div class="home-buttons">
+                        <button type="submit" class="button button--style2">Search</button>
+                        <!-- <button type="submit" class="button button--style2">Refresh</button> -->
+                    </div>
+                </form>
+            </section>
+
+            <div class="anch">
+                <p class="alert"></p>
+                <button class="button button--style1">Logout</button>
+            </div>
+        </section>
+
+        <!-- Results -->
+        <section class="panel product hide">
+            <ul class="img-panel">
+                <!--dynamic Js load--->
+            </ul>
+        </section>
+
+        <!-- Details -->
+        <section class="panel"></section>
+
+        </section>
+
+    </main>
+    <script src="curray.js"></script>
+    <script src="data.js"></script>
+    <script src="components.js"></script>
+    <script src="logic.js"></script>
+    <script src="custom-components.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
