@@ -1,4 +1,4 @@
-function Login({ onLogin, onBack }) {
+function Login({ onLogin, onBack, error }) {
     return <>
         <h1>Login</h1>
         <form onSubmit={event => {
@@ -8,14 +8,15 @@ function Login({ onLogin, onBack }) {
 
             onLogin(email, password)
         }}>
-            <input type="email" name="email" />
-            <input type="password" name="password" />
+            <label>E-mail<input type="email" name="email" /></label>
+            <label>Password<input type="password" name="password" /></label>
             <button>Login</button>
-            <a href="" onClick={event => {
-                event.preventDefault()
-
-                onBack()
-            }}>Go back</a>
         </form>
+        {error && <Feedback message={error} />}
+        <a href="" onClick={event => {
+            event.preventDefault()
+
+            onBack()
+        }}>Go back</a>
     </>
 }
