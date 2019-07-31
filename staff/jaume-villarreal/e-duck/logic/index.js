@@ -184,7 +184,6 @@ const logic = {
     },
 
     retrieveUser(_email){
-        debugger
         if(!_email) throw Error ("e-mail is not defined")
 
         if(!_email.trim()) throw Error ("e-mail is empty or blank")
