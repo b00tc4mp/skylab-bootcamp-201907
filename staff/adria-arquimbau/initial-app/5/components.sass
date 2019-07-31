@@ -1,0 +1,109 @@
+=round-border($width, $radius, $style, $color)
+    border: $width $style $color
+    border-radius: $radius
+
+%base-panel
+    padding: 0.5rem
+    margin: 1.5rem 
+
+body 
+    background-image: url('https://images.thestar.com/iaCkYOTaIGCYYGnTbNeoz2ua4jY=/1200x806/smart/filters:cb(2700061000)/https://www.thestar.com/content/dam/thestar/news/queenspark/2017/05/29/ontario-tories-cry-fowl-over-120k-for-a-giant-rubber-duck/giant-duck.jpg')
+    background-size: cover
+
+.panel
+    @extend %base-panel
+
+    +round-border(0.1rem, 1rem, solid, $panel-color)
+    
+    background-color: $panel-back-color
+    
+    &--show
+        display: block
+    
+    &--hide
+        display: none
+
+    &__feedback
+        color: red
+
+    &__button
+        background-color: rgb(255, 210, 8)
+        border: none
+        border-radius: 0.5rem
+        color: black
+        padding: 4px 15px
+        text-align: center
+        text-decoration: none
+        display: inline-block
+        font-size: 12px
+        margin: 2px 2px
+        cursor: pointer
+
+.alert
+    @extend %base-panel
+
+    +round-border(0.1rem, 1rem, solid, $alert-color)
+    
+    background-color: $alert-back-color
+
+    &__title
+        color: $alert-title-color
+
+    &__body
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+        font-weight: 400
+        font-size: 0.75rem
+    
+    &__accept
+        +round-border(0.1rem, 1rem, solid, $alert-color)
+
+    &--danger
+        border-color: $alert-warn-color
+        background-color: $alert-warn-back-color
+
+    &--danger > h2
+        color: $alert-warn-title-color
+    
+    &--danger > button
+        border-color: $alert-warn-color
+
+.confirm
+    @extend %base-panel
+
+    +round-border(0.1rem, 1rem, solid, $confirm-color)
+    
+    background-color: $confirm-back-color
+
+    &__title
+        color: $confirm-title-color
+
+    &__body
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+        font-weight: 400
+        font-size: 0.75rem
+    
+    &__accept
+        +round-border(0.1rem, 1rem, solid, $confirm-color)
+    
+    &__cancel
+        +round-border(0.1rem, 1rem, solid, $confirm-color)
+
+ul
+    width: 95%
+    display: flex
+    flex-wrap: wrap
+    padding: 0 
+
+li
+    max-width: 200px
+    margin: 2% 
+
+h3 
+    max-width: 200px
+    margin: 2%
+    height: 1.9rem
+
+img
+    max-width: 200px
+    margin: 2%
+    padding-top: 1rem

@@ -22,10 +22,15 @@ class DuckResults extends Results {
 
         li.appendChild(img)
 
-        const fav = document.createElement('button')
-        fav.innerText = 'Add to Favorite'
+        const favorite = document.createElement('button')
+        favorite.innerText = 'Add to Favorite'
+        favorite.addEventListener('click', event => {
+            event.stopPropagation()
+            
+            this.onAddToFavoriteClicked(duck.id)
+        }, false)
 
-        li.appendChild(fav)
+        li.appendChild(favorite)
 
         li.addEventListener('click', event => {
             event.preventDefault()
@@ -35,6 +40,10 @@ class DuckResults extends Results {
     }
 
     onClickItem(id) {
+        console.log(id)
+    }
+
+    onAddToFavoriteClicked(id) {
         console.log(id)
     }
 }

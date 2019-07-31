@@ -85,7 +85,7 @@ login.onSubmitLogin(function (email, password) {
 });
 // //-----------------------------
 var home = new DuckHome(panels[4]);
-var resultPanel = new Results(panels[5]);
+var resultPanel = new ResultPanel(panels[5]);
 
 home.onClickLogout(function () {
     home.hide();
@@ -94,7 +94,7 @@ home.onClickLogout(function () {
 
 home.search.onSearch(function (query) {
     logic.searchDucks(query, function (results) {
-        resultPanel.listItems(results);
+        resultPanel.result.listItems(results);
     });
     resultPanel.show()
 });

@@ -1,0 +1,99 @@
+=round-border($width, $radius, $style, $color)
+    border: $width $style $color
+    border-radius: $radius
+
+%base-panel
+    padding: 0.5rem
+    margin: 1.5rem
+
+.panel
+    @extend %base-panel
+
+    +round-border(0.1rem, 1rem, solid, $panel-color)
+    
+    background-color: $panel-back-color
+    font-family: $font-initial-app
+
+    &--show
+        display: block
+    
+    &--hide
+        display: none
+
+    &__feedback
+        color: red
+
+    &__button
+        background-color: skyblue
+        border: none
+        border-radius: 0.5rem
+        color: white
+        padding: 15px 32px
+        text-align: center
+        text-decoration: none
+        display: inline-block
+        font-size: 16px
+        margin: 4px 2px
+        cursor: pointer
+
+.alert
+    @extend %base-panel
+
+    +round-border(0.1rem, 1rem, solid, $alert-color)
+    
+    background-color: $alert-back-color
+
+    &__title
+        color: $alert-title-color
+
+    &__body
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+        font-weight: 400
+        font-size: 0.75rem
+    
+    &__accept
+        +round-border(0.1rem, 1rem, solid, $alert-color)
+
+    &--danger
+        border-color: $alert-warn-color
+        background-color: $alert-warn-back-color
+
+    &--danger > h2
+        color: $alert-warn-title-color
+    
+    &--danger > button
+        border-color: $alert-warn-color
+
+.confirm
+    @extend %base-panel
+
+    +round-border(0.1rem, 1rem, solid, $confirm-color)
+    
+    background-color: $confirm-back-color
+
+    &__title
+        color: $confirm-title-color
+
+    &__body
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+        font-weight: 400
+        font-size: 0.75rem
+    
+    &__accept
+        +round-border(0.1rem, 1rem, solid, $confirm-color)
+    
+    &__cancel
+        +round-border(0.1rem, 1rem, solid, $confirm-color)
+
+.duckstyles
+    width: 80vw
+    display: grid
+    grid-template-columns: 1fr 1fr
+
+li
+    grid-template-columns: 22% auto
+    grid-template-rows: 22% auto
+
+img
+    grid-row: 1 / span 2
+    grid-column: 1 / span 2
