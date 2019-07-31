@@ -9,7 +9,17 @@ class App extends React.Component {
             openLogin: false,
             openFav: false
         }
+
+        this.handleBack = this.handleBack.bind(this)
+
     }
+
+
+
+    handleBack() {
+        this.setState({ landing: true, openFav: false })
+    }
+
     render() {
         return <>
             {this.state.landing && <button onClick={event => {
@@ -28,10 +38,10 @@ class App extends React.Component {
             {this.state.landing && <button onClick={event => {
                 event.preventDefault()
                 this.setState({ openFav: true, landing: false })
-            }}>To Favourites</button>
+            }}>To Favorites</button>
             }
 
-            {this.state.fav && <Favorite />}
+            {this.state.openFav && <Favorite onBack={this.handleBack} />}
 
 
             {this.state.openLogin && <Login back={() => this.setState({ landing: true, openLogin: false })} />}
