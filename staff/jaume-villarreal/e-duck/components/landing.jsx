@@ -33,7 +33,8 @@ class Landing extends React.Component {
 
             {
                 !this.state.duck ?
-                    <Results items={this.state.ducks} paintItem={duck => {
+                    <Results 
+                     items={this.state.ducks} paintItem={duck => {
                         return <DuckItem duck={duck} />
                     }} onItem={this.handleRetrieveDuck} />
                     :

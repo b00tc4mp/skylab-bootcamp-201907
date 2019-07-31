@@ -26,7 +26,7 @@ class Button extends React.Component {
 }
 
 
-  //   handleClick() {
+//   handleClick() {
 //     this.setState(state => ({
 //       isToggleOn: !state.isToggleOn
 //     }));
