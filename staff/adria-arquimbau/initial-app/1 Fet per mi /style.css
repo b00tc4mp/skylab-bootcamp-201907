@@ -1,0 +1,43 @@
+body{
+    background-color:rgb(236, 230, 230);
+    display: grid;
+    width: 100%;
+}
+section{
+    border-radius: 15px;
+    background-color: rgb(34, 140, 182);
+    margin: 12% 25%;  
+}
+.errorTextLoginWrong {
+    color: red;
+}
+.errorTextLoginWrong {
+    color: red;
+}
+.errorTextRegister{
+    color: red;
+}
+button {
+    border: 1px solid black;
+}
+input{
+    border: 1px solid black;
+}
+.panel {
+    border: 1px solid black;
+    padding: 10px;
+}
+form div{
+    display: grid;
+}
+form div button{
+    padding: 10px;
+    margin: 10px 0px 0px 0px;
+    width: 25%;
+}
+.panel--show {
+    display: block; 
+}
+.panel--hide {
+    display: none;
+}
