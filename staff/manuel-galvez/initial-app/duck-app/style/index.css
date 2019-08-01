@@ -1,0 +1,117 @@
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.duck-detail, .duck-results, .duck-home, .search, .feedback, .register-success, .register, .login, .landing {
+  padding: 0.5rem;
+  margin: 1.5rem;
+  border: 0.1rem solid gray;
+  border-radius: 1rem;
+  background-color: white;
+}
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15rem;
+  height: 3rem;
+  max-width: 15rem;
+  margin: 1vh 0;
+  text-decoration: none;
+  border-radius: 3px;
+}
+.btn--blue {
+  background-color: #0791D0;
+  color: white;
+}
+.btn--white {
+  border: 1px solid #0791D0;
+  color: #0791D0;
+}
+.btn__register {
+  background-color: #0791D0;
+  color: white;
+}
+.btn__login {
+  border: 1px solid #0791D0;
+  color: #0791D0;
+}
+.btn__submit {
+  background-color: #0791D0;
+  color: white;
+  box-shadow: 0;
+  border: 0;
+  align-self: center;
+  font-size: 1.05rem;
+}
+.btn__back {
+  width: 7rem;
+  max-height: 2.5rem;
+  border: 1px solid #0791D0;
+  color: #0791D0;
+}
+.btn__logout {
+  width: 7rem;
+  height: 2.5rem;
+  border: 1px solid #0791D0;
+  color: #0791D0;
+}
+
+.landing {
+  background-color: yellow;
+}
+
+.login {
+  background-color: orange;
+}
+
+.register {
+  background-color: gold;
+}
+
+.register-success {
+  background-color: salmon;
+}
+
+.feedback--success {
+  background-color: greenyellow;
+}
+.feedback--warning {
+  background-color: yellow;
+}
+.feedback--error {
+  background-color: red;
+  color: white;
+}
+
+.search {
+  background-color: silver;
+}
+
+.duck-home {
+  background-color: greenyellow;
+}
+
+.duck-results {
+  background-color: skyblue;
+}
+.duck-results img {
+  width: 333px;
+}
+
+.duck-detail {
+  background-color: plum;
+}
+.duck-detail__photo {
+  width: 333px;
+}
+.duck-detail__price {
+  background-color: yellow;
+  color: red;
+}
+
+/*# sourceMappingURL=index.css.map */
