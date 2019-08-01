@@ -48,7 +48,7 @@ class App extends Component {
 
     handleLogout() {
         this.setState({ email: undefined })
-    } 
+    }
 
     render() {
         const { state: { view, email, error }, handleGoToRegister, handleRegister, handleBackToLanding, handleGoToLogin, handleLogin, handleLogout } = this

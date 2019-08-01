@@ -53,10 +53,10 @@ class Landing extends Component {
         this.props.onLogout()
     }
 
-    handleToggleFavDuck() {
+    handleToggleFavDuck(id) {
         const { props: { user, onLogin }, handleSearch } = this
-        
-        user? handleSearch() : onLogin()
+
+        user ? logic.toggleFavDuck(user, id, handleSearch) : onLogin()
     }
 
     render() {
@@ -83,13 +83,13 @@ class Landing extends Component {
             <h1>Landing</h1>
 
             <Search onSearch={handleSearch} />
-
             {!duck ?
                 <Results items={ducks} paintItem={duck => {
-                    return <DuckItem duck={duck} user={user} onToggle={handleToggleFavDuck} />
+                    return <DuckItem duck={duck} onToggle={handleToggleFavDuck} />
                 }} onItem={handleRetrieveDuck} />
                 :
-                <DuckDetail duck={duck} onBack={handleBackFromDetail} />}
+                
+                <DuckDetail duck={duck} onToggle={handleToggleFavDuck} onBack={handleBackFromDetail} />}
         </>
     }
 }

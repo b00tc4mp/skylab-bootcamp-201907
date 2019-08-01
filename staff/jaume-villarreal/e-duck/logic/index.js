@@ -134,12 +134,11 @@ const logic = (() => {
 
                 expression()
             } else
-                call('http://duckling-api.herokuapp.com/api/ducks/' + id, (error, result) => {
+                call('http://duckling-api.herokuapp.com/api/ducks/' + id, error => {
                     if (error)
                         expression(new Error(`cannot retrieve duck with id ${id}`))
                     else {
-                        // TODO do not add fav if already exists
-                        user.favorites.push(id)
+                        favorites.push(id)
 
                         expression()
                     }
