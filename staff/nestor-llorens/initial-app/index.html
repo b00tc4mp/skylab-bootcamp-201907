@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Initial App</title>
+    <link rel='stylesheet' href='styles/index.css'>
+</head>
+<body>
+    <main>
+        <h1>Initial App</h1>
+       
+       <!-- home page -->
+        <section class='home show'>
+            <a href='' class='enrollButton'>Enroll</a> or <a href='' class='signInButton'>Sign in</a>
+        </section>
+
+        <!-- enroll -->
+        <section class='enroll hide'>
+            <form class='enrollForm'>
+                <label for='name'>Name</label>
+                <input type='text' class='name' name='name'>
+                <label for='lastName'>Last Name</label>
+                <input type='text' class='lastName' name='lastName'>
+                <label for='email'>E-mail</label>
+                <input type='email' class='email' name='email'>
+                <label for='pass'>Pass</label>
+                <input type='password' class='pass' name='pass'>
+                <button type='submit'>Enroll</button>
+            </form>
+            <button type='click' class='backButton'>Back</button>
+        </section>
+
+        <!-- enroll success -->
+        <section class='enrollSuccess hide'>
+            <h2>Thank you for enrolling!</h2>
+            You can now procced to <a href='' class='signInButton'>Sign in</a>
+        </section>
+
+        <!-- sign in -->
+        <section class='signIn hide'>
+            <form class='signInForm'>
+                <label for=email>E-mail</label>
+                <input type='text' class='email' name='email'>
+                <label for='pass'>Pass</label>
+                <input type='text' class='pass' name='pass'>
+                <button type='submit'>Sign in</button>
+            </form>
+            <button type='click' class='backButton'>Back</button>
+        </section>
+
+        <!-- landing -->
+        <section class='landing hide'>
+            <h2>Welcome user!</h2>
+            <button type='click' class='logOutButton'>Log Out</button>
+        </section>
+    </main>
+    <script src="logic/logic.js"></script>
+    <script src="data/data.js"></script>
+    <!-- <script src="utils/call.js"></script> -->
+    <!-- <script src="utils/curray.js"></script> -->
+    <!-- <script src="data/index.js"></script> -->
+    <!-- <script src="logic/index.js"></script> -->
+    <script src="components/index.js"></script>
+    <!-- <script src="components/landing.js"></script> -->
+    <!-- <script src="components/submit-back.js"></script> -->
+    <!-- <script src="components/register.js"></script> -->
+    <!-- <script src="components/register-success.js"></script> -->
+    <!-- <script src="components/login.js"></script> -->
+    <!-- <script src="components/feedback.js"></script> -->
+    <!-- <script src="components/search.js"></script> -->
+    <!-- <script src="components/results.js"></script> -->
+    <!-- <script src="components/custom/duck-home.js"></script> -->
+    <!-- <script src="components/custom/duck-results.js"></script> -->
+    <!-- <script src="components/custom/duck-detail.js"></script> -->
+    <script src="index.js"></script>
+
+</body>
+</html>
