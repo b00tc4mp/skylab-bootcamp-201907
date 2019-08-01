@@ -1,0 +1,164 @@
+@import url("https://fonts.googleapis.com/css?family=Ribeye+Marrow&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  width: 80%;
+  background-color: moccasin;
+  margin: 0 auto;
+  height: 100%;
+  border: 0.4rem double darkorange;
+  border-radius: 0.3rem;
+}
+.wrapper__header {
+  padding: 2rem 0 2rem 2rem;
+  color: darkslategray;
+  text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+  font-family: "Ribeye Marrow", cursive;
+}
+.wrapper__motto {
+  padding-left: 3rem;
+  color: darkslategray;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  font-family: "Ribeye Marrow", cursive;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.duck-detail, .duck-results, .duck-home, .search, .feedback, .register-success, .register, .login, .landing {
+  padding: 2rem;
+  margin: 2rem;
+  border: 0.2rem solid darkorange;
+  border-radius: 0.3rem;
+  background-color: lightyellow;
+}
+.panel__back-link {
+  display: block;
+  padding-top: 1rem;
+  color: white;
+}
+
+.landing {
+  background-color: lightyellow;
+}
+
+.login {
+  background-color: orange;
+}
+
+.register {
+  background-color: orange;
+}
+
+.register-success {
+  background-color: darkseagreen;
+  color: white;
+  border-color: olivedrab;
+}
+
+.feedback {
+  font-style: oblique;
+}
+.feedback--success {
+  background-color: darkgreen;
+}
+.feedback--warning {
+  background-color: darkyellow;
+}
+.feedback--error {
+  background-color: crimson;
+  color: white;
+}
+
+.search {
+  background-color: palegoldenrod;
+}
+.search__title {
+  padding-bottom: 1rem;
+}
+
+.duck-home {
+  background-color: gold;
+}
+
+.duck-results {
+  background-color: palegoldenrod;
+}
+.duck-results img {
+  width: 300px;
+  border: 2px solid orange;
+}
+.duck-results li {
+  list-style-type: none;
+}
+.duck-results h3 {
+  padding: 1rem 0 0.5rem;
+  font-family: "Ribeye Marrow", cursive;
+}
+
+.duck-detail {
+  background-color: palegoldenrod;
+}
+.duck-detail__title {
+  padding: 1rem 0;
+  font-size: 1.25rem;
+  font-family: "Ribeye Marrow", cursive;
+}
+.duck-detail__photo {
+  width: 400px;
+}
+.duck-detail__price {
+  display: block;
+  border: 0.2rem solid darkorange;
+  border-radius: 0.3rem;
+  background-color: lightyellow;
+  font-size: 2rem;
+  margin: 1rem 0;
+  width: 120px;
+  font-family: "Ribeye Marrow", cursive;
+}
+.duck-detail__link {
+  display: block;
+  padding-top: 1rem;
+  scolor: white;
+}
+
+.form {
+  padding: 0 2rem;
+}
+.form__text-field {
+  display: inline-block;
+  width: 100%;
+  max-width: 600px;
+  height: 30px;
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  border: 0.1rem solid khaki;
+  border-radius: 0.3rem;
+}
+.form__label {
+  display: inline-block;
+}
+.form__button {
+  display: inline-block;
+  height: 30px;
+  width: 100px;
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  border: 0.1rem solid khaki;
+  border-radius: 0.3rem;
+}
+
+/*# sourceMappingURL=index.css.map */
