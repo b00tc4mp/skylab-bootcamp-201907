@@ -16,8 +16,8 @@ const logic = (() => {
             if (!surname.trim()) throw new Error('surname is empty or blank')
 
             if (typeof username !== 'string') throw TypeError(`${username} is not a string`)
-            if (!username.trim()) throw new Error('e-mail is empty or blank')
-            if (!EMAIL_REGEX.test(username)) throw new Error('e-mail is not valid')
+            if (!username.trim()) throw new Error('username is empty or blank')
+            if (!EMAIL_REGEX.test(username)) throw new Error('username is not valid')
 
             if (typeof password !== 'string') throw TypeError(`${password} is not a string`)
             if (!password.trim()) throw new Error('password is empty or blank')
@@ -27,9 +27,11 @@ const logic = (() => {
 
             if (password !== repassword) throw new Error('passwords do not match')
 
+            if (typeof expression !== 'function') throw TypeError(`${expression} is not a function`)
+
             call('https://skylabcoders.herokuapp.com/api/user', 'post',
                 { 'content-type': 'application/json' },
-                { name, surname, username, password },
+                { name, surname, username, password, favorites: [] },
                 (error, response) => {
                     if (error) expression(error)
                     else if (response.status === 'KO') expression(new Error(response.error))
@@ -38,68 +40,101 @@ const logic = (() => {
             )
         },
 
-        authenticateUser(username, password) {
+        authenticateUser(username, password, expression) {
             if (typeof username !== 'string') throw TypeError(`${username} is not a string`)
-            if (!username.trim()) throw new Error('e-mail is empty or blank')
-            if (!EMAIL_REGEX.test(username)) throw new Error('e-mail is not valid')
+            if (!username.trim()) throw new Error('username is empty or blank')
+            if (!EMAIL_REGEX.test(username)) throw new Error('username is not valid')
 
             if (typeof password !== 'string') throw TypeError(`${password} is not a string`)
             if (!password.trim()) throw new Error('password is empty or blank')
 
-            const user = users.find(function (user) {
-                return user.username === username && user.password === password
-            })
+            if (typeof expression !== 'function') throw TypeError(`${expression} is not a function`)
 
-            if (!user) throw new Error('wrong credentials')
+            call('https://skylabcoders.herokuapp.com/api/auth', 'post',
+                { 'content-type': 'application/json' },
+                { username, password },
+                (error, response) => {
+                    if (error) expression(error)
+                    else if (response.status === 'KO') expression(new Error(response.error))
+                    else expression(undefined, response.data)
+                }
+            )
         },
 
-        retrieveUser(username) {
-            if (typeof username !== 'string') throw TypeError(`${username} is not a string`)
-            if (!username.trim()) throw new Error('e-mail is empty or blank')
-            if (!EMAIL_REGEX.test(username)) throw new Error('e-mail is not valid')
+        retrieveUser(id, token, expression) {
+            if (typeof id !== 'string') throw TypeError(`${id} is not a string`)
+            if (!id.trim()) throw new Error('id is empty or blank')
 
-            const user = users.find(function (user) {
-                return user.username === username
-            })
-
-            if (!user) throw new Error(`user with e-mail ${username} not found`)
-
-            const { name, surname, username: _username } = user
-
-            return { name, surname, username: _username }
-        },
-
-        searchDucks(username, query, expression) {
-            let favorites
-
-            if (typeof username !== 'undefined') {
-                if (typeof username !== 'string') throw new TypeError(`${username} is not a string`)
-                if (!username.trim()) throw new Error('e-mail is empty or blank')
-                if (!EMAIL_REGEX.test(username)) throw new Error('e-mail is not valid')
-
-                const user = users.find(user => user.username === username)
-
-                if (!user) throw new Error(`user with e-mail ${username} not found`)
-
-                favorites = user.favorites
-            }
-
-            if (typeof query !== 'string') throw new TypeError(`${query} is not a string`)
+            if (typeof token !== 'string') throw TypeError(`${token} is not a string`)
+            if (!token.trim()) throw new Error('token is empty or blank')
 
             if (typeof expression !== 'function') throw TypeError(`${expression} is not a function`)
 
-            call('http://duckling-api.herokuapp.com/api/search?q=' + query, (error, ducks) => {
-                if (error) {
-                    if (error.status < 500)
-                        expression(undefined, [])
-                    else
-                        expression(new Error(`fail search with criteria ${query}`))
-                } else {
-                    favorites && ducks.forEach(duck => duck.favorite = favorites.includes(duck.id))
-
-                    expression(undefined, ducks)
+            call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'get',
+                { 'authorization': `bearer ${token}` },
+                undefined,
+                (error, response) => {
+                    if (error) expression(error)
+                    else if (response.status === 'KO') expression(new Error(response.error))
+                    else expression(undefined, response.data)
                 }
-            })
+            )
+        },
+
+        searchDucks(id, token, query, expression) { // TODO use 'id' and 'token' instaead of 'username'
+            let favorites
+
+            if (typeof id !== 'undefined' && typeof token !== 'undefined') {
+                if (typeof id !== 'string') throw TypeError(`${id} is not a string`)
+                if (!id.trim()) throw new Error('id is empty or blank')
+
+                if (typeof token !== 'string') throw TypeError(`${token} is not a string`)
+                if (!token.trim()) throw new Error('token is empty or blank')
+
+                if (typeof query !== 'string') throw new TypeError(`${query} is not a string`)
+
+                if (typeof expression !== 'function') throw TypeError(`${expression} is not a function`)
+
+                call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'get',
+                    { 'authorization': `bearer ${token}` },
+                    undefined,
+                    (error, response) => {
+                        if (error) expression(error)
+                        else if (response.status === 'KO') expression(new Error(response.error))
+                        else {
+                            favorites = response.data.favorites
+
+                            call('http://duckling-api.herokuapp.com/api/search?q=' + query, 'get', undefined, undefined, (error, ducks) => {
+                                if (error) expression(new Error(`fail search with criteria ${query}`))
+                                else {
+                                    if (ducks.error) expression(undefined, [])
+                                    else {
+                                        favorites && ducks.forEach(duck => duck.favorite = favorites.includes(duck.id))
+
+                                        expression(undefined, ducks)
+                                    }
+                                }
+                            })
+                        }
+                    }
+                )
+            } else {
+                if (typeof query !== 'string') throw new TypeError(`${query} is not a string`)
+
+                if (typeof expression !== 'function') throw TypeError(`${expression} is not a function`)
+
+                call('http://duckling-api.herokuapp.com/api/search?q=' + query, 'get', undefined, undefined, (error, ducks) => {
+                    if (error) expression(new Error(`fail search with criteria ${query}`))
+                    else {
+                        if (ducks.error) expression(undefined, [])
+                        else {
+                            favorites && ducks.forEach(duck => duck.favorite = favorites.includes(duck.id))
+
+                            expression(undefined, ducks)
+                        }
+                    }
+                })
+            }
         },
 
         retrieveDuck(username, id, expression) {
@@ -107,12 +142,12 @@ const logic = (() => {
 
             if (typeof username !== 'undefined') {
                 if (typeof username !== 'string') throw new TypeError(`${username} is not a string`)
-                if (!username.trim()) throw new Error('e-mail is empty or blank')
-                if (!EMAIL_REGEX.test(username)) throw new Error('e-mail is not valid')
+                if (!username.trim()) throw new Error('username is empty or blank')
+                if (!EMAIL_REGEX.test(username)) throw new Error('username is not valid')
 
                 const user = users.find(user => user.username === username)
 
-                if (!user) throw new Error(`user with e-mail ${username} not found`)
+                if (!user) throw new Error(`user with username ${username} not found`)
 
                 favorites = user.favorites
             }
