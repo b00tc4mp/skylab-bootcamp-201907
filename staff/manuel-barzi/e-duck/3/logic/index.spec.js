@@ -233,7 +233,7 @@ describe('logic', () => {
         it('should succeed on valid id', done => {
             const id = '5c3853aebd1bde8520e66ee8'
 
-            logic.retrieveDuck(id, (error, duck) => {
+            logic.retrieveDuck(undefined, id, (error, duck) => {
                 expect(error).toBeUndefined()
 
                 expect(duck).toBeDefined()
@@ -242,6 +242,7 @@ describe('logic', () => {
                 expect(duck.imageUrl).toBeDefined()
                 expect(duck.price).toBeDefined()
                 expect(duck.link).toBeDefined()
+                expect(duck.favorite).toBeUndefined()
 
                 done()
             })
@@ -250,7 +251,7 @@ describe('logic', () => {
         it('should fail on non valid id', done => {
             const id = '5c3853aebd1bde8520e66ff9'
 
-            logic.retrieveDuck(id, (error, duck) => {
+            logic.retrieveDuck(undefined, id, (error, duck) => {
                 expect(error).toBeDefined()
                 expect(duck).toBeUndefined()
 
@@ -259,6 +260,53 @@ describe('logic', () => {
         })
 
         // TODO test more cases
+
+        describe('when user already has a favorite duck', () => {
+            const id = '5c3853aebd1bde8520e66e97'
+            let name, surname, email, password, user
+
+            beforeEach(() => {
+                users = new Array
+
+                name = `n-${random()}`
+                surname = `s-${random()}`
+                email = `e-${random()}@mail.com`
+                password = `p-${random()}`
+
+                user = { name, surname, email, password, favorites: new Array('5c3853aebd1bde8520e66e52', id, '5c3853aebd1bde8520e66e9e') }
+
+                users.push(user)
+            })
+
+            it('should succeed on valid id', done => {
+                logic.retrieveDuck(email, id, (error, duck) => {
+                    expect(error).toBeUndefined()
+
+                    expect(duck).toBeDefined()
+                    expect(duck.id).toBe(id)
+                    expect(duck.title).toBeDefined()
+                    expect(duck.imageUrl).toBeDefined()
+                    expect(duck.price).toBeDefined()
+                    expect(duck.link).toBeDefined()
+                    expect(duck.favorite).toBeTruthy()
+
+                    done()
+                })
+            })
+
+            it('should fail on non valid id', done => {
+                const id = '5c3853aebd1bde8520e66ff9'
+
+                logic.retrieveDuck(email, id, (error, duck) => {
+                    expect(error).toBeDefined()
+                    expect(duck).toBeUndefined()
+
+                    done()
+                })
+            })
+
+            // TODO test more cases
+        })
     })
 
     describe('toggle favorite duck', () => {
@@ -315,24 +363,24 @@ describe('logic', () => {
 
         describe('when duck already in favorites', () => {
             let name, surname, email, password, favorites, duckId, user
-    
+
             beforeEach(() => {
                 users = new Array
-    
+
                 name = `n-${random()}`
                 surname = `s-${random()}`
                 email = `e-${random()}@mail.com`
                 password = `p-${random()}`
                 favorites = new Array
                 duckId = '5c3853aebd1bde8520e66ee8'
-    
+
                 favorites.push(duckId)
-    
+
                 user = { name, surname, email, password, favorites }
-    
+
                 users.push(user)
             })
-    
+
             it('should succeed on matching duck id', done => {
                 logic.toggleFavDuck(email, duckId, error => {
                     expect(error).toBeUndefined()
@@ -342,7 +390,7 @@ describe('logic', () => {
                     done()
                 })
             })
-    
+
             // TODO test more cases
         })
     })
