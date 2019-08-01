@@ -1,0 +1,25 @@
+*
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+    
+.wrapper
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    width: 80%
+    background-color: moccasin
+    margin: 0 auto
+    height: 100%
+    +round-border(0.4rem, 0.3rem, double, $panel-color)
+
+    &__header
+        padding: 2rem 0 2rem 2rem
+        color: darkslategray
+        text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white
+        font-family: $font-duck
+    
+    &__motto
+        padding-left: 3rem
+        color: darkslategray
+        text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white
+        font-family: $font-duck
+
