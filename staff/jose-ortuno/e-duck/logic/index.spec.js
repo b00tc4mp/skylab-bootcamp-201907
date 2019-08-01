@@ -276,4 +276,43 @@ describe('logic', () => {
             })
         })
     })
+
+    describe('retrieve user', () => {
+        let name, surname, email, password
+        const retrieveEmail = 'manuelbarzi@gmail.com'
+
+        beforeEach(() => {
+            users = new Array
+
+            name = 'Manuel'
+            surname = 'Barzi'
+            email = 'manuelbarzi@gmail.com'
+            password = '123'
+            
+
+            users.push({ name, surname, email, password, favorites: new Array('5c3853aebd1bde8520e66ee8', '5c3853aebd1bde8520e66ec4') })
+        })
+
+        it('should answer name, surname and email', () => {
+
+            const retrieveUser = logic.retrieveUser(retrieveEmail)
+
+            const { name: _name, surname: _surname, email: _email } = retrieveUser
+
+            expect(name).toBe(_name)
+            expect(surname).toBe(_surname)
+            expect(email).toBe(_email)
+
+        })
+
+        it('should do not answer password', () => {
+
+            const retrieveUser = logic.retrieveUser(retrieveEmail)
+
+            const { password } = retrieveUser
+
+            expect(password).toBeUndefined()
+
+        })
+    })
 })

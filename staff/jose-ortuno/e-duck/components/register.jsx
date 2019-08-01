@@ -1,5 +1,6 @@
 function Register(props) {
-    return <form onSubmit={event => {
+    return <>
+        <form onSubmit={event => {
         event.preventDefault()
 
         const { target:{ name: {value: name}, surname: {value: surname}, email: {value: email}, password: { value: password}}} = event
@@ -28,4 +29,10 @@ function Register(props) {
 
         <button type="submit">Register</button>
     </form>
+    <a href="" onClick={event => {
+        event.preventDefault()
+
+        props.onBack()
+    }}>Go back</a>
+    </>
 }

@@ -182,5 +182,13 @@ const logic = {
             })
         }
 
+    },
+
+    retrieveUser(_email) {
+        const user = users.find(user => { return user.email === _email})
+
+        const { name, surname, email } = user
+
+        return { name, surname, email }
     }
 }
