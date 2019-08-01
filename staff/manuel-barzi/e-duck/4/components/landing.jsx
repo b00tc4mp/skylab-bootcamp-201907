@@ -4,7 +4,7 @@ class Landing extends Component {
     constructor() {
         super()
 
-        this.state = { query: undefined, ducks: [], duck: undefined, error: undefined }
+        this.state = { query: undefined, ducks: [], duck: undefined, error: undefined, user: undefined }
 
         this.handleSearch = this.handleSearch.bind(this)
         this.handleRetrieveDuck = this.handleRetrieveDuck.bind(this)
@@ -17,10 +17,31 @@ class Landing extends Component {
         this.handleAcceptError = this.handleAcceptError.bind(this)
     }
 
-    handleSearch(query) {
+    componentWillMount() {
         const { props: { user } } = this
 
-        logic.searchDucks(user, query, (error, ducks) => {
+        if (user) {
+            const { id, token } = user
+
+            try {
+                logic.retrieveUser(id, token, (error, user) => {
+                    if (error) this.setState({ error: error.message })
+                    else this.setState({ user })
+                })
+            } catch ({ message }) {
+                this.setState({ error: message })
+            }
+        }
+    }
+
+    handleSearch(query) {
+        const { state: { user } } = this
+
+        let id, token
+
+        user && (id = user.id, token = user.token)
+
+        logic.searchDucks(id, token, query, (error, ducks) => {
             if (error) this.setState({ error: error.message })
             else this.setState({ ducks, query })
         })
@@ -79,15 +100,11 @@ class Landing extends Component {
     }
 
     render() {
-        const { state: { ducks, duck, error }, handleSearch, handleRetrieveDuck, handleRegister, handleBackFromDetail, handleLogin, handleLogout, handleToggleFavDuckFromDuckItem, handleToggleFavDuckFromDuckDetail, handleAcceptError, props: { user } } = this
-
-        let _user
-
-        user && (_user = logic.retrieveUser(user))
+        const { state: { ducks, duck, error, user }, handleSearch, handleRetrieveDuck, handleRegister, handleBackFromDetail, handleLogin, handleLogout, handleToggleFavDuckFromDuckItem, handleToggleFavDuckFromDuckDetail, handleAcceptError } = this
 
         return <>
             <header>
-                {_user && <p>Hello, {_user.name}</p>}
+                {user && <p>Hello, {user.name}</p>}
                 <nav>
                     {!user ? <ul>
                         <li><a href="" onClick={handleRegister}>Register</a></li>

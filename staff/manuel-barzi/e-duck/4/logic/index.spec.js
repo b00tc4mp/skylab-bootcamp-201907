@@ -1,30 +1,60 @@
 'use strict'
 
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+
 const { random } = Math
 
 describe('logic', () => {
+    let user
+
     beforeEach(() => {
-        // users = []
+        user = {
+            name: 'John-' + random(),
+            surname: 'Doe-' + random(),
+            username: 'johndoe-' + random() + '@mail.com',
+            password: '123-' + random(),
+            favorites: []
+        }
     })
 
     describe('register user', () => {
-        let user
-
-        beforeEach(() => {
-            user = {
-                name: 'John-' + random(),
-                surname: 'Doe-' + random(),
-                username: 'johndoe-' + random() + '@mail.com',
-                password: '123-' + random(),
-                favorites: []
-            }
-        })
-
         it('should succeed on correct data', done => {
             expect(() => logic.registerUser(user.name, user.surname, user.username, user.password, user.password, error => {
                 expect(error).toBeUndefined()
 
-                done()
+                call('https://skylabcoders.herokuapp.com/api/auth', 'post',
+                    { 'content-type': 'application/json' },
+                    { username: user.username, password: user.password },
+                    (error, response) => {
+                        if (error) done(error)
+                        else if (response.status === 'KO') done(new Error(response.error))
+                        else {
+                            const { id, token } = response.data
+
+                            call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'get',
+                                { 'authorization': `bearer ${token}` },
+                                undefined,
+                                (error, response) => {
+                                    if (error) done(error)
+                                    else if (response.status === 'KO') done(new Error(response.error))
+                                    else {
+                                        const _user = response.data
+
+                                        expect(_user.name).toBe(user.name)
+                                        expect(_user.surname).toBe(user.surname)
+                                        expect(_user.username).toBe(user.username)
+                                        expect(_user.password).toBeUndefined()
+                                        expect(_user.id).toBe(id)
+                                        expect(_user.favorites).toBeDefined()
+                                        expect(_user.favorites).toEqual(user.favorites)
+
+                                        done()
+                                    }
+                                }
+                            )
+                        }
+                    }
+                )
             })).not.toThrow()
         })
 
@@ -34,10 +64,10 @@ describe('logic', () => {
             }).toThrowError(Error, 'name is empty or blank')
         })
 
-        it('should fail on non-valid e-mail', () => {
+        it('should fail on non-valid username', () => {
             expect(() => {
                 logic.registerUser('Manuel', 'Barzi', 'manuelbarzi#gmail.com', '123', '123', () => { })
-            }).toThrowError(Error, 'e-mail is not valid')
+            }).toThrowError(Error, 'username is not valid')
         })
 
         it('should fail on non-matching re-password', () => {
@@ -49,7 +79,7 @@ describe('logic', () => {
         // TODO test more cases
 
         describe('when user already exists', () => {
-            it('should fail on already existing e-mail', done => {
+            it('should fail on already existing username', done => {
                 expect(() => logic.registerUser(user.name, user.surname, user.username, user.password, user.password, error => {
                     expect(error).toBeUndefined()
 
@@ -66,85 +96,104 @@ describe('logic', () => {
     })
 
     describe('authenticate user', () => {
-        const user = {
-            name: 'John-' + random(),
-            surname: 'Doe-' + random(),
-            username: 'johndoe-' + random() + '@mail.com',
-            password: '123-' + random()
-        }
-
-        beforeEach(() => {
-            users.push(user)
+        beforeEach(done => {
+            call('https://skylabcoders.herokuapp.com/api/user', 'post',
+                { 'content-type': 'application/json' },
+                user,
+                (error, response) => {
+                    if (error) done(error)
+                    else if (response.status === 'KO') done(new Error(response.error))
+                    else done()
+                }
+            )
         })
 
-        it('should succeed on correct data', () => {
-            expect(() => {
-                const _user = logic.authenticateUser(user.username, user.password)
+        it('should succeed on correct data', done => {
+            expect(() => logic.authenticateUser(user.username, user.password, (error, data) => {
+                expect(error).toBeUndefined()
 
-                expect(_user).toBeUndefined()
-            }).not.toThrow()
+                expect(data).toBeDefined()
+
+                const { id, token } = data
+                expect(id).toBeDefined()
+                expect(token).toBeDefined()
+
+                done()
+            })).not.toThrow()
         })
 
         it('should fail on empty username', () => {
             expect(() => {
-                logic.authenticateUser('', user.password)
-            }).toThrowError(Error, 'e-mail is empty or blank')
+                logic.authenticateUser('', user.password, () => { })
+            }).toThrowError(Error, 'username is empty or blank')
         })
 
-        it('should fail on non-valid e-mail', () => {
+        it('should fail on non-valid username', () => {
             expect(() => {
-                logic.authenticateUser('manuelbarzi#gmail.com', '123')
-            }).toThrowError(Error, 'e-mail is not valid')
+                logic.authenticateUser('manuelbarzi#gmail.com', '123', () => { })
+            }).toThrowError(Error, 'username is not valid')
         })
 
         // TODO test more cases
     })
 
-    xdescribe('retrieve user', () => {
-        const user = {
-            name: 'John-' + random(),
-            surname: 'Doe-' + random(),
-            username: 'johndoe-' + random() + '@mail.com',
-            password: '123-' + random()
-        }
+    describe('retrieve user', () => {
+        let data
 
-        beforeEach(() => {
-            users.push(user)
+        beforeEach(done => {
+            call('https://skylabcoders.herokuapp.com/api/user', 'post',
+                { 'content-type': 'application/json' },
+                user,
+                (error, response) => {
+                    if (error) done(error)
+                    else if (response.status === 'KO') done(new Error(response.error))
+                    else call('https://skylabcoders.herokuapp.com/api/auth', 'post',
+                        { 'content-type': 'application/json' },
+                        { username: user.username, password: user.password },
+                        (error, response) => {
+                            if (error) done(error)
+                            else if (response.status === 'KO') done(new Error(response.error))
+                            else {
+                                data = response.data
+
+                                done()
+                            }
+                        }
+                    )
+                }
+            )
         })
 
-        it('should succeed on matching user with e-mail', () => {
-            expect(() => {
-                const _user = logic.retrieveUser(user.username)
+        it('should succeed on matching user with username', done => {
+            expect(() => logic.retrieveUser(data.id, data.token, (error, _user) => {
+                expect(error).toBeUndefined()
 
-                const { name, surname, username, password } = _user
+                const { id, name, surname, username, password } = _user
 
+                expect(id).toBe(data.id)
                 expect(name).toBe(user.name)
                 expect(surname).toBe(user.surname)
                 expect(username).toBe(user.username)
                 expect(password).toBeUndefined()
-            }).not.toThrow()
+
+                done()
+            })).not.toThrow()
         })
 
-        it('should fail on empty username', () => {
+        it('should fail on empty id', () => {
             expect(() => {
-                logic.retrieveUser('')
-            }).toThrowError(Error, 'e-mail is empty or blank')
-        })
-
-        it('should fail on non-valid e-mail', () => {
-            expect(() => {
-                logic.retrieveUser('manuelbarzi#gmail.com')
-            }).toThrowError(Error, 'e-mail is not valid')
+                logic.retrieveUser('', 'a-token', () => { })
+            }).toThrowError(Error, 'id is empty or blank')
         })
 
         // TODO test more cases
     })
 
-    xdescribe('search ducks', () => {
+    describe('search ducks', () => {
         it('should succeed on matching criteria', done => {
             const query = 'white' // 12 results
 
-            logic.searchDucks(undefined, query, (error, ducks) => {
+            logic.searchDucks(undefined, undefined, query, (error, ducks) => {
                 expect(error).toBeUndefined()
 
                 expect(ducks).toBeDefined()
@@ -163,7 +212,7 @@ describe('logic', () => {
         })
 
         it('should get empy array on no matching criteria', done => {
-            logic.searchDucks(undefined, 'patata', (error, ducks) => {
+            logic.searchDucks(undefined, undefined, 'patata', (error, ducks) => {
                 expect(error).toBeUndefined()
 
                 expect(ducks).toBeDefined()
@@ -174,35 +223,46 @@ describe('logic', () => {
         })
 
         it('should fail on undefined query', () => {
-            expect(() => logic.searchDucks()).toThrowError(TypeError, `undefined is not a string`)
+            expect(() => logic.searchDucks(undefined, undefined)).toThrowError(TypeError, `undefined is not a string`)
         })
 
         it('should fail on undefined expression', () => {
-            expect(() => logic.searchDucks(undefined, 'something')).toThrowError(TypeError, `undefined is not a function`)
+            expect(() => logic.searchDucks(undefined, undefined, 'something')).toThrowError(TypeError, `undefined is not a function`)
         })
 
         // TODO test more cases
 
         describe('when user already has favorite ducks', () => {
-            let name, surname, username, password, user
+            let data
 
-            beforeEach(() => {
-                users = new Array
+            beforeEach(done => {
+                call('https://skylabcoders.herokuapp.com/api/user', 'post',
+                    { 'content-type': 'application/json' },
+                    user,
+                    (error, response) => {
+                        if (error) done(error)
+                        else if (response.status === 'KO') done(new Error(response.error))
+                        else call('https://skylabcoders.herokuapp.com/api/auth', 'post',
+                            { 'content-type': 'application/json' },
+                            { username: user.username, password: user.password },
+                            (error, response) => {
+                                if (error) done(error)
+                                else if (response.status === 'KO') done(new Error(response.error))
+                                else {
+                                    data = response.data
 
-                name = `n-${random()}`
-                surname = `s-${random()}`
-                username = `e-${random()}@mail.com`
-                password = `p-${random()}`
-
-                user = { name, surname, username, password, favorites: new Array('5c3853aebd1bde8520e66e52', '5c3853aebd1bde8520e66e97', '5c3853aebd1bde8520e66e9e') }
-
-                users.push(user)
+                                    done()
+                                }
+                            }
+                        )
+                    }
+                )
             })
 
             it('should succeed on matching criteria', done => {
                 const query = 'white' // 12 results
 
-                logic.searchDucks(username, query, (error, ducks) => {
+                logic.searchDucks(data.id, data.token, query, (error, ducks) => {
                     expect(error).toBeUndefined()
 
                     expect(ducks).toBeDefined()
