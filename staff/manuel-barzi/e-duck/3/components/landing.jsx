@@ -4,7 +4,7 @@ class Landing extends Component {
     constructor() {
         super()
 
-        this.state = { query: undefined, ducks: [], duck: undefined }
+        this.state = { query: undefined, ducks: [], duck: undefined, error: undefined }
 
         this.handleSearch = this.handleSearch.bind(this)
         this.handleRetrieveDuck = this.handleRetrieveDuck.bind(this)
@@ -14,13 +14,14 @@ class Landing extends Component {
         this.handleLogout = this.handleLogout.bind(this)
         this.handleToggleFavDuckFromDuckItem = this.handleToggleFavDuckFromDuckItem.bind(this)
         this.handleToggleFavDuckFromDuckDetail = this.handleToggleFavDuckFromDuckDetail.bind(this)
+        this.handleAcceptError = this.handleAcceptError.bind(this)
     }
 
     handleSearch(query) {
         const { props: { user } } = this
 
         logic.searchDucks(user, query, (error, ducks) => {
-            if (error) console.error(error)
+            if (error) this.setState({ error: error.message })
             else this.setState({ ducks, query })
         })
     }
@@ -29,7 +30,7 @@ class Landing extends Component {
         const { props: { user } } = this
 
         logic.retrieveDuck(user, id, (error, duck) => {
-            if (error) console.error(error)
+            if (error) this.setState({ error: error.message })
             else this.setState({ duck })
         })
     }
@@ -44,7 +45,7 @@ class Landing extends Component {
         const { state: { query }, props: { user } } = this
 
         logic.searchDucks(user, query, (error, ducks) => {
-            if (error) console.error(error)
+            if (error) this.setState({ error: error.message })
             else this.setState({ ducks, duck: undefined })
         })
     }
@@ -73,12 +74,16 @@ class Landing extends Component {
         user ? logic.toggleFavDuck(user, id, () => handleRetrieveDuck(id)) : onLogin()
     }
 
+    handleAcceptError() {
+        this.setState({ error: undefined })
+    }
+
     render() {
-        const { state: { ducks, duck }, handleSearch, handleRetrieveDuck, handleRegister, handleBackFromDetail, handleLogin, handleLogout, handleToggleFavDuckFromDuckItem, handleToggleFavDuckFromDuckDetail, props: { user } } = this
+        const { state: { ducks, duck, error }, handleSearch, handleRetrieveDuck, handleRegister, handleBackFromDetail, handleLogin, handleLogout, handleToggleFavDuckFromDuckItem, handleToggleFavDuckFromDuckDetail, handleAcceptError, props: { user } } = this
 
         let _user
 
-        if (user) _user = logic.retrieveUser(user)
+        user && (_user = logic.retrieveUser(user))
 
         return <>
             <header>
@@ -104,6 +109,8 @@ class Landing extends Component {
                 }} onItem={handleRetrieveDuck} />
                 :
                 <DuckDetail duck={duck} onBack={handleBackFromDetail} onToggle={handleToggleFavDuckFromDuckDetail} />}
+
+            {error && <Modal message={error} onAccept={handleAcceptError} />}
         </>
     }
 }
