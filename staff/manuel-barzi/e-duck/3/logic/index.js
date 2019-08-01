@@ -107,14 +107,34 @@ const logic = (() => {
             })
         },
 
-        retrieveDuck(id, expression) {
-            // TODO validate id, expression
+        retrieveDuck(email, id, expression) {
+            let favorites
 
-            call('http://duckling-api.herokuapp.com/api/ducks/' + id, (error, result) => {
+            if (typeof email !== 'undefined') {
+                if (typeof email !== 'string') throw new TypeError(`${email} is not a string`)
+                if (!email.trim()) throw new Error('e-mail is empty or blank')
+                if (!EMAIL_REGEX.test(email)) throw new Error('e-mail is not valid')
+
+                const user = users.find(user => user.email === email)
+
+                if (!user) throw new Error(`user with e-mail ${email} not found`)
+
+                favorites = user.favorites
+            }
+
+            if (typeof id !== 'string') throw new TypeError(`${id} is not a string`)
+            if (!id.trim()) throw new Error('id is empty or blank')
+
+            if (typeof expression !== 'function') throw TypeError(`${expression} is not a function`)
+
+            call('http://duckling-api.herokuapp.com/api/ducks/' + id, (error, duck) => {
                 if (error)
                     expression(new Error(`cannot retrieve duck with id ${id}`))
-                else
-                    expression(undefined, result)
+                else {
+                    favorites && (duck.favorite = favorites.includes(id))
+
+                    expression(undefined, duck)
+                }
             })
         },
 
