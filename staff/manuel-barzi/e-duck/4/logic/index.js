@@ -27,7 +27,15 @@ const logic = (() => {
 
             if (password !== repassword) throw new Error('passwords do not match')
 
-            // TODO call user api
+            call('https://skylabcoders.herokuapp.com/api/user', 'post',
+                { 'content-type': 'application/json' },
+                { name, surname, username, password },
+                (error, response) => {
+                    if (error) expression(error)
+                    else if (response.status === 'KO') expression(new Error(response.error))
+                    else expression()
+                }
+            )
         },
 
         authenticateUser(username, password) {
