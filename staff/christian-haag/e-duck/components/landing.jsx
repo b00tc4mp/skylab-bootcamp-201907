@@ -2,20 +2,24 @@ class Landing extends React.Component {
     constructor() {
         super()
 
-        this.state = { ducks: [], duck: undefined }
+        this.state = { query: undefined, ducks: [], duck: undefined }
 
         this.handleSearch = this.handleSearch.bind(this)
         this.handleRetrieveDuck = this.handleRetrieveDuck.bind(this)
         this.handleBackFromDetail = this.handleBackFromDetail.bind(this)
         this.handleRegister = this.handleRegister.bind(this)
         this.handleLogin = this.handleLogin.bind(this)
+        this.handleFavorites = this.handleFavorites.bind(this)
         this.handleLogout = this.handleLogout.bind(this)
+        this.handleToggleFavDuck = this.handleToggleFavDuck.bind(this)
     }
 
-    handleSearch(query) {
-        logic.searchDucks(query, (error, ducks) => {
+    handleSearch(query = this.state.query) {
+        const { props: { user } } = this
+
+        logic.searchDucks(user, query, (error, ducks) => {
             if (error) console.error(error)
-            else this.setState({ ducks })
+            else this.setState({ ducks, query })
         })
     }
 
@@ -42,26 +46,43 @@ class Landing extends React.Component {
         this.props.onLogin()
     }
 
+    handleFavorites(event) {
+        event.preventDefault()
+
+        this.props.onFavorites()
+    }
+
     handleLogout(event) {
         event.preventDefault()
 
         this.props.onLogout()
     }
 
-    render() {
-        const { state: { ducks, duck }, handleSearch, handleRetrieveDuck, handleRegister, handleBackFromDetail, handleLogin, handleLogout, props: { user } } = this
+    handleToggleFavDuck() {
+        const { props: { user, onLogin }, handleSearch } = this
 
-        // TODO const _user = logic.retrieveUser(user)
+        user ? handleSearch() : onLogin()
+    }
+
+
+    render() {
+        const { state: { ducks, duck }, handleSearch, handleRetrieveDuck, handleRegister, handleBackFromDetail, handleLogin, handleLogout, handleFavorites, handleToggleFavDuck, props: { user } } = this
+
+        let _user
+
+        if (user) _user = logic.retrieveUser(user)
 
         return <>
             <header>
-                {/* TODO <p>Hello, {_user.name}</p> */}
+                {_user && <p>Hello, {_user.name}</p>}
                 <nav>
                     {!user ? <ul>
                         <li><a href="" onClick={handleRegister}>Register</a></li>
                         <li><a href="" onClick={handleLogin}>Login</a></li>
+
                     </ul> : <ul>
                             <li><a href="" onClick={handleLogout}>Logout</a></li>
+                            <li><a href="" onClick={handleFavorites}>My Favorites</a></li>
                         </ul>}
 
                 </nav>
@@ -73,7 +94,7 @@ class Landing extends React.Component {
 
             {!duck ?
                 <Results items={ducks} paintItem={duck => {
-                    return <DuckItem duck={duck} />
+                    return <DuckItem duck={duck} user={user} onToggle={handleToggleFavDuck} />
                 }} onItem={handleRetrieveDuck} />
                 :
                 <DuckDetail duck={duck} onBack={handleBackFromDetail} />}

@@ -3,7 +3,7 @@ class App extends React.Component {
     constructor() {
         super();
 
-        this.state = { view: 'landing', email: undefined } // 'register', 'login', ...
+        this.state = { view: 'landing', email: undefined, error: undefined } // 'register', 'login', ...
 
         this.handleGoToRegister = this.handleGoToRegister.bind(this)
         this.handleBackToLanding = this.handleBackToLanding.bind(this)
@@ -11,6 +11,7 @@ class App extends React.Component {
         this.handleLogin = this.handleLogin.bind(this)
         this.handleRegister = this.handleRegister.bind(this)
         this.handleLogout = this.handleLogout.bind(this)
+        this.handleFavorites = this.handleFavorites.bind(this)
     }
 
     handleGoToRegister() {
@@ -21,14 +22,18 @@ class App extends React.Component {
         this.setState({ view: 'landing' })
     }
 
-    handleRegister(name, surname, email, password) {
+    handleRegister(name, surname, email, password, repassword) {
         try {
-            logic.register(name, surname, email, password)
+            logic.registerUser(name, surname, email, password, repassword)
 
             this.setState({ view: 'register-success' })
-        } catch (error) {
-            // TODO
+        } catch ({ message }) {
+            this.setState({ error: message })
+
         }
+    }
+    handleFavorites() {
+        this.setState({ view: 'favorites' })
     }
 
     handleGoToLogin() {
@@ -37,11 +42,11 @@ class App extends React.Component {
 
     handleLogin(email, password) {
         try {
-            logic.authenticate(email, password)
+            logic.authenticateUser(email, password)
 
             this.setState({ view: 'landing', email })
-        } catch (error) {
-            // TODO
+        } catch ({ message }) {
+            this.setState({ error: message })
         }
     }
 
@@ -50,13 +55,14 @@ class App extends React.Component {
     }
 
     render() {
-        const { state: { view, email }, handleGoToRegister, handleRegister, handleBackToLanding, handleGoToLogin, handleLogin, handleLogout } = this
+        const { state: { view, email, error }, handleGoToRegister, handleFavorites, handleRegister, handleBackToLanding, handleGoToLogin, handleLogin, handleLogout } = this
 
         return <>
             {view === 'landing' && <Landing onRegister={handleGoToRegister} onLogin={handleGoToLogin} user={email} onLogout={handleLogout} />}
-            {view === 'register' && <Register onBack={handleBackToLanding} onRegister={handleRegister} />}
+            {view === 'register' && <Register onBack={handleBackToLanding} onRegister={handleRegister} error={error} />}
+            {view === 'favorites' && <Favorites onFavorites={handleFavorites} onBack={handleBackToLanding} />}
             {view === 'register-success' && <RegisterSuccess onLogin={handleGoToLogin} />}
-            {view === 'login' && <Login onBack={handleBackToLanding} onLogin={handleLogin} />}
+            {view === 'login' && <Login onBack={handleBackToLanding} onLogin={handleLogin} error={error} />}
         </>
     }
 }
