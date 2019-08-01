@@ -8,16 +8,16 @@ const logic = (() => {
     const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
     return {
-        registerUser(name, surname, email, password, repassword) {
+        registerUser(name, surname, username, password, repassword, expression) {
             if (typeof name !== 'string') throw TypeError(`${name} is not a string`)
             if (!name.trim()) throw new Error('name is empty or blank')
 
             if (typeof surname !== 'string') throw TypeError(`${surname} is not a string`)
             if (!surname.trim()) throw new Error('surname is empty or blank')
 
-            if (typeof email !== 'string') throw TypeError(`${email} is not a string`)
-            if (!email.trim()) throw new Error('e-mail is empty or blank')
-            if (!EMAIL_REGEX.test(email)) throw new Error('e-mail is not valid')
+            if (typeof username !== 'string') throw TypeError(`${username} is not a string`)
+            if (!username.trim()) throw new Error('e-mail is empty or blank')
+            if (!EMAIL_REGEX.test(username)) throw new Error('e-mail is not valid')
 
             if (typeof password !== 'string') throw TypeError(`${password} is not a string`)
             if (!password.trim()) throw new Error('password is empty or blank')
@@ -27,64 +27,51 @@ const logic = (() => {
 
             if (password !== repassword) throw new Error('passwords do not match')
 
-
-            const user = users.find(function (user) {
-                return user.email === email
-            })
-
-            if (user) throw new Error('e-mail is already registered')
-
-            users.push({
-                name: name,
-                surname: surname,
-                email: email,
-                password: password,
-                favorites: new Array
-            })
+            // TODO call user api
         },
 
-        authenticateUser(email, password) {
-            if (typeof email !== 'string') throw TypeError(`${email} is not a string`)
-            if (!email.trim()) throw new Error('e-mail is empty or blank')
-            if (!EMAIL_REGEX.test(email)) throw new Error('e-mail is not valid')
+        authenticateUser(username, password) {
+            if (typeof username !== 'string') throw TypeError(`${username} is not a string`)
+            if (!username.trim()) throw new Error('e-mail is empty or blank')
+            if (!EMAIL_REGEX.test(username)) throw new Error('e-mail is not valid')
 
             if (typeof password !== 'string') throw TypeError(`${password} is not a string`)
             if (!password.trim()) throw new Error('password is empty or blank')
 
             const user = users.find(function (user) {
-                return user.email === email && user.password === password
+                return user.username === username && user.password === password
             })
 
             if (!user) throw new Error('wrong credentials')
         },
 
-        retrieveUser(email) {
-            if (typeof email !== 'string') throw TypeError(`${email} is not a string`)
-            if (!email.trim()) throw new Error('e-mail is empty or blank')
-            if (!EMAIL_REGEX.test(email)) throw new Error('e-mail is not valid')
+        retrieveUser(username) {
+            if (typeof username !== 'string') throw TypeError(`${username} is not a string`)
+            if (!username.trim()) throw new Error('e-mail is empty or blank')
+            if (!EMAIL_REGEX.test(username)) throw new Error('e-mail is not valid')
 
             const user = users.find(function (user) {
-                return user.email === email
+                return user.username === username
             })
 
-            if (!user) throw new Error(`user with e-mail ${email} not found`)
+            if (!user) throw new Error(`user with e-mail ${username} not found`)
 
-            const { name, surname, email: _email } = user
+            const { name, surname, username: _username } = user
 
-            return { name, surname, email: _email }
+            return { name, surname, username: _username }
         },
 
-        searchDucks(email, query, expression) {
+        searchDucks(username, query, expression) {
             let favorites
 
-            if (typeof email !== 'undefined') {
-                if (typeof email !== 'string') throw new TypeError(`${email} is not a string`)
-                if (!email.trim()) throw new Error('e-mail is empty or blank')
-                if (!EMAIL_REGEX.test(email)) throw new Error('e-mail is not valid')
+            if (typeof username !== 'undefined') {
+                if (typeof username !== 'string') throw new TypeError(`${username} is not a string`)
+                if (!username.trim()) throw new Error('e-mail is empty or blank')
+                if (!EMAIL_REGEX.test(username)) throw new Error('e-mail is not valid')
 
-                const user = users.find(user => user.email === email)
+                const user = users.find(user => user.username === username)
 
-                if (!user) throw new Error(`user with e-mail ${email} not found`)
+                if (!user) throw new Error(`user with e-mail ${username} not found`)
 
                 favorites = user.favorites
             }
@@ -107,23 +94,43 @@ const logic = (() => {
             })
         },
 
-        retrieveDuck(id, expression) {
-            // TODO validate id, expression
+        retrieveDuck(username, id, expression) {
+            let favorites
 
-            call('http://duckling-api.herokuapp.com/api/ducks/' + id, (error, result) => {
+            if (typeof username !== 'undefined') {
+                if (typeof username !== 'string') throw new TypeError(`${username} is not a string`)
+                if (!username.trim()) throw new Error('e-mail is empty or blank')
+                if (!EMAIL_REGEX.test(username)) throw new Error('e-mail is not valid')
+
+                const user = users.find(user => user.username === username)
+
+                if (!user) throw new Error(`user with e-mail ${username} not found`)
+
+                favorites = user.favorites
+            }
+
+            if (typeof id !== 'string') throw new TypeError(`${id} is not a string`)
+            if (!id.trim()) throw new Error('id is empty or blank')
+
+            if (typeof expression !== 'function') throw TypeError(`${expression} is not a function`)
+
+            call('http://duckling-api.herokuapp.com/api/ducks/' + id, (error, duck) => {
                 if (error)
                     expression(new Error(`cannot retrieve duck with id ${id}`))
-                else
-                    expression(undefined, result)
+                else {
+                    favorites && (duck.favorite = favorites.includes(id))
+
+                    expression(undefined, duck)
+                }
             })
         },
 
-        toggleFavDuck(email, id, expression) {
+        toggleFavDuck(username, id, expression) {
             // TODO validate args (type and content, where it applies)
 
-            const user = users.find(user => user.email === email)
+            const user = users.find(user => user.username === username)
 
-            if (!user) throw Error(`user with email ${email} not found`)
+            if (!user) throw Error(`user with username ${username} not found`)
 
             const { favorites } = user
 
@@ -145,12 +152,12 @@ const logic = (() => {
                 })
         },
 
-        retrieveFavoriteDucks(email, expression) {
+        retrieveFavoriteDucks(username, expression) {
             // TODO valide args
 
-            const user = users.find(user => user.email === email)
+            const user = users.find(user => user.username === username)
 
-            if (!user) throw Error(`user with email ${email} not found`)
+            if (!user) throw Error(`user with username ${username} not found`)
 
             const { favorites } = user
 

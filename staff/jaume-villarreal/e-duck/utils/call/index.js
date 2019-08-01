@@ -1,4 +1,4 @@
-function call(url, expression) {
+function call(url, expression) { // TODO swith from XHR to fetch
     const xhr = new XMLHttpRequest()
 
     xhr.open('get', url)

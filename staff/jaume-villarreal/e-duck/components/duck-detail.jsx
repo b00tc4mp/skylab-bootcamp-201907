@@ -1,9 +1,9 @@
-function DuckDetail({ duck: { title, imageUrl, price, description, link }, onBack }) {
+function DuckDetail({ duck: { id, title, imageUrl, price, description, link, favorite }, onBack, onToggle }) {
     return <>
         <h3>{title}</h3>
-        <FavButton active = { favorite } onToggle={() => onToggle(id)} />
         <img src={imageUrl} />
         <span>{price}</span>
+        <FavButton active={favorite} onToggle={() => onToggle(id)}/>
         <p>{description}</p>
         <a href={link}>Go to store</a>
         <a href="" onClick={ event => {
