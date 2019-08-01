@@ -37,17 +37,6 @@ describe('call', () => {
             })
         })
     })
-    
-    // TODO test delete and patch
-    describe('delete' , () => {
-        it('should succeed on coherent user delete' , done => {
-             call('https://reqres.in/api/users/2', 'delete', undefined, {id : 2}, (error, response) => {
-                expect(error).toBeUndefined()
-                expect(response).toBeDefined()
 
-                done()
-            })
-        })
-    })
-  
+    // TODO test delete and patch
 })
