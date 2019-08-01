@@ -4,7 +4,7 @@ class App extends Component {
     constructor() {
         super()
 
-        this.state = { view: 'landing', email: undefined, error: undefined } // view: 'register', 'login', ...
+        this.state = { view: 'landing', data: undefined, error: undefined } // view: 'register', 'login', ...
 
         this.handleGoToRegister = this.handleGoToRegister.bind(this)
         this.handleBackToLanding = this.handleBackToLanding.bind(this)
@@ -24,9 +24,10 @@ class App extends Component {
 
     handleRegister(name, surname, email, password, repassword) {
         try {
-            logic.registerUser(name, surname, email, password, repassword)
-
-            this.setState({ view: 'register-success' })
+            logic.registerUser(name, surname, email, password, repassword, error => {
+                if (error) this.setState({ error: message })
+                else this.setState({ view: 'register-success' })
+            }) 
         } catch ({ message }) {
             this.setState({ error: message })
         }
@@ -38,23 +39,24 @@ class App extends Component {
 
     handleLogin(email, password) {
         try {
-            logic.authenticateUser(email, password)
-
-            this.setState({ view: 'landing', email })
+            logic.authenticateUser(email, password, (error, data) => {
+                if (error) this.setState({ error: error.message})
+                else this.setState({ view: 'landing', data })
+            })
         } catch ({ message }) {
             this.setState({ error: message })
         }
     }
 
     handleLogout() {
-        this.setState({ email: undefined })
+        this.setState({ data: undefined })
     }
 
     render() {
-        const { state: { view, email, error }, handleGoToRegister, handleRegister, handleBackToLanding, handleGoToLogin, handleLogin, handleLogout } = this
+        const { state: { view, data, error }, handleGoToRegister, handleRegister, handleBackToLanding, handleGoToLogin, handleLogin, handleLogout } = this
 
         return <>
-            {view === 'landing' && <Landing onRegister={handleGoToRegister} onLogin={handleGoToLogin} user={email} onLogout={handleLogout} />}
+            {view === 'landing' && <Landing onRegister={handleGoToRegister} onLogin={handleGoToLogin} user={data} onLogout={handleLogout} />}
             {view === 'register' && <Register onBack={handleBackToLanding} onRegister={handleRegister} error={error} />}
             {view === 'register-success' && <RegisterSuccess onLogin={handleGoToLogin} />}
             {view === 'login' && <Login onBack={handleBackToLanding} onLogin={handleLogin} error={error} />}
