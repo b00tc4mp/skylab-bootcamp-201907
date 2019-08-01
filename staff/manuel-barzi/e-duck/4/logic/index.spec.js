@@ -8,58 +8,57 @@ describe('logic', () => {
     })
 
     describe('register user', () => {
-        it('should succeed on correct data', done => {
-            const user = {
+        let user
+
+        beforeEach(() => {
+            user = {
                 name: 'John-' + random(),
                 surname: 'Doe-' + random(),
-                email: 'johndoe-' + random() + '@mail.com',
+                username: 'johndoe-' + random() + '@mail.com',
                 password: '123-' + random(),
                 favorites: []
             }
+        })
 
-            logic.registerUser(user.name, user.surname, user.username, user.password, user.password, error => {
+        it('should succeed on correct data', done => {
+            expect(() => logic.registerUser(user.name, user.surname, user.username, user.password, user.password, error => {
                 expect(error).toBeUndefined()
 
-                done()  
-            })
+                done()
+            })).not.toThrow()
         })
 
         it('should fail on empty name', () => {
             expect(() => {
-                logic.registerUser('', 'Barzi', 'manuelbarzi@gmail.com', '123', '123')
+                logic.registerUser('', 'Barzi', 'manuelbarzi@gmail.com', '123', '123', () => { })
             }).toThrowError(Error, 'name is empty or blank')
         })
 
         it('should fail on non-valid e-mail', () => {
             expect(() => {
-                logic.registerUser('Manuel', 'Barzi', 'manuelbarzi#gmail.com', '123', '123')
+                logic.registerUser('Manuel', 'Barzi', 'manuelbarzi#gmail.com', '123', '123', () => { })
             }).toThrowError(Error, 'e-mail is not valid')
         })
 
         it('should fail on non-matching re-password', () => {
             expect(() => {
-                logic.registerUser('Manuel', 'Barzi', 'manuelbarzi@gmail.com', '123', '456')
+                logic.registerUser('Manuel', 'Barzi', 'manuelbarzi@gmail.com', '123', '456', () => { })
             }).toThrowError(Error, 'passwords do not match')
         })
 
         // TODO test more cases
 
         describe('when user already exists', () => {
-            const user = {
-                name: 'John-' + random(),
-                surname: 'Doe-' + random(),
-                email: 'johndoe-' + random() + '@mail.com',
-                password: '123-' + random()
-            }
+            it('should fail on already existing e-mail', done => {
+                expect(() => logic.registerUser(user.name, user.surname, user.username, user.password, user.password, error => {
+                    expect(error).toBeUndefined()
 
-            beforeEach(() => {
-                users.push(user)
-            })
+                    expect(() => logic.registerUser(user.name, user.surname, user.username, user.password, user.password, error => {
+                        expect(error).toBeDefined()
 
-            it('should fail on already existing e-mail', () => {
-                expect(() => {
-                    logic.registerUser(user.name, user.surname, user.email, user.password, user.password)
-                }).toThrowError(Error, 'e-mail is already registered')
+                        done()
+                    })).not.toThrow()
+                })).not.toThrow()
             })
 
             // TODO test more cases
@@ -70,7 +69,7 @@ describe('logic', () => {
         const user = {
             name: 'John-' + random(),
             surname: 'Doe-' + random(),
-            email: 'johndoe-' + random() + '@mail.com',
+            username: 'johndoe-' + random() + '@mail.com',
             password: '123-' + random()
         }
 
@@ -80,13 +79,13 @@ describe('logic', () => {
 
         it('should succeed on correct data', () => {
             expect(() => {
-                const _user = logic.authenticateUser(user.email, user.password)
+                const _user = logic.authenticateUser(user.username, user.password)
 
                 expect(_user).toBeUndefined()
             }).not.toThrow()
         })
 
-        it('should fail on empty email', () => {
+        it('should fail on empty username', () => {
             expect(() => {
                 logic.authenticateUser('', user.password)
             }).toThrowError(Error, 'e-mail is empty or blank')
@@ -101,11 +100,11 @@ describe('logic', () => {
         // TODO test more cases
     })
 
-    describe('retrieve user', () => {
+    xdescribe('retrieve user', () => {
         const user = {
             name: 'John-' + random(),
             surname: 'Doe-' + random(),
-            email: 'johndoe-' + random() + '@mail.com',
+            username: 'johndoe-' + random() + '@mail.com',
             password: '123-' + random()
         }
 
@@ -115,18 +114,18 @@ describe('logic', () => {
 
         it('should succeed on matching user with e-mail', () => {
             expect(() => {
-                const _user = logic.retrieveUser(user.email)
+                const _user = logic.retrieveUser(user.username)
 
-                const { name, surname, email, password } = _user
+                const { name, surname, username, password } = _user
 
                 expect(name).toBe(user.name)
                 expect(surname).toBe(user.surname)
-                expect(email).toBe(user.email)
+                expect(username).toBe(user.username)
                 expect(password).toBeUndefined()
             }).not.toThrow()
         })
 
-        it('should fail on empty email', () => {
+        it('should fail on empty username', () => {
             expect(() => {
                 logic.retrieveUser('')
             }).toThrowError(Error, 'e-mail is empty or blank')
@@ -141,7 +140,7 @@ describe('logic', () => {
         // TODO test more cases
     })
 
-    describe('search ducks', () => {
+    xdescribe('search ducks', () => {
         it('should succeed on matching criteria', done => {
             const query = 'white' // 12 results
 
@@ -185,17 +184,17 @@ describe('logic', () => {
         // TODO test more cases
 
         describe('when user already has favorite ducks', () => {
-            let name, surname, email, password, user
+            let name, surname, username, password, user
 
             beforeEach(() => {
                 users = new Array
 
                 name = `n-${random()}`
                 surname = `s-${random()}`
-                email = `e-${random()}@mail.com`
+                username = `e-${random()}@mail.com`
                 password = `p-${random()}`
 
-                user = { name, surname, email, password, favorites: new Array('5c3853aebd1bde8520e66e52', '5c3853aebd1bde8520e66e97', '5c3853aebd1bde8520e66e9e') }
+                user = { name, surname, username, password, favorites: new Array('5c3853aebd1bde8520e66e52', '5c3853aebd1bde8520e66e97', '5c3853aebd1bde8520e66e9e') }
 
                 users.push(user)
             })
@@ -203,7 +202,7 @@ describe('logic', () => {
             it('should succeed on matching criteria', done => {
                 const query = 'white' // 12 results
 
-                logic.searchDucks(email, query, (error, ducks) => {
+                logic.searchDucks(username, query, (error, ducks) => {
                     expect(error).toBeUndefined()
 
                     expect(ducks).toBeDefined()
@@ -229,7 +228,7 @@ describe('logic', () => {
         })
     })
 
-    describe('retrieve duck', () => {
+    xdescribe('retrieve duck', () => {
         it('should succeed on valid id', done => {
             const id = '5c3853aebd1bde8520e66ee8'
 
@@ -263,23 +262,23 @@ describe('logic', () => {
 
         describe('when user already has a favorite duck', () => {
             const id = '5c3853aebd1bde8520e66e97'
-            let name, surname, email, password, user
+            let name, surname, username, password, user
 
             beforeEach(() => {
                 users = new Array
 
                 name = `n-${random()}`
                 surname = `s-${random()}`
-                email = `e-${random()}@mail.com`
+                username = `e-${random()}@mail.com`
                 password = `p-${random()}`
 
-                user = { name, surname, email, password, favorites: new Array('5c3853aebd1bde8520e66e52', id, '5c3853aebd1bde8520e66e9e') }
+                user = { name, surname, username, password, favorites: new Array('5c3853aebd1bde8520e66e52', id, '5c3853aebd1bde8520e66e9e') }
 
                 users.push(user)
             })
 
             it('should succeed on valid id', done => {
-                logic.retrieveDuck(email, id, (error, duck) => {
+                logic.retrieveDuck(username, id, (error, duck) => {
                     expect(error).toBeUndefined()
 
                     expect(duck).toBeDefined()
@@ -297,7 +296,7 @@ describe('logic', () => {
             it('should fail on non valid id', done => {
                 const id = '5c3853aebd1bde8520e66ff9'
 
-                logic.retrieveDuck(email, id, (error, duck) => {
+                logic.retrieveDuck(username, id, (error, duck) => {
                     expect(error).toBeDefined()
                     expect(duck).toBeUndefined()
 
@@ -309,27 +308,27 @@ describe('logic', () => {
         })
     })
 
-    describe('toggle favorite duck', () => {
-        let name, surname, email, password
+    xdescribe('toggle favorite duck', () => {
+        let name, surname, username, password
 
         beforeEach(() => {
             users = new Array
 
             name = `n-${random()}`
             surname = `s-${random()}`
-            email = `e-${random()}@mail.com`
+            username = `e-${random()}@mail.com`
             password = `p-${random()}`
 
-            users.push({ name, surname, email, password, favorites: new Array })
+            users.push({ name, surname, username, password, favorites: new Array })
         })
 
         it('should succeed on correct duck id', done => {
             const id = '5c3853aebd1bde8520e66ee8'
 
-            logic.toggleFavDuck(email, id, error => {
+            logic.toggleFavDuck(username, id, error => {
                 expect(error).toBeUndefined()
 
-                const { favorites } = users.find(user => user.email === email)
+                const { favorites } = users.find(user => user.username === username)
                 expect(favorites.length).toBe(1)
 
                 const favorite = favorites[0]
@@ -339,17 +338,17 @@ describe('logic', () => {
             })
         })
 
-        it('should fail on non existing email', () => {
-            email = 'invalid@mail.com'
+        it('should fail on non existing username', () => {
+            username = 'invalid@mail.com'
 
-            expect(() => logic.toggleFavDuck(email))
-                .toThrowError(Error, `user with email ${email} not found`)
+            expect(() => logic.toggleFavDuck(username))
+                .toThrowError(Error, `user with username ${username} not found`)
         })
 
         it('should fail non existing duck id', done => {
             const id = '5c3853aebd1bde8520e66ff9'
 
-            logic.toggleFavDuck(email, id, error => {
+            logic.toggleFavDuck(username, id, error => {
                 expect(error).toBeDefined()
 
                 const { message } = error
@@ -362,27 +361,27 @@ describe('logic', () => {
         // TODO test more cases
 
         describe('when duck already in favorites', () => {
-            let name, surname, email, password, favorites, duckId, user
+            let name, surname, username, password, favorites, duckId, user
 
             beforeEach(() => {
                 users = new Array
 
                 name = `n-${random()}`
                 surname = `s-${random()}`
-                email = `e-${random()}@mail.com`
+                username = `e-${random()}@mail.com`
                 password = `p-${random()}`
                 favorites = new Array
                 duckId = '5c3853aebd1bde8520e66ee8'
 
                 favorites.push(duckId)
 
-                user = { name, surname, email, password, favorites }
+                user = { name, surname, username, password, favorites }
 
                 users.push(user)
             })
 
             it('should succeed on matching duck id', done => {
-                logic.toggleFavDuck(email, duckId, error => {
+                logic.toggleFavDuck(username, duckId, error => {
                     expect(error).toBeUndefined()
 
                     expect(favorites.length).toBe(0)
@@ -395,22 +394,22 @@ describe('logic', () => {
         })
     })
 
-    describe('retrieve favorite ducks', () => {
-        let name, surname, email, password
+    xdescribe('retrieve favorite ducks', () => {
+        let name, surname, username, password
 
         beforeEach(() => {
             users = new Array
 
             name = `n-${random()}`
             surname = `s-${random()}`
-            email = `e-${random()}@mail.com`
+            username = `e-${random()}@mail.com`
             password = `p-${random()}`
 
-            users.push({ name, surname, email, password, favorites: new Array('5c3853aebd1bde8520e66ee8', '5c3853aebd1bde8520e66ec4') })
+            users.push({ name, surname, username, password, favorites: new Array('5c3853aebd1bde8520e66ee8', '5c3853aebd1bde8520e66ec4') })
         })
 
         it('should succeed on previously added fav ducks', done => {
-            logic.retrieveFavoriteDucks(email, (error, ducks) => {
+            logic.retrieveFavoriteDucks(username, (error, ducks) => {
                 expect(error).toBeUndefined()
 
                 expect(ducks).toBeDefined()
