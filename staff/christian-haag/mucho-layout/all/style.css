@@ -1,0 +1,442 @@
+* {
+  margin: 0 2px;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+}
+
+section {
+  width: 40%;
+}
+h2,
+h3 {
+  color: #ea2127;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #aeaeae;
+}
+
+a:hover {
+  color: rgb(82, 81, 81);
+}
+
+i {
+  margin: 10px;
+  color: #aeaeae;
+}
+
+i:hover {
+  color: rgb(82, 81, 81);
+  cursor: pointer;
+}
+
+.header-container > figure {
+  width: 15%;
+}
+
+.nav-1 li {
+  width: auto;
+  display: block;
+  float: left;
+  margin: 20px 6px;
+  padding: 2px;
+  font-size: 1.2rem;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #aeaeae;
+}
+
+.nav-2 li {
+  display: none;
+  margin: 6px;
+  padding: 2px;
+  font-size: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #aeaeae;
+}
+.nav-menu {
+  display: flex;
+  width: 45%;
+  justify-content: flex-end;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.fas {
+  display: none;
+}
+
+figure,
+.article-text {
+  width: 33%;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+#header-text {
+  width: 100%;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  line-height: 1.3;
+  padding: 15px 15px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #aeaeae;
+}
+
+.header-sect {
+  display: none;
+}
+
+.header-container {
+  position: fixed;
+  display: flex;
+  background-color: white;
+  flex-direction: row;
+  align-content: space-between;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding-top: 15px;
+  left: 0;
+  top: 0;
+}
+
+.header-wrapper {
+  height: 150px;
+}
+
+#logo {
+  margin: 25px 25px;
+  width: 100px;
+}
+
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.article-text-wrapp {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100vw;
+}
+
+.article-text__title {
+  color: #ea2127;
+  font-size: 1rem;
+}
+
+.article-text > p {
+  font-size: 1.1rem;
+  margin: 5px;
+  padding: 10px;
+}
+
+.article-text {
+  word-wrap: break-word;
+  line-height: 1.3;
+  background-color: whitesmoke;
+  margin: 2px;
+  padding: 25px 0 70px 0;
+}
+.hamb {
+  display: none;
+}
+footer {
+  margin: 15px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: baseline;
+}
+
+footer > p {
+  color: rgb(90, 90, 90);
+}
+
+footer > h4 {
+  margin: 0;
+  padding: 2px;
+}
+
+.info-head,
+.info-foot {
+  padding: 0;
+}
+.info-head > h3 {
+  margin: 0;
+}
+
+.info-foot {
+  margin-top: 35px;
+  margin-bottom: 45px;
+}
+
+.info-head > p {
+  font-size: 1.2rem;
+  color: #aeaeae;
+}
+
+.info-foot > p {
+  margin: 0;
+  padding: 0;
+  color: #aeaeae;
+}
+
+#aside-1 {
+  width: 100%;
+  height: 100px;
+  font-size: 1.8rem;
+  color: #555555;
+  margin: 50px 7px;
+  padding: 50px 0;
+}
+
+.barna,
+.sanfran,
+.paris,
+.ny {
+  font-size: 1.4rem !important;
+  font-weight: bold;
+  color: #ea2127 !important;
+}
+.footer-section-container {
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+}
+.address {
+  margin: 15px 50px 30px 7px;
+}
+
+.f-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.f-container {
+  font-size: 1.2rem;
+  color: #aeaeae;
+}
+
+.as-f1 {
+  width: 300px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+#terms:hover {
+  color: rgb(82, 81, 81);
+}
+
+.as-f2 {
+  width: 300px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cop,
+.terms-f,
+.subscribe {
+  font-size: 1rem;
+}
+
+.terms-f > a {
+  text-decoration: none;
+}
+
+@media (min-width: 1213px) and (max-width: 1400px) {
+  #header-text {
+    font-size: 1rem;
+  }
+  .nav-1 li {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 1213px) {
+  figure {
+    width: 49%;
+  }
+  main {
+    margin: 0;
+    justify-content: space-evenly;
+  }
+  .head-section {
+    display: none;
+  }
+  .header-container {
+    width: 100%;
+  }
+
+  .nav-menu {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .nav-1 li {
+    font-size: 1.1rem;
+    float: right;
+  }
+}
+
+@media (max-width: 900px) {
+  .footer-section-container {
+    flex-wrap: wrap;
+  }
+  #aside-1 > p {
+    font-size: 1.5rem;
+  }
+  .fas {
+    display: block;
+  }
+}
+
+@media (max-width: 800px) {
+  .nav-menu {
+    width: 90%;
+    align-items: flex-start;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+  .nav-menu > .nav-2 li {
+    display: block;
+    float: left;
+  }
+  .nav-menu > .nav-2 li i {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    margin: 0;
+    width: 100vw;
+    display: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  figure {
+    margin-right: 15px;
+    width: 100vw;
+  }
+  img {
+    width: 100%;
+    margin: 0;
+  }
+
+  .fas {
+    display: block;
+  }
+
+  .nav-menu {
+    display: none;
+  }
+  .header-wrapper {
+    height: 80px;
+  }
+  .header-container {
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 80px;
+  }
+
+  .header-container figure {
+    width: auto;
+  }
+
+  .header-container > i {
+    margin-right: 30px;
+  }
+  .head-section > figure > i {
+    display: flex;
+  }
+  .header-sect {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+  }
+
+  .header-sect > i {
+    margin-right: 50px;
+  }
+  .sect1 {
+    border-top: 1px solid rgb(170, 170, 170);
+    border-bottom: 1px solid rgb(170, 170, 170);
+  }
+  .sect2 {
+    border-bottom: 1px solid rgb(170, 170, 170);
+  }
+
+  .header-sect > ul {
+    font-size: 1.2rem;
+    margin: 10px;
+    color: #aeaeae;
+  }
+  .article-text {
+    left: 0;
+    background-color: whitesmoke;
+    width: inherit;
+    height: 300px;
+    padding: 5px 15px;
+    margin: 7px 0;
+  }
+
+  .footer-section-container {
+    flex-direction: column;
+  }
+
+  #aside-1 > p {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 1300px) {
+  .barna,
+  .sanfran,
+  .paris,
+  .ny {
+    font-size: 1rem !important;
+  }
+  .info-head > p {
+    font-size: 0.9rem;
+  }
+  .info-foot > p {
+    font-size: 0.9rem;
+  }
+}
