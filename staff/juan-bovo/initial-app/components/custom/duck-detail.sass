@@ -1,0 +1,28 @@
+.duck-detail
+    @extend %panel
+
+    background-color: palegoldenrod
+
+    &__title
+        padding: 1rem 0
+        font-size: 1.25rem
+        font-family: $font-duck
+
+
+    &__photo
+        width: 400px
+
+    &__price
+        display: block
+        +round-border(0.2rem, 0.3rem, solid, $panel-color)
+        background-color: $panel-back-color
+        font-size: 2rem
+        margin: 1rem 0
+        width: 120px
+        font-family: $font-duck
+
+
+    &__link
+        display: block
+        padding-top: 1rem
+        scolor: white
