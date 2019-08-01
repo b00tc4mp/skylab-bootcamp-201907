@@ -12,11 +12,10 @@ class Landing extends Component {
         this.handleRegister = this.handleRegister.bind(this)
         this.handleLogin = this.handleLogin.bind(this)
         this.handleLogout = this.handleLogout.bind(this)
-        this.handleToggleFavDuckFromDuckItem = this.handleToggleFavDuckFromDuckItem.bind(this)
-        this.handleToggleFavDuckFromDuckDetail = this.handleToggleFavDuckFromDuckDetail.bind(this)
+        this.handleToggleFavDuck = this.handleToggleFavDuck.bind(this)
     }
 
-    handleSearch(query) {
+    handleSearch(query = this.state.query) {
         const { props: { user } } = this
 
         logic.searchDucks(user, query, (error, ducks) => {
@@ -26,9 +25,7 @@ class Landing extends Component {
     }
 
     handleRetrieveDuck(id) {
-        const { props: { user } } = this
-
-        logic.retrieveDuck(user, id, (error, duck) => {
+        logic.retrieveDuck(id, (error, duck) => {
             if (error) console.error(error)
             else this.setState({ duck })
         })
@@ -41,12 +38,7 @@ class Landing extends Component {
     }
 
     handleBackFromDetail() {
-        const { state: { query }, props: { user } } = this
-
-        logic.searchDucks(user, query, (error, ducks) => {
-            if (error) console.error(error)
-            else this.setState({ ducks, duck: undefined })
-        })
+        this.setState({ duck: undefined })
     }
 
     handleLogin(event) {
@@ -61,20 +53,14 @@ class Landing extends Component {
         this.props.onLogout()
     }
 
-    handleToggleFavDuckFromDuckItem(id) {
-        const { props: { user, onLogin }, handleSearch, state: { query } } = this
+    handleToggleFavDuck(id) {
+        const { props: { user, onLogin }, handleSearch } = this
 
-        user ? logic.toggleFavDuck(user, id, () => handleSearch(query)) : onLogin()
-    }
-
-    handleToggleFavDuckFromDuckDetail(id) {
-        const { props: { user, onLogin }, handleRetrieveDuck } = this
-
-        user ? logic.toggleFavDuck(user, id, () => handleRetrieveDuck(id)) : onLogin()
+        user ? logic.toggleFavDuck(user, id, handleSearch) : onLogin()
     }
 
     render() {
-        const { state: { ducks, duck }, handleSearch, handleRetrieveDuck, handleRegister, handleBackFromDetail, handleLogin, handleLogout, handleToggleFavDuckFromDuckItem, handleToggleFavDuckFromDuckDetail, props: { user } } = this
+        const { state: { ducks, duck }, handleSearch, handleRetrieveDuck, handleRegister, handleBackFromDetail, handleLogin, handleLogout, handleToggleFavDuck, props: { user } } = this
 
         let _user
 
@@ -100,10 +86,10 @@ class Landing extends Component {
 
             {!duck ?
                 <Results items={ducks} paintItem={duck => {
-                    return <DuckItem duck={duck} onToggle={handleToggleFavDuckFromDuckItem} />
+                    return <DuckItem duck={duck} onToggle={handleToggleFavDuck} />
                 }} onItem={handleRetrieveDuck} />
                 :
-                <DuckDetail duck={duck} onBack={handleBackFromDetail} onToggle={handleToggleFavDuckFromDuckDetail} />}
+                <DuckDetail duck={duck} onBack={handleBackFromDetail} />}
         </>
     }
 }
