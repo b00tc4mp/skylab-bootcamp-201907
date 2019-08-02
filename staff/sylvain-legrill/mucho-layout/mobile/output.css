@@ -1,0 +1,118 @@
+html {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-flow: column wrap;
+  background-color: white;
+  color: #555555;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  line-height: 1.5;
+  font-size: 20px;
+}
+
+header {
+  background-color: white;
+  padding: 10px 10px;
+  color: #AEAEAE;
+}
+
+.header__nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 5px;
+}
+
+.header__logoimg {
+  width: 85px;
+}
+
+.header__presentation {
+  display: none;
+  font-size: 16px;
+}
+
+.header__navigator {
+  display: none;
+  font-size: 16px;
+}
+
+.header__navproject {
+  line-height: 1.3;
+  padding: 10px 0 0;
+  height: 100%;
+}
+
+.header__navproject--navservices, .header__navproject--navindustries {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #d1cdcd;
+}
+
+.header__navproject--navservices {
+  border-top: 1px solid #d1cdcd;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between */
+}
+
+.main__imagecontainer img {
+  width: 100%;
+}
+
+.main__imagecontainer img:hover {
+  opacity: 0.05;
+  transition: opacity 500ms;
+}
+
+.main__mainarticles--wearemucho, .main__mainarticles--talkingandteaching, .main__mainarticles--about {
+  margin-bottom: 1%;
+  background-color: #F4F4F4;
+  padding: 24px;
+}
+
+.main__mainarticles h2 {
+  color: #EC1C24;
+  font-size: 14px;
+}
+
+.main__mainarticles a {
+  color: #AEAEAE;
+  text-decoration: none;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-top: 10%;
+  margin: 3% 3%;
+}
+
+.footer__contact {
+  font-size: 20px;
+}
+
+.footer__adresses {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+}
+
+.footer h2 {
+  color: #EC1C24;
+  font-size: 14px;
+}
+
+.footer__copyrightsuscribe {
+  color: #AEAEAE;
+}
+
+/*# sourceMappingURL=output.css.map */
