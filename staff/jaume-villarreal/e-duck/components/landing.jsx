@@ -47,10 +47,14 @@ class Landing extends Component {
         })
     }
 
-    handleRetrieveDuck(id) {
-        const { props: { user } } = this
+    handleRetrieveDuck(duckId) {
+        const { state: { user } } = this
 
-        logic.retrieveDuck(user, id, (error, duck) => {
+        let id, token
+
+        user && (id = user.id, token = user.token)
+
+        logic.retrieveDuck(id, token, duckId, (error, duck) => {
             if (error) this.setState({ error: error.message })
             else this.setState({ duck })
         })

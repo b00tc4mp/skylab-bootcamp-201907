@@ -1,4 +1,9 @@
-function call(url, method, headers, body, expression) { // TODO swith from XHR to fetch
+function call(url, method = 'get', headers, body, expression) {
+    validate.string(url, 'url')
+    validate.url(url, 'url')
+    validate.string(method, 'method', true, ['get', 'post', 'put', 'patch', 'delete'])
+    validate.function(expression, 'expression')
+
     fetch(url, {
         method,
         headers,
