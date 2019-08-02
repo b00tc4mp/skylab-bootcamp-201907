@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style/index.css">
+</head>
+
+<body>
+    <main>
+        <h1>Initial App</h1>
+
+        <!-- Landing -->
+        <section class="landing show">
+            <a href="">Register</a> or <a href="">Login</a>.
+        </section>
+
+        <!-- Register -->
+        <section class="register hide">
+            <form>
+                <label for="name">Name</label>
+                <input type="text" id="name">
+                <label for="surname">Surname</label>
+                <input type="text" id="surname">
+                <label for="email">E-mail</label>
+                <input type="email" id="email">
+                <label for="password">Password</label>
+                <input type="password" id="password">
+                <button type="submit">Register</button>
+            </form>
+            <p class="panel__feedback feedback feedback--error">A message.</p>
+            <a href="">back</a>
+        </section>
+
+        <!-- Register Success -->
+        <section class="register-success hide">
+            Ok, registered succeeded, you can now proceed to <a href="">login</a>.
+        </section>
+
+        <!-- Login -->
+        <section class="login hide">
+            <form>
+                <label for="email">E-mail</label>
+                <input type="email" id="email">
+                <label for="password">Password</label>
+                <input type="password" id="password">
+                <button type="submit">Login</button>
+            </form>
+            <p class="panel__feedback feedback feedback--error"></p>
+            <a href="">back</a>
+        </section>
+
+        <!-- Home -->
+        <section class="duck-home hide">
+            <h2>Welcome!</h2>
+            <button>Logout</button>
+            <button>List your favourites</button>
+
+
+            <!-- Search -->
+            <section class="search">
+                <h3>Search</h3>
+                <form>
+                    <input type="text" name="query">
+                    <button>Search</button>
+                </form>
+                <p class="panel__feedback feedback feedback--error"></p>
+            </section>
+
+            <!-- Results -->
+            <section class="duck-results hide">
+                    
+                <ul>
+                    <li>Duck 1</li>
+                    <li>Duck 2</li>
+                    <li>Duck 3</li>
+                </ul>
+            </section>
+
+            <!-- Detail -->
+            <section class="duck-detail hide">
+                
+                <h3>Title</h3>
+                <p class = "favourite">❤</p>
+                <img class="duck-detail__photo" src="http://whetever.com/image.jpg">
+                <span class="duck-detail__price">Price</span>
+                <p>Description</p>
+                <a href="">Link</a>
+                <button>Back</button>  
+            </section>
+
+             <!-- Favourite -->
+             <section class="duck-myfavourite hide">
+                <ul>
+                    <li>Duck 1</li>
+                </ul>
+            </section>
+        </section>
+    </main>
+
+    <script src="utils/call.js"></script>
+    <script src="utils/curray.js"></script>
+    <script src="data/index.js"></script>
+    <script src="logic/index.js"></script>
+    <script src="components/component.js"></script>
+    <script src="components/landing.js"></script>
+    <script src="components/submit-back.js"></script>
+    <script src="components/register.js"></script>
+    <script src="components/register-success.js"></script>
+    <script src="components/login.js"></script>
+    <script src="components/feedback.js"></script>
+    <script src="components/search.js"></script>
+    <script src="components/results.js"></script>
+    <script src="components/custom/duck-home.js"></script>
+    <script src="components/custom/duck-results.js"></script>
+    <script src="components/custom/duck-detail.js"></script>
+    <script src="components/favourite.js"></script>
+
+    <script src="index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,111 @@
+body {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+body a {
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+}
+
+body h3, h2 {
+  font-family: "Roboto", sans-serif;
+}
+
+h1 {
+  font-family: "Ribeye Marrow", cursive;
+}
+
+header {
+  align-self: center;
+}
+
+.infocontainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  padding-top: 3%;
+  padding-bottom: 50px;
+  font-family: "Ribeye Marrow", cursive;
+}
+
+.logo {
+  width: 300px;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.duck-detail, .duck-results, .duck-home, .search, .feedback, .register-success, .register, .login, .landing {
+  padding: 0.5rem;
+  margin: 1.5rem;
+  border: 0.1rem solid gray;
+  border-radius: 1rem;
+  background-color: lightgray;
+}
+.landing {
+  background-color: gold;
+  width: 60%;
+}
+
+.login {
+  background-color: gold;
+  width: 60%;
+}
+
+.register {
+  background-color: gold;
+  width: 60%;
+}
+
+.register-success {
+  background-color: gold;
+  width: 60%;
+}
+
+.feedback--success {
+  background-color: greenyellow;
+}
+.feedback--warning {
+  background-color: yellow;
+}
+.feedback--error {
+  background-color: red;
+  color: white;
+}
+
+.search {
+  background-color: gold;
+}
+
+.duck-home {
+  background-color: gold;
+}
+
+.duck-results {
+  background-color: white;
+}
+.duck-results img {
+  width: 333px;
+}
+
+.duck-detail {
+  background-color: gold;
+}
+.duck-detail__photo {
+  width: 333px;
+}
+.duck-detail__price {
+  background-color: black;
+  color: white;
+}
+
+/*# sourceMappingURL=index.css.map */
