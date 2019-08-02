@@ -1,15 +1,17 @@
-console.log('DEMO DE MAP');
+console.log("DEMO map");
 
 var array = [1, 2, 3];
-console.log('array ', array);
 
-var result = map(array, function(value){ return value * coeficient; });
-console.log('result', result);
-console.log('expected : [10, 20, 30]');
+console.log("array", array);
 
-array = [1, 2, 3];
-console.log('array ', array);
+var coeficient = 10;
 
-var result = map(array, function(value){ return '<' + value + '>'; });
-console.log('result', result);
-console.log('expected : ["<1>", "<20>", "<30>"]');
+var result = map(function(value){
+    return value * coeficient;
+})
+check(result, [10,20,30])
+
+
+function check(result, expected){
+    if(result.toString() !== expected.toString()) console.error("Error")
+}

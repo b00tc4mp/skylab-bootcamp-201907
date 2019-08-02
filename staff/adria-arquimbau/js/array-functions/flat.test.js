@@ -43,4 +43,3 @@ suite('flat', function () {
         check(error.message, 'true is not an array');
     });
 });
-
