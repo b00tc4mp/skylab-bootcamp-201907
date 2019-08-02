@@ -18,10 +18,10 @@ class Landing extends Component {
     }
 
     componentWillMount() {
-        const { props: { user } } = this
+        const { props: { credentials } } = this
 
-        if (user) {
-            const { id, token } = user
+        if (credentials) {
+            const { id, token } = credentials
 
             try {
                 logic.retrieveUser(id, token, (error, user) => {
@@ -35,11 +35,11 @@ class Landing extends Component {
     }
 
     handleSearch(query) {
-        const { state: { user } } = this
+        const { props: { credentials } } = this
 
         let id, token
 
-        user && (id = user.id, token = user.token)
+        credentials && (id = credentials.id, token = credentials.token)
 
         logic.searchDucks(id, token, query, (error, ducks) => {
             if (error) this.setState({ error: error.message })
@@ -48,11 +48,11 @@ class Landing extends Component {
     }
 
     handleRetrieveDuck(duckId) {
-        const { state: { user } } = this
+        const { props: { credentials } } = this
 
         let id, token
 
-        user && (id = user.id, token = user.token)
+        credentials && (id = credentials.id, token = credentials.token)
 
         logic.retrieveDuck(id, token, duckId, (error, duck) => {
             if (error) this.setState({ error: error.message })
@@ -67,9 +67,13 @@ class Landing extends Component {
     }
 
     handleBackFromDetail() {
-        const { state: { query }, props: { user } } = this
+        const { state: { query }, props: { credentials } } = this
 
-        logic.searchDucks(user, query, (error, ducks) => {
+        let id, token
+
+        credentials && (id = credentials.id, token = credentials.token)
+
+        logic.searchDucks(id, token, query, (error, ducks) => {
             if (error) this.setState({ error: error.message })
             else this.setState({ ducks, duck: undefined })
         })
@@ -84,19 +88,27 @@ class Landing extends Component {
     handleLogout(event) {
         event.preventDefault()
 
-        this.props.onLogout()
+        this.setState({ credentials: undefined }, () => this.props.onLogout())
     }
 
-    handleToggleFavDuckFromDuckItem(id) {
-        const { props: { user, onLogin }, handleSearch, state: { query } } = this
+    handleToggleFavDuckFromDuckItem(duckId) {
+        const { props: { onLogin, credentials }, handleSearch, state: { query } } = this
 
-        user ? logic.toggleFavDuck(user, id, () => handleSearch(query)) : onLogin()
+        let id, token
+
+        credentials && (id = credentials.id, token = credentials.token)
+
+        credentials ? logic.toggleFavDuck(id, token, duckId, () => handleSearch(query)) : onLogin()
     }
 
-    handleToggleFavDuckFromDuckDetail(id) {
-        const { props: { user, onLogin }, handleRetrieveDuck } = this
+    handleToggleFavDuckFromDuckDetail(duckId) {
+        const { props: { onLogin, credentials }, handleRetrieveDuck } = this
 
-        user ? logic.toggleFavDuck(user, id, () => handleRetrieveDuck(id)) : onLogin()
+        let id, token
+
+        credentials && (id = credentials.id, token = credentials.token)
+
+        credentials ? logic.toggleFavDuck(id, token, duckId, () => handleRetrieveDuck(duckId)) : onLogin()
     }
 
     handleAcceptError() {
