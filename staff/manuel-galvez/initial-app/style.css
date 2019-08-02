@@ -1,0 +1,165 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: "Raleway", sans-serif;
+  color: #0791D0;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.company {
+  width: 100%;
+  height: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.company__name {
+  font-size: 2rem;
+  margin-left: 0.5rem;
+}
+.company__logo {
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  width: 4rem;
+  height: 4rem;
+}
+
+.landing {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15rem;
+  height: 3rem;
+  max-width: 15rem;
+  margin: 1vh 0;
+  text-decoration: none;
+  border-radius: 3px;
+}
+.btn__register {
+  background-color: #0791D0;
+  color: white;
+}
+.btn__login {
+  border: 1px solid #0791D0;
+  color: #0791D0;
+}
+.btn__submit {
+  background-color: #0791D0;
+  color: white;
+  box-shadow: 0;
+  border: 0;
+  align-self: center;
+  font-size: 1.05rem;
+}
+.btn__back {
+  width: 7rem;
+  max-height: 2.5rem;
+  border: 1px solid #0791D0;
+  color: #0791D0;
+}
+.btn__logout {
+  width: 7rem;
+  height: 2.5rem;
+  border: 1px solid #0791D0;
+  color: #0791D0;
+}
+
+.form {
+  display: flex;
+  flex-flow: column wrap;
+  align-content: center;
+  justify-content: center;
+}
+.form__input {
+  width: 20rem;
+  height: 2rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+.form__input:focus {
+  border: 1px solid #0791D0;
+  outline: 0px;
+}
+
+.home {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+.home__btn {
+  margin-top: 3rem;
+}
+
+.registered__message {
+  margin-bottom: 1rem;
+}
+
+.panel {
+  width: 35rem;
+  height: 35rem;
+  border-radius: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin: 0 20px;
+  padding: 2rem;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  background-color: white;
+}
+.panel--hide {
+  display: none;
+}
+.panel--show {
+  display: flex;
+}
+.panel__header {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.panel__content {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.panel__alert {
+  width: 80%;
+  height: 2rem;
+  background-color: rgba(255, 0, 0, 0.4);
+  justify-self: flex-start;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 5px;
+  color: rgba(255, 0, 0, 0.7);
+}
+.panel__alert--hide {
+  visibility: hidden;
+}
+.panel__alert--show {
+  display: flex;
+}
+
+/*# sourceMappingURL=style.css.map */

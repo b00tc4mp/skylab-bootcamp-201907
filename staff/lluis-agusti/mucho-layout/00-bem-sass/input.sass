@@ -1,0 +1,286 @@
+body
+    box-sizing: border-box
+    margin: 0
+    border: 0
+    padding: 0
+    font-family: sans-serif
+    font-weight: 300
+    color: darkgray
+    
+a
+    text-decoration: none
+    color: darkgray
+
+.header
+    padding: 25px
+    
+    &__main
+        height: 40px
+        position: sticky
+        top: 0px
+        background-color: white
+        border-bottom: 1px solid darkgray
+        display: flex
+        justify-content: space-between
+
+    &__logo
+        margin: 0
+        padding: 0
+        max-width: 90px
+
+    &__text
+        display: none
+
+    &__menu--icon
+        align-self: center
+        max-width: 40px
+
+    &__menu--hidden
+        display: none
+
+    &__submenu
+        display: flex
+        justify-content: space-between
+        border-bottom: 1px solid darkgray
+
+    &__submenu--text
+        margin-left: 0
+
+    &__submenu--icon
+        width: 25px
+        height: 25px
+        margin-right: 7px
+        align-self: center
+
+    &__submenu--hidden
+        display: none
+
+.main
+    
+    &__content
+        padding: 5px
+
+    &__imagen
+        display: flex
+        justify-content: space-between
+        display: block
+        position: relative
+        margin: 0
+
+    &__reveal
+        position: absolute
+        top: 0
+        left: 0
+        z-index:-1
+
+    &__title
+        color: black
+        position: absolute
+        margin: 1em 0 0 1em
+        font-size: 1rem
+        width: 300px
+
+    &__subtitle
+        position: absolute
+        margin: 3em 0 0 1em
+        font-size: 1rem
+
+    &__figure
+        margin: 0 0 5px 0
+
+    &__img
+        display: block
+        width: 100%
+
+    &__article
+        margin-bottom: 5px
+        padding: 20px
+        min-height: 250px
+        background-color: white
+
+    &__article--title
+        color: red
+        margin: 1em 0 0 1em
+        font-size: 14px
+
+    &__article--text
+        color: black
+        margin: 1em 0 0 1em
+        font-size: 12px
+
+.footer
+
+    padding: 25px
+    &__address
+        font-style: normal
+        color: gray
+        padding: 5px
+
+    &__city--branch
+        display: flex
+        justify-content: space-between
+        flex-direction: column
+
+    &__branch--name
+        color: red
+        margin-bottom: 0
+
+    &__branch--info
+        margin: 0
+
+    &__social--media
+        margin-top: 2em
+        color: darkgray
+
+    &__list
+        display: flex
+        margin-left: 15px
+        padding: 0
+
+    &__list--item
+        padding-right: 15px
+        list-style: none
+
+    &__last--line
+        display: flex
+        color: darkgray
+
+    &__copyright
+        margin-right: 1em
+
+@media (min-width: 562px)
+
+    .header
+
+        &__main
+            border-bottom: none
+
+        &__menu--icon
+            display: none
+
+        &__menu--hidden
+            display: flex
+
+        &__menu--item
+            padding-left: 15px
+            list-style: none
+
+        &__sub
+            display: flex
+            justify-content: flex-end
+
+        &__submenu
+            border-bottom: none
+            margin-left: 1em
+
+        &__submenu--icon
+            margin-left: 10px
+
+    .footer
+
+        &__cities
+            display: flex
+            flex-wrap: wrap
+
+        &__city--branch
+            flex: 2 1 auto
+            width: 50%
+            height: 200px
+            flex-direction: column
+            justify-content: flex-start
+
+        &__bottom--section
+            display: flex
+            justify-content: space-between
+            flex-direction: row-reverse
+            margin-top: 2em
+
+        &__social--media
+            display: flex
+            margin: 0
+
+@media (min-width: 562px) and (max-width: 1024px)
+
+    .main
+
+        &__content
+            display: flex
+            flex-wrap: wrap
+
+        &__imagen
+            display: block
+            position: relative
+            max-width: 50%
+
+        &__figure
+            padding: 3px
+
+        &__article
+            margin: 3px
+            max-width: 45%
+
+    .footer__text
+        width: 65%
+        margin-bottom: 2em
+
+/* --------- header text change  --------- */
+@media (min-width: 1024px) and (max-width: 1460px)
+
+    .header__text
+        display: block
+        padding: 0
+        font-size: 14px
+
+/* --------- DESKTOP --------- */
+@media (min-width: 1024px)
+
+    .header__text
+        display: block
+        padding: 0
+        width: 30%
+
+    .main
+
+        &__content
+            padding: 5px
+            display: grid
+            grid-template-columns: 25% 25% 25% 25%
+            grid-template-rows: repeat(9, 1fr)
+            grid-auto-flow: dense
+
+        &__figure
+            margin: auto
+            padding: 3px
+
+        &__article
+            margin: 3px
+            min-height: auto
+
+    .footer
+
+        &__text
+        width: 50%
+
+        &__city--branch
+        width: auto
+        height: 200px
+
+    .img3
+        grid-row: span 2
+        grid-column: span 2
+        
+    .img5
+        grid-row: span 2
+        grid-column: span 2
+    
+    .img8
+        grid-row: span 2
+        grid-column: span 2
+        
+    .img11
+        grid-row: span 2
+        grid-column: span 2
+        
+    .img16
+        grid-row: span 2
+        grid-column: span 2

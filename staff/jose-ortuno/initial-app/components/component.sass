@@ -1,0 +1,43 @@
+.show
+    display: block
+    
+.hide
+    display: none
+
+%form
+    & label
+        display: none
+    & input
+        width: 80%
+        text-align: center
+        margin-bottom: 10px
+        padding: 10px
+        border: 1px solid $greyl
+        border-radius: 1rem
+        cursor: pointer
+        transition: 0.5s
+        &:focus
+            border: 1px solid $red
+            border-radius: 1rem
+            box-shadow: none
+            outline: 0px
+        &::placeholder
+            color: $greyl
+    & button
+        width: 80%
+        border-radius: 1rem
+        padding: 10px
+        background-color: $grey
+        color: $white
+        transition: 0.5s
+        &:hover
+            opacity: 0.6
+
+%buttons
+    border-radius: 1rem
+    padding: 10px
+    background-color: #95a5a6
+    color: #ecf0f1
+    transition: 0.5s
+    &:hover
+        opacity: 0.6

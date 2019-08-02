@@ -1,0 +1,198 @@
+/* --- MOBILE VERSION. First tries (flex). No BEM, no Sass. ---*/
+
+/* general */
+html {
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    font-family: sans-serif;
+    font-weight: 300;
+    color: darkgray;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: darkgray;
+}
+
+.hidden, .intro {
+    display: none;
+}
+
+
+/* header */
+header, footer {
+    padding: 25px;
+}
+.app-head {
+    height: 40px;
+    position: sticky;
+    top: 0px;
+    background-color: white;
+    border-bottom: 1px solid darkgray ;
+    display: flex;
+    justify-content: space-between;
+}
+
+header figure {
+    margin: 0;
+    padding: 0;
+    align-self: center; 
+}
+
+.mucho-logo {
+    margin: 0;
+    padding: 0;
+    max-width: 90px;
+}
+
+.menu-icon {
+    align-self: center;
+    max-width: 40px;
+}
+
+.submenu {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid darkgray ;
+}
+
+.submenu p {
+    margin-left: 0;
+}
+
+.submenu p:hover{
+    color: black;
+}
+
+.submenu-icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 7px;
+    align-self: center;
+}
+
+
+/* main */
+.main-content, address {
+    padding: 5px;
+}
+
+.imagen, .city-branch {
+    display: flex;
+    justify-content: space-between;
+}
+
+.imagen {
+    display: block;
+    position: relative;
+    margin: 0;
+}
+
+.imagen figure {
+    margin: 0 0 5px 0;
+}
+
+.imagen img {
+    display: block;
+    width: 100%;
+}
+
+.imagen img:hover {
+    opacity: 0.05;
+    transition: opacity 500ms;
+}
+
+.reveal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index:-1;
+}
+
+h1, h2 {
+    color: black;
+    display: block;
+    position: absolute;
+    margin: 1em 0 0 1em;
+    font-size: 1rem;
+    width: 300px;
+}
+
+h2 {
+    margin-top: 3em;
+    color: rgb(170, 170, 170)
+}
+
+article {
+    height: 300px;
+    margin: 5px;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+article p, h3 {
+    color: black;
+    margin: 1em 0 0 1em;
+}
+
+h3 {
+    color: red;
+}
+
+
+/* footer */
+address {
+    font-style: normal;
+    color: grey;
+}
+
+.city-branch {
+    flex-direction: column;
+}
+
+.city-branch h4 {
+    color: red;
+    margin-bottom: 0;
+}
+
+.city-branch p {
+    margin: 0;
+}
+
+.social-media {
+    margin-top: 2em;
+    color: darkgray;
+}
+
+.social-media ul {
+    display: flex;
+    padding: 0;
+}
+
+.social-media ul li {
+    padding-right: 15px;
+}
+
+.social-media img {
+    max-width: 15px;
+    height: 15px;
+}
+
+.last-line {
+    display: flex;
+    color: darkgray;
+}
+
+.last-line p {
+    padding-right: 15px;
+}

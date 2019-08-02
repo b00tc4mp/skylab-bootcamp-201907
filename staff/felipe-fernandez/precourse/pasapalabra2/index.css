@@ -1,0 +1,199 @@
+body {
+    background: lightblue;
+
+}
+#container {
+    
+    height: 95vh;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr; 
+    grid-template-rows: 0.5fr 1fr 1fr 1fr;
+    margin-top:1%;
+    
+}
+
+.item {
+    background: rgb(38, 165, 204);
+    color: rgb(19, 18, 18); 
+    
+}
+
+#rosco{
+    
+    grid-row: 2/5;
+
+}
+
+#botonesRosco{
+    
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
+    border: 1px solid rgba(50, 100, 141, 0.658);
+    
+}
+
+ #z{
+    grid-column: 3/5;
+
+}
+ 
+.letra{
+    background: rgb(179, 158, 175);
+    border: 1px solid rgb(14, 36, 23);
+    font-family: 'Russo One', sans-serif;
+}
+
+.paragrafoLetra{
+    text-align: center;
+   
+}
+
+#inputRespuestas{
+    grid-column:1/4;
+    display:none;
+}
+
+#enviar{
+    grid-column:4/5;
+    display:none;
+
+}
+#preguntas {
+    display: block;
+    grid-row: 2/4;
+    display: grid;
+    
+}
+
+#titulo {
+    grid-column:1/3;
+}
+#paragrafoTitulo{
+    
+    color:white;
+    text-align: center;
+    font-size: 38px;
+    font-family: 'Russo One', sans-serif;
+    
+}
+
+#pRules{
+    
+    margin-top:5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: justify;
+    font-size: 13px;
+    display: block;
+    font-family: 'Russo One', sans-serif;
+}
+
+#inputNombre{
+    display: block;
+    width:100px;
+    height: 30px;
+    margin: 10px auto;
+}
+
+#pNombre{
+    margin : 10px auto;
+    text-align: center;
+    font-size: 18px;
+    display: block;
+    font-family: 'Russo One', sans-serif;
+}
+#botonjugar{
+    display: none;
+    width:100px;
+    height: 50px;
+    margin: 0 auto;
+    background: rgb(179, 158, 175);
+    border: 1px solid grey;
+    font-size: 15px;
+    font-family: 'Russo One', sans-serif;
+    border-radius: 8px;
+}
+
+.letraActual{
+    background: rgb(11, 142, 185);
+}
+
+#score{
+    display: grid;
+    display:block;
+    grid-row: 4/4;
+}
+#scoringPoints{
+    margin: 10px auto;
+}
+
+#circleGreen{
+  height: 50px;
+  width: 50px;
+  background-color: rgb(154, 253, 97);
+  border-radius: 50%;
+  display: none; 
+  margin-top: 20px;
+  margin-left: 40%;
+  
+}
+
+
+#circleRed{
+    height: 50px;
+    width: 50px;
+    background-color: rgb(233, 77, 77);
+    border-radius: 50%;
+    display:none;
+    margin-top: 20px;
+    margin-left:  10px; 
+  }
+
+#correct{
+      text-align: center;
+      margin-top: 15px;
+  }
+
+#error{
+    text-align: center;
+    margin-top: 15px;
+} 
+
+#keepPlaying{
+    
+    text-align: center;
+    display: none;
+    position: absolute;
+    margin-left: 10%;
+    
+}
+#keepPlayingText{
+    text-align: center;
+    font-family: 'Russo One', sans-serif;
+}
+
+.buttonsKeepPlaying{
+  background-color: rgb(150, 182, 212);
+  border: none;
+  color: black;
+  padding:20px;
+  font-family: 'Russo One', sans-serif;
+  font-size: 15px;
+  border-radius: 8px;
+ 
+}
+
+
+#countdown{
+   
+    display:none;
+    font-family: 'Russo One', sans-serif;
+    padding:20px;
+    margin-top:10%;
+    margin-left:40%;
+    font-size: 35px;
+    border: 5px,  solid, rgb(150, 182, 212);
+}
