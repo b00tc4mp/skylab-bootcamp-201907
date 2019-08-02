@@ -134,9 +134,30 @@ describe('Curray', function () {
             expect(error.message, 'No se puede convertir a string un objeto null');
         });
 
-//****************************************************************************** */
 
     });
+
+
+
+
+
+    describe('flat', function(){
+        it('default', function(){
+            var curray = new Curray(1, 2, 3, new Curray('a', 'b', 'c', new Curray(true, false)));
+
+           var result=curray.flat()
+            var expected = [1, 2, 3, 'a', 'b', 'c', new Curray(true, false)];
+            // for (var i = 0; i < result; i++){
+            //     expect(result[i], expected[i]);
+            // }
+
+            result=Array.from(result);
+            expectArrays(result, expected);
+
+        })
+
+
+    })
 
 
 
