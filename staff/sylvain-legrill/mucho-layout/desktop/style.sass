@@ -1,0 +1,241 @@
+html
+    box-sizing: border-box
+
+
+
+body
+    margin: 0
+    border: 0
+    padding: 0
+    background-color: rgb(255,255,255)
+    font-family: Arial, Helvetica, sans-serif
+    font-weight: normal
+    line-height: 1.5
+    width: 100%
+
+
+.header
+   
+    background-color: rgb(255,255,255) 
+    padding: 14px 16px   
+    color: #AEAEAE
+    font-size: 14px
+    
+
+
+.header__logoimg
+    width: 100px
+    padding: 20px
+
+
+.header__bars
+    display: none
+
+
+.header__presentation
+    display: block
+    width:40%
+
+
+
+.header__nav
+    display: flex
+    justify-content: space-between
+ 
+
+.header__navigator--menulist
+    
+    display: flex
+    align-content: flex-end
+
+
+.header__navigator--menulist  li 
+
+
+    padding: 2%
+    list-style-type: none  
+
+    
+.header__navproject
+
+    display: none
+    justify-content: flex-end
+    margin-left: 1em
+    
+    
+
+.header__navproject--navservices , .header__navproject--navindustries
+    display: flex
+    align-items: center
+    margin: 2%
+    font-size: 14px
+
+
+
+.header__navproject i
+    margin-left: 10px
+
+
+
+
+
+
+
+.main
+   margin-left: 1%
+   margin-right: 1%
+    
+
+
+.main__imagecontainer 
+    display: grid
+    grid-template-columns: repeat( 3 , 1fr)
+    grid-template-rows: repeat(11, 1fr)
+    grid-gap: 3px
+    grid-auto-flow: dense
+    justify-items: stretch
+    align-items: stretch
+    position: relative
+    height: 100%
+  
+
+.main__imagecontainer img
+    margin: auto
+    max-width: 100%
+    max-height: 100%
+
+
+
+.main__imagecontainer img:hover
+    opacity: 0.05
+    transition: opacity 500ms
+
+
+.main__imagecontainer--imgD , .main__imagecontainer--imgG , .main__imagecontainer--imgJ , .main__imagecontainer--imgM, .main__imagecontainer--imgP
+    grid-column-start: span 2
+    grid-row-start: span 2
+
+
+
+
+
+
+
+ 
+  
+.main__mainarticles
+    display: grid
+    grid-template-columns: repeat( 3 , 1fr)
+    grid-gap: 3px
+    grid-auto-flow: dense
+  
+
+
+
+
+.main__mainarticles--wearemucho, .main__mainarticles--talkingandteaching, .main__mainarticles--about
+    
+    background-color: #F4F4F4
+    padding: 10px
+
+
+
+
+
+.main__mainarticles p
+    font-size: 20px
+    padding: 10px
+
+
+
+
+.main__mainarticles h2
+    color: #EC1C24
+    font-size: 20px
+    padding: 10px
+
+
+.main__mainarticles a
+    color: #AEAEAE
+    text-decoration: none
+
+
+
+.footer
+    margin-left: 1%
+    margin-right: 1%
+    color:#8a8888
+
+
+
+
+.footer__contact
+   
+    display: grid
+    grid-template-columns: repeat(2 , 1fr)
+    font-size: 22px
+    padding-top:100px
+    color:#555555
+    font-size: 20px
+
+
+.footer__addresses
+    display: grid
+    grid-template-columns: repeat(4 , 1fr)
+
+
+
+
+
+.footer__addresses .direction
+    font-size: 14px
+
+
+
+
+.footer__copyrightsuscribe
+    display: flex
+    flex-direction: row-reverse
+    justify-content: space-between
+    align-items: flex-end
+    color:#AEAEAE
+    font-size: 14px
+    
+
+
+
+
+
+
+.footer__copyrightsuscribe--subscribe
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: center
+    word-spacing: 2px
+
+
+
+.footer__copyrightsuscribe--subscribe i 
+    margin: 10px
+    font-size: 17px
+
+
+.footer h2
+    color: #EC1C24
+    font-size: 14px
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
