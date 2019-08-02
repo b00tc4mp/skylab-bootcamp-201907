@@ -1,0 +1,80 @@
+body {
+  font-family: Arial;
+  padding: 10px;
+  background-image: linear-gradient(to bottom right, red, yellow);
+    color: rgb(0, 0, 0);
+}
+
+a {
+    text-decoration: none; 
+    background-color: none;
+    color: rgb(0, 0, 0);
+}
+
+
+
+div {
+    border-radius: 15px;
+}
+
+.header {
+  padding: 10px;
+  font-size: 20px;
+  text-align: center;
+  background-image: linear-gradient(to bottom right, rgb(255, 255, 255), rgb(121, 121, 121));
+}
+
+.leftcolumn { 
+  float: left;
+  width: 70%;
+}
+
+.rightcolumn {
+  float: right;
+  width: 25%;
+  padding-left: 20px;
+}
+
+.card {
+  background-image: linear-gradient(to bottom right, rgb(255, 255, 255), rgb(121, 121, 121));
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.footer {
+  padding: 10px;
+  text-align: center;
+  background-image: linear-gradient(to bottom right, rgb(255, 255, 255), rgb(121, 121, 121));
+  margin-top: 20px;
+}
+
+.nav1 {
+    padding: 4px;
+    background-color: rgba(234, 238, 17, 0.486);
+    margin: 40px;
+    border-radius: 7px;
+    border: 1px solid rgba(100, 94, 94, 0.979);
+}
+
+.nav {
+    padding: 10px;
+    text-align: center;
+    background-image: linear-gradient(to bottom right, rgb(255, 255, 255), rgb(121, 121, 121));
+    margin-top: 20px;
+   
+  }
+
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn { 
+    width: 100%;
+    padding: 0;
+  }
+}
+
+
