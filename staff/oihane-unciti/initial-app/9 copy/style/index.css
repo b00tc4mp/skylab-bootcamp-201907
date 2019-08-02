@@ -1,0 +1,74 @@
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.landing, .login, .register, .register-success, .feedback, .search, .duck-home, .duck-results, .duck-detail {
+  padding: 0.5rem;
+  margin: 1.5rem;
+  border: 0.1rem solid gray;
+  border-radius: 1rem;
+  background-color: lightgray;
+}
+
+.landing {
+  background-color: yellow;
+}
+
+.login {
+  background-color: orange;
+}
+
+.register {
+  background-color: gold;
+}
+
+.register-success {
+  background-color: salmon;
+}
+
+.feedback--success {
+  background-color: greenyellow;
+}
+
+.feedback--warning {
+  background-color: yellow;
+}
+
+.feedback--error {
+  background-color: red;
+  color: white;
+}
+
+.search {
+  background-color: silver;
+}
+
+.duck-home {
+  background-color: greenyellow;
+}
+
+.duck-results {
+  background-color: skyblue;
+}
+
+.duck-results img {
+  width: 333px;
+}
+
+.duck-detail {
+  background-color: plum;
+}
+
+.duck-detail__photo {
+  width: 333px;
+}
+
+.duck-detail__price {
+  background-color: yellow;
+  color: red;
+}
+/*# sourceMappingURL=index.css.map */
