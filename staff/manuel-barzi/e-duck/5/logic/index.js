@@ -9,7 +9,7 @@ const logic = (() => {
 
     return {
         registerUser(name, surname, username, password, repassword, expression) {
-            validate.string(value, 'name')
+            validate.string(name, 'name')
             validate.string(surname, 'surname')
             validate.string(username, 'username')
             validate.email(username, 'username')
@@ -138,7 +138,7 @@ const logic = (() => {
                                     if (duck.error) expression(new Error(duck.error))
                                     else {
                                         favorites && (duck.favorite = favorites.includes(duckId))
-    
+
                                         expression(undefined, duck)
                                     }
                                 }
@@ -159,65 +159,99 @@ const logic = (() => {
             }
         },
 
-        toggleFavDuck(username, id, expression) {
-            // TODO validate args (type and content, where it applies)
+        toggleFavDuck(id, token, duckId, expression) {
+            validate.string(id, 'id')
+            validate.string(token, 'token')
+            validate.string(duckId, 'duck id')
+            validate.function(expression, 'expression')
 
-            const user = users.find(user => user.username === username)
-
-            if (!user) throw Error(`user with username ${username} not found`)
-
-            const { favorites } = user
-
-            const index = favorites.findIndex(favorite => favorite === id)
-
-            if (index > -1) {
-                favorites.splice(index, 1)
-
-                expression()
-            } else
-                call('http://duckling-api.herokuapp.com/api/ducks/' + id, error => {
-                    if (error)
-                        expression(new Error(`cannot retrieve duck with id ${id}`))
+            call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'get',
+                { 'authorization': `bearer ${token}` },
+                undefined,
+                (error, response) => {
+                    if (error) expression(error)
+                    else if (response.status === 'KO') expression(new Error(response.error))
                     else {
-                        favorites.push(id)
+                        const favorites = response.data.favorites
 
-                        expression()
+                        const index = favorites.findIndex(favorite => favorite === duckId)
+
+                        if (index > -1) {
+                            favorites.splice(index, 1)
+
+                            call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'put',
+                                { 'content-type': 'application/json', 'authorization': `bearer ${token}` },
+                                { favorites },
+                                (error, response) => {
+                                    if (error) expression(error)
+                                    else if (response.status === 'KO') expression(new Error(response.error))
+                                    else expression()
+                                }
+                            )
+                        } else
+                            call('http://duckling-api.herokuapp.com/api/ducks/' + duckId, undefined, undefined, undefined, (error, duck) => {
+                                if (error)
+                                    expression(new Error(`cannot retrieve duck with id ${duckId}`))
+                                else if (duck.error) expression(new Error(duck.error))
+                                else {
+                                    favorites.push(duckId)
+
+                                    call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'put',
+                                        { 'content-type': 'application/json', 'authorization': `bearer ${token}` },
+                                        { favorites },
+                                        (error, response) => {
+                                            if (error) expression(error)
+                                            else if (response.status === 'KO') expression(new Error(response.error))
+                                            else expression()
+                                        }
+                                    )
+                                }
+                            })
                     }
-                })
+                }
+            )
         },
 
-        retrieveFavoriteDucks(username, expression) {
-            // TODO valide args
+        retrieveFavoriteDucks(id, token, expression) {
+            validate.string(id, 'id')
+            validate.string(token, 'token')
+            validate.function(expression, 'expression')
 
-            const user = users.find(user => user.username === username)
+            call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'get',
+                { 'authorization': `bearer ${token}` },
+                undefined,
+                (error, response) => {
+                    if (error) expression(error)
+                    else if (response.status === 'KO') expression(new Error(response.error))
+                    else {
+                        const favorites = response.data.favorites
 
-            if (!user) throw Error(`user with username ${username} not found`)
+                        if (!favorites.length) expression(undefined, [])
+                        else {
+                            let count = 0
+                            const ducks = []
+                            let _error
 
-            const { favorites } = user
+                            favorites.forEach(id => {
+                                call('http://duckling-api.herokuapp.com/api/ducks/' + id, undefined, undefined, undefined, (error, duck) => {
+                                    if (error) {
+                                        if (!_error) _error = error
+                                    } else {
+                                        ducks.push(duck)
+                                    }
 
-            if (!favorites.length) expression([])
-            else {
-                let count = 0
-                const ducks = []
-                let _error
+                                    count++
 
-                favorites.forEach(id => {
-                    call('http://duckling-api.herokuapp.com/api/ducks/' + id, (error, duck) => {
-                        if (error) {
-                            if (!_error) _error = error
-                        } else {
-                            ducks.push(duck)
+                                    if (count === favorites.length) {
+                                        if (_error) expression(_error)
+                                        else expression(undefined, ducks)
+                                    }
+                                })
+                            })
                         }
-
-                        count++
-
-                        if (count === favorites.length) {
-                            if (_error) expression(_error)
-                            else expression(undefined, ducks)
-                        }
-                    })
-                })
-            }
+                    }
+                }
+            )
         }
     }
 })()
