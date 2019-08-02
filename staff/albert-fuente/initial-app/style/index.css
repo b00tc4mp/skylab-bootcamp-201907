@@ -1,0 +1,211 @@
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.duck-favourite, .duck-detail, .duck-results, .duck-home, .search, .feedback, .register-success, .register, .login, .landing {
+  padding: 0.5rem;
+  margin: 1.5rem;
+  border: 0.4rem solid gray;
+  border-radius: 1rem;
+  background-color: lightgray;
+}
+.landing {
+  padding: 40px;
+  margin-right: 60%;
+}
+
+.landing__button {
+  color: black;
+  text-decoration: none;
+  background-color: red;
+  padding: 2%;
+  border-radius: 10%;
+  border: 2px solid #333;
+}
+
+.login {
+  background-color: orange;
+  margin-right: 50%;
+}
+.login label {
+  padding-top: 10px;
+  font-weight: bold;
+}
+
+.login__button {
+  margin: 1%;
+  margin-left: 10%;
+  color: black;
+  text-decoration: none;
+  background-color: grey;
+  padding: 5px;
+  border: 2px solid #333;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.register {
+  background-color: gold;
+  margin-right: 50%;
+}
+
+.register__form {
+  display: grid;
+}
+.register__form label {
+  padding-top: 10px;
+  font-weight: bold;
+}
+
+.register__button {
+  margin: 1%;
+  margin-left: 20%;
+  margin-right: 20%;
+  color: black;
+  text-decoration: none;
+  background-color: grey;
+  padding: 5px;
+  border: 2px solid #333;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.register-success {
+  background-color: salmon;
+  margin-right: 50%;
+}
+
+.feedback--success {
+  background-color: greenyellow;
+}
+.feedback--warning {
+  background-color: yellow;
+}
+.feedback--error {
+  background-color: red;
+  color: white;
+}
+
+.search {
+  background-color: silver;
+  grid-area: search;
+}
+
+.duck-home {
+  background-color: greenyellow;
+}
+
+.mainGrid {
+  display: grid;
+  grid-template-areas: "results search" "results fav";
+}
+
+.duck-results {
+  background-color: skyblue;
+  grid-area: results;
+}
+
+ul {
+  widows: 95%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0%;
+}
+
+h3 {
+  max-width: 200px;
+  margin: 2%;
+  margin-bottom: 10%;
+  height: 1.9rem;
+}
+
+img {
+  max-width: 200px;
+  margin: 2%;
+  border: 2px solid black;
+  border-radius: 50%;
+}
+img:hover {
+  border: 2px solid red;
+  filter: invert(1);
+  transition: all 0.5s ease-out;
+  transform: rotate(360deg) scale(0.7);
+  transition: all 0.5s ease-out;
+  cursor: pointer;
+}
+
+li {
+  padding: 5px;
+  list-style-type: none;
+}
+
+.duck-detail {
+  background-color: plum;
+}
+.duck-detail__photo {
+  width: 333px;
+}
+.duck-detail__price {
+  background-color: #FF6000;
+  color: #ffffff;
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: 20px;
+  border-radius: 5%;
+}
+.duck-detail__fav {
+  background-color: transparent;
+  color: #888888;
+  border: 2px solid #888888;
+  background: none;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+}
+.duck-detail__fav:hover {
+  color: red;
+  border: 2px solid red;
+}
+.duck-detail a {
+  border: 2px solid black;
+  padding: 5px;
+  margin: 5px;
+  color: black;
+  border-radius: 20%;
+  text-decoration: none;
+  background: #ffff;
+  color: #333333;
+}
+.duck-detail a:hover {
+  background: #333333;
+  color: #ffffff;
+}
+
+.duck-favourite {
+  background-color: lightblue;
+  grid-area: fav;
+}
+
+body {
+  font-family: cursive;
+  background-image: url("https://images.pexels.com/photos/226597/pexels-photo-226597.jpeg?cs=srgb&dl=bath-ducks-bathroom-bathtub-226597.jpg&fm=jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  font-family: "Farro", sans-serif;
+  background-color: black;
+  height: 100vh;
+}
+
+h1 {
+  font-size: 3rem;
+  text-align: center;
+  color: #ED091C;
+}
+
+/*# sourceMappingURL=index.css.map */

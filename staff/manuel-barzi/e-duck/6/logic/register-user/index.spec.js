@@ -1,7 +1,7 @@
 {
     const { random } = Math
 
-    describe('register user', () => {
+    describe('logic - register user', () => {
         let user
 
         beforeEach(() => {
