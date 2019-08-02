@@ -1,0 +1,36 @@
+@mixin  easeIn
+    transition: all 0.5s ease-out
+@mixin filter
+    filter: invert(1)
+.duck-results
+    @extend %panel
+
+    background-color: skyblue
+    grid-area: results
+
+ul
+    widows: 95%
+    display: flex
+    flex-wrap: wrap
+    padding: 0%
+h3 
+    max-width: 200px
+    margin:2%
+    margin-bottom: 10%
+    height: 1.9rem
+
+img
+    max-width: 200px
+    margin:2%
+    border: 2px solid black
+    border-radius: 50%
+    &:hover
+            border: 2px solid red
+            @include filter
+            @include easeIn
+            transform: rotate(360deg) scale(0.7)
+            @include easeIn
+            cursor: pointer
+li 
+    padding: 5px
+    list-style-type: none

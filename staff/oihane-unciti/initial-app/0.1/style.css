@@ -1,0 +1,21 @@
+.panel {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.panel--show {
+    display: block;
+}
+
+.panel--hide {
+    display: none;
+}
+
+.letter--hide{
+    display : none;
+}
+
+.letter--show {
+    display: block;
+    color :red;
+}
