@@ -67,7 +67,7 @@ describe('logic', () => {
         it('should fail on non-valid username', () => {
             expect(() => {
                 logic.registerUser('Manuel', 'Barzi', 'manuelbarzi#gmail.com', '123', '123', () => { })
-            }).toThrowError(Error, 'username is not valid')
+            }).toThrowError(Error, 'username with value manuelbarzi#gmail.com is not a valid e-mail')
         })
 
         it('should fail on non-matching re-password', () => {
@@ -131,7 +131,7 @@ describe('logic', () => {
         it('should fail on non-valid username', () => {
             expect(() => {
                 logic.authenticateUser('manuelbarzi#gmail.com', '123', () => { })
-            }).toThrowError(Error, 'username is not valid')
+            }).toThrowError(Error, 'username with value manuelbarzi#gmail.com is not a valid e-mail')
         })
 
         // TODO test more cases
@@ -223,21 +223,21 @@ describe('logic', () => {
         })
 
         it('should fail on undefined query', () => {
-            expect(() => logic.searchDucks(undefined, undefined)).toThrowError(TypeError, `undefined is not a string`)
+            expect(() => logic.searchDucks()).toThrowError(TypeError, `query with value undefined is not a string`)
         })
 
         it('should fail on undefined expression', () => {
-            expect(() => logic.searchDucks(undefined, undefined, 'something')).toThrowError(TypeError, `undefined is not a function`)
+            expect(() => logic.searchDucks(undefined, undefined, 'something')).toThrowError(TypeError, `expression with value undefined is not a function`)
         })
 
         // TODO test more cases
 
-        fdescribe('when user already has favorite ducks', () => {
+        describe('when user already has favorite ducks', () => {
             let data
 
             beforeEach(done => {
                 user.favorites.push('5c3853aebd1bde8520e66e99', '5c3853aebd1bde8520e66e8a', '5c3853aebd1bde8520e66e70')
-                
+
                 call('https://skylabcoders.herokuapp.com/api/user', 'post',
                     { 'content-type': 'application/json' },
                     user,
@@ -261,7 +261,7 @@ describe('logic', () => {
                 )
             })
 
-            fit('should succeed on matching criteria', done => {
+            it('should succeed on matching criteria', done => {
                 const query = 'white' // 12 results
 
                 logic.searchDucks(data.id, data.token, query, (error, ducks) => {
@@ -324,7 +324,7 @@ describe('logic', () => {
 
         describe('when user already has a favorite duck', () => {
             const id = '5c3853aebd1bde8520e66e97'
-            
+
             let data
 
             beforeEach(done => {
@@ -385,84 +385,145 @@ describe('logic', () => {
     })
 
     describe('toggle favorite duck', () => {
-        let name, surname, username, password
+        const id = '5c3853aebd1bde8520e66e97'
 
-        beforeEach(() => {
-            users = new Array
+        let data
 
-            name = `n-${random()}`
-            surname = `s-${random()}`
-            username = `e-${random()}@mail.com`
-            password = `p-${random()}`
+        beforeEach(done => {
+            call('https://skylabcoders.herokuapp.com/api/user', 'post',
+                { 'content-type': 'application/json' },
+                user,
+                (error, response) => {
+                    if (error) done(error)
+                    else if (response.status === 'KO') done(new Error(response.error))
+                    else call('https://skylabcoders.herokuapp.com/api/auth', 'post',
+                        { 'content-type': 'application/json' },
+                        { username: user.username, password: user.password },
+                        (error, response) => {
+                            if (error) done(error)
+                            else if (response.status === 'KO') done(new Error(response.error))
+                            else {
+                                data = response.data
 
-            users.push({ name, surname, username, password, favorites: new Array })
+                                done()
+                            }
+                        }
+                    )
+                }
+            )
         })
 
         it('should succeed on correct duck id', done => {
-            const id = '5c3853aebd1bde8520e66ee8'
-
-            logic.toggleFavDuck(username, id, error => {
+            logic.toggleFavDuck(data.id, data.token, id, error => {
                 expect(error).toBeUndefined()
 
-                const { favorites } = users.find(user => user.username === username)
-                expect(favorites.length).toBe(1)
+                call(`https://skylabcoders.herokuapp.com/api/user/${data.id}`, 'get',
+                    { 'authorization': `bearer ${data.token}` },
+                    undefined,
+                    (error, response) => {
+                        if (error) done(error)
+                        else if (response.status === 'KO') done(new Error(response.error))
+                        else {
+                            const user = response.data
 
-                const favorite = favorites[0]
-                expect(favorite).toBe(id)
+                            expect(user.id).toBe(data.id)
 
-                done()
+                            const { favorites } = user
+                            expect(favorites).toBeDefined()
+                            expect(favorites.length).toBe(1)
+
+                            const [favorite] = favorites
+                            expect(favorite).toBe(id)
+
+                            done()
+                        }
+                    }
+                )
             })
         })
 
-        it('should fail on non existing username', () => {
-            username = 'invalid@mail.com'
+        // TODO refactor
+        // it('should fail on non existing id', () => {
+        //     expect(() => logic.toggleFavDuck('invalid-id', data.token, id, () => {}))
+        //         .toThrowError(Error, `user with username ${username} not found`)
+        // })
 
-            expect(() => logic.toggleFavDuck(username))
-                .toThrowError(Error, `user with username ${username} not found`)
-        })
+        // TODO refactor
+        // it('should fail non existing duck id', done => {
+        //     const id = '5c3853aebd1bde8520e66ff9'
 
-        it('should fail non existing duck id', done => {
-            const id = '5c3853aebd1bde8520e66ff9'
+        //     logic.toggleFavDuck(username, id, error => {
+        //         expect(error).toBeDefined()
 
-            logic.toggleFavDuck(username, id, error => {
-                expect(error).toBeDefined()
+        //         const { message } = error
+        //         expect(message).toBe(`cannot retrieve duck with id ${id}`)
 
-                const { message } = error
-                expect(message).toBe(`cannot retrieve duck with id ${id}`)
-
-                done()
-            })
-        })
+        //         done()
+        //     })
+        // })
 
         // TODO test more cases
 
         describe('when duck already in favorites', () => {
-            let name, surname, username, password, favorites, duckId, user
+            const id = '5c3853aebd1bde8520e66e97'
 
-            beforeEach(() => {
-                users = new Array
+            let data
 
-                name = `n-${random()}`
-                surname = `s-${random()}`
-                username = `e-${random()}@mail.com`
-                password = `p-${random()}`
-                favorites = new Array
-                duckId = '5c3853aebd1bde8520e66ee8'
+            beforeEach(done => {
+                user = {
+                    name: 'John-' + random(),
+                    surname: 'Doe-' + random(),
+                    username: 'johndoe-' + random() + '@mail.com',
+                    password: '123-' + random(),
+                    favorites: [id]
+                }
 
-                favorites.push(duckId)
+                call('https://skylabcoders.herokuapp.com/api/user', 'post',
+                    { 'content-type': 'application/json' },
+                    user,
+                    (error, response) => {
+                        if (error) done(error)
+                        else if (response.status === 'KO') done(new Error(response.error))
+                        else call('https://skylabcoders.herokuapp.com/api/auth', 'post',
+                            { 'content-type': 'application/json' },
+                            { username: user.username, password: user.password },
+                            (error, response) => {
+                                if (error) done(error)
+                                else if (response.status === 'KO') done(new Error(response.error))
+                                else {
+                                    data = response.data
 
-                user = { name, surname, username, password, favorites }
-
-                users.push(user)
+                                    done()
+                                }
+                            }
+                        )
+                    }
+                )
             })
 
-            it('should succeed on matching duck id', done => {
-                logic.toggleFavDuck(username, duckId, error => {
+            it('should succeed on correct duck id', done => {
+                logic.toggleFavDuck(data.id, data.token, id, error => {
                     expect(error).toBeUndefined()
 
-                    expect(favorites.length).toBe(0)
+                    call(`https://skylabcoders.herokuapp.com/api/user/${data.id}`, 'get',
+                        { 'authorization': `bearer ${data.token}` },
+                        undefined,
+                        (error, response) => {
+                            if (error) done(error)
+                            else if (response.status === 'KO') done(new Error(response.error))
+                            else {
+                                const user = response.data
 
-                    done()
+                                expect(user.id).toBe(data.id)
+
+                                const { favorites } = user
+                                expect(favorites).toBeDefined()
+                                expect(favorites.length).toBe(0)
+
+                                done()
+                            }
+                        }
+                    )
                 })
             })
 
@@ -470,26 +531,41 @@ describe('logic', () => {
         })
     })
 
-    xdescribe('retrieve favorite ducks', () => {
-        let name, surname, username, password
+    describe('retrieve favorite ducks', () => {
+        let data
 
-        beforeEach(() => {
-            users = new Array
+        beforeEach(done => {
+            user.favorites.push('5c3853aebd1bde8520e66e97', '5c3853aebd1bde8520e66ee8', '5c3853aebd1bde8520e66ec4')
 
-            name = `n-${random()}`
-            surname = `s-${random()}`
-            username = `e-${random()}@mail.com`
-            password = `p-${random()}`
+            call('https://skylabcoders.herokuapp.com/api/user', 'post',
+                { 'content-type': 'application/json' },
+                user,
+                (error, response) => {
+                    if (error) done(error)
+                    else if (response.status === 'KO') done(new Error(response.error))
+                    else call('https://skylabcoders.herokuapp.com/api/auth', 'post',
+                        { 'content-type': 'application/json' },
+                        { username: user.username, password: user.password },
+                        (error, response) => {
+                            if (error) done(error)
+                            else if (response.status === 'KO') done(new Error(response.error))
+                            else {
+                                data = response.data
 
-            users.push({ name, surname, username, password, favorites: new Array('5c3853aebd1bde8520e66ee8', '5c3853aebd1bde8520e66ec4') })
+                                done()
+                            }
+                        }
+                    )
+                }
+            )
         })
 
         it('should succeed on previously added fav ducks', done => {
-            logic.retrieveFavoriteDucks(username, (error, ducks) => {
+            logic.retrieveFavoriteDucks(data.id, data.token, (error, ducks) => {
                 expect(error).toBeUndefined()
 
                 expect(ducks).toBeDefined()
-                expect(ducks.length).toBe(2)
+                expect(ducks.length).toBe(3)
 
                 ducks.forEach(({ id, title, imageUrl, price, description, link }) => {
                     expect(id).toBeDefined()
@@ -499,10 +575,8 @@ describe('logic', () => {
                     expect(description).toBeDefined()
                     expect(link).toBeDefined()
 
-                    const { favorites } = users[0]
-                    const _id = favorites.find(fav => fav === id)
-                    expect(_id).toBeDefined()
-                    expect(_id).toBe(id)
+                    const { favorites } = user
+                    expect(favorites.includes(id)).toBeTruthy()
                 })
 
                 done()
