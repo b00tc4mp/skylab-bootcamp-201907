@@ -4,7 +4,4 @@
  * Business Logic
  */
 
-const logic = (() => ({
-
-
-}))()
+const logic = {}

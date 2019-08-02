@@ -1,4 +1,7 @@
 {
+
+    const { random } = Math
+
     describe('logic', () => {
         let user
 
