@@ -28,10 +28,9 @@ class Landing extends Component {
             const { id, token } = credentials
 
             try {
-                logic.retrieveUser(id, token, (error, user) => {
-                    if (error) this.setState({ error: error.message })
-                    else this.setState({ user })
-                })
+                logic.retrieveUser(id, token)
+                    .then(user => this.setState({ user }))
+                    .catch(({ message }) => this.setState({ error: message }))
             } catch ({ message }) {
                 this.setState({ error: message })
             }
