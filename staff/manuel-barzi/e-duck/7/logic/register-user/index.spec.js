@@ -1,7 +1,7 @@
 {
     const { random } = Math
 
-    describe('logic - register user', () => {
+    fdescribe('logic - register user', () => {
         let user, data
 
         beforeEach(() => {
@@ -39,23 +39,23 @@
                 .catch(error => expect(error).toBeUndefined())
         )
 
-        it('should fail on empty name', () => {
-            expect(() => {
+        it('should fail on empty name', () =>
+            expect(() =>
                 logic.registerUser('', 'Barzi', 'manuelbarzi@gmail.com', '123', '123')
-            }).toThrowError(Error, 'name is empty or blank')
-        })
+            ).toThrowError(Error, 'name is empty or blank')
+        )
 
-        it('should fail on non-valid username', () => {
-            expect(() => {
+        it('should fail on non-valid username', () =>
+            expect(() =>
                 logic.registerUser('Manuel', 'Barzi', 'manuelbarzi#gmail.com', '123', '123')
-            }).toThrowError(Error, 'username with value manuelbarzi#gmail.com is not a valid e-mail')
-        })
+            ).toThrowError(Error, 'username with value manuelbarzi#gmail.com is not a valid e-mail')
+        )
 
-        it('should fail on non-matching re-password', () => {
-            expect(() => {
+        it('should fail on non-matching re-password', () =>
+            expect(() =>
                 logic.registerUser('Manuel', 'Barzi', 'manuelbarzi@gmail.com', '123', '456')
-            }).toThrowError(Error, 'passwords do not match')
-        })
+            ).toThrowError(Error, 'passwords do not match')
+        )
 
         // TODO test more cases
 

@@ -1,7 +1,7 @@
 {
     const { random } = Math
 
-   describe('logic - authenticate user', () => {
+    fdescribe('logic - authenticate user', () => {
         let user
 
         beforeEach(() => {
@@ -28,20 +28,19 @@
                     expect(id).toBeDefined()
                     expect(token).toBeDefined()
                 })
-
         )
 
-        it('should fail on empty username', () => {
-            expect(() => {
+        it('should fail on empty username', () =>
+            expect(() =>
                 logic.authenticateUser('', user.password)
-            }).toThrowError(Error, 'username is empty or blank')
-        })
+            ).toThrowError(Error, 'username is empty or blank')
+        )
 
-        it('should fail on non-valid username', () => {
-            expect(() => {
+        it('should fail on non-valid username', () =>
+            expect(() =>
                 logic.authenticateUser('manuelbarzi#gmail.com', '123')
-            }).toThrowError(Error, 'username with value manuelbarzi#gmail.com is not a valid e-mail')
-        })
+            ).toThrowError(Error, 'username with value manuelbarzi#gmail.com is not a valid e-mail')
+        )
 
         // TODO test more cases
     })

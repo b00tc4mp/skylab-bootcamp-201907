@@ -1,10 +1,10 @@
 {
     const { random } = Math
 
-    describe('logic - retrieve user', () => {
+    fdescribe('logic - retrieve user', () => {
         let user, data
 
-        beforeEach(done => {
+        beforeEach(() => {
             user = {
                 name: 'John-' + random(),
                 surname: 'Doe-' + random(),
@@ -19,8 +19,9 @@
                     else return call('https://skylabcoders.herokuapp.com/api/auth', 'post', { 'content-type': 'application/json' }, { username: user.username, password: user.password })
                 })
                 .then(response => {
-                    if (response.status === 'KO') done(new Error(response.error))
-                    else return response.data
+                    if (response.status === 'KO') throw new Error(response.error)
+
+                    data = response.data
                 })
         })
 
@@ -38,9 +39,9 @@
         )
 
         it('should fail on empty id', () =>
-            expect(() => {
+            expect(() =>
                 logic.retrieveUser('', 'a-token')
-            }).toThrowError(Error, 'id is empty or blank')
+            ).toThrowError(Error, 'id is empty or blank')
         )
 
         // TODO test more cases
