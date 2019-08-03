@@ -41,19 +41,19 @@
 
         it('should fail on empty name', () => {
             expect(() => {
-                logic.registerUser('', 'Barzi', 'manuelbarzi@gmail.com', '123', '123', () => { })
+                logic.registerUser('', 'Barzi', 'manuelbarzi@gmail.com', '123', '123')
             }).toThrowError(Error, 'name is empty or blank')
         })
 
         it('should fail on non-valid username', () => {
             expect(() => {
-                logic.registerUser('Manuel', 'Barzi', 'manuelbarzi#gmail.com', '123', '123', () => { })
+                logic.registerUser('Manuel', 'Barzi', 'manuelbarzi#gmail.com', '123', '123')
             }).toThrowError(Error, 'username with value manuelbarzi#gmail.com is not a valid e-mail')
         })
 
         it('should fail on non-matching re-password', () => {
             expect(() => {
-                logic.registerUser('Manuel', 'Barzi', 'manuelbarzi@gmail.com', '123', '456', () => { })
+                logic.registerUser('Manuel', 'Barzi', 'manuelbarzi@gmail.com', '123', '456')
             }).toThrowError(Error, 'passwords do not match')
         })
 
