@@ -4,7 +4,7 @@
     describe('logic - retrieve user', () => {
         let user, data
 
-        beforeEach(done => {
+        beforeEach(() => {
             user = {
                 name: 'John-' + random(),
                 surname: 'Doe-' + random(),
@@ -13,30 +13,26 @@
                 favorites: []
             }
 
-            call('https://skylabcoders.herokuapp.com/api/user', 'post',
-                { 'content-type': 'application/json' },
-                user,
-                (error, response) => {
-                    if (error) done(error)
-                    else if (response.status === 'KO') done(new Error(response.error))
-                    else call('https://skylabcoders.herokuapp.com/api/auth', 'post',
-                        { 'content-type': 'application/json' },
-                        { username: user.username, password: user.password },
-                        (error, response) => {
-                            if (error) done(error)
-                            else if (response.status === 'KO') done(new Error(response.error))
-                            else {
-                                data = response.data
-
-                                done()
-                            }
-                        }
-                    )
-                }
-            )
+            return call('https://skylabcoders.herokuapp.com/api/user', 'post',
+                { 'content-type': 'application/json' }, user)
+                .then(response => {
+                    if (response === 'KO') throw new Error(response.error)
+                    else {
+                        return call('https://skylabcoders.herokuapp.com/api/auth', 'post',
+                            { 'content-type': 'application/json' },
+                            { username: user.username, password: user.password })
+                            .then(response => {
+                                if (response === 'KO') throw new Error(response.error)
+                                else {
+                                    data = response.data
+                                }
+                            })
+                    }
+                })
         })
 
-        it('should succeed on matching user with username', done => {
+
+        fit('should succeed on matching user with username', () => {
             expect(() => logic.retrieveUser(data.id, data.token, (error, _user) => {
                 expect(error).toBeUndefined()
 
@@ -48,11 +44,11 @@
                 expect(username).toBe(user.username)
                 expect(password).toBeUndefined()
 
-                done()
+
             })).not.toThrow()
         })
 
-        it('should fail on empty id', () => {
+        fit('should fail on empty id', () => {
             expect(() => {
                 logic.retrieveUser('', 'a-token', () => { })
             }).toThrowError(Error, 'id is empty or blank')

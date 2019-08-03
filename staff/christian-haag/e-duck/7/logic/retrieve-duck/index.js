@@ -1,4 +1,4 @@
-logic.retrieveDuck = function(id, token, duckId, expression) {
+logic.retrieveDuck = function (id, token, duckId, expression) {
     let favorites
 
     if (id != undefined && token != undefined) {
@@ -7,16 +7,15 @@ logic.retrieveDuck = function(id, token, duckId, expression) {
         validate.string(duckId, 'duck id')
         validate.function(expression, 'expression')
 
-        call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'get',
+        return call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'get',
             { 'authorization': `bearer ${token}` },
-            undefined,
-            (error, response) => {
-                if (error) expression(error)
-                else if (response.status === 'KO') expression(new Error(response.error))
+            undefined)
+            .then(response => {
+                if (response.status === 'KO') throw new Error(response.error)
                 else {
                     favorites = response.data.favorites
 
-                    call('http://duckling-api.herokuapp.com/api/ducks/' + duckId, 'get', undefined, undefined, (error, duck) => {
+                    return call('http://duckling-api.herokuapp.com/api/ducks/' + duckId, 'get', undefined, undefined, (error, duck) => {
                         if (error)
                             expression(new Error(`cannot retrieve duck with id ${duckId}`))
                         else {
@@ -28,14 +27,18 @@ logic.retrieveDuck = function(id, token, duckId, expression) {
                             }
                         }
                     })
+
                 }
-            }
-        )
+            })
+
+
+
+
     } else {
         validate.string(duckId, 'duck id')
         validate.function(expression, 'expression')
 
-        call('http://duckling-api.herokuapp.com/api/ducks/' + duckId, undefined, undefined, undefined, (error, duck) => {
+        return call('http://duckling-api.herokuapp.com/api/ducks/' + duckId, undefined, undefined, undefined, (error, duck) => {
             if (error)
                 expression(new Error(`cannot retrieve duck with id ${duckId}`))
             else if (duck.error) expression(new Error(duck.error))
