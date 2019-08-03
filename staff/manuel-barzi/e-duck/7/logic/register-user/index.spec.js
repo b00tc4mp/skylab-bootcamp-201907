@@ -36,7 +36,6 @@
                     expect(_user.favorites).toBeDefined()
                     expect(_user.favorites).toEqual(user.favorites)
                 })
-                .catch(error => expect(error).toBeUndefined())
         )
 
         it('should fail on empty name', () =>
