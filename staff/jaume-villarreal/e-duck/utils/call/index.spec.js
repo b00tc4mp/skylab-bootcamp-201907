@@ -1,40 +1,31 @@
 describe('call', () => {
     describe('post', () => {
-        it('should succeed on coherent data', done => {
-            call('https://skylabcoders.herokuapp.com/api/user', 'post', { 'content-type': 'application/json' }, {
+        it('should succeed on coherent data', () => {
+            return call('https://skylabcoders.herokuapp.com/api/user', 'post', { 'content-type': 'application/json' }, {
                 username: `pepito-${Math.random()}`,
                 password: 'grillo'
-            }, (error, response) => {
-                expect(error).toBeUndefined()
-                expect(response).toBeDefined()
-
-                done()
             })
+                .then(res => expect(res).toBeDefined())
+                .catch(error => expect(error).toBeUndefined())
         })
     })
 
     describe('get', () => {
-        it('should succeed on coherent data', done => {
-            call('https://duckling-api.herokuapp.com/api/search?q=green', 'get', undefined, undefined, (error, response) => {
-                expect(error).toBeUndefined()
-                expect(response).toBeDefined()
-
-                done()
-            })
+        it('should succeed on coherent data', () => {
+            return call('https://duckling-api.herokuapp.com/api/search?q=green', 'get', undefined, undefined)
+                .then(res => expect(res).toBeDefined())
+                .catch(error => expect(error).toBeUndefined())
         })
     })
 
     describe('put', () => {
-        it('should succeed on coherent data', done => {
-            call('https://reqres.in/api/users/2', 'put', undefined, {
+        it('should succeed on coherent data', () => {
+            return call('https://reqres.in/api/users/2', 'put', undefined, {
                 "name": "morpheus",
                 "job": "zion resident"
-            }, (error, response) => {
-                expect(error).toBeUndefined()
-                expect(response).toBeDefined()
-
-                done()
             })
+                .then(res => expect(res).toBeDefined())
+                .catch(error => expect(error).toBeUndefined())
         })
     })
 

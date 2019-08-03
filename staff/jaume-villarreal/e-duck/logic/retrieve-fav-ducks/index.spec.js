@@ -1,8 +1,10 @@
 {
-    describe("logic - retrieve user" , () => {
-        let user
+    const { random } = Math
 
-        beforeEach((done => {
+    describe('logic - retrieve favorite ducks', () => {
+        let user, data
+
+        beforeEach(done => {
             user = {
                 name: 'John-' + random(),
                 surname: 'Doe-' + random(),
@@ -10,6 +12,8 @@
                 password: '123-' + random(),
                 favorites: []
             }
+
+            user.favorites.push('5c3853aebd1bde8520e66e97', '5c3853aebd1bde8520e66ee8', '5c3853aebd1bde8520e66ec4')
 
             call('https://skylabcoders.herokuapp.com/api/user', 'post',
                 { 'content-type': 'application/json' },
@@ -34,30 +38,30 @@
             )
         })
 
-        it('should succeed on correct data', done => {
-            expect(() => logic.authenticateUser(user.username, user.password, (error, data) => {
+        it('should succeed on previously added fav ducks', done => {
+            logic.retrieveFavDucks(data.id, data.token, (error, ducks) => {
                 expect(error).toBeUndefined()
 
-                expect(data).toBeDefined()
+                expect(ducks).toBeDefined()
+                expect(ducks.length).toBe(3)
 
-                const { id, token } = data
-                expect(id).toBeDefined()
-                expect(token).toBeDefined()
+                ducks.forEach(({ id, title, imageUrl, price, description, link, favorite }) => {
+                    expect(id).toBeDefined()
+                    expect(title).toBeDefined()
+                    expect(imageUrl).toBeDefined()
+                    expect(price).toBeDefined()
+                    expect(description).toBeDefined()
+                    expect(link).toBeDefined()
+                    expect(favorite).toBeTruthy()
+
+                    const { favorites } = user
+                    expect(favorites.includes(id)).toBeTruthy()
+                })
 
                 done()
-            })).not.toThrow()
+            })
         })
 
-        it('should fail on empty username', () => {
-            expect(() => {
-                logic.authenticateUser('', user.password, () => { })
-            }).toThrowError(Error, 'username is empty or blank')
-        })
-
-        it('should fail on non-valid username', () => {
-            expect(() => {
-                logic.authenticateUser('manuelbarzi#gmail.com', '123', () => { })
-            }).toThrowError(Error, 'username with value manuelbarzi#gmail.com is not a valid e-mail')
-        })
-    ) 
+        // TODO test more cases
+    })
 }
