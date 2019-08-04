@@ -6,10 +6,10 @@ function DuckDetail({ duck: { id, title, imageUrl, price, description, link, fav
         <FavButton active={favorite} onToggle={() => onToggle(id)}/>
         <p>{description}</p>
         <a href={link}>Go to store</a>
-        <a href="" onClick={ event => {
+        {onBack && <a href="" onClick={ event => {
             event.preventDefault()
 
             onBack()
-        }}>Go back</a>
+        }}>Go back</a>}
     </>
 }
