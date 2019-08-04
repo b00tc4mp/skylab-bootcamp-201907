@@ -50,11 +50,6 @@
             expect(() => logic.searchDucks()).toThrowError(TypeError, `query with value undefined is not a string`)
         })
 
-        it('should fail on undefined expression', () => {
-            expect(() => logic.searchDucks(undefined, undefined, 'something')).toThrowError(TypeError, `expression with value undefined is not a function`)
-        })
-
-        // TODO test more cases
 
         describe('when user already has favorite ducks', () => {
             let data
