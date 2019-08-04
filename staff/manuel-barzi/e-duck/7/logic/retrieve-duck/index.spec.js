@@ -4,7 +4,7 @@
     describe('logic - retrieve duck', () => {
         let user
 
-        beforeEach(() => {
+        beforeEach(() =>
             user = {
                 name: 'John-' + random(),
                 surname: 'Doe-' + random(),
@@ -12,35 +12,29 @@
                 password: '123-' + random(),
                 favorites: []
             }
-        })
+        )
 
-        it('should succeed on valid duck id', done => {
+        it('should succeed on valid duck id', () => {
             const id = '5c3853aebd1bde8520e66ee8'
 
-            logic.retrieveDuck(undefined, undefined, id, (error, duck) => {
-                expect(error).toBeUndefined()
-
-                expect(duck).toBeDefined()
-                expect(duck.id).toBe(id)
-                expect(duck.title).toBeDefined()
-                expect(duck.imageUrl).toBeDefined()
-                expect(duck.price).toBeDefined()
-                expect(duck.link).toBeDefined()
-                expect(duck.favorite).toBeUndefined()
-
-                done()
-            })
+            return logic.retrieveDuck(undefined, undefined, id)
+                .then(duck => {
+                    expect(duck).toBeDefined()
+                    expect(duck.id).toBe(id)
+                    expect(duck.title).toBeDefined()
+                    expect(duck.imageUrl).toBeDefined()
+                    expect(duck.price).toBeDefined()
+                    expect(duck.link).toBeDefined()
+                    expect(duck.favorite).toBeUndefined()
+                })
         })
 
-        it('should fail on non valid duck id', done => {
+        it('should fail on non valid duck id', () => {
             const id = '5c3853aebd1bde8520e66ff9'
 
-            logic.retrieveDuck(undefined, undefined, id, (error, duck) => {
-                expect(error).toBeDefined()
-                expect(duck).toBeUndefined()
-
-                done()
-            })
+            return logic.retrieveDuck(undefined, undefined, id)
+                .then(duck => expect(duck).toBeUndefined())
+                .catch(error => expect(error).toBeDefined())
         })
 
         // TODO test more cases
@@ -50,57 +44,41 @@
 
             let data
 
-            beforeEach(done => {
+            beforeEach(() => {
                 user.favorites.push(id)
 
-                call('https://skylabcoders.herokuapp.com/api/user', 'post',
-                    { 'content-type': 'application/json' },
-                    user,
-                    (error, response) => {
-                        if (error) done(error)
-                        else if (response.status === 'KO') done(new Error(response.error))
-                        else call('https://skylabcoders.herokuapp.com/api/auth', 'post',
-                            { 'content-type': 'application/json' },
-                            { username: user.username, password: user.password },
-                            (error, response) => {
-                                if (error) done(error)
-                                else if (response.status === 'KO') done(new Error(response.error))
-                                else {
-                                    data = response.data
+                return call('https://skylabcoders.herokuapp.com/api/user', 'post', { 'content-type': 'application/json' }, user)
+                    .then(response => {
+                        if (response.status === 'KO') throw new Error(response.error)
 
-                                    done()
-                                }
-                            }
-                        )
-                    }
-                )
+                        return call('https://skylabcoders.herokuapp.com/api/auth', 'post', { 'content-type': 'application/json' }, { username: user.username, password: user.password })
+                            .then(response => {
+                                if (response.status === 'KO') throw new Error(response.error)
+
+                                data = response.data
+                            })
+                    })
             })
 
-            it('should succeed on valid id', done => {
-                logic.retrieveDuck(data.id, data.token, id, (error, duck) => {
-                    expect(error).toBeUndefined()
+            it('should succeed on valid id', () =>
+                logic.retrieveDuck(data.id, data.token, id)
+                    .then(duck => {
+                        expect(duck).toBeDefined()
+                        expect(duck.id).toBe(id)
+                        expect(duck.title).toBeDefined()
+                        expect(duck.imageUrl).toBeDefined()
+                        expect(duck.price).toBeDefined()
+                        expect(duck.link).toBeDefined()
+                        expect(duck.favorite).toBeTruthy()
+                    })
+            )
 
-                    expect(duck).toBeDefined()
-                    expect(duck.id).toBe(id)
-                    expect(duck.title).toBeDefined()
-                    expect(duck.imageUrl).toBeDefined()
-                    expect(duck.price).toBeDefined()
-                    expect(duck.link).toBeDefined()
-                    expect(duck.favorite).toBeTruthy()
-
-                    done()
-                })
-            })
-
-            it('should fail on non valid id', done => {
+            it('should fail on non valid id', () => {
                 const id = '5c3853aebd1bde8520e66ff9'
 
-                logic.retrieveDuck(data.id, data.token, id, (error, duck) => {
-                    expect(error).toBeDefined()
-                    expect(duck).toBeUndefined()
-
-                    done()
-                })
+                return logic.retrieveDuck(data.id, data.token, id)
+                    .then(duck => expect(duck).toBeUndefined())
+                    .catch(error => expect(error).toBeDefined())
             })
 
             // TODO test more cases
