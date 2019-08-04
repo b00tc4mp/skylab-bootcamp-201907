@@ -1,42 +1,20 @@
-logic.retrieveFavDucks = function(id, token, expression) {
+logic.retrieveFavDucks = function (id, token) {
     validate.string(id, 'id')
     validate.string(token, 'token')
-    validate.function(expression, 'expression')
 
-    call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'get',
-        { 'authorization': `bearer ${token}` },
-        undefined,
-        (error, response) => {
-            if (error) expression(error)
-            else if (response.status === 'KO') expression(new Error(response.error))
-            else {
-                const favorites = response.data.favorites
+    return call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'get', { 'authorization': `bearer ${token}` }, undefined)
+        .then(response => {
+            if (response.status === 'KO') throw new Error(response.error)
 
-                if (!favorites.length) expression(undefined, [])
-                else {
-                    let count = 0
-                    const ducks = []
-                    let _error
+            const favorites = response.data.favorites
 
-                    favorites.forEach(id => {
-                        call('http://duckling-api.herokuapp.com/api/ducks/' + id, undefined, undefined, undefined, (error, duck) => {
-                            if (error) {
-                                if (!_error) _error = error
-                            } else {
-                                duck.favorite = true
-                                ducks.push(duck)
-                            }
+            if (!favorites.length) return []
 
-                            count++
+            const calls = favorites.map(id =>
+                call(`http://duckling-api.herokuapp.com/api/ducks/${id}`, undefined, undefined, undefined)
+                    .then(duck => (duck.favorite = true) && duck)
+            )
 
-                            if (count === favorites.length) {
-                                if (_error) expression(_error)
-                                else expression(undefined, ducks)
-                            }
-                        })
-                    })
-                }
-            }
-        }
-    )
+            return Promise.all(calls)
+        })
 }
