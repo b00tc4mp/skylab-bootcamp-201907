@@ -1,10 +1,10 @@
 {
     const { random } = Math
 
-    fdescribe('logic - register user', () => {
+    describe('logic - register user', () => {
         let user, data
 
-        beforeEach(() => {
+        beforeEach(() =>
             user = {
                 name: 'John-' + random(),
                 surname: 'Doe-' + random(),
@@ -12,7 +12,7 @@
                 password: '123-' + random(),
                 favorites: []
             }
-        })
+        )
 
         it('should succeed on correct data', () =>
             logic.registerUser(user.name, user.surname, user.username, user.password, user.password)
