@@ -24,10 +24,9 @@ class App extends Component {
 
     handleRegister(name, surname, email, password, repassword) {
         try {
-            logic.registerUser(name, surname, email, password, repassword, error => {
-                if (error) this.setState({ error: message })
-                else this.setState({ view: 'register-success' })
-            })
+            logic.registerUser(name, surname, email, password, repassword)
+            .then(() => this.setState({ view: 'register-success' }))
+            .catch(({message}) => this.setState({ error: message }))
         } catch ({ message }) {
             this.setState({ error: message })
         }
@@ -39,10 +38,9 @@ class App extends Component {
 
     handleLogin(email, password) {
         try {
-            logic.authenticateUser(email, password, (error, credentials) => {
-                if (error) this.setState({ error: error.message })
-                else this.setState({ view: 'landing', credentials })
-            })
+            logic.authenticateUser(email, password)
+                .then(credentials => this.setState({ view: 'landing', credentials }))
+                .catch(({ message }) => this.setState({ error: message }))
         } catch ({ message }) {
             this.setState({ error: message })
         }
