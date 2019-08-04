@@ -4,9 +4,9 @@
     describe('logic - toggle favorite duck', () => {
         const duckId = '5c3853aebd1bde8520e66e97'
 
-        let user, data
+        let user, credentials
 
-        beforeEach(done => {
+        beforeEach(() => {
             user = {
                 name: 'John-' + random(),
                 surname: 'Doe-' + random(),
@@ -15,43 +15,29 @@
                 favorites: []
             }
 
-            call('https://skylabcoders.herokuapp.com/api/user', 'post',
-                { 'content-type': 'application/json' },
-                user,
-                (error, response) => {
-                    if (error) done(error)
-                    else if (response.status === 'KO') done(new Error(response.error))
-                    else call('https://skylabcoders.herokuapp.com/api/auth', 'post',
-                        { 'content-type': 'application/json' },
-                        { username: user.username, password: user.password },
-                        (error, response) => {
-                            if (error) done(error)
-                            else if (response.status === 'KO') done(new Error(response.error))
-                            else {
-                                data = response.data
+            return call('https://skylabcoders.herokuapp.com/api/user', 'post', { 'content-type': 'application/json' }, user)
+                .then(response => {
+                    if (response.status === 'KO') throw new Error(response.error)
 
-                                done()
-                            }
-                        }
-                    )
-                }
-            )
+                    return call('https://skylabcoders.herokuapp.com/api/auth', 'post', { 'content-type': 'application/json' }, { username: user.username, password: user.password })
+                        .then(response => {
+                            if (response.status === 'KO') throw new Error(response.error)
+
+                            credentials = response.data
+                        })
+                })
         })
 
-        it('should succeed on correct duck id', done => {
-            logic.toggleFavDuck(data.id, data.token, duckId, error => {
-                expect(error).toBeUndefined()
+        it('should succeed on correct duck id', () =>
+            logic.toggleFavDuck(credentials.id, credentials.token, duckId)
+                .then(() =>
+                    call(`https://skylabcoders.herokuapp.com/api/user/${credentials.id}`, 'get', { 'authorization': `bearer ${credentials.token}` }, undefined)
+                        .then(response => {
+                            if (response.status === 'KO') throw new Error(response.error)
 
-                call(`https://skylabcoders.herokuapp.com/api/user/${data.id}`, 'get',
-                    { 'authorization': `bearer ${data.token}` },
-                    undefined,
-                    (error, response) => {
-                        if (error) done(error)
-                        else if (response.status === 'KO') done(new Error(response.error))
-                        else {
                             const user = response.data
 
-                            expect(user.id).toBe(data.id)
+                            expect(user.id).toBe(credentials.id)
 
                             const { favorites } = user
                             expect(favorites).toBeDefined()
@@ -59,13 +45,9 @@
 
                             const [favorite] = favorites
                             expect(favorite).toBe(duckId)
-
-                            done()
-                        }
-                    }
+                        })
                 )
-            })
-        })
+        )
 
         // TODO refactor
         // it('should fail on non existing id', () => {
@@ -74,7 +56,7 @@
         // })
 
         // TODO refactor
-        // it('should fail non existing duck id', done => {
+        // it('should fail non existing duck id', () => {
         //     const id = '5c3853aebd1bde8520e66ff9'
 
         //     logic.toggleFavDuck(username, id, error => {
@@ -92,9 +74,9 @@
         describe('when duck already in favorites', () => {
             const id = '5c3853aebd1bde8520e66e97'
 
-            let data
+            let credentials
 
-            beforeEach(done => {
+            beforeEach(() => {
                 user = {
                     name: 'John-' + random(),
                     surname: 'Doe-' + random(),
@@ -103,54 +85,36 @@
                     favorites: [id]
                 }
 
-                call('https://skylabcoders.herokuapp.com/api/user', 'post',
-                    { 'content-type': 'application/json' },
-                    user,
-                    (error, response) => {
-                        if (error) done(error)
-                        else if (response.status === 'KO') done(new Error(response.error))
-                        else call('https://skylabcoders.herokuapp.com/api/auth', 'post',
-                            { 'content-type': 'application/json' },
-                            { username: user.username, password: user.password },
-                            (error, response) => {
-                                if (error) done(error)
-                                else if (response.status === 'KO') done(new Error(response.error))
-                                else {
-                                    data = response.data
+                return call('https://skylabcoders.herokuapp.com/api/user', 'post', { 'content-type': 'application/json' }, user)
+                    .then(response => {
+                        if (response.status === 'KO') throw new Error(response.error)
 
-                                    done()
-                                }
-                            }
-                        )
-                    }
-                )
+                        return call('https://skylabcoders.herokuapp.com/api/auth', 'post', { 'content-type': 'application/json' }, { username: user.username, password: user.password })
+                            .then(response => {
+                                if (response.status === 'KO') throw new Error(response.error)
+
+                                credentials = response.data
+                            })
+                    })
             })
 
-            it('should succeed on correct duck id', done => {
-                logic.toggleFavDuck(data.id, data.token, id, error => {
-                    expect(error).toBeUndefined()
+            it('should succeed on correct duck id', () =>
+                logic.toggleFavDuck(credentials.id, credentials.token, id)
+                    .then(() =>
+                        call(`https://skylabcoders.herokuapp.com/api/user/${credentials.id}`, 'get', { 'authorization': `bearer ${credentials.token}` }, undefined)
+                            .then(response => {
+                                if (response.status === 'KO') throw new Error(response.error)
 
-                    call(`https://skylabcoders.herokuapp.com/api/user/${data.id}`, 'get',
-                        { 'authorization': `bearer ${data.token}` },
-                        undefined,
-                        (error, response) => {
-                            if (error) done(error)
-                            else if (response.status === 'KO') done(new Error(response.error))
-                            else {
                                 const user = response.data
 
-                                expect(user.id).toBe(data.id)
+                                expect(user.id).toBe(credentials.id)
 
                                 const { favorites } = user
                                 expect(favorites).toBeDefined()
                                 expect(favorites.length).toBe(0)
-
-                                done()
-                            }
-                        }
+                            })
                     )
-                })
-            })
+            )
 
             // TODO test more cases
         })
