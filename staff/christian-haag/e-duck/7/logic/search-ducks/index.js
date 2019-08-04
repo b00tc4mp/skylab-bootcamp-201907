@@ -13,28 +13,28 @@ logic.searchDucks = function (id, token, query) {
                 if (response.status === 'KO') throw new Error(response.error)
                 else {
                     favorites = response.data.favorites
-                    return call('http://duckling-api.herokuapp.com/api/search?q=' + query, 'get', undefined, undefined)
-                        .then(response => {
-                            if (response.error) throw new Error(response.error)
-                            else if (favorites) {
-                                ducks.forEach(duck => duck.favorite = favorites.includes(duck.id))
+                    return call(`http://duckling-api.herokuapp.com/api/search?q=${query}`, 'get', undefined, undefined)
+                        .then(ducks => {
+                            if (ducks.error) return []
+                            else {
+                                favorites && ducks.forEach(duck => duck.favorite = favorites.includes(duck.id))
+
+                                return ducks
                             }
                         })
                 }
             })
-            .catch(() => new Error(`fail search with criteria ${query}`))
-
-
     } else {
         validate.string(query, 'query', false)
 
-        return call('http://duckling-api.herokuapp.com/api/search?q=' + query, 'get', undefined, undefined)
+        return call(`http://duckling-api.herokuapp.com/api/search?q=${query}`, 'get', undefined, undefined)
             .then(ducks => {
                 if (ducks.error) return []
-                else return ducks
-            })
-            .catch(error => error)
 
+                favorites && ducks.forEach(duck => duck.favorite = favorites.includes(duck.id))
+
+                return ducks
+            })
     }
 }
 

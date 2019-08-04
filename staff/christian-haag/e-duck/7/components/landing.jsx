@@ -42,14 +42,10 @@ class Landing extends Component {
         let id, token
         credentials && (id = credentials.id, token = credentials.token)
 
-        try {
-            this.setState({ query: query })
-            logic.searchDucks(id, token, query)
-                .then(ducks => this.setState({ ducks }))
-                .catch(({ message }) => this.setState({ error: message }))
-        } catch ({ message }) {
-            this.setState({ error: message })
-        }
+
+        logic.searchDucks(id, token, query)
+            .then(ducks => this.setState({ ducks, query }))
+            .catch(({ message }) => this.setState({ error: message }))
     }
 
 
@@ -57,13 +53,10 @@ class Landing extends Component {
         const { props: { credentials } } = this
         let id, token
         credentials && (id = credentials.id, token = credentials.token)
-        try {
-            logic.retrieveDuck(id, token, duckId)
-                .then(duckId => this.setState({ duck: duckId }))
-                .catch(({ message }) => this.setState({ error: message }))
-        } catch ({ message }) {
-            this.setState({ error: message })
-        }
+
+        logic.retrieveDuck(id, token, duckId)
+            .then(duck => this.setState({ duck }))
+            .catch(({ message }) => this.setState({ error: message }))
 
     }
 
@@ -77,14 +70,10 @@ class Landing extends Component {
         const { state: { query, ducks }, props: { credentials } } = this
         let id, token
         credentials && (id = credentials.id, token = credentials.token)
-        try {
-            logic.searchDucks(id, token, query)
-                .then(() => this.setState({ ducks, duck: undefined }))
-                .catch(({ message }) => this.setState({ error: message }))
-        } catch ({ message }) {
-            this.setState({ error: message })
-        }
 
+        logic.searchDucks(id, token, query)
+            .then(ducks => this.setState({ ducks, duck: undefined }))
+            .catch(({ message }) => this.setState({ error: message }))
     }
 
     handleLogin(event) {
@@ -98,7 +87,7 @@ class Landing extends Component {
 
         const { props: { onLogout } } = this
 
-        this.setState({ user: undefined }, () => onLogout())
+        this.setState({ user: undefined, view: 'search' }, () => onLogout())
     }
 
     handleToggleFavDuckFromDuckItem(duckId) {
@@ -106,44 +95,30 @@ class Landing extends Component {
         let id, token
         credentials && (id = credentials.id, token = credentials.token)
 
-        try {
+        if (credentials)
             logic.toggleFavDuck(id, token, duckId)
-                .then(() => {
-                    if (credentials) return handleSearch(query)
-                    else {
-                        onLogin()
-                    }
-                })
+                .then(() => handleSearch(query))
                 .catch(({ message }) => this.setState({ error: message }))
-        } catch ({ message }) {
-            this.setState({ error: message })
+        else {
+            onLogin()
         }
+
     }
 
-    //     credentials ? logic.toggleFavDuck(id, token, duckId, () => handleSearch(query)) : onLogin()
-    // }
 
     handleToggleFavDuckFromDuckDetail(duckId) {
         const { props: { onLogin, credentials }, handleRetrieveDuck } = this
         let id, token
         credentials && (id = credentials.id, token = credentials.token)
 
-        try {
+        if (credentials)
             logic.toggleFavDuck(id, token, duckId)
-                .then(() => {
-                    if (credentials) return handleRetrieveDuck(duckId)
-                    else {
-                        onLogin()
-                    }
-                })
+                .then(() => handleRetrieveDuck(duckId))
                 .catch(({ message }) => this.setState({ error: message }))
-
-        } catch ({ message }) {
-            this.setState({ error: message })
+        else {
+            onLogin()
         }
     }
-    //     credentials ? logic.toggleFavDuck(id, token, duckId, () => handleRetrieveDuck(duckId)) : onLogin()
-    // }
 
     handleAcceptError() {
         this.setState({ error: undefined })
@@ -154,15 +129,12 @@ class Landing extends Component {
         const { props: { credentials } } = this
         let id, token
         credentials && (id = credentials.id, token = credentials.token)
-        try {
-            logic.retrieveFavDucks(id, token)
-                .then(() => this.setState({ view: 'favorites', favs }))
-                .catch(({ message }) => this.setState({ error: message }))
-        } catch ({ message }) {
-            this.setState({ error: message })
-        }
 
+        logic.retrieveFavDucks(id, token)
+            .then(favs => this.setState({ view: 'favorites', favs }))
+            .catch(({ message }) => this.setState({ error: message }))
     }
+
 
     handleGoToSearch(event) {
         event.preventDefault()
@@ -172,12 +144,16 @@ class Landing extends Component {
 
     handleToggleFavDuckFromFavorites(duckId) {
         const { props: { onLogin, credentials }, handleFavorites } = this
-
         let id, token
-
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.toggleFavDuck(id, token, duckId, () => handleFavorites()) : onLogin()
+        if (credentials)
+            logic.toggleFavDuck(id, token, duckId)
+                .then(() => handleFavorites())
+                .catch(({ message }) => this.setState({ error: message }))
+        else {
+            onLogin()
+        }
     }
 
     render() {

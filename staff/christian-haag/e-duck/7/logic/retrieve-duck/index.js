@@ -14,25 +14,24 @@ logic.retrieveDuck = function (id, token, duckId) {
                 if (response.status === 'KO') throw new Error(response.error)
                 else {
                     favorites = response.data.favorites
-                    return call('http://duckling-api.herokuapp.com/api/ducks/' + duckId, 'get', undefined, undefined)
+                    return call(`http://duckling-api.herokuapp.com/api/ducks/${duckId}`, 'get', undefined, undefined)
+
                 }
             })
-            .then(response => {
-                if (response.error) throw new Error(response.error)
-                else if (favorites) {
-                    duck.favorite = favorites.includes(duckId)
-                }
+            .then(duck => {
+                if (duck.error) throw new Error(duck.error)
+                favorites && (duck.favorite = favorites.includes(duckId))
+
+                return duck
             })
-            .catch(() => new Error(`cannot retrieve duck with id ${duckId}`))
 
     } else {
         validate.string(duckId, 'duck id')
 
         return call('http://duckling-api.herokuapp.com/api/ducks/' + duckId, undefined, undefined, undefined)
             .then(duck => {
-                if (duck.error) return duck.error
-                else return duck
+                if (duck.error) throw new Error(duck.error)
+                return duck
             })
-
     }
 }

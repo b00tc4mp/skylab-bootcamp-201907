@@ -8,6 +8,6 @@ logic.authenticateUser = function (username, password) {
         { username, password })
         .then(response => {
             if (response.status === 'KO') throw new Error(response.error)
-            else return response.data
+            return response.data
         })
 }

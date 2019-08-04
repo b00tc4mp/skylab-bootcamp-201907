@@ -7,7 +7,7 @@ logic.retrieveUser = function (id, token) {
         undefined)
         .then(response => {
             if (response.status === 'KO') throw new Error(response.error)
-            else return response.data
+            return response.data
         })
 
 }
