@@ -18,6 +18,10 @@ class App extends Component {
         this.setState({view: 'landing'})
     }
 
+    handleGoToSignUp() {
+
+    }
+
     handleSubmitRegister(name, surname, email, password, repassword){
         try {
             logic.registerUser(name, surname, email, password, repassword, error =>{
@@ -43,11 +47,15 @@ class App extends Component {
         }
 
 
+    handleLogin() {
+
+    }
+
     render() {
         const { state: { view, credentials, error }, handleBackToLanding, handleLogin, handleSubmitRegister, handleGoToLogin, handleGoToSignUp } = this
 
         return <>
-        {view === 'landing' && <Landing onLogin={handleGoToLogin}/>}
+        {view === 'landing' && <Landing mainView={this.state.view} onLogin={handleGoToLogin}/>}
         {view === 'login' && <Login onClose={handleBackToLanding} onLogin={handleLogin} error={error} toSignUp= {handleGoToSignUp}/>}
         {view === 'register' && <SignUp onClose={handleBackToLanding} onSignUp={handleSubmitRegister} error ={error} toLogin ={handleGoToLogin}/>}
         </>
