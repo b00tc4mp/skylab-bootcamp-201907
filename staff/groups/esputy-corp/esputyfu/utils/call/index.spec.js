@@ -1,4 +1,5 @@
 describe('call', () => {
+    const token = "BQBAdGDhnFod3hcCk9-dfogDRZZwuvixpun5AwLqG0XopMJqPNxxX9d7hxU0_OpJTeqz3L5fh9IlcIXRXVM"
 
     // xdescribe('api spotify get token', () => { // NOT POSSIBLE TO GET TOKEN FROM BROWSER FOR SECURITY REASONS AS CLIENT CREDENTIALS ARE SENT IN PLAIN TEXT
 
@@ -19,24 +20,33 @@ describe('call', () => {
     // })
     
     describe('api spotify get tracks', () => {
-        const token = "BQBe_1I2EcsHumCDavWtWXHjcMBHrvS6w81ajt8w_W0n3pV2SEgQ0mfhDEtoYaS10-Nz5VTa91Q6mFrYHvA"
+
         const query = 'wonderwall'
         const types = 'track'
+        const api = 'spotify'
 
-        it('should succeed on correct data', done => {
-            return call(`https://api.spotify.com/v1/search?q=${query}&type=${types}`,
+        it('should succeed on correct data', () => 
+            call(`https://api.spotify.com/v1/search?q=${query}&type=${types}`,
             'get', 
             { 'Authorization': `Bearer ${token}` }, 
-            undefined)
+            undefined,
+            api)
 
             .then(res => {
                 expect(res).toBeDefined()
                 expect(res.tracks.items.length).toBe(20)
-                done()
             })
             .catch(error => expect(error).toBeUndefined())
-        })
+        )
 
+        it('should throw error on wrong method (spotify api only accepts "get")', () => 
+            expect(() => 
+                call(`https://api.spotify.com/v1/search?q=${query}&type=${types}`,
+                'post', 
+                { 'Authorization': `Bearer ${token}` }, 
+                undefined,
+                api)).toThrowError(Error, 'method with value post does not match one of the expected values: get'))
+            
     })
 
 })
