@@ -43,10 +43,10 @@
 
 
         describe('logic - search movies - user with favorites', () => {
+            let data
             let user
 
             beforeEach(() => {
-            
                 user = {
                     name: 'John-' + random(),
                     surname: 'Doe-' + random(),
@@ -55,12 +55,52 @@
                     favorites: []
                 }
             
-                return call(url, 'post', { 'content-type': 'application/json' }, user)
-                    .then(response => {
-                        if (response.status === 'KO') throw new Error(response.error)
-                    })
+                return call('https://skylabcoders.herokuapp.com/api/user', 'post',
+                    { 'content-type': 'application/json' }, user)
+                        .then(() => call('https://skylabcoders.herokuapp.com/api/auth', 'post',
+                            { 'content-type': 'application/json' },
+                            { username: user.username, password: user.password }))
+                        .then(response => {
+                            if (response.status === 'KO') throw new Error(response.error)
+                            else data = response.data
+                        })
+                        .catch(error => error)
             })
 
+            fit('should succeed on matching criteria', () => {
+            const query = 'train' // 20 results
+
+            logic.searchMovies(data.id, data.token, query)
+                .then(movies => {
+                    expect(movies).toBeDefined()
+                    expect(movies instanceof Array).toBeTruthy()
+                    expect(movies.length).toBe(20)
+
+                    let favorites = 0
+
+                    movies.forEach(movie => {
+                        expect(movie.vote_count).toBeDefined()
+                        expect(movie.id).toBeDefined()
+                        expect(movie.video).toBeDefined()
+                        expect(movie.title).toBeDefined()
+                        expect(movie.popularity).toBeDefined()
+                        expect(movie.poster_path).toBeDefined()
+                        expect(movie.original_language).toBeDefined()
+                        expect(movie.original_title).toBeDefined()
+                        expect(movie.genre_ids).toBeDefined()
+                        expect(movie.backdrop_path).toBeDefined()
+                        expect(movie.adult).toBeDefined()
+                        expect(movie.overview).toBeDefined()
+                        expect(movie.release_date).toBeDefined()
+
+                        movie.favorite && favorites++
+                    })
+
+                    expect(favorites).toBe(user.favorites.length)
+                })
+                .catch(error => expect(error).toBeDefined())
+            })
         })
+
     })
 }
