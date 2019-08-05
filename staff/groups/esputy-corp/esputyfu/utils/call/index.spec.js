@@ -1,5 +1,4 @@
 describe('call', () => {
-    const token = "BQBAdGDhnFod3hcCk9-dfogDRZZwuvixpun5AwLqG0XopMJqPNxxX9d7hxU0_OpJTeqz3L5fh9IlcIXRXVM"
 
     // xdescribe('api spotify get token', () => { // NOT POSSIBLE TO GET TOKEN FROM BROWSER FOR SECURITY REASONS AS CLIENT CREDENTIALS ARE SENT IN PLAIN TEXT
 
