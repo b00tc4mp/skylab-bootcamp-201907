@@ -1,4 +1,4 @@
-Components
+﻿Components
 
 App
 
@@ -18,20 +18,29 @@ App
   Submit
   Back
 
-/////
-
 - Search
-  Form
-  Submit
-
-  Random Meal
-  By name
-  Categories
-  Multi ingredient
-  Main ingredient
 
 - Results
 
 - Recipe
 
 - Recipe detail
+
+LOGIC
+
+    Register User
+    Authenticate User
+
+    Search
+
+    By name
+    https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata
+
+    By category
+    https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood
+
+    By main ingredient
+    https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast
+
+    TODO - By multi ingredient
+    https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast,garlic,salt
