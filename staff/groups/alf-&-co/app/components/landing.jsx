@@ -5,14 +5,61 @@ class Landing extends Component {
         super()
 
         this.state = { view: 'collections', search: false, query: undefined, movies: [], movie: undefined, error: undefined, user: undefined, favs: [] }
-    }
 
+        this.handleGoToFavorites=this.handleGoToFavorites.bind(this)
+        this.handleGoToCollections=this.handleGoToCollections.bind(this)
+        this.handleLogout=this.handleLogout.bind(this)
+        this.handleGoToSearch=this.handleGoToSearch.bind(this)
+        this.handleGoToLogin=this.handleGoToLogin.bind(this)
+        this.handleSearch=this.handleSearch.bind(this)
+        this.handleRetrieveMovie=this.handleRetrieveMovie.bind(this)
+        this.handleToggleFavMovieFromMovieDetail=this.handleToggleFavMovieFromMovieDetail.bind(this)
+        this.handleBackFromDetail=this.handleBackFromDetail.bind(this)
+        this.handleToggleFavMovieFromMovieItem=this.handleToggleFavMovieFromMovieItem.bind(this)
+    }
+handleGoToFavorites(){
+
+}
+handleGoToCollections(){
+
+}
+handleLogout(){
+
+}
+handleGoToSearch(){
+
+}
+handleGoToLogin(){
+
+}
+handleSearch(){
+
+}
+handleRetrieveMovie(){
+
+}
+handleToggleFavMovieFromMovieDetail(){
+
+}
+handleBackFromDetail(){
+
+}
+handleToggleFavMovieFromMovieItem(){
+
+}
 /* Handlers */
 
 
 
 /* Render */
     render() {
+        const {
+            state: { view, search, movie, movies, query, error, user, favs },
+            handleSearch, handleRetrieveMovie, handleLogout,
+            handleBackFromDetail, handleGoToSearch, handleGoToLogin,
+            handleToggleFavMovieFromMovieItem, handleToggleFavMovieFromMovieDetail, handleGoToCollections, handleGoToFavorites
+        } = this
+
         return <>
             <header>
                 <nav>
@@ -34,7 +81,7 @@ class Landing extends Component {
                 {search && <Search onSearch={handleSearch}></Search>}
 
                 {/* Default view on landing <main>. Displays collections of movies. */}
-                {view === 'collections' && <Collections></Collections>}
+                {/* view === 'collections' && <Collections></Collections> */}
                     {/* This should go into Collection component */}
                     {/* <ul>
                         <li><a href="" onClick={handleGoToFavorites}>Action</a></li>

@@ -15,6 +15,10 @@ class App extends Component {
     handleBackToLanding(){
         this.setState({view: 'landing'})
     }
+    
+    handleLogin(){
+       
+    }
 
     handleSubmitRegister(name, surname, email, password, repassword){
         try {
@@ -27,6 +31,9 @@ class App extends Component {
         }
     }
     handleGoToLogin(){
+        this.setState({view: 'login'})
+    }
+    handleGoToSignUp(){
         this.setState({view: 'login'})
     }
 
