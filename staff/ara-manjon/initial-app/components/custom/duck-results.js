@@ -23,7 +23,7 @@ class DuckResults extends Results {
         li.appendChild(img)
 
         const fav = document.createElement('button')
-        fav.innerText = 'Add to Favorite'
+        fav.innerText = 'Add to Fav'
 
         li.appendChild(fav)
 
