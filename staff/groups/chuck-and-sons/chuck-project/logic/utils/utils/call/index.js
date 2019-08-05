@@ -1,7 +1,7 @@
 function call(url , method = 'get' , headers , body){
-    validate.string(url , 'string')
+    validate.str(url , 'string')
     validate.url(url , 'url')
-    validate.string(method , 'method' , true , ['get' , 'post' , 'put' , 'patch' , 'delete'])
+    validate.str(method , 'method' , true , ['get' , 'post' , 'put' , 'patch' , 'delete'])
 
     return fetch(url , {
         method,
