@@ -4,7 +4,7 @@ class Landing extends Component {
     constructor() {
         super()
 
-        this.state = { view: 'collections', search: false, query: undefined, movies: [], movie: undefined, error: undefined, user: undefined, favs: [] }
+        this.state = { view: '', search: false, query: undefined, movies: [], movie: undefined, error: undefined, user: undefined, favs: [] }
 
         this.handleGoToFavorites=this.handleGoToFavorites.bind(this)
         this.handleGoToCollections=this.handleGoToCollections.bind(this)
@@ -47,7 +47,8 @@ class Landing extends Component {
     }
 
 
-    handleRetrieveMovie(){
+    handleRetrieveMovie(id){
+        console.log(id)
 
     }
 

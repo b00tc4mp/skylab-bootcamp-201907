@@ -13,12 +13,12 @@ function Login (props){
             <button>Login</button>
 
         </form>
-        <FeedBack message={error}/>
+        {/*<FeedBack message={error}/>
         <a href="" onClick={event=>{
             event.preventDefault()
 
             onclose()
 
-        }}></a>
+        }}></a>*/}
     </>
 }
