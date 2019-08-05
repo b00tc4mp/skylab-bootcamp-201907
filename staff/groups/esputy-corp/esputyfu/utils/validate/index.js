@@ -22,6 +22,3 @@ const validate = (() => {
         }
     }
 })()
-
-if (!URL_REGEX.test(target)) throw new Error(`${name} with value ${target} is not a valid URL`)
-if (method === undefined) throw new Error('method argument is undefined')
