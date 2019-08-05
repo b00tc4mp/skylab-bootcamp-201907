@@ -1,11 +1,12 @@
 logic.registerUser = function(name , surname , username , password, repassword) {
-    validate.string(name , 'name')
-    validate.string(surname , 'surname')
-    validate.string(username , 'username')
+    validate.str(name , 'name')
+    validate.str(surname , 'surname')
+    validate.str(username , 'username')
     validate.email(username , 'username')
-    validate.string(password , 'password')
+    validate.str(password , 'password')
+    validate.str(repassword , 'repassword')
 
-    if(password !== repassword) throw Error ("password doesn't match")
+    if(password !== repassword) throw new Error ("password doesn't match")
 
     const user = {
         "name" : name,
@@ -16,7 +17,7 @@ logic.registerUser = function(name , surname , username , password, repassword) 
         "favorites" : []
     }
 
-    call("https://skylabcoders.herokuapp.com/api/user" , 'post' , {'content-type' : 'application/json'} , user)
+    return call("https://skylabcoders.herokuapp.com/api/user" , 'post' , {'content-type' : 'application/json'} , user)
     .then(response => {
         if (response.status === 'KO') throw Error (response.error)
     })
