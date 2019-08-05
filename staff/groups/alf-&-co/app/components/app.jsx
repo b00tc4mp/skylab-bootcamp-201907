@@ -1,15 +1,17 @@
 const { Component } = React
+
 class App extends Component {
     constructor() {
         super()
 
-        this.state = { view: 'landing', credentials: undefined, error: undefined }
+        this.state = { view: 'login', credentials: undefined, error: undefined }
 
         this.handleBackToLanding = this.handleBackToLanding.bind(this)
         this.handleGoToLogin = this.handleGoToLogin.bind(this)
         this.handleLogin = this.handleLogin.bind(this)
         this.handleSubmitRegister = this.handleSubmitRegister.bind(this)
         this.handleGoToSignUp = this.handleGoToSignUp.bind(this)
+       
     }
 
     handleBackToLanding(){
@@ -33,6 +35,17 @@ class App extends Component {
     handleGoToLogin(){
         this.setState({view: 'login'})
     }
+    
+    handleLogin(username, password){
+        try {
+            logic.authenticateUser(username, password)
+                .then (credentials => this.setState({view: 'landing', credentials}))
+                .catch(({message}) => this.setState ({error: message}))
+            } catch (message){
+                this.setState({message})    
+            }
+        }
+
 
     handleLogin() {
 
