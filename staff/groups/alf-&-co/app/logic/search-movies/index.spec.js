@@ -42,7 +42,7 @@
             })
 
 
-        fdescribe('logic - search movies - user with favorites', () => {
+        describe('logic - search movies - user with favorites', () => {
             let data
             let user
 
@@ -69,9 +69,8 @@
 
             it('should succeed on matching criteria', () => {
             const query = 'train' // 20 results
-            debugger
 
-            logic.searchMovies(data.id, data.token, query)
+            return logic.searchMovies(data.id, data.token, query)
                 .then(movies => {
                     expect(movies).toBeDefined()
                     expect(movies instanceof Array).toBeTruthy()
@@ -99,7 +98,6 @@
 
                     expect(favorites).toBe(user.favorites.length)
                 })
-                .catch(error => expect(error).toBeDefined())
             })
         })
 

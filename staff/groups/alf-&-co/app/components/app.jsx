@@ -16,6 +16,10 @@ class App extends Component {
         this.setState({view: 'landing'})
     }
 
+    handleGoToSignUp() {
+
+    }
+
     handleSubmitRegister(name, surname, email, password, repassword){
         try {
             logic.registerUser(name, surname, email, password, repassword, error =>{
@@ -28,6 +32,10 @@ class App extends Component {
     }
     handleGoToLogin(){
         this.setState({view: 'login'})
+    }
+
+    handleLogin() {
+
     }
 
     render() {
