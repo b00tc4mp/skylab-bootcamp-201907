@@ -42,7 +42,7 @@
             })
 
 
-        describe('logic - search movies - user with favorites', () => {
+        fdescribe('logic - search movies - user with favorites', () => {
             let data
             let user
 
@@ -67,8 +67,9 @@
                         .catch(error => error)
             })
 
-            fit('should succeed on matching criteria', () => {
+            it('should succeed on matching criteria', () => {
             const query = 'train' // 20 results
+            debugger
 
             logic.searchMovies(data.id, data.token, query)
                 .then(movies => {
