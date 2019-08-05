@@ -16,18 +16,19 @@ logic.searchJokes = function (id, token, query) {
                     .then(jokes => {
                         if (jokes.error) return []
                         else {
-                            favorites && jokes.forEach(joke => joke.favorite = joke.include(joke.id))
+                            favorites && jokes.result.forEach(joke => joke.favorite = favorites.includes(joke.id))
 
                             return jokes
                         }
                     })
             })
     } else {
+        validate.string(query, 'query', false)
         return call(`https://api.chucknorris.io/jokes/search?query=${query}`, 'get', undefined, undefined)
             .then(jokes => {
                 if (jokes.error) return []
 
-                favorites && jokes.forEach(joke => joke.favorite = joke.include(joke.id))
+                favorites && jokes.result.forEach(joke => joke.favorite = favorites.includes(joke.id))
 
                 return jokes
             })
