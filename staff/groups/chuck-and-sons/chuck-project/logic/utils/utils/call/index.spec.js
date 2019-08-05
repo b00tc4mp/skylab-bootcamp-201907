@@ -22,7 +22,7 @@
                         "name": "Jaume",
                         "surname": "Norris",
                         "age": 35,
-                        "project": "chuck"
+                        "project": "chuck",
                         "username": "jaume.norris@bitme.com",
                         "password": "123",
                         "favorites": []
@@ -32,48 +32,40 @@
             })
         })
 
-        fdescribe("POST case => authenticate an user" , () => {
-            const user , data
+        describe("POST case => authenticate an user" , () => {
+            let user
             
-            beforeEach(){
+            beforeEach( () => {
                 user = {
-                    "name": `chuck-${random}`,
-                    "surname": `norris-${random}`
+                    "name": `chuck-${random()}`,
+                    "surname": `norris-${random()}`,
                     "age": 35,
                     "project": "chuck",
-                    "username": `chuck.${random}.norris@bitme.com`,
-                    "password": `123-${random}`,
+                    "username": `chuck.${random()}.norris@bitme.com`,
+                    "password": `123-${random()}`,
                     "favorites": []
                 }
 
-                return call("https://skylabcoders.herokuapp.com/api/user",
-                            "post",
-                            {"content-type" : "appplications/json",
-                            user})
+                return call('https://skylabcoders.herokuapp.com/api/user', 'post', { 'content-type': 'application/json' }, user)
                                 .then(response => {
+                                    
                                     if (response === 'KO') throw Error (response.error)
+
+                                    else console.log('username' , user  )
                                 })
-            }
-            it()
+            })
 
-            return call("https://skylabcoders.herokuapp.com/api/auth",
-                        "post",
-                        {"content-type" : "application/json"} ,
-                        {"username" : user.username , "password" : user.password})
+            it('should succeed on correct data' , () => 
+                call("https://skylabcoders.herokuapp.com/api/auth" , "post" , {"content-type" : "application/json"} , {"username" : user.username , "password" : user.password})
                             .then(response => {
-                                if(response.status === 'KO') throw Error (response.error)
-                                else{
-                                    data = response.data
-                                    const { id , token } = data
-
-                                    expect(data).toBeDefined()
-                                    expect(id).toBeDefined()
-                                    expect(token).toBeDefined()
-                                }
-                            })
+                                const { data  , data : {id , token} } = response
+                                
+                                expect(data).toBeDefined()
+                                expect(id).toBeDefined()
+                                expect(token).toBeDefined()
+                            }
+                        ))
         })
-
-        // TODO => PUT method
 
         describe("error cases" , () => {
 
