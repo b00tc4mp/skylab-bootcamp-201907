@@ -1,0 +1,40 @@
+Notas abesti
+
+Musixmatch API
+
+apikey:
+apikey=e492562d27469098b0922d5d580837eb
+(apikey is mandatory)
+
+base url:
+https://api.musixmatch.com/ws/1.1/
+
+API uses different methods, as follow:
+
+OUR CHOICE ON SEARCH --> track.search + q_artist and q_track ("Aerosmith" and "dude looks like a lady")
+https://developer.musixmatch.com/documentation/api-reference/track-search
+https://api.musixmatch.com/ws/1.1/track.search?apikey=e492562d27469098b0922d5d580837eb&q_artist=aerosmith&q_track=dude%20looks%20like%20a%20lady
+
+    other option --> track.search(example using the word "revolution")
+    https://api.musixmatch.com/ws/1.1/track.search?apikey=e492562d27469098b0922d5d580837eb&q_track=%22revolution%22
+
+
+OUR CHOICE ON RETRIEVE SONGS
+track.get + commontrack_id
+https://api.musixmatch.com/ws/1.1/track.get?apikey=e492562d27469098b0922d5d580837eb&commontrack_id=74094520
+
+OUR CHOICE ON DISPLAY LYRICS
+track.lyrics + track_id
+https://api.musixmatch.com/ws/1.1/track.lyrics.get?apikey=e492562d27469098b0922d5d580837eb&track_id=30974361
+
+ALBUM ART:
+https://developer.musixmatch.com/documentation/api-reference/album-get --> not working, sent an email to developers.
+https://api.musixmatch.com/ws/1.1/album.get?album_id=13881272&apikey=e492562d27469098b0922d5d580837eb
+    Alternative!! --> https://musicbrainz.org/doc/Cover_Art_Archive/API
+    get the mbid from Musixmatch API and using it on Musicbrainz: https://wiki.musicbrainz.org/Development/JSON_Web_Service
+
+
+
+OTHER FEATURES
+artist.get
+https://api.musixmatch.com/ws/1.1/artist.get?apikey=e492562d27469098b0922d5d580837eb&artist_id=268
