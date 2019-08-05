@@ -1,5 +1,4 @@
 describe('call', () => {
-    const token = "BQBAdGDhnFod3hcCk9-dfogDRZZwuvixpun5AwLqG0XopMJqPNxxX9d7hxU0_OpJTeqz3L5fh9IlcIXRXVM"
 
     // xdescribe('api spotify get token', () => { // NOT POSSIBLE TO GET TOKEN FROM BROWSER FOR SECURITY REASONS AS CLIENT CREDENTIALS ARE SENT IN PLAIN TEXT
 
@@ -19,7 +18,7 @@ describe('call', () => {
     //     })
     // })
     
-    describe('api spotify get tracks', () => {
+    describe('spotify api get tracks', () => {
 
         const query = 'wonderwall'
         const types = 'track'
@@ -49,4 +48,40 @@ describe('call', () => {
             
     })
 
+    describe('skylab api methods tests', () => {
+        const api = 'skylab'
+        
+        it('post should succeed on correct data', () => {
+            return call('https://skylabcoders.herokuapp.com/api/user', 'post', { 'content-type': 'application/json' }, {
+                username: `esputy-${Math.random()}`,
+                password: `esputy-${Math.random()}`
+            },
+            api)
+                .then(res => expect(res).toBeDefined())
+                .catch(error => expect(error).toBeUndefined())
+        })
+        it('get should succeed on correct url and method', () => {
+            return call('https://skylabcoders.herokuapp.com/api/users', 'get', undefined, undefined, api) 
+                
+                .then(res => expect(res).toBeDefined())
+                .catch(error => expect(error).toBeUndefined())
+        })
+
+        //TO DO PATCH, PUT, DELETE
+    })
+    describe('api tests', () => {
+        const api = 'random'
+        
+        it('"should throw error when api is not "spotify" or "skylab"', () => {
+            expect(() => 
+                call(`https://api.spotify.com/v1/search?q=wonderwall&type=track`,
+                'post', 
+                { 'Authorization': `Bearer ${token}` }, 
+                undefined,
+                api)).toThrowError(Error, 'random must be "spotify or "skylab"')
+        })
+    })
+
 })
+
+//TODO MORE TESTS
