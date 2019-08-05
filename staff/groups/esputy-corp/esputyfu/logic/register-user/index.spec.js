@@ -16,13 +16,13 @@
 
         it('should succeed on correct data', () =>
             logic.registerUser(user.name, user.surname, user.username, user.password, user.password)
-                .then(() => call('https://skylabcoders.herokuapp.com/api/auth', 'post', { 'content-type': 'application/json' }, { username: user.username, password: user.password }))
+                .then(() => call('https://skylabcoders.herokuapp.com/api/auth', 'post', { 'content-type': 'application/json' }, { username: user.username, password: user.password },'skylab'))
                 .then(response => {
                     if (response.status === 'KO') throw new Error(response.error)
                     else {
                         data = response.data
 
-                        return call(`https://skylabcoders.herokuapp.com/api/user/${data.id}`, 'get', { 'authorization': `bearer ${data.token}` }, undefined)
+                        return call(`https://skylabcoders.herokuapp.com/api/user/${data.id}`, 'get', { 'authorization': `bearer ${data.token}` }, undefined,'skylab')
                     }
                 })
                 .then(response => {
