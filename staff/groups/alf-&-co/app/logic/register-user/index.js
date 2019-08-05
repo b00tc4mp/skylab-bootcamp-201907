@@ -1,3 +1,6 @@
+/**
+ * Introduce the user dades to de api added. 
+ */
 logic.registerUser = function (name, surname, username, password, repassword) {
     validate.string(name, 'name')
     validate.string(surname, 'surname')

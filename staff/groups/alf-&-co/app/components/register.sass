@@ -1,7 +1,7 @@
 font-family: Futura,Trebuchet MS,Arial,sans-serif
-
+$color-black: #000000
 %text-link
-    color: black
+    color: $color-black
 
     font-family: 'Open Sans', Arial, Helvetica, sans-serif
 
@@ -16,8 +16,31 @@ font-family: Futura,Trebuchet MS,Arial,sans-serif
     text-align: center 
     &:hover
         color: grey
-    
-.button
+
+
+%text-base-small
+    font-size: 0.5rem
+    text-decoration: none
+    font-weight: 200
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif
+
+%text-base-medium
+    font-size: 1rem
+    text-decoration: none
+    font-weight: 200
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif
+
+%text-base-big
+    font-size: 1.4rem
+    text-decoration: none
+    font-weight: 500
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif
+
+.big-letter
+    color: $color-black
+    @extend %text-base-big
+
+.close
     @extend %text-link
     display: inline-block
     appearance: none
@@ -30,7 +53,38 @@ font-family: Futura,Trebuchet MS,Arial,sans-serif
 
     &:not([disabled]):hover,
     &:not([disabled]):focus 
-        color: grey
+        color: $color-green-clair
+    &:focus 
+        outline: none
+        box-shadow: none
+    &[disabled] 
+        cursor: not-allowed
+
+form  
+    background-color: $color-black
+    color: $color-black
+    @extend %text-base-medium
+    input
+        border: 0.1rem solid $color-black
+        color: $color-light-grey
+        @extend %text-base-medium
+
+.button
+    @extend %text-base-medium
+    text-align: center
+    display: inline-block
+    color: $color-black
+    appearance: none
+    border: 0.1rem solid $color-black
+    margin: 0
+    height: 0
+    padding: 0
+    cursor: pointer
+    transition: all 250ms cubic-bezier(0.675, 0.420, 0.090, 0.870)
+
+    &:not([disabled]):hover,
+    &:not([disabled]):focus 
+        color: $color-green-clair
     &:focus 
         outline: none
         box-shadow: none

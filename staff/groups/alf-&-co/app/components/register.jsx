@@ -1,10 +1,10 @@
-function Register({ onSignUp, close, toLogin, error }) {
+function SignUp({ onSignUp, onClose, toLogin, error }) {
     return <>
-        <h1>BECOME A MOVIE LAB MEMBER</h1>
-        <a href="" onClick={event =>{
+        <h1 class= "big-letter">BECOME A MOVIE LAB MEMBER</h1>
+        <a href="close" onClick={event =>{
             event.preventDefault()
 
-            close()
+            onClose()
         }}>close</a>
         <form onSubmit={event => {
             event.preventDefault()
@@ -16,10 +16,10 @@ function Register({ onSignUp, close, toLogin, error }) {
             <label><input type="email" name="email" value= "Email" /></label>
             <label><input type="password" name="password" value= "Password" /></label>
             <label><input type="password" name="repassword" value="Repeat password" /></label>
-            <button>SIGN UP NOW</button>
+            <button class="button">SIGN UP NOW</button>
         </form>
         {error && <Feedback message={error}/>}
-        <a href="" onClick={event =>{
+        <a href="" class="button" onClick={event =>{
             event.preventDefault()
 
             toLogin()
