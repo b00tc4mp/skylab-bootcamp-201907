@@ -10,16 +10,36 @@
 
     describe('logic - search movies', () => {
     
-        it('should succeed on correct data', () =>
-           callToFunction(param1, param2)
-               .then(data => {
-                   expect(data).toBeDefined()
-    
-                   const {id, token } = data
-                   expect(id).toBeDefined()
-                   expect(token).toBeDefined()
+        it('should succeed on correct data', () => {
+            return logic.searchMovies(undefined, undefined, 'train')
+               .then(response => {
+                   expect(response).toBeDefined()
+                   expect(response instanceof Array).toBeTruthy()
+                   expect(response[0].id).toBeDefined()
                })
-        )
+               .catch(error => error)
+            })
+
+        it('should fail on empty query', () => {
+            return logic.searchMovies(undefined, undefined, '')
+                .then(response => response)
+                .catch(error =>  {
+                    expect(error).toBeDefined()
+                    expect(error.message).toBe('Search keyword must be provided.')
+                })
+                   
+            })
+        
+         it('should fail on non-valid query', () => {
+            const query = 'asdafsafsdf'
+            return logic.searchMovies(undefined, undefined, query)
+                .then(response => response)
+                .catch(error =>  {
+                    expect(error).toBeDefined()
+                    expect(error.message).toBe(`There are no results for query: ${query}`)
+                })
+                   
+            })
 
 
         describe('logic - search movies - user with favorites', () => {
