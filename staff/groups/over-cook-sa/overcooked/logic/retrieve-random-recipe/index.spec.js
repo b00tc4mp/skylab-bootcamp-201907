@@ -4,7 +4,7 @@
         it('Should return recipe data', () => {
             return logic.retrieveRandomRecipe()
                 .then(meal => {
-                    debugger
+           
                     expect(meal.idMeal).toBeDefined()
                     expect(meal.strMeal).toBeDefined()
                     expect(meal.strCategory).toBeDefined()
