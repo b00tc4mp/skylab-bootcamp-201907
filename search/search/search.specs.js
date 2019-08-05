@@ -58,6 +58,7 @@
                     })
             })
 
+
             describe('when user has already favorite jokes', () => {
                 let credentials
 
