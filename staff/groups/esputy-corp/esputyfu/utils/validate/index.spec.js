@@ -33,13 +33,13 @@ describe('validate', () => {
     describe('url', () => {
         it('should not to throw an error', () => {
             expect(() => {
-                validate.url('https://stackoverflow.com/questions/4144686')
+                validate.url('https://www.marca.com')
             }).not.toThrowError()
         }) 
         it('should throw an error ', () => {
             expect(() => {
-                validate.url('htt//stackoverflow.com/questions/4144686/', 'url')
-            }).toThrowError(Error, `url with value htt//stackoverflow.com/questions/4144686/ is not a valid URL`)
+                validate.url('not a url.com', 'url')
+            }).toThrowError(Error, `url with value not a url.com is not a valid URL`)
         })
     })
 })
