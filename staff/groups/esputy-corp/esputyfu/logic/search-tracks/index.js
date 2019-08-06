@@ -1,10 +1,7 @@
 logic.searchTracks = (idUser, tokenUser, song, limit) => {
     let favorites
-    let token = 'BQBi1BzqM-krCUqv7MwqPim2f4JHV9_-1QLAz-pNRCIs_8o9cJ46wKncEL79G40rYUYqTKYYpYSZkUd1_GM'
 
     if(typeof song === 'string') song.split(' ').join('-').toLowerCase()
-    
-    // checkToken(token)
 
     if(idUser != undefined && tokenUser != undefined) {
         if(typeof idUser !== 'string') throw new Error(`id user with value ${idUser} is not a string`)
@@ -47,7 +44,8 @@ logic.searchTracks = (idUser, tokenUser, song, limit) => {
                                     name: nameArtist}],
                                 explicit, 
                                 external_urls:{spotify: linkTrack}, 
-                                id: idTrack, 
+                                id: idTrack,
+                                name: nameTrack,
                                 popularity, 
                                 preview_url: previewUrl
                         } = item
@@ -67,15 +65,13 @@ logic.searchTracks = (idUser, tokenUser, song, limit) => {
                             // track
                                 linkTrack,
                                 idTrack,
+                                nameTrack,
                                 popularity,
                                 previewUrl
                         }
                     }))
                     .catch(error => new Error(error))
             })
-
-       
-    
 
     } else {
         if(limit == undefined) limit = '10'
@@ -110,7 +106,8 @@ logic.searchTracks = (idUser, tokenUser, song, limit) => {
                             name: nameArtist}],
                         explicit, 
                         external_urls:{spotify: linkTrack}, 
-                        id: idTrack, 
+                        id: idTrack,
+                        name: nameTrack,
                         popularity, 
                         preview_url: previewUrl
                 } = item
@@ -128,6 +125,7 @@ logic.searchTracks = (idUser, tokenUser, song, limit) => {
                 // track
                     linkTrack,
                     idTrack,
+                    nameTrack,
                     popularity,
                     previewUrl
     
