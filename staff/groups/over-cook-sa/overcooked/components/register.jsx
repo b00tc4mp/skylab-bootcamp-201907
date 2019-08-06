@@ -1,4 +1,4 @@
-function Register({ onRegister, onBack }) {
+function Register({ onRegister, onBack, error }) {
   return (
     <>
       <h2>Register Now</h2>
@@ -45,6 +45,8 @@ function Register({ onRegister, onBack }) {
           Back
         </a>
       </form>
+      {error && <Feedback message={error} />}
+
     </>
   )
 }
