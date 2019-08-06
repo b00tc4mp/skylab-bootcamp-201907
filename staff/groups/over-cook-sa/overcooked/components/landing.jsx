@@ -5,7 +5,10 @@ class Landing extends Component {
         super()
 
         this.state = { view: 'header', mealRandom: null }
+        
         this.onRandomRecipe = this.onRandomRecipe.bind(this)
+        this.handleRegister = this.handleRegister.bind(this)
+
 
     }
 
@@ -19,6 +22,12 @@ class Landing extends Component {
             //console.log(meal)
             this.setState({mealRandom : meal})
         })
+    }
+
+    handleRegister(event) {
+        event.preventDefault()
+
+        this.props.onRegister()
     }
   
     render() {
