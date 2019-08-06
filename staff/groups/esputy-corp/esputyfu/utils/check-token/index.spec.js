@@ -8,11 +8,5 @@
                 .then(res => res.toBeUndefined())
                 .catch(error => expect(error).toBeDefined())
         )
-
-        it('should throw error on invalid token', () => 
-        checkToken(invToken)
-        .then(res => res.toBeUndefined())
-        .catch(error => expect(error).toBeDefined())
-        )
     })
 }
