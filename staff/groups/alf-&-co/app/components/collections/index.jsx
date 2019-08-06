@@ -2,7 +2,7 @@ function Collections(props){
     
     return <>  
      <h3>Collections</h3>
-     <ul className="container">
+    {/* List of items by genre. If you click on a genre appears a list of movies of this genre  */}     <ul className="container">
        
          <li>
             <a href="" data-id={28} onClick={event=>{

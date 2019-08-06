@@ -7,6 +7,7 @@ class Landing extends Component {
         this.state = { view: 'collections', search: false, query: undefined, movies: [], movie: undefined, error: undefined, user: undefined, favs: [] }
         this.handleGoToFavorites=this.handleGoToFavorites.bind(this)
         this.handleGoToCollections=this.handleGoToCollections.bind(this)
+        this.handleLinkToCollections=this.handleLinkToCollections.bind(this)
         this.handleLogout=this.handleLogout.bind(this)
         this.handleGoToSearch=this.handleGoToSearch.bind(this)
         this.handleGoToLogin=this.handleGoToLogin.bind(this)
@@ -17,7 +18,7 @@ class Landing extends Component {
         this.handleToggleFavMovieFromMovieItem=this.handleToggleFavMovieFromMovieItem.bind(this)
     }
 
-     handleGoToCollections(query){
+    handleGoToCollections(query){
         console.log(query)
         const { props: { credentials } } = this
         let id, token
@@ -27,8 +28,12 @@ class Landing extends Component {
         credentials && (id = credentials.id, token = credentials.token)
         
         logic.searchMovies(id, token, query, collections)
-            .then(movies => this.setState( {movies, query, view: ''} ))
+            .then(movies => this.setState( {movies, query, view: 'results'} ))
             .catch(error => this.setState( { error: error.message }))
+    }
+
+    handleLinkToCollections(){
+        this.setState({view:'collections'})
     }
    
     handleGoToSearch(event){
@@ -45,7 +50,7 @@ class Landing extends Component {
         
 
         logic.searchMovies(id, token, query)
-            .then(movies => this.setState( {movies, query, view: ''} ))
+            .then(movies => this.setState( {movies, query, view: 'results'} ))
             .catch(error => this.setState( { error: error.message }))
     }
 
@@ -63,6 +68,9 @@ class Landing extends Component {
 
     }
     handleGoToLogin(){
+
+    }
+    handleLogout(){
 
     }
    
@@ -89,7 +97,7 @@ class Landing extends Component {
             state: { view, search, movie, movies, query, error, user, favs },
             handleSearch, handleRetrieveMovie, handleLogout,
             handleBackFromDetail, handleGoToSearch, handleGoToLogin,
-            handleToggleFavMovieFromMovieItem, handleToggleFavMovieFromMovieDetail, handleGoToCollections, handleGoToFavorites
+            handleToggleFavMovieFromMovieItem, handleToggleFavMovieFromMovieDetail, handleGoToCollections, handleLinkToCollections, handleGoToFavorites
         } = this
 
         return <>
@@ -100,7 +108,7 @@ class Landing extends Component {
                 <nav>
                     <ul>
                         <li><a href="" onClick={handleGoToFavorites}>Favorites</a></li>
-                        <li><a href="" onClick={handleGoToCollections}>Collections</a></li>
+                        <li><a href="" onClick={handleLinkToCollections}>Collections</a></li>
                         <li><a href="" onClick={handleLogout}>Logout</a></li>
                     </ul>
                     <ul>
