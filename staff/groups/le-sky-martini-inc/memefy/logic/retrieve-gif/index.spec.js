@@ -23,7 +23,7 @@
                     expect(gif.data.id).toBe(id)
                     expect(gif.data.title).toBeDefined()
                     expect(gif.data.images.downsized_large.url).toBeDefined()
-                    /* expect(gif.favorite).toBeUndefined() */
+                    expect(gif.favorite).toBeUndefined()
                 })
         })
 
