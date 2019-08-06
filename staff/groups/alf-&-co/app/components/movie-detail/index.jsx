@@ -6,14 +6,12 @@ function MovieDetail({movie, onBack, onToggle}){
         <img src={`http://image.tmdb.org/t/p/w342/${movie.movieComplete.poster_path}`} />
         <h3>{ movie.movieComplete.original_title }</h3>
         <span>{movie.movieComplete.vote_average}</span>
-        <a href="">💜</a>
+        <FavButton active={movie.favorite} onToggle={() => onToggle(movie.movieComplete.id.toString())} />
         <span>{ movie.movieComplete.release_date }</span>
         <p>{movie.director}</p>
         <span>{ movie.movieComplete.overview }</span>
         {/* {movie.mainCast.map(movie => <li>{movie}</li>)} */}
 
-        
-        {/*<FavButton active={favorite} onToggle={() => onToggle(id)} />*/}
         {onBack && <a href="" onClick={ event => {
             event.preventDefault()
 
