@@ -41,9 +41,13 @@ class Landing extends Component {
   }
 
   onRandomRecipe = () => {
-    logic.retrieveRandomRecipe().then(meal => {
-      //console.log(meal)
-      this.setState({ mealRandom: meal })
+    logic.retrieveRandomRecipe()
+        .then(meal => {
+          const { strYoutube : youtube } = meal
+          meal.strYoutube = youtubeParse(youtube)
+        //console.log(meal)
+        this.setState({ mealRandom: meal })
+      
     })
   }
 

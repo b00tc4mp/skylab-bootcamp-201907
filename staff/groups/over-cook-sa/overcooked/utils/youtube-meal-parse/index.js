@@ -1,7 +1,7 @@
 
  const youtubeParse = link => {
-   
-    youtube = link.split("=")
 
+    const youtube = link.split("=")
+    
     return `https://www.youtube.com/embed/${youtube[1]}`
 }
