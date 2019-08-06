@@ -21,20 +21,25 @@ class Landing extends Component {
     handleGoToFavorites(){
 
     }
+
     handleGoToCollections(){
 
     }
+
     handleLogout(){
 
     }
+
     handleGoToSearch(event){
         event.preventDefault()
         this.setState({ search: true })
 
     }
+
     handleGoToLogin(){
 
     }
+
     handleSearch(query){
         const { props: { credentials } } = this
         let id, token
@@ -46,22 +51,29 @@ class Landing extends Component {
             .catch(error => this.setState( { error: error.message }))
     }
 
-
     handleRetrieveMovie(id){
         console.log(id)
 
     }
 
-    handleToggleFavMovieFromMovieDetail(){
+    handleToggleFavMovieFromMovieDetail(movieId) {
+        const { props : { goToLogin, credentials }, handleRetrieveMovie } = this
 
+        credentials && (id = credentials.id, token = credentials.token)
+
+        credentials ? logic.toggleFavMovie(id, token, movieId, () => handleRetrieveMovie(movieId)) : goToLogin()
     }
 
     handleBackFromDetail(){
 
     }
 
-    handleToggleFavMovieFromMovieItem(){
+    handleToggleFavMovieFromMovieItem(movieId) {
+        const { props : { goToLogin, credentials }, handleSearch, state: { query } } = this
 
+        credentials && (id = credentials.id, token = credentials.token)
+
+        credentials ? logic.toggleFavMovie(id, token, movieId, () => handleSearch(query)) : goToLogin()
     }
 
     
@@ -95,15 +107,6 @@ class Landing extends Component {
 
                 {/* Search state is false by default. It's only displayed when clicked on search button */}
                 {search && <Search onSearch={handleSearch}></Search>}
-
-                {/* Default view on landing <main>. Displays collections of movies. */}
-                {/* view === 'collections' && <Collections></Collections> */}
-                    {/* This should go into Collection component */}
-                    {/* <ul>
-                        <li><a href="" onClick={handleGoToFavorites}>Action</a></li>
-                        <li><a href="" onClick={handleGoToCollections}>Comedy</a></li>
-                        <li><a href="" onClick={handleLogout}>Logout</a>Scify</li>
-                    </ul> */}
 
                 {/* Only displayed after query search or click on a collection. Composed by a grid of movie items with title, rating, poster, director and a fav button */}
                 {view === 'results' &&
