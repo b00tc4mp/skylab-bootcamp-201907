@@ -7,25 +7,14 @@ class App extends Component {
         this.state = { view: 'landing' }
 
 
-        this.handleRegister = this.handleRegister.bind(this)
+        
 
     }
 
         
+  
+
     
-
-
-    
-
-    handleRegister(name, surname, email, password, repassword) {
-        try {
-            logic.registerUser(name, surname, email, password, repassword)
-                .then(() => this.setState({ view: 'register-success' }))
-                .catch(({ message }) => this.setState({ error: message }))
-        } catch ({ message }) {
-            this.setState({ error: message })
-        }
-    }
 
 
     render() {
@@ -35,7 +24,7 @@ class App extends Component {
         return <>
 
             
-            {view === "landing" && <Register onRegister={handleRegister} />}
+            
             {view === 'landing' && <Landing />}
 
         </>

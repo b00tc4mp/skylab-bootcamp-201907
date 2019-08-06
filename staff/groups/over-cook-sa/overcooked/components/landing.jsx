@@ -5,16 +5,12 @@ class Landing extends Component {
         super()
 
 
-        this.state = { view: 'header', mealRandom: null }
+        this.state = { view: 'first', mealRandom: null }
         
-        this.onRandomRecipe = this.onRandomRecipe.bind(this)
-        this.handleRegister = this.handleRegister.bind(this)
-
-
-        this.state = { view: 'first' , mealRandom: null }
         this.onRandomRecipe = this.onRandomRecipe.bind(this)
         this.handleGoToLogin = this.handleGoToLogin.bind(this)
         this.handleGoToRegister = this.handleGoToRegister.bind(this)
+        this.handleRegister = this.handleRegister.bind(this)
 
 
     }
@@ -31,10 +27,15 @@ class Landing extends Component {
         })
     }
 
-    handleRegister(event) {
-        event.preventDefault()
-
-        this.props.onRegister()
+    handleRegister(name, surname, email, password, repassword) {
+        try {
+            logic.registerUser(name, surname, email, password, repassword)
+                .then(() => this.setState({ view: 'register-success' }))
+                .catch(({ message }) => this.setState({ error: message }))
+        } catch ({ message }) {
+            this.setState({ error: message })
+        }
+    }
 
     handleGoToRegister() {
         this.setState({ view: 'register', mealRandom: null })
@@ -44,11 +45,11 @@ class Landing extends Component {
         this.setState({ view: 'login' , mealRandom: null })
 
     }
-  
+    
 
     render() {
 
-        const { state: { view, mealRandom }, handleGoToLogin, handleGoToRegister } = this
+        const { state: { view, mealRandom }, handleGoToLogin, handleGoToRegister, handleRegister } = this
 
         return <>
             <header>
@@ -56,7 +57,7 @@ class Landing extends Component {
             </header>
             <main>
                 <section>
-                    { view === 'register' && <Register />}
+                    {view === "register" && <Register onRegister={handleRegister} />}
                     { view === 'first' && <WelcomeAnchors onLogin={handleGoToLogin} onRegister={handleGoToRegister} />}
                     { view === 'login' && <Login />}
                 </section>
