@@ -13,10 +13,11 @@ logic.toggleFavMovie = function(userId, userToken, movieId, expression) {
             if (response.status === 'KO') throw Error(response.error)
             const favorites = response.data.favorites
 
-            const index = favorites.findIndex(favId => favId === movieId)
+            const index
+            (favorites) ? index = favorites.findIndex(favId => favId === movieId) : favorites = []
 
             /* means movie has been found in user's favorites, remove from it */
-            if (index > -1) {
+            if (favorites && index > -1) {
 
                 favorites.splice(index, 1)
 
@@ -27,7 +28,6 @@ logic.toggleFavMovie = function(userId, userToken, movieId, expression) {
                     {favorites})
                     .then(response => {
                         if (response.status === 'KO') throw Error(response.error)
-                        debugger
                         expression()
                     })
             } else {
@@ -41,7 +41,7 @@ logic.toggleFavMovie = function(userId, userToken, movieId, expression) {
                             `https://skylabcoders.herokuapp.com/api/user/${userId}`,
                             'put',
                             {'content-type': 'application/json', 'authorization': `bearer ${userToken}`},
-                            {favorites})
+                            {favorites: favorites})
                             .then(response => {
                                 if (response.status === 'KO') throw Error(response.error)
                                 expression()

@@ -35,9 +35,6 @@ class Landing extends Component {
             .catch(error => this.setState( { error: error.message }))
     }
 
-    handleLogout(){
-    }
-
     handleLinkToCollections(){
         this.setState({view:'collections'})
     }
@@ -45,12 +42,8 @@ class Landing extends Component {
     handleGoToSearch(event){
         event.preventDefault()
         this.setState({ search: true })
-
     }
 
-    handleGoToLogin(){
-
-    }
 
    
     handleSearch(query){
@@ -85,7 +78,7 @@ class Landing extends Component {
     handleGoToLogIn(event){
         event.preventDefault()
     
-        this.props.onLogIn()
+        this.props.goToLogin()
     
     }
 
