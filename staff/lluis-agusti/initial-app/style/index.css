@@ -1,0 +1,115 @@
+body {
+  font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+ul {
+  width: 95%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0%;
+}
+
+li {
+  max-width: 200px;
+  margin: 2%;
+}
+
+h3 {
+  max-width: 200px;
+  margin: 2%;
+  height: 1.9rem;
+}
+
+img {
+  max-width: 200px;
+  margin: 2%;
+  padding-top: 1rem;
+}
+
+h1 {
+  text-align: center;
+}
+
+.btn {
+  background-color: skyblue;
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.duck-detail, .duck-results, .duck-home, .search, .feedback, .register-success, .register, .login, .landing {
+  padding: 0.5rem;
+  margin: 1.5rem;
+  align-content: center;
+  border: 0.1rem solid lightgray;
+  border-radius: 1rem;
+  background-color: #c2c2c2;
+}
+.landing {
+  background-color: lightgray;
+}
+
+.login {
+  background-color: lightgray;
+}
+
+.register {
+  background-color: lightgray;
+}
+
+.register-success {
+  background-color: lightgray;
+}
+
+.feedback--success {
+  background-color: #80dc6a;
+}
+.feedback--warning {
+  background-color: #fd927b;
+}
+.feedback--error {
+  background-color: #fd927b;
+  color: white;
+}
+
+.search {
+  background-color: lightgray;
+}
+
+.duck-home {
+  background-color: lightgray;
+}
+
+.duck-results {
+  background-color: lightgray;
+}
+.duck-results img {
+  width: 333px;
+}
+
+.duck-detail {
+  background-color: lightgray;
+}
+.duck-detail__photo {
+  width: 333px;
+}
+.duck-detail__price {
+  color: #e16c6c;
+}
+
+/*# sourceMappingURL=index.css.map */
