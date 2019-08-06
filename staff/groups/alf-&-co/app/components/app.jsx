@@ -4,60 +4,68 @@ class App extends Component {
     constructor() {
         super()
 
-        this.state = { view: 'landing', credentials: undefined, error: undefined }
+
+        this.state = { view: 'landing', credentials: undefined, error: undefined, register_success: undefined }
 
         this.handleBackToLanding = this.handleBackToLanding.bind(this)
-        this.handleGoToLogin = this.handleGoToLogin.bind(this)
-        this.handleLogin = this.handleLogin.bind(this)
-        this.handleSubmitRegister = this.handleSubmitRegister.bind(this)
-        // this.handleGoToSignUp = this.handleGoToSignUp.bind(this)
+        this.handleGoToLogIn = this.handleGoToLogIn.bind(this)
+        this.handleSubmitLogIn = this.handleSubmitLogIn.bind(this)
+        this.handleSubmitSignUp = this.handleSubmitSignUp.bind(this)
+        this.handleGoToSignUp = this.handleGoToSignUp.bind(this)
+        this.handleLogOut = this.handleLogOut.bind(this)
 
     }
 
-    handleBackToLanding(){
-        this.setState({view: 'landing'})
+    handleBackToLanding() {
+        this.setState({ view: 'landing' })
+
     }
 
     handleGoToSignUp() {
-
+        this.setState({ view: 'signup', error: undefined })
     }
 
-    handleSubmitRegister(name, surname, email, password, repassword){
+
+    handleGoToSignUp(name, surname, email, password, repassword){
         try {
-            logic.registerUser(name, surname, email, password, repassword, error =>{
-                if(error) this.setState({error: message})
-                else this.setState({view: 'login'})
-            })
-        }catch({message}){
-            this.setState({error: message})
+            logic.registerUser(name, surname, email, password, repassword)
+                .then(() => this.setState({ view: 'login', register_success: true }))
+                .catch(({ message }) => this.setState({ error: message }))
+        } catch ({ message }) {
+            this.setState({ error: message })
         }
     }
-    handleGoToLogin(){
-        this.setState({view: 'login'})
-    }
-    
-    handleLogin(username, password){
-        try {
-            logic.authenticateUser(username, password)
-                .then (credentials => this.setState({view: 'landing', credentials}))
-                .catch(({message}) => this.setState ({error: message}))
-            } catch (message){
-                this.setState({message})    
-            }
-        }
 
+    handleGoToLogIn() {
+        this.setState({ view: 'login', error: undefined, register_success: undefined })
+    }
+
+    handleSubmitLogIn(email, password) {
+        try {
+            logic.authenticateUser(email, password)
+                .then(credentials => this.setState({ view: 'landing', credentials, register_success: undefined }))
+                .catch(({ message }) => this.setState({ error: message }))
+        } catch ({message}) {
+            this.setState({ error: message })
+        }
+    }
+    handleLogOut(){
+        this.setState({credentials: undefined})
+    }
 
     handleLogin() {
 
     }
 
     render() {
-        const { state: { view, credentials, error }, handleBackToLanding, handleLogin, handleSubmitRegister, handleGoToLogin, handleGoToSignUp } = this
+        const { state: { view, credentials, error, register_success }, handleBackToLanding, handleSubmitLogIn, handleSubmitSignUp, handleGoToLogIn, handleGoToSignUp, handleLogOut } = this
 
         return <>
-        {view === 'landing' && <Landing mainView={this.state.view} onLogin={handleGoToLogin}/>}
-        {view === 'login' && <Login onClose={handleBackToLanding} onLogin={handleLogin} error={error} toSignUp= {handleGoToSignUp}/>}
-        {view === 'register' && <SignUp onClose={handleBackToLanding} onSignUp={handleSubmitRegister} error ={error} toLogin ={handleGoToLogin}/>}
+
+            {view === 'landing' && <Landing onLogIn={handleGoToLogIn}  credentials={credentials} />}
+            {view === 'login' && <LogIn onClose={handleBackToLanding} onLogIn={handleSubmitLogIn} error={error} register_success={register_success} toSignUp={handleGoToSignUp} onLogOut={handleLogOut} />}
+            {view === 'signup' && <SignUp onClose={handleBackToLanding} onSignUp={handleSubmitSignUp} error={error} toLogIn={handleGoToLogIn} />}
+
         </>
     }
 }

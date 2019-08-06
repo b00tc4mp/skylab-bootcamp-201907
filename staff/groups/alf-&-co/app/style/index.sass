@@ -1,0 +1,224 @@
+@import base-setting
+@import ../components/feedback
+
+
+%text-link
+    color: $color-black
+
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif
+
+    text-decoration: none
+
+    line-height: 50px
+
+    font-weight: 500
+
+    font-size: 1rem
+
+    text-align: center 
+    &:hover
+        color: grey
+
+
+%text-base-small
+    font-size: 0.7rem
+    text-decoration: none
+    font-weight: 200
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif
+
+%text-base-medium
+    font-size: 0.8rem
+    text-decoration: none
+    font-weight: 200
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif
+
+%text-base-big
+    font-size: 1rem
+    text-decoration: none
+    font-weight: 500
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif
+*
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+body
+    width: 100vw
+
+.panel--nav
+    width: 100%
+    height: 70px
+    position: fixed
+    border: 0.1rem solid $color-black
+    background-color: $color-white
+    z-index: 4
+.logo
+    width: 100%
+    letter-spacing: 0.3rem
+    text-align: center
+    text-justify: center
+    position: absolute
+    font-size: 1.8rem
+    top: 10px
+    text-decoration: none
+    font-weight: 500
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif
+
+.icons-header
+    display: flex
+    width: 70px
+    position: absolute
+    right: 5px
+    top: 20px
+    ul
+        overflow: auto
+        align-items: right
+        list-style-type: none
+    li
+        height: 25px
+        list-style-type: none
+        text-decoration: none
+        padding: 0
+        margin: 1px 5px
+    li,
+    a
+        text-decoration: none
+        margin: 1px 5px
+        font-size: 1.2rem
+        color: $color-black
+        text-transform: uppercase
+        -webkit-transition: all 0.5s ease
+        &:hover 
+            color: $color-green-clair 
+
+
+
+    
+
+.panel--foot
+    width: 100%
+    height: 60px
+    display: flex
+    position: fixed
+    align-items: center
+    justify-content: center
+    flex-direction: row
+    bottom: 45px
+    border-top: 0.01rem solid $color-green-clair
+    border-bottom: 0.01rem solid $color-green-clair
+    ul
+        overflow: auto
+        list-style-type: none
+    li
+        height: 25px
+        list-style-type: none
+        text-decoration: none
+        float: left
+        padding: 0
+    li,
+    a
+        text-decoration: none
+        font-size: 1rem
+        margin: 1px auto
+        color: $color-black
+        text-transform: uppercase
+        -webkit-transition: all 0.5s ease
+        &:hover 
+            color: $color-light-grey 
+
+.registered-name
+        @extend %text-base-medium
+        width: 100%
+        margin: 15px auto
+        position: fixed
+        text-align: center
+        bottom: 0
+
+.close
+    position: absolute
+    right: 25px
+    top: 15px
+    width: 10px
+    height: 10px
+    opacity: 1
+    color: $color-black
+    &:hover 
+        opacity: 0.2
+        color: $color-light-grey
+    &:before,
+    &:after 
+        position: absolute
+        left: 10px
+        content: ' '
+        height: 20px
+        width: 1px
+        background-color: $color-black
+        opacity: 1
+    &:before 
+        transform: rotate(45deg)
+    &:after 
+        transform: rotate(-45deg)
+
+.big-letter
+    color: $color-black
+    @extend %text-base-medium
+    margin: 20px
+
+.form-panel
+    display: flex
+    flex-direction: column
+    align-items: center
+    width: 100%
+    padding: 20px
+    margin: 2px auto
+
+form    
+    color: $color-black
+    @extend %text-base-medium
+    display: flex
+    flex-direction: column
+    align-items: center
+    width: 100%
+    input
+        width: 250px
+        line-height: 30px
+        border: 0.01rem solid $color-black
+        color: $color-light-grey
+        @extend %text-base-medium
+        margin: 15px auto
+        vertical-align: middle
+    input,
+    textarea
+        padding: 6px
+        transition-property: background,border,color
+        transition-duration: .15s
+        &:focus,
+        &textarea:focus 
+            outline-color: $color-green-clair
+            color: $color-black
+            background-color: $color-white
+
+.button
+    @extend %text-base-small
+    width: 130px
+    padding: 10px
+    margin: 10px
+    text-align: center
+    color: $color-black
+    background-color: $color-white
+    border: 0.05rem solid $color-black
+    appearance: none
+    cursor: pointer
+    transition: all 250ms cubic-bezier(0.675, 0.420, 0.090, 0.870)
+
+    &:not([disabled]):hover,
+    &:not([disabled]):focus 
+        color: $color-green-clair
+        background-color: $color-white
+    &:focus 
+        outline: none
+        box-shadow: none
+    &[disabled] 
+        cursor: not-allowed
+
+
+
