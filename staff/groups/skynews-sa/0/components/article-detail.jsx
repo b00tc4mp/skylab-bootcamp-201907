@@ -1,4 +1,4 @@
-function ArticleDetail({article: { title, urlToImage,description,url,publishedAt}}){
+function ArticleDetail({article: { title, urlToImage,description,url,publishedAt}, onBack}){
     
     return <>
     <h3>{title}</h3>
@@ -8,6 +8,7 @@ function ArticleDetail({article: { title, urlToImage,description,url,publishedAt
     <p>Go to original <a href={url}>article</a> </p>
     <a href="" onClick={event=>{
         event.preventDefault()
+
         onBack()
     }}>Go onBack</a>
     </>
