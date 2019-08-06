@@ -26,7 +26,7 @@ class App extends Component {
     }
 
 
-    handleGoToSignUp(name, surname, email, password, repassword){
+    handleSubmitSignUp(name, surname, email, password, repassword){
         try {
             logic.registerUser(name, surname, email, password, repassword)
                 .then(() => this.setState({ view: 'login', register_success: true }))
