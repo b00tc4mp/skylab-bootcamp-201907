@@ -19,6 +19,25 @@
   background-image: url('https://image.freepik.com/vector-gratis/diseno-fondo-mapa-mundo_1127-2318.jpg')
   background-size: cover
 
+.spinner:before
+  content:""
+  box-sizing: border-box
+  position: absolute
+  top: 70%
+  left: 50%
+  height: 80px
+  width: 80px
+  margin-top: -30px
+  margin-left: -30px
+  border-radius: 50%
+  border-top:10px solid #009ee2
+  border-right:7px solid transparent
+  animation: spinner 0.4s linear infinite
+
+@keyframes spinner
+  to
+    transform: rotate(360deg)
+
 .nav
   width: 100%
   padding: 0.5rem
@@ -29,7 +48,7 @@
   text-align: center
 
 
-ul
+.nav-ul
   list-style-type: none
   display: flex
 
@@ -39,13 +58,13 @@ a
   text-decoration: none
   color: rgb(255,255,255)
 
-.register
+.register-li
   padding: 0.4rem 1.3rem
 
-.login
+.login-li
   padding: 0.4rem 1.8rem
 
-.logo
+.nav-logo
   width: 84vw
   margin: 6rem auto
   display: flex
@@ -57,4 +76,45 @@ select
   display: flex
   background-color: rgb(255,255,255)
 
-  
+.results-nav
+  width: 100vw
+  display: flex
+  text-align: center
+  background: rgb(255,255,255)
+
+.results-ul
+  list-style-type: none
+  display: flex
+  width: 95vw
+  margin: 1rem auto
+  flex-wrap: wrap
+
+.results-li
+  width: 95vw
+
+.item-h3
+  margin-top: 2rem
+
+.item-img
+  width: 95vw
+  margin: 1rem auto
+
+.detail
+  width: 95vw
+  margin: 1rem auto
+  background: rgb(255,255,255)
+
+.detail-title
+  margin-top: 2rem
+
+.detail-img
+  width: 95vw
+  margin: 1rem auto
+
+.detail-data
+  font-size: 0.6rem
+
+.detail-description
+  font-size: 0.8rem
+  margin-top: 1rem
+
