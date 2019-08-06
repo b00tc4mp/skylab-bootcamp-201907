@@ -19,6 +19,11 @@ class Landing extends Component {
         this.handleToggleFavMovieFromMovieItem=this.handleToggleFavMovieFromMovieItem.bind(this)
     }
 
+    componentWillMount(){
+        const {props: { credentials }} = this
+        
+    }
+
     handleGoToCollections(query){
         console.log(query)
         const { props: { credentials } } = this
@@ -111,30 +116,30 @@ class Landing extends Component {
             handleToggleFavMovieFromMovieItem, handleToggleFavMovieFromMovieDetail, handleGoToCollections, handleLinkToCollections, handleGoToFavorites
         } = this
 
-        return <>
-
         
-
-<header className="panel--nav">
+        
+    return <>
+        <header className="panel--nav">
+            {user && <p>Hello, {user.name}</p>}
                 <nav>
                     <ul>
                         <li><a href="" onClick={handleGoToFavorites}>Favorites</a></li>
                         <li><a href="" onClick={handleGoToCollections}>Collections</a></li>
                         <li><a href="" onClick={handleLogOut}>Logout</a></li>
                     </ul>
-                    <h2 className="logo">MOVIE LAB</h2>
+                     <h2 className="logo">MOVIE LAB</h2>
 
                     <ul className= "icons-header">
                         <li><a href="" onClick={handleGoToSearch}><i className="fas fa-search"></i></a></li>
-                        
+                                
 
                         {!user ?<li><a href="" onClick={handleGoToLogIn}><i className="fas fa-user"></i></a></li>
                         :
                         <li><a href="" onClick={handleGoToLogIn}>{user.name}</a></li>
                         }
-                    </ul>
-                </nav>
-            </header>
+                     </ul>
+                 </nav>
+        </header>
             <main>
 
                 {/* Search state is false by default. It's only displayed when clicked on search button */}
