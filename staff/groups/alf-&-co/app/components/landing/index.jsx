@@ -17,81 +17,69 @@ class Landing extends Component {
         this.handleToggleFavMovieFromMovieItem=this.handleToggleFavMovieFromMovieItem.bind(this)
     }
 
-    handleGoToFavorites(){
+     handleGoToCollections(query){
+        console.log(query)
+        const { props: { credentials } } = this
+        let id, token
+        let collections = true
+       
 
+        credentials && (id = credentials.id, token = credentials.token)
+        
+        logic.searchMovies(id, token, query, collections)
+            .then(movies => this.setState( {movies, query, view: ''} ))
+            .catch(error => this.setState( { error: error.message }))
     }
-    handleGoToCollections(){
-
-    }
-    handleLogout(){
-
-    }
+   
     handleGoToSearch(event){
         event.preventDefault()
         this.setState({ search: true })
 
     }
-    handleGoToLogin(){
-
-    }
+   
     handleSearch(query){
         const { props: { credentials } } = this
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
+        
 
         logic.searchMovies(id, token, query)
-            .then(movies => this.setState( {movies, query, view: 'results'} ))
+            .then(movies => this.setState( {movies, query, view: ''} ))
             .catch(error => this.setState( { error: error.message }))
     }
 
-handleGoToFavorites(){
+    handleGoToFavorites(){
 
-}
+    }
 
-handleGoToCollections(){
+   
+    handleLogout(){
 
-}
-handleLogout(){
+    }
+    handleGoToSearch(){
+        event.preventDefault()
+        this.setState({search: true})
 
-}
-handleGoToSearch(){
 
-}
-handleGoToLogin(){
+    }
+    handleGoToLogin(){
 
-}
-handleSearch(){
-
-}
-handleRetrieveMovie(){
-
-}
-handleToggleFavMovieFromMovieDetail(){
-
-}
-handleBackFromDetail(){
-
-}
-handleToggleFavMovieFromMovieItem(){
-
-}
-
+    }
+   
     handleRetrieveMovie(){
 
     }
-
     handleToggleFavMovieFromMovieDetail(){
 
     }
-
     handleBackFromDetail(){
 
     }
-
     handleToggleFavMovieFromMovieItem(){
 
     }
+
 
     
 /* Handlers */
@@ -129,7 +117,7 @@ handleToggleFavMovieFromMovieItem(){
                 {search && <Search onSearch={handleSearch}></Search>}
 
                 {/* Default view on landing <main>. Displays collections of movies. */}
-                {view === 'collections' && <Collections></Collections>}
+                {view === 'collections' && <Collections onCollection={handleGoToCollections}></Collections>}
                    
                 {/* Only displayed after query search or click on a collection. Composed by a grid of movie items with title, rating, poster, director and a fav button */}
                 {view === 'results' &&
