@@ -11,13 +11,13 @@ logic.toggleFavMovie = function(userId, userToken, movieId, expression) {
     return call(`${AUTH_ENDPOINT}${userId}`, 'get', {'authorization': `bearer ${userToken}`}, undefined)
         .then(response => {
             if (response.status === 'KO') throw Error(response.error)
-            const favorites = response.data.favorites
+            let favorites = response.data.favorites
 
-            const index
+            let index
             (favorites) ? index = favorites.findIndex(favId => favId === movieId) : favorites = []
 
             /* means movie has been found in user's favorites, remove from it */
-            if (favorites && index > -1) {
+            if (index > -1) {
 
                 favorites.splice(index, 1)
 
