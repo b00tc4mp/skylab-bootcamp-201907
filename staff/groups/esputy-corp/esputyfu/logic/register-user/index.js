@@ -1,4 +1,4 @@
-logic.registerUser = function (name, surname, username, password, repassword) {
+logic.registerUser = (name, surname, username, password, repassword) => {
     validate.string(name, 'name')
     validate.string(surname, 'surname')
     validate.string(username, 'username')
