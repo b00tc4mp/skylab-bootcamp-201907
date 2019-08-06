@@ -10,8 +10,8 @@ class App extends Component {
         this.handleGoToLogin = this.handleGoToLogin.bind(this)
         this.handleLogin = this.handleLogin.bind(this)
         this.handleSubmitRegister = this.handleSubmitRegister.bind(this)
-        this.handleGoToSignUp = this.handleGoToSignUp.bind(this)
-       
+        // this.handleGoToSignUp = this.handleGoToSignUp.bind(this)
+
     }
 
     handleBackToLanding(){
