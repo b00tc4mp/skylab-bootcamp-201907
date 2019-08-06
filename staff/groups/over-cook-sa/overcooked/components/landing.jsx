@@ -5,7 +5,7 @@ class Landing extends Component {
     super()
 
     this.state = {
-      view: 'first',
+      view: 'landing',
       mealRandom: null,
       credentials: undefined,
       user: undefined,
@@ -17,6 +17,7 @@ class Landing extends Component {
     this.handleGoToRegister = this.handleGoToRegister.bind(this)
     this.handleRegister = this.handleRegister.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
+    this.handleGoBack = this.handleGoBack.bind(this)
   }
 
   componentWillMount() {
@@ -66,7 +67,7 @@ class Landing extends Component {
     try {
       logic
         .authenticateUser(email, password)
-        .then(credentials => this.setState({ view: 'first', credentials }))
+        .then(credentials => this.setState({ view: 'landing', credentials }))
         .catch(({ message }) => this.setState({ error: message }))
     } catch ({ message }) {
       this.setState({ error: message })
@@ -81,13 +82,18 @@ class Landing extends Component {
     this.setState({ view: 'login', mealRandom: null })
   }
 
+  handleGoBack() {
+    this.setState({ view: 'landing'})
+  }
+
   render() {
     const {
       state: { view, mealRandom },
       handleGoToLogin,
       handleGoToRegister,
       handleRegister,
-      handleLogin
+      handleLogin,
+      handleGoBack
     } = this
 
     return (
@@ -97,14 +103,14 @@ class Landing extends Component {
         </header>
         <main>
           <section>
-            {view === 'register' && <Register onRegister={handleRegister} />}
-            {view === 'first' && (
+            {view === 'register' && <Register onRegister={handleRegister} onBack={handleGoBack} />}
+            {view === 'landing' && (
               <WelcomeAnchors
                 onRegister={handleGoToRegister}
                 onLogin={handleGoToLogin}
               />
             )}
-            {view === 'login' && <Login onLogin={handleLogin} />}
+            {view === 'login' && <Login onLogin={handleLogin} onBack={handleGoBack} />}
             {view === 'register-success' && (
               <RegisterSuccess onLogin={handleGoToLogin} />
             )}

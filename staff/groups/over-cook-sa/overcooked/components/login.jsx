@@ -1,4 +1,4 @@
-function Login({ onLogin }) {
+function Login({ onLogin, onBack }) {
   return (
     <>
       <h2>Enter login data</h2>
@@ -28,7 +28,7 @@ function Login({ onLogin }) {
           href="#"
           onClick={event => {
             event.preventDefault()
-            onBack() // pending to do
+            onBack()
           }}
         >
           Back
