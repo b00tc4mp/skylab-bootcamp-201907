@@ -2,9 +2,9 @@ logic.searchJokes = function (id, token, query) {
     let favorites;
 
     if (id !== undefined && token !== undefined) {
-        validate.string(id, 'id')
-        validate.string(token, 'token')
-        validate.string(query, 'query', false)
+        validate.str(id, 'id')
+        validate.str(token, 'token')
+        validate.str(query, 'query', false)
 
         return call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'get', { 'authorization': `bearer: ${token}` }, undefined)
             .then(response => {
@@ -23,7 +23,7 @@ logic.searchJokes = function (id, token, query) {
                     })
             })
     } else {
-        validate.string(query, 'query', false)
+        validate.str(query, 'query', false)
         return call(`https://api.chucknorris.io/jokes/search?query=${query}`, 'get', undefined, undefined)
             .then(jokes => {
                 if (jokes.error) return []

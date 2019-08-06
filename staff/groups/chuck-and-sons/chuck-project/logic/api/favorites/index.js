@@ -1,6 +1,6 @@
 logic.getFavoriteJokes = (id, token) => {
-    validate.string(id, 'id')
-    validate.string(token, 'token')
+    validate.str(id, 'id')
+    validate.str(token, 'token')
 
     return call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'get', { 'authorization': `bearer: ${token}` }, undefined)
         .then(response => {
