@@ -234,4 +234,8 @@ form textareatextarea:focus {
   cursor: not-allowed;
 }
 
+main {
+  padding-top: 15vh;
+}
+
 /*# sourceMappingURL=index.css.map */
