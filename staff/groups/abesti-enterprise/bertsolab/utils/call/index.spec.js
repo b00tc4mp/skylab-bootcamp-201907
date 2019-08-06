@@ -29,5 +29,4 @@ describe('call', () => {
         })
     })
 
-    // TODO test delete and patch
 })
