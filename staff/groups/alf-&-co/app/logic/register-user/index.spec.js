@@ -86,7 +86,7 @@
                 .then(() => logic.registerUser(user.name, user.surname, user.username, user.password, user.password))
                 .catch(error => expect(error).toBeDefined())
             )
-            // TODO test more cases when username is the same, but the name non-matching
+            
         })
     })
 }
