@@ -19,6 +19,8 @@ class Landing extends Component {
         this.handleFavorites = this.handleFavorites.bind(this)
         this.handleGoToSearch = this.handleGoToSearch.bind(this)
         this.handleToggleFavGifFromFavorites = this.handleToggleFavGifFromFavorites.bind(this)
+        this.handleRandom = this.handleRandom.bind(this)
+
     }
 
     componentWillMount() {
@@ -147,6 +149,18 @@ class Landing extends Component {
         credentials ? logic.toggleFavGif(id, token, gifId).then(() => handleFavorites()).catch(({ message }) => this.setState({ error: message })) : onLogin()
     }
 
+    handleRandom(gifId) {
+        const { props: { credentials } } = this
+
+        let id, token
+
+        credentials && (id = credentials.id, token = credentials.token)
+
+        logic.getRandom(id, token, gifId)
+            .then(gif => this.setState({ gif }))
+            .catch(({ message }) => this.setState({ error: message }))
+    }
+
     render() {
         const {
             state: { view, gifs, gif, error, user, favs },
@@ -154,7 +168,7 @@ class Landing extends Component {
             handleBackFromDetail, handleLogin, handleLogout,
             handleToggleFavGifFromGifItem, handleToggleFavGifFromGifDetail,
             handleAcceptError, handleFavorites, handleGoToSearch,
-            handleToggleFavGifFromFavorites
+            handleToggleFavGifFromFavorites, handleRandom
         } = this
 
         return <>
@@ -165,7 +179,7 @@ class Landing extends Component {
                         <li><a href="" onClick={handleRegister}>Register</a></li>
                         <li><a href="" onClick={handleLogin}>Login</a></li>
                     </ul> : <ul>
-                            {view === 'search' && <li><a href="" onClick={event => {
+                            {(view === 'search' || view === 'random') && <li><a href="" onClick={event => {
                                 event.preventDefault()
 
                                 handleFavorites()
@@ -180,8 +194,11 @@ class Landing extends Component {
             <h1>Landing</h1>
 
             {view === 'search' && <>
-                <h3>Search</h3>
+                <h3>Search...</h3>
                 <Search onSearch={handleSearch} />
+
+                <h3>or get Random!</h3>
+                <Random onRandom={handleRandom}/>
 
                 {!gif ?
                     <Results items={gifs} paintItem={gif => {
