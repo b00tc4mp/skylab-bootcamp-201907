@@ -1,7 +1,5 @@
 logic.retrieveUser = function (id , token){
-
     validate.str(id , 'id')
-    
     validate.str(token , 'token')
 
     return call(`https://skylabcoders.herokuapp.com/api/user/${id}` , 'get' , {'authorization' : `bearer ${token}`} , undefined)
@@ -10,3 +8,7 @@ logic.retrieveUser = function (id , token){
         return response.data
     })
 }
+
+
+
+

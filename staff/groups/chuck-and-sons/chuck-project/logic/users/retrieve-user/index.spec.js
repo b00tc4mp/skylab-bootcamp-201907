@@ -46,14 +46,15 @@
             })
         )
 
-        // it("should fail with wrong type of id" , () => 
-        //     expect( () => {
-        //         logic.retrieverUser( 1 , data.token)
-        //     }).toThrowError(TypeError , "id with value 1 is not a valid string"))
+        it("should fail with wrong type of id" , () => 
+            expect( () => {
+                logic.retrieveUser( 1 , data.token)
+            }).toThrowError(TypeError , "id with value 1 is not a valid string"))
+            
         
-        // it("should fail with empty or blank id" , () => 
-        //     expect( () => {
-        //         logic.retrieveUser( "" , data.token)
-        //     }).toThrowError(TypeError , "id is empty or blank"))
+        it("should fail with empty or blank id" , () => 
+            expect( () => {
+                logic.retrieveUser( "" , data.token)
+            }).toThrowError(TypeError , "id is empty or blank"))
     })
 }
