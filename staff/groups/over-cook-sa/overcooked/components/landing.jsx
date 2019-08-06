@@ -4,10 +4,18 @@ class Landing extends Component {
     constructor () {
         super()
 
+
+        this.state = { view: 'header', mealRandom: null }
+        
+        this.onRandomRecipe = this.onRandomRecipe.bind(this)
+        this.handleRegister = this.handleRegister.bind(this)
+
+
         this.state = { view: 'first' , mealRandom: null }
         this.onRandomRecipe = this.onRandomRecipe.bind(this)
         this.handleGoToLogin = this.handleGoToLogin.bind(this)
         this.handleGoToRegister = this.handleGoToRegister.bind(this)
+
 
     }
 
@@ -23,12 +31,18 @@ class Landing extends Component {
         })
     }
 
+    handleRegister(event) {
+        event.preventDefault()
+
+        this.props.onRegister()
+
     handleGoToRegister() {
         this.setState({ view: 'register', mealRandom: null })
     }
 
     handleGoToLogin() {
         this.setState({ view: 'login' , mealRandom: null })
+
     }
   
 
