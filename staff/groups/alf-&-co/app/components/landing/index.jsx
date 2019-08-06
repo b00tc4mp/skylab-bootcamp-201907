@@ -85,7 +85,16 @@ class Landing extends Component {
     handleAcceptError() {
         this.setState({ error: undefined })
     }
-    handleRetrieveMovie(){
+    handleRetrieveMovie(movieId){
+        const { props: {credentials } } = this
+        let id, token
+        credentials && (id = credentials.id, token = credentials.token)
+
+        logic.retrieveMovie(id, token, movieId)
+        .then(movie => this.setState({movie, view: 'detail'}))
+        .catch(({message}) => this.setState({error: message}))
+        
+        
 
     }
     handleToggleFavMovieFromMovieDetail(){
