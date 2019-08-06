@@ -15,7 +15,12 @@ class App extends Component{
     }
     /* LANDING */
     handleGoRegister(){
-        this.setState({view:"register"})
+        this.setState({view:"spinner"})
+        setTimeout(() => {
+            
+            this.setState({view:"register"})
+            
+        }, 2000)
     }
     handleGoLogin(){
         this.setState({view:"login"})
@@ -54,6 +59,8 @@ class App extends Component{
             {view=== 'register' && <Register onRegister={handleRegister} onBack={handleBackToLanding} error={error} />}
             {view === 'register-success' && <RegisterSuccess onLogin={handleGoLogin} error={error}/>}
             {view=== 'login' &&<Login onLogin={handleLogin} onBack={handleBackToLanding} error={error}/>}
+            {view==="spinner" && <Spinner/>}
+
 
         </>
     }
