@@ -10,6 +10,8 @@ class Landing extends Component{
         this.handleSearch=this.handleSearch.bind(this)
         this.handleRetrieveArticle=this.handleRetrieveArticle.bind(this)
         this.handleBackFromDetail=this.handleBackFromDetail.bind(this)
+        this.handleToggleFavArticleFromArticleDetail=this.handleToggleFavArticleFromArticleDetail.bind(this)
+    
     }
 
     handleBackFromDetail() {
@@ -31,18 +33,35 @@ class Landing extends Component{
         /* console.log(value, "correct") */
         logic.searchNews(value)
         .then(news=>this.setState({news,value}))
+        .catch(({message}) => this.setState({error: message}))
         .then(() => console.log("p:",this.state.news))
     }
     handleRetrieveArticle(item){
-        console.log("workds",item)
-        this.setState({article:item})
-        
+
+        const {props : {credentials}} = this
+        let id, token
+        credentials && (id = credentials.id, token = credentials.token)
+
+        logic.retrieveArticle(id, token, item)
+        this.setState({ article:item }) 
     }
+     handleToggleFavArticleFromArticleDetail(article){
+        const {props : { onLogin, credentials}, handleRetrieveArticle} = this
+
+        let id, token
+
+        credentials && (id = credentials.id, token = credentials.token)
+        
+        credentials ? logic.toggleFavArt(id, token, article)
+        .then(() => handleRetrieveArticle(article))
+        .catch(({ message}) => this.setState( { error : message})) 
+        : onLogin()
+    } 
 
     render(){
-        const {state:{news, article},
+        const {state:{news, article, error},
         handleLogin,handleRegister,handleSearch,
-        handleRetrieveArticle, handleBackFromDetail}=this
+        handleRetrieveArticle, handleBackFromDetail,  handleToggleFavArticleFromArticleDetail }=this
 
         return <>
         <header>
@@ -57,13 +76,13 @@ class Landing extends Component{
         </header>
 
         
-        <Search onSearch={handleSearch}/>
+        <Search onSearch={handleSearch} error={error}/>
         {!article?
         <Results items={news} paintItem={article => {
             return <ArticleItem article={article}/>
         }} onItem={handleRetrieveArticle}/>
         :
-        <ArticleDetail article={article} onBack={handleBackFromDetail}/>}
+        <ArticleDetail article={article} onBack={handleBackFromDetail} onToggle={handleToggleFavArticleFromArticleDetail}/>}
         </>
     }
 }

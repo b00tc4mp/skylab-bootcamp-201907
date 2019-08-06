@@ -1,10 +1,12 @@
 function FavButton({active, onToggle}){
   return <button onClick={event =>{
-    event.preventDefault()
+    event.stopPropagation()
 
     onToggle()
+    
   }} >
+  {console.log(active)}
     {active?
-    <i className="fa fa-star"></i>:<i className='fas fa-star'></i>}
+    ':corazón_púrpura:' : ':corazón_partido:'}
   </button>
 }

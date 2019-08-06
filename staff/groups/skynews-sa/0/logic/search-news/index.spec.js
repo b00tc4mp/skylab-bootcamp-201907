@@ -16,9 +16,9 @@
     })
 
     it('should fail on wrong value', () => 
-    logic.searchNews('jhfjh')
-    .catch(error => {
-      expect(error).toBeDefined()
-    }))
+      logic.searchNews('jhfjh')
+      .then((res)=>expect(res).toBeUndefined())
+      .catch(error => { expect(error).toBeDefined() })
+    )
   })
 }
