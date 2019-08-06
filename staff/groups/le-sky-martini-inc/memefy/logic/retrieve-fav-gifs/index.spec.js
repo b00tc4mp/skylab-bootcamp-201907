@@ -34,7 +34,7 @@
                     expect(gifs).toBeDefined()
                     expect(gifs.length).toBe(3)
 
-                    gifs.forEach(({ id, title, images, url, favorite }) => {
+                    gifs.forEach(({ data: { id, title, images, url}, favorite }) => {
                         expect(id).toBeDefined()
                         expect(title).toBeDefined()
                         expect(images.downsized_large.url).toBeDefined()

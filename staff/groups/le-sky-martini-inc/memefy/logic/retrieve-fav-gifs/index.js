@@ -12,7 +12,7 @@ logic.retrieveFavGifs = function (id, token) {
 
             const calls = favorites.map(gifId =>
                 call(`https://api.giphy.com/v1/gifs/${gifId}?api_key=yXEKD5c78ISwI8WSOKyTndpHZH9XpqQW`, undefined, undefined, undefined)
-                    .then(res => res.data)
+                    // .then(res => res.data)
                     .then(gif => (gif.favorite = true) && gif)
             )
 
