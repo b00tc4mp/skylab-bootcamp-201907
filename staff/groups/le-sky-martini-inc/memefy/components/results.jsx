@@ -7,6 +7,3 @@ function Results(props) {
         </li>)}
     </ul>
 }
-
-
-
