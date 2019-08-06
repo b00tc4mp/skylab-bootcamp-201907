@@ -6,18 +6,16 @@ class App extends Component {
 
         this.state = { view: 'landing' }
 
+
         this.handleRegister = this.handleRegister.bind(this)
-        this.handleGoToLogin = this.handleGoToLogin.bind(this)
-        this.handleGotToRegister = this.handleGotToRegister.bind(this)
+
     }
 
-    handleGotToRegister() {
-        this.setState({ view: 'register' })
-    }
+        
+    
 
-    handleGoToLogin() {
-        this.setState({ view: 'login' })
-    }
+
+    
 
     handleRegister(name, surname, email, password, repassword) {
         try {
@@ -32,11 +30,14 @@ class App extends Component {
 
     render() {
 
-        const { state: { view }, handleGotToRegister, handleGoToLogin, handleRegister } = this
+        const { state: { view }, handleRegister } = this
 
         return <>
-            {view === 'landing' && <Landing onRegister={handleGotToRegister} onLogin={handleGoToLogin} />}
+
+            
             {view === "landing" && <Register onRegister={handleRegister} />}
+            {view === 'landing' && <Landing />}
+
         </>
     }
 }
