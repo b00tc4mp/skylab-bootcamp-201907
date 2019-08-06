@@ -68,13 +68,13 @@ class Landing extends Component{
         return <>
         <header>
             <nav className="nav">
-                <ul>
-                    <li><a href="" className="register" onClick={handleRegister}>Register</a></li>
-                    <li><a className="login" href=""onClick={handleLogin}>Login</a></li>
+                <ul className="nav-ul">
+                    <li><a href="" className="register-li" onClick={handleRegister}>Register</a></li>
+                    <li><a className="login-li" href=""onClick={handleLogin}>Login</a></li>
                 </ul>
             </nav>
              <h1 className='landing__title hide'>SkyNews</h1>
-             <img className="logo" src="style/img/skynews-logo.png"></img> 
+             <img className="nav-logo" src="style/img/skynews-logo.png"></img> 
         </header>
 
         

@@ -1,16 +1,17 @@
 function ArticleDetail({article, onBack, onToggle}){
     
     return <>
-    <h3>{article.title}</h3>
-    <img src={article.urlToImage}/>
-    <p>Published: {article.publishedAt.slice(0,10)}</p>
-    <h4 >{article.description}</h4>
-    <FavButton active={article.favorite} onToggle={() => onToggle(article)}/>
-    <p>Go to original <a href={article.url}>article</a> </p>
-    <a href="" onClick={event=>{
+    <section className="detail">
+        <h3 className="detail-title">{article.title}</h3>
+        <img className="detail-img" src={article.urlToImage}/>
+        <p className="detail-data">Published: {article.publishedAt.slice(0,10)}</p>
+        <h4 className="detail-description">{article.description}</h4>
+        <FavButton active={article.favorite} onToggle={() => onToggle(article)}/>
+        <a className="detail-Link" href={article.url}>Go to original article</a>
+        <a className="detaul-back" href="" onClick={event=>{
         event.preventDefault()
-
         onBack()
-    }}>Go onBack</a>
+        }}>Go onBack</a>
+    </section>
     </>
 }
