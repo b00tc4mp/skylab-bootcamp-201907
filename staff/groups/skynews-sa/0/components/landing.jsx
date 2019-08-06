@@ -31,10 +31,12 @@ class Landing extends Component{
     }
     handleSearch(value){
         /* console.log(value, "correct") */
+        this.props.onSpinning()
         logic.searchNews(value)
         .then(news=>this.setState({news,value}))
         .catch(({message}) => this.setState({error: message}))
         .then(() => console.log("p:",this.state.news))
+        .then(()=> this.props.onStopSpinning())
     }
     handleRetrieveArticle(item){
 
