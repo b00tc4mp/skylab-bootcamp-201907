@@ -1,7 +1,7 @@
-function RecipeItem ( { meal: { strMeal, strMealThumb } } ) {
+function RecipeItem ( { meal: { strMeal, strMealThumb, strYoutube } } ) {
     return <>
+        <h2>Random Recipe</h2>
         <h3>{strMeal}</h3>
-        <img src={strMealThumb} alt=""/> {/** TErmianr poniendo el viodeo */}
-        {/*<iframe width="420" height="315" src={strYoutube}></iframe>    */}
+        <iframe width="420" height="315" src={strYoutube}></iframe>    
     </>
 }
