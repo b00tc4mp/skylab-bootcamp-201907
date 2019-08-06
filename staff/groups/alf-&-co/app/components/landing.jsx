@@ -8,10 +8,11 @@ class Landing extends Component {
 
         this.handleGoToFavorites=this.handleGoToFavorites.bind(this)
         this.handleGoToCollections=this.handleGoToCollections.bind(this)
-        this.handleLogout=this.handleLogout.bind(this)
+        this.handleLogOut=this.handleLogOut.bind(this)
         this.handleGoToSearch=this.handleGoToSearch.bind(this)
-        this.handleGoToLogin=this.handleGoToLogin.bind(this)
+        this.handleGoToLogIn=this.handleGoToLogIn.bind(this)
         this.handleSearch=this.handleSearch.bind(this)
+        this.handleAcceptError = this.handleAcceptError.bind(this)
         this.handleRetrieveMovie=this.handleRetrieveMovie.bind(this)
         this.handleToggleFavMovieFromMovieDetail=this.handleToggleFavMovieFromMovieDetail.bind(this)
         this.handleBackFromDetail=this.handleBackFromDetail.bind(this)
@@ -23,13 +24,25 @@ handleGoToFavorites(){
 handleGoToCollections(){
 
 }
-handleLogout(){
+handleLogOut(event){
+    event.preventDefault()
 
+    const {props: {onLogOut} } = this
+
+    this.setState({user: undefined, view: 'collections'}, ()=> onLogOut())
+
+}
+handleGoToLogIn(event){
+    event.preventDefault()
+
+    this.props.onLogIn()
+
+}
+
+handleAcceptError() {
+    this.setState({ error: undefined })
 }
 handleGoToSearch(){
-
-}
-handleGoToLogin(){
 
 }
 handleSearch(){
@@ -55,23 +68,29 @@ handleToggleFavMovieFromMovieItem(){
     render() {
         const {
             state: { view, search, movie, movies, query, error, user, favs },
-            handleSearch, handleRetrieveMovie, handleLogout,
-            handleBackFromDetail, handleGoToSearch, handleGoToLogin,
-            handleToggleFavMovieFromMovieItem, handleToggleFavMovieFromMovieDetail, handleGoToCollections, handleGoToFavorites
+            handleSearch, handleRetrieveMovie, handleLogOut,
+            handleBackFromDetail, handleGoToSearch, handleGoToLogIn,
+            handleToggleFavMovieFromMovieItem,handleToggleFavMovieFromMovieDetail, handleGoToCollections, handleGoToFavorites
         } = this
 
         return <>
-            <header>
+            <header className="panel--nav">
                 <nav>
                     <ul>
                         <li><a href="" onClick={handleGoToFavorites}>Favorites</a></li>
                         <li><a href="" onClick={handleGoToCollections}>Collections</a></li>
-                        <li><a href="" onClick={handleLogout}>Logout</a></li>
+                        <li><a href="" onClick={handleLogOut}>Logout</a></li>
                     </ul>
-                    <ul>
-                        <img></img>
-                        <li><a href="" onClick={handleGoToSearch}>Search</a></li>
-                        <li><a href="" onClick={handleGoToLogin}>Login</a></li>
+                    <h2 className="logo">MOVIE LAB</h2>
+
+                    <ul className= "icons-header">
+                        <li><a href="" onClick={handleGoToSearch}><i className="fas fa-search"></i></a></li>
+                        
+
+                        {!user ?<li><a href="" onClick={handleGoToLogIn}><i className="fas fa-user"></i></a></li>
+                        :
+                        <li><a href="" onClick={handleGoToLogIn}>{user.name}</a></li>
+                        }
                     </ul>
                 </nav>
             </header>
@@ -100,12 +119,18 @@ handleToggleFavMovieFromMovieItem(){
                     <MovieDetail movie={movie} onBack={handleBackFromDetail} onToggle={handleToggleFavMovieFromMovieDetail} />}
             </main>
             <footer>
-                <p>Movie Lab © 2019 Alf & Co.</p>
-                <ul>
-                    <li><a href="">Twitter</a></li>
-                    <li><a href="">Facebook</a></li>
-                    <li><a href="">Instagram</a></li>
+                
+                <ul className="panel--foot">
+                    <li className="red"><a href=""><i className="fab fa-twitter"></i></a></li>
+                    <li><a href=""><i className="fab fa-facebook-f"></i></a></li>
+                    <li><a href=""><i className="fab fa-instagram"></i></a></li>
+                    <li><a href=""><i className="fab fa-pinterest-p"></i></a></li>
+                    <li><a href=""><i className="fab fa-tumblr"></i></a></li>
+                    <li><a href=""><i className="fab fa-vimeo-v"></i></a></li>
+                    <li><a href=""><i className="fab fa-youtube"></i></a></li>
+                    <li><a href=""><i className="fab fa-weixin"></i></a></li>
                 </ul>
+                <p className="registered-name">Movie Lab © 2019 Alf & Co.</p>
             </footer>
         </>
     }
