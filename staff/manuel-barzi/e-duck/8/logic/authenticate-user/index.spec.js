@@ -21,10 +21,10 @@
 
         it('should succeed on correct data', () =>
             logic.authenticateUser(user.username, user.password)
-                .then(data => {
-                    expect(data).toBeDefined()
+                .then(credentials => {
+                    expect(credentials).toBeDefined()
 
-                    const { id, token } = data
+                    const { id, token } = credentials
                     expect(id).toBeDefined()
                     expect(token).toBeDefined()
                 })

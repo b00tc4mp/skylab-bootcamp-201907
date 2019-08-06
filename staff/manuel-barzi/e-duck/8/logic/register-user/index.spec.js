@@ -2,7 +2,7 @@
     const { random } = Math
 
     describe('logic - register user', () => {
-        let user, data
+        let user, credentials
 
         beforeEach(() =>
             user = {
@@ -20,9 +20,9 @@
                 .then(response => {
                     if (response.status === 'KO') throw new Error(response.error)
                     else {
-                        data = response.data
+                        credentials = response.data
 
-                        return call(`https://skylabcoders.herokuapp.com/api/user/${data.id}`, 'get', { 'authorization': `bearer ${data.token}` }, undefined)
+                        return call(`https://skylabcoders.herokuapp.com/api/user/${credentials.id}`, 'get', { 'authorization': `bearer ${credentials.token}` }, undefined)
                     }
                 })
                 .then(response => {
@@ -32,7 +32,7 @@
                     expect(_user.surname).toBe(user.surname)
                     expect(_user.username).toBe(user.username)
                     expect(_user.password).toBeUndefined()
-                    expect(_user.id).toBe(data.id)
+                    expect(_user.id).toBe(credentials.id)
                     expect(_user.favorites).toBeDefined()
                     expect(_user.favorites).toEqual(user.favorites)
                 })

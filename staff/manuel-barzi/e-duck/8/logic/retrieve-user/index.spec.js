@@ -2,7 +2,7 @@
     const { random } = Math
 
     describe('logic - retrieve user', () => {
-        let user, data
+        let user, credentials
 
         beforeEach(() => {
             user = {
@@ -21,16 +21,16 @@
                 .then(response => {
                     if (response.status === 'KO') throw new Error(response.error)
 
-                    data = response.data
+                    credentials = response.data
                 })
         })
 
         it('should succeed on matching user with username', () =>
-            logic.retrieveUser(data.id, data.token)
+            logic.retrieveUser(credentials.id, credentials.token)
                 .then(_user => {
                     const { id, name, surname, username, password } = _user
 
-                    expect(id).toBe(data.id)
+                    expect(id).toBe(credentials.id)
                     expect(name).toBe(user.name)
                     expect(surname).toBe(user.surname)
                     expect(username).toBe(user.username)

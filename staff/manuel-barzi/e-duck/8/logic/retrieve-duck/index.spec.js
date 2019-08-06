@@ -42,7 +42,7 @@
         describe('when user already has a favorite duck', () => {
             const id = '5c3853aebd1bde8520e66e97'
 
-            let data
+            let credentials
 
             beforeEach(() => {
                 user.favorites.push(id)
@@ -55,13 +55,13 @@
                             .then(response => {
                                 if (response.status === 'KO') throw new Error(response.error)
 
-                                data = response.data
+                                credentials = response.data
                             })
                     })
             })
 
             it('should succeed on valid id', () =>
-                logic.retrieveDuck(data.id, data.token, id)
+                logic.retrieveDuck(credentials.id, credentials.token, id)
                     .then(duck => {
                         expect(duck).toBeDefined()
                         expect(duck.id).toBe(id)
@@ -76,7 +76,7 @@
             it('should fail on non valid id', () => {
                 const id = '5c3853aebd1bde8520e66ff9'
 
-                return logic.retrieveDuck(data.id, data.token, id)
+                return logic.retrieveDuck(credentials.id, credentials.token, id)
                     .then(duck => expect(duck).toBeUndefined())
                     .catch(error => expect(error).toBeDefined())
             })
