@@ -13,6 +13,9 @@ class Landing extends Component {
         const { state: { view } } = this
 
         return <>
+            <header>
+                <BigHeader />
+            </header>
             
 
         </>
