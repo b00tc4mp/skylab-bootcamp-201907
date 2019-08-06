@@ -7,6 +7,6 @@ function FavButton({active, onToggle}){
   }} >
   {console.log(active)}
     {active?
-    ':corazón_púrpura:' : ':corazón_partido:'}
+    <i className="far fa-2x fa-star"></i>:<i className="fas fa-2x fa-star"></i>}
   </button>
 }
