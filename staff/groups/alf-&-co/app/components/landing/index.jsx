@@ -50,11 +50,10 @@ class Landing extends Component {
     }
 
     handleGoToFavorites(){
-
     }
 
-   
-    handleLogout(){
+    handleRetrieveMovie(id){
+        console.log(id)
 
     }
     handleGoToSearch(){

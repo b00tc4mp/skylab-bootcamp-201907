@@ -19,6 +19,6 @@ function Login (props){
 
             onclose()
 
-        }}></a>
+        }}></a>*/}
     </>
 }
