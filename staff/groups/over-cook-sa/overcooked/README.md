@@ -1,37 +1,43 @@
-﻿Components
+﻿COMPONENTS
 
-App
+- App
+    - Footer
 
-- Landing
-  Login / Register
+    - Landing
+        - Header
+        - Login / Register & Random Recipe   
+        - Register User
+            - Form
+            - Submit
+            - Back
+        - Register Success
+            - GoLogin
+        - Login
+            - Form
+            - Submit
+            - Back 
 
-- Register User
-  Form
-  Submit
-  Back
-
-- Register Success
-  Login
-
-- Login
-  Form
-  Submit
-  Back
-
-- Search
-
-- Results
-
-- Recipe
-
-- Recipe detail
+    - Home
+        - Header / Search / Logout / Favorites   
+        - Results / Favorites / Back
+        - Recipe detail / Favorites / Back
+        - Categories
 
 LOGIC
 
-    Register User
-    Authenticate User
+- retrieve recipe
+- toggle favorite meals
+- retrieve user
+- random recipe
+- search by name
+- search by category
+- search by ingredient
+- validate
+- register user
+- authenticate user
 
-    Search
+  
+API
 
     By name
     https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata
