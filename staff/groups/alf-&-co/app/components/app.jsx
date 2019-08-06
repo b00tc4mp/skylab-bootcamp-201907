@@ -4,6 +4,7 @@ class App extends Component {
     constructor() {
         super()
 
+
         this.state = { view: 'landing', credentials: undefined, error: undefined, register_success: undefined }
 
         this.handleBackToLanding = this.handleBackToLanding.bind(this)
@@ -17,13 +18,15 @@ class App extends Component {
 
     handleBackToLanding() {
         this.setState({ view: 'landing' })
+
     }
 
     handleGoToSignUp() {
         this.setState({ view: 'signup', error: undefined })
     }
 
-    handleSubmitSignUp(name, surname, email, password, repassword) {
+
+    handleGoToSignUp(name, surname, email, password, repassword){
         try {
             logic.registerUser(name, surname, email, password, repassword)
                 .then(() => this.setState({ view: 'login', register_success: true }))
@@ -50,13 +53,19 @@ class App extends Component {
         this.setState({credentials: undefined})
     }
 
+    handleLogin() {
+
+    }
+
     render() {
         const { state: { view, credentials, error, register_success }, handleBackToLanding, handleSubmitLogIn, handleSubmitSignUp, handleGoToLogIn, handleGoToSignUp, handleLogOut } = this
 
         return <>
+
             {view === 'landing' && <Landing onLogIn={handleGoToLogIn}  credentials={credentials} />}
             {view === 'login' && <LogIn onClose={handleBackToLanding} onLogIn={handleSubmitLogIn} error={error} register_success={register_success} toSignUp={handleGoToSignUp} onLogOut={handleLogOut} />}
             {view === 'signup' && <SignUp onClose={handleBackToLanding} onSignUp={handleSubmitSignUp} error={error} toLogIn={handleGoToLogIn} />}
+
         </>
     }
 }

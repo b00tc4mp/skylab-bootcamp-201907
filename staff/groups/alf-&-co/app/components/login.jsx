@@ -21,12 +21,15 @@ function LogIn({ onLogIn, toSignUp, onClose, error, register_success }) {
             {register_success && <Feedback message='Register successful' level='success' />}
             <button type="submit" className="button" form="form1">LOG IN</button>
 
+
             <a href="" className="button" onClick={event => {
                 event.preventDefault()
+
 
                 toSignUp()
 
             }}>SIGN UP</a>
         </div>
+
     </>
 }
