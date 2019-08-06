@@ -8,7 +8,7 @@ logic.registerUser = function (name, surname, username, password, repassword) {
 
     if (password !== repassword) throw new Error('passwords do not match')
 
-    return call('https://skylabcoders.herokuapp.com/api/user', 'post', { 'content-type': 'application/json' }, { name, surname, username, password, favorites: [] },'skylab')
+    return call('https://skylabcoders.herokuapp.com/api/user', 'post', { 'content-type': 'application/json' }, JSON.stringify({ name, surname, username, password, favorites: [] }))
         .then(response => {
             if (response.status === 'KO') throw new Error(response.error)
         })

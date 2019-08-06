@@ -2,21 +2,29 @@
     const { random } = Math
 
     describe('logic - register user', () => {
-        let user, data
+        let user, data, body, _body
 
-        beforeEach(() =>
-            user = {
-                name: 'John-' + random(),
-                surname: 'Doe-' + random(),
-                username: 'johndoe-' + random() + '@mail.com',
-                password: '123-' + random(),
-                favorites: []
+        beforeEach(() => {
+                user = {
+                    name: 'John-' + random(),
+                    surname: 'Doe-' + random(),
+                    username: 'johndoe-' + random() + '@mail.com',
+                    password: '123-' + random(),
+                    favorites: []
+                }
+
+                body = { 
+                    username: user.username, 
+                    password: user.password 
+                }
+
+                _body = JSON.stringify(body)
             }
         )
 
         it('should succeed on correct data', () =>
             logic.registerUser(user.name, user.surname, user.username, user.password, user.password)
-                .then(() => call('https://skylabcoders.herokuapp.com/api/auth', 'post', { 'content-type': 'application/json' }, { username: user.username, password: user.password },'skylab'))
+                .then(() => call('https://skylabcoders.herokuapp.com/api/auth', 'post', { 'content-type': 'application/json' }, _body))
                 .then(response => {
                     if (response.status === 'KO') throw new Error(response.error)
                     else {

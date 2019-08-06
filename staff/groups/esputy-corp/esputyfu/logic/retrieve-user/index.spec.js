@@ -13,10 +13,10 @@
                 favorites: []
             }
 
-            return call('https://skylabcoders.herokuapp.com/api/user', 'post', { 'content-type': 'application/json' }, user, 'skylab')
+            return call('https://skylabcoders.herokuapp.com/api/user', 'post', { 'content-type': 'application/json' }, JSON.stringify(user))
                 .then(response => {
                     if (response.status === 'KO') throw new Error(response.error)
-                    else return call('https://skylabcoders.herokuapp.com/api/auth', 'post', { 'content-type': 'application/json' }, { username: user.username, password: user.password }, 'skylab')
+                    else return call('https://skylabcoders.herokuapp.com/api/auth', 'post', { 'content-type': 'application/json' }, JSON.stringify({ username: user.username, password: user.password }))
                 })
                 .then(response => {
                     if (response.status === 'KO') throw new Error(response.error)

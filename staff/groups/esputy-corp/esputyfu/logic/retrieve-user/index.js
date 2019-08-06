@@ -4,7 +4,7 @@ logic.retrieveUser = function (id, token) {
     if(typeof id !== 'string') throw new Error('id is not string')
     if(typeof token !== 'string') throw new Error('id is not string')
 
-    return call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'get', { 'authorization': `bearer ${token}` }, undefined, 'skylab')
+    return call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'get', { 'authorization': `bearer ${token}` }, undefined)
         .then(response => {
             if (response.status === 'KO') throw new Error(response.error)
 
