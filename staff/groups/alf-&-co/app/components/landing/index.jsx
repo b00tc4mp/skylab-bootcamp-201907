@@ -20,9 +20,21 @@ class Landing extends Component {
     }
 
     componentWillMount(){
-        const {props: { credentials }} = this
+        const { props: { credentials } } = this
+
+        if (credentials) {
+            const { id, token } = credentials
         
+        
+        try {
+            logic.retrieveUser(id, token)
+            .then(user => this.setState({user}))
+            .catch(({message})=> this.setState({error: message}))
+        } catch({message}){
+            this.setState({error:message})
+        }
     }
+}
 
     handleGoToCollections(query){
         console.log(query)
@@ -67,26 +79,24 @@ class Landing extends Component {
         console.log(id)
 
     }
-    handleGoToSearch(){
-        event.preventDefault()
-        this.setState({search: true})
-
-
-    }
+    
     handleGoToLogIn(event){
         event.preventDefault()
     
         this.props.onLogIn()
     
     }
+
     handleLogOut(event){
+        
         event.preventDefault()
     
-        const {props: {onLogOut} } = this
+        const { props: { onLogOut } } = this
     
-        this.setState({user: undefined, view: 'collections'}, ()=> onLogOut())
+        this.setState({ user: undefined, view: 'collections' }, () => onLogOut())
     
     }
+
     handleAcceptError() {
         this.setState({ error: undefined })
     }
@@ -120,7 +130,7 @@ class Landing extends Component {
         
     return <>
         <header className="panel--nav">
-            {user && <p>Hello, {user.name}</p>}
+           
                 <nav>
                     <ul>
                         <li><a href="" onClick={handleGoToFavorites}>Favorites</a></li>
@@ -131,11 +141,11 @@ class Landing extends Component {
 
                     <ul className= "icons-header">
                         <li><a href="" onClick={handleGoToSearch}><i className="fas fa-search"></i></a></li>
-                                
+                        {user && <p>{user.name}</p>}       
 
-                        {!user ?<li><a href="" onClick={handleGoToLogIn}><i className="fas fa-user"></i></a></li>
-                        :
-                        <li><a href="" onClick={handleGoToLogIn}>{user.name}</a></li>
+                        {!user && <li><a href="" onClick={handleGoToLogIn}><i className="fas fa-user"></i></a></li>
+                        
+                       
                         }
                      </ul>
                  </nav>
