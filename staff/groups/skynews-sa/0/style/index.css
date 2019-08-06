@@ -1,0 +1,68 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.body {
+  width: 100vw;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  color: #555555;
+  background-image: url("https://image.freepik.com/vector-gratis/diseno-fondo-mapa-mundo_1127-2318.jpg");
+  background-size: cover;
+}
+
+.nav {
+  width: 100%;
+  padding: 0.5rem;
+  height: 2.2rem;
+  background-color: #009ee2;
+  display: flex;
+  justify-content: flex-end;
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+}
+
+a {
+  font-size: 0.8em;
+  background-color: rgba(241, 239, 235, 0.2);
+  text-decoration: none;
+  color: white;
+}
+
+.register {
+  padding: 0.4rem 1.3rem;
+}
+
+.login {
+  padding: 0.4rem 1.8rem;
+}
+
+.logo {
+  width: 84vw;
+  margin: 6rem auto;
+  display: flex;
+}
+
+select {
+  width: 60vw;
+  height: 6vh;
+  margin: 0 auto;
+  display: flex;
+  background-color: white;
+}
+
+/*# sourceMappingURL=index.css.map */
