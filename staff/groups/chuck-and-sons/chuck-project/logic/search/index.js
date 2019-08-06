@@ -1,4 +1,3 @@
-
 logic.searchJokes = function (id, token, query) {
     let favorites;
 
@@ -35,4 +34,3 @@ logic.searchJokes = function (id, token, query) {
             })
     }
 }
-
