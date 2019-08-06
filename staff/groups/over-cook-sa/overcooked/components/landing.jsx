@@ -16,7 +16,10 @@ class Landing extends Component {
             <header>
                 <BigHeader />
             </header>
-            
+
+            <footer>
+                <Footer />
+            </footer>
 
         </>
     }
