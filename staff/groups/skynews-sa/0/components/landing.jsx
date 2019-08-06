@@ -9,6 +9,14 @@ class Landing extends Component{
         this.handleRegister=this.handleRegister.bind(this)
         this.handleSearch=this.handleSearch.bind(this)
         this.handleRetrieveArticle=this.handleRetrieveArticle.bind(this)
+        this.handleBackFromDetail=this.handleBackFromDetail.bind(this)
+    }
+
+    handleBackFromDetail() {
+        const { state: { value }} = this
+        logic.searchNews(value)
+            .then(news => this.setState({ news, article: undefined }))
+            .catch(({ message }) => this.setState({ error: message }))
     }
 
     handleRegister(event){
@@ -32,7 +40,9 @@ class Landing extends Component{
     }
 
     render(){
-        const {state:{news, article},handleLogin,handleRegister,handleSearch,handleRetrieveArticle}=this
+        const {state:{news, article},
+        handleLogin,handleRegister,handleSearch,
+        handleRetrieveArticle, handleBackFromDetail}=this
 
         return <>
         <header>
@@ -53,7 +63,7 @@ class Landing extends Component{
             return <ArticleItem article={article}/>
         }} onItem={handleRetrieveArticle}/>
         :
-        <ArticleDetail article={article} />}
+        <ArticleDetail article={article} onBack={handleBackFromDetail}/>}
         </>
     }
 }
