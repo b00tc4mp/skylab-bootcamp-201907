@@ -2,7 +2,7 @@
     const { random } = Math
 
     describe('logic - toggle favorite track', () => {
-        fdescribe('when you do not have songs in favorites', () => {
+        describe('when you do not have songs in favorites', () => {
             const trackId = '7rbCL7W893Zonbfnevku5s'
 
             let user, credentials
@@ -52,7 +52,7 @@
 
         })
 
-        fdescribe('when you have a song in favorites', () => {
+        describe('when you have a song in favorites', () => {
             const trackId = '7rbCL7W893Zonbfnevku5s'
 
             let user, credentials
