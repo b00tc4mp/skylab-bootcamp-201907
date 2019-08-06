@@ -4,16 +4,40 @@ class Landing extends Component {
   constructor() {
     super()
 
-    this.state = { view: 'first', mealRandom: null }
+    this.state = {
+      view: 'first',
+      mealRandom: null,
+      credentials: undefined,
+      user: undefined,
+      error: undefined
+    }
 
     this.onRandomRecipe = this.onRandomRecipe.bind(this)
     this.handleGoToLogin = this.handleGoToLogin.bind(this)
     this.handleGoToRegister = this.handleGoToRegister.bind(this)
     this.handleRegister = this.handleRegister.bind(this)
+    this.handleLogin = this.handleLogin.bind(this)
   }
 
   componentWillMount() {
     this.onRandomRecipe()
+
+    const {
+      props: { credentials }
+    } = this
+
+    if (credentials) {
+      const { id, token } = credentials
+
+      try {
+        logic
+          .retrieveUser(id, token)
+          .then(user => this.setState({ user }))
+          .catch(({ message }) => this.setState({ error: message }))
+      } catch ({ message }) {
+        this.setState({ error: message })
+      }
+    }
   }
 
   onRandomRecipe = () => {
@@ -34,6 +58,17 @@ class Landing extends Component {
     }
   }
 
+  handleLogin(email, password) {
+    try {
+      logic
+        .authenticateUser(email, password)
+        .then(credentials => this.setState({ view: 'first', credentials }))
+        .catch(({ message }) => this.setState({ error: message }))
+    } catch ({ message }) {
+      this.setState({ error: message })
+    }
+  }
+
   handleGoToRegister() {
     this.setState({ view: 'register', mealRandom: null })
   }
@@ -47,7 +82,8 @@ class Landing extends Component {
       state: { view, mealRandom },
       handleGoToLogin,
       handleGoToRegister,
-      handleRegister
+      handleRegister,
+      handleLogin
     } = this
 
     return (
@@ -60,11 +96,11 @@ class Landing extends Component {
             {view === 'register' && <Register onRegister={handleRegister} />}
             {view === 'first' && (
               <WelcomeAnchors
-                onLogin={handleGoToLogin}
                 onRegister={handleGoToRegister}
+                onLogin={handleGoToLogin}
               />
             )}
-            {view === 'login' && <Login />}
+            {view === 'login' && <Login onLogin={handleLogin} />}
             {view === 'register-success' && (
               <RegisterSuccess onLogin={handleGoToLogin} />
             )}
