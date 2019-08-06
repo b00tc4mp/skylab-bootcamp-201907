@@ -1,4 +1,4 @@
-logic.toggleFavMovie = function(userId, userToken, movieId) {
+logic.toggleFavMovie = function(userId, userToken, movieId, expression) {
     const TMDB_API_KEY = '03ecceac5993bcd054fbc7d617df741a'
     const AUTH_ENDPOINT = 'https://skylabcoders.herokuapp.com/api/user/'
 
@@ -27,6 +27,8 @@ logic.toggleFavMovie = function(userId, userToken, movieId) {
                     {favorites})
                     .then(response => {
                         if (response.status === 'KO') throw Error(response.error)
+                        debugger
+                        expression()
                     })
             } else {
                 /* Check if movie is still accessible */
@@ -42,7 +44,7 @@ logic.toggleFavMovie = function(userId, userToken, movieId) {
                             {favorites})
                             .then(response => {
                                 if (response.status === 'KO') throw Error(response.error)
-
+                                expression()
                             })
                     })
             }

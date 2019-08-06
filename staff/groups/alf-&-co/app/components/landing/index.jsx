@@ -4,32 +4,44 @@ class Landing extends Component {
     constructor() {
         super()
 
-        this.state = { view: '', search: false, query: undefined, movies: [], movie: undefined, error: undefined, user: undefined, favs: [] }
+        this.state = { view: 'collections', search: false, query: undefined, collection: undefined, movies: [], movie: undefined, error: undefined, user: undefined, favs: [] }
 
         this.handleGoToFavorites=this.handleGoToFavorites.bind(this)
         this.handleGoToCollections=this.handleGoToCollections.bind(this)
-        this.handleLogout=this.handleLogout.bind(this)
+        this.handleLinkToCollections=this.handleLinkToCollections.bind(this)
+        this.handleLogOut=this.handleLogOut.bind(this)
         this.handleGoToSearch=this.handleGoToSearch.bind(this)
-        this.handleGoToLogin=this.handleGoToLogin.bind(this)
+        this.handleGoToLogIn=this.handleGoToLogIn.bind(this)
         this.handleSearch=this.handleSearch.bind(this)
+        this.handleAcceptError = this.handleAcceptError.bind(this)
         this.handleRetrieveMovie=this.handleRetrieveMovie.bind(this)
         this.handleToggleFavMovieFromMovieDetail=this.handleToggleFavMovieFromMovieDetail.bind(this)
         this.handleBackFromDetail=this.handleBackFromDetail.bind(this)
         this.handleToggleFavMovieFromMovieItem=this.handleToggleFavMovieFromMovieItem.bind(this)
     }
 
-    handleGoToFavorites(){
+    /* Handlers */
 
-    }
+    handleGoToCollections(collection){
+        const { props: { credentials } } = this
+        let id, token
+        let collections = true
+       
 
-    handleGoToCollections(){
-
+        credentials && (id = credentials.id, token = credentials.token)
+        
+        logic.searchMovies(id, token, collection, collections)
+            .then(movies => this.setState( {movies, collection, view: 'results', query: undefined} ))
+            .catch(error => this.setState( { error: error.message }))
     }
 
     handleLogout(){
-
     }
 
+    handleLinkToCollections(){
+        this.setState({view:'collections'})
+    }
+   
     handleGoToSearch(event){
         event.preventDefault()
         this.setState({ search: true })
@@ -40,15 +52,22 @@ class Landing extends Component {
 
     }
 
+   
     handleSearch(query){
+        event.preventDefault()
         const { props: { credentials } } = this
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
+        
 
         logic.searchMovies(id, token, query)
-            .then(movies => this.setState( {movies, query, view: 'results'} ))
+            .then(movies => this.setState( {movies, query, view: 'results', collection: undefined} ))
             .catch(error => this.setState( { error: error.message }))
+    }
+
+    handleGoToFavorites() {
+
     }
 
     handleRetrieveMovie(id){
@@ -56,8 +75,40 @@ class Landing extends Component {
 
     }
 
+    handleGoToSearch(){
+        event.preventDefault()
+        this.setState({search: true})
+    }
+
+  
+
+    handleGoToLogIn(event){
+        event.preventDefault()
+    
+        this.props.onLogIn()
+    
+    }
+
+    handleLogOut(event){
+        event.preventDefault()
+    
+        const {props: {onLogOut} } = this
+    
+        this.setState({user: undefined, view: 'collections'}, ()=> onLogOut())
+    }
+
+    handleAcceptError() {
+        this.setState({ error: undefined })
+    }
+
+    handleRetrieveMovie(){
+
+    }
+
     handleToggleFavMovieFromMovieDetail(movieId) {
         const { props : { goToLogin, credentials }, handleRetrieveMovie } = this
+
+        let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
 
@@ -65,49 +116,59 @@ class Landing extends Component {
     }
 
     handleBackFromDetail(){
-
     }
 
     handleToggleFavMovieFromMovieItem(movieId) {
-        const { props : { goToLogin, credentials }, handleSearch, state: { query } } = this
+        const { props : { goToLogin, credentials }, handleSearch, handleGoToCollections, state: { query, collection } } = this
 
+        let id, token
+  
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.toggleFavMovie(id, token, movieId, () => handleSearch(query)) : goToLogin()
+
+        credentials ? logic.toggleFavMovie(id, token, movieId, () => collection ? handleGoToCollections(collection) : handleSearch(query)) : goToLogin()
+
     }
 
-    
-/* Handlers */
 
-/* Render */
+    /* Render */
+
     render() {
         const {
             state: { view, search, movie, movies, query, error, user, favs },
-            handleSearch, handleRetrieveMovie, handleLogout,
-            handleBackFromDetail, handleGoToSearch, handleGoToLogin,
-            handleToggleFavMovieFromMovieItem, handleToggleFavMovieFromMovieDetail, handleGoToCollections, handleGoToFavorites
+            handleSearch, handleRetrieveMovie, handleLogOut,
+            handleBackFromDetail, handleGoToSearch, handleGoToLogIn,
+            handleToggleFavMovieFromMovieItem, handleToggleFavMovieFromMovieDetail, handleGoToCollections, handleLinkToCollections, handleGoToFavorites
         } = this
 
         return <>
-            <header>
+            <header className="panel--nav">
                 <nav>
                     <ul>
                         <li><a href="" onClick={handleGoToFavorites}>Favorites</a></li>
                         <li><a href="" onClick={handleGoToCollections}>Collections</a></li>
-                        <li><a href="" onClick={handleLogout}>Logout</a></li>
+                        <li><a href="" onClick={handleLogOut}>Logout</a></li>
                     </ul>
-                    <ul>
-                        <img></img>
-                        <li><a href="" onClick={handleGoToSearch}>Search</a></li>
-                        <li><a href="" onClick={handleGoToLogin}>Login</a></li>
+                    <h2 className="logo">MOVIE LAB</h2>
+
+                    <ul className= "icons-header">
+                        <li><a href="" onClick={handleGoToSearch}><i className="fas fa-search"></i></a></li>
+                        
+
+                        {!user ?<li><a href="" onClick={handleGoToLogIn}><i className="fas fa-user"></i></a></li>
+                        :
+                        <li><a href="" onClick={handleGoToLogIn}>{user.name}</a></li>
+                        }
                     </ul>
                 </nav>
             </header>
             <main>
-
                 {/* Search state is false by default. It's only displayed when clicked on search button */}
-                {search && <Search onSearch={handleSearch}></Search>}
+                { search && <Search onSearch={handleSearch}></Search> }
 
+                {/* Default view on landing <main>. Displays collections of movies. */}
+                {view === 'collections' && <Collections onCollection={handleGoToCollections}></Collections>}
+                   
                 {/* Only displayed after query search or click on a collection. Composed by a grid of movie items with title, rating, poster, director and a fav button */}
                 {view === 'results' &&
                     <Results movies={movies} paintItem={movie => {
@@ -119,12 +180,17 @@ class Landing extends Component {
                     <MovieDetail movie={movie} onBack={handleBackFromDetail} onToggle={handleToggleFavMovieFromMovieDetail} />}
             </main>
             <footer>
-                <p>Movie Lab © 2019 Alf & Co.</p>
-                <ul>
-                    <li><a href="">Twitter</a></li>
-                    <li><a href="">Facebook</a></li>
-                    <li><a href="">Instagram</a></li>
+            <ul className="panel--foot">
+                    <li className="red"><a href=""><i className="fab fa-twitter"></i></a></li>
+                    <li><a href=""><i className="fab fa-facebook-f"></i></a></li>
+                    <li><a href=""><i className="fab fa-instagram"></i></a></li>
+                    <li><a href=""><i className="fab fa-pinterest-p"></i></a></li>
+                    <li><a href=""><i className="fab fa-tumblr"></i></a></li>
+                    <li><a href=""><i className="fab fa-vimeo-v"></i></a></li>
+                    <li><a href=""><i className="fab fa-youtube"></i></a></li>
+                    <li><a href=""><i className="fab fa-weixin"></i></a></li>
                 </ul>
+                <p className="registered-name">Movie Lab © 2019 Alf & Co.</p>
             </footer>
         </>
     }

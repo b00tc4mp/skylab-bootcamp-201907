@@ -1,0 +1,237 @@
+.feedback--error {
+  text-align: center;
+  color: #bc2f0f;
+}
+.feedback--warn {
+  background-color: yellow;
+}
+.feedback--success {
+  text-align: center;
+  color: #31997c;
+}
+
+.button, .feedback--error, .feedback--success {
+  font-size: 0.7rem;
+  text-decoration: none;
+  font-weight: 200;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+}
+
+form input, form, .big-letter, .registered-name {
+  font-size: 0.8rem;
+  text-decoration: none;
+  font-weight: 200;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+}
+
+.panel--nav {
+  width: 100%;
+  height: 70px;
+  position: fixed;
+  border: 0.1rem solid #000000;
+  background-color: #ffffff;
+  z-index: 4;
+}
+
+.logo {
+  width: 100%;
+  letter-spacing: 0.3rem;
+  text-align: center;
+  text-justify: center;
+  position: absolute;
+  font-size: 1.8rem;
+  top: 10px;
+  text-decoration: none;
+  font-weight: 500;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+}
+
+.icons-header {
+  display: flex;
+  width: 70px;
+  position: absolute;
+  right: 5px;
+  top: 20px;
+}
+.icons-header ul {
+  overflow: auto;
+  align-items: right;
+  list-style-type: none;
+}
+.icons-header li {
+  height: 25px;
+  list-style-type: none;
+  text-decoration: none;
+  padding: 0;
+  margin: 1px 5px;
+}
+.icons-header li,
+.icons-header a {
+  text-decoration: none;
+  margin: 1px 5px;
+  font-size: 1.2rem;
+  color: #000000;
+  text-transform: uppercase;
+  -webkit-transition: all 0.5s ease;
+}
+.icons-header li:hover,
+.icons-header a:hover {
+  color: #00ffa6;
+}
+
+.panel--foot {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  bottom: 45px;
+  border-top: 0.01rem solid #00ffa6;
+  border-bottom: 0.01rem solid #00ffa6;
+}
+.panel--foot ul {
+  overflow: auto;
+  list-style-type: none;
+}
+.panel--foot li {
+  height: 25px;
+  list-style-type: none;
+  text-decoration: none;
+  float: left;
+  padding: 0;
+}
+.panel--foot li,
+.panel--foot a {
+  text-decoration: none;
+  font-size: 1rem;
+  margin: 1px auto;
+  color: #000000;
+  text-transform: uppercase;
+  -webkit-transition: all 0.5s ease;
+}
+.panel--foot li:hover,
+.panel--foot a:hover {
+  color: #c6c6c6;
+}
+
+.registered-name {
+  width: 100%;
+  margin: 15px auto;
+  position: fixed;
+  text-align: center;
+  bottom: 0;
+}
+
+.close {
+  position: absolute;
+  right: 25px;
+  top: 15px;
+  width: 10px;
+  height: 10px;
+  opacity: 1;
+  color: #000000;
+}
+.close:hover {
+  opacity: 0.2;
+  color: #c6c6c6;
+}
+.close:before, .close:after {
+  position: absolute;
+  left: 10px;
+  content: " ";
+  height: 20px;
+  width: 1px;
+  background-color: #000000;
+  opacity: 1;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}
+
+.big-letter {
+  color: #000000;
+  margin: 20px;
+}
+
+.form-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  margin: 2px auto;
+}
+
+form {
+  color: #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+form input {
+  width: 250px;
+  line-height: 30px;
+  border: 0.01rem solid #000000;
+  color: #c6c6c6;
+  margin: 15px auto;
+  vertical-align: middle;
+}
+form input,
+form textarea {
+  padding: 6px;
+  transition-property: background, border, color;
+  transition-duration: 0.15s;
+}
+form input:focus, form inputtextarea:focus,
+form textarea:focus,
+form textareatextarea:focus {
+  outline-color: #00ffa6;
+  color: #000000;
+  background-color: #ffffff;
+}
+
+.button {
+  width: 130px;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  color: #000000;
+  background-color: #ffffff;
+  border: 0.05rem solid #000000;
+  appearance: none;
+  cursor: pointer;
+  transition: all 250ms cubic-bezier(0.675, 0.42, 0.09, 0.87);
+}
+.button:not([disabled]):hover, .button:not([disabled]):focus {
+  color: #00ffa6;
+  background-color: #ffffff;
+}
+.button:focus {
+  outline: none;
+  box-shadow: none;
+}
+.button[disabled] {
+  cursor: not-allowed;
+}
+
+main {
+  padding-top: 15vh;
+}
+
+/*# sourceMappingURL=index.css.map */
