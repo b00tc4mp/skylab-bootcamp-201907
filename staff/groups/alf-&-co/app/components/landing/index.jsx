@@ -4,7 +4,8 @@ class Landing extends Component {
     constructor() {
         super()
 
-        this.state = { view: 'collections', search: false, query: undefined, movies: [], movie: undefined, error: undefined, user: undefined, favs: [] }
+        this.state = { view: 'collections', search: false, query: undefined, collection: undefined, movies: [], movie: undefined, error: undefined, user: undefined, favs: [] }
+
         this.handleGoToFavorites=this.handleGoToFavorites.bind(this)
         this.handleGoToCollections=this.handleGoToCollections.bind(this)
         this.handleLinkToCollections=this.handleLinkToCollections.bind(this)
@@ -19,8 +20,9 @@ class Landing extends Component {
         this.handleToggleFavMovieFromMovieItem=this.handleToggleFavMovieFromMovieItem.bind(this)
     }
 
-    handleGoToCollections(query){
-        console.log(query)
+    /* Handlers */
+
+    handleGoToCollections(collection){
         const { props: { credentials } } = this
         let id, token
         let collections = true
@@ -28,9 +30,12 @@ class Landing extends Component {
 
         credentials && (id = credentials.id, token = credentials.token)
         
-        logic.searchMovies(id, token, query, collections)
-            .then(movies => this.setState( {movies, query, view: 'results'} ))
+        logic.searchMovies(id, token, collection, collections)
+            .then(movies => this.setState( {movies, collection, view: 'results', query: undefined} ))
             .catch(error => this.setState( { error: error.message }))
+    }
+
+    handleLogout(){
     }
 
     handleLinkToCollections(){
@@ -42,8 +47,14 @@ class Landing extends Component {
         this.setState({ search: true })
 
     }
+
+    handleGoToLogin(){
+
+    }
+
    
     handleSearch(query){
+        event.preventDefault()
         const { props: { credentials } } = this
         let id, token
 
@@ -51,58 +62,77 @@ class Landing extends Component {
         
 
         logic.searchMovies(id, token, query)
-            .then(movies => this.setState( {movies, query, view: 'results'} ))
+            .then(movies => this.setState( {movies, query, view: 'results', collection: undefined} ))
             .catch(error => this.setState( { error: error.message }))
     }
 
-    handleGoToFavorites(){
+    handleGoToFavorites() {
+
     }
 
     handleRetrieveMovie(id){
         console.log(id)
 
     }
+
     handleGoToSearch(){
         event.preventDefault()
         this.setState({search: true})
-
-
     }
+
+  
+
     handleGoToLogIn(event){
         event.preventDefault()
     
         this.props.onLogIn()
     
     }
+
     handleLogOut(event){
         event.preventDefault()
     
         const {props: {onLogOut} } = this
     
         this.setState({user: undefined, view: 'collections'}, ()=> onLogOut())
-    
     }
+
     handleAcceptError() {
         this.setState({ error: undefined })
     }
+
     handleRetrieveMovie(){
 
     }
-    handleToggleFavMovieFromMovieDetail(){
 
+    handleToggleFavMovieFromMovieDetail(movieId) {
+        const { props : { goToLogin, credentials }, handleRetrieveMovie } = this
+
+        let id, token
+
+        credentials && (id = credentials.id, token = credentials.token)
+
+        credentials ? logic.toggleFavMovie(id, token, movieId, () => handleRetrieveMovie(movieId)) : goToLogin()
     }
+
     handleBackFromDetail(){
-
-    }
-    handleToggleFavMovieFromMovieItem(){
-
     }
 
+    handleToggleFavMovieFromMovieItem(movieId) {
+        const { props : { goToLogin, credentials }, handleSearch, handleGoToCollections, state: { query, collection } } = this
 
-    
-/* Handlers */
+        let id, token
+  
+        credentials && (id = credentials.id, token = credentials.token)
 
-/* Render */
+
+        credentials ? logic.toggleFavMovie(id, token, movieId, () => collection ? handleGoToCollections(collection) : handleSearch(query)) : goToLogin()
+
+    }
+
+
+    /* Render */
+
     render() {
         const {
             state: { view, search, movie, movies, query, error, user, favs },
@@ -112,10 +142,7 @@ class Landing extends Component {
         } = this
 
         return <>
-
-        
-
-<header className="panel--nav">
+            <header className="panel--nav">
                 <nav>
                     <ul>
                         <li><a href="" onClick={handleGoToFavorites}>Favorites</a></li>
@@ -136,9 +163,8 @@ class Landing extends Component {
                 </nav>
             </header>
             <main>
-
                 {/* Search state is false by default. It's only displayed when clicked on search button */}
-                {search && <Search onSearch={handleSearch}></Search>}
+                { search && <Search onSearch={handleSearch}></Search> }
 
                 {/* Default view on landing <main>. Displays collections of movies. */}
                 {view === 'collections' && <Collections onCollection={handleGoToCollections}></Collections>}

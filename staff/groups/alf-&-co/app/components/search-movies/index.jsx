@@ -1,5 +1,5 @@
 function Search(props) {
-    return <form onSubmit={event => {
+    return <form className="form" onSubmit={event => {
         event.preventDefault()
 
         const { target: { query: { value: query } } } = event
