@@ -4,26 +4,26 @@ describe('PARAMETERS VALIDATIONS' , () =>{
 
             it('should validate a correct string' , ()=>{
                 expect( () => {
-                    validate.string('hello' , 'string')
+                    validate.str('hello' , 'string')
                 }).not.toThrow()
             })
 
            it("should fail with an empty string" , ()=>{
                 expect( () => {
-                    validate.string("" , "string")    
+                    validate.str("" , "string")    
                 }).toThrowError(TypeError , "string is empty or blank")
 
             })
 
             it('should fail with a wrong string' , ()=>{
                 expect( () => {
-                    validate.string(1 , 'string')
+                    validate.str(1 , 'string')
                 }).toThrowError(TypeError , "string with value 1 is not a valid string")
             })
 
             it("should fail with wrong values" , ()=>{
                 expect( () => {
-                    validate.string('green' , 'string' , true , ['red' , 'blue' , 'yellow'])
+                    validate.str('green' , 'string' , true , ['red' , 'blue' , 'yellow'])
                 }).toThrowError(TypeError , 'string with value green does not match one of the following values: red, blue, yellow')
             })
         })

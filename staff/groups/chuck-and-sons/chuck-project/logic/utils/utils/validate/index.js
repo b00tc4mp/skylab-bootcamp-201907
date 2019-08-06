@@ -1,10 +1,11 @@
 const validate = ( () => {
+    
     const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     
     const URL_REGEX = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/
 
     return{
-        string(target , name , empty = true , values){
+        str(target , name , empty = true , values){
             if (typeof target !== 'string') throw new TypeError (`${name} with value ${target} is not a valid string`)
 
             if (empty && !target.trim()) throw new TypeError (`${name} is empty or blank`)
