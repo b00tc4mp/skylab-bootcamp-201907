@@ -5,7 +5,8 @@ logic.searchNews= (value) => {
     
     return call(url,"get",undefined,undefined)
         .then((response)=>{
-        if(response.articles.length < 1) throw new Error("wrong input value")
+            const {articles} =response
+        if( articles.length< 1) throw new Error("wrong input value")
         return call(url,'get', undefined, undefined)
             .then(response => response.articles.filter(element => {
                 return element.description!=null && element.urlToImage!=null && element.content!=null && element.publishedAt!=null

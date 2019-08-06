@@ -52,10 +52,10 @@ class App extends Component{
 
 
     render() {
-        const { state: { view, error }, handleGoRegister, handleGoLogin ,handleRegister, handleLogin, handleBackToLanding} = this
+        const { state: { view, credentials, error }, handleGoRegister, handleGoLogin ,handleRegister, handleLogin, handleBackToLanding} = this
 
         return <>
-            {view === 'landing' && <Landing onRegister={handleGoRegister} onLogin={handleGoLogin} />}
+            {view === 'landing' && <Landing onRegister={handleGoRegister} onLogin={handleGoLogin} credentials={credentials}/>}
             {view=== 'register' && <Register onRegister={handleRegister} onBack={handleBackToLanding} error={error} />}
             {view === 'register-success' && <RegisterSuccess onLogin={handleGoLogin} error={error}/>}
             {view=== 'login' &&<Login onLogin={handleLogin} onBack={handleBackToLanding} error={error}/>}

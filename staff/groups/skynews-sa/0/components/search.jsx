@@ -1,4 +1,4 @@
-function Search(props){
+function Search({onSearch, error}){
     return <>
      <select onChange={event=>{
         event.preventDefault()
@@ -9,7 +9,7 @@ function Search(props){
         /* console.log(value) */
 
         /*TESTING VALUE */
-        props.onSearch(value)
+        onSearch(value)
      }}>
         <option>Select a category</option>
         <option value="business">business</option>
@@ -21,5 +21,6 @@ function Search(props){
         <option value="technology">technology</option>
         <option value="ad">sdf</option>
     </select>
+    {error && <Feedback message={error} />}
     </>
 }
