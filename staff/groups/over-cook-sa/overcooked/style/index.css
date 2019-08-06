@@ -4,4 +4,14 @@
   margin: 10px;
 }
 
+.feedback--error {
+  color: red;
+}
+.feedback--warn {
+  background-color: yellow;
+}
+.feedback--success {
+  color: green;
+}
+
 /*# sourceMappingURL=index.css.map */
