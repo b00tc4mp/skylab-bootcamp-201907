@@ -13,12 +13,12 @@ logic.getRandom = function (id, token, gifId) {
 
                 return call(`https://api.giphy.com/v1/gifs/random?api_key=yXEKD5c78ISwI8WSOKyTndpHZH9XpqQW`, 'get', undefined, undefined)
 
-                    .then(gif => {
-                        if (gif.error) throw new Error(gif.error)
+                    .then(randomGif => {
+                        if (randomGif.error) throw new Error(randomGif.error)
 
-                        favorites && (gif.favorite = favorites.includes(gifId))
+                        favorites && (randomGif.favorite = favorites.includes(gifId))
 
-                        return gif
+                        return randomGif
                         
                     })
                     
@@ -28,10 +28,10 @@ logic.getRandom = function (id, token, gifId) {
 
         return call(`https://api.giphy.com/v1/gifs/random?api_key=yXEKD5c78ISwI8WSOKyTndpHZH9XpqQW`, undefined, undefined, undefined)
             
-            .then(gif => {
-                if (gif.error) throw new Error(gif.error)
+            .then(randomGif => {
+                if (randomGif.error) throw new Error(randomGif.error)
 
-                return gif
+                return randomGif
             })
             
     }

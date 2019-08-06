@@ -4,7 +4,7 @@ class Landing extends Component {
     constructor() {
         super()
 
-        this.state = { view: 'search', query: undefined, gifs: [], gif: undefined, error: undefined, user: undefined, favs: [] }
+        this.state = { view: 'search', query: undefined, gifs: [], gif: undefined, randomGif: undefined, error: undefined, user: undefined, favs: [] }
         // view: 'search', 'favorites'
 
         this.handleSearch = this.handleSearch.bind(this)
@@ -157,13 +157,13 @@ class Landing extends Component {
         credentials && (id = credentials.id, token = credentials.token)
 
         logic.getRandom(id, token, gifId)
-            .then(gif => this.setState({ gif }))
+            .then(randomGif => this.setState({ randomGif }))
             .catch(({ message }) => this.setState({ error: message }))
     }
 
     render() {
         const {
-            state: { view, gifs, gif, error, user, favs },
+            state: { view, gifs, gif, randomGif, error, user, favs },
             handleSearch, handleRetrieveGif, handleRegister,
             handleBackFromDetail, handleLogin, handleLogout,
             handleToggleFavGifFromGifItem, handleToggleFavGifFromGifDetail,
@@ -197,15 +197,24 @@ class Landing extends Component {
                 <h3>Search...</h3>
                 <Search onSearch={handleSearch} />
 
-                <h3>or get Random!</h3>
-                <Random onRandom={handleRandom}/>
-
                 {!gif ?
                     <Results items={gifs} paintItem={gif => {
                         return <GifItem gif={gif} onToggle={handleToggleFavGifFromGifItem} />
                     }} onItem={handleRetrieveGif} />
                     :
                     <GifDetail gif={gif} onBack={handleBackFromDetail} onToggle={handleToggleFavGifFromGifDetail} />}
+
+                {error && <Modal message={error} onAccept={handleAcceptError} />}
+
+                <h3>or get Random!</h3>
+                <Random onRandom={handleRandom}/> 
+
+                {!randomGif ?
+                    <Results items={gifs} paintItem={gif => {
+                        return <GifItem gif={gif} onToggle={handleToggleFavGifFromGifItem} />
+                    }} onItem={handleRetrieveGif} />
+                    :
+                    <RandomDetail randomGif={randomGif} onToggle={handleToggleFavGifFromGifDetail} />}
 
                 {error && <Modal message={error} onAccept={handleAcceptError} />}
             </>}
@@ -216,11 +225,6 @@ class Landing extends Component {
                     return <GifDetail gif={gif} onToggle={handleToggleFavGifFromFavorites} />
                 }} onItem={handleRetrieveGif} />
             </>}
-<section><ul><li>Cat 1</li>
-<li>Cat 1</li>
-<li>Cat 1</li>
-<li>Cat 1</li>
-</ul></section> 
         </>
     }
 }
