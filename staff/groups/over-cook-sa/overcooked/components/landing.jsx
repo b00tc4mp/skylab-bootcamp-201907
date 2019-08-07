@@ -70,8 +70,9 @@ class Landing extends Component {
     try {
       logic
         .authenticateUser(email, password)
-        .then(credentials => this.setState({ view: 'landing', credentials }))
-        this.props.onGoHome()
+        .then(credentials => {this.setState({ credentials })
+          this.props.onCredentials(credentials)})
+
         .catch(({ message }) => this.setState({ error: message }))
     } catch ({ message }) {
       this.setState({ error: message })
