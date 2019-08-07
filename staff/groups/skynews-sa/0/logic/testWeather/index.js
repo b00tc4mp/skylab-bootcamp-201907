@@ -3,8 +3,12 @@ logic.weather= () => {
 
 /*     https://newsapi.org/v2/top-headlines?category=${value}&country=gb&apiKey=c9813556fceb4eaf8db2c5d1638ab3fa
  */
-    return call(url,"get",undefined,undefined)
-        .then((response)=>{
-        return call(url,'get', undefined, undefined)
-            .then(response => console.log(response))})
-        }
+   
+    return call(url,'get', undefined, undefined)
+        .then(function(myJson) {
+            return (myJson);
+        })
+    
+        
+}
+        
