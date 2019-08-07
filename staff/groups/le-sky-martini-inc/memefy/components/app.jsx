@@ -73,19 +73,16 @@ class App extends Component {
     render() {
         const { state: { view, credentials, error }, handleGoToRegister, handleRegister, handleBackToLanding, handleGoToLogin, handleLogin, handleLogout, handleGoToRegisterOrLogin } = this
 
-        return <>
-
-            {view === 'landing' && <Landing onRegister={handleGoToRegister} onRegisterOrLogin={handleGoToRegisterOrLogin} onLogin={handleGoToLogin} credentials={credentials} onLogout={handleLogout} />}
-            {view === 'register' && <Register onBack={handleBackToLanding} onRegister={handleRegister} error={error} />}
-            {view === 'register-success' && <RegisterSuccess onLogin={handleGoToLogin} />}
-
-
-
-            {view === 'registerorlogin' && <RegisterOrLogin onLogin={handleGoToLogin} onRegister={handleGoToRegister} onBack={handleBackToLanding} />}
-
-
-
-            {view === 'login' && <Login onBack={handleBackToLanding} onLogin={handleLogin} error={error} />}
-        </>
+        return <body className={`body`}>
+            <header className={`body__header`}>Memefy</header>
+            <main className={`body__main`}>
+                {view === 'landing' && <Landing onRegister={handleGoToRegister} onRegisterOrLogin={handleGoToRegisterOrLogin} onLogin={handleGoToLogin} credentials={credentials} onLogout={handleLogout} />}
+                {view === 'register' && <Register onBack={handleBackToLanding} onRegister={handleRegister} error={error} />}
+                {view === 'register-success' && <RegisterSuccess onLogin={handleGoToLogin} />}
+                {view === 'registerorlogin' && <RegisterOrLogin onLogin={handleGoToLogin} onRegister={handleGoToRegister} onBack={handleBackToLanding} />}
+                {view === 'login' && <Login onBack={handleBackToLanding} onLogin={handleLogin} error={error} />}
+            </main>
+            <footer className={`body__footer`}>Le Sky Martini inc.</footer>
+        </body>
     }
 }

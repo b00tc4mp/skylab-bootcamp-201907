@@ -1,0 +1,28 @@
+.detail
+    @extend %main-content-box
+
+    margin-bottom: 2em
+    padding: 5em
+    background-color: $terciary-bg-color
+
+    &__title
+        font-size: 33px
+
+    &__photo
+        max-width: 80%
+        margin: auto
+
+    &__link
+        color: black
+        font-weight: bold
+        text-decoration: none 
+
+    &__link:hover
+        color: gray
+
+    &__back
+        @extend %link
+        margin: 1em auto 2em auto
+
+    &__back:hover
+        color: $hover-text-color

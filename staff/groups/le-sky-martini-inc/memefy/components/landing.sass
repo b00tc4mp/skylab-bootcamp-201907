@@ -1,0 +1,24 @@
+.landing
+    @extend %main-content-box
+
+    &__menu
+        list-style: none
+        display: flex
+        justify-content: space-around
+        magin: 2em
+        padding: 0
+
+    &__title
+        text-align: center
+        padding: 25px
+
+    &__register, &__login
+        background-color: black
+        color: $secondary-text-color
+        text-decoration: none
+        padding: 10px
+        font-size: 16px
+    
+    &__register:hover, &__login:hover
+        background-color: white
+        color: $hover-text-color

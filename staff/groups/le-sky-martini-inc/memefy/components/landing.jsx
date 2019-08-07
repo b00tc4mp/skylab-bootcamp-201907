@@ -205,14 +205,15 @@ class Landing extends Component {
             handleToggleFavGifFromFavorites, handleRandom, handleGoToRandom, handleBackFromRandomDetail
         } = this
 
-        return <>
+        return <section className={`landing`}>
             <header>
+                <h1 className={`landing__title`}>Welcome!</h1>
                 {user && <p>Hello, {user.name}</p>}
                 <nav>
-                    {!user ? <ul>
-                        <li><a href="" onClick={handleRegister}>Register</a></li>
-                        <li><a href="" onClick={handleLogin}>Login</a></li>
-                    </ul> : <ul>
+                    {!user ? <ul className={`landing__menu`}>
+                        <li><a className={`landing__register`} href="" onClick={handleRegister}>Register</a></li>
+                        <li><a className={`landing__login`} href="" onClick={handleLogin}>Login</a></li>
+                    </ul> : <ul className={`landing__menu`}>
                             {(view === 'search' || view === 'random') && <li><a href="" onClick={event => {
                                 event.preventDefault()
 
@@ -225,48 +226,47 @@ class Landing extends Component {
                 </nav>
             </header>
 
-            <h1>Landing</h1>
+            <main>
+                <section className={`search`}>
+                    {view === 'search' && <>
+                        <h3>Search</h3>
+                        <Search onSearch={handleSearch} />
 
-            {view === 'search' && <>
-                <h3>Search...</h3>
-                <Search onSearch={handleSearch} />
+                        
+                            {!gif ?
+                                <Results items={gifs} paintItem={gif => {
+                                    return <GifItem gif={gif} onToggle={handleToggleFavGifFromGifItem} />
+                                }} onItem={handleRetrieveGif} />
+                                :
+                                <GifDetail gif={gif} onBack={handleBackFromDetail} onToggle={handleToggleFavGifFromGifDetail} />}
+
+                            {error && <Modal message={error} onAccept={handleAcceptError} />}
+                    </>}
                 
-                <h3>or go to GIF TV!</h3>
-                <button onClick={handleGoToRandom}>?</button>
+                    {view === 'random' && <>
+                        <h3>Start zapping!</h3>
+                        <Random onRandom={handleRandom}/> 
 
-                {!gif ?
-                    <Results items={gifs} paintItem={gif => {
-                        return <GifItem gif={gif} onToggle={handleToggleFavGifFromGifItem} />
-                    }} onItem={handleRetrieveGif} />
-                    :
-                    <GifDetail gif={gif} onBack={handleBackFromDetail} onToggle={handleToggleFavGifFromGifDetail} />}
+                        {!randomGif ?
+                            <Results items={gifs} paintItem={gif => {
+                                return <GifItem gif={gif} onToggle={handleToggleFavGifFromGifItem} />
+                            }} onItem={handleRetrieveGif} />
+                            :
+                            <RandomDetail randomGif={randomGif} onBack={handleBackFromRandomDetail} />}
 
-                {error && <Modal message={error} onAccept={handleAcceptError} />}
+                        {error && <Modal message={error} onAccept={handleAcceptError} 
+                        />}
 
-            </>}
+                    </>}
 
-            {view === 'random' && <>
-                <h3>Start zapping!</h3>
-                <Random onRandom={handleRandom}/> 
-
-                {!randomGif ?
-                    <Results items={gifs} paintItem={gif => {
-                        return <GifItem gif={gif} onToggle={handleToggleFavGifFromGifItem} />
-                    }} onItem={handleRetrieveGif} />
-                    :
-                    <RandomDetail randomGif={randomGif} onBack={handleBackFromRandomDetail} />}
-
-                {error && <Modal message={error} onAccept={handleAcceptError} 
-                />}
-
-            </>}
-
-            {view === 'favorites' && <>
-                <h3>Favorites</h3>
-                <Results items={favs} paintItem={gif => {
-                    return <GifDetail gif={gif} onToggle={handleToggleFavGifFromFavorites} />
-                }} onItem={handleRetrieveGif} />
-            </>}
-        </>
+                    {view === 'favorites' && <>
+                        <h3>Favorites</h3>
+                        <Results items={favs} paintItem={gif => {
+                            return <GifDetail gif={gif} onToggle={handleToggleFavGifFromFavorites} />
+                        }} onItem={handleRetrieveGif} />
+                    </>}
+                </section>
+            </main>
+        </section>
     }
 }

@@ -1,7 +1,7 @@
 function FavButton({ active, onToggle }) {
-    return <button onClick={event => {
+    return <button className={`results__favorites`} onClick={event => {
         event.stopPropagation()
 
         onToggle()
-    }}>{active ? '💜' : '💔'}</button>
+    }}>{active ? <i class="fas fa-heart"></i> : <i class="far fa-heart"></i>}</button>
 }

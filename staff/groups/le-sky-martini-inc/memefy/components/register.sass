@@ -1,0 +1,23 @@
+.register
+    @extend %main-content-box
+
+    &__form
+        padding: 5px
+
+    &__item
+        list-style: none
+        margin-top: 2em
+
+    &__input
+        @extend %text-input
+
+    &__button
+        @extend %button
+
+        font-size: 22px
+
+    &__back
+        @extend %link
+
+    &__back:hover
+        color: $hover-text-color
