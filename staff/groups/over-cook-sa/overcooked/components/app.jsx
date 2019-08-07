@@ -29,7 +29,7 @@ class App extends Component {
         
         {!credentials ? 
         view === 'landing' && <Landing onCredentials={handleCredentials} /> 
-        : view === 'home' && <Home onLogout={handleLogout} /> }
+        : view === 'home' && <Home onLogout={handleLogout} credentials={credentials} /> }
         
 
         </>
