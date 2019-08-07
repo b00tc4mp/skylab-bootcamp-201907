@@ -10,12 +10,12 @@ function MovieDetail({movie, onBack, onToggle}){
         <h4>{ movie.movieComplete.tagline }</h4>
         <span>{movie.movieComplete.vote_average}</span>
         
-        <h4>Featured Crew</h4>
+        <h4>Director</h4>
         <p>{movie.director}</p>
         <h4>Overview</h4>
         <span>{ movie.movieComplete.overview }</span>
         <h4>Main Cast</h4>
-        {movie.mainCast.map(movie => <li>{movie}</li>)}
+        {movie.mainCast.map(movie => <li key={movie}>{movie}</li>)}
 
         {onBack && <a href="" onClick={ event => {
             event.preventDefault()

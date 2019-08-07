@@ -200,8 +200,9 @@ class Landing extends Component {
 
                     <ul className= "icons-header">
                         <li><a href="" onClick={handleGoToSearch}><i className="fas fa-search"></i></a></li>
-                        {user && <p>{user.name}</p>}       
-
+                        {user && <>
+                            <img src={`https://ui-avatars.com/api/?name=${user.name}&rounded=true&background=fff&color=00ffa6`} />
+                         </>}
                         {!user && <li><a href="" onClick={handleGoToLogIn}><i className="fas fa-user"></i></a></li>
                         
                        
