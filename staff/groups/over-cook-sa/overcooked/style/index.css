@@ -1,17 +1,110 @@
 * {
-  border: 1px solid black;
-  padding: 10px;
-  margin: 10px;
 }
 
 .feedback--error {
   color: red;
 }
+
 .feedback--warn {
   background-color: yellow;
 }
+
 .feedback--success {
   color: green;
 }
+
+body {
+  display: flex;
+  margin: 5px;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style-type: none;
+  float: left;
+}
+main{
+  display: grid;
+  grid-template-rows: 40% 40% 20%;
+}
+.landing-logo {
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+}
+
+.back-img {
+  display: flex;
+  background-image: url("img/fondo.jpg");
+  background-size: cover;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.welcomeAnchors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 1%;   
+}
+
+  .welcomeAnchors li {
+    margin: 3vw;
+    justify-content: flex-start;
+  }
+
+  .welcomeAnchors li a {
+    text-decoration: none;
+    font-size: 1.2em;
+    color: black;
+    font-weight: bolder;
+    background-color: aliceblue;
+    border: 2px solid black;
+    border-radius: 15px;
+    -moz-border-radius:15px;
+	  -webkit-border-radius:15px;
+    padding: 0.5vw;
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+
+  
+  .random-recipe {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+  }
+  
+  .recipe-title{
+    background-color: rgba(240, 248, 255, 0.664);
+    border: 1px solid skyblue;
+    border-radius: 15px;
+    -moz-border-radius:15px;
+    -webkit-border-radius:15px;
+  }
+  .recipe-video{
+    border-radius: 30px;
+    -moz-border-radius:30px;
+    -webkit-border-radius:30px;
+  }
+footer{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: baseline;
+}
+
+.sMedia li{
+  margin: 0.5vw;
+}
+
+
+
 
 /*# sourceMappingURL=index.css.map */
