@@ -42,13 +42,11 @@ class Landing extends Component {
   }
 
   onRandomRecipe = () => {
-    logic.retrieveRandomRecipe()
-        .then(meal => {
-          const { strYoutube : youtube } = meal
-          meal.strYoutube = youtubeParse(youtube)
-        //console.log(meal)
-        this.setState({ mealRandom: meal })
-      
+    logic.retrieveRandomRecipe().then(meal => {
+      const { strYoutube: youtube } = meal
+      meal.strYoutube = youtubeParse(youtube)
+      //console.log(meal)
+      this.setState({ mealRandom: meal })
     })
   }
 
@@ -68,6 +66,7 @@ class Landing extends Component {
       logic
         .authenticateUser(email, password)
         .then(credentials => this.setState({ view: 'landing', credentials }))
+        this.props.onGoHome()
         .catch(({ message }) => this.setState({ error: message }))
     } catch ({ message }) {
       this.setState({ error: message })
@@ -83,7 +82,7 @@ class Landing extends Component {
   }
 
   handleGoBack() {
-    this.setState({ view: 'landing'})
+    this.setState({ view: 'landing' })
   }
 
   render() {
@@ -103,17 +102,10 @@ class Landing extends Component {
         </header>
         <main>
           <section>
-            {view === 'register' && <Register onRegister={handleRegister} onBack={handleGoBack} />}
-            {view === 'landing' && (
-              <WelcomeAnchors
-                onRegister={handleGoToRegister}
-                onLogin={handleGoToLogin}
-              />
-            )}
-            {view === 'login' && <Login onLogin={handleLogin} onBack={handleGoBack} />}
-            {view === 'register-success' && (
-              <RegisterSuccess onLogin={handleGoToLogin} />
-            )}
+            {view === 'register' && (<Register onRegister={handleRegister} onBack={handleGoBack} />)}
+            {view === 'landing' && (<WelcomeAnchors onRegister={handleGoToRegister} onLogin={handleGoToLogin} />)}
+            {view === 'login' && (<Login onLogin={handleLogin} onBack={handleGoBack} />)}
+            {view === 'register-success' && (<RegisterSuccess onLogin={handleGoToLogin} />)}
           </section>
           <section>{mealRandom && <RecipeItem meal={mealRandom} />}</section>
         </main>
