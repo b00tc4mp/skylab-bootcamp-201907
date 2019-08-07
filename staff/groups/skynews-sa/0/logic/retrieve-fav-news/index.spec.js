@@ -12,7 +12,8 @@
       source: {id: null, name: "Thetimes.co.uk"},
       title: "Rolls-Royce warns of further engine trouble | Business - The Times",
       url: "https://www.thetimes.co.uk/article/rolls-royce-warns-of-further-engine-trouble-llxzbtn6l",
-      urlToImage: "http://www.thetimes.co.uk/imageserver/image/methode%2Ftimes%2Fprod%2Fweb%2Fbin%2Fe570fb7e-b836-11e9-9ed1-57176c9fe03e.jpg?crop=2794%2C1572%2C0%2C146&resize=685"
+      urlToImage: "http://www.thetimes.co.uk/imageserver/image/methode%2Ftimes%2Fprod%2Fweb%2Fbin%2Fe570fb7e-b836-11e9-9ed1-57176c9fe03e.jpg?crop=2794%2C1572%2C0%2C146&resize=685",
+      favorite: true
       
     }
 
@@ -31,21 +32,22 @@
         .then(response => {
           if(response.status === 'KO') throw new Error(response.error)
 
-          return call('https://skylabcoders.herokuapp.com/api/user', 'post', { 'content-type': 'application/json' }, {username: user.username, password: user.password})
+          return call('https://skylabcoders.herokuapp.com/api/auth', 'post', { 'content-type': 'application/json' }, {username: user.username, password: user.password})
             .then(response => {
               if(response.status === 'KO') throw new Error(response.error)
+
+              credentials = response.data
             })
         })
     })
 
-    interface('should succees on previously added fav news', () => 
+    it('should succees on previously added fav news', () => 
       logic.retrieveFavNews(credentials.id, credentials.token)
-        .then(news => {
-          expect(news).toBeDefined()
-          expect(news.length).toBe(1)
+        .then(newsFav => {
+          expect(newsFav).toBeDefined()
+          expect(newsFav.length).toBe(1)
 
-          news.forEach(({author, content, description, publishedAt, source, title, url, urlToImage, favorite}) => {
-            expect(author).toBeDefined()
+          newsFav.forEach(({content, description, publishedAt, source, title, url, urlToImage, favorite}) => {
             expect(content).toBeDefined()
             expect(description).toBeDefined()
             expect(publishedAt).toBeDefined()
@@ -56,7 +58,7 @@
             expect(favorite).toBeTruthy()
 
             const { favorites } = user
-            expect(favorites.includes(id)).toBeTruthy()
+            expect(favorites.includes(article)).toBeTruthy()
 
           })
         }))

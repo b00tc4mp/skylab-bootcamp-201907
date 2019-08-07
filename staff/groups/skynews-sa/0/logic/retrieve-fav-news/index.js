@@ -10,12 +10,7 @@ logic.retrieveFavNews = function (id, token) {
 
             if (!favorites.length) return []
 
-            const calls = favorites.map(//?? =>
-                (article => (article.favorite = true) && article)
-            )
-
-            return calls
+            return favorites
         })
 }
 
-//?????????????????????????????????
