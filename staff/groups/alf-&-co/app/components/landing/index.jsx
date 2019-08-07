@@ -18,6 +18,8 @@ class Landing extends Component {
         this.handleToggleFavMovieFromMovieDetail=this.handleToggleFavMovieFromMovieDetail.bind(this)
         this.handleBackFromDetail=this.handleBackFromDetail.bind(this)
         this.handleToggleFavMovieFromMovieItem=this.handleToggleFavMovieFromMovieItem.bind(this)
+        this.handleToggleFavMovieFromFavoritesSection=this.handleToggleFavMovieFromFavoritesSection.bind(this)
+        this.handleFavorites = this.handleFavorites.bind(this)
     }
 
     componentWillMount(){
@@ -77,6 +79,11 @@ class Landing extends Component {
 
     handleGoToFavorites(event) {
         event.preventDefault()
+        this.handleFavorites()
+
+    }
+
+    handleFavorites() {
         const { props: {credentials}, goToLogin } = this
 
         let id, token
@@ -120,6 +127,12 @@ class Landing extends Component {
 
     }
 
+    handleBackFromDetail(){
+        const {state: {favs, query, collections},  handleGoToFavorites, handleSearch } = this
+
+        favs ? handleGoToFavorites() : collections ? handleCollections(collections) : handleSearch(query)
+    }
+
     handleToggleFavMovieFromMovieDetail(movieId) {
         const { props : { goToLogin, credentials }, handleRetrieveMovie } = this
 
@@ -128,12 +141,6 @@ class Landing extends Component {
         credentials && (id = credentials.id, token = credentials.token)
 
         credentials ? logic.toggleFavMovie(id, token, movieId, () => handleRetrieveMovie(movieId)) : goToLogin()
-    }
-
-    handleBackFromDetail(){
-        const {state: {favs, query, collections},  handleGoToFavorites, handleSearch } = this
-
-        favs ? handleGoToFavorites() : collections ? handleCollections(collections) : handleSearch(query)
     }
 
     handleToggleFavMovieFromMovieItem(movieId) {
@@ -146,6 +153,18 @@ class Landing extends Component {
         credentials ? logic.toggleFavMovie(id, token, movieId, () => collection ? handleGoToCollections(collection) : handleSearch(query)) : goToLogin()
     }
 
+    handleToggleFavMovieFromFavoritesSection(movieId) {
+        const { props : { goToLogin, credentials }, handleFavorites } = this
+
+        let id, token
+  
+        credentials && (id = credentials.id, token = credentials.token)
+
+        credentials ? logic.toggleFavMovie(id, token, movieId, () => handleFavorites()) : goToLogin()
+
+    }
+
+
 
     /* Render */
 
@@ -154,7 +173,8 @@ class Landing extends Component {
             state: { view, search, movie, movies, query, error, user, favs },
             handleSearch, handleRetrieveMovie, handleLogOut,
             handleBackFromDetail, handleGoToSearch, handleGoToLogIn,
-            handleToggleFavMovieFromMovieItem, handleToggleFavMovieFromMovieDetail, handleGoToCollections, handleLinkToCollections, handleGoToFavorites
+            handleToggleFavMovieFromMovieItem, handleToggleFavMovieFromMovieDetail, handleGoToCollections, handleLinkToCollections, handleGoToFavorites,
+            handleToggleFavMovieFromFavoritesSection
         } = this
 
         return <>
@@ -196,9 +216,10 @@ class Landing extends Component {
                     <MovieDetail movie={movie} onBack={handleBackFromDetail} onToggle={handleToggleFavMovieFromMovieDetail} />}
 
                 {view === 'favorites' &&
-                    <Results movies={favs} paintItem={movie => {
-                        return <MovieItem movie={movie} onToggle={handleToggleFavMovieFromMovieItem} />
-                    }} onItem={handleRetrieveMovie} />}
+                    <Favorites favs={favs} removeFav={handleToggleFavMovieFromFavoritesSection} showDetail={handleRetrieveMovie} />
+                      
+           }
+
             </main>
             <footer>
             <ul className="panel--foot">
