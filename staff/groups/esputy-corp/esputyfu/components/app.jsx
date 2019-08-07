@@ -58,11 +58,12 @@ class App extends React.Component {
 
     render() {
         return <>
-            <Landing credentials={this.state.credentials} onLogin={this.handleGoToLogin} onRegister={this.handleGoToRegister} />
+            <Header onLogin={this.handleGoToLogin} onRegister={this.handleGoToRegister}/>
+            {this.state.view === 'landing' && <Landing data={this.state.credentials} onLogin={this.handleGoToLogin} onRegister={this.handleGoToRegister} />}
             {this.state.view === 'register' && <Register onRegister={this.handleRegister} />}
             {this.state.view === 'register-success' && <RegisterSuccess onLogin={this.handleGoToLogin} />}
             {this.state.view === 'login' && <Login onLogin={this.handleLogin} />}
-
+            <Footer/>
         </>
     }
 }

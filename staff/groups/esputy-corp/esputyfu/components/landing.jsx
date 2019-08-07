@@ -44,15 +44,6 @@ class Landing extends React.Component {
 
     render() {
         return <>
-            <header>
-                <nav>
-                    <ul>
-                        <li><a href="#" >Favoritos</a></li>
-                        <li><a href="" onClick={this.handleLogin}>Iniciar sesión</a></li>
-                        <li><a href="" onClick={this.handleRegister}>Registro</a></li>
-                    </ul>
-                </nav>
-            </header>
             <main>
                 <section>
                     <Search onSearch={this.handleSearch} />
@@ -64,9 +55,6 @@ class Landing extends React.Component {
                 </section>}
 
             </main>
-            <footer>
-                <p>Hemos utilizado la api de Spotify. Que quede claro.</p>
-            </footer>
         </>
     }
 }
