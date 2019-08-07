@@ -4,9 +4,7 @@ class App extends Component {
     constructor() {
         super()
 
-
-        this.state = { view: 'register', credentials: undefined, error: undefined } 
-
+        this.state = { view: 'login', credentials: undefined, error: undefined } 
 
         this.handleRegister = this.handleRegister.bind(this)
         this.handleGoToHome = this.handleGoToHome.bind(this)
@@ -94,15 +92,11 @@ class App extends Component {
                         <i class="fa fa-bars"></i></a>
                 </ul>}
         </header>
-       
-
     
-  
-         
-        
-        {view === 'home' && <Home onRegister={handleGoToRegister} onLogin={handleGoToLogin} />}
-        { view === "register" && <Register onBack={handleGoToHome} onLogin={handleGoToLogin} onRegister={handleRegister} error={error} />} 
-        { view === "login" && <Login onBack={handleGoToHome} onRegister={handleGoToRegister} onLogin={handleLogin} error={error} />} 
+            {view === 'home' && <Home onRegister={handleGoToRegister} onLogin={handleGoToLogin} />}
+            { view === "register" && <Register onBack={handleGoToHome} onLogin={handleGoToLogin} onRegister={handleRegister} error={error} />} 
+            { view === "login" && <Login onBack={handleGoToHome} onRegister={handleGoToRegister} onLogin={handleLogin} error={error} />} 
+       
         
           <footer>
                 <p>Copyrigth © SkyLab 2019 </p>
