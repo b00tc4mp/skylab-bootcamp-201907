@@ -59,8 +59,14 @@ class Landing extends Component {
             .catch(error => this.setState( { error: error.message }))
     }
 
-    handleGoToFavorites() {
+    handleGoToFavorites(event) {
+        event.preventDefault()
+        const { props: {credentials}, goToLogin } = this
 
+        let id, token
+        credentials && (id = credentials.id, token = credentials.token)
+
+        credentials ? logic.retrieveFavMovies(id, token).then(favs => this.setState({favs, view : 'favorites'})) : goToLogin()
     }
 
     handleRetrieveMovie(id){
@@ -72,8 +78,6 @@ class Landing extends Component {
         event.preventDefault()
         this.setState({search: true})
     }
-
-  
 
     handleGoToLogIn(event){
         event.preventDefault()
@@ -109,6 +113,9 @@ class Landing extends Component {
     }
 
     handleBackFromDetail(){
+        const {state: {favs, query, collections},  handleGoToFavorites, handleSearch } = this
+
+        favs ? handleGoToFavorites() : collections ? handleCollections(collections) : handleSearch(query)
     }
 
     handleToggleFavMovieFromMovieItem(movieId) {
@@ -118,9 +125,7 @@ class Landing extends Component {
   
         credentials && (id = credentials.id, token = credentials.token)
 
-
         credentials ? logic.toggleFavMovie(id, token, movieId, () => collection ? handleGoToCollections(collection) : handleSearch(query)) : goToLogin()
-
     }
 
 
@@ -168,9 +173,14 @@ class Landing extends Component {
                         return <MovieItem movie={movie} onToggle={handleToggleFavMovieFromMovieItem} />
                     }} onItem={handleRetrieveMovie} />}
 
-                {/* Movie detail which displays title, poster, overview, director, rating, release_date, main cast. Includes fav button and back button  */}
+                {/* Movie detail which displays     . Includes fav button and back button  */}
                 {view === 'detail' &&
                     <MovieDetail movie={movie} onBack={handleBackFromDetail} onToggle={handleToggleFavMovieFromMovieDetail} />}
+
+                {view === 'favorites' &&
+                    <Results movies={favs} paintItem={movie => {
+                        return <MovieItem movie={movie} onToggle={handleToggleFavMovieFromMovieItem} />
+                    }} onItem={handleRetrieveMovie} />}
             </main>
             <footer>
             <ul className="panel--foot">
