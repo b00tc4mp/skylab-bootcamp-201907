@@ -1,4 +1,4 @@
-function SmallHeader() {
+function SmallHeader(props) {
   return (
     <>
       <img
@@ -7,7 +7,11 @@ function SmallHeader() {
       />
 
       <p>Welcome, User</p>
-      <a href="">Logout</a>
+      <a href="" onClick={ event => {
+        event.preventDefault()
+        props.onLogout()
+      }
+      }>Logout</a>
       <a href="">Favorites</a>
 
       <form name="formulario" method="post" action="/send.php">
