@@ -60,8 +60,6 @@ class Landing extends Component {
         event.preventDefault()
         this.setState({ search: true })
     }
-
-
    
     handleSearch(query){
         const { props: { credentials } } = this
@@ -85,16 +83,6 @@ class Landing extends Component {
         credentials ? logic.retrieveFavMovies(id, token).then(favs => this.setState({favs, view : 'favorites'})) : goToLogin()
     }
 
-    handleRetrieveMovie(id){
-        console.log(id)
-
-    }
-
-    handleGoToSearch(event){
-        event.preventDefault()
-        this.setState({search: true})
-    }
-
     handleGoToLogIn(event){
         event.preventDefault()
     
@@ -115,9 +103,15 @@ class Landing extends Component {
     handleAcceptError() {
         this.setState({ error: undefined })
     }
+    handleRetrieveMovie(movieId){
+        const { props: { credentials } } = this
+        let id, token
+        credentials && (id = credentials.id, token = credentials.token)
 
-    handleRetrieveMovie(){
-
+        logic.retrieveMovie(id, token, movieId)
+        .then(movie => this.setState({ movie, view: 'detail'}))
+        .catch(({message}) => this.setState({error: message}))
+        
     }
 
     handleToggleFavMovieFromMovieDetail(movieId) {
@@ -131,9 +125,20 @@ class Landing extends Component {
     }
 
     handleBackFromDetail(){
-        const {state: {favs, query, collections},  handleGoToFavorites, handleSearch } = this
+        const { state: { query, collection }, props:{ credentials } } = this
+        let id, token
+        let collections = true
 
-        favs ? handleGoToFavorites() : collections ? handleCollections(collections) : handleSearch(query)
+        credentials && (id = credentials.id, token = credentials.token)
+        !collection ? logic.searchMovies(id,token,query)
+        .then(movies => this.setState( { movies, query, view: 'results', collection: undefined} ))
+        .catch(error => this.setState( { error: error.message }))
+        :        
+        logic.searchMovies(id, token, collection,collections)
+        .then(movies => this.setState( { movies, collection, view: 'results', query: undefined} ))
+        .catch(error => this.setState( { error: error.message }))
+        /*const {state: {favs, query, collections},  handleGoToFavorites, handleSearch } = this
+        favs ? handleGoToFavorites() : collections ? handleCollections(collections) : handleSearch(query)*/
     }
 
     handleToggleFavMovieFromMovieItem(movieId) {
@@ -183,7 +188,7 @@ class Landing extends Component {
                 { search && <Search onSearch={handleSearch}></Search> }
 
                 {/* Default view on landing <main>. Displays collections of movies. */}
-                {view === 'collections' && <Collections onCollection={handleGoToCollections}></Collections>}
+                {view === 'collections' && <Collections onCollection={handleGoToCollections}/>}
                    
                 {/* Only displayed after query search or click on a collection. Composed by a grid of movie items with title, rating, poster, director and a fav button */}
                 {view === 'results' &&
