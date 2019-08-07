@@ -4,7 +4,13 @@ class App extends Component {
     constructor() {
         super()
 
-        this.state = { view: 'landing', credentials: undefined, error: undefined } // view: 'register', 'login', ...
+        let credentials
+
+        const { id, token } = sessionStorage
+
+        id && token && (credentials = { id, token })
+
+        this.state = { view: 'landing', credentials, error: undefined } // view: 'register', 'login', ...
 
         this.handleGoToRegister = this.handleGoToRegister.bind(this)
         this.handleBackToLanding = this.handleBackToLanding.bind(this)
@@ -12,8 +18,14 @@ class App extends Component {
         this.handleLogin = this.handleLogin.bind(this)
         this.handleRegister = this.handleRegister.bind(this)
         this.handleLogout = this.handleLogout.bind(this)
+        this.handleGoToRegisterOrLogin = this.handleGoToRegisterOrLogin.bind(this)
     }
 
+
+     handleGoToRegisterOrLogin() {
+         this.setState({ view: 'registerorlogin' })
+     }
+ 
     handleGoToRegister() {
         this.setState({ view: 'register' })
     }
@@ -39,7 +51,12 @@ class App extends Component {
     handleLogin(email, password) {
         try {
             logic.authenticateUser(email, password)
-                .then(credentials => this.setState({ view: 'landing', credentials }))
+                .then(credentials => {
+                    sessionStorage.id = credentials.id
+                    sessionStorage.token = credentials.token
+
+                    this.setState({ view: 'landing', credentials })
+                })
                 .catch(({ message }) => this.setState({ error: message }))
         } catch ({ message }) {
             this.setState({ error: message })
@@ -47,17 +64,25 @@ class App extends Component {
     }
 
     handleLogout() {
+        delete sessionStorage.id
+        delete sessionStorage.token
+
         this.setState({ credentials: undefined })
     }
 
     render() {
-        const { state: { view, credentials, error }, handleGoToRegister, handleRegister, handleBackToLanding, handleGoToLogin, handleLogin, handleLogout } = this
+        const { state: { view, credentials, error }, handleGoToRegister, handleRegister, handleBackToLanding, handleGoToLogin, handleLogin, handleLogout, handleGoToRegisterOrLogin } = this
 
-        return <>
-            {view === 'landing' && <Landing onRegister={handleGoToRegister} onLogin={handleGoToLogin} credentials={credentials} onLogout={handleLogout} />}
-            {view === 'register' && <Register onBack={handleBackToLanding} onRegister={handleRegister} error={error} />}
-            {view === 'register-success' && <RegisterSuccess onLogin={handleGoToLogin} />}
-            {view === 'login' && <Login onBack={handleBackToLanding} onLogin={handleLogin} error={error} />}
-        </>
+        return <body className={`body`}>
+            <header className={`body__header`}>Memefy</header>
+            <main className={`body__main`}>
+                {view === 'landing' && <Landing onRegister={handleGoToRegister} onRegisterOrLogin={handleGoToRegisterOrLogin} onLogin={handleGoToLogin} credentials={credentials} onLogout={handleLogout} />}
+                {view === 'register' && <Register onBack={handleBackToLanding} onRegister={handleRegister} error={error} />}
+                {view === 'register-success' && <RegisterSuccess onLogin={handleGoToLogin} />}
+                {view === 'registerorlogin' && <RegisterOrLogin onLogin={handleGoToLogin} onRegister={handleGoToRegister} onBack={handleBackToLanding} />}
+                {view === 'login' && <Login onBack={handleBackToLanding} onLogin={handleLogin} error={error} />}
+            </main>
+            <footer className={`body__footer`}>Le Sky Martini inc.</footer>
+        </body>
     }
 }

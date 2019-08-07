@@ -1,0 +1,70 @@
+$primary-bg-color: rgba(0, 0, 0, 0.5)
+$secondary-bg-color: rgba(255, 255, 255, 0.5)
+$terciary-bg-color: rgba(0, 0, 0, 0.1)
+
+$button-bg-color: black
+$error-bg-color: rgba(100, 0, 0, .65)
+
+$primary-text-color: black
+$secondary-text-color: white
+
+$link-text-color: grey
+$hover-text-color: deeppink
+
+    
+%main-content-box 
+    background-color: $secondary-bg-color
+    margin: auto
+    padding: 30px
+    width: 70%
+    text-align: center
+
+%link
+    color: $link-text-color
+    text-decoration: none  
+
+%text-input
+    width: 95%
+    margin-top: .5em
+    border-radius: 5em
+    border: none
+    outline: none
+    padding: 15px 
+    font-size: 18px
+
+%button
+    background-color: $button-bg-color
+    color: $secondary-text-color
+    border: none
+    padding: 15px
+    font-size: 18px
+
+        
+@mixin header-footer-style
+    background-color: $primary-bg-color
+    color: $secondary-text-color
+    padding: 1.5em
+    text-align: center
+
+.body
+    background-image: url("https://images.pexels.com/photos/988872/pexels-photo-988872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260")
+    background-repeat: no-repeat
+    background-size: cover
+    box-sizing: border-box
+    margin: auto
+    font-family: "Cousine", sans-serif
+    font-size: 1.2rem
+    &__header
+        @include header-footer-style
+        font-size: 3rem
+
+    &__main
+        margin-top: 3em
+        min-height: 100vh
+
+    &__footer
+        @include header-footer-style
+
+        width: 100%
+        font-size: 14px
+        margin-top: -50px

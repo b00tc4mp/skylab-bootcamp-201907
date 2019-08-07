@@ -1,0 +1,23 @@
+.register-or-login
+    @extend %main-content-box 
+
+    &__item
+        list-style: none
+        margin-top: 2em
+
+    &__register, &__login
+        background-color: black
+        color: $secondary-text-color
+        text-decoration: none
+        padding: 10px
+        font-size: 16px
+    
+    &__register:hover, &__login:hover
+        background-color: white
+        color: $hover-text-color
+
+    &__back
+        @extend %link
+
+    &__back:hover
+        color: $hover-text-color

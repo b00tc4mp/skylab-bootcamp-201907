@@ -1,17 +1,233 @@
 * {
-  border: 1px dotted deeppink;
-  padding: 10px;
-  margin: 10px;
+  margin: 0;
 }
 
+.detail, .results, .search, .feedback, .register-or-login, .register-success, .register, .login, .landing {
+  background-color: rgba(255, 255, 255, 0.5);
+  margin: auto;
+  padding: 30px;
+  width: 70%;
+  text-align: center;
+}
+
+.detail__back, .register-or-login__back, .register-success__login, .register__back, .login__back {
+  color: grey;
+  text-decoration: none;
+}
+
+.search__input, .register__input, .login__input {
+  width: 95%;
+  margin-top: 0.5em;
+  border-radius: 5em;
+  border: none;
+  outline: none;
+  padding: 15px;
+  font-size: 18px;
+}
+
+.search__button, .register__button, .login__button {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 15px;
+  font-size: 18px;
+}
+
+.body {
+  background-image: url("https://images.pexels.com/photos/988872/pexels-photo-988872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-sizing: border-box;
+  margin: auto;
+  font-family: "Cousine", sans-serif;
+  font-size: 1.2rem;
+}
+.body__header {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 1.5em;
+  text-align: center;
+  font-size: 3rem;
+}
+.body__main {
+  margin-top: 3em;
+  min-height: 100vh;
+}
+.body__footer {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 1.5em;
+  text-align: center;
+  width: 100%;
+  font-size: 14px;
+  margin-top: -50px;
+}
+
+.landing__menu {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  magin: 2em;
+  padding: 0;
+}
+.landing__title {
+  text-align: center;
+  padding: 25px;
+}
+.landing__register, .landing__login {
+  background-color: black;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  font-size: 16px;
+}
+.landing__register:hover, .landing__login:hover {
+  background-color: white;
+  color: deeppink;
+}
+
+.login__form {
+  padding: 5px;
+}
+.login__item {
+  list-style: none;
+  margin-top: 2em;
+}
+.login__back:hover {
+  color: deeppink;
+}
+
+.register__form {
+  padding: 5px;
+}
+.register__item {
+  list-style: none;
+  margin-top: 2em;
+}
+.register__button {
+  font-size: 22px;
+}
+.register__back:hover {
+  color: deeppink;
+}
+
+.register-success__login:hover {
+  color: deeppink;
+}
+
+.register-or-login__item {
+  list-style: none;
+  margin-top: 2em;
+}
+.register-or-login__register, .register-or-login__login {
+  background-color: black;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  font-size: 16px;
+}
+.register-or-login__register:hover, .register-or-login__login:hover {
+  background-color: white;
+  color: deeppink;
+}
+.register-or-login__back:hover {
+  color: deeppink;
+}
+
+.feedback {
+  margin-bottom: 2em;
+  font-size: 16px;
+}
 .feedback--error {
-  color: red;
+  background-color: rgba(100, 0, 0, 0.65);
+  color: white;
 }
 .feedback--warn {
   background-color: yellow;
 }
 .feedback--success {
   color: green;
+}
+
+.search {
+  margin: 2em auto 2em auto;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.search__label {
+  display: none;
+}
+.search__button {
+  background-color: grey;
+  margin: 1em auto 1em auto;
+}
+
+.results {
+  margin-bottom: 2em;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.results__list {
+  display: grid;
+  grid-template-columns: 1;
+  align-items: center;
+  justify-items: center;
+  list-style: none;
+  padding: 0;
+  font-size: 16px;
+}
+.results__item {
+  margin: 2em;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.results__image {
+  max-width: 300px;
+  border-radius: 2em;
+}
+.results__favorites {
+  background-color: grey;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 1em;
+  max-width: 70%;
+}
+.results__favorites:hover {
+  background-color: deeppink;
+}
+.results__favorites:active {
+  background-color: black;
+  color: white;
+}
+
+.detail {
+  margin-bottom: 2em;
+  padding: 5em;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.detail__title {
+  font-size: 33px;
+}
+.detail__photo {
+  max-width: 80%;
+  margin: auto;
+}
+.detail__link {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+}
+.detail__link:hover {
+  color: gray;
+}
+.detail__back {
+  margin: 1em auto 2em auto;
+}
+.detail__back:hover {
+  color: deeppink;
 }
 
 .modal {

@@ -6,7 +6,8 @@ function Search(props) {
 
         props.onSearch(query)
     }}>
-        <input type="text" name="query" />
-        <button>🔍</button>
+        <label className={`search__label`} for="query">Search</label>
+        <input className={`search__input`} type="text" name="query" id="query"/>
+        <button className={`search__button`}>🔍</button>
     </form>
 }

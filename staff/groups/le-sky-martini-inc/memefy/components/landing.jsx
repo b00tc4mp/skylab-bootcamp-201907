@@ -19,7 +19,22 @@ class Landing extends Component {
         this.handleFavorites = this.handleFavorites.bind(this)
         this.handleGoToSearch = this.handleGoToSearch.bind(this)
         this.handleToggleFavGifFromFavorites = this.handleToggleFavGifFromFavorites.bind(this)
+        // this.handleRegisterOrLogin = this.handleRegisterOrLogin.bind(this)
+        // this.handleGoToRegisterOrLogin = this.handleGoToRegisterOrLogin.bind(this)
     }
+
+    // handleRegisterOrLogin(event) {
+    //     event.preventDefault()
+
+    //      this.props.onLogin()
+    // }
+
+    // handleGoToRegisterOrLogin(event) {
+    //     event.preventDefault()
+
+    //     this.setState({ view: 'registerorlogin' })
+    // }
+
 
     componentWillMount() {
         const { props: { credentials } } = this
@@ -36,7 +51,7 @@ class Landing extends Component {
             }
         }
     }
-
+    
     handleSearch(query) {
         const { props: { credentials } } = this
 
@@ -87,6 +102,8 @@ class Landing extends Component {
         this.props.onLogin()
     }
 
+
+
     handleLogout(event) {
         event.preventDefault()
 
@@ -96,23 +113,23 @@ class Landing extends Component {
     }
 
     handleToggleFavGifFromGifItem(gifId) {
-        const { props: { onLogin, credentials }, handleSearch, state: { query } } = this
+        const { props: { onRegisterOrLogin, credentials }, handleSearch, state: { query } } = this
 
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.toggleFavGif(id, token, gifId).then(() => handleSearch(query)).catch(({ message }) => this.setState({ error: message })) : onLogin()
+        credentials ? logic.toggleFavGif(id, token, gifId).then(() => handleSearch(query)).catch(({ message }) => this.setState({ error: message })) : onRegisterOrLogin()
     }
 
     handleToggleFavGifFromGifDetail(gifId) {
-        const { props: { onLogin, credentials }, handleRetrieveGif } = this
+        const { props: { onRegisterOrLogin, credentials }, handleRetrieveGif } = this
 
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.toggleFavGif(id, token, gifId).then(() => handleRetrieveGif(gifId)).catch(({ message }) => this.setState({ error: message })) : onLogin()
+        credentials ? logic.toggleFavGif(id, token, gifId).then(() => handleRetrieveGif(gifId)).catch(({ message }) => this.setState({ error: message })) : onRegisterOrLogin()
     }
 
     handleAcceptError() {
@@ -137,14 +154,16 @@ class Landing extends Component {
         this.setState({ view: 'search' })
     }
 
+
+
     handleToggleFavGifFromFavorites(gifId) {
-        const { props: { onLogin, credentials }, handleFavorites } = this
+        const { props: { onRegisterOrLogin, credentials }, handleFavorites } = this
 
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.toggleFavGif(id, token, gifId).then(() => handleFavorites()).catch(({ message }) => this.setState({ error: message })) : onLogin()
+        credentials ? logic.toggleFavGif(id, token, gifId).then(() => handleFavorites()).catch(({ message }) => this.setState({ error: message })) : onRegisterOrLogin() /// !!!!
     }
 
     render() {
@@ -157,14 +176,15 @@ class Landing extends Component {
             handleToggleFavGifFromFavorites
         } = this
 
-        return <>
+        return <section className={`landing`}>
             <header>
+                <h1 className={`landing__title`}>Welcome!</h1>
                 {user && <p>Hello, {user.name}</p>}
                 <nav>
-                    {!user ? <ul>
-                        <li><a href="" onClick={handleRegister}>Register</a></li>
-                        <li><a href="" onClick={handleLogin}>Login</a></li>
-                    </ul> : <ul>
+                    {!user ? <ul className={`landing__menu`}>
+                        <li><a className={`landing__register`} href="" onClick={handleRegister}>Register</a></li>
+                        <li><a className={`landing__login`} href="" onClick={handleLogin}>Login</a></li>
+                    </ul> : <ul className={`landing__menu`}>
                             {view === 'search' && <li><a href="" onClick={event => {
                                 event.preventDefault()
 
@@ -177,33 +197,32 @@ class Landing extends Component {
                 </nav>
             </header>
 
-            <h1>Landing</h1>
+            <main>
+                <section className={`search`}>
+                    {view === 'search' && <>
+                        <h3>Search</h3>
+                        <Search onSearch={handleSearch} />
 
-            {view === 'search' && <>
-                <h3>Search</h3>
-                <Search onSearch={handleSearch} />
+                        
+                            {!gif ?
+                                <Results items={gifs} paintItem={gif => {
+                                    return <GifItem gif={gif} onToggle={handleToggleFavGifFromGifItem} />
+                                }} onItem={handleRetrieveGif} />
+                                :
+                                <GifDetail gif={gif} onBack={handleBackFromDetail} onToggle={handleToggleFavGifFromGifDetail} />}
 
-                {!gif ?
-                    <Results items={gifs} paintItem={gif => {
-                        return <GifItem gif={gif} onToggle={handleToggleFavGifFromGifItem} />
+                            {error && <Modal message={error} onAccept={handleAcceptError} />}
+                    </>}
+                
+
+                {view === 'favorites' && <>
+                    <h3>Favorites</h3>
+                    <Results items={favs} paintItem={gif => {
+                        return <GifDetail gif={gif} onToggle={handleToggleFavGifFromFavorites} />
                     }} onItem={handleRetrieveGif} />
-                    :
-                    <GifDetail gif={gif} onBack={handleBackFromDetail} onToggle={handleToggleFavGifFromGifDetail} />}
-
-                {error && <Modal message={error} onAccept={handleAcceptError} />}
-            </>}
-
-            {view === 'favorites' && <>
-                <h3>Favorites</h3>
-                <Results items={favs} paintItem={gif => {
-                    return <GifDetail gif={gif} onToggle={handleToggleFavGifFromFavorites} />
-                }} onItem={handleRetrieveGif} />
-            </>}
-<section><ul><li>Cat 1</li>
-<li>Cat 1</li>
-<li>Cat 1</li>
-<li>Cat 1</li>
-</ul></section> 
-        </>
+                </>}
+                </section>
+            </main>
+        </section>
     }
 }
