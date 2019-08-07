@@ -22,6 +22,12 @@ logic.searchGifs = function (id, token, query) {
                             return gifs
                         }
                     })
+                    .then(randomGifs => {
+                        if (randomGifs.error) return []
+                        else {
+                            return randomGifs
+                        }
+                    })
             }) 
     } else {
         validate.string(query, 'query', false)
@@ -34,6 +40,13 @@ logic.searchGifs = function (id, token, query) {
 
                 favorites && gifs.forEach(gif => gif.favorite = favorites.includes(gif.id))
                 return gifs
+            })
+            .then(randomGifs => {
+            
+                if (randomGifs.error) return []
+                else {
+                    return randomGifs
+                }
             })
     }
 }

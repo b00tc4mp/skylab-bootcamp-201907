@@ -4,7 +4,7 @@ class Landing extends Component {
     constructor() {
         super()
 
-        this.state = { view: 'search', query: undefined, gifs: [], gif: undefined, randomGif: undefined, error: undefined, user: undefined, favs: [] }
+        this.state = { view: 'search', query: undefined, gifs: [], gif: undefined, randomGifs: [], randomGif: undefined, error: undefined, user: undefined, favs: [] }
         // view: 'search', 'favorites'
 
         this.handleSearch = this.handleSearch.bind(this)
@@ -20,6 +20,8 @@ class Landing extends Component {
         this.handleGoToSearch = this.handleGoToSearch.bind(this)
         this.handleToggleFavGifFromFavorites = this.handleToggleFavGifFromFavorites.bind(this)
         this.handleRandom = this.handleRandom.bind(this)
+        this.handleGoToRandom = this.handleGoToRandom.bind(this)
+        this.handleBackFromRandomDetail = this.handleBackFromRandomDetail.bind(this)
 
     }
 
@@ -161,6 +163,19 @@ class Landing extends Component {
             .catch(({ message }) => this.setState({ error: message }))
     }
 
+    handleGoToRandom(event) {
+        event.preventDefault()
+
+        this.setState({ view: 'random' })
+    }
+
+    handleBackFromRandomDetail() {
+        event.preventDefault()
+
+        this.setState({ view: 'search' })
+    }
+
+
     render() {
         const {
             state: { view, gifs, gif, randomGif, error, user, favs },
@@ -168,7 +183,7 @@ class Landing extends Component {
             handleBackFromDetail, handleLogin, handleLogout,
             handleToggleFavGifFromGifItem, handleToggleFavGifFromGifDetail,
             handleAcceptError, handleFavorites, handleGoToSearch,
-            handleToggleFavGifFromFavorites, handleRandom
+            handleToggleFavGifFromFavorites, handleRandom, handleGoToRandom, handleBackFromRandomDetail
         } = this
 
         return <>
@@ -197,17 +212,8 @@ class Landing extends Component {
                 <h3>Search...</h3>
                 <Search onSearch={handleSearch} />
                 
-                <h3>or get Random!</h3>
-                <Random onRandom={handleRandom}/> 
-
-                {!randomGif ?
-                    <Results items={gifs} paintItem={gif => {
-                        return <GifItem gif={gif} onToggle={handleToggleFavGifFromGifItem} />
-                    }} onItem={handleRetrieveGif} />
-                    :
-                    <RandomDetail randomGif={randomGif} onToggle={handleToggleFavGifFromGifDetail} />}
-
-                {error && <Modal message={error} onAccept={handleAcceptError} />}
+                <h3>or go to GIF TV!</h3>
+                <button onClick={handleGoToRandom}>?</button>
 
                 {!gif ?
                     <Results items={gifs} paintItem={gif => {
@@ -217,6 +223,22 @@ class Landing extends Component {
                     <GifDetail gif={gif} onBack={handleBackFromDetail} onToggle={handleToggleFavGifFromGifDetail} />}
 
                 {error && <Modal message={error} onAccept={handleAcceptError} />}
+
+            </>}
+
+            {view === 'random' && <>
+                <h3>Start zapping!</h3>
+                <Random onRandom={handleRandom}/> 
+
+                {!randomGif ?
+                    <Results items={gifs} paintItem={gif => {
+                        return <GifItem gif={gif} onToggle={handleToggleFavGifFromGifItem} />
+                    }} onItem={handleRetrieveGif} />
+                    :
+                    <RandomDetail randomGif={randomGif} onBack={handleBackFromRandomDetail} />}
+
+                {error && <Modal message={error} onAccept={handleAcceptError} 
+                />}
 
             </>}
 
