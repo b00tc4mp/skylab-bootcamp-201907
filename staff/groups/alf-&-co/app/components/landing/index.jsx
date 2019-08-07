@@ -20,8 +20,24 @@ class Landing extends Component {
         this.handleToggleFavMovieFromMovieItem=this.handleToggleFavMovieFromMovieItem.bind(this)
     }
 
-    /* Handlers */
+    componentWillMount(){
+        const { props: { credentials } } = this
 
+        if (credentials) {
+            const { id, token } = credentials
+        
+        
+        try {
+            logic.retrieveUser(id, token)
+            .then(user => this.setState({user}))
+            .catch(({message})=> this.setState({error: message}))
+        } catch({message}){
+            this.setState({error:message})
+        }
+    }
+
+
+    /* Handlers */
     handleGoToCollections(collection){
         const { props: { credentials } } = this
         let id, token
@@ -73,7 +89,6 @@ class Landing extends Component {
         this.setState({search: true})
     }
 
-  
 
     handleGoToLogIn(event){
         event.preventDefault()
@@ -83,11 +98,13 @@ class Landing extends Component {
     }
 
     handleLogOut(event){
+        
         event.preventDefault()
     
-        const {props: {onLogOut} } = this
-    
-        this.setState({user: undefined, view: 'collections'}, ()=> onLogOut())
+        const { props: { onLogOut } } = this
+ 
+        this.setState({ user: undefined, view: 'collections' }, () => onLogOut())
+   
     }
 
     handleAcceptError() {
@@ -142,19 +159,19 @@ class Landing extends Component {
                         <li><a href="" onClick={handleGoToCollections}>Collections</a></li>
                         <li><a href="" onClick={handleLogOut}>Logout</a></li>
                     </ul>
-                    <h2 className="logo">MOVIE LAB</h2>
+                     <h2 className="logo">MOVIE LAB</h2>
 
                     <ul className= "icons-header">
                         <li><a href="" onClick={handleGoToSearch}><i className="fas fa-search"></i></a></li>
-                        
+                        {user && <p>{user.name}</p>}       
 
-                        {!user ?<li><a href="" onClick={handleGoToLogIn}><i className="fas fa-user"></i></a></li>
-                        :
-                        <li><a href="" onClick={handleGoToLogIn}>{user.name}</a></li>
+                        {!user && <li><a href="" onClick={handleGoToLogIn}><i className="fas fa-user"></i></a></li>
+                        
+                       
                         }
-                    </ul>
-                </nav>
-            </header>
+                     </ul>
+                 </nav>
+        </header>
             <main>
                 {/* Search state is false by default. It's only displayed when clicked on search button */}
                 { search && <Search onSearch={handleSearch}></Search> }
