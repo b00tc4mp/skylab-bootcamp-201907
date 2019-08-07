@@ -2,12 +2,38 @@ class App extends React.Component {
     constructor() {
         super()
 
-        this.state = { view: 'undefined', credentials: {} }
 
+        this.state = { view: 'undefined', credentials: {} }
+        
+        //bindings
+
+        this.handleRegister = this.handleRegister.bind(this)
+        this.handleBackToLanding = this.handleBackToLanding.bind(this)
         this.handleLogin = this.handleLogin.bind(this)
 
-    }
 
+    }
+  
+  //register
+    handleRegister(name, surname, email, password, repassword) {
+        try {
+            logic.registerUser(name, surname, email, password, repassword)
+            .catch(console.error)
+
+            this.setState({ view: 'register-success' })
+        } catch (error) {
+            console.error(error)
+        }
+    }
+  
+  //register-success
+
+    handleGoToLogin() {
+        this.setState({ view: 'login'})
+    }
+  
+  //login
+       
     handleLogin(email, password) {
         try {
             logic.authenticateUser(email, password)
@@ -17,14 +43,23 @@ class App extends React.Component {
                 })
                 .catch(console.error)
 
+
         } catch {
             console.error(error)
         }
     }
+  // navigate
+    handleBackToLanding() {
+        this.setState({ view: 'landing' })
+    }
 
     render() {
         return <>
-            <Login onLogin={this.handleLogin} />
+
+            {this.state.view === 'register' && <Register onRegister={this.handleRegister}/>}
+            {this.state.view === 'register-success' && <RegisterSuccess onLogin={this.handleGoToLogin}/>}
+            {this.state.view === 'login' && <Login onLogin={this.handleLogin} />}
+            
         </>
     }
 }
