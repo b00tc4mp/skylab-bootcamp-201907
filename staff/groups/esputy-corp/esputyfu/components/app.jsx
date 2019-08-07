@@ -34,8 +34,7 @@ class App extends React.Component {
         try {
             logic.authenticateUser(email, password)
                 .then(user => {
-                    this.setState({ credentials: user })
-                    this.setState({ view: 'landing' })
+                    this.setState({ credentials: user, view: 'landing'  })
                 })
                 .catch(message => console.error(message))
 
