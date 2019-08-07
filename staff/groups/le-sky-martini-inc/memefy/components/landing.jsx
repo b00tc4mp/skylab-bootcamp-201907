@@ -22,8 +22,23 @@ class Landing extends Component {
         this.handleRandom = this.handleRandom.bind(this)
         this.handleGoToRandom = this.handleGoToRandom.bind(this)
         this.handleBackFromRandomDetail = this.handleBackFromRandomDetail.bind(this)
+        // this.handleRegisterOrLogin = this.handleRegisterOrLogin.bind(this)
+        // this.handleGoToRegisterOrLogin = this.handleGoToRegisterOrLogin.bind(this)
 
     }
+
+    // handleRegisterOrLogin(event) {
+    //     event.preventDefault()
+
+    //      this.props.onLogin()
+    // }
+
+    // handleGoToRegisterOrLogin(event) {
+    //     event.preventDefault()
+
+    //     this.setState({ view: 'registerorlogin' })
+    // }
+
 
     componentWillMount() {
         const { props: { credentials } } = this
@@ -40,7 +55,7 @@ class Landing extends Component {
             }
         }
     }
-
+    
     handleSearch(query) {
         const { props: { credentials } } = this
 
@@ -91,6 +106,8 @@ class Landing extends Component {
         this.props.onLogin()
     }
 
+
+
     handleLogout(event) {
         event.preventDefault()
 
@@ -100,23 +117,23 @@ class Landing extends Component {
     }
 
     handleToggleFavGifFromGifItem(gifId) {
-        const { props: { onLogin, credentials }, handleSearch, state: { query } } = this
+        const { props: { onRegisterOrLogin, credentials }, handleSearch, state: { query } } = this
 
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.toggleFavGif(id, token, gifId).then(() => handleSearch(query)).catch(({ message }) => this.setState({ error: message })) : onLogin()
+        credentials ? logic.toggleFavGif(id, token, gifId).then(() => handleSearch(query)).catch(({ message }) => this.setState({ error: message })) : onRegisterOrLogin()
     }
 
     handleToggleFavGifFromGifDetail(gifId) {
-        const { props: { onLogin, credentials }, handleRetrieveGif } = this
+        const { props: { onRegisterOrLogin, credentials }, handleRetrieveGif } = this
 
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.toggleFavGif(id, token, gifId).then(() => handleRetrieveGif(gifId)).catch(({ message }) => this.setState({ error: message })) : onLogin()
+        credentials ? logic.toggleFavGif(id, token, gifId).then(() => handleRetrieveGif(gifId)).catch(({ message }) => this.setState({ error: message })) : onRegisterOrLogin()
     }
 
     handleAcceptError() {
@@ -141,14 +158,16 @@ class Landing extends Component {
         this.setState({ view: 'search' })
     }
 
+
+
     handleToggleFavGifFromFavorites(gifId) {
-        const { props: { onLogin, credentials }, handleFavorites } = this
+        const { props: { onRegisterOrLogin, credentials }, handleFavorites } = this
 
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.toggleFavGif(id, token, gifId).then(() => handleFavorites()).catch(({ message }) => this.setState({ error: message })) : onLogin()
+        credentials ? logic.toggleFavGif(id, token, gifId).then(() => handleFavorites()).catch(({ message }) => this.setState({ error: message })) : onRegisterOrLogin() /// !!!!
     }
 
     handleRandom(gifId) {
