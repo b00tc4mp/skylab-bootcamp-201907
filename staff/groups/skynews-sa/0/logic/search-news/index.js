@@ -1,7 +1,9 @@
-logic.searchNews= (value) => {
-    const url = `https://newsapi.org/v2/top-headlines?category=${value}&country=gb&apiKey=c9813556fceb4eaf8db2c5d1638ab3fa`
+logic.searchNews= (category,country) => {
+    const url = `https://newsapi.org/v2/top-headlines?category=${category}&country=${country}&apiKey=c9813556fceb4eaf8db2c5d1638ab3fa`
 
-    if(value.length < 1) throw new Error("no value inserted")
+/*     https://newsapi.org/v2/top-headlines?category=${value}&country=gb&apiKey=c9813556fceb4eaf8db2c5d1638ab3fa
+ */
+    if(category.length < 1) throw new Error("no category or value inserted")
     
     return call(url,"get",undefined,undefined)
         .then((response)=>{

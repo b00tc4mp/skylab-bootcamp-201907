@@ -1,26 +1,43 @@
-function Search({onSearch, error}){
+function Search({onSearch, error,category,country}){
+    let value1=category,value2=country
     return <>
+    <form onSubmit={event=>{
+        event.preventDefault()
+        onSearch(value1,value2)
+    }}>
+        
      <select onChange={event=>{
         event.preventDefault()
-        /* onSearch(event) */
-        /* const{target:{value:value}}=this
-        props.onSearch(value) */
-        const{target:{value:value}}=event
-        /* console.log(value) */
-
-        /*TESTING VALUE */
-        onSearch(value)
+        value1=event.target.value
+        
      }}>
         <option>Select a category</option>
-        <option value="business">business</option>
-        <option value="entertainment">entertainment</option>
-        <option value="general">general</option>
-        <option value="health">health</option>
-        <option value="science">science</option>
-        <option value="sports">sports</option>
-        <option value="technology">technology</option>
-        <option value="ad">sdf</option>
+        <option value="business">Business</option>
+        <option value="entertainment">Entertainment</option>
+        <option value="general">General</option>
+        <option value="health">Health</option>
+        <option value="science">Science</option>
+        <option value="sports">Sports</option>
+        <option value="technology">Technology</option>
     </select>
+
+    <select onChange={event=>{
+        event.preventDefault()
+        value2=event.target.value
+     }}>
+        <option>Select a country</option>
+        <option value="fr">France</option>
+        <option value="gb">Great Britain</option>
+        <option value="de">Germany</option>
+        <option value="us">US</option>
+       
+        
+    </select>
+    <button>Search News</button>
+
+
+
+    </form>
     {error && <Feedback message={error} />}
     </>
 }
