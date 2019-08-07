@@ -119,9 +119,7 @@ class Landing extends Component {
             </section>
             <section>{mealRandom && <RecipeItem meal={mealRandom} />}</section>
         </main>
-        <footer>
-          <Footer />
-        </footer>
+     
       </>
     )
   }

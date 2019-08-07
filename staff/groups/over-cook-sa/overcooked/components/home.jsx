@@ -18,7 +18,7 @@ render () {
 
     return <>
         <SmallHeader onLogout={handleLogout} />
-        <Footer />
+        
     </>
     
 }
