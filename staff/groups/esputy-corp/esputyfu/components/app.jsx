@@ -8,6 +8,7 @@ class App extends React.Component {
         //bindings
 
         this.handleRegister = this.handleRegister.bind(this)
+        this.handleGoToLogin = this.handleGoToLogin.bind(this)
         this.handleBackToLanding = this.handleBackToLanding.bind(this)
         this.handleLogin = this.handleLogin.bind(this)
 
@@ -18,9 +19,9 @@ class App extends React.Component {
     handleRegister(name, surname, email, password, repassword) {
         try {
             logic.registerUser(name, surname, email, password, repassword)
-            .catch(console.error)
+            .then(() => this.setState({ view: 'register-success' }))
+            .catch(message => console.error(message))
 
-            this.setState({ view: 'register-success' })
         } catch (error) {
             console.error(error)
         }
@@ -41,7 +42,7 @@ class App extends React.Component {
                     this.setState({ credentials: user })
                     this.setState({ view: 'landing' })
                 })
-                .catch(console.error)
+                .catch(message => console.error(message))
 
 
         } catch {
