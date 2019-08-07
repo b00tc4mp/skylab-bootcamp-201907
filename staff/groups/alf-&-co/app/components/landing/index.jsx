@@ -26,19 +26,20 @@ class Landing extends Component {
         if (credentials) {
             const { id, token } = credentials
         
-        
-        try {
-            logic.retrieveUser(id, token)
-            .then(user => this.setState({user}))
-            .catch(({message})=> this.setState({error: message}))
-        } catch({message}){
-            this.setState({error:message})
+            
+            try {
+                logic.retrieveUser(id, token)
+                .then(user => this.setState({user}))
+                .catch(({message})=> this.setState({error: message}))
+            } catch({message}){
+                this.setState({error:message})
+            }
         }
     }
 
 
     /* Handlers */
-    handleGoToCollections(collection){
+    handleGoToCollections(collection) {
         const { props: { credentials } } = this
         let id, token
         let collections = true
@@ -63,7 +64,6 @@ class Landing extends Component {
 
    
     handleSearch(query){
-        event.preventDefault()
         const { props: { credentials } } = this
         let id, token
 
@@ -90,7 +90,7 @@ class Landing extends Component {
 
     }
 
-    handleGoToSearch(){
+    handleGoToSearch(event){
         event.preventDefault()
         this.setState({search: true})
     }
