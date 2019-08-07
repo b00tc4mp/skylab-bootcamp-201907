@@ -18,7 +18,6 @@ describe('logic authenticate users', () =>{
 
     it('should succeed on correct data', ()=>
         logic.authenticateUser(user.username, user.password)
-      
         .then(response=> {
             
             expect(response).toBeDefined()
