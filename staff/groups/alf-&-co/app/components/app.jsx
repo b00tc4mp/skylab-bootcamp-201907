@@ -10,7 +10,7 @@ class App extends Component {
 
         id && token && (credentials = { id, token })
 
-        this.state = { view: 'landing', credentials, error: undefined, register_success: undefined }
+        this.state = { view: 'landing', credentials, error: undefined, register_success: undefined , query: undefined, collection: undefined}
 
         this.handleBackToLanding = this.handleBackToLanding.bind(this)
         this.handleGoToLogIn = this.handleGoToLogIn.bind(this)
@@ -41,8 +41,8 @@ class App extends Component {
         }
     }
 
-    handleGoToLogIn() {
-        this.setState({ view: 'login', error: undefined, register_success: undefined })
+    handleGoToLogIn(query, collection) {
+        this.setState({ view: 'login', error: undefined, register_success: undefined, query, collection })
     }
 
     handleSubmitLogIn(email, password) {
@@ -70,10 +70,10 @@ class App extends Component {
     }
 
     render() {
-        const { state: { view, credentials, error, register_success }, handleBackToLanding, handleSubmitLogIn, handleSubmitSignUp, handleGoToLogIn, handleGoToSignUp, handleLogOut } = this
+        const { state: { view, credentials, error, register_success, query, collection }, handleBackToLanding, handleSubmitLogIn, handleSubmitSignUp, handleGoToLogIn, handleGoToSignUp, handleLogOut } = this
 
         return <>
-            {view === 'landing' && <Landing goToLogin={handleGoToLogIn}  credentials={credentials} onLogOut={handleLogOut} />}
+            {view === 'landing' && <Landing goToLogin={handleGoToLogIn} query={query} collection={collection} credentials={credentials} onLogOut={handleLogOut} />}
             {view === 'login' && <LogIn onClose={handleBackToLanding} onLogIn={handleSubmitLogIn} error={error} register_success={register_success} toSignUp={handleGoToSignUp} />}
 
             {view === 'signup' && <SignUp onClose={handleBackToLanding} onSignUp={handleSubmitSignUp} error={error} toLogIn={handleGoToLogIn} />}
