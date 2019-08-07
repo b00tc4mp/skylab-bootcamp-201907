@@ -176,7 +176,7 @@
                 it('should succeed on matching criteria', () => {
                 const query = '28' // 20 results 
     
-                return logic.searchMovies(data.id, data.token, query, collections)
+                return logic.searchMovies(data.id, data.token, query, collections=true)
                     .then(movies => {
                         expect(movies).toBeDefined()
                         expect(movies instanceof Array).toBeTruthy()

@@ -4,8 +4,13 @@ class App extends Component {
     constructor() {
         super()
 
+        let credentials
 
-        this.state = { view: 'landing', credentials: undefined, error: undefined, register_success: undefined }
+        const { id, token } = sessionStorage
+
+        id && token && (credentials = { id, token })
+
+        this.state = { view: 'landing', credentials, error: undefined, register_success: undefined }
 
         this.handleBackToLanding = this.handleBackToLanding.bind(this)
         this.handleGoToLogIn = this.handleGoToLogIn.bind(this)
@@ -43,26 +48,34 @@ class App extends Component {
     handleSubmitLogIn(email, password) {
         try {
             logic.authenticateUser(email, password)
-                .then(credentials => this.setState({ view: 'landing', credentials, register_success: undefined }))
+                .then(credentials => {
+
+                    sessionStorage.id = credentials.id
+                    sessionStorage.token = credentials.token
+
+                    this.setState({ view: 'landing', credentials, register_success: undefined })})
                 .catch(({ message }) => this.setState({ error: message }))
         } catch ({message}) {
             this.setState({ error: message })
         }
     }
+
     handleLogOut(){
+        
+
+        delete sessionStorage.id 
+        delete sessionStorage.token 
+
         this.setState({credentials: undefined})
-    }
-
-    handleLogin() {
-
     }
 
     render() {
         const { state: { view, credentials, error, register_success }, handleBackToLanding, handleSubmitLogIn, handleSubmitSignUp, handleGoToLogIn, handleGoToSignUp, handleLogOut } = this
 
         return <>
-            {view === 'landing' && <Landing credentials={credentials} mainView={view} goToLogin={handleGoToLogIn} />}
-            {view === 'login' && <LogIn onClose={handleBackToLanding} onLogIn={handleSubmitLogIn} error={error} register_success={register_success} toSignUp={handleGoToSignUp} onLogOut={handleLogOut} />}
+            {view === 'landing' && <Landing goToLogin={handleGoToLogIn}  credentials={credentials} onLogOut={handleLogOut} />}
+            {view === 'login' && <LogIn onClose={handleBackToLanding} onLogIn={handleSubmitLogIn} error={error} register_success={register_success} toSignUp={handleGoToSignUp} />}
+
             {view === 'signup' && <SignUp onClose={handleBackToLanding} onSignUp={handleSubmitSignUp} error={error} toLogIn={handleGoToLogIn} />}
         </>
     }
