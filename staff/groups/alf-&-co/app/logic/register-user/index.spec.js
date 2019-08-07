@@ -1,7 +1,7 @@
 {
     const { random }= Math
 
-    describe('logic - register user', () => {
+    fdescribe('logic - register user', () => {
 
         let user, data
 
@@ -11,7 +11,8 @@
                 surname: 'Surname-' + random(),
                 username: 'username-' + random() + '@mail.com',
                 password: 'Password-' + random(),
-                favorites: []
+                favorites: [],
+                lists: []
             }
         )
         it('should succeed on correct data user', () =>
@@ -42,6 +43,8 @@
                 expect(_user.id).toBe(data.id)
                 expect(_user.favorites).toBeDefined()
                 expect(_user.favorites).toEqual(user.favorites)
+                expect(_user.lists).toBeDefined()
+                expect(_user.lists).toEqual(user.lists)
             })
 
         )
