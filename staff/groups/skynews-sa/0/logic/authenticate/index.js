@@ -1,4 +1,4 @@
-logic.authenticateUser = function (username, password) {
+logic.authenticateUser = (username, password) => {
     validate.string(username, 'username')
     validate.email(username, 'username')
     validate.string(password, 'password')

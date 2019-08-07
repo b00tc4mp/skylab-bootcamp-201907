@@ -1,4 +1,4 @@
-logic.retrieveUser = function (id, token) {
+logic.retrieveUser =  (id, token) => {
   validate.string(id, 'id')
   validate.string(token, 'token')
 
