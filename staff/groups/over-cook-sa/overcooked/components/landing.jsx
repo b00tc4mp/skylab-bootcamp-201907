@@ -44,13 +44,13 @@ class Landing extends Component {
 
   onRandomRecipe = () => {
     logic.retrieveRandomRecipe()
-        .then(meal => {
-          const { strYoutube : youtube } = meal
-          meal.strYoutube = youtubeParse(youtube)
+      .then(meal => {
+        const { strYoutube: youtube } = meal
+        meal.strYoutube = youtubeParse(youtube)
         //console.log(meal)
         this.setState({ mealRandom: meal })
-      
-    })
+
+      })
   }
 
   handleAcceptError() {
@@ -104,10 +104,10 @@ class Landing extends Component {
 
     return (
       <>
-        <header>
+        <header >
           <BigHeader />
         </header>
-        <main>
+        <main className="back-img">
           <section>
             {view === 'register' && <Register onRegister={handleRegister} onBack={handleGoBack} error={error} />}
             {view === 'landing' && (
@@ -121,7 +121,8 @@ class Landing extends Component {
               <RegisterSuccess onLogin={handleGoToLogin} />
             )}
           </section>
-          <section>{mealRandom && <RecipeItem meal={mealRandom} />}</section>
+          <section className="random-recipe">{mealRandom && <RecipeItem meal={mealRandom} />}
+          </section>
         </main>
         <footer>
           <Footer />
