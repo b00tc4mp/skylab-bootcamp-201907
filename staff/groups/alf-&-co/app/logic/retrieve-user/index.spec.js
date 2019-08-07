@@ -1,7 +1,7 @@
 {
    const random = Math.random
     
-    fdescribe('logic - retrieve user', () => {
+    describe('logic - retrieve user', () => {
 
         let user, data
 
@@ -47,9 +47,18 @@
                 })
             ) 
 
-            it('should failed with wrong id in the user registered', () =>
+            it('should failed retrieving the user with wrong id', () =>
                  
             logic.retrieveUser('323', data.token)
+                
+                .catch(error=>{
+                    expect(error).toBeDefined()
+                }) 
+                   
+            ) 
+            it('should failed retrieving the user with wrong token', () =>
+                 
+            logic.retrieveUser(data.id, '333')
                 
                 .catch(error=>{
                     expect(error).toBeDefined()
