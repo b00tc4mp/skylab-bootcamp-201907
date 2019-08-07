@@ -3,7 +3,7 @@ function Results(props) {
         {props.meals.map( meal => 
             <li key={meal.idMeal} >
                 {props.paintMeal(meal)}
-            </li> )
+            </li>)
         }
    </ul>
 }

@@ -15,7 +15,7 @@ class Home extends Component {
 
     handleSearch(query) {
         const { props: { credentials } } = this
-
+debugger
         let id = credentials.id
         let token = credentials.token
 
