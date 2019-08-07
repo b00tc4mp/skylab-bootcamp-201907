@@ -10,6 +10,19 @@
   color: #31997c;
 }
 
+.mosaicPanel {
+  display: grid;
+  grid-template-rows: repeat(15, 1fr);
+  grid-gap: 1px;
+  padding-left: 3px;
+}
+
+.mosaic {
+  width: 95vw;
+  height: 100vw;
+  object-fit: cover;
+}
+
 .button, .feedback--error, .feedback--success {
   font-size: 0.7rem;
   text-decoration: none;
