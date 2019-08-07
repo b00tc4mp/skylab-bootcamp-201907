@@ -4,7 +4,7 @@
     const iNeedMyGirl = '7rbCL7W893Zonbfnevku5s'
     const elephantGun = '6pmxr66tMAePxzOLfjGNcX'
 
-    describe('logic - search tracks', () => {
+    fdescribe('logic - search tracks', () => {
         describe('when the user logged', () => {
             beforeEach(() => {
                 user = {

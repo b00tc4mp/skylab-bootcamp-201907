@@ -53,7 +53,7 @@
                     })
                 )
 
-                it('should succeed on matching criteria when capital letters are used', () => {
+                it('should retrieve a song determinate', () => {
                     return logic.retrieveTrack(credentials.id, credentials.token, '5wj4E6IsrVtn8IBJQOd0Cl')
                     .then(track => {
                         expect(track).toBeDefined()
@@ -63,7 +63,7 @@
                     })
                 })
 
-                it('should succeed on matching criteria when capital letters are used', () => {
+                it('should retrieve a song determinate', () => {
                     return logic.retrieveTrack(credentials.id, credentials.token, '7rbCL7W893Zonbfnevku5s')
                     .then(track => {
                         expect(track).toBeDefined()
