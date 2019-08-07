@@ -13,7 +13,7 @@ class Landing extends React.Component {
 
     handleSearch(query = this.state.query) {
         try {
-            logic.searchTracks(this.props.credentials.id, this.props.credentials.token, query)
+            logic.searchTracks(this.props.data.id, this.props.data.token, query)
                 .catch(message => console.error(message))
                 .then(response => this.setState({ search: query, tracks: response }))
         } catch {
