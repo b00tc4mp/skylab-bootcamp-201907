@@ -54,7 +54,7 @@
                 expect(recipe.favorite).toBeTruthy()
             }))
 
-        fit('should succeed on valid id, recipe not in favorites', () =>
+        it('should succeed on valid id, recipe not in favorites', () =>
             logic.retrieveRecipe(data.id, data.token, '52775').then(recipe => {
 
                 expect(recipe).toBeDefined()

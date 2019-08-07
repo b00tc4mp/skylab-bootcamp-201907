@@ -14,17 +14,6 @@ function SmallHeader(props) {
       }>Logout</a>
       <a href="">Favorites</a>
 
-      <form name="formulario" method="post" action="/send.php">
-        
-        <select name="combo">
-          <option value="1">by name</option>
-          <option value="2" selected>by category</option>
-          <option value="3">by ingredient</option>
-        </select>
-        <input type="search" id="mySearch" name="q" />
-        <button>Search</button>
-      </form>
-
     </>
   )
 }

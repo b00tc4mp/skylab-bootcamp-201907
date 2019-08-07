@@ -9,6 +9,7 @@ logic.searchIngredient = function (id, token, query) {
         return call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'get', { 'authorization': `bearer ${token}` }, undefined)
             .then(response => {
                 if (response.status === 'KO') throw new Error(response.error)
+            
 
                 favorites = response.data.favorites
                 return call(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${query}`, 'get', undefined, undefined)
