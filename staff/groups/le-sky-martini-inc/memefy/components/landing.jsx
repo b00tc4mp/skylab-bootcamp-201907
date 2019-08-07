@@ -196,16 +196,7 @@ class Landing extends Component {
             {view === 'search' && <>
                 <h3>Search...</h3>
                 <Search onSearch={handleSearch} />
-
-                {!gif ?
-                    <Results items={gifs} paintItem={gif => {
-                        return <GifItem gif={gif} onToggle={handleToggleFavGifFromGifItem} />
-                    }} onItem={handleRetrieveGif} />
-                    :
-                    <GifDetail gif={gif} onBack={handleBackFromDetail} onToggle={handleToggleFavGifFromGifDetail} />}
-
-                {error && <Modal message={error} onAccept={handleAcceptError} />}
-
+                
                 <h3>or get Random!</h3>
                 <Random onRandom={handleRandom}/> 
 
@@ -217,6 +208,16 @@ class Landing extends Component {
                     <RandomDetail randomGif={randomGif} onToggle={handleToggleFavGifFromGifDetail} />}
 
                 {error && <Modal message={error} onAccept={handleAcceptError} />}
+
+                {!gif ?
+                    <Results items={gifs} paintItem={gif => {
+                        return <GifItem gif={gif} onToggle={handleToggleFavGifFromGifItem} />
+                    }} onItem={handleRetrieveGif} />
+                    :
+                    <GifDetail gif={gif} onBack={handleBackFromDetail} onToggle={handleToggleFavGifFromGifDetail} />}
+
+                {error && <Modal message={error} onAccept={handleAcceptError} />}
+
             </>}
 
             {view === 'favorites' && <>
