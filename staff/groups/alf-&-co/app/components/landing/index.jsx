@@ -4,6 +4,7 @@ class Landing extends Component {
     constructor() {
         super()
 
+       
         this.state = { view: 'collections', search: false, query: undefined, collection: undefined, movies: [], movie: undefined, error: undefined, user: undefined, favs: [] }
 
         this.handleGoToFavorites=this.handleGoToFavorites.bind(this)
@@ -23,7 +24,7 @@ class Landing extends Component {
     }
 
     componentWillMount(){
-        const { props: { credentials } } = this
+        const { props: { credentials , query , collection} } = this
 
         if (credentials) {
             const { id, token } = credentials
@@ -37,6 +38,8 @@ class Landing extends Component {
                 this.setState({error:message})
             }
         }
+        if (query) this.handleSearch(query)
+        if (collection) this.handleGoToCollections(collection)
     }
 
 
@@ -91,9 +94,12 @@ class Landing extends Component {
     }
 
     handleGoToLogIn(event){
+
+        const { state: { query, collection } } = this
+
         event.preventDefault()
     
-        this.props.goToLogin()
+        this.props.goToLogin(query, collection)
     
     }
 
