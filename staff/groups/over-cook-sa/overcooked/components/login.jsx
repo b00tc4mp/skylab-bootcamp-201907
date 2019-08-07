@@ -1,4 +1,4 @@
-function Login({ onLogin, onBack }) {
+function Login({ onLogin, onBack, error }) {
   return (
     <>
       <h2>Enter login data</h2>
@@ -34,6 +34,7 @@ function Login({ onLogin, onBack }) {
           Back
         </a>
       </form>
+      {error && <Feedback message={error} />}
     </>
   )
 }

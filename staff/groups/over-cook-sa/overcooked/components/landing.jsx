@@ -18,6 +18,7 @@ class Landing extends Component {
     this.handleRegister = this.handleRegister.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
     this.handleGoBack = this.handleGoBack.bind(this)
+    this.handleAcceptError = this.handleAcceptError.bind(this)
   }
 
   componentWillMount() {
@@ -50,6 +51,10 @@ class Landing extends Component {
     })
   }
 
+  handleAcceptError() {
+    this.setState({ error: undefined })
+  }
+
   handleRegister(name, surname, email, password, repassword) {
     try {
       logic
@@ -74,25 +79,26 @@ class Landing extends Component {
   }
 
   handleGoToRegister() {
-    this.setState({ view: 'register', mealRandom: null })
+    this.setState({ view: 'register', mealRandom: null, error: undefined })
   }
 
   handleGoToLogin() {
-    this.setState({ view: 'login', mealRandom: null })
+    this.setState({ view: 'login', mealRandom: null, error: undefined })
   }
 
   handleGoBack() {
-    this.setState({ view: 'landing' })
+    this.setState({ view: 'landing', error: undefined })
   }
 
   render() {
     const {
-      state: { view, mealRandom },
+      state: { view, mealRandom, error },
       handleGoToLogin,
       handleGoToRegister,
       handleRegister,
       handleLogin,
-      handleGoBack
+      handleGoBack,
+      handleAcceptError
     } = this
 
     return (
@@ -102,9 +108,9 @@ class Landing extends Component {
         </header>
         <main>
           <section>
-            {view === 'register' && (<Register onRegister={handleRegister} onBack={handleGoBack} />)}
+            {view === 'register' && (<Register onRegister={handleRegister} onBack={handleGoBack} error={error}/>)}
             {view === 'landing' && (<WelcomeAnchors onRegister={handleGoToRegister} onLogin={handleGoToLogin} />)}
-            {view === 'login' && (<Login onLogin={handleLogin} onBack={handleGoBack} />)}
+            {view === 'login' && (<Login onLogin={handleLogin} onBack={handleGoBack} error={error}/>)}
             {view === 'register-success' && (<RegisterSuccess onLogin={handleGoToLogin} />)}
           </section>
           <section>{mealRandom && <RecipeItem meal={mealRandom} />}</section>
