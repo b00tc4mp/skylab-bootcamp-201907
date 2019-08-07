@@ -32,7 +32,7 @@ logic.searchMovies = function(userId, userToken, query, collections=false) {
                         if (response.error) return []
                         else {
                             let movies = response.results
-                            favorites && movies.forEach(movie => movie.favorite = favorites.includes(movie.id))
+                            favorites && movies.forEach(movie => movie.favorite = favorites.includes(movie.id.toString()))
 
                             return movies
                         }

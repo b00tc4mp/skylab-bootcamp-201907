@@ -73,11 +73,10 @@ class App extends Component {
         const { state: { view, credentials, error, register_success }, handleBackToLanding, handleSubmitLogIn, handleSubmitSignUp, handleGoToLogIn, handleGoToSignUp, handleLogOut } = this
 
         return <>
-
-            {view === 'landing' && <Landing onLogIn={handleGoToLogIn}  credentials={credentials} onLogOut={handleLogOut} />}
+            {view === 'landing' && <Landing goToLogin={handleGoToLogIn}  credentials={credentials} onLogOut={handleLogOut} />}
             {view === 'login' && <LogIn onClose={handleBackToLanding} onLogIn={handleSubmitLogIn} error={error} register_success={register_success} toSignUp={handleGoToSignUp} />}
-            {view === 'signup' && <SignUp onClose={handleBackToLanding} onSignUp={handleSubmitSignUp} error={error} toLogIn={handleGoToLogIn} />}
 
+            {view === 'signup' && <SignUp onClose={handleBackToLanding} onSignUp={handleSubmitSignUp} error={error} toLogIn={handleGoToLogIn} />}
         </>
     }
 }
