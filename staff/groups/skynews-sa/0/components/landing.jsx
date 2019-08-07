@@ -56,10 +56,8 @@ class Landing extends Component{
         
         id && token && logic.retrieveArticle(id, token, item)
         .then((article) => this.setState({ article }))
-        .then(() => this.setState({ view:"none" }))
         id==undefined && token==undefined && logic.retrieveArticle(id, token, item)
         this.setState({article:item})
-        this.setState({view:"none"})
     }
 
 
@@ -71,7 +69,7 @@ class Landing extends Component{
     handleBackFromDetail() {
         const { state: { category, country }} = this
         logic.searchNews(category, country)
-            .then(news => this.setState({ news, article: undefined }))
+            .then(news => this.setState({ news, article: undefined, view:"search" }))
             .catch(({ message }) => this.setState({ error: message }))
     }
 
@@ -160,23 +158,27 @@ class Landing extends Component{
              <h1 className='landing__title hide'>SkyNews</h1>
              <img className="nav-logo" src="style/img/skynews-logo.png"></img> 
         </header>
-        {view === 'search' && !article ? <>
-
-            <Search onSearch={handleSearch} error={error} category={category} country={country}/>
+        {view === 'search' && <>
+        
+        
+        <h3>Search</h3>
+        <Search onSearch={handleSearch} error={error} category={category} country={country}/>
+        {!article ?
 
             <Results items={news} paintItem={article => {
                 return <ArticleItem article={article}/>
             }} onItem={handleRetrieveArticle}/>
-            </>
             :
-            <ArticleDetail article={article} onBack={handleBackFromDetail} onToggle={handleToggleFavArticleFromArticleDetail}/>}
-        
+            <ArticleDetail article={article} onToggle={handleToggleFavArticleFromArticleDetail} onBack={handleBackFromDetail} />}
+            {error && <Modal message={error} onAccept={handleAcceptError} />}
+            </>}
         
 
         {view === 'favorites' && <>
+        <h3>Favorites</h3>
             <Results items={favs} paintItem={article => {
-                return <ArticleDetail article={article} onToggle={handleToggleFavArtFromFavorites} />
-            }} onItem={handleRetrieveArticle} />
+                return <ArticleDetail article={article} onToggle={handleToggleFavArtFromFavorites}/>
+            }} onItem={handleRetrieveArticle}/>
         </>}
     </>
     }

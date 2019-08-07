@@ -1,4 +1,4 @@
-function ArticleDetail({article, onBack, onToggle}){
+function ArticleDetail({article, onToggle, onBack}){
     
     return <>
     <section className="detail">
@@ -8,10 +8,10 @@ function ArticleDetail({article, onBack, onToggle}){
         <h4 className="detail-description">{article.description}</h4>
         <FavButton active={article.favorite} onToggle={() => onToggle(article)}/>
         <a className="detail-Link" href={article.url}>Go to original article</a>
-        <a className="detaul-back" href="" onClick={event=>{
+        {onBack && <a className="detaul-back" href="" onClick={event=>{
         event.preventDefault()
         onBack()
-        }}>Go onBack</a>
+        }}>Go onBack</a>}
     </section>
     </>
 }
