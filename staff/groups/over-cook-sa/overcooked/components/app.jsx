@@ -18,6 +18,7 @@ class App extends Component {
     }
 
     handleCredentials(credentials){
+        
         this.setState({ credentials })
     }
     
@@ -32,17 +33,14 @@ class App extends Component {
 
     render() {
 
-        const { state: { view, credentials }, handleCredentials, handleLogout } = this
+        const { state: { credentials }, handleCredentials, handleLogout } = this
 
         return (
         <>
-        {!credentials ? <Landing onCredentials={handleCredentials} /> 
-        : <Home onLogout={handleLogout} /> }
-        
 
         {!credentials ? 
-        view === 'landing' && <Landing onCredentials={handleCredentials} /> 
-        : view === 'home' && <Home onLogout={handleLogout} credentials={credentials} /> }
+        <Landing onCredentials={handleCredentials} />: 
+        <Home onLogout={handleLogout} credentials={credentials} /> }
         
         <footer>
             <Footer />
