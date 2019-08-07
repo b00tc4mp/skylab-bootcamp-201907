@@ -38,13 +38,13 @@
 
         // TODO test more cases
 
-        xdescribe('when user already has a favorite duck', () => {
-            const track_id = '5c3853aebd1bde8520e66e97'
+        describe('when user already has a favorite track', () => {
+            const track_id = '30974362'
 
             let credentials
 
             beforeEach(() => {
-                user.favorites.push(id)
+                user.favorites.push(track_id)
 
                 return call('https://skylabcoders.herokuapp.com/api/user', 'post', { 'content-type': 'application/json' }, user)
                     .then(response => {
@@ -59,25 +59,24 @@
                     })
             })
 
-            it('should succeed on valid id', () =>
-                logic.retrieveDuck(credentials.id, credentials.token, track_id)
-                    .then(duck => {
-                        expect(duck).toBeDefined()
-                        expect(duck.id).toBe(id)
-                        expect(duck.title).toBeDefined()
-                        expect(duck.imageUrl).toBeDefined()
-                        expect(duck.price).toBeDefined()
-                        expect(duck.link).toBeDefined()
-                        expect(duck.favorite).toBeTruthy()
+            it('should succeed on valid track_id', () => {
+                return logic.retrieveLyrics(undefined, undefined, track_id)
+                    .then(lyrics => {
+                        expect(lyrics).toBeDefined()
+                        expect(lyrics).toBe("Here we are, born to be kings\nWe're the princes of the Universe\nHere we belong, fighting to survive\nIn a world with the darkest powers\n\nAnd here we are\nWe're the princes of the Universe\nHere we belong, fighting for survival\nWe've come to be the rulers of your world\n\nI am immortal\nI have inside me blood of kings\nI have no rival\nNo man can be my equal\nTake me to the future of your world\n\n...\n\n******* This Lyrics is NOT for Commercial use *******\n(1409618543212)")
                     })
-            )
+                    .catch(error => expect(error).toBeUndefined())
+                })
 
-            it('should fail on non valid id', () => {
-                const id = '5c3853aebd1bde8520e66ff9'
+            it('should fail on non valid track_id', () => {
+                const track_id = '3097436a1'
 
-                return logic.retrieveDuck(credentials.id, credentials.token, id)
-                    .then(duck => expect(duck).toBeUndefined())
-                    .catch(error => expect(error).toBeDefined())
+                return logic.retrieveLyrics(undefined, undefined, track_id)
+                .then(lyrics => {
+                    expect(lyrics).toBeUndefined()
+                    expect(res.message.header.status_code).toBe('401')
+                })
+                .catch(error => expect(error).toBeDefined())
             })
 
             // TODO test more cases

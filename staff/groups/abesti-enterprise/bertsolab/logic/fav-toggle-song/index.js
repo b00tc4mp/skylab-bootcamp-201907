@@ -21,7 +21,7 @@ logic.toggleFavTrack = function (id, token, trackId) {
             } else
                 return call(`http://skylabcoders.herokuapp.com/proxy?url=https://api.musixmatch.com/ws/1.1/track.get?apikey=e492562d27469098b0922d5d580837eb&commontrack_id=${trackId}`, 'get', undefined, undefined)
                     .then(track => {
-                        if(res.message.header.status_code === 404) throw new Error("invalid track id")
+                        if(track.message.header.status_code === 404) throw new Error("invalid track id")
 
                         favorites.push(trackId)
 

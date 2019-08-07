@@ -4,7 +4,7 @@ class App extends Component {
     constructor() {
         super()
 
-        this.state = { view: 'login', credentials: undefined, error: undefined } 
+        this.state = { view: 'home', credentials: undefined, error: undefined } 
 
         this.handleRegister = this.handleRegister.bind(this)
         this.handleGoToHome = this.handleGoToHome.bind(this)
@@ -14,6 +14,7 @@ class App extends Component {
         this.handleMenuHome=this.handleMenuHome.bind(this)
         this.handleMenuRegister=this.handleMenuRegister.bind(this)
         this.handleMenuLogin=this.handleMenuLogin.bind(this)
+
         
    
     }
@@ -69,11 +70,13 @@ class App extends Component {
        }
     }
 
+    
+
    
 
 
     render() {
-        const {  state: { view, credentials, error, user}, handleMenuHome, handleMenuLogin, handleMenuRegister, handleRegister, handleFavourite, handleLogout, handleGoToLogin, handleGoToHome, handleGoToRegister, handleLogin } = this
+        const {  state: { view, credentials, error, user}, handleMenuHome, handleMenuLogin, handleMenuRegister, handleRegister, handleFavorite, handleLogout, handleGoToLogin, handleGoToHome, handleGoToRegister, handleLogin } = this
         return  <>
 
         <header className="header">
@@ -86,7 +89,7 @@ class App extends Component {
                         <li><a href="" onClick={handleMenuRegister}>Register</a></li>
                         <li><a href="" onClick={handleMenuLogin}>Login</a></li>
                 </ul> : <ul>
-                        <li><a href="#fav" onClick={handleFavourite}>Favorite List</a></li>
+                        <li><a href="#fav" onClick={handleFavorite}>Favorite List</a></li>
                         <li><a href="#logout" onClick={handleLogout}>Logout</a></li>
                         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                         <i class="fa fa-bars"></i></a>
@@ -96,7 +99,6 @@ class App extends Component {
             {view === 'home' && <Home onRegister={handleGoToRegister} onLogin={handleGoToLogin} />}
             { view === "register" && <Register onBack={handleGoToHome} onLogin={handleGoToLogin} onRegister={handleRegister} error={error} />} 
             { view === "login" && <Login onBack={handleGoToHome} onRegister={handleGoToRegister} onLogin={handleLogin} error={error} />} 
-       
         
           <footer>
                 <p>Copyrigth © SkyLab 2019 </p>

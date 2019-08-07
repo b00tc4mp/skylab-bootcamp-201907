@@ -28,7 +28,7 @@
                 })
         })
 
-        it('should succeed in correct track id', () =>
+        it('should succeed on correct track id', () =>
             logic.toggleFavTrack(credentials.id, credentials.token, trackId)
                 .then(() =>
                     call(`https://skylabcoders.herokuapp.com/api/user/${credentials.id}`, 'get', { 'authorization': `bearer ${credentials.token}` }, undefined)
@@ -52,16 +52,16 @@
         it('should fail on non existing trackId', () => {
             const trackId = '8a'
         
-                return logic.toggleFavTrack(credentials.id, credentials.token, trackId)
-                .then(res =>{
-                    expect(res).toBeDefined()
-                            
-                    expect(res.header.status_code).toBe("404")
-                }) 
-                .catch(error => expect(error).toBeDefined()) 
+            return logic.toggleFavTrack(credentials.id, credentials.token, trackId)
+            .then(res =>{
+                expect(res).toBeDefined()
+                        
+                expect(res.header.status_code).toBe("404")
+            }) 
+            .catch(error => expect(error).toBeDefined()) 
         
-             })
         })
+        
 
         describe('when track already in favorites', () => {
             const trackId = '13040287'
@@ -90,7 +90,7 @@
                     })
             })
 
-            fit('should succeed on correct track id', () =>
+            it('should succeed on correct track id', () =>
                 logic.toggleFavTrack(credentials.id, credentials.token, trackId)
                     .then(() =>
                         call(`https://skylabcoders.herokuapp.com/api/user/${credentials.id}`, 'get', { 'authorization': `bearer ${credentials.token}` }, undefined)
@@ -107,7 +107,6 @@
                             })
                     )
             )
-
-            // TODO test more cases
         })
+    })
 }
