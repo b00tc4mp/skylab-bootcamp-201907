@@ -6,27 +6,20 @@ class App extends Component {
 
         this.state = { view: 'landing' }
 
-
-        
-
+        this.handleGoToHome = this.handleGoToHome.bind(this)
     }
 
-        
-  
-
-    
-
+    handleGoToHome() {
+        this.setState({ view: 'home'})
+      }
 
     render() {
 
-        const { state: { view }, handleRegister } = this
+        const { state: { view }, handleGoToHome } = this
 
         return <>
-
-            
-            
-            {view === 'landing' && <Landing />}
-
+            {view === 'landing' && <Landing onGoHome={handleGoToHome}/>}
+            {view === 'home' && <Home />}
         </>
     }
 }
