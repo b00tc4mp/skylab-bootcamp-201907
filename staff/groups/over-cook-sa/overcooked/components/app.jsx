@@ -4,21 +4,31 @@ class App extends Component {
     constructor() {
         super()
 
-        this.state = { view: 'landing', credentials: undefined }
+        let credentials
+
+        const { id, token } = sessionStorage
+
+        id && token && (credentials = { id, token })
+
+        this.state = {credentials}
 
 
         this.handleCredentials = this.handleCredentials.bind(this)
         this.handleLogout = this.handleLogout.bind(this)
     }
 
-
     handleCredentials(credentials){
-        this.setState({ credentials , view: 'home'})
+        this.setState({ credentials })
     }
     
     handleLogout(){
-        this.setState({ credentials: undefined, view: 'landing' })
+        this.setState({ credentials: undefined })
+
+       delete sessionStorage.id
+       delete sessionStorage.token
     }
+
+    
 
     render() {
 
@@ -28,8 +38,8 @@ class App extends Component {
         <>
         
         {!credentials ? 
-        view === 'landing' && <Landing onCredentials={handleCredentials} /> 
-        : view === 'home' && <Home onLogout={handleLogout} /> }
+        <Landing onCredentials={handleCredentials} /> 
+        :   <Home onLogout={handleLogout} /> }
         
 
         </>

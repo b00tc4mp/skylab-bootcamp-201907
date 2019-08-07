@@ -71,8 +71,11 @@ class Landing extends Component {
       logic
         .authenticateUser(email, password)
         .then(credentials => {this.setState({ credentials })
-          this.props.onCredentials(credentials)})
-
+          this.props.onCredentials(credentials)
+          sessionStorage.id = credentials.id
+          sessionStorage.token = credentials.token
+        })
+      
         .catch(({ message }) => this.setState({ error: message }))
     } catch ({ message }) {
       this.setState({ error: message })
@@ -108,13 +111,13 @@ class Landing extends Component {
           <BigHeader />
         </header>
         <main>
-          <section>
-            {view === 'register' && (<Register onRegister={handleRegister} onBack={handleGoBack} error={error}/>)}
-            {view === 'landing' && (<WelcomeAnchors onRegister={handleGoToRegister} onLogin={handleGoToLogin} />)}
-            {view === 'login' && (<Login onLogin={handleLogin} onBack={handleGoBack} error={error}/>)}
-            {view === 'register-success' && (<RegisterSuccess onLogin={handleGoToLogin} />)}
-          </section>
-          <section>{mealRandom && <RecipeItem meal={mealRandom} />}</section>
+            <section>
+              {view === 'register' && (<Register onRegister={handleRegister} onBack={handleGoBack} error={error}/>)}
+              {view === 'landing' && (<WelcomeAnchors onRegister={handleGoToRegister} onLogin={handleGoToLogin} />)}
+              {view === 'login' && (<Login onLogin={handleLogin} onBack={handleGoBack} error={error}/>)}
+              {view === 'register-success' && (<RegisterSuccess onLogin={handleGoToLogin} />)}
+            </section>
+            <section>{mealRandom && <RecipeItem meal={mealRandom} />}</section>
         </main>
         <footer>
           <Footer />
