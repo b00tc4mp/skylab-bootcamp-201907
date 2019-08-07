@@ -4,6 +4,7 @@ class Landing extends Component{
     constructor(){
         super()
 
+
         this.state={ view: 'search', category: undefined, country: undefined, news:[], article:undefined, error: undefined, user: undefined, favs: []}
         
         this.handleSearch=this.handleSearch.bind(this)
@@ -36,12 +37,16 @@ class Landing extends Component{
     handleSearch(category, country){
         /* console.log(value, "correct") */
         this.props.onSpinning()
+        try{
         logic.searchNews(category, country)
-        .then(news=>this.setState({news, category, country}))
+        .then(news=>this.setState({news, category, country, error:undefined}))
         .catch(({message}) => this.setState({error: message}))
         .then(() => console.log("p:",this.state.news))
         .then(()=> this.props.onStopSpinning())
-        
+        }catch({message}){
+            this.setState({error:message})
+            this.props.onStopSpinning()
+        }
     }
 
     handleRetrieveArticle(item){
@@ -50,11 +55,11 @@ class Landing extends Component{
         credentials && (id = credentials.id, token = credentials.token)
         
         id && token && logic.retrieveArticle(id, token, item)
-        .then((article) => this.setState({ article}))
-        /* .then(() => this.setState({ viewLanding:"other" })) */
+        .then((article) => this.setState({ article }))
+        .then(() => this.setState({ view:"none" }))
         id==undefined && token==undefined && logic.retrieveArticle(id, token, item)
         this.setState({article:item})
-       /*  this.setState({viewLanding:"other"}) */
+        this.setState({view:"none"})
     }
 
 
@@ -155,19 +160,17 @@ class Landing extends Component{
              <h1 className='landing__title hide'>SkyNews</h1>
              <img className="nav-logo" src="style/img/skynews-logo.png"></img> 
         </header>
+        {view === 'search' && !article ? <>
 
-        {view === 'search' && <>
             <Search onSearch={handleSearch} error={error} category={category} country={country}/>
 
-        {!article?
             <Results items={news} paintItem={article => {
                 return <ArticleItem article={article}/>
             }} onItem={handleRetrieveArticle}/>
+            </>
             :
             <ArticleDetail article={article} onBack={handleBackFromDetail} onToggle={handleToggleFavArticleFromArticleDetail}/>}
-
-    
-        </>}
+        
         
 
         {view === 'favorites' && <>

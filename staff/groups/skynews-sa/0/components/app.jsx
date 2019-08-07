@@ -19,6 +19,7 @@ class App extends Component{
         this.handleBackToLanding=this.handleBackToLanding.bind(this)
         this.handleSpinning=this.handleSpinning.bind(this)
         this.handleSpinning1=this.handleSpinning1.bind(this)
+        this.handleWeather=this.handleWeather.bind(this)
         this.handleLogout=this.handleLogout.bind(this)
 
     }
@@ -32,12 +33,8 @@ class App extends Component{
 
     /* LANDING */
     handleGoRegister(){
-        this.setState({view:"spinner"})
-        setTimeout(() => {
-            
+           
             this.setState({view:"register"})
-            
-        }, 2000)
     }
     handleGoLogin(){
         this.setState({view:"login"})
@@ -71,6 +68,13 @@ class App extends Component{
             this.setState({ error: message })
         }
     }
+
+    /*WEATHER*/
+    handleWeather(){
+        console.log("weather")
+    }
+    
+
     /*LOGOUT*/
     handleLogout() {
         this.setState({ credentials: undefined })
@@ -78,11 +82,15 @@ class App extends Component{
 
 
 
+
     render() {
+
+
         const { state: { viewSpinner,view, credentials, error }, handleGoRegister, handleGoLogin ,handleRegister, handleLogin, handleBackToLanding, handleSpinning, handleSpinning1, handleLogout} = this
 
         return <>
             {view === 'landing' && <Landing onRegister={handleGoRegister} onLogin={handleGoLogin} credentials={credentials} onSpinning={handleSpinning} onStopSpinning={handleSpinning1} onLogout={handleLogout}/>}
+
             {view=== 'register' && <Register onRegister={handleRegister} onBack={handleBackToLanding} error={error} />}
             {view === 'register-success' && <RegisterSuccess onLogin={handleGoLogin} error={error}/>}
             {view=== 'login' &&<Login onLogin={handleLogin} onBack={handleBackToLanding} error={error}/>}
