@@ -34,8 +34,7 @@ class App extends React.Component {
         try {
             logic.authenticateUser(email, password)
                 .then(user => {
-                    this.setState({ credentials: user })
-                    this.setState({ view: 'landing' })
+                    this.setState({ credentials: user, view: 'landing'  })
                 })
                 .catch(message => console.error(message))
 
@@ -59,7 +58,7 @@ class App extends React.Component {
 
     render() {
         return <>
-            <Landing data={this.state.credentials} onLogin={this.handleGoToLogin} onRegister={this.handleGoToRegister} />
+            <Landing credentials={this.state.credentials} onLogin={this.handleGoToLogin} onRegister={this.handleGoToRegister} />
             {this.state.view === 'register' && <Register onRegister={this.handleRegister} />}
             {this.state.view === 'register-success' && <RegisterSuccess onLogin={this.handleGoToLogin} />}
             {this.state.view === 'login' && <Login onLogin={this.handleLogin} />}
