@@ -4,7 +4,7 @@ class App extends Component {
     constructor() {
         super()
 
-        this.state = { view: 'home', credentials: undefined, error: undefined } 
+        this.state = { view: 'register', credentials: undefined, error: undefined } 
 
         this.handleRegister = this.handleRegister.bind(this)
         this.handleGoToHome = this.handleGoToHome.bind(this)
