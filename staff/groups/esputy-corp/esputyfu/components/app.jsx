@@ -3,7 +3,7 @@ class App extends React.Component {
         super()
 
 
-        this.state = { view: 'undefined', credentials: {} }
+        this.state = { view: 'landing', credentials: {} }
         
         //bindings
 
@@ -56,7 +56,7 @@ class App extends React.Component {
 
     render() {
         return <>
-
+            {this.state.view === 'landing' && <Landing />}
             {this.state.view === 'register' && <Register onRegister={this.handleRegister}/>}
             {this.state.view === 'register-success' && <RegisterSuccess onLogin={this.handleGoToLogin}/>}
             {this.state.view === 'login' && <Login onLogin={this.handleLogin} />}
