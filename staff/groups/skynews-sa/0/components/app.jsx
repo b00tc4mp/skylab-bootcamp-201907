@@ -24,13 +24,8 @@ class App extends Component{
     }
 
     /* LANDING */
-    handleGoRegister(){
-        this.setState({view:"spinner"})
-        setTimeout(() => {
-            
-            this.setState({view:"register"})
-            
-        }, 2000)
+    handleGoRegister(){         
+    this.setState({view:"register"})
     }
     handleGoLogin(){
         this.setState({view:"login"})
