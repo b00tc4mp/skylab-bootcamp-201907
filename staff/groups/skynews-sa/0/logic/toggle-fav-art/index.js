@@ -1,4 +1,4 @@
-logic.toggleFavArt = function (id, token, article) {
+logic.toggleFavArt =  (id, token, article) => {
   validate.string(id, 'id')
   validate.string(token, 'token')
 
@@ -8,7 +8,7 @@ logic.toggleFavArt = function (id, token, article) {
       
       const favorites = response.data.favorites
 
-      const index = favorites.findIndex(favorite => favorite === article)
+      const index = favorites.findIndex(favorite => favorite.url === article.url)
 
       if(index > -1) {
         favorites.splice(index, 1)

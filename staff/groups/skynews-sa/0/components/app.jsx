@@ -4,7 +4,13 @@ class App extends Component{
 
     constructor(){
         super()
-        this.state={viewSpinner:false,view:"landing",credentials:undefined,error:undefined}
+
+        let credentials
+
+        const { id, token } = sessionStorage
+
+        id && token && (credentials = { id, token })
+        this.state={viewSpinner:false,view:"landing",credentials,error:undefined}
 
         this.handleGoLogin=this.handleGoLogin.bind(this)
         this.handleGoRegister=this.handleGoRegister.bind(this)
@@ -53,7 +59,12 @@ class App extends Component{
     handleLogin(email, password) {
         try {
             logic.authenticateUser(email, password)
-                .then(credentials => this.setState({ view: 'landing', credentials }))
+            .then(credentials => {
+                sessionStorage.id = credentials.id
+                sessionStorage.token = credentials.token
+
+                this.setState({ view: 'landing', credentials })
+            })
                 .catch(({ message }) => this.setState({ error: message }))
         } catch ({ message }) {
             this.setState({ error: message })

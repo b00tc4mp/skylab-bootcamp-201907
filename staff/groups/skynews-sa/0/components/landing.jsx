@@ -28,16 +28,18 @@ class Landing extends Component{
     }
 
     handleRetrieveArticle(item){
-
         const {props : {credentials}} = this
         let id, token
         credentials && (id = credentials.id, token = credentials.token)
-
-        logic.retrieveArticle(id, token, item)
-        this.setState({ article:item }) 
+        
+        id && token && logic.retrieveArticle(id, token, item)
+        .then((article) => this.setState({ article }))
+        .then(() => this.setState({ viewLanding:"other" }))
+        id==undefined && token==undefined && logic.retrieveArticle(id, token, item)
+        this.setState({article:item})
         this.setState({viewLanding:"other"})
-
     }
+
 
     handleRegister(event){
         event.preventDefault()
