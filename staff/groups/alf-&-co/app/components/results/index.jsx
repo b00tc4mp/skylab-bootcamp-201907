@@ -1,5 +1,5 @@
 function Results(props) {
-    return <div className="mosaicPanel">
+    return <>
         <ul className="mosaicPanel">
         {/* For each movie in movies array, create a list element and add event listener with closure to it*/}
         {props.movies.map(movie => <li className="mosaicList" key={movie.id} onClick={ () => {
@@ -10,5 +10,5 @@ function Results(props) {
         {props.paintItem(movie)}
         </li>)}
         </ul>
-    </div>
+    </>
 }
