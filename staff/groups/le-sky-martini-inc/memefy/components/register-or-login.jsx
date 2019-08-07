@@ -19,6 +19,6 @@ function RegisterOrLogin({ onRegister, onLogin, onBack, error }) {
             <a className={`register-or-login__back`} href="" onClick={event => {
                 event.preventDefault()
                 onBack()     // Hacer que sea -> Go back to results. Go back genuino.
-            }}>Back to Home</a>
+            }}><i class="fas fa-arrow-left"></i> Back to Home</a>
     </section>
 }

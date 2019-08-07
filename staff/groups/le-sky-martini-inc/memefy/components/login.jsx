@@ -25,6 +25,6 @@ function Login({ onLogin, onBack, error }) {
             event.preventDefault()
 
             onBack()
-        }}>Go back</a>
+        }}><i class="fas fa-arrow-left"></i> Go back</a>
     </section>
 }

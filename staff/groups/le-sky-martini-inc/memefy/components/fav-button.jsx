@@ -3,5 +3,5 @@ function FavButton({ active, onToggle }) {
         event.stopPropagation()
 
         onToggle()
-    }}>{active ? '💜' : '💔'}</button>
+    }}>{active ? <i class="fas fa-heart"></i> : <i class="far fa-heart"></i>}</button>
 }

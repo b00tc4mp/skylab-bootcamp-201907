@@ -9,6 +9,6 @@ function GifDetail({ gif: { data: { id, title, images, import_datetime, bitly_ur
             event.preventDefault()
 
             onBack()
-        }}>Go back</a>}
+        }}><i class="fas fa-arrow-left"></i> Go back</a>}
     </section>
 }
