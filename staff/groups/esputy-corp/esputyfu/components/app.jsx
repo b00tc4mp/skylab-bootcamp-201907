@@ -3,7 +3,7 @@ class App extends React.Component {
         super()
 
 
-        this.state = { view: 'landing', credentials: { id: undefined, token: undefined } }
+        this.state = { view: 'landing', credentials: {} }
 
         //bindings
 
@@ -34,8 +34,7 @@ class App extends React.Component {
         try {
             logic.authenticateUser(email, password)
                 .then(user => {
-                    this.setState({ credentials: user })
-                    this.setState({ view: 'landing' })
+                    this.setState({ credentials: user, view: 'landing'  })
                 })
                 .catch(message => console.error(message))
 
@@ -59,6 +58,7 @@ class App extends React.Component {
 
     render() {
         return <>
+
             <Header onLogin={this.handleGoToLogin} onRegister={this.handleGoToRegister} _state={this.state.credentials.id}/>
             {this.state.view === 'landing' && <Landing data={this.state.credentials}/>}
             {this.state.view === 'register' && <Register onRegister={this.handleRegister} />}
