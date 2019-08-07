@@ -3,26 +3,15 @@ const { Component } = React
 class Home extends Component {
     constructor() {
         super()
-
         this.state = {}
-
     }
-
-
 
 render () {
 
-    return (
-        <>
+    return <>
         <SmallHeader />
         <Footer />
-
-
-
-        </>
-
-
-    )
+    </>
+    
 }
-
 }

@@ -4,22 +4,31 @@ class App extends Component {
     constructor() {
         super()
 
-        this.state = { view: 'landing' }
+        this.state = { view: 'landing', credentials: undefined }
 
-        this.handleGoToHome = this.handleGoToHome.bind(this)
+
+        this.handleCredentials = this.handleCredentials.bind(this)
     }
 
-    handleGoToHome() {
+
+    handleCredentials(credentials){
+        this.setState({ credentials })
         this.setState({ view: 'home'})
-      }
+    }
+    
 
     render() {
 
-        const { state: { view }, handleGoToHome } = this
+        const { state: { view, credentials }, handleCredentials } = this
 
-        return <>
-            {view === 'landing' && <Landing onGoHome={handleGoToHome}/>}
-            {view === 'home' && <Home />}
+        return (
+        <>
+        
+        {!credentials ? 
+        view === 'landing' && <Landing onCredentials={handleCredentials} /> 
+        : view === 'home' && <Home /> }
+        
         </>
+        )
     }
 }
