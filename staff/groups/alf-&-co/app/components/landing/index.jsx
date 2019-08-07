@@ -20,6 +20,8 @@ class Landing extends Component {
         this.handleToggleFavMovieFromMovieItem=this.handleToggleFavMovieFromMovieItem.bind(this)
         this.handleToggleFavMovieFromFavoritesSection=this.handleToggleFavMovieFromFavoritesSection.bind(this)
         this.handleFavorites = this.handleFavorites.bind(this)
+        this.handleToggleMovieFromMovieDetail = this.handleToggleMovieFromMovieDetail.bind(this)
+        this.handleListModal = this.handleListModal.bind(this)
     }
 
     componentWillMount(){
@@ -174,6 +176,28 @@ class Landing extends Component {
         credentials ? logic.toggleFavMovie(id, token, movieId, () => handleFavorites()) : goToLogin()
 
     }
+    handleListModal(){
+        const { props: {credentials}, goToLogin } = this
+
+        let id, token
+        credentials && (id = credentials.id, token = credentials.token)
+
+        credentials ? logic.createList(id, token).then(list => this.setState({list, view : 'list'})) : goToLogin()
+             /* create = function that create the list */
+    }
+
+
+
+
+    handleToggleMovieFromMovieDetail(movieId){
+        const {props:{ goToLogin, credentials }} = this
+
+        let id, token
+
+        credentials && (id = credentials.id, token = credentials.token)
+
+        credentials ? logic.toggleListModal(id, token, movieId, () => handleListModal()) : goToLogin()
+    }
 
 
 
@@ -185,7 +209,7 @@ class Landing extends Component {
             handleSearch, handleRetrieveMovie, handleLogOut,
             handleBackFromDetail, handleGoToSearch, handleGoToLogIn,
             handleToggleFavMovieFromMovieItem, handleToggleFavMovieFromMovieDetail, handleGoToCollections, handleLinkToCollections, handleGoToFavorites,
-            handleToggleFavMovieFromFavoritesSection
+            handleToggleFavMovieFromFavoritesSection, handleToggleMovieFromMovieDetail
         } = this
 
         return <>
@@ -225,12 +249,13 @@ class Landing extends Component {
 
                 {/* Movie detail which displays     . Includes fav button and back button  */}
                 {view === 'detail' &&
-                    <MovieDetail movie={movie} onBack={handleBackFromDetail} onToggle={handleToggleFavMovieFromMovieDetail} />}
+                    <MovieDetail movie={movie} onBack={handleBackFromDetail} onList={handleListModal} onToggle={handleToggleFavMovieFromMovieDetail} onToggle ={handleToggleMovieFromMovieDetail}/>}
 
                 {view === 'favorites' &&
-                    <Favorites favs={favs} removeFav={handleToggleFavMovieFromFavoritesSection} showDetail={handleRetrieveMovie} />
-                      
-           }
+                    <Favorites favs={favs} removeFav={handleToggleFavMovieFromFavoritesSection} showDetail={handleRetrieveMovie} />}
+                
+                {view === 'list' &&
+                    <ModalList list={list} paintList={list => {list =>{ return }}}/>}
 
             </main>
             <footer>

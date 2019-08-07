@@ -186,7 +186,7 @@ class Landing extends Component {
                 <Search onSearch={handleSearch} />
 
                 {!duck ?
-                    <Results items={ducks} paintItem={duck => {
+                    < Results items={ducks} paintItem={duck => {
                         return <DuckItem duck={duck} onToggle={handleToggleFavDuckFromDuckItem} />
                     }} onItem={handleRetrieveDuck} />
                     :

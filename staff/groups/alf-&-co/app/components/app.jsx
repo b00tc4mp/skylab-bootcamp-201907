@@ -34,7 +34,7 @@ class App extends Component {
     handleSubmitSignUp(name, surname, email, password, repassword){
         try {
             logic.registerUser(name, surname, email, password, repassword)
-                .then(() => this.setState({ view: 'login', register_success: true }))
+                .then(() => this.setState({ view: 'login', register_success: true, error: undefined}))
                 .catch(({ message }) => this.setState({ error: message }))
         } catch ({ message }) {
             this.setState({ error: message })
@@ -54,7 +54,7 @@ class App extends Component {
                     sessionStorage.token = credentials.token
 
                     this.setState({ view: 'landing', credentials, register_success: undefined })})
-                .catch(({ message }) => this.setState({ error: message }))
+                .catch(({ message }) => this.setState({ error: message}))
         } catch ({message}) {
             this.setState({ error: message })
         }
