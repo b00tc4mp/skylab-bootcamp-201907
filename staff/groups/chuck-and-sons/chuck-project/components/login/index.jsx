@@ -8,7 +8,7 @@ function Login(props){
 
     return <>
         <div className = "form">
-
+            <h1>Login</h1>
             <form
                 className = "form__login"
                 

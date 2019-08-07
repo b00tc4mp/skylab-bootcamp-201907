@@ -13,7 +13,7 @@ class App extends React.Component{
             error : undefined,
             printItem: undefined,
             credentials,
-            user : undefined,
+            // user : undefined,
             categories: [],
             jokes: [],
             random: [] 
@@ -32,7 +32,7 @@ class App extends React.Component{
    }
 
     // ===
-    componentWilllMount(){
+    componentDidMount(){
         const { props : { credentials }} = this
 
         if (credentials){
@@ -146,13 +146,13 @@ class App extends React.Component{
         
         return <>
             <div className = "wrapper">
-                <Header onGoToRegister = {handleGoToRegister} onGoToLogin = {handleGoToLogin} onChangeView = { view }/>
+                <Header onGoToRegister = {handleGoToRegister} onGoToLogin = {handleGoToLogin} onChangeView = { view } />
                 <Search onSearch = {handleSearch}/>
-                { view === 'login' && <Login onGoToLanding = {handleGoToLanding} onLogin={handleLogin} error = { error }/> }
+                {view === 'login' && <Login onGoToLanding = {handleGoToLanding} onLogin={handleLogin} error = { error }/> }
                 { view === 'register' && <Register onGoToLanding = {handleGoToLanding} onRegister = {handleRegister} error = { error }/> }
                 { view === 'register-success' && <RegisterSuccess onGoToLanding = {handleGoToLanding} onGoToLogin = {handleGoToLogin}/> }
                 
-                <main className="main-container">
+                { view === "landing" && <main className="main-container">
                     {<button className="random-button" onClick={event => {
                         event.preventDefault()
                         handleRandomButton()
@@ -175,7 +175,7 @@ class App extends React.Component{
                             <RetrieveRandom arrayRandom={random} />
                         </section>
                     </>}
-                </main>
+                </main>}
 
 
             </div>            
