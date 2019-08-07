@@ -43,6 +43,7 @@ class Landing extends Component {
   }
 
   onRandomRecipe = () => {
+
     logic.retrieveRandomRecipe()
       .then(meal => {
         const { strYoutube: youtube } = meal
@@ -51,6 +52,7 @@ class Landing extends Component {
         this.setState({ mealRandom: meal })
 
       })
+
   }
 
   handleAcceptError() {
@@ -72,7 +74,12 @@ class Landing extends Component {
     try {
       logic
         .authenticateUser(email, password)
-        .then(credentials => this.setState({ view: 'landing', credentials }))
+        .then(credentials => {this.setState({ credentials })
+          this.props.onCredentials(credentials)
+          sessionStorage.id = credentials.id
+          sessionStorage.token = credentials.token
+        })
+      
         .catch(({ message }) => this.setState({ error: message }))
     } catch ({ message }) {
       this.setState({ error: message })
@@ -107,26 +114,18 @@ class Landing extends Component {
         <header >
           <BigHeader />
         </header>
+
         <main className="back-img">
           <section>
-            {view === 'register' && <Register onRegister={handleRegister} onBack={handleGoBack} error={error} />}
-            {view === 'landing' && (
-              <WelcomeAnchors
-                onRegister={handleGoToRegister}
-                onLogin={handleGoToLogin}
-              />
-            )}
-            {view === 'login' && <Login onLogin={handleLogin} onBack={handleGoBack} error={error} />}
-            {view === 'register-success' && (
-              <RegisterSuccess onLogin={handleGoToLogin} />
-            )}
+            {view === 'register' && (<Register onRegister={handleRegister} onBack={handleGoBack} error={error} /> )}
+            {view === 'landing' && (<WelcomeAnchors onRegister={handleGoToRegister} onLogin={handleGoToLogin} /> )}
+            {view === 'login' && (<Login onLogin={handleLogin} onBack={handleGoBack} error={error} />} )}
+            {view === 'register-success' && (<RegisterSuccess onLogin={handleGoToLogin} />)}
           </section>
-          <section className="random-recipe">{mealRandom && <RecipeItem meal={mealRandom} />}
-          </section>
+          <section className="random-recipe"> {mealRandom && <RecipeItem meal={mealRandom} />} </section>
+
         </main>
-        <footer>
-          <Footer />
-        </footer>
+     
       </>
     )
   }
