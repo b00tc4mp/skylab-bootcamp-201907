@@ -4,16 +4,34 @@ class Landing extends Component{
     constructor(){
         super()
 
-        this.state={ view: 'search', category: undefined, country: undefined, value:undefined, news:[], article:undefined, error: undefined, user: undefined, favs: []}
+
+        this.state={ view: 'search', category: undefined, country: undefined, news:[], article:undefined, error: undefined, user: undefined, favs: []}
         
         this.handleSearch=this.handleSearch.bind(this)
         this.handleRetrieveArticle=this.handleRetrieveArticle.bind(this)
         this.handleBackFromDetail=this.handleBackFromDetail.bind(this)
         this.handleRegister=this.handleRegister.bind(this)
         this.handleLogin=this.handleLogin.bind(this)
+        this.handleLogout=this.handleLogout.bind(this)
         this.handleToggleFavArticleFromArticleDetail=this.handleToggleFavArticleFromArticleDetail.bind(this)
+        this.handleAcceptError=this.handleAcceptError.bind(this)
         this.handleFavorites=this.handleFavorites.bind(this)
+        this.handleGoToSearch=this.handleGoToSearch.bind(this)
         this.handleToggleFavArtFromFavorites=this.handleToggleFavArtFromFavorites.bind(this)
+    }
+
+    componentWillMount() {
+        const { props: { credentials } } = this
+        if (credentials) {
+            const { id, token } = credentials
+            try {
+                logic.retrieveUser(id, token)
+                    .then(user => this.setState({ user }))
+                    .catch(({ message }) => this.setState({ error: message }))
+            } catch ({ message }) {
+                this.setState({ error: message })
+            }
+        }
     }
 
     handleSearch(category, country){
@@ -51,8 +69,8 @@ class Landing extends Component{
     }
 
     handleBackFromDetail() {
-        const { state: { value }} = this
-        logic.searchNews(value)
+        const { state: { category, country }} = this
+        logic.searchNews(category, country)
             .then(news => this.setState({ news, article: undefined }))
             .catch(({ message }) => this.setState({ error: message }))
     }
@@ -88,6 +106,10 @@ class Landing extends Component{
         : onLogin()
     } 
 
+    handleAcceptError() {
+        this.setState({ error: undefined })
+    }
+
     handleFavorites() {
         const { props: {credentials}} = this
 
@@ -96,8 +118,13 @@ class Landing extends Component{
         credentials && (id = credentials.id, token = credentials.token)
 
         logic.retrieveFavNews(id, token)
-            .then(favs => this.setState({ view: 'favorites', favs}))
+            .then(favs => this.setState({ view: 'favorites', article:undefined , favs}))
             .catch(({ message }) => this.setState({ error: message}))
+    }
+
+    handleGoToSearch(event) {
+        event.preventDefault()
+        this.setState({ view: 'search' })
     }
 
     handleToggleFavArtFromFavorites(article) {
@@ -113,7 +140,7 @@ class Landing extends Component{
     render(){
         const {
         state: { view, category, country, news, article, error, user, favs},
-        handleSearch, handleRetrieveArticle, handleRegister, handleBackFromDetail, handleLogin, handleToggleFavArticleFromArticleDetail, handleFavorites, handleToggleFavArtFromFavorites } = this
+        handleSearch, handleRetrieveArticle, handleRegister, handleBackFromDetail, handleLogin, handleLogout, handleToggleFavArticleFromArticleDetail, handleAcceptError, handleFavorites, handleGoToSearch, handleToggleFavArtFromFavorites } = this
 
         return <>
         <header>
@@ -133,8 +160,8 @@ class Landing extends Component{
              <h1 className='landing__title hide'>SkyNews</h1>
              <img className="nav-logo" src="style/img/skynews-logo.png"></img> 
         </header>
-
         {view === 'search' && !article ? <>
+
             <Search onSearch={handleSearch} error={error} category={category} country={country}/>
 
             <Results items={news} paintItem={article => {
@@ -147,7 +174,7 @@ class Landing extends Component{
         
 
         {view === 'favorites' && <>
-            <Results items={favs} paintItem={duck => {
+            <Results items={favs} paintItem={article => {
                 return <ArticleDetail article={article} onToggle={handleToggleFavArtFromFavorites} />
             }} onItem={handleRetrieveArticle} />
         </>}
