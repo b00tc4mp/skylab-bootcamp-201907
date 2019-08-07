@@ -1,5 +1,6 @@
-function RecipeItem ( { meal: { strMeal, strMealThumb, strYoutube } } ) {
+function RecipeItem ( { meal: { strMeal, strYoutube } } ) {
     return <>
+
     <section className="random-content">
         <h2 className="random-recipe">Random Recipe</h2>
         <h3 className="random-recipe recipe-title">{strMeal}</h3>
