@@ -13,7 +13,7 @@ logic.searchSongs =  (id, token, q_artist, q_track) => {
 
                 favorites = response.data.favorites
 
-                return call(`https://skylabcoders.herokuapp.com/proxy?url=https://api.musixmatch.com/ws/1.1/track.search?apikey=e492562d27469098b0922d5d580837eb&q_artist=${q_artist}&q_track=${q_track}`, 'get', undefined, undefined)
+                return call(`https://skylabcoders.herokuapp.com/proxy?url=https://api.musixmatch.com/ws/1.1/track.search?apikey=e492562d27469098b0922d5d580837eb&q_artist=${q_artist}&q_track=${q_track}&s_track_rating=ASC&f_has_lyrics`, 'get', undefined, undefined)
                     .then(res => {
                         if(res.message.header.status_code === 401) throw new Error("invalid token")
                         else {
@@ -28,7 +28,7 @@ logic.searchSongs =  (id, token, q_artist, q_track) => {
         validate.string(q_artist, 'query', false)
         validate.string(q_track, 'query', false)
 
-        return call(`https://skylabcoders.herokuapp.com/proxy?url=https://api.musixmatch.com/ws/1.1/track.search?apikey=e492562d27469098b0922d5d580837eb&q_artist=${q_artist}&q_track=${q_track}`, 'get', undefined, undefined)
+        return call(`https://skylabcoders.herokuapp.com/proxy?url=https://api.musixmatch.com/ws/1.1/track.search?apikey=e492562d27469098b0922d5d580837eb&q_artist=${q_artist}&q_track=${q_track}&s_track_rating=ASC&f_has_lyrics`, 'get', undefined, undefined)
             .then(res => {
                 if(res.message.header.status_code === 401) throw new Error("invalid artist or song")
                 
