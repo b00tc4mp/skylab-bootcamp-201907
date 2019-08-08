@@ -4,8 +4,8 @@ function RegisterSuccess(props){
     
     return <>
         <h1>Register success</h1>
-        <div className = "reigster-succes">
-            <p classname = "register-succes__text">Your user has been registered.
+        <div className = "register-succes">
+            <p className = "register-succes__text">Your user has been registered.
 
                 <a href='' className = "btn btn__login" onClick = { event => {
                         event.preventDefault()
@@ -21,6 +21,6 @@ function RegisterSuccess(props){
                     }
                 }> Search</a>
             </p>
-        <div>
+        </div>
     </>
 }
