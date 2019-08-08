@@ -1,4 +1,4 @@
-function MovieItem({ movie, onToggle }) {
+function MovieItem({ movie, onToggle, onClickList }) {
 
     return <>
     {/* Only displayed after query search or click on a collection. 
@@ -7,6 +7,7 @@ function MovieItem({ movie, onToggle }) {
         <h3>{ movie.original_title }</h3>
         <span>{movie.vote_average}</span>
         <FavButton active={movie.favorite} onToggle={() => onToggle(movie.id.toString())} />
+        <ListButton active={movie.inlist} onClickList = {() => onClickList(movie.id.toString())} />
         <span>{ movie.release_date }</span>
     </>
 }
