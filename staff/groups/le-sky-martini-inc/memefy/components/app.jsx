@@ -74,7 +74,9 @@ class App extends Component {
         const { state: { view, credentials, error }, handleGoToRegister, handleRegister, handleBackToLanding, handleGoToLogin, handleLogin, handleLogout, handleGoToRegisterOrLogin } = this
 
         return <body className={`body`}>
-            <header className={`body__header`}>Memefy</header>
+            <header className={`body__header`}>
+                <p><a className={`body__header-title1`} href=""><i class="fas fa-tv"></i> Memefy <span className={`body__header-title2`}>.TV</span></a></p>
+            </header>
             <main className={`body__main`}>
                 {view === 'landing' && <Landing onRegister={handleGoToRegister} onRegisterOrLogin={handleGoToRegisterOrLogin} onLogin={handleGoToLogin} credentials={credentials} onLogout={handleLogout} />}
                 {view === 'register' && <Register onBack={handleBackToLanding} onRegister={handleRegister} error={error} />}
@@ -82,7 +84,7 @@ class App extends Component {
                 {view === 'registerorlogin' && <RegisterOrLogin onLogin={handleGoToLogin} onRegister={handleGoToRegister} onBack={handleBackToLanding} />}
                 {view === 'login' && <Login onBack={handleBackToLanding} onLogin={handleLogin} error={error} />}
             </main>
-            <footer className={`body__footer`}>Le Sky Martini inc.</footer>
+            <footer className={`body__footer`}>Skylab Coders Academy <i class="fab fa-gratipay"></i> Le Sky Martini</footer>
         </body>
     }
 }

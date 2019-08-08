@@ -190,7 +190,6 @@ class Landing extends Component {
             .catch(({ message }) => this.setState({ error: message }))
     }
 
-
     handleRetrieveGif(gifId) {
         const { props: { credentials } } = this
 
@@ -329,33 +328,40 @@ class Landing extends Component {
         } = this
 
         return <section className={`landing`}>
-            <header>
-                <h1 className={`landing__title`}>Welcome!</h1>
-                {user && <p>Hello, {user.name}</p>}
+            <header className={`landing__header`}>
+                {user && <p>Hello, {user.name}! <i className="fas fa-user-circle"></i></p>}
                 <nav>
-                    {!user ? <ul className={`landing__menu`}>
-                        <li><a className={`landing__register`} href="" onClick={handleRegister}>Register</a></li>
-                        <li><a className={`landing__login`} href="" onClick={handleLogin}>Login</a></li>
-                    </ul> : <ul className={`landing__menu`}>
+                    {!user ? <ul className={`landing__header-menu`}>
+                        <li className={`landing__header-item`}>
+                            <a className={`landing__header-register`} href="" onClick={handleRegister}><i className="fas fa-user-plus"></i>  Register</a>
+                        </li>
+                        <li className={`landing__header-item`}>
+                            <a className={`landing__header-login`} href="" onClick={handleLogin}><i className="fas fa-sign-in-alt"></i>  Login
+                            </a>
+                        </li>
+                    </ul> : <ul className={`landing__header-menu`}>
                             {(view === 'search' || view === 'random') && <li><a href="" onClick={event => {
                                 event.preventDefault()
 
                                 handleFavorites()
-                            }}>Favorites</a></li>}
+                            }}>Favorites <i className="fas fa-heart"></i></a></li>}
                             {view === 'favorites' && <li><a href="" onClick={handleGoToSearch}>Search</a></li>}
-                            <li><a href="" onClick={handleLogout}>Logout</a></li>
+                            <li><a href="" onClick={handleLogout}>Logout <i className="fas fa-sign-out-alt"></i></a></li>
                         </ul>}
-
                 </nav>
             </header>
 
-            <main>
+                <h1 className={`landing__title`}>Welcome!</h1>
+
                 <section className={`search`}>
                     {view === 'search' && <>
                         <h3>Search</h3>
                         <Search onSearch={handleSearch} />
                         <Categories onClickCatAnimals={handleCatAnimals} onClickCatCats={handleCatCats} onClickCatDogs={handleCatDogs} onClickCatBabies={handleCatBabies} onClickCatMorning={handleCatMorning} onClickCatCelebrate={handleCatCelebrate} onClickCatThink={handleCatThink}/>
-                        
+
+                        <h3>or go to GIF TV!</h3>
+                        <img className={`random__tv-icon`}src="http://lesismor.co.uk/gf/Retro-TV-icon.png" onClick={handleGoToRandom}></img>
+
                             {!gif ?
                                 <Results items={gifs} paintItem={gif => {
                                     return <GifItem gif={gif} onToggle={handleToggleFavGifFromGifItem} />
@@ -367,18 +373,19 @@ class Landing extends Component {
                     </>}
                 
                     {view === 'random' && <>
-                        <h3>Start zapping!</h3>
-                        <Random onRandom={handleRandom}/> 
+                        <h3>Start zapping!</h3> 
 
                         {!randomGif ?
                             <Results items={gifs} paintItem={gif => {
                                 return <GifItem gif={gif} onToggle={handleToggleFavGifFromGifItem} />
                             }} onItem={handleRetrieveGif} />
                             :
-                            <RandomDetail randomGif={randomGif} onBack={handleBackFromRandomDetail} />}
+                            <RandomDetail randomGif={randomGif} />}
 
                         {error && <Modal message={error} onAccept={handleAcceptError} 
                         />}
+
+                        <Random onRandom={handleRandom} onBack={handleBackFromRandomDetail} />
 
                     </>}
 
@@ -389,7 +396,6 @@ class Landing extends Component {
                         }} onItem={handleRetrieveGif} />
                     </>}
                 </section>
-            </main>
         </section>
     }
 }

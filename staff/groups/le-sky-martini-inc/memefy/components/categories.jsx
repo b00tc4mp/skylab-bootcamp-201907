@@ -38,5 +38,4 @@ function Categories(props) {
     </ul>
 
     </>
-
 }
