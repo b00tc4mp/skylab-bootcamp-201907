@@ -34,44 +34,49 @@ logic.searchTracks = (idUser, tokenUser, song, limit) => {
 
                 return call(`https://api.spotify.com/v1/search?query=${song}&type=track&offset=0&limit=${limit}`, 'get', { 'Authorization': `Bearer ${response.access_token}` }, undefined)
             })
-            .then(response => response.tracks.items.map(item => {
+            .then(response => {
+                
+                const songs = response.tracks.items.map(item => { 
+                    const { album: {
+                        images: [{ url }],
+                        external_urls: { spotify: linkAlbum },
+                        name: nameAlbum,
+                        release_date: releaseDate },
+                        artists: [{
+                            external_urls: { spotify: linkkArtist },
+                            name: nameArtist }],
+                        explicit,
+                        external_urls: { spotify: linkTrack },
+                        id: idTrack,
+                        name: nameTrack,
+                        popularity,
+                        preview_url: previewUrl
+                    } = item
+    
+                    return {
+                        // album
+                        url,
+                        linkAlbum,
+                        nameAlbum,
+                        releaseDate,
+                        // artist
+                        linkkArtist,
+                        nameArtist,
+                        explicit,
+                        // track
+                        linkTrack,
+                        idTrack,
+                        nameTrack,
+                        popularity,
+                        previewUrl
+                    }
+                })
 
-                const { album: {
-                    images: [{ url }],
-                    external_urls: { spotify: linkAlbum },
-                    name: nameAlbum,
-                    release_date: releaseDate },
-                    artists: [{
-                        external_urls: { spotify: linkkArtist },
-                        name: nameArtist }],
-                    explicit,
-                    external_urls: { spotify: linkTrack },
-                    id: idTrack,
-                    name: nameTrack,
-                    popularity,
-                    preview_url: previewUrl
-                } = item
+                favorites && songs.forEach(song => song.favorite = favorites.includes(song.idTrack))
 
-                if (favorites) item.favorite = favorites.includes(idTrack)
-
-                return {
-                    // album
-                    url,
-                    linkAlbum,
-                    nameAlbum,
-                    releaseDate,
-                    // artist
-                    linkkArtist,
-                    nameArtist,
-                    explicit,
-                    // track
-                    linkTrack,
-                    idTrack,
-                    nameTrack,
-                    popularity,
-                    previewUrl
-                }
-            }))
+                return songs
+            
+            })
             .catch(error => new Error(error))
     } else {
         if (limit == undefined) limit = '10'
