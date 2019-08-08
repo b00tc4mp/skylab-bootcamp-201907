@@ -5,7 +5,7 @@ class Landing extends Component {
         super()
 
 
-        this.state = { view: 'collections', error: undefined,  search: false, query: undefined, movieId: undefined, collection: undefined, movies: [], movie: undefined, error: undefined, user: undefined, favs: [], lists: undefined}
+        this.state = { view: 'collections', error: undefined,  search: false, query: undefined, movieId: undefined, collection: undefined, movies: [], movie: undefined, error: undefined, user: undefined, favs: [], lists: undefined, showModal: undefined}
 
         this.handleGoToFavorites = this.handleGoToFavorites.bind(this)
         this.handleGoToCollections = this.handleGoToCollections.bind(this)
@@ -255,7 +255,8 @@ class Landing extends Component {
         credentials && (id = credentials.id, token = credentials.token)
 
         credentials ? logic.retrieveLists(id, token, movieId)
-            .then(lists => this.setState({lists, view: 'list-modal'})) : handleGoToLogIn()
+            .then(lists => this.setState({lists})).then(this.setState({showModal: true})).then(console.log(true)) : handleGoToLogIn()
+        
     }
 
     handleDisplayListModal(movieId) {
@@ -263,12 +264,12 @@ class Landing extends Component {
     }
 
     handleToggleMovieFromList(movieId, listName) {
-        const { props: { credentials }, handleGoToLogIn } = this
+        const { props: { credentials }, handleGoToLogIn, handleRetrieveLists } = this
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.toggleFromMovieList(id, token, movieId, listName, () => this.handleRetrieveLists(movieId)) : handleGoToLogIn()
+        credentials ? logic.toggleFromMovieList(id, token, movieId, listName).then(() => handleRetrieveLists(movieId)) : handleGoToLogIn()
     }
 
 handleGoToHome(event){
@@ -280,7 +281,7 @@ handleGoToHome(event){
     /* Render */
     render() {
         const {
-            state: { view, search, movie, movies, query, feedback, error, user, favs, lists, movieId },
+            state: { view, search, movie, movies, feedback, error, user, favs, lists, movieId, showModal },
             handleSearch, handleRetrieveMovie, handleLogOut,
             handleBackFromDetail, handleGoToSearch, handleGoToLogIn,
             handleToggleFavMovieFromMovieItem, handleToggleFavMovieFromMovieDetail, handleGoToCollections, handleLinkToCollections, handleGoToFavorites,
@@ -319,6 +320,7 @@ handleGoToHome(event){
                 </nav>
             </header>
             <main>
+               
                 {/* Search state is false by default. It's only displayed when clicked on search button */}
                 {search && <Search onSearch={handleSearch}></Search>}
 
@@ -326,10 +328,15 @@ handleGoToHome(event){
                 {view === 'collections' && <Collections onCollection={handleGoToCollections} />}
 
                 {/* Only displayed after query search or click on a collection. Composed by a grid of movie items with title, rating, poster, director and a fav button */}
-                {view === 'results' &&
+                {view === 'results' && <>
                     <Results movies={movies} paintItem={movie => {
                         return <MovieItem movie={movie} onToggle={handleToggleFavMovieFromMovieItem} onClickList={handleDisplayListModal} />
                     }} onItem={handleRetrieveMovie} />}
+                    {showModal &&
+                    <ListModal lists={lists} movieId={movieId} feedback={feedback} error={error} onToggleMovieList={handleToggleMovieFromList} onCreateList={handleCreateList} />
+                    }
+                    </>
+                }
 
                 {/* Movie detail which displays. Includes fav button and back button  */}
                 {view === 'detail' &&
@@ -338,10 +345,7 @@ handleGoToHome(event){
                 {view === 'favorites' &&
                     <Favorites favs={favs} removeFav={handleToggleFavMovieFromFavoritesSection} showDetail={handleRetrieveMovie} />
                 }
-                {view === 'list-modal' &&
-                    <ListModal lists={lists} movieId={movieId} feedback={feedback} error={error} onToggleMovieList={handleToggleMovieFromList} onCreateList={handleCreateList} />
-                }
-
+              
             </main>
 
             <footer className="panel--foot">              
