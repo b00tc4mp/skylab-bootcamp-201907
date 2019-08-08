@@ -13,6 +13,7 @@ class App extends React.Component {
         this.handleBackToLanding = this.handleBackToLanding.bind(this)
         this.handleLogin = this.handleLogin.bind(this)
         this.handleFavs = this.handleFavs.bind(this)
+        this.handleLogout = this.handleLogout.bind(this)
     }
 
     //register
@@ -49,7 +50,7 @@ class App extends React.Component {
         this.state.credentials && (id = this.state.credentials.id, token = this.state.credentials.token)
 
         logic.retrieveFavTracks(id, token)
-            .then(response => this.setState({favs: response}))
+            .then(response => this.setState({ favs: response }))
     }
 
     // navigate
@@ -65,9 +66,13 @@ class App extends React.Component {
         this.setState({ view: 'login' })
     }
 
+    handleLogout() {
+        this.setState({ view: 'landing', credentials: undefined })
+    }
+
     render() {
         return <>
-            <Header onLogin={this.handleGoToLogin} onRegister={this.handleGoToRegister} state={this.state.credentials} onFavorites={this.handleFavs} onLogo={this.handleBackToLanding}/>
+            <Header onLogin={this.handleGoToLogin} onRegister={this.handleGoToRegister} state={this.state.credentials} onFavorites={this.handleFavs} onLogo={this.handleBackToLanding} onLogout={this.handleLogout} />
             {this.state.view === 'landing' && <Landing credentials={this.state.credentials} onLogin={this.handleGoToLogin} onFavorites={this.state.favs} backFav={this.handleFavs} />}
             {this.state.view === 'register' && <Register onRegister={this.handleRegister} />}
             {this.state.view === 'register-success' && <RegisterSuccess onLogin={this.handleGoToLogin} />}
