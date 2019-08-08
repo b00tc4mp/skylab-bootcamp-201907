@@ -161,7 +161,7 @@ render () {
     const{ state: { meals, meal, cats , favs, user}, showCat, handleLogout, handleSearch, handleGoBack, handleOnMeal, handleSearchCat, handleGoToCategories, handleSearchIngredient, handleToggleRecipeDetail, handleToggleRecipeList,handleToggleFavorite, handleFavorites} = this
 
     return ( <>
-    <header>
+    <header className='homeHeader'>
         {user && <SmallHeader onLogout={handleLogout} goToCategories={handleGoToCategories} showCat={showCat} user={user} handleFavorites={handleFavorites}  />}
         <Search onSearchName={handleSearch} onSearchIngredient={handleSearchIngredient}/>
     

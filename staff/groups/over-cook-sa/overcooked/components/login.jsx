@@ -1,8 +1,9 @@
 function Login({ onLogin, onBack, error }) {
   return (
     <>
-      <h2>Enter login data</h2>
-      <form
+      <h2 className='loginTitle'>Login</h2>
+      
+      <form className="loginForm"
         onSubmit={event => {
           event.preventDefault()
 
@@ -23,9 +24,9 @@ function Login({ onLogin, onBack, error }) {
           Password <input type="password" name="password" />
         </label>
 
-        <button>Go!</button>
+        <button className='btnGo'>Go!</button>
         <a
-          href="#"
+          href="#" className='backButton'
           onClick={event => {
             event.preventDefault()
             onBack()

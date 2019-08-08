@@ -8,19 +8,20 @@ function SmallHeader({onLogout,goToCategories,user,handleFavorites}) {
       />
 
       <p className="home-welcome">Welcome {user.name}</p>
-      <a href="home-logout" onClick={ event => {
+      
+      <a href="home-logout" className="headerButton" onClick={ event => {
         event.preventDefault()
         onLogout()
       }
       }>Logout</a>
 
-      <a className="home-categories" href="" onClick={ event => {
+      <a className="home-categories headerButton" href="" onClick={ event => {
         event.preventDefault()
         goToCategories()
       }
       }>Categories</a>
       
-      <a href="" className="home-favorites" onClick={event => {
+      <a href="" className="home-favorites headerButton" onClick={event => {
         event.preventDefault(
 
         handleFavorites()

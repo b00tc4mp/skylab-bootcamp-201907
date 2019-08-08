@@ -22,7 +22,7 @@ class App extends Component {
     handleCredentials(credentials){
         logic.retrieveUser(credentials.id, credentials.token)
             .then(user => {
-                debugger
+                
                 this.setState({ user , credentials })
             })
     }

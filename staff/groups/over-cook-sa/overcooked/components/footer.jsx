@@ -8,7 +8,7 @@ function Footer () {
             <li><i className="fab fa-github-square"></i></li>
     </ul>
     <section className="footer-copyright">
-    <p>Overcook S.A. Copyright &copy; 2019 / Skylab Industries</p>
+    <p>Copyright &copy; 2019 / Skylab Industries</p>
     </section>
             
     
