@@ -1,7 +1,7 @@
 {
     const { random }= Math
 
-    fdescribe('logic - register user', () => {
+    describe('logic - register user', () => {
 
         let user, data
 
@@ -72,15 +72,17 @@
                 logic.registerUser('John-5', 'Doe-5', 'johndoe-5@mail.com', '123', '123')).toThrowError(Error, 'password is not a valid password. The string must contain at least 1 numeric character, 1 alphabetical character and must be six characters or longer')
         )
 
-        it('should fail on is not  a string', () =>
+        it('should fail with name if is not  a string', () =>
             expect(() =>
                 logic.registerUser([], 'Doe-6', 'johndoe-6@mail.com', 'Password6', 'Password6')).toThrowError(Error, 'name with value  is not a string')
         )
 
-        it('should fail on is not  a string', () =>
+        it('should fail with surname if is not  a string', () =>
             expect(() =>
                 logic.registerUser('John-7', NaN, 'johndoe-7@mail.com', 'Password7', 'Password7')).toThrowError(Error, 'surname with value NaN is not a string')
         )
+
+        
 
         describe('when user alredy exists', () => {
             it('should fail on alredy existing username', () =>

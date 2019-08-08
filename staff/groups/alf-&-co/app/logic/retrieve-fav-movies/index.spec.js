@@ -1,6 +1,7 @@
 {
+    const { random }= Math
 
-    describe('logic - retrieve fav movies', () => {
+    fdescribe('logic - retrieve fav movies', () => {
         let user
         let data
 
@@ -50,21 +51,51 @@
         })
 
 
-        it('should fail on incorrect auth id', () => {
-            expect(() => 
-                logic.retrieveFavMovies('', data.token)
-                ).toThrowError('id is empty or blank')
+        it('should fail on empty auth id', () => {
+            expect(() => logic.retrieveFavMovies('', data.token)).toThrowError('id is empty or blank')
         }) 
 
+        it('should fail on empty auth token', () => {
+            expect(() => logic.retrieveFavMovies(data.id, '')).toThrowError('token is empty or blank')
+        })
+
+        it('should fail on undefined userId', () => {
+            expect(() => logic.retrieveFavMovies(undefined, data.token)).toThrowError('id with value undefined is not a string')
+        })
+        
+        it('should fail on undefined userToken', () => {
+            expect(() => logic.retrieveFavMovies(data.id, undefined)).toThrowError('token with value undefined is not a string')
+        }) 
+
+        it('should fail on incorrect auth id', () => {
+            return logic.retrieveFavMovies(data.id, 'aaaa')
+                .catch(error => {
+                        expect(error).toBeDefined()
+                        expect(error.message).toBe('User authentication failed.')
+                })
+        })
+
         it('should fail on incorrect auth token', () => {
-            expect(() => 
-                logic.retrieveFavMovies(data.id, '')
-                ).toThrowError('token is empty or blank')
+            return logic.retrieveFavMovies(data.id, 'aaaa')
+                .catch(error => {
+                        expect(error).toBeDefined()
+                        expect(error.message).toBe('User authentication failed.')
+                })
         })
 
 
+        it('should fail on incorrect tmdb api endpoint', () => {
+            return logic.retrieveFavMovies(data.id, data.id)
+                .catch(error => expect(error).toBeDefined())
+        })
 
-        describe('user without favs', () => {
+        it('should fail when on incorrect user api endpoint', () => {
+            return logic.retrieveFavMovies(data.id, data.id)
+                .catch(error => expect(error).toBeDefined())
+        })
+
+
+        describe('user without favorites', () => {
             let user
             let data
 

@@ -20,7 +20,7 @@ logic.searchMovies = function(userId, userToken, query, collections=false) {
     if (userId != undefined && userToken != undefined)  {
         validate.string(userId, 'id')
         validate.string(userToken, 'token')
-        validate.string(query, 'query', false)
+        validate.string(query, 'query')
 
         return call(`https://skylabcoders.herokuapp.com/api/user/${userId}`, 'get', { 'authorization': `bearer ${userToken}` }, undefined)
             .then(response => {

@@ -133,7 +133,6 @@ class Landing extends Component {
         logic.retrieveMovie(id, token, movieId)
             .then(movie => this.setState({ movie, view: 'detail' }))
             .catch(({ message }) => this.setState({ error: message }))
-
     }
 
 
@@ -171,7 +170,17 @@ class Landing extends Component {
 
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.toggleFavMovie(id, token, movieId, () => collection ? handleGoToCollections(collection) : handleSearch(query)) : goToLogin()
+        credentials ? logic.toggleFavMovie(id, token, movieId).then(() => collection ? handleGoToCollections(collection) : handleSearch(query)) : goToLogin()
+    }
+
+    handleToggleFavMovieFromMovieDetail(movieId) {
+        const { props : { goToLogin, credentials }, handleRetrieveMovie } = this
+
+        let id, token
+
+        credentials && (id = credentials.id, token = credentials.token)
+
+        credentials ? logic.toggleFavMovie(id, token, movieId).then(() => handleRetrieveMovie(movieId)) : goToLogin()
     }
 
     handleToggleFavMovieFromFavoritesSection(movieId) {
@@ -181,21 +190,9 @@ class Landing extends Component {
 
         credentials && (id = credentials.id, token = credentials.token)
         
-        credentials ? logic.toggleFavMovie(id, token, movieId, () => handleFavorites()) : goToLogin()
+        credentials ? logic.toggleFavMovie(id, token, movieId).then(() => handleFavorites()) : goToLogin()
 
     }
-/*     handleListModal() {
-        const { props: { credentials }, goToLogin } = this
-
-        let id, token
-        credentials && (id = credentials.id, token = credentials.token)
-
-        credentials ? logic.createList(id, token).then(list => this.setState({ list, view: 'list' })) : goToLogin()
-        
-    } */
-
-
-
 
     handleToggleMovieFromMovieDetail(movieId) {
         const { props: { goToLogin, credentials } } = this
@@ -261,8 +258,7 @@ handleGoToHome(event){
             handleBackFromDetail, handleGoToSearch, handleGoToLogIn,
             handleToggleFavMovieFromMovieItem, handleToggleFavMovieFromMovieDetail, handleGoToCollections, handleLinkToCollections, handleGoToFavorites,
             handleToggleFavMovieFromFavoritesSection, handleCreateList, handleDisplayListModal, handleToggleMovieFromList, handleToggleMovieFromMovieDetail,handleGoToHome
-
-        } = this
+         } = this
 
         return <>
             <header className="panel--nav">
