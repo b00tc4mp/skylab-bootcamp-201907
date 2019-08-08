@@ -1,4 +1,5 @@
 *
+  margin: 0
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
   
 .feedback--error 
@@ -11,8 +12,8 @@
   color: green
 
 body 
-  display: flex
-  
+  width: 100vw
+  display: flex 
 
 ul 
   padding: 0
@@ -28,8 +29,7 @@ main
 
 .landing-logo 
   display: flex
-  width: 100%
-  height: 100%
+  width: 100vw
 
 .back-img 
   display: flex
@@ -37,7 +37,6 @@ main
   background-size: cover
   display: block
   width: 100%
-  height: 100%
 
 .landingContainer 
   display: flex
@@ -53,6 +52,9 @@ main
     -webkit-border-radius: 3px
     padding: 1vw
 
+.landingContainer
+    margin: 0 0 0 5px
+
 .landingContainer li 
     margin: 1vw
 
@@ -61,7 +63,7 @@ main
     font-size: 0.8em
     color: black
     font-weight: bolder
-
+ 
 .landingContainer label
   margin: 1vw
 
@@ -75,25 +77,33 @@ main
 .random-content
     border: 2px solid rgba(0,0,0,0.3)
     padding: 0 20px 20px 20px
-    margin: 60px
+    margin: 60px auto
     box-shadow: 0 4px 6px #bbb
     background: #fff
     border-radius: 3px
     -moz-border-radius: 3px
     -webkit-border-radius: 3px
     padding: 10px
-    
+    width: 80vw
+    height: 70vw
+
+.random-content h2
+    font-size: 15px
+
+.random-content h3
+    font-size: 12px
+
 .random-recipe 
     display: flex
     flex-wrap: wrap
     flex-direction: column
     align-content: center
-  
-    .recipe-title
-     
-  
-    .recipe-video
-        border-radius: 30px
+
+.recipe-video 
+    border-radius: 10px
+    width: 100%
+    height: 70%
+    margin: 20px auto
 
 
 footer
@@ -102,7 +112,23 @@ footer
     justify-content: space-evenly
     align-items: baseline
     color: white
+    width: 100vw
 
 
-
-@import ../components/feedback
+.feedback
+    border: 2px solid rgba(0,0,0,0.3)
+    padding: 0 20px 20px 20px
+    margin: 60px
+    box-shadow: 0 4px 6px #bbb
+    background: #fff
+    border-radius: 3px
+    -moz-border-radius: 3px
+    -webkit-border-radius: 3px
+    padding: 10px
+    
+    &--error
+        color: red
+    &--warn
+        background-color: yellow
+    &--success
+        color: green
