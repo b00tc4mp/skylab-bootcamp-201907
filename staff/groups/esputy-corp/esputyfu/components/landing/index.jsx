@@ -11,6 +11,7 @@ class Landing extends React.Component {
         this.handleToggleFavFromTrackDetail = this.handleToggleFavFromTrackDetail.bind(this)
         this.handleToggleFavFromTrackItem = this.handleToggleFavFromTrackItem.bind(this)
         this.handleToggleFavFromFavDetail = this.handleToggleFavFromFavDetail.bind(this)
+        this.handleBackFromDetailTrack = this.handleBackFromDetailTrack.bind(this)
 
     }
 
@@ -82,8 +83,18 @@ class Landing extends React.Component {
         this.props.credentials && (id = this.props.credentials.id, token = this.props.credentials.token)
 
         logic.toggleFavTrack(id, token, trackId)
-                .then(() => this.props.backFav())
-                .catch(message => console.error(message))
+            .then(() => this.props.backFav())
+            .catch(message => console.error(message))
+    }
+
+    handleBackFromDetailTrack() {
+        let id, token
+
+        this.props.credentials && (id = this.props.credentials.id, token = this.props.credentials.token)
+
+        logic.searchTracks(id, token, this.state.search)
+            .then(tracks => this.setState({ tracks, track: undefined }))
+            .catch(message => console.error(message))
     }
 
     render() {
@@ -92,7 +103,7 @@ class Landing extends React.Component {
                 {this.props.onFavorites && <>
                     <h3>Favoritos</h3>
                     <Results items={this.props.onFavorites} paintItem={track => {
-                        return <TrackDetail track={track} onToggle={this.handleToggleFavFromFavDetail} />
+                        return <TrackDetail track={track} onToggle={this.handleToggleFavFromFavDetail} onBack={this.handleBackFromDetailTrack} />
                     }} />
                     {this.props.onFavorites.length == 0 && <p>No tienes favoritos</p>}
                 </>}
@@ -102,7 +113,7 @@ class Landing extends React.Component {
                         <Results items={this.state.tracks} paintItem={track => {
                             return <TrackItem track={track} onToggle={this.handleToggleFavFromTrackItem} />
                         }} onItem={this.handleRetrieveTrack} /> :
-                        <TrackDetail track={this.state.track} onToggle={this.handleToggleFavFromTrackDetail} />}
+                        <TrackDetail track={this.state.track} onToggle={this.handleToggleFavFromTrackDetail} onBack={this.handleBackFromDetailTrack} />}
                 </>}
 
             </main>

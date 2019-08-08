@@ -1,6 +1,7 @@
 function Search(props) {
     return <>
         <div className='container'>
+            <h1>La versión fú de Spotify</h1>
         <form onSubmit={event => {
             event.preventDefault()
 
