@@ -16,7 +16,7 @@ logic.retrieveLyrics = function (id, token, track_id){
             .then(res => {
                 if(res.message.header.status_code === 404) throw new Error("invalid token")
                 else {
-                    const lyrics = res.body.lyrics.lyrics_body
+                    const lyrics = res.message.body.lyrics.lyrics_body
 
                     //favorites && track_id.favorite.includes() --> Verlo con Oihane
                     //favorites && (duck.favorite = favorites.includes(duckId))

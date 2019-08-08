@@ -4,9 +4,14 @@ class Home extends Component {
     constructor() {
         super()
 
-        this.state = { q_artist: undefined, q_track: undefined, tracks: [], track: undefined, error: undefined, user: undefined }
+        this.state = { q_artist: undefined, q_track: undefined, tracks: [], 
+                       track: undefined, error: undefined,
+                       lyrics: undefined, username: undefined
+                     }
         this.handleSearch=this.handleSearch.bind(this)
-        this.handleToggleFavSong=this.handleToggleFavSong.bind(this)
+        this.handleRetrieveSong=this.handleRetrieveSong.bind(this)
+        this.handleCloseLyrics = this.handleCloseLyrics.bind(this)
+        //this.handlePaintLyrics=this.handlePaintLyrics.bind(this)
     }
     
     componentWillMount() {
@@ -16,14 +21,19 @@ class Home extends Component {
             const { id, token } = credentials
 
             try {
-                logic.retrieveUser(id, token, (error, user) => {
-                    if (error) this.setState({ error: error.message })
-                    else this.setState({ user })
-                })
+                logic.retrieveUser(id, token)
+                    .then(user => this.setState({ username: user.name }))
+                    .catch(({ message }) => this.setState({ error: message }))
             } catch ({ message }) {
                 this.setState({ error: message })
             }
         }
+    }
+
+    componentWillReceiveProps(props) {
+        const { credentials } = props
+
+        !credentials && this.setState({username: undefined})
     }
 
     handleSearch(q_artist, q_track) {
@@ -38,16 +48,6 @@ class Home extends Component {
             .catch(({ message }) => this.setState({ error: message }))
     }
 
-    handleToggleFavSong(commontrack_id) {
-        const { props: { onLogin, credentials }, handleSearch, state: { q_artist, q_track } } = this
-
-        let id, token
-
-        credentials && (id = credentials.id, token = credentials.token)
-
-        credentials ? logic.toggle(id, token, commontrack_id, () => handleSearch(q_artist, q_track)) : onLogin()
-    }
-
     handleRetrieveSong(track_id) {
         const { props: { credentials } } = this
 
@@ -55,35 +55,51 @@ class Home extends Component {
 
         credentials && (id = credentials.id, token = credentials.token)
 
-        logic.retrieveLyrics(id, token, track_id) 
-            .then(track => this.setState({ track }))
-            .catch(({ message }) => this.setState({ error: message }))
+        logic.retrieveLyrics(id, token, track_id.toString()) 
+            .then(lyrics => this.setState({ lyrics }))
+            .catch(({ message }) => this.setState({ lyrics: message }))
         
     }
 
+    // handlePaintLyrics(lyrics){
+    //     console.log("hey")
+    //     console.log(lyrics)
+    // }
 
-
-
+    handleCloseLyrics() {
+        this.setState({ lyrics: undefined }) 
+    }
+    
+   
     render() {
-        const { state: { tracks, track, error, user }, handleSearch, handleRetrieveDuck, handleRegister, handleToggleFavSong, handleBackFromDetail, handleLogin, handleLogout, handleToggleFavDuckFromDuckDetail, handleAcceptError } = this
+        const { state: { tracks, track, error, lyrics , username}, 
+                handleSearch, handleRetrieveDuck, handleRegister, 
+                handleTosggleFavSong, handleBackFromDetail, handleLogin, handleLogout, 
+                handleToggleFavDuckFromDuckDetail, handleAcceptError, 
+                handleRetrieveSong,
+                handleCloseLyrics
+               // handlePaintLyrics 
+              } = this
+
+              debugger
 
         return <>
            
 
-            <Search onSearch={handleSearch} />
+            <Search onSearch={handleSearch} username = {username} />
+
+            
 
             <Results items={tracks} paintItem={track => {
-                    return <SongItem track={track} />
-                }} onItem={handleRetrieveDuck} />
+                    // return <SongItem track={track} onDisplay={handleRetrieveSong} paintItem={track => {
+                    //     <LyricsItem lyrics={lyrics} onDisplay={handlePaintLyrics} />
+                    // }}/>
+                // }} />
+                    return <SongItem track={track} onDisplay={handleRetrieveSong}/>
+                }}
+            />
 
-            {/* {!track ?
-                <Results items={tracks} paintItem={track => {
-                    return <SongItem track={track} onToggle={handleToggleFavSong} />
-                }} onItem={handleRetrieveDuck} />
-                :
-                <DuckDetail duck={duck} onBack={handleBackFromDetail} onToggle={handleToggleFavDuckFromDuckDetail} />}
-
-            {error && <Modal message={error} onAccept={handleAcceptError} />} */}
+            {lyrics && <LyricsItem lyrics={lyrics} onClose={handleCloseLyrics}/>}
 
         </>
     }
