@@ -180,7 +180,7 @@ class Landing extends Component {
     }
 
     handleToggleFavMovieFromMovieItem(movieId) {
-        const { props: { credentials }, handleSearch, handleGoToCollections, state: { query, collection } } = this
+        const { props: { credentials }, handleSearch, handleGoToLogIn, handleGoToCollections, state: { query, collection } } = this
 
         let id, token
 

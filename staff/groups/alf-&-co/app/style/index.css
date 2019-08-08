@@ -229,6 +229,37 @@ main {
   color: #00ffa6;
 }
 
+.container_image {
+  width: 95%;
+  display: flex;
+  align-items: center;
+  margin: 10px auto;
+  position: relative;
+  text-align: center;
+}
+.container_image img {
+  width: 100%;
+  position: relative;
+  margin: 0 auto;
+}
+.container_image p {
+  color: #f7f7f7;
+  letter-spacing: 0.2em;
+  position: absolute;
+  align-items: center;
+  width: 100%;
+  bottom: 70px;
+}
+.container_image .title_collection {
+  font-size: 1.6em;
+  color: #f7f7f7;
+  font-weight: 800;
+  position: absolute;
+  align-items: center;
+  width: 100%;
+  bottom: 30px;
+}
+
 form {
   color: #000000;
   display: flex;
@@ -522,10 +553,17 @@ form textareatextarea:focus {
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 
-.menuToggle a, .registered-name, form, form input, .search-bar, .mosaicInfo__vote, .big-letter {
+.menuToggle a, .registered-name, .container_image p, form, form input, .search-bar, .mosaicInfo__vote, .big-letter {
   font-size: 1rem;
   text-decoration: none;
   font-weight: 200;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+}
+
+.container_image .title_collection {
+  font-size: 1.3rem;
+  text-decoration: none;
+  font-weight: 500;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 
