@@ -3,7 +3,7 @@ class App extends React.Component {
         super()
 
 
-        this.state = { view: 'landing', credentials: undefined, favs: [] }
+        this.state = { view: 'landing', credentials: undefined, favs: undefined }
 
         //bindings
 
@@ -12,8 +12,7 @@ class App extends React.Component {
         this.handleGoToRegister = this.handleGoToRegister.bind(this)
         this.handleBackToLanding = this.handleBackToLanding.bind(this)
         this.handleLogin = this.handleLogin.bind(this)
-
-
+        this.handleFavs = this.handleFavs.bind(this)
     }
 
     //register
@@ -29,7 +28,6 @@ class App extends React.Component {
     }
 
     //login
-
     handleLogin(email, password) {
         try {
             logic.authenticateUser(email, password)
@@ -44,12 +42,15 @@ class App extends React.Component {
         }
     }
 
-    // Favs
-
+    // handle
     handleFavs() {
+        let id, token
 
+        this.state.credentials && (id = this.state.credentials.id, token = this.state.credentials.token)
+
+        logic.retrieveFavTracks(id, token)
+            .then(response => this.setState({favs: response}))
     }
-
 
     // navigate
     handleBackToLanding() {
@@ -66,8 +67,8 @@ class App extends React.Component {
 
     render() {
         return <>
-            <Header onLogin={this.handleGoToLogin} onRegister={this.handleGoToRegister} state={this.state.credentials} onFavorites={this.handleFavs}/>
-            {this.state.view === 'landing' && <Landing credentials={this.state.credentials} onLogin={this.handleGoToLogin} />}
+            <Header onLogin={this.handleGoToLogin} onRegister={this.handleGoToRegister} state={this.state.credentials} onFavorites={this.handleFavs} onLogo={this.handleBackToLanding}/>
+            {this.state.view === 'landing' && <Landing credentials={this.state.credentials} onLogin={this.handleGoToLogin} onFavorites={this.state.favs} backFav={this.handleFavs} />}
             {this.state.view === 'register' && <Register onRegister={this.handleRegister} />}
             {this.state.view === 'register-success' && <RegisterSuccess onLogin={this.handleGoToLogin} />}
             {this.state.view === 'login' && <Login onLogin={this.handleLogin} />}
