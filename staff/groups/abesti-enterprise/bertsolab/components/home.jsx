@@ -6,12 +6,12 @@ class Home extends Component {
 
         this.state = { q_artist: undefined, q_track: undefined, tracks: [], 
                        track: undefined, error: undefined,
-                       lyrics: undefined, username: undefined
+                       lyrics: undefined, username: undefined, fav:[]
                      }
         this.handleSearch=this.handleSearch.bind(this)
         this.handleRetrieveSong=this.handleRetrieveSong.bind(this)
         this.handleCloseLyrics = this.handleCloseLyrics.bind(this)
-        //this.handlePaintLyrics=this.handlePaintLyrics.bind(this)
+        this.handleToggleFavSong= this.handleToggleFavSong.bind(this)
     }
     
     componentWillMount() {
@@ -22,7 +22,7 @@ class Home extends Component {
 
             try {
                 logic.retrieveUser(id, token)
-                    .then(user => this.setState({ username: user.name }))
+                    .then(user => this.setState({ username: user.name}))
                     .catch(({ message }) => this.setState({ error: message }))
             } catch ({ message }) {
                 this.setState({ error: message })
@@ -33,7 +33,7 @@ class Home extends Component {
     componentWillReceiveProps(props) {
         const { credentials } = props
 
-        !credentials && this.setState({username: undefined})
+        !credentials && this.setState({username: undefined, fav :[], q_artist: undefined, q_track: undefined, tracks: []})
     }
 
     handleSearch(q_artist, q_track) {
@@ -60,11 +60,21 @@ class Home extends Component {
             .catch(({ message }) => this.setState({ lyrics: message }))
         
     }
+    
+    handleToggleFavSong(track_id){
+        const { props: { onLogin,  credentials }, state: {q_artist, q_track } }= this
 
-    // handlePaintLyrics(lyrics){
-    //     console.log("hey")
-    //     console.log(lyrics)
-    // }
+        let id, token
+
+        credentials && (id = credentials.id, token = credentials.token)
+
+        credentials ? logic.toggleFavTrack(id, token, track_id)
+            .then( () => handleSearch(q_artist, q_track))
+            .catch(({ message }) => this.setState({ error: message})) 
+            :
+            onLogin()
+    }
+
 
     handleCloseLyrics() {
         this.setState({ lyrics: undefined }) 
@@ -77,11 +87,10 @@ class Home extends Component {
                 handleTosggleFavSong, handleBackFromDetail, handleLogin, handleLogout, 
                 handleToggleFavDuckFromDuckDetail, handleAcceptError, 
                 handleRetrieveSong,
-                handleCloseLyrics
-               // handlePaintLyrics 
+                handleCloseLyrics, handleToggleFavSong
               } = this
 
-              debugger
+        
 
         return <>
            
@@ -91,12 +100,8 @@ class Home extends Component {
             
 
             <Results items={tracks} paintItem={track => {
-                    // return <SongItem track={track} onDisplay={handleRetrieveSong} paintItem={track => {
-                    //     <LyricsItem lyrics={lyrics} onDisplay={handlePaintLyrics} />
-                    // }}/>
-                // }} />
-                    return <SongItem track={track} onDisplay={handleRetrieveSong}/>
-                }}
+                    return <SongItem track={track} onDisplay={handleRetrieveSong} onToggle={handleToggleFavSong}/>
+                }} 
             />
 
             {lyrics && <LyricsItem lyrics={lyrics} onClose={handleCloseLyrics}/>}

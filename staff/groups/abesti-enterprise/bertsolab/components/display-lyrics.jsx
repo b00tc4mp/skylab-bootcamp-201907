@@ -1,7 +1,7 @@
-function DisplayLyrics({ onDisplay }) {
+function DisplayLyrics({ onDisplay, trackId }) {
     return <button onClick={event => {
         event.stopPropagation()
 
-        onDisplay()
+        onDisplay(trackId)
     }}>{'👁‍🗨'}</button>
 }
