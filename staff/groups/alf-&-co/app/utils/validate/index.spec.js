@@ -23,14 +23,12 @@ describe('logic - validate', ()=>{
             validate.string('','string')).toThrowError(Error, `string is empty or blank`)
             
         })
-        xit('should fail on empty string', () =>{
+        it('should fail on empty string', () =>{
             expect(() =>
             validate.string( '','string')).toThrowError(Error, `string with value  does not match one of the expected values: `)
             
         })
 
-
-        `${name} with value ${target} does not match one of the expected values: ${values.join(', ')}`
     })
     describe('email', ()=>{
         it('should succeed on correct email', () =>{
@@ -57,9 +55,6 @@ describe('logic - validate', ()=>{
             
         })
     })
-
-
-
 
     describe('URL', ()=>{
         it('should succeed on correct URL', () =>{
