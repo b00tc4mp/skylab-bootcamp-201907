@@ -136,11 +136,6 @@ class Landing extends Component {
 
     }
 
-    handleBackFromDetail() {
-        const { state: { favs, query, collections }, handleGoToFavorites, handleSearch } = this
-
-        favs ? handleGoToFavorites() : collections ? handleCollections(collections) : handleSearch(query)
-    }
 
     handleToggleFavMovieFromMovieDetail(movieId) {
         const { props: { goToLogin, credentials }, handleRetrieveMovie } = this
@@ -153,7 +148,7 @@ class Landing extends Component {
     }
 
     handleBackFromDetail() {
-        const { state: { query, collection }, props: { credentials } } = this
+        const { state: { query, collection, favs }, props: { credentials },handleGoToFavorites, handleSearch } = this
         let id, token
         let collections = true
 
@@ -165,8 +160,8 @@ class Landing extends Component {
             logic.searchMovies(id, token, collection, collections)
                 .then(movies => this.setState({ movies, collection, view: 'results', query: undefined }))
                 .catch(error => this.setState({ error: error.message }))
-        /*const {state: {favs, query, collections},  handleGoToFavorites, handleSearch } = this
-        favs ? handleGoToFavorites() : collections ? handleCollections(collections) : handleSearch(query)*/
+        
+        favs ? handleGoToFavorites() : collections ? handleCollections(collections) : handleSearch(query)
     }
 
     handleToggleFavMovieFromMovieItem(movieId) {
