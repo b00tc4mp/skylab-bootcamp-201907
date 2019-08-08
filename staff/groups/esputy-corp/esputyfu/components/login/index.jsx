@@ -1,28 +1,30 @@
 function Login(props) {
     return <>
-    <h1>Para continuar, inicia sesión en Esputifú.</h1>
-    <form onSubmit={event => {
-        event.preventDefault()
+    <div className=' full login'>
+        <h1 >Inicia sesión</h1>
+        <form onSubmit={event => {
+            event.preventDefault()
 
-        const { target:
-            { email:
-                { value: email },
-            password:
-                { value: password }
-            }
-        } = event
+            const { target:
+                { email:
+                    { value: email },
+                password:
+                    { value: password }
+                }
+            } = event
 
-        props.onLogin(email, password)
-    }} >
-        <label >
-            <p>email</p>
-            <input type="email" name="email" placeholder="email"/>
-        </label>
-        <label >
-            <p>contraseña</p>
-            <input type="password" name="password" placeholder="contraseña" />
-        </label>
-        <button>Entra</button>
-    </form >
+            props.onLogin(email, password)
+        }} >
+            <label >
+                <p className = 'container__campName'>email</p>
+                <input className='container__input' type="email" name="email" placeholder="email"/>
+            </label>
+            <label >
+                <p className = 'container__campName'>contraseña</p>
+                <input className='container__input' type="password" name="password" placeholder="contraseña" />
+            </label>
+            <button className='container__button'>Entra</button>
+        </form >
+    </div>
 </>
 }
