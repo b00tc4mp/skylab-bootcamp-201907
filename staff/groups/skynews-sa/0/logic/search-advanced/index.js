@@ -1,6 +1,6 @@
 logic.searchNewsAdvanced = (query) => {
     
-   if(!query) throw Error("no category or value inserted")
+   if(!query) throw Error("no query inserted")
    
    const url =`https://newsapi.org/v2/everything?q=${query}&apiKey=0b43829c3b6049768d553a6c5a839dea`
     

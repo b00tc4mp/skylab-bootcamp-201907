@@ -215,7 +215,11 @@ class Landing extends Component{
                             <li><a href="" className="register-li nav-but" onClick={handleRegister}>Register</a></li>
                             <li><a className="login-li nav-but" href="" onClick={handleLogin}>Login</a></li>
                         </ul> : <ul className="fav-ul">
-                            {view === 'search' || view === 'searchAdv' && <li><a href="" className="favorites-li nav-but" onClick={event => {
+                            {view === 'search' && <li><a href="" className="favorites-li nav-but" onClick={event => {
+                                event.preventDefault()
+                                handleFavorites()
+                            }}>Favorites</a></li>}
+                            {view === 'searchAdv' && <li><a href="" className="favorites-li nav-but" onClick={event => {
                                 event.preventDefault()
                                 handleFavorites()
                             }}>Favorites</a></li>}
