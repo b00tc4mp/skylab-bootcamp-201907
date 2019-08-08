@@ -93,11 +93,6 @@
         })
 
 
-        it('should fail when on incorrect tmdb api endpoint', () => {
-            return logic.toggleFavMovie(data.id, data.id, '680')
-                .catch(error => expect(error).toBeDefined())
-        })
-
         describe('when user has already favorites', () => {
           let user
           const movieId = '680'
