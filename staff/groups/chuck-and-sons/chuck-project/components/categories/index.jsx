@@ -1,7 +1,7 @@
 function Categories(props) {
     const { categories, searchCategory } = props
     return (
-        <div className="categories">
+        <section className="categories">
             <h3>Categories</h3>
             <ul className="categories__list">
                 {categories.length && categories.map(category => {
@@ -11,7 +11,7 @@ function Categories(props) {
                     }}><p className="category">{category}</p></li>
                 })}
             </ul>
-        </div>
+        </section>
     )
 }
 

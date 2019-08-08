@@ -32,7 +32,7 @@ class App extends React.Component{
    }
 
     // ===
-    componentWilllMount(){
+    componentDidMount(){
         const { props : { credentials }} = this
 
         if (credentials){
@@ -42,8 +42,8 @@ class App extends React.Component{
         try{
             logic.retrieveUser(id , token)
                 .then( user => this.setState({ user }))
-                .catch( ({ message }) => this.setState({ error : message } ) )
-        }catch({ message }){
+                .catch( ({ message }) => this.setState({ error : message }))
+        } catch({ message }){
             this.setState({ error : message})
         }
     }
@@ -82,6 +82,10 @@ class App extends React.Component{
             .catch(({ message }) => this.setState({ error: message }))
     }
 
+    handleStartSynth(value){
+        logic.synth(value)
+    }
+
     // ===
 
     handleGoToRegister(){
@@ -116,23 +120,35 @@ class App extends React.Component{
                     sessionStorage.id = credentials.id
                     sessionStorage.token = credentials.token
                     this.setState({ view : 'landing' , credentials })
-                } )
+
+                    const {id , token} = credentials
+
+                    try{
+                        logic.retrieveUser(id , token)
+                            .then( user => this.setState({ user }))
+                            .catch( ({ message }) => this.setState({ message }))
+                    } catch({ message }){
+                        this.setState({ error : message})
+                    }
+
+                })
                 .catch( ({ message }) => this.setState( {error : message} ))
         }
         catch({ message }){this.setState( {error : message} )}
     }
 
+
     handleLogout(){
         delete sessionStorage.id
         delete sessionStorage.token
 
-        this.setState({ credentials : undefined })
+        this.setState({ credentials : undefined , user : undefined })
     }
 
 
     render(){
         const {
-            state : { view , error, categories, jokes, printItem, random},
+            state : { view , error, categories, jokes, printItem, random , user},
             handleGoToRegister,
             handleGoToLogin,
             handleGoToLanding,
@@ -141,41 +157,31 @@ class App extends React.Component{
             handleLogout,
             handleSearch,
             handleSearchCategories,
-            handleRandomButton
+            handleRandomButton,
+            handleStartSynth
         } = this
         
         return <>
             <div className = "wrapper">
-                <Header onGoToRegister = {handleGoToRegister} onGoToLogin = {handleGoToLogin} onChangeView = { view }/>
+                <Header onGoToRegister = {handleGoToRegister} onGoToLogin = {handleGoToLogin} onLogout = {handleLogout} onChangeView = { view } user = { user }/>
                 <Search onSearch = {handleSearch}/>
                 { view === 'login' && <Login onGoToLanding = {handleGoToLanding} onLogin={handleLogin} error = { error }/> }
                 { view === 'register' && <Register onGoToLanding = {handleGoToLanding} onRegister = {handleRegister} error = { error }/> }
                 { view === 'register-success' && <RegisterSuccess onGoToLanding = {handleGoToLanding} onGoToLogin = {handleGoToLogin}/> }
                 
-                <main className="main-container">
+                { view === "landing" && <main className="main-container">
+
                     {<button className="random-button" onClick={event => {
                         event.preventDefault()
                         handleRandomButton()
                     }}>Random Chuck</button>}
 
-                    <section className="categories">
-                        <Categories categories={categories} searchCategory={handleSearchCategories} />
-                    </section>
+                    <Categories categories={categories} searchCategory={handleSearchCategories} />
 
-                    {printItem === 'printCategory' && <>
-                        <section className="results">
-                            <h2>Jokes</h2>
-                            <RetrieveCategories arrayJokes={jokes} />
-                        </section>
-                    </>}
+                    {printItem === 'printCategory' && <RetrieveCategories arrayJokes={jokes} startSynth = {handleStartSynth}/>}
 
-                    {printItem === 'printRandom' && <>
-                        <section className="results">
-                            <h2>Your Random Chuck</h2>
-                            <RetrieveRandom arrayRandom={random} />
-                        </section>
-                    </>}
-                </main>
+                    {printItem === 'printRandom' && <RetrieveRandom arrayRandom={random} startSynth = {handleStartSynth}/>}
+                </main>}
 
 
             </div>            
