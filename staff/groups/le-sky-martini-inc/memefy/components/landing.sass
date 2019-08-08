@@ -1,11 +1,12 @@
 .landing
     @extend %main-content-box
+    background-color: none
     padding: 0
     &__header
         position: absolute
-        top: 5em
+        top: 4em
         left: 50%
-        margin-left: -256px
+        margin-left: -160px
 
     &__header-menu
         list-style: none
@@ -15,22 +16,25 @@
         padding: 0
 
     &__header-item
-        background-color: white
-        width: 10em
-        margin: 3em
+        background: linear-gradient(-45deg, #FF5128, #9422E8, #1EC0FF)
+        background-size: 400% 400%
+        animation: Gradient 15s ease infinite
+        @keyframes Gradient
+            0%
+                background-position: 0% 50%
+            50% 
+                background-position: 100% 50%
+            100% 
+                background-position: 0% 50%
+        width: 7.5em
+        margin: 3em 1.5em auto 1.5em
         border-radius: 5em 
-        padding: 10px     
+        padding: 10px   
         font-size: 16px
 
     &__header-register, &__header-login
-        width: 50px
-        color: $primary-text-color
+        color: $secondary-text-color
         text-decoration: none        
 
-    &__header-register:hover, &__header-login:hover
-        background-color: deeppink
-        color: $secondary-text-color
-
-    &__title
-        text-align: center
-        padding: 25px
+    &__header-item:hover
+        background: deeppink
