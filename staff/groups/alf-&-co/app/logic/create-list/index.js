@@ -14,7 +14,6 @@ logic.createList = function(userId, userToken, listName) {
 
             !lists ? lists = [] : lists
 
-            debugger
             if (lists.length) {
                 const index = lists.findIndex(list => list.name === listName)
                 if (index > -1) throw Error(`List with name "${listName} already exists in the database`)

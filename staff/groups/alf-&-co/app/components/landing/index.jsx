@@ -92,15 +92,18 @@ class Landing extends Component {
     }
 
     handleFavorites() {
-        const { props: { credentials }, goToLogin } = this
+        const { props: { credentials }, handleGoToLogIn } = this
 
         let id, token
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.retrieveFavMovies(id, token).then(favs => this.setState({ favs, view: 'favorites' })) : goToLogin()
+        credentials ? logic.retrieveFavMovies(id, token).then(favs => this.setState({ favs, view: 'favorites' })) : handleGoToLogIn()
     }
 
-    handleGoToLogIn(){
+    handleGoToLogIn(event){
+
+        event && event.preventDefault()
+
         const { state: { query, collection } } = this
     
         this.props.goToLogin(query, collection)
@@ -137,7 +140,7 @@ class Landing extends Component {
     }
 
     handleToggleFavMovieFromMovieDetail(movieId) {
-        const { props: { goToLogin, credentials }, handleRetrieveMovie, handleGoToLogIn } = this
+        const { props: {  credentials }, handleRetrieveMovie, handleGoToLogIn } = this
 
         let id, token
 
@@ -164,17 +167,17 @@ class Landing extends Component {
     }
 
     handleToggleFavMovieFromMovieItem(movieId) {
-        const { props: { goToLogin, credentials }, handleSearch, handleGoToCollections, state: { query, collection } } = this
+        const { props: { credentials }, handleSearch, handleGoToCollections, state: { query, collection } } = this
 
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.toggleFavMovie(id, token, movieId).then(() => collection ? handleGoToCollections(collection) : handleSearch(query)) : goToLogin()
+        credentials ? logic.toggleFavMovie(id, token, movieId).then(() => collection ? handleGoToCollections(collection) : handleSearch(query)) : handleGoToLogIn()
     }
 
     handleToggleFavMovieFromMovieDetail(movieId) {
-        const { props : { goToLogin, credentials }, handleRetrieveMovie, handleGoToLogIn } = this
+        const { props : { credentials }, handleRetrieveMovie, handleGoToLogIn } = this
 
         let id, token
 
@@ -184,7 +187,7 @@ class Landing extends Component {
     }
 
     handleToggleFavMovieFromFavoritesSection(movieId) {
-        const { props: { goToLogin, credentials }, handleFavorites, handleGoToLogIn } = this
+        const { props: { credentials }, handleFavorites, handleGoToLogIn } = this
 
         let id, token
 
@@ -195,7 +198,7 @@ class Landing extends Component {
     }
 
     handleToggleMovieFromMovieDetail(movieId) {
-        const { props: { goToLogin, credentials }, handleGoToLogIn } = this
+        const { props: {  credentials }, handleGoToLogIn } = this
 
         let id, token
 
