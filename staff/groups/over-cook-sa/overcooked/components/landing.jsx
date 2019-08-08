@@ -96,6 +96,7 @@ class Landing extends Component {
 
   handleGoBack() {
     this.setState({ view: 'landing', error: undefined })
+    this.onRandomRecipe()
   }
 
   render() {
@@ -105,8 +106,7 @@ class Landing extends Component {
       handleGoToRegister,
       handleRegister,
       handleLogin,
-      handleGoBack,
-      handleAcceptError
+      handleGoBack
     } = this
 
     return (

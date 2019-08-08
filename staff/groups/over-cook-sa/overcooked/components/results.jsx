@@ -1,5 +1,5 @@
 function Results(props) {
-   return <ul>
+   return<ul>
         {props.meals.map( meal => 
             <li key={meal.idMeal} onClick={ () => {
                 props.onMeal(meal.idMeal)
@@ -7,5 +7,5 @@ function Results(props) {
                 {props.paintMeal(meal)}
             </li>)
         }
-   </ul>
+    </ul>
 }
