@@ -188,9 +188,9 @@ class App extends React.Component {
                     }}>Random Chuck</button>}
 
                     <Categories categories={categories} searchCategory={handleSearchCategories} />
-                    //-----------------------------------------------------------------------
+                    
                     {printItem === 'printSearch' && <RetrieveCategories arrayJokes={jokes} startSynth={handleStartSynth} />}
-                    //-----------------------------------------------------------------------
+                    
                     {printItem === 'printCategory' && <RetrieveCategories arrayJokes={jokes} startSynth={handleStartSynth} />}
 
                     {printItem === 'printRandom' && <RetrieveRandom arrayRandom={random} startSynth={handleStartSynth} />}
