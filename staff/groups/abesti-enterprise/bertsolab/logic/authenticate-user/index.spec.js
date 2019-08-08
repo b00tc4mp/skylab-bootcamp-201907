@@ -42,6 +42,17 @@
             ).toThrowError(Error, 'username with value manuelbarzi#gmail.com is not a valid e-mail')
         )
 
-        // TODO test more cases
+        it('should fail in wrong password', () =>{
+            return logic.authenticateUser(user.username, '456')
+            .then(data => expect(data).toBeDefined())
+            .catch(error => expect(error).toBeDefined())
+        })
+
+        it('should fail on empty password', () =>
+        expect(() =>
+            logic.authenticateUser(user.username, '')
+        ).toThrowError(Error, 'password is empty or blank')
+    )
+
     })
 }
