@@ -362,7 +362,6 @@ class Landing extends Component {
                         <h3>or go to GIF TV!</h3>
                         <img className={`random__tv-icon`}src="http://lesismor.co.uk/gf/Retro-TV-icon.png" onClick={handleGoToRandom}></img>
 
-                        
                             {!gif ?
                                 <Results items={gifs} paintItem={gif => {
                                     return <GifItem gif={gif} onToggle={handleToggleFavGifFromGifItem} />
