@@ -10,7 +10,7 @@ function TrackDetail({ track: { url, favorite, linkAlbum, nameAlbum, releaseDate
             <li className='container__li--detail'>{nameAlbum}</li>
             <li className='container__li--detail'>Popularity: {popularity}</li>
         </ul>
-        {previewUrl !== null ? <audio controls>
+        {previewUrl !== null ? <audio controls autoPlay>
             <source src={previewUrl} type="audio/ogg"></source>
             <source src={previewUrl} type="audio/mp3"></source>
         </audio> : <p>Lo siento spotify no tiene preview de esta canción</p>}

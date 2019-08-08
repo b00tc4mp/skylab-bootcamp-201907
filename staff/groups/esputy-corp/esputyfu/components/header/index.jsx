@@ -1,8 +1,7 @@
 function Header(props) {
     return <>
         <header className='header'>
-            <img className='header__logo' src="components/header/logo.png" alt="" />
-            <h2><a href="" onClick={event => {
+            <h2 ><a className='header__h2' href="" onClick={event => {
                 event.preventDefault()
                 props.onLogo()
             }}>Esputyfú</a></h2>
