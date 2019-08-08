@@ -1,4 +1,5 @@
-function SmallHeader(props) {
+function SmallHeader({onLogout,goToCategories,user}) {
+
   return (
     <>
       <img
@@ -6,16 +7,16 @@ function SmallHeader(props) {
         alt=""
       />
 
-      <p>Welcome, User</p>
+      <p>Welcome {user.name}</p>
       <a href="" onClick={ event => {
         event.preventDefault()
-        props.onLogout()
+        onLogout()
       }
       }>Logout</a>
 
 <a href="" onClick={ event => {
         event.preventDefault()
-        props.goToCategories()
+        goToCategories()
       }
       }>Categories</a>
       

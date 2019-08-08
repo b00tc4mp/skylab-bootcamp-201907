@@ -11,7 +11,7 @@ class App extends Component {
         id && token && (credentials = { id, token })
 
 
-        this.state = {credentials}
+        this.state = {credentials, user:undefined}
 
 
         this.handleCredentials = this.handleCredentials.bind(this)
@@ -20,11 +20,15 @@ class App extends Component {
     }
 
     handleCredentials(credentials){
-        this.setState({ credentials })
+        logic.retrieveUser(credentials.id, credentials.token)
+            .then(user => {
+                debugger
+                this.setState({ user , credentials })
+            })
     }
 
-    handleUser(user){
-        this.setState({ user })
+    handleUser(){
+        
     }
     
     handleLogout(){
@@ -33,20 +37,18 @@ class App extends Component {
        delete sessionStorage.id
        delete sessionStorage.token
     }
-
-    
-
+ß
     render() {
 
-        const { state: { credentials, user}, handleCredentials, handleLogout, handleUser } = this
+        const { state: { credentials }, handleCredentials, handleLogout, handleUser } = this
 
         return (
         <>
 
         {!credentials ? 
         <Landing onCredentials={handleCredentials} onUser={handleUser}/>: 
-        <Home onLogout={handleLogout} credentials={credentials} user={user} /> }
-        
+        <Home onLogout={handleLogout} credentials={credentials} /> }
+
         <footer>
             <Footer />
         </footer>
