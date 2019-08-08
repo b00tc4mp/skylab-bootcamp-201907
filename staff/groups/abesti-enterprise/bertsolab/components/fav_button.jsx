@@ -1,5 +1,6 @@
+
 function FavButton({ active, onToggle, trackId }) {
-    return <button onClick={event => {
+    return <button className="fav-button" onClick={event => {
         event.preventDefault()
         onToggle(trackId)
     }}>{active ? '❤' : '🖤'}</button>

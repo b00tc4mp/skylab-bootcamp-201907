@@ -1,37 +1,35 @@
+@import url('https://fonts.googleapis.com/css?family=Red+Hat+Display&display=swap')
+  
 *
-    padding: 0
-    margin: 0
+  padding: 0
+  margin: 0
+  font-family: 'Red Hat Display', sans-serif
+  background-color: f4f4f4
     
 body
-    width: 99vw
+  width: 100vw
+  background-color: f4f4f4
 
 
-form
-    display: flex
-    flex-direction: column
-    background-color: red
-    margin-left: 10px
+.form
+  display: flex
+  flex-direction: column
+  background-color: red
 
-img 
-    width: 40%
-    margin-top: 10px
-    margin-left: 10px
+.header__logo--image
+  width: 40%
 
-main
-    width: 100%
-    height: 85%
-    margin-top: 15%
-
-
-footer
-    width: 100%
-    height: 5%
-    background-color: purple
-    text-align: center
-    bottom: 0
-
-a 
-  color: #000
+.footer
+  position: fixed
+  width: 100%
+  height: 5%
+  background-color: rgb(103, 0, 163)
+  text-align: center
+  color: white
+  bottom: 0
+  &__content
+    font-size: smaller
+    padding-top: 1.5%
 
 
 /* header */
@@ -44,27 +42,27 @@ a
   height: 10%
 
 
-.header ul 
+.user-menu 
   margin: 0
   padding: 0
   list-style: none
   overflow: hidden
-  background-color: #fff
 
 
-.header li a 
+.user-menu__auth-option-link
   display: block
   padding: 20px 20px
   border-right: 1px solid #f4f4f4
   text-decoration: none
+  color: #000
 
 
-.header li a:hover,
-.header .menu-btn:hover 
+.user-menu__auth-option-link:hover,
+.header .hamburguer-menu__button:hover 
   background-color: #f4f4f4
 
 
-.header .logo 
+.header .header__logo 
   display: block
   float: left
   font-size: 2em
@@ -74,7 +72,7 @@ a
 
 /* menu */
 
-.header .menu 
+.header .user-menu 
   clear: both
   max-height: 0
   transition: max-height .2s ease-out
@@ -82,16 +80,16 @@ a
 
 /* menu icon */
 
-.header .menu-icon 
+.header .hamburguer-menu__icon 
   cursor: pointer
-  display: inline-block
+  //display: inline-block
   float: right
   padding: 28px 20px
   position: relative
   user-select: none
 
 
-.header .menu-icon .navicon 
+.header .hamburguer-menu__icon .hamburguer-menu__navicon 
   background: #333
   display: block
   height: 2px
@@ -100,8 +98,8 @@ a
   width: 18px
 
 
-.header .menu-icon .navicon:before,
-.header .menu-icon .navicon:after 
+.header .hamburguer-menu__icon .hamburguer-menu__navicon:before,
+.header .hamburguer-menu__icon .hamburguer-menu__navicon:after 
   background: #333
   content: ''
   display: block
@@ -111,56 +109,64 @@ a
   width: 100%
 
 
-.header .menu-icon .navicon:before 
+.header .hamburguer-menu__icon .hamburguer-menu__navicon:before 
   top: 5px
 
 
-.header .menu-icon .navicon:after 
+.header .hamburguer-menu__icon .hamburguer-menu__navicon:after 
   top: -5px
 
 
 /* menu btn */
 
-.header .menu-btn 
+.header .hamburguer-menu__button 
   display: none
 
 
-.header .menu-btn:checked ~ .menu 
+.header .hamburguer-menu__button:checked ~ .user-menu 
   max-height: 240px
 
 
-.header .menu-btn:checked ~ .menu-icon .navicon 
+.header .hamburguer-menu__button:checked ~ .hamburguer-menu__icon .hamburguer-menu__navicon 
   background: transparent
 
 
-.header .menu-btn:checked ~ .menu-icon .navicon:before 
+.header .hamburguer-menu__button:checked ~ .hamburguer-menu__icon .hamburguer-menu__navicon:before 
   transform: rotate(-45deg)
 
 
-.header .menu-btn:checked ~ .menu-icon .navicon:after 
+.header .hamburguer-menu__button:checked ~ .hamburguer-menu__icon .hamburguer-menu__navicon:after 
   transform: rotate(45deg)
 
 
-.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
-.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after 
+.header .hamburguer-menu__button:checked ~ .hamburguer-menu__icon:not(.steps) .hamburguer-menu__navicon:before,
+.header .hamburguer-menu__button:checked ~ .hamburguer-menu__icon:not(.steps) .hamburguer-menu__navicon:after 
   top: 0
 
 
 /* 48em = 768px */
 
-@media (min-width: 48em) 
-  .header li 
+@media (min-width: 48em)
+  .header__logo--image
+    width: 70%
+
+  .user-menu__auth-option 
     float: left
   
-  .header li a 
+  .user-menu__auth-option-link 
     padding: 20px 30px
   
-  .header .menu 
+  .header .user-menu 
     clear: none
     float: right
     max-height: none
   
-  .header .menu-icon 
+  .header .hamburguer-menu__icon 
     display: none
+  
+  .footer__content
+    padding: 0.5% 1.5% 0 0
+    text-align: right
+    
   
 
