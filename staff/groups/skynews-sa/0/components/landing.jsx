@@ -5,7 +5,7 @@ class Landing extends Component{
         super()
 
 
-        this.state={ view: 'search', category: undefined, country: undefined, news:[], article:undefined, error: undefined, user: undefined, favs: []}
+        this.state={ view: 'search', category: undefined, country: undefined, news:[], article:undefined, error: undefined, user: undefined, favs: [],weather:undefined}
         
         this.handleSearch=this.handleSearch.bind(this)
         this.handleRetrieveArticle=this.handleRetrieveArticle.bind(this)
@@ -18,6 +18,8 @@ class Landing extends Component{
         this.handleFavorites=this.handleFavorites.bind(this)
         this.handleGoToSearch=this.handleGoToSearch.bind(this)
         this.handleToggleFavArtFromFavorites=this.handleToggleFavArtFromFavorites.bind(this)
+        this.handleWeather=this.handleWeather.bind(this)
+
     }
 
     componentWillMount() {
@@ -31,6 +33,15 @@ class Landing extends Component{
             } catch ({ message }) {
                 this.setState({ error: message })
             }
+        }
+        try{          
+            logic.weather()
+            .then(weather=>{
+                var a=weather
+                console.log("teeest weather",a)
+                this.setState({weather:a})})
+        }catch({error}){
+            console.log(error)
         }
     }
 
@@ -134,11 +145,42 @@ class Landing extends Component{
 
         credentials ? logic.toggleFavArt(id, token, article).then(() => handleFavorites()).catch(({ message }) => this.setState({ error: message})) : onLogin()
     }
+    handleWeather(country){
+        let long=undefined
+        let lat=undefined
+        if (country == "de") {
+            long = 52.52437
+            lat = 13.41053
+        }
+        if (country == "fr") {
+            long = 48.85341
+            lat = 2.3488
+            }
+        if (country == "gb") {
+            long = 51.50853
+            lat = -0.12574
+            }
+        if (country == "de") {
+            long = 40.730610
+            lat = -73.935242
+            }
+        try{          
+            logic.weather(long,lat)
+            .then(weather=>{
+                var a=weather
+                console.log("teeest weather",a)
+                this.setState({weather:a})})
+
+        }catch({error}){
+            console.log(error)
+            /*TODO REVISAR */
+        }
+    }
 
     render(){
         const {
-        state: { view, category, country, news, article, error, user, favs},
-        handleSearch, handleRetrieveArticle, handleRegister, handleBackFromDetail, handleLogin, handleLogout, handleToggleFavArticleFromArticleDetail, handleAcceptError, handleFavorites, handleGoToSearch, handleToggleFavArtFromFavorites } = this
+        state: { view, category, country, news, article, error, user, favs, weather},
+        handleSearch, handleRetrieveArticle, handleRegister, handleBackFromDetail, handleLogin, handleLogout, handleToggleFavArticleFromArticleDetail, handleAcceptError, handleFavorites, handleGoToSearch, handleToggleFavArtFromFavorites, handleWeather } = this
 
         return <>
         <header>
@@ -157,9 +199,11 @@ class Landing extends Component{
             </nav>
         </header>
         
-        
+        {view==="search" && weather && <WeatherItem weather={weather} country={country}/>}
+
         {view === 'search' && <>
-        <Search onSearch={handleSearch} error={error} category={category} country={country}/>
+        
+        <Search onSearch={handleSearch} error={error} category={category} country={country} onWeather={handleWeather}/>
         {!article ?
 
             <Results items={news} paintItem={article => {

@@ -1,4 +1,4 @@
-function Search({onSearch, error, category,country}){
+function Search({onSearch, error, category,country, onWeather}){
     let value1=category,value2=country
     return <>
     <section className="search">
@@ -8,6 +8,7 @@ function Search({onSearch, error, category,country}){
     <form onSubmit={event=>{
         event.preventDefault()
         onSearch(value1,value2)
+        onWeather(value2)
     }}>
         
      <select className="select" onChange={event=>{
@@ -24,7 +25,6 @@ function Search({onSearch, error, category,country}){
         <option value="sports">Sports</option>
         <option value="technology">Technology</option>
     </select>
-
     <select className="select" onChange={event=>{
         event.preventDefault()
         value2=event.target.value
