@@ -1,6 +1,6 @@
 function Search(props) {
     return <>
-        <div className='container'>
+        <div className='container container__background'>
         <form onSubmit={event => {
             event.preventDefault()
 
@@ -12,7 +12,7 @@ function Search(props) {
             props.onSearch(query)
         }}>
             <label>
-                <p className='container__p'>Busca tu cancion favorita!</p>
+                <p className='container__title'>Busca tu canción favorita!</p>
                 <input className='container__input' type="text" name="search" placeholder="Buscar una canción" />
             </label>
             <button className='container__button'>buscar</button>
