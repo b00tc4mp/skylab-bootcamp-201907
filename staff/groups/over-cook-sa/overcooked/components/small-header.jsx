@@ -1,4 +1,4 @@
-function SmallHeader({onLogout,goToCategories,user}) {
+function SmallHeader({onLogout,goToCategories,user,handleFavorites}) {
 
   return (
     <>
@@ -20,17 +20,12 @@ function SmallHeader({onLogout,goToCategories,user}) {
       }
       }>Categories</a>
       
-
       <a href="" className="home-favorites" onClick={event => {
         event.preventDefault(
 
-          props.handleFavorites()
+        handleFavorites()
         )
       }}>Favorites</a>
-
-  
-
-
     </>
   )
 }
