@@ -4,7 +4,8 @@ class Landing extends Component {
     constructor() {
         super()
 
-        this.state = { view: 'collections', search: false, query: undefined, collection: undefined, movies: [], movie: undefined, error: undefined, user: undefined, favs: [] }
+
+        this.state = { view: 'collections', search: false, query: undefined, movieId: undefined, collection: undefined, movies: [], movie: undefined, error: undefined, user: undefined, favs: [], lists: undefined}
 
         this.handleGoToFavorites = this.handleGoToFavorites.bind(this)
         this.handleGoToCollections = this.handleGoToCollections.bind(this)
@@ -21,11 +22,16 @@ class Landing extends Component {
         this.handleToggleFavMovieFromFavoritesSection = this.handleToggleFavMovieFromFavoritesSection.bind(this)
         this.handleFavorites = this.handleFavorites.bind(this)
         this.handleToggleMovieFromMovieDetail = this.handleToggleMovieFromMovieDetail.bind(this)
-        /* this.handleListModal = this.handleListModal.bind(this) */
+        this.handleCreateList = this.handleCreateList.bind(this)
+        this.handleRetrieveLists = this.handleRetrieveLists.bind(this)
+        this.handleDisplayListModal = this.handleDisplayListModal.bind(this)
+        this.handleToggleMovieFromList = this.handleToggleMovieFromList.bind(this)
+           
     }
 
-    componentWillMount() {
-        const { props: { credentials } } = this
+    componentWillMount(){
+        const { props: { credentials , query , collection} } = this
+
 
         if (credentials) {
             const { id, token } = credentials
@@ -39,6 +45,8 @@ class Landing extends Component {
                 this.setState({ error: message })
             }
         }
+        if (query) this.handleSearch(query)
+        if (collection) this.handleGoToCollections(collection)
     }
 
 
@@ -92,11 +100,14 @@ class Landing extends Component {
         credentials ? logic.retrieveFavMovies(id, token).then(favs => this.setState({ favs, view: 'favorites' })) : goToLogin()
     }
 
-    handleGoToLogIn(event) {
+    handleGoToLogIn(event){
+
+        const { state: { query, collection } } = this
+
         event.preventDefault()
-
-        this.props.goToLogin()
-
+    
+        this.props.goToLogin(query, collection)
+    
     }
 
     handleLogOut(event) {
@@ -172,7 +183,7 @@ class Landing extends Component {
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
-
+        
         credentials ? logic.toggleFavMovie(id, token, movieId, () => handleFavorites()) : goToLogin()
 
     }
@@ -199,17 +210,56 @@ class Landing extends Component {
         credentials ? logic.toggleListModal(id, token, movieId, () => handleListModal()) : goToLogin()
     }
 
+    
+    handleCreateList(event) {
+        event && event.preventDefault()
+
+        const { target: { list: { value: listName } } } = event
+      
+        const { props: { credentials }, handleRetrieveLists } = this
+        let id, token
+
+        credentials && (id = credentials.id, token = credentials.token)
+
+        credentials ? logic.createList(id, token, listName, () =>  {handleRetrieveLists()}) : console.log(error)
+    }
+
+    handleRetrieveLists(movieId) {
+
+        const { props: { credentials } } = this
+        let id, token
+
+        movieId && this.setState({movieId})
+
+        credentials && (id = credentials.id, token = credentials.token)
+
+        credentials ? logic.retrieveLists(id, token, movieId, lists => this.setState({lists, view: 'list-modal'})) : console.log('error')
+    }
+
+    handleDisplayListModal(movieId) {
+        this.handleRetrieveLists(movieId)
+    }
+
+    handleToggleMovieFromList(movieId, listName) {
+        const { props: { credentials } } = this
+        let id, token
+
+        credentials && (id = credentials.id, token = credentials.token)
+
+        credentials ? logic.toggleFromMovieList(id, token, movieId, listName, () => this.handleRetrieveLists(movieId)) : console.log('error')
+    }
 
 
     /* Render */
 
     render() {
         const {
-            state: { view, search, movie, movies, query, error, user, favs },
+            state: { view, search, movie, movies, query, error, user, favs, lists, movieId },
             handleSearch, handleRetrieveMovie, handleLogOut,
             handleBackFromDetail, handleGoToSearch, handleGoToLogIn,
             handleToggleFavMovieFromMovieItem, handleToggleFavMovieFromMovieDetail, handleGoToCollections, handleLinkToCollections, handleGoToFavorites,
-            handleToggleFavMovieFromFavoritesSection, handleToggleMovieFromMovieDetail
+            handleToggleFavMovieFromFavoritesSection, handleCreateList, handleDisplayListModal, handleToggleMovieFromList
+
         } = this
 
         return <>
@@ -250,22 +300,23 @@ class Landing extends Component {
                 {/* Only displayed after query search or click on a collection. Composed by a grid of movie items with title, rating, poster, director and a fav button */}
                 {view === 'results' &&
                     <Results movies={movies} paintItem={movie => {
-                        return <MovieItem movie={movie} onToggle={handleToggleFavMovieFromMovieItem} />
+                        return <MovieItem movie={movie} onToggle={handleToggleFavMovieFromMovieItem} onClickList={handleDisplayListModal} />
                     }} onItem={handleRetrieveMovie} />}
 
-                {/* Movie detail which displays     . Includes fav button and back button  */}
+                {/* Movie detail which displays. Includes fav button and back button  */}
                 {view === 'detail' &&
                     <MovieDetail movie={movie} onBack={handleBackFromDetail} /* onList={handleListModal} */ onToggle={handleToggleFavMovieFromMovieDetail} onToggle={handleToggleMovieFromMovieDetail} />}
 
                 {view === 'favorites' &&
-                    <Favorites favs={favs} removeFav={handleToggleFavMovieFromFavoritesSection} showDetail={handleRetrieveMovie} />}
-
-                {view === 'list' &&
-                    <ModalList list={list} paintList={list => { list => { return } }} />}
+                    <Favorites favs={favs} removeFav={handleToggleFavMovieFromFavoritesSection} showDetail={handleRetrieveMovie} />
+                }
+                {view === 'list-modal' &&
+                    <ListModal lists={lists} movieId={movieId} onToggleMovieList={handleToggleMovieFromList} onCreateList={handleCreateList} />
+                }
 
             </main>
-            <footer className="panel--foot">
-                <ul>
+            <footer className="panel--foot">              
+                 <ul>
                     <li className="red"><a href=""><i className="fab fa-twitter"></i></a></li>
                     <li><a href=""><i className="fab fa-facebook-f"></i></a></li>
                     <li><a href=""><i className="fab fa-instagram"></i></a></li>
