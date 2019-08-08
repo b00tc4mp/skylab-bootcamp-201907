@@ -9,8 +9,7 @@ function Search(props) {
     }}>
         <select name="combo">
             <option value="1">by name</option>
-            <option value="2">by category</option>
-            <option value="3">by ingredient</option>
+            <option value="2">by ingredient</option>
         </select>
         <input type="text" id="mySearch" name="query" />
         <button>Search</button>

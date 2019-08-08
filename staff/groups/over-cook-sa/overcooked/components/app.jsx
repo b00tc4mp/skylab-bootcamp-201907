@@ -10,16 +10,21 @@ class App extends Component {
 
         id && token && (credentials = { id, token })
 
+
         this.state = {credentials}
 
 
         this.handleCredentials = this.handleCredentials.bind(this)
         this.handleLogout = this.handleLogout.bind(this)
+        this.handleUser = this.handleUser.bind(this)
     }
 
     handleCredentials(credentials){
-        
         this.setState({ credentials })
+    }
+
+    handleUser(user){
+        this.setState({ user })
     }
     
     handleLogout(){
@@ -33,14 +38,14 @@ class App extends Component {
 
     render() {
 
-        const { state: { credentials }, handleCredentials, handleLogout } = this
+        const { state: { credentials, user}, handleCredentials, handleLogout, handleUser } = this
 
         return (
         <>
 
         {!credentials ? 
-        <Landing onCredentials={handleCredentials} />: 
-        <Home onLogout={handleLogout} credentials={credentials} /> }
+        <Landing onCredentials={handleCredentials} onUser={handleUser}/>: 
+        <Home onLogout={handleLogout} credentials={credentials} user={user} /> }
         
         <footer>
             <Footer />

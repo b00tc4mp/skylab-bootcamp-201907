@@ -1,15 +1,17 @@
 const { Component } = React
 
-class Home extends Component {
+class Home extends Component { 
     constructor() {
         super()
-        this.state =  { meals: [], meal: undefined, query: undefined, error: undefined, view: 'home'}
+        this.state =  { meals: [], meal: undefined, query: undefined, error: undefined, view: 'home', cats: true }
 
         this.handleLogout = this.handleLogout.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
         this.handleGoBack = this.handleGoBack.bind(this)
         this.handleToggle = this.handleToggle.bind(this)
         this.handleOnMeal = this.handleOnMeal.bind(this)
+        this.handleSearchCat = this.handleSearchCat.bind(this)
+        this.handleGoToCategories = this.handleGoToCategories.bind(this)
     }
 
     handleLogout(){
@@ -24,6 +26,17 @@ class Home extends Component {
 
         logic.searchByName(id, token, query)
         .then(meals =>  this.setState( { meals, query}))
+        .catch(({ message }) => this.setState({error: message}))
+    }
+
+    handleSearchCat(query) {
+        const { props: { credentials } } = this
+
+        let id = credentials.id
+        let token = credentials.token
+
+        logic.showCategory(id, token, query)
+        .then(meals =>  this.setState( { meals, query, cats: false}))
         .catch(({ message }) => this.setState({error: message}))
     }
 
@@ -45,21 +58,33 @@ class Home extends Component {
             .catch(({message}) => this.setState({ error: message }))
     }
 
+    handleGoToCategories() {
+        this.setState({ cats: true, meals: [] })
+    }
+
 render () {
 
-    const{ state: {meals, meal}, handleLogout, handleSearch, handleGoBack, handleToggle, handleOnMeal } = this
+    const{ state: { meals, meal, cats }, handleLogout, handleSearch, handleGoBack, handleToggle, handleOnMeal, handleSearchCat, handleGoToCategories } = this
 
     return ( <>
     <header>
-        <SmallHeader onLogout={handleLogout} />
+        <SmallHeader onLogout={handleLogout} goToCategories={handleGoToCategories} user={this.props.user} />
         <Search onSearchName={handleSearch} />
+    
+        
     </header>
-    <main> 
-        {!meal ? <Results meals={meals} onMeal={handleOnMeal} paintMeal = { meal => {return <RecipeItem2 meal={meal}/>}} />
-        : <RecipeDetails meal={meal} onBack={handleGoBack} onToggle={handleToggle} />}
+    <main>
+        
+        <section>     
+            {cats && <Categories onSearchCat={handleSearchCat} /> } 
+            {!meal ? <Results meals={meals} onMeal={handleOnMeal} goCat={handleGoToCategories} paintMeal = { meal => {return <RecipeItem2 meal={meal}/>}}  />
+            : <RecipeDetails meal={meal} onBack={handleGoBack} onToggle={handleToggle} />}
+        </section>
+       
     </main>
     </>
     )
     
   }
 }
+

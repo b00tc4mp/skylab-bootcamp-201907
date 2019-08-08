@@ -12,6 +12,13 @@ function SmallHeader(props) {
         props.onLogout()
       }
       }>Logout</a>
+
+<a href="" onClick={ event => {
+        event.preventDefault()
+        props.goToCategories()
+      }
+      }>Categories</a>
+      
       <a href="">Favorites</a>
 
     </>
