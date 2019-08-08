@@ -1,30 +1,35 @@
-function SmallHeader(props) {
+function SmallHeader({onLogout,goToCategories,user}) {
+
   return (
     <>
-      <img
+      <img className="home-logo"
         src="https://images.gog.com/87aecb600554d68a9c5b58c757bc0a2ded9fd7b27c635ef6d57d748765cb9d43.png"
         alt=""
       />
 
-      <p>Welcome, User</p>
-      <a href="" onClick={ event => {
+      <p className="home-welcome">Welcome {user.name}</p>
+      <a href="home-logout" onClick={ event => {
         event.preventDefault()
-        props.onLogout()
+        onLogout()
       }
       }>Logout</a>
 
-<a href="" onClick={ event => {
+      <a className="home-categories" href="" onClick={ event => {
         event.preventDefault()
-        props.goToCategories()
+        goToCategories()
       }
       }>Categories</a>
       
-      <a href="" onClick={event => {
+
+      <a href="" className="home-favorites" onClick={event => {
         event.preventDefault(
 
           props.handleFavorites()
         )
       }}>Favorites</a>
+
+  
+
 
     </>
   )

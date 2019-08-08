@@ -4,7 +4,7 @@ function RecipeDetails({ meal: { idMeal, strMeal, strInstructions, strYoutube, s
         <FavButton active={favorite} onToggle={() => onToggle(idMeal)} />
         <img src={strMealThumb}/>
         <p>{strInstructions}</p>
-        <a href={strYoutube}></a>
+        <a href={strYoutube} target="_blank" >VIDEO</a>
 
         <a href="#" onClick={ event => {
             event.preventDefault()

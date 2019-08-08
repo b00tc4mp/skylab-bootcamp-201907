@@ -1,8 +1,9 @@
 function WelcomeAnchors({ onLogin, onRegister }) {
   return (
     <>
-      <nav className="welcomeAnchors">
-        <ul>
+      <nav className="landingContainer">
+
+        <ul className="landingContainer_container">
           <li>
             <a
               href=""

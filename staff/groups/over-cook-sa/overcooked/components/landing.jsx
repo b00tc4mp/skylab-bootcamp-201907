@@ -94,7 +94,7 @@ class Landing extends Component {
 
     return (
       <>
-        <header >
+        <header className="header-landing">
           <BigHeader />
         </header>
 

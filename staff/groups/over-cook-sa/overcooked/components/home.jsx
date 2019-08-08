@@ -1,9 +1,11 @@
 const { Component } = React
 
-class Home extends Component { 
+class Home extends Component {
     constructor() {
         super()
-        this.state =  { meals: [], meal: undefined, favs: [], query: undefined, searchCategory:undefined, searchIngredient:undefined, error: undefined, view: 'home', cats: true, back: true}
+
+        this.state =  { meals: [], meal: undefined, user: undefined, favs: [], query: undefined, searchCategory:undefined, searchIngredient:undefined, error: undefined, view: 'home', cats: true, back: true}
+
 
         this.handleLogout = this.handleLogout.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
@@ -17,22 +19,39 @@ class Home extends Component {
         this.handleFavorites = this. handleFavorites.bind(this)
         this.handleRetrieveMeal= this.handleRetrieveMeal.bind(this)
         this.handleToggleFavorite = this.handleToggleFavorite.bind(this)
+
+
     }
 
-    handleLogout(){
+    componentWillMount() {
+        const { props: { credentials: { id, token } } } = this
+        logic.retrieveUser(id, token)
+            .then(user => {
+                this.setState({ user })
+            })
+
+    }
+
+    handleLogout() {
         this.props.onLogout()
     }
 
     handleSearch(query) {
         const { props: { credentials } } = this
+
        
+
+        this.setState({ meal: undefined })
+
 
         let id = credentials.id
         let token = credentials.token
 
         logic.searchByName(id, token, query)
+
         .then(meals =>  this.setState( { meals, query, cats: false, meal : undefined, searchIngredient: undefined, searchCategory : undefined}))
         .catch(({ message }) => this.setState({error: message}))
+
     }
 
     handleToggleRecipeDetail(idMeal) {
@@ -65,24 +84,29 @@ class Home extends Component {
 
     handleSearchCat(searchCategory) {
         const { props: { credentials } } = this
-   
+
 
         let id = credentials.id
         let token = credentials.token
 
+
         logic.showCategory(id, token, searchCategory)
         .then(meals =>  this.setState( { meals, searchCategory, cats: false, searchIngredient: undefined, query : undefined}))
         .catch(({ message }) => this.setState({error: message}))
+
     }
 
     handleSearchIngredient(query) {
         const { props: { credentials } } = this
-   
+
+        this.setState({ meal: undefined })
+
 
         let id = credentials.id
         let token = credentials.token
 
         logic.searchIngredient(id, token, query)
+
         .then(meals =>  this.setState( { meals, searchIngredient: query, cats: false, meal : undefined, searchCategory : undefined}))
         .catch(({ message }) => this.setState({error: message}))
     }
@@ -90,6 +114,7 @@ class Home extends Component {
     handleGoBack(){
 
         const { handleSearch, handleSearchCat, handleFavorites, handleSearchIngredient, state: { query, searchIngredient, searchCategory } } = this
+
 
             if(query) handleSearch(query)
             if(searchCategory) handleSearchCat(searchCategory)
@@ -99,14 +124,14 @@ class Home extends Component {
         this.setState({ meal: undefined })
     }
 
-    handleOnMeal(idMeal){
-        const {props: { credentials } } = this
+    handleOnMeal(idMeal) {
+        const { props: { credentials } } = this
         let id = credentials.id
         let token = credentials.token
 
         logic.retrieveRecipe(id, token, idMeal)
             .then(meal => this.setState({ meal }))
-            .catch(({message}) => this.setState({ error: message }))
+            .catch(({ message }) => this.setState({ error: message }))
     }
 
     handleGoToCategories() {
@@ -147,14 +172,15 @@ class Home extends Component {
             .catch(({ message }) => this.setState({ error: message }))
     }
 
+
  
 render () {
 
-    const{ state: { meals, meal, cats , favs}, showCat, handleLogout, handleSearch, handleGoBack, handleOnMeal, handleSearchCat, handleGoToCategories, handleSearchIngredient, handleToggleRecipeDetail, handleToggleRecipeList,handleToggleFavorite, handleFavorites} = this
+    const{ state: { meals, meal, cats , favs, user}, showCat, handleLogout, handleSearch, handleGoBack, handleOnMeal, handleSearchCat, handleGoToCategories, handleSearchIngredient, handleToggleRecipeDetail, handleToggleRecipeList,handleToggleFavorite, handleFavorites} = this
 
     return ( <>
     <header>
-        <SmallHeader onLogout={handleLogout} goToCategories={handleGoToCategories} showCat={showCat} user={this.props.user} handleFavorites={handleFavorites}  />
+        {user && <SmallHeader onLogout={handleLogout} goToCategories={handleGoToCategories} showCat={showCat} user={this.props.user} handleFavorites={handleFavorites}  />}
         <Search onSearchName={handleSearch} onSearchIngredient={handleSearchIngredient}/>
     
         
@@ -175,4 +201,3 @@ render () {
     </>
     )    
   }
-}
