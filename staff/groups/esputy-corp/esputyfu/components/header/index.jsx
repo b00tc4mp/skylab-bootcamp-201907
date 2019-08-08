@@ -1,27 +1,20 @@
-class Header extends React.Component {
-    constructor() {
-        super()
-
-    }
-
-    render() {
+function Header(props) {
         return <>
-
-            <header class='header'>
+            <header className='header'>
                 <h2>Esputyfú</h2>
-                {!this.props._state ? 
-                    <nav class='header__nav'>
-                        <ul class='header__ul'>
-                            <li class='header__li'>
-                                <a class='header__a' href="" onClick={event => {
+                {!props.state ? 
+                    <nav className='header__nav'>
+                        <ul className='header__ul'>
+                            <li className='header__li'>
+                                <a className='header__a' href="" onClick={event => {
                                     event.preventDefault()
-                                    this.props.onLogin()
+                                    props.onLogin()
                                 }}>Iniciar sesión</a>
                             </li>
                             <li>
-                                <a class='header__a' href="" onClick={event => {
+                                <a className='header__a' href="" onClick={event => {
                                     event.preventDefault()
-                                    this.props.onRegister()
+                                    props.onRegister()
                                 }}>Registro</a>
                             </li>
                         </ul>
@@ -30,11 +23,10 @@ class Header extends React.Component {
                      <nav>
                      <ul>
                          <li>
-                             <a class='header__a' href="#">Favoritos</a>
+                             <a className='header__a' href="#">Favoritos</a>
                          </li>
                      </ul>
                  </nav>}
             </header>
         </>
     }
-}
