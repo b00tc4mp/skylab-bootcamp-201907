@@ -26,6 +26,7 @@ class Landing extends Component {
         this.handleRetrieveLists = this.handleRetrieveLists.bind(this)
         this.handleDisplayListModal = this.handleDisplayListModal.bind(this)
         this.handleToggleMovieFromList = this.handleToggleMovieFromList.bind(this)
+        this.handleGoToMenuCollections = this.handleGoToMenuCollections.bind(this)
            
     }
 
@@ -62,6 +63,11 @@ class Landing extends Component {
         logic.searchMovies(id, token, collection, collections)
             .then(movies => this.setState({ movies, collection, view: 'results', query: undefined }))
             .catch(error => this.setState({ error: error.message }))
+    }
+
+    handleGoToMenuCollections(){
+        event.preventDefault()
+        this.setState({view: 'collections'})
     }
 
     handleLinkToCollections() {
@@ -167,44 +173,45 @@ class Landing extends Component {
     }
 
     handleToggleFavMovieFromMovieItem(movieId) {
+      
         const { props: { goToLogin, credentials }, handleSearch, handleGoToCollections, state: { query, collection } } = this
 
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.toggleFavMovie(id, token, movieId).then(() => collection ? handleGoToCollections(collection) : handleSearch(query)) : goToLogin()
+        credentials ? logic.toggleFavMovie(id, token, movieId).then(() => collection ? handleGoToCollections(collection) : handleSearch(query)) : goToLogin(query, collection)
     }
 
     handleToggleFavMovieFromMovieDetail(movieId) {
-        const { props : { goToLogin, credentials }, handleRetrieveMovie } = this
+        const { props : { goToLogin, credentials }, handleRetrieveMovie , state:{ query, collection } } = this
 
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.toggleFavMovie(id, token, movieId).then(() => handleRetrieveMovie(movieId)) : goToLogin()
+        credentials ? logic.toggleFavMovie(id, token, movieId).then(() => handleRetrieveMovie(movieId)) : goToLogin(query, collection)
     }
 
     handleToggleFavMovieFromFavoritesSection(movieId) {
-        const { props: { goToLogin, credentials }, handleFavorites } = this
+        const { props: { goToLogin, credentials }, handleFavorites, state:{ query, collection } } = this
 
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
         
-        credentials ? logic.toggleFavMovie(id, token, movieId).then(() => handleFavorites()) : goToLogin()
+        credentials ? logic.toggleFavMovie(id, token, movieId).then(() => handleFavorites()) : goToLogin(query, collection)
 
     }
 
     handleToggleMovieFromMovieDetail(movieId) {
-        const { props: { goToLogin, credentials } } = this
+        const { props: { goToLogin, credentials } , state:{ query, collection } } = this
 
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.toggleListModal(id, token, movieId, () => handleListModal()) : goToLogin()
+        credentials ? logic.toggleListModal(id, token, movieId, () => handleListModal()) : goToLogin(query, collection)
     }
 
     
@@ -255,7 +262,8 @@ class Landing extends Component {
             handleSearch, handleRetrieveMovie, handleLogOut,
             handleBackFromDetail, handleGoToSearch, handleGoToLogIn,
             handleToggleFavMovieFromMovieItem, handleToggleFavMovieFromMovieDetail, handleGoToCollections, handleLinkToCollections, handleGoToFavorites,
-            handleToggleFavMovieFromFavoritesSection, handleCreateList, handleDisplayListModal, handleToggleMovieFromList, handleToggleMovieFromMovieDetail
+            handleToggleFavMovieFromFavoritesSection, handleCreateList, handleDisplayListModal, handleToggleMovieFromList, handleToggleMovieFromMovieDetail,
+            handleGoToMenuCollections
 
         } = this
 
@@ -269,7 +277,7 @@ class Landing extends Component {
                         <span></span>
                         <ul className="menu">
                             <li><a href="" onClick={handleGoToFavorites}>Favorites</a></li>
-                            <li><a href="" onClick={handleGoToCollections}>Collections</a></li>
+                            <li><a href="" onClick= {handleGoToMenuCollections} >Collections</a></li>
                             <li><a href="" onClick={handleLogOut}>Log Out</a></li>
                         </ul>
                     </div>
