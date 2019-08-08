@@ -342,24 +342,24 @@ class Landing extends Component {
 
         return <section className={`landing`}>
             <header className={`landing__header`}>
-                {user && <p>Hello, {user.name}! <i className="fas fa-user-circle"></i></p>}
+                {user && <p className={`landing__header-message`}>Hello, {user.name}!</p>}
                 <nav>
                     {!user ? <ul className={`landing__header-menu`}>
                         <li className={`landing__header-item`}>
-                            <a className={`landing__header-register`} href="" onClick={handleRegister}><i className="fas fa-user-plus"></i>  Register</a>
+                            <a className={`landing__header-link`} href="" onClick={handleRegister}><i className="fas fa-user-plus"></i>  Register</a>
                         </li>
                         <li className={`landing__header-item`}>
-                            <a className={`landing__header-login`} href="" onClick={handleLogin}><i className="fas fa-sign-in-alt"></i>  Login
+                            <a className={`landing__header-link`} href="" onClick={handleLogin}><i className="fas fa-sign-in-alt"></i>  Login
                             </a>
                         </li>
                     </ul> : <ul className={`landing__header-menu`}>
-                            {(view === 'search' || view === 'random') && <li><a href="" onClick={event => {
+                            {(view === 'search' || view === 'random') && <li className={`landing__header-item`}><a className={`landing__header-link`} href="" onClick={event => {
                                 event.preventDefault()
 
                                 handleFavorites()
                             }}>Favorites <i className="fas fa-heart"></i></a></li>}
                             {view === 'favorites' && <li><a href="" onClick={handleGoToSearch}>Search</a></li>}
-                            <li><a href="" onClick={handleLogout}>Logout <i className="fas fa-sign-out-alt"></i></a></li>
+                            <li className={`landing__header-item`}><a className={`landing__header-link`} href="" onClick={handleLogout}>Logout <i className="fas fa-sign-out-alt"></i></a></li>
                         </ul>}
                 </nav>
             </header>
@@ -374,7 +374,7 @@ class Landing extends Component {
                     </div>
                     <div className={`random`}>
                         <h3 className={`random__title1`}>GIF<span className={`random__title2`}>.TV</span></h3>
-                        <img className={`random__tv-icon`} src="https://www.iconsdb.com/icons/preview/white/tv-xxl.png" onClick={handleGoToRandom}></img>
+                        <img className={`random__tv-icon`} src="http://25.media.tumblr.com/ee5078721ddb2c202e4b67674c9ac40f/tumblr_mgfkslJuRX1ri23bwo1_500.gif" onClick={handleGoToRandom}></img>
                     </div>
                             {!gif ?
                                 <Results items={gifs} paintItem={gif => {

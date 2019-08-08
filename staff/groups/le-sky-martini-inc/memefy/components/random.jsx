@@ -1,6 +1,6 @@
 function Random(props) {
     return <section className={`random`}>
-        <img className={`random__tv-remote`} src="https://iconsplace.com/wp-content/uploads/_icons/ffffff/256/png/remote-control-icon-18-256.png" onClick={event => {
+        <img className={`random__tv-remote`} src="https://media.giphy.com/media/LpvMOgLawT6x14rngP/giphy.gif" onClick={event => {
         event.preventDefault()
         
         props.onRandom()

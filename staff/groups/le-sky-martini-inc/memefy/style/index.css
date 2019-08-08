@@ -24,7 +24,7 @@
   font-size: 18px;
 }
 
-.search__button, .register__button, .login__button {
+.search__button {
   background-color: #45b39c;
   color: white;
   border: none;
@@ -99,6 +99,10 @@
   magin: 2em;
   padding: 0;
 }
+.landing__header-message {
+  color: white;
+  margin: 1.5em auto -1.5em auto;
+}
 .landing__header-item {
   background: linear-gradient(-45deg, #FF5128, #9422E8, #1EC0FF);
   background-size: 400% 400%;
@@ -120,7 +124,7 @@
     background-position: 0% 50%;
   }
 }
-.landing__header-register, .landing__header-login {
+.landing__header-link {
   color: white;
   text-decoration: none;
 }
@@ -132,6 +136,7 @@
   background-color: white;
   font-family: "Cousine", sans-serif;
   border-radius: 0.5em;
+  width: 90%;
 }
 .login__form {
   padding: 1px;
@@ -149,14 +154,13 @@
 .login__button {
   margin-top: 1em;
   margin-bottom: 1em;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  border-radius: 0.2em;
+  border: none;
+  padding: 10px;
   background: linear-gradient(-45deg, #FF5128, #9422E8, #1EC0FF);
   background-size: 400% 400%;
   animation: Gradient 15s ease infinite;
-  padding: 10px;
-  font-size: 22px;
+  font-size: 18px;
+  color: white;
 }
 @keyframes Gradient {
   0% {
@@ -177,6 +181,7 @@
   background-color: white;
   font-family: "Cousine", sans-serif;
   border-radius: 0.5em;
+  width: 90%;
 }
 .register__form {
   padding: 1px;
@@ -194,14 +199,13 @@
 .register__button {
   margin-top: 1em;
   margin-bottom: 1em;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  border-radius: 0.2em;
+  border: none;
+  padding: 10px;
   background: linear-gradient(-45deg, #FF5128, #9422E8, #1EC0FF);
   background-size: 400% 400%;
   animation: Gradient 15s ease infinite;
-  padding: 10px;
-  font-size: 22px;
+  font-size: 18px;
+  color: white;
 }
 @keyframes Gradient {
   0% {
@@ -221,21 +225,24 @@
 .register-success {
   font-family: "Cousine", sans-serif;
   border-radius: 0.5em;
+  width: 90%;
 }
 .register-success__copy {
   color: white;
 }
 .register-success__login {
   background-color: white;
-  padding: 0.5em;
+  padding: 10px;
   border-radius: 0.2em;
   z-index: 1em;
 }
 .register-success__login:hover {
-  color: deeppink;
+  color: white;
+  background-color: deeppink;
 }
 
 .register-or-login {
+  width: 90%;
   font-family: "Cousine", sans-serif;
   border-radius: 0.5em;
 }
