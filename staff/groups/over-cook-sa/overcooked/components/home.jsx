@@ -98,11 +98,12 @@ class Home extends Component {
 
     handleGoBack(){
 
-        const { handleSearch, handleSearchCat, handleSearchIngredient, state: { query, searchIngredient, searchCategory } } = this
+        const { handleSearch, handleSearchCat, handleSearchIngredient, handleFavorites, state: { query, searchIngredient, searchCategory } } = this
 
             if(query) handleSearch(query)
             if(searchCategory) handleSearchCat(searchCategory)
             if(searchIngredient) handleSearchIngredient(searchIngredient)
+            else handleFavorites()
                
         this.setState({ meal: undefined })
     }
@@ -173,7 +174,8 @@ render () {
             {!meal ? <Results meals={meals} onMeal={handleOnMeal} goCat={handleGoToCategories} paintMeal = { meal => {return <RecipeItem2 meal={meal} onToggle={handleToggleRecipeList} />}}  />
             : <RecipeDetails meal={meal} onBack={handleGoBack} onToggle={handleToggleRecipeDetail} />}
            
-            <Favorites favs={favs} onMeal={handleOnMeal} goCat={handleGoToCategories} paintMeal = { meal => {return <RecipeItem2 meal={meal} onToggle={handleToggleFavorite} />}}  />
+            {!meal  && <Favorites favs={favs} onMeal={handleOnMeal} goCat={handleGoToCategories} paintMeal = { meal => {return <RecipeItem2 meal={meal} onToggle={handleToggleFavorite} />}}  />
+            }
         </section>
 
     </main>
