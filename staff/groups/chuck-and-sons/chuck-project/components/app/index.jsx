@@ -17,7 +17,8 @@ class App extends React.Component {
             user: undefined,
             categories: [],
             jokes: [],
-            random: []
+            random: [],
+
         }
 
         this.handleGoToRegister = this.handleGoToRegister.bind(this)
@@ -30,14 +31,15 @@ class App extends React.Component {
         this.handleSearchCategories = this.handleSearchCategories.bind(this)
         this.handleRandomButton = this.handleRandomButton.bind(this)
         this.handleLogout = this.handleLogout.bind(this)
+        this.handleToggleFavorite = this.handleToggleFavorite.bind(this)
     }
 
     // ===
-    componentDidMount() {
-        const { props: { credentials } } = this
+    componentWillMount() {
+        const { state: { credentials } } = this
 
         if (credentials) {
-            const { id, token } = credentials
+            const { id , token } = credentials
         }
 
         try {
@@ -49,6 +51,11 @@ class App extends React.Component {
         }
     }
 
+    // componentWillReceiveProps(props){
+    //     const { credentials } = props
+    //     !credentials && this.setState({ user: undefined })
+    // }
+
     componentDidMount() {
         logic.getCategories()
             .then(data => {
@@ -57,13 +64,14 @@ class App extends React.Component {
     }
 
     handleSearch(query) {
-        const { props: { credentials } } = this
+        const { state: { credentials } } = this
         let id, token
+
         credentials && (id = credentials.id, token = credentials.token)
 
         logic.searchJokes(id, token, query)
             .then(joke => {
-                this.setState({ jokes: joke })
+                this.setState({ jokes: joke, query: query })
                 this.setState({ printItem: 'printSearch' })
             })
 
@@ -71,20 +79,19 @@ class App extends React.Component {
     }
     //--------------------------------------------------------
     handleSearchCategories(category) {
-        const { props: { credentials } } = this
+        const { state: { credentials } } = this
         let id, token
         credentials && (id = credentials.id, token = credentials.token)
 
         logic.searchJokes(id, token, category)
             .then(joke => {
-                this.setState({ jokes: joke })
+                this.setState({ jokes: joke, query: category })
                 this.setState({ printItem: 'printCategory' })
             })
             .catch(({ message }) => this.setState({ error: message }))
     }
     //-------------------------------------------------------
     handleRandomButton() {
-
         logic.getRandomJoke()
             .then(joke => {
                 this.setState({ random: joke })
@@ -92,6 +99,7 @@ class App extends React.Component {
             })
             .catch(({ message }) => this.setState({ error: message }))
     }
+
 
     handleStartSynth(value) {
         logic.synth(value)
@@ -157,16 +165,27 @@ class App extends React.Component {
         this.setState({ credentials: undefined, user: undefined })
     }
 
+    handleToggleFavorite(jokeId) {
+
+        const { state: { credentials, query }, handleSearch } = this
+        let id, token
+        credentials && (id = credentials.id, token = credentials.token)
+        credentials ? logic.toggleFavoriteItem(id, token, jokeId)
+            .then(() => handleSearch(query))
+            .catch(({ message }) => this.setState({ error: message }))
+            : this.setState({ view: 'login' })
+    }
 
     render() {
         const {
-            state: { view, error, categories, jokes, printItem, random, user },
+            state: { view, error, categories, user, jokes, printItem, random },
             handleGoToRegister,
             handleGoToLogin,
             handleGoToLanding,
             handleRegister,
             handleLogin,
             handleLogout,
+            handleToggleFavorite,
             handleSearch,
             handleSearchCategories,
             handleRandomButton,
@@ -175,25 +194,26 @@ class App extends React.Component {
 
         return <>
             <div className="wrapper">
-                <Header onGoToRegister={handleGoToRegister} onGoToLogin={handleGoToLogin} onLogout={handleLogout} onChangeView={view} user={user} />
+                <Header onGoToRegister={handleGoToRegister} onGoToLogin={handleGoToLogin} onLogout={handleLogout} onChangeView={view} user={user}/>
+                <Search onSearch={handleSearch} />
                 {view === 'login' && <Login onGoToLanding={handleGoToLanding} onLogin={handleLogin} error={error} />}
                 {view === 'register' && <Register onGoToLanding={handleGoToLanding} onRegister={handleRegister} error={error} />}
                 {view === 'register-success' && <RegisterSuccess onGoToLanding={handleGoToLanding} onGoToLogin={handleGoToLogin} />}
 
                 {view === "landing" && <main className="main-container">
-                    <Search onSearch={handleSearch} />
+
                     {<button className="random-button" onClick={event => {
                         event.preventDefault()
                         handleRandomButton()
                     }}>Random Chuck</button>}
 
                     <Categories categories={categories} searchCategory={handleSearchCategories} />
-                    
-                    {printItem === 'printSearch' && <RetrieveCategories arrayJokes={jokes} startSynth={handleStartSynth} />}
-                    
-                    {printItem === 'printCategory' && <RetrieveCategories arrayJokes={jokes} startSynth={handleStartSynth} />}
 
-                    {printItem === 'printRandom' && <RetrieveRandom arrayRandom={random} startSynth={handleStartSynth} />}
+                    {printItem === 'printSearch' && <RetrieveCategories arrayJokes={jokes} startSynth={handleStartSynth} onToggle={handleToggleFavorite} error = { error} />}
+
+                    {printItem === 'printCategory' && <RetrieveCategories user={user} arrayJokes={jokes} startSynth={handleStartSynth} onToggle={handleToggleFavorite} />}
+
+                    {printItem === 'printRandom' && <RetrieveRandom arrayRandom={random} startSynth={handleStartSynth} ontoggle={handleToggleFavorite} />}
                 </main>}
 
 

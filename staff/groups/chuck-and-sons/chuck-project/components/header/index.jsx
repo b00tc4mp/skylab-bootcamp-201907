@@ -14,13 +14,13 @@ function Header(props){
             
             <nav className = "navigation">
                 <ul>
-                { onChangeView === 'landing' && <li><a href="" className = "btn btn__register" onClick={ event => {
+                { onChangeView !== 'register' && !user && <li><a href="" className = "btn btn__register" onClick={ event => {
                                                         event.preventDefault()
                                                         onGoToRegister()
                                                     }}>Register</a></li>
                                                 }
                 
-                { onChangeView === 'landing' && <li><a href="" className = "btn btn__login" onClick={ event => {
+                { onChangeView !== 'login' && !user && <li><a href="" className = "btn btn__login" onClick={ event => {
                                                     event.preventDefault()
                                                     onGoToLogin()
                                                 }}>Login</a></li>
