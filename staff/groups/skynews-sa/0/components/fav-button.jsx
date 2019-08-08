@@ -7,6 +7,6 @@ function FavButton({active, onToggle}){
   }} >
   {console.log(active)}
     {active?
-    <i className="far fa-2x fa-star"></i>:<i className="fas fa-2x fa-star"></i>}
+    <i className="star fas fa-2x fa-star"></i>:<i className="star far fa-2x fa-star"></i>}
   </button>
 }

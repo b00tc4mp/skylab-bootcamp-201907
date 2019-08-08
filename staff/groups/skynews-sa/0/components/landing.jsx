@@ -142,26 +142,23 @@ class Landing extends Component{
 
         return <>
         <header>
-            {user && <p>Hello, {user.name}</p>}
             <nav className="nav">
+            {user && <p className="nav-hello">Hello, {user.name}</p>}
                 {! user ?
                 <ul className="nav-ul">
-                    <li><a href="" className="register-li" onClick={handleRegister}>Register</a></li>
-                    <li><a className="login-li" href=""onClick={handleLogin}>Login</a></li>
-                </ul>: <ul>
-                    {view === 'search' && <li><a href="" onClick={event => { event.preventDefault()
+                    <li><a href="" className="register-li nav-but" onClick={handleRegister}>Register</a></li>
+                    <li><a className="login-li nav-but" href=""onClick={handleLogin}>Login</a></li>
+                </ul>: <ul className="fav-ul">
+                    {view === 'search' && <li><a href="" className="favorites-li nav-but" onClick={event => { event.preventDefault()
                     handleFavorites()}}>Favorites</a></li>}
-                    {view === 'favorites' && <li><a href="" onClick={handleGoToSearch}>Search</a></li>}
-                    <li><a href="" onClick={handleLogout}>Logout</a></li>
+                    {view === 'favorites' && <li><a href="" className="search-li nav-but" onClick={handleGoToSearch}>Search</a></li>}
+                    <li><a href="" className="logout-li nav-but" onClick={handleLogout}>Logout</a></li>
                 </ul>}
             </nav>
-             <h1 className='landing__title hide'>SkyNews</h1>
-             <img className="nav-logo" src="style/img/skynews-logo.png"></img> 
         </header>
+        
+        
         {view === 'search' && <>
-        
-        
-        <h3>Search</h3>
         <Search onSearch={handleSearch} error={error} category={category} country={country}/>
         {!article ?
 
@@ -175,10 +172,19 @@ class Landing extends Component{
         
 
         {view === 'favorites' && <>
-        <h3>Favorites</h3>
-            <Results items={favs} paintItem={article => {
-                return <ArticleDetail article={article} onToggle={handleToggleFavArtFromFavorites}/>
-            }} onItem={handleRetrieveArticle}/>
+        <section className="favorites">
+        <h1 className='fav__title hide'>SkyNews</h1>
+             <img className="fav-logo" src="style/img/skynews-logo.png"></img> 
+            <h3 className="fav-title">Favorites</h3>
+                    {!article ?
+                        <Results items={favs} paintItem={article => {
+                            return <ArticleItem article={article} />
+                        }} onItem={handleRetrieveArticle} />
+                        :
+                        <ArticleDetail article={article} onToggle={handleToggleFavArticleFromArticleDetail} onBack={handleFavorites} />}
+                    {error && <Modal message={error} onAccept={handleAcceptError} />}
+
+                </section>
         </>}
     </>
     }

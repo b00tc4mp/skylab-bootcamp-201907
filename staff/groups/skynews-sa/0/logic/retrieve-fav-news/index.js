@@ -1,4 +1,4 @@
-logic.retrieveFavNews = function (id, token) {
+logic.retrieveFavNews =  (id, token) => {
   validate.string(id, 'id')
   validate.string(token, 'token')
 

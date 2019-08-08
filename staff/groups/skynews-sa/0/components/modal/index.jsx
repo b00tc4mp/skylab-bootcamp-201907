@@ -1,13 +1,13 @@
 function Modal({ message, onAccept }) {
-  return <section>
-      <main>
+  return <>
+      <section>
           <Feedback message={message} />
-          <button onClick={event => {
+          <button className="feedback-button" onClick={event => {
               event.stopPropagation()
               onAccept()
           }}>Ok</button>
-      </main>
-  </section>
+    </section>
+  </>
 } 
 
 

@@ -7,11 +7,11 @@ function ArticleDetail({article, onToggle, onBack}){
         <p className="detail-data">Published: {article.publishedAt.slice(0,10)}</p>
         <h4 className="detail-description">{article.description}</h4>
         <FavButton active={article.favorite} onToggle={() => onToggle(article)}/>
-        <a className="detail-Link" href={article.url}>Go to original article</a>
-        {onBack && <a className="detaul-back" href="" onClick={event=>{
+        <a className="detail-link art-but" href={article.url}>Go to original article</a>
+        {onBack && <a className="back-link art-but" href="" onClick={event=>{
         event.preventDefault()
         onBack()
-        }}>Go onBack</a>}
+        }}>Go Back</a>}
     </section>
     </>
 }

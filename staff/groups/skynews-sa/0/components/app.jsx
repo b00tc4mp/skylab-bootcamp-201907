@@ -34,14 +34,14 @@ class App extends Component{
     /* LANDING */
     handleGoRegister(){
            
-            this.setState({view:"register"})
+            this.setState({view:"register", error:undefined})
     }
     handleGoLogin(){
-        this.setState({view:"login"})
+        this.setState({view:"login", error:undefined})
     }
     /*BACK */
     handleBackToLanding(){
-        this.setState({view:"landing"})
+        this.setState({view:"landing", error:undefined})
     }
     /*REGISTER */
     handleRegister(name, surname, email, password, repassword) {

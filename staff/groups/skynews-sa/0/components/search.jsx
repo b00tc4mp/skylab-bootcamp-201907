@@ -1,12 +1,16 @@
-function Search({onSearch, error,category,country}){
+function Search({onSearch, error, category,country}){
     let value1=category,value2=country
     return <>
+    <section className="search">
+        <h1 className='search-title hide'>SkyNews</h1>
+        <img className="nav-logo" src="style/img/skynews-logo.png"></img> 
+        <h3 className="search-title">Search</h3>
     <form onSubmit={event=>{
         event.preventDefault()
         onSearch(value1,value2)
     }}>
         
-     <select onChange={event=>{
+     <select className="select" onChange={event=>{
         event.preventDefault()
         value1=event.target.value
         
@@ -21,7 +25,7 @@ function Search({onSearch, error,category,country}){
         <option value="technology">Technology</option>
     </select>
 
-    <select onChange={event=>{
+    <select className="select" onChange={event=>{
         event.preventDefault()
         value2=event.target.value
      }}>
@@ -33,11 +37,9 @@ function Search({onSearch, error,category,country}){
        
         
     </select>
-    <button>Search News</button>
-
-
-
-    </form>
-    {error && <Feedback message={error} />}
-    </>
+            <button className="search-button">Search News</button>
+        </form>
+    </section>
+{/*     {error && <Feedback message={error} />}
+ */}    </>
 }
