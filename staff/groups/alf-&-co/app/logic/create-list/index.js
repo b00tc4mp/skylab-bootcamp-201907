@@ -1,4 +1,4 @@
-logic.createList = function(userId, userToken, listName, expression) {
+logic.createList = function(userId, userToken, listName) {
     const AUTH_ENDPOINT = 'https://skylabcoders.herokuapp.com/api/user/'
 
     //Input Validation
@@ -14,8 +14,9 @@ logic.createList = function(userId, userToken, listName, expression) {
 
             !lists ? lists = [] : lists
 
+            debugger
             if (lists.length) {
-                const index = lists.find(list => list.name === listName)
+                const index = lists.findIndex(list => list.name === listName)
                 if (index > -1) throw Error(`List with name "${listName} already exists in the database`)
             }
 
@@ -29,7 +30,7 @@ logic.createList = function(userId, userToken, listName, expression) {
                 {lists})
                 .then(response => {
                     if (response.status === 'KO') throw Error(response.error)
-                        expression(lists)
+                        return lists
                 })
         })
     }
