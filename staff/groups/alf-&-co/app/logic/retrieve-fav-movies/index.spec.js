@@ -1,7 +1,7 @@
 {
     const { random }= Math
 
-    fdescribe('logic - retrieve fav movies', () => {
+    describe('logic - retrieve fav movies', () => {
         let user
         let data
 

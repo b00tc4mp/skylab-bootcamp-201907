@@ -5,7 +5,7 @@ class Landing extends Component {
         super()
 
 
-        this.state = { view: 'collections', search: false, query: undefined, movieId: undefined, collection: undefined, movies: [], movie: undefined, error: undefined, user: undefined, favs: [], lists: undefined}
+        this.state = { view: 'collections', error: undefined,  search: false, query: undefined, movieId: undefined, collection: undefined, movies: [], movie: undefined, error: undefined, user: undefined, favs: [], lists: undefined}
 
         this.handleGoToFavorites = this.handleGoToFavorites.bind(this)
         this.handleGoToCollections = this.handleGoToCollections.bind(this)
@@ -103,19 +103,19 @@ class Landing extends Component {
     }
 
     handleFavorites() {
-        const { props: { credentials }, goToLogin } = this
+        const { props: { credentials }, handleGoToLogIn } = this
 
         let id, token
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.retrieveFavMovies(id, token).then(favs => this.setState({ favs, view: 'favorites' })) : goToLogin()
+        credentials ? logic.retrieveFavMovies(id, token).then(favs => this.setState({ favs, view: 'favorites' })) : handleGoToLogIn()
     }
 
     handleGoToLogIn(event){
 
-        const { state: { query, collection } } = this
+        event && event.preventDefault()
 
-        event.preventDefault()
+        const { state: { query, collection } } = this
     
         this.props.goToLogin(query, collection)
     
@@ -146,17 +146,17 @@ class Landing extends Component {
 
 
     handleToggleFavMovieFromMovieDetail(movieId) {
-        const { props: { goToLogin, credentials }, handleRetrieveMovie } = this
+        const { props: {  credentials }, handleRetrieveMovie, handleGoToLogIn } = this
 
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.toggleFavMovie(id, token, movieId, () => handleRetrieveMovie(movieId)) : goToLogin()
+        credentials ? logic.toggleFavMovie(id, token, movieId, () => handleRetrieveMovie(movieId)) : handleGoToLogIn()
     }
 
     handleBackFromDetail() {
-        const { state: { query, collection, favs }, props: { credentials },handleGoToFavorites, handleSearch } = this
+        const { state: { query, collection, favs }, props: { credentials },handleGoToFavorites, handleSearch, handleCollections } = this
         let id, token
         let collections = true
 
@@ -173,45 +173,44 @@ class Landing extends Component {
     }
 
     handleToggleFavMovieFromMovieItem(movieId) {
-      
-        const { props: { goToLogin, credentials }, handleSearch, handleGoToCollections, state: { query, collection } } = this
+        const { props: { credentials }, handleSearch, handleGoToCollections, state: { query, collection } } = this
 
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.toggleFavMovie(id, token, movieId).then(() => collection ? handleGoToCollections(collection) : handleSearch(query)) : goToLogin(query, collection)
+        credentials ? logic.toggleFavMovie(id, token, movieId).then(() => collection ? handleGoToCollections(collection) : handleSearch(query)) : handleGoToLogIn()
     }
 
     handleToggleFavMovieFromMovieDetail(movieId) {
-        const { props : { goToLogin, credentials }, handleRetrieveMovie , state:{ query, collection } } = this
-
+        const { props : { credentials }, handleRetrieveMovie, handleGoToLogIn } = this
+       
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.toggleFavMovie(id, token, movieId).then(() => handleRetrieveMovie(movieId)) : goToLogin(query, collection)
+        credentials ? logic.toggleFavMovie(id, token, movieId).then(() => handleRetrieveMovie(movieId)) : handleGoToLogIn()
     }
 
     handleToggleFavMovieFromFavoritesSection(movieId) {
-        const { props: { goToLogin, credentials }, handleFavorites, state:{ query, collection } } = this
+        const { props: { credentials }, handleFavorites, handleGoToLogIn } = this
 
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
         
-        credentials ? logic.toggleFavMovie(id, token, movieId).then(() => handleFavorites()) : goToLogin(query, collection)
-
+        credentials ? logic.toggleFavMovie(id, token, movieId).then(() => handleFavorites()) : handleGoToLogIn()
     }
 
     handleToggleMovieFromMovieDetail(movieId) {
-        const { props: { goToLogin, credentials } , state:{ query, collection } } = this
-
+        const { props: { credentials }, handleGoToLogIn, handleListModal } = this
+        
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
+      
+        credentials ? logic.toggleListModal(id, token, movieId, () => handleListModal()) : handleGoToLogIn()
 
-        credentials ? logic.toggleListModal(id, token, movieId, () => handleListModal()) : goToLogin(query, collection)
     }
 
     
@@ -220,24 +219,36 @@ class Landing extends Component {
 
         const { target: { list: { value: listName } } } = event
       
-        const { props: { credentials }, handleRetrieveLists } = this
+        const { state: { movieId }, props: { credentials }, handleRetrieveLists, handleGoToLogIn } = this
         let id, token
+
+        this.setState({error: undefined})
+        this.setState({feedback: undefined})
+
 
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.createList(id, token, listName, () =>  {handleRetrieveLists()}) : console.log(error)
+        credentials ? logic.createList(id, token, listName)
+            .then(() => {
+                this.setState({feedback: `${listName} added to your lists successfully`})
+                handleRetrieveLists(movieId)
+            })
+            .catch(({ message }) => this.setState({ error: message}))
+        : handleGoToLogIn() 
+
     }
 
     handleRetrieveLists(movieId) {
 
-        const { props: { credentials } } = this
+        const { props: { credentials }, handleGoToLogIn } = this
         let id, token
 
         movieId && this.setState({movieId})
 
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.retrieveLists(id, token, movieId, lists => this.setState({lists, view: 'list-modal'})) : console.log('error')
+        credentials ? logic.retrieveLists(id, token, movieId)
+            .then(lists => this.setState({lists, view: 'list-modal'})) : handleGoToLogIn()
     }
 
     handleDisplayListModal(movieId) {
@@ -245,12 +256,12 @@ class Landing extends Component {
     }
 
     handleToggleMovieFromList(movieId, listName) {
-        const { props: { credentials } } = this
+        const { props: { credentials }, handleGoToLogIn } = this
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.toggleFromMovieList(id, token, movieId, listName, () => this.handleRetrieveLists(movieId)) : console.log('error')
+        credentials ? logic.toggleFromMovieList(id, token, movieId, listName, () => this.handleRetrieveLists(movieId)) : handleGoToLogIn()
     }
 
 handleGoToHome(event){
@@ -260,10 +271,9 @@ handleGoToHome(event){
 
 
     /* Render */
-
     render() {
         const {
-            state: { view, search, movie, movies, query, error, user, favs, lists, movieId },
+            state: { view, search, movie, movies, query, feedback, error, user, favs, lists, movieId },
             handleSearch, handleRetrieveMovie, handleLogOut,
             handleBackFromDetail, handleGoToSearch, handleGoToLogIn,
             handleToggleFavMovieFromMovieItem, handleToggleFavMovieFromMovieDetail, handleGoToCollections, handleLinkToCollections, handleGoToFavorites,
@@ -322,10 +332,11 @@ handleGoToHome(event){
                     <Favorites favs={favs} removeFav={handleToggleFavMovieFromFavoritesSection} showDetail={handleRetrieveMovie} />
                 }
                 {view === 'list-modal' &&
-                    <ListModal lists={lists} movieId={movieId} onToggleMovieList={handleToggleMovieFromList} onCreateList={handleCreateList} />
+                    <ListModal lists={lists} movieId={movieId} feedback={feedback} error={error} onToggleMovieList={handleToggleMovieFromList} onCreateList={handleCreateList} />
                 }
 
             </main>
+
             <footer className="panel--foot">              
                  <ul>
                     <li className="red"><a href=""><i className="fab fa-twitter"></i></a></li>
