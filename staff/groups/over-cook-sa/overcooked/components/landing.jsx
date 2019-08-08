@@ -23,23 +23,6 @@ class Landing extends Component {
 
   componentWillMount() {
     this.onRandomRecipe()
-
-    const {
-      props: { credentials }
-    } = this
-
-    if (credentials) {
-      const { id, token } = credentials
-
-      try {
-        logic
-          .retrieveUser(id, token)
-          .then(user => this.setState({ user }))
-          .catch(({ message }) => this.setState({ error: message }))
-      } catch ({ message }) {
-        this.setState({ error: message })
-      }
-    }
   }
 
   onRandomRecipe = () => {
