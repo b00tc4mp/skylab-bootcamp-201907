@@ -3,7 +3,7 @@ function Feedback(props){
     const { message } = props
 
     return <>
-        <div>
+        <div className = "feedback">
             { message }
         </div>
     </>
