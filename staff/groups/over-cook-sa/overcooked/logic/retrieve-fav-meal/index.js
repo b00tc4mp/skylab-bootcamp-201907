@@ -17,6 +17,7 @@ logic.retrieveFavMeal = function (id, token) {
         
             return Promise.all(calls)
             .then(response => { 
+                
                 return response.map(element => {
                     const { meals : [ meal ] } = element
                     return meal
