@@ -19,7 +19,12 @@ function SmallHeader(props) {
       }
       }>Categories</a>
       
-      <a href="">Favorites</a>
+      <a href="" onClick={event => {
+        event.preventDefault(
+
+          props.handleFavorites()
+        )
+      }}>Favorites</a>
 
     </>
   )

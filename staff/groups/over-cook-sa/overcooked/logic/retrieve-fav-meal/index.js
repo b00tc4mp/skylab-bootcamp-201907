@@ -1,0 +1,20 @@
+logic.retrieveFavMeal = function (id, token) {
+    validate.string(id, 'id')
+    validate.string(token, 'token')
+
+    return call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'get', { 'authorization': `bearer ${token}` }, undefined)
+        .then(response => {
+            if (response.status === 'KO') throw new Error(response.error)
+
+            const favorites = response.data.favorites
+
+            if (!favorites.length) return []
+
+            const calls = favorites.map(idMeal =>
+                call(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`, 'get', undefined, undefined)
+                    .then(meal => (meal.favorite = true) && meal)
+            )
+
+            return Promise.all(calls)
+        })
+}
