@@ -64,7 +64,7 @@
 
                 beforeEach(() => {
 
-                    user.favorites.push("Y3XtQY1nQAWbZK9LCffH0A", "v04aFGwkRvyDfL65MsYSaQ", "dwxnerd8qamdgrzsl9aakq", "kh2dFDFJRh22lt0PXUFlRQ")
+                    user.favorites.push("Y3XtQY1nQAWbZK9LCffH0A", "TGFYYh2hTiazBHV02yLlrQ", "anusbnc9r1arcxdq1ha9jq", "v04aFGwkRvyDfL65MsYSaQ")
 
                     return call('https://skylabcoders.herokuapp.com/api/user', 'post', { 'content-type': 'application/json' }, user)
                         .then(response => {
@@ -81,14 +81,14 @@
                 })
 
 
-                it('should suceed on matching criteria', () => {
+                it('should suceed on matching criteria, if result greater than 30 it should return 15 jokes', () => {
                     const query = 'all'
 
                     return logic.searchJokes(credentials.id, credentials.token, query)
                         .then(jokes => {
                             expect(jokes).toBeDefined()
                             expect(jokes.result instanceof Array).toBeTruthy()
-                            expect(jokes.total).toBe(1469)
+                            expect(jokes.result.length).toBe(15)
 
                             let favorites = 0
 

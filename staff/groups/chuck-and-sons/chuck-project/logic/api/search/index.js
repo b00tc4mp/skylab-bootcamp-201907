@@ -16,9 +16,14 @@ logic.searchJokes = function (id, token, query) {
                     .then(jokes => {
                         if (jokes.error) return []
                         else {
-                            favorites && jokes.result.forEach(joke => joke.favorite = favorites.includes(joke.id))
+                            if (jokes.total > 30) {
+                                const jokeSelection = jokes.result.splice(15)
+                                favorites && jokes.result.forEach(joke => joke.favorite = favorites.includes(joke.id))
+                                return jokes
+                            } else {
 
-                            return jokes
+                                return jokes
+                            }
                         }
                     })
             })
@@ -27,10 +32,16 @@ logic.searchJokes = function (id, token, query) {
         return call(`https://api.chucknorris.io/jokes/search?query=${query}`, 'get', undefined, undefined)
             .then(jokes => {
                 if (jokes.error) return []
+                else {
+                    if (jokes.total > 30) {
+                        const jokeSelection = jokes.result.splice(15)
+                        favorites && jokes.result.forEach(joke => joke.favorite = favorites.includes(joke.id))
+                        return jokes
+                    } else {
 
-                favorites && jokes.result.forEach(joke => joke.favorite = favorites.includes(joke.id))
-
-                return jokes
+                        return jokes
+                    }
+                }
             })
     }
 }
