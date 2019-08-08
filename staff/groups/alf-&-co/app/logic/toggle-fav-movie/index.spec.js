@@ -46,15 +46,28 @@
                     })
             })
 
-        it('should fail when on userId is provided', () => {
+        it('should fail when userId is not provided', () => {
+            expect(() => logic.toggleFavMovie(undefined, data.token, '680')).toThrowError('id with value undefined is not a string')
+        })
+        
+        it('should fail when userToken is not provided', () => {
+            expect(() => logic.toggleFavMovie(data.id, undefined, '680')).toThrowError('token with value undefined is not a string')
+        })
+
+        it('should fail when movieId is not provided', () => {
+            expect(() => logic.toggleFavMovie(data.id, data.token, undefined)).toThrowError('movie id with value undefined is not a string')
+        })
+
+
+        it('should fail on empty userId', () => {
             expect(() => logic.toggleFavMovie('', data.token, '680')).toThrowError('id is empty or blank')
         })
         
-        it('should fail when on userToken is provided', () => {
+        it('should fail on empty userToken', () => {
             expect(() => logic.toggleFavMovie(data.id, '', '680')).toThrowError('token is empty or blank')
         })
 
-        it('should fail when on movieId is provided', () => {
+        it('should fail on empty movieId', () => {
             expect(() => logic.toggleFavMovie(data.id, data.token, '')).toThrowError('movie id is empty or blank')
         })
 
