@@ -10,7 +10,7 @@ function Login(props){
         <div className = "form">
             <h1>Login</h1>
             <form
-                className = "form__login"
+                className = "form__landing form--login"
                 
                 onSubmit={event => {
                     event.preventDefault()
@@ -20,13 +20,13 @@ function Login(props){
                     onLogin(username , password)
             }}>
 
-                <label htmlFor = "username">Email
+                <label htmlFor = "username">Email</label>
                     <input type="email" name="username" id="username" />
-                </label>
+                
 
-                <label htmlFor = "password">Password
+                <label htmlFor = "password">Password</label>
                     <input type="password" name="password" id="password" />
-                </label>
+                
 
                 <button className = "btn btn__submit">Login</button>
             </form>
