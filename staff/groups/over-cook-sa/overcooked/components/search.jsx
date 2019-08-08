@@ -1,6 +1,6 @@
 function Search(props) {
  
-    return <form onSubmit = {event =>{
+    return <form className='search' onSubmit = {event =>{
         event.preventDefault()
         const { target: { query: { value: query }, combo: { value: combo } } } = event
         if(combo === '1') props.onSearchName(query)

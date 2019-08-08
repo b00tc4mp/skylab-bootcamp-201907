@@ -1,14 +1,14 @@
 function RecipeDetails({ meal: { idMeal, strMeal, strInstructions, strYoutube, strMealThumb, favorite }, onBack, onToggle }) {
-    return <>
+    return <div className='wrapper'>
         <h3>{strMeal}</h3> 
         <FavButton active={favorite} onToggle={() => onToggle(idMeal)} />
-        <img src={strMealThumb}/>
-        <p>{strInstructions}</p>
-        <a href={strYoutube} target="_blank" >VIDEO</a>
+        <img className='img'src={strMealThumb}/>
+        <p className='descText'>{strInstructions}</p>
+        <a className='btnGo' href={strYoutube} target="_blank" >VIDEO</a>
 
-        <a href="#" onClick={ event => {
+        <a className='backButton' href="#" onClick={ event => {
             event.preventDefault()
             onBack()
         }} >Go Back</a>
-    </>
+    </div>
 }

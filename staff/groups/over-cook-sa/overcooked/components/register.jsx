@@ -3,8 +3,8 @@ function Register({ onRegister, onBack, error }) {
     <>
     <nav className="landingContainer">
       <ul className="landingContainer_container">
-      <h2>Register Now</h2>
-      <form
+      <h2 className='loginTitle'>Register</h2>
+      <form className="loginForm"
         onSubmit={event => {
           event.preventDefault()
 
@@ -36,8 +36,8 @@ function Register({ onRegister, onBack, error }) {
         <label>
           Repeat password <input type="password" name="repassword" />
         </label>
-        <button>Register</button>
-        <a className="back" href="#"
+        <button className='btnGo'>Register</button>
+        <a className="backButton" href="#"
           onClick={event => {
             event.preventDefault()
             onBack()
