@@ -1,9 +1,10 @@
 { 
     const { random }= Math
     
-    fdescribe('logic - retrieve custom lists', () => {
+    describe('logic - retrieve custom lists', () => {
         let user
         let movieId = '680'
+        let listName = 'Best of 2019'
 
         beforeEach(() => {
 
@@ -13,7 +14,7 @@
                 username: 'johndoe-' + random() + '@mail.com',
                 password: '123-' + random(),
                 favorites: [],
-                lists: []
+                lists: [{name: listName, movies: [movieId]}]
             }
 
             return call('https://skylabcoders.herokuapp.com/api/user', 'post', { 'content-type': 'application/json' }, user)
@@ -30,7 +31,7 @@
             })
 
         it('should succeed on correct data', () => {
-            return logic.createList(data.id, data.token, listName)
+            return logic.retrieveLists(data.id, data.token, movieId)
                 .then(lists => {
 
                     /* We need to retrieve user to check list was added to users' lists */
@@ -42,7 +43,10 @@
                             expect(retrievedUser.id).toBe(data.id)
                             expect(retrievedUser.lists instanceof Array).toBeTruthy()
                             expect(retrievedUser.lists.length).toBe(1)
-                            expect(retrievedUser.lists[0].name).toBe(listName)
+                            expect(retrievedUser.lists[0].name).toBe('Best of 2019')
+                            expect(retrievedUser.lists[0].movies).toBeDefined()
+                            expect(retrievedUser.lists[0].movies[0]).toBe('680')
+
                         })
                     })
             })
@@ -50,58 +54,57 @@
 
         /* Undefined */
         it('should fail when userId is not provided', () => {
-            expect(() => logic.createList(undefined, data.token, listName)).toThrowError('id with value undefined is not a string')
+            expect(() => logic.retrieveLists(undefined, data.token, movieId)).toThrowError('id with value undefined is not a string')
         })
 
         it('should fail when userToken is not provided', () => {
-            expect(() => logic.createList(data.id, undefined, listName)).toThrowError('token with value undefined is not a string')
+            expect(() => logic.retrieveLists(data.id, undefined, movieId)).toThrowError('token with value undefined is not a string')
         })
 
         it('should fail when listName is not provided', () => {
-            expect(() => logic.createList(data.id, data.token, undefined)).toThrowError('list name with value undefined is not a string')
+            expect(() => logic.retrieveLists(data.id, data.token, undefined)).toThrowError('movie id with value undefined is not a string')
         })
 
         /* Wrong credentials */
         it('should fail on incorrect userId', () => {
-            return logic.createList('aaaaa', data.token, listName)
+            return logic.retrieveLists('aaaaa', data.token, movieId)
                 .catch(error => expect(error).toBeDefined())
         })
 
         it('should fail on incorrect userToken', () => {
-            return logic.createList(data.id, 'bbbbb', listName)
+            return logic.retrieveLists(data.id, 'bbbbb', movieId)
                 .catch(error => expect(error).toBeDefined())
         })
 
         
         /* Empty parameters */
         it('should fail when userId is not provided', () => {
-            expect(() => logic.createList('', data.token, listName)).toThrowError('id is empty or blank')
+            expect(() => logic.retrieveLists('', data.token, movieId)).toThrowError('id is empty or blank')
         })
 
         it('should fail when userToken is not provided', () => {
-            expect(() => logic.createList(data.id, '', listName)).toThrowError('token is empty or blank')
+            expect(() => logic.retrieveLists(data.id, '', movieId)).toThrowError('token is empty or blank')
         })
 
         it('should fail when listName is not provided', () => {
-            expect(() => logic.createList(data.id, data.token, '')).toThrowError('list name is empty or blank')
+            expect(() => logic.retrieveLists(data.id, data.token, '')).toThrowError('movie id is empty or blank')
         }) 
 
         /* Wrong endpoints */
         it('should fail on incorrect user api endpoint', () => {
-            return logic.createList(data.id, data.id, listName)
+            return logic.retrieveLists(data.id, data.id, movieId)
                 .catch(error => expect(error).toBeDefined())
         })
 
 
         it('should fail on incorrect tmdb api endpoint', () => {
-            return logic.createList(data.id, data.id, listName)
+            return logic.retrieveLists(data.id, data.id, movieId)
                 .catch(error => expect(error).toBeDefined())
         })
 
 
-        describe('when user has already custom lists', () => {
+        describe('when user does not have custom lists', () => {
           let user
-          let listName = 'Top 10 All Time'
 
           beforeEach(() => {
 
@@ -111,7 +114,7 @@
                   username: 'johndoe-' + random() + '@mail.com',
                   password: '123-' + random(),
                   favorites: [],
-                  lists: [{name: 'Best of 2019', movies: []}]
+                  lists: []
               }
 
               return call('https://skylabcoders.herokuapp.com/api/user', 'post', { 'content-type': 'application/json' }, user)
@@ -125,27 +128,26 @@
                       if (response.status === 'KO') throw new Error(response.error)
                       data = response.data
                   })
-          })
-
-          it('should add new list to user\'s list on correct data',  () => {
-              return logic.createList(data.id, data.token, listName)
-                  .then(() => {
-                      return call(`https://skylabcoders.herokuapp.com/api/user/${data.id}`, 'get',
-                      { 'authorization': `bearer ${data.token}` },
-                      undefined)
-                          .then(response => {
-                              const user = response.data
-                              expect(user.id).toBe(data.id)
-                              expect(user.lists instanceof Array).toBeTruthy()
-                              expect(user.lists.length).toBe(2)
-                              expect(user.lists[0].name).toBe('Best of 2019')
-                              expect(user.lists[0].movies.length).toBe(0)
-                              expect(user.lists[1].name).toBe('Top 10 All Time')
-                              expect(user.lists[1].movies.length).toBe(0)
-                      })
-                  })
             })
 
+
+            it('should succeed on correct data', () => {
+                return logic.retrieveLists(data.id, data.token, movieId)
+                    .then(lists => {
+
+                    /* We need to retrieve user to check list was added to users' lists */
+                    return call(`https://skylabcoders.herokuapp.com/api/user/${data.id}`, 'get',
+                    { 'authorization': `bearer ${data.token}` },
+                    undefined)
+                        .then(response => {
+                            const retrievedUser = response.data
+                            expect(retrievedUser.id).toBe(data.id)
+                            expect(retrievedUser.lists instanceof Array).toBeTruthy()
+                            expect(retrievedUser.lists.length).toBe(0)
+
+                        })
+                    })
+                })
         })
     })
 }
