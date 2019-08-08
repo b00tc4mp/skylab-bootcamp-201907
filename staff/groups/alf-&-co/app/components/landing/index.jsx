@@ -5,7 +5,8 @@ class Landing extends Component {
         super()
 
 
-        this.state = { view: 'collections', error: undefined,  search: false, query: undefined, movieId: undefined, collection: undefined, movies: [], movie: undefined, error: undefined, user: undefined, favs: [], lists: undefined, showModal: undefined}
+
+        this.state = { view: 'collections', search: true, query: undefined, movieId: undefined, collection: undefined, movies: [], movie: undefined, error: undefined, user: undefined, favs: [], lists: undefined}
 
         this.handleGoToFavorites = this.handleGoToFavorites.bind(this)
         this.handleGoToCollections = this.handleGoToCollections.bind(this)
@@ -27,9 +28,7 @@ class Landing extends Component {
         this.handleRetrieveLists = this.handleRetrieveLists.bind(this)
         this.handleDisplayListModal = this.handleDisplayListModal.bind(this)
         this.handleToggleMovieFromList = this.handleToggleMovieFromList.bind(this)
-
         this.handleGoToMenuCollections = this.handleGoToMenuCollections.bind(this)
-
         this.handleGoToHome = this.handleGoToHome.bind(this)
 
            
@@ -320,8 +319,8 @@ handleGoToHome(event){
                 </nav>
             </header>
             <main>
-               
-                {/* Search state is false by default. It's only displayed when clicked on search button */}
+
+                {/* Search state is true by default. */}
                 {search && <Search onSearch={handleSearch}></Search>}
 
                 {/* Default view on landing <main>. Displays collections of movies. */}
