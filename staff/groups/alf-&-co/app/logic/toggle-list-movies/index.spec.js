@@ -1,7 +1,7 @@
 { 
     const { random }= Math
     
-    fdescribe('logic - toggle movies from custom lists', () => {
+    describe('logic - toggle movies from custom lists', () => {
         let user
         let movieId = '680'
         let listName = 'Best of 2019'
