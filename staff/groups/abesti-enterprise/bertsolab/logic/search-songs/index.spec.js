@@ -1,7 +1,7 @@
 {
     const { random } = Math
 
-    describe('logic - search lyrics', () => {
+    describe('logic - search songs', () => {
         let user
 
         beforeEach(() => {
@@ -94,7 +94,7 @@
 
         
 
-        fdescribe('when user already has favorite songs', () => {
+        describe('when user already has favorite songs', () => {
             let credentials
 
             beforeEach(() => {
