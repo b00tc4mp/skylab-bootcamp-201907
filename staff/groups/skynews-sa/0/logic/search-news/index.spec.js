@@ -30,6 +30,13 @@
   )
     it('should wrong on empty url image', () =>
       logic.searchNews('business', 'gb')
-      .then((res) => expect(res.findIndex(element => element.urlToImage=='' || element.urlToImage== undefined || element.urlToImage== null)).toBe(-1)))
+      .then((res) => expect(res.findIndex(element => element.urlToImage=='' || element.urlToImage== undefined || element.urlToImage== null)).toBe(-1))
+  )
+
+  it('should fail on wrong category', () => 
+  logic.searchNews('jhfjh', "gasdasf")
+  .then((res)=>expect(res).toBeUndefined())
+  .catch(error => { expect(error).toBeDefined() })
+  )
   })
 }
