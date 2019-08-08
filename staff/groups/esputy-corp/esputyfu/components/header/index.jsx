@@ -23,7 +23,10 @@ function Header(props) {
                      <nav>
                      <ul>
                          <li>
-                             <a className='header__a' href="#">Favoritos</a>
+                             <a className='header__a' href="" onClick={event => {
+                                 event.preventDefault()
+                                 props.onFavorites()
+                             }}>Favoritos</a>
                          </li>
                      </ul>
                  </nav>}

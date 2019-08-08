@@ -9,6 +9,7 @@ class Landing extends React.Component {
         this.handleRegister = this.handleRegister.bind(this)
         this.handleRetrieveTrack = this.handleRetrieveTrack.bind(this)
         this.handleToggleFavFromTrackDetail = this.handleToggleFavFromTrackDetail.bind(this)
+        this.handleToggleFavFromTrackItem = this.handleToggleFavFromTrackItem.bind(this)
 
     }
 
@@ -46,6 +47,20 @@ class Landing extends React.Component {
             .catch(message => console.error(message))
     }
 
+    handleToggleFavFromTrackItem(trackId) {
+        let id, token
+
+        this.props.credentials && (id = this.props.credentials.id, token = this.props.credentials.token)
+
+        if (this.props.credentials !== undefined) {
+            logic.toggleFavTrack(id, token, trackId)
+                .then(() => this.handleSearch(this.state.search))
+                .catch(message => console.error(message))
+        } else {
+            this.props.onLogin()
+        }
+    }
+
     handleToggleFavFromTrackDetail(trackId) {
         let id, token
 
@@ -66,7 +81,7 @@ class Landing extends React.Component {
                 <Search onSearch={this.handleSearch} />
                 {this.state.track === undefined ?
                     <Results items={this.state.tracks} paintItem={track => {
-                        return <TrackItem track={track} onToggle={this.handleToggleFavFromTrackDetail} />
+                        return <TrackItem track={track} onToggle={this.handleToggleFavFromTrackItem} />
                     }} onItem={this.handleRetrieveTrack} /> :
                     <TrackDetail track={this.state.track} onToggle={this.handleToggleFavFromTrackDetail} />}
 
