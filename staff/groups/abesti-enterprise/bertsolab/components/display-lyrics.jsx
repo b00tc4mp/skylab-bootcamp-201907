@@ -1,5 +1,5 @@
 function DisplayLyrics({ onDisplay }) {
-    return <button onClick={event => {
+    return <button className="display-lyrics" onClick={event => {
         event.stopPropagation()
 
         onDisplay()

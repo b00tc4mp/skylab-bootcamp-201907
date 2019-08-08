@@ -81,7 +81,6 @@ class Home extends Component {
                // handlePaintLyrics 
               } = this
 
-              debugger
 
         return <>
            

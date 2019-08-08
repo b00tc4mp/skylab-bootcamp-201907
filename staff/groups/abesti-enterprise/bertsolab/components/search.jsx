@@ -1,15 +1,15 @@
 function Search(props) {
-    return <form onSubmit={event => {
+    return <form className="form search-form" onSubmit={event => {
         event.preventDefault()
         
         const { target: { q_track: { value: q_track }, q_artist: { value: q_artist } } } = event
 
         props.onSearch(q_artist, q_track)
     }}>
-        <h1>Find your favorite lyric {props.username? `, ${props.username}!` : ''}</h1>
-        <input type="text" name="q_artist" placeholder="write the performer" />
-        <input type="text" name="q_track" placeholder="write the song title" />
+        <h1 className="search-form__title" >Find your favorite lyrics {props.username? `, ${props.username}!` : ''}</h1>
+        <input className="search-form__query-field" type="text" name="q_artist" placeholder="Who's the performer?" />
+        <input className="search-form__query-field" type="text" name="q_track" placeholder="What's the song title?" />
 
-        <button>🔍</button>
+        <button className="search-form__button">🔍</button>
     </form>
 }
