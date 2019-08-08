@@ -59,7 +59,7 @@
                         expect(track).toBeDefined()
                         expect(track.nameTrack).toBe('Wonderwall - Remastered')
                         expect(track instanceof Object).toBeTruthy()
-                        expect(Object.keys(track).length).toBe(12)
+                        expect(Object.keys(track).length).toBe(13)
                     })
                 })
 
@@ -69,7 +69,7 @@
                         expect(track).toBeDefined()
                         expect(track.nameTrack).toBe('I Need My Girl')
                         expect(track instanceof Object).toBeTruthy()
-                        expect(Object.keys(track).length).toBe(12)
+                        expect(Object.keys(track).length).toBe(13)
                     })
                 })
             })
