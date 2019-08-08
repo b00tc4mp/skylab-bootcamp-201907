@@ -5,7 +5,7 @@ logic.retrieveLists = function(userId, userToken, movieId, expression) {
     validate.string(userId, 'id')
     validate.string(userToken, 'token')
 
-    debugger
+    
     /* Call retrieve user endpoint to extract their favorites */
     return call(`${AUTH_ENDPOINT}${userId}`, 'get', {'authorization': `bearer ${userToken}`}, undefined)
         .then(response => {

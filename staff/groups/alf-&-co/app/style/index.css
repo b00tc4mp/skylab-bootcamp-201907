@@ -10,17 +10,6 @@
   color: #31997c;
 }
 
-.mosaicPanel {
-  display: grid;
-  grid-template-rows: repeat(20, 1fr);
-  grid-gap: 1px;
-  padding-left: 3px;
-}
-
-.mosaicList {
-  grid-gap: 5px;
-}
-
 .mosaic {
   width: 97%;
   height: 93%;
@@ -33,14 +22,14 @@
   justify-content: space-around;
 }
 
-.button, .feedback--error, .feedback--success {
+.mosaicInfo__date, .mosaicInfo__title, .button, .feedback--error, .feedback--success {
   font-size: 0.8rem;
   text-decoration: none;
   font-weight: 200;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 
-.registered-name, .container_image p, form input, form, .big-letter, .menuToggle a, .search-bar {
+.registered-name, .mosaicInfo__vote, .container_image p, form input, form, .big-letter, .menuToggle a, .search-bar {
   font-size: 1rem;
   text-decoration: none;
   font-weight: 200;
@@ -90,6 +79,7 @@ main {
   text-decoration: none;
   font-weight: 500;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  z-index: 5;
 }
 
 .icons-header {
@@ -189,8 +179,11 @@ main {
   position: relative;
   top: 32px;
   left: 23px;
+  width: 40px;
+  margin: 1px;
   -webkit-user-select: none;
   user-select: none;
+  z-index: 6;
 }
 .menuToggle a {
   text-decoration: none;
@@ -374,6 +367,109 @@ form textareatextarea:focus {
   align-items: center;
   width: 100%;
   bottom: 30px;
+}
+
+.mosaicPanel {
+  width: 95%;
+  display: flex;
+  align-items: center;
+  margin: 10px auto;
+  position: relative;
+  text-align: center;
+  flex-direction: column;
+}
+
+.mosaicList {
+  width: 100%;
+  position: relative;
+  align-items: center;
+  margin: 5px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.mosaicImage {
+  width: 100%;
+  position: relative;
+  align-items: center;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.mosaicImage__image {
+  width: 100%;
+  opacity: 0.9;
+}
+.mosaicImage__background {
+  background-color: #000000;
+  opacity: 0.5;
+  width: 100%;
+  height: 60px;
+  z-index: 1;
+  position: absolute;
+  bottom: 0;
+}
+
+.mosaicInfo {
+  width: 100%;
+  height: 50px;
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+  text-align: left;
+  left: 10px;
+  bottom: 10px;
+}
+.mosaicInfo__title {
+  color: #f7f7f7;
+  font-weight: 800;
+  margin-left: 50px;
+  margin-top: 10px;
+  position: absolute;
+}
+.mosaicInfo__vote {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  color: #00ffa6;
+  font-weight: 500;
+  background-color: #000000;
+  padding: 5px;
+  border: 0.2rem solid #000000;
+  border-radius: 4px;
+  left: 5px;
+  bottom: 0px;
+  position: absolute;
+}
+.mosaicInfo__date {
+  color: #f7f7f7;
+  opacity: 0.8;
+  font-weight: 500;
+  left: 50px;
+  top: 30px;
+  position: absolute;
+}
+.mosaicInfo__fav {
+  color: #f7f7f7;
+  font-size: 1.5rem;
+  font-weight: 500;
+  right: 25px;
+  top: 13px;
+  position: absolute;
+}
+.mosaicInfo__list {
+  visibility: visible;
+  font-size: 1rem;
+  font-weight: 200;
+  height: 1px;
+  opacity: 0.8;
+  top: 17px;
+  right: 55px;
+  position: absolute;
+}
+
+.fas {
+  color: #00ffa6;
 }
 
 .panel--foot {
