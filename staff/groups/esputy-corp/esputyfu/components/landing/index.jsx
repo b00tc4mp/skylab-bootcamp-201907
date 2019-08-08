@@ -2,7 +2,7 @@ class Landing extends React.Component {
     constructor() {
         super()
 
-        this.state = { search: undefined, tracks: [], track: undefined }
+        this.state = { search: undefined, tracks: [], track: undefined, favs: [] }
 
         this.handleSearch = this.handleSearch.bind(this)
         this.handleLogin = this.handleLogin.bind(this)
@@ -10,6 +10,7 @@ class Landing extends React.Component {
         this.handleRetrieveTrack = this.handleRetrieveTrack.bind(this)
         this.handleToggleFavFromTrackDetail = this.handleToggleFavFromTrackDetail.bind(this)
         this.handleToggleFavFromTrackItem = this.handleToggleFavFromTrackItem.bind(this)
+        this.handleToggleFavFromFavDetail = this.handleToggleFavFromFavDetail.bind(this)
 
     }
 
@@ -75,15 +76,34 @@ class Landing extends React.Component {
         }
     }
 
+    handleToggleFavFromFavDetail(trackId) {
+        let id, token
+
+        this.props.credentials && (id = this.props.credentials.id, token = this.props.credentials.token)
+
+        logic.toggleFavTrack(id, token, trackId)
+                .then(() => this.props.backFav())
+                .catch(message => console.error(message))
+    }
+
     render() {
         return <>
             <main>
-                <Search onSearch={this.handleSearch} />
-                {this.state.track === undefined ?
-                    <Results items={this.state.tracks} paintItem={track => {
-                        return <TrackItem track={track} onToggle={this.handleToggleFavFromTrackItem} />
-                    }} onItem={this.handleRetrieveTrack} /> :
-                    <TrackDetail track={this.state.track} onToggle={this.handleToggleFavFromTrackDetail} />}
+                {this.props.onFavorites && <>
+                    <h3>Favoritos</h3>
+                    <Results items={this.props.onFavorites} paintItem={track => {
+                        return <TrackDetail track={track} onToggle={this.handleToggleFavFromFavDetail} />
+                    }} />
+                    {this.props.onFavorites.length == 0 && <p>No tienes favoritos</p>}
+                </>}
+                {!this.props.onFavorites && <>
+                    <Search onSearch={this.handleSearch} />
+                    {this.state.track === undefined ?
+                        <Results items={this.state.tracks} paintItem={track => {
+                            return <TrackItem track={track} onToggle={this.handleToggleFavFromTrackItem} />
+                        }} onItem={this.handleRetrieveTrack} /> :
+                        <TrackDetail track={this.state.track} onToggle={this.handleToggleFavFromTrackDetail} />}
+                </>}
 
             </main>
         </>
