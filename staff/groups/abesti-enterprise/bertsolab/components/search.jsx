@@ -6,10 +6,10 @@ function Search(props) {
 
         props.onSearch(q_artist, q_track)
     }}>
-        <h1 className="search-form__title" >Find your favorite lyrics {props.username? `, ${props.username}!` : ''}</h1>
-        <input className="search-form__query-field" type="text" name="q_artist" placeholder="Who's the performer?" />
-        <input className="search-form__query-field" type="text" name="q_track" placeholder="What's the song title?" />
+        <h1 className="search-form__title form__title" >Find your favorite lyrics {props.username? `, ${props.username}!` : ''}</h1>
+        <input className="search-form__query-field form__field" type="text" name="q_artist" placeholder="Who's the performer?" />
+        <input className="search-form__query-field form__field" type="text" name="q_track" placeholder="What's the song title?" />
 
-        <button className="search-form__button">🔍</button>
+        <button className="search-form__button form_button">🔍</button>
     </form>
 }

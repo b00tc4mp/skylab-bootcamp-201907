@@ -3,29 +3,47 @@
   padding: 0;
   margin: 0;
   font-family: "Red Hat Display", sans-serif;
-  background-color: f4f4f4;
+  box-sizing: border-box;
+}
+
+.header {
+  background-image: linear-gradient(to bottom right, black, purple);
+  background-repeat: no-repeat;
 }
 
 body {
   width: 100vw;
-  background-color: f4f4f4;
+  background-color: #0a0a0a;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  background-color: red;
+  background-color: plum;
+  border: 0.1rem solid purple;
+  border-radius: 0.1rem;
+}
+.form__title {
+  padding: 1rem;
+  font-size: 0.8;
+}
+.form__field {
+  font-size: 1.5rem;
+}
+.form__button {
+  margin: 1rem;
 }
 
 .header__logo--image {
-  width: 40%;
+  width: 60%;
 }
 
 .footer {
+  background-image: linear-gradient(to bottom, #0a0a0a, purple);
+  background-repeat: no-repeat;
   position: fixed;
   width: 100%;
   height: 5%;
-  background-color: #6700a3;
   text-align: center;
   color: white;
   bottom: 0;
@@ -54,21 +72,24 @@ body {
 .user-menu__auth-option-link {
   display: block;
   padding: 20px 20px;
-  border-right: 1px solid #f4f4f4;
+  border-right: 1px solid purple;
   text-decoration: none;
-  color: #000;
+  color: #f4f4f4;
 }
 
 .user-menu__auth-option-link:hover,
 .header .hamburguer-menu__button:hover {
-  background-color: #f4f4f4;
+  background-color: rgba(96, 96, 96, 0.4);
+  color: #f4f4f4;
+}
+
+.header__logo {
+  padding: 20px;
 }
 
 .header .header__logo {
   display: block;
   float: left;
-  font-size: 2em;
-  padding: 10px 20px;
   text-decoration: none;
 }
 
@@ -89,7 +110,7 @@ body {
 }
 
 .header .hamburguer-menu__icon .hamburguer-menu__navicon {
-  background: #333;
+  background: #f4f4f4;
   display: block;
   height: 2px;
   position: relative;
@@ -99,7 +120,7 @@ body {
 
 .header .hamburguer-menu__icon .hamburguer-menu__navicon:before,
 .header .hamburguer-menu__icon .hamburguer-menu__navicon:after {
-  background: #333;
+  background: #f4f4f4;
   content: "";
   display: block;
   height: 100%;
@@ -145,7 +166,7 @@ body {
 /* 48em = 768px */
 @media (min-width: 48em) {
   .header__logo--image {
-    width: 70%;
+    width: 100%;
   }
 
   .user-menu__auth-option {
