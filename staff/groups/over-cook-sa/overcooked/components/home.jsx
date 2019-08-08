@@ -12,6 +12,7 @@ class Home extends Component {
         this.handleOnMeal = this.handleOnMeal.bind(this)
         this.handleSearchCat = this.handleSearchCat.bind(this)
         this.handleGoToCategories = this.handleGoToCategories.bind(this)
+        this.handleSearchIngredient = this.handleSearchIngredient.bind(this)
     }
 
     handleLogout(){
@@ -20,22 +21,35 @@ class Home extends Component {
 
     handleSearch(query) {
         const { props: { credentials } } = this
+        this.setState({ meal : undefined})
 
         let id = credentials.id
         let token = credentials.token
 
         logic.searchByName(id, token, query)
-        .then(meals =>  this.setState( { meals, query}))
+        .then(meals =>  this.setState( { meals, query, cats: false}))
         .catch(({ message }) => this.setState({error: message}))
     }
 
     handleSearchCat(query) {
         const { props: { credentials } } = this
-
+     
         let id = credentials.id
         let token = credentials.token
 
         logic.showCategory(id, token, query)
+        .then(meals =>  this.setState( { meals, query, cats: false}))
+        .catch(({ message }) => this.setState({error: message}))
+    }
+
+    handleSearchIngredient(query) {
+        const { props: { credentials } } = this
+        this.setState({ meal : undefined})
+
+        let id = credentials.id
+        let token = credentials.token
+
+        logic.searchIngredient(id, token, query)
         .then(meals =>  this.setState( { meals, query, cats: false}))
         .catch(({ message }) => this.setState({error: message}))
     }
@@ -64,12 +78,12 @@ class Home extends Component {
 
 render () {
 
-    const{ state: { meals, meal, cats }, handleLogout, handleSearch, handleGoBack, handleToggle, handleOnMeal, handleSearchCat, handleGoToCategories } = this
+    const{ state: { meals, meal, cats }, handleLogout, handleSearch, handleGoBack, handleToggle, handleOnMeal, handleSearchCat, handleGoToCategories, handleSearchIngredient } = this
 
     return ( <>
     <header>
         <SmallHeader onLogout={handleLogout} goToCategories={handleGoToCategories} user={this.props.user} />
-        <Search onSearchName={handleSearch} />
+        <Search onSearchName={handleSearch} onSearchIngredient={handleSearchIngredient} />
     
         
     </header>
@@ -87,4 +101,3 @@ render () {
     
   }
 }
-
