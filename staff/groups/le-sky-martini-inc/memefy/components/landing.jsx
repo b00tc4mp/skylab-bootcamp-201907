@@ -66,10 +66,9 @@ class Landing extends Component {
 
     componentWillReceiveProps(props) {
         const { favs } = props
-
         !favs && this.setState({favs: []})
     }
-
+  
     handleSearch(query) {
         const { props: { credentials } } = this
 
@@ -284,11 +283,8 @@ class Landing extends Component {
 
         const { state : { query }} = this
         query && this.handleSearch(query)
-
         this.setState({ view: 'search' })
     }
-
-
 
     handleToggleFavGifFromFavorites(gifId) {
         const { props: { onRegisterOrLogin, credentials }, handleFavorites } = this

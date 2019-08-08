@@ -128,38 +128,127 @@
   background: deeppink;
 }
 
+.login {
+  background-color: white;
+  font-family: "Cousine", sans-serif;
+  border-radius: 0.5em;
+}
 .login__form {
-  padding: 5px;
+  padding: 1px;
+}
+.login__title {
+  color: #502666;
 }
 .login__item {
   list-style: none;
-  margin-top: 2em;
+  margin-top: 0.5em;
+}
+.login__input {
+  border: 1px solid lightgray;
+}
+.login__button {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  border-radius: 0.2em;
+  background: linear-gradient(-45deg, #FF5128, #9422E8, #1EC0FF);
+  background-size: 400% 400%;
+  animation: Gradient 15s ease infinite;
+  padding: 10px;
+  font-size: 22px;
+}
+@keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 .login__back:hover {
   color: deeppink;
 }
 
+.register {
+  background-color: white;
+  font-family: "Cousine", sans-serif;
+  border-radius: 0.5em;
+}
 .register__form {
-  padding: 5px;
+  padding: 1px;
+}
+.register__title {
+  color: #502666;
 }
 .register__item {
   list-style: none;
-  margin-top: 2em;
+  margin-top: 0.5em;
+}
+.register__input {
+  border: 1px solid lightgray;
 }
 .register__button {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  border-radius: 0.2em;
+  background: linear-gradient(-45deg, #FF5128, #9422E8, #1EC0FF);
+  background-size: 400% 400%;
+  animation: Gradient 15s ease infinite;
+  padding: 10px;
   font-size: 22px;
+}
+@keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 .register__back:hover {
   color: deeppink;
 }
 
+.register-success {
+  font-family: "Cousine", sans-serif;
+  border-radius: 0.5em;
+}
+.register-success__copy {
+  color: white;
+}
+.register-success__login {
+  background-color: white;
+  padding: 0.5em;
+  border-radius: 0.2em;
+  z-index: 1em;
+}
 .register-success__login:hover {
   color: deeppink;
 }
 
+.register-or-login {
+  font-family: "Cousine", sans-serif;
+  border-radius: 0.5em;
+}
+.register-or-login__list {
+  padding-top: 3em;
+  padding-bottom: 5em;
+}
 .register-or-login__item {
   list-style: none;
   margin-top: 2em;
+}
+.register-or-login__title {
+  color: white;
 }
 .register-or-login__register, .register-or-login__login {
   background-color: black;

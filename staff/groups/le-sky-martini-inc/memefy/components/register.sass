@@ -1,23 +1,48 @@
 .register
     @extend %main-content-box
+    background-color: white
+    font-family: "Cousine", sans-serif
+    border-radius: 0.5em 
 
     &__form
-        padding: 5px
+        padding: 1px
+    
+    &__title
+        color:  #502666
+        
 
     &__item
         list-style: none
-        margin-top: 2em
+        margin-top: 0.5em
 
     &__input
         @extend %text-input
 
-    &__button
-        @extend %button
+        border: 1px solid lightgray
 
+    &__button
+        margin-top: 1em
+        margin-bottom: 1em
+        padding-left: 0.5em
+        padding-right: 0.5em
+        border-radius: 0.2em
+        @extend %button
+        background: linear-gradient(-45deg,#FF5128, #9422E8, #1EC0FF)
+        background-size: 400% 400%
+        animation: Gradient 15s ease infinite
+        padding: 10px
         font-size: 22px
+        @keyframes Gradient
+            0%
+                background-position: 0% 50%
+            50% 
+                background-position: 100% 50%
+            100% 
+                background-position: 0% 50%
 
     &__back
         @extend %link
+        
 
     &__back:hover
         color: $hover-text-color
