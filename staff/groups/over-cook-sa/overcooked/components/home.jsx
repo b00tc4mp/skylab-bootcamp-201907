@@ -16,6 +16,7 @@ class Home extends Component {
         this.handleToggleRecipeList = this.handleToggleRecipeList.bind(this)
         this.handleFavorites = this. handleFavorites.bind(this)
         this.handleRetrieveMeal= this.handleRetrieveMeal.bind(this)
+        this.handleToggleFavorite = this.handleToggleFavorite.bind(this)
     }
 
     handleLogout(){
@@ -56,6 +57,7 @@ class Home extends Component {
             if(query) handleSearch(query)
             if(searchCategory) handleSearchCat(searchCategory)
             if(searchIngredient) handleSearchIngredient(searchIngredient)
+
         })
         .catch(({ message }) => this.setState({ error: message}))
     }
@@ -87,11 +89,12 @@ class Home extends Component {
 
     handleGoBack(){
 
-        const { handleSearch, handleSearchCat, handleSearchIngredient, state: { query, searchIngredient, searchCategory } } = this
+        const { handleSearch, handleSearchCat, handleFavorites, handleSearchIngredient, state: { query, searchIngredient, searchCategory } } = this
 
             if(query) handleSearch(query)
             if(searchCategory) handleSearchCat(searchCategory)
             if(searchIngredient) handleSearchIngredient(searchIngredient)
+            
        
         this.setState({ meal: undefined })
     }
@@ -111,14 +114,15 @@ class Home extends Component {
     }
 
     handleFavorites() {
-        const {props: { credentials } } = this
-
+        const {props: { credentials }} = this
+  
         let id = credentials.id
         let token = credentials.token
 
         logic.retrieveFavMeal(id, token)
-            .then(favs => this.setState({ favs }))
-            .catch(({ message }) => this.setState({ error: message }))
+            .then(favs => {this.setState({ cats:false, favs })})
+           
+            .catch(({ message }) => this.setState({ error: message }))     
     }
 
     handleToggleFavorite(idMeal){
@@ -126,6 +130,7 @@ class Home extends Component {
 
         let id = credentials.id
         let token = credentials.token
+
         logic.toggleFavMeal(id, token, idMeal)
             .then(()=> this.handleFavorites())
             .catch(({ message }) => this.setState({ error: message }))
@@ -142,15 +147,14 @@ class Home extends Component {
             .catch(({ message }) => this.setState({ error: message }))
     }
 
-
  
 render () {
 
-    const{ state: { meals, meal, cats}, handleLogout, handleSearch, handleGoBack, handleOnMeal, handleSearchCat, handleGoToCategories, handleSearchIngredient, handleToggleRecipeDetail, handleToggleRecipeList, handleFavorites} = this
+    const{ state: { meals, meal, cats , favs}, showCat, handleLogout, handleSearch, handleGoBack, handleOnMeal, handleSearchCat, handleGoToCategories, handleSearchIngredient, handleToggleRecipeDetail, handleToggleRecipeList,handleToggleFavorite, handleFavorites} = this
 
     return ( <>
     <header>
-        <SmallHeader onLogout={handleLogout} goToCategories={handleGoToCategories} user={this.props.user} handleFavorites={handleFavorites}  />
+        <SmallHeader onLogout={handleLogout} goToCategories={handleGoToCategories} showCat={showCat} user={this.props.user} handleFavorites={handleFavorites}  />
         <Search onSearchName={handleSearch} onSearchIngredient={handleSearchIngredient}/>
     
         
@@ -158,9 +162,12 @@ render () {
     <main>
         
         <section>     
-            {cats && <Categories onSearchCat={handleSearchCat} /> } 
+            { cats && <Categories onSearchCat={handleSearchCat} /> }
+
             {!meal ? <Results meals={meals} onMeal={handleOnMeal} goCat={handleGoToCategories} paintMeal = { meal => {return <RecipeItem2 meal={meal} onToggle={handleToggleRecipeList} />}}  />
             : <RecipeDetails meal={meal} onBack={handleGoBack} onToggle={handleToggleRecipeDetail} />}
+           
+            <Favorites favs={favs} onMeal={handleOnMeal} goCat={handleGoToCategories} paintMeal = { meal => {return <RecipeItem2 meal={meal} onToggle={handleToggleFavorite} />}}  />
         </section>
 
        
