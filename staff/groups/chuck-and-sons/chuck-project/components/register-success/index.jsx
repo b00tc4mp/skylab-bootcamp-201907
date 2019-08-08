@@ -4,21 +4,23 @@ function RegisterSuccess(props){
     
     return <>
         <h1>Register success</h1>
-        <p>Your user has been registered.
+        <div className = "reigster-succes">
+            <p classname = "register-succes__text">Your user has been registered.
 
-            <a href='' className = "btn btn__login" onClick = { event => {
-                    event.preventDefault()
-                    onGoToLogin()
-                }
-            }> Login </a>
-        
-            or
-        
-            <a href='' className = "btn btn__search" onClick = { event => {
-                    event.preventDefault()
-                    onGoToLanding()
-                }
-            }> Search</a>
-        </p>
+                <a href='' className = "btn btn__login" onClick = { event => {
+                        event.preventDefault()
+                        onGoToLogin()
+                    }
+                }> Login </a>
+            
+                or
+            
+                <a href='' className = "btn btn__search" onClick = { event => {
+                        event.preventDefault()
+                        onGoToLanding()
+                    }
+                }> Search</a>
+            </p>
+        <div>
     </>
 }
