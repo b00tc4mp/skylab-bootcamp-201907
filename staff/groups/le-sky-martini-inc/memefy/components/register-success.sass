@@ -1,8 +1,18 @@
 .register-success
     @extend %main-content-box 
+    font-family: "Cousine", sans-serif
+    border-radius: 0.5em 
+
+    &__copy
+        color: white
 
     &__login
         @extend %link
+        background-color: white
+        padding: 0.5em
+        border-radius: 0.2em 
+        z-index: 1em
+
     
     &__login:hover
         color: $hover-text-color
