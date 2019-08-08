@@ -1,11 +1,10 @@
-logic.retrieveLists = function(userId, userToken, movieId, expression) {
+logic.retrieveLists = function(userId, userToken, movieId) {
     const AUTH_ENDPOINT = 'https://skylabcoders.herokuapp.com/api/user/'
 
     //Input Validation
     validate.string(userId, 'id')
     validate.string(userToken, 'token')
 
-    
     /* Call retrieve user endpoint to extract their favorites */
     return call(`${AUTH_ENDPOINT}${userId}`, 'get', {'authorization': `bearer ${userToken}`}, undefined)
         .then(response => {
@@ -16,10 +15,12 @@ logic.retrieveLists = function(userId, userToken, movieId, expression) {
 
             if (lists.length) {
                 lists.forEach(list => list.inList = list.movies.includes(movieId))
-                expression(lists)
+                return lists
             } else {
-                expression(lists)
+                return lists
+
             }
         })
 }
+
 
