@@ -1,5 +1,6 @@
 function Search(props) {
     return <>
+        <div class='container'>
         <form onSubmit={event => {
             event.preventDefault()
 
@@ -11,10 +12,11 @@ function Search(props) {
             props.onSearch(query)
         }}>
             <label>
-                <p>Encuentra tus canciones favoritas:</p>
-                <input type="text" name="search" placeholder="Buscar una canción" />
+                <p className='container__p'>Busca tu cancion favorita!</p>
+                <input className='container__input' type="text" name="search" placeholder="Buscar una canción" />
             </label>
-            <button>buscar</button>
+            <button className='container__button'>buscar</button>
         </form>
+        </div>
     </>
 }

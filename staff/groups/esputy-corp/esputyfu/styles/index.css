@@ -5,6 +5,38 @@
 body {
   margin: 0;
   padding: 0;
+  background-image: linear-gradient(black, #2a5234, black);
+}
+
+.container {
+  color: black;
+  border: 5px solid #6f6f6f;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  display: block;
+  font-family: "Playfair Display", serif;
+}
+.container__campName {
+  display: none;
+}
+.container__input {
+  border-radius: 10px;
+  border: 2px solid #6F6F6F;
+  background-color: white;
+  margin-top: 1rem;
+  width: 75%;
+  padding: 8px;
+}
+.container__advice {
+  display: none;
+}
+.container__button {
+  border: 2px solid #6F6F6F;
+  background-color: white;
+  border-radius: 10px;
+  width: 50%;
+  margin-top: 50px;
 }
 
 .full {
@@ -36,6 +68,7 @@ h1 {
   background-color: white;
   margin-top: 1rem;
   width: 75%;
+  padding: 8px;
 }
 .container__advice {
   display: none;
@@ -77,7 +110,7 @@ h2 {
 
 .footer {
   width: 100vw;
-  background-color: #404046;
+  background-color: black;
   bottom: 0px;
   color: white;
   text-align: center;
