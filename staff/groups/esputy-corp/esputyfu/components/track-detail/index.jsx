@@ -17,8 +17,5 @@ function TrackDetail({ track: { url, favorite, linkAlbum, nameAlbum, releaseDate
 
             onBack()
         }}>Go Back</a>}
-
-
-
     </>
 }
