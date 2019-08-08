@@ -176,13 +176,12 @@ class App extends React.Component {
         return <>
             <div className="wrapper">
                 <Header onGoToRegister={handleGoToRegister} onGoToLogin={handleGoToLogin} onLogout={handleLogout} onChangeView={view} user={user} />
-                <Search onSearch={handleSearch} />
                 {view === 'login' && <Login onGoToLanding={handleGoToLanding} onLogin={handleLogin} error={error} />}
                 {view === 'register' && <Register onGoToLanding={handleGoToLanding} onRegister={handleRegister} error={error} />}
                 {view === 'register-success' && <RegisterSuccess onGoToLanding={handleGoToLanding} onGoToLogin={handleGoToLogin} />}
 
                 {view === "landing" && <main className="main-container">
-
+                    <Search onSearch={handleSearch} />
                     {<button className="random-button" onClick={event => {
                         event.preventDefault()
                         handleRandomButton()
