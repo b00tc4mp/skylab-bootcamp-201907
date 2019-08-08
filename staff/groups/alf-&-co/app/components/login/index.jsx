@@ -17,8 +17,14 @@ function LogIn({ onLogIn, toSignUp, onClose, error, register_success }) {
                 <label><input type="text" name="username" placeholder="Enter your email" /></label>
                 <label><input type="password" name="password" placeholder="Enter your password" /></label>
             </form>
-            {error && <Feedback message={error} />}
-            {register_success && <Feedback message='Register successful' level='success' />}
+
+
+            
+
+            {error? 
+            <Feedback message={error}/> 
+            :
+            register_success && <Feedback message='Register successful' level='success' /> }
             <button type="submit" className="button" form="form1">LOG IN</button>
 
 
