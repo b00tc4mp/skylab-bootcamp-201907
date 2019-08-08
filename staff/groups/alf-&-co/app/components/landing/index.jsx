@@ -17,6 +17,7 @@ class Landing extends Component {
         this.handleAcceptError = this.handleAcceptError.bind(this)
         this.handleRetrieveMovie = this.handleRetrieveMovie.bind(this)
         this.handleToggleFavMovieFromMovieDetail = this.handleToggleFavMovieFromMovieDetail.bind(this)
+        this.handleToggleMovieFromMovieDetail = this.handleToggleMovieFromMovieDetail.bind(this)
         this.handleBackFromDetail = this.handleBackFromDetail.bind(this)
         this.handleToggleFavMovieFromMovieItem = this.handleToggleFavMovieFromMovieItem.bind(this)
         this.handleToggleFavMovieFromFavoritesSection = this.handleToggleFavMovieFromFavoritesSection.bind(this)
@@ -26,6 +27,11 @@ class Landing extends Component {
         this.handleRetrieveLists = this.handleRetrieveLists.bind(this)
         this.handleDisplayListModal = this.handleDisplayListModal.bind(this)
         this.handleToggleMovieFromList = this.handleToggleMovieFromList.bind(this)
+
+        this.handleGoToMenuCollections = this.handleGoToMenuCollections.bind(this)
+
+        this.handleGoToHome = this.handleGoToHome.bind(this)
+
            
     }
 
@@ -62,6 +68,11 @@ class Landing extends Component {
         logic.searchMovies(id, token, collection, collections)
             .then(movies => this.setState({ movies, collection, view: 'results', query: undefined }))
             .catch(error => this.setState({ error: error.message }))
+    }
+
+    handleGoToMenuCollections(){
+        event.preventDefault()
+        this.setState({view: 'collections'})
     }
 
     handleLinkToCollections() {
@@ -133,11 +144,6 @@ class Landing extends Component {
             .catch(({ message }) => this.setState({ error: message }))
     }
 
-    handleBackFromDetail() {
-        const { state: { favs, query, collections }, handleGoToFavorites, handleSearch } = this
-
-        favs ? handleGoToFavorites() : collections ? handleCollections(collections) : handleSearch(query)
-    }
 
     handleToggleFavMovieFromMovieDetail(movieId) {
         const { props: {  credentials }, handleRetrieveMovie, handleGoToLogIn } = this
@@ -150,7 +156,7 @@ class Landing extends Component {
     }
 
     handleBackFromDetail() {
-        const { state: { query, collection }, props: { credentials } } = this
+        const { state: { query, collection, favs }, props: { credentials },handleGoToFavorites, handleSearch, handleCollections } = this
         let id, token
         let collections = true
 
@@ -162,8 +168,8 @@ class Landing extends Component {
             logic.searchMovies(id, token, collection, collections)
                 .then(movies => this.setState({ movies, collection, view: 'results', query: undefined }))
                 .catch(error => this.setState({ error: error.message }))
-        /*const {state: {favs, query, collections},  handleGoToFavorites, handleSearch } = this
-        favs ? handleGoToFavorites() : collections ? handleCollections(collections) : handleSearch(query)*/
+        
+        favs ? handleGoToFavorites() : collections ? handleCollections(collections) : handleSearch(query)
     }
 
     handleToggleFavMovieFromMovieItem(movieId) {
@@ -178,7 +184,7 @@ class Landing extends Component {
 
     handleToggleFavMovieFromMovieDetail(movieId) {
         const { props : { credentials }, handleRetrieveMovie, handleGoToLogIn } = this
-
+       
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
@@ -194,17 +200,17 @@ class Landing extends Component {
         credentials && (id = credentials.id, token = credentials.token)
         
         credentials ? logic.toggleFavMovie(id, token, movieId).then(() => handleFavorites()) : handleGoToLogIn()
-
     }
 
     handleToggleMovieFromMovieDetail(movieId) {
-        const { props: {  credentials }, handleGoToLogIn } = this
-
+        const { props: { credentials }, handleGoToLogIn, handleListModal } = this
+        
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
-
+      
         credentials ? logic.toggleListModal(id, token, movieId, () => handleListModal()) : handleGoToLogIn()
+
     }
 
     
@@ -258,6 +264,11 @@ class Landing extends Component {
         credentials ? logic.toggleFromMovieList(id, token, movieId, listName, () => this.handleRetrieveLists(movieId)) : handleGoToLogIn()
     }
 
+handleGoToHome(event){
+       event.preventDefault()
+       this.setState({view: 'collections'})
+   }
+
 
     /* Render */
     render() {
@@ -266,9 +277,11 @@ class Landing extends Component {
             handleSearch, handleRetrieveMovie, handleLogOut,
             handleBackFromDetail, handleGoToSearch, handleGoToLogIn,
             handleToggleFavMovieFromMovieItem, handleToggleFavMovieFromMovieDetail, handleGoToCollections, handleLinkToCollections, handleGoToFavorites,
-            handleToggleFavMovieFromFavoritesSection, handleCreateList, handleDisplayListModal, handleToggleMovieFromList, handleToggleMovieFromMovieDetail
+            handleToggleFavMovieFromFavoritesSection, handleCreateList, handleDisplayListModal, handleToggleMovieFromList, handleToggleMovieFromMovieDetail,
+            handleGoToMenuCollections, handleGoToHome
 
         } = this
+
 
         return <>
             <header className="panel--nav">
@@ -280,12 +293,12 @@ class Landing extends Component {
                         <span></span>
                         <ul className="menu">
                             <li><a href="" onClick={handleGoToFavorites}>Favorites</a></li>
-                            <li><a href="" onClick={handleGoToCollections}>Collections</a></li>
+                            <li><a href="" onClick= {handleGoToMenuCollections} >Collections</a></li>
                             <li><a href="" onClick={handleLogOut}>Log Out</a></li>
                         </ul>
                     </div>
 
-                    <h2 className="logo">MOVIE LAB</h2>
+                    <h2 className="logo" onClick={handleGoToHome}>MOVIE LAB</h2>
 
                     <ul className="icons-header">
                         <li><a className= "search-icon"href="" onClick={handleGoToSearch}><i className="fas fa-search"></i></a></li>
@@ -313,7 +326,7 @@ class Landing extends Component {
 
                 {/* Movie detail which displays. Includes fav button and back button  */}
                 {view === 'detail' &&
-                    <MovieDetail movie={movie} onBack={handleBackFromDetail} /* onList={handleListModal} */ onToggle={handleToggleFavMovieFromMovieDetail} onToggle={handleToggleMovieFromMovieDetail} />}
+                    <MovieDetail movie={movie} onBack={handleBackFromDetail}  onToggle={handleToggleFavMovieFromMovieDetail} onToggle={handleToggleMovieFromMovieDetail} />}
 
                 {view === 'favorites' &&
                     <Favorites favs={favs} removeFav={handleToggleFavMovieFromFavoritesSection} showDetail={handleRetrieveMovie} />
