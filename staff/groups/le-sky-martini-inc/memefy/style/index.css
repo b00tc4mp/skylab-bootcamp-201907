@@ -1,16 +1,19 @@
 * {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.detail, .results, .search, .feedback, .register-or-login, .register-success, .register, .login, .landing {
-  background-color: rgba(255, 255, 255, 0.5);
-  margin: auto;
+.feedback, .register-or-login, .register-success, .register, .login, .landing {
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 5em auto auto auto;
   padding: 30px;
-  width: 70%;
+  width: 90%;
+  height: 95%;
   text-align: center;
 }
 
-.detail__back, .register-or-login__back, .register-success__login, .register__back, .login__back {
+.detail__back, .random__back, .register-or-login__back, .register-success__login, .register__back, .login__back {
   color: grey;
   text-decoration: none;
 }
@@ -26,7 +29,7 @@
 }
 
 .search__button, .register__button, .login__button {
-  background-color: black;
+  background-color: #45b39c;
   color: white;
   border: none;
   padding: 15px;
@@ -34,20 +37,39 @@
 }
 
 .body {
-  background-image: url("https://images.pexels.com/photos/988872/pexels-photo-988872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
-  background-repeat: no-repeat;
-  background-size: cover;
-  box-sizing: border-box;
-  margin: auto;
+  background: linear-gradient(-45deg, #1CFF1B, #FF5128, #9422E8, #1EC0FF);
+  background-size: 400% 400%;
+  animation: Gradient 15s ease infinite;
+  padding: 0;
   font-family: "Cousine", sans-serif;
   font-size: 1.2rem;
+}
+@keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 .body__header {
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
-  padding: 1.5em;
+  padding: 2em;
   text-align: center;
-  font-size: 3rem;
+  font-family: Bungee;
+  font-size: 2rem;
+  padding: 1em 0 3em 0;
+}
+.body__header-title1 {
+  text-decoration: none;
+  color: white;
+}
+.body__header-title2 {
+  font-size: 1.2rem;
 }
 .body__main {
   margin-top: 3em;
@@ -56,34 +78,48 @@
 .body__footer {
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
-  padding: 1.5em;
+  padding: 2em;
   text-align: center;
   width: 100%;
-  font-size: 14px;
-  margin-top: -50px;
+  font-size: 1rem;
 }
 
-.landing__menu {
+.landing {
+  padding: 0;
+}
+.landing__header {
+  position: absolute;
+  top: 5em;
+  left: 50%;
+  margin-left: -256px;
+}
+.landing__header-menu {
   list-style: none;
   display: flex;
   justify-content: space-around;
   magin: 2em;
   padding: 0;
 }
-.landing__title {
-  text-align: center;
-  padding: 25px;
-}
-.landing__register, .landing__login {
-  background-color: black;
-  color: white;
-  text-decoration: none;
+.landing__header-item {
+  background-color: white;
+  width: 10em;
+  margin: 3em;
+  border-radius: 5em;
   padding: 10px;
   font-size: 16px;
 }
-.landing__register:hover, .landing__login:hover {
-  background-color: white;
-  color: deeppink;
+.landing__header-register, .landing__header-login {
+  width: 50px;
+  color: black;
+  text-decoration: none;
+}
+.landing__header-register:hover, .landing__header-login:hover {
+  background-color: deeppink;
+  color: white;
+}
+.landing__title {
+  text-align: center;
+  padding: 25px;
 }
 
 .login__form {
@@ -134,6 +170,26 @@
   color: deeppink;
 }
 
+.random__tv-icon {
+  max-width: 20%;
+}
+.random__tv-remote {
+  max-width: 20%;
+}
+.random__title {
+  font-size: 33px;
+}
+.random__photo {
+  max-width: 80%;
+  margin: auto;
+}
+.random__back {
+  margin: 1em auto 2em auto;
+}
+.random__back:hover {
+  color: deeppink;
+}
+
 .feedback {
   margin-bottom: 2em;
   font-size: 16px;
@@ -151,10 +207,12 @@
 
 .search {
   margin: 2em auto 2em auto;
-  background-color: rgba(0, 0, 0, 0.1);
 }
 .search__label {
   display: none;
+}
+.search__input {
+  text-align: center;
 }
 .search__button {
   background-color: grey;
@@ -162,8 +220,7 @@
 }
 
 .results {
-  margin-bottom: 2em;
-  background-color: rgba(0, 0, 0, 0.1);
+  margin: 2em auto auto auto;
 }
 .results__list {
   display: grid;
@@ -204,9 +261,8 @@
 }
 
 .detail {
-  margin-bottom: 2em;
+  margin: 2em auto auto auto;
   padding: 5em;
-  background-color: rgba(0, 0, 0, 0.1);
 }
 .detail__title {
   font-size: 33px;

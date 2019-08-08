@@ -1,24 +1,36 @@
 .landing
     @extend %main-content-box
+    padding: 0
+    &__header
+        position: absolute
+        top: 5em
+        left: 50%
+        margin-left: -256px
 
-    &__menu
+    &__header-menu
         list-style: none
         display: flex
         justify-content: space-around
         magin: 2em
         padding: 0
 
+    &__header-item
+        background-color: white
+        width: 10em
+        margin: 3em
+        border-radius: 5em 
+        padding: 10px     
+        font-size: 16px
+
+    &__header-register, &__header-login
+        width: 50px
+        color: $primary-text-color
+        text-decoration: none        
+
+    &__header-register:hover, &__header-login:hover
+        background-color: deeppink
+        color: $secondary-text-color
+
     &__title
         text-align: center
         padding: 25px
-
-    &__register, &__login
-        background-color: black
-        color: $secondary-text-color
-        text-decoration: none
-        padding: 10px
-        font-size: 16px
-    
-    &__register:hover, &__login:hover
-        background-color: white
-        color: $hover-text-color

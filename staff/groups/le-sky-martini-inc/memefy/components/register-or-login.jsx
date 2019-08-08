@@ -6,13 +6,13 @@ function RegisterOrLogin({ onRegister, onLogin, onBack, error }) {
                 <a className={`register-or-login__register`} href="" onClick={event => {
                     event.preventDefault()
                     onRegister()
-                    }}>Register</a>
+                    }}><i class="fas fa-user-plus"></i>  Register</a>
             </li>
             <li className={`register-or-login__item`}>
                 <a className={`register-or-login__login`} href="" onClick={event => {
                     event.preventDefault()
                     onLogin()
-                    }}>Login</a>
+                    }}><i class="fas fa-sign-in-alt"></i>  Login</a>
             </li>
         </ul>
         {error && <Feedback message={error} />}
