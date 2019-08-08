@@ -1,6 +1,7 @@
-const random  = Math.random
+{
+    const { random }= Math
 
-describe('logic authenticate users', () =>{
+describe('logic - authenticate users', () =>{
     let user
 
     beforeEach(() => {
@@ -54,3 +55,5 @@ describe('logic authenticate users', () =>{
     })
 
 })
+
+}

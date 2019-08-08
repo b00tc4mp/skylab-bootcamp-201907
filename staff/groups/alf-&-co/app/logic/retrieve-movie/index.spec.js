@@ -1,13 +1,11 @@
 {
-    const {
-        random
-    } = Math
+    const { random } = Math
     /* Retrieve movie detail movie specs:
         a) User should be able to get movie details when click in one of the movie results.
         b) If user is logged, detail result will incorporate favorites information.
         c) Empty search will return non-filtered list of movies
     */
-    describe('logic - retrieve movie', () => {
+    fdescribe('logic - retrieve movie', () => {
         let user
         
 
@@ -47,7 +45,7 @@
                 })
         })
 
-        xit('should fail on non valid movie id', ()=>{
+        it('should fail on non valid movie id', ()=>{
             const id = 'fhsdjue'
 
             return logic.retrieveMovie(undefined, undefined, id)
@@ -55,8 +53,21 @@
             .catch(error => expect(error).toBeDefined())
   
             })
-    
-    
+        
+        it('should fail with no id', ()=>
+
+            expect (() => 
+                logic.retrieveMovie(undefined, undefined, '')
+             ).toThrowError(Error, 'movie id is empty or blank')
+        )
+        
+         
+            it('should fail with no string id', () => 
+            expect(()=>
+                logic.retrieveMovie(undefined, undefined, undefined)
+            ).toThrowError(Error, 'movie id with value undefined is not a string')
+        )
+        
 
         describe('logic - retrieve movie - user with favorites', ()=>{
             const id= "11804"
@@ -99,12 +110,27 @@
                     expect(movie.mainCast).toBeDefined()
                     expect(movie.favorite).toBeUndefined()
             }))
-            xit('should fail on non valid id', () => {
+            it('should fail on non valid id', () => {
                 const id = 'fsfesf'
                 return logic.retrieveMovie(data.id, data.token, id)
                 .then(response => expect(response).toBeUndefined())
                 .catch(error => expect(error).toBeDefined())
             })
+
+            it('should fail with emtpy id', () => 
+                expect(()=>
+                    logic.retrieveMovie(data.id, data.token, '')
+                ).toThrowError(Error, 'movie id is empty or blank')
+            )
+                   
+
+            it('should fail with no string id', () => 
+                expect(()=>
+                    logic.retrieveMovie(data.id, data.token, undefined)
+                ).toThrowError(Error, 'movie id with value undefined is not a string')
+            )
+
+            
         })
     })
    

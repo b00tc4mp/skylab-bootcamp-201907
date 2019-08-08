@@ -121,10 +121,16 @@ class Landing extends Component {
         let id, token
         credentials && (id = credentials.id, token = credentials.token)
 
-        logic.retrieveMovie(id, token, movieId)
-        .then(movie => this.setState({ movie, view: 'detail'}))
-        .catch(({message}) => this.setState({error: message}))
-        
+        try {
+
+            logic.retrieveMovie(id, token, movieId)
+            .then(movie => this.setState({ movie, view: 'detail'}))
+            .catch(({message}) => this.setState({error: message}))
+            
+        } catch({message}){
+             this.setState({error:message})
+
+        }
     }
 
     handleBackFromDetail(){

@@ -111,7 +111,7 @@
         d) Non-valid query should display message saying no results for that query
     */
 
-    fdescribe('logic - search by collections', ()=>{
+    describe('logic - search by collections', ()=>{
 
         it('should succeed on correct data', () => {
             return logic.searchMovies(undefined, undefined, '28', collections=true)

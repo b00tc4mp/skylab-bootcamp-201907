@@ -1,4 +1,5 @@
 {
+    const { random }= Math
 
     describe('logic - retrieve fav movies', () => {
         let user

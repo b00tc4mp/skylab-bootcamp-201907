@@ -1,6 +1,7 @@
-{
+{ 
+    const { random }= Math
 
-    fdescribe('logic - toggle fav movie', () => {
+    describe('logic - toggle fav movie', () => {
         let user
 
         beforeEach(() => {
@@ -44,7 +45,8 @@
                     })
             })
 
-        describe('when user has already favorites', () => {
+        
+            describe('when user has already favorites', () => {
             let user
             const movieId = '680'
 
