@@ -8,9 +8,9 @@ logic.retrieveLyrics = function (id, token, track_id){
 
         return call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'get', { 'authorization': `bearer ${token}` }, undefined)
         .then(res => {
-            if(res.status === 'KO') throw new Error (response.error)
+            if(res.status === 'KO') throw new Error (res.error)
 
-            favorites = response.data.favorites
+            favorites = res.data.favorites
 
             return call(`http://skylabcoders.herokuapp.com/proxy?url=https://api.musixmatch.com/ws/1.1/track.lyrics.get?apikey=e492562d27469098b0922d5d580837eb&track_id=${track_id}`, 'get', undefined, undefined)
             .then(res => {

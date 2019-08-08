@@ -33,7 +33,7 @@ class Home extends Component {
     componentWillReceiveProps(props) {
         const { credentials } = props
 
-        !credentials && this.setState({username: undefined})
+        !credentials && this.setState({username: undefined, fav :[], q_artist: undefined, q_track: undefined, tracks: []})
     }
 
     handleSearch(q_artist, q_track) {
@@ -42,7 +42,7 @@ class Home extends Component {
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
-debugger
+
         logic.searchSongs(id, token, q_artist, q_track)
             .then(tracks => this.setState({ tracks, q_artist, q_track }))
             .catch(({ message }) => this.setState({ error: message }))
@@ -68,11 +68,11 @@ debugger
 
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.toggleFavTrack(id, token, trackId)
+        credentials ? logic.toggleFavTrack(id, token, track_id)
             .then( () => handleSearch(q_artist, q_track))
             .catch(({ message }) => this.setState({ error: message})) 
             :
-             onLogin()
+            onLogin()
     }
 
 
@@ -90,7 +90,7 @@ debugger
                 handleCloseLyrics, handleToggleFavSong
               } = this
 
-              debugger
+        
 
         return <>
            
@@ -100,8 +100,8 @@ debugger
             
 
             <Results items={tracks} paintItem={track => {
-                    return <SongItem track={track} onDisplay={handleRetrieveSong} onToggle= {handleToggleFavSong}/>
-                }}
+                    return <SongItem track={track} onDisplay={handleRetrieveSong} onToggle={handleToggleFavSong}/>
+                }} 
             />
 
             {lyrics && <LyricsItem lyrics={lyrics} onClose={handleCloseLyrics}/>}

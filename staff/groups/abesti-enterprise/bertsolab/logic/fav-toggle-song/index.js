@@ -8,8 +8,9 @@ logic.toggleFavTrack = function (id, token, trackId) {
             if (response.status === 'KO') throw new Error(response.error)
 
             const favorites = response.data.favorites
+            debugger
 
-            const index = favorites.findIndex(favorite => favorite === trackId)
+            const index = favorites.findIndex(favorite => favorite == trackId)
 
             if (index > -1) {
                 favorites.splice(index, 1)
@@ -23,7 +24,7 @@ logic.toggleFavTrack = function (id, token, trackId) {
                     .then(track => {
                         if(track.message.header.status_code === 404) throw new Error("invalid track id")
 
-                        favorites.push(trackId)
+                       favorites.push(trackId)
 
                         return call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'put', { 'content-type': 'application/json', 'authorization': `bearer ${token}` }, { favorites })
                             .then(response => {
