@@ -24,19 +24,19 @@
 
 
 %text-base-small
-    font-size: 0.7rem
-    text-decoration: none
-    font-weight: 200
-    font-family: 'Open Sans', Arial, Helvetica, sans-serif
-
-%text-base-medium
     font-size: 0.8rem
     text-decoration: none
     font-weight: 200
     font-family: 'Open Sans', Arial, Helvetica, sans-serif
 
-%text-base-big
+%text-base-medium
     font-size: 1rem
+    text-decoration: none
+    font-weight: 200
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif
+
+%text-base-big
+    font-size: 1.3rem
     text-decoration: none
     font-weight: 500
     font-family: 'Open Sans', Arial, Helvetica, sans-serif
@@ -46,23 +46,25 @@
     box-sizing: border-box
 body
     width: 100vw
+    min-width: 375px
+    background-color: $color-beige
 main
-    padding-top: 20%
+    padding-top: 85px
 .panel--nav
     width: 100%
-    height: 70px
+    height: 85px
     position: fixed
-    border: 0.1rem solid $color-black
-    background-color: $color-white
+    /* border: 0.1rem solid $color-black */
+    background-color: $color-beige
     z-index: 4
 .logo
     width: 100%
-    letter-spacing: 0.3rem
+    letter-spacing: 0.2rem
     text-align: center
     text-justify: center
     position: absolute
-    font-size: 1.8rem
-    top: 10px
+    font-size: 2.2rem
+    top: 17px
     text-decoration: none
     font-weight: 500
     font-family: 'Open Sans', Arial, Helvetica, sans-serif
@@ -71,71 +73,55 @@ main
     display: flex
     width: 70px
     position: absolute
-    right: 5px
-    top: 20px
+    right: 0px
+    top: 10px
+    z-index: 50
     ul
         overflow: auto
         align-items: right
         list-style-type: none
+        right: 10px
+        margin: 5px
     li
         height: 25px
         list-style-type: none
         text-decoration: none
         padding: 0
-        margin: 1px 5px
+        margin: 20px 2px
     li,
-    a
+    a,
+    img
         text-decoration: none
-        margin: 1px 5px
+        width: 55%
         font-size: 1.2rem
         color: $color-black
         text-transform: uppercase
         -webkit-transition: all 0.5s ease
         &:hover 
             color: $color-green-clair 
+    img
+        margin: 12px 2px
+        
 
 
-
-    
-
-.panel--foot
+.search-bar       
     width: 100%
-    height: 60px
-    display: flex
-    position: fixed
-    align-items: center
-    justify-content: center
-    flex-direction: row
-    bottom: 45px
-    border-top: 0.01rem solid $color-green-clair
-    border-bottom: 0.01rem solid $color-green-clair
-    ul
-        overflow: auto
-        list-style-type: none
-    li
-        height: 25px
-        list-style-type: none
-        text-decoration: none
-        float: left
-        padding: 0
-    li,
-    a
-        text-decoration: none
-        font-size: 1rem
-        margin: 1px auto
-        color: $color-black
-        text-transform: uppercase
-        -webkit-transition: all 0.5s ease
-        &:hover 
-            color: $color-light-grey 
+    line-height: 30px
+    border: none
+    @extend %text-base-medium
+    margin: 0px auto
+    vertical-align: middle
+    input,
+    textarea
+        padding: 6px
+        transition-property: background,border,color
+        transition-duration: .15s
+        &:focus,
+        &textarea:focus 
+            outline-color: $color-green-clair
+            color: $color-black
+            background-color: $color-beige
 
-.registered-name
-        @extend %text-base-medium
-        width: 100%
-        margin: 15px auto
-        position: fixed
-        text-align: center
-        bottom: 0
 
 .close
     position: absolute
@@ -161,6 +147,110 @@ main
         transform: rotate(45deg)
     &:after 
         transform: rotate(-45deg)
+
+
+.menuToggle
+    z-index: 5
+    display: block
+    position: relative
+    top: 32px
+    left: 23px
+    -webkit-user-select: none
+    user-select: none
+    a
+        text-decoration: none
+        @extend %text-base-medium
+        color: $color-black
+        transition: color 0.3s ease
+        line-height: 40px
+        font-weight: 500
+        padding-left: 45px
+
+.menuToggle
+     input
+
+        display: block
+        width: 30px
+        height: 22px
+        position: absolute
+        top: -7px
+        left: -5px
+        
+        cursor: pointer
+        
+        opacity: 0 
+        z-index: 6
+        
+        -webkit-touch-callout: none
+.menuToggle
+    span
+        display: block
+        width: 30px
+        height: 3px
+        margin-bottom: 5px
+        position: relative
+        
+        background: $color-black
+        border-radius: 1px
+        z-index: 5
+        transform-origin: 5px 0px
+        transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0), background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),opacity 0.55s ease                              
+.menuToggle 
+    span:first-child
+        transform-origin: 0% 0%
+
+
+.menuToggle 
+    span:nth-last-child(2)
+        transform-origin: 0% 100%
+
+.menuToggle 
+    input:checked ~ span
+        opacity: 1
+        transform: rotate(45deg) translate(-2px, -1px)
+        background: $color-black
+.menuToggle 
+    input:checked ~ span:nth-last-child(3)
+        opacity: 0
+        transform: rotate(0deg) scale(0.2, 0.2)
+.menuToggle 
+    input:checked ~ span:nth-last-child(2)
+        transform: rotate(-45deg) translate(0, -1px)
+.menu
+  position: absolute
+  width: 200px
+  margin: 0px 0 0 -50px
+  padding-left: 0
+  top: 45px
+
+  padding-top: 0px
+  
+  background: $color-beige
+  list-style-type: none
+  -webkit-font-smoothing: antialiased
+
+  
+  transform-origin: 0% 0%
+  transform: translate(-100%, 0)
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0)
+
+
+.menu 
+    li
+        padding: 0
+        font-size: 22px
+        transition: all 250ms cubic-bezier(0.675, 0.420, 0.090, 0.870)
+        &:hover
+            background-color: $color-green-clair
+
+.menuToggle 
+    input:checked ~ ul
+
+        transform: none
+
+
+
 
 .big-letter
     color: $color-black
@@ -199,7 +289,7 @@ form
         &textarea:focus 
             outline-color: $color-green-clair
             color: $color-black
-            background-color: $color-white
+            background-color: $color-beige
 
 .button
     @extend %text-base-small
@@ -208,7 +298,7 @@ form
     margin: 10px
     text-align: center
     color: $color-black
-    background-color: $color-white
+    background-color: $color-beige
     border: 0.05rem solid $color-black
     appearance: none
     cursor: pointer
@@ -217,14 +307,89 @@ form
     &:not([disabled]):hover,
     &:not([disabled]):focus 
         color: $color-green-clair
-        background-color: $color-white
+        background-color: $color-beige
     &:focus 
         outline: none
         box-shadow: none
     &[disabled] 
         cursor: not-allowed
+.container_image
+    width:95%
+    display: flex
+    align-items: center
+    margin: 10px auto
+    position: relative
+    text-align: center
+    img
+        width: 100%
+        position: relative
+        margin: 0 auto
+    p
+        @extend %text-base-medium
+        color: $color-beige
+        letter-spacing: 0.2em
+        position: absolute
+        align-items: center
+        width: 100%
+        bottom: 70px
+    .title_collection
+        @extend %text-base-big
+        font-size: 1.6em
+        color: $color-beige
+        font-weight: 800
+        position: absolute
+        align-items: center
+        width: 100%
+        bottom: 30px
 
-main 
-    padding-top: 15vh 
+.panel--foot
+    width: 100%
+    height: 100px
+    display: flex
+    align-items: center
+    justify-content: center
+    flex-direction: row    
+    
+    flex-wrap: wrap
+    bottom: 10px
+
+    ul
+        overflow: auto
+        width: 100%
+        list-style-type: none
+        bottom: 30px
+        padding: 15px
+        display: flex
+        flex-wrap: wrap
+
+        
+        border-top: 0.01rem solid $color-green-clair
+        border-bottom: 0.01rem solid $color-green-clair
+    li
+        height: 25px
+        list-style-type: none
+        text-decoration: none
+        margin: 30px 30px        
+    li,
+    a,
+    i
+        text-decoration: none
+        font-size: 1.5rem
+        margin: 1px auto
+        color: $color-black
+        text-transform: uppercase
+        -webkit-transition: all 0.5s ease
+        &:hover 
+            color: $color-light-grey
+
+
+.registered-name
+        @extend %text-base-medium
+        width: 100%
+        margin: 15px auto
+        text-align: center
+        bottom: 5px
+
+
 
 
