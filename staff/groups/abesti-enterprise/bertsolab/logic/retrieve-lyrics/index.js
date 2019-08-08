@@ -14,6 +14,7 @@ logic.retrieveLyrics = function (id, token, track_id){
 
             return call(`http://skylabcoders.herokuapp.com/proxy?url=https://api.musixmatch.com/ws/1.1/track.lyrics.get?apikey=e492562d27469098b0922d5d580837eb&track_id=${track_id}`, 'get', undefined, undefined)
             .then(res => {
+
                 if(res.message.header.status_code === 401) {
                     throw new Error("there's something wrong with the current track_id")
                 } else if (res.message.header.status_code === 404){
