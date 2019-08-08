@@ -13,7 +13,7 @@ class App extends React.Component{
             error : undefined,
             printItem: undefined,
             credentials,
-            // user : undefined,
+            user : undefined,
             categories: [],
             jokes: [],
             random: [] 
@@ -42,8 +42,8 @@ class App extends React.Component{
         try{
             logic.retrieveUser(id , token)
                 .then( user => this.setState({ user }))
-                .catch( ({ message }) => this.setState({ error : message } ) )
-        }catch({ message }){
+                .catch( ({ message }) => this.setState({ error : message }))
+        } catch({ message }){
             this.setState({ error : message})
         }
     }
@@ -116,11 +116,23 @@ class App extends React.Component{
                     sessionStorage.id = credentials.id
                     sessionStorage.token = credentials.token
                     this.setState({ view : 'landing' , credentials })
-                } )
+
+                    const {id , token} = credentials
+
+                    try{
+                        logic.retrieveUser(id , token)
+                            .then( user => this.setState({ user }))
+                            .catch( ({ message }) => this.setState({ message }))
+                    } catch({ message }){
+                        this.setState({ error : message})
+                    }
+
+                })
                 .catch( ({ message }) => this.setState( {error : message} ))
         }
         catch({ message }){this.setState( {error : message} )}
     }
+
 
     handleLogout(){
         delete sessionStorage.id
@@ -132,7 +144,7 @@ class App extends React.Component{
 
     render(){
         const {
-            state : { view , error, categories, jokes, printItem, random},
+            state : { view , error, categories, jokes, printItem, random , user},
             handleGoToRegister,
             handleGoToLogin,
             handleGoToLanding,
@@ -146,7 +158,7 @@ class App extends React.Component{
         
         return <>
             <div className = "wrapper">
-                <Header onGoToRegister = {handleGoToRegister} onGoToLogin = {handleGoToLogin} onChangeView = { view } />
+                <Header onGoToRegister = {handleGoToRegister} onGoToLogin = {handleGoToLogin} onLogout = {handleLogout} onChangeView = { view } user = { user }/>
                 <Search onSearch = {handleSearch}/>
                 {view === 'login' && <Login onGoToLanding = {handleGoToLanding} onLogin={handleLogin} error = { error }/> }
                 { view === 'register' && <Register onGoToLanding = {handleGoToLanding} onRegister = {handleRegister} error = { error }/> }
