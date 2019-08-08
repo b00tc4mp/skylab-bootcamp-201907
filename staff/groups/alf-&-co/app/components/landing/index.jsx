@@ -17,6 +17,7 @@ class Landing extends Component {
         this.handleAcceptError = this.handleAcceptError.bind(this)
         this.handleRetrieveMovie = this.handleRetrieveMovie.bind(this)
         this.handleToggleFavMovieFromMovieDetail = this.handleToggleFavMovieFromMovieDetail.bind(this)
+        this.handleToggleMovieFromMovieDetail = this.handleToggleMovieFromMovieDetail.bind(this)
         this.handleBackFromDetail = this.handleBackFromDetail.bind(this)
         this.handleToggleFavMovieFromMovieItem = this.handleToggleFavMovieFromMovieItem.bind(this)
         this.handleToggleFavMovieFromFavoritesSection = this.handleToggleFavMovieFromFavoritesSection.bind(this)
@@ -26,6 +27,7 @@ class Landing extends Component {
         this.handleRetrieveLists = this.handleRetrieveLists.bind(this)
         this.handleDisplayListModal = this.handleDisplayListModal.bind(this)
         this.handleToggleMovieFromList = this.handleToggleMovieFromList.bind(this)
+        this.handleGoToHome = this.handleGoToHome.bind(this)
            
     }
 
@@ -249,6 +251,11 @@ class Landing extends Component {
         credentials ? logic.toggleFromMovieList(id, token, movieId, listName, () => this.handleRetrieveLists(movieId)) : console.log('error')
     }
 
+handleGoToHome(event){
+       event.preventDefault()
+       this.setState({view: 'collections'})
+   }
+
 
     /* Render */
 
@@ -258,7 +265,7 @@ class Landing extends Component {
             handleSearch, handleRetrieveMovie, handleLogOut,
             handleBackFromDetail, handleGoToSearch, handleGoToLogIn,
             handleToggleFavMovieFromMovieItem, handleToggleFavMovieFromMovieDetail, handleGoToCollections, handleLinkToCollections, handleGoToFavorites,
-            handleToggleFavMovieFromFavoritesSection, handleCreateList, handleDisplayListModal, handleToggleMovieFromList
+            handleToggleFavMovieFromFavoritesSection, handleCreateList, handleDisplayListModal, handleToggleMovieFromList, handleToggleMovieFromMovieDetail,handleGoToHome
 
         } = this
 
@@ -277,7 +284,7 @@ class Landing extends Component {
                         </ul>
                     </div>
 
-                    <h2 className="logo">MOVIE LAB</h2>
+                    <h2 className="logo" onClick={handleGoToHome}>MOVIE LAB</h2>
 
                     <ul className="icons-header">
                         <li><a className= "search-icon"href="" onClick={handleGoToSearch}><i className="fas fa-search"></i></a></li>
@@ -305,7 +312,7 @@ class Landing extends Component {
 
                 {/* Movie detail which displays. Includes fav button and back button  */}
                 {view === 'detail' &&
-                    <MovieDetail movie={movie} onBack={handleBackFromDetail} /* onList={handleListModal} */ onToggle={handleToggleFavMovieFromMovieDetail} onToggle={handleToggleMovieFromMovieDetail} />}
+                    <MovieDetail movie={movie} onBack={handleBackFromDetail}  onToggle={handleToggleFavMovieFromMovieDetail} onToggle={handleToggleMovieFromMovieDetail} />}
 
                 {view === 'favorites' &&
                     <Favorites favs={favs} removeFav={handleToggleFavMovieFromFavoritesSection} showDetail={handleRetrieveMovie} />
