@@ -1,7 +1,7 @@
 function Header(props) {
         return <>
             <header className='header'>
-                <img clasName='header__logo' src="components/header/logo.png" alt=""/>
+                <img className='header__logo' src="components/header/logo.png" alt=""/>
                 <h2>Esputyfú</h2>
                 {!props.state ? 
                     <nav className='header__nav'>

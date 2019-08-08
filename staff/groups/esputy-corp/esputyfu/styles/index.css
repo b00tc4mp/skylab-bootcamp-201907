@@ -100,7 +100,6 @@ h2 {
   color-margin-top: 20px;
 }
 .header__logo {
-  width: 20px;
   display: inline-block;
 }
 
@@ -131,6 +130,15 @@ h2 {
   background-size: cover;
   min-height: 70vh;
   text-align: center;
+}
+
+.container__img {
+  width: 100%;
+  max-width: 600px;
+}
+
+.container__ul--detail {
+  list-style: none;
 }
 
 /*# sourceMappingURL=index.css.map */

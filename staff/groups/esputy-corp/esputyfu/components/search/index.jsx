@@ -1,6 +1,6 @@
 function Search(props) {
     return <>
-        <div class='container'>
+        <div className='container'>
         <form onSubmit={event => {
             event.preventDefault()
 
