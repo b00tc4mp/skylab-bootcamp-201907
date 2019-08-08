@@ -3,7 +3,7 @@ class App extends React.Component {
         super()
 
 
-        this.state = { view: 'landing', credentials: undefined }
+        this.state = { view: 'landing', credentials: undefined, favs: [] }
 
         //bindings
 
@@ -43,6 +43,14 @@ class App extends React.Component {
             console.error(error)
         }
     }
+
+    // Favs
+
+    handleFavs() {
+
+    }
+
+
     // navigate
     handleBackToLanding() {
         this.setState({ view: 'landing' })
@@ -58,7 +66,7 @@ class App extends React.Component {
 
     render() {
         return <>
-            <Header onLogin={this.handleGoToLogin} onRegister={this.handleGoToRegister} state={this.state.credentials}/>
+            <Header onLogin={this.handleGoToLogin} onRegister={this.handleGoToRegister} state={this.state.credentials} onFavorites={this.handleFavs}/>
             {this.state.view === 'landing' && <Landing credentials={this.state.credentials} onLogin={this.handleGoToLogin} />}
             {this.state.view === 'register' && <Register onRegister={this.handleRegister} />}
             {this.state.view === 'register-success' && <RegisterSuccess onLogin={this.handleGoToLogin} />}

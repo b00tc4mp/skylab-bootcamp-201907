@@ -1,16 +1,13 @@
 {
     const { random } = Math
-    const wonderwall = '5wj4E6IsrVtn8IBJQOd0Cl'
-    const iNeedMyGirl = '7rbCL7W893Zonbfnevku5s'
-    const elephantGun = '6pmxr66tMAePxzOLfjGNcX'
 
-    describe('logic - search tracks', () => {
+    describe('logic - retrieve fav tracks', () => {
         describe('when the user logged', () => {
             beforeEach(() => {
                 user = {
-                    name: 'Joaquin-' + random(),
-                    surname: 'Sabina-' + random(),
-                    username: 'joasab-' + random(),
+                    name: 'Miguel-' + random(),
+                    surname: 'Bose-' + random(),
+                    username: 'mibo-' + random(),
                     password: '123-' + random(),
                     favorites: []
                 }
@@ -158,84 +155,6 @@
                         logic.searchTracks(credentials.id, 5345345, 'wonderwall', '20')
                     ).toThrowError('token user with value 5345345 is not a string')
                 )
-
-            })
-        })
-
-        describe('when the user not logged', () => {
-            it('should retrieve tracks', () =>
-                logic.searchTracks(undefined, undefined, 'wonderwall')
-                    .then(tracks => {
-                        expect(tracks).toBeDefined()
-                        expect(tracks instanceof Array).toBeTruthy()
-                        expect(tracks.length).toBe(10)
-                    })
-            )
-            it('should retrieve items to tracks', () =>
-                logic.searchTracks(undefined, undefined, 'wonderwall', '10')
-                    .then(song => {
-                        song.forEach(track => {
-                            expect(track.url).toBeDefined()
-                            expect(track.linkAlbum).toBeDefined()
-                            expect(track.nameAlbum).toBeDefined()
-                            expect(track.releaseDate).toBeDefined()
-                            expect(track.linkkArtist).toBeDefined()
-                            expect(track.nameArtist).toBeDefined()
-                            expect(track.explicit).toBeDefined()
-                            expect(track.linkTrack).toBeDefined()
-                            expect(track.idTrack).toBeDefined()
-                            expect(track.nameTrack).toBeDefined()
-                            expect(track.popularity).toBeDefined()
-                            expect(track.previewUrl).toBeDefined()
-                        })
-                    })
-            )
-            it('should retrieve tracks with certain number of songs', () =>
-                logic.searchTracks(undefined, undefined, 'wonderwall', '1')
-                    .then(tracks => {
-                        expect(tracks.length).toBe(1)
-                    })
-            )
-
-            it('should return error: song with value is not a string', () =>
-                expect(() =>
-                    logic.searchTracks(undefined, undefined, 24324532, '1')
-                ).toThrowError('song with value 24324532 is not a string')
-            )
-
-            it('should return error: limit with value is not a string', () =>
-                expect(() =>
-                    logic.searchTracks(undefined, undefined, 'wonderwall', 1)
-                ).toThrowError('limit with value 1 is not a string')
-            )
-
-            describe('when are you search for a song', () => {
-                it('should succeed on matching criteria when capital letters are used', () => {
-                    return logic.searchTracks(undefined, undefined, 'WONDERWAL', '1')
-                        .then(songs => {
-                            expect(songs).toBeDefined()
-                            expect(songs instanceof Array).toBeTruthy()
-                            expect(songs.length).toBe(1)
-                        })
-                })
-
-                it('should succeed on matching criteria when you enter a name with spaces', () => {
-                    return logic.searchTracks(undefined, undefined, 'i Need My Girl', '1')
-                        .then(songs => {
-                            expect(songs).toBeDefined()
-                            expect(songs instanceof Array).toBeTruthy()
-                            expect(songs.length).toBe(1)
-                        })
-                })
-
-                it('should succeed on matching criteria when you enter a name with spaces', () => {
-                    return logic.searchTracks(undefined, undefined, 'wonderwall               ', '1')
-                        .then(songs => {
-                            expect(songs).toBeDefined()
-                            expect(songs instanceof Array).toBeTruthy()
-                            expect(songs.length).toBe(1)
-                        })
-                })
             })
         })
     })
