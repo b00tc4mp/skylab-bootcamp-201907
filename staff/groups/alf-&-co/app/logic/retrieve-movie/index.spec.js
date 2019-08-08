@@ -5,7 +5,7 @@
         b) If user is logged, detail result will incorporate favorites information.
         c) Empty search will return non-filtered list of movies
     */
-    fdescribe('logic - retrieve movie', () => {
+    describe('logic - retrieve movie', () => {
         let user
         
 

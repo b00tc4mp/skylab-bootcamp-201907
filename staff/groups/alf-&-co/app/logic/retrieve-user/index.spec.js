@@ -79,6 +79,16 @@
             )
             
 
+            it('should fail on id undefined', () =>
+            expect(() =>
+                logic.retrieveUser(undefined, 'a-token')
+            ).toThrowError(Error, 'id with value undefined is not a string')
+            )
 
+            it('should fail on token undefined', ()=> 
+            expect(() =>
+                logic.retrieveUser('13424', undefined)
+            ).toThrowError(Error, 'token with value undefined is not a string')
+            )
     })
 }
