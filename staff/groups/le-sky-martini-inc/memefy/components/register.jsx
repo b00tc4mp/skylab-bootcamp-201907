@@ -1,6 +1,6 @@
 function Register({ onRegister, onBack, error }) {
     return <section className={`register`}>
-        <h1>Register</h1>
+        <h1 className={`register__title`}>Sign up</h1>
         <form className={`register__form`} onSubmit={event => {
             event.preventDefault()
 
@@ -10,21 +10,21 @@ function Register({ onRegister, onBack, error }) {
         }}>
             <ul>
                 <li className={`register__item`}>
-                    <label>Name<input className={`register__input`} type="text" name="name" /></label>
+                    <label><input className={`register__input`} type="text" name="name" placeholder="name"/></label>
                 </li>
                 <li className={`register__item`}>
-                    <label>Surname<input className={`register__input`} type="text" name="surname" /></label>
+                    <label><input className={`register__input`} type="text" name="surname" placeholder="surname" /></label>
                 </li>
                 <li className={`register__item`}>
-                    <label>E-mail<input className={`register__input`} type="email" name="email" /></label>
+                    <label><input className={`register__input`} type="email" name="email" placeholder="email"/></label>
                 </li>
                 <li className={`register__item`}>
-                    <label>Password<input className={`register__input`} type="password" name="password" /></label>
+                    <label><input className={`register__input`} type="password" name="password" placeholder="password"/></label>
                 </li>
                 <li className={`register__item`}>
-                    <label>Repeat password<input className={`register__input`} type="password" name="repassword" /></label>
+                    <label><input className={`register__input`} type="password" name="repassword" placeholder="repeat password"/></label>
                 </li>
-                <button className={`register__button`}>Register</button>
+                <button className={`register__button`}>finish</button>
             </ul>
         </form>
         {error && <Feedback message={error} />}

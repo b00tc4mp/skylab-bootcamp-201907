@@ -1,6 +1,6 @@
 function Login({ onLogin, onBack, error }) {
     return <section className={`login`}>
-        <h1>Login</h1>
+        <h1 className={`login__title`}>Sign in</h1>
         <form className={`login__form`} onSubmit={event => {
             event.preventDefault()
 
@@ -10,15 +10,15 @@ function Login({ onLogin, onBack, error }) {
         }}>
             <ul>
                 <li className={`login__item`}>
-                   <label for="email">E-mail</label>
-                   <input className={`login__input`} type="email" name="email" id="email"/>
+                   <label for="email"></label>
+                   <input className={`login__input`} type="email" name="email" id="email"  placeholder="email"/>
                 </li>
                 <li className={`login__item`}>
-                    <label for="password">Password</label>
-                    <input className={`login__input`} type="password" name="password" id="password"/>
+                    <label for="password"></label>
+                    <input className={`login__input`} type="password" name="password" id="password" placeholder="password"/>
                 </li>
             </ul>
-            <button className={`login__button`}>Login</button>
+            <button className={`login__button`}>done</button>
         </form>
         {error && <Feedback message={error} />}
         <a className={`login__back`} href="" onClick={event => {

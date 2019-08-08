@@ -1,7 +1,7 @@
 function RegisterOrLogin({ onRegister, onLogin, onBack, error }) {
     return <section className={`register-or-login`}>
-    <h1>Register or Login</h1>
-        <ul>
+    <h1 className={`register-or-login__title`}>Log in or join to save favorites</h1>
+        <ul className={`register-or-login__list`}>
             <li className={`register-or-login__item`}>
                 <a className={`register-or-login__register`} href="" onClick={event => {
                     event.preventDefault()
@@ -19,6 +19,6 @@ function RegisterOrLogin({ onRegister, onLogin, onBack, error }) {
             <a className={`register-or-login__back`} href="" onClick={event => {
                 event.preventDefault()
                 onBack()     // Hacer que sea -> Go back to results. Go back genuino.
-            }}><i class="fas fa-arrow-left"></i> Back to Home</a>
+            }}><i class="fas fa-arrow-left"></i> Go Back</a>
     </section>
 }
