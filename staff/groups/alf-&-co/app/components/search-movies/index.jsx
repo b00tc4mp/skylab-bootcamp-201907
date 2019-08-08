@@ -6,7 +6,7 @@ function Search(props) {
 
         props.onSearch(query)
     }}>
-        <input type="text" name="query" placeholder="Search by movie title..."/>
-        <button>🔍</button>
+        {<input className="search-bar" type="text" name="query" placeholder="Search by movie title..."/>}
+        
     </form>
 }
