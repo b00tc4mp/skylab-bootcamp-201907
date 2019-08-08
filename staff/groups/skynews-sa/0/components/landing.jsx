@@ -5,7 +5,7 @@ class Landing extends Component{
         super()
 
 
-        this.state={ view: 'search', category: undefined, country: undefined, news:[], article:undefined, error: undefined, user: undefined, favs: [],weather:undefined}
+        this.state={ view: 'search', category: undefined, country: undefined, query:undefined, news:[], article:undefined, error: undefined, user: undefined, favs: [],weather:undefined}
         
         this.handleSearch=this.handleSearch.bind(this)
         this.handleRetrieveArticle=this.handleRetrieveArticle.bind(this)
@@ -19,6 +19,9 @@ class Landing extends Component{
         this.handleGoToSearch=this.handleGoToSearch.bind(this)
         this.handleToggleFavArtFromFavorites=this.handleToggleFavArtFromFavorites.bind(this)
         this.handleWeather=this.handleWeather.bind(this)
+        this.handleSearchAdvanced=this.handleSearchAdvanced.bind(this)
+        this.handleGoToSearchAdvanced=this.handleGoToSearchAdvanced.bind(this)
+        this.handleBackFromSearchAdvanced=this.handleBackFromSearchAdvanced.bind(this)
 
     }
 
@@ -58,6 +61,27 @@ class Landing extends Component{
             this.setState({error:message})
             this.props.onStopSpinning()
         }
+    }
+
+    handleSearchAdvanced(query){
+        this.props.onSpinning()
+        try{
+        logic.searchNewsAdvanced(query)
+        .then(news=>this.setState({news, query, error:undefined}))
+        .catch(({message}) => this.setState({error: message}))
+        .then(() => console.log("p:",this.state.news))
+        .then(()=> this.props.onStopSpinning())
+        }catch({message}){
+            this.setState({error:message})
+            this.props.onStopSpinning()
+        }
+    }
+
+    handleGoToSearchAdvanced() {
+        this.setState({ view: 'searchAdv', article: undefined })
+    }
+    handleBackFromSearchAdvanced() {
+        this.setState({ view: 'search', article: undefined })
     }
 
     handleRetrieveArticle(item){
@@ -179,47 +203,64 @@ class Landing extends Component{
 
     render(){
         const {
-        state: { view, category, country, news, article, error, user, favs, weather},
-        handleSearch, handleRetrieveArticle, handleRegister, handleBackFromDetail, handleLogin, handleLogout, handleToggleFavArticleFromArticleDetail, handleAcceptError, handleFavorites, handleGoToSearch, handleToggleFavArtFromFavorites, handleWeather } = this
+        state: { view, category, country,query , news, article, error, user, favs, weather},
+        handleSearch, handleRetrieveArticle , handleRegister, handleBackFromDetail, handleLogin, handleLogout, handleToggleFavArticleFromArticleDetail, handleAcceptError, handleFavorites, handleGoToSearch, handleWeather,handleGoToSearchAdvanced , handleSearchAdvanced, handleBackFromSearchAdvanced } = this
 
         return <>
-        <header>
-            <nav className="nav">
-            {user && <p className="nav-hello">Hello, {user.name}</p>}
-                {! user ?
-                <ul className="nav-ul">
-                    <li><a href="" className="register-li nav-but" onClick={handleRegister}>Register</a></li>
-                    <li><a className="login-li nav-but" href=""onClick={handleLogin}>Login</a></li>
-                </ul>: <ul className="fav-ul">
-                    {view === 'search' && <li><a href="" className="favorites-li nav-but" onClick={event => { event.preventDefault()
-                    handleFavorites()}}>Favorites</a></li>}
-                    {view === 'favorites' && <li><a href="" className="search-li nav-but" onClick={handleGoToSearch}>Search</a></li>}
-                    <li><a href="" className="logout-li nav-but" onClick={handleLogout}>Logout</a></li>
-                </ul>}
-            </nav>
-        </header>
-        
-        {view==="search" && weather && <WeatherItem weather={weather} country={country}/>}
+            <header>
+                <nav className="nav">
+                    {user && <p className="nav-hello">Hello, {user.name}</p>}
+                    {!user ?
+                        <ul className="nav-ul">
+                            <li><a href="" className="register-li nav-but" onClick={handleRegister}>Register</a></li>
+                            <li><a className="login-li nav-but" href="" onClick={handleLogin}>Login</a></li>
+                        </ul> : <ul className="fav-ul">
+                            {view === 'search' || view === 'searchAdv' && <li><a href="" className="favorites-li nav-but" onClick={event => {
+                                event.preventDefault()
+                                handleFavorites()
+                            }}>Favorites</a></li>}
+                            {view === 'favorites' && <li><a href="" className="search-li nav-but" onClick={handleGoToSearch}>Search</a></li>}
+                            <li><a href="" className="logout-li nav-but" onClick={handleLogout}>Logout</a></li>
+                        </ul>}
+                </nav>
+            </header>
 
-        {view === 'search' && <>
-        
-        <Search onSearch={handleSearch} error={error} category={category} country={country} onWeather={handleWeather}/>
-        {!article ?
+            {view === "search" && weather && <WeatherItem weather={weather} country={country} />}
 
-            <Results items={news} paintItem={article => {
-                return <ArticleItem article={article}/>
-            }} onItem={handleRetrieveArticle}/>
-            :
-            <ArticleDetail article={article} onToggle={handleToggleFavArticleFromArticleDetail} onBack={handleBackFromDetail} />}
-            {error && <Modal message={error} onAccept={handleAcceptError} />}
+            {view === 'search' && <>
+
+                <Search onSearch={handleSearch} error={error} category={category} country={country} onWeather={handleWeather} />
+                <a href="" className="favorites-li nav-but" onClick={event => {
+                                event.preventDefault()
+                                this.handleGoToSearchAdvanced()
+                            }}>Advanced Search</a>
+                {!article ?
+                    <Results items={news} paintItem={article => {
+                        return <ArticleItem article={article} />
+                    }} onItem={handleRetrieveArticle} />
+                    :
+                    <ArticleDetail article={article} onToggle={handleToggleFavArticleFromArticleDetail} onBack={handleBackFromDetail} />}
+                {error && <Modal message={error} onAccept={handleAcceptError} />}
             </>}
-        
 
-        {view === 'favorites' && <>
-        <section className="favorites">
-        <h1 className='fav__title hide'>SkyNews</h1>
-             <img className="fav-logo" src="style/img/skynews-logo.png"></img> 
-            <h3 className="fav-title">Favorites</h3>
+            {view === 'searchAdv' && <>
+
+                <SearchAdv onSearch={handleSearchAdvanced} onBack={handleBackFromSearchAdvanced} />
+                {!article ? 
+
+                    <Results items={news} paintItem={article => {
+                        return <ArticleItem article={article} />
+                    }} onItem={handleRetrieveArticle} />
+                    :
+                    <ArticleDetail article={article} onToggle={handleToggleFavArticleFromArticleDetail} onBack={handleGoToSearchAdvanced} />}
+                {error && <Modal message={error} onAccept={handleAcceptError} />}
+            </>}
+
+            {view === 'favorites' && <>
+                <section className="favorites">
+                    <h1 className='fav__title hide'>SkyNews</h1>
+                    <img className="fav-logo" src="style/img/skynews-logo.png"></img>
+                    <h3 className="fav-title">Favorites</h3>
                     {!article ?
                         <Results items={favs} paintItem={article => {
                             return <ArticleItem article={article} />
@@ -229,8 +270,8 @@ class Landing extends Component{
                     {error && <Modal message={error} onAccept={handleAcceptError} />}
 
                 </section>
-        </>}
-    </>
+            </>}
+        </>
     }
 }
 
