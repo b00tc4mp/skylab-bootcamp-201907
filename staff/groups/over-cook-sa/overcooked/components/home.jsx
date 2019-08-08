@@ -91,7 +91,7 @@ class Home extends Component {
 
         const { state: { meals, meal, cats, user }, handleLogout, handleSearch, handleGoBack, handleToggle, handleOnMeal, handleSearchCat, handleGoToCategories, handleSearchIngredient } = this
         return (<>
-            <header>
+            <header className="header-home">
                 {user && <SmallHeader onLogout={handleLogout} goToCategories={handleGoToCategories} user={user} />}
                 <Search onSearchName={handleSearch} onSearchIngredient={handleSearchIngredient} />
             </header>
