@@ -1,6 +1,7 @@
-const random  = Math.random
+{
+    const { random }= Math
 
-describe('logic authenticate users', () =>{
+describe('logic - authenticate users', () =>{
     let user
 
     beforeEach(() => {
@@ -53,4 +54,18 @@ describe('logic authenticate users', () =>{
         ).toThrowError(Error, 'username with value asdf#adsf.com is not a valid e-mail')
     })
 
+    it('should fail on non-string username', () => {
+        expect(()=> 
+            logic.authenticateUser(undefined, user.password)
+        ).toThrowError(Error, 'username with value undefined is not a string')
+    })
+
+    it('should fail on non-string password', () => {
+        expect(()=> 
+            logic.authenticateUser(user.username, undefined)
+        ).toThrowError(Error, 'password with value undefined is not a string')
+    })
+
 })
+
+}

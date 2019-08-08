@@ -1,5 +1,5 @@
 {
-   const random = Math.random
+    const { random }= Math
     
     describe('logic - retrieve user', () => {
 
@@ -11,8 +11,8 @@
             user= {
                 name: 'pepe' + random(),
                 surname: 'perez'  + random(),
-                username: 'pE' + random().toFixed(3) + '@mail.com',
-                password: 'jA' + random().toFixed(7),
+                username: 'pE' + random() + '@mail.com',
+                password: 'jAg' + random(),
                 favorites: []
               
             }
@@ -58,7 +58,7 @@
             ) 
             it('should failed retrieving the user with wrong token', () =>
                  
-            logic.retrieveUser(data.id, '333')
+            logic.retrieveUser(data.id, '333333')
                 
                 .catch(error=>{
                     expect(error).toBeDefined()
@@ -79,6 +79,16 @@
             )
             
 
+            it('should fail on id undefined', () =>
+            expect(() =>
+                logic.retrieveUser(undefined, 'a-token')
+            ).toThrowError(Error, 'id with value undefined is not a string')
+            )
 
+            it('should fail on token undefined', ()=> 
+            expect(() =>
+                logic.retrieveUser('13424', undefined)
+            ).toThrowError(Error, 'token with value undefined is not a string')
+            )
     })
 }

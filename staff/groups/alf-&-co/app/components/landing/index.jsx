@@ -131,7 +131,6 @@ class Landing extends Component {
         logic.retrieveMovie(id, token, movieId)
             .then(movie => this.setState({ movie, view: 'detail' }))
             .catch(({ message }) => this.setState({ error: message }))
-
     }
 
     handleBackFromDetail() {
@@ -197,18 +196,6 @@ class Landing extends Component {
         credentials ? logic.toggleFavMovie(id, token, movieId).then(() => handleFavorites()) : goToLogin()
 
     }
-/*     handleListModal() {
-        const { props: { credentials }, goToLogin } = this
-
-        let id, token
-        credentials && (id = credentials.id, token = credentials.token)
-
-        credentials ? logic.createList(id, token).then(list => this.setState({ list, view: 'list' })) : goToLogin()
-        
-    } */
-
-
-
 
     handleToggleMovieFromMovieDetail(movieId) {
         const { props: { goToLogin, credentials } } = this
@@ -268,7 +255,7 @@ class Landing extends Component {
             handleSearch, handleRetrieveMovie, handleLogOut,
             handleBackFromDetail, handleGoToSearch, handleGoToLogIn,
             handleToggleFavMovieFromMovieItem, handleToggleFavMovieFromMovieDetail, handleGoToCollections, handleLinkToCollections, handleGoToFavorites,
-            handleToggleFavMovieFromFavoritesSection, handleCreateList, handleDisplayListModal, handleToggleMovieFromList
+            handleToggleFavMovieFromFavoritesSection, handleCreateList, handleDisplayListModal, handleToggleMovieFromList, handleToggleMovieFromMovieDetail
 
         } = this
 
