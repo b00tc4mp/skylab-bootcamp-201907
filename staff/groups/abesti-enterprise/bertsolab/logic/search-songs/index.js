@@ -15,10 +15,10 @@ logic.searchSongs =  (id, token, q_artist, q_track) => {
 
                 return call(`https://skylabcoders.herokuapp.com/proxy?url=https://api.musixmatch.com/ws/1.1/track.search?apikey=e492562d27469098b0922d5d580837eb&q_artist=${q_artist}&q_track=${q_track}`, 'get', undefined, undefined)
                     .then(res => {
-                        if(res.message.header.status_code === 401) throw new Error("invalid token") //check if this gives the proper error
+                        if(res.message.header.status_code === 401) throw new Error("invalid token")
                         else {
                             const { message: { body: { track_list }}} = res
-                            favorites && track_list.forEach(track => track.favorite = favorites.includes(track_id))
+                            //favorites && track_list.forEach(track => track.favorite = favorites.includes(track_id)) // -> Should work properly when favorites be up & running :)
 
                             return track_list
                         }

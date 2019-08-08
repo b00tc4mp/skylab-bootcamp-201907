@@ -36,8 +36,6 @@
                 .catch(error => expect(error).toBeDefined())
         })
 
-        // TODO test more cases
-
         describe('when user already has a favorite track', () => {
             const track_id = '30974362'
 
@@ -78,8 +76,6 @@
                 })
                 .catch(error => expect(error).toBeDefined())
             })
-
-            // TODO test more cases
         })
     })
 }
