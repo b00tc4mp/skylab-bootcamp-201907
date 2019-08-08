@@ -36,7 +36,16 @@
                 .catch(error => expect(error).toBeDefined())
         })
 
-        // TODO test more cases
+        it('should return a 404 on non existant track_id', () => {
+            const track_id = '2039441'
+
+            return logic.retrieveLyrics(undefined, undefined, track_id)
+                .then(lyrics => {
+                    expect(lyrics).toBeUndefined()
+                    expect(res.message.header.status_code).toBe('404')
+                })
+                .catch(error => expect(error).toBeDefined())
+        })
 
         describe('when user already has a favorite track', () => {
             const track_id = '30974362'
@@ -78,8 +87,6 @@
                 })
                 .catch(error => expect(error).toBeDefined())
             })
-
-            // TODO test more cases
         })
     })
 }
