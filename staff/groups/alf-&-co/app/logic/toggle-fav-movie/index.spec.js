@@ -2,7 +2,7 @@
 
     const { random } = Math
 
-    fdescribe('logic - toggle fav movie', () => {
+    describe('logic - toggle fav movie', () => {
         let user
 
         beforeEach(() => {
@@ -71,23 +71,23 @@
             expect(() => logic.toggleFavMovie(data.id, data.token, '')).toThrowError('movie id is empty or blank')
         })
 
-        it('should fail when on incorrect userId', () => {
+        it('should fail on incorrect userId', () => {
             return logic.toggleFavMovie('aaaaa', data.token, '680')
                 .catch(error => expect(error).toBeDefined())
         })
 
-        it('should fail when on incorrect userToken', () => {
+        it('should fail on incorrect userToken', () => {
             return logic.toggleFavMovie(data.id, 'bbbbb', '680')
                 .catch(error => expect(error).toBeDefined())
         })
 
-        it('should fail when on incorrect user api endpoint', () => {
+        it('should fail on incorrect user api endpoint', () => {
             return logic.toggleFavMovie(data.id, data.id, '680')
                 .catch(error => expect(error).toBeDefined())
         })
 
 
-        it('should fail when on incorrect tmdb api endpoint', () => {
+        it('should fail on incorrect tmdb api endpoint', () => {
             return logic.toggleFavMovie(data.id, data.id, '680')
                 .catch(error => expect(error).toBeDefined())
         })
