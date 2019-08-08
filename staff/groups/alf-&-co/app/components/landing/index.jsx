@@ -103,12 +103,16 @@ class Landing extends Component {
     }
 
     handleFavorites() {
+
         const { props: { credentials }, handleGoToLogIn } = this
+
 
         let id, token
         credentials && (id = credentials.id, token = credentials.token)
 
+
         credentials ? logic.retrieveFavMovies(id, token).then(favs => this.setState({ favs, view: 'favorites' })) : handleGoToLogIn()
+
     }
 
     handleGoToLogIn(event){
@@ -146,13 +150,16 @@ class Landing extends Component {
 
 
     handleToggleFavMovieFromMovieDetail(movieId) {
+
         const { props: {  credentials }, handleRetrieveMovie, handleGoToLogIn } = this
+
 
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
 
         credentials ? logic.toggleFavMovie(id, token, movieId, () => handleRetrieveMovie(movieId)) : handleGoToLogIn()
+
     }
 
     handleBackFromDetail() {
