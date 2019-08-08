@@ -32,7 +32,6 @@ logic.toggleFromMovieList = function(userId, userToken, movieId, listName, expre
                     {lists})
                     .then(response => {
                         if (response.status === 'KO') throw Error(response.error)
-                            expression()
                     })
             } else {
                 /* Check if movie is still accessible */
@@ -48,7 +47,6 @@ logic.toggleFromMovieList = function(userId, userToken, movieId, listName, expre
                             {lists})
                             .then(response => {
                                 if (response.status === 'KO') throw Error(response.error)
-                                expression()
                             })
                     })
             }
