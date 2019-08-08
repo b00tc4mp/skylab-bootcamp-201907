@@ -1,7 +1,7 @@
 {
     const { random } = Math
 
-    describe('logic - search lyrics', () => {
+    describe('logic - search songs', () => {
         let user
 
         beforeEach(() => {
@@ -80,9 +80,6 @@
             }).catch(error => expect(error).toBeUndefined())
         })
 
-        
-
-
         it('should return an empty array on uncontrolled typo', () => {
             const q_artist= 'abreosmith'
             const q_track= 'dude looks like a lady'
@@ -95,62 +92,45 @@
                 }).catch(error => expect(error).toBeUndefined())
         })
 
-        // describe('when user already has favorite songs', () => {
-        //     let data
+        
 
-        //     beforeEach(done => {
-        //         user.favorites.push('5c3853aebd1bde8520e66e99', '5c3853aebd1bde8520e66e8a', '5c3853aebd1bde8520e66e70')
+        describe('when user already has favorite songs', () => {
+            let credentials
 
-        //         call('https://skylabcoders.herokuapp.com/api/user', 'post',
-        //             { 'content-type': 'application/json' },
-        //             user,
-        //             (error, response) => {
-        //                 if (error) done(error)
-        //                 else if (response.status === 'KO') done(new Error(response.error))
-        //                 else call('https://skylabcoders.herokuapp.com/api/auth', 'post',
-        //                     { 'content-type': 'application/json' },
-        //                     { username: user.username, password: user.password },
-        //                     (error, response) => {
-        //                         if (error) done(error)
-        //                         else if (response.status === 'KO') done(new Error(response.error))
-        //                         else {
-        //                             data = response.data
+            beforeEach(() => {
+                user.favorites.push('5c3853aebd1bde8520e66e99', '5c3853aebd1bde8520e66e8a', '5c3853aebd1bde8520e66e70')
 
-        //                             done()
-        //                         }
-        //                     }
-        //                 )
-        //             }
-        //         )
-        //     })
+                return call('https://skylabcoders.herokuapp.com/api/user', 'post', { 'content-type': 'application/json' }, user)
+                    .then(response => {
+                        if (response.status === 'KO') throw new Error(response.error)
 
-        //     it('should succeed on matching song title and artist', done => {
-        //         const q_artist = 'aerosmith'
-        //         const q_track = 'dude looks like a lady'
+                        return call('https://skylabcoders.herokuapp.com/api/auth', 'post', { 'content-type': 'application/json' }, { username: user.username, password: user.password })
+                            .then(response => {
+                                if (response.status === 'KO') throw new Error(response.error)
 
-        //         // logic.searchDucks(data.id, data.token, query, (error, ducks) => {
-        //         //     expect(error).toBeUndefined()
+                                credentials = response.data
+                            })
+                    })
+            })
 
-        //         //     expect(ducks).toBeDefined()
-        //         //     expect(ducks instanceof Array).toBeTruthy()
-        //         //     expect(ducks.length).toBe(12)
-
-        //         //     let favorites = 0
-
-        //         //     ducks.forEach(duck => {
-        //         //         expect(duck.id).toBeDefined()
-        //         //         expect(duck.title).toBeDefined()
-        //         //         expect(duck.imageUrl).toBeDefined()
-        //         //         expect(duck.price).toBeDefined()
-
-        //         //         duck.favorite && favorites++
-        //         //     })
-
-        //         //     expect(favorites).toBe(user.favorites.length)
-
-        //         //     done()
-        //     //     })
-        //     // })
-        // // })
+            it('should succeed on matching song title and artist', () => {
+                const q_artist = 'aerosmith'
+                const q_track = 'dude looks like a lady'
+    
+                return logic.searchSongs(credentials.id, credentials.token, q_artist, q_track)
+                .then(songs => {
+                    expect(songs instanceof Array).toBeTruthy()
+                    expect(songs).toBeDefined()
+                    expect(songs.length).toBe(8)
+    
+                    songs.forEach(song => {
+                        expect(song.track.track_id).toBeDefined()
+                        expect(song.track.track_name).toBeDefined()
+                        expect(song.track.album_name).toBeDefined()
+                        expect(song.track.artist_name).toBeDefined()
+                    })
+                }).catch(error => expect(error).toBeUndefined())
+            })
+        })
     })
 }
