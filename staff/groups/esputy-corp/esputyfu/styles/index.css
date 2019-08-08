@@ -1,5 +1,10 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  padding: 0;
 }
 
 .full {
@@ -53,11 +58,16 @@ h2 {
   font-family: "Playfair Display", serif;
   display: flex;
   justify-content: space-between;
+  width: 100vw;
 }
 .header__a {
   text-decoration: none;
   color: white;
   color-margin-top: 20px;
+}
+.header__logo {
+  width: 20px;
+  display: inline-block;
 }
 
 .header__a:hover {
@@ -79,14 +89,6 @@ h2 {
 .footer__p {
   font-size: 14px;
   font-family: "Playfair Display", serif;
-}
-
-.login {
-  background-image: url("https://cdn.pixabay.com/photo/2015/05/15/14/50/concert-768722_960_720.jpg");
-  background-position: center;
-  background-size: cover;
-  min-height: 70vh;
-  text-align: center;
 }
 
 /*# sourceMappingURL=index.css.map */
