@@ -40,9 +40,7 @@ logic.retrieveTrack = (idUser, tokenUser, idTrack) => {
                         preview_url: previewUrl
                 } = response
 
-                if(favorites) response.favorite = favorites.includes(idTrack)
-
-                return { 
+                const song = { 
                     // album
                         url, 
                         linkAlbum, 
@@ -59,6 +57,10 @@ logic.retrieveTrack = (idUser, tokenUser, idTrack) => {
                         popularity,
                         previewUrl
                 }
+
+                favorites && (song.favorite = favorites.includes(song.idTrack))
+
+                return song
             })
     } else {
         if(typeof idTrack !== 'string') throw new Error(`song with value ${idTrack} is not a string`)
