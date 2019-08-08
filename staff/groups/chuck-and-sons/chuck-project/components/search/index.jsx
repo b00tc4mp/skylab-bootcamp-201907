@@ -6,7 +6,7 @@ function Search(props){
 
     return <>
         <form
-            className = "form form__search"
+            className = "form form__landing form--search"
             onSubmit = { event =>{
                 event.preventDefault()
 
@@ -16,9 +16,9 @@ function Search(props){
             }                
         }>
             
-            <label htmlFor="query">
+            <label htmlFor="query"></label>
                 <input type="text" name="query" id ="query" />
-            </label>
+            
             <button className="btn btn__submit">Search</button>
 
         </form>
