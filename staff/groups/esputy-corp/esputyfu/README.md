@@ -17,6 +17,8 @@ Esputifú was created as a test case, main goal being to get familiarized with R
 
 [![Build Status](https://img.shields.io/badge/build-working-brightgreen.svg)](https://github.com/joseortuno/skylab-bootcamp-201907/tree/esputy/develop/staff/groups/esputy-corp/esputyfu)
 
+### When you merge your own pull request
+
 ![meme](https://files.slack.com/files-pri/T0SJKHBFZ-FM9PBTEUW/captura_de_pantalla_2019-08-09_a_las_14.24.56.png)
 
 ## Functional description
