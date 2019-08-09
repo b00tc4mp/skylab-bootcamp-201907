@@ -103,7 +103,6 @@ class Home extends Component {
                 handleCloseLyrics, handleToggleFavSong
             } = this
 
-        
 
         return <>
            

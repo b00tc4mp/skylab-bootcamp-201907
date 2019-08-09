@@ -111,19 +111,19 @@ class App extends Component {
         return  <>
 
         <header className="header">
-            <a href="" className="logo" onClick={handleMenuHome}><img src="logo.jpg" alt=""/></a>
-            <input className="menu-btn" type="checkbox" id="menu-btn" />
-            <label className="menu-icon" htmlFor="menu-btn"><span className="navicon"></span></label>
+            <a href="" className="header__logo" onClick={handleMenuHome}><img className="header__logo--image" src="./style/images/logo.png" alt="Find your favorite lyrics at Versolab!"/></a>
+            <input className="hamburguer-menu__button" type="checkbox" id="menu-btn" />
+            <label className="hamburguer-menu__icon" htmlFor="menu-btn"><span className="hamburguer-menu__navicon"></span></label>
            
 
             {!credentials ? 
-                <ul className="menu">
-                        <li><a href="" onClick={handleMenuRegister}>Register</a></li>
-                        <li><a href="" onClick={handleMenuLogin}>Login</a></li>
+                <ul className="user-menu">
+                        <li className="user-menu__auth-option" ><a className="user-menu__auth-option-link" href="" onClick={handleMenuRegister}>Register</a></li>
+                        <li className="user-menu__auth-option" ><a className="user-menu__auth-option-link" href="" onClick={handleMenuLogin}>Login</a></li>
                 </ul> : 
-                <ul className="menu">
-                        <li><a href="" onClick={handleFavorite}>Favorite List</a></li>
-                        <li><a href="" onClick={handleLogout}>Logout</a></li>
+                <ul className="user-menu">
+                        <li className="user-menu__auth-option" ><a className="user-menu__auth-option-link" href="" onClick={handleFavorite}>Favorite List</a></li>
+                        <li className="user-menu__auth-option" ><a className="user-menu__auth-option-link" href="" onClick={handleLogout}>Logout</a></li>
                 </ul>}
         </header>
     
@@ -131,8 +131,8 @@ class App extends Component {
             { view === "register" && <Register onBack={handleGoToHome} onLogin={handleGoToLogin} onRegister={handleRegister} error={error} />} 
             { view === "login" && <Login onBack={handleGoToHome} onRegister={handleGoToRegister} onLogin={handleLogin} error={error} />} 
         
-          <footer>
-                <p>Copyrigth © SkyLab 2019 </p>
+          <footer className="footer">
+                <p className="footer__content">Copyrigth © SkyLab 2019 </p>
             </footer>
         </>
        /*  return <>
