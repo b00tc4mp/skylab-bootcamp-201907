@@ -1,3 +1,14 @@
+/** 
+ * Its a search method that 
+ * accesses the API to be able to search meals 
+ * through their names
+ * 
+ * @param {string} id       - identifier
+ * @param {string} token    - key to verify user
+ * @param {string} name     - is a parameter to look for meal through the name
+ * 
+ */
+
 logic.searchByName = function (id, token, name) {
 
     let favorites

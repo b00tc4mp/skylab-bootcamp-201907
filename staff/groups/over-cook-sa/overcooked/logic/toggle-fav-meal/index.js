@@ -1,3 +1,13 @@
+/** 
+ * Its alows us to acces the Skylabcoders users API 
+ * to add and delete favorites (we save the meals through theyr ids)
+ * 
+ * @param {string} id       - identifier
+ * @param {string} token    - key to verify user
+ * @param {string} idMeal   - identifier of the meal
+ * 
+ */
+
 logic.toggleFavMeal = function (id, token, idMeal) {
     validate.string(id, 'id')
     validate.string(token, 'token')

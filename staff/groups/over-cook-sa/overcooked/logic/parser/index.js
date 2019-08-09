@@ -1,3 +1,12 @@
+
+/** 
+ * Go through a meal array to take out all the ingredients 
+ * and quantities to be able to see them on details 
+ * 
+ * @param {array} rawRecipe   -
+ * 
+ */
+
 function recipeFormatter(rawRecipe){ //array
     let ingredients = []
     let recipeDetails = rawRecipe
