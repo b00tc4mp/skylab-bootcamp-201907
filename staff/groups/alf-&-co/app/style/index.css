@@ -787,10 +787,12 @@ form textareatextarea:focus {
   margin: 2px auto;
 }
 
+
 .close {
   width: 1.2rem;
   height: 1.2rem;
 }
+
 .close__detail {
   position: absolute;
   right: 10px;
@@ -820,6 +822,28 @@ form textareatextarea:focus {
 .close__detail:after {
   transform: rotate(-45deg);
 }
+
+
+.emptyFavorites {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 350px;
+}
+
+.far {
+  color: #00ffa6;
+  border: none;
+  cursor: pointer;
+  appearance: none;
+  font-size: 2rem;
+}
+
+h3 {
+  font: "Open Sans", Arial, Helvetica, sans-serif;
+}
+
 
 .feedback--error, .feedback--success, .mosaicInfo__title, .mosaicInfo__date, .panelDetail__director, .panelDetail__mainCast, .panelDetail__description, .panelDetail__date, .panelDetail__title, .panelDetail__vote, .panelDetail__director--name, .panelDetail__mainCast--name, .panelDetail__description--description, .button {
   font-size: 0.8rem;
