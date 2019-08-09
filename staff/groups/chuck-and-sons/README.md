@@ -7,7 +7,9 @@
 * Jaume Villarreal
 
 ## Abstract
-Chuck Generator is a team project developed for [SkylabCoders](https://www.skylabcoders.com) bootcamp, as the endpoint of frontend part. In order to implement it, these technologies have been used:
+Chuck Generator is a team project developed for [SkylabCoders](https://www.skylabcoders.com) bootcamp, as the endpoint of frontend part.
+
+## Requirements
 * HTML
 * CSS - Sass
 * Javascript
