@@ -1,3 +1,9 @@
+/**Function that retrieve user dates
+ * @param {number} id   Credential id for access the API
+ * @param {number} token    Credential token for access the API
+ * @throws {Error}  Error of user credentials
+ * @return dates user of API
+ */
 logic.retrieveUser =  (id, token) => {
   validate.string(id, 'id')
   validate.string(token, 'token')

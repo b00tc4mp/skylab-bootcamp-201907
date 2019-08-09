@@ -1,3 +1,8 @@
+/**Function that agree favourite new in array of API
+ * @param {number} id   Credential id for access the API
+ * @param {number} token    Credential token for access the API
+ * @throws {Error}  Error of user credentials
+ */
 logic.toggleFavArt =  (id, token, article) => {
   validate.string(id, 'id')
   validate.string(token, 'token')
