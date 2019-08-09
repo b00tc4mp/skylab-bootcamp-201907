@@ -2,9 +2,9 @@ function Search({onSearch, error, category,country, onWeather}){
     let value1=category,value2=country
     return <>
     <section className="search">
-        <h1 className='search-title hide'>SkyNews</h1>
+        <h1 className='search__title hide'>SkyNews</h1>
         <img className="nav-logo" src="style/img/skynews-logo.png"></img> 
-        <h3 className="search-title">Search</h3>
+        <h3 className="search__title">Search</h3>
     <form onSubmit={event=>{
         event.preventDefault()
         onSearch(value1,value2)
@@ -37,7 +37,7 @@ function Search({onSearch, error, category,country, onWeather}){
        
         
     </select>
-            <button className="search-button">Search News</button>
+            <button className="button">Search News</button>
         </form>
     </section>
 {/*     {error && <Feedback message={error} />}

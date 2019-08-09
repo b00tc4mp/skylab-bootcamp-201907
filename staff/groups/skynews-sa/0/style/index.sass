@@ -38,7 +38,7 @@
     transform: rotate(360deg)
 
 .nav
-  width: 100%
+  width: 100vw
   padding: 0.5rem
   height: 2.2rem
   background-color: rgb(0,158,226)
@@ -46,22 +46,26 @@
   justify-content: flex-end
   text-align: center
 
-
-.nav-ul
+.ul
   list-style-type: none
   display: flex
 
 .nav-but
-  font-size: 0.8em
-  background-color: rgba(241, 239, 235, 0.2)
   text-decoration: none
   color: rgb(255,255,255)
 
-.register-li
-  padding: 0.4rem 1.3rem
-  
-.login-li
-  padding: 0.4rem 1.8rem
+.li
+  font-size: 0.8em
+  margin-right: 0.2rem
+  background-color: rgba(241, 239, 235, 0.2)   
+  width: 5rem
+  align-self: center
+  padding: 0.3rem
+  text-align: center
+
+.weather
+  width: 95vw
+  margin: 1rem
 
 .nav-logo
   width: 70vw
@@ -75,95 +79,104 @@
   display: flex
   background-color: rgb(255,255,255)
 
-.search-button
+.button
   width: 40vw
   height: 6vh
   margin: 1rem auto
-  padding: 0 2.4rem
-  display: flex
   background-color: rgba(200,200,200,0.5)
   border: 0.05rem solid rgb(180,180,180)
   border-radius: 0.3rem
+  text-align: center
 
-.search-button:active
+.button:active
   background-color: rgba(200,200,200,1)
   color: rgb(255,255,255)
 
-.results-nav
-  width: 100vw
+.feed-sec
+  display: flex
+  flex-direction: column
+
+.feedback-button
+  width: 40vw
+  height: 6vh
+  margin: 1rem auto
+  background-color: rgba(200,200,200,0.5)
+  border: 0.05rem solid rgb(180,180,180)
+  border-radius: 0.3rem
+  text-align: center
+
+.feedback-button:active
+  background-color: rgba(200,200,200,1)
+  color: rgb(255,255,255)
+
+.results
+  width: 95vw
+  min-height: 200px
+  margin: 0 auto
   display: flex
   text-align: center
-  background: rgb(255,255,255)
+  background-color: rgba(255, 255, 255, 0.5)
+  box-shadow: 10px 10px 9px -4px rgba(0, 0, 0, 0.1)
+  border-radius: 0.3rem
 
-.results-ul
+.results__ul
   list-style-type: none
   display: flex
   width: 95vw
   margin: 1rem auto
   flex-wrap: wrap
 
-.results-li
+.results__li
   width: 95vw
 
-.item-h3
+.title
   margin-top: 2rem
 
-.item-img
-  width: 95vw
+.img
+  width: 90vw
   margin: 1rem auto
 
 .detail
   width: 95vw
   margin: 1rem auto 2rem auto
-  background: rgb(255,255,255)
+  padding: 0.8rem
+  background-color: rgba(255, 255, 255, 0.5)
+  box-shadow: 10px 10px 9px -4px rgba(0, 0, 0, 0.1)
+  border-radius: 0.3rem
 
-.detail-title
-  margin-top: 2.5rem
+.detail__img
+  width:90vw
+  margin-top: 1rem
 
-.detail-img
-  width: 95vw
-  margin: 1rem auto
-
-.detail-data
+.detail__data
   font-size: 0.6rem
 
-.detail-description
+.detail__description
   font-size: 0.8rem
   margin: 1rem 0
 
-.nav-hello
+.nav__hello
   margin: auto 6rem auto 0  
   color: rgb(255,255,255)
   font-size: 0.9rem
 
-.fav-ul
-  list-style-type: none
-  display: flex
-
+.favorites
+  width: 95vw
+  text-align: center
+  margin: auto
+  
 .fav-logo
   width: 60vw
   margin: 4rem auto
   display: flex
 
-.favorites-li
-  padding: 0.4rem 1.3rem
-  
-.logout-li
-  padding: 0.4rem 1.7rem
-
-.search-li
-  padding: 0.4rem 1.7rem
-
 .search
   text-align: center 
 
-.search-title
+.search__title
   margin: 1rem auto
 
-.register-main
-  width: 100vw
-
-.register-nav
+.compo-nav
   width: 100%
   padding: 0.2rem 
   height: 2.2rem
@@ -172,7 +185,7 @@
   justify-content: space-between
   align-items: center
 
-.register-form-section
+.form-section
   width: 90vw
   margin-top: 2rem
   padding: 2rem
@@ -185,7 +198,7 @@
   flex-direction: column
   align-items: center
 
-.register-form
+.form
   margin-top: 2rem
   
 input 
@@ -196,73 +209,15 @@ input
   border: 0.05rem solid #b4b4b4
   padding: 2px
 
-.register-back
-  padding: 0.4rem 1.7rem
-
-.register-button
-  width: 40vw
-  height: 6vh
-  margin: 1rem auto
-  padding: 0 3.2rem
-  display: flex
-  background-color: rgba(200,200,200,0.5)
-  border: 0.05rem solid rgb(180,180,180)
-  border-radius: 0.3rem
+.back
+  width: 5rem
 
 .fav-logo-bco
   height: 80%
   padding-left: 0.45rem
 
-.login-main
+.main
   width: 100vw
-
-.login-nav
-  width: 100%
-  padding: 0.2rem 
-  height: 2.2rem
-  background-color: #009ee2
-  display: flex
-  justify-content: space-between
-  align-items: center
-
-.login-form-section
-  width: 90vw
-  margin-top: 2rem
-  padding: 2rem
-  margin: 2rem auto
-  background-color: rgba(255, 255, 255, 0.5)
-  box-shadow: 10px 10px 9px -4px rgba(0, 0, 0, 0.1)
-  border-radius: 0.3rem
-  text-align: center
-  justify-content: center
-  flex-direction: column
-  align-items: center
-
-.login-form
-  margin-top: 2rem
-
-.login-back
-  padding: 0.4rem 1.7rem
-
-.login-button
-  width: 40vw
-  height: 6vh
-  margin: 1rem auto
-  padding: 0 3.75rem
-  display: flex
-  background-color: rgba(200,200,200,0.5)
-  border: 0.05rem solid rgb(180,180,180)
-  border-radius: 0.3rem
-
-.feedback-button
-  width: 40vw
-  height: 6vh
-  margin: 1rem auto
-  padding: 0 4.2rem
-  display: flex
-  background-color: rgba(200,200,200,0.8)
-  border: 0.05rem solid rgb(180,180,180)
-  border-radius: 0.3rem
 
 .feedback-section
   width: 60vw
@@ -274,7 +229,7 @@ input
   font-size: 0.8rem
   border-radius: 0.3rem
 
-.reg-success-nav
+.reg__success-nav
   width: 100%
   padding: 0.2rem 
   height: 2.2rem
@@ -283,8 +238,7 @@ input
   justify-content: flex-start
   align-items: center
 
-
-.reg-success-section
+.reg__success-section
   width: 90vw
   margin-top: 2rem
   padding: 2rem
@@ -297,22 +251,30 @@ input
   flex-direction: column
   align-items: center
 
+.art-ul
+  list-style-type: none
+  display: flex
+  justify-content: space-evenly
+
+.art-li
+  font-size: 0.8em
+  margin-right: 0.2rem
+  background-color: rgba(180, 180, 180, 0.5)   
+  align-self: center
+  padding: 0.3rem
+  border-radius: 0.4rem
+  text-align: center
+
 .art-but
-  width: 40vw
-  margin: 1rem 1rem 1rem 0
-  justify-content: flex-end
-  background-color: rgba(200,200,200,0.5)
-  border: 0.05rem solid rgb(180,180,180)
-  border-radius: 0.3rem
   text-decoration: none
-  font-size: 0.8rem
   color: rgb(0,0,0)
 
-.detail-link
-  padding: 0.4rem 1.5rem
+.query-search
+  display: flex
+  flex-direction: column
 
-.back-link
-  padding: 0.4rem 1.7rem
-
-.star
-  margin:0 1rem
+.go-query
+  width: 100vw
+  font-size: 0.8rem
+  text-align: center
+  color: rgb(0,0,0)
