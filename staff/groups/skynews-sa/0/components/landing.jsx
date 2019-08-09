@@ -209,22 +209,22 @@ class Landing extends Component{
         return <>
             <header>
                 <nav className="nav">
-                    {user && <p className="nav-hello">Hello, {user.name}</p>}
+                    {user && <p className="nav__hello">Hello, {user.name}</p>}
                     {!user ?
-                        <ul className="nav-ul">
-                            <li><a href="" className="register-li nav-but" onClick={handleRegister}>Register</a></li>
-                            <li><a className="login-li nav-but" href="" onClick={handleLogin}>Login</a></li>
-                        </ul> : <ul className="fav-ul">
-                            {view === 'search' && <li><a href="" className="favorites-li nav-but" onClick={event => {
+                        <ul className="ul">
+                            <li className="li"><a href="" className="nav-but" onClick={handleRegister}>Register</a></li>
+                            <li className="li"><a className="nav-but" href="" onClick={handleLogin}>Login</a></li>
+                        </ul> : <ul className="ul">
+                            {view === 'search' && <li className="li"><a href="" className="nav-but" onClick={event => {
                                 event.preventDefault()
                                 handleFavorites()
                             }}>Favorites</a></li>}
-                            {view === 'searchAdv' && <li><a href="" className="favorites-li nav-but" onClick={event => {
+                            {view === 'searchAdv' && <li className="li"><a href="" className="nav-but" onClick={event => {
                                 event.preventDefault()
                                 handleFavorites()
                             }}>Favorites</a></li>}
-                            {view === 'favorites' && <li><a href="" className="search-li nav-but" onClick={handleGoToSearch}>Search</a></li>}
-                            <li><a href="" className="logout-li nav-but" onClick={handleLogout}>Logout</a></li>
+                            {view === 'favorites' && <li className="li"><a href="" className="nav-but" onClick={handleGoToSearch}>Search</a></li>}
+                            <li className="li"><a href="" className="nav-but" onClick={handleLogout}>Logout</a></li>
                         </ul>}
                 </nav>
             </header>
@@ -234,11 +234,12 @@ class Landing extends Component{
             {view === 'search' && <>
 
                 <Search onSearch={handleSearch} error={error} category={category} country={country} onWeather={handleWeather} />
+                <section className="query-search">
+                <a className="go-query" href="" onClick={event => {
+                    event.preventDefault()
+                    this.handleGoToSearchAdvanced()
+                }}>Go to query search</a></section>
                 {error && <Modal message={error} onAccept={handleAcceptError} />}
-                <a href="" className="favorites-li nav-but" onClick={event => {
-                                event.preventDefault()
-                                this.handleGoToSearchAdvanced()
-                            }}>Advanced Search</a>
                 {!article ?
                     <Results items={news} paintItem={article => {
                         return <ArticleItem article={article} />
@@ -264,7 +265,7 @@ class Landing extends Component{
                 <section className="favorites">
                     <h1 className='fav__title hide'>SkyNews</h1>
                     <img className="fav-logo" src="style/img/skynews-logo.png"></img>
-                    <h3 className="fav-title">Favorites</h3>
+                    <h3 className="title">Favorites</h3>
                     {!article ?
                         <Results items={favs} paintItem={article => {
                             return <ArticleItem article={article} />

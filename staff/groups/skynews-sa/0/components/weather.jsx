@@ -9,12 +9,14 @@ function WeatherItem({weather:{currently:{temperature,icon}},country}){
     if(country=="us") country="New York"
 
     return <>
-         <h3 >{country}: {b.toFixed(1)}°C</h3>
-        {icon==="clear-day" && <i className="far fa-sun"></i>}
-        {icon==="rain" && <i className="fas fa-cloud-showers-heavy"></i>}
-        {icon==="wind" && <i className="fas fa-wind"></i>}
-        {icon==="cloudy" && <i className="fas fa-cloud"></i>}
-        {icon==="partly-cloudy-day" && <i className="fas fa-cloud-sun"></i>}
+        <section className="weather">
+             <h3 >{country}: {b.toFixed(1)}°C</h3>
+            {icon==="clear-day" && <i className="far fa-sun"></i>}
+            {icon==="rain" && <i className="fas fa-cloud-showers-heavy"></i>}
+            {icon==="wind" && <i className="fas fa-wind"></i>}
+            {icon==="cloudy" && <i className="fas fa-cloud"></i>}
+            {icon==="partly-cloudy-day" && <i className="fas fa-cloud-sun"></i>}
+        </section>
   
 
     </>
