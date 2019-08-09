@@ -2,9 +2,9 @@ logic.retrieveTrack = (idUser, tokenUser, idTrack) => {
     let favorites
 
     if(idUser != undefined && tokenUser != undefined) {
-        if(typeof idUser !== 'string') throw new Error(`id user with value ${idUser} is not a string`)
-        if(typeof tokenUser !== 'string') throw new Error(`token user with value ${tokenUser} is not a string`)
-        if(typeof idTrack !== 'string') throw new Error(`song with value ${idTrack} is not a string`)
+        validate.string(idUser, 'id user')
+        validate.string(tokenUser, 'token user')
+        validate.string(idTrack, 'song')
 
         return call(`https://skylabcoders.herokuapp.com/api/user/${idUser}`, 'get', { 'authorization': `bearer ${tokenUser}` }, undefined)
             .then(response => {
@@ -63,7 +63,7 @@ logic.retrieveTrack = (idUser, tokenUser, idTrack) => {
                 return song
             })
     } else {
-        if(typeof idTrack !== 'string') throw new Error(`song with value ${idTrack} is not a string`)
+        validate.string(idTrack, 'song')
 
         return call(`http://skylabcoders.herokuapp.com/proxy?url=https://accounts.spotify.com/api/token`, 'post',
             {

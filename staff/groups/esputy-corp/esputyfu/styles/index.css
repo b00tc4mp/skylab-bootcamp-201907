@@ -105,6 +105,7 @@ h1 {
   bottom: 0px;
   color: white;
   text-align: center;
+  padding: 10px;
 }
 .footer__title {
   font-family: "Playfair Display", serif;
@@ -138,6 +139,10 @@ h1 {
   padding: 0;
 }
 
+.container__search {
+  font-size: 1.3rem;
+}
+
 .success {
   background-image: url("https://cdn.pixabay.com/photo/2015/04/20/13/19/concert-731227_960_720.jpg");
   min-height: 500px;
@@ -167,7 +172,7 @@ h1 {
 
 .container__img {
   width: 100%;
-  max-width: 600px;
+  max-width: 700px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -175,12 +180,17 @@ h1 {
 .container__ul--detail {
   list-style: none;
   color: white;
+  padding: 0;
 }
 
 .container__a {
   color: white;
   text-decoration: none;
   margin-left: 10px;
+}
+
+.container__a:visited {
+  color: white;
 }
 
 .fa {
@@ -206,6 +216,10 @@ h1 {
   margin-right: auto;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.fa-external-link {
+  font-size: 0.8rem;
 }
 
 /*# sourceMappingURL=index.css.map */

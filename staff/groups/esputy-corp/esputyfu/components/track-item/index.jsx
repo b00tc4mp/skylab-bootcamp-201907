@@ -4,6 +4,7 @@ function TrackItem({ track: { nameTrack, nameArtist, nameAlbum, url, favorite, i
         <h3>{nameTrack}</h3>
         <p>{nameArtist} · {nameAlbum}</p>
         <FavButton active={favorite} onToggle={() => onToggle(idTrack)}/>
+        <p>-</p>
     </>
 
 }

@@ -1,14 +1,13 @@
 logic.searchTracks = (idUser, tokenUser, song, limit) => {
     let favorites
-
+    if (limit == undefined) limit = '10'
     if (typeof song === 'string') song.split(' ').join('-').toLowerCase()
 
     if (idUser != undefined && tokenUser != undefined) {
-        if (typeof idUser !== 'string') throw new Error(`id user with value ${idUser} is not a string`)
-        if (typeof tokenUser !== 'string') throw new Error(`token user with value ${tokenUser} is not a string`)
-        if (limit == undefined) limit = '10'
-        if (typeof song !== 'string') throw new Error(`song with value ${song} is not a string`)
-        if (typeof limit !== 'string') throw new Error(`limit with value ${limit} is not a string`)
+        validate.string(idUser, 'id user')
+        validate.string(tokenUser, 'token user')
+        validate.string(song, 'song')
+        validate.string(limit, 'limit')
 
         song = song.trim()
         limit = limit.trim()
@@ -79,9 +78,8 @@ logic.searchTracks = (idUser, tokenUser, song, limit) => {
             })
             .catch(error => new Error(error))
     } else {
-        if (limit == undefined) limit = '10'
-        if (typeof song !== 'string') throw new Error(`song with value ${song} is not a string`)
-        if (typeof limit !== 'string') throw new Error(`limit with value ${limit} is not a string`)
+        validate.string(song, 'song')
+        validate.string(limit, 'limit')
 
         song = song.trim()
         limit = limit.trim()
