@@ -1,3 +1,15 @@
+/**
+ * Retrieves jokes depending on a query 
+ *
+ * @param {String} user id.
+ * @param {String} user token.
+ * @param {String} query search.
+ * 
+ * @throws {Error} When user API doesn't retrieve any user.
+ * 
+ * @returns {Array} An array with jokes.
+ */
+
 logic.searchJokes = function (id, token, query) {
     let favorites;
     console.log(id, token)

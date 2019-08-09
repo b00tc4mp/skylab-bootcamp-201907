@@ -3,7 +3,7 @@ function Search(props) {
     const { onSearch } = props
 
     return <>
-        <form className="form form__search" onSubmit={event => {
+        <form className="form form--search" onSubmit={event => {
             event.preventDefault()
 
             const { target: { query: { value: query } } } = event
@@ -11,11 +11,10 @@ function Search(props) {
             onSearch(query)
         }
         }>
+            <label htmlFor="query"></label>
+            <input type="text" name="query" id="query" />
 
-            <label htmlFor="query">
-                <input type="text" name="query" id="query" />
-            </label>
-            <button className="btn btn__submit">Search</button>
+            <button className="btn btn__search">Search</button>
 
         </form>
     </>

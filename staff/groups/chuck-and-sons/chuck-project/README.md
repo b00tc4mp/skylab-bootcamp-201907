@@ -11,23 +11,14 @@ Jokes can be shown by categories or by free search and each one can be reproduce
 ![User case](assets/user_case.png)
 
 ## Technical description
-### Technologies
-* HTML
-* Css - Sass
-* Javascript
-* React
-
 ### Activity diagram
-![Activity diagram](assets/activity_diagram_00.png)
+![User case](assets/activity_diagram_00.png)
 
-![Activity diagram](assets/activity_diagram_01.png)
+![User case](assets/activity_diagram_01.png)
+
 
 ### Blocks
-![UBlocks](assets/blocks.png)
-
-### Components
-![User case](assets/components.png)
+![User case](assets/blocks.png)
 
 ### Data model
-![UData model](assets/data_model.png)
 

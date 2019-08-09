@@ -1,3 +1,17 @@
+/**
+ * Toggles { favorite } on the current joke 
+ * Updates { favorites } propety on the current user
+ *
+ * @param {String} user id.
+ * @param {String} user token.
+ * @param {String} joke id.
+ * 
+ * @throws {Error} When user API doesn't retrieve any user.
+ * @throws {Error} When user API doesn't retrieve credentials.
+ * @throws {Error} When data API doesn't retrieve the current joke.
+ */
+
+
 logic.toggleFavoriteItem = function (id, token, idItem) {
     validate.str(id, 'id')
     validate.str(token, 'token')

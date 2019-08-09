@@ -1,8 +1,8 @@
-function RetrieveCategories({ arrayJokes, startSynth, onToggle , error }) {
+function RetrieveCategories({ arrayJokes, startSynth, onToggle, error }) {
 
     return <section className="results">
-         <h2>Your Jokes</h2> 
-        {!arrayJokes.length && <Feedback className = "feedback feedback--error" message = { "no results for this query" }/> }
+        <h2>Your Jokes</h2>
+        {arrayJokes.total === 0 && <Feedback className="feedback feedback--error" message={'no valid query'} />}
         {arrayJokes.result.map(item => {
             return <article className="joke-container" key={`${item.id}`}>
                 <p className="joke">{item.value}</p>
@@ -17,18 +17,19 @@ function RetrieveCategories({ arrayJokes, startSynth, onToggle , error }) {
 
 function RetrieveRandom({ arrayRandom, startSynth }) {
 
-    const joke = Object.values(arrayRandom.value)
-    const jokeId = Object.values(arrayRandom.id)
+    const joke = arrayRandom.value
+    const jokeId = arrayRandom.id
 
-
-    return <div>
+    return <section className="results">
+        <h2>Your Random Chuck</h2>
         <article className="joke-container results" key={`${jokeId}`}>
-            <h2>Your Random Chuck</h2>
-
             <p className="joke">{arrayRandom.value}</p>
-            <SynthButton initSynth={startSynth} joke={joke} />
+            <div className="div-container">
+                <SynthButton initSynth={startSynth} joke={joke} />
+            </div>
         </article>
-    </div>
+    </section>
+
 }
 
 

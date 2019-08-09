@@ -1,4 +1,4 @@
-function Register(props){
+function Register(props) {
 
     const {
         onGoToLanding,
@@ -7,56 +7,56 @@ function Register(props){
     } = props
 
     return <>
-        <div className = "form">
+        <div className="form">
 
-            <h1> Register </h1>
+            <h2> Register </h2>
 
-            <form   className = "form__landing form--register"
-            
-                    onSubmit={ event =>{
-                        event.preventDefault()
-                        
-                        const { target : { 
-                                name : { value : name },
-                                surname : { value : surname },
-                                username : { value : username },
-                                password : { value : password },
-                                repassword : { value : repassword } 
+            <form className="form__landing form--register"
 
-                            }
-                        } = event
+                onSubmit={event => {
+                    event.preventDefault()
 
-                        onRegister(name , surname , username , password , repassword)
+                    const { target: {
+                        name: { value: name },
+                        surname: { value: surname },
+                        username: { value: username },
+                        password: { value: password },
+                        repassword: { value: repassword }
+
                     }
+                    } = event
+
+                    onRegister(name, surname, username, password, repassword)
+                }
                 }>
 
-                <label htmlFor = "name">Name</label>
-                    <input type="text" name="name" id="name" />
-                
+                <label htmlFor="name">Name</label>
+                <input type="text" name="name" id="name" />
 
-                <label htmlFor = "surname">Surname</label>
-                    <input type="text" name="surname" id="surname" />
-                
 
-                <label htmlFor = "username">Email</label>
-                    <input type="email" name="username" id="username" />
-                
+                <label htmlFor="surname">Surname</label>
+                <input type="text" name="surname" id="surname" />
 
-                <label htmlFor = "password">Password</label>
-                    <input type="password" name="password" id="password"/>
-                
 
-                <label htmlFor = "repassword">Repeat password</label>
-                    <input type="password" name="repassword" id="repassword" />
-                
+                <label htmlFor="username">Email</label>
+                <input type="email" name="username" id="username" />
 
-                <button className = "btn btn__submit">Register</button>
+
+                <label htmlFor="password">Password</label>
+                <input type="password" name="password" id="password" />
+
+
+                <label htmlFor="repassword">Repeat password</label>
+                <input type="password" name="repassword" id="repassword" />
+
+
+                <button className="btn btn__submit">Register</button>
 
             </form>
 
-            <button className = "btn btn__back" onClick={ event => { onGoToLanding() } }>Go back</button>
+            <button className="btn btn__back" onClick={event => { onGoToLanding() }}>Go back</button>
 
-            {error && <Feedback className = "feedback feedback--error" message = { error }/>}
+            {error && <Feedback className="feedback feedback--error" message={error} />}
         </div>
     </>
 }

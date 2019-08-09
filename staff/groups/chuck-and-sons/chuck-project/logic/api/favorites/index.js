@@ -1,3 +1,15 @@
+/**
+ * Retrieves user favorites 
+ *
+ * @param {String} user id.
+ * @param {String} user token.
+ * 
+ * @throws {Error} When user API doesn't retrieve any user.
+ * @throws {Error} When data API doesn't retrieve a joke.
+ * 
+ * @returns {Array} An array with favorite jokes.
+ */
+
 logic.getFavoriteJokes = (id, token) => {
     validate.str(id, 'id')
     validate.str(token, 'token')
