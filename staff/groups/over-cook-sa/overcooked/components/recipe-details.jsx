@@ -20,6 +20,9 @@ function RecipeDetails({ meal: { idMeal, strMeal, strInstructions, strYoutube, s
        
 
         <p className='descText'>{strInstructions}</p>
+
+        <iframe className="recipe-video" src={strYoutube}></iframe>
+
         <a className='btnGo' href={strYoutube} target="_blank" >VIDEO</a>
 
         <a className='backButton' href="#" onClick={ event => {

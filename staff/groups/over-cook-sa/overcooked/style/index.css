@@ -170,6 +170,27 @@ main {
   bottom: 0;
 }
 
+.register-succes {
+  display: grid;
+  box-shadow: 0 4px 6px #bbb;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  margin: 5rem 2rem 0 2rem;
+  padding: 10px;
+  font-size: 15px;
+}
+.register-succes__login {
+  box-shadow: 0 4px 6px #bbb;
+  background-color: rgba(123, 239, 178, 0.7);
+  padding: 5px 5px 5px 5px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  color: black;
+}
+
 .footer-home {
   background-color: #a30f32;
   display: flex;
