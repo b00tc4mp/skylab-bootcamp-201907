@@ -1,4 +1,4 @@
-# Chcuk Generator
+# Chuck Generator
 staff
 - jaume
 - christian
