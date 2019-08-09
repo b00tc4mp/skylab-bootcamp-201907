@@ -15,12 +15,10 @@ class Landing extends Component {
         this.handleAcceptError = this.handleAcceptError.bind(this)
         this.handleRetrieveMovie = this.handleRetrieveMovie.bind(this)
         this.handleToggleFavMovieFromMovieDetail = this.handleToggleFavMovieFromMovieDetail.bind(this)
-        this.handleToggleMovieFromMovieDetail = this.handleToggleMovieFromMovieDetail.bind(this)
         this.handleBackFromDetail = this.handleBackFromDetail.bind(this)
         this.handleToggleFavMovieFromMovieItem = this.handleToggleFavMovieFromMovieItem.bind(this)
         this.handleToggleFavMovieFromFavoritesSection = this.handleToggleFavMovieFromFavoritesSection.bind(this)
         this.handleFavorites = this.handleFavorites.bind(this)
-        this.handleToggleMovieFromMovieDetail = this.handleToggleMovieFromMovieDetail.bind(this)
         this.handleCreateList = this.handleCreateList.bind(this)
         this.handleRetrieveLists = this.handleRetrieveLists.bind(this)
         this.handleDisplayListModal = this.handleDisplayListModal.bind(this)
@@ -28,6 +26,7 @@ class Landing extends Component {
         this.handleGoToMenuCollections = this.handleGoToMenuCollections.bind(this)
         this.handleGoToHome = this.handleGoToHome.bind(this)
         this.handleCloseModal = this.handleCloseModal.bind(this)
+    }
 
 
     componentWillMount() {
@@ -90,7 +89,7 @@ class Landing extends Component {
     }
 
     handleGoToFavorites(event) {
-        event.preventDefault()
+        event && event.preventDefault()
         this.handleFavorites()
 
     }
@@ -200,17 +199,6 @@ class Landing extends Component {
         credentials && (id = credentials.id, token = credentials.token)
 
         credentials ? logic.toggleFavMovie(id, token, movieId).then(() => handleFavorites()) : handleGoToLogIn()
-    }
-
-    handleToggleMovieFromMovieDetail(movieId) {
-        const { props: { credentials }, handleGoToLogIn, handleListModal } = this
-
-        let id, token
-
-        credentials && (id = credentials.id, token = credentials.token)
-
-        credentials ? logic.toggleListModal(id, token, movieId, () => handleListModal()) : handleGoToLogIn()
-
     }
 
 
@@ -339,7 +327,7 @@ class Landing extends Component {
 
                 {/* Movie detail which displays. Includes fav button and back button  */}
                 {view === 'detail' &&
-                    <MovieDetail movie={movie} onBack={handleBackFromDetail} onToggle={handleToggleFavMovieFromMovieDetail} onToggle={handleToggleMovieFromMovieDetail} />}
+                    <MovieDetail movie={movie} onBack={handleBackFromDetail} onToggle={handleToggleFavMovieFromMovieDetail} />}
 
                 {view === 'favorites' && <>
                     <Favorites favs={favs} removeFav={handleToggleFavMovieFromFavoritesSection} showDetail={handleRetrieveMovie} onClickList={handleDisplayListModal} />

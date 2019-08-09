@@ -487,8 +487,6 @@ form textareatextarea:focus {
 }
 .panelDetail__title {
   margin-top: 60px;
-
-
 }
 .panelDetail__director, .panelDetail__mainCast {
   border: none;
@@ -538,8 +536,6 @@ form textareatextarea:focus {
   cursor: not-allowed;
 }
 
-
-
 .panelImage {
   display: flex;
   width: 100%;
@@ -554,35 +550,21 @@ form textareatextarea:focus {
   opacity: 0.7;
 }
 
-
 .close__detail--detail {
   position: absolute;
   right: 10px;
   width: 30px;
   top: 170px;
-
-.close__detail {
-  position: absolute;
-  right: 10px;
-  top: 140px;
-  width: 30px;
-
   height: 30px;
   opacity: 1;
   color: #f7f7f7;
   z-index: 7;
 }
-
 .close__detail--detail:hover {
   opacity: 0.2;
   color: #c6c6c6;
 }
-
-.close__detail:hover {
-  opacity: 0.2;
-  color: #c6c6c6;
-}
-.close__detail:before, .close__detail:after {
+.close__detail--detail:before, .close__detail--detail:after {
   position: absolute;
   left: 10px;
   content: " ";
@@ -591,16 +573,10 @@ form textareatextarea:focus {
   background-color: #f7f7f7;
   opacity: 1;
 }
-
 .close__detail--detail:before {
   transform: rotate(45deg);
 }
 .close__detail--detail:after {
-
-.close__detail:before {
-  transform: rotate(45deg);
-}
-.close__detail:after {
   transform: rotate(-45deg);
 }
 
@@ -854,7 +830,6 @@ form textareatextarea:focus {
   width: 1.2rem;
   height: 1.2rem;
 }
-
 .close__detail {
   position: absolute;
   right: 10px;
@@ -884,7 +859,6 @@ form textareatextarea:focus {
 .close__detail:after {
   transform: rotate(-45deg);
 }
-
 
 ul {
   display: grid;
@@ -949,22 +923,21 @@ h3 {
   font: "Open Sans", Arial, Helvetica, sans-serif;
 }
 
-.feedback--error, .feedback--success, .mosaicInfo__title, .mosaicInfo__date, .panelDetail__director, .panelDetail__mainCast, .panelDetail__description, .panelDetail__date, .panelDetail__title, .panelDetail__vote, .panelDetail__director--name, .panelDetail__mainCast--name, .panelDetail__description--description, .button {
+.feedback--error, .feedback--success, .registered-name, .mosaicInfo__title, .mosaicInfo__date, .panelDetail__director, .panelDetail__mainCast, .panelDetail__description, .panelDetail__date, .panelDetail__title, .panelDetail__vote, .panelDetail__director--name, .panelDetail__mainCast--name, .panelDetail__description--description, .button {
   font-size: 0.8rem;
   text-decoration: none;
   font-weight: 200;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 
-
-.menuToggle a, .registered-name, .container_image p, form, form input, .search-bar, .mosaicInfo__vote, .big-letter, .button {
+.menuToggle a, form, form input, .search-bar, .mosaicInfo__vote, .big-letter, .form-panel, .form-panel input, .button, .container_image p {
   font-size: 1rem;
   text-decoration: none;
   font-weight: 200;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 
-.container_image .title_collection, .modal-inner__title {
+.modal-inner__title, .container_image .title_collection {
   font-size: 1.3rem;
   text-decoration: none;
   font-weight: 500;
