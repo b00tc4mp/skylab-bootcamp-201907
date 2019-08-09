@@ -1,3 +1,13 @@
+/**
+ * We retrive the recipes through the identifiers 
+ * to be able to look if they are in favorites
+ * 
+ * @param {string} id       - identifier
+ * @param {string} token    - key to verify user
+ * @param {string} recipeId - recipe identifier
+ * 
+ */
+
 logic.retrieveRecipe = function (id, token, recipeId) {
     let favorites
 

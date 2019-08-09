@@ -1,3 +1,19 @@
+
+/** 
+ * Authenticate a user through the service via Skylabcoders users API
+ * by providing the inputs collected on the register form.
+ * Return JSON response that includes user id 
+ * 
+ * @param {string} name       - Name of the user
+ * @param {string} surname    - Surname of the user
+ * @param {string} username   - Username used to sign in into the service
+ * @param {string} password   - Password used to sign in into the service
+ * @param {string} repassword - Password confirmation
+ * 
+ */
+
+
+
 logic.registerUser = function (name, surname, username, password, repassword) {
     validate.string(name, 'name')
     validate.string(surname, 'surname')

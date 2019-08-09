@@ -1,3 +1,12 @@
+/**
+ * Throught the id and token we retrieve the user favorites through 
+ * Skylabcoders users API
+ * 
+ * @param {string} id       - identifier
+ * @param {string} token    - key to verify user
+ * 
+ */
+
 logic.retrieveFavMeal = function (id, token) {
     validate.string(id, 'id')
     validate.string(token, 'token')

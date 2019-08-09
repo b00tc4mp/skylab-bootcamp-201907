@@ -1,3 +1,8 @@
+/** 
+ * ti splits youtube videos and uses the video id 
+ * so we can show it in the App
+ * 
+ */
 
  const youtubeParse = link => {
 

@@ -1,3 +1,14 @@
+/** 
+ * Its a search method that 
+ * accesses the API to be able to search meals 
+ * through their ingredients
+ * 
+ * @param {string} id       - identifier
+ * @param {string} token    - key to verify user
+ * @param {string} query    - is a parameter to look for meal through ingredient
+ * 
+ */
+
 logic.searchIngredient = function (id, token, query) {
     let favorites
 

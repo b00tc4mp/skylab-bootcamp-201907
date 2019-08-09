@@ -1,3 +1,14 @@
+/** 
+ * Its a search method that 
+ * accesses the API and alows us to search meals 
+ * through their category
+ * 
+ * @param {string} id       - identifier
+ * @param {string} token    - key to verify user
+ * @param {string} query     - is a parameter to look for meal through their classification
+ * 
+ */
+
 logic.showCategory = function (id, token, query) {
     let favorites
 
