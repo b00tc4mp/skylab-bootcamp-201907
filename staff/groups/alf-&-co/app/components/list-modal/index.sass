@@ -87,3 +87,34 @@
 
 
     
+
+
+.close
+    &__detail
+    
+        position: absolute
+        right: 10px
+        top: 140px
+        width: 30px
+        height: 30px
+        opacity: 1
+        color: $color-beige
+        z-index: 7
+
+        &:hover 
+            opacity: 0.2
+            color: $color-light-grey
+        &:before,
+        &:after 
+            position: absolute
+            left: 10px
+            content: ' '
+            height: 20px
+            width: 2px
+            background-color: $color-beige
+            opacity: 1
+        &:before 
+            transform: rotate(45deg)
+        &:after 
+            transform: rotate(-45deg)        
+
