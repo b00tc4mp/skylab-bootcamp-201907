@@ -1,3 +1,17 @@
+/**
+ * It allows a registered user to add or remove favorite GIFs from random panel.
+ * It checks whether the GIF id already exists in the favorites section. If it does, the function removes it; if it doesn't, the function adds it.
+ * If the validations go wrong, it shows a message with the response error.
+ * 
+ * @param {String} id The user id.
+ * @param {String} token The token to authorize user validation.
+ * @param {String} gifid The GIF id.
+ * 
+ * @return {Object} Response on the process and modified favorites array.
+ */
+
+
+
 logic.randomGif = function (id, token, gifId) {
     let favorites = []
 
