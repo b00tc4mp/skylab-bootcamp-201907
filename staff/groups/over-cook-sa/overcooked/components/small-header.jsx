@@ -2,9 +2,13 @@ function SmallHeader({onLogout,goToCategories,user,handleFavorites}) {
 
   return ( <nav>
       <img className = "home-logo" src="https://cdn.shopify.com/s/files/1/0014/1962/files/FG-banner_collect-top_template2_overcooked.png?v=1528818873" alt=""/>
+        <section className="user">
+          <section className="user-welcome">
+          <p className="home-welcome">Welcome {user.name}</p>
+          </section>
+        </section>
 
-      <p className="home-welcome">Welcome {user.name}</p>
-      
+      <section className="smallHeader-buttons">
       <a href="home-logout" className="headerButton" onClick={ event => {
         event.preventDefault()
         onLogout()
@@ -23,6 +27,8 @@ function SmallHeader({onLogout,goToCategories,user,handleFavorites}) {
         handleFavorites()
         )
       }}>Favorites</a>
+              </section>
+
       </nav>
     
   )

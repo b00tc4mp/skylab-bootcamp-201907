@@ -3,6 +3,10 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+.hide {
+  display: none;
+}
+
 .feedback--error {
   color: red;
 }
@@ -18,13 +22,16 @@
 body {
   width: 100vw;
   display: flex;
+  height: 100vh;
 }
 
 input {
   border: 0.09rem solid rgba(0, 0, 0, 0.3);
+  margin: 0.2rem;
+  opacity: 0.8;
 }
 
-select, button, a {
+select, button {
   margin: 0.5rem;
   text-align: center;
   padding-top: 0.4rem;
@@ -34,7 +41,6 @@ select, button, a {
   margin-top: 1rem;
   align-self: center;
   border: none;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bold;
   background-color: #4091cc;
   color: white !important;
@@ -42,6 +48,7 @@ select, button, a {
 
 a {
   text-decoration: none;
+  padding-top: 0 !important;
 }
 
 ul {
@@ -64,42 +71,40 @@ main {
   width: 100vw;
 }
 
-.back-img {
-  display: flex;
-  background-color: white;
+.backgroundLan {
+  background-image: url(img/fondo-landing.png);
   background-size: cover;
-  display: block;
-  width: 100%;
+  height: 100vh;
+}
+
+.landingButton {
+  background-color: rgba(91, 177, 222, 0.8);
 }
 
 .landingContainer {
   display: flex;
   padding-top: 1%;
+  width: 100vw;
+  margin: 0 0 0 0;
 }
 .landingContainer_container {
-  background-color: aliceblue;
-  border: 2px solid rgba(0, 0, 0, 0.3);
-  box-shadow: 0 4px 6px #bbb;
-  background: #fff;
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
   padding: 1vw;
-}
-
-.landingContainer {
-  margin: 0 0 0 5px;
+  margin: 2rem auto;
 }
 
 .landingContainer li {
-  margin: 1vw;
+  margin: 2vw;
 }
 
 .landingContainer a {
+  color: white !important;
   text-decoration: none;
   font-size: 0.8em;
   color: black;
   font-weight: bolder;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px #bbb;
+  padding: 0.5rem;
 }
 
 .landingContainer label {
@@ -115,20 +120,17 @@ main {
 }
 
 .random-content {
-  border: 2px solid rgba(0, 0, 0, 0.3);
+  display: block;
   padding: 0 20px 20px 20px;
   margin: 60px auto;
   box-shadow: 0 4px 6px #bbb;
-  background: #fff;
+  background-color: rgba(255, 255, 255, 0.6);
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   padding: 10px;
   width: 80vw;
   height: 70vw;
-}
-
-.random-content h2 {
   font-size: 15px;
 }
 
@@ -137,7 +139,6 @@ main {
 }
 
 .random-recipe {
-  display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   align-content: center;
@@ -155,7 +156,7 @@ main {
   top: 0;
   width: 100%;
   padding-top: 2rem;
-  background-color: white;
+  background-image: url(img/fondo-landing.png);
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 
@@ -231,15 +232,11 @@ main {
 }
 
 .btnGo {
-  margin-top: 1rem;
   align-self: center;
   border: none;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bold;
-  background-color: #4091cc;
-  height: 1.7rem;
+  background-color: rgba(91, 177, 222, 0.8);
   color: white;
-  width: 4rem;
 }
 
 .backButton {
@@ -253,10 +250,8 @@ main {
   border: none;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bold;
-  background-color: #4091cc;
-  height: 1.3rem;
+  background-color: rgba(91, 177, 222, 0.8);
   color: white !important;
-  width: 4rem;
 }
 
 .homeHeader {
@@ -281,8 +276,21 @@ main {
   width: 1rem;
 }
 
+.user {
+  display: flex;
+}
+
 .home-welcome {
   margin-bottom: 0.5rem;
+  color: white;
+  margin: 0;
+}
+
+.user-welcome {
+  background-color: #4091cc;
+  opacity: 0.8;
+  border-radius: 2px;
+  width: 30vw;
 }
 
 .search {

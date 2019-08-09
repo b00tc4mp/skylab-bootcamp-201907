@@ -4,8 +4,8 @@ function WelcomeAnchors({ onLogin, onRegister }) {
       <nav className="landingContainer">
 
         <ul className="landingContainer_container">
-          <li>
-            <a
+          <li className="regLog">
+            <a className="landingButton"
               href=""
               onClick={event => {
                 event.preventDefault()
@@ -17,7 +17,7 @@ function WelcomeAnchors({ onLogin, onRegister }) {
             </a>
           </li>
           <li>
-            <a
+            <a className="landingButton"
               href=""
               onClick={event => {
                 event.preventDefault()

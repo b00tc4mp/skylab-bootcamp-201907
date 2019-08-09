@@ -94,6 +94,8 @@ class Landing extends Component {
 
     return (
       <>
+        
+    <section className="backgroundLan">
         <header className="header-landing">
           <BigHeader />
         </header>
@@ -112,6 +114,7 @@ class Landing extends Component {
      <footer className="footer">
        <Footer />
      </footer>
+     </section>
       </>
     )
   }

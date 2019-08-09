@@ -3,7 +3,6 @@ function Register({ onRegister, onBack, error }) {
     <>
     <nav className="landingContainer">
       <ul className="landingContainer_container">
-      <h2 className='loginTitle'>Register</h2>
       <form className="loginForm"
         onSubmit={event => {
           event.preventDefault()
@@ -21,21 +20,26 @@ function Register({ onRegister, onBack, error }) {
           onRegister(name, surname, email, password, repassword)
         }}
       >
-        <label>
-          Name <input type="text" name="name" />
+        <label htmlFor="name" className="hide">
+          Name 
         </label>
-        <label>
-          Surname <input type="text" name="surname" />
+        <input placeholder="Name" type="text" name="name" />
+        <label htmlFor="surname" className="hide">
+          Surname 
         </label>
-        <label>
-          E-mail <input type="email" name="email" />
+        <input placeholder="Surname" type="text" name="surname" />
+        <label htmlFor="email" className="hide">
+          E-mail 
         </label>
-        <label>
-          Password <input type="password" name="password" />
+        <input placeholder="Email" type="email" name="email" />
+        <label htmlFor="password" className="hide">
+          Password 
         </label>
-        <label>
-          Repeat password <input type="password" name="repassword" />
+        <input placeholder="Password" type="password" name="password" />
+        <label htmlFor="repassword" className="hide">
+          Repeat password 
         </label>
+        <input placeholder="Repeat Password" type="password" name="repassword" />
         <button className='btnGo'>Register</button>
         <a className="backButton" href="#"
           onClick={event => {
