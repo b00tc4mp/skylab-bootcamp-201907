@@ -1,8 +1,8 @@
 function Register({ onRegister, onLogin, onBack, error}) {
 return <>
     <section className="register">
-        <h2 className="register__title title">Register</h2>
-        <form className="register__form form" onSubmit={event => {
+        <h2 className="title register__title">Register</h2>
+        <form className="form register__form" onSubmit={event => {
             event.preventDefault()
 
             const { target: { name: { value: name }, surname: { value: surname }, email: { value: email }, password: { value: password }, repassword: { value: repassword} } } = event
@@ -14,18 +14,18 @@ return <>
             <label>E-mail<input className="register__form--field form__field" type="email" name="email" /></label>
             <label>Password<input className="register__form--field form__field" type="password" name="password" /></label>
             <label>Repeat password<input className="register__form--field form__field" type="password" name="repassword" /></label>
-            <button className="register__button form_button">Register</button>
+            <button className="register__button form__button">Register</button>
         </form>
         {error && <Feedback message={error} />}
-        <p className="register__info form-info">Do you already have an account? Go to
-            <a className="register__on-login" href="" onLogin={event => {
+        <p className="register__info form__info">Do you already have an account? Go to <span></span>
+            <a className="register__on-login anchor__link" href="" onLogin={event => {
             event.preventDefault()
 
             onLogin()
-        }}> Login</a></p>
+        }}>Login</a></p>
         
 
-        <a className="register__back-link back-link" href="" onClick={event => {
+        <a className="register__back-link anchor__link" href="" onClick={event => {
             event.preventDefault()
 
             onBack()
