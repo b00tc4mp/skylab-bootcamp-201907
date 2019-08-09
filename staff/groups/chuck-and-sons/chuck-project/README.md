@@ -21,4 +21,4 @@ Jokes can be shown by categories or by free search and each one can be reproduce
 ![User case](assets/blocks.png)
 
 ### Data model
-
+![User case](assets/data_model.png)
