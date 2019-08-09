@@ -1,3 +1,30 @@
+/**
+ * Input validation for strings, emails, functions, urls and passwords.
+ * Returns no response if validation is passed, otherwise raises error.
+ * 
+ * string
+ * @param {string} target - Input parameter to validate
+ * @param {string} name - Variable identifier
+ * @param {string} [empty=true] - Optional validate flag. When set to false (defaul) empty strings are allowed. Default is true
+ * @param {string} values - Array of values against which target existence will be checked. 
+ * 
+ * email
+ * @param {string} target - Input parameter to validate
+ * @param {string} name - Variable identifier
+ * 
+ * password
+ * @param {string} target - Input parameter to validate
+ * @param {string} name - Variable identifier
+ * 
+ * function
+ * @param {string} target - Input parameter to validate
+ * @param {string} name - Variable identifier
+ * 
+ * url
+ * @param {string} target - Input parameter to validate
+ * @param {string} name - Variable identifier
+ */
+
 const validate = (() => {
     const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     const URL_REGEX = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/ 

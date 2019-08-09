@@ -1,11 +1,13 @@
 /**
+ * Retrieves movie details such as title, release date or director 
+ * by calling the specific TMDB API endpoint with a movie id.
+ * When an user is logged to the service, their favorites are also retrieved
+ * to check if the movie id is already included in user's favorites.  
+ * Returns a parsed JSON with movie details.
  * 
- * Retrieve movie detail using TMDB API. If userID and userToken is provided, result are enriched with favorites data.
- * 
- * @params {string} userId
- * @params {string} userToken
- * @params {string} query
- * @params {boolean} collections
+ * @param {string} userId - User id returned by Skylabcoders' users API authentication
+ * @param {string} userToken - Token returned by Skylabcoders' users API authentication
+ * @param {string} movieId - The TMDB movie id 
  * 
  */
 

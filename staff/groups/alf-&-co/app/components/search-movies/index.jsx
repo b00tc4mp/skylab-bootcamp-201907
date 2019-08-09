@@ -4,9 +4,9 @@ function Search(props) {
 
         const { target: { query: { value: query } } } = event
 
-        props.onSearch(query)
+        props.onSearch(query, event)
     }}>
-        {<input className="search-bar" type="text" name="query" placeholder="Search by movie title..."/>}
+        {<input   className="search-bar" type="text" name="query" placeholder="Search by movie title..."/>}
         
     </form>
 }

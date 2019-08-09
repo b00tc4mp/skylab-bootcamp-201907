@@ -1,6 +1,16 @@
 /**
- * Introduce the user dades to de api added. 
+ * Registers a new user into the service via Skylabcoders users API
+ * by providing the inputs collected on the register form.
+ * Return JSON response that includes user id 
+ * 
+ * @param {string} name       - Name of the user
+ * @param {string} surname    - Surname of the user
+ * @param {string} username   - Username used to sign in into the service
+ * @param {string} password   - Password used to sign in into the service
+ * @param {string} repassword - Password confirmation
+ * 
  */
+
 logic.registerUser = function (name, surname, username, password, repassword) {
     validate.string(name, 'name')
     validate.string(surname, 'surname')
@@ -15,5 +25,6 @@ logic.registerUser = function (name, surname, username, password, repassword) {
     return call('https://skylabcoders.herokuapp.com/api/user', 'post', { 'content-type': 'application/json' }, {name, surname, username, password, favorites: [], lists: [] })
         .then(response => {
             if (response.status === 'KO') throw new Error(response.error)
+            return response
         })
 }

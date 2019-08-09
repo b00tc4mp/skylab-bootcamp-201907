@@ -1,11 +1,14 @@
 /**
+ * Retrieves a list of movies from TMDB API 
+ * matching either the search keyword or the collection selection.
+ * When user is logged in, user's favorites are also retrieved to
+ * add a boolean flag to results when needed
+ * Returns an array of movie objects.
  * 
- * Search movies and collections (by genre) using TMDB API and returns movie results. If userID and userToken is provided, results are enriched with favorites data.
- * If collections is true, the endpoint url changes and goes to the movies of the chosen collections
- * @params {string} userID
- * @params {string} userToken
- * @params {string} query
- * @params {boolean} collections
+ * @param {string} userId - User id returned by Skylabcoders' users API authentication
+ * @param {string} userToken - Token returned by Skylabcoders' users API authentication
+ * @param {string} query - The keyword query submitted on the search form
+ * @param {boolean} [collections=false] - An optional flag to indicate which endpoint must be use (search or collections)
  * 
  */
 
