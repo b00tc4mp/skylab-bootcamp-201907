@@ -85,6 +85,8 @@
                         .then(response => {
                             if (response.status === 'KO') throw new Error(response.error)
                         })
+                        .then(username=>expect(username).toBeUndefined())
+                        .then(password=>expect(password).toBeUndefined())
                 })
         })
     }

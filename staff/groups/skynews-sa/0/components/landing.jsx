@@ -234,6 +234,7 @@ class Landing extends Component{
             {view === 'search' && <>
 
                 <Search onSearch={handleSearch} error={error} category={category} country={country} onWeather={handleWeather} />
+                {error && <Modal message={error} onAccept={handleAcceptError} />}
                 <a href="" className="favorites-li nav-but" onClick={event => {
                                 event.preventDefault()
                                 this.handleGoToSearchAdvanced()
@@ -244,12 +245,12 @@ class Landing extends Component{
                     }} onItem={handleRetrieveArticle} />
                     :
                     <ArticleDetail article={article} onToggle={handleToggleFavArticleFromArticleDetail} onBack={handleBackFromDetail} />}
-                {error && <Modal message={error} onAccept={handleAcceptError} />}
             </>}
 
             {view === 'searchAdv' && <>
 
                 <SearchAdv onSearch={handleSearchAdvanced} onBack={handleBackFromSearchAdvanced} />
+                {error && <Modal message={error} onAccept={handleAcceptError} />}
                 {!article ? 
 
                     <Results items={news} paintItem={article => {
@@ -257,7 +258,6 @@ class Landing extends Component{
                     }} onItem={handleRetrieveArticle} />
                     :
                     <ArticleDetail article={article} onToggle={handleToggleFavArticleFromArticleDetail} onBack={handleGoToSearchAdvanced} />}
-                {error && <Modal message={error} onAccept={handleAcceptError} />}
             </>}
 
             {view === 'favorites' && <>

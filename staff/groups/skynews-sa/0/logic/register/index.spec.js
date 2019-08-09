@@ -47,6 +47,22 @@
                 logic.registerUser('Manuel', 'Barzi', 'manuelbarzi@gmail.com', '123', '456')
             ).toThrowError(Error, 'passwords do not match')
         )
+
+        it('should fail on empty surname', () =>
+        expect(() =>
+            logic.registerUser('', 'Barzi', 'manuelbarzi@gmail.com', '123', '123')
+        ).toThrowError(Error, 'name is empty or blank')
+    )
+    it("should fail on empty password",()=>
+        expect(()=>
+            logic.registerUser('Manuel', 'Barzi', 'manuelbarzi@gmail.com', '', '')
+        ).toThrowError(Error,"password is empty or blank")       
+    )
+    it("shoudl fail on empty repassword", ()=>
+        expect(()=>
+            logic.registerUser('Manuel', 'Barzi', 'manuelbarzi@gmail.com', '333', '')         
+        ).toThrowError(Error,"password repeat is empty or blank")       
+    )
         // TODO test more cases
         describe('when user already exists', () => {
             it('should fail on already existing username', () =>
@@ -55,7 +71,6 @@
                     .then(() => logic.registerUser(user.name, user.surname, user.username, user.password, user.password))
                     .catch(error => expect(error).toBeDefined())
             )
-            // TODO test more cases
         })
     })
 }
