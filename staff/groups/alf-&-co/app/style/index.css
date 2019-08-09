@@ -721,6 +721,8 @@ form textareatextarea:focus {
   width: 80vw;
   height: 80vh;
   background-color: #f7f7f7;
+  position: relative;
+  padding: 10px;
 }
 .modal-inner__title {
   margin-top: 1rem;
@@ -745,7 +747,10 @@ form textareatextarea:focus {
 .modal-inner__item:nth-last-child {
   border-bottom: none;
 }
-.modal-inner__item--active {
+.modal-inner__btn {
+  width: 100%;
+}
+.modal-inner__btn--active {
   color: #00ffa6;
 }
 
@@ -782,6 +787,12 @@ form textareatextarea:focus {
   margin: 2px auto;
 }
 
+
+.close {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
 .close__detail {
   position: absolute;
   right: 10px;
@@ -812,6 +823,7 @@ form textareatextarea:focus {
   transform: rotate(-45deg);
 }
 
+
 .emptyFavorites {
   display: flex;
   flex-direction: column;
@@ -831,6 +843,7 @@ form textareatextarea:focus {
 h3 {
   font: "Open Sans", Arial, Helvetica, sans-serif;
 }
+
 
 .feedback--error, .feedback--success, .mosaicInfo__title, .mosaicInfo__date, .panelDetail__director, .panelDetail__mainCast, .panelDetail__description, .panelDetail__date, .panelDetail__title, .panelDetail__vote, .panelDetail__director--name, .panelDetail__mainCast--name, .panelDetail__description--description, .button {
   font-size: 0.8rem;
