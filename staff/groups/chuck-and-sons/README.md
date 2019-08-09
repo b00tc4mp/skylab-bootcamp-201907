@@ -20,4 +20,4 @@ Jokes can be shown by categories or by free search and each one can be reproduce
 * user API: https://skylabcoders.herokuapp.com/api
 * chuck norris => data API
 * synth => synth API
-https://img.shields.io/badge/api-user-green.svg
+[https://img.shields.io/badge/api-user-green.svg](http://www.google.com)
