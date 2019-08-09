@@ -129,7 +129,6 @@ class App extends Component {
                         <li className="user-menu__auth-option" ><a className="user-menu__auth-option-link" href="" onClick={handleMenuLogin}>Login</a></li>
                 </ul> : 
                 <ul className="user-menu">
-                        <li className="user-menu__auth-option" ><a className="user-menu__auth-option-link" href="" onClick={handleFavorite}>Favorite List</a></li>
                         <li className="user-menu__auth-option" ><a className="user-menu__auth-option-link" href="" onClick={handleLogout}>Logout</a></li>
                 </ul>}
         </header>
@@ -142,10 +141,6 @@ class App extends Component {
                 <p className="footer__content">Copyrigth © SkyLab 2019 </p>
             </footer>
         </>
-       /*  return <>
-            {view === 'landing' && <Landing onRegister={handleGoToRegister} onLogin={handleGoToLogin} credentials={credentials} onLogout={handleLogout} />}
-            {view === 'register' && <Register onBack={handleBackToLanding} onRegister={handleRegister} error={error} />}
-            {view === 'register-success' && <RegisterSuccess onLogin={handleGoToLogin} />}
-            {view === 'login' && <Login onBack={handleBackToLanding} onLogin={handleLogin} error={error} />} */
+     
     }
 }

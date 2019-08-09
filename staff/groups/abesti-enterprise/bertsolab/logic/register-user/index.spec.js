@@ -56,7 +56,6 @@
             ).toThrowError(Error, 'passwords do not match')
         )
 
-        // TODO test more cases
 
         describe('when user already exists', () => {
             it('should fail on already existing username', () =>
@@ -66,7 +65,6 @@
                     .catch(error => expect(error).toBeDefined())
             )
 
-            // TODO test more cases
         })
     })
 }

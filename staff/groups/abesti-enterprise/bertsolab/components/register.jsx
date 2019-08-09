@@ -23,7 +23,7 @@ return <>
         </form>
         {error && <Feedback message={error} />}
         <p className="register__info form__info">Do you already have an account? Go to <span></span>
-            <a className="register__on-login anchor__link" href="" onLogin={event => {
+            <a className="register__on-login anchor__link" href="" onClick={event => {
             event.preventDefault()
 
             onLogin()

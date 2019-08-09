@@ -84,7 +84,6 @@ class Home extends Component {
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
-        debugger
         credentials ? logic.toggleFavTrack(id, token, track_id)
             .then(() => this.handleSearch(q_artist, q_track))
             .catch(({ message }) => this.setState({ error: message})) 

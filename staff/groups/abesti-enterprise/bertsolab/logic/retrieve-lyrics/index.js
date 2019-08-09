@@ -12,11 +12,11 @@
 
 logic.retrieveLyrics = (id, token, track_id) => {
 
+
     if(id != undefined && token != undefined) {
         validate.string(id, 'id')
         validate.string(token, 'token')
         validate.string(track_id, 'track_id')
-        debugger
         return call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'get', { 'authorization': `bearer ${token}` }, undefined)
         .then(res => {
             if(res.status === 'KO') throw new Error (res.error)
@@ -35,8 +35,7 @@ logic.retrieveLyrics = (id, token, track_id) => {
                         throw new Error("Musixmatch API has not available lyrics for that song")
                     } else {
                         lyrics = res.message.body.lyrics.lyrics_body
-                        //favorites && track_id.favorite.includes() --> Verlo con Oihane
-                        //favorites && (lyrics.favorite = favorites.includes(track_id))
+                       
                     }
                     return lyrics
                 }

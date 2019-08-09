@@ -103,6 +103,14 @@ body {
 
 .song-item {
   color: #f4f4f4;
+  border: 1px solid;
+  text-align: center;
+  margin: 20px;
+  border-radius: 0.3rem;
+}
+.song-item:hover {
+  outline: 2px solid #9c50b6;
+  background-color: #260026;
 }
 
 .fav-button {
@@ -110,13 +118,42 @@ body {
   color: #ecb182;
   font-size: x-large;
   border: none;
+  margin: 0 1rem;
 }
 
+.results {
+  margin-bottom: 10%;
+}
+
+.lyrics-item {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(10, 10, 10, 0.9);
+  z-index: 1;
+  position: fixed;
+  left: 0;
+  top: 0;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
 .lyrics-item__button {
   background-color: transparent;
   color: #f4f4f4;
   font-size: x-large;
   border: none;
+  margin: 0 1rem;
+  align-items: flex-end;
+}
+.lyrics-item__panel {
+  width: 80vw;
+  padding: 20px;
+  padding-left: 15px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  border-radius: 0.3rem;
 }
 
 .footer {

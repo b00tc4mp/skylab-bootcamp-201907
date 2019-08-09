@@ -90,18 +90,53 @@ body
 
 .song-item
   color: rgb(244, 244, 244)
+  border: 1px solid
+  text-align: center
+  margin: 20px
+  border-radius: 0.3rem
+  &:hover
+    outline: 2px solid #9c50b6
+    background-color: #260026
+
 
 .fav-button
   background-color: transparent
   color: rgb(236, 177, 130)
   font-size: x-large
   border: none
+  margin: 0 1rem
 
-.lyrics-item__button
-  background-color: transparent
-  color: rgb(244, 244, 244)
-  font-size: x-large
-  border: none
+.results
+  margin-bottom: 10%
+
+.lyrics-item
+  width: 100vw
+  height: 100vh
+  background-color: rgba(10, 10, 10, 0.9)
+  z-index: 1
+  position: fixed
+  left: 0
+  top: 0
+  color: white
+  display: flex
+  justify-content: center
+  
+  &__button
+    background-color: transparent
+    color: rgb(244, 244, 244)
+    font-size: x-large
+    border: none
+    margin: 0 1rem
+    align-items: flex-end
+  &__panel
+    width: 80vw
+    padding: 20px
+    padding-left: 15px
+    background-color: rgba(255,255,255,0.2)
+    margin: auto
+    display: flex
+    justify-content: center
+    border-radius: 0.3rem
 
 .footer
   background-image: linear-gradient(to bottom, rgb(10, 10, 10), purple)
