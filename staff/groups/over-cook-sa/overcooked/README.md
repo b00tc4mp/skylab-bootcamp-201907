@@ -31,6 +31,10 @@
 
 ![cases](img/useCases.png)
 
+### Flows
+
+![flows](img/flow.jpg)
+
 ## Technical Description
 
 ### Blocks
