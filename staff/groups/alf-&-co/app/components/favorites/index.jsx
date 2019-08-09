@@ -5,9 +5,9 @@ function Favorites({favs, removeFav, showDetail, onClickList}) {
             return <MovieItem movie={movie} onToggle={removeFav} onClickList={onClickList} />
         }} onItem={showDetail} />
         : 
-        <>  
+        <div className="emptyFavorites">  
          <p><i className="far fa-heart"/></p>
-         <h3>There are no favorites yet</h3>
-         </>}
+         <h3  className="big-letter">There are no favorites yet</h3>
+         </div>}
         </>
 }
