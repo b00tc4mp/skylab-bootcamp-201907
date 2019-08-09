@@ -85,7 +85,7 @@ h1 {
 
 .footer {
   width: 100vw;
-  background-color: black;
+  background-color: #0d0d0d;
   bottom: 0px;
   color: white;
   text-align: center;
@@ -150,7 +150,6 @@ h1 {
 .container__ul--detail {
   list-style: none;
   color: white;
-  text-align: center;
 }
 
 .container__a {
