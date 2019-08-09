@@ -1,3 +1,7 @@
+/**
+* Register user form.
+*/
+
 function Register({ onRegister, onLogin, onBack, error}) {
 return <>
     <section className="register">

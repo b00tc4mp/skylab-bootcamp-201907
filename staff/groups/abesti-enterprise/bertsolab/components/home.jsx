@@ -1,3 +1,7 @@
+/**
+* Component that allows the visualization the main behaviour .
+*/
+
 const { Component } = React
 
 class Home extends Component {

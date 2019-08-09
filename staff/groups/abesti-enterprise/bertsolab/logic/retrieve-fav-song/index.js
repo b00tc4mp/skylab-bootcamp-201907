@@ -1,3 +1,14 @@
+/**
+ *This functionability is not willing. In the near future it return a list with favorites.
+ * 
+ * @param {String} id The user id.
+ * @param {String} token The token to authorize user validation.
+ * @param {String} trackId The id of the song.
+ * 
+ * @return {Object} return all favourites of a logged user.
+ */
+
+
 logic.retrieveFavs = function (id, token, trackId)  {
     //let favorites
 

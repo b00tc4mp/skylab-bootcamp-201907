@@ -1,3 +1,15 @@
+/**
+ * It allows the user to mark favourites o remove them from favourite list. 
+ * User has an array with their favourites.
+ * If the validations go wrong, it shows a message with the response error.
+ * 
+ * @param {String} id The user id.
+ * @param {String} token The token to authorize user validation.
+ * @param {String} trackId  The id song.
+ * 
+ * @return {Object} Change favorites array, it can add or remove.
+ */
+
 logic.toggleFavTrack = function (id, token, trackId) {
     validate.string(id, 'id')
     validate.string(token, 'token')

@@ -1,5 +1,16 @@
+/**
+ * It allows a user to find the lyrics which are related to their search.
+ * 
+ * @param {String} id The user id.
+ * @param {String} token The token to authorize user validation.
+ * @param {String} track_id The track id.
+ * 
+ * @return {Object} Response with a lyric list.
+ */
+
+
+
 logic.retrieveLyrics = (id, token, track_id) => {
-    //let favorites
 
     if(id != undefined && token != undefined) {
         validate.string(id, 'id')

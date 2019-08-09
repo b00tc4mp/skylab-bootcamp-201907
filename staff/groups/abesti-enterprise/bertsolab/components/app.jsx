@@ -1,3 +1,10 @@
+/**
+* Main application container.
+*/
+
+
+
+
 const { Component } = React
 
 class App extends Component {

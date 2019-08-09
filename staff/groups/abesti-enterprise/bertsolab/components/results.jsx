@@ -1,3 +1,7 @@
+/**
+ * Component to print search results served by the API search endpoint.
+ */
+
 function Results(props) {
     return <ul>
         {props.items.map((item) => <li key={item.track.track_id.toString()}>
