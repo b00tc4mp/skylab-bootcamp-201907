@@ -311,7 +311,7 @@ handleGoToHome(event){
                         <ul className="menu">
                             <li><a href="" onClick={handleGoToFavorites}>Favorites</a></li>
                             <li><a href="" onClick= {handleGoToMenuCollections} >Collections</a></li>
-                            <li><a href="" onClick={handleLogOut}>Log Out</a></li>
+                            {this.props.credentials && <li><a href="" onClick={handleLogOut}>Log Out</a></li>}
                         </ul>
                     </div>
 
