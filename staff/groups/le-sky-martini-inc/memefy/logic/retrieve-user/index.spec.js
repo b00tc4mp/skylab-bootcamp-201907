@@ -6,10 +6,10 @@
 
         beforeEach(() => {
             user = {
-                name: 'John-' + random(),
-                surname: 'Doe-' + random(),
-                username: 'johndoe-' + random() + '@mail.com',
-                password: '123-' + random(),
+                name: 'LePink-' + random(),
+                surname: 'Martini-' + random(),
+                username: 'teamwork-' + random() + '@mail.com',
+                password: 'zzz-' + random(),
                 favorites: []
             }
 
@@ -44,6 +44,13 @@
             ).toThrowError(Error, 'id is empty or blank')
         )
 
-        // TODO test more cases
+        it('should fail on non-valid id', () =>
+            expect(() =>
+                logic.retrieveUser('', 'a-token')
+            ).toThrowError(Error, 'id is empty or blank') // RECTIFY MESSAGE!!!!
+        )
+
+
+
     })
 }

@@ -27,7 +27,7 @@ class App extends Component {
      }
  
     handleGoToRegister() {
-        this.setState({ view: 'register' })
+        this.setState({ view: 'register' , error:undefined })
     }
 
     handleBackToLanding() {
@@ -45,7 +45,7 @@ class App extends Component {
     }
 
     handleGoToLogin() {
-        this.setState({ view: 'login' })
+        this.setState({ view: 'login', error: undefined })
     }
 
     handleLogin(email, password) {

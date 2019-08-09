@@ -6,10 +6,10 @@
 
         beforeEach(() =>
             user = {
-                name: 'John-' + random(),
-                surname: 'Doe-' + random(),
-                username: 'johndoe-' + random() + '@mail.com',
-                password: '123-' + random(),
+                name: 'LePink-' + random(),
+                surname: 'Martini-' + random(),
+                username: 'teamwork-' + random() + '@mail.com',
+                password: 'zzz-' + random(),
                 favorites: []
             }
         )
@@ -56,8 +56,6 @@
             ).toThrowError(Error, 'passwords do not match')
         )
 
-        // TODO test more cases
-
         describe('when user already exists', () => {
             it('should fail on already existing username', () =>
                 logic.registerUser(user.name, user.surname, user.username, user.password, user.password)
@@ -65,8 +63,6 @@
                     .then(() => logic.registerUser(user.name, user.surname, user.username, user.password, user.password))
                     .catch(error => expect(error).toBeDefined())
             )
-
-            // TODO test more cases
         })
     })
 }
