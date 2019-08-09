@@ -39,8 +39,10 @@ class Home extends Component {
         let token = credentials.token
 
         logic.searchByName(id, token, query)
-
-        .then(meals =>  this.setState( {favs:[], meals, query, cats: false, meal : undefined, searchIngredient: undefined, searchCategory : undefined}))
+        .then(meals =>  {
+            this.setState( {favs:[], meals, query, cats: false, meal : undefined, searchIngredient: undefined, searchCategory : undefined})
+            debugger
+        })
         .catch(({ message }) => this.setState({error: message}))
 
     }
@@ -114,7 +116,8 @@ class Home extends Component {
         let token = credentials.token
 
         logic.retrieveRecipe(id, token, idMeal)
-            .then(meal => this.setState({ meal }))
+            .then(meal => {
+                this.setState({ meal })})
             .catch(({ message }) => this.setState({ error: message }))
     }
 
@@ -171,10 +174,12 @@ render () {
         
         <section>     
             { cats && <Categories onSearchCat={handleSearchCat} /> }
-            <section className="wrapper-cont">
-            {!meal ? <Results meals={meals} onMeal={handleOnMeal} goCat={handleGoToCategories} paintMeal = { meal => {return<RecipeItem2 meal={meal} onToggle={handleToggleRecipeList} />}}  />
-            : <RecipeDetails meal={meal} onBack={handleGoBack} onToggle={handleToggleRecipeDetail} />}
-            </section>
+
+<section className="wrapper-cont">
+            {!meal ? <Results meals={meals} onMeal={handleOnMeal} goCat={handleGoToCategories} paintMeal = { meal => {return <RecipeItem2 meal={meal} onToggle={handleToggleRecipeList} />}}  />
+            : <RecipeDetails meal={meal} onBack={handleGoBack} onToggle={handleToggleRecipeDetail} ingredients={recipeFormatter(meal)} />}
+           </section>
+
             {!meal  && <Favorites favs={favs} onMeal={handleOnMeal} goCat={handleGoToCategories} paintMeal = { meal => {return <RecipeItem2 meal={meal} onToggle={handleToggleFavorite} />}}  />
             }
         </section>
