@@ -3,7 +3,7 @@
     const wonderwall = '5wj4E6IsrVtn8IBJQOd0Cl'
     const iNeedMyGirl = '7rbCL7W893Zonbfnevku5s'
 
-    fdescribe('logic - retrieve fav tracks', () => {
+    describe('logic - retrieve fav tracks', () => {
         describe('when are you retrieve for a favorites', () => {
             let credentials
 

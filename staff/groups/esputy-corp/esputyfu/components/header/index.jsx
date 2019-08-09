@@ -31,6 +31,12 @@ function Header(props) {
                                 props.onFavorites()
                             }}>Favoritos</a>
                         </li>
+                        <li>
+                            <a className='header__a' href="" onClick={event => {
+                                event.preventDefault()
+                                {props.onLogout()}
+                            }}>Salir</a>
+                        </li>
                     </ul>
                 </nav>}
         </header>
