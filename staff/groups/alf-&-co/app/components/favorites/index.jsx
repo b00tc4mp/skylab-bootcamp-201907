@@ -1,8 +1,8 @@
-function Favorites({favs, removeFav, showDetail}) {
+function Favorites({favs, removeFav, showDetail, onClickList}) {
     return  <>
         {favs.length ?
         <Results movies={favs} paintItem={movie => {
-            return <MovieItem movie={movie} onToggle={removeFav} />
+            return <MovieItem movie={movie} onToggle={removeFav} onClickList={onClickList} />
         }} onItem={showDetail} />
         : 
         <>  

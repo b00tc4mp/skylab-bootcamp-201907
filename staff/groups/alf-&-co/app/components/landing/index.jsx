@@ -332,17 +332,21 @@ handleGoToHome(event){
                         return <MovieItem movie={movie} onToggle={handleToggleFavMovieFromMovieItem} onClickList={handleDisplayListModal} />
                     }} onItem={handleRetrieveMovie} />}
                     {showModal &&
-                    <ListModal lists={lists} movieId={movieId} feedback={feedback} error={error} onToggleMovieList={handleToggleMovieFromList} onCreateList={handleCreateList} />
+                    <ListModal lists={lists} onClosemovieId={movieId} feedback={feedback} error={error} onToggleMovieList={handleToggleMovieFromList} onCreateList={handleCreateList} />
                     }
                     </>
-                }
+                }i
 
                 {/* Movie detail which displays. Includes fav button and back button  */}
                 {view === 'detail' &&
                     <MovieDetail movie={movie} onBack={handleBackFromDetail}  onToggle={handleToggleFavMovieFromMovieDetail} onToggle={handleToggleMovieFromMovieDetail} />}
 
-                {view === 'favorites' &&
-                    <Favorites favs={favs} removeFav={handleToggleFavMovieFromFavoritesSection} showDetail={handleRetrieveMovie} />
+                {view === 'favorites' && <>
+                    <Favorites favs={favs} removeFav={handleToggleFavMovieFromFavoritesSection} showDetail={handleRetrieveMovie} onClickList={handleDisplayListModal} />
+                    {showModal &&
+                    <ListModal lists={lists} onClosemovieId={movieId} feedback={feedback} error={error} onToggleMovieList={handleToggleMovieFromList} onCreateList={handleCreateList} />
+                    }
+                    </>
                 }
               
             </main>

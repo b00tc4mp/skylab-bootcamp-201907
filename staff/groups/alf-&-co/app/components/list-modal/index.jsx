@@ -1,12 +1,13 @@
-function ListModal({movieId, lists, onCreateList, onToggleMovieList, error, feedback}) {
+function ListModal({movieId, lists, onCreateList, onToggleMovieList, error, feedback, close}) {
     return  <div className='modal-outer'>
         {lists && 
             <div className="modal-inner">
                 <a href="" className="close" onClick={event => {
-                event.preventDefault()
-                onClose()
-                }}></a>
+                    event.preventDefault()
+                    close()
+                }}></a>               
                 <h3 className="modal-inner__title">Add to</h3>
+
                 <ul className="modal-inner__list">
                     {lists.map(list => 
                         <li className="modal-inner__item" key={Math.random().toFixed(5)}>

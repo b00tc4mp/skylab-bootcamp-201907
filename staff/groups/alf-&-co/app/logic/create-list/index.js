@@ -1,3 +1,14 @@
+/**
+ * Creates a new custom list of movies into user's object.
+ * If a list with the same name already exists, an error is raised. 
+ * Otherwise, the list is created by sending a PUT to Skylabcoders user API.
+ * Returns the updated array of lists.
+ * 
+ * @param {string} userId - User id returned by Skylabcoders' users API authentication
+ * @param {string} userToken - Token returned by Skylabcoders' users API authentication
+ * @param {string} listName - The name of the list that wants to be created, get from a submit form
+ * 
+ */
 logic.createList = function(userId, userToken, listName) {
     const AUTH_ENDPOINT = 'https://skylabcoders.herokuapp.com/api/user/'
 

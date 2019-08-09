@@ -1,3 +1,15 @@
+/**
+ * Adds or removes a movie to/from a user's list of favorites. 
+ * User data is retrieved from Skylabcoders' users API in order 
+ * to check if a specific movie is already in user's favorites. 
+ * Returns object with status of response
+ * 
+ * @param {string} userId - User id returned by Skylabcoders' users API authentication
+ * @param {string} userToken - Token returned by Skylabcoders' users API authentication
+ * @param {string} movieId - The TMDB movie id 
+ * 
+ */
+
 logic.toggleFavMovie = function(userId, userToken, movieId) {
     const TMDB_API_KEY = '03ecceac5993bcd054fbc7d617df741a'
     const AUTH_ENDPOINT = 'https://skylabcoders.herokuapp.com/api/user/'
@@ -28,6 +40,7 @@ logic.toggleFavMovie = function(userId, userToken, movieId) {
                     {favorites})
                     .then(response => {
                         if (response.status === 'KO') throw Error(response.error)
+                        return response
                     })
             } else {
                 /* Check if movie is still accessible */
@@ -43,6 +56,7 @@ logic.toggleFavMovie = function(userId, userToken, movieId) {
                             {favorites: favorites})
                             .then(response => {
                                 if (response.status === 'KO') throw Error(response.error)
+                                return response
                             })
                     })
             }
