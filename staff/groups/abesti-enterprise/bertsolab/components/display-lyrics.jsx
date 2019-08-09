@@ -1,4 +1,4 @@
-function DisplayLyrics({ onDisplay }) {
+function DisplayLyrics({ onDisplay, trackId }) {
     return <button className="lyrics-item__button" onClick={event => {
         event.stopPropagation()
 
