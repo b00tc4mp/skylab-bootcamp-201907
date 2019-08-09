@@ -41,7 +41,7 @@ class Home extends Component {
         logic.searchByName(id, token, query)
         .then(meals =>  {
             this.setState( { favs:[], meals, query, cats: false, meal : undefined, searchIngredient: undefined, searchCategory : undefined})
-            debugger
+     
         })
         .catch(({ message }) => this.setState({error: message}))
 

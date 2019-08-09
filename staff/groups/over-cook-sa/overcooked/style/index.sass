@@ -106,7 +106,7 @@ main
   
 
 .random-content
-    display: block
+  
     padding: 0 20px 20px 20px
     margin: 60px auto
     box-shadow: 0 4px 6px #bbb
@@ -119,14 +119,15 @@ main
     height: 70vw
     font-size: 15px
 
+    &__recipe 
+      color: #4091cc
+
+
+
 .random-content h3
     font-size: 12px
 
-.random-recipe 
-    flex-wrap: wrap
-    flex-direction: column
-    align-content: center
-
+  
 .recipe-video 
     border-radius: 10px
     width: 100%
@@ -297,7 +298,7 @@ main
     flex-direction: column
     text-align: center
     margin-top: 1rem
-    border-top: 1px solid rgba(0,0,0,0.3)
+    border-top: 0
 
     &__title
       padding-top: 1rem
@@ -311,6 +312,16 @@ main
 
 .fav-text
     font-size: 12px
+
+.ingredients-cont
+    display: grid
+    
+
+    &__ingredients
+      padding: 10px
+
+.ingredients-title
+    padding: 10px 0 0 0
 
 .descText
     color: black
