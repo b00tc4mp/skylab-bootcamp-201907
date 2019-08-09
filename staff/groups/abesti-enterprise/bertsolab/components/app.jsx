@@ -18,6 +18,7 @@ class App extends Component {
         this.handleMenuRegister=this.handleMenuRegister.bind(this)
         this.handleMenuLogin=this.handleMenuLogin.bind(this)
         this.handleLogout = this.handleLogout.bind(this)
+        this.handleFavorite=this.handleFavorite.bind(this)
 
         
    
@@ -87,6 +88,18 @@ class App extends Component {
            this.setState({ error: message })
        }
     }
+    
+    handleFavorite(event) {
+
+        event.preventDefault()
+        const {id, token}= sessionStorage
+      
+
+        logic.retrieveFavs(id, token, track_id)
+            .then(favs => this.setState({ view: 'favorites', favs }))
+            .catch(({ message }) => this.setState({ error: message }))
+
+    }
 
     
 
@@ -94,7 +107,7 @@ class App extends Component {
 
 
     render() {
-        const {  state: { view, credentials, error, user}, handleMenuHome, handleMenuLogin, handleMenuRegister, handleRegister, handleFavorite, handleLogout, handleGoToLogin, handleGoToHome, handleGoToRegister, handleLogin } = this
+        const {  state: { view, credentials, error, favorites, user}, handleMenuHome, handleMenuLogin, handleMenuRegister, handleRegister, handleFavorite, handleLogout, handleGoToLogin, handleGoToHome, handleGoToRegister, handleLogin } = this
         return  <>
 
         <header className="header">
