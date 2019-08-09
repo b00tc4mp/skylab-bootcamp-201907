@@ -7,14 +7,19 @@
   font-family: 'Red Hat Display', sans-serif
   box-sizing: border-box
 
-.header
-  background-image: linear-gradient(to bottom right, black, purple)
-  background-repeat: no-repeat
+*:focus 
+  outline: none
 
 body
   width: 100vw
   background-color: rgb(10, 10, 10)
 
+.header
+  background-image: linear-gradient(to bottom right, rgb(10, 10, 10), purple)
+  background-repeat: no-repeat
+
+.header__logo--image
+  width: 60%
 
 .form
   display: flex
@@ -23,17 +28,80 @@ body
   +round-border(0.1rem, 0.1rem, solid, purple)
   
   &__title
-    padding: 1rem
-    font-size: 0.8
+    padding: 1rem 1rem 0
+    font-size: 150%
   
   &__field
+    padding: 0.5rem
+    margin: 0.5rem 1rem
     font-size: 1.5rem
+    +round-border(0.1rem, 0.3rem, solid, rgb(156, 80, 182))
+  
+  &__field:hover
+    outline: 2px solid rgb(236, 177, 130)
+
+  &__field:focus
+    outline: 5px solid rgb(236, 177, 130)
   
   &__button
-    margin: 1rem
+    padding: 0.5rem
+    margin: 0.5rem 3rem
+    font-size: 1.5rem
+    +round-border(0.1rem, 0.3rem, solid, rgb(156, 80, 182))
+    background-color: rgb(244, 244, 244)
 
-.header__logo--image
-  width: 60%
+  &__button:hover
+    outline: 5px solid rgb(236, 177, 130)
+    background-color: purple
+    color: white
+
+.register, .login
+  margin-bottom: 10%
+
+.register__title, .login__title
+  background-color: plum
+  padding: 1rem
+  font-size: 120%
+  border: 0.1rem solid purple
+  border-bottom: none
+
+.register__form, .login__form
+  border-top: none
+
+  & label
+    padding-left: 1rem
+
+  &--field
+    width: 90%
+    font-size: 1rem
+
+.form__info
+  color: white
+  padding: 1em
+
+.anchor__link
+  color: white
+
+.feedback
+  text-align: center
+  padding: 1rem
+  color: tomato
+  font-size: x-large
+
+.song-item
+  color: rgb(244, 244, 244)
+
+.fav-button
+  background-color: transparent
+  color: rgb(236, 177, 130)
+  font-size: x-large
+  border: none
+
+.lyrics-item__button
+  background-color: transparent
+  color: rgb(244, 244, 244)
+  font-size: x-large
+  border: none
 
 .footer
   background-image: linear-gradient(to bottom, rgb(10, 10, 10), purple)
@@ -90,15 +158,15 @@ body
 .user-menu__auth-option-link
   display: block
   padding: 20px 20px
-  border-right: 1px solid purple
+  border-right: 0.1rem solid purple
   text-decoration: none
-  color: #f4f4f4
+  color: rgb(244, 244, 244)
 
 
 .user-menu__auth-option-link:hover,
 .header .hamburguer-menu__button:hover 
   background-color: rgba(96, 96, 96, 0.4)
-  color: #f4f4f4
+  color: rgb(244, 244, 244)
 
 .header__logo
   padding: 20px
@@ -129,7 +197,7 @@ body
 
 
 .header .hamburguer-menu__icon .hamburguer-menu__navicon 
-  background: #f4f4f4
+  background: rgb(244, 244, 244)
   display: block
   height: 2px
   position: relative
@@ -139,7 +207,7 @@ body
 
 .header .hamburguer-menu__icon .hamburguer-menu__navicon:before,
 .header .hamburguer-menu__icon .hamburguer-menu__navicon:after 
-  background: #f4f4f4
+  background: rgb(244, 244, 244)
   content: ''
   display: block
   height: 100%
@@ -189,11 +257,25 @@ body
   .header__logo--image
     width: 100%
 
+  .register__title, .login__title
+    background-color: rgb(10, 10, 10)
+    color: white
+    font-size: 150%
+    border: none
+  
+  .form
+    padding: 1em, 0
+    +round-border(0.1rem, 0.3rem, solid, rgb(156, 80, 182))
+
+    &__field
+      width: 95%
+
   .user-menu__auth-option 
     float: left
   
   .user-menu__auth-option-link 
     padding: 20px 30px
+    border: 0.1rem solid purple
   
   .header .user-menu 
     clear: none

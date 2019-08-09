@@ -10,6 +10,6 @@ function Search(props) {
         <input className="search-form__query-field form__field" type="text" name="q_artist" placeholder="Who's the performer?" />
         <input className="search-form__query-field form__field" type="text" name="q_track" placeholder="What's the song title?" />
 
-        <button className="search-form__button form_button">🔍</button>
+        <button className="search-form__button form__button"><i className="fas fa-search"></i></button>
     </form>
 }

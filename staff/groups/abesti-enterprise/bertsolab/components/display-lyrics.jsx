@@ -1,7 +1,7 @@
 function DisplayLyrics({ onDisplay }) {
-    return <button className="display-lyrics" onClick={event => {
+    return <button className="lyrics-item__button" onClick={event => {
         event.stopPropagation()
 
         onDisplay(trackId)
-    }}>{'👁‍🗨'}</button>
+    }}>{<i className="far fa-eye"></i>}</button>
 }
