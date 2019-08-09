@@ -141,19 +141,6 @@ class Landing extends Component {
     }
 
 
-    handleToggleFavMovieFromMovieDetail(movieId) {
-
-        const { props: { credentials }, handleRetrieveMovie, handleGoToLogIn } = this
-
-
-        let id, token
-
-        credentials && (id = credentials.id, token = credentials.token)
-
-        credentials ? logic.toggleFavMovie(id, token, movieId, () => handleRetrieveMovie(movieId)) : handleGoToLogIn()
-
-    }
-
     handleBackFromDetail() {
         const { state: { query, collection, favs }, props: { credentials }, handleGoToFavorites, handleSearch, handleLinkToCollections } = this
         let id, token
