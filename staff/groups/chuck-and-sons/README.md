@@ -17,7 +17,6 @@ Jokes can be shown by categories or by free search and each one can be reproduce
 * React
 
 ## API's
-* user API: https://skylabcoders.herokuapp.com/api
-* chuck norris => data API
+* chuck norris => data API [![Build status](https://img.shields.io/badge/api-user-green.svg)](https://skylabcoders.herokuapp.com/api)
 * synth => synth API
-[![Build status](https://img.shields.io/badge/api-user-green.svg)](http://www.google.com)
+
