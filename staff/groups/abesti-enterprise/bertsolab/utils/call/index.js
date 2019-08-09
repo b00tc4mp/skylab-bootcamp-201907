@@ -8,5 +8,5 @@ function call(url, method = 'get', headers, body) {
         headers,
         body: JSON.stringify(body)
     })
-        .then(res => res.json())
+    .then(res => res.json())
 }

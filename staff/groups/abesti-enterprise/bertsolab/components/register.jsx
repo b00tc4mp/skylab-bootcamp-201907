@@ -7,6 +7,7 @@ return <>
 
             const { target: { name: { value: name }, surname: { value: surname }, email: { value: email }, password: { value: password }, repassword: { value: repassword} } } = event
 
+
             onRegister(name, surname, email, password, repassword)
         }}>
             <label>Name<input className="register__form--field form__field" type="text" name="name" /></label>
