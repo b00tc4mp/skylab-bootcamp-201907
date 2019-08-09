@@ -28,7 +28,7 @@ class Landing extends Component {
         this.handleCloseModal = this.handleCloseModal.bind(this)
     }
 
-
+    }
     componentWillMount() {
         const { props: { credentials, query, collection } } = this
 
@@ -355,4 +355,4 @@ class Landing extends Component {
         </>
     }
 
-}
+    }

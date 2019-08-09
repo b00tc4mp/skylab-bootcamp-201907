@@ -38,7 +38,7 @@ main {
 
 .icons-header {
   display: flex;
-  width: 50px;
+  width: 70px;
   position: absolute;
   right: 0;
   top: 10px;
@@ -49,19 +49,20 @@ main {
   align-items: right;
   list-style-type: none;
   right: 10px;
-  margin: 5px;
+  margin: 15px;
 }
 .icons-header li {
   height: 25px;
   list-style-type: none;
   padding: 0;
-  margin: 20px 2px;
+  margin: 20px 15px;
 }
 .icons-header li,
 .icons-header a,
 .icons-header img {
   text-decoration: none;
-  width: 55%;
+  width: 60%;
+  top: 20px;
   font-size: 1.5rem;
   color: #000000;
   text-transform: uppercase;
@@ -73,7 +74,8 @@ main {
   color: #00ffa6;
 }
 .icons-header img {
-  margin: 12px 2px;
+  margin: 0 auto;
+  padding-top: 10px;
 }
 
 .menuToggle {
@@ -454,7 +456,7 @@ form textareatextarea:focus {
   align-items: center;
   height: 100%;
   margin: 10px auto;
-  margin-top: 60px;
+  margin-top: 45px;
   flex-direction: row;
   background-color: #1f1f1f;
 }
@@ -522,7 +524,7 @@ form textareatextarea:focus {
   height: 30px;
   opacity: 1;
   color: #f7f7f7;
-  z-index: 7;
+  z-index: 2;
 }
 .fav:not([disabled]):hover, .fav:not([disabled]):focus {
   outline: none;
@@ -558,7 +560,7 @@ form textareatextarea:focus {
   height: 30px;
   opacity: 1;
   color: #f7f7f7;
-  z-index: 7;
+  z-index: 2;
 }
 .close__detail--detail:hover {
   opacity: 0.2;
@@ -916,7 +918,7 @@ li {
   border: none;
   cursor: pointer;
   appearance: none;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 h3 {
