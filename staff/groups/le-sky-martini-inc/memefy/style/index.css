@@ -232,9 +232,9 @@
 }
 .register-success__login {
   background-color: white;
-  padding: 10px;
+  padding: 3px 10px;
   border-radius: 0.2em;
-  z-index: 1em;
+  line-height: 3;
 }
 .register-success__login:hover {
   color: white;
@@ -427,10 +427,17 @@
     background-position: 0% 50%;
   }
 }
+.search__favorite-title {
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 0;
+  padding: 1.5em;
+  color: white;
+  text-align: center;
+}
 
 .results {
   color: white;
-  margin: 1em auto auto auto;
+  margin: 2em auto 3em auto;
 }
 .results__list {
   display: grid;
@@ -445,7 +452,7 @@
   padding: 1em 1em 2em 1em;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: flex-end;
 }
 .results__image {
@@ -471,11 +478,11 @@
 .detail {
   background-color: black;
   color: white;
-  margin: 1em auto auto auto;
-  padding: 2em;
+  margin: 1em auto 3em auto;
+  padding: 2em 1em;
 }
 .detail__title {
-  font-size: 33px;
+  font-size: 22px;
   margin-bottom: 0.75em;
 }
 .detail__photo {

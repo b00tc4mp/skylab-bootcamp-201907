@@ -1,5 +1,9 @@
 const { Component } = React
 
+/**
+ * The main application container.
+ */
+
 class App extends Component {
     constructor() {
         super()
@@ -22,7 +26,7 @@ class App extends Component {
     }
 
 
-     handleGoToRegisterOrLogin() {
+    handleGoToRegisterOrLogin() {
          this.setState({ view: 'registerorlogin' })
      }
  

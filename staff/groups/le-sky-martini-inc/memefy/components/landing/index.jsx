@@ -1,5 +1,9 @@
 const { Component } = React
 
+ /**
+ * Component that allows the visualization the main behaviour.
+ */
+
 class Landing extends Component {
     constructor() {
         super()
@@ -29,23 +33,7 @@ class Landing extends Component {
         this.handleRandom = this.handleRandom.bind(this)
         this.handleGoToRandom = this.handleGoToRandom.bind(this)
         this.handleBackFromRandomDetail = this.handleBackFromRandomDetail.bind(this)
-
-        // this.handleRegisterOrLogin = this.handleRegisterOrLogin.bind(this)
-        // this.handleGoToRegisterOrLogin = this.handleGoToRegisterOrLogin.bind(this)
-
     }
-
-    // handleRegisterOrLogin(event) {
-    //     event.preventDefault()
-
-    //      this.props.onLogin()
-    // }
-
-    // handleGoToRegisterOrLogin(event) {
-    //     event.preventDefault()
-
-    //     this.setState({ view: 'registerorlogin' })
-    // }
 
 
     componentWillMount() {
@@ -77,7 +65,7 @@ class Landing extends Component {
         credentials && (id = credentials.id, token = credentials.token)
 
         logic.searchGifs(id, token, query)
-            .then(gifs => this.setState({ gifs, query }))
+            .then(gifs => this.setState({ gifs, query, gif: undefined }))
             .then(( )=>{
             })
             .catch(({ message }) => this.setState({ error: message }))
@@ -93,7 +81,7 @@ class Landing extends Component {
         credentials && (id = credentials.id, token = credentials.token)
 
         logic.searchGifs(id, token, query)
-            .then(gifs => this.setState({ gifs, query }))
+            .then(gifs => this.setState({ gifs, query, gif: undefined }))
             .then(( )=>{
             })
             .catch(({ message }) => this.setState({ error: message }))
@@ -109,7 +97,7 @@ class Landing extends Component {
         credentials && (id = credentials.id, token = credentials.token)
 
         logic.searchGifs(id, token, query)
-            .then(gifs => this.setState({ gifs, query }))
+            .then(gifs => this.setState({ gifs, query, gif: undefined }))
             .then(( )=>{
             })
             .catch(({ message }) => this.setState({ error: message }))
@@ -126,7 +114,7 @@ class Landing extends Component {
         credentials && (id = credentials.id, token = credentials.token)
 
         logic.searchGifs(id, token, query)
-            .then(gifs => this.setState({ gifs, query }))
+            .then(gifs => this.setState({ gifs, query, gif: undefined }))
             .then(( )=>{
             })
             .catch(({ message }) => this.setState({ error: message }))
@@ -142,7 +130,7 @@ class Landing extends Component {
         credentials && (id = credentials.id, token = credentials.token)
 
         logic.searchGifs(id, token, query)
-            .then(gifs => this.setState({ gifs, query }))
+            .then(gifs => this.setState({ gifs, query, gif: undefined }))
             .then(( )=>{
             })
             .catch(({ message }) => this.setState({ error: message }))
@@ -158,7 +146,7 @@ class Landing extends Component {
         credentials && (id = credentials.id, token = credentials.token)
 
         logic.searchGifs(id, token, query)
-            .then(gifs => this.setState({ gifs, query }))
+            .then(gifs => this.setState({ gifs, query, gif: undefined }))
             .then(( )=>{
             })
             .catch(({ message }) => this.setState({ error: message }))
@@ -175,7 +163,7 @@ class Landing extends Component {
         credentials && (id = credentials.id, token = credentials.token)
 
         logic.searchGifs(id, token, query)
-            .then(gifs => this.setState({ gifs, query }))
+            .then(gifs => this.setState({ gifs, query, gif: undefined }))
             .then(( )=>{
             })
             .catch(({ message }) => this.setState({ error: message }))
@@ -190,7 +178,7 @@ class Landing extends Component {
         credentials && (id = credentials.id, token = credentials.token)
 
         logic.searchGifs(id, token, query)
-            .then(gifs => this.setState({ gifs, query }))
+            .then(gifs => this.setState({ gifs, query, gif: undefined }))
             .then(( )=>{
             })
             .catch(({ message }) => this.setState({ error: message }))
@@ -231,8 +219,6 @@ class Landing extends Component {
 
         this.props.onLogin()
     }
-
-
 
     handleLogout(event) {
         event.preventDefault()
@@ -358,7 +344,7 @@ class Landing extends Component {
 
                                 handleFavorites()
                             }}>Favorites <i className="fas fa-heart"></i></a></li>}
-                            {view === 'favorites' && <li><a href="" onClick={handleGoToSearch}>Search</a></li>}
+                            {view === 'favorites' && <li className={`landing__header-item`}><a className={`landing__header-link`}href="" onClick={handleGoToSearch}><i class="fas fa-arrow-left"></i> Search</a></li>}
                             <li className={`landing__header-item`}><a className={`landing__header-link`} href="" onClick={handleLogout}>Logout <i className="fas fa-sign-out-alt"></i></a></li>
                         </ul>}
                 </nav>
@@ -403,7 +389,7 @@ class Landing extends Component {
                     </>}
 
                     {view === 'favorites' && <>
-                        <h3>Favorites</h3>
+                        <h3 className={`search__favorite-title`}>Favorites</h3>
                         <Results items={favs} paintItem={gif => {
                             return <GifDetail gif={gif} onToggle={handleToggleFavGifFromFavorites} />
                         }} onItem={handleRetrieveGif} />

@@ -1,3 +1,7 @@
+ /**
+ * Register or login selector to authenticate or add users.
+ */
+
 function RegisterOrLogin({ onRegister, onLogin, onBack, error }) {
     return <section className={`register-or-login`}>
     <h1 className={`register-or-login__title`}>Sign in or join us!</h1>

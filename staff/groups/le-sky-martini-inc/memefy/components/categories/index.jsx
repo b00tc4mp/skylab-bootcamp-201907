@@ -1,3 +1,7 @@
+/**
+ * Category selector component.
+ */
+
 function Categories(props) {
     return <section className={`categories`}>
       <ul className={`categories__list`}>
