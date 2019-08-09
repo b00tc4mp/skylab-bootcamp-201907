@@ -21,6 +21,7 @@ logic.searchByName = function (id, token, name) {
                         else {
                             favorites && response.meals.forEach(meal => meal.favorite = favorites.includes(meal.idMeal))
 
+                            
                             return response.meals
                         }
                     })
