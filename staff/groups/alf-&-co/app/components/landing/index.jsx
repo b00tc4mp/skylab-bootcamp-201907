@@ -155,7 +155,7 @@ class Landing extends Component {
     }
 
     handleBackFromDetail() {
-        const { state: { query, collection, favs }, props: { credentials }, handleGoToFavorites, handleSearch, handleCollections } = this
+        const { state: { query, collection, favs }, props: { credentials }, handleGoToFavorites, handleSearch, handleLinkToCollections } = this
         let id, token
         let collections = true
 
@@ -168,7 +168,7 @@ class Landing extends Component {
                 .then(movies => this.setState({ movies, collection, view: 'results', query: undefined }))
                 .catch(error => this.setState({ error: error.message }))
 
-        favs ? handleGoToFavorites() : collections ? handleCollections(collections) : handleSearch(query)
+         collections ? handleLinkToCollections(collections) : (query ? handleSearch(query) :  handleGoToFavorites())
     }
 
     handleToggleFavMovieFromMovieItem(movieId) {
