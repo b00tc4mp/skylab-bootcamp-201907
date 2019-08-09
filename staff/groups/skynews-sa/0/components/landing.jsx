@@ -95,7 +95,6 @@ class Landing extends Component{
         this.setState({article:item})
     }
 
-
     handleRegister(event){
         event.preventDefault()
         this.props.onRegister()
@@ -203,7 +202,7 @@ class Landing extends Component{
 
     render(){
         const {
-        state: { view, category, country,query , news, article, error, user, favs, weather},
+        state: { view, category, country, query , news, article, error, user, favs, weather},
         handleSearch, handleRetrieveArticle , handleRegister, handleBackFromDetail, handleLogin, handleLogout, handleToggleFavArticleFromArticleDetail, handleAcceptError, handleFavorites, handleGoToSearch, handleWeather,handleGoToSearchAdvanced , handleSearchAdvanced, handleBackFromSearchAdvanced } = this
 
         return <>
