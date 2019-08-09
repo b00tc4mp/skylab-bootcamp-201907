@@ -1,18 +1,18 @@
 function RegisterOrLogin({ onRegister, onLogin, onBack, error }) {
     return <section className={`register-or-login`}>
-    <h1 className={`register-or-login__title`}>Log in or join to save favorites</h1>
+    <h1 className={`register-or-login__title`}>Sign in or join us!</h1>
         <ul className={`register-or-login__list`}>
             <li className={`register-or-login__item`}>
-                <a className={`register-or-login__register`} href="" onClick={event => {
+                <a className={`register-or-login__link`} href="" onClick={event => {
                     event.preventDefault()
                     onRegister()
-                    }}><i class="fas fa-user-plus"></i>  Register</a>
+                    }}><i class="fas fa-user-plus"></i>  Sign up</a>
             </li>
             <li className={`register-or-login__item`}>
-                <a className={`register-or-login__login`} href="" onClick={event => {
+                <a className={`register-or-login__link`} href="" onClick={event => {
                     event.preventDefault()
                     onLogin()
-                    }}><i class="fas fa-sign-in-alt"></i>  Login</a>
+                    }}><i class="fas fa-sign-in-alt"></i>  Sign in</a>
             </li>
         </ul>
         {error && <Feedback message={error} />}

@@ -14,10 +14,14 @@
         font-size: 10px
 
     &__tv-icon, &__tv-remote
-        max-width: 15%
+        min-width: 10%
+        max-width: 50%
         margin: .5em auto 1em auto
         padding: .5em
         border: 2px solid white
+
+    &__tv-icon:hover, &__tv-remote:hover
+        background-color: white
 
     &__detail
         background-color: $primary-bg-color

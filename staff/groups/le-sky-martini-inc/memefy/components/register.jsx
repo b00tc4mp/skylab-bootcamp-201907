@@ -24,10 +24,11 @@ function Register({ onRegister, onBack, error }) {
                 <li className={`register__item`}>
                     <label><input className={`register__input`} type="password" name="repassword" placeholder="repeat password"/></label>
                 </li>
+                {error && <Feedback message={error} />}
                 <button className={`register__button`}>finish</button>
             </ul>
         </form>
-        {error && <Feedback message={error} />}
+        
         <a className={`register__back`} href="" onClick={event => {
             event.preventDefault()
 
