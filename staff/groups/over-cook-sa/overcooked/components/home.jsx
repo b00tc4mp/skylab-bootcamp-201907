@@ -4,7 +4,7 @@ class Home extends Component {
     constructor() {
         super()
 
-        this.state =  { meals: [], meal: undefined, user: undefined, favs: [], query: undefined, searchCategory:undefined, searchIngredient:undefined, error: undefined, view: 'home', cats: true, back: true}
+        this.state =  { meals: [], meal: undefined, user: undefined, favs: [], query: undefined, searchCategory: undefined, searchIngredient:undefined, error: undefined, view: 'home', cats: true, back: true}
 
         this.handleLogout = this.handleLogout.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
@@ -40,7 +40,7 @@ class Home extends Component {
 
         logic.searchByName(id, token, query)
         .then(meals =>  {
-            this.setState( {favs:[], meals, query, cats: false, meal : undefined, searchIngredient: undefined, searchCategory : undefined})
+            this.setState( { favs:[], meals, query, cats: false, meal : undefined, searchIngredient: undefined, searchCategory : undefined})
             debugger
         })
         .catch(({ message }) => this.setState({error: message}))
@@ -81,7 +81,7 @@ class Home extends Component {
         let token = credentials.token
 
         logic.showCategory(id, token, searchCategory)
-        .then(meals =>  this.setState( {favs:[], meals, searchCategory, cats: false, searchIngredient: undefined, query : undefined}))
+        .then(meals =>  this.setState( { favs:[], meals, searchCategory, cats: false, meal: undefined, searchIngredient: undefined, query: undefined}))
         .catch(({ message }) => this.setState({error: message}))
 
     }
@@ -94,25 +94,26 @@ class Home extends Component {
 
         logic.searchIngredient(id, token, query)
 
-        .then(meals =>  this.setState( { favs:[], meals, searchIngredient: query, cats: false, meal : undefined, searchCategory : undefined}))
+        .then(meals =>  this.setState( { favs:[], meals, searchIngredient: query, cats: false, meal : undefined, searchCategory : undefined, query: undefined}))
         .catch(({ message }) => this.setState({error: message}))
     }
 
     handleGoBack(){
 
         const { handleSearch, handleSearchCat, handleSearchIngredient, handleFavorites, state: { query, searchIngredient, searchCategory } } = this
-
+        if(query || searchCategory || searchIngredient){
             if(query) handleSearch(query)
             if(searchCategory) handleSearchCat(searchCategory)
             if(searchIngredient) handleSearchIngredient(searchIngredient)
-            else handleFavorites()
+        }     
+        else handleFavorites()
                
         this.setState({ meal: undefined })
     }
 
     handleOnMeal(idMeal) {
         const { props: { credentials } } = this
-        let id = credentials.id
+        let id = credentials.id 
         let token = credentials.token
 
         logic.retrieveRecipe(id, token, idMeal)
@@ -132,7 +133,7 @@ class Home extends Component {
         let token = credentials.token
 
         logic.retrieveFavMeal(id, token)
-            .then(favs => {this.setState({ cats:false, favs, meal: undefined, meals: []})})
+            .then(favs => {this.setState({ query: undefined, searchCategory: undefined, searchIngredient:undefined, cats:false, favs, meal: undefined, meals: []})})
            
             .catch(({ message }) => this.setState({ error: message }))     
     }

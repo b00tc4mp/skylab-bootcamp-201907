@@ -3,6 +3,8 @@ function RecipeDetails({ meal: { idMeal, strMeal, strInstructions, strYoutube, s
         <h3 className="wrapper__title">{strMeal}</h3> 
         <FavButton active={favorite} onToggle={() => onToggle(idMeal)} />
 
+        <img className='wrapper__img' src={strMealThumb} alt=""/>
+
         <ul>
             {ingredients.map((ingredient, index) => {
                 
