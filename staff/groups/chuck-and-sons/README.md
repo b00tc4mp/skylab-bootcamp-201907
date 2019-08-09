@@ -18,5 +18,5 @@ Jokes can be shown by categories or by free search and each one can be reproduce
 
 ## API's
 * data API => [Chuck Norris jokes](https://skylabcoders.herokuapp.com/api)
-* synth => synth API
+* synth API
 
