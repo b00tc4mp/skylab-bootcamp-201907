@@ -8,9 +8,10 @@ function MovieDetail({movie, onBack, onToggle}){
         <div className= "panelDetail">
         <h3 className="panelDetail__title">{ movie.movieComplete.original_title }</h3>
         <span className="panelDetail__vote">{movie.movieComplete.vote_average}</span>
-        <FavButton active={movie.movieComplete.favorite} onToggle={() => onToggle(movie.movieComplete.id.toString())} />
-        {/* <h4 className="panelDetail__tagline">{ movie.movieComplete.tagline }</h4> */}
-        
+  
+        <div className= "fav">
+        <FavButton className= "fav" active={movie.movieComplete.favorite} onToggle={() => onToggle(movie.movieComplete.id.toString())} />
+        </div>
         
         <span className="panelDetail__date">{ movie.movieComplete.release_date }</span>
         
@@ -23,15 +24,17 @@ function MovieDetail({movie, onBack, onToggle}){
         
         <h4 className="panelDetail__description">Overview</h4>
         <span className="panelDetail__description--description">{ movie.movieComplete.overview }</span>
-        </div>
-        <div className= "panelImage">
-        <img className="panelImage__image"src={`http://image.tmdb.org/t/p/w342/${movie.movieComplete.poster_path}`} />
-        </div>
-        {onBack && <a className="close__detail" href="" onClick={ event => {
+        {onBack && <a className="close__detail--detail" href="" onClick={ event => {
             event.preventDefault()
 
             onBack()
         }}></a>}
+        
+        </div>
+        <div className= "panelImage">
+        <img className="panelImage__image"src={`http://image.tmdb.org/t/p/w342/${movie.movieComplete.poster_path}`} />
+        </div>
+
         </div>
         
         

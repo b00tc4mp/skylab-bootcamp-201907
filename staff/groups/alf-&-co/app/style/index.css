@@ -38,11 +38,11 @@ main {
 
 .icons-header {
   display: flex;
-  width: 70px;
+  width: 50px;
   position: absolute;
-  right: 0px;
+  right: 0;
   top: 10px;
-  z-index: 50;
+  z-index: 5;
 }
 .icons-header ul {
   overflow: auto;
@@ -54,7 +54,6 @@ main {
 .icons-header li {
   height: 25px;
   list-style-type: none;
-  text-decoration: none;
   padding: 0;
   margin: 20px 2px;
 }
@@ -63,7 +62,7 @@ main {
 .icons-header img {
   text-decoration: none;
   width: 55%;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   color: #000000;
   text-transform: uppercase;
   -webkit-transition: all 0.5s ease;
@@ -78,7 +77,6 @@ main {
 }
 
 .menuToggle {
-  z-index: 5;
   display: block;
   position: relative;
   top: 32px;
@@ -87,7 +85,7 @@ main {
   margin: 1px;
   -webkit-user-select: none;
   user-select: none;
-  z-index: 6;
+  z-index: 7;
 }
 .menuToggle a {
   text-decoration: none;
@@ -165,11 +163,13 @@ main {
   width: 200px;
   margin: 0px 0 0 -50px;
   padding-left: 0;
-  top: 45px;
+  top: 52px;
+  z-index: 9;
   padding-top: 0px;
   background: #f7f7f7;
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
+  z-index: 8;
   transform-origin: 0% 0%;
   transform: translate(-100%, 0);
   transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
@@ -220,6 +220,7 @@ main {
 
 .registered-name {
   width: 100%;
+  font-weight: 800;
   margin: 15px auto;
   text-align: center;
   bottom: 5px;
@@ -227,37 +228,6 @@ main {
 
 .fas {
   color: #00ffa6;
-}
-
-.container_image {
-  width: 95%;
-  display: flex;
-  align-items: center;
-  margin: 10px auto;
-  position: relative;
-  text-align: center;
-}
-.container_image img {
-  width: 100%;
-  position: relative;
-  margin: 0 auto;
-}
-.container_image p {
-  color: #f7f7f7;
-  letter-spacing: 0.2em;
-  position: absolute;
-  align-items: center;
-  width: 100%;
-  bottom: 70px;
-}
-.container_image .title_collection {
-  font-size: 1.6em;
-  color: #f7f7f7;
-  font-weight: 800;
-  position: absolute;
-  align-items: center;
-  width: 100%;
-  bottom: 30px;
 }
 
 form {
@@ -274,19 +244,21 @@ form input {
   color: #c6c6c6;
   margin: 15px auto;
   vertical-align: middle;
+  z-index: 3;
 }
 form input,
 form textarea {
   padding: 6px;
+  padding-left: 15px;
   transition-property: background, border, color;
   transition-duration: 0.15s;
 }
 form input:focus, form inputtextarea:focus,
 form textarea:focus,
 form textareatextarea:focus {
-  outline-color: #00ffa6;
+  outline-color: #f7f7f7;
   color: #000000;
-  background-color: #f7f7f7;
+  background-color: #ffffff;
 }
 
 .search-bar {
@@ -295,6 +267,7 @@ form textareatextarea:focus {
   border: none;
   margin: 0px auto;
   vertical-align: middle;
+  position: fixed;
 }
 .search-bar input,
 .search-bar textarea {
@@ -318,6 +291,7 @@ form textareatextarea:focus {
   position: relative;
   text-align: center;
   flex-direction: column;
+  margin-top: 60px;
 }
 
 .mosaicList {
@@ -408,6 +382,23 @@ form textareatextarea:focus {
   right: 55px;
   position: absolute;
 }
+.mosaicInfo__list, .mosaicInfo__fav {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  appearance: none;
+}
+.mosaicInfo__list:not([disabled]):hover, .mosaicInfo__list:not([disabled]):focus, .mosaicInfo__fav:not([disabled]):hover, .mosaicInfo__fav:not([disabled]):focus {
+  outline: none;
+  box-shadow: none;
+}
+.mosaicInfo__list:focus, .mosaicInfo__fav:focus {
+  outline: none;
+  box-shadow: none;
+}
+.mosaicInfo__list[disabled], .mosaicInfo__fav[disabled] {
+  cursor: not-allowed;
+}
 
 .mosaic {
   width: 97%;
@@ -463,7 +454,7 @@ form textareatextarea:focus {
   align-items: center;
   height: 100%;
   margin: 10px auto;
-  margin-top: 40px;
+  margin-top: 60px;
   flex-direction: row;
   background-color: #1f1f1f;
 }
@@ -495,7 +486,9 @@ form textareatextarea:focus {
   color: #00ffa6;
 }
 .panelDetail__title {
-  margin-top: 30px;
+  margin-top: 60px;
+
+
 }
 .panelDetail__director, .panelDetail__mainCast {
   border: none;
@@ -523,6 +516,30 @@ form textareatextarea:focus {
   margin-bottom: 30px;
 }
 
+.fav {
+  position: absolute;
+  left: 50px;
+  top: 155px;
+  width: 30px;
+  height: 30px;
+  opacity: 1;
+  color: #f7f7f7;
+  z-index: 7;
+}
+.fav:not([disabled]):hover, .fav:not([disabled]):focus {
+  outline: none;
+  box-shadow: none;
+}
+.fav:focus {
+  outline: none;
+  box-shadow: none;
+}
+.fav[disabled] {
+  cursor: not-allowed;
+}
+
+
+
 .panelImage {
   display: flex;
   width: 100%;
@@ -537,16 +554,30 @@ form textareatextarea:focus {
   opacity: 0.7;
 }
 
+
+.close__detail--detail {
+  position: absolute;
+  right: 10px;
+  width: 30px;
+  top: 170px;
+
 .close__detail {
   position: absolute;
   right: 10px;
   top: 140px;
   width: 30px;
+
   height: 30px;
   opacity: 1;
   color: #f7f7f7;
   z-index: 7;
 }
+
+.close__detail--detail:hover {
+  opacity: 0.2;
+  color: #c6c6c6;
+}
+
 .close__detail:hover {
   opacity: 0.2;
   color: #c6c6c6;
@@ -560,6 +591,12 @@ form textareatextarea:focus {
   background-color: #f7f7f7;
   opacity: 1;
 }
+
+.close__detail--detail:before {
+  transform: rotate(45deg);
+}
+.close__detail--detail:after {
+
 .close__detail:before {
   transform: rotate(45deg);
 }
@@ -585,7 +622,7 @@ form textareatextarea:focus {
   left: 10px;
   content: " ";
   height: 20px;
-  width: 1px;
+  width: 2px;
   background-color: #000000;
   opacity: 1;
 }
@@ -623,6 +660,35 @@ form textareatextarea:focus {
 .big-letter {
   color: #000000;
   margin: 20px;
+}
+
+.form-panel {
+  color: #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.form-panel input {
+  width: 250px;
+  line-height: 30px;
+  border: 0.01rem solid #000000;
+  color: #c6c6c6;
+  margin: 15px auto;
+  vertical-align: middle;
+}
+.form-panel input,
+.form-panel textarea {
+  padding: 6px;
+  transition-property: background, border, color;
+  transition-duration: 0.15s;
+}
+.form-panel input:focus, .form-panel inputtextarea:focus,
+.form-panel textarea:focus,
+.form-panel textareatextarea:focus {
+  outline-color: #00ffa6;
+  color: #000000;
+  background-color: #ffffff;
 }
 
 .close {
@@ -788,6 +854,7 @@ form textareatextarea:focus {
   width: 1.2rem;
   height: 1.2rem;
 }
+
 .close__detail {
   position: absolute;
   right: 10px;
@@ -818,6 +885,50 @@ form textareatextarea:focus {
   transform: rotate(-45deg);
 }
 
+
+ul {
+  display: grid;
+}
+
+li {
+  list-style: none;
+}
+
+.container {
+  margin-top: 60px;
+}
+
+.container_image {
+  width: 95%;
+  display: flex;
+  align-items: center;
+  margin: 5px auto;
+  position: relative;
+  text-align: center;
+}
+.container_image img {
+  width: 100%;
+  position: relative;
+  margin: 0 auto;
+}
+.container_image p {
+  color: #f7f7f7;
+  letter-spacing: 0.2em;
+  position: absolute;
+  align-items: center;
+  width: 100%;
+  bottom: 70px;
+}
+.container_image .title_collection {
+  font-size: 1.6em;
+  color: #f7f7f7;
+  font-weight: 800;
+  position: absolute;
+  align-items: center;
+  width: 100%;
+  bottom: 30px;
+}
+
 .emptyFavorites {
   display: flex;
   flex-direction: column;
@@ -844,6 +955,7 @@ h3 {
   font-weight: 200;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
+
 
 .menuToggle a, .registered-name, .container_image p, form, form input, .search-bar, .mosaicInfo__vote, .big-letter, .button {
   font-size: 1rem;

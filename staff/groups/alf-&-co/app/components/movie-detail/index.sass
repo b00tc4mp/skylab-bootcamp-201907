@@ -21,7 +21,7 @@
     align-items: center
     height: 100%
     margin: 10px auto
-    margin-top: 40px
+    margin-top: 60px
     flex-direction: row
     background-color: $color-grey-back
 
@@ -58,7 +58,7 @@
     &__vote
         color: $color-green-clair
     &__title
-        margin-top: 30px
+        margin-top: 60px
     &__director,
     &__mainCast
         border: none
@@ -81,6 +81,27 @@
             font-size: 0.65rem
             line-height: 1.2rem
             margin-bottom: 30px
+            
+.fav
+    position: absolute
+    left: 50px
+    top: 155px
+    width: 30px
+    height: 30px
+    opacity: 1
+    color: $color-beige
+    z-index: 7
+    &:not([disabled]):hover,
+    &:not([disabled]):focus 
+        outline: none
+        box-shadow: none
+    &:focus 
+        outline: none
+        box-shadow: none
+    &[disabled] 
+        cursor: not-allowed 
+
+
 
  
 .panelImage
@@ -95,35 +116,34 @@
         width: 100%
         opacity: 0.7
 
-
-
-
 .close
     &__detail
-    
-        position: absolute
-        right: 10px
-        top: 140px
-        width: 30px
-        height: 30px
-        opacity: 1
-        color: $color-beige
-        z-index: 7
-
-        &:hover 
-            opacity: 0.2
-            color: $color-light-grey
-        &:before,
-        &:after 
+        &--detail    
             position: absolute
-            left: 10px
-            content: ' '
-            height: 20px
-            width: 2px
-            background-color: $color-beige
+            right: 10px
+            width: 30px
+            top: 170px
+            height: 30px
             opacity: 1
-        &:before 
-            transform: rotate(45deg)
-        &:after 
-            transform: rotate(-45deg)        
+            color: $color-beige
+            z-index: 7
+
+            &:hover 
+                opacity: 0.2
+                color: $color-light-grey
+            &:before,
+            &:after 
+                position: absolute
+                left: 10px
+                content: ' '
+                height: 20px
+                width: 2px
+                background-color: $color-beige
+                opacity: 1
+            &:before 
+                transform: rotate(45deg)
+            &:after 
+                transform: rotate(-45deg)
+           
+                       
 
