@@ -1,5 +1,11 @@
 function RecipeDetails({ meal: { idMeal, strMeal, strInstructions, strYoutube, strMealThumb, favorite }, ingredients, onBack, onToggle }) {
-    return <div className='wrapper'>
+    
+
+    const youtube = strYoutube.split("=")  
+    const youtubeLink = 'https://www.youtube.com/embed/'+youtube[1]
+    
+
+   return <div className='wrapper'>
         <h3 className="wrapper__title">{strMeal}</h3> 
         <FavButton active={favorite} onToggle={() => onToggle(idMeal)} />
 
@@ -20,8 +26,8 @@ function RecipeDetails({ meal: { idMeal, strMeal, strInstructions, strYoutube, s
        
 
         <p className='descText'>{strInstructions}</p>
-
-        <iframe className="recipe-video" src={strYoutube}></iframe>
+        
+        <iframe className="recipe-video" src={youtubeLink}></iframe>
 
         <a className='btnGo' href={strYoutube} target="_blank" >VIDEO</a>
 

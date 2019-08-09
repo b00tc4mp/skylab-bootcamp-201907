@@ -160,6 +160,8 @@ class Home extends Component {
             .catch(({ message }) => this.setState({ error: message }))
     }
 
+    
+
 render () {
 
     const{ state: { meals, meal, cats , favs, user}, showCat, handleLogout, handleSearch, handleGoBack, handleOnMeal, handleSearchCat, handleGoToCategories, handleSearchIngredient, handleToggleRecipeDetail, handleToggleRecipeList,handleToggleFavorite, handleFavorites} = this

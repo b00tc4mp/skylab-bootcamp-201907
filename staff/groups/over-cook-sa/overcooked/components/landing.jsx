@@ -32,9 +32,9 @@ class Landing extends Component {
         const { strYoutube: youtube } = meal
         meal.strYoutube = youtubeParse(youtube)
         //console.log(meal)
-        this.setState({ mealRandom: meal })
+        this.setState({ mealRandom: meal })})
 
-      })
+      
 
   }
 
