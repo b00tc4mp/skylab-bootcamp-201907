@@ -6,7 +6,7 @@ class Landing extends Component {
 
 
 
-        this.state = { view: 'collections', search: true, query: undefined, movieId: undefined, collection: undefined, movies: [], movie: undefined, error: undefined, user: undefined, favs: [], lists: undefined}
+        this.state = { view: 'collections', search: true, query: undefined, movieId: undefined, collection: undefined, movies: [], movie: undefined, error: undefined, user: undefined, favs: [], lists: undefined, showModal: undefined}
 
         this.handleGoToFavorites = this.handleGoToFavorites.bind(this)
         this.handleGoToCollections = this.handleGoToCollections.bind(this)
@@ -30,7 +30,7 @@ class Landing extends Component {
         this.handleToggleMovieFromList = this.handleToggleMovieFromList.bind(this)
         this.handleGoToMenuCollections = this.handleGoToMenuCollections.bind(this)
         this.handleGoToHome = this.handleGoToHome.bind(this)
-
+        this.handleCloseModal = this.handleCloseModal.bind(this)
            
     }
 
@@ -236,13 +236,17 @@ class Landing extends Component {
 
         credentials && (id = credentials.id, token = credentials.token)
 
-        credentials ? logic.createList(id, token, listName)
-            .then(() => {
-                this.setState({feedback: `${listName} added to your lists successfully`})
-                handleRetrieveLists(movieId)
-            })
-            .catch(({ message }) => this.setState({ error: message}))
-        : handleGoToLogIn() 
+        try {
+            credentials ? logic.createList(id, token, listName)
+                .then(() => {
+                    this.setState({feedback: `${listName} added to your lists successfully`})
+                    handleRetrieveLists(movieId)
+                })
+                .catch(({ message }) => this.setState({ error: message}))
+            : handleGoToLogIn()
+        } catch(error) {
+            this.setState({error: error.message})
+        } 
 
     }
 
@@ -256,7 +260,7 @@ class Landing extends Component {
         credentials && (id = credentials.id, token = credentials.token)
 
         credentials ? logic.retrieveLists(id, token, movieId)
-            .then(lists => this.setState({lists})).then(this.setState({showModal: true})).then(console.log(true)) : handleGoToLogIn()
+            .then(lists => this.setState({lists})).then(this.setState({showModal: true})) : handleGoToLogIn()
         
     }
 
@@ -278,6 +282,10 @@ handleGoToHome(event){
        this.setState({view: 'collections'})
    }
 
+   handleCloseModal() {
+       this.setState({showModal: undefined, error: undefined})
+   }
+
 
     /* Render */
     render() {
@@ -287,7 +295,7 @@ handleGoToHome(event){
             handleBackFromDetail, handleGoToSearch, handleGoToLogIn,
             handleToggleFavMovieFromMovieItem, handleToggleFavMovieFromMovieDetail, handleGoToCollections, handleLinkToCollections, handleGoToFavorites,
             handleToggleFavMovieFromFavoritesSection, handleCreateList, handleDisplayListModal, handleToggleMovieFromList, handleToggleMovieFromMovieDetail,
-            handleGoToMenuCollections, handleGoToHome
+            handleGoToMenuCollections, handleGoToHome, handleCloseModal
 
         } = this
 
@@ -334,7 +342,7 @@ handleGoToHome(event){
                         return <MovieItem movie={movie} onToggle={handleToggleFavMovieFromMovieItem} onClickList={handleDisplayListModal} />
                     }} onItem={handleRetrieveMovie} />}
                     {showModal &&
-                    <ListModal lists={lists} onClosemovieId={movieId} feedback={feedback} error={error} onToggleMovieList={handleToggleMovieFromList} onCreateList={handleCreateList} />
+                    <ListModal onClose={handleCloseModal} lists={lists} movieId={movieId} feedback={feedback} error={error} onToggleMovieList={handleToggleMovieFromList} onCreateList={handleCreateList} />
                     }
                     </>
                 }i
@@ -346,7 +354,7 @@ handleGoToHome(event){
                 {view === 'favorites' && <>
                     <Favorites favs={favs} removeFav={handleToggleFavMovieFromFavoritesSection} showDetail={handleRetrieveMovie} onClickList={handleDisplayListModal} />
                     {showModal &&
-                    <ListModal lists={lists} onClosemovieId={movieId} feedback={feedback} error={error} onToggleMovieList={handleToggleMovieFromList} onCreateList={handleCreateList} />
+                    <ListModal onClose={handleCloseModal} lists={lists} movieId={movieId} feedback={feedback} error={error} onToggleMovieList={handleToggleMovieFromList} onCreateList={handleCreateList} />
                     }
                     </>
                 }

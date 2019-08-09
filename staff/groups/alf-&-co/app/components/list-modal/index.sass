@@ -23,9 +23,11 @@
     flex-flow: column nowrap
     justify-content: center
     align-items: center
-    width: 80vw 
-    height: 80vh 
+    width: 80%
+    height: 80% 
     background-color: $color-beige
+    padding: 1rem
+    position: relative
 
     &__title
         margin-top: 1rem
@@ -50,7 +52,7 @@
 
         &:nth-last-child
             border-bottom: none
-
+    &__btn
         &--active
             color: $color-green-clair
 
@@ -86,12 +88,11 @@
     margin: 2px auto
 
 
-    
-
-
 .close
+    width: 1.2rem
+    height: 1.2rem
+
     &__detail
-    
         position: absolute
         right: 10px
         top: 140px

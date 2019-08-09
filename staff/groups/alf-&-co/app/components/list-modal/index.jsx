@@ -1,10 +1,10 @@
-function ListModal({movieId, lists, onCreateList, onToggleMovieList, error, feedback, close}) {
+function ListModal({movieId, lists, onCreateList, onToggleMovieList, error, feedback, onClose}) {
     return  <div className='modal-outer'>
         {lists && 
             <div className="modal-inner">
                 <a href="" className="close" onClick={event => {
                     event.preventDefault()
-                    close()
+                    onClose()
                 }}></a>               
                 <h3 className="modal-inner__title">Add to</h3>
 
