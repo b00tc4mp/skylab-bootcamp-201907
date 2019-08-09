@@ -1,3 +1,13 @@
+/**
+ * Retrieves the list of favorites movies from the user profile.
+ * A call to TMDB API is done in order to check availability of every movie id.
+ * Returns an array of movie ids favorited by the user
+ * 
+ * @param {string} userId - User id returned by Skylabcoders' users API authentication
+ * @param {string} userToken - Token returned by Skylabcoders' users API authentication
+ * 
+ */
+
 logic.retrieveFavMovies = function(userId, userToken) {
     const TMDB_API_KEY = '03ecceac5993bcd054fbc7d617df741a'
     const AUTH_ENDPOINT = 'https://skylabcoders.herokuapp.com/api/user/'

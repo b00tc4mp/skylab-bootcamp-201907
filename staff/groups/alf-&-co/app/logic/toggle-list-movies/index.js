@@ -1,3 +1,16 @@
+/**
+ * Adds or removes a movie to/from a user's custom list.
+ * User data is retrieved from Skylabcoders' users API in order 
+ * to check if a specific movie is already in user's list. 
+ * Returns object with status of response
+ * 
+ * @param {string} userId - User id returned by Skylabcoders' users API authentication
+ * @param {string} userToken - Token returned by Skylabcoders' users API authentication
+ * @param {string} movieId - The TMDB movie id 
+ * @param {string} listName - The name of the user's custom list 
+ * 
+ */
+
 logic.toggleFromMovieList = function(userId, userToken, movieId, listName, expression) {
     const TMDB_API_KEY = '03ecceac5993bcd054fbc7d617df741a'
     const AUTH_ENDPOINT = 'https://skylabcoders.herokuapp.com/api/user/'
@@ -18,7 +31,6 @@ logic.toggleFromMovieList = function(userId, userToken, movieId, listName, expre
             (lists) ? indexList = lists.findIndex(list => list.name === listName) : lists = []
 
             /* means list has been found in user's lists */
-
             let indexMovie
             (lists[indexList].movies) ? indexMovie = lists[indexList].movies.findIndex(movie => movie === movieId) :  {}
 
