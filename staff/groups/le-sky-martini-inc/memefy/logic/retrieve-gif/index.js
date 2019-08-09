@@ -1,3 +1,15 @@
+/**
+ * Retrieves GIF via Giphy API. 
+ * If the user is registered it checks his/her id+token and allows him/her to save desired GIFs to a favorites array/section.
+ * If the validations goes wrong, it shows a message with the response error.
+ * 
+ * @param {String} id The user id.
+ * @param {String} token The token to authorize user validation.
+ * @param {String} gifid The GIF id.
+ * 
+ * @return {Object} GIF object with different properties. 
+ */
+
 logic.retrieveGif = function (id, token, gifId) {
     let favorites = []
 
