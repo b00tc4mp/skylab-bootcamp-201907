@@ -44,7 +44,7 @@ class App extends Component {
 
         return (
         <>
-
+    
         {!credentials ? 
         <Landing onCredentials={handleCredentials} onUser={handleUser}/>: 
         <Home onLogout={handleLogout} credentials={credentials} /> }

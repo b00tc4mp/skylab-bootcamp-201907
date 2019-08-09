@@ -171,7 +171,7 @@ render () {
             <Search onSearchName={handleSearch} onSearchIngredient={handleSearchIngredient}/>
         
     </header>
-    <main>
+    <main className="home-main">
         
         <section>     
             { cats && <Categories onSearchCat={handleSearchCat} /> }
