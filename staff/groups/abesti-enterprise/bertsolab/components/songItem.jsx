@@ -1,3 +1,7 @@
+ /**
+ * Listed item in Results component.
+ */
+
 function SongItem({ track: { track_id, track_name, artist_name, album_name, favorite}, onDisplay, onToggle}) {
     return <>
         <section className="song-item">

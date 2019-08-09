@@ -1,3 +1,7 @@
+/**
+* Login component .
+*/
+
 function Login({ onLogin, onBack, onRegister, error }) {
     return <>
     <section className="login">

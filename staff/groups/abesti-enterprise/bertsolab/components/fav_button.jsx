@@ -1,3 +1,6 @@
+/**
+* Button Favorite Song.
+*/
 
 function FavButton({ active, onToggle, trackId }) {
     return <button className="fav-button" onClick={event => {

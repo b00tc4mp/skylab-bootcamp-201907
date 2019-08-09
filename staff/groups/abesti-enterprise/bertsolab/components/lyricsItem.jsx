@@ -1,3 +1,7 @@
+/**
+* Component list the lyrics found .
+*/
+
 function LyricsItem({ lyrics, onClose }) {
     return <>
 

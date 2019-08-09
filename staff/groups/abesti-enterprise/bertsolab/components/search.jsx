@@ -1,3 +1,7 @@
+/**
+ * Search input for the query.
+ */
+
 function Search(props) {
     return <form className="form search-form" onSubmit={event => {
         event.preventDefault()
