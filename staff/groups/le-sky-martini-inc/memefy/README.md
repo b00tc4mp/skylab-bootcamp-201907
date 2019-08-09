@@ -1,4 +1,4 @@
-# MEMEFY
+# MEMEFY.tv
 A project by:
 
  **Le Sky Martini inc.**

@@ -18,9 +18,10 @@ function Login({ onLogin, onBack, error }) {
                     <input className={`login__input`} type="password" name="password" id="password" placeholder="password"/>
                 </li>
             </ul>
+            {error && <Feedback message={error} />}
             <button className={`login__button`}>done</button>
         </form>
-        {error && <Feedback message={error} />}
+        
         <a className={`login__back`} href="" onClick={event => {
             event.preventDefault()
 

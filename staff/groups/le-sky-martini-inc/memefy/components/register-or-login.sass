@@ -1,30 +1,40 @@
 .register-or-login
     @extend %main-content-box 
-    width: 90%
+    background-color: white
     font-family: "Cousine", sans-serif
     border-radius: 0.5em 
+    width: 90%
 
     &__list
-        padding-top: 3em
-        padding-bottom: 5em
-
-    &__item
+        margin: 2em auto 2em auto
         list-style: none
-        margin-top: 2em
     
     &__title
-        color: white
+        color: #502666
 
-    &__register, &__login
-        background-color: black
+    &__item
+        background: linear-gradient(-45deg, #FF5128, #9422E8, #1EC0FF)
+        background-size: 400% 400%
+        animation: Gradient 15s ease infinite
+        @keyframes Gradient
+            0%
+                background-position: 0% 50%
+            50% 
+                background-position: 100% 50%
+            100% 
+                background-position: 0% 50%
+        max-width: 50%
+        margin: 1em auto auto auto
+        border-radius: 5em 
+        padding: 1em   
+        font-size: 22px
+
+    &__link
         color: $secondary-text-color
-        text-decoration: none
-        padding: 10px
-        font-size: 16px
-    
-    &__register:hover, &__login:hover
-        background-color: white
-        color: $hover-text-color
+        text-decoration: none        
+
+    &__item:hover
+        background: deeppink
 
     &__back
         @extend %link
@@ -32,3 +42,4 @@
 
     &__back:hover
         color: $hover-text-color
+

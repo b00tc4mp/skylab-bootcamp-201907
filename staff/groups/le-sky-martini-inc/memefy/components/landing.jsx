@@ -346,10 +346,10 @@ class Landing extends Component {
                 <nav>
                     {!user ? <ul className={`landing__header-menu`}>
                         <li className={`landing__header-item`}>
-                            <a className={`landing__header-link`} href="" onClick={handleRegister}><i className="fas fa-user-plus"></i>  Register</a>
+                            <a className={`landing__header-link`} href="" onClick={handleRegister}><i className="fas fa-user-plus"></i>  Sign up</a>
                         </li>
                         <li className={`landing__header-item`}>
-                            <a className={`landing__header-link`} href="" onClick={handleLogin}><i className="fas fa-sign-in-alt"></i>  Login
+                            <a className={`landing__header-link`} href="" onClick={handleLogin}><i className="fas fa-sign-in-alt"></i>  Sign in
                             </a>
                         </li>
                     </ul> : <ul className={`landing__header-menu`}>
