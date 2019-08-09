@@ -1,4 +1,19 @@
-const validate = (() => {
+/**
+ * Register new users to Herokuapp's API via form.
+ * If the user is already registered API returns a error message.
+ * If the register goes well, API returns a 'KO' status and an error message.
+ * 
+ * @var {String} EMAIL_REGEX Email Address Regular Expression
+ * @param {String} URL_REGEX URL Address Regular Expression
+ * 
+ * 
+ * @return {String} Specified error messages.
+ */
+
+
+const validate = (() => { 
+
+    
     const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     const URL_REGEX = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/ 
 
