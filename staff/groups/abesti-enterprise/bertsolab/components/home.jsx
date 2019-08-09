@@ -12,6 +12,7 @@ class Home extends Component {
         this.handleRetrieveSong=this.handleRetrieveSong.bind(this)
         this.handleCloseLyrics = this.handleCloseLyrics.bind(this)
         this.handleToggleFavSong= this.handleToggleFavSong.bind(this)
+        this.handleRetrieveSongFav=this.handleRetrieveSongFav.bind(this) 
     }
     
     componentWillMount() {
@@ -60,6 +61,18 @@ class Home extends Component {
             .catch(({ message }) => this.setState({ lyrics: message }))
         
     }
+
+     handleRetrieveSongFav(track_id){
+        const { props: { credentials } } = this
+
+        let id, token
+
+        credentials && (id = credentials.id, token = credentials.token)
+
+        logic.retrieveFavs(id, token, track_id.toString()) 
+            .then(lyrics => this.setState({ lyrics }))
+            .catch(({ message }) => this.setState({ lyrics: message }))
+    }   
     
     handleToggleFavSong(track_id){
         const { props: { onLogin,  credentials }, state: {q_artist, q_track } }= this
@@ -67,9 +80,9 @@ class Home extends Component {
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
-
+        debugger
         credentials ? logic.toggleFavTrack(id, token, track_id)
-            .then( () => handleSearch(q_artist, q_track))
+            .then(() => this.handleSearch(q_artist, q_track))
             .catch(({ message }) => this.setState({ error: message})) 
             :
             onLogin()
@@ -88,7 +101,7 @@ class Home extends Component {
                 handleToggleFavDuckFromDuckDetail, handleAcceptError, 
                 handleRetrieveSong,
                 handleCloseLyrics, handleToggleFavSong
-              } = this
+            } = this
 
         
 
@@ -105,7 +118,6 @@ class Home extends Component {
             />
 
             {lyrics && <LyricsItem lyrics={lyrics} onClose={handleCloseLyrics}/>}
-
         </>
     }
 }

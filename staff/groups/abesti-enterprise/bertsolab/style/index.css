@@ -38,6 +38,24 @@ a {
   color: #000;
 }
 
+.display-song {
+  height: 100vh;
+  background-color: rgba(10, 10, 10, 0.9);
+  z-index: 1;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: purple;
+  padding: 30px 30px 30px 30px;
+}
+.display-song_cross {
+  background-color: rgba(10, 10, 10, 0.9);
+  color: white;
+}
+
 /* header */
 .header {
   background-color: #fff;

@@ -17,7 +17,7 @@ return <>
     </form>
     {error && <Feedback message={error} />}
     <p>Do you already have an account? Go to
-        <a href="" onLogin={event => {
+        <a href="" onClick={event => {
         event.preventDefault()
 
         onLogin()

@@ -8,7 +8,7 @@ logic.toggleFavTrack = function (id, token, trackId) {
             if (response.status === 'KO') throw new Error(response.error)
 
             const favorites = response.data.favorites
-            debugger
+            
 
             const index = favorites.findIndex(favorite => favorite == trackId)
 

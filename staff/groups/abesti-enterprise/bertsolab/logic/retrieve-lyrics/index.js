@@ -1,11 +1,11 @@
-logic.retrieveLyrics = function (id, token, track_id){
+logic.retrieveLyrics = (id, token, track_id) => {
     //let favorites
 
     if(id != undefined && token != undefined) {
         validate.string(id, 'id')
         validate.string(token, 'token')
         validate.string(track_id, 'track_id')
-
+        debugger
         return call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'get', { 'authorization': `bearer ${token}` }, undefined)
         .then(res => {
             if(res.status === 'KO') throw new Error (res.error)
@@ -25,7 +25,7 @@ logic.retrieveLyrics = function (id, token, track_id){
                     } else {
                         lyrics = res.message.body.lyrics.lyrics_body
                         //favorites && track_id.favorite.includes() --> Verlo con Oihane
-                        //favorites && (duck.favorite = favorites.includes(duckId))
+                        //favorites && (lyrics.favorite = favorites.includes(track_id))
                     }
                     return lyrics
                 }

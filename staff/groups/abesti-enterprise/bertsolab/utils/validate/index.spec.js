@@ -11,7 +11,7 @@ describe ("validate", () => {
     })
     it("should fail on empty data", () => {
         aux = ""
-        debugger
+
         expect( () => validate.string (aux, 'aux')).toThrowError(Error, `aux is empty or blank`)
     }) 
     it("should succeed in email", ()=>{

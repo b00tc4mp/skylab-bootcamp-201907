@@ -1,9 +1,12 @@
 function LyricsItem({ lyrics, onClose }) {
     return <>
-        <h3>{lyrics}</h3>
-        <button onClick = {event => {
-            onClose()
-        }}
-        >✖</button>
+        <section className="display-song">
+            <h3>{lyrics}</h3>
+            <button className="display-song__cross" onClick = {event => {
+                onClose()
+            }}
+            >✖</button>
+        </section>
+        
     </>
 }
