@@ -14,6 +14,6 @@ function Search(props) {
             <option value="2">by ingredient</option>
         </select>
         <input type="text" id="mySearch" name="query" />
-        <button>Search</button>
+        <button className="Search-button">Search</button>
     </form>
 }
