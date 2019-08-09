@@ -1,3 +1,18 @@
+/**
+ * @description This function searchs for songs in Musixmatch's database using 2 strings: artist name and track title.
+ * Besides, it includes 3 extra parameters:
+ * - apikey: our key identifier as users of Musixmatch API.
+ * - s_track_rating: it helps on sorting search results prioritizing the most popular songs.
+ * - f_has_lyrics: prioritize songs which has lyrics.
+ *  
+ * @param id user id
+ * @param token valid credentials on database
+ * @param q_artist artist name
+ * @param q_track track name
+ * 
+ * @returns 
+ */
+
 logic.searchSongs =  (id, token, q_artist, q_track) => {
     let favorites
 
