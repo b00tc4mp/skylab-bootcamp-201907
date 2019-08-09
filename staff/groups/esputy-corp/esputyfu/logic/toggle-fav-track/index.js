@@ -1,7 +1,7 @@
-logic.toggleFavTrack = function (id, token, idTrack) {
-    if (typeof id !== 'string') throw new Error(`id user with value ${id} is not a string`)
-    if (typeof token !== 'string') throw new Error(`token user with value ${token} is not a string`)
-    if (typeof idTrack !== 'string') throw new Error(`track id with value ${idTrack} is not a string`)
+logic.toggleFavTrack = (id, token, idTrack) => {
+    validate.string(id, 'id user')
+    validate.string(token, 'token user')
+    validate.string(idTrack, 'id track')
 
     return call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'get', { 'authorization': `bearer ${token}` }, undefined)
         .then(response => {

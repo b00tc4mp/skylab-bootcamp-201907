@@ -121,7 +121,7 @@
                         })
                 })
 
-                it('should succeed on matching criteria', () => {
+                it('should return favorites', () => {
 
                     return logic.searchTracks(credentials.id, credentials.token, 'wonderwall', '10')
                         .then(songs => {

@@ -24,6 +24,7 @@ class Landing extends React.Component {
             logic.searchTracks(id, token, query)
                 .catch(message => console.error(message))
                 .then(response => this.setState({ search: query, tracks: response, track: undefined }))
+                .then( () => this.props.onGoToSearch())
         } catch {
             console.error(error)
         }
@@ -100,20 +101,27 @@ class Landing extends React.Component {
     render() {
         return <>
             <main>
-                {this.props.onFavorites && <>
+                {this.props.onFavorites && this.props.nav === 'favorites' && <>
                     <h3>Favoritos</h3>
                     <Results items={this.props.onFavorites} paintItem={track => {
-                        return <TrackDetail track={track} onToggle={this.handleToggleFavFromFavDetail} onBack={this.handleBackFromDetailTrack} />
+                        return <TrackDetail onView={this.props.nav} track={track} onToggle={this.handleToggleFavFromFavDetail} onBack={this.handleBackFromDetailTrack} />
                     }} />
                     {this.props.onFavorites.length == 0 && <p>No tienes favoritos</p>}
                 </>}
-                {!this.props.onFavorites && <>
-                    <Search onSearch={this.handleSearch} />
-                    {this.state.track === undefined ?
+                
+                {(this.props.nav === 'search') && <>
+                    <div className='container container__background'>
+                        {!this.state.tracks.length && <h1>La versión fú de Spotify</h1>}
+                        {!this.state.tracks.length ? <p className='container__search'>¡Busca tu canción favorita!</p> : <p className='container__title'>¿Otra no?</p>}
+
+
+                        <Search onSearch={this.handleSearch} />
+                    </div>
+                    {(this.state.track === undefined ) ?
                         <Results items={this.state.tracks} paintItem={track => {
                             return <TrackItem track={track} onToggle={this.handleToggleFavFromTrackItem} />
                         }} onItem={this.handleRetrieveTrack} /> :
-                        <TrackDetail track={this.state.track} onToggle={this.handleToggleFavFromTrackDetail} onBack={this.handleBackFromDetailTrack} />}
+                        <TrackDetail onView={this.props.nav} track={this.state.track} onToggle={this.handleToggleFavFromTrackDetail} onBack={this.handleBackFromDetailTrack} />}
                 </>}
 
             </main>

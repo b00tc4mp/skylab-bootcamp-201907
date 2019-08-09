@@ -2,11 +2,15 @@ class App extends React.Component {
     constructor() {
         super()
 
+        //session storage
+        let credentials
+        const { id, token } = sessionStorage
+        id && token && (credentials = { id, token })
 
-        this.state = { view: 'landing', credentials: undefined, favs: undefined }
+        //sattes
+        this.state = { view: 'search', credentials, favs: undefined }
 
         //bindings
-
         this.handleRegister = this.handleRegister.bind(this)
         this.handleGoToLogin = this.handleGoToLogin.bind(this)
         this.handleGoToRegister = this.handleGoToRegister.bind(this)
@@ -33,7 +37,10 @@ class App extends React.Component {
         try {
             logic.authenticateUser(email, password)
                 .then(user => {
-                    this.setState({ credentials: user, view: 'landing' })
+                    sessionStorage.id = user.id
+                    sessionStorage.token = user.token
+
+                    this.setState({ credentials: user, view: 'search' })
                 })
                 .catch(message => console.error(message))
 
@@ -50,12 +57,12 @@ class App extends React.Component {
         this.state.credentials && (id = this.state.credentials.id, token = this.state.credentials.token)
 
         logic.retrieveFavTracks(id, token)
-            .then(response => this.setState({ favs: response }))
+            .then(response => this.setState({ view: 'favorites', favs: response }))
     }
 
     // navigate
     handleBackToLanding() {
-        this.setState({ view: 'landing' })
+        this.setState({ view: 'search' })
     }
 
     handleGoToRegister() {
@@ -67,15 +74,22 @@ class App extends React.Component {
     }
 
     handleLogout() {
-        this.setState({ view: 'landing', credentials: undefined })
+        delete sessionStorage.id
+        delete sessionStorage.token
+
+        this.setState({ view: 'search', credentials: undefined, favs: undefined })
     }
 
     render() {
         return <>
-            <Header onLogin={this.handleGoToLogin} onRegister={this.handleGoToRegister} state={this.state.credentials} onFavorites={this.handleFavs} onLogo={this.handleBackToLanding} onLogout={this.handleLogout} />
-            {this.state.view === 'landing' && <Landing credentials={this.state.credentials} onLogin={this.handleGoToLogin} onFavorites={this.state.favs} backFav={this.handleFavs} />}
+            <Header onLogin={this.handleGoToLogin} onRegister={this.handleGoToRegister} state={this.state.credentials} nav={this.state.view} onFavorites={this.handleFavs} onSearch={this.handleBackToLanding} onLogout={this.handleLogout} />
+
+            {(this.state.view === 'search' || this.state.view === 'favorites') && <Landing nav={this.state.view} credentials={this.state.credentials} onGoToSearch={this.handleBackToLanding} onLogin={this.handleGoToLogin} onFavorites={this.state.favs} backFav={this.handleFavs} />}
+
             {this.state.view === 'register' && <Register onRegister={this.handleRegister} />}
+
             {this.state.view === 'register-success' && <RegisterSuccess onLogin={this.handleGoToLogin} />}
+
             {this.state.view === 'login' && <Login onLogin={this.handleLogin} />}
             <Footer />
         </>
