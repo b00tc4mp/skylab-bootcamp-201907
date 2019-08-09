@@ -83,10 +83,12 @@ class Landing extends Component {
         this.setState({ search: true })
     }
 
-    handleSearch(query) {
+    handleSearch(query, event) {
+
+        event && event.target.reset()
         const { props: { credentials } } = this
         let id, token
-
+        
         credentials && (id = credentials.id, token = credentials.token)
 
 
@@ -321,7 +323,7 @@ handleGoToHome(event){
             <main>
 
                 {/* Search state is true by default. */}
-                {search && <Search onSearch={handleSearch}></Search>}
+                {search && <Search onSearch={handleSearch} ></Search>}
 
                 {/* Default view on landing <main>. Displays collections of movies. */}
                 {view === 'collections' && <Collections onCollection={handleGoToCollections} />}
