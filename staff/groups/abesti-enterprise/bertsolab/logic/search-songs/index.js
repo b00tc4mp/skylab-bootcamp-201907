@@ -6,7 +6,7 @@ logic.searchSongs =  (id, token, q_artist, q_track) => {
         validate.string(token, 'token')
         validate.string(q_artist, 'query', false)
         validate.string(q_track, 'query', false)
-        debugger
+        
         return call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'get', { 'authorization': `bearer ${token}` }, undefined)
             .then(response => {
                 if (response.status === 'KO') throw new Error(response.error)
