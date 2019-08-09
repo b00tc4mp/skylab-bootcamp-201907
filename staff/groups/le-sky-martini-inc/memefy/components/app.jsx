@@ -27,7 +27,7 @@ class App extends Component {
      }
  
     handleGoToRegister() {
-        this.setState({ view: 'register' })
+        this.setState({ view: 'register' , error:undefined })
     }
 
     handleBackToLanding() {
@@ -45,7 +45,7 @@ class App extends Component {
     }
 
     handleGoToLogin() {
-        this.setState({ view: 'login' })
+        this.setState({ view: 'login', error: undefined })
     }
 
     handleLogin(email, password) {
@@ -75,7 +75,7 @@ class App extends Component {
 
         return <body className={`body`}>
             <header className={`body__header`}>
-                <p><a className={`body__header-title1`} href=""><i class="fas fa-tv"></i> Memefy <span className={`body__header-title2`}>.TV</span></a></p>
+                <p><a className={`body__header-title1`} href=""><i className="fas fa-tv"></i> Memefy <span className={`body__header-title2`}>.TV</span></a></p>
             </header>
             <main className={`body__main`}>
                 {view === 'landing' && <Landing onRegister={handleGoToRegister} onRegisterOrLogin={handleGoToRegisterOrLogin} onLogin={handleGoToLogin} credentials={credentials} onLogout={handleLogout} />}
@@ -84,7 +84,7 @@ class App extends Component {
                 {view === 'registerorlogin' && <RegisterOrLogin onLogin={handleGoToLogin} onRegister={handleGoToRegister} onBack={handleBackToLanding} />}
                 {view === 'login' && <Login onBack={handleBackToLanding} onLogin={handleLogin} error={error} />}
             </main>
-            <footer className={`body__footer`}>Skylab Coders Academy <i class="fab fa-gratipay"></i> Le Sky Martini</footer>
+            <footer className={`body__footer`}>Skylab Coders Academy <i className="fab fa-gratipay"></i> Le Sky Martini</footer>
         </body>
     }
 }

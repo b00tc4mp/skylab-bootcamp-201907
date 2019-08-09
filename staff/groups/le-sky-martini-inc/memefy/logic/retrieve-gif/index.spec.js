@@ -6,10 +6,10 @@
 
         beforeEach(() =>
             user = {
-                name: 'John-' + random(),
-                surname: 'Doe-' + random(),
-                username: 'johndoe-' + random() + '@mail.com',
-                password: '123-' + random(),
+                name: 'LePink-' + random(),
+                surname: 'Martini-' + random(),
+                username: 'teamwork-' + random() + '@mail.com',
+                password: 'zzz-' + random(),
                 favorites: []
             }
         )
@@ -34,8 +34,6 @@
                 .then(gif => expect(gif.id).toBeUndefined())
                 .catch(error => expect(error).toBeDefined())
         })
-
-        // TODO test more cases
 
         describe('when user already has a favorite gif', () => {
             const id = 'GpyS1lJXJYupG'
@@ -74,8 +72,6 @@
                     .then(gif => expect(gif.id).toBeUndefined())
                     .catch(error => expect(error).toBeDefined())
             })
-
-            // TODO test more cases
         })
     })
 }

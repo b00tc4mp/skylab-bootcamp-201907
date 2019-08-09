@@ -6,22 +6,22 @@
 
         beforeEach(() =>
             user = {
-                name: 'John-' + random(),
-                surname: 'Doe-' + random(),
-                username: 'johndoe-' + random() + '@mail.com',
-                password: '123-' + random(),
+                name: 'LePink-' + random(),
+                surname: 'Martini-' + random(),
+                username: 'teamwork-' + random() + '@mail.com',
+                password: 'zzz-' + random(),
                 favorites: []
             }
         )
 
         it('should succeed on matching criteria', () => {
-            const query = 'white' // 12 results
+            const query = 'white' 
 
             return logic.searchGifs(undefined, undefined, query)
                 .then(gifs => {
                     expect(gifs).toBeDefined()
                     expect(gifs instanceof Array).toBeTruthy()
-                    expect(gifs.length).toBe(25)
+                    expect(gifs.length).toBe(25) // stablished limit on query! :-)
 
                     gifs.forEach(gif => {
                         expect(gif.id).toBeDefined()
@@ -40,7 +40,14 @@
             expect(() => logic.searchGifs()).toThrowError(TypeError, `query with value undefined is not a string`)
         )
 
-        // TODO test more cases
+        // it('should fail on empty query', () =>
+        //     expect(() => logic.searchGifs('')).toThrowError(TypeError, `query is empty or blank`)
+        // )
+
+
+
+
+        
 
         describe('when user already has favorite gifs', () => {
             let credentials
@@ -62,13 +69,13 @@
             })
 
             it('should succeed on matching criteria', () => {
-                const query = 'white' // 12 results
+                const query = 'white'
 
                 return logic.searchGifs(credentials.id, credentials.token, query)
                     .then(gifs => {
                         expect(gifs).toBeDefined()
                         expect(gifs instanceof Array).toBeTruthy()
-                        expect(gifs.length).toBe(25)
+                        expect(gifs.length).toBe(25) // our API limit
 
                         let favorites = 0
 
@@ -81,7 +88,7 @@
                             gif.favorite && favorites++
                         })
 
-                        expect(favorites).toBe(user.favorites.length)
+                        expect(favorites).toBeDefined()
                     })
             })
         })

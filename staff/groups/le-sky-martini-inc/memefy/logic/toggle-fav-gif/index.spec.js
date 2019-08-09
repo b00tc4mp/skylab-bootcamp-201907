@@ -8,10 +8,10 @@
 
         beforeEach(() => {
             user = {
-                name: 'John-' + random(),
-                surname: 'Doe-' + random(),
-                username: 'johndoe-' + random() + '@mail.com',
-                password: '123-' + random(),
+                name: 'LePink-' + random(),
+                surname: 'Martini-' + random(),
+                username: 'teamwork-' + random() + '@mail.com',
+                password: 'zzz-' + random(),
                 favorites: []
             }
 
@@ -49,27 +49,12 @@
                 )
         )
 
-        // TODO refactor
-        // it('should fail on non existing id', () => {
-        //     expect(() => logic.toggleFavGif('invalid-id', data.token, id, () => {}))
-        //         .toThrowError(Error, `user with username ${username} not found`)
-        // })
-
-        // TODO refactor
-        // it('should fail non existing gif id', () => {
-        //     const id = '5c3853aebd1bde8520e66ff9'
-
-        //     logic.toggleFavGif(username, id, error => {
-        //         expect(error).toBeDefined()
-
-        //         const { message } = error
-        //         expect(message).toBe(`cannot retrieve gif with id ${id}`)
-
-        //         done()
-        //     })
-        // })
-
-        // TODO test more cases
+    
+         it('should fail on non existing id', () =>
+             logic.toggleFavGif('invalid-id', credentials.token, credentials.id)
+             .then(response => expect(response).toBeDefined())
+             .catch(error => expect(error).toBeDefined())
+         )
 
         describe('when gif already in favorites', () => {
             const gifId = 'GpyS1lJXJYupG'
@@ -116,7 +101,8 @@
                     )
             )
 
-            // TODO test more cases
+
+
         })
     })
 }

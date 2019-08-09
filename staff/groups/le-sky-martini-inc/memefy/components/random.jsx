@@ -1,14 +1,14 @@
 function Random(props) {
-    return <setion className={`random`}>
-        <img className={`random__tv-remote`} src="https://www.pngrepo.com/download/9781/remote-control.png" onClick={event => {
+    return <section className={`random`}>
+        <img className={`random__tv-remote`} src="https://media.giphy.com/media/LpvMOgLawT6x14rngP/giphy.gif" onClick={event => {
         event.preventDefault()
         
         props.onRandom()
         }}></img>
-        <a className={`random__back`} href="" onClick={ event => {
+        <p><a className={`random__back`} href="" onClick={ event => {
                 event.preventDefault()
 
                 props.onBack()
-            }}>Go back</a>
-    </setion>
+            }}><i class="fas fa-arrow-left"></i> Go back</a></p>
+    </section>
 }
