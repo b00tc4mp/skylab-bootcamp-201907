@@ -2,7 +2,7 @@
 Experience a new way of accessing Spotify resources through our web app.
 
 ## Motivation
-Esputifú was created a as test case, main goal being to get familiarized with React Javascript Library and how to communicate with external APIs.
+Esputifú was created as a test case, main goal being to get familiarized with React Javascript Library and how to communicate with external APIs.
 
 ## Features
 
@@ -10,6 +10,7 @@ Esputifú was created a as test case, main goal being to get familiarized with R
 * Sign in.
 * Search music tracks.
 * Access track details such as artist, album, release date and more.
+* Add tracks to user's favourite list.
 * Listen a 30 seconds track preview (not available on all tracks).
 
 ## Build status 
