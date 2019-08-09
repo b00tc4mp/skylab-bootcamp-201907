@@ -20,6 +20,30 @@ body {
   display: flex;
 }
 
+input {
+  border: 0.09rem solid rgba(0, 0, 0, 0.3);
+}
+
+select, button, a {
+  margin: 0.5rem;
+  text-align: center;
+  padding-top: 0.4rem;
+  align-content: space-around;
+  text-decoration: none;
+  font-size: 0.7rem;
+  margin-top: 1rem;
+  align-self: center;
+  border: none;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  background-color: #4091cc;
+  color: white !important;
+}
+
+a {
+  text-decoration: none;
+}
+
 ul {
   padding: 0;
   margin: 0;
@@ -126,7 +150,16 @@ main {
   margin: 20px auto;
 }
 
-footer {
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding-top: 2rem;
+  background-color: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.footer {
   background-color: #a30f32;
   display: flex;
   align-content: flex-end;
@@ -136,6 +169,22 @@ footer {
   color: white;
   width: 100vw;
   font-size: 0.8rem;
+  position: absolute;
+  bottom: 0;
+}
+
+.footer-home {
+  background-color: #a30f32;
+  display: flex;
+  align-content: flex-end;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: baseline;
+  color: white;
+  width: 100vw;
+  font-size: 0.8rem;
+  bottom: 0;
+  margin-top: 2rem;
 }
 
 .footer-sMedia {
@@ -212,6 +261,7 @@ footer {
 
 .homeHeader {
   text-align: center;
+  padding: 0;
 }
 
 .headerButton {
@@ -240,10 +290,25 @@ footer {
   margin-bottom: 0.5rem;
 }
 
+.cat_cont {
+  margin-bottom: 2rem;
+  margin-top: 12rem;
+}
+
+.catPasta {
+  border-top: 0 !important;
+}
+
 .catTitle {
   text-align: center;
   color: #4091cc;
   margin: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+  padding-top: 1rem;
+}
+
+.cat-img {
+  width: 100vw;
 }
 
 .wrapper {
@@ -253,17 +318,33 @@ footer {
   flex-direction: column;
   text-align: center;
   margin-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+}
+.wrapper__title {
+  padding-top: 1rem;
 }
 
-.img {
+.wrapper-cont {
+  margin-top: 12rem;
+}
+
+.wrapper__img {
+  margin-top: 1rem;
   width: 100vw;
-  height: auto;
+}
+
+.fav-text {
+  font-size: 12px;
 }
 
 .descText {
   color: black;
   text-align: justify;
   padding: 1rem;
+}
+
+.home-logo {
+  width: 100vw;
 }
 
 /*# sourceMappingURL=index.css.map */

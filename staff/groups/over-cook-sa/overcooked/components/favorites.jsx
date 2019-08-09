@@ -1,6 +1,7 @@
 function Favorites(props) {
     
-    return<ul>
+    return <section className="favorites">
+    <ul>
          {props.favs.map( meal => 
              <li key={meal.idMeal} onClick={ () => {
                  props.onMeal(meal.idMeal)
@@ -9,5 +10,6 @@ function Favorites(props) {
              </li>)
          }
      </ul>
+     </section>
      
  }

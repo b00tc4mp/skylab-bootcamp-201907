@@ -1,11 +1,7 @@
 function SmallHeader({onLogout,goToCategories,user,handleFavorites}) {
 
-  return (
-    <>
-      <img className="home-logo"
-        src="https://images.gog.com/87aecb600554d68a9c5b58c757bc0a2ded9fd7b27c635ef6d57d748765cb9d43.png"
-        alt=""
-      />
+  return ( <nav>
+      <img className = "home-logo" src="https://cdn.shopify.com/s/files/1/0014/1962/files/FG-banner_collect-top_template2_overcooked.png?v=1528818873" alt=""/>
 
       <p className="home-welcome">Welcome {user.name}</p>
       
@@ -27,6 +23,7 @@ function SmallHeader({onLogout,goToCategories,user,handleFavorites}) {
         handleFavorites()
         )
       }}>Favorites</a>
-    </>
+      </nav>
+    
   )
 }

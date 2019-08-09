@@ -161,24 +161,29 @@ render () {
     const{ state: { meals, meal, cats , favs, user}, showCat, handleLogout, handleSearch, handleGoBack, handleOnMeal, handleSearchCat, handleGoToCategories, handleSearchIngredient, handleToggleRecipeDetail, handleToggleRecipeList,handleToggleFavorite, handleFavorites} = this
 
     return ( <>
-    <header className='homeHeader'>
-        {user && <SmallHeader onLogout={handleLogout} goToCategories={handleGoToCategories} showCat={showCat} user={user} handleFavorites={handleFavorites}  />}
-        <Search onSearchName={handleSearch} onSearchIngredient={handleSearchIngredient}/>
-    
+    <header className='homeHeader sticky'>
+       
+            {user && <SmallHeader onLogout={handleLogout} goToCategories={handleGoToCategories} showCat={showCat} user={user} handleFavorites={handleFavorites}  />}       
+            <Search onSearchName={handleSearch} onSearchIngredient={handleSearchIngredient}/>
+        
     </header>
     <main>
         
         <section>     
             { cats && <Categories onSearchCat={handleSearchCat} /> }
-
-            {!meal ? <Results meals={meals} onMeal={handleOnMeal} goCat={handleGoToCategories} paintMeal = { meal => {return <RecipeItem2 meal={meal} onToggle={handleToggleRecipeList} />}}  />
+            <section className="wrapper-cont">
+            {!meal ? <Results meals={meals} onMeal={handleOnMeal} goCat={handleGoToCategories} paintMeal = { meal => {return<RecipeItem2 meal={meal} onToggle={handleToggleRecipeList} />}}  />
             : <RecipeDetails meal={meal} onBack={handleGoBack} onToggle={handleToggleRecipeDetail} />}
-           
+            </section>
             {!meal  && <Favorites favs={favs} onMeal={handleOnMeal} goCat={handleGoToCategories} paintMeal = { meal => {return <RecipeItem2 meal={meal} onToggle={handleToggleFavorite} />}}  />
             }
         </section>
 
     </main>
+
+    <footer className="footer-home">
+        <Footer />
+    </footer>
     </>
     )    
   }

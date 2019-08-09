@@ -109,6 +109,9 @@ class Landing extends Component {
 
         </main>
      
+     <footer className="footer">
+       <Footer />
+     </footer>
       </>
     )
   }

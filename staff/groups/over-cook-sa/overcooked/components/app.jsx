@@ -49,9 +49,6 @@ class App extends Component {
         <Landing onCredentials={handleCredentials} onUser={handleUser}/>: 
         <Home onLogout={handleLogout} credentials={credentials} /> }
 
-        <footer>
-            <Footer />
-        </footer>
 
         </>
         )
