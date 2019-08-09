@@ -1,5 +1,4 @@
-# SkylaughCoders
-
+# Chcuk Generator
 staff
 - jaume
 - christian
