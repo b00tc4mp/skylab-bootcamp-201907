@@ -14,7 +14,7 @@ function Header(props) {
                                 props.onLogin()
                             }}>Iniciar sesión</a>
                         </li>
-                        <li>
+                        <li className='header__li'>
                             <a className='header__a' href="" onClick={event => {
                                 event.preventDefault()
                                 props.onRegister()
