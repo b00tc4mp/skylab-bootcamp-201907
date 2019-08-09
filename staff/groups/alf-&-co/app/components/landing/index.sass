@@ -23,11 +23,11 @@ main
 
 .icons-header
     display: flex
-    width: 70px
+    width: 50px
     position: absolute
-    right: 0px
+    right: 0
     top: 10px
-    z-index: 50
+    z-index: 5
     ul
         overflow: auto
         align-items: right
@@ -37,7 +37,6 @@ main
     li
         height: 25px
         list-style-type: none
-        text-decoration: none
         padding: 0
         margin: 20px 2px
     li,
@@ -45,7 +44,7 @@ main
     img
         text-decoration: none
         width: 55%
-        font-size: 1.2rem
+        font-size: 1.5rem
         color: $color-black
         text-transform: uppercase
         -webkit-transition: all 0.5s ease
@@ -58,7 +57,6 @@ main
 
 
 .menuToggle
-    z-index: 5
     display: block
     position: relative
     top: 32px
@@ -67,7 +65,7 @@ main
     margin: 1px
     -webkit-user-select: none
     user-select: none
-    z-index: 6
+    z-index: 7
     a
         text-decoration: none
         @extend %text-base-medium
@@ -128,8 +126,6 @@ main
     input:checked ~ span:nth-last-child(2)
         transform: rotate(-45deg) translate(0, -1px)
 
-
-
 .menu 
     li
         padding: 0
@@ -149,13 +145,13 @@ main
   width: 200px
   margin: 0px 0 0 -50px
   padding-left: 0
-  top: 45px
-
-  padding-top: 0px
-  
+  top: 52px
+  z-index: 9
+  padding-top: 0px  
   background: $color-beige
   list-style-type: none
   -webkit-font-smoothing: antialiased
+  z-index: 8
 
   
   transform-origin: 0% 0%
@@ -206,8 +202,9 @@ main
 
 
 .registered-name
-        @extend %text-base-medium
+        @extend %text-base-small
         width: 100%
+        font-weight: 800
         margin: 15px auto
         text-align: center
         bottom: 5px
@@ -217,31 +214,4 @@ main
 
 
 
-.container_image
-    width:95%
-    display: flex
-    align-items: center
-    margin: 10px auto
-    position: relative
-    text-align: center
-    img
-        width: 100%
-        position: relative
-        margin: 0 auto
-    p
-        @extend %text-base-medium
-        color: $color-beige
-        letter-spacing: 0.2em
-        position: absolute
-        align-items: center
-        width: 100%
-        bottom: 70px
-    .title_collection
-        @extend %text-base-big
-        font-size: 1.6em
-        color: $color-beige
-        font-weight: 800
-        position: absolute
-        align-items: center
-        width: 100%
-        bottom: 30px
+

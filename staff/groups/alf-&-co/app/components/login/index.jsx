@@ -9,7 +9,7 @@ function LogIn({ onLogIn, toSignUp, onClose, error, register_success }) {
 
         <div className="form-panel">
             <h3 className="big-letter">LOG IN</h3>
-            <form method="get" autoComplete="off" id="form1" onSubmit={event => {
+            <form id="form-log"method="get" autoComplete="off" id="form1" onSubmit={event => {
                 event.preventDefault()
                 const { target: { username: { value: username }, password: { value: password } } } = event
                 onLogIn(username, password)

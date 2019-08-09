@@ -16,7 +16,7 @@
         left: 10px
         content: ' '
         height: 20px
-        width: 1px
+        width: 2px
         background-color: $color-black
         opacity: 1
     &:before 
@@ -53,3 +53,30 @@
     color: $color-black
     @extend %text-base-medium
     margin: 20px
+
+.form-panel
+    
+    color: $color-black
+    @extend %text-base-medium
+    display: flex
+    flex-direction: column
+    align-items: center
+    width: 100%
+    input
+        width: 250px
+        line-height: 30px
+        border: 0.01rem solid $color-black
+        color: $color-light-grey
+        @extend %text-base-medium
+        margin: 15px auto
+        vertical-align: middle
+    input,
+    textarea
+        padding: 6px
+        transition-property: background,border,color
+        transition-duration: .15s
+        &:focus,
+        &textarea:focus 
+            outline-color: $color-green-clair
+            color: $color-black
+            background-color: $color-white
