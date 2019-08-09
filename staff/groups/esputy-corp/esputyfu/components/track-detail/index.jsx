@@ -4,7 +4,7 @@ function TrackDetail({ track: { url, favorite, linkAlbum, nameAlbum, releaseDate
         <img className='container container__img' src={url} />
         <h3><a className='container__a' href={linkTrack}>{nameTrack}</a></h3>
         <FavButton active={favorite} onToggle={() => onToggle(idTrack)}/>
-        {previewUrl !== null ? <audio controls>
+        {previewUrl !== null ? <audio controls autoPlay>
             <source src={previewUrl} type="audio/ogg"></source>
             <source src={previewUrl} type="audio/mp3"></source>
         </audio> : <p>Lo siento spotify no tiene preview de esta canción</p>}
