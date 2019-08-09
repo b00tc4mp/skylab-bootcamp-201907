@@ -6,6 +6,7 @@
     position: relative
     text-align: center
     flex-direction: column
+    margin-top: 60px
 
 .mosaicList
     width: 100%
@@ -90,6 +91,22 @@
         top: 17px
         right: 55px
         position: absolute
+    &__list,
+    &__fav
+        background-color: transparent
+        border: none
+        cursor: pointer
+        appearance: none
+
+        &:not([disabled]):hover,
+        &:not([disabled]):focus 
+            outline: none
+            box-shadow: none
+        &:focus 
+            outline: none
+            box-shadow: none
+        &[disabled] 
+            cursor: not-allowed 
         
 
 

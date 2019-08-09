@@ -14,18 +14,19 @@ form
         @extend %text-base-medium
         margin: 15px auto
         vertical-align: middle
+        
+        z-index: 3
     input,
     textarea
         padding: 6px
+        padding-left: 15px
         transition-property: background,border,color
         transition-duration: .15s
         &:focus,
         &textarea:focus 
-            outline-color: $color-green-clair
+            outline-color: $color-beige
             color: $color-black
-            background-color: $color-beige
-
-
+            background-color: $color-white
 .search-bar       
     width: 100%
     line-height: 30px
@@ -33,6 +34,7 @@ form
     @extend %text-base-medium
     margin: 0px auto
     vertical-align: middle
+    position: fixed
     input,
     textarea
         padding: 6px

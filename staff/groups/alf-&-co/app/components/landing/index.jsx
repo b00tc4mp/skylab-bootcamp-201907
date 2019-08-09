@@ -6,13 +6,12 @@ class Landing extends Component {
 
 
 
-        this.state = { view: 'collections', search: true, query: undefined, movieId: undefined, collection: undefined, movies: [], movie: undefined, error: undefined, user: undefined, favs: [], lists: undefined}
+        this.state = { view: 'collections', search: true, query: undefined, movieId: undefined, collection: undefined, movies: [], movie: undefined, error: undefined, user: undefined, favs: [], lists: undefined }
 
         this.handleGoToFavorites = this.handleGoToFavorites.bind(this)
         this.handleGoToCollections = this.handleGoToCollections.bind(this)
         this.handleLinkToCollections = this.handleLinkToCollections.bind(this)
         this.handleLogOut = this.handleLogOut.bind(this)
-        this.handleGoToSearch = this.handleGoToSearch.bind(this)
         this.handleGoToLogIn = this.handleGoToLogIn.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
         this.handleAcceptError = this.handleAcceptError.bind(this)
@@ -31,11 +30,11 @@ class Landing extends Component {
         this.handleGoToMenuCollections = this.handleGoToMenuCollections.bind(this)
         this.handleGoToHome = this.handleGoToHome.bind(this)
 
-           
+
     }
 
-    componentWillMount(){
-        const { props: { credentials , query , collection} } = this
+    componentWillMount() {
+        const { props: { credentials, query, collection } } = this
 
 
         if (credentials) {
@@ -69,19 +68,15 @@ class Landing extends Component {
             .catch(error => this.setState({ error: error.message }))
     }
 
-    handleGoToMenuCollections(){
+    handleGoToMenuCollections() {
         event.preventDefault()
-        this.setState({view: 'collections'})
+        this.setState({ view: 'collections' })
     }
 
     handleLinkToCollections() {
         this.setState({ view: 'collections' })
     }
 
-    handleGoToSearch(event) {
-        event.preventDefault()
-        this.setState({ search: true })
-    }
 
     handleSearch(query) {
         const { props: { credentials } } = this
@@ -114,14 +109,14 @@ class Landing extends Component {
 
     }
 
-    handleGoToLogIn(event){
+    handleGoToLogIn(event) {
 
         event && event.preventDefault()
 
         const { state: { query, collection } } = this
-    
+
         this.props.goToLogin(query, collection)
-    
+
     }
 
     handleLogOut(event) {
@@ -150,7 +145,7 @@ class Landing extends Component {
 
     handleToggleFavMovieFromMovieDetail(movieId) {
 
-        const { props: {  credentials }, handleRetrieveMovie, handleGoToLogIn } = this
+        const { props: { credentials }, handleRetrieveMovie, handleGoToLogIn } = this
 
 
         let id, token
@@ -162,7 +157,7 @@ class Landing extends Component {
     }
 
     handleBackFromDetail() {
-        const { state: { query, collection, favs }, props: { credentials },handleGoToFavorites, handleSearch, handleCollections } = this
+        const { state: { query, collection, favs }, props: { credentials }, handleGoToFavorites, handleSearch, handleCollections } = this
         let id, token
         let collections = true
 
@@ -174,7 +169,7 @@ class Landing extends Component {
             logic.searchMovies(id, token, collection, collections)
                 .then(movies => this.setState({ movies, collection, view: 'results', query: undefined }))
                 .catch(error => this.setState({ error: error.message }))
-        
+
         favs ? handleGoToFavorites() : collections ? handleCollections(collections) : handleSearch(query)
     }
 
@@ -189,8 +184,8 @@ class Landing extends Component {
     }
 
     handleToggleFavMovieFromMovieDetail(movieId) {
-        const { props : { credentials }, handleRetrieveMovie, handleGoToLogIn } = this
-       
+        const { props: { credentials }, handleRetrieveMovie, handleGoToLogIn } = this
+
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
@@ -204,43 +199,43 @@ class Landing extends Component {
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
-        
+
         credentials ? logic.toggleFavMovie(id, token, movieId).then(() => handleFavorites()) : handleGoToLogIn()
     }
 
     handleToggleMovieFromMovieDetail(movieId) {
         const { props: { credentials }, handleGoToLogIn, handleListModal } = this
-        
+
         let id, token
 
         credentials && (id = credentials.id, token = credentials.token)
-      
+
         credentials ? logic.toggleListModal(id, token, movieId, () => handleListModal()) : handleGoToLogIn()
 
     }
 
-    
+
     handleCreateList(event) {
         event && event.preventDefault()
 
         const { target: { list: { value: listName } } } = event
-      
+
         const { state: { movieId }, props: { credentials }, handleRetrieveLists, handleGoToLogIn } = this
         let id, token
 
-        this.setState({error: undefined})
-        this.setState({feedback: undefined})
+        this.setState({ error: undefined })
+        this.setState({ feedback: undefined })
 
 
         credentials && (id = credentials.id, token = credentials.token)
 
         credentials ? logic.createList(id, token, listName)
             .then(() => {
-                this.setState({feedback: `${listName} added to your lists successfully`})
+                this.setState({ feedback: `${listName} added to your lists successfully` })
                 handleRetrieveLists(movieId)
             })
-            .catch(({ message }) => this.setState({ error: message}))
-        : handleGoToLogIn() 
+            .catch(({ message }) => this.setState({ error: message }))
+            : handleGoToLogIn()
 
     }
 
@@ -249,13 +244,13 @@ class Landing extends Component {
         const { props: { credentials }, handleGoToLogIn } = this
         let id, token
 
-        movieId && this.setState({movieId})
+        movieId && this.setState({ movieId })
 
         credentials && (id = credentials.id, token = credentials.token)
 
         credentials ? logic.retrieveLists(id, token, movieId)
-            .then(lists => this.setState({lists})).then(this.setState({showModal: true})).then(console.log(true)) : handleGoToLogIn()
-        
+            .then(lists => this.setState({ lists })).then(this.setState({ showModal: true })).then(console.log(true)) : handleGoToLogIn()
+
     }
 
     handleDisplayListModal(movieId) {
@@ -271,10 +266,10 @@ class Landing extends Component {
         credentials ? logic.toggleFromMovieList(id, token, movieId, listName).then(() => handleRetrieveLists(movieId)) : handleGoToLogIn()
     }
 
-handleGoToHome(event){
-       event.preventDefault()
-       this.setState({view: 'collections'})
-   }
+    handleGoToHome(event) {
+        event.preventDefault()
+        this.setState({ view: 'collections' })
+    }
 
 
     /* Render */
@@ -282,7 +277,7 @@ handleGoToHome(event){
         const {
             state: { view, search, movie, movies, feedback, error, user, favs, lists, movieId, showModal },
             handleSearch, handleRetrieveMovie, handleLogOut,
-            handleBackFromDetail, handleGoToSearch, handleGoToLogIn,
+            handleBackFromDetail, handleGoToLogIn,
             handleToggleFavMovieFromMovieItem, handleToggleFavMovieFromMovieDetail, handleGoToCollections, handleLinkToCollections, handleGoToFavorites,
             handleToggleFavMovieFromFavoritesSection, handleCreateList, handleDisplayListModal, handleToggleMovieFromList, handleToggleMovieFromMovieDetail,
             handleGoToMenuCollections, handleGoToHome
@@ -300,7 +295,7 @@ handleGoToHome(event){
                         <span></span>
                         <ul className="menu">
                             <li><a href="" onClick={handleGoToFavorites}>Favorites</a></li>
-                            <li><a href="" onClick= {handleGoToMenuCollections} >Collections</a></li>
+                            <li><a href="" onClick={handleGoToMenuCollections} >Collections</a></li>
                             <li><a href="" onClick={handleLogOut}>Log Out</a></li>
                         </ul>
                     </div>
@@ -308,8 +303,6 @@ handleGoToHome(event){
                     <h2 className="logo" onClick={handleGoToHome}>MOVIE LAB</h2>
 
                     <ul className="icons-header">
-                        <li><a className= "search-icon"href="" onClick={handleGoToSearch}><i className="fas fa-search"></i></a></li>
-                        
                         {user && <>
                             <img src={`https://ui-avatars.com/api/?name=${user.name}&rounded=true&background=f7f7f7&color=00ffa6`} />
                         </>}
@@ -332,23 +325,23 @@ handleGoToHome(event){
                         return <MovieItem movie={movie} onToggle={handleToggleFavMovieFromMovieItem} onClickList={handleDisplayListModal} />
                     }} onItem={handleRetrieveMovie} />}
                     {showModal &&
-                    <ListModal lists={lists} movieId={movieId} feedback={feedback} error={error} onToggleMovieList={handleToggleMovieFromList} onCreateList={handleCreateList} />
+                        <ListModal lists={lists} movieId={movieId} feedback={feedback} error={error} onToggleMovieList={handleToggleMovieFromList} onCreateList={handleCreateList} />
                     }
-                    </>
+                </>
                 }
 
                 {/* Movie detail which displays. Includes fav button and back button  */}
                 {view === 'detail' &&
-                    <MovieDetail movie={movie} onBack={handleBackFromDetail}  onToggle={handleToggleFavMovieFromMovieDetail} onToggle={handleToggleMovieFromMovieDetail} />}
+                    <MovieDetail movie={movie} onBack={handleBackFromDetail} onToggle={handleToggleFavMovieFromMovieDetail} onToggle={handleToggleMovieFromMovieDetail} />}
 
                 {view === 'favorites' &&
                     <Favorites favs={favs} removeFav={handleToggleFavMovieFromFavoritesSection} showDetail={handleRetrieveMovie} />
                 }
-              
+
             </main>
 
-            <footer className="panel--foot">              
-                 <ul>
+            <footer className="panel--foot">
+                <ul>
                     <li className="red"><a href=""><i className="fab fa-twitter"></i></a></li>
                     <li><a href=""><i className="fab fa-facebook-f"></i></a></li>
                     <li><a href=""><i className="fab fa-instagram"></i></a></li>
