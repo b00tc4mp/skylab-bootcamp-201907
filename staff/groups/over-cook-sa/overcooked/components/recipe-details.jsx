@@ -4,16 +4,20 @@ function RecipeDetails({ meal: { idMeal, strMeal, strInstructions, strYoutube, s
         <FavButton active={favorite} onToggle={() => onToggle(idMeal)} />
 
         <img className='wrapper__img' src={strMealThumb} alt=""/>
+        
+        <h2 className="ingredients-title">INGREDIENTS</h2>
 
-        <ul>
+        <ul className="ingredients-cont">
             {ingredients.map((ingredient, index) => {
                 
-                return <li className='ingredients' key={index}>
-                    {<span>{ingredient.ingredientName}: {ingredient.measure}</span>}
+                return <li className='ingredients-cont__ingredients' key={index}>
+            {<h4>{ingredient.ingredientName}</h4>}
+            {<p>{ingredient.measure}</p>}
                 </li>
 
             })}
         </ul>
+       
 
         <p className='descText'>{strInstructions}</p>
         <a className='btnGo' href={strYoutube} target="_blank" >VIDEO</a>
