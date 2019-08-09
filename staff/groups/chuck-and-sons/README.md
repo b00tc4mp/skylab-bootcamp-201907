@@ -1,11 +1,5 @@
 # Chuck Generator
 
-## Staff
-
-* Christian Haag
-* Josep Boix
-* Jaume Villarreal
-
 ## Description
 ![alt text](http://cdn.marketplaceimages.windowsphone.com/v8/images/95755042-08d3-4648-9ab2-77322b65340d?imageType=ws_icon_medium)
 
