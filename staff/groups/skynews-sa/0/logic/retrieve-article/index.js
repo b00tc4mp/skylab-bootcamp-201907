@@ -1,3 +1,10 @@
+/**Function that retrieve article of array and update the favs array in API
+ * @param {number} id  id of credentials of user
+ * @param {number} token  token of credentials of user
+ * @throws {Error} error in the credentials of API
+ * @return {Array}  update of favorites to API
+ * @return {Object} article
+ */
 logic.retrieveArticle = (id, token, article) => {
   let favorites
   let index=-1
