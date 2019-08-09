@@ -1,5 +1,7 @@
 # Chuck Generator
-staff
-- jaume
-- christian
-- josep
+
+## Staff
+
+* Christian Haag
+* Josep Boix
+* Jaume Villarreal
