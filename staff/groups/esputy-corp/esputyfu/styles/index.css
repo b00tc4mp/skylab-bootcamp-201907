@@ -25,6 +25,10 @@ body {
   margin-top: 1rem;
   width: 75%;
   padding: 8px;
+  max-width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 .container__advice {
   display: none;
@@ -35,6 +39,8 @@ body {
   border-radius: 10px;
   width: 50%;
   margin-top: 50px;
+  max-width: 150px;
+  height: 30px;
 }
 
 .full {
@@ -106,13 +112,20 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.results__ul--res {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
 }
 
 .container__background {
   background-image: url("https://cdn.pixabay.com/photo/2015/03/26/09/58/headphones-690685_960_720.jpg");
   padding: 50px;
   background-position: center;
-  min-height: 500px;
 }
 
 .container__title {
@@ -121,17 +134,54 @@ h1 {
 
 .container__item {
   width: 100%;
-  max-width: 300px;
-  text-align: center;
+  max-width: 400px;
+  height: 100%;
+  max-height: 400px;
+  margin-top: 50px;
 }
 
 .container__img {
   width: 100%;
   max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .container__ul--detail {
   list-style: none;
+  color: white;
+  text-align: center;
+}
+
+.container__a {
+  color: white;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.fa {
+  font-size: 28px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fa-heart-o {
+  color: green;
+}
+
+.fa-heart {
+  color: plum;
+}
+
+.button__fav {
+  background-color: black;
+  border: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 /*# sourceMappingURL=index.css.map */
