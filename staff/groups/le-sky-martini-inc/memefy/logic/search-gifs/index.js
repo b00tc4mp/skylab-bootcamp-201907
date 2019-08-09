@@ -1,3 +1,15 @@
+/**
+ * Searches GIF via Giphy API with an introduced query. 
+ * If the user is registered it checks his/her id+token and allows him/her to save desired GIFs to a favorites array/section.
+ * If the validation of user/query information goes wrong, it shows a message with the response error.
+ * 
+ * @param {String} id The user id.
+ * @param {String} token The token to authorize user validation.
+ * @param {String} query The query introduced in the search bar.
+ * 
+ * @return {Object} GIF object with different properties.
+ */
+
 logic.searchGifs = function (id, token, query) {
     let favorites = []
 

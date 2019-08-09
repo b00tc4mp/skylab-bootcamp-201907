@@ -1,3 +1,13 @@
+/**
+ * Retrieves user via own user API. 
+ * If the validation goes wrong, it shows a message with the response error.
+ * 
+ * @param {String} id The user id.
+ * @param {String} token The token to authorize user validation.
+ * 
+ * @return {Object} Response: { status, data { name, surname, username, id } }
+ */
+
 logic.retrieveUser = function (id, token) {
     validate.string(id, 'id')
     validate.string(token, 'token')

@@ -13,6 +13,6 @@ function Random(props) {
                 event.preventDefault()
 
                 props.onBack()
-            }}><i class="fas fa-arrow-left"></i> Go back</a></p>
+            }}><i className="fas fa-arrow-left"></i> Go back</a></p>
     </section>
 }
