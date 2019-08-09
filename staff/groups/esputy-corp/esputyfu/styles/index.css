@@ -138,6 +138,15 @@ h1 {
   padding: 0;
 }
 
+.success {
+  background-image: url("https://cdn.pixabay.com/photo/2015/04/20/13/19/concert-731227_960_720.jpg");
+  min-height: 500px;
+  background-size: cover;
+}
+.success__a {
+  color: red;
+}
+
 .container__background {
   background-image: url("https://cdn.pixabay.com/photo/2015/03/26/09/58/headphones-690685_960_720.jpg");
   padding: 50px;
