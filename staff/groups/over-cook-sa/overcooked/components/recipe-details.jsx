@@ -5,7 +5,9 @@ function RecipeDetails({ meal: { idMeal, strMeal, strInstructions, strYoutube, s
     const youtubeLink = 'https://www.youtube.com/embed/'+youtube[1]
     
 
-   return <div className='wrapper'>
+   return <section className='wrapper_cont'>
+   
+        <div className='wrapper'>
         <h3 className="wrapper__title">{strMeal}</h3> 
         <FavButton active={favorite} onToggle={() => onToggle(idMeal)} />
 
@@ -36,4 +38,5 @@ function RecipeDetails({ meal: { idMeal, strMeal, strInstructions, strYoutube, s
             onBack()
         }} >Go Back</a>
     </div>
+    </section>
 }

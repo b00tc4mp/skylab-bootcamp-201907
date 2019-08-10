@@ -10,6 +10,5 @@ function Favorites(props) {
              </li>)
          }
      </ul>
-     </section>
-     
+     </section>  
  }
