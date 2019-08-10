@@ -101,16 +101,16 @@ class Landing extends Component {
         </header>
 
         <main className="back-img">
+
+          <section className="random-recipe"> 
+            {mealRandom && <RecipeItem meal={mealRandom} />} 
+          </section>
           
           <section>
             {view === 'register' && (<Register onRegister={handleRegister} onBack={handleGoBack} error={error} /> )}
             {view === 'landing' && (<WelcomeAnchors onRegister={handleGoToRegister} onLogin={handleGoToLogin} /> )}
             {view === 'login' && (<Login onLogin={handleLogin} onBack={handleGoBack} error={error} /> )}
             {view === 'register-success' && (<RegisterSuccess onLogin={handleGoToLogin} />)}
-          </section>
-
-          <section className="random-recipe"> 
-          {mealRandom && <RecipeItem meal={mealRandom} />} 
           </section>
 
         </main>

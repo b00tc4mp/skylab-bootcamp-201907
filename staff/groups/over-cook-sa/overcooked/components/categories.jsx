@@ -14,25 +14,25 @@ function Categories (props) {
         }}></img>
 
         <h3 className='catTitle'>Vegan</h3>
-        <img className="cat-img" src="https://www.themealdb.com/images/category/vegan.png" alt="" onClick={event => {
+        <img className="cat-img catSlim" src="https://www.themealdb.com/images/category/vegan.png" alt="" onClick={event => {
           event.preventDefault()
         props.onSearchCat('vegan')    
         }}></img>
 
         <h3 className='catTitle'>Beef</h3>
-        <img className="cat-img" src="https://www.themealdb.com/images/category/beef.png" alt="" onClick={event => {
+        <img className="cat-img catSlim" src="https://www.themealdb.com/images/category/beef.png" alt="" onClick={event => {
           event.preventDefault()
         props.onSearchCat('beef')    
         }}></img>
 
         <h3 className='catTitle'>Chicken</h3>
-        <img className="cat-img" src="https://www.themealdb.com/images/category/chicken.png" alt="" onClick={event => {
+        <img className="cat-img catSlim" src="https://www.themealdb.com/images/category/chicken.png" alt="" onClick={event => {
           event.preventDefault()
         props.onSearchCat('Chicken')    
         }}></img>
 
         <h3 className='catTitle'>Lamb</h3>
-        <img className="cat-img" src="https://www.themealdb.com/images/category/lamb.png" alt="" onClick={event => {
+        <img className="cat-img catSlim" src="https://www.themealdb.com/images/category/lamb.png" alt="" onClick={event => {
           event.preventDefault()
         props.onSearchCat('lamb')    
         }}></img>
@@ -50,7 +50,7 @@ function Categories (props) {
         }}></img>
 
         <h3 className='catTitle'>Desserts</h3>
-        <img className="cat-img" src="https://www.themealdb.com/images/category/dessert.png" alt="" onClick={event => {
+        <img className="cat-img catLast" src="https://www.themealdb.com/images/category/dessert.png" alt="" onClick={event => {
           event.preventDefault()
         props.onSearchCat('dessert')    
         }}></img>

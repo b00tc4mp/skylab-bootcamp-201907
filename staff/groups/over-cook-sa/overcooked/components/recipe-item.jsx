@@ -1,7 +1,5 @@
 function RecipeItem ( { meal: { strMeal, strYoutube } } ) {
     
-    
-    console.log(strYoutube)
     return <>
 
     <section className="random-content">
