@@ -1,7 +1,9 @@
+const FilterFilesByExtension=require("./filter-files-byextension")
 
-const filterByExt= require("./filter-files-byextension")
+const{argv:[,,folder,extension]}=process 
 
-const{argv:[,,folder,extension]}=process
+FilterFilesByExtension(folder,extension,(error,files)=>{
+    if(error) throw error 
 
-filterByExt(folder,extension,files=> 
-    files.forEach(file=>console.log(file)))
+    files.forEach(file=>console.log(file))
+})
