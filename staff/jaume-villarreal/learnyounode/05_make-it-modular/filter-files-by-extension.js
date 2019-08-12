@@ -5,11 +5,10 @@ function filterByExtension (folder , extension , callback) {
     fs.readdir(folder , (error , files) => {
         if (error) return callback(error)
 
-        const filtered = files.filter( file => {
-            (path.extname(file) === `.${extension}`) && filtered.push(file)
-        })
+        const filtered = files.filter( file => (path.extname(file) === `.${extension}`))
+
+        callback(undefined , filtered)
     })
-    callback(undefined , filtered)
 }
 
 module.exports = filterByExtension
