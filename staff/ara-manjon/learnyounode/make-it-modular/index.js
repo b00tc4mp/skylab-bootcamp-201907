@@ -1,4 +1,6 @@
-const filterModul = require('./filter-files-by-extension')
+
+//node . . txt 
+const filterModul = require('./file-filter-by-extension')
 const { argv: [,, folder, extension] } = process
 
 
