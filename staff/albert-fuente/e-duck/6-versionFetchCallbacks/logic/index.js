@@ -1,0 +1,5 @@
+/**
+ * Business Logic
+ */
+
+const logic = {}
