@@ -1,7 +1,6 @@
 function WeatherItem({weather:{currently:{temperature,icon}},country}){
     let a=temperature
     let b=(a-32)*5/9
-    console.log(b)
     if(country==undefined) country="Barcelona"
     if(country=="gb") country="London"
     if(country=="de") country="Berlin"
@@ -22,16 +21,3 @@ function WeatherItem({weather:{currently:{temperature,icon}},country}){
     </>
 }
 
-
-
-/* function WeatherItem({weather}){
-    debugger
-    return <>
-        <h1>TEEST WEATHER</h1>
-        
-        <h3 >{weather.currently.humidity}</h3>
-    </>
-} */
-
-/* {(({temperature} − 32) × 5 / 9)} = 31,667 °C
- */

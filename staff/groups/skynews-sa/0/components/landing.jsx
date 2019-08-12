@@ -41,10 +41,8 @@ class Landing extends Component{
             logic.weather()
             .then(weather=>{
                 var a=weather
-                console.log("teeest weather",a)
                 this.setState({weather:a})})
         }catch({error}){
-            console.log(error)
         }
     }
 
@@ -55,7 +53,6 @@ class Landing extends Component{
         logic.searchNews(category, country)
         .then(news=>this.setState({news, category, country, error:undefined}))
         .catch(({message}) => this.setState({error: message}))
-        .then(() => console.log("p:",this.state.news))
         .then(()=> this.props.onStopSpinning())
         }catch({message}){
             this.setState({error:message})
@@ -69,7 +66,6 @@ class Landing extends Component{
         logic.searchNewsAdvanced(query)
         .then(news=>this.setState({news, query, error:undefined}))
         .catch(({message}) => this.setState({error: message}))
-        .then(() => console.log("p:",this.state.news))
         .then(()=> this.props.onStopSpinning())
         }catch({message}){
             this.setState({error:message})
@@ -191,11 +187,9 @@ class Landing extends Component{
             logic.weather(long,lat)
             .then(weather=>{
                 var a=weather
-                console.log("teeest weather",a)
                 this.setState({weather:a})})
 
         }catch({error}){
-            console.log(error)
             /*TODO REVISAR */
         }
     }

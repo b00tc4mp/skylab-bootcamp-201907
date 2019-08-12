@@ -40,6 +40,5 @@ function Search({onSearch, error, category,country, onWeather}){
             <button className="button">Search News</button>
         </form>
     </section>
-{/*     {error && <Feedback message={error} />}
- */}    </>
+   </>
 }
