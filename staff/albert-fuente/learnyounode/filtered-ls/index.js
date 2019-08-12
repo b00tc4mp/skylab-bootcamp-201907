@@ -1,0 +1,25 @@
+var fs=require("fs")
+var path=require("path")
+
+const{argv:[,,direct,ext]}=process
+
+
+fs.readdir(direct,(error,list)=>{
+    var res=path.extname(ext)
+    list.forEach(element=>{
+/*         console.log(element)
+        console.log(res)
+        console.log(dir) */
+        /* console.log(element) */
+        
+        /* if(path.extname(element)==".md"){
+            console.log(element)
+        } */
+        var res=path.extname(element)
+        if(res===`.${ext}`){
+            console.log(element)
+        }
+
+    })
+    
+})
