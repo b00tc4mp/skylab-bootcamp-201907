@@ -7,6 +7,7 @@ const server = http.createServer((request, response) => {
   const { pathname, query : {iso}} = url.parse(request.url, true)
 
   const date = new Date(iso)
+  let output, json
   
 
   switch (pathname){
@@ -17,17 +18,19 @@ const server = http.createServer((request, response) => {
       const second = date.getSeconds()
 
       const output = {hour, minute, second}
+
       const json = JSON.stringify(output)
 
-      response.writeHead(200, {'Content-Type' : 'application/json', 'Access-Control-Allow-Origin':'*'})
+      response.writeHead(200, {'Content-Type' : 'application/json'})
 
       response.end(json)
       break
     case 'api/unixtime':      
       const unixtime = date.getTime()
 
-      const output = { unixtime }
-      const json = JSON.stringify(output)
+      output = { unixtime }
+
+      json = JSON.stringify(output)
 
       response.writeHead(200, {'Content-Type' : 'application/json'})
 
