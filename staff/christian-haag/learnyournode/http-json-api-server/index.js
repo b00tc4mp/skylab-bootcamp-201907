@@ -4,7 +4,7 @@ const url = require('url')
 const { argv: [, , port] } = process
 
 const server = http.createServer((req, res) => {
-    const { pathname, iso } = url.parse(req.url, true)
+    const { pathname, query: { iso } } = url.parse(req.url, true)
 
     switch (pathname) {
         case '/api/parsetime':
