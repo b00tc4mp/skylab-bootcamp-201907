@@ -7,10 +7,9 @@ const request = http.get(url, response => {
 
     response.on('error', error => { throw error })
 
-    
-    //let content = ''
-    //response.on('data', chunk => content += chunk)
-    //response.on('end', () => console.log(`${content.length}\n${content}`))
+    let content = ''
+    response.on('data', chunk => content += chunk)
+    response.on('end', () => console.log(`${content.length}\n${content}`))
 
     // NOTE about the data progression
     // let count = 0
