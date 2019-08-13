@@ -1,5 +1,9 @@
-const filterByExt = require('./module.js')
+const filterFilesByExtension = require('./module')
 
-const { argv: [, , folder, ext] } = process
+const { argv: [, , folder, extension] } = process
 
-filterByExt(folder, ext, files => files.forEach(file => console.log(file)))
+filterFilesByExtension(folder, extension, (error, files) => {
+    if (error) throw error
+
+    files.forEach(file => console.log(file))
+})
