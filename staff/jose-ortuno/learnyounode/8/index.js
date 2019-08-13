@@ -1,7 +1,7 @@
 const http = require('http')
 
 const { argv: [, , url] } = process
-
+debugger
 http.get(url, response => {
     let content = ''
     response.setEncoding('utf8')
