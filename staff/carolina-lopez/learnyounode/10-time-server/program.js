@@ -1,6 +1,6 @@
 const net = require('net')
 
-const { argv : [ , , port] } = process
+const { argv : [ , , port ] } = process
 
 var server = net.createServer(function (socket){
   socket.end(getFormattedDate() + '\n')

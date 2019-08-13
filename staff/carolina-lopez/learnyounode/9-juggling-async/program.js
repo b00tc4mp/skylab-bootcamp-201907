@@ -1,4 +1,4 @@
-/* const http = require('http')
+const http = require('http')
 const bl = require('bl')
 
 // const { argv : [, , ...urls] } = process
@@ -21,9 +21,9 @@ urls.forEach((url, index) => {
   })
 })
 
- */
 
-const http = require('http')
+
+/* const http = require('http')
 const bl = require('bl')
 const urls = process.argv.splice(2)
 const accData = []
@@ -39,4 +39,5 @@ urls.forEach((url, index) => {
             }
         }))
     })
-})
+}) */
+
