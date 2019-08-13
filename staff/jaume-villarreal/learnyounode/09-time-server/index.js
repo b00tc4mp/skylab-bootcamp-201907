@@ -1,3 +1,4 @@
+// create a TCP server
 const net = require('net')
 
 const { argv : [ , , port]} = process
@@ -12,8 +13,7 @@ const minutes = date.getMinutes()
 const currentDate = `${year}-${month}-${day} ${hour}:${minutes}`
 
 const server = net.createServer( socket => {
-    // socket.write(currentDate)
-    socket.end(currentDate + "\n")
+    socket.end(currentDate + "\n") // === socket.write(currentDate); socket.end();
 })
     .on('error' , error => {throw error})
     .listen(port)
