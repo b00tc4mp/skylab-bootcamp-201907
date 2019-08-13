@@ -7,11 +7,11 @@ const net = require("net")
 //     socket.write(`${date.getFullYear()}-${date.getMonth()}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`)
 //     socket.end(data)
 // })
-function zeroLeft (i) {
-    return (i < 10 ? '0' : '') + i
+function zeroLeft (num) {
+    return (num < 10 ? '0' : '') + num
 }
 
-var server = net.createServer(socket => {
+const server = net.createServer(socket => {
     //console.log(process.argv[2])
     date = new Date
     // socket handling logic  
@@ -19,7 +19,7 @@ var server = net.createServer(socket => {
     socket.end(data)
 })
 
-//Esto fue suerte, por eso lo comento y lo pongo bien:
+// Esto fue suerte, por eso lo comento y lo pongo bien:
 // server.listen(process.argv[2], () => {
 //     function listener(socket){
 //         console.log(socket)
