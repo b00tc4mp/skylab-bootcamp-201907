@@ -24,10 +24,6 @@ const server = net.createServer((socket) => {
 server.listen(Number(process.argv[2]))
 
 
-
-
-
-
 /* Note[1]: The socket object contains a lot of meta-data regarding the connection,
   but it is also a Node duplex Stream, in that it can be both read from, and
   written to. For this exercise we only need to write data and then close
@@ -42,3 +38,30 @@ server.listen(Number(process.argv[2]))
 
   file://C:\Users\Carolina Zhou
 Lin\AppData\Roaming\npm\node_modules\learnyounode\node_apidoc\net.html*/
+
+
+
+
+// Alternative Solution
+/* const net = require('net')
+const strftime = require('strftime')
+
+const { argv: [, , port] } = process
+
+const server = net.createServer(socket => {
+    //console.log(socket)
+
+    // HTTP response demo
+    //     socket.end(`HTTP/1.1 200 OK
+    // Content-Type: text/html
+
+    // Hello world!`)
+
+    const date = new Date
+
+    const formatted = strftime('%Y-%m-%d %H:%M\n', date) // YYYY-MM-DD hh:mm
+
+    socket.end(formatted)
+})
+
+server.listen(port)  */
