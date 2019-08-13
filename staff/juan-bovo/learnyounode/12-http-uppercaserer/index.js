@@ -1,16 +1,14 @@
 const http = require('http')
-var map = require('through2-map') 
+const map = require('through2-map') 
 
-const options = {method: 'POST', port: process.argv[2]}
+//const options = {method: 'POST', port: process.argv[2]} //--> Nop, no va
 
-const server = http.createServer(options, (res) => {
-    const outStream = []
-
-    res.pipe(map(chunk => {  
-        chunk.toString().toUpperCase() //.split('').reverse().join('')
-        outStream.push(chunk)
-      })).pipe(outStream)
+const server = http.createServer((req, res) => {
+  if (req.method === 'POST'){
+    req.pipe(map(function (chunk) {  
+      return chunk.toString().toUpperCase()
+    })).pipe(res)
+  }
 })
-
 
 server.listen(process.argv[2])
