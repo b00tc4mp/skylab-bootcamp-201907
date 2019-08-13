@@ -20,7 +20,6 @@ app.get('/pepito', (req, res) => {
 })
 
 app.get('/search', (req, res) => {
-    debugger
     const { query: { q , carolina } } = req
     const url = `http://duckling-api.herokuapp.com/api/search?q=${q}`
     const request = http.get(url, response => {
