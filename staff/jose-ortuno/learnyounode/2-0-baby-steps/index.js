@@ -1,0 +1,1 @@
+console.log(process.argv.slice(2).reduce((accu, val) => Number(accu) + Number(val)))
