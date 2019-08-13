@@ -1,16 +1,13 @@
 const fs = require('fs')
 
-const {argc: [, , file] } = process 
+const { argv: [, , file] } = process
 
-fs.readFile(file,'utf8',(err,content) => {
-   if (error) throw error 
-   const lines = constent.match(/\r?\n/g).length
+fs.readFile(file, 'utf8', (error, content) => {
+    if (error) throw error
 
-   console.log(lines)
+    const lines = content.match(/\r?\n/g).length
 
-
+    console.log(lines)
 })
 
-console.log( '...')
-
-
+// console.log('...')
