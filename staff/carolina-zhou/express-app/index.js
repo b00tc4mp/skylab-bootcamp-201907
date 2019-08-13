@@ -1,5 +1,5 @@
 const express = require('express')
-
+const http = require('http')
 const { argv: [, , port] } = process
 
 const app = express()
@@ -13,9 +13,28 @@ app.get('/', (req, res) => {
 })
 
 app.get('/search', (req, res) => {
-    res.send(`ok, searching... ${req.query.q}`)
+    const { query: {q} } = req
 
-    // TODO call duckling api endpoint that searches ducks, wait for the answer and the return ducks in <UL><LI>...
+    const url = `http://duckling-api.herokuapp.com/api/search?q=${q}`
+    const request = http.get(url, response => {
+        let content = ''
+        response.on('data', chunk => content += chunk)
+        response.on('end', () => {
+            const jsonData = JSON.parse(content)
+            let ducks = jsonData.map(duck => {
+                const { title, imageUrl, price} = duck
+                return `<li>
+                    <h2>${title}</h2>
+                    <img src=${imageUrl} />
+                    <span>${price}</span>
+                </li>`
+            })
+
+            res.send(`<ul>${ducks.join('')}</ul>`)
+        })
+    })
+
+    request.on('error', error => { throw error})
 })
 
 app.listen(port)
