@@ -45,3 +45,16 @@ ws
 - Es un objeto que nos indica quien se a ha conectado a nosotros
 - para dar respuesta, escribimos socket.write() 
 - socket.end()
+
+## createServer
+- req es stream: permite enviar datos en forma de torrente
+- res es stream: permite recibir datos en forma de torrente
+
+##console.dir
+- nos da la informacion de iso y query
+
+##writeHead
+- cors header
+
+#SERVIDOR EXPRESS NODE EXPRES.JS    
+ls node_modules/

@@ -1,4 +1,3 @@
-//curl -X POST -d 'hola mundo' http://localhost:8080
 
 const fs = require('fs')
 
