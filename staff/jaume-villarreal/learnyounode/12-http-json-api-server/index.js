@@ -8,15 +8,15 @@ const server = http.createServer((request , response) => {
         response.writeHead(200 , {'content-type' : 'application/json'})
 
         //parse URL => acces to URL Object properties
-        let parsedURL = url.parse(request.url , true)
+        const parsedURL = url.parse(request.url , true)
         
-        // retrieve API's path
-        let path = parsedURL.pathname
+        // retrieve API's endpoints
+        const path = parsedURL.pathname
 
         // retrieve date from URL's Query Object => property 'iso'
-        let date = new Date(parsedURL.query.iso)
+        const date = new Date(parsedURL.query.iso)
 
-        let output
+        let output = ''
 
         if(path === '/api/parsetime'){
             output = {
