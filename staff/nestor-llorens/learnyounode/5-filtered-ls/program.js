@@ -1,14 +1,13 @@
-var fs = require('fs')
-var path = require('path');
-let temp
+const fs = require('fs')
+const path = require('path');
 
 const { argv: [,,directory,ext] } = process
 
 fs.readdir(directory, (error, list) => {
 
     if (error) throw Error(error)
-    list.forEach( (item) => {
-        temp = path.extname(item)
-        if (temp === `.${ext}`) console.log(item)
-    })
+
+    const filtered = list.filter(item => path.extname(item) === `.${ext}` )
+    
+    filtered.forEach(item => console.log(item))
 })
