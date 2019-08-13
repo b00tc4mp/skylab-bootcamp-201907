@@ -1,5 +1,5 @@
 const http = require('http')
-const bl = require('bl')    //requires buffer list module => buffer list collector, it doesn't need keyword ¡new when constructor is invoqued
+const bl = require('bl')    //requires buffer list module => buffer list collector, it doesn't need keyword 'new' when constructor is invoqued
 
 const { argv : [ , , url] } = process
 
