@@ -7,7 +7,9 @@ var server = http.createServer(function (req, res) {
   req.pipe(map(function (chunk) {
       /* let content =""
 
-   req.on(data, chunck => content ) */
+   req.on("data", chunck => content += chunck )
+   
+   r*/
    var aux = chunk.toString()
    var result = aux.toUpperCase()
    return result

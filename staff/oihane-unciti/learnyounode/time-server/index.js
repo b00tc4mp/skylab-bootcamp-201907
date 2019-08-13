@@ -8,13 +8,18 @@ function now(){
 
 
 var server = net.createServer(socket => {
-    socket.on('data', data => {
+     const date = new Date
+     const formatted= strftime("%Y--%m--%d %H:%M", date)
+
+     socket.end(formatted)
+   /*  socket.on('data', data => {
         var string = (data.toString());
         console.log(string)
     });
 
-    socket.end(now() + '\n')
+    socket.end(now() + '\n') */
 })
+server.listen()
 
 
 
