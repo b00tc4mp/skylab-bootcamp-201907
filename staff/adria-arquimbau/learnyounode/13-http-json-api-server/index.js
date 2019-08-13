@@ -1,34 +1,58 @@
-var http = require('http')
-var url = require('url')
- 
-function parsetime (time) {
-  return {
-    hour: time.getHours(),
-    minute: time.getMinutes(),
-    second: time.getSeconds()
-  }
-}
- 
-function unixtime (time) {
-  return { unixtime : time.getTime() }
-}
- 
-var server = http.createServer(function (req, res) {
-  var parsedUrl = url.parse(req.url, true)
-  var time = new Date(parsedUrl.query.iso)
-  var result
- 
-  if (/^\/api\/parsetime/.test(req.url))
-    result = parsetime(time)
-  else if (/^\/api\/unixtime/.test(req.url))
-    result = unixtime(time)
- 
-    if (result) {
-      res.writeHead(200, { 'Content-Type': 'application/json' })
-    res.end(JSON.stringify(result))
-  } else {
-    res.writeHead(404)
-    res.end()
-  }
+// TEST curl http://localhost:8080/api/parsetime?iso=2013-08-10T12:10:15.474Z 
+
+const http = require('http')
+const url = require('url')
+
+const { argv: [, , port] } = process
+
+const server = http.createServer((req, res) => {
+    const { pathname, query: { iso } } = url.parse(req.url, true)
+
+    const date = new Date(iso)
+    let output, json
+
+    switch (pathname) {
+        // TEST curl http://localhost:8080/api/parsetime?iso=2013-08-10T12:10:15.474Z 
+        case '/api/parsetime':
+            const hour = date.getHours()
+            const minute = date.getMinutes()
+            const second = date.getSeconds()
+
+            output = { hour, minute, second }
+
+            json = JSON.stringify(output)
+
+            //res.writeHead(200, { 'Content-Type': 'application/json' }) 
+
+            res.writeHead(200, {
+                'Content-Type': 'application/json',
+                // 'Access-Control-Allow-Origin': '*', // AVOID cors problems
+                // 'Access-Control-Allow-Origin': 'https://www.google.es' // LIMIT access to localhost and google only
+            })
+
+            /* TEST from browser
+
+            fetch('http://localhost:8080/api/parsetime?iso=2013-08-10T12:10:15.474Z')
+                .then(res => res.json())
+                .then(console.log)
+             */
+
+
+            res.end(json)
+
+            break
+        // TEST curl http://localhost:8080/api/unixtime?iso=2013-08-10T12:10:15.474Z 
+        case '/api/unixtime':
+            const unixtime = date.getTime()
+
+            output = { unixtime }
+
+            json = JSON.stringify(output)
+
+            res.writeHead(200, { 'Content-Type': 'application/json' })
+
+            res.end(json)
+    }
 })
-server.listen(Number(process.argv[2]))
+
+server.listen(port)  
