@@ -12,3 +12,4 @@ fs.readdir(folder, function (err, files) {
       }
   })
 })
+
