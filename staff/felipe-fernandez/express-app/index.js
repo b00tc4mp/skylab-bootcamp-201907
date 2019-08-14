@@ -1,5 +1,5 @@
 const express = require('express')
-
+const http = require('http')
 const { argv: [, , port] } = process
 
 const app = express()
@@ -14,9 +14,8 @@ app.get('/', (req, res) => {
 
 app.get('/search', (req, res) => {
 
-    // TODO call duckling api endpoint that searches ducks, wait for the answer and the return ducks in <UL><LI>...
 
-const http = require('http')
+
 const url= `http://duckling-api.herokuapp.com/api/search?q=${req.query.q}`
 http.get(url, response => {
 
@@ -26,12 +25,17 @@ http.get(url, response => {
     response.on('end', () => {
         const jsonData= JSON.parse(data)
        
+        if (jsonData.error) throw new Error(jsonData.error)
+
         const ducks = jsonData.map(duck => {
-            const {title, imageUrl, price} = duck
+            const {title, imageUrl, price, id} = duck
             return `<li>
-                <h2>${title}</h2>
-                <img src="${imageUrl}"/>
-                <p>${price}</p>`
+                <a href="/detail/${id}/">
+                    <h2>${title}</h2>
+                    <img src="${imageUrl}"/>
+                    <p>${price}</p>
+                </a>
+            <li>`
             
         })
         res.send(`<ul>${ducks.join('')}</ul>`)
@@ -40,4 +44,30 @@ http.get(url, response => {
 
 })
 
-app.listen(port)
+
+
+app.get('/detail/:id', (req, res) => {
+    let data = ''
+    
+     http.get(`http://duckling-api.herokuapp.com/api/ducks/${req.params.id}`, response => {
+        response.on('error', error => res.send(error.message))
+        response.on('data', chunk=> data += chunk)
+        response.on('end', () => {
+            const jsonData = JSON.parse(data)
+            if (jsonData.error) throw new Error(jsonData.error)
+            const { title, imageUrl, price, description, link } = jsonData
+            const htmlResponse = `
+                    <article>
+                    <h2>${title}</h2>
+                    <img src=${imageUrl}></img>
+                    <p>${description}</p>
+                    <p>${price}</p>
+                    <a href=${link} target="_blank">Link</a>
+                    </article>
+                    `
+            res.send(htmlResponse)
+        })
+    })
+ }) 
+
+ app.listen(port)
