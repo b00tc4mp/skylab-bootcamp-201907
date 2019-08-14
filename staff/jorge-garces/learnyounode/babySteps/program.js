@@ -1,0 +1,1 @@
+console.log(process.argv.slice(2).reduce((accum, curr) => accum + Number(curr), 0))
