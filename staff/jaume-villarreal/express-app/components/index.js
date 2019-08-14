@@ -1,7 +1,11 @@
 module.exports = {
-    Html: require('./html'),
-    Header: require('./header'),
-    Search: require('./search'),
-    DuckResults: require('./duck-results'),
-    DuckDetail: require('./duck-detail')
+    Html: require('./html/index'),
+    Header: require('./header/index'),
+    Search: require('./search/index'),
+    DuckResults: require('./duck-results/index'),
+    RegisterLogin: require('./buttonset-register-login/index'),
+    DuckDetail: require('./duck-detail/index'),
+    Register: require('./register/index'),
+    RegisterSuccess: require('./register-success/index'),
+    Login: require('./login/index')
 }
