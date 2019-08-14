@@ -6,10 +6,10 @@ const server = net.createServer(socket => {
     var d = new Date();
     var data =
     d.getUTCFullYear() + "-" +
-    ("0" + (d.getUTCMonth()+1)).slice(-2) + "-" +
-    ("0" + d.getUTCDate()).slice(-2) + " " +
-    ("0" + (d.getUTCHours() + 2)).slice(-2) + ":" +
-    ("0" + d.getUTCMinutes()).slice(-2) + '\n'
+    ("0" + (d.getMonth()+1)).slice(-2) + "-" +
+    ("0" + d.getDate()).slice(-2) + " " +
+    ("0" + (d.getHours())).slice(-2) + ":" +
+    ("0" + d.getMinutes()).slice(-2) + '\n'
     socket.end(data)
 })
 server.listen(port)
