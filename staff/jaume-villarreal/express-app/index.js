@@ -4,6 +4,7 @@ const http = require('http')
 
 const bodyParser = require('body-parser')
 
+
 const { Html, Header, Search, DuckResults,
         DuckDetail, RegisterLogin,
         Register, RegisterSuccess , Login 
@@ -11,11 +12,15 @@ const { Html, Header, Search, DuckResults,
 
 const session = require('express-session')
 
-const FileStore = require('session-file-store')(session);
+// const FileStore = require('session-file-store')(session);
 
 const { argv: [, , port] } = process
 
 const app = express()
+
+const urlencodedParser = bodyParser.urlencoded( {extended : true} )
+
+const jsonParser = bodyParser.json()
  
 
 
@@ -26,9 +31,7 @@ app.use(session({
     saveUninitialized: false
 }));
 
-app.use(bodyParser.urlencoded( {extended : true} ))
 
-app.use(bodyParser.json())
 
 
 app.get('/', (request, response) => {
@@ -89,13 +92,13 @@ app.get('/login' , (request , response) => {
     response.send(Html(`${Login()}`))
 })
 
-app.get('/registersuccess' , (request,response)=>{
-    response.send(Html(`${RegisterSuccess()}`))
-})
+// app.get('/registersuccess' , (request,response)=>{
+//     response.send(Html(`${RegisterSuccess()}`))
+// })
 
-app.post('/registersuccess' , (request,response)=>{
-    const name = request.body.id
-    alert(name)
+app.post('/registersuccess' , urlencodedParser , (request,response)=>{
+    console.log(request.body)
+    response.send(Html(`${RegisterSuccess()}`))
 })
 
 

@@ -5,7 +5,7 @@ function Html(content) {
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                <title>express-ducksss</title>
+                <title>express-ducks</title>
             </head>
             <body>
                 ${content}
