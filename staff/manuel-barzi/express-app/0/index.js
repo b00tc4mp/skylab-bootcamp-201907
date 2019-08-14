@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/search', (req, res) => {
-    const { query: { q }} = req
+    const { query: { q } } = req
 
     const request = http.get(`http://duckling-api.herokuapp.com/api/search?q=${q}`, response => {
         response.on('error', error => { throw error })
@@ -43,11 +43,45 @@ app.get('/search', (req, res) => {
 
             if (ducks.error) throw new Error(ducks.error)
 
-            const output = `<ul>${ducks.map(({ title, imageUrl, price}) => `<li>
+            const output = `<ul>${ducks.map(({ id, title, imageUrl, price }) => `<li>
+                <a href="/ducks/${id}">
+                    <h3>${title}</h3>
+                    <img src="${imageUrl}">
+                    <span>${price}</span>
+                </a>
+            </li>`).join('')}</ul>`
+
+            res.send(render(output))
+        })
+    })
+
+    request.on('error', error => { throw error })
+})
+
+app.get('/ducks/:id', (req, res) => {
+    const { params: { id } } = req
+
+    const request = http.get(`http://duckling-api.herokuapp.com/api/ducks/${id}`, response => {
+        response.on('error', error => { throw error })
+
+        let content = ''
+
+        response.on('data', chunk => content += chunk)
+
+        response.on('end', () => {
+            const duck = JSON.parse(content)
+
+            if (duck.error) throw new Error(duck.error)
+
+            const { title, imageUrl, price, description, link } = duck
+
+            const output = `<article>
                 <h3>${title}</h3>
                 <img src="${imageUrl}">
                 <span>${price}</span>
-            </li>`).join('')}</ul>`
+                <p>${description}</p>
+                <a href="${link}" target="_blank">Go to store</a>
+            </article>`
 
             res.send(render(output))
         })
