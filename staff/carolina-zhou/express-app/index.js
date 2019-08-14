@@ -1,40 +1,98 @@
 const express = require('express')
 const http = require('http')
+const { Html, Header, Search, DuckResults, DuckDetail } = require('./components')
 const { argv: [, , port] } = process
 
+// app is an instance of express
 const app = express()
 
+let sessionIds = 0
+const sessions = {}
+
+
 // http://localhost:8080/ => <form><input name="query">...</form>
+// http://localhost:8080/ => <form><input name="query">...</form>
+/* 
+Basic routing: app.METHOD(PATH, HANDLER)
+- METHOD is a http request method.
+- PATH is a path on the server.
+- HANDLER is a function executed when the route is matched.
+*/
 app.get('/', (req, res) => {
-    res.send(`<form action="/search">
-        <input type="text" name="q">
-        <button>Search</button>
-    </form>`)
+    const sid = sessionIds++
+
+    sessions[sid] = {}
+
+    res.setHeader('Set-Cookie', [`session-id=${sid}`]);
+
+    res.send(Html(Search()))
 })
 
+function parseCookieSessionId(req) {
+    const { headers: { cookie } } = req
+
+    const keyValues = cookie.split(';').map(keyValue => keyValue.trim())
+
+    const keyValue = keyValues.find(keyValue => keyValue.startsWith('session-id'))
+
+    const [, sid] = keyValue.split('=')
+
+    return sid
+}
+
 app.get('/search', (req, res) => {
-    const { query: {q} } = req
+    const { query: { q } } = req
 
-    const url = `http://duckling-api.herokuapp.com/api/search?q=${q}`
-    const request = http.get(url, response => {
+    const sid = parseCookieSessionId(req)
+
+    const session = sessions[sid]
+
+    session.query = q
+
+    const request = http.get(`http://duckling-api.herokuapp.com/api/search?q=${q}`, response => {
+        response.on('error', error => { throw error })
+
         let content = ''
-        response.on('data', chunk => content += chunk)
-        response.on('end', () => {
-            const jsonData = JSON.parse(content)
-            let ducks = jsonData.map(duck => {
-                const { title, imageUrl, price} = duck
-                return `<li>
-                    <h2>${title}</h2>
-                    <img src=${imageUrl} />
-                    <span>${price}</span>
-                </li>`
-            })
 
-            res.send(`<ul>${ducks.join('')}</ul>`)
+        response.on('data', chunk => content += chunk)
+
+        response.on('end', () => {
+            // Parsing JSON content (string) to turn it into a Javascript object.
+            const ducks = JSON.parse(content)
+
+            if (ducks.error) throw new Error(ducks.error)
+
+            res.send(Html(`${Search(session.query)}${DuckResults(ducks)}`))
         })
     })
 
-    request.on('error', error => { throw error})
+    request.on('error', error => { throw error })
+})
+
+app.get('/ducks/:id', (req, res) => {
+    const { params: { id } } = req
+
+    const sid = parseCookieSessionId(req)
+
+    const session = sessions[sid]
+
+    const request = http.get(`http://duckling-api.herokuapp.com/api/ducks/${id}`, response => {
+        response.on('error', error => { throw error })
+
+        let content = ''
+
+        response.on('data', chunk => content += chunk)
+
+        response.on('end', () => {
+            const duck = JSON.parse(content)
+
+            if (duck.error) throw new Error(duck.error)
+
+            res.send(Html(`${Search(session.query)}${DuckDetail(duck)}`))
+        })
+    })
+
+    request.on('error', error => { throw error })
 })
 
 app.listen(port)
