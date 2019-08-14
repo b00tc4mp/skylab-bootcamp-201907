@@ -24,6 +24,7 @@ app.get('/search', (req, res) => {
         const ducks = jsonData.map(duck => {
           const {title, imageUrl, price} = duck
           return `<li>
+            <a href= '/duck/${id}'>
             <h2>${title}</h2>
             <img src=${imageUrl} />
             <span>${price}</span>
@@ -37,7 +38,8 @@ app.get('/search', (req, res) => {
 
 
 app.get('/ducks/id', (req, res) => {
-  const { query: { id }} = req
+  const { params : {id}} = req
+  
 
   const request = http.get(`http://duckling-api.herokuapp.com/api/ducks/${id}`, response => {
       response.on('error', error => { throw error })
@@ -47,17 +49,20 @@ app.get('/ducks/id', (req, res) => {
       response.on('data', chunk => content += chunk)
 
       response.on('end', () => {
-          const ducks = JSON.parse(content)
+          const duck = JSON.parse(content)
 
-          if (ducks.error) throw new Error(ducks.error)
+          if (duck.error) throw new Error(duck.error)
 
-          const output = `<ul>${ducks.map(({ id, title, imageUrl, price, description, link}) => `<li>
+          const {id, title, imageUrl, price, description, link}
+
+          const output = `<article>
               <h3>${title}</h3>
               <img src="${imageUrl}">
               <span>${price}</span>
               <p>${description}</p>
               <a href=${link}>Go to store</a>
-          </li>`).join('')}</ul>`
+
+          </article>
 
           res.send(render(output))
       })
