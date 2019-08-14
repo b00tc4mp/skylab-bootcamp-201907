@@ -1,0 +1,11 @@
+.feedback__error {
+  color: red;
+}
+.feedback__warn {
+  color: orange;
+}
+.feedbacksuccess {
+  color: green;
+}
+
+/*# sourceMappingURL=index.css.map */
