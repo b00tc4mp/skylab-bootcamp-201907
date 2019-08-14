@@ -17,7 +17,7 @@ var server = http.createServer(function (req, res) {
   var parsedUrl = url.parse(req.url, true)
   var time = new Date(parsedUrl.query.iso)
   var result
- 
+ debugger
   if (/^\/api\/parsetime/.test(req.url))
     result = parsetime(time)
   else if (/^\/api\/unixtime/.test(req.url))
