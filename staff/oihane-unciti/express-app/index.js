@@ -23,6 +23,7 @@ app.get('', (req, res) => {
     res.send(`<h1>Holiii!!!!${req.query.user} y ${req.query.password}</h1>`)
 }) */
 
+    
 app.get('/search', (req, res) => {
     const url = `http://duckling-api.herokuapp.com/api/search?q=${req.query.q}`
     
@@ -32,21 +33,38 @@ app.get('/search', (req, res) => {
         response.on("end",()=> {
             const jsonData = JSON.parse(content)
             let ducks= jsonData.map(duck => {
-                const {title, imageUrl, price} = duck
-                return `<li>
-                    <h2>${title}</h2>
-                    <img src=${imageUrl} />
-                    <span>${price}</span>            
-            </li> `
-            });
+                const {title, imageUrl, price, id} = duck
+                return `<a href="/ducks/${id}"><li>
+                        <h3>${title}</h3>
+                        <img src=${imageUrl}></img>
+                        <p>${price}</p>
+                    </li></a>`
+            
+            })
             res.send(`<ul>${ducks.join("")}</ul>`)
+
+
+            })
         })
-        // TODO call duckling api endpoint that searches ducks, wait for the answer and the return ducks in <UL><LI>...
+
     })
 
-req.on("error", error => { throw error})
+app.get("/ducks/:id", (req, res) => {
+    const url  = `http://duckling-api.herokuapp.com/api/ducks/${req.params.id}`
+    http.get(url , response =>{
+        res.method === "GET" && res.writeHead(200, { "content-Type": "application/json" })
+        let data = ""
+        response.on("data", chunck => data += chunck)
+        response.on("end", () => {
+            let duck = JSON.parse(data)
+            const { title, imageUrl, price, description } = duck
+            res.send(render(`<h3>${title}</h3>
+                            <img src=${imageUrl}></img>
+                            <p>${price}</p>
+                            <p>${description}</p>` )
+                    )
+        })
+    })
+
 })
-
-
-
 app.listen(port)
