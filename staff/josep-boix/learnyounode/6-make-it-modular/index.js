@@ -48,16 +48,38 @@ const fs = require ('fs')
 const path = require ('path')
 // const {argv:[,,folder, extension]} = process
 
-function filterFilesByExtension (folder, extension, callback) {
-    const _extension = `.${extension}`
+function filterFuncByExtension (folder, fileExtension, callback) {
+//   debugger
+  fs.readdir(folder, (error, data)=>{
+    if (error) return callback(error)
     
-    fs.readdir(folder, (error, files)=>{
-        if (error) throw error
+    const _extension = `.${fileExtension}`
     
-        const filtered = files.filter(file => {path.extname(file) === _extension 
-            
-        callback(undefined, filtered)
-    }
-
+    const filteredList = data.filter(file =>
+      path.extname(file) === _extension)
+      // file.includes('.' + fileExtension)
+      
+      callback (undefined, filteredList)
+      // return callback(undefined, filteredList)
     })
 }
+
+module.exports = filterFuncByExtension
+
+
+// const fs = require('fs')
+// const path = require('path')
+
+// function filterFilesByExtension(folder, extension, callback) {
+//     fs.readdir(folder, (error, files) => {
+//         if (error) return callback(error)
+
+//         const _extension = `.${extension}`
+
+//         const filtered = files.filter(file => path.extname(file) === _extension)
+
+//         callback(undefined, filtered)
+//     })
+// }
+
+// module.exports = filterFilesByExtension

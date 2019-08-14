@@ -11,10 +11,6 @@
 
   For this exercise you will need to use the http core module.
 
-  Documentation on the http module can be found by pointing your browser
-  here:
-  file://C:\Users\joeth\AppData\Roaming\npm\node_modules\learnyounode\node_apidoc\http.html
-
   The http.get() method is a shortcut for simple GET requests, use it to
   simplify your solution. The first argument to http.get() can be the URL
   you want to GET; provide a callback as the second argument.
