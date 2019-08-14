@@ -1,3 +1,4 @@
+//print a list of files ina given dictionary
 
 const fs = require('fs')
 const path = require('path') //devuelve la extension del archivo

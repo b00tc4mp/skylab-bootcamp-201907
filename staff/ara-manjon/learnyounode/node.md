@@ -1,7 +1,21 @@
+# NODE
+
+##LEARNYOUNODE
 
 
-## fs.readFile
-- leer el archivo
+**3**
+**My first I/O**
+>const fs = require('fs')
+>
+>const fileBuffer= fs.readFileSync(process.argv[2]) -> 
+>Go read the file. This method will return a Buffer object containing the complete contents of the file. 
+**4**
+**ASYNC I/O**
+>fs.readFile()
+>to read a file in async way
+>function callback (err, data) { /* ... */ } 
+>
+
 ## fs.writeFile
 - escribe el contenido de un archivo (data)
 ## fs.createReadStream
