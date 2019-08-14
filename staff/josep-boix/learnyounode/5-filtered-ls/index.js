@@ -39,10 +39,10 @@ const {argv:[,,folder, extension]} = process
 
 const _extension = `.${extension}`
 
-fs.readdir(folder,(error, files) => {
+fs.readdir(folder,(error, files) => {   // Asynchronous readdir(3). Reads the contents of a directory. The callback gets two arguments (err, files) where files is an array of the names of the files in the directory excluding '.' and '..'.
     if (error) throw error
 
     files.forEach(file => {
-        path.extname(file) === _extension && console.log(file) //The path.extname() method returns the extension of the path, from the last occurrence of the .
+        path.extname(file) === _extension && console.log(file)  //The path.extname() method returns the extension of the path, from the last occurrence of the .
     })
 })
