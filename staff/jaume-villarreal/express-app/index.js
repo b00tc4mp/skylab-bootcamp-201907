@@ -1,60 +1,67 @@
 const express = require('express')
-const app = express()
 const http = require('http')
+const { Html, Header, Search, DuckResults, DuckDetail } = require('./components')
+const session = require('express-session')
+const FileStore = require('session-file-store')(session);
 
-const { argv : [ , , port]} = process
+const { argv: [, , port] } = process
 
-const {Html , Header , Search , DuckResults , DuckDetail} = require('./components')
+const app = express()
+ 
+app.use(session({
+    // store: new FileStore({}),
+    secret: 's3cr3t th1ng'
+}));
 
-const endPointSearchDucks = "http://duckling-api.herokuapp.com/api/search?q="
-const endPointDetailDuck = "http://duckling-api.herokuapp.com/api/ducks/"
 
-app.get('/' , (request , response) => {
-    response.send(Html(Search()))
+app.get('/', (req, res) => {
+    res.send(Html(Search()))
 })
 
-app.get('/search' , (request , response) => {
+app.get('/search', (req, res) => {
+    const { query: { q }, session } = req
 
-    const { query:{ q:search }} = request
+    session.query = q
 
-    const httpRequest = http.get(`${endPointSearchDucks}${search}` , res => {
-        res.on('error' , error => {throw error})
-        
-        let ducks = ''
+    const request = http.get(`http://duckling-api.herokuapp.com/api/search?q=${q}`, response => {
+        response.on('error', error => { throw error })
 
-        res.on('data' , chunk => ducks += chunk )
-        
-        res.on('end' , () => {
-            ducks = JSON.parse(ducks)
+        let content = ''
 
-            if(ducks.error) throw new Error(ducks.error)
+        response.on('data', chunk => content += chunk)
 
-            response.send(Html(`${Search()}${DuckResults(ducks)}`)).on('error' , error => {throw error})
-        })  
-    })
-    httpRequest.on('error' , error => { throw error })
-})
+        response.on('end', () => {
+            const ducks = JSON.parse(content)
 
-app.get('/ducks/:idDuck' , (request , response) => {
-    
-    const { params : { idDuck } } = request
+            if (ducks.error) throw new Error(ducks.error)
 
-    const httpRequest = http.get(`${endPointDetailDuck}${idDuck}` , res => {
-        res.on('error' , error => {throw error})
-        
-        let duck = ''
-
-        res.on('data' , chunk => duck += chunk )
-        
-        res.on('end' , () => {
-            duck = JSON.parse(duck)
-
-            if(duck.error) throw new Error(duck.error)
-
-            response.send(Html(`${Search()}${DuckDetail(duck)}`)).on('error' , error => {throw error})
+            res.send(Html(`${Search(session.query)}${DuckResults(ducks)}`))
         })
     })
-    httpRequest.on('error' , error => { throw error })
+
+    request.on('error', error => { throw error })
+})
+
+app.get('/ducks/:id', (req, res) => {
+    const { params: { id }, session } = req
+
+    const request = http.get(`http://duckling-api.herokuapp.com/api/ducks/${id}`, response => {
+        response.on('error', error => { throw error })
+
+        let content = ''
+
+        response.on('data', chunk => content += chunk)
+
+        response.on('end', () => {
+            const duck = JSON.parse(content)
+
+            if (duck.error) throw new Error(duck.error)
+
+            res.send(Html(`${Search(session.query)}${DuckDetail(duck)}`))
+        })
+    })
+
+    request.on('error', error => { throw error })
 })
 
 app.listen(port)
