@@ -25,18 +25,10 @@
   fs.readFileSync('/path/to/file'). This method will return a Buffer object
   containing the complete contents of the file.
 
-  Documentation on the fs module can be found by pointing your browser here:
-  file://C:\Users\joeth\AppData\Roaming\npm\node_modules\learnyounode\node_a
-  pidoc\fs.html
-
   Buffer objects are Node's way of efficiently representing arbitrary arrays
   of data, whether it be ascii, binary or some other format. Buffer objects
   can be converted to strings by simply calling the toString() method on
   them. e.g. var str = buf.toString().
-
-  Documentation on Buffers can be found by pointing your browser here:
-  file://C:\Users\joeth\AppData\Roaming\npm\node_modules\learnyounode\node_a
-  pidoc\buffer.html
 
   If you're looking for an easy way to count the number of newlines in a
   string, recall that a JavaScript String can be .split() into an array of
@@ -44,16 +36,25 @@
   file does not have a newline character ('\n') at the end of the last line,
   so using this method you'll end up with an array that has one more element
   than the number of newlines.*/
-
-const fs = require ('fs')  //filesistem
+ 
+const fs = require ('fs')  //files sistem
 const {argv: [,,file]} = process
 
 const content = fs.readFileSync(file, 'utf8')
-// const a = fs.readFileSync(process.argv[2])
 
-const lines = content.toString().match(/\r?\n/g).length
-// const lines = fileContent.split(REGEX_LINES).length -1
-// var str = a.toString()
+const lines = content.toString().split('\n').length -1
 
-// console.log(str.split('\n'))
 console.log(lines)
+
+/**OFICIAL SOLUTION */
+
+// console.log(str.split('\n').length -1)
+
+// const fs = require ('fs')  //files sistem
+// const {argv: [,,file]} = process
+// const REGEX_LINES= /\r?\n/g
+
+// const filecontent = fs.readFileSync(file, 'utf8')
+// const lines = filecontent.toString().match(REGEX_LINES).length
+
+// console.log(lines)

@@ -28,17 +28,8 @@ must use asynchronous I/O.
 /*
 where list is an array of filename strings.
 
-Documentation on the fs module can be found by pointing your browser here:
-file://C:\Users\joeth\AppData\Roaming\npm\node_modules\learnyounode\node_a
-pidoc\fs.html
-
 You may also find node's path module helpful, particularly the extname
 method.
-
-Documentation on the path module can be found by pointing your browser
-here:
-file://C:\Users\joeth\AppData\Roaming\npm\node_modules\learnyounode\node_a
-pidoc\path.html
 */
 
 const fs = require ('fs') 
@@ -52,6 +43,6 @@ fs.readdir(folder,(error, files) => {
     if (error) throw error
 
     files.forEach(file => {
-        path.extname(file) === _extension && console.log(file)
+        path.extname(file) === _extension && console.log(file) //The path.extname() method returns the extension of the path, from the last occurrence of the .
     })
 })

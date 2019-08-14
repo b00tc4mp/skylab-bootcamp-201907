@@ -31,18 +31,25 @@ argument is truthy. If there is no error, you should have your Buffer
 object as the second argument. As with readFileSync(), you can supply
 'utf8' as the second argument and put the callback as the third argument
 and you will get a String instead of a Buffer.
-
-Documentation on the fs module can be found by pointing your browser here:
-file://C:\Users\joeth\AppData\Roaming\npm\node_modules\learnyounode\node_a
-pidoc\fs.html
 */
 
 const fs = require ('fs')  //filesistem
 const {argv: [,,file]} = process
 
-fs.readFile(file, 'utf8', (error, content) => {
-  if (error) throw Error
-  
-  const lines = content.toString().match(/\r?\n/g).length
+fs.readFile(file,'utf8', (error, callback) => {
+  if (error) throw Error (error)
+
+  const lines = callback.toString().split('\n').length -1
   console.log(lines)
 })
+
+// const fs = require ('fs')  //filesistem
+// const {argv: [,,file]} = process
+// const REGEX_LINES = /\r?\n/g
+
+// fs.readFile(file, 'utf8', (error, content) => {
+//   if (error) throw Error
+  
+//   const lines = content.toString().match(REGEX_LINES).length
+//   console.log(lines)
+// })
