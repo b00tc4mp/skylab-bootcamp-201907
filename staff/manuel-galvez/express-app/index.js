@@ -19,6 +19,7 @@ app.get('/search', (req, res) => {
     const query = req.query.q
 
     http.get(`http://duckling-api.herokuapp.com/api/search?q=${query}`, response => {
+        debugger
         response.on('error', error => res.send(error.message))
         response.on('data', chunk=> data += chunk)
         response.on('end', () => {
