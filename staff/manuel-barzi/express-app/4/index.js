@@ -9,7 +9,7 @@ const { argv: [, , port] } = process
 const app = express()
  
 app.use(session({
-    store: new FileStore({}),
+    // store: new FileStore({}),
     secret: 's3cr3t th1ng'
 }));
 
