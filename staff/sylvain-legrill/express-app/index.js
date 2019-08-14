@@ -34,4 +34,40 @@ app.get('/search', (req, res) => {
     })
     // TODO call duckling api endpoint that searches ducks, wait for the answer and the return ducks in <UL><LI>...
 })
+
+
+app.get('/ducks/id', (req, res) => {
+  const { query: { id }} = req
+
+  const request = http.get(`http://duckling-api.herokuapp.com/api/ducks/${id}`, response => {
+      response.on('error', error => { throw error })
+
+      let content = ''
+
+      response.on('data', chunk => content += chunk)
+
+      response.on('end', () => {
+          const ducks = JSON.parse(content)
+
+          if (ducks.error) throw new Error(ducks.error)
+
+          const output = `<ul>${ducks.map(({ id, title, imageUrl, price, description, link}) => `<li>
+              <h3>${title}</h3>
+              <img src="${imageUrl}">
+              <span>${price}</span>
+              <p>${description}</p>
+              <a href=${link}>Go to store</a>
+          </li>`).join('')}</ul>`
+
+          res.send(render(output))
+      })
+  })
+
+  request.on('error', error => { throw error })
+})
+
 app.listen(port)    
+
+
+// http://duckling-api.herokuapp.com/api/ducks/${duckId}
+
