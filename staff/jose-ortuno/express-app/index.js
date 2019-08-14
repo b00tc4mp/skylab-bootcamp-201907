@@ -20,7 +20,7 @@ app.get('/pepito', (req, res) => {
 })
 
 app.get('/search', (req, res) => {
-    const { query: { q , carolina } } = req
+    const { query: { q } } = req
     const url = `http://duckling-api.herokuapp.com/api/search?q=${q}`
     const request = http.get(url, response => {
         let content = ''
@@ -28,14 +28,13 @@ app.get('/search', (req, res) => {
         response.on('data', chunk => content += chunk)
         response.on('end', () => {
             const jsonData = JSON.parse(content)
-            const ducks = jsonData.map(duck => {
-                const { title, imageUrl, price } = duck
-                return `<li>
+            const ducks = jsonData.map(({ title, imageUrl, price }) =>
+                `<li>
                     <h2>${title}</h2>
                     <img src=${imageUrl} />
                     <span>${price}</span>
                 </li>`
-            })
+            )
 
             res.send(`<ul>${ducks.join('')}</ul>`)
         })
