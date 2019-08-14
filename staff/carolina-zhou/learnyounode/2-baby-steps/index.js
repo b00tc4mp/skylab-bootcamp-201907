@@ -1,3 +1,5 @@
+// Extended version
+/* 
 const argumentList = process.argv;
 const values = process.argv.slice(2)
 
@@ -7,4 +9,8 @@ let solution = values.forEach((value) => {
 	return sum;
 });
 
-console.log(sum);
+console.log(sum); 
+*/
+
+// Simplified version
+console.log(process.argv.slice(2).reduce((accum, value) => accum + Number(value), 0))

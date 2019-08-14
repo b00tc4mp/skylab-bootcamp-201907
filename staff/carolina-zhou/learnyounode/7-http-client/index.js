@@ -1,7 +1,8 @@
 // http core module passed to a variable
 const http = require('http')
-// url provided is the first command-line argument
-const url = process.argv[2]
+/* url provided is the first command-line argument
+const url = process.argv[2] */
+const { argv: [, , url] } = process
 
 // http.get() method with url as first argument and callback as second.
 // response is a Node Sream object (an object that emits events: "data", "error", "end"...)

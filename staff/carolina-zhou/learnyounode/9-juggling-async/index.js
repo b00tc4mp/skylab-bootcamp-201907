@@ -1,7 +1,7 @@
 const http = require('http')
 const bl = require('bl') // Reminder: third-party package to abstract the difficulties involved in collecting an entire stream of data. Two different packages provide a useful API for solving this problem (there are likely more!): bl (Buffer List) and concat-stream. Both bl and concat-stream can have a stream piped in to them and they will collect the data for you. Once the stream has ended, a callback will be fired with the data.
 const results = []
-const count = 0
+let count = 0
 
 // FUNCTION ONE. Iterates through values in results array and logs them to the console.
 // For loop is sequential. The iterator is only increased in value by one each time the loop runs.
@@ -16,14 +16,15 @@ function httpGet (index) {
   http.get(process.argv[2 + index], function (response) {
     // Inside of the callback function, the response.pip() method is used to pipe the body of the response to the bl() method from the ‘bl’ module.
     // The bl() method accepts a callback funciton as an argument.
-    response.pipe(bl(function (err, data) {
+    response.pipe(bl((err, data) => {
       if (err)
         return console.error(err)
  
       // The value of results at the index passed to httpGet (‘results[index’) is assigned the data from the callback.
       results[index] = data.toString()
-      //Each time our callback inside of the bl() method is run, the value of the count variable is increased by 1.
       count++
+      //Each time our callback inside of the bl() method is run, the value of the count variable is increased by 1.
+      
  
       // If the value of count is equal to 3 for all three urls that are passed as arguments to this program, the printResults function is called.
       if (count == 3)
