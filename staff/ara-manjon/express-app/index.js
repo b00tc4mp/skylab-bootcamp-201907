@@ -1,10 +1,13 @@
 const http = require('http')
 const express = require('express')
-const {
-    argv: [, , port]
-} = process
+conts { Html, Header, Search, DuckResults, DuckDedatil } = require('./components')
+const { argv: [, , port } = process
+
 const app = express()
 // http://localhost:8080/ => <form><input name="query">...</form>
+
+let sessionIds = 0
+const sessions = {}
 
 app.get('/', (req, res) => {
     res.send(renderHtml(renderSearch()))
