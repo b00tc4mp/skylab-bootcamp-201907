@@ -1,14 +1,15 @@
-function extensionsFilter(routeFile, routeExt, callback) {
+module.exports = function (pathFile, pathExt, callback) {
     const fs = require('fs')
     const path = require('path')
-    
-    const extension = `.${ext}`
-    
-    fs.readdir(files, calback => {
-        if (error) throw new Error(error)
+
+    const extension = `.${pathExt}`
+
+    fs.readdir(pathFile, (error, data) => {
+        if (error) return callback(error, undefined)
+
         const result = data.filter(file => path.extname(file) === extension)
-        result.forEach(file => console.log(file))
+        
+        callback(undefined, result)
+
     })
 }
-
-module.exports = extensionsFilter
