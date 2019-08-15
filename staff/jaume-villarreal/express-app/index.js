@@ -6,90 +6,70 @@ const bodyParser = require('body-parser')
 
 const { Html, Header, Search, DuckResults,
         DuckDetail, RegisterLogin,
-        Register, RegisterSuccess , Login 
+        Register, RegisterSuccess, Login,
+        Home
         } = require('./components')
 
-const { registerUser, authenticateUser,
-        retrieveUser, toggleFavDuck
-        } = require('./logic')
+const logic = require('./logic')
 
 const session = require('express-session')
-
-// const FileStore = require('session-file-store')(session);
 
 const { argv: [, , port] } = process
 
 const app = express()
 
-app.use(bodyParser.urlencoded({extended : true}))   // const urlencodedParser = bodyParser.urlencoded( {extended : true} )
-app.use(bodyParser.json())                          // const jsonParser = bodyParser.json()
+const urlencodedParser = bodyParser.urlencoded( {extended : true} )    //app.use(bodyParser.urlencoded({extended : true}))
+
 app.use(session({
-    // store: new FileStore({}),
     secret: 's3cr3t th1ng',
     resave: false,
     saveUninitialized: false
 }));
 
 
-
-
 app.get('/', (request, response) => {
+    const { userId , token } = session
+
+    // if(userId && token){
+    //     userId = undefined
+    //     token = undefined
+    // }
+
     response.send(Html(`${Header(`${RegisterLogin()}`)}${Search()}`))
 })
 
 app.get('/search', (request, response) => {
-    const { query: { q }, session } = request
+    const { query: { q }, session: { userId , token} } = request
 
     session.query = q
-
-    const httpRequest = http.get(`http://duckling-api.herokuapp.com/api/search?q=${q}`, httpResponse => {
-        httpResponse.on('error', error => { throw error })
-
-        let content = ''
-
-        httpResponse.on('data', chunk => content += chunk)
-
-        httpResponse.on('end', () => {
-            const ducks = JSON.parse(content)
-
-            if (ducks.error) throw new Error(ducks.error)
-
-            response.send(Html(`${Search(session.query)}${DuckResults(ducks)}`))
-        })
-    })
-
-    httpRequest.on('error', error => { throw error })
+    
+    try{
+        logic.searchDucks(userId , token , q)
+            .then(ducks => response.send(Html(`${Search(session.query)}${DuckResults(ducks)}`)))
+            .catch( error => { throw error })
+    } catch(error){ throw error}
+    
 })
 
 app.get('/ducks/:id', (request, response) => {
-    const { params: { id }, session } = request
+    const { params: { id: duckId }, session } = request
 
-    const httpRequest = http.get(`http://duckling-api.herokuapp.com/api/ducks/${id}`, httpResponse => {
-        httpResponse.on('error', error => { throw error })
-
-        let content = ''
-
-        httpResponse.on('data', chunk => content += chunk)
-
-        httpResponse.on('end', () => {
-            const duck = JSON.parse(content)
-
-            if (duck.error) throw new Error(duck.error)
-
-            response.send(Html(`${Search(session.query)}${DuckDetail(duck)}`))
-        })
-    })
-
-    httpRequest.on('error', error => { throw error })
+    try{
+        logic.retrieveDuck(userId , token , duckId)
+            .then( response.send(Html(`${Search(session.query)}${DuckDetail(duckId)}`)))
+            .catch( error => { throw error })
+    } catch(error){
+        throw error
+    }
 })
 
 app.get('/register' , (request , response) => {
     response.send(Html( Register('/register') ))
 })
 
-app.post('/register' , (request,response)=>{
+app.post('/register' , urlencodedParser , (request,response)=>{
     const {name , surname , username , password , repassword} = request.body
-    registerUser(name , surname , username , password , repassword)
+    logic.registerUser(name , surname , username , password , repassword)
     .then(_response => {
         response.send(Html(`${RegisterSuccess()}`))
     })
@@ -99,18 +79,37 @@ app.get('/login' , (request , response) => {
     response.send(Html(Login()))
 })
 
-app.post('/login' , (request , response) => {
+app.post('/login' , urlencodedParser , (request , response) => {
     const { username , password } = request.body
-    authenticateUser(username , password)
-        .then( data => {
-            const { id , token } = data
-            return retrieveUser(id,token)
-        })
-        .then(user =>{
-            const { name } = user
-            console.log(name)
-            response.send(Html(`<h3>Hello ${name}</h3>`))
-        })
+
+    const { session } = request
+
+    try{
+        logic.authenticateUser(username , password)
+            .then( ({ id , token }) => {
+                session.userId = id
+                session.token = token
+                response.redirect('/home')
+            })
+            .catch( error => { throw error })
+    }
+    catch(error){ throw error}
+    
+            
+})
+
+app.get('/home' , (request , response) => {
+    const { session : { userId , token } } = request
+
+    try{
+        debugger
+        logic.retrieveUser( userId , token)
+            .then( ({ name }) => response.send(Html(`${Home(name)}`)))
+    } catch(error){
+        throw error
+    }
+
+    
 })
 
 app.listen(port)

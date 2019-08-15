@@ -1,3 +1,4 @@
+const retrieveUser = require('.')
 const { call } = require('../../utils')
 
 const { random } = Math

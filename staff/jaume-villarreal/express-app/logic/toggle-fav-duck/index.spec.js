@@ -1,3 +1,4 @@
+const toggleFavDuck = require('.')
 const { call } = require('../../utils')
 
 const { random } = Math
@@ -30,7 +31,7 @@ describe('logic - toggle favorite duck', () => {
     })
 
     it('should succeed on correct duck id', () =>
-        logic.toggleFavDuck(credentials.id, credentials.token, duckId)
+        toggleFavDuck(credentials.id, credentials.token, duckId)
             .then(() =>
                 call(`https://skylabcoders.herokuapp.com/api/user/${credentials.id}`, 'get', { 'authorization': `bearer ${credentials.token}` }, undefined)
                     .then(response => {
@@ -100,7 +101,7 @@ describe('logic - toggle favorite duck', () => {
         })
 
         it('should succeed on correct duck id', () =>
-            logic.toggleFavDuck(credentials.id, credentials.token, id)
+            toggleFavDuck(credentials.id, credentials.token, id)
                 .then(() =>
                     call(`https://skylabcoders.herokuapp.com/api/user/${credentials.id}`, 'get', { 'authorization': `bearer ${credentials.token}` }, undefined)
                         .then(response => {

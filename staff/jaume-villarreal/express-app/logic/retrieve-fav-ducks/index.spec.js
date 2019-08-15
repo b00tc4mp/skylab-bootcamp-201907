@@ -1,4 +1,4 @@
-
+const retrieveFavDucks = require('.')
 const { call } = require('../../utils')
 
 const { random } = Math

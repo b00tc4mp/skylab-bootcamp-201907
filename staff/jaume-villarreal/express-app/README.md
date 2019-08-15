@@ -22,9 +22,11 @@ Module `session-express` is able to invoke a function that receives as an argume
 * **`saveUnitialized`**: defined as `true` it forces to save in the DB the object with the data of the session, although this one has not been initialized.
 
 ### **Jasmine (testing)**
-**npm i -D jasmine=> install a module as devDependence** (see `package.json`)
+* install as devDependence (see `package.json` below): `npm i -D jasmine`
 ```javascritp
 "devDependencies": {
     "jasmine": "^3.4.0"
   },
   ```
+* execute on terminal: `npx jasmine logic/**/*.spec.js`
+`
