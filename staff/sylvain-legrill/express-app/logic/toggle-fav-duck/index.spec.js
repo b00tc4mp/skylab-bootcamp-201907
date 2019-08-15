@@ -1,4 +1,6 @@
-{
+const toggleFavDuck = require('.')
+const { call } = require('../../utils')
+
     const { random } = Math
 
     describe('logic - toggle favorite duck', () => {
@@ -119,4 +121,3 @@
             // TODO test more cases
         })
     })
-}

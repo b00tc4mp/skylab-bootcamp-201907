@@ -1,4 +1,6 @@
-logic.retrieveDuck = function (id, token, duckId) {
+const { validate, call } = require('../../utils')
+
+function retrieveDuck (id, token, duckId) {
     let favorites
 
     if (id != undefined && token != undefined) {
@@ -32,3 +34,6 @@ logic.retrieveDuck = function (id, token, duckId) {
             })
     }
 }
+
+
+module.exports = retrieveDuck

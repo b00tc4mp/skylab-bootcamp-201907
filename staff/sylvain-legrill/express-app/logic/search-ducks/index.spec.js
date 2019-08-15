@@ -1,90 +1,39 @@
-{
-    const { random } = Math
+const { validate, call } = require('../../utils')
 
-    describe('logic - search ducks', () => {
-        let user
+module.exports = function(id, token, query) {
+    let favorites
 
-        beforeEach(() =>
-            user = {
-                name: 'John-' + random(),
-                surname: 'Doe-' + random(),
-                username: 'johndoe-' + random() + '@mail.com',
-                password: '123-' + random(),
-                favorites: []
-            }
-        )
+    if (id != undefined && token != undefined) {
+        validate.string(id, 'id')
+        validate.string(token, 'token')
+        validate.string(query, 'query', false)
 
-        it('should succeed on matching criteria', () => {
-            const query = 'white' // 12 results
+        return call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'get', { 'authorization': `bearer ${token}` }, undefined)
+            .then(response => {
+                if (response.status === 'KO') throw new Error(response.error)
 
-            return logic.searchDucks(undefined, undefined, query)
-                .then(ducks => {
-                    expect(ducks).toBeDefined()
-                    expect(ducks instanceof Array).toBeTruthy()
-                    expect(ducks.length).toBe(12)
+                favorites = response.data.favorites
 
-                    ducks.forEach(duck => {
-                        expect(duck.id).toBeDefined()
-                        expect(duck.title).toBeDefined()
-                        expect(duck.imageUrl).toBeDefined()
-                        expect(duck.price).toBeDefined()
-                    })
-                })
-        })
-
-        it('should get empy array on no matching criteria', () =>
-            logic.searchDucks(undefined, undefined, 'patata')
-                .then(ducks => expect(ducks.length).toBe(0))
-        )
-
-        it('should fail on undefined query', () =>
-            expect(() => logic.searchDucks()).toThrowError(TypeError, `query with value undefined is not a string`)
-        )
-
-        // TODO test more cases
-
-        describe('when user already has favorite ducks', () => {
-            let credentials
-
-            beforeEach(() => {
-                user.favorites.push('5c3853aebd1bde8520e66e99', '5c3853aebd1bde8520e66e8a', '5c3853aebd1bde8520e66e70')
-
-                return call('https://skylabcoders.herokuapp.com/api/user', 'post', { 'content-type': 'application/json' }, user)
-                    .then(response => {
-                        if (response.status === 'KO') throw new Error(response.error)
-
-                        return call('https://skylabcoders.herokuapp.com/api/auth', 'post', { 'content-type': 'application/json' }, { username: user.username, password: user.password })
-                            .then(response => {
-                                if (response.status === 'KO') throw new Error(response.error)
-
-                                credentials = response.data
-                            })
-                    })
-            })
-
-            it('should succeed on matching criteria', () => {
-                const query = 'white' // 12 results
-
-                return logic.searchDucks(credentials.id, credentials.token, query)
+                return call(`http://duckling-api.herokuapp.com/api/search?q=${query}`, 'get', undefined, undefined)
                     .then(ducks => {
-                        expect(ducks).toBeDefined()
-                        expect(ducks instanceof Array).toBeTruthy()
-                        expect(ducks.length).toBe(12)
+                        if (ducks.error) return []
+                        else {
+                            favorites && ducks.forEach(duck => duck.favorite = favorites.includes(duck.id))
 
-                        let favorites = 0
-
-                        ducks.forEach(duck => {
-                            expect(duck.id).toBeDefined()
-                            expect(duck.title).toBeDefined()
-                            expect(duck.imageUrl).toBeDefined()
-                            expect(duck.price).toBeDefined()
-
-                            duck.favorite && favorites++
-                        })
-
-                        expect(favorites).toBe(user.favorites.length)
+                            return ducks
+                        }
                     })
             })
-        })
-    })
+    } else {
+        validate.string(query, 'query', false)
+
+        return call(`http://duckling-api.herokuapp.com/api/search?q=${query}`, 'get', undefined, undefined)
+            .then(ducks => {
+                if (ducks.error) return []
+
+                favorites && ducks.forEach(duck => duck.favorite = favorites.includes(duck.id))
+
+                return ducks
+            })
+    }
 }

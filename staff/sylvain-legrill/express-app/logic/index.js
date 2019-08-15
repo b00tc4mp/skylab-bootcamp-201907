@@ -1,10 +1,8 @@
 logic = {}
 module.exports = {
-    authenticateUser: require('./authenticate-user'),
     registerUser: require('./register-user'),
-    retrieveDuck: require('./retrieve-duck'),
-    retrieveFavDucks: require('./retrieve-fav-ducks'),
-    retrieveUser: require('./retrieve-user'),
+    authenticateUser: require('./authenticate-user'),
     searchDucks: require('./search-ducks'),
+    retrieveDuck: require('./retrieve-duck'),
     toggleFavDuck: require('./toggle-fav-duck')
 }
