@@ -1,6 +1,6 @@
 function Header(content) {
     return `<header> 
-    ${content}
+    <h2>${content ? content : ''}</h2>
     </header>`
 }
 
