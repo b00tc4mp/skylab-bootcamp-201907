@@ -1,0 +1,44 @@
+.landing
+    @extend %main-content-box
+    background-color: none
+    padding: 0
+    &__header
+        position: absolute
+        top: 4em
+        left: 50%
+        margin-left: -160px
+
+    &__header-menu
+        list-style: none
+        display: flex
+        justify-content: space-around
+        magin: 2em
+        padding: 0
+
+    &__header-message
+        color: white
+        margin: 1.5em auto -1.5em auto
+
+    &__header-item
+        background: linear-gradient(-45deg, #FF5128, #9422E8, #1EC0FF)
+        background-size: 400% 400%
+        animation: Gradient 15s ease infinite
+        @keyframes Gradient
+            0%
+                background-position: 0% 50%
+            50% 
+                background-position: 100% 50%
+            100% 
+                background-position: 0% 50%
+        width: 7.5em
+        margin: 3em 1.5em auto 1.5em
+        border-radius: 5em 
+        padding: 10px   
+        font-size: 16px
+
+    &__header-link
+        color: $secondary-text-color
+        text-decoration: none        
+
+    &__header-item:hover
+        background: deeppink
