@@ -1,4 +1,6 @@
-logic.toggleFavDuck = function (id, token, duckId) {
+const { validate , call } = require('../../utils')
+
+function toggleFavDuck(id, token, duckId) {
     validate.string(id, 'id')
     validate.string(token, 'token')
     validate.string(duckId, 'duck id')
@@ -32,3 +34,5 @@ logic.toggleFavDuck = function (id, token, duckId) {
                     })
         })
 }
+
+module.exports = toggleFavDuck

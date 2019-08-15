@@ -9,7 +9,9 @@ const { Html, Header, Search, DuckResults,
         Register, RegisterSuccess , Login 
         } = require('./components')
 
-const { registerUser , authenticateUser , retrieveUser } = require('./logic')
+const { registerUser, authenticateUser,
+        retrieveUser, toggleFavDuck
+        } = require('./logic')
 
 const session = require('express-session')
 
@@ -82,7 +84,7 @@ app.get('/ducks/:id', (request, response) => {
 })
 
 app.get('/register' , (request , response) => {
-    response.send(Html( Register() ))
+    response.send(Html( Register('/register') ))
 })
 
 app.post('/register' , (request,response)=>{
@@ -94,7 +96,7 @@ app.post('/register' , (request,response)=>{
 })
 
 app.get('/login' , (request , response) => {
-    response.send(Html( Login() ))
+    response.send(Html(Login()))
 })
 
 app.post('/login' , (request , response) => {
@@ -104,8 +106,8 @@ app.post('/login' , (request , response) => {
             const { id , token } = data
             return retrieveUser(id,token)
         })
-        .then(_response =>{
-            const { name } = _response
+        .then(user =>{
+            const { name } = user
             console.log(name)
             response.send(Html(`<h3>Hello ${name}</h3>`))
         })

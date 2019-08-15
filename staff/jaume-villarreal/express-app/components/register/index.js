@@ -1,6 +1,6 @@
-function Register(){
+function Register(path){
 	return	`<h1>Register</h1>
-				<form method='post' action='register'>
+				<form method='post' action='${path}'>
 					<label for='name'>Name</label><input type="text" id="name" name="name"/>
 					<label for='surname'>Surname</label><input type="text" id="surname" name="surname"/>
 					<label for='username'>Email</label><input type="email" id="username" name="username"/>
@@ -9,7 +9,6 @@ function Register(){
 					<button>Register</button>
 				</form>
 				<a href='/'>Go back</a>`
-	
 }
 
 module.exports = Register

@@ -5,6 +5,7 @@ function DuckResults(ducks) {
             <img src="${imageUrl}">
             <span>${price}</span>
         </a>
+        <button>fav</button>
     </li>`).join('')}</ul>`
 }
 

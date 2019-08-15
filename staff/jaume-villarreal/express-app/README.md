@@ -19,3 +19,5 @@ app.METHOD( PATH , HANDLER)
 * **`secret`**: type `string` property that uses a cryptographic algorithm to encrypt session `id's`.
 * **`resave`**: defined as `true` it forces to save the session data to the DB, even if there has been no change
 * **`saveUnitialized`**: defined as `true` it forces to save in the DB the object with the data of the session, although this one has not been initialized.
+
+**npm i -D => install a module as devDependence**
