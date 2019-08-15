@@ -1,6 +1,6 @@
-const { call, validate } = require('../utils')
+const { call, validate } = require('../../utils')
 
-function authenticateUser(username, password) {
+module.exports = function(username, password) {
     validate.string(username, 'username')
     validate.email(username, 'username')
     validate.string(password, 'password')
@@ -12,5 +12,3 @@ function authenticateUser(username, password) {
             return response.data
         })
 }
-
-module.exports = authenticateUser

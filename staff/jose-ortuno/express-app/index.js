@@ -5,24 +5,23 @@ const session = require('express-session')
 const FileStore = require('session-file-store')(session);
 const { call } = require('./utils')
 
-const { authenticateUser, registerUser, retrieveDuck, retrieveFavDucks, retrieveUser, searchDucks, toggleFavDuck } = require('./logic')
+// const { authenticateUser, registerUser, retrieveDuck, retrieveFavDucks, retrieveUser, searchDucks, toggleFavDuck } = require('./logic')
+
+const logic = require('./logic')
+
+
 
 const { argv: [, , port] } = process
 
 const app = express()
 
-// BODY PARSER
-var bodyParser = require('body-parser')
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-    extended: false
-}));
 
-/**
- * --------------
- */
+/**********************************************************************************************
+ *
+ *********************************************************************************************/
+
 
 app.use(session({
-    // store: new FileStore({}),
     secret: 's3cr3t th1ng'
 }));
 
@@ -56,13 +55,14 @@ app.get('/search', (req, res) => {
 })
 
 app.get('/register', (req, res) => {
-
     res.send(Html(`${Header(Menu())}${Register()}`))
 })
 
+
+
 app.post('/register-success', (req, res) => {
     const { name, surname, email, password, repassword } = req.body
-    registerUser(name, surname, email, password, repassword)
+    logic.retrieveUser(name, surname, email, password, repassword)
         .then( () => res.send(Html(RegisterSuccess())))
         .then(error => console.error(error))
 })

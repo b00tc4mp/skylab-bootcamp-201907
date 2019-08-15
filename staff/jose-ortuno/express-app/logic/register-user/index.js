@@ -1,4 +1,4 @@
-const { call, validate } = require('../utils')
+const { call, validate } = require('../../utils')
 
 function registerUser(name, surname, username, password, repassword) {
     validate.string(name, 'name')

@@ -1,4 +1,4 @@
-const { call, validate } = require('../utils')
+const { call, validate } = require('../../utils')
 
 function retrieveDuck(id, token, duckId) {
     let favorites

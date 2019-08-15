@@ -1,6 +1,6 @@
-const { call, validate } = require('../utils')
+const { call, validate } = require('../../utils')
 
-function searchDucks(id, token, query) {
+module.exports = function (id, token, query) {
     let favorites
 
     if (id != undefined && token != undefined) {
@@ -37,5 +37,3 @@ function searchDucks(id, token, query) {
             })
     }
 }
-
-module.exports = searchDucks
