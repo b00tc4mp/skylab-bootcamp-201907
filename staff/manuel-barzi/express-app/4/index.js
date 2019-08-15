@@ -2,7 +2,7 @@ const express = require('express')
 const http = require('http')
 const { Html, Header, Search, DuckResults, DuckDetail } = require('./components')
 const session = require('express-session')
-const FileStore = require('session-file-store')(session);
+// const FileStore = require('session-file-store')(session);
 
 const { argv: [, , port] } = process
 
