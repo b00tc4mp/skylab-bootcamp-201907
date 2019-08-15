@@ -3,5 +3,7 @@ module.exports = {
     Header: require('./header'),
     Search: require('./search'),
     DuckResults: require('./duck-results'),
-    DuckDetail: require('./duck-detail')
+    DuckDetail: require('./duck-detail'),
+    Register: require('./register'),
+    Login: require('./login')
 }
