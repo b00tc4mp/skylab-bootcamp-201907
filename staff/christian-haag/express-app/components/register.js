@@ -1,7 +1,7 @@
-function Register(name, surname, username, password) {
-    return `<div>
+function Register(path) {
+    return `
             <h2> Register </h2>
-            <form action="/register" method="POST">
+            <form action="${path}" method="POST">
                 <label htmlFor="name">Name</label>
                 <input type="text" name="name" id="name" />
 
@@ -13,10 +13,11 @@ function Register(name, surname, username, password) {
 
                 <label htmlFor="password">Password</label>
                 <input type="password" name="password" id="password" />
-
+                
+                <label htmlFor="password">Repassword</label>
+                <input type="password" name="repassword" id="repassword" />
                 <button type="submit">Register</button>
-
             </form>
-            </div>`
+            <a href="">Go back</a>`
 }
 module.exports = Register

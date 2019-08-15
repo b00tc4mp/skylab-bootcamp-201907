@@ -1,7 +1,7 @@
-function Search(query, name) {
+function Search(query, registerPath, loginPath) {
     return `<div>
-    <a href="/register">Register</a>
-    <a href="/login">Login</a>
+    <a href="${registerPath}">Register</a>
+    <a href="${loginPath}">Login</a>
     </div>
     <form action="/search">
 <input type="text" name="q" value="${query || ''}"">

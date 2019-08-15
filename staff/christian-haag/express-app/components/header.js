@@ -1,6 +1,6 @@
 function Header(content) {
     return `<header> 
-    <h2>${content ? content : ''}</h2>
+    <h2>Wellcome${content ? content : ''}</h2>
     </header>`
 }
 
