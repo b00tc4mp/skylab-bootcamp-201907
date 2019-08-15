@@ -5,7 +5,8 @@ function DuckDetail({ title, imageUrl, price, description, link }) {
         <span>${price}</span>
         <p>${description}</p>
         <a href="${link}" target="_blank">Go to store</a>
-    </article>`
+    </article>
+    <a href="">Go back</a>`
 }
 
 module.exports = DuckDetail

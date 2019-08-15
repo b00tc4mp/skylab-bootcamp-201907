@@ -4,7 +4,7 @@ module.exports = {
     Search: require('./search'),
     DuckResults: require('./duck-results'),
     DuckDetail: require('./duck-detail'),
-    Login: require('./login'),
     Register: require('./register'),
-    RegisterSuccess: require('./register-success')
+    RegisterSuccess: require('./register-success'),
+    Login: require('./login')
 }

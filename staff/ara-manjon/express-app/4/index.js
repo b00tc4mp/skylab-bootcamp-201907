@@ -3,18 +3,17 @@ const http = require('http')
 const { Html, Header, Search, Login, Register, DuckResults, DuckDetail, RegisterSuccess } = require('./components')
 const logic = require('./logic')
 const session = require('express-session')
-const bodyParser = require('body-parser')
+const {parseBody} = require('./utils')
 
 const { argv: [, , port] } = process
 
 const app = express()
-
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
  
 app.use(session({
     // store: new FileStore({}),
-    secret: 's3cr3t th1ng'
+    secret: 's3cr3t th1ng',
+    saveUninitialized: true,
+    resave: true
 }));
 
 
@@ -24,64 +23,51 @@ app.get('/', (req, res) => {
 
 
 app.get('/search', (req, res) => {
-    const { query: { q }, session } = req
+    const { query: { q }, session: {userId, token} } = req
 
     session.query = q
 
-    const request = http.get(`http://duckling-api.herokuapp.com/api/search?q=${q}`, response => {
-        response.on('error', error => { throw error })
+try{
+    logic.searchDucks(userId, token, q)
+    .then(ducks => res.send(Html(`${Header()}${Search(session.query)}${DuckResults(ducks)}`)))
+    .catch(error => {throw error})    
+  } catch(error){
+    throw error
+}
 
-        let content = ''
-
-        response.on('data', chunk => content += chunk)
-
-        response.on('end', () => {
-            const ducks = JSON.parse(content)
-
-            if (ducks.error) throw new Error(ducks.error)
-
-            res.send(Html(`${Header()}${Search(session.query)}${DuckResults(ducks)}`))
-        })
-    })
-
-    request.on('error', error => { throw error })
 })
 
 app.get('/ducks/:id', (req, res) => {
-    const { params: { id }, session } = req
+    const { params: { id: duckId }, session: { userId, token, query} } = req
 
-    const request = http.get(`http://duckling-api.herokuapp.com/api/ducks/${id}`, response => {
-        response.on('error', error => { throw error })
+    try {
+        logic.retrieveDuck(userId, token, duckId)
+        .then(duck => res.send(Html(`${Header()}${Search(session.query)}${DuckDetail(duck)}`)))
+        .catch(error => {throw error})
+    }catch(error){
+        throw error
+    }
 
-        let content = ''
-
-        response.on('data', chunk => content += chunk)
-
-        response.on('end', () => {
-            const duck = JSON.parse(content)
-
-            if (duck.error) throw new Error(duck.error)
-
-            res.send(Html(`${Search(session.query)}${DuckDetail(duck)}`))
-        })
-    })
-
-    request.on('error', error => { throw error })
 })
 
-app.get('/sign-up',(req, res) => {
-    res.send(Html(Register('/sing-up')))
+app.get('/register',(req, res) => {
+    res.send(Html(Register('/register')))
 })
-app.post('/sign-up',(req, res)=>{
+app.post('/register', parseBody, (req, res)=>{
+
+    const {body}= req 
 
         
-    const { name, surname, email , password, repassword } = req.body
+    const { name, surname, email , password, repassword } = body
 
-    logic.registerUser(name, surname, email, password, repassword)
-    res.send(Html(RegisterSuccess()))
-    
-    
+    try{
+        logic.registerUser(name, surname, email, password, repassword)
+        .then(()=>res.send(Html(RegisterSuccess())))
+    }catch(error){
+        throw error
+    }    
 })
+
  app.get('/register-success', (req,res) =>{
     res.send(Html(Login('/login')))
 }) 
@@ -90,12 +76,27 @@ app.get('/login',(req, res) => {
     res.send(Html(Login()))
 })
 
-app.post('/login',(req, res)=>{
-   const { email , password } = req.body
-   debugger
+app.post('/login',parseBody,(req, res)=>{
+    const {body, session}=req
+   const { email , password } = body
+   try{
     logic.authenticateUser(email, password)
-    .then(data => logic.retrieveUser(data.id, data.token))
-    .then(response => res.send(`<h3>Hello, ${response.name}</h3>${Header()}${Search()}`))     
+    .then(({id, token})=>{
+        session.userId = id
+        session.token = token
+
+        res.redirect('/home')
+    })
+    .catch(error => {throw error})        
+   } catch(error){
+       throw error
+   }
 })
+
+app.get('/home', (req, res) => {
+    res.send(Html(`${Header()}${Search(session.query)}`))
+})
+
+
 app.listen(port)
  

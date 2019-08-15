@@ -1,4 +1,5 @@
-const {validate, call} = require('../../utils') 
+const {validate, call} = require('../../utils')
+ 
 function authenticateUser (username, password) {
     validate.string(username, 'username')
     validate.email(username, 'username')
