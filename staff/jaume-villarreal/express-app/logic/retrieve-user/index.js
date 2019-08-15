@@ -1,6 +1,6 @@
-const { validate , call } = require('../../utils')
+const { validate, call } = require('../../utils')
 
-module.exports = function(id, token) {
+module.exports = function (id, token) {
     validate.string(id, 'id')
     validate.string(token, 'token')
 

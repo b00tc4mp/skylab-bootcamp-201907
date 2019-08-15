@@ -1,115 +1,152 @@
 const express = require('express')
 
-const http = require('http')
-
-const bodyParser = require('body-parser')
-
-const { Html, Header, Search, DuckResults,
-        DuckDetail, RegisterLogin,
-        Register, RegisterSuccess, Login,
-        Home
+const   {   Html, Header, DuckResults,
+            DuckDetail, Register, RegisterSuccess,
+            Login, FavButton
         } = require('./components')
 
-const logic = require('./logic')
-
 const session = require('express-session')
+const { parseBody } = require('./utils')
+const logic = require('./logic')
+const literals = require('./literals')
 
 const { argv: [, , port] } = process
 
 const app = express()
 
-const urlencodedParser = bodyParser.urlencoded( {extended : true} )    //app.use(bodyParser.urlencoded({extended : true}))
+const SEARCH = '/search', SIGN_IN = '/sign-in', SIGN_UP = '/sign-up', SIGN_OUT = '/sign-out'
 
 app.use(session({
     secret: 's3cr3t th1ng',
-    resave: false,
-    saveUninitialized: false
-}));
+    saveUninitialized: true,
+    resave: true
+}))
 
+app.get('/', (req, res) => {
+    const { session: { userId, token, query } } = req
 
-app.get('/', (request, response) => {
-    const { userId , token } = session
+    // TODO make app multi-lang
+    req.session.lang = 'ca'
 
-    // if(userId && token){
-    //     userId = undefined
-    //     token = undefined
-    // }
+    try {
+        if (userId && token)
+            logic.retrieveUser(userId, token)
+                .then(user => res.send(Html(Header(user.name, query, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT))))
+                .catch(error => { throw error })
+        else
+            res.send(Html(Header(undefined, query, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT)))
+    } catch (error) {
+        throw error
+    }
 
-    response.send(Html(`${Header(`${RegisterLogin()}`)}${Search()}`))
 })
 
-app.get('/search', (request, response) => {
-    const { query: { q }, session: { userId , token} } = request
+app.get('/search', (req, res) => {
+    const { query: { q: query }, session: { userId, token } } = req
 
-    session.query = q
-    
-    try{
-        logic.searchDucks(userId , token , q)
-            .then(ducks => response.send(Html(`${Search(session.query)}${DuckResults(ducks)}`)))
-            .catch( error => { throw error })
-    } catch(error){ throw error}
-    
-})
+    // session.query = query
+    if(!session.query || query) session.query = query
 
-app.get('/ducks/:id', (request, response) => {
-    const { params: { id: duckId }, session } = request
-
-    try{
-        logic.retrieveDuck(userId , token , duckId)
-            .then( response.send(Html(`${Search(session.query)}${DuckDetail(duckId)}`)))
-            .catch( error => { throw error })
-    } catch(error){
+    try {
+        if (userId && token)
+            Promise.all([
+                logic.retrieveUser(userId, token),
+                logic.searchDucks(userId, token, session.query)
+            ])
+                .then(([user, ducks]) => res.send(Html(`${Header(user.name, query, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT)}${DuckResults(ducks)}`)))
+                .catch(error => { throw error })
+        else
+            logic.searchDucks(undefined, undefined, session.query)
+                .then(ducks => res.send(Html(`${Header(undefined, query, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT)}${DuckResults(ducks)}`)))
+    } catch (error) {
         throw error
     }
 })
 
-app.get('/register' , (request , response) => {
-    response.send(Html( Register('/register') ))
+app.get('/ducks/:id', (req, res) => {
+    const { params: { id: duckId }, session: { userId, token, query } } = req
+
+    try {
+        if (userId && token)
+            Promise.all([
+                logic.retrieveUser(userId, token),
+                logic.retrieveDuck(userId, token, duckId)
+            ])
+                .then(([user, duck]) => res.send(Html(`${Header(user.name, query, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT)}${DuckDetail(duck)}`)))
+                .catch(error => { throw error })
+        else
+            logic.retrieveDuck(undefined, undefined, duckId)
+                .then(duck => res.send(Html(`${Header(undefined, query, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT)}${DuckDetail(duck)}`)))
+    } catch (error) {
+        throw error
+    }
 })
 
-app.post('/register' , urlencodedParser , (request,response)=>{
-    const {name , surname , username , password , repassword} = request.body
-    logic.registerUser(name , surname , username , password , repassword)
-    .then(_response => {
-        response.send(Html(`${RegisterSuccess()}`))
-    })
+app.post("/onToggle" , parseBody , (request , response) => {
+
+    const { body: {duckId} , session: { userId, token } } = request
+
+    if(userId && token){
+        logic.retrieveUser(userId , token)
+            .then( () => {logic.toggleFavDuck(userId , token , duckId)})
+            .then( () => response.redirect('/search'))
+            .catch( error => { throw error })
+    } else response.redirect('/sign-in')
+
 })
 
-app.get('/login' , (request , response) => {
-    response.send(Html(Login()))
+app.get('/sign-up', (req, res) => {
+    const { session: { lang = 'en' }} = req
+
+    res.send(Html(Register(literals[lang].signUp, '/sign-up')))
 })
 
-app.post('/login' , urlencodedParser , (request , response) => {
-    const { username , password } = request.body
+app.post('/sign-up', parseBody, (req, res) => {
+    const { body } = req
 
-    const { session } = request
+    const { name, surname, email, password, repassword } = body
 
-    try{
-        logic.authenticateUser(username , password)
-            .then( ({ id , token }) => {
+    try {
+        logic.registerUser(name, surname, email, password, repassword)
+            .then(() => res.send(Html(RegisterSuccess('/sign-in'))))
+            .catch(error => { throw error })
+    } catch (error) {
+        throw error
+    }
+})
+
+app.get('/sign-in', (req, res) => {
+    const { session: { lang = 'en' }} = req
+
+    res.send(Html(Login(literals[lang].signIn, '/sign-in')))
+})
+
+app.post('/sign-in', parseBody, (req, res) => {
+    const { body, session } = req
+
+    const { email, password } = body
+
+    try {
+        logic.authenticateUser(email, password)
+            .then(({ id, token }) => {
                 session.userId = id
                 session.token = token
-                response.redirect('/home')
+
+                res.redirect('/')
             })
-            .catch( error => { throw error })
-    }
-    catch(error){ throw error}
-    
-            
-})
-
-app.get('/home' , (request , response) => {
-    const { session : { userId , token } } = request
-
-    try{
-        debugger
-        logic.retrieveUser( userId , token)
-            .then( ({ name }) => response.send(Html(`${Home(name)}`)))
-    } catch(error){
+            .catch(error => { throw error })
+    } catch (error) {
         throw error
     }
+})
 
-    
+app.post('/sign-out', (req, res) => {
+    const { session } = req
+
+    delete session.userId
+    delete session.token
+
+    res.redirect('/')
 })
 
 app.listen(port)

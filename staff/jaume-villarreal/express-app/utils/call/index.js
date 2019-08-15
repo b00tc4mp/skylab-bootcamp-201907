@@ -1,5 +1,5 @@
-const fetch = require('node-fetch')
 const validate = require('../validate')
+const fetch = require('node-fetch')
 
 function call(url, method = 'get', headers, body) {
     validate.string(url, 'url')
