@@ -1,76 +1,96 @@
 const express = require('express')
 const http = require('http')
+const { Html, Header, Search, Menu, DuckResults, DuckDetail, Register, RegisterSuccess, Login } = require('./components')
+const session = require('express-session')
+const FileStore = require('session-file-store')(session);
+const { call } = require('./utils')
+
+const { authenticateUser, registerUser, retrieveDuck, retrieveFavDucks, retrieveUser, searchDucks, toggleFavDuck } = require('./logic')
 
 const { argv: [, , port] } = process
+
 const app = express()
 
-app.get('/', (req, res) => {
-    res.send(`<form action="/search">
-        <input type="text" name="q">
-        <button>Search</button>
-    </form>`)
-})
+// BODY PARSER
+var bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+    extended: false
+}));
 
-app.get('/pepito', (req, res) => {
-    res.send(`<div>
-        <h3>pepito</h3>
-        <a href="/">Search</a>
-    </div>`)
+/**
+ * --------------
+ */
+
+app.use(session({
+    // store: new FileStore({}),
+    secret: 's3cr3t th1ng'
+}));
+
+
+app.get('/', (req, res) => {
+    res.send(Html(Header(`${Menu()}${Search()}`)))
 })
 
 app.get('/search', (req, res) => {
-    const { query: { q } } = req
-    const url = `http://duckling-api.herokuapp.com/api/search?q=${q}`
-    const request = http.get(url, response => {
+    const { query: { q }, session } = req
+
+    session.query = q
+
+    const request = http.get(`http://duckling-api.herokuapp.com/api/search?q=${q}`, response => {
+        response.on('error', error => { throw error })
+
         let content = ''
-        response.on('error', error => { throw new Error(error) })
+
         response.on('data', chunk => content += chunk)
+
         response.on('end', () => {
-            const jsonData = JSON.parse(content)
-            const ducks = jsonData.map(({ title, imageUrl, price, id }) =>
-                `<li>
-                    <a href=/duck/${id}>
-                        <h2>${title}</h2>
-                        <img src="${imageUrl}" />
-                        <span>${price}</span>
-                    </a>
-                </li>`
-            )
+            const ducks = JSON.parse(content)
 
-            res.send(`<ul>${ducks.join('')}</ul>`)
+            if (ducks.error) throw new Error(ducks.error)
+
+            res.send(Html(`${Search(session.query)}${DuckResults(ducks)}`))
         })
-
-    }).on('error', error => { throw new Error(error) })
-
+    })
+    debugger
     request.on('error', error => { throw error })
-
 })
 
-app.get('/duck/:id', (req, res) => {
-    const { params: { id } } = req
-    const url = `http://duckling-api.herokuapp.com/api/ducks/${id}`
-    const request = http.get(url, response => {
+app.get('/register', (req, res) => {
+
+    res.send(Html(`${Header(Menu())}${Register()}`))
+})
+
+app.post('/register-success', (req, res) => {
+    const { name, surname, email, password, repassword } = req.body
+    registerUser(name, surname, email, password, repassword)
+        .then( () => res.send(Html(RegisterSuccess())))
+        .then(error => console.error(error))
+})
+
+app.get('/login', (req, res) => {
+    res.send(Html(`${Header(Menu())}${Login()}`))
+})
+
+app.get('/ducks/:id', (req, res) => {
+    const { params: { id }, session } = req
+
+    const request = http.get(`http://duckling-api.herokuapp.com/api/ducks/${id}`, response => {
+        response.on('error', error => { throw error })
+
         let content = ''
-        response.on('error', error => { throw new Error(error) })
+
         response.on('data', chunk => content += chunk)
+
         response.on('end', () => {
-            const jsonData = JSON.parse(content)
+            const duck = JSON.parse(content)
 
-            const { title, imageUrl, price, description, link } = jsonData
+            if (duck.error) throw new Error(duck.error)
 
-            res.send(`<section>
-                <h1>${title}</h1>
-                <img src="${imageUrl}" />
-                <span>${price}</span>
-                <p>${description}</p>
-                <a href=${link} target="_blank">Go to store</a>
-            </section>`)
+            res.send(Html(`${Search(session.query)}${DuckDetail(duck)}`))
         })
-
-    }).on('error', error => { throw new Error(error) })
+    })
 
     request.on('error', error => { throw error })
-
 })
 
 app.listen(port)
