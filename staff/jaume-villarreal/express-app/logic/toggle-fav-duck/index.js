@@ -34,5 +34,3 @@ function toggleFavDuck(id, token, duckId) {
                     })
         })
 }
-
-module.exports = toggleFavDuck

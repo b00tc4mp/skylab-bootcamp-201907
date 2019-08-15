@@ -1,4 +1,6 @@
 {
+    const { call } = require('../../utils')
+    
     const { random } = Math
 
     describe('logic - search ducks', () => {
@@ -17,7 +19,7 @@
         it('should succeed on matching criteria', () => {
             const query = 'white' // 12 results
 
-            return logic.searchDucks(undefined, undefined, query)
+            return searchDucks(undefined, undefined, query)
                 .then(ducks => {
                     expect(ducks).toBeDefined()
                     expect(ducks instanceof Array).toBeTruthy()
@@ -33,12 +35,12 @@
         })
 
         it('should get empy array on no matching criteria', () =>
-            logic.searchDucks(undefined, undefined, 'patata')
+            searchDucks(undefined, undefined, 'patata')
                 .then(ducks => expect(ducks.length).toBe(0))
         )
 
         it('should fail on undefined query', () =>
-            expect(() => logic.searchDucks()).toThrowError(TypeError, `query with value undefined is not a string`)
+            expect(() => searchDucks()).toThrowError(TypeError, `query with value undefined is not a string`)
         )
 
         // TODO test more cases
@@ -65,7 +67,7 @@
             it('should succeed on matching criteria', () => {
                 const query = 'white' // 12 results
 
-                return logic.searchDucks(credentials.id, credentials.token, query)
+                return searchDucks(credentials.id, credentials.token, query)
                     .then(ducks => {
                         expect(ducks).toBeDefined()
                         expect(ducks instanceof Array).toBeTruthy()

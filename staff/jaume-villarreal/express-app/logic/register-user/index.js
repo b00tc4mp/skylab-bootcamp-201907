@@ -1,6 +1,6 @@
 const { validate , call } = require('../../utils')
 
-function registerUser(name, surname, username, password, repassword) {
+module.exports = function(name, surname, username, password, repassword) {
     validate.string(name, 'name')
     validate.string(surname, 'surname')
     validate.string(username, 'username')
@@ -15,5 +15,3 @@ function registerUser(name, surname, username, password, repassword) {
             if (response.status === 'KO') throw new Error(response.error)
         })
 }
-
-module.exports = registerUser
