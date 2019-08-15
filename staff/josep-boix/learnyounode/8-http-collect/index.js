@@ -85,6 +85,10 @@ http.get(url, response=> {
 })  //recupera todos los chunks de la llamada al server y los muestra de una vez
 
 
+/**
+ *      OFICIAL SOLUTION
+ */
+
 // var http = require('http')
 // var bl = require('bl')
 

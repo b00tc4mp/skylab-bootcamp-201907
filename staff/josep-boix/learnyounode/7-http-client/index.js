@@ -43,6 +43,9 @@ http.get(url,response => {
     response.on('data', data => console.log (data))     //imprime cada chunk recibido en el momento de recibirlo
 }).on('error', error =>{throw error})
 
+/**
+ *      OFICIAL SOLUTION
+ */
 
 // var http = require('http')
 

@@ -50,12 +50,14 @@ const path = require ('path')
 
 function filterFuncByExtension (folder, fileExtension, callback) {
 //   debugger
-  fs.readdir(folder, (error, data)=>{
+  fs.readdir(folder, (error, files)=>{   // Asynchronous readdir(3). Reads the contents of a directory. 
+                                        // The callback gets two arguments (err, files) where files is an array of the names 
+                                        // of the files in the directory excluding '.' and '..'.
     if (error) return callback(error)
     
     const _extension = `.${fileExtension}`
     
-    const filteredList = data.filter(file =>
+    const filteredList = files.filter(file =>   //El mètode filter() crea un nou array amb tots els elements que passin el test implementat per la funció que passa com a argument.
       path.extname(file) === _extension)
       // file.includes('.' + fileExtension)
       
