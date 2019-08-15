@@ -5,6 +5,7 @@ function DuckDetail({ title, imageUrl, price, description, link }) {
         <span>${price}</span>
         <p>${description}</p>
         <a href="${link}" target="_blank">Go to store</a>
+        <button>Favorite</button>
     </article>`
 }
 

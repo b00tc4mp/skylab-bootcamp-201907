@@ -4,6 +4,7 @@ const { Html, Header, Search, DuckResults, DuckDetail, Register, RegisterSuccess
 const session = require('express-session')
 const { parseBody } = require('./utils')
 const logic = require('./logic')
+const marquesine = `<h1> Tha great Duck Shtore</h1>`
 
 const { argv: [, , port] } = process
 
@@ -16,7 +17,7 @@ app.use(session({
 }))
 
 app.get('/', (req, res) => {
-    res.send(Html(Search()))
+    res.send(Html(`${Header(marquesine)} ${Search()}`))
 })
 
 app.get('/search', (req, res) => {
@@ -26,7 +27,7 @@ app.get('/search', (req, res) => {
 
     try {
         logic.searchDucks(userId, token, q)
-            .then(ducks => res.send(Html(`${Search(q)}${DuckResults(ducks)}`)))
+            .then(ducks => res.send(Html(`${Header(marquesine)}${Search(q)}${DuckResults(ducks)}`)))
             .catch(error => { throw error })
     } catch (error) {
         throw error
@@ -38,7 +39,7 @@ app.get('/ducks/:id', (req, res) => {
 
     try {
         logic.retrieveDuck(userId, token, duckId)
-            .then(duck => res.send(Html(`${Search(query)}${DuckDetail(duck)}`)))
+            .then(duck => res.send(Html(`${Header(marquesine)}${Search(query)}${DuckDetail(duck)}`)))
             .catch(error => { throw error })
     } catch (error) {
         throw error
