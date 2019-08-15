@@ -4,11 +4,12 @@ const http = require('http')
 
 const bodyParser = require('body-parser')
 
-
 const { Html, Header, Search, DuckResults,
         DuckDetail, RegisterLogin,
         Register, RegisterSuccess , Login 
         } = require('./components')
+
+const { registerUser , authenticateUser , retrieveUser } = require('./logic')
 
 const session = require('express-session')
 
@@ -18,12 +19,8 @@ const { argv: [, , port] } = process
 
 const app = express()
 
-const urlencodedParser = bodyParser.urlencoded( {extended : true} )
-
-const jsonParser = bodyParser.json()
- 
-
-
+app.use(bodyParser.urlencoded({extended : true}))   // const urlencodedParser = bodyParser.urlencoded( {extended : true} )
+app.use(bodyParser.json())                          // const jsonParser = bodyParser.json()
 app.use(session({
     // store: new FileStore({}),
     secret: 's3cr3t th1ng',
@@ -85,21 +82,33 @@ app.get('/ducks/:id', (request, response) => {
 })
 
 app.get('/register' , (request , response) => {
-    response.send(Html(`${Register()}`))
+    response.send(Html( Register() ))
+})
+
+app.post('/register' , (request,response)=>{
+    const {name , surname , username , password , repassword} = request.body
+    registerUser(name , surname , username , password , repassword)
+    .then(_response => {
+        response.send(Html(`${RegisterSuccess()}`))
+    })
 })
 
 app.get('/login' , (request , response) => {
-    response.send(Html(`${Login()}`))
+    response.send(Html( Login() ))
 })
 
-// app.get('/registersuccess' , (request,response)=>{
-//     response.send(Html(`${RegisterSuccess()}`))
-// })
-
-app.post('/registersuccess' , urlencodedParser , (request,response)=>{
-    console.log(request.body)
-    response.send(Html(`${RegisterSuccess()}`))
+app.post('/login' , (request , response) => {
+    const { username , password } = request.body
+    authenticateUser(username , password)
+        .then( data => {
+            const { id , token } = data
+            return retrieveUser(id,token)
+        })
+        .then(_response =>{
+            const { name } = _response
+            console.log(name)
+            response.send(Html(`<h3>Hello ${name}</h3>`))
+        })
 })
-
 
 app.listen(port)

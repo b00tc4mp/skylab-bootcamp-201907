@@ -1,10 +1,11 @@
 # EXPRESS-APP [documentation]
 
-## **App object route methods
+## **App object route methods**
 These methods are derived from HTTP ones. They refer to the way to respond to a client request, being `get` and `post`the most usual ones. Route definition takes the followwing structure:
 ```javascript
 app.METHOD( PATH , HANDLER)
 ```
+
 * **app**: instance of `express`
 * **METHOD**: HTTP request method
 * **PATH**: endpoint on the server 
@@ -12,7 +13,6 @@ app.METHOD( PATH , HANDLER)
 
 * app.**`get`**: it requests a representation of a specified resourse. This kind of requests should only retrieve data and should have not other effect.
 * app.**`post`**: it requests that the server accepts data enclosed in the request as a new part of data stored in the `URI`.
-
 
 ## **Module session-express (middleware)**
 `session-express` module is able to invoke a function that receives as an argument an object to be declared and defined with the required properties:
