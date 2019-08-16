@@ -99,5 +99,4 @@ app.post('/:duckId', (req, res) => {
         .then(() => res.redirect('/search'))
 })
 
-
 app.listen(port)
