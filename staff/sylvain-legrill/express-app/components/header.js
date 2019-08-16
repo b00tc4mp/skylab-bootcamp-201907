@@ -1,7 +1,5 @@
 const Search = require('./search')
 
-debugger
-
 function Header(name, query, searchPath, signInPath, signUpPath, signOutPath) {
     return `<header>
         ${name && `<nav>
