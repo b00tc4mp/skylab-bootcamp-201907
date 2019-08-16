@@ -1,0 +1,28 @@
+extends ../html/index
+
+include ../lang-selector/index
+include ../search/index
+include ../duck-results/index
+
+block content
+    header.header
+      +lang-selector(selectLangPath)
+      nav
+        ul
+          li
+            form(method="post" action=signOutPath)
+              button= signOut
+      if(name)
+        h1
+            | #{hello}, #{name}!
+            h1
+      else
+        nav
+            ul
+            li
+                a(href=signUpPath)= signUp
+            li
+                a(href=signInPath)= signIn
+      +search(searchPath, search)
+      if (ducks)
+        +duck-results(ducks)
