@@ -1,20 +1,25 @@
 const express = require('express')
-
-const   {   Html, Header, DuckResults,
-            DuckDetail, Register, RegisterSuccess,
-            Login, FavButton
-        } = require('./components')
-
+const { Html, Header, DuckResults, DuckDetail, Register, RegisterSuccess, Login } = require('./components')
 const session = require('express-session')
-const { parseBody } = require('./utils')
 const logic = require('./logic')
-const literals = require('./literals')
+// const literals = require('./constants')
+const bodyParser = require('body-parser')
+
+const formBodyParser = bodyParser.urlencoded({ extended: false })
 
 const { argv: [, , port] } = process
 
 const app = express()
 
-const SEARCH = '/search', SIGN_IN = '/sign-in', SIGN_UP = '/sign-up', SIGN_OUT = '/sign-out'
+const {
+    HOME,
+    SEARCH,
+    SIGN_IN,
+    SIGN_UP,
+    SIGN_OUT,
+    DETAIL,
+    TOGGLE_FAV
+} = require('./constants')
 
 app.use(session({
     secret: 's3cr3t th1ng',
@@ -22,11 +27,11 @@ app.use(session({
     resave: true
 }))
 
-app.get('/', (req, res) => {
+app.get(HOME, (req, res) => {
     const { session: { userId, token, query } } = req
 
     // TODO make app multi-lang
-    req.session.lang = 'ca'
+    req.session.lang = 'es'
 
     try {
         if (userId && token)
@@ -41,32 +46,32 @@ app.get('/', (req, res) => {
 
 })
 
-app.get('/search', (req, res) => {
-    const { query: { q: query }, session: { userId, token } } = req
-    4
-    // session.query = query
-    if(!session.query || query) session.query = query
+app.get(SEARCH, (req, res) => {
+    const { query: { q: query }, session: { userId, token , lang } } = req
+
+    req.session.query = query
+    req.session.view = 'search'
 
     try {
         if (userId && token)
             Promise.all([
                 logic.retrieveUser(userId, token),
-                logic.searchDucks(userId,  token,  session.query)
+                logic.searchDucks(userId, token, query)
             ])
-                .then(([user, ducks]) => {
-                    res.send(Html(`${Header(user.name, query, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT)}${DuckResults(ducks)}`))
-                })
+                .then(([user, ducks]) => res.send(Html(`${Header(user.name, query, lang)}${DuckResults(ducks)}`)))
                 .catch(error => { throw error })
         else
-            logic.searchDucks(undefined, undefined, session.query)
-                .then(ducks => res.send(Html(`${Header(undefined, query, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT)}${DuckResults(ducks)}`)))
+            logic.searchDucks(undefined, undefined, query)
+                .then(ducks => res.send(Html(`${Header(undefined, query, lang)}${DuckResults(ducks)}`)))
     } catch (error) {
         throw error
     }
 })
 
-app.get('/ducks/:id', (req, res) => {
-    const { params: { id: duckId }, session: { userId, token, query } } = req
+app.get(`${DETAIL}/:id`, (req, res) => {
+    const { params: { id: duckId }, session: { userId, token, query ,lang } } = req
+
+    req.session.view = 'detail'
 
     try {
         if (userId && token)
@@ -84,55 +89,33 @@ app.get('/ducks/:id', (req, res) => {
     }
 })
 
-app.post("/onToggle" , parseBody , (request , response) => {
+app.get(SIGN_UP, (req, res) => {
+    const { session: { lang = 'en' } } = req
 
-    const { body: {duckId , pathname} , session: { userId, token } } = request
-
-    if(userId && token){
-        try{logic.toggleFavDuck(userId , token , duckId)
-            .then( () => response.redirect(pathname))
-            .catch( error => { throw error })
-        }
-        catch(error){throw error}
-        
-    } else response.redirect('/sign-in')
+    res.send(Html(Register(lang)))
 })
 
-app.get('/goToFavs' , (request , response) => {
-    const {session : {userId , token}} = request
-    Promise.all([
-        logic.retrieveUser(userId , token),
-        logic.retrieveFavDucks(userId , token)
-    ]).then( ([user , ducks]) => response.send(Html(`${Header(user.name, query, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT)}${DuckResults(ducks)}`)))
-})
-
-app.get('/sign-up', (req, res) => {
-    const { session: { lang = 'en' }} = req
-
-    res.send(Html(Register(literals[lang].signUp, '/sign-up')))
-})
-
-app.post('/sign-up', parseBody, (req, res) => {
+app.post(SIGN_UP, formBodyParser, (req, res) => {
     const { body } = req
 
     const { name, surname, email, password, repassword } = body
 
     try {
         logic.registerUser(name, surname, email, password, repassword)
-            .then(() => res.send(Html(RegisterSuccess('/sign-in'))))
+            .then(() => res.send(Html(RegisterSuccess(SIGN_IN))))
             .catch(error => { throw error })
     } catch (error) {
         throw error
     }
 })
 
-app.get('/sign-in', (req, res) => {
-    const { session: { lang = 'en' }} = req
+app.get(SIGN_IN, (req, res) => {
+    const { session: { lang = 'en' } } = req
 
-    res.send(Html(Login(literals[lang].signIn, '/sign-in')))
+    res.send(Html(Login(lang)))
 })
 
-app.post('/sign-in', parseBody, (req, res) => {
+app.post(SIGN_IN, formBodyParser, (req, res) => {
     const { body, session } = req
 
     const { email, password } = body
@@ -143,7 +126,7 @@ app.post('/sign-in', parseBody, (req, res) => {
                 session.userId = id
                 session.token = token
 
-                res.redirect('/')
+                res.redirect(HOME)
             })
             .catch(error => { throw error })
     } catch (error) {
@@ -151,13 +134,27 @@ app.post('/sign-in', parseBody, (req, res) => {
     }
 })
 
-app.post('/sign-out', (req, res) => {
+app.post(SIGN_OUT, (req, res) => {
     const { session } = req
 
     delete session.userId
     delete session.token
 
-    res.redirect('/')
+    res.redirect(HOME)
+})
+
+app.post(TOGGLE_FAV, formBodyParser, (req, res) => {
+    const { body: { id }, session: { userId, token, query, view } } = req
+
+    if (userId && token)
+        try {
+            logic.toggleFavDuck(userId, token, id)
+                .then(() => view === 'search' ? res.redirect(`${SEARCH}/?q=${query}`) : res.redirect(`${DETAIL}/${id}`))
+                .catch(error => { throw error })
+        } catch (error) {
+            throw error
+        }
+    else res.redirect(SIGN_IN)
 })
 
 app.listen(port)
