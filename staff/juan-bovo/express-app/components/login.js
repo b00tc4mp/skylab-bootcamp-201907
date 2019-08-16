@@ -5,5 +5,5 @@ module.exports = function(path) {
             <label>Password<input type="password" name="password" /></label>
             <button>Login</button>
         </form>
-        <a href="">Go back</a>`
+        <a href="/">Go back</a>`
 }

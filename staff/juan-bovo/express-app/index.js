@@ -1,6 +1,6 @@
 const express = require('express')
 const http = require('http')
-const { Html, Header, Search, DuckResults, DuckDetail, Register, RegisterSuccess, Login } = require('./components')
+const { Html, Header, Search, DuckResults, DuckDetail, Register, RegisterSuccess, Login, FavButton } = require('./components')
 const session = require('express-session')
 const { parseBody } = require('./utils')
 const logic = require('./logic')

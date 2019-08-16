@@ -8,7 +8,7 @@ function Register(path) {
             <label>Repeat password<input type="password" name="repassword" /></label>
             <button>Register</button>
         </form>
-        <a href="">Go back</a>`
+        <a href="/">Go back</a>`
 }
 
 module.exports = Register
