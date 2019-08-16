@@ -5,7 +5,12 @@ debugger
 function Header(name, query, searchPath, signInPath, signUpPath, signOutPath) {
     return `<header>
         ${name && `<nav>
-                <ul><li><form method="post" action="${signOutPath}"><button>Sign-Out</button></form></li></ul>
+                <ul>
+                    <li>
+                        <form method="post" action="${signOutPath}"><button>Sign-Out</button></form>
+                        <a href="/goToFavs">Favorites</a>
+                    </li>
+                </ul>
             </nav>
             <h1>Hello, ${name}!<h1>` || `<nav>
                 <ul>

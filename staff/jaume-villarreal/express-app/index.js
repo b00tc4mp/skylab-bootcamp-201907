@@ -43,11 +43,9 @@ app.get('/', (req, res) => {
 
 app.get('/search', (req, res) => {
     const { query: { q: query }, session: { userId, token } } = req
-    
+    4
     // session.query = query
     if(!session.query || query) session.query = query
-
-    console.log('QUERY',session.query ,'\nUSERID', userId , '\nTOKEN', token)
 
     try {
         if (userId && token)
@@ -56,7 +54,6 @@ app.get('/search', (req, res) => {
                 logic.searchDucks(userId,  token,  session.query)
             ])
                 .then(([user, ducks]) => {
-                    console.log('favorites' , user.favorites.length)
                     res.send(Html(`${Header(user.name, query, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT)}${DuckResults(ducks)}`))
                 })
                 .catch(error => { throw error })
@@ -89,15 +86,24 @@ app.get('/ducks/:id', (req, res) => {
 
 app.post("/onToggle" , parseBody , (request , response) => {
 
-    const { body: {duckId} , session: { userId, token } } = request
+    const { body: {duckId , pathname} , session: { userId, token } } = request
 
     if(userId && token){
-        logic.retrieveUser(userId , token)
-            .then( () => logic.toggleFavDuck(userId , token , duckId))
-            .then( () => response.redirect('/search'))
+        try{logic.toggleFavDuck(userId , token , duckId)
+            .then( () => response.redirect(pathname))
             .catch( error => { throw error })
+        }
+        catch(error){throw error}
+        
     } else response.redirect('/sign-in')
+})
 
+app.get('/goToFavs' , (request , response) => {
+    const {session : {userId , token}} = request
+    Promise.all([
+        logic.retrieveUser(userId , token),
+        logic.retrieveFavDucks(userId , token)
+    ]).then( ([user , ducks]) => response.send(Html(`${Header(user.name, query, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT)}${DuckResults(ducks)}`)))
 })
 
 app.get('/sign-up', (req, res) => {
