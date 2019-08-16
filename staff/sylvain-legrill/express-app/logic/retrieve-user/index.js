@@ -1,6 +1,6 @@
 const { validate, call } = require('../../utils')
 
-module.exports = function (id, token) {
+function retrieveUser(id, token) {
     validate.string(id, 'id')
     validate.string(token, 'token')
 
@@ -11,3 +11,5 @@ module.exports = function (id, token) {
             return response.data
         })
 }
+
+module.exports = retrieveUser
