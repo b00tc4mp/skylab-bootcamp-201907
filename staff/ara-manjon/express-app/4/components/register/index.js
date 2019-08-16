@@ -1,4 +1,8 @@
-function Register(title, name,surname, email, password, repassword, path) {
+const literals = require('./i18n')
+const { path } = require('./config')
+
+function Register(lang) {
+    const{title, password, surname, name, email, repassword, goBack} = literals[lang]
     return `<section>
         <h1>${title}</h1>
         <form method="post" action="${path}">
@@ -7,9 +11,9 @@ function Register(title, name,surname, email, password, repassword, path) {
             <label>${email}<input type="email" name="email" /></label>
             <label>${password}<input type="password" name="password"/></label>
             <label>${repassword}<input type="password" name="repassword" /></label>
-            <button>Register</button>
+            <button>${title}</button>
         </form>
-        <a href="">Go Back</a>
+        <a href="">${goBack}</a>
     </section>`
 }
 
