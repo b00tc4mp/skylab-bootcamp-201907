@@ -1,7 +1,7 @@
 const retrieveFavDucks = require('.')
 const { call } = require('../../utils')
 
-const { random } = Math
+    const { random } = Math
 
     describe('logic - retrieve favorite ducks', () => {
         let user, credentials
@@ -50,4 +50,6 @@ const { random } = Math
                     })
                 })
         )
+
+        // TODO test more cases
     })

@@ -1,7 +1,7 @@
 const retrieveUser = require('.')
 const { call } = require('../../utils')
 
-const { random } = Math
+    const { random } = Math
 
     describe('logic - retrieve user', () => {
         let user, credentials
@@ -49,3 +49,4 @@ const { random } = Math
         // TODO test more cases
     })
 
+    

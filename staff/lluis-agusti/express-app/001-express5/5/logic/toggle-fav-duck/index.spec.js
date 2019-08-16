@@ -1,7 +1,7 @@
 const toggleFavDuck = require('.')
 const { call } = require('../../utils')
 
-const { random } = Math
+    const { random } = Math
 
     describe('logic - toggle favorite duck', () => {
         const duckId = '5c3853aebd1bde8520e66e97'

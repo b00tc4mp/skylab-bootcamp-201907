@@ -8,15 +8,6 @@ module.exports = function (id, token) {
         .then(response => {
             if (response.status === 'KO') throw new Error(response.error)
 
-            const favorites = response.data.favorites
-
-            if (!favorites.length) return []
-
-            const calls = favorites.map(id =>
-                call(`http://duckling-api.herokuapp.com/api/ducks/${id}`, undefined, undefined, undefined)
-                    .then(duck => (duck.favorite = true) && duck)
-            )
-
-            return Promise.all(calls)
+            return response.data
         })
 }

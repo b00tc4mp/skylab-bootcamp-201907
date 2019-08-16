@@ -1,6 +1,6 @@
 const express = require('express')
 const http = require('http')
-const { Html, Header, Search, DuckResults, DuckDetail, Register, RegisterSuccess, Login } = require('./components')
+const { Html, Header, Search, DuckResults, DuckDetail, Register, RegisterSuccess, Login, HomeHeader, FavButton } = require('./components')
 const session = require('express-session')
 const { parseBody } = require('./utils')
 const logic = require('./logic')
@@ -12,37 +12,32 @@ const app = express()
 app.use(session({
     secret: 's3cr3t th1ng',
     saveUninitialized: true,
-    resave: true,
-    favorites: ["gjkh", "56746", "dfasd"]
+    resave: true
 }))
 
-
 app.get('/', (req, res) => {
-    res.send(Html(`${Header()}${Search()}`))
+    res.send(Html(`${Header(`${Search()}`)}`))
 })
-
 
 app.get('/search', (req, res) => {
     const { query: { q }, session: { userId, token } } = req
 
-    session.query = q
-
+    if(!session.query || q) session.query = q 
     try {
-        logic.searchDucks(userId, token, q)
-            .then(ducks => res.send(Html(`${Header()}${Search(q)}${DuckResults(ducks)}`)))
+        logic.searchDucks(userId, token,  session.query)
+            .then(ducks => res.send(Html(`${Search(q)}${DuckResults(ducks)}`)))
             .catch(error => { throw error })
     } catch (error) {
         throw error
     }
 })
 
-
 app.get('/ducks/:id', (req, res) => {
     const { params: { id: duckId }, session: { userId, token, query } } = req
 
     try {
         logic.retrieveDuck(userId, token, duckId)
-            .then(duck => res.send(Html(`${Header()}${Search(query)}${DuckDetail(duck)}`)))
+            .then(duck => res.send(Html(`${Header(`${Search(query)}`)}${DuckDetail(duck)}`)))
             .catch(error => { throw error })
     } catch (error) {
         throw error
@@ -50,7 +45,7 @@ app.get('/ducks/:id', (req, res) => {
 })
 
 app.get('/sign-up', (req, res) => {
-    res.send(Html(`${Header()}${Register('/sign-up')}`))
+    res.send(Html(Register('/sign-up')))
 })
 
 app.post('/sign-up', parseBody, (req, res) => {
@@ -60,7 +55,7 @@ app.post('/sign-up', parseBody, (req, res) => {
 
     try {
         logic.registerUser(name, surname, email, password, repassword)
-            .then(() => res.send(Html(`${Header()}${RegisterSuccess('/sign-in')}`)))
+            .then(() => res.send(Html(RegisterSuccess('/sign-in'))))
             .catch(error => { throw error })
     } catch (error) {
         throw error
@@ -68,7 +63,7 @@ app.post('/sign-up', parseBody, (req, res) => {
 })
 
 app.get('/sign-in', (req, res) => {
-    res.send(Html(`${Header()}${Login('/sign-in', '/')}`))
+    res.send(Html(Login('/sign-in')))
 })
 
 app.post('/sign-in', parseBody, (req, res) => {
@@ -81,7 +76,7 @@ app.post('/sign-in', parseBody, (req, res) => {
             .then(({ id, token }) => {
                 session.userId = id
                 session.token = token
-
+                
                 res.redirect('/home')
             })
             .catch(error => { throw error })
@@ -91,7 +86,32 @@ app.post('/sign-in', parseBody, (req, res) => {
 })
 
 app.get('/home', (req, res) => {
-    res.send(Html(`${Header()}${'hola mundo!'}`))
+    const { session: {userId, token} } = req
+    logic.retrieveUser(userId, token)
+        .then(response => res.send(Html(`${HomeHeader(response.name)}${Search()}`)))
+}) 
+
+app.get("/goToLanding", (req, res) =>{
+    res.send(Html(`${Header(`${Search()}`)}`))
 })
+
+ app.post("/onToggle", parseBody, (req, res) =>{
+    const { body: {duckId}, session: { userId, token } } = req
+
+        if (userId && token) 
+            logic.retrieveUser(userId, token)
+                .then(() => logic.toggleFavDuck(userId, token, duckId))
+                .then(() => res.redirect("/search"))
+                .catch((error) => console.log(error))
+        
+        else res.redirect("/sign-in")
+    })
+
+
+// credentials ? logic.toggleFavDuck(id, token, duckId)
+//.then(() => handleRetrieveDuck(duckId))
+//.catch(({ message }) => this.setState({ error: message })) :
+//onLogin()
+
 
 app.listen(port)

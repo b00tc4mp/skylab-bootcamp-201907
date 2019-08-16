@@ -3,7 +3,8 @@ module.exports = {
     authenticateUser: require('./authenticate-user'),
     searchDucks: require('./search-ducks'),
     retrieveDuck: require('./retrieve-duck'),
-    retrieveFavDucks: require("./retrieve-fav-ducks"),
-    retrieveUser: require("./retrieve-user"),
-    toggleFavDuck: require("./toggle-fav-duck")
+    retrieveFavDucks: require('./retrieve-fav-ducks'),
+    retrieveUser: require('./retrieve-user'),
+    toggleFavDuck: require('./toggle-fav-duck'),
+    literals = require('../literals.js')
 }
