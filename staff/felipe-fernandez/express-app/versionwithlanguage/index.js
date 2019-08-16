@@ -1,15 +1,25 @@
 const express = require('express')
-const { Html, Header, DuckResults, DuckDetail, Register, RegisterSuccess, Login } = require('./components')
+const { Html, Header, DuckResults, DuckDetail, Register, RegisterSuccess, Login, LanguageSelector } = require('./components')
 const session = require('express-session')
-const { parseBody } = require('./utils')
 const logic = require('./logic')
-const literals = require('./literals')
+const literals = require('./constants')
+const bodyParser = require('body-parser')
+
+const formBodyParser = bodyParser.urlencoded({ extended: false })
 
 const { argv: [, , port] } = process
 
 const app = express()
 
-const SEARCH = '/search', SIGN_IN = '/sign-in', SIGN_UP = '/sign-up', SIGN_OUT = '/sign-out'
+const {
+    HOME,
+    SEARCH,
+    SIGN_IN,
+    SIGN_UP,
+    SIGN_OUT,
+    DETAIL,
+    TOGGLE_FAV
+} = require('./constants')
 
 app.use(session({
     secret: 's3cr3t th1ng',
@@ -17,12 +27,12 @@ app.use(session({
     resave: true
 }))
 
-app.get('/', (req, res) => {
+app.get(HOME, (req, res) => {
     const { session: { userId, token, query } } = req
 
     // TODO make app multi-lang
-    req.session.lang = 'fr'
-
+    
+    req.session.view = 'home'
     try {
         if (userId && token)
             logic.retrieveUser(userId, token)
@@ -36,10 +46,11 @@ app.get('/', (req, res) => {
 
 })
 
-app.get('/search', (req, res) => {
+app.get(SEARCH, (req, res) => {
     const { query: { q: query }, session: { userId, token } } = req
 
-    session.query = query
+    req.session.query = query
+    req.session.view = 'search'
 
     try {
         if (userId && token)
@@ -57,8 +68,10 @@ app.get('/search', (req, res) => {
     }
 })
 
-app.get('/ducks/:id', (req, res) => {
+app.get(`${DETAIL}/:id`, (req, res) => {
     const { params: { id: duckId }, session: { userId, token, query } } = req
+
+    req.session.view = 'detail'
 
     try {
         if (userId && token)
@@ -76,34 +89,37 @@ app.get('/ducks/:id', (req, res) => {
     }
 })
 
-app.get('/sign-up', (req, res) => {
-    const { session: { lang = 'en' }} = req
+app.get(SIGN_UP, (req, res) => {
+    const { session: { lang = 'en' } } = req
 
-    res.send(Html(Register(literals[lang].signUp, '/sign-up')))
+    res.send(Html(Register(lang)))
 })
 
-app.post('/sign-up', parseBody, (req, res) => {
-    const { body } = req
+app.post(SIGN_UP, formBodyParser, (req, res) => {
+    const { body, session } = req
+    req.session.view = 'register'
 
     const { name, surname, email, password, repassword } = body
 
     try {
         logic.registerUser(name, surname, email, password, repassword)
-            .then(() => res.send(Html(RegisterSuccess('/sign-in'))))
+            .then(() => res.send(Html(RegisterSuccess(SIGN_IN))))
             .catch(error => { throw error })
     } catch (error) {
         throw error
     }
 })
 
-app.get('/sign-in', (req, res) => {
-    const { session: { lang = 'en' }} = req
-
-    res.send(Html(Login(literals[lang].signIn, '/sign-in')))
+app.get(SIGN_IN, (req, res) => {
+    const { session: { lang = 'en' } } = req
+    req.session.view = 'login'
+    res.send(Html(`${LanguageSelector()}${Login(lang)}`))
 })
 
-app.post('/sign-in', parseBody, (req, res) => {
+app.post(SIGN_IN, formBodyParser, (req, res) => {
     const { body, session } = req
+    
+    
 
     const { email, password } = body
 
@@ -113,7 +129,7 @@ app.post('/sign-in', parseBody, (req, res) => {
                 session.userId = id
                 session.token = token
 
-                res.redirect('/')
+                res.redirect(HOME)
             })
             .catch(error => { throw error })
     } catch (error) {
@@ -121,13 +137,50 @@ app.post('/sign-in', parseBody, (req, res) => {
     }
 })
 
-app.post('/sign-out', (req, res) => {
+app.post(SIGN_OUT, (req, res) => {
     const { session } = req
 
     delete session.userId
     delete session.token
 
-    res.redirect('/')
+    res.redirect(HOME)
 })
+
+app.post(TOGGLE_FAV, formBodyParser, (req, res) => {
+    const { body: { id }, session: { userId, token, query, view } } = req
+
+    if (userId && token)
+        try {
+            logic.toggleFavDuck(userId, token, id)
+                .then(() => view === 'search' ? res.redirect(`${SEARCH}/?q=${query}`) : res.redirect(`${DETAIL}/${id}`))
+                .catch(error => { throw error })
+        } catch (error) {
+            throw error
+        }
+    else res.redirect(SIGN_IN)
+})
+
+app.post('/language-selector',formBodyParser, (req, res)=>{
+
+    const { body : { language } } = req
+    const { session: { view } } = req
+    let {session: {lang}} =req
+
+debugger
+
+    if (view==='login' && language==='english') {
+        lang='en'
+        res.send(Html(Login(lang)))
+    } else if (view==='login' && language==='espaniol'){
+        lang='es'
+        res.send(Html(Login(lang)))
+    }else if (view==='login' && language==='catala'){
+        lang='ca'
+        res.send(Html(Login(lang)))
+    }
+
+    
+})
+
 
 app.listen(port)

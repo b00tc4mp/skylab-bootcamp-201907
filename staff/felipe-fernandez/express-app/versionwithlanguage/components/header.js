@@ -1,9 +1,9 @@
 const Search = require('./search')
-
-debugger
+const LanguageSelector = require('./language-selector')
 
 function Header(name, query, searchPath, signInPath, signUpPath, signOutPath) {
     return `<header>
+        ${LanguageSelector()}
         ${name && `<nav>
                 <ul><li><form method="post" action="${signOutPath}"><button>Sign-Out</button></form></li></ul>
             </nav>
@@ -14,6 +14,8 @@ function Header(name, query, searchPath, signInPath, signUpPath, signOutPath) {
                 </ul>
             </nav>`}
         ${Search(query, searchPath)}
+        
+        
     </header>`
 }
 
