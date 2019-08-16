@@ -1,4 +1,4 @@
-function DuckDetail({ title, imageUrl, price, description, link }) {
+function DuckDetail({ title, imageUrl, price, description, link, onBackPath }) {
     return `<article>
         <h3>${title}</h3>
         <img src="${imageUrl}">
@@ -6,7 +6,9 @@ function DuckDetail({ title, imageUrl, price, description, link }) {
         <p>${description}</p>
         <a href="${link}" target="_blank">Go to store</a>
     </article>
-    <a href="">Go back</a>`
+    <nav>
+    <ul><li><form method="post" action="${onBackPath}"><button>Go back</button></form></li></ul>
+    </nav>`
 }
 
 module.exports = DuckDetail

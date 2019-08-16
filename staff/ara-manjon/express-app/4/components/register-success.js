@@ -1,5 +1,5 @@
-module.exports = function() {
+module.exports = function(path) {
     return `<p>
-        User successfully registered, you can now proceed to <a href="/login">Login</a>.
+        User successfully registered, you can now proceed to <a href="${path}">Login</a>.
     </p>`
 }
