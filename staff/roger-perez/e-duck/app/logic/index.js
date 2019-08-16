@@ -4,183 +4,194 @@
  * Business Logic
  */
 
-const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+const logic = (() => {
+    const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
-const logic = {
-    register(name, surname, email, password) {
-        let errors = ''
+    return {
+        registerUser(name, surname, username, password, repassword, expression) {
+            if (typeof name !== 'string') throw TypeError(`${name} is not a string`)
+            if (!name.trim()) throw new Error('name is empty or blank')
 
-        if (!name.trim()) {
-            errors += 'Name is empty or blank.'
-        }
+            if (typeof surname !== 'string') throw TypeError(`${surname} is not a string`)
+            if (!surname.trim()) throw new Error('surname is empty or blank')
 
-        if (!surname.trim()) {
-            if (errors) errors += '\n'
+            if (typeof username !== 'string') throw TypeError(`${username} is not a string`)
+            if (!username.trim()) throw new Error('e-mail is empty or blank')
+            if (!EMAIL_REGEX.test(username)) throw new Error('e-mail is not valid')
 
-            errors += 'Surname is empty or blank.'
-        }
+            if (typeof password !== 'string') throw TypeError(`${password} is not a string`)
+            if (!password.trim()) throw new Error('password is empty or blank')
 
-        if (!email.trim()) {
-            if (errors) errors += '\n'
+            if (typeof repassword !== 'string') throw TypeError(`${repassword} is not a string`)
+            if (!repassword.trim()) throw new Error('password repeat is empty or blank')
 
-            errors += 'E-mail is empty or blank.'
-        } else if (!EMAIL_REGEX.test(email)) {
-            if (errors) errors += '\n'
+            if (password !== repassword) throw new Error('passwords do not match')
 
-            errors += 'E-mail is not valid.'
-        }
+            call('https://skylabcoders.herokuapp.com/api/user', 'post',
+                { 'content-type': 'application/json' },
+                { name, surname, username, password },
+                (error, response) => {
+                    if (error) expression(error)
+                    else if (response.status === 'KO') expression(new Error(response.error))
+                    else expression()
+                }
+            )
+        },
 
-        if (!password.trim()) {
-            if (errors) errors += '\n'
+        authenticateUser(username, password) {
+            if (typeof username !== 'string') throw TypeError(`${username} is not a string`)
+            if (!username.trim()) throw new Error('e-mail is empty or blank')
+            if (!EMAIL_REGEX.test(username)) throw new Error('e-mail is not valid')
 
-            errors += 'Password is empty or blank.\n'
-        }
+            if (typeof password !== 'string') throw TypeError(`${password} is not a string`)
+            if (!password.trim()) throw new Error('password is empty or blank')
 
-        if (errors)
-            throw new Error(errors)
-        else {
             const user = users.find(function (user) {
-                return user.email === email
+                return user.username === username && user.password === password
             })
 
-            if (user) throw new Error('E-mail is already registered.')
+            if (!user) throw new Error('wrong credentials')
+        },
 
-            users.push({
-                name: name,
-                surname: surname,
-                email: email,
-                password: password,
-                favorites: new Array
+        retrieveUser(username) {
+            if (typeof username !== 'string') throw TypeError(`${username} is not a string`)
+            if (!username.trim()) throw new Error('e-mail is empty or blank')
+            if (!EMAIL_REGEX.test(username)) throw new Error('e-mail is not valid')
+
+            const user = users.find(function (user) {
+                return user.username === username
             })
-        }
-    },
 
-    authenticate(email, password) {
-        let errors = ''
+            if (!user) throw new Error(`user with e-mail ${username} not found`)
 
-        if (!email.trim()) {
-            errors += 'E-mail is empty or blank.'
-        } else if (!EMAIL_REGEX.test(email)) {
-            errors += 'E-mail is not valid.'
-        }
+            const { name, surname, username: _username } = user
 
-        if (!password.trim()) {
-            if (errors) errors += '\n'
+            return { name, surname, username: _username }
+        },
 
-            errors += 'Password is empty or blank.\n'
-        }
+        searchDucks(username, query, expression) {
+            let favorites
 
-        if (errors) throw new Error(errors)
+            if (typeof username !== 'undefined') {
+                if (typeof username !== 'string') throw new TypeError(`${username} is not a string`)
+                if (!username.trim()) throw new Error('e-mail is empty or blank')
+                if (!EMAIL_REGEX.test(username)) throw new Error('e-mail is not valid')
 
-        const user = users.find(function (user) {
-            return user.email === email && user.password === password
-        })
+                const user = users.find(user => user.username === username)
 
-        if (!user) throw new Error('Wrong credentials.')
-    },
+                if (!user) throw new Error(`user with e-mail ${username} not found`)
 
-    searchDucks(query, expression) {
-        if (typeof query !== 'string') throw new TypeError(`${query} is not a string`)
+                favorites = user.favorites
+            }
 
-        if (typeof expression !== 'function') throw TypeError(`${expression} is not a function`)
+            if (typeof query !== 'string') throw new TypeError(`${query} is not a string`)
 
-        call('http://duckling-api.herokuapp.com/api/search?q=' + query, (error, result) => {
-            if (error) {
-                if (error.status < 500)
-                    expression(undefined, [])
-                else
-                    expression(new Error(`fail search with criteria ${query}`))
-            } else
-                expression(undefined, result)
-        })
-    },
+            if (typeof expression !== 'function') throw TypeError(`${expression} is not a function`)
 
-    retrieveDuck(id, expression) {
-        // TODO validate id, expression
+            call('http://duckling-api.herokuapp.com/api/search?q=' + query, (error, ducks) => {
+                if (error) {
+                    if (error.status < 500)
+                        expression(undefined, [])
+                    else
+                        expression(new Error(`fail search with criteria ${query}`))
+                } else {
+                    favorites && ducks.forEach(duck => duck.favorite = favorites.includes(duck.id))
 
-        call('http://duckling-api.herokuapp.com/api/ducks/' + id, (error, result) => {
-            if (error)
-                expression(new Error(`cannot retrieve duck with id ${id}`))
-            else
-                expression(undefined, result)
-        })
-    },
+                    expression(undefined, ducks)
+                }
+            })
+        },
 
-    addDuckToFavorites(email, id, expression) {
-        // TODO validate args (type and content, where it applies)
+        retrieveDuck(username, id, expression) {
+            let favorites
 
-        const user = users.find(user => user.email === email)
+            if (typeof username !== 'undefined') {
+                if (typeof username !== 'string') throw new TypeError(`${username} is not a string`)
+                if (!username.trim()) throw new Error('e-mail is empty or blank')
+                if (!EMAIL_REGEX.test(username)) throw new Error('e-mail is not valid')
 
-        if (!user) throw Error(`user with email ${email} not found`)
+                const user = users.find(user => user.username === username)
 
-        call('http://duckling-api.herokuapp.com/api/ducks/' + id, (error, result) => {
-            if (error)
-                expression(new Error(`cannot retrieve duck with id ${id}`))
-            else {
-                // TODO do not add fav if already exists
-                user.favorites.push(id)
+                if (!user) throw new Error(`user with e-mail ${username} not found`)
+
+                favorites = user.favorites
+            }
+
+            if (typeof id !== 'string') throw new TypeError(`${id} is not a string`)
+            if (!id.trim()) throw new Error('id is empty or blank')
+
+            if (typeof expression !== 'function') throw TypeError(`${expression} is not a function`)
+
+            call('http://duckling-api.herokuapp.com/api/ducks/' + id, (error, duck) => {
+                if (error)
+                    expression(new Error(`cannot retrieve duck with id ${id}`))
+                else {
+                    favorites && (duck.favorite = favorites.includes(id))
+
+                    expression(undefined, duck)
+                }
+            })
+        },
+
+        toggleFavDuck(username, id, expression) {
+            // TODO validate args (type and content, where it applies)
+
+            const user = users.find(user => user.username === username)
+
+            if (!user) throw Error(`user with username ${username} not found`)
+
+            const { favorites } = user
+
+            const index = favorites.findIndex(favorite => favorite === id)
+
+            if (index > -1) {
+                favorites.splice(index, 1)
 
                 expression()
-            }
-        })
-    },
+            } else
+                call('http://duckling-api.herokuapp.com/api/ducks/' + id, error => {
+                    if (error)
+                        expression(new Error(`cannot retrieve duck with id ${id}`))
+                    else {
+                        favorites.push(id)
 
-    removeDuckFromFavorites(email, id) {
-        // TODO validate args
-
-        const user = users.find(user => user.email === email)
-
-        if (!user) throw Error(`user with email ${email} not found`)
-
-        const { favorites } = user
-
-        // const _favorites = new Curray
-
-        // favorites.forEach(favorite => {
-        //     favorite !== id && _favorites.push(favorite)
-        // })
-
-        // user.favorites = _favorites
-
-        // NOW switching to Array
-
-        const index = favorites.findIndex(favorite => favorite === id)
-
-        favorites.splice(index, 1)
-    },
-
-    retrieveFavoriteDucks(email, expression) {
-        // TODO valide args
-
-        const user = users.find(user => user.email === email)
-
-        if (!user) throw Error(`user with email ${email} not found`)
-
-        const { favorites } = user
-
-        if (!favorites.length) expression([])
-        else {
-            let count = 0
-            const ducks = []
-            let _error
-
-            favorites.forEach(id => {
-                call('http://duckling-api.herokuapp.com/api/ducks/' + id, (error, duck) => {
-                    if (error) {
-                        if (!_error) _error = error
-                    } else {
-                        ducks.push(duck)
-                    }
-                
-                    count++
-
-                    if (count === favorites.length) {
-                        if (_error) expression(_error)
-                        else expression(undefined, ducks)
+                        expression()
                     }
                 })
-            })
-        }
+        },
 
+        retrieveFavoriteDucks(username, expression) {
+            // TODO valide args
+
+            const user = users.find(user => user.username === username)
+
+            if (!user) throw Error(`user with username ${username} not found`)
+
+            const { favorites } = user
+
+            if (!favorites.length) expression([])
+            else {
+                let count = 0
+                const ducks = []
+                let _error
+
+                favorites.forEach(id => {
+                    call('http://duckling-api.herokuapp.com/api/ducks/' + id, (error, duck) => {
+                        if (error) {
+                            if (!_error) _error = error
+                        } else {
+                            ducks.push(duck)
+                        }
+
+                        count++
+
+                        if (count === favorites.length) {
+                            if (_error) expression(_error)
+                            else expression(undefined, ducks)
+                        }
+                    })
+                })
+            }
+        }
     }
-}
+})()
