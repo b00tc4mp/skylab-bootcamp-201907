@@ -1,0 +1,83 @@
+$primary-bg-color: rgba(0, 0, 0, 0.5)
+$secondary-bg-color: rgba(255, 255, 255, 0.3)
+$terciary-bg-color: rgba(0, 0, 0, 0.1)
+
+$button-bg-color: #45b39c
+$error-bg-color: rgba(100, 0, 0, .65)
+
+$primary-text-color: black
+$secondary-text-color: white
+
+$link-text-color: grey
+$hover-text-color: deeppink
+
+    
+%main-content-box 
+    margin: 2em auto auto auto
+    padding: 30px
+    height: 95%
+    text-align: center
+
+%link
+    color: $link-text-color
+    text-decoration: none  
+
+%text-input
+    width: 100%
+    border: none
+    outline: none
+    padding: 15px 
+    font-size: 18px
+
+%button
+    background-color: $button-bg-color
+    color: $secondary-text-color
+    border: none
+    padding: 15px
+    font-size: 16px
+    height: 50px
+    width: 50px
+
+        
+@mixin header-footer-style
+    background-color: $primary-bg-color
+    color: $secondary-text-color
+    padding: 2em
+    text-align: center
+
+.body
+    background: linear-gradient(-45deg, #1CFF1B,#FF5128, #9422E8, #1EC0FF)
+    background-size: 400% 400%
+    animation: Gradient 15s ease infinite
+    padding: 0
+    font-family: "Cousine", sans-serif
+    font-size: 1.2rem
+    @keyframes Gradient
+        0%
+            background-position: 0% 50%
+        50% 
+            background-position: 100% 50%
+        100% 
+            background-position: 0% 50%
+    &__header
+        @include header-footer-style
+        font-family: Bungee
+        font-size: 2rem
+        padding: 1em 0 3em 0
+    
+    &__header-title1
+        text-decoration: none
+        color: $secondary-text-color
+
+    &__header-title2
+        font-size: 1.2rem
+
+    &__main
+        margin-top: 3em
+        min-height: 100vh
+
+    &__footer
+        @include header-footer-style
+
+        width: 100%
+        font-size: 0.575em

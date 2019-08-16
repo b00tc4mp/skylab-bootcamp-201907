@@ -1,0 +1,55 @@
+.random
+    background-color: $primary-bg-color
+    margin-top: 1em
+    padding: 1em
+    &__title1
+        color: white
+        text-align: center
+
+    &__title2
+        color: white
+        text-align: left
+        padding-bottom: 1em
+        font-family: Bungee
+        font-size: 10px
+
+    &__tv-icon, &__tv-remote
+        min-width: 10%
+        max-width: 50%
+        margin: .5em auto 1em auto
+        padding: .5em
+        border: 2px solid white
+
+    &__tv-icon:hover, &__tv-remote:hover
+        background-color: white
+
+    &__detail
+        background-color: $primary-bg-color
+        margin-top: 1em
+        padding: 1em
+        display: flex
+        flex-direction: column
+
+    &__detail-title
+        color: white
+
+    &__group
+        background-color: black
+        color: white
+        margin: 1em auto auto auto
+        padding: 2em
+
+    &__gif-title
+        font-size: 33px
+        margin-bottom: .75em
+
+    &__photo
+        width: 100%
+
+    &__back
+        @extend %link
+        color: white
+        font-size: 13px
+
+    &__back:hover
+        color: $hover-text-color
