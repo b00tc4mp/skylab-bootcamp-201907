@@ -1,5 +1,5 @@
 const express = require('express')
-const { Html, Header, DuckResults, DuckDetail, Register, RegisterSuccess, Login } = require('./components')
+const { Html, Home, DuckDetail, Register, RegisterSuccess, Login } = require('./components')
 const session = require('express-session')
 const logic = require('./logic')
 const bodyParser = require('body-parser')
@@ -19,6 +19,9 @@ const formBodyParser = bodyParser.urlencoded({ extended: true })
 const { argv: [, , port] } = process
 
 const app = express()
+
+app.set('view engine', 'pug')
+app.set('views', 'components');
 
 app.use(express.static('public'))
 
@@ -46,10 +49,14 @@ app.get(HOME, (req, res) => {
     try {
         if (userId && token)
             logic.retrieveUser(userId, token)
-                .then(user => res.send(Html(Header(user.name, query, lang))))
+                .then(user =>
+                    // res.send(Html(Home(user.name, query, lang)))
+                    Home(user.name, query, lang, undefined, res)
+                )
                 .catch(error => { throw error })
         else
-            res.send(Html(Header(undefined, query, lang)))
+            // res.send(Html(Home(undefined, query, lang)))
+            Home(undefined, query, lang, undefined, res)
     } catch (error) {
         throw error
     }
@@ -70,11 +77,17 @@ app.get(SEARCH, (req, res) => {
                 logic.retrieveUser(userId, token),
                 logic.searchDucks(userId, token, query)
             ])
-                .then(([user, ducks]) => res.send(Html(`${Header(user.name, query, lang)}${DuckResults(ducks)}`)))
+                .then(([user, ducks]) =>
+                    //res.send(Html(`${Home(user.name, query, lang)}${DuckResults(ducks)}`))
+                    Home(user.name, query, lang, ducks, res)
+                )
                 .catch(error => { throw error })
         else
             logic.searchDucks(undefined, undefined, query)
-                .then(ducks => res.send(Html(`${Header(undefined, query, lang)}${DuckResults(ducks)}`)))
+                .then(ducks =>
+                    // res.send(Html(`${Home(undefined, query, lang)}${DuckResults(ducks)}`))
+                    Home(undefined, query, lang, ducks, res)
+                )
     } catch (error) {
         throw error
     }
@@ -93,11 +106,11 @@ app.get(`${DETAIL}/:id`, (req, res) => {
                 logic.retrieveUser(userId, token),
                 logic.retrieveDuck(userId, token, duckId)
             ])
-                .then(([user, duck]) => res.send(Html(`${Header(user.name, query, lang)}${DuckDetail(duck)}`)))
+                .then(([user, duck]) => res.send(Html(`${Home(user.name, query, lang)}${DuckDetail(duck)}`)))
                 .catch(error => { throw error })
         else
             logic.retrieveDuck(undefined, undefined, duckId)
-                .then(duck => res.send(Html(`${Header(undefined, query, lang)}${DuckDetail(duck)}`)))
+                .then(duck => res.send(Html(`${Home(undefined, query, lang)}${DuckDetail(duck)}`)))
     } catch (error) {
         throw error
     }
@@ -110,7 +123,8 @@ app.get(SIGN_UP, (req, res) => {
 
     const { lang } = session
 
-    res.send(Html(Register(lang)))
+    //res.send(Html(Register(lang)))
+    Register(lang, res)
 })
 
 app.post(SIGN_UP, formBodyParser, (req, res) => {
@@ -134,7 +148,8 @@ app.get(SIGN_IN, (req, res) => {
 
     const { lang } = session
 
-    res.send(Html(Login(lang)))
+    //res.send(Html(Login(lang)))
+    Login(lang, res)
 })
 
 app.post(SIGN_IN, formBodyParser, (req, res) => {
