@@ -7,5 +7,5 @@ module.exports = {
     Register: require('./register'),
     Login: require('./login'),
     RegisterSuccess: require('./register-success'),
-    Home: require('./home')
+    FavButton: require('./fav-button')
 }
