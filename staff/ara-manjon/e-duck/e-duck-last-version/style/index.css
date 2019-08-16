@@ -1,0 +1,30 @@
+* {
+  padding: 10px;
+  margin: 10px;
+}
+
+.feedback--error {
+  color: red;
+}
+.feedback--warn {
+  background-color: yellow;
+}
+.feedback--success {
+  color: green;
+}
+
+.modal {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(10, 10, 10, 0.3);
+  z-index: 1;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+.modal > main {
+  background-color: white;
+  text-align: center;
+}
+
+/*# sourceMappingURL=index.css.map */
