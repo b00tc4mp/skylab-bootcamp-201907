@@ -1,45 +1,23 @@
-// TEST curl http://localhost:8080/api/parsetime?iso=2013-08-10T12:10:15.474Z 
-
 const http = require('http')
-const url = require('url')
-
-const { argv: [, , port] } = process
-
-const server = http.createServer((req, res) => {
-    const { pathname, query: { iso } } = url.parse(req.url, true)
-
-    const date = new Date(iso)
-    let output, json
-
-    switch (pathname) {
-        case '/api/parsetime':
-            const hour = date.getHours()
-            const minute = date.getMinutes()
-            const second = date.getSeconds()
-
-            output = { hour, minute, second }
-
-            json = JSON.stringify(output)
-
-            res.writeHead(200, {
-                'Content-Type': 'application/json',
-            })
-
-            res.end(json)
-
-            break
-
-        case '/api/unixtime':
-            const unixtime = date.getTime()
-
-            output = { unixtime }
-
-            json = JSON.stringify(output)
-
-            res.writeHead(200, { 'Content-Type': 'application/json' })
-
-            res.end(json)
+let url = require('url')
+const { argv : [ , , port] } = process
+const server = http.createServer((request , response) => {
+    response.writeHead(200 , {'content-type' : 'application/json'})
+    //parse URL => acces to URL Object properties
+    const parsedURL = url.parse(request.url , true)
+    // retrieve API's endpoints
+    const path = parsedURL.pathname
+    // retrieve date from URL's Query Object => property 'iso'
+    const date = new Date(parsedURL.query.iso)
+    let output = ''
+    if(path === '/api/parsetime'){
+        output = {
+            hour : date.getHours(),
+            minute : date.getMinutes(),
+            second : date.getSeconds()
+        }
+    }else if(path==='/api/unixtime'){
+        output = { unixtime : date.getTime() }
     }
-})
-
-server.listen(port)  
+    response.end(JSON.stringify(output))
+}).listen(port)
