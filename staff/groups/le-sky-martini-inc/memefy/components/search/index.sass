@@ -1,0 +1,48 @@
+.search
+    margin: 1em auto auto auto
+    padding: 1.5em
+    &__bar
+        background-color: $primary-bg-color
+        margin: 0
+        padding: 1.5em
+
+    &__title
+        color: white
+        text-align: left
+        padding-bottom: 1em
+
+    &__form
+        display: flex 
+        justify-content: space-between
+        margin-bottom: 1em
+
+    &__label
+        display: none
+
+    &__input
+        @extend %text-input
+        text-align: center
+        font-size: 13px
+
+    &__button
+        @extend %button
+        margin-left: 1em
+        background: linear-gradient(-45deg, #FF5128, #9422E8, #1EC0FF)
+        background-size: 400% 400%
+        animation: Gradient 15s ease infinite
+        @keyframes Gradient
+            0%
+                background-position: 0% 50%
+            50% 
+                background-position: 100% 50%
+            100% 
+                background-position: 0% 50%
+
+    &__favorite-title
+        background-color: $primary-bg-color
+        margin: 0
+        padding: 1.5em
+        color: white
+        text-align: center
+
+        

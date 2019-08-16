@@ -1,0 +1,18 @@
+.spinner:before
+  content:""
+  box-sizing: border-box
+  position: absolute
+  top: 70%
+  left: 50%
+  height: 80px
+  width: 80px
+  margin-top: -30px
+  margin-left: -30px
+  border-radius: 50%
+  border-top:10px solid #009ee2
+  border-right:7px solid transparent
+  animation: spinner 0.4s linear infinite
+
+@keyframes spinner
+  to
+    transform: rotate(360deg)
