@@ -25,7 +25,7 @@ app.get('/search', (req, res) => {
     if(!session.query || q) session.query = q 
     try {
         logic.searchDucks(userId, token,  session.query)
-            .then(ducks => res.send(Html(`${Search(q)}${DuckResults(ducks)}`)))
+            .then(ducks => res.send(Html(`${HomeHeader()}${Search(q)}${DuckResults(ducks)}`)))
             .catch(error => { throw error })
     } catch (error) {
         throw error
@@ -96,22 +96,23 @@ app.get("/goToLanding", (req, res) =>{
 })
 
  app.post("/onToggle", parseBody, (req, res) =>{
-    const { body: {duckId}, session: { userId, token } } = req
+    const { body: {duckId, path}, session: { userId, token } } = req
 
         if (userId && token) 
-            logic.retrieveUser(userId, token)
-                .then(() => logic.toggleFavDuck(userId, token, duckId))
-                .then(() => res.redirect("/search"))
+            logic.toggleFavDuck(userId, token, duckId)
+                .then(() => res.redirect(path))
                 .catch((error) => console.log(error))
         
         else res.redirect("/sign-in")
     })
+app.get("/goToFav", (req, res)=>{
+    const { session: { userId, token} } = req
 
-
-// credentials ? logic.toggleFavDuck(id, token, duckId)
-//.then(() => handleRetrieveDuck(duckId))
-//.catch(({ message }) => this.setState({ error: message })) :
-//onLogin()
-
+    Promise.all ([
+        logic.retrieveUser(userId, token),
+        logic.retrieveFavDucks(userId, token)
+    ])
+            .then(([response, ducks]) => res.send(Html(`${HomeHeader(response.name)}${Search()}${DuckResults(ducks)}`)))
+})
 
 app.listen(port)
