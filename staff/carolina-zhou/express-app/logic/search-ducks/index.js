@@ -1,4 +1,7 @@
-logic.searchDucks = function (id, token, query) {
+// search-ducks
+const { validate, call } = require('../../utils')
+
+module.exports = function(id, token, query) {
     let favorites
 
     if (id != undefined && token != undefined) {

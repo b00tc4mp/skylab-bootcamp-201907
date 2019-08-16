@@ -1,0 +1,21 @@
+{
+  "name": "express-app",
+  "version": "1.0.0",
+  "description": "my super express app",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "jasmine": "^3.4.0"
+  },
+  "scripts": {
+    "start": "node . 8080",
+    "debug": "node debug . 8080",
+    "test": "npx jasmine logic/**/*.spec.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

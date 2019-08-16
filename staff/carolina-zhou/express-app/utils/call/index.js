@@ -1,6 +1,5 @@
-const fetch = require('node-fetch')
 const validate = require('../validate')
-
+const fetch = require('node-fetch')
 
 function call(url, method = 'get', headers, body) {
     validate.string(url, 'url')
@@ -10,7 +9,7 @@ function call(url, method = 'get', headers, body) {
     return fetch(url, {
         method,
         headers,
-        body: JSON.stringify(body)
+        body: JSON.stringify(body) // The JSON.stringify() method converts a JavaScript object or value to a JSON string.
     })
         .then(res => res.json())
 }
