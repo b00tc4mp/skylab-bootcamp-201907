@@ -12,6 +12,8 @@
     "jasmine": "^3.4.0"
   },
   "scripts": {
+    "start": "node . 8080",
+    "debug": "node debug . 8080",
     "test": "npx jasmine logic/**/*.spec.js"
   },
   "author": "",

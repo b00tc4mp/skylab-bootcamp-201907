@@ -1,5 +1,5 @@
-function Register(path) {
-    return `<h1>Register</h1>
+function Register(title, path) {
+    return `<h1>${title}</h1>
         <form method="post" action="${path}">
             <label>Name<input type="text" name="name" /></label>
             <label>Surname<input type="text" name="surname" /></label>

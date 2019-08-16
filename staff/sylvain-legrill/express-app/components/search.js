@@ -1,5 +1,5 @@
-function Search(query) {
-    return `<form action="/search">
+function Search(query, path) {
+    return `<form action="${path}">
         <input type="text" name="q" value="${query || ''}">
         <button>Search</button>
     </form>`
