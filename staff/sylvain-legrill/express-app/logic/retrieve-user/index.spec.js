@@ -1,39 +1,49 @@
-const { validate, call } = require('../../utils')
+{
+    const { random } = Math
 
-module.exports = function(id, token, query) {
-    let favorites
+    describe('logic - retrieve user', () => {
+        let user, credentials
 
-    if (id != undefined && token != undefined) {
-        validate.string(id, 'id')
-        validate.string(token, 'token')
-        validate.string(query, 'query', false)
+        beforeEach(() => {
+            user = {
+                name: 'John-' + random(),
+                surname: 'Doe-' + random(),
+                username: 'johndoe-' + random() + '@mail.com',
+                password: '123-' + random(),
+                favorites: []
+            }
 
-        return call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'get', { 'authorization': `bearer ${token}` }, undefined)
-            .then(response => {
-                if (response.status === 'KO') throw new Error(response.error)
+            return call('https://skylabcoders.herokuapp.com/api/user', 'post', { 'content-type': 'application/json' }, user)
+                .then(response => {
+                    if (response.status === 'KO') throw new Error(response.error)
+                    else return call('https://skylabcoders.herokuapp.com/api/auth', 'post', { 'content-type': 'application/json' }, { username: user.username, password: user.password })
+                })
+                .then(response => {
+                    if (response.status === 'KO') throw new Error(response.error)
 
-                favorites = response.data.favorites
+                    credentials = response.data
+                })
+        })
 
-                return call(`http://duckling-api.herokuapp.com/api/search?q=${query}`, 'get', undefined, undefined)
-                    .then(ducks => {
-                        if (ducks.error) return []
-                        else {
-                            favorites && ducks.forEach(duck => duck.favorite = favorites.includes(duck.id))
+        it('should succeed on matching user with username', () =>
+            logic.retrieveUser(credentials.id, credentials.token)
+                .then(_user => {
+                    const { id, name, surname, username, password } = _user
 
-                            return ducks
-                        }
-                    })
-            })
-    } else {
-        validate.string(query, 'query', false)
+                    expect(id).toBe(credentials.id)
+                    expect(name).toBe(user.name)
+                    expect(surname).toBe(user.surname)
+                    expect(username).toBe(user.username)
+                    expect(password).toBeUndefined()
+                })
+        )
 
-        return call(`http://duckling-api.herokuapp.com/api/search?q=${query}`, 'get', undefined, undefined)
-            .then(ducks => {
-                if (ducks.error) return []
+        it('should fail on empty id', () =>
+            expect(() =>
+                logic.retrieveUser('', 'a-token')
+            ).toThrowError(Error, 'id is empty or blank')
+        )
 
-                favorites && ducks.forEach(duck => duck.favorite = favorites.includes(duck.id))
-
-                return ducks
-            })
-    }
+        // TODO test more cases
+    })
 }

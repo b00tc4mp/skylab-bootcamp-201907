@@ -1,6 +1,4 @@
-const { validate, call } = require('../../utils')
-
-function retrieveUser(id, token) {
+logic.retrieveUser = function (id, token) {
     validate.string(id, 'id')
     validate.string(token, 'token')
 
@@ -11,5 +9,3 @@ function retrieveUser(id, token) {
             return response.data
         })
 }
-
-module.exports = retrieveUser
