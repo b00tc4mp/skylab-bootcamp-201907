@@ -13,10 +13,12 @@ function Header(name, query, lang) {
                 </div>
                 
                 ${name && `<nav class= "header__nav">
-                        <ul><li><form method="post" action="${signOutPath}"><button>${signOut}</button></form></li></ul>
-                        <ul><li><form method="post" action="${favoritesPath}"><button>${favorites}</button></form></li></ul>
+                        <ul class="header__nav--logged">
+                            <li><form class="form__logged" method="post" action="${signOutPath}"><button class="btn btn--logged">${signOut}</button></form></li>
+                            <li><form class="form__logged" method="post" action="${favoritesPath}"><button class="btn btn--logged">${favorites}</button></form></li>
+                        </ul>
                     </nav>
-                    <h1>${hello}, ${name}!<h1>` || `<nav class="header__nav">
+                    <h1 class="header__title--username">${hello}, ${name}!<h1>` || `<nav class="header__nav">
                         <ul>
                             <li><a class="btn" href="${signUpPath}">${signUp}</a></li>
                             <li><a class="btn" href="${signInPath}">${signIn}</a></li>

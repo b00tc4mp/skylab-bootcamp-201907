@@ -12,6 +12,10 @@
         color: white
         text-align: center
         border-radius: .25rem
+        &--username
+            margin-top: 1rem
+            font-size: 1.25rem
+            text-align: center
     &__lang
         width: 75%
     &__nav
@@ -31,8 +35,29 @@
                 justify-content: space-between
                 margin: .5rem
                 width: 15rem
+        &--logged
+            width: 100%
+            display: flex
+            justify-content: space-between
+            >ul
+                width: 100%
+                list-style: none
+                display: flex
+                justify-content: center
+                >li
+                    display: flex
+                    justify-content: space-between
+                    margin: .5rem
+                    width: 45%
+                    border: 10px solid
     &__search
         width: 100%
         margin: 1.5rem 0 1rem
         display: flex
         flex-direction: column
+
+.form__logged
+    width: 100%
+    display: flex
+    justify-content: center
+    align-items: center

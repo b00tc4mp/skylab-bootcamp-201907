@@ -30,6 +30,7 @@ html {
   text-decoration: none;
   padding: 0.5rem;
   font-size: 1rem;
+  outline: none;
 }
 .btn:hover {
   background-color: #03A6A611;
@@ -38,6 +39,69 @@ html {
 .btn--search {
   color: white;
   background-color: #03A6A6;
+}
+.btn--search:hover {
+  background-color: #03A6A6;
+  color: white;
+  font-weight: bold;
+}
+.btn--form-user {
+  width: 75%;
+  background-color: #03A6A6CC;
+  color: white;
+}
+.btn--back {
+  width: 50%;
+  margin: 0 auto;
+  border: none;
+  color: white;
+  background-color: #54264DCC;
+}
+.btn--logged {
+  color: #03A6A6;
+}
+
+.form-user {
+  width: 100%;
+  margin: 0 auto 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #03A6A6;
+  border-radius: 0.5rem;
+  background-color: #03A6A611;
+}
+.form-user__header {
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+  padding: 0.5rem;
+  margin: 0 0 1rem;
+  background-color: #54264D;
+  color: white;
+  text-align: center;
+  border: none;
+  border-radius: 0.25rem;
+}
+.form-user__label {
+  width: 100%;
+  font-family: "Open Sans", sans-serif;
+  padding: 0.25rem;
+  text-align: center;
+}
+.form-user__input {
+  color: #03A6A6;
+  background-color: #03A6A644;
+  width: 100%;
+  font-family: "Titillium", sans-serif;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  text-align: center;
+  border: none;
+  border-radius: 0.5rem;
+  outline: none;
 }
 
 .header {
@@ -55,6 +119,11 @@ html {
   color: white;
   text-align: center;
   border-radius: 0.25rem;
+}
+.header__title--username {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  text-align: center;
 }
 .header__lang {
   width: 75%;
@@ -79,11 +148,36 @@ html {
   margin: 0.5rem;
   width: 15rem;
 }
+.header__nav--logged {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.header__nav--logged > ul {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+.header__nav--logged > ul > li {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem;
+  width: 45%;
+  border: 10px solid;
+}
 .header__search {
   width: 100%;
   margin: 1.5rem 0 1rem;
   display: flex;
   flex-direction: column;
+}
+
+.form__logged {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .lang-nav {
@@ -113,13 +207,91 @@ html {
   background-color: #F2E530BB;
 }
 
+.list-results {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+.list-results__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border: 1px solid black;
+  margin-top: 2rem;
+  padding: 0.25rem;
+}
+
+.list-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
+  text-decoration: none;
+}
+.list-item__header {
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #F2E530;
+  color: #8f860a;
+  padding: 0.5rem;
+  border: 1px solid #8f860a55;
+  border-radius: 0.5rem;
+  font-size: 1.05rem;
+}
+.list-item__img {
+  width: 100%;
+}
+.list-item__price {
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #54264D;
+  padding: 0.25rem;
+  border: 1px solid #54264D55;
+  border-radius: 0.25rem;
+  background-color: #54264D44;
+}
+
+.form-fav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #F85B4E33;
+  width: 20%;
+  border-radius: 0.5rem;
+  margin: 1rem 0 0.5rem;
+  padding: 0.25rem;
+  background-color: #F85B4E55;
+}
+.form-fav__btn {
+  width: 100%;
+}
+
+.header__fav {
+  width: 100%;
+  text-align: center;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background-color: #54264D55;
+  color: #54264D;
+  border-radius: 0.5rem;
+}
+
 .search-box {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 2rem;
-  color: #F85B4E;
+  color: #03A6A6;
   background-color: #03A6A622;
   margin-bottom: 0.5rem;
   padding: 0.25rem;
@@ -128,6 +300,7 @@ html {
   outline: none;
   font-size: 1rem;
   font-family: "Open Sans", sans-serif;
+  text-align: center;
 }
 
 /*# sourceMappingURL=style.css.map */

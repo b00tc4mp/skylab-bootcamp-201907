@@ -90,8 +90,7 @@ app.get(SEARCH, (req, res) => {
 
 app.get(`${DETAIL}/:id/`, (req, res) => {
 
-     console.log(req.path)
-    //  console.log(req.static)
+    //  console.log(req.path)
     
     const { params: { id: duckId }, session } = req
 
