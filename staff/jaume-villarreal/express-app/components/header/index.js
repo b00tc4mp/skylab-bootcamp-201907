@@ -1,19 +1,24 @@
 const Search = require('../search')
 const literals = require('./i18n')
-const { searchPath, signInPath, signUpPath, signOutPath } = require("./config")
+const { signInPath, signUpPath, signOutPath, favoritesPath } = require('./config')
+const LangSelector = require('../lang-selector')
 
 function Header(name, query, lang) {
-    return `<header>
+    const { hello, signUp, signIn, signOut, favorites } = literals[lang]
+
+    return `<header class="header">
+        ${LangSelector()}
         ${name && `<nav>
-                <ul><li><form method="post" action="${signOutPath}"><button>${literals[lang].signOut}</button></form></li></ul>
+                <ul><li><form method="post" action="${signOutPath}"><button>${signOut}</button></form></li></ul>
+                <ul><li><form method="post" action="${favoritesPath}"><button>${favorites}</button></form></li></ul>
             </nav>
-            <h1>Hello, ${name}!<h1>` || `<nav>
+            <h1>${hello}, ${name}!<h1>` || `<nav>
                 <ul>
-                    <li><a href="${signUpPath}">${literals[lang].signUp}</a></li>
-                    <li><a href="${signInPath}">${literals[lang].signIn}</a></li>
+                    <li><a href="${signUpPath}">${signUp}</a></li>
+                    <li><a href="${signInPath}">${signIn}</a></li>
                 </ul>
             </nav>`}
-        ${Search(query, searchPath)}
+        ${Search(query, lang)}
     </header>`
 }
 

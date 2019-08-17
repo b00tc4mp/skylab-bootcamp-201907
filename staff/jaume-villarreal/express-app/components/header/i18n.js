@@ -1,6 +1,25 @@
 module.exports = {
-    en: { signOut: 'Sign-out' , signUp: 'Sign-up' , signIp: 'Sign-in'},
-    es: { signOut: 'Salir' , signUp: 'Registrarse' , signIp: 'Acceder'},
-    ca: { signOut: 'Sortir' , signUp: 'Registra\'t' , signIp: 'Accedeix'},
-    fr: { signOut: 'Quitter' , signUp: 'S\'inscrire' , signIp: 'Accès'}
+    en: {
+            hello: 'Hello', signIn: 'Sign-in',
+            signUp: 'Sign-up', signOut: 'Sign-out',
+            favorites: 'Go to favorites'
+        },
+
+    es: {
+            hello: 'Hola', signIn: 'Acceder',
+            signUp: 'Registrar', signOut: 'Salir',
+            favorites: 'Ir a  favoritos'
+        },
+
+    ca: {
+            hello: 'Hola', signIn: 'Accedeix', 
+            signUp: 'Registra\'t', signOut: 'Surt',
+            favorites: 'Ves als favorits'
+        },
+
+    fr: {
+            hello: 'Bonjour', signIn: 'Se connecter',
+            signUp: 'S\'incriure', signOut: 'Sortir',
+            favorites: 'Aller aux favoris'
+        }
 }

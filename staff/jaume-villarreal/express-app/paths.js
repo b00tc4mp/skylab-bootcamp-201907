@@ -5,5 +5,7 @@ module.exports = {
     SIGN_UP: '/sign-up',
     SIGN_OUT: '/sign-out',
     DETAIL: '/ducks',
-    TOGGLE_FAV: '/toggle-favorite'
+    TOGGLE_FAV: '/toggle-favorite',
+    SELECT_LANG: '/select-language',
+    FAVORITES: '/favorites'
 }

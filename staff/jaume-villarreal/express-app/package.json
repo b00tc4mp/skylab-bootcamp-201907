@@ -17,7 +17,8 @@
     "start": "node . 8080",
     "watch": "npx nodemon . 8080",
     "debug": "node debug . 8080",
-    "test": "npx jasmine logic/**/*.spec.js"
+    "test": "npx jasmine logic/**/*.spec.js",
+    "sass": "sass style/index.sass public/style.css"
   },
   "author": "",
   "license": "ISC"

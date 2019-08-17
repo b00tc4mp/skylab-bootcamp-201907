@@ -1,4 +1,4 @@
-const FavButton = require('../fav-button')
+const FavButton = require('./fav-button')
 
 module.exports = function ({ id, title, imageUrl, price, favorite }) {
     return `<a href="/ducks/${id}">

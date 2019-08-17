@@ -1,8 +1,8 @@
-const {SEARCH , SIGN_IN , SIGN_UP , SIGN_OUT} = require('../../constants')
+const { SIGN_IN, SIGN_UP, SIGN_OUT, FAVORITES } = require('../../paths')
 
 module.exports = {
-    searchPath: SEARCH, 
-    signInPath: SIGN_IN, 
-    signUpPath: SIGN_UP, 
-    signOutPath: SIGN_OUT
+    signInPath: SIGN_IN,
+    signUpPath: SIGN_UP,
+    signOutPath: SIGN_OUT,
+    favoritesPath: FAVORITES
 }

@@ -1,25 +1,29 @@
 const express = require('express')
-const { Html, Header, DuckResults, DuckDetail, Register, RegisterSuccess, Login } = require('./components')
-const session = require('express-session')
-const logic = require('./logic')
-// const literals = require('./constants')
-const bodyParser = require('body-parser')
+const app = express()
 
-const formBodyParser = bodyParser.urlencoded({ extended: false })
+const session = require('express-session')
+
+const logic = require('./logic')
+
+const bodyParser = require('body-parser')
+const formBodyParser = bodyParser.urlencoded({ extended: true })
 
 const { argv: [, , port] } = process
 
-const app = express()
+const {
+    Html, Header, DuckResults,
+    DuckDetail, Register,
+    RegisterSuccess, Login, Favorites
+} = require('./components')
 
 const {
-    HOME,
-    SEARCH,
-    SIGN_IN,
-    SIGN_UP,
-    SIGN_OUT,
-    DETAIL,
-    TOGGLE_FAV
-} = require('./constants')
+    HOME, SEARCH, SIGN_IN,
+    SIGN_UP, SIGN_OUT, DETAIL,
+    TOGGLE_FAV, SELECT_LANG, FAVORITES
+} = require('./paths')
+
+//app.use
+app.use(express.static('public'))
 
 app.use(session({
     secret: 's3cr3t th1ng',
@@ -27,19 +31,28 @@ app.use(session({
     resave: true
 }))
 
-app.get(HOME, (req, res) => {
-    const { session: { userId, token, query } } = req
+app.use((req, res, next) => {
+    const { session } = req
 
-    // TODO make app multi-lang
-    req.session.lang = 'es'
+    session.lang || (session.lang = 'en')
+
+    next()
+})
+
+app.get(HOME, (req, res) => {
+    const { session } = req
+
+    session.view = HOME
+
+    const { userId, token, query, lang } = session
 
     try {
         if (userId && token)
             logic.retrieveUser(userId, token)
-                .then(user => res.send(Html(Header(user.name, query, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT))))
+                .then(user => res.send(Html(Header(user.name, query, lang))))
                 .catch(error => { throw error })
         else
-            res.send(Html(Header(undefined, query, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT)))
+            res.send(Html(Header(undefined, query, lang)))
     } catch (error) {
         throw error
     }
@@ -47,10 +60,12 @@ app.get(HOME, (req, res) => {
 })
 
 app.get(SEARCH, (req, res) => {
-    const { query: { q: query }, session: { userId, token , lang } } = req
+    const { query: { q: query }, session } = req
 
-    req.session.query = query
-    req.session.view = 'search'
+    session.query = query
+    session.view = `${SEARCH}?q=${query}`
+
+    const { userId, token, lang } = session
 
     try {
         if (userId && token)
@@ -69,9 +84,11 @@ app.get(SEARCH, (req, res) => {
 })
 
 app.get(`${DETAIL}/:id`, (req, res) => {
-    const { params: { id: duckId }, session: { userId, token, query ,lang } } = req
+    const { params: { id: duckId }, session } = req
 
-    req.session.view = 'detail'
+    session.view = `${DETAIL}/${duckId}`
+
+    const { userId, token, query, lang } = session
 
     try {
         if (userId && token)
@@ -79,30 +96,34 @@ app.get(`${DETAIL}/:id`, (req, res) => {
                 logic.retrieveUser(userId, token),
                 logic.retrieveDuck(userId, token, duckId)
             ])
-                .then(([user, duck]) => res.send(Html(`${Header(user.name, query, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT)}${DuckDetail(duck)}`)))
+                .then(([user, duck]) => res.send(Html(`${Header(user.name, query, lang)}${DuckDetail(duck)}`)))
                 .catch(error => { throw error })
         else
             logic.retrieveDuck(undefined, undefined, duckId)
-                .then(duck => res.send(Html(`${Header(undefined, query, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT)}${DuckDetail(duck)}`)))
+                .then(duck => res.send(Html(`${Header(undefined, query, lang)}${DuckDetail(duck)}`)))
     } catch (error) {
         throw error
     }
 })
 
 app.get(SIGN_UP, (req, res) => {
-    const { session: { lang = 'en' } } = req
+    const { session } = req
+
+    session.view = SIGN_UP
+
+    const { lang } = session
 
     res.send(Html(Register(lang)))
 })
 
 app.post(SIGN_UP, formBodyParser, (req, res) => {
-    const { body } = req
+    const { body, session: { lang } } = req
 
     const { name, surname, email, password, repassword } = body
 
     try {
         logic.registerUser(name, surname, email, password, repassword)
-            .then(() => res.send(Html(RegisterSuccess(SIGN_IN))))
+            .then(() => res.send(Html(RegisterSuccess(lang))))
             .catch(error => { throw error })
     } catch (error) {
         throw error
@@ -110,7 +131,11 @@ app.post(SIGN_UP, formBodyParser, (req, res) => {
 })
 
 app.get(SIGN_IN, (req, res) => {
-    const { session: { lang = 'en' } } = req
+    const { session } = req
+
+    session.view = SIGN_IN
+
+    const { lang } = session
 
     res.send(Html(Login(lang)))
 })
@@ -149,12 +174,44 @@ app.post(TOGGLE_FAV, formBodyParser, (req, res) => {
     if (userId && token)
         try {
             logic.toggleFavDuck(userId, token, id)
-                .then(() => view === 'search' ? res.redirect(`${SEARCH}/?q=${query}`) : res.redirect(`${DETAIL}/${id}`))
+                .then(() => res.redirect(view))
                 .catch(error => { throw error })
         } catch (error) {
             throw error
         }
     else res.redirect(SIGN_IN)
+})
+
+app.get(FAVORITES , (request , response) => {
+    const { session } = request
+    const { userId, token, query, lang } = session
+    
+    session.view = FAVORITES
+
+    try{
+        Promise.all([
+            logic.retrieveUser(userId,token),
+            logic.retrieveFavDucks(userId,token)
+        ])
+        .then(( [ user , ducks ] ) => response.send(Html(`${Header(user.name, query, lang)}${Favorites(ducks , lang)}`)))
+        .catch( error => {throw error})    
+    } catch(error){
+        throw error
+    }    
+})
+
+app.post(FAVORITES , formBodyParser , (request , response) => {
+    response.redirect(FAVORITES)
+})
+
+app.post(SELECT_LANG, formBodyParser, (req, res) => {
+    const { body: { lang }, session } = req
+
+    session.lang = lang
+
+    const { view } = session
+
+    res.redirect(view)
 })
 
 app.listen(port)

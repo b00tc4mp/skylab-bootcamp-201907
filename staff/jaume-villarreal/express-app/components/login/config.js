@@ -1,5 +1,6 @@
-const { SIGN_IN } = require('../../constants')
+const { SIGN_IN, HOME } = require('../../paths')
 
 module.exports = {
-    path: SIGN_IN
+    path: SIGN_IN,
+    goBackPath: HOME
 }
