@@ -1,14 +1,25 @@
 const express = require('express')
-const http = require('http')
-const { Html, Header, Search, DuckResults, DuckDetail, Register, RegisterSuccess, Login, FavButton } = require('./components')
+const { Html, Header, DuckResults, DuckDetail, Register, RegisterSuccess, Login } = require('./components')
 const session = require('express-session')
-const { parseBody } = require('./utils')
 const logic = require('./logic')
-const marquesine = `<h1> Tha great Duck Shtore</h1>`
+const literals = require('./constants')
+const bodyParser = require('body-parser')
+
+const formBodyParser = bodyParser.urlencoded({ extended: false })
 
 const { argv: [, , port] } = process
 
 const app = express()
+
+const {
+    HOME,
+    SEARCH,
+    SIGN_IN,
+    SIGN_UP,
+    SIGN_OUT,
+    DETAIL,
+    TOGGLE_FAV
+} = require('./constants')
 
 app.use(session({
     secret: 's3cr3t th1ng',
@@ -16,59 +27,95 @@ app.use(session({
     resave: true
 }))
 
-app.get('/', (req, res) => {
-    res.send(Html(`${Header(marquesine)} ${Search()}`))
-})
+app.get(HOME, (req, res) => {
+    const { session: { userId, token, query } } = req
 
-app.get('/search', (req, res) => {
-    const { query: { q }, session: { userId, token } } = req
-
-    session.query = q
+    // TODO make app multi-lang
+    req.session.lang = 'es'
 
     try {
-        logic.searchDucks(userId, token, q)
-            .then(ducks => res.send(Html(`${Header(marquesine)}${Search(q)}${DuckResults(ducks)}`)))
-            .catch(error => { throw error })
+        if (userId && token)
+            logic.retrieveUser(userId, token)
+                .then(user => res.send(Html(Header(user.name, query, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT))))
+                .catch(error => { throw error })
+        else
+            res.send(Html(Header(undefined, query, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT)))
+    } catch (error) {
+        throw error
+    }
+
+})
+
+app.get(SEARCH, (req, res) => {
+    const { query: { q: query }, session: { userId, token } } = req
+
+    req.session.query = query
+    req.session.view = 'search'
+
+    try {
+        if (userId && token)
+            Promise.all([
+                logic.retrieveUser(userId, token),
+                logic.searchDucks(userId, token, query)
+            ])
+                .then(([user, ducks]) => res.send(Html(`${Header(user.name, query, lang = 'ca', SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT)}${DuckResults(ducks)}`)))
+                .catch(error => { throw error })
+        else
+            logic.searchDucks(undefined, undefined, query)
+                .then(ducks => res.send(Html(`${Header(undefined, query, lang = 'ca', SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT)}${DuckResults(ducks)}`)))
     } catch (error) {
         throw error
     }
 })
 
-app.get('/ducks/:id', (req, res) => {
-    const { params: { id: duckId }, session: { userId, token, query } } = req
+app.get(`${DETAIL}/:id`, (req, res) => {
+    const { params: { id: duckId }, session: { userId, token, query, lang } } = req
+
+    req.session.view = 'detail'
 
     try {
-        logic.retrieveDuck(userId, token, duckId)
-            .then(duck => res.send(Html(`${Header(marquesine)}${Search(query)}${DuckDetail(duck)}`)))
-            .catch(error => { throw error })
+        if (userId && token)
+            Promise.all([
+                logic.retrieveUser(userId, token),
+                logic.retrieveDuck(userId, token, duckId)
+            ])
+                .then(([user, duck]) => res.send(Html(`${Header(user.name, query, lang, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT)}${DuckDetail(duck)}`)))
+                .catch(error => { throw error })
+        else
+            logic.retrieveDuck(undefined, undefined, duckId)
+                .then(duck => res.send(Html(`${Header(undefined, query, lang, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT)}${DuckDetail(duck)}`)))
     } catch (error) {
         throw error
     }
 })
 
-app.get('/sign-up', (req, res) => {
-    res.send(Html(Register('/sign-up')))
+app.get(SIGN_UP, (req, res) => {
+    const { session: { lang = 'en' } } = req
+
+    res.send(Html(Register(lang)))
 })
 
-app.post('/sign-up', parseBody, (req, res) => {
+app.post(SIGN_UP, formBodyParser, (req, res) => {
     const { body } = req
 
     const { name, surname, email, password, repassword } = body
 
     try {
         logic.registerUser(name, surname, email, password, repassword)
-            .then(() => res.send(Html(RegisterSuccess('/sign-in'))))
+            .then(() => res.send(Html(RegisterSuccess(SIGN_IN))))
             .catch(error => { throw error })
     } catch (error) {
         throw error
     }
 })
 
-app.get('/sign-in', (req, res) => {
-    res.send(Html(Login('/sign-in')))
+app.get(SIGN_IN, (req, res) => {
+    const { session: { lang = 'en' } } = req
+
+    res.send(Html(Login(lang)))
 })
 
-app.post('/sign-in', parseBody, (req, res) => {
+app.post(SIGN_IN, formBodyParser, (req, res) => {
     const { body, session } = req
 
     const { email, password } = body
@@ -79,7 +126,7 @@ app.post('/sign-in', parseBody, (req, res) => {
                 session.userId = id
                 session.token = token
 
-                res.redirect('/home')
+                res.redirect(HOME)
             })
             .catch(error => { throw error })
     } catch (error) {
@@ -87,8 +134,27 @@ app.post('/sign-in', parseBody, (req, res) => {
     }
 })
 
-app.get('/home', (req, res) => {
-    res.send(Html('hola mundo!'))
+app.post(SIGN_OUT, (req, res) => {
+    const { session } = req
+
+    delete session.userId
+    delete session.token
+
+    res.redirect(HOME)
+})
+
+app.post(TOGGLE_FAV, formBodyParser, (req, res) => {
+    const { body: { id }, session: { userId, token, query, view } } = req
+
+    if (userId && token)
+        try {
+            logic.toggleFavDuck(userId, token, id)
+                .then(() => view === 'search' ? res.redirect(`${SEARCH}/?q=${query}`) : res.redirect(`${DETAIL}/${id}`))
+                .catch(error => { throw error })
+        } catch (error) {
+            throw error
+        }
+    else res.redirect(SIGN_IN)
 })
 
 app.listen(port)

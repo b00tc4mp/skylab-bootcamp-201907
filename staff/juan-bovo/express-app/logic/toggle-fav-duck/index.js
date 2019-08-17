@@ -1,6 +1,6 @@
 const { validate, call } = require('../../utils')
 
-function toggleFavDuck(id, token, duckId) {
+module.exports = function (id, token, duckId) {
     validate.string(id, 'id')
     validate.string(token, 'token')
     validate.string(duckId, 'duck id')
@@ -34,5 +34,3 @@ function toggleFavDuck(id, token, duckId) {
                     })
         })
 }
-
-module.exports = toggleFavDuck

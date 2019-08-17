@@ -1,7 +1,6 @@
 const { validate, call } = require('../../utils')
 
-
-function retrieveFavDucks(id, token) {
+module.exports = function (id, token) {
     validate.string(id, 'id')
     validate.string(token, 'token')
 
@@ -21,5 +20,3 @@ function retrieveFavDucks(id, token) {
             return Promise.all(calls)
         })
 }
-
-module.exports = retrieveFavDucks

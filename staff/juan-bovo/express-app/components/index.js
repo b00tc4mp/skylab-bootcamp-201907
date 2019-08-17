@@ -6,6 +6,5 @@ module.exports = {
     DuckDetail: require('./duck-detail'),
     Register: require('./register'),
     RegisterSuccess: require('./register-success'),
-    Login: require('./login'),
-    FavButton: require('./fav-button')
+    Login: require('./login')
 }
