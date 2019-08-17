@@ -75,7 +75,7 @@ const net = require ('net')
 const {argv: [, , port]} = process
 
 const date = new Date()
-const output = date.getFullYear().slice(-2) +'-'
+const output = date.getFullYear() +'-'
    + ('0' + (date.getMonth() + 1)).slice(-2) +'-'
    + ('0' + date.getDate()).slice(-2) +' '
    + ('0' + date.getHours()).slice(-2) +':'
@@ -90,3 +90,29 @@ const server = net.createServer (socket => {
 })
 
 server.listen(port)
+
+/**
+ *    OFICIAL SOLUTION
+ */
+/*
+var net = require('net')
+
+    function zeroFill (i) {
+      return (i < 10 ? '0' : '') + i
+    }
+
+    function now () {
+      var d = new Date()
+      return d.getFullYear() + '-' +
+        zeroFill(d.getMonth() + 1) + '-' +
+        zeroFill(d.getDate()) + ' ' +
+        zeroFill(d.getHours()) + ':' +
+        zeroFill(d.getMinutes())
+    }
+
+    var server = net.createServer(function (socket) {
+      socket.end(now() + '\n')
+    })
+
+    server.listen(Number(process.argv[2]))
+*/
