@@ -9,11 +9,8 @@ const formBodyParser = bodyParser.urlencoded({ extended: false })
 
 const { argv: [, , port] } = process
 
-app.set('view engine', 'pug')
-
 const app = express()
 
-/* const SEARCH ='/search', SIGN_IN = '/sign-in', SIGN_UP= '/sign-up', SIGN_OUT = '/sign-out' */
 
 const {
     HOME,
