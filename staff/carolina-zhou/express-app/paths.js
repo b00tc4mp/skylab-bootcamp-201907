@@ -1,3 +1,4 @@
+// Indexing paths
 module.exports = {
     HOME: '/',
     SEARCH: '/search',

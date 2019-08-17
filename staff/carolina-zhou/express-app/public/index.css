@@ -14,7 +14,7 @@
   background-color: rgba(255, 255, 255, 0.5);
   width: 70%;
   margin: 2em auto;
-  padding: 30px;
+  padding: 3em;
   text-align: center;
 }
 
@@ -24,7 +24,7 @@
 }
 
 .register__input, .login__input, .header__search-input {
-  width: 95%;
+  width: 100%;
   margin-top: 0.5em;
   border: none;
   outline: none;
@@ -32,7 +32,7 @@
   font-size: 18px;
 }
 
-.register__button, .login__button, .header__lang-button, .header__button {
+.register__button, .login__button, .header__button, .header__lang-button {
   background-color: black;
   color: white;
   border: none;
@@ -52,19 +52,40 @@
 .header__nav {
   list-style: none;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
   padding: 0;
+}
+.header__item {
+  margin: 5px 15px;
+  width: 13%;
+  border: 1px solid grey;
+  padding: 10px 0px;
+}
+.header__form {
+  padding: 0;
+}
+.header__logout {
+  color: grey;
+  background: none;
+  border: none;
+  padding: 5px 17px;
+  font-size: 22px;
+}
+.header__message {
+  font-size: 2rem;
+  margin: auto;
 }
 .header__link {
   color: grey;
   text-decoration: none;
   margin: 15px;
-  border: 1px solid grey;
   padding: 5px 17px;
 }
-.header__link:hover {
+.header__link:hover, .header__logout:hover {
   color: deeppink;
 }
+
 .header__lang-selector {
   list-style: none;
   display: flex;
@@ -77,7 +98,6 @@
   margin: 0.5em;
   width: 50%;
 }
-
 .login__list {
   padding: 0;
 }
@@ -167,7 +187,7 @@
   max-width: 80%;
 }
 .duck-detail__price {
-  margin-top: 1em;
+  margin-top: 2em;
   border: 2px solid white;
   border-radius: 3em;
   padding: 20px;
@@ -177,11 +197,16 @@
 }
 .duck-detail__link {
   margin-top: 1em;
-  color: grey;
+  color: white;
   font-weight: bold;
   text-decoration: none;
 }
-.duck-detail__link:hover {
+.duck-detail__back {
+  margin-top: 1em;
+  color: grey;
+  text-decoration: none;
+}
+.duck-detail__link:hover, .duck-detail__back:hover {
   color: deeppink;
 }
 

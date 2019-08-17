@@ -113,11 +113,11 @@ app.get(`${DETAIL}/:id`, (req, res) => {
                 logic.retrieveUser(userId, token),
                 logic.retrieveDuck(userId, token, duckId)
             ])
-                .then(([user, duck]) => res.send(Html(`${Header(user.name, query, lang)}${DuckDetail(duck)}`)))
+                .then(([user, duck]) => res.send(Html(`${Header(user.name, query, lang)}${DuckDetail(duck, lang)}`)))
                 .catch(error => { throw error })
         else
             logic.retrieveDuck(undefined, undefined, duckId)
-                .then(duck => res.send(Html(`${Header(undefined, query, lang)}${DuckDetail(duck)}`)))
+                .then(duck => res.send(Html(`${Header(undefined, query, lang)}${DuckDetail(duck, lang)}`)))
     } catch (error) {
         throw error
     }
