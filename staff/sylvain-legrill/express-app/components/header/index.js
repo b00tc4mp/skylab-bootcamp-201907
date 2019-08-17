@@ -9,10 +9,8 @@ function Header(name, query, lang) {
     return `<header class="header">
         ${LangSelector()}
         ${name && `<nav>
-            
                 <ul><li><a href="${favoritePath}">${favorite}</a></li>
                 <li><form method="post" action="${signOutPath}"><button>${signOut}</button></form></li></ul>
-                
             </nav>
             <h1>${hello}, ${name}!<h1>` || `<nav>
                 <ul>

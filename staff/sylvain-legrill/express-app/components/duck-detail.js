@@ -1,4 +1,4 @@
-const FavButton = require('./fav-button')
+const FavButton = require("./fav-button")
 
 function DuckDetail({ id, favorite, title, imageUrl, price, description, link }) {
     return `<article>
