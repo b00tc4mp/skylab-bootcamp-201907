@@ -55,12 +55,6 @@ Use socket.write(data) to write data to the socket and socket.end() to
 close the socket. Alternatively, the .end() method also takes a data
 object so you can simplify to just: socket.end(data).
 
-Documentation on the net module can be found by pointing your browser
-here:
-
-file://C:\Users\joeth\AppData\Roaming\npm\node_modules\learnyounode\node_a
-pidoc\net.html
-
 To create the date, you'll need to create a custom format from a new
 Date() object. The methods that will be useful are:
 
@@ -76,3 +70,23 @@ command. You can read more about strftime at:
 (https://github.com/samsonjs/strftime)
 */
 
+const net = require ('net')
+
+const {argv: [, , port]} = process
+
+const date = new Date()
+const output = date.getFullYear().slice(-2) +'-'
+   + ('0' + (date.getMonth() + 1)).slice(-2) +'-'
+   + ('0' + date.getDate()).slice(-2) +' '
+   + ('0' + date.getHours()).slice(-2) +':'
+   + ('0' + date.getMinutes()).slice(-2) +'\n'
+
+const server = net.createServer (socket => {
+   //when the other end of the socket sends a FIN packet, 
+   //the server will only send a FIN packet back when socket.end() 
+   //is explicitly called, until then the connection is half-closed 
+   //(non-readable but still writable). 
+   socket.end(output)
+})
+
+server.listen(port)
