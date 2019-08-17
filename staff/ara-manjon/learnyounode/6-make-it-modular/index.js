@@ -1,11 +1,15 @@
+/**
+ * This problem is the same as the previous but introduces the concept of  
+   modules. You will need to create two files to solve this.
+ */
 
-//node . . txt 
-const filterFilesByExtension = require('./file-filter-by-extension')
+
+const filterFiles = require('./file-filter')
 const { argv: [,, folder, extension] } = process
 
 
-filterFilesByExtension(folder,extension,(error, files) => {
-    if(error) return error
+filterFiles(folder,extension,(error, files) => {
+    if(error) return console.error('There was an error:', error)
     files.forEach(file => console.log(file))
 }
 )

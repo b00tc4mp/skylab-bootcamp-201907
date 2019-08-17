@@ -1,15 +1,30 @@
-//print a list of files ina given dictionary
+/**
+ *  Create a program that prints a list of files in a given directory,  
+    filtered by the extension of the files. You will be provided a directory  
+    name as the first argument to your program (e.g. '/path/to/dir/') and a  
+    file extension to filter by as the second argument.
 
-const fs = require('fs')
-const path = require('path') //devuelve la extension del archivo
-const { argv: [,, folder, extension] } = process
+    The fs.readdir() method takes a pathname as its first argument and a  
+    callback as its second. The callback signature is:  
+   
+     function callback (err, list)
+ */
+
+ const file =  process.argv[2]
+ const extension = '.'+ process.argv[3]
+ const fs = require('fs')
+ const path = require('path')
+
+ fs.readdir(file, (error, list)=>{
+    if(error) throw error
+
+    const filter = list.filter(file => path.extname(file) === extension)
+    for(const i= 0; i< filter.length; i++)
+    console.log(filter[i])
+
+ })
 
 
-fs.readdir(folder, function(err, list){
-    if(err) throw err
-    for(i=0; i<list.length; i++){
-        if(path.extname(list[i]) === `.${extension}`) console.log(list[i])    
-    }
-})
+
 
 

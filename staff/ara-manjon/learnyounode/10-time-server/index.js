@@ -1,9 +1,10 @@
 const net = require('net')
+const strftime = require('strftime')
 const { argv: [, , portNumber] }= process
 // cuando algo se conecta al servidor, lanzar la fecha
 const server = net.createServer(function(socket){
-    let date= new Date()
-    const output= date.getFullYear()+' - ' +(0+(date.getMonth()+1)).slice(-2)+' - '+(0+date.getDate().slice(-2))+' '+ (0+date.getHours()).slice(-2)+':'+ (0+date.getMinutes().slice(-2))+"\n"
+    let date= new Date
+    const output= strftime('%Y-%m-%d %H:%M\n', date)
     socket.end(output)
 
     })
