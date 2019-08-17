@@ -37,7 +37,7 @@
   color: white;
   border: none;
   padding: 10px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .header {
@@ -54,11 +54,12 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  margin-top: 5px;
   padding: 0;
 }
 .header__item {
   margin: 5px 15px;
-  width: 13%;
+  width: 235px;
   border: 1px solid grey;
   padding: 10px 0px;
 }
@@ -90,10 +91,16 @@
   list-style: none;
   display: flex;
   justify-content: flex-end;
+  margin: 0;
+  padding: 0;
 }
 .header__lang-option {
   padding: 15px;
 }
+.header__lang-button {
+  font-size: 12px;
+}
+
 .header__search-input {
   margin: 0.5em;
   width: 50%;
