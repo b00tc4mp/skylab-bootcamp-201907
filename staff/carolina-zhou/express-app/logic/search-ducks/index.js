@@ -1,4 +1,3 @@
-// search-ducks
 const { validate, call } = require('../../utils')
 
 module.exports = function(id, token, query) {

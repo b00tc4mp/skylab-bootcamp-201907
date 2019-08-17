@@ -9,7 +9,7 @@ function call(url, method = 'get', headers, body) {
     return fetch(url, {
         method,
         headers,
-        body: JSON.stringify(body) // The JSON.stringify() method converts a JavaScript object or value to a JSON string.
+        body: JSON.stringify(body)
     })
         .then(res => res.json())
 }

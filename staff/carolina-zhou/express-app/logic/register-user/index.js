@@ -1,4 +1,3 @@
-// register-user
 const { validate, call } = require('../../utils')
 
 function registerUser(name, surname, username, password, repassword) {

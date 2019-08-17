@@ -1,4 +1,3 @@
-// retrieve-user
 const { validate, call } = require('../../utils')
 
 module.exports = function (id, token) {

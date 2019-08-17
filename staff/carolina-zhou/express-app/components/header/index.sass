@@ -1,0 +1,27 @@
+.header
+    background-color: $secondary-bg-color
+    padding: 30px
+    text-align: center
+
+    &__title
+        margin: 0
+        padding: 25px
+
+    &__nav
+        list-style: none
+        display: flex
+        justify-content: flex-end
+        padding: 0
+
+    &__link
+        color: $link-text-color
+        text-decoration: none
+        margin: 15px
+        border: 1px solid $link-text-color
+        padding: 5px 17px
+    
+    &__link:hover
+        color: $hover-text-color
+
+    &__button
+        @extend %button

@@ -1,4 +1,3 @@
-// authenticate-user
 const { validate, call } = require('../../utils')
 
 function authenticateUser(username, password) {
