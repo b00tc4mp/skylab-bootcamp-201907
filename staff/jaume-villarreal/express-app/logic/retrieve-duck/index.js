@@ -1,14 +1,14 @@
 const { validate, call } = require('../../utils')
 
-module.exports = function (id, token, duckId) {
+module.exports = function (userId, token, duckId) {
     let favorites
 
-    if (id != undefined && token != undefined) {
-        validate.string(id, 'id')
+    if (userId != undefined && token != undefined) {
+        validate.string(userId, 'user id')
         validate.string(token, 'token')
         validate.string(duckId, 'duck id')
 
-        return call(`https://skylabcoders.herokuapp.com/api/user/${id}`, 'get', { 'authorization': `bearer ${token}` }, undefined)
+        return call(`https://skylabcoders.herokuapp.com/api/user/${userId}`, 'get', { 'authorization': `bearer ${token}` }, undefined)
             .then(response => {
                 if (response.status === 'KO') throw new Error(response.error)
 

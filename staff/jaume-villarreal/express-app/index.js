@@ -25,6 +25,11 @@ const {
 //app.use
 app.use(express.static('public'))
 
+// app.use( (request , respone , next) => {
+//     const st = express.static('public')
+//     request
+// }
+
 app.use(session({
     secret: 's3cr3t th1ng',
     saveUninitialized: true,
@@ -83,7 +88,11 @@ app.get(SEARCH, (req, res) => {
     }
 })
 
-app.get(`${DETAIL}/:id`, (req, res) => {
+app.get(`${DETAIL}/:id/`, (req, res) => {
+
+     console.log(req.path)
+    //  console.log(req.static)
+    
     const { params: { id: duckId }, session } = req
 
     session.view = `${DETAIL}/${duckId}`

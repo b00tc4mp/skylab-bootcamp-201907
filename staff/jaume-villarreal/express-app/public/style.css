@@ -1,11 +1,133 @@
 * {
-  border: 1px solid black;
-  padding: 10px;
-  margin: 10px;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+html {
+  background-color: #f9f9f9;
+}
+
+.wrapper {
+  width: 95vw;
+  min-height: 95vh;
+  padding: 1rem;
+  margin: 0.5vh auto;
+  background-color: white;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+  border: 1px solid #03A6A6;
+  border-radius: 0.5rem;
+  background-color: #03A6A622;
+  color: #03A6A6;
+  text-decoration: none;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+.btn:hover {
+  background-color: #03A6A611;
+  font-weight: bold;
+}
+.btn--search {
+  color: white;
+  background-color: #03A6A6;
 }
 
 .header {
-  background-color: skyblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.header__title {
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+  padding: 0.5rem;
+  margin: 0 0 1rem;
+  background-color: #54264D;
+  color: white;
+  text-align: center;
+  border-radius: 0.25rem;
+}
+.header__lang {
+  width: 75%;
+}
+.header__nav {
+  width: 100%;
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  border-top: 2px solid #03A6A6;
+  border-bottom: 2px solid #03A6A6;
+}
+.header__nav > ul {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+.header__nav > ul > li {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem;
+  width: 15rem;
+}
+.header__search {
+  width: 100%;
+  margin: 1.5rem 0 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.lang-nav {
+  margin: 0 0 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  list-style: none;
+  font-family: "Montserrat", sans-serif;
+}
+.lang-nav > li {
+  width: 22%;
+}
+.lang-nav > li > form > button {
+  margin: 0.15rem;
+  padding: 0.5rem 0.25rem;
+  width: 100%;
+  background-color: #F2E530FF;
+  border-radius: 0.25rem;
+  border: none;
+  font-weight: bold;
+  font-size: 0.85rem;
+  color: #8f860a;
+  outline: none;
+}
+.lang-nav > li > form > button:hover {
+  background-color: #F2E530BB;
+}
+
+.search-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 2rem;
+  color: #F85B4E;
+  background-color: #03A6A622;
+  margin-bottom: 0.5rem;
+  padding: 0.25rem;
+  border: none;
+  border-radius: 0.25rem;
+  outline: none;
+  font-size: 1rem;
+  font-family: "Open Sans", sans-serif;
 }
 
 /*# sourceMappingURL=style.css.map */
