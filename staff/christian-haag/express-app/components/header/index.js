@@ -28,7 +28,7 @@ function Header(name, query, lang) {
             </li>
         </ul>
     </nav>`}
-    ${Search(query, lang)}
+    ${Search(lang, query)}
 </header>`
 }
 

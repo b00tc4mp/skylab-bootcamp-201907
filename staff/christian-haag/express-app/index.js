@@ -151,7 +151,7 @@ app.post(REGISTER, urlencodedParser, (req, res) => {
 
     } catch (error) {
         req.session.handleError = error.message
-        res.redirect(LOGIN)
+        res.redirect(REGISTER)
     }
 })
 
