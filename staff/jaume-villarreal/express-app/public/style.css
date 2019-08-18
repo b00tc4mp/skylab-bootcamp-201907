@@ -249,6 +249,7 @@ html {
 }
 .list-item__price {
   width: 95%;
+  margin-bottom: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -258,6 +259,17 @@ html {
   border: 1px solid #54264D55;
   border-radius: 0.25rem;
   background-color: #54264D44;
+}
+.list-item__description {
+  padding: 1rem;
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.9rem;
+  border-radius: 0.5rem;
+  border: 1px solid #03A6A688;
+  background-color: #03A6A611;
+  color: #03A6A6ff;
+  text-align: center;
+  line-height: 1.5rem;
 }
 
 .form-fav {
