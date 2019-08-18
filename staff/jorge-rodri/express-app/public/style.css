@@ -1,0 +1,51 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box; }
+
+.nav--pos > ul > li, .lang--pos > ul, .lang--pos > ul > li {
+  margin-right: 2%; }
+
+.cab {
+  display: flex;
+  justify-content: space-around; }
+
+.nav--pos > ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+  width: 20vw;
+  height: 7vh; }
+
+.nav--pos > ul > li {
+  padding: 1.5%;
+  list-style-type: none;
+  width: 12vw;
+  height: 5vh; }
+  .nav--pos > ul > li > a {
+    text-decoration: none;
+    color: #DEB887;
+    font-family: "Lexend Giga", sans-serif; }
+
+.lang--pos > ul {
+  display: flex;
+  padding-top: 3%; }
+
+.lang--pos > ul > li {
+  list-style-type: none; }
+  .lang--pos > ul > li > form > button {
+    background-color: #DEB887; }
+
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 5% 0; }
+
+.body--color {
+  background: #F0FFFF;
+  background: -webkit-linear-gradient(to left, #F0FFFF, #FFFFFF);
+  background: linear-gradient(to left, #F0FFFF, #FFFFFF); }
+
+/*# sourceMappingURL=style.css.map */
