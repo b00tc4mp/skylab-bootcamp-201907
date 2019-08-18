@@ -1,5 +1,5 @@
-const { LOGIN } = require('../../constants')
+const { LOGIN } = require('../../paths')
 
 module.exports = {
-    path: LOGIN
+    loginPath: LOGIN
 }

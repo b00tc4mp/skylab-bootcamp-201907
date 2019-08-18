@@ -1,2 +1,4 @@
-sessions/
 node_modules/
+sessions/
+package.json
+package-lock.json

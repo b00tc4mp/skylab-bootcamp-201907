@@ -1,5 +1,5 @@
-const { REGISTER } = require('../../constants')
+const { REGISTER } = require('../../paths')
 
 module.exports = {
-    path: REGISTER
+    registerPath: REGISTER
 }

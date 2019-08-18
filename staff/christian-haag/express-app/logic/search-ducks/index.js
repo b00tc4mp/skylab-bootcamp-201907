@@ -1,6 +1,6 @@
 const { validate, call } = require('../../utils')
 
-module.exports = function(id, token, query) {
+module.exports = function (id, token, query) {
     let favorites
 
     if (id != undefined && token != undefined) {
@@ -16,7 +16,7 @@ module.exports = function(id, token, query) {
 
                 return call(`http://duckling-api.herokuapp.com/api/search?q=${query}`, 'get', undefined, undefined)
                     .then(ducks => {
-                        if (ducks.error) return []
+                        if (ducks.error) return [ducks.error]
                         else {
                             favorites && ducks.forEach(duck => duck.favorite = favorites.includes(duck.id))
 
@@ -26,10 +26,9 @@ module.exports = function(id, token, query) {
             })
     } else {
         validate.string(query, 'query', false)
-
         return call(`http://duckling-api.herokuapp.com/api/search?q=${query}`, 'get', undefined, undefined)
             .then(ducks => {
-                if (ducks.error) return []
+                if (ducks.error) return [ducks.error]
 
                 favorites && ducks.forEach(duck => duck.favorite = favorites.includes(duck.id))
 

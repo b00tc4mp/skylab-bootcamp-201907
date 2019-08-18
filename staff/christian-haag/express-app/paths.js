@@ -5,5 +5,7 @@ module.exports = {
     REGISTER: '/register',
     LOGOUT: '/logout',
     TOGGLE_FAV: '/ontoggle',
-    DETAIL: '/ducks'
+    DETAIL: '/ducks',
+    FAVORITES: '/favorites',
+    SELECT_LANG: '/select-language'
 }

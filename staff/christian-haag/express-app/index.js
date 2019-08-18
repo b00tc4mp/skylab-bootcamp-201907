@@ -1,15 +1,14 @@
 const express = require('express')
-const http = require('http')
 const bodyParser = require('body-parser')
 
-const { Html, Header, DuckResults, DuckDetail, Register, Login, RegisterSuccess, FavDucks } = require('./components')
+const { Html, Header, DuckResults, DuckDetail, Register, Login, RegisterSuccess, Favorites } = require('./components')
 const session = require('express-session')
 const logic = require('./logic')
-//const literals = require('./constants')
+
 const { argv: [, , port] } = process
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 const app = express()
-const lang_code = 'de'
+
 
 const {
     HOME,
@@ -17,10 +16,11 @@ const {
     LOGIN,
     REGISTER,
     LOGOUT,
-    FAV,
+    FAVORITES,
     DETAIL,
-    TOGGLE_FAV
-} = require('./constants')
+    TOGGLE_FAV,
+    SELECT_LANG
+} = require('./paths')
 
 app.use(session({
     secret: 'my secret phrase',
@@ -28,28 +28,39 @@ app.use(session({
     saveUninitialized: true,
 }))
 
+app.use((req, res, next) => {
+    const { session } = req
+
+    session.lang || (session.lang = 'en')
+
+    next()
+})
+
 
 app.get(HOME, (req, res) => {
-    const { session: { userId, token, query, lang = `${lang_code}` } } = req
+    const { session: { userId, token, query, lang } } = req
+
+    req.session.view = HOME
+    req.session.handleError = undefined
 
 
     try {
         if (userId && token)
             logic.retrieveUser(userId, token)
-                .then(user => res.send(Html(Header(user.name, query, SEARCH, LOGIN, REGISTER, FAV, LOGOUT))))
+                .then(user => res.send(Html(Header(user.name, query, lang))))
                 .catch(error => { throw error })
         else
-            res.send(Html(Header(undefined, query, SEARCH, LOGIN, REGISTER, LOGOUT)))
+            res.send(Html(Header(undefined, query, lang)))
     } catch (error) {
         throw error
     }
 })
 
 app.get(SEARCH, (req, res) => {
-    const { query: { q: query }, session: { userId, token, lang = `${lang_code}` } } = req
+    const { query: { q: query }, session: { userId, token, lang } } = req
 
     req.session.query = query
-    req.session.view = 'search'
+    req.session.view = `${SEARCH}/?q=${query}`
 
     try {
         if (userId && token)
@@ -57,11 +68,11 @@ app.get(SEARCH, (req, res) => {
                 logic.retrieveUser(userId, token),
                 logic.searchDucks(userId, token, query)
             ])
-                .then(([user, ducks]) => res.send(Html(`${Header(user.name, query, SEARCH, LOGIN, REGISTER, LOGOUT)}${DuckResults(ducks)}`)))
-                .catch(error => { throw error })
+                .then(([user, ducks]) => res.send(Html(`${Header(user.name, query, lang)}${DuckResults(ducks)}`)))
+
         else
             logic.searchDucks(undefined, undefined, query)
-                .then(ducks => res.send(Html(`${Header(undefined, query, SEARCH, LOGIN, REGISTER, LOGOUT)}${DuckResults(ducks)}`)))
+                .then(ducks => res.send(Html(`${Header(undefined, query, lang)}${DuckResults(ducks)}`)))
                 .catch(error => { throw error })
     } catch (error) {
         throw error
@@ -70,21 +81,38 @@ app.get(SEARCH, (req, res) => {
 })
 
 app.post(TOGGLE_FAV, urlencodedParser, (req, res) => {
-    const { body: { duckId }, session: { userId, token, query, view, lang = `${lang_code}` } } = req
-    console.log('data ', userId, token)
+    const { body: { duckId }, session: { userId, token, view } } = req
+    try {
+        if (userId && token)
+            logic.toggleFavDuck(userId, token, duckId)
+                .then(() => res.redirect(view))
+                .catch(error => { throw error })
+        else
+            res.redirect(LOGIN)
+    } catch (error) {
+        throw error
+    }
+})
+
+app.get(FAVORITES, (req, res) => {
+    const { session: { userId, token, query, lang } } = req
+
+    req.session.view = FAVORITES
+
     if (userId && token)
-        logic.toggleFavDuck(userId, token, duckId)
-            .then(() => {
-                view === 'search' ? res.redirect(`${SEARCH}/?q=${query}`) : res.redirect(`${SEARCH}/:${duckId}`)
-            })
+        Promise.all([
+            logic.retrieveUser(userId, token),
+            logic.retrieveFavDucks(userId, token),
+        ])
+            .then(([user, ducks]) => res.send(Html(`${Header(user.name, query, lang)}${Favorites(ducks, `${SEARCH}/?q=${query}`)}`)))
             .catch(error => { throw error })
-    else
-        res.redirect(LOGIN)
+
 })
 
 app.get(`${DETAIL}/:id`, (req, res) => {
-    const { params: { id: duckId }, session: { userId, token, query, lang = `${lang_code}` } } = req
+    const { params: { id: duckId }, session: { userId, token, query, lang } } = req
 
+    req.session.view = `${DETAIL}/${duckId}`
 
     try {
         if (userId && token)
@@ -92,11 +120,11 @@ app.get(`${DETAIL}/:id`, (req, res) => {
                 logic.retrieveUser(userId, token),
                 logic.retrieveDuck(userId, token, duckId)
             ])
-                .then(([user, duck]) => res.send(Html(`${Header(user.name, query, SEARCH, LOGIN, REGISTER, LOGOUT)}${DuckDetail(duck, user)}`)))
+                .then(([user, duck]) => res.send(Html(`${Header(user.name, query, lang)}${DuckDetail(duck, lang, `${SEARCH}/?q=${query}`)}`)))
                 .catch(error => { throw error })
         else
             logic.retrieveDuck(undefined, undefined, duckId)
-                .then(duck => res.send(Html(`${Header(undefined, query, SEARCH, LOGIN, REGISTER, LOGOUT)}${DuckDetail(duck)}`)
+                .then(duck => res.send(Html(`${Header(undefined, query, lang)}${DuckDetail(duck, lang, `${SEARCH}/?q=${query}`)}`)
                 ))
                 .catch(error => { throw error })
     } catch (error) {
@@ -106,8 +134,11 @@ app.get(`${DETAIL}/:id`, (req, res) => {
 })
 
 app.get(REGISTER, (req, res) => {
-    const { session: { lang = `${lang_code}` } } = req
-    res.send(Html(Register(lang)))
+    const { session: { lang } } = req
+
+    req.session.view = REGISTER
+
+    res.send(Html(Register(lang, HOME)))
 })
 
 app.post(REGISTER, urlencodedParser, (req, res) => {
@@ -125,9 +156,12 @@ app.post(REGISTER, urlencodedParser, (req, res) => {
 
 
 app.get(LOGIN, (req, res) => {
-    const { session: { lang = `${lang_code}` } } = req
-    res.send(Html(Login(lang)))
+    const { session } = req
+    req.session.view = LOGIN
+
+    res.send(Html(Login(session, HOME)))
 })
+
 
 app.post(LOGIN, urlencodedParser, (req, res) => {
     const { body, session } = req
@@ -139,16 +173,16 @@ app.post(LOGIN, urlencodedParser, (req, res) => {
             .then(({ id, token }) => {
                 session.userId = id
                 session.token = token
-
                 res.redirect(HOME)
             })
-            .catch(error => { throw error })
     } catch (error) {
-        throw error
+        req.session.handleError = error.message
+        res.redirect(LOGIN)
     }
 })
 
-app.get(LOGOUT, (req, res) => {
+
+app.post(LOGOUT, (req, res) => {
     const { session } = req
 
     delete session.userId
@@ -158,8 +192,15 @@ app.get(LOGOUT, (req, res) => {
 
 })
 
-app.get('/favorites', (req, res) => {
-    res.send(FavDucks())
+app.post(SELECT_LANG, urlencodedParser, (req, res) => {
+    const { body: { lang }, session: { view } } = req
+    console.log(lang)
+    session.lang = lang
+    console.log(session.lang)
+    res.redirect(view)
+
 })
+
+
 
 app.listen(port)
