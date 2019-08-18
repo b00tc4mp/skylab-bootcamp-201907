@@ -22,13 +22,8 @@ const {
     TOGGLE_FAV, SELECT_LANG, FAVORITES
 } = require('./paths')
 
-//app.use
-app.use(express.static('public'))
 
-// app.use( (request , respone , next) => {
-//     const st = express.static('public')
-//     request
-// }
+app.use(express.static('public'))
 
 app.use(session({
     secret: 's3cr3t th1ng',
