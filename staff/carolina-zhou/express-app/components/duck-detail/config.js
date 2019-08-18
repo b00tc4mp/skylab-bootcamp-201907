@@ -1,5 +1,5 @@
-const { SEARCH } = require('../../paths')
+const { HOME } = require('../../paths')
 
 module.exports = {
-    goBackPath: SEARCH
+    goBackPath: HOME
 }
