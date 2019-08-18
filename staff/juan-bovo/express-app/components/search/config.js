@@ -1,4 +1,4 @@
-const { SEARCH } = require('../../constants')
+const { SEARCH } = require('../../paths')
 
 module.exports = {
     path: SEARCH

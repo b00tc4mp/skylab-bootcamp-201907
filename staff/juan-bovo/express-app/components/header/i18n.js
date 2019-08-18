@@ -1,6 +1,6 @@
 module.exports = {
-    en: { SignOut: 'Sign Out', Hello: 'Hello', surname: 'Surname', password: 'Password', repassword: 'Repeat password' },
-    es: { SignOut: 'Cerrar Cesión', Hello: 'Hola', surname: 'Apellido', password: 'Contraseña', repassword: 'Repetir contraseña' },
-    ca: { SignOut: 'Tancar sessió', Hello: 'Hola', surname: 'Surname', password: 'Password', repassword: 'Repeat password' },
-    fr: { SignOut: 'Déconnexion', Hello: 'Allô', surname: 'Surname', password: 'Password', repassword: 'Repeat password' }
+    en: { hello: 'Hello', signIn: 'Sign-in', signUp: 'Sign-up', signOut: 'Sign-out', favorite: "Favorite"},
+    es: { hello: 'Hola', signIn: 'Acceder', signUp: 'Registrar', signOut: 'Salir', favorite: "Favorito"},
+    ca: { hello: 'Hola', signIn: 'Accedeix', signUp: 'Registra\'t', signOut: 'Surt', favorite: "Favorite"},
+    fr: { hello: 'Bonjour', signIn: 'Se connecter', signUp: 'S\'incriure', signOut: 'Sortir', favorite: "Favorite"}
 }

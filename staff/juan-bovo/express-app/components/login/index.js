@@ -1,12 +1,14 @@
 const literals = require('./i18n')
-const { path } = require('./config')
+const { path, goBackPath } = require('./config')
 
-module.exports = function(lang) {
-    return `<h1>${literals[lang].title}</h1>
+module.exports = function (lang) {
+    const { signIn, goBack, password } = literals[lang]
+
+    return `<h1>${signIn}</h1>
         <form method="post" action="${path}">
             <label>E-mail<input type="email" name="email" /></label>
-            <label>Password<input type="password" name="password" /></label>
-            <button>Login</button>
+            <label>${password}<input type="password" name="password" /></label>
+            <button>${signIn}</button>
         </form>
-        <a href="">Go back</a>`
+        <a href="${goBackPath}">${goBack}</a>`
 }

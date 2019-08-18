@@ -1,6 +1,6 @@
 module.exports = {
-    en: { button: 'Search' },
-    es: { button: 'Buscar' },
-    ca: { button: 'Cerca' },
-    fr: { button: 'Chercher' }
+    en: { search: 'Search' },
+    es: { search: 'Buscar' },
+    ca: { search: 'Cerca' },
+    fr: { search: 'Chercher' }
 }
