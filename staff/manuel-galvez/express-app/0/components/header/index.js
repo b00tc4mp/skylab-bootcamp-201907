@@ -6,7 +6,6 @@ const { signInPath, signUpPath, signOutPath, favoritesPath } = require('./config
 function Header(name, query, lang = 'en') {
     const { signIn, signUp, signOut, favorites } = locale[lang]
     return `<header>
-        ${Locale()}
         ${name && `<nav role="navigation">
                 <div id="menuToggle">
                     <input type="checkbox" />
@@ -14,18 +13,27 @@ function Header(name, query, lang = 'en') {
                     <span></span>
                     <span></span>
                     <ul id="menu">
-                        <li>
-                            <form class="search__form form" method="post" action="${signOutPath}">
-                                <button class="logout__btn btn btn--secondary">${signOut}</button>
+                        <h1 class="welcome">Hello, ${name}!</h1>
+                        <li class="menu__option">
+                            <form class="form" method="post" action="${signOutPath}">
+                                <button class="menu__signout">${signOut}</button>
                             </form>
                         </li>
-                        <li>
+                        <li class="menu__option">
                             <a href="${favoritesPath}">${favorites}</a>
                         </li>
+                        ${Locale()}
                     </ul>
                 </div>
             </nav>
-            <h1>Hello, ${name}!<h1>` 
+            <div class="logo">
+                <div class="logo__img">
+                    <img src="https://i.kym-cdn.com/photos/images/original/000/588/934/b54.jpg" />
+                </div>
+                <div class="logo__text">
+                    <h3>SkyDucks</h3>
+                </div>
+            </div>`
             || 
             `<nav role="navigation">
                 <div id="menuToggle">
@@ -34,15 +42,25 @@ function Header(name, query, lang = 'en') {
                     <span></span>
                     <span></span>
                     <ul id="menu">
-                        <li>
-                            <a class="login__btn btn btn--primary" href="${signInPath}">${signIn}</a>
+                        <li class="menu__option">
+                            <a href="${signInPath}">${signIn}</a>
                         </li>
-                        <li>
-                            <a class="login__btn btn btn--secondary" href="${signUpPath}">${signUp}</a>
+                        <li class="menu__option">
+                            <a href="${signUpPath}">${signUp}</a>
                         </li>
+                        ${Locale()}
                     </ul>
                 </div>
-            </nav>`}
+            </nav>
+            <div class="logo">
+                <div class="logo__img">
+                    <img src="https://i.kym-cdn.com/photos/images/original/000/588/934/b54.jpg" />
+                </div>
+                <div class="logo__text">
+                    <h3>SkyDucks</h3>
+                </div>
+            </div>`
+        }
         ${Search(query, lang)}
     </header>`
 }

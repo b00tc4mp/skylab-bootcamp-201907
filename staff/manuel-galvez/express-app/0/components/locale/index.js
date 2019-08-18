@@ -1,9 +1,9 @@
 function LocaleSelector() {
-    return `<form method="POST" action="/locale">
-                <button type="submit" name="lang" value="en">EN</button>
-                <button type="submit" name="lang" value="es">ES</button>
-                <button type="submit" name="lang" value="ca">CA</button>
-                <button type="submit" name="lang" value="fr">FR</button>
+    return `<form class="locale__form form" method="POST" action="/locale">
+                <li><button class="menu__option locale__btn" type="submit" name="lang" value="en">EN</button></li>
+                <li><button class="menu__option locale__btn" type="submit" name="lang" value="es">ES</button></li>
+                <li><button class="menu__option locale__btn" type="submit" name="lang" value="ca">CA</button></li>
+                <li><button class="menu__option locale__btn" type="submit" name="lang" value="fr">FR</button></li>
             </form>`
 }
 

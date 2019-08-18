@@ -1,5 +1,5 @@
 const DuckItem = require('../duck-item')
 
 module.exports = function(ducks) {
-    return `<ul>${ducks.map(duck => `<li>${DuckItem(duck)}</li>`).join('')}</ul>`
+    return `<ul class="ducks">${ducks.map(duck => `<li class="ducks__item">${DuckItem(duck)}</li>`).join('')}</ul>`
 }
