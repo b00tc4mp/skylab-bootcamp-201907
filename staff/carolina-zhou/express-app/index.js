@@ -31,6 +31,7 @@ const { argv: [, , port] } = process
 // app is an instance of express
 const app = express()
 
+// To serve static files such as images, CSS files, and JavaScript files, use the express.static built-in middleware function.
 app.use(express.static('public'))
 
 // Initializing the session. 
@@ -53,7 +54,7 @@ app.use((req, res, next) => {
 - PATH is a path on the server.
 - HANDLER is a function executed when the route is matched.
 */
-// Home
+// Home 
 app.get(HOME, (req, res) => {
     const { session } = req
 
@@ -74,7 +75,7 @@ app.get(HOME, (req, res) => {
 
 })
 
-// Search
+// Search 
 app.get(SEARCH, (req, res) => {
     const { query: { q: query }, session } = req
 
@@ -99,7 +100,7 @@ app.get(SEARCH, (req, res) => {
     }
 })
 
-// Duck detail
+// Duck detail 
 app.get(`${DETAIL}/:id`, (req, res) => {
     const { params: { id: duckId }, session } = req
 
@@ -123,7 +124,7 @@ app.get(`${DETAIL}/:id`, (req, res) => {
     }
 })
 
-// Register
+// Register 
 app.get(SIGN_UP, (req, res) => {
     const { session } = req
 
@@ -227,7 +228,7 @@ app.get(FAVORITE, (req, res) => {
     }
 })
 
-// Languages
+// Language
 app.post(SELECT_LANG, formBodyParser, (req, res) => {
     const { body: { lang }, session } = req
 
