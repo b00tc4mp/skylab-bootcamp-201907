@@ -1,0 +1,44 @@
+$primary-bg-color: rgba(0, 0, 0, 0.7)
+$secondary-bg-color: rgba(255, 255, 255, 0.5)
+
+$button-bg-color: black
+$errror-bg-color: rgba(100, 0, 0, .65)
+
+$primary-text-color: black
+$secondary-text-color: white
+
+$link-text-color: grey
+$hover-text-color: deeppink
+
+%main-content-box
+    background-color: $secondary-bg-color
+    width: 70%
+    margin: 2em auto
+    padding: 3em
+    text-align: center
+
+%link
+    color: $link-text-color
+    text-decoration: none  
+
+%text-input
+    width: 100%
+    margin-top: .5em
+    border: none
+    outline: none
+    padding: 10px 
+    font-size: 18px
+
+%button
+    background-color: $button-bg-color
+    color: $secondary-text-color
+    border: none
+    padding: 10px
+    font-size: 16px
+
+    
+@mixin header-footer-style
+    background-color: $primary-bg-color
+    color: $secondary-text-color
+    padding: 15px
+    text-align: center

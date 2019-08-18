@@ -1,8 +1,18 @@
+// Requiring express, components and logic and passing them to named variables.
 const express = require('express')
 const { Html, Header, DuckResults, DuckDetail, Register, RegisterSuccess, Login } = require('./components')
-const session = require('express-session')
 const logic = require('./logic')
+
+// Creating a session middleware with given options (express-session accepts properties in the options object: cookie, cookie.domain, cookie.expires...).
+const session = require('express-session')
+
+/* 
+To parse the data coming from POST requests, you have to install a package: the body-parser. This package allows you to use a series of middleware, which can decode data in different formats. The middleware to handle url encoded data is returned by bodyParser.urlencoded({extended: false}). extended=false is a configuration option that tells the parser to use the classic encoding. When using it, values can be only strings or arrays.
+*/
 const bodyParser = require('body-parser')
+const formBodyParser = bodyParser.urlencoded({ extended: true })
+
+// Passing paths as constants (capital letters convention).
 const {
     HOME,
     SEARCH,
@@ -15,14 +25,16 @@ const {
     FAVORITE
 } = require('./paths')
 
-const formBodyParser = bodyParser.urlencoded({ extended: true })
-
+// port is the first command-line argument; this equals const port = process.argv[2] */
 const { argv: [, , port] } = process
 
+// app is an instance of express
 const app = express()
 
+// To serve static files such as images, CSS files, and JavaScript files, use the express.static built-in middleware function.
 app.use(express.static('public'))
 
+// Initializing the session. 
 app.use(session({
     secret: 's3cr3t th1ng',
     saveUninitialized: true,
@@ -37,6 +49,12 @@ app.use((req, res, next) => {
     next()
 })
 
+/*Basic routing: app.METHOD(PATH, HANDLER)
+- METHOD is a http request method.
+- PATH is a path on the server.
+- HANDLER is a function executed when the route is matched.
+*/
+// Home 
 app.get(HOME, (req, res) => {
     const { session } = req
 
@@ -57,6 +75,7 @@ app.get(HOME, (req, res) => {
 
 })
 
+// Search 
 app.get(SEARCH, (req, res) => {
     const { query: { q: query }, session } = req
 
@@ -81,6 +100,7 @@ app.get(SEARCH, (req, res) => {
     }
 })
 
+// Duck detail 
 app.get(`${DETAIL}/:id`, (req, res) => {
     const { params: { id: duckId }, session } = req
 
@@ -94,16 +114,17 @@ app.get(`${DETAIL}/:id`, (req, res) => {
                 logic.retrieveUser(userId, token),
                 logic.retrieveDuck(userId, token, duckId)
             ])
-                .then(([user, duck]) => res.send(Html(`${Header(user.name, query, lang)}${DuckDetail(duck)}`)))
+                .then(([user, duck]) => res.send(Html(`${Header(user.name, query, lang)}${DuckDetail(duck, lang)}`)))
                 .catch(error => { throw error })
         else
             logic.retrieveDuck(undefined, undefined, duckId)
-                .then(duck => res.send(Html(`${Header(undefined, query, lang)}${DuckDetail(duck)}`)))
+                .then(duck => res.send(Html(`${Header(undefined, query, lang)}${DuckDetail(duck, lang)}`)))
     } catch (error) {
         throw error
     }
 })
 
+// Register 
 app.get(SIGN_UP, (req, res) => {
     const { session } = req
 
@@ -128,6 +149,7 @@ app.post(SIGN_UP, formBodyParser, (req, res) => {
     }
 })
 
+// Login
 app.get(SIGN_IN, (req, res) => {
     const { session } = req
 
@@ -157,6 +179,7 @@ app.post(SIGN_IN, formBodyParser, (req, res) => {
     }
 })
 
+// Logout
 app.post(SIGN_OUT, (req, res) => {
     const { session } = req
 
@@ -166,6 +189,7 @@ app.post(SIGN_OUT, (req, res) => {
     res.redirect(HOME)
 })
 
+// Favorites
 app.post(TOGGLE_FAV, formBodyParser, (req, res) => {
     const { body: { id }, session: { userId, token, query, view } } = req
 
@@ -204,7 +228,7 @@ app.get(FAVORITE, (req, res) => {
     }
 })
 
-
+// Language
 app.post(SELECT_LANG, formBodyParser, (req, res) => {
     const { body: { lang }, session } = req
 
@@ -215,4 +239,5 @@ app.post(SELECT_LANG, formBodyParser, (req, res) => {
     res.redirect(view)
 })
 
+// Binding and listening for connections on the specified host and port.
 app.listen(port)

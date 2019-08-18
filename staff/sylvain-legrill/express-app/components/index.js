@@ -1,3 +1,4 @@
+// Indexing components
 module.exports = {
     Html: require('./html'),
     Header: require('./header'),
