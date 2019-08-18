@@ -44,6 +44,8 @@ app.get(HOME, (req, res) => {
 
     session.view = HOME
 
+    session.error = undefined
+
     const { userId, token, query, lang } = session
 
     try {
@@ -112,11 +114,11 @@ app.get(`${DETAIL}/:id/`, (req, res) => {
 app.get(SIGN_UP, (req, res) => {
     const { session } = req
 
-    session.view = SIGN_UP
+    session.view = SIGN_IN
 
-    const { lang } = session
+    const { lang , error } = session
 
-    res.send(Html(Register(lang)))
+    res.send(Html(Register(lang , error)))
 })
 
 app.post(SIGN_UP, formBodyParser, (req, res) => {
@@ -129,7 +131,8 @@ app.post(SIGN_UP, formBodyParser, (req, res) => {
             .then(() => res.send(Html(RegisterSuccess(lang))))
             .catch(error => { throw error })
     } catch (error) {
-        throw error
+         session.error = error.message
+        res.redirect(SIGN_UP)
     }
 })
 
@@ -138,9 +141,9 @@ app.get(SIGN_IN, (req, res) => {
 
     session.view = SIGN_IN
 
-    const { lang } = session
+    const { lang , error } = session
 
-    res.send(Html(Login(lang)))
+    res.send(Html(Login(lang , error)))
 })
 
 app.post(SIGN_IN, formBodyParser, (req, res) => {
@@ -156,9 +159,14 @@ app.post(SIGN_IN, formBodyParser, (req, res) => {
 
                 res.redirect(HOME)
             })
-            .catch(error => { throw error })
+            .catch(error => {
+                session.error = error.message
+                res.redirect(SIGN_IN)
+            })
+            // .catch(error => { throw error })
     } catch (error) {
-        throw error
+        session.error = error.message
+        res.redirect(SIGN_IN)
     }
 })
 

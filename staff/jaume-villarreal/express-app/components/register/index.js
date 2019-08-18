@@ -1,7 +1,7 @@
 const literals = require('./i18n')
 const { path, goBackPath } = require('./config')
 
-function Register(lang) {
+module.exports = function (lang , error) {
     const { signUp, name, surname, password, repassword, goBack } = literals[lang]
 
     return `<h1 class="form-user form-user__header">${signUp}</h1>
@@ -24,7 +24,6 @@ function Register(lang) {
 
             <button class="btn btn--form-user">${signUp}</button>
         </form>
-        <a class="btn btn--back" href="${goBackPath}">${goBack}</a>`
+        <a class="btn btn--back" href="${goBackPath}">${goBack}</a>
+        ${error && `<p class = feedback>${error}</p>` || `<p></p>`}`
 }
-
-module.exports = Register

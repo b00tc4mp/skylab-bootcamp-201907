@@ -61,6 +61,18 @@ html {
   color: #03A6A6;
 }
 
+.feedback {
+  margin: 2rem 0;
+  padding: 1rem;
+  text-align: left;
+  background-color: #F85B4E55;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  border-left: 1rem solid #F85B4E;
+  color: #F85B4E;
+  font-family: Titillium, sans-serif;
+}
+
 .form-user {
   width: 100%;
   margin: 0 auto 1rem;
