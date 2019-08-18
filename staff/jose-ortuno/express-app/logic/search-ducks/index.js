@@ -1,6 +1,6 @@
-const { call, validate } = require('../../utils')
+const { validate, call } = require('../../utils')
 
-module.exports = function (id, token, query) {
+module.exports = function(id, token, query) {
     let favorites
 
     if (id != undefined && token != undefined) {

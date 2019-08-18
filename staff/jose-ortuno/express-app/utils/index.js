@@ -1,4 +1,4 @@
 module.exports = {
-    call: require('./call'),
     validate: require('./validate'),
- }
+    call: require('./call')
+}

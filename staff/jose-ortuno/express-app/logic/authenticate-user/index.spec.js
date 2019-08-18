@@ -1,5 +1,6 @@
+
+const authenticateUser = require('.')
 const { call } = require('../../utils')
-const logic = require('../')
 
 const { random } = Math
 
@@ -22,7 +23,7 @@ describe('logic - authenticate user', () => {
     })
 
     it('should succeed on correct data', () =>
-        logic.authenticateUser(user.username, user.password)
+        authenticateUser(user.username, user.password)
             .then(credentials => {
                 expect(credentials).toBeDefined()
 
@@ -34,13 +35,13 @@ describe('logic - authenticate user', () => {
 
     it('should fail on empty username', () =>
         expect(() =>
-            logic.authenticateUser('', user.password)
+            authenticateUser('', user.password)
         ).toThrowError(Error, 'username is empty or blank')
     )
 
     it('should fail on non-valid username', () =>
         expect(() =>
-            logic.authenticateUser('manuelbarzi#gmail.com', '123')
+            authenticateUser('manuelbarzi#gmail.com', '123')
         ).toThrowError(Error, 'username with value manuelbarzi#gmail.com is not a valid e-mail')
     )
 

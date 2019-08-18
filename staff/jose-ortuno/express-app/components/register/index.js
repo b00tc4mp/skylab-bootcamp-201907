@@ -1,8 +1,9 @@
 const literals = require('./i18n')
 const { path } = require('./config')
 
-function Register(lang) {
-    const { title, name, surname, password, repassword } = literals[lang]
+module.exports = function (lang, view) {
+    const { title, name, surname, password, repassword, back } = literals[lang]
+    
 
     return `<h1>${title}</h1>
         <form method="post" action="${path}">
@@ -13,7 +14,5 @@ function Register(lang) {
             <label>${repassword}<input type="password" name="repassword" /></label>
             <button>${title}</button>
         </form>
-        <a href="">Go back</a>`
+        <a href="${view}">${back}</a>`
 }
-
-module.exports = Register

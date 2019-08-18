@@ -1,5 +1,5 @@
+const retrieveFavDucks = require('.')
 const { call } = require('../../utils')
-const logic = require('../')
 
 const { random } = Math
 
@@ -31,7 +31,7 @@ describe('logic - retrieve favorite ducks', () => {
     })
 
     it('should succeed on previously added fav ducks', () =>
-        logic.retrieveFavDucks(credentials.id, credentials.token)
+        retrieveFavDucks(credentials.id, credentials.token)
             .then(ducks => {
                 expect(ducks).toBeDefined()
                 expect(ducks.length).toBe(3)

@@ -1,5 +1,5 @@
+const retrieveUser = require('.')
 const { call } = require('../../utils')
-const logic = require('../')
 
 const { random } = Math
 
@@ -28,7 +28,7 @@ describe('logic - retrieve user', () => {
     })
 
     it('should succeed on matching user with username', () =>
-        logic.retrieveUser(credentials.id, credentials.token)
+        retrieveUser(credentials.id, credentials.token)
             .then(_user => {
                 const { id, name, surname, username, password } = _user
 
@@ -42,7 +42,7 @@ describe('logic - retrieve user', () => {
 
     it('should fail on empty id', () =>
         expect(() =>
-            logic.retrieveUser('', 'a-token')
+            retrieveUser('', 'a-token')
         ).toThrowError(Error, 'id is empty or blank')
     )
 

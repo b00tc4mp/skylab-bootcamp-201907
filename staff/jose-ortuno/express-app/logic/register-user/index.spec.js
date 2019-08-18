@@ -1,5 +1,5 @@
+const registerUser = require('.')
 const { call } = require('../../utils')
-const logic = require('../')
 
 const { random } = Math
 
@@ -17,7 +17,7 @@ describe('logic - register user', () => {
     )
 
     it('should succeed on correct data', () =>
-        logic.registerUser(user.name, user.surname, user.username, user.password, user.password)
+        registerUser(user.name, user.surname, user.username, user.password, user.password)
             .then(() => call('https://skylabcoders.herokuapp.com/api/auth', 'post', { 'content-type': 'application/json' }, { username: user.username, password: user.password }))
             .then(response => {
                 if (response.status === 'KO') throw new Error(response.error)
@@ -42,19 +42,19 @@ describe('logic - register user', () => {
 
     it('should fail on empty name', () =>
         expect(() =>
-            logic.registerUser('', 'Barzi', 'manuelbarzi@gmail.com', '123', '123')
+            registerUser('', 'Barzi', 'manuelbarzi@gmail.com', '123', '123')
         ).toThrowError(Error, 'name is empty or blank')
     )
 
     it('should fail on non-valid username', () =>
         expect(() =>
-            logic.registerUser('Manuel', 'Barzi', 'manuelbarzi#gmail.com', '123', '123')
+            registerUser('Manuel', 'Barzi', 'manuelbarzi#gmail.com', '123', '123')
         ).toThrowError(Error, 'username with value manuelbarzi#gmail.com is not a valid e-mail')
     )
 
     it('should fail on non-matching re-password', () =>
         expect(() =>
-            logic.registerUser('Manuel', 'Barzi', 'manuelbarzi@gmail.com', '123', '456')
+            registerUser('Manuel', 'Barzi', 'manuelbarzi@gmail.com', '123', '456')
         ).toThrowError(Error, 'passwords do not match')
     )
 
@@ -62,9 +62,9 @@ describe('logic - register user', () => {
 
     describe('when user already exists', () => {
         it('should fail on already existing username', () =>
-            logic.registerUser(user.name, user.surname, user.username, user.password, user.password)
+            registerUser(user.name, user.surname, user.username, user.password, user.password)
                 .catch(error => expect(error).toBeUndefined())
-                .then(() => logic.registerUser(user.name, user.surname, user.username, user.password, user.password))
+                .then(() => registerUser(user.name, user.surname, user.username, user.password, user.password))
                 .catch(error => expect(error).toBeDefined())
         )
 

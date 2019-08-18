@@ -1,5 +1,5 @@
+const retrieveDuck = require('.')
 const { call } = require('../../utils')
-const logic = require('../')
 
 const { random } = Math
 
@@ -19,7 +19,7 @@ describe('logic - retrieve duck', () => {
     it('should succeed on valid duck id', () => {
         const id = '5c3853aebd1bde8520e66ee8'
 
-        return logic.retrieveDuck(undefined, undefined, id)
+        return retrieveDuck(undefined, undefined, id)
             .then(duck => {
                 expect(duck).toBeDefined()
                 expect(duck.id).toBe(id)
@@ -34,7 +34,7 @@ describe('logic - retrieve duck', () => {
     it('should fail on non valid duck id', () => {
         const id = '5c3853aebd1bde8520e66ff9'
 
-        return logic.retrieveDuck(undefined, undefined, id)
+        return retrieveDuck(undefined, undefined, id)
             .then(duck => expect(duck).toBeUndefined())
             .catch(error => expect(error).toBeDefined())
     })
@@ -63,7 +63,7 @@ describe('logic - retrieve duck', () => {
         })
 
         it('should succeed on valid id', () =>
-            logic.retrieveDuck(credentials.id, credentials.token, id)
+            retrieveDuck(credentials.id, credentials.token, id)
                 .then(duck => {
                     expect(duck).toBeDefined()
                     expect(duck.id).toBe(id)
@@ -78,7 +78,7 @@ describe('logic - retrieve duck', () => {
         it('should fail on non valid id', () => {
             const id = '5c3853aebd1bde8520e66ff9'
 
-            return logic.retrieveDuck(credentials.id, credentials.token, id)
+            return retrieveDuck(credentials.id, credentials.token, id)
                 .then(duck => expect(duck).toBeUndefined())
                 .catch(error => expect(error).toBeDefined())
         })

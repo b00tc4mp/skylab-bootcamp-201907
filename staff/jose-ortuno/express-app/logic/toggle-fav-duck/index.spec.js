@@ -1,5 +1,5 @@
+const toggleFavDuck = require('.')
 const { call } = require('../../utils')
-const logic = require('../')
 
 const { random } = Math
 
@@ -31,7 +31,7 @@ describe('logic - toggle favorite duck', () => {
     })
 
     it('should succeed on correct duck id', () =>
-        logic.toggleFavDuck(credentials.id, credentials.token, duckId)
+        toggleFavDuck(credentials.id, credentials.token, duckId)
             .then(() =>
                 call(`https://skylabcoders.herokuapp.com/api/user/${credentials.id}`, 'get', { 'authorization': `bearer ${credentials.token}` }, undefined)
                     .then(response => {
@@ -53,7 +53,7 @@ describe('logic - toggle favorite duck', () => {
 
     // TODO refactor
     // it('should fail on non existing id', () => {
-    //     expect(() => logic.toggleFavDuck('invalid-id', data.token, id, () => {}))
+    //     expect(() => toggleFavDuck('invalid-id', data.token, id, () => {}))
     //         .toThrowError(Error, `user with username ${username} not found`)
     // })
 
@@ -61,7 +61,7 @@ describe('logic - toggle favorite duck', () => {
     // it('should fail non existing duck id', () => {
     //     const id = '5c3853aebd1bde8520e66ff9'
 
-    //     logic.toggleFavDuck(username, id, error => {
+    //     toggleFavDuck(username, id, error => {
     //         expect(error).toBeDefined()
 
     //         const { message } = error
@@ -101,7 +101,7 @@ describe('logic - toggle favorite duck', () => {
         })
 
         it('should succeed on correct duck id', () =>
-            logic.toggleFavDuck(credentials.id, credentials.token, id)
+            toggleFavDuck(credentials.id, credentials.token, id)
                 .then(() =>
                     call(`https://skylabcoders.herokuapp.com/api/user/${credentials.id}`, 'get', { 'authorization': `bearer ${credentials.token}` }, undefined)
                         .then(response => {
