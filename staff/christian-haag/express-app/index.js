@@ -134,23 +134,24 @@ app.get(`${DETAIL}/:id`, (req, res) => {
 })
 
 app.get(REGISTER, (req, res) => {
-    const { session: { lang } } = req
+    const { session } = req
 
     req.session.view = REGISTER
 
-    res.send(Html(Register(lang, HOME)))
+    res.send(Html(Register(session, HOME)))
 })
 
 app.post(REGISTER, urlencodedParser, (req, res) => {
-    const { body } = req
+    const { body, session: { lang } } = req
     const { name, surname, username, password, repassword } = body
 
     try {
         logic.registerUser(name, surname, username, password, repassword)
-            .then(() => res.send(Html(RegisterSuccess(LOGIN))))
-            .catch(error => { throw error })
+            .then(() => res.send(Html(RegisterSuccess(lang, LOGIN))))
+
     } catch (error) {
-        throw error
+        req.session.handleError = error.message
+        res.redirect(LOGIN)
     }
 })
 
@@ -194,9 +195,7 @@ app.post(LOGOUT, (req, res) => {
 
 app.post(SELECT_LANG, urlencodedParser, (req, res) => {
     const { body: { lang }, session: { view } } = req
-    console.log(lang)
-    session.lang = lang
-    console.log(session.lang)
+    req.session.lang = lang
     res.redirect(view)
 
 })

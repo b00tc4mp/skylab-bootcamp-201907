@@ -1,7 +1,8 @@
 const literals = require('./i18n')
 const { registerPath } = require('./config')
 
-function Register(lang, gobackPath) {
+function Register(session, gobackPath) {
+    const { lang, handleError } = session
     const { name, surname, username, password, repassword, submit, goback } = literals[lang]
     return `
             <h2> ${literals[lang].title} </h2>
@@ -22,6 +23,7 @@ function Register(lang, gobackPath) {
                 <input type="password" name="repassword" id="repassword" />
                 <button type="submit">${submit}</button>
             </form>
+            ${handleError !== undefined ? `<p>${handleError}</p>` : ''}
             <a href="${gobackPath}">${goback}</a>`
 }
 module.exports = Register

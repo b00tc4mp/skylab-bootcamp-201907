@@ -5,7 +5,7 @@ const { loginPath } = require('./config')
 module.exports = function (session, gobackPath) {
     const { lang, handleError } = session
     const { title, username, password, goback } = literals[lang]
-    console.log(handleError)
+
     return `<h1>${title}</h1>
     <form action="${loginPath}" method="POST">
     

@@ -1,4 +1,5 @@
 node_modules/
-sessions/
-package.json
 package-lock.json
+package.json
+../express-app-pug/
+sessions/
