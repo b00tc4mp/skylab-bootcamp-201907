@@ -1,86 +1,228 @@
 const express = require('express')
-const http = require('http')
+const { Html, Header, DuckResults, DuckDetail, Register, RegisterSuccess, Login } = require('./components')
+const logic = require('./logic')
+
+const session = require('express-session')
+
+const bodyParser = require('body-parser')
+const formBodyParser = bodyParser.urlencoded({ extended: true })
+
+const {
+    HOME,
+    SEARCH,
+    SIGN_IN,
+    SIGN_UP,
+    SIGN_OUT,
+    DETAIL,
+    TOGGLE_FAV,
+    SELECT_LANG,
+    FAVORITE
+} = require('./paths')
+
 const { argv: [, , port] } = process
+
 const app = express()
-// http://localhost:8080/ => <form><input name="query">...</form>
-app.get('', (req, res) => {
-    res.send(`<form action="/search">
-        <input type="text" name="q">
-        <button>Search</button>
-    </form>`)
+
+app.use(express.static('public'))
+
+
+app.use(session({
+    secret: 's3cr3t th1ng',
+    saveUninitialized: true,
+    resave: true
+}))
+
+app.use((req, res, next) => {
+    const { session } = req
+
+    session.lang || (session.lang = 'en')
+
+    next()
 })
 
-function renderHtml() {
-  return `<!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Document</title>
-  </head>
-  <body>
-      
-  </body>
-  </html>`
-}
 
-function renderSearch() {
-  return `<header>
-  ${content}
-  </header>`
-}
+app.get(HOME, (req, res) => {
+    const { session } = req
 
-function renderHeader(content) {
-  return `<header>
-  ${content}
-  </header>`
-}
-app.get('/search', (req, res) => {
-    //  res.send(`ok, searching... ${req.query.q}`)
-    const url = `http://duckling-api.herokuapp.com/api/search?q=${req.query.q}`
-    http.get(url, response => {
-      let content = ''
-      response.on('data', chunk => content += chunk)
-      response.on('end', () => {
-        const jsonData = JSON.parse(content)
+    session.view = HOME
 
-        const ducks = jsonData.map(duck => {
-          const {title, imageUrl, price, id} = duck
-          return `<li><a href="">
-            <h2>${title}</h2>
-            <img src=${imageUrl} />
-            <span>${price}</span>
-            <span>${id}</span></a>
-            </li>`
-        })
-        res.send(`<ul>${ducks.join('')}</ul>`)
-      })
-    })
+    const { userId, token, query, lang } = session
+
+    try {
+        if (userId && token)
+            logic.retrieveUser(userId, token)
+                .then(user => res.send(Html(Header(user.name, query, lang))))
+                .catch(error => { throw error })
+        else
+            res.send(Html(Header(undefined, query, lang)))
+    } catch (error) {
+        throw error
+    }
+
 })
 
-app.get('/duck/:id', (req, res) => {
-    const { params: {id } }= req
 
-    const url = `http://duckling-api.herokuapp.com/api/ducks${id}`
-    http.get(url, response => {
-      let content = ''
-      response.on('data', chunk => content += chunk)
-      response.on('end', () => {
-        const duck = JSON.parse(content)
-        // const duck = jsonData.map(duck => {
+app.get(SEARCH, (req, res) => {
+    const { query: { q: query }, session } = req
 
-          const {title, imageUrl, price, description, link} = duck
-          
-          return `<li>
-            <h2>${title}</h2>
-            <img src=${imageUrl} />
-            <span>${price}</span>
-            <p>${description}</p>
-            <a href="${link}" target="_blank">Link to Store</a>
-            </li>`
-        })
-        res.send(`<ul>${duck}</ul>`)
-}
+    session.query = query
+    session.view = `${SEARCH}?q=${query}`
+
+    const { userId, token, lang } = session
+
+    try {
+        if (userId && token)
+            Promise.all([
+                logic.retrieveUser(userId, token),
+                logic.searchDucks(userId, token, query)
+            ])
+                .then(([user, ducks]) => res.send(Html(`${Header(user.name, query, lang)}${DuckResults(ducks)}`)))
+                .catch(error => { throw error })
+        else
+            logic.searchDucks(undefined, undefined, query)
+                .then(ducks => res.send(Html(`${Header(undefined, query, lang)}${DuckResults(ducks)}`)))
+    } catch (error) {
+        throw error
+    }
+})
+
+
+app.get(`${DETAIL}/:id`, (req, res) => {
+    const { params: { id: duckId }, session } = req
+
+    session.view = `${DETAIL}/${duckId}`
+
+    const { userId, token, query, lang } = session
+
+    try {
+        if (userId && token)
+            Promise.all([
+                logic.retrieveUser(userId, token),
+                logic.retrieveDuck(userId, token, duckId)
+            ])
+                .then(([user, duck]) => res.send(Html(`${Header(user.name, query, lang)}${DuckDetail(duck, lang)}`)))
+                .catch(error => { throw error })
+        else
+            logic.retrieveDuck(undefined, undefined, duckId)
+                .then(duck => res.send(Html(`${Header(undefined, query, lang)}${DuckDetail(duck, lang)}`)))
+    } catch (error) {
+        throw error
+    }
+})
+
+
+app.get(SIGN_UP, (req, res) => {
+    const { session } = req
+
+    session.view = SIGN_UP
+
+    const { lang } = session
+
+    res.send(Html(Register(lang)))
+})
+
+app.post(SIGN_UP, formBodyParser, (req, res) => {
+    const { body, session: { lang } } = req
+
+    const { name, surname, email, password, repassword } = body
+
+    try {
+        logic.registerUser(name, surname, email, password, repassword)
+            .then(() => res.send(Html(RegisterSuccess(lang))))
+            .catch(error => { throw error })
+    } catch (error) {
+        throw error
+    }
+})
+
+
+app.get(SIGN_IN, (req, res) => {
+    const { session } = req
+
+    session.view = SIGN_IN
+
+    const { lang } = session
+
+    res.send(Html(Login(lang)))
+})
+
+app.post(SIGN_IN, formBodyParser, (req, res) => {
+    const { body, session } = req
+
+    const { email, password } = body
+
+    try {
+        logic.authenticateUser(email, password)
+            .then(({ id, token }) => {
+                session.userId = id
+                session.token = token
+
+                res.redirect(HOME)
+            })
+            .catch(error => { throw error })
+    } catch (error) {
+        throw error
+    }
+})
+
+
+app.post(SIGN_OUT, (req, res) => {
+    const { session } = req
+
+    delete session.userId
+    delete session.token
+
+    res.redirect(HOME)
+})
+
+
+app.post(TOGGLE_FAV, formBodyParser, (req, res) => {
+    const { body: { id }, session: { userId, token, query, view } } = req
+
+    if (userId && token)
+        try {
+            logic.toggleFavDuck(userId, token, id)
+                .then(() => res.redirect(view))
+                .catch(error => { throw error })
+        } catch (error) {
+            throw error
+        }
+    else res.redirect(SIGN_IN)
+})
+
+app.get(FAVORITE, (req, res) => {
+    const { query: { q: query }, session } = req
+
+    session.query = query
+    session.view = `${FAVORITE}?q=${""}`
+
+    const { userId, token, lang, duckId } = session
+
+    try {
+        if (userId && token)
+            Promise.all([
+                logic.retrieveUser(userId, token),
+                logic.retrieveFavDucks(userId, token, duckId)
+            ])
+                .then(([user, ducks]) => res.send(Html(`${Header(user.name, query, lang)}${DuckResults(ducks)}`)))
+                .catch(error => { throw error })
+        else
+            logic.retrieveFavDucks(undefined, undefined, query)
+                .then(ducks => res.send(Html(`${Header(undefined, query, lang)}${DuckResults(ducks)}`)))
+    } catch (error) {
+        throw error
+    }
+})
+
+
+app.post(SELECT_LANG, formBodyParser, (req, res) => {
+    const { body: { lang }, session } = req
+
+    session.lang = lang
+
+    const { view } = session
+
+    res.redirect(view)
+})
 
 app.listen(port)

@@ -1,4 +1,6 @@
-logic.retrieveDuck = function (id, token, duckId) {
+const { validate, call } = require('../../utils')
+
+module.exports = function (id, token, duckId) {
     let favorites
 
     if (id != undefined && token != undefined) {

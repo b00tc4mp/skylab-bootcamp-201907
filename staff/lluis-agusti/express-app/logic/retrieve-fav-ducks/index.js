@@ -1,4 +1,6 @@
-logic.retrieveFavDucks = function (id, token) {
+const { validate, call } = require('../../utils')
+
+module.exports = function (id, token) {
     validate.string(id, 'id')
     validate.string(token, 'token')
 

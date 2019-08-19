@@ -1,3 +1,4 @@
+// Indexing components
 module.exports = {
     Html: require('./html'),
     Header: require('./header'),
@@ -5,6 +6,6 @@ module.exports = {
     DuckResults: require('./duck-results'),
     DuckDetail: require('./duck-detail'),
     Register: require('./register'),
-    Login: require('./login'),
-    call: require('call')
+    RegisterSuccess: require('./register-success'),
+    Login: require('./login')
 }
