@@ -1,0 +1,22 @@
+extends ../html/index
+
+block content
+    h1(class='header__title')= signUp
+    form(class='form' method="post" action=path)
+      label(class='form__label')
+        | #{name}
+      input(class='form__text-field' type="text" name="name")
+      label(class='form__label')
+        | #{surname}
+      input(class='form__text-field' type="text" name="surname")
+      label(class='form__label')
+        | E-mail
+      input(class='form__text-field' type="email" name="email")
+      label(class='form__label')
+        | #{password}
+      input(class='form__text-field' type="password" name="password")
+      label(class='form__label')
+        | #{repassword}
+      input(class='form__text-field' type="password" name="repassword")
+      button(class='form__button')= signUp
+    a(class='form__back-link' href=goBackPath)= goBack
