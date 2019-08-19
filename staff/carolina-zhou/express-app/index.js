@@ -3,7 +3,8 @@ const express = require('express')
 const { Html, Header, DuckResults, DuckDetail, Register, RegisterSuccess, Login } = require('./components')
 const logic = require('./logic')
 
-// Creating a session middleware with given options (express-session accepts properties in the options object: cookie, cookie.domain, cookie.expires...).
+// Creating a session middleware[*] with given options (express-session accepts properties in the options object: cookie, cookie.domain, cookie.expires...).
+// [*] Functions that have access to the request object (req), the response object (res), and the next middleware function in the application’s request-response cycle.
 const session = require('express-session')
 
 /* 
