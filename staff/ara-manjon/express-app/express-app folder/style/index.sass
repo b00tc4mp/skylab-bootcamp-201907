@@ -1,0 +1,248 @@
+$font-fam: 'Open Sans', Arial, Helvetica, sans-serif
+$yellow: #fff200
+$black: #1f1f1f
+$yellow-clair: #fff52e
+$yellow-white: #fffba6
+$grey: #474747
+*
+    padding: 0px
+    margin: 0px
+    box-sizing: border-box
+    border: none
+
+@import ../components/header
+body
+    background-color: $yellow
+button
+    outline: none
+    &:focus,
+    &:hover
+        border: node
+        text-decoration: node
+        outline: none
+        color: $grey
+a
+    &:hover
+        color: grey
+
+
+.header
+    width: 100vw
+    position: fixed
+    background-color: $yellow
+    top: 0
+    &--title
+        height: 50px
+        width: 100vw
+        margin: 0px auto
+        display: flex
+        justify-content: center
+    &--items
+        height: 58px
+        width: 100vw
+        margin: 0px auto
+        display: flex
+        font-family: $font-fam
+        color: $black
+        font-size: 1rem
+        text-decoration: none
+        justify-content: space-between
+        padding: 2px
+    &--search
+        width: 100vw
+        display: flex
+        justify-content: center
+        align-self: center
+        position: fixed
+
+    
+
+        
+
+
+.logo
+    text-decoration: none
+    font-size: 1.5rem
+    align-self: center
+    color: $black
+    font-family: $font-fam
+    font-weight: 600
+
+.dropdown
+    display: inline-block
+    display: block
+    overflow: hidden
+    width: 120px
+
+.dropbtn
+    background-color: $yellow
+    padding: 16px
+    width: 120px
+    font-size: 0.9rem
+    border: none
+    cursor: pointer
+
+.dropdown-content,
+.lang-list,
+.lang-form,
+.lang-button,
+.lang-input,
+.lang-ul
+    display: none
+    list-style-type: none
+    background-color: $yellow
+    min-width: 160px
+    box-shadow: none
+    z-index: 2
+    color: $black
+    padding: 4px 2px
+    text-decoration: none
+    text-align: left
+    border: none
+    
+    
+
+.dropdown-content,
+.lang-list,
+.lang-form,
+.lang-button,
+.lang-ul,
+.lang-input
+    display: block
+    list-style-type: none
+    min-width: 160px
+    box-shadow: none
+    z-index: 2
+    color: $black
+    padding: 4px 2px
+    text-decoration: none
+    text-align: left
+    border: none
+.dropdown:hover
+    display: block
+    position: absolute
+.sign
+    position: absolute
+    right: 0
+    padding: 1px 1px
+    width: 100px
+    font-size: 0.9rem
+    align-self: center
+    margin-right: 2px
+    text-align: center
+ul,
+li,
+a
+    list-style-type: none
+    text-decoration: none
+    color: $black
+
+.button
+    &--search
+        background-color: $yellow
+        width: 70px
+        font-size: 0.9rem
+        border: none
+        cursor: pointer
+.input
+    &--search
+        width: 100px
+        height: 20px
+        border: none
+.content
+    margin-top: 120px
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+.item
+    min-width: 100%
+    background-color: $yellow
+    font-family: $font-fam
+    height: 100%
+    display: flex
+    justify-content: center
+    flex-direction: center
+    margin: 2px
+    &--image
+        width: 600px
+
+    &--title
+        color: $black
+        padding: 4px 2px
+        text-align: center
+    &--price
+        position: absolute
+        text-align: center
+        width: 50px
+.button
+    &--fav
+        position: absolute
+        top: 720px
+        margin: 10px
+.formSign
+    display: flex
+    flex-direction: column
+    margin: 10px
+    &--register
+        justify-content: center
+        margin: 20px auto
+        text-align: center
+        font-size: 1rem
+    &--title,
+    &--goback,
+    &--button
+        text-align: center
+        margin: 20px auto
+        text-align: center
+        width: 150px
+        margin: 2px auto
+        font-family: $font-fam
+        background-color: $yellow
+    &--form
+        display: flex
+        flex-direction: column
+        margin: 10px auto
+        justify-content: center
+        text-align: center
+    &--input
+        text-align: center
+        width: 150px
+        height: 25px
+        margin: 2px auto
+    &--label
+        text-align: center
+        width: 150px
+        margin: 2px auto
+        font-family: $font-fam
+
+.hello
+    position: absolute
+    top: 15px
+    right: 20px
+    font-size: 1.2rem
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        
