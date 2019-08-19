@@ -1,5 +1,5 @@
 const express = require('express')
-const { Html, Header, DuckResults, DuckDetail, Register, RegisterSuccess, Login } = require('./components')
+const { Html, Header, DuckResults, DuckDetail, Register, RegisterSuccess, Login , Feedback} = require('./components')
 const session = require('express-session')
 const logic = require('./logic')
 const bodyParser = require('body-parser')
@@ -41,6 +41,8 @@ app.use((req, res, next) => {
 app.get(HOME, (req, res) => {
     const { session } = req
 
+    req.session.error = false
+
     session.view = HOME
 
     const { userId, token, query, lang } = session
@@ -73,7 +75,9 @@ app.get(SEARCH, (req, res) => {
                 logic.searchDucks(userId, token, query)
             ])
                 .then(([user, ducks]) => res.send(Html(`${Header(user.name, query, lang)}${DuckResults(ducks)}`)))
-                .catch(error => { throw error })
+                .catch(error => { 
+                    
+                 })
         else
             logic.searchDucks(undefined, undefined, query)
                 .then(ducks => res.send(Html(`${Header(undefined, query, lang)}${DuckResults(ducks)}`)))
@@ -115,21 +119,28 @@ app.get(SIGN_UP, (req, res) => {
     session.view = SIGN_UP
 
     const { lang } = session
-
-    res.send(Html(Register(lang)))
+    const { error } = session
+     
+    res.send(Html(Register(lang, error)))
 })
 
 app.post(SIGN_UP, formBodyParser, (req, res) => {
     const { body, session: { lang } } = req
 
     const { name, surname, email, password, repassword } = body
+    req.session.error = false
 
     try {
         logic.registerUser(name, surname, email, password, repassword)
             .then(() => res.send(Html(RegisterSuccess(lang))))
-            .catch(error => { throw error })
+            .catch(error => { 
+                req.session.error = error.message
+                res.redirect(SIGN_UP)
+            
+            })
     } catch (error) {
-        throw error
+        req.session.error = error.message
+        res.redirect(SIGN_UP)
     }
 })
 
@@ -138,9 +149,9 @@ app.get(SIGN_IN, (req, res) => {
 
     session.view = SIGN_IN
 
-    const { lang } = session
+    const { lang , error } = session
 
-    res.send(Html(Login(lang)))
+    res.send(Html(Login(lang, error)))
 })
 
 app.post(SIGN_IN, formBodyParser, (req, res) => {
@@ -156,9 +167,13 @@ app.post(SIGN_IN, formBodyParser, (req, res) => {
 
                 res.redirect(HOME)
             })
-            .catch(error => { throw error })
+            .catch(error => { 
+                req.session.error = error.message
+                res.redirect(SIGN_IN)
+             })
     } catch (error) {
-        throw error
+        req.session.error = error.message
+        res.redirect(SIGN_IN)
     }
 })
 
@@ -200,7 +215,9 @@ app.get(FAVORITE, (req, res) => {
 
     session.view = `${FAVORITE}?q=${''}`
 
-    const { userId, token, lang, duckId } = session
+
+    const { userId, token, lang, duckId, query} = session
+    session.query=''
 
     try {
         if (userId && token)

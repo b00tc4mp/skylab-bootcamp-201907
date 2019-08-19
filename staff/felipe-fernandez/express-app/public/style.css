@@ -1,10 +1,22 @@
+.feedback {
+  margin: 2rem 0;
+  padding: 1rem;
+  text-align: center;
+  background-color: #F85B4E55;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  border-left: 1rem solid #F85B4E;
+  color: #F85B4E;
+  font-family: Titillium, sans-serif;
+}
+
 .form {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .form > label {
-  color: green;
+  color: #464159;
   text-align: center;
   padding: 0.1rem;
 }
@@ -28,13 +40,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #D7D9DA;
-  font-family: "Source Sans Pro", sans-serif;
+  background-color: #8bbabb;
+  font-family: "Playfair Display", serif;
   padding: 20px;
   margin: 0 auto;
 }
 .duck-detail button, .duck-results button, .search button, .register button, .login button, .lang button, .header button {
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: "Playfair Display", serif;
   font-size: 16px;
   background-color: #cabebe;
   border-radius: 8px;
@@ -89,7 +101,6 @@ h1 {
 .search {
   display: flex;
   flex-wrap: wrap;
-  flex-grow: 2;
   justify-content: center;
   width: 60%;
 }
@@ -102,8 +113,8 @@ h1 {
 
 .duck-results {
   align-items: center;
-  width: 50%;
-  height: 50%;
+  width: 60%;
+  height: 60%;
 }
 .duck-results * {
   text-align: center;
@@ -124,7 +135,7 @@ h1 {
 
 .duck-detail {
   align-content: center;
-  background-color: #D7D9DA;
+  background-color: #8bbabb;
   width: 60%;
   height: 60%;
   text-align: justify;
@@ -149,16 +160,20 @@ h1 {
   text-align: center;
 }
 
+body {
+  background-color: #c7f0db;
+}
+
 h1 {
   text-align: center;
-  font-family: "Bree Serif", serif;
+  font-family: "Playfair Display", serif;
   padding: 10px;
-  color: #e17055;
+  color: #464159;
 }
 
 a {
   text-decoration: none;
-  color: #e17055;
+  color: #464159;
   font-size: 18px;
 }
 

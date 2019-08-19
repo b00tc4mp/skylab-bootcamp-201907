@@ -8,6 +8,7 @@ function Html(content) {
                 <title>Document</title>
                 <link rel="stylesheet" type="text/css" href="/style.css" />
                 <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+                <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet">
             </head>
             <body>
             <h1>E-duck express app</h1>

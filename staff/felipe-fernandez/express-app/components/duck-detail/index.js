@@ -3,8 +3,8 @@ const literals = require('./i18n')
 
 function DuckDetail(ducks, lang, query) {
     const  { id, favorite, title, imageUrl, price, description, link } = ducks
-    const { goBack } = literals[lang]
-    query ?  query=`/search?q=${query}` :  query=`/ducks/` 
+    const { goBack , store } = literals[lang]
+    query ?  query=`/search?q=${query}` :  query='/ducks/'
 
 
 
@@ -15,7 +15,7 @@ function DuckDetail(ducks, lang, query) {
         <div class="fav">${FavButton(id, favorite)}</div>
         <p>${description}</p>
         
-        <a href="${link}" target="_blank">Go to store</a>
+        <a href="${link}" target="_blank">${store}</a>
         <a href="${query}">${goBack}</a>
     </article>`
 }
