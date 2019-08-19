@@ -1,10 +1,11 @@
 include ../fav-button/index
-
-mixin duck-detail(duck)
-        article
-          h3= duck.title
-          img(src=duck.imageUrl)
-          span= duck.price
-          p= duck.description
-          a(href=duck.link)= 'Go to store'
+mixin duck-detail(duck , goBack , query)
+        article.list-item-detail
+          h3.list-item__header= duck.title
+          img.list-item__image(src=duck.imageUrl)
+          p.list-item__description= duck.description
+          span.list-item__price= duck.price
+          a.btn(href=duck.link)= 'Go to store'
+          a.btn.btn--back(href=goBack+"?q="+query)='Go Back'
           +fav-button(duck.id , duck.favorite)
+          

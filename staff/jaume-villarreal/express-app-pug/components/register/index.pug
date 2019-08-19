@@ -1,22 +1,22 @@
 extends ../html/index
 
 block content
-    h1= signUp
-    form(method="post" action=path)
-      label
+    h1.form-user.form-user__header= signUp
+    form.form-user(method="post" action=path)
+      label.form-user__label
         | #{name}
-        input(type="text" name="name")
-      label
+        input.form-user__input(type="text" name="name")
+      label.form-user__label
         | #{surname}
-        input(type="text" name="surname")
-      label
+        input.form-user__input(type="text" name="surname")
+      label.form-user__label
         | E-mail
-        input(type="email" name="email")
-      label
+        input.form-user__input(type="email" name="email")
+      label.form-user__label
         | #{password}
-        input(type="password" name="password")
-      label
+        input.form-user__input(type="password" name="password")
+      label.form-user__label
         | #{repassword}
-        input(type="password" name="repassword")
+        input.form-user__input(type="password" name="repassword")
       button= signUp
-    a(href=goBackPath)= goBack
+    a.btn.btn--back(href=goBackPath)= goBack

@@ -2,13 +2,13 @@
 extends ../html/index
 
 block content
-    h1= signIn
-    form(method="post" action=path)
-      label
+    h1.form-user.form-user__header= signIn
+    form.form-user(method="post" action=path)
+      label.form-user__label
         | E-mail
-        input(type="email" name="email")
-      label
+        input.form-user__input(type="email" name="email")
+      label.form-user__label
         | #{password}
-        input(type="password" name="password")
-      button= signIn
-    a(href=goBackPath)= goBack
+        input.form-user__input(type="password" name="password")
+      button.btn.btn--form-user= signIn
+    a.btn.btn--back(href=goBackPath)= goBack

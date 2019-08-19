@@ -1,4 +1,4 @@
-const literals = require('./i18n')
+ const literals = require('./i18n')
 const { path, goBackPath } = require('./config')
 
     module.exports = function(lang, res) {

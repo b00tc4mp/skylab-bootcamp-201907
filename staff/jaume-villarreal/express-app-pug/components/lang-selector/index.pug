@@ -1,5 +1,5 @@
 mixin lang-selector(path)
-    ul
+    ul.lang-nav
         li
           form(method="post" action=path)
             input(type="hidden" name="lang" value="en")
@@ -11,7 +11,7 @@ mixin lang-selector(path)
         li
           form(method="post" action=path)
             input(type="hidden" name="lang" value="ca")
-            button CA
+            button CAT
         li
           form(method="post" action=path)
             input(type="hidden" name="lang" value="fr")

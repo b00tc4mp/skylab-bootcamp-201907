@@ -1,11 +1,11 @@
 include ../fav-button/index
 
 mixin duck-results(ducks)
-    ul
+    ul.list-results
       each duck in ducks
-        li
-          a(href='/ducks/' + duck.id)
-            h3= duck.title
-            img(src=duck.imageUrl)
-            span= duck.price
+        li.list-results__item
+          a.list-item(href='/ducks/' + duck.id)
+            h3.list-item__header= duck.title
+            img.list-item__image(src=duck.imageUrl)
+            span.list-item__price= duck.price
             +fav-button(duck.id , duck.favorite)
