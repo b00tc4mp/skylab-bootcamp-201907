@@ -1,0 +1,225 @@
+.body {
+  background-image: url("https://i.etsystatic.com/8383825/r/il/900134/631296477/il_794xN.631296477_se9t.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-sizing: border-box;
+  margin: auto;
+  width: 100vw;
+  min-height: 100vh;
+  font-family: "Cousine", sans-serif;
+  font-size: 22px;
+}
+
+.duck-detail, .duck-results, .register-success, .register, .login {
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 70%;
+  margin: 2em auto;
+  padding: 3em;
+  text-align: center;
+}
+
+.register-success__login, .register__link, .login__link {
+  color: grey;
+  text-decoration: none;
+}
+
+.register__input, .login__input, .header__search-input {
+  width: 100%;
+  margin-top: 0.5em;
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.register__button, .login__button, .header__button, .header__lang-button {
+  background-color: rgba(87, 86, 86, 0.26);
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.header {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 30px;
+  text-align: center;
+}
+.header__title {
+  margin: 0;
+  padding: 25px;
+}
+.header__nav {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 5px;
+  padding: 0;
+}
+.header__item {
+  margin: 5px 15px;
+  width: 235px;
+  border: 1px solid grey;
+  padding: 10px 0px;
+}
+.header__form {
+  padding: 0;
+}
+.header__logout {
+  color: grey;
+  background: none;
+  border: none;
+  padding: 5px 17px;
+  font-size: 22px;
+}
+.header__message {
+  font-size: 2rem;
+  margin: auto;
+}
+.header__link {
+  color: grey;
+  text-decoration: none;
+  margin: 15px;
+  padding: 5px 17px;
+}
+.header__link:hover, .header__logout:hover {
+  color: deeppink;
+}
+
+.header__lang-selector {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+}
+.header__lang-option {
+  padding: 15px;
+}
+.header__lang-button {
+  border-radius: 50px;
+  font-size: 12px;
+}
+
+.header__search-input {
+  margin: 0.5em;
+  width: 50%;
+}
+.login__list {
+  padding: 0;
+}
+.login__item {
+  list-style: none;
+  margin-top: 2em;
+}
+.login__link:hover {
+  color: deeppink;
+}
+
+.register__list {
+  padding: 0;
+}
+.register__item {
+  list-style: none;
+  margin-top: 2em;
+}
+.register__link:hover {
+  color: deeppink;
+}
+
+.register-success__login:hover {
+  color: deeppink;
+}
+
+.favorites {
+  background: none;
+  color: white;
+  border: 2px solid white;
+  border-radius: 5em;
+  padding: 7px;
+  font-size: 16px;
+}
+.favorites:hover {
+  background-color: deeppink;
+}
+
+.duck-results {
+  background-color: rgba(0, 0, 0, 0.7);
+  margin-bottom: 2em;
+}
+.duck-results__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  padding: 10px;
+  font-size: 16px;
+}
+.duck-results__item {
+  list-style: none;
+}
+
+.duck-item {
+  margin: 2em;
+  border: 2px solid white;
+  padding: 1em 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
+.duck-item__title, .duck-item__price {
+  color: white;
+  margin: 0.5em;
+}
+.duck-item__image {
+  max-width: 300px;
+  margin: 0.5em;
+}
+
+.duck-detail {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  margin-bottom: 2em;
+  padding: 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.duck-detail__title {
+  font-size: 2rem;
+}
+.duck-detail__photo {
+  max-width: 80%;
+}
+.duck-detail__price {
+  margin-top: 2em;
+  border: 2px solid white;
+  border-radius: 3em;
+  padding: 20px;
+  width: 20%;
+  align-self: center;
+  font-weight: bold;
+}
+.duck-detail__link {
+  margin-top: 1em;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+.duck-detail__back {
+  margin-top: 1em;
+  color: grey;
+  text-decoration: none;
+}
+.duck-detail__link:hover, .duck-detail__back:hover {
+  color: deeppink;
+
+   /* color: hsla(0, 94%, 21%, 0.993);  */
+}
+
+/*# sourceMappingURL=index.css.map */
+
+
