@@ -115,16 +115,17 @@ app.get(SIGN_UP, (req, res) => {
 })
 
 app.post(SIGN_UP, formBodyParser, (req, res) => {
-    const { body, session: { lang } } = req
+    const { body, session:{lang}} = req
 
     const { name, surname, email, password, repassword } = body
-
+    debugger
     try {
         logic.registerUser(name, surname, email, password, repassword)
             .then(() => res.send(Html(RegisterSuccess(lang))))
             .catch(error => { throw error })
     } catch (error) {
-        throw error
+        debugger
+        res.send(Html(Register(lang, error.message)))
     }
 })
 
@@ -140,7 +141,8 @@ app.get(SIGN_IN, (req, res) => {
 
 app.post(SIGN_IN, formBodyParser, (req, res) => {
     const { body, session } = req
-
+    const { lang } = session
+    debugger
     const { email, password } = body
 
     try {
@@ -153,7 +155,7 @@ app.post(SIGN_IN, formBodyParser, (req, res) => {
             })
             .catch(error => { throw error })
     } catch (error) {
-        throw error
+        res.send(Html(Login(lang, error.message)))
     }
 })
 
@@ -184,7 +186,7 @@ app.get(FAVORITE, (req, res) => {
     const { query: { q: query }, session } = req
 
     session.query = query
-    session.view = `${FAVORITE}?q=${query}`
+    session.view = `${FAVORITE}?q=${""}`
 
     const { userId, token, lang, duckId } = session
 

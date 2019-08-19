@@ -7,19 +7,29 @@ function Header(name, query, lang) {
     const { hello, signUp, signIn, signOut, favorite } = literals[lang]
 
     return `<header class="header">
+        <article>
         ${LangSelector()}
+        <h1 class="header__title">This is an Old Duck Shop</h1>
         ${name && `<nav>
-            
-                <ul><li><a href="${favoritePath}">${favorite}</a></li>
-                <li><form method="post" action="${signOutPath}"><button>${signOut}</button></form></li></ul>
+                <ul>
+                <li class="form__list-item"><a class="header__back-link" href="${favoritePath}">${favorite}</a></li>
+                <li>
+                <form method="post" action="${signOutPath}">
+                <button class="header__button">${signOut}</button>
+                </form>
+                </li>
+                </ul>
                 
             </nav>
-            <h1>${hello}, ${name}!<h1>` || `<nav>
+            <h2>${hello}, ${name}!<h2>` || `<nav>
                 <ul>
-                    <li><a href="${signUpPath}">${signUp}</a></li>
-                    <li><a href="${signInPath}">${signIn}</a></li>
+                    <li class="form__list-item"><a class="header__back-link" href="${signUpPath}">${signUp}</a></li>
+                    <li class="form__list-item"><a class="header__back-link" href="${signInPath}">${signIn}</a></li>
                 </ul>
             </nav>`}
+       
+       </article>
+       
         ${Search(query, lang)}
     </header>`
 }
