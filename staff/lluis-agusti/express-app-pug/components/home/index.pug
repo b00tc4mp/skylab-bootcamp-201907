@@ -3,19 +3,23 @@ extends ../html/index
 include ../lang-selector/index
 include ../search/index
 include ../duck-results/index
+include ../duck-detail/index
+
 
 block content
     header.header
       +lang-selector(selectLangPath)
-      nav
-        ul
-          li
-            form(method="post" action=signOutPath)
-              button= signOut
+      
       if(name)
-        h1
+        nav
+          h1
             | #{hello}, #{name}!
-            h1
+          ul
+            li
+              a(href=favoritePath)= favorite
+            li
+              form(method="post" action=signOutPath)
+                button= signOut
       else
         nav
             ul
@@ -26,3 +30,5 @@ block content
       +search(searchPath, search)
       if (ducks)
         +duck-results(ducks)
+      if (duck)
+        +duck-detail(duck)

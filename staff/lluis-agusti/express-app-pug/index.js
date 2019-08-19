@@ -11,7 +11,8 @@ const {
     SIGN_OUT,
     DETAIL,
     TOGGLE_FAV,
-    SELECT_LANG
+    SELECT_LANG,
+    FAVORITE
 } = require('./paths')
 
 const formBodyParser = bodyParser.urlencoded({ extended: true })
@@ -51,12 +52,12 @@ app.get(HOME, (req, res) => {
             logic.retrieveUser(userId, token)
                 .then(user =>
                     // res.send(Html(Home(user.name, query, lang)))
-                    Home(user.name, query, lang, undefined, res)
+                    Home(user.name, query, lang, undefined, undefined, res)
                 )
                 .catch(error => { throw error })
         else
             // res.send(Html(Home(undefined, query, lang)))
-            Home(undefined, query, lang, undefined, res)
+            Home(undefined, query, lang, undefined, undefined, res)
     } catch (error) {
         throw error
     }
@@ -79,14 +80,44 @@ app.get(SEARCH, (req, res) => {
             ])
                 .then(([user, ducks]) =>
                     //res.send(Html(`${Home(user.name, query, lang)}${DuckResults(ducks)}`))
-                    Home(user.name, query, lang, ducks, res)
+                    Home(user.name, query, lang, ducks, undefined, res)
                 )
                 .catch(error => { throw error })
         else
             logic.searchDucks(undefined, undefined, query)
                 .then(ducks =>
                     // res.send(Html(`${Home(undefined, query, lang)}${DuckResults(ducks)}`))
-                    Home(undefined, query, lang, ducks, res)
+                    Home(undefined, query, lang, ducks, undefined, res)
+                )
+    } catch (error) {
+        throw error
+    }
+})
+
+app.get(FAVORITE, (req, res) => {
+    const { query: { q: query }, session } = req
+
+    session.query = query
+    session.view = `${FAVORITE}`
+
+    const { userId, token, lang } = session
+
+    try {
+        if (userId && token)
+            Promise.all([
+                logic.retrieveUser(userId, token),
+                logic.retrieveFavDucks(userId, token, query)
+            ])
+                .then(([user, ducks]) =>
+                    //res.send(Html(`${Home(user.name, query, lang)}${DuckResults(ducks)}`))
+                    Home(user.name, query, lang, ducks, undefined, res)
+                )
+                .catch(error => { throw error })
+        else
+            logic.retrieveFavDucks(undefined, undefined, query)
+                .then(ducks =>
+                    // res.send(Html(`${Home(undefined, query, lang)}${DuckResults(ducks)}`))
+                    Home(undefined, query, lang, ducks, undefined, res)
                 )
     } catch (error) {
         throw error
@@ -96,7 +127,7 @@ app.get(SEARCH, (req, res) => {
 app.get(`${DETAIL}/:id`, (req, res) => {
     const { params: { id: duckId }, session } = req
 
-    session.view = `${DETAIL}/${duckId}`
+    session.view = `/ducks/${duckId}`
 
     const { userId, token, query, lang } = session
 
@@ -106,11 +137,13 @@ app.get(`${DETAIL}/:id`, (req, res) => {
                 logic.retrieveUser(userId, token),
                 logic.retrieveDuck(userId, token, duckId)
             ])
-                .then(([user, duck]) => res.send(Html(`${Home(user.name, query, lang)}${DuckDetail(duck)}`)))
+                //.then(([user, duck]) => res.send(Html(`${Home(user.name, query, lang)}${DuckDetail(duck)}`)))
+                .then(([user, duck]) => Home(user.name, query, lang, undefined, duck, res))
                 .catch(error => { throw error })
         else
             logic.retrieveDuck(undefined, undefined, duckId)
-                .then(duck => res.send(Html(`${Home(undefined, query, lang)}${DuckDetail(duck)}`)))
+                //.then(duck => res.send(Html(`${Home(undefined, query, lang)}${DuckDetail(duck)}`)))
+                .then(duck => Home(undefined, query, lang, undefined, duck, res))
     } catch (error) {
         throw error
     }
@@ -134,7 +167,7 @@ app.post(SIGN_UP, formBodyParser, (req, res) => {
 
     try {
         logic.registerUser(name, surname, email, password, repassword)
-            .then(() => res.send(Html(RegisterSuccess(lang))))
+            .then(() =>RegisterSuccess(lang,res))
             .catch(error => { throw error })
     } catch (error) {
         throw error
