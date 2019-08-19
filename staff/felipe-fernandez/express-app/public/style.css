@@ -1,0 +1,169 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form > label {
+  color: green;
+  text-align: center;
+  padding: 0.1rem;
+}
+.form > input {
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.form > button {
+  width: 30%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+* {
+  padding: 0;
+}
+
+.duck-detail, .duck-results, .search, .register, .login, .lang, .header {
+  margin: 1.5rem;
+  background-color: lightgray;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #D7D9DA;
+  font-family: "Source Sans Pro", sans-serif;
+  padding: 20px;
+  margin: 0 auto;
+}
+.duck-detail button, .duck-results button, .search button, .register button, .login button, .lang button, .header button {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 16px;
+  background-color: #cabebe;
+  border-radius: 8px;
+  padding: 0.3rem;
+}
+.duck-detail button:hover, .duck-results button:hover, .search button:hover, .register button:hover, .login button:hover, .lang button:hover, .header button:hover {
+  background-color: white;
+  color: #D7D9DA;
+  font-weight: bold;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  width: 60%;
+}
+
+.navigator {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+h1 {
+  display: block;
+}
+
+.lang {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+}
+
+.login {
+  width: 60%;
+  height: 80%;
+}
+.login input {
+  display: block;
+  flex-wrap: wrap;
+}
+
+.register {
+  width: 60%;
+  height: 40%;
+}
+.register input {
+  display: block;
+  flex-wrap: wrap;
+}
+
+.search {
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 2;
+  justify-content: center;
+  width: 60%;
+}
+.search button {
+  margin: 0 auto;
+}
+.search input {
+  padding: 0.1rem;
+}
+
+.duck-results {
+  align-items: center;
+  width: 50%;
+  height: 50%;
+}
+.duck-results * {
+  text-align: center;
+}
+.duck-results img {
+  width: 80%;
+  align-self: center;
+}
+.duck-results li {
+  list-style: none;
+}
+.duck-results h3 {
+  align-self: center;
+}
+.duck-results span {
+  display: block;
+}
+
+.duck-detail {
+  align-content: center;
+  background-color: #D7D9DA;
+  width: 60%;
+  height: 60%;
+  text-align: justify;
+}
+.duck-detail img {
+  width: 80%;
+  margin: 0 10%;
+}
+.duck-detail span {
+  display: block;
+  color: black;
+  text-align: center;
+}
+.duck-detail a {
+  display: block;
+  text-align: center;
+}
+.duck-detail h3 {
+  text-align: center;
+}
+.duck-detail .fav {
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+  font-family: "Bree Serif", serif;
+  padding: 10px;
+  color: #e17055;
+}
+
+a {
+  text-decoration: none;
+  color: #e17055;
+  font-size: 18px;
+}
+
+li {
+  list-style-type: none;
+}
+
+/*# sourceMappingURL=style.css.map */
