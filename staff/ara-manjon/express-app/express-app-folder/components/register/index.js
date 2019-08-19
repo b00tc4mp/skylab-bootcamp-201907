@@ -1,8 +1,10 @@
 const literals = require('./i18n')
 const { path, goBackPath } = require('./config')
+const Feedback = require('../feedback')
 
-function Register(lang) {
+function Register(lang, error) {
     const{title, password, surname, name, email, repassword, goBack} = literals[lang]
+    
     return `<section class="formSign--register">
         <h1 class="formSign--title">${title}</h1>
         <form class="formSign--form" method="post" action="${path}">
@@ -13,11 +15,16 @@ function Register(lang) {
             <label class="formSign--label">${repassword}<input class="formSign--input" type="password" name="repassword" /></label>
             <button class="formSign--button">${title}</button>
         </form>
-        <a class="formSign--goback" href="${goBackPath}">${goBack}</a>
+        ${(error && Feedback(error)) || ''}
+       
+        <a class="formSign--goback" href="${goBackPath}">${goBack}</a> 
     </section>`
+   
+    
 }
 
 module.exports = Register
+
 
 
 

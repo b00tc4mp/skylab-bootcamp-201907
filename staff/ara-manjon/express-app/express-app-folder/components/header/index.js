@@ -25,7 +25,7 @@ function Header(name, query, lang) {
         </li>
         <li>
         <form method="post" action="${signOutPath}">
-        <buttonclass="button" >${signOut}</button>
+        <button class="button" >${signOut}</button>
         </form>
         </li>
         </ul>

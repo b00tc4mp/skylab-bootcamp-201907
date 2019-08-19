@@ -1,5 +1,5 @@
 const express = require('express')
-const { Html, Header, Login, Register, DuckResults, DuckDetail, RegisterSuccess } = require('./components')
+const { Html, Header, Login, Register, DuckResults, DuckDetail, RegisterSuccess} = require('./components')
 const logic = require('./logic')
 const session = require('express-session')
 const bodyParser = require('body-parser')
@@ -149,7 +149,7 @@ app.post(SIGN_UP, formBodyParser, (req, res)=>{
         .then(()=>res.send(Html(RegisterSuccess(lang))))
         .catch(error => { throw error })
     }catch(error){
-        throw error
+        res.send(Html(Register(lang,error)))
     }    
 })
 
@@ -164,8 +164,10 @@ app.post(SIGN_UP, formBodyParser, (req, res)=>{
 
 
 app.post(SIGN_IN,formBodyParser,(req, res)=>{
+    
     const { body, session } = req
-   const { email , password } = body
+    const { lang }=session
+    const { email , password } = body
    try{
     logic.authenticateUser(email, password)
     .then(({id, token})=>{
@@ -176,7 +178,8 @@ app.post(SIGN_IN,formBodyParser,(req, res)=>{
     })
     .catch(error => {throw error})        
    } catch(error){
-       throw error
+    res.send(Html(Login(lang, error)))
+    
    }
 })
 
