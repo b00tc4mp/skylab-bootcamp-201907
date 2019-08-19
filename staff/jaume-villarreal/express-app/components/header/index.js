@@ -1,7 +1,9 @@
 const Search = require('../search')
+const LangSelector = require('../lang-selector')
+
 const literals = require('./i18n')
 const { signInPath, signUpPath, signOutPath, favoritesPath } = require('./config')
-const LangSelector = require('../lang-selector')
+
 
 function Header(name, query, lang) {
     const { hello, signUp, signIn, signOut, favorites } = literals[lang]

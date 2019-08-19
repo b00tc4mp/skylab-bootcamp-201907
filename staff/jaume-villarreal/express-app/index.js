@@ -44,7 +44,12 @@ app.get(HOME, (req, res) => {
 
     session.view = HOME
 
-    session.error = undefined
+    delete session.error
+
+    delete session.name
+    delete session.surname
+    delete session.email
+    delete session.password
 
     const { userId, token, query, lang } = session
 
@@ -86,9 +91,6 @@ app.get(SEARCH, (req, res) => {
 })
 
 app.get(`${DETAIL}/:id/`, (req, res) => {
-
-    //  console.log(req.path)
-    
     const { params: { id: duckId }, session } = req
 
     session.view = `${DETAIL}/${duckId}`
@@ -116,22 +118,43 @@ app.get(SIGN_UP, (req, res) => {
 
     session.view = SIGN_IN
 
-    const { lang , error } = session
+    const { lang , error , name , surname , email , password } = session
 
-    res.send(Html(Register(lang , error)))
+    res.send(Html(Register(name , surname , email , password , lang , error)))
+
+    delete session.name
+    delete session.surname
+    delete session.email
+    delete session.password
 })
 
 app.post(SIGN_UP, formBodyParser, (req, res) => {
-    const { body, session: { lang } } = req
-
+    // const { body, session:{lang} } = req
+    const { body, session } = req
+    const { lang } = session
+    
     const { name, surname, email, password, repassword } = body
 
+    session.name = name
+    session.surname = surname
+    session.email = email
+    session.password = password
+
     try {
-        logic.registerUser(name, surname, email, password, repassword)
-            .then(() => res.send(Html(RegisterSuccess(lang))))
-            .catch(error => { throw error })
+        logic.registerUser(session.name, session.surname, session.email, session.password, repassword)
+            .then(() => {
+                delete session.name
+                delete session.surname
+                delete session.email
+                delete session.password
+                res.send(Html(RegisterSuccess(lang)))
+            })
+            .catch(error => {
+                session.error = error.message
+                res.redirect(SIGN_UP)
+            })
     } catch (error) {
-         session.error = error.message
+        session.error = error.message
         res.redirect(SIGN_UP)
     }
 })
@@ -141,9 +164,14 @@ app.get(SIGN_IN, (req, res) => {
 
     session.view = SIGN_IN
 
-    const { lang , error } = session
+    const { lang , error , email , password  } = session
 
-    res.send(Html(Login(lang , error)))
+    res.send(Html(Login(email ,  password , lang , error)))
+
+    delete session.name
+    delete session.surname
+    delete session.email
+    delete session.password
 })
 
 app.post(SIGN_IN, formBodyParser, (req, res) => {
@@ -151,8 +179,11 @@ app.post(SIGN_IN, formBodyParser, (req, res) => {
 
     const { email, password } = body
 
+      session.email = email
+      session.password = password
+
     try {
-        logic.authenticateUser(email, password)
+        logic.authenticateUser(session.email , session.password)
             .then(({ id, token }) => {
                 session.userId = id
                 session.token = token
@@ -163,7 +194,6 @@ app.post(SIGN_IN, formBodyParser, (req, res) => {
                 session.error = error.message
                 res.redirect(SIGN_IN)
             })
-            // .catch(error => { throw error })
     } catch (error) {
         session.error = error.message
         res.redirect(SIGN_IN)
