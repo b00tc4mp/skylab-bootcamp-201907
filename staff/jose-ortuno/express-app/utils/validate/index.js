@@ -1,23 +1,28 @@
-
-const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-const URL_REGEX = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/
+const check = require('../check')
 
 module.exports = {
-    string(target, name, empty = true, values) {
-        if (typeof target !== 'string') throw TypeError(`${name} with value ${target} is not a string`)
-        if (empty && !target.trim()) throw new Error(`${name} is empty or blank`)
-        if (values && !values.includes(target)) throw new Error(`${name} with value ${target} does not match one of the expected values: ${values.join(', ')}`)
+    string(target, name, empty = true, value) {
+        const error = check.string(target, name, empty, value)
+        if (error) throw Error(error)
     },
 
     email(target, name) {
-        if (!EMAIL_REGEX.test(target)) throw new Error(`${name} with value ${target} is not a valid e-mail`)
+        const error = check.email(target, name)
+        if (error) throw Error(error)
     },
 
     function(target, name) {
-        if (typeof target !== 'function') throw TypeError(`${name} with value ${target} is not a function`)
+        const error = check.function(target, name)
+        if (error) throw Error(error)
     },
 
     url(target, name) {
-        if (!URL_REGEX.test(target)) throw new Error(`${name} with value ${target} is not a valid URL`)
+        const error = check.url(target, name)
+        if (error) throw Error(error)
+    }, 
+
+    multiple(criteria) {
+        const errors = check.multiple(criteria)
+        if(errors.length) throw Error(errors.join('|'))
     }
 }

@@ -1,6 +1,6 @@
 module.exports = function (id, selected) {
-    return `<form method="post" action="/toggle-favorite">
+    return `<form class="fav" method="post" action="/toggle-favorite">
             <input type="hidden" name="id" value="${id}" />
-            <button>${selected ? '💜' : '💔'}</button>
+            <button>${selected ? `<i class="fas fa-heart-broken"></i>` : `<i class="fas fa-heart"></i>`}</button>
         </form>`
 }

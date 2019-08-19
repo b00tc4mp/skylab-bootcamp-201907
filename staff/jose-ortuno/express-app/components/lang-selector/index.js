@@ -1,7 +1,7 @@
 const { path } = require('./config')
 
 module.exports = function () {
-    return `<ul>
+    return `<ul class="lang-selector">
                 <li>
                     <form method="post" action="${path}">
                         <input type="hidden" name="lang" value="en">

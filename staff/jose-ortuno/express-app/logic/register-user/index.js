@@ -1,19 +1,18 @@
 const { validate, call } = require('../../utils')
 
-function registerUser(name, surname, username, password, repassword) {
-    validate.string(name, 'name')
-    validate.string(surname, 'surname')
-    validate.string(username, 'username')
-    validate.email(username, 'username')
-    validate.string(password, 'password')
-    validate.string(repassword, 'password repeat')
+module.exports = function (name, surname, username, password, repassword) {
 
-    if (password !== repassword) throw new Error('passwords do not match')
+    validate.multiple([
+        { type: 'string', target: name, name: 'name' },
+        { type: 'string', target: surname, name: 'surname' },
+        { type: 'string', target: username, name: 'username' },
+        { type: 'string', target: password, name: 'password' },
+        { type: 'string', target: repassword, name: 'repassword' },
+        { type: 'match', target: [password, repassword] }
+    ])
 
     return call('https://skylabcoders.herokuapp.com/api/user', 'post', { 'content-type': 'application/json' }, { name, surname, username, password, favorites: [] })
         .then(response => {
             if (response.status === 'KO') throw new Error(response.error)
         })
 }
-
-module.exports = registerUser
