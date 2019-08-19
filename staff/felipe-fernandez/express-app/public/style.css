@@ -34,7 +34,7 @@
   padding: 0;
 }
 
-.duck-detail, .duck-results, .search, .register, .login, .lang, .header {
+.duck-detail, .duck-results, .search, .register-success, .register, .login, .lang, .header {
   margin: 1.5rem;
   background-color: lightgray;
   flex-direction: column;
@@ -45,15 +45,15 @@
   padding: 20px;
   margin: 0 auto;
 }
-.duck-detail button, .duck-results button, .search button, .register button, .login button, .lang button, .header button {
+.duck-detail button, .duck-results button, .search button, .register-success button, .register button, .login button, .lang button, .header button {
   font-family: "Playfair Display", serif;
   font-size: 16px;
   background-color: #cabebe;
   border-radius: 8px;
   padding: 0.3rem;
 }
-.duck-detail button:hover, .duck-results button:hover, .search button:hover, .register button:hover, .login button:hover, .lang button:hover, .header button:hover {
-  background-color: white;
+.duck-detail button:hover, .duck-results button:hover, .search button:hover, .register-success button:hover, .register button:hover, .login button:hover, .lang button:hover, .header button:hover {
+  background: #6b6b6b;
   color: #D7D9DA;
   font-weight: bold;
 }
@@ -87,6 +87,7 @@ h1 {
 .login input {
   display: block;
   flex-wrap: wrap;
+  padding: 0.3rem;
 }
 
 .register {
@@ -96,6 +97,13 @@ h1 {
 .register input {
   display: block;
   flex-wrap: wrap;
+  padding: 0.3rem;
+}
+
+.register-success {
+  width: 60vw;
+  font-family: "Playfair Display", serif;
+  text-align: center;
 }
 
 .search {
@@ -108,7 +116,8 @@ h1 {
   margin: 0 auto;
 }
 .search input {
-  padding: 0.1rem;
+  padding: 0.3rem;
+  margin-bottom: 0.5rem;
 }
 
 .duck-results {
@@ -165,6 +174,13 @@ body {
 }
 
 h1 {
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  padding: 10px;
+  color: #464159;
+}
+
+h2 {
   text-align: center;
   font-family: "Playfair Display", serif;
   padding: 10px;

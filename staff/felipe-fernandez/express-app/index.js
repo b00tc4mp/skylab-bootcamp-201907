@@ -62,11 +62,14 @@ app.get(HOME, (req, res) => {
 
 app.get(SEARCH, (req, res) => {
     const { query: { q: query }, session } = req
-
+   
+    
     req.session.query = query
     req.session.view = `${SEARCH}?q=${query}`
+
     
     const { userId, token, lang } = session
+ 
 
     try {
         if (userId && token)

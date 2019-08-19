@@ -5,7 +5,7 @@ const Feedback = require('../feedback')
 function Register(lang, error) {
     const { signUp, name, surname, password, repassword, goBack } = literals[lang]
 
-    return `<h1>${signUp}</h1>
+    return `<h2>${signUp}</h2>
         <form class="form register" method="post" action="${path}">
             <label>${name}<input type="text" name="name" /></label>
             <label>${surname}<input type="text" name="surname" /></label>
