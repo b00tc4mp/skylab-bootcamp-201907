@@ -1,21 +1,37 @@
 const literals = require('./i18n')
 const { path, goBackPath } = require('./config')
+const feedback = require('../feedback')
 
-    module.exports = function(lang, res) {
+function Register(lang, error) {
     const { signUp, name, surname, password, repassword, goBack } = literals[lang]
 
-    res.render('register', { signUp, name, surname, password, repassword, goBack, path, goBackPath } )
+    return `<section class="register">
+        <h1 class="register__title">${signUp}</h1>
+        <form method="post" action="${path}">
+            <ul class="register__list">
+                <li class="register__item">
+                    <label><input class="register__input" type="text" placeholder="${name}" name="name" /></label>
+                </li>
+                <li class="register__item">
+                    <label><input class="register__input" type="text" placeholder="${surname}" name="surname" /></label>
+                </li>
+                <li class="register__item">
+                    <label><input class="register__input" type="email" placeholder="E-mail" name="email" /></label>
+                </li>
+                <li class="register__item">
+                    <label><input class="register__input" type="password" placeholder="${password}" name="password" /></label>
+                </li>
+                <li class="register__item">
+                    <label><input class="register__input" type="password" placeholder="${repassword}" name="repassword" /></label>
+                </li>
+                <li class="register__item">
+                    <button class="register__button">${signUp}</button>
+                </li>
+            </ul>
+        </form>
+        <p>${(error && feedback(error)) || " "}</p>
+        <a class="register__link" href="${goBackPath}">${goBack}</a>
+        </section>`
 }
 
-// module.exports = function(lang) {
-
-    // return `<h1>${signUp}</h1>
-    //     <form method="post" action="${path}">
-    //         <label>${name}<input type="text" name="name" /></label>
-    //         <label>${surname}<input type="text" name="surname" /></label>
-    //         <label>E-mail<input type="email" name="email" /></label>
-    //         <label>${password}<input type="password" name="password" /></label>
-    //         <label>${repassword}<input type="password" name="repassword" /></label>
-    //         <button>${signUp}</button>
-    //     </form>
-    //     <a href="${goBackPath}">${goBack}</a>`
+module.exports = Register

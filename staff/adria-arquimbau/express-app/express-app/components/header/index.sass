@@ -1,0 +1,62 @@
+.sticky 
+  position: fixed
+  top: 0
+  width: 100%
+    
+.header
+    background-color: $secondary-bg-color
+    padding: 30px
+    text-align: center
+
+    &__title
+        margin: 0
+        padding: 25px
+
+    &__nav
+        list-style: none
+        display: flex
+        flex-direction: column
+        align-items: flex-end
+        margin-top: 0
+        padding: 0
+    
+    &__item
+        margin: 2px 9px
+        width: 225px
+        border: 1px solid $link-text-color
+        padding: 0
+    
+    &__form
+        padding: 0
+        display: flex
+        justify-content: center
+
+    &__form-search
+        background-color: black
+        color: $hover-text-color
+
+    &__logout
+        color: $link-text-color
+        background: none
+        border: none
+        font-size: 22px
+        display: flex
+        justify-content: center
+
+    &__message
+        font-size: 1rem
+        margin: 8.3px 15px
+        display: flex
+        flex-direction: column
+        align-items: flex-end
+
+
+
+    &__link
+        color: $link-text-color
+        text-decoration: none
+        margin: 15px
+        padding: 5px 17px
+    
+    &__link:hover, &__logout:hover
+        color: $hover-text-color

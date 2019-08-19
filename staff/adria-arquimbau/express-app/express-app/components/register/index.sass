@@ -1,0 +1,28 @@
+.register
+    @extend %main-content-box 
+
+    &__list
+        padding: 0
+        
+    &__item
+        list-style: none
+        margin-top: 2em
+
+    &__input
+        background-color: black
+        @extend %text-input 
+        width: 30%
+        text-align: center
+        color: $hover-text-color
+
+    &__button
+        @extend %button
+
+    &__button:hover
+        color: $hover-text-color
+
+    &__link
+        @extend %link
+
+    &__link:hover
+        color: $hover-text-color

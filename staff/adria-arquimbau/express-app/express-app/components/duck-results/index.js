@@ -1,5 +1,7 @@
-const DuckItem = require('./duck-item')
+const DuckItem = require('../duck-item')
 
 module.exports = function(ducks) {
-    return `<ul>${ducks.map(duck => `<li>${DuckItem(duck)}</li>`).join('')}</ul>`
+    return `<section class="duck-results">
+        <ul class="duck-results__list">${ducks.map(duck => `<li class="duck-results__item">${DuckItem(duck)}</li>`).join('')}</ul>
+    </section`
 }
