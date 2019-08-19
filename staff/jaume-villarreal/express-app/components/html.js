@@ -8,7 +8,7 @@ function Html(content) {
                 
                 <link rel="stylesheet" href="/style.css" type="text/css">
                 <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Titillium+Web&display=swap" rel="stylesheet">
-                <link rel="icon" href="favicon.ico" type="image/x-icon" />
+                <link rel="icon" href="/favicon.ico" type="image/x-icon" />
                
                 <title>Document</title>
                
