@@ -1,5 +1,5 @@
 const express = require('express')
-const { Html, Home, DuckDetail, Register, RegisterSuccess, Login } = require('./components')
+const { Html, Home, DuckDetail, Register, RegisterSuccess, Login, Feedback } = require('./components')
 const session = require('express-session')
 const logic = require('./logic')
 const bodyParser = require('body-parser')
@@ -44,6 +44,7 @@ app.get(HOME, (req, res) => {
     const { session } = req
 
     session.view = HOME
+    req.session.error=false
 
     const { userId, token, query, lang } = session
 
@@ -152,13 +153,13 @@ app.get(`${DETAIL}/:id`, (req, res) => {
 
 app.get(SIGN_UP, (req, res) => {
     const { session } = req
-
+    const { error } = session
     session.view = SIGN_UP
 
     const { lang } = session
-
+   
     //res.send(Html(Register(lang)))
-    Register(lang, res)
+    Register(lang, res, error)
 })
 
 app.post(SIGN_UP, formBodyParser, (req, res) => {
@@ -170,9 +171,13 @@ app.post(SIGN_UP, formBodyParser, (req, res) => {
         logic.registerUser(name, surname, email, password, repassword)
         // .then(() => res.send(Html(RegisterSuccess(lang))))
              .then(() => RegisterSuccess(lang, res))
-            .catch(error => { throw error })
+            .catch(error => { 
+                req.session.error=error.message
+                res.redirect(SIGN_UP) 
+            })
     } catch (error) {
-        throw error
+        req.session.error=error.message
+        res.redirect(SIGN_UP)
     }
 })
 
@@ -182,9 +187,9 @@ app.get(SIGN_IN, (req, res) => {
     session.view = SIGN_IN
 
     const { lang } = session
-
+    const { error }= session
     //res.send(Html(Login(lang)))
-    Login(lang, res)
+    Login(lang, res, error)
 })
 
 app.post(SIGN_IN, formBodyParser, (req, res) => {
@@ -200,9 +205,13 @@ app.post(SIGN_IN, formBodyParser, (req, res) => {
 
                 res.redirect(HOME)
             })
-            .catch(error => { throw error })
+            .catch(error => { 
+                req.session.error=error.message
+                res.redirect(SIGN_IN)
+             })
     } catch (error) {
-        throw error
+        req.session.error=error.message
+        res.redirect(SIGN_IN)
     }
 })
 
