@@ -1,11 +1,11 @@
-const literals = require('./i18n')
+// const literals = require('./i18n')
 
 module.exports = function (lang, error) {
 
-    const { } = literals[lang]
+    // const { } = literals[lang]
 
     return `
-    <section class='landing'>
+    <section class='feedback'>
         <p>${error}</p>
     </section>
     `

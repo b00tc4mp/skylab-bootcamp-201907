@@ -126,7 +126,7 @@ app.post(SIGN_UP, formBodyParser, (req, res) => {
             .catch(error => { throw error })
     } catch (error) {
         req.session.error = error.message
-
+        // TODO: STORE SESSION INFORMATION TO REPAINT WHEN ERROR HANDLING
         res.redirect(view)
     }
 })

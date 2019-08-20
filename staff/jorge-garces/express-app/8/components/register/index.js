@@ -1,6 +1,7 @@
 const literals = require('./i18n')
 const { path, goBackPath } = require('./config')
 const LangSelector = require('../lang-selector')
+const Feedback = require('../feedback')
 
 function Register(lang, error) {
     const { title, name, surname, password, repassword, back } = literals[lang]
@@ -30,7 +31,7 @@ function Register(lang, error) {
         </section>
     </section>
         
-        ${error ? `<h1>${error}</h1>` : ''}`
+        ${error ? `${Feedback(lang, error)}` : ''}`
 }
 
 module.exports = Register
