@@ -31,18 +31,19 @@ app.use(session({
 }))
 
 app.get(HOME, (req, res) => {
-    const { query:{lang}, session: { userId, token, query } } = req
+    const { query: { lang }, session: { userId, token, query } } = req
 
+    req.session.error = false
     // TODO make app multi-lang
-    lang? req.session.lang=lang:req.session.lang="en"
+    lang ? req.session.lang = lang : req.session.lang = "en"
 
     try {
         if (userId && token)
             logic.retrieveUser(userId, token)
-                .then(user => res.send(Html(Header(user.name, query, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT, FAVORITE))))
+                .then(user => res.send(Html(Header(user.name, query, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT, FAVORITE,req.session.lang))))
                 .catch(error => { throw error })
         else
-            res.send(Html(Header(undefined, query, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT, FAVORITE)))
+            res.send(Html(Header(undefined, query, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT, FAVORITE,req.session.lang)))
     } catch (error) {
         throw error
     }

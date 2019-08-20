@@ -2,7 +2,10 @@ const Search = require('../search')
 const literals = require('./i18n')
 const { signInPath, signUpPath, signOutPath } = require('./config')
 
-function Header(name, query, searchPath, signInPath, signUpPath, signOutPath,favorites) {
+function Header(name, query, searchPath, signInPath, signUpPath, signOutPath,favorites,lang) {
+    debugger
+    const { hello, signIn, signUp, signOut } = literals[lang]
+
     
     return `<header>
     <h1 class="title">DUCK SERVER</h1>
@@ -13,18 +16,18 @@ function Header(name, query, searchPath, signInPath, signUpPath, signOutPath,fav
                 <div class="uppernav">
                 <nav>
                 <ul>
-                <li><form method="post" action="${signOutPath}"><button>Sign-Out</button></form></li>
+                <li><form method="post" action="${signOutPath}"><button>${signOut}</button></form></li>
                 <li><a href="${favorites}">Favorites</a></li>
                 </ul>
                 </nav>
                 </div>
-                <h1>Hello, ${name}!</h1>` || `
+                <h1>${hello}, ${name}!</h1>` || `
             <div class="uppernav">
                 <div>
                 
                 <ul>
-                    <li><a href="${signUpPath}">Sign-Up</a></li>
-                    <li><a href="${signInPath}">Sign-In</a></li>
+                    <li><a href="${signUpPath}">${signUp}</a></li>
+                    <li><a href="${signInPath}">${signIn}</a></li>
                 </ul>
                 </div>
                  
