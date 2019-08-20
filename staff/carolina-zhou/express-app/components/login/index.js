@@ -2,7 +2,7 @@ const literals = require('./i18n')
 const { path } = require('./config')
 const Feedback = require('../feedback')
 
-module.exports = function (lang, error, email, back) {
+module.exports = function (error, email, lang, back) {
     const { signIn, goBack, password } = literals[lang]
 
     return `<section class="login">
