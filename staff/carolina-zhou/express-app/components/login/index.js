@@ -1,7 +1,8 @@
 const literals = require('./i18n')
-const { path, goBackPath } = require('./config')
+const { path } = require('./config')
+const Feedback = require('../feedback')
 
-module.exports = function (lang) {
+module.exports = function (lang, error, email, back) {
     const { signIn, goBack, password } = literals[lang]
 
     return `<section class="login">
@@ -9,7 +10,7 @@ module.exports = function (lang) {
         <form method="post" action="${path}">
             <ul class="login__list">
                 <li class="login__item">
-                    <label">E-mail<input class="login__input" type="email" name="email" /></label>
+                    <label">E-mail<input class="login__input" type="email" name="email" /value="${email ? email : ''}" /></label>
                 </li>
                 <li  class="login__item">
                     <label>${password}<input class="login__input" type="password" name="password" /></label>
@@ -19,6 +20,7 @@ module.exports = function (lang) {
                 </li>
             </ul>
         </form>
-        <a class="login__link" href="${goBackPath}">${goBack}</a>
+        ${error ? Feedback(error) : ''}
+        <a class="login__link" href="${back}">${goBack}</a>
         </section>`
 }

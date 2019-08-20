@@ -1,6 +1,6 @@
 // Indexing components
 module.exports = {
-    Html: require('./html'),
+    Page: require('./html'),
     Header: require('./header'),
     Search: require('./search'),
     DuckResults: require('./duck-results'),

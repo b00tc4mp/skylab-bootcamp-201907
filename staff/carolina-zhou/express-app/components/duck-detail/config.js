@@ -1,5 +1,5 @@
-const { HOME } = require('../../paths')
+const { DETAIL } = require('../../paths')
 
 module.exports = {
-    goBackPath: HOME
+    path: DETAIL
 }
