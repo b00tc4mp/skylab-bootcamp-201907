@@ -1,4 +1,5 @@
 const { validate } = require('../../utils')
+
 module.exports = {
     /**
      * 
@@ -14,6 +15,7 @@ module.exports = {
         // TODO this.__users__.findOne/.insertOne...
         validate.str(name , 'name')
         validate.str(surname , 'surname')
+        validate.str(email , 'email')
         validate.email(email , 'email')
         validate.str(password , 'password')
         
