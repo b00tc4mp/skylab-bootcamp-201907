@@ -161,9 +161,9 @@ app.get(SIGN_IN, (req, res) => {
 })
 
 app.post(SIGN_IN, formBodyParser, (req, res) => {
-    const { body, session: { lang } } = req
+    const { body, session } = req
     const { email, password } = body
-
+    const { lang } = req
     try {
         logic.authenticateUser(email, password)
             .then(({ id, token }) => {

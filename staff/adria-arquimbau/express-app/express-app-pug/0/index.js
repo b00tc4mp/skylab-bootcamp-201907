@@ -25,7 +25,7 @@ app.set('view engine', 'pug')
 app.set('views', 'components');
 
 app.use(express.static('public'))
-
+  
 app.use(session({
     secret: 's3cr3t th1ng',
     saveUninitialized: true,

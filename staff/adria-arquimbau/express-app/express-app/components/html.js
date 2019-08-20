@@ -9,7 +9,6 @@ function Html(content) {
                 <link rel="stylesheet" href="/index.css">
                 <link rel="icon" href="favicon.ico" type="image/x-icon" />
                 <script src="https://kit.fontawesome.com/0ebe3f9bf2.js"></script>
-                <script src="/sticky.js"></script>
 
 
             </head>

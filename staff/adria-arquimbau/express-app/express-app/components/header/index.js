@@ -6,7 +6,8 @@ const LangSelector = require('../lang-selector')
 function Header(name, query, lang) {
     const { hello, signUp, signIn, signOut, favorite } = literals[lang]
 
-    return `<header class="header" class="sticky">
+    return `<header class="sticky">
+                <section class="header">
         ${LangSelector()}
         ${name && `<nav>
             
@@ -21,6 +22,7 @@ function Header(name, query, lang) {
                 </ul>
             </nav>`}
         ${Search(query, lang)}
+        </section>
     </header>`
 }
 

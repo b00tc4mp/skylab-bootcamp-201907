@@ -11,7 +11,7 @@
 }
 
 .duck-detail, .duck-results, .register-success, .register, .login {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.9);
   width: 70%;
   margin: 2em auto;
   padding: 3em;
@@ -52,8 +52,8 @@
 }
 
 .header {
-  background-color: rgba(255, 255, 255, 0.5);
-  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 0px 30px 30px 30px;
   text-align: center;
 }
 .header__title {
@@ -212,6 +212,7 @@
   list-style: none;
   padding: 10px;
   font-size: 16px;
+  margin-top: 8rem;
 }
 .duck-results__item {
   list-style: none;
