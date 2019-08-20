@@ -16,8 +16,7 @@ block content
         nav.header__nav
           ul.header__nav--logged
             li.form__logged
-              form.form__logged(method="post" action=favoritePath)
-                button.btn.btn--logged= favorite
+              a.btn.btn--logged(href=favoritePath)= favorite
             li.form__logged
               form.form__logged(method="post" action=signOutPath)
                 button.btn.btn--logged= signOut
