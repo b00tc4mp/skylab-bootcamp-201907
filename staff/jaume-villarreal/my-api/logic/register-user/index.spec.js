@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb')
 const { expect } = require('chai')
-const {logic} = require('../')
+const logic = require('.')
 
 describe('logic', () => {
     let client, users
@@ -28,6 +28,7 @@ describe('logic', () => {
             surname = `surname-${Math.random()}`
             email = `email-${Math.random()}@domain.com`
             password = `password-${Math.random()}`
+            repassword = password
         })
 
         it('should succeed on correct data', () =>

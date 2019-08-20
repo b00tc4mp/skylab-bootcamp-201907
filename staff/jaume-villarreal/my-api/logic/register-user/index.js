@@ -1,12 +1,12 @@
-const { validate , call } = require('../../utils')
+const { validate } = require('../../utils')
 module.exports = {
     /**
      * 
-     * @param {*} name 
-     * @param {*} surname 
-     * @param {*} email 
-     * @param {*} password 
-     * @param {*} repassword 
+     * @param {String} name 
+     * @param {String} surname 
+     * @param {String} email 
+     * @param {String} password 
+     * @param {String} repassword 
      * 
      * @returns {Promise}
      */
@@ -14,11 +14,15 @@ module.exports = {
         // TODO this.__users__.findOne/.insertOne...
         validate.str(name , 'name')
         validate.str(surname , 'surname')
-        validate.str(email , 'email')
         validate.email(email , 'email')
         validate.str(password , 'password')
         
         if(password !== repassword) throw Error ("Passwords don't match")
-        return Promise.resolve()
+
+        return this.__users__.findOne({ email })
+            .then( user => {
+                if(user) throw Error('This user already exists')
+                this.__users__.insertOne({ name , surname , email , password})
+        })
     }
 }
