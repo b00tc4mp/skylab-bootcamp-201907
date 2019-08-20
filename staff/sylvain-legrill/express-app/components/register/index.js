@@ -2,21 +2,21 @@ const literals = require('./i18n')
 const { path, goBackPath } = require('./config')
 const Feedback = require('../feedback')
 
-function Register(lang) {
-    const { signUp, name, surname, password, repassword, goBack } = literals[lang]
+function Register(error,name, surname, email, lang) {
+    const { signUp, name: _name, surname: _surname, password, repassword, goBack } = literals[lang]
 
     return `<section class="register">
         <h1 class="register__title">${signUp}</h1>
         <form method="post" action="${path}">
             <ul class="register__list">
                 <li class="register__item">
-                    <label>${name}<input class="register__input" type="text" name="name" /></label>
+                    <label>${_name}<input class="register__input" type="text" name="name" value="${name ? name : ''} /></label>
                 </li>
                 <li class="register__item">
-                    <label>${surname}<input class="register__input" type="text" name="surname" /></label>
+                    <label>${_surname}<input class="register__input" type="text" name="surname" value="${surname ? surname : ''}" /></label>
                 </li>
                 <li class="register__item">
-                    <label>E-mail<input class="register__input" type="email" name="email" /></label>
+                    <label>E-mail<input class="register__input" type="email" name="email" value="${email ? email : ''}" /></label>
                 </li>
                 <li class="register__item">
                     <label>${password}<input class="register__input" type="password" name="password" /></label>
