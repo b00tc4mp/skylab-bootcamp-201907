@@ -27,10 +27,11 @@ describe('logic', () => {
             name = `name-${Math.random()}`
             surname = `surname-${Math.random()}`
             email = `email-${Math.random()}@domain.com`
-            password = `password-${Math.random()}`
+            password = `password-${Math.random()}`,
+            repassword = password
         })
 
-        it('should succeed on correct data', () =>
+        it('should succeed on correct data', () => {
             logic.registerUser(name, surname, email, password, repassword)
                 .then(() => users.findOne({ name }))
                 .then(user => {
@@ -40,7 +41,14 @@ describe('logic', () => {
                     expect(user.email).to.equal(email)
                     expect(user.password).to.equal(password)
                 })
+            }
         )
+        it('should fail on email', () => {
+            logic.registerUser(name, surname, email, password, repassword)
+                .then(() => users.findOne({ name }))
+                .catch(error => expect(error.message).to.equal("Email already exists"))
+    
+        })
     })
 
     describe('authenticate', () => {
