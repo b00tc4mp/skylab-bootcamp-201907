@@ -1,29 +1,31 @@
 const literals = require('./i18n')
 const { registerPath } = require('./config')
 
-function Register(session, gobackPath) {
-    const { lang, handleError } = session
-    const { name, surname, username, password, repassword, submit, goback } = literals[lang]
+function Register(_name, _surname, _username, _password, lang, handleError, gobackPath) {
+    const { title, name, surname, username, password, repassword, submit, goback } = literals[lang]
+
     return `
-            <h2> ${literals[lang].title} </h2>
-            <form action="${registerPath}" method="POST">
-                <label htmlFor="name">${name}</label>
-                <input type="text" name="name" id="name" />
+    <section class="register">
+            <h2 class="title"> ${title} </h2>
+            <form class="register-form" action="${registerPath}" method="POST">
+                <label class="register-form__label" >${name}</label>
+                <input class="register-form__input" type="text" name="name" value="${_name || ''}" />
 
-                <label htmlFor="surname">${surname}</label>
-                <input type="text" name="surname" id="surname" />
+                <label class="register-form__label" >${surname}</label>
+                <input class="register-form__input" type="text" name="surname" value="${_surname || ''}" />
 
-                <label htmlFor="username">${username}</label>
-                <input type="email" name="username" id="username" />
+                <label class="register-form__label" >${username}</label>
+                <input class="register-form__input" type="email" name="username" value="${_username || ''}"/>
 
-                <label htmlFor="password">${password}</label>
-                <input type="password" name="password" id="password" />
-                
-                <label htmlFor="password">${repassword}</label>
-                <input type="password" name="repassword" id="repassword" />
-                <button type="submit">${submit}</button>
+                <label class="register-form__label" >${password}</label>
+                <input class="register-form__input" type="password" name="password" value="${_password || ''}" />
+
+                <label class="register-form__label" >${repassword}</label>
+                <input class="register-form__input" type="password" name="repassword" />
+                <button class="register-form__button" type="submit">${submit}</button>
             </form>
-            ${handleError !== undefined ? `<p>${handleError}</p>` : ''}
-            <a href="${gobackPath}">${goback}</a>`
+            ${handleError !== undefined ? `<p class="alert" >${handleError}</p>` : ''}
+            <a href="${gobackPath}">${goback}</a>
+            </section>`
 }
 module.exports = Register

@@ -7,24 +7,28 @@ const LangSelector = require('../lang-selector')
 function Header(name, query, lang) {
     const { hello, register, login, favorites, logout } = literals[lang]
     return `<header class="header"> 
+    <h1 class="title" >Ducky Duk Store</h1>
     ${LangSelector()}
-    ${name && `<nav class="header__nav-bar">
-        <ul>
-            <li>
+    ${name && `
+    <nav>
+        <ul class="header__nav-bar">
+            <li class="header__li">
                 <form method="POST" action="${logoutPath}">
-                <button>${logout}</button>
-                <a href="${favoritePath}">${favorites}</a>
+                <button class="header__anchor-button">${logout}</button>
                 </form>
+            </li>
+            <li class="header__li">
+            <a class="header__anchor" href="${favoritePath}">${favorites}</a>
             </li>
         </ul>
     </nav>
-    <h1>${hello}, ${name}!</h1>` || `<nav>
-        <ul>
-            <li>
-                <a href="${registerPath}">${register}</a>
+    <h2 class="name" >${hello}, ${name}!</h2>` || `<nav>
+        <ul class="header__nav-bar">
+            <li class="header__li">
+                <a class="header__anchor" href="${registerPath}">${register}</a>
             </li>
             <li>
-                <a href="${loginPath}">${login}</a>
+                <a class="header__anchor" href="${loginPath}">${login}</a>
             </li>
         </ul>
     </nav>`}

@@ -1,0 +1,25 @@
+.duck-container
+    @extend %item-container
+
+    &__list
+        @extend %item
+       
+        &-h3
+            @extend %item-title
+
+        &-a
+            text-decoration: none
+            
+        &-img
+            @extend %item-image
+
+    &__list-bottom
+        margin: 5px
+        display: flex
+        justify-content: center
+        align-items: center
+
+        &-span
+            margin-right: 25px
+
+           

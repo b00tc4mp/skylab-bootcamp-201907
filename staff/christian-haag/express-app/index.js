@@ -22,6 +22,8 @@ const {
     SELECT_LANG
 } = require('./paths')
 
+app.use(express.static('public'))
+
 app.use(session({
     secret: 'my secret phrase',
     resave: false,
@@ -41,7 +43,12 @@ app.get(HOME, (req, res) => {
     const { session: { userId, token, query, lang } } = req
 
     req.session.view = HOME
-    req.session.handleError = undefined
+    delete req.session.handleError
+
+    delete session.name
+    delete session.surname
+    delete session.username
+    delete session.password
 
 
     try {
@@ -104,7 +111,7 @@ app.get(FAVORITES, (req, res) => {
             logic.retrieveUser(userId, token),
             logic.retrieveFavDucks(userId, token),
         ])
-            .then(([user, ducks]) => res.send(Html(`${Header(user.name, query, lang)}${Favorites(ducks, `${SEARCH}/?q=${query}`)}`)))
+            .then(([user, ducks]) => res.send(Html(`${Header(user.name, query, lang)}${Favorites(lang, ducks, `${SEARCH}/?q=${query}`)}`)))
             .catch(error => { throw error })
 
 })
@@ -137,17 +144,38 @@ app.get(REGISTER, (req, res) => {
     const { session } = req
 
     req.session.view = REGISTER
+    const { name, surname, username, password, lang, handleError } = session
 
-    res.send(Html(Register(session, HOME)))
+    res.send(Html(Register(name, surname, username, password, lang, handleError, HOME)))
+
+    delete session.name
+    delete session.surname
+    delete session.username
+    delete session.password
 })
 
 app.post(REGISTER, urlencodedParser, (req, res) => {
-    const { body, session: { lang } } = req
-    const { name, surname, username, password, repassword } = body
+    const { session } = req
+    const { body: { name, surname, username, password, repassword }, session: { lang } } = req
+
+    session.name = name
+    session.surname = surname
+    session.username = username
+    session.password = password
 
     try {
-        logic.registerUser(name, surname, username, password, repassword)
+        logic.registerUser(session.name, session.surname, session.username, session.password, repassword)
+            .then(() => {
+                delete session.name
+                delete session.surname
+                delete session.username
+                delete session.password
+            })
             .then(() => res.send(Html(RegisterSuccess(lang, LOGIN))))
+            .catch((error) => {
+                req.session.handleError = error.message
+                res.redirect(REGISTER)
+            })
 
     } catch (error) {
         req.session.handleError = error.message
