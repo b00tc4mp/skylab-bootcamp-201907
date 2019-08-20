@@ -1,6 +1,8 @@
 
 extends ../html/index
 
+include ../feedback/index
+
 block content
     h1= signIn
     form(method="post" action=path)
@@ -12,3 +14,5 @@ block content
         input(type="password" name="password")
       button= signIn
     a(href=goBackPath)= goBack
+    if (error)
+      +feedback(error)

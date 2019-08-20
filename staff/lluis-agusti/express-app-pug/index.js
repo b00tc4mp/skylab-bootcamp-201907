@@ -44,6 +44,7 @@ app.get(HOME, (req, res) => {
     const { session } = req
 
     session.view = HOME
+    req.session.error=false
 
     const { userId, token, query, lang } = session
 
@@ -154,10 +155,12 @@ app.get(SIGN_UP, (req, res) => {
 
     session.view = SIGN_UP
 
+    const { error } = session
+
     const { lang } = session
 
     //res.send(Html(Register(lang)))
-    Register(lang, res)
+    Register(lang, res, error)
 })
 
 app.post(SIGN_UP, formBodyParser, (req, res) => {
@@ -165,12 +168,22 @@ app.post(SIGN_UP, formBodyParser, (req, res) => {
 
     const { name, surname, email, password, repassword } = body
 
+    // session.error =
+    // session.name = 
+    // session.surname = 
+    // session.email = 
+
+
     try {
         logic.registerUser(name, surname, email, password, repassword)
             .then(() =>RegisterSuccess(lang,res))
-            .catch(error => { throw error })
+            .catch(error => { 
+                req.session.error=error.message
+                res.redirect(SIGN_UP)
+            })
     } catch (error) {
-        throw error
+        req.session.error=error.message
+        res.redirect(SIGN_UP) // PQ ES redirect() i no send() ????
     }
 })
 
@@ -179,10 +192,12 @@ app.get(SIGN_IN, (req, res) => {
 
     session.view = SIGN_IN
 
+    const{ error }=session
+
     const { lang } = session
 
     //res.send(Html(Login(lang)))
-    Login(lang, res)
+    Login(lang, res, error)
 })
 
 app.post(SIGN_IN, formBodyParser, (req, res) => {
@@ -198,9 +213,13 @@ app.post(SIGN_IN, formBodyParser, (req, res) => {
 
                 res.redirect(HOME)
             })
-            .catch(error => { throw error })
+            .catch(error => { 
+                req.session.error=error.message
+                res.redirect(SIGN_IN)
+             })
     } catch (error) {
-        throw error
+        req.session.error=error.message
+        res.redirect(SIGN_IN)
     }
 })
 

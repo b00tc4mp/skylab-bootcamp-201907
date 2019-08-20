@@ -7,5 +7,5 @@ module.exports = {
     DETAIL: '/ducks',
     TOGGLE_FAV: '/toggle-favorite',
     SELECT_LANG: '/select-language',
-    FAVORITE: '/ducks'
+    FAVORITE: '/favorites'
 }
