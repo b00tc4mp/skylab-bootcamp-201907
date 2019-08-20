@@ -1,0 +1,68 @@
+%panel
+    padding: 0.5rem
+    margin: 1.5rem
+
+    +round-border(0.01rem, 0.1rem, solid, #cbd6ce)
+    
+    background-color: #cbd6ce
+
+    &__feedback
+        color: red
+%text-app
+    color: black
+
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif
+
+    text-decoration: none
+
+    line-height: 50px
+
+    font-weight: 500
+
+    font-size: 1.5rem
+
+    text-align: center 
+
+%text-link
+    color: black
+
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif
+
+    text-decoration: none
+
+    line-height: 50px
+
+    font-weight: 500
+
+    font-size: 1.5rem
+
+    text-align: center 
+    &:hover
+        color: grey
+
+main
+    @extend %text-app
+    list-style: none
+
+
+a,
+button
+    @extend %text-link
+    display: inline-block
+    appearance: none
+    border: none
+    margin: 0
+    height: 0
+    padding: 0
+    cursor: pointer
+    transition: all 250ms cubic-bezier(0.675, 0.420, 0.090, 0.870)
+
+    &:not([disabled]):hover,
+    &:not([disabled]):focus 
+        color: grey
+    &:focus 
+        outline: none
+        box-shadow: none
+    &[disabled] 
+        cursor: not-allowed
+
