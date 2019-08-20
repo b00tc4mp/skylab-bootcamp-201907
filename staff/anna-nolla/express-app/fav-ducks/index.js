@@ -1,27 +1,15 @@
 const express = require('express')
-const { Page, Home, DuckDetail, Register, RegisterSuccess, Login } = require('./components')
+const { Html, Header, DuckResults, DuckDetail, Register, RegisterSuccess, Login } = require('./components')
 const session = require('express-session')
 const logic = require('./logic')
 const bodyParser = require('body-parser')
-const {
-    HOME,
-    SEARCH,
-    SIGN_IN,
-    SIGN_UP,
-    SIGN_OUT,
-    DETAIL,
-    TOGGLE_FAV,
-    SELECT_LANG
-} = require('./paths')
+const { HOME, SEARCH, SIGN_IN, SIGN_UP, SIGN_OUT, DETAIL, TOGGLE_FAV, SELECT_LANG, FAVORITE } = require('./paths')
 
 const formBodyParser = bodyParser.urlencoded({ extended: true })
 
 const { argv: [, , port] } = process
 
 const app = express()
-
-app.set('view engine', 'pug')
-app.set('views', 'components');
 
 app.use(express.static('public'))
 
@@ -49,14 +37,10 @@ app.get(HOME, (req, res) => {
     try {
         if (userId && token)
             logic.retrieveUser(userId, token)
-                .then(user =>
-                    // res.send(Html(Home(user.name, query, lang)))
-                    Home(user.name, query, lang, undefined, res)
-                )
+                .then(user => res.send(Html(Header(user.name, query, lang))))
                 .catch(error => { throw error })
         else
-            // res.send(Html(Home(undefined, query, lang)))
-            Home(undefined, query, lang, undefined, res)
+            res.send(Html(Header(undefined, query, lang)))
     } catch (error) {
         throw error
     }
@@ -77,17 +61,11 @@ app.get(SEARCH, (req, res) => {
                 logic.retrieveUser(userId, token),
                 logic.searchDucks(userId, token, query)
             ])
-                .then(([user, ducks]) =>
-                    //res.send(Html(`${Home(user.name, query, lang)}${DuckResults(ducks)}`))
-                    Home(user.name, query, lang, ducks, res)
-                )
+                .then(([user, ducks]) => res.send(Html(`${Header(user.name, query, lang)}${DuckResults(ducks)}`)))
                 .catch(error => { throw error })
         else
             logic.searchDucks(undefined, undefined, query)
-                .then(ducks =>
-                    // res.send(Html(`${Home(undefined, query, lang)}${DuckResults(ducks)}`))
-                    Home(undefined, query, lang, ducks, res)
-                )
+                .then(ducks => res.send(Html(`${Header(undefined, query, lang)}${DuckResults(ducks)}`)))
     } catch (error) {
         throw error
     }
@@ -106,11 +84,11 @@ app.get(`${DETAIL}/:id`, (req, res) => {
                 logic.retrieveUser(userId, token),
                 logic.retrieveDuck(userId, token, duckId)
             ])
-                .then(([user, duck]) => res.send(Page(`${Home(user.name, query, lang)}${DuckDetail(duck)}`)))
+                .then(([user, duck]) => res.send(Html(`${Header(user.name, query, lang)}${DuckDetail(duck)}`)))
                 .catch(error => { throw error })
         else
             logic.retrieveDuck(undefined, undefined, duckId)
-                .then(duck => res.send(Page(`${Home(undefined, query, lang)}${DuckDetail(duck)}`)))
+                .then(duck => res.send(Html(`${Header(undefined, query, lang)}${DuckDetail(duck)}`)))
     } catch (error) {
         throw error
     }
@@ -121,39 +99,22 @@ app.get(SIGN_UP, (req, res) => {
 
     session.view = SIGN_UP
 
-    const { error, name, surname, email, lang } = session
+    const { lang } = session
 
-    delete session.error
-    delete session.name
-    delete session.surname
-    delete session.email
-
-    Register(error, name, surname, email, lang, res)
+    res.send(Html(Register(lang)))
 })
 
 app.post(SIGN_UP, formBodyParser, (req, res) => {
-    const { body, session } = req
+    const { body, session: { lang } } = req
 
     const { name, surname, email, password, repassword } = body
 
     try {
         logic.registerUser(name, surname, email, password, repassword)
-            .then(() => res.send(Page(RegisterSuccess(lang))))
-            .catch(({ message }) => {
-                session.error = message
-                session.name = name
-                session.surname = surname
-                session.email = email
-
-                res.redirect(SIGN_UP)
-            })
-    } catch ({ message }) {
-        session.error = message
-        session.name = name
-        session.surname = surname
-        session.email = email
-
-        res.redirect(SIGN_UP)
+            .then(() => res.send(Html(RegisterSuccess(lang))))
+            .catch(error => { throw error })
+    } catch (error) {
+        throw error
     }
 })
 
@@ -162,12 +123,9 @@ app.get(SIGN_IN, (req, res) => {
 
     session.view = SIGN_IN
 
-    const { error, email, lang } = session
+    const { lang } = session
 
-    delete session.error
-    delete session.email
-
-    Login(error, email, lang, res)
+    res.send(Html(Login(lang)))
 })
 
 app.post(SIGN_IN, formBodyParser, (req, res) => {
@@ -183,17 +141,9 @@ app.post(SIGN_IN, formBodyParser, (req, res) => {
 
                 res.redirect(HOME)
             })
-            .catch(({ message }) => {
-                session.error = message
-                session.email = email
-
-                res.redirect(SIGN_IN)
-            })
-    } catch ({ message }) {
-        session.error = message
-        session.email = email
-
-        res.redirect(SIGN_IN)
+            .catch(error => { throw error })
+    } catch (error) {
+        throw error
     }
 })
 
@@ -206,12 +156,27 @@ app.post(SIGN_OUT, (req, res) => {
     res.redirect(HOME)
 })
 
+app.get(FAVORITE, (req, res) => {
+    const { session: { userId, token, lang, query } } = req
+
+    session.query = query
+    session.view = `${FAVORITE}?q=${""}`
+
+    Promise.all([
+        logic.retrieveUser(userId, token),
+        logic.retrieveFavDucks(userId, token)
+    ])
+        .then(([user, ducks]) => res.send(Html(`${Header(user.name, query, lang)}${DuckResults(ducks)}`)))
+        .catch(error => console.log(error))
+})
+
+
 app.post(TOGGLE_FAV, formBodyParser, (req, res) => {
-    const { body: { id }, session: { userId, token, query, view } } = req
+    const { body: { id: duckId }, session: { userId, token, view } } = req
 
     if (userId && token)
         try {
-            logic.toggleFavDuck(userId, token, id)
+            logic.toggleFavDuck(userId, token, duckId)
                 .then(() => res.redirect(view))
                 .catch(error => { throw error })
         } catch (error) {
@@ -229,5 +194,6 @@ app.post(SELECT_LANG, formBodyParser, (req, res) => {
 
     res.redirect(view)
 })
+
 
 app.listen(port)

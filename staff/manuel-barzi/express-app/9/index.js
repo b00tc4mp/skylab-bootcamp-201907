@@ -110,12 +110,12 @@ app.get(SIGN_UP, (req, res) => {
 
     const { error, lang, name, surname, email } = session
 
-    res.send(Page(Register(error, name, surname, email, lang)))
-
     delete session.error
     delete session.name
     delete session.surname
     delete session.email
+
+    res.send(Page(Register(error, name, surname, email, lang)))
 })
 
 app.post(SIGN_UP, formBodyParser, (req, res) => {
@@ -151,10 +151,10 @@ app.get(SIGN_IN, (req, res) => {
 
     const { error, email, lang } = session
 
-    res.send(Page(Login(error, email, lang)))
-
     delete session.error
     delete session.email
+
+    res.send(Page(Login(error, email, lang)))
 })
 
 app.post(SIGN_IN, formBodyParser, (req, res) => {
