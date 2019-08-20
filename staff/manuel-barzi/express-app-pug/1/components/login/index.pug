@@ -1,0 +1,18 @@
+
+extends ../page/index
+
+include ../feedback/index
+
+block content
+    h1= signIn
+    form(method="post" action=path)
+      label
+        | E-mail
+        input(type="email" name="email" value=emailValue)
+      label
+        | #{password}
+        input(type="password" name="password")
+      button= signIn
+    if (error)
+      +feedback(error, 'error')
+    a(href=goBackPath)= goBack

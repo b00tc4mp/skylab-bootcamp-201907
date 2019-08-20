@@ -1,0 +1,46 @@
+%marg
+    margin-right: 2%
+
+.cab
+    display: flex
+    justify-content: space-around
+
+
+.nav--pos > ul
+    display: flex
+    justify-content: center
+    align-items: center
+    margin-top: 5px
+    width: 20vw
+    height: 7vh
+
+
+.nav--pos > ul > li
+    padding: 1.5%
+    list-style-type: none
+    width: 12vw
+    height: 5vh
+    @extend %marg
+
+    > a
+        text-decoration: none
+        color: #DEB887
+        font-family: 'Lexend Giga', sans-serif
+
+.lang--pos > ul
+    display: flex
+    padding-top: 3%
+    @extend %marg
+
+.lang--pos > ul > li
+    list-style-type: none
+    @extend %marg
+    & > form > button
+        background-color: #DEB887
+
+
+.search
+    display: flex
+    justify-content: center
+    align-items: flex-start
+    padding: 5% 0

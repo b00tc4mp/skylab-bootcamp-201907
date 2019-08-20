@@ -1,0 +1,25 @@
+* {
+  border: 1px solid black;
+  padding: 1px;
+  margin: 1px;
+}
+
+.header {
+  background-color: skyblue;
+}
+
+.lang-selector > li {
+  display: inline-block;
+}
+
+.feedback--error {
+  color: red;
+}
+.feedback--warn {
+  background-color: yellow;
+}
+.feedback--success {
+  color: green;
+}
+
+/*# sourceMappingURL=style.css.map */
