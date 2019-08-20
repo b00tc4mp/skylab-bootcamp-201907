@@ -1,17 +1,19 @@
 extends ../html/index
 
+include ../feedback/index
+
 block content
     h1= signUp
     form(method="post" action=path)
       label
         | #{name}
-        input(type="text" name="name")
+        input(type="text" name="name" value=nameValue)
       label
         | #{surname}
-        input(type="text" name="surname")
+        input(type="text" name="surname" value=surnameValue)
       label
         | E-mail
-        input(type="email" name="email")
+        input(type="email" name="email" value=emailValue)
       label
         | #{password}
         input(type="password" name="password")
@@ -19,4 +21,6 @@ block content
         | #{repassword}
         input(type="password" name="repassword")
       button= signUp
+    if (error)
+      +feedback(error, 'error')
     a(href=goBackPath)= goBack

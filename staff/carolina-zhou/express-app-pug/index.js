@@ -138,12 +138,12 @@ app.get(`${DETAIL}/:id`, (req, res) => {
                 logic.retrieveDuck(userId, token, duckId)
             ])
                 //.then(([user, duck]) => res.send(Html(`${Home(user.name, query, lang)}${DuckDetail(duck)}`)))
-                .then(([user, duck]) => Home(user.name, query, lang, undefined, duck, res))
+                .then(([user, duck]) => res.send(Html(`${Home(user.name, query, lang)}${DuckDetail(duck)}`)))
                 .catch(error => { throw error })
         else
             logic.retrieveDuck(undefined, undefined, duckId)
                 //.then(duck => res.send(Html(`${Home(undefined, query, lang)}${DuckDetail(duck)}`)))
-                .then(duck => Home(undefined, query, lang, undefined, duck, res))
+                .then(duck => res.send(Html(`${Home(undefined, query, lang)}${DuckDetail(duck)}`)))
     } catch (error) {
         throw error
     }
@@ -154,23 +154,39 @@ app.get(SIGN_UP, (req, res) => {
 
     session.view = SIGN_UP
 
-    const { lang } = session
+    const { error, name, surname, email, lang } = session
 
-    //res.send(Html(Register(lang)))
-    Register(lang, res)
+    delete session.error
+    delete session.name
+    delete session.surname
+    delete session.email
+
+    Register(error, name, surname, email, lang, res)
 })
 
 app.post(SIGN_UP, formBodyParser, (req, res) => {
-    const { body, session: { lang } } = req
+    const { body, session } = req
 
     const { name, surname, email, password, repassword } = body
 
     try {
         logic.registerUser(name, surname, email, password, repassword)
-            .then(() =>RegisterSuccess(lang,res))
-            .catch(error => { throw error })
-    } catch (error) {
-        throw error
+            .then(() => res.send(Html(RegisterSuccess(lang))))
+            .catch(({ message }) => {
+                session.error = message
+                session.name = name
+                session.surname = surname
+                session.email = email
+
+                res.redirect(SIGN_UP)
+            })
+    } catch ({ message }) {
+        session.error = message
+        session.name = name
+        session.surname = surname
+        session.email = email
+
+        res.redirect(SIGN_UP)
     }
 })
 
@@ -179,10 +195,12 @@ app.get(SIGN_IN, (req, res) => {
 
     session.view = SIGN_IN
 
-    const { lang } = session
+    const { error, email, lang } = session
 
-    //res.send(Html(Login(lang)))
-    Login(lang, res)
+    delete session.error
+    delete session.email
+
+    Login(error, email, lang, res)
 })
 
 app.post(SIGN_IN, formBodyParser, (req, res) => {
@@ -198,9 +216,17 @@ app.post(SIGN_IN, formBodyParser, (req, res) => {
 
                 res.redirect(HOME)
             })
-            .catch(error => { throw error })
-    } catch (error) {
-        throw error
+            .catch(({ message }) => {
+                session.error = message
+                session.email = email
+
+                res.redirect(SIGN_IN)
+            })
+    } catch ({ message }) {
+        session.error = message
+        session.email = email
+
+        res.redirect(SIGN_IN)
     }
 })
 
