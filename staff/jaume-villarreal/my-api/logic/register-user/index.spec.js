@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb')
 const { expect } = require('chai')
-const logic = require('.')
+const {logic} = require('../')
 
 describe('logic', () => {
     let client, users
