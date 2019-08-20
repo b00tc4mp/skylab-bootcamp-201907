@@ -95,22 +95,22 @@ class Landing extends Component {
     return (
       <>
         
-    <section className="backgroundLan">
-        <header className="header-landing">
+    <section className="body__background">
+        <header className="header">
           <BigHeader />
         </header>
 
-        <main className="back-img">
-
-          <section className="random-recipe"> 
-            {mealRandom && <RecipeItem meal={mealRandom} />} 
-          </section>
-          
-          <section>
+        <main className="main">
+      
+          <section className="main__nav">
             {view === 'register' && (<Register onRegister={handleRegister} onBack={handleGoBack} error={error} /> )}
             {view === 'landing' && (<WelcomeAnchors onRegister={handleGoToRegister} onLogin={handleGoToLogin} /> )}
             {view === 'login' && (<Login onLogin={handleLogin} onBack={handleGoBack} error={error} /> )}
             {view === 'register-success' && (<RegisterSuccess onLogin={handleGoToLogin} />)}
+          </section>
+
+          <section> 
+            {mealRandom && <RecipeItem meal={mealRandom} />} 
           </section>
 
         </main>

@@ -2,10 +2,10 @@ function RecipeItem ( { meal: { strMeal, strYoutube } } ) {
     
     return <>
 
-    <section className="random-content">
-        <h2 className="random-content__recipe">Random Recipe</h2>        
-        <iframe className="recipe-video" src={strYoutube}></iframe>   
-
-    </section> 
+        <section className="main__random-section">
+            <h2 className="main__random-section__title">Random Recipe</h2> 
+            <h3 className="main__random-section__recipe">{strMeal}</h3>      
+            <iframe className="main__random-section__video" src={strYoutube}></iframe>   
+        </section>
     </>
 }
