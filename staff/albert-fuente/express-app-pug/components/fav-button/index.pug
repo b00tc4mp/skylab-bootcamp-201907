@@ -1,0 +1,8 @@
+mixin fav-button(duckId,selected)
+    form(method="post" action="/toggle-favorite")
+      input(type="hidden" name="id" value= duckId)
+      if(selected)
+        button 💜
+      else 
+        button 💔
+        

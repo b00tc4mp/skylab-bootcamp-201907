@@ -1,0 +1,14 @@
+
+extends ../html/index
+
+block content
+    h1= signIn
+    form(method="post" action=path)
+      label
+        | E-mail
+        input(type="email" name="email")
+      label
+        | #{password}
+        input(type="password" name="password")
+      button= signIn
+    a(href=goBackPath)= goBack

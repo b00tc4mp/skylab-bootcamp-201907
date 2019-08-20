@@ -1,0 +1,12 @@
+include ../fav-button/index
+
+
+mixin duck-detail(duck , goBack , query)
+        article
+          h3= duck.title
+          img(src=duck.imageUrl)
+          span= duck.price
+          p= duck.description
+          a(href=duck.link)= "Go to store"
+          a(href=goBack+"?q=" + query)="Back"
+          +fav-button(duck.id,duck.favorite)
