@@ -1,0 +1,134 @@
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.duck-detail, .duck-results, .duck-home, .search, .feedback, .register-success, .register, .login, .landing {
+  padding: 0.5rem;
+  margin: 1.5rem;
+  border: 0.01rem solid #cbd6ce;
+  border-radius: 0.1rem;
+  background-color: #cbd6ce;
+}
+main {
+  color: black;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  line-height: 50px;
+  font-weight: 500;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+a,
+button {
+  color: black;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  line-height: 50px;
+  font-weight: 500;
+  font-size: 1.5rem;
+  text-align: center;
+}
+a:hover,
+button:hover {
+  color: grey;
+}
+
+main {
+  list-style: none;
+}
+
+a,
+button {
+  display: inline-block;
+  appearance: none;
+  border: none;
+  margin: 0;
+  height: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: all 250ms cubic-bezier(0.675, 0.42, 0.09, 0.87);
+}
+a:not([disabled]):hover, a:not([disabled]):focus,
+button:not([disabled]):hover,
+button:not([disabled]):focus {
+  color: grey;
+}
+a:focus,
+button:focus {
+  outline: none;
+  box-shadow: none;
+}
+a[disabled],
+button[disabled] {
+  cursor: not-allowed;
+}
+
+.landing {
+  background-color: #cbd6ce;
+}
+
+.login {
+  background-color: #cbd6ce;
+}
+
+.register {
+  background-color: #cbd6ce;
+}
+
+.register-success {
+  background-color: #cbd6ce;
+}
+
+.feedback--success {
+  background-color: greenyellow;
+}
+.feedback--warning {
+  background-color: yellow;
+}
+.feedback--error {
+  background-color: red;
+  color: white;
+}
+
+.search {
+  background-color: #cbd6ce;
+}
+
+.duck-home {
+  background-color: #cbd6ce;
+}
+
+.duck-results {
+  background-color: #cbd6ce;
+  display: grid;
+  text-decoration: none;
+  color: black;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  line-height: 50px;
+  font-weight: 500;
+  font-size: 1rem;
+  text-align: center;
+}
+.duck-results ul {
+  list-style: none;
+}
+.duck-results img {
+  width: 333px;
+}
+
+.duck-detail {
+  background-color: #cbd6ce;
+}
+.duck-detail__photo {
+  width: 333px;
+}
+.duck-detail__price {
+  color: black;
+}
+
+/*# sourceMappingURL=index.css.map */
