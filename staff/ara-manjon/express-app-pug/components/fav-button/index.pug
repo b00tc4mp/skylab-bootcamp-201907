@@ -1,0 +1,7 @@
+mixin fav-button(id, selected)
+    form(method="post" action="/toggle-favorite")
+      input(type="hidden" name="id" value=id) 
+      if (selected)
+        button 💜
+      else
+        button 💔
