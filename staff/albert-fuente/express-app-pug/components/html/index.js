@@ -7,7 +7,6 @@ function Html(content) {
                 <meta http-equiv="X-UA-Compatible" content="ie=edge">
                 <title>Document</title>
                 <link rel="stylesheet" href="/style.css">
-                <link rel="icon" href="/favicon.ico" type="image/x-icon" />
             </head>
             <body>
                 ${content}

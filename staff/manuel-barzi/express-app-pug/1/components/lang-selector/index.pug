@@ -1,0 +1,18 @@
+mixin lang-selector(path)
+    ul.lang-selector
+        li
+          form(method="post" action=path)
+            input(type="hidden" name="lang" value="en")
+            button EN
+        li
+          form(method="post" action=path)
+            input(type="hidden" name="lang" value="es")
+            button ES
+        li
+          form(method="post" action=path)
+            input(type="hidden" name="lang" value="ca")
+            button CA
+        li
+          form(method="post" action=path)
+            input(type="hidden" name="lang" value="fr")
+            button FR
