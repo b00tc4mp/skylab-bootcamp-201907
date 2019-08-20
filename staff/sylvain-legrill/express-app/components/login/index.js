@@ -1,5 +1,9 @@
+debugger
+
 const literals = require('./i18n')
 const { path, goBackPath } = require('./config')
+const Feedback = require('../feedback')
+
 
 module.exports = function (lang) {
     const { signIn, goBack, password } = literals[lang]
@@ -19,6 +23,7 @@ module.exports = function (lang) {
                 </li>
             </ul>
         </form>
+        ${error ? Feedback(error, 'error') : ''} 
         <a class="login__link" href="${goBackPath}">${goBack}</a>
         </section>`
 }

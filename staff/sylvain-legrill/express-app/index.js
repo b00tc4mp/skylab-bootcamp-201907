@@ -130,22 +130,42 @@ app.get(SIGN_UP, (req, res) => {
 
     session.view = SIGN_UP
 
-    const { lang } = session
+    const { error, name, surname, email } = session
 
-    res.send(Html(Register(lang)))
+    res.send(Html(Register(error, name, surname, email)))
+
+    delete session.error
+    delete session.name
+    delete session.surname
+    delete session.email
+
 })
 
 app.post(SIGN_UP, formBodyParser, (req, res) => {
-    const { body, session: { lang } } = req
+    const { body, session } = req //lang
 
-    const { name, surname, email, password, repassword } = body
+    const { name, surname, email, password, repassword } = body //lang
+
+    
 
     try {
         logic.registerUser(name, surname, email, password, repassword)
-            .then(() => res.send(Html(RegisterSuccess(lang))))
-            .catch(error => { throw error })
-    } catch (error) {
-        throw error
+            .then(() => res.send(Html(RegisterSuccess()))) //lang
+            .catch(({message })=> {
+                session.error = message
+                session.name = name
+                session.surname = surname
+                session.email = email
+
+                res.redirect(SIGN_UP)
+            })
+    } catch ({message}) {
+        session.error = message
+        session.name = name
+        session.surname = surname
+        session.email = email
+
+        res.redirect(SIGN_UP)
     }
 })
 
@@ -155,9 +175,11 @@ app.get(SIGN_IN, (req, res) => {
 
     session.view = SIGN_IN
 
-    const { lang } = session
+    const { error, email, lang } = session 
+    res.send(Html(Login(error, email, lang))) 
 
-    res.send(Html(Login(lang)))
+    delete session.error
+    delete session.email
 })
 
 app.post(SIGN_IN, formBodyParser, (req, res) => {
@@ -173,9 +195,17 @@ app.post(SIGN_IN, formBodyParser, (req, res) => {
 
                 res.redirect(HOME)
             })
-            .catch(error => { throw error })
-    } catch (error) {
-        throw error
+            .catch(({ message }) => {
+                session.error = message
+                session.email = email
+
+                res.redirect(SIGN_IN)
+            })
+    } catch ({message}) {
+        session.error = message
+        session.email = email
+
+        res.redirect(SIGN_IN)
     }
 })
 

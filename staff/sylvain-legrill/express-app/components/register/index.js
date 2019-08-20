@@ -1,5 +1,6 @@
 const literals = require('./i18n')
 const { path, goBackPath } = require('./config')
+const Feedback = require('../feedback')
 
 function Register(lang) {
     const { signUp, name, surname, password, repassword, goBack } = literals[lang]
@@ -28,6 +29,7 @@ function Register(lang) {
                 </li>
             </ul>
         </form>
+        ${error ? Feedback(error, 'error') : ''}
         <a class="register__link" href="${goBackPath}">${goBack}</a>
         </section>`
 }
