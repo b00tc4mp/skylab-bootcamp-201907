@@ -7,15 +7,12 @@ module.exports = {
      * @param {string} name 
      * @param {string} surname 
      * @param {string} email 
-     * @param {string} password 
-     * @param {string} repassword 
+     * @param {string} password
      * 
      * @returns {Promise}
      */
-    registerUser(name, surname, email, password, repassword) {
+    registerUser(name, surname, email, password) {
         // TODO validate fields
-
-        if (password !== repassword) throw new Error('passwords do not match')
 
         return this.__users__.findOne({ email })
             .then(user => {
@@ -39,7 +36,9 @@ module.exports = {
 
         return this.__users__.findOne({ email })
             .then(user => {
-                if (!user || user.password !== password) throw new Error(`user with e-mail ${email} does not exist`)
+                if (!user) throw new Error(`user with e-mail ${email} does not exist`)
+
+                if (user.password !== password) throw new Error('wrong credentials')
 
                 return user._id.toString()
             })
@@ -55,9 +54,10 @@ module.exports = {
     retrieveUser(id) {
         // TODO validate fields
 
-        // VIKING style
+        // VIKING
         // return this.__users__.findOne({ _id: ObjectId(id) })
         //     .then(user => {
+        //         if (!user) throw new Error(`user with id ${id} not found`) 
         //         user.id = user._id.toString()
         //         delete user._id
         //         delete user.password
@@ -65,9 +65,11 @@ module.exports = {
         //         return user
         //     })
 
-        // TUNED style
+        // TUNED
         return this.__users__.findOne({ _id: ObjectId(id) }, { projection: { _id: 0, password: 0 } })
             .then(user => {
+                if (!user) throw new Error(`user with id ${id} not found`)
+
                 user.id = id
 
                 return user
