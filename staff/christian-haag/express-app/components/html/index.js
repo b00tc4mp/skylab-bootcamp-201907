@@ -7,6 +7,7 @@ function Html(content) {
      <meta http-equiv="X-UA-Compatible" content="ie=edge">
      <link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet">
      <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
+     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
      <link rel="stylesheet" href="/style.css">
      <title>Document</title>
  </head>

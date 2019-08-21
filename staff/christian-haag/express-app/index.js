@@ -43,7 +43,7 @@ app.get(HOME, (req, res) => {
     const { session: { userId, token, query, lang } } = req
 
     req.session.view = HOME
-    delete req.session.handleError
+    delete session.handleError
 
     delete session.name
     delete session.surname
@@ -144,14 +144,14 @@ app.get(REGISTER, (req, res) => {
     const { session } = req
 
     req.session.view = REGISTER
-    const { name, surname, username, password, lang, handleError } = session
+    const { name, surname, username, lang, handleError } = session
 
-    res.send(Html(Register(name, surname, username, password, lang, handleError, HOME)))
+    res.send(Html(Register(name, surname, username, lang, handleError, HOME)))
 
     delete session.name
     delete session.surname
     delete session.username
-    delete session.password
+
 })
 
 app.post(REGISTER, urlencodedParser, (req, res) => {
@@ -161,15 +161,16 @@ app.post(REGISTER, urlencodedParser, (req, res) => {
     session.name = name
     session.surname = surname
     session.username = username
-    session.password = password
+
 
     try {
-        logic.registerUser(session.name, session.surname, session.username, session.password, repassword)
+        logic.registerUser(session.name, session.surname, session.username, password, repassword)
             .then(() => {
+                delete session.handleError
                 delete session.name
                 delete session.surname
                 delete session.username
-                delete session.password
+
             })
             .then(() => res.send(Html(RegisterSuccess(lang, LOGIN))))
             .catch((error) => {

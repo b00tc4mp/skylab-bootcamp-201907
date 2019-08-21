@@ -1,7 +1,7 @@
 const literals = require('./i18n')
 const { registerPath } = require('./config')
 
-function Register(_name, _surname, _username, _password, lang, handleError, gobackPath) {
+function Register(_name, _surname, _username, lang, handleError, gobackPath) {
     const { title, name, surname, username, password, repassword, submit, goback } = literals[lang]
 
     return `
@@ -18,7 +18,7 @@ function Register(_name, _surname, _username, _password, lang, handleError, goba
                 <input class="register-form__input" type="email" name="username" value="${_username || ''}"/>
 
                 <label class="register-form__label" >${password}</label>
-                <input class="register-form__input" type="password" name="password" value="${_password || ''}" />
+                <input class="register-form__input" type="password" name="password" />
 
                 <label class="register-form__label" >${repassword}</label>
                 <input class="register-form__input" type="password" name="repassword" />
