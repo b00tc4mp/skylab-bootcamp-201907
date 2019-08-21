@@ -2,6 +2,7 @@ const { MongoClient } = require('mongodb')
 const { expect } = require('chai')
 const logic = require('.')
 
+
 describe('logic', () => {
     let client, users
 
@@ -21,7 +22,7 @@ describe('logic', () => {
     beforeEach(() => users.deleteMany())
 
     describe('register', () => {
-        let name, surname, email, password, repassword
+        let name, surname, email, password
 
         beforeEach(() => {
             name = `name-${Math.random()}`
@@ -31,8 +32,13 @@ describe('logic', () => {
         })
 
         it('should succeed on correct data', () =>
-            logic.registerUser(name, surname, email, password, repassword)
-                .then(() => users.findOne({ name }))
+            logic.registerUser(name, surname, email, password, password)
+                /* .then(() => users.findOne({ name })) */
+                .then(result => {
+                    expect(result).not.to.exist
+
+                    return users.findOne({ email })
+                })
                 .then(user => {
                     expect(user).to.exist
                     expect(user.name).to.equal(name)
@@ -41,10 +47,12 @@ describe('logic', () => {
                     expect(user.password).to.equal(password)
                 })
         )
-    })
 
-    describe('authenticate', () => {
-        // TODO
+        it('should fail on existing email', ()=>{
+            logic.registerUser(name, surname, email, password, password)
+            .then(()=> users.findOne({ email }))
+            .catch(error => expect(error.message).to.equal('Email already exists'))
+        })
     })
 
     after(() => client.close())

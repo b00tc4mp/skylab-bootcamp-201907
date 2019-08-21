@@ -1,16 +1,7 @@
 module.exports = {
-    /**
-     * 
-     * @param {*} name 
-     * @param {*} surname 
-     * @param {*} email 
-     * @param {*} password 
-     * @param {*} repassword 
-     * 
-     * @returns {Promise}
-     */
-    registerUser(name, surname, email, password, repassword) {
-        // TODO this.__users__.findOne/.insertOne...
-        return Promise.resolve()
-    }
+    registerUser: require('./register-user'),
+    authenticateUser: require('./authenticate-user'),
+    retrieveUser: require('./retrieve-user'),
+    updateUser: require('./update-user'),
+    unregisterUser: require('./unregister-user')
 }
