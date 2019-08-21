@@ -10,6 +10,8 @@ module.exports = {
         return this.__users__.findOne({ email })
             .then(user => {
                 if ((!user) || (user.password != password)) throw Error('Wrong credentials')
+                
+                return user._id.toString()
             }
             )
     }

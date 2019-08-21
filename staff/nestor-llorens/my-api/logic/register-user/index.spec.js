@@ -15,7 +15,7 @@ describe('register', () => {
    
     before(() => {
 
-        client = new MongoClient('mongodb://localhost')
+        client = new MongoClient('mongodb://localhost', { useNewUrlParser: true, useUnifiedTopology: true })
 
         return client.connect()
             .then(() => {
@@ -41,7 +41,7 @@ describe('register', () => {
             })
     )
 
-    it('should create error.message on email already registered', () =>
+    it('should fail on email already registered', () =>
         logic.registerUser(name, surname, email, password, repassword)
             .catch(error => expect(error.message).to.equal('Email is already registered'))
     )
