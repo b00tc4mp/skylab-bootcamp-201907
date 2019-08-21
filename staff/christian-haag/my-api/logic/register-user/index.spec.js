@@ -34,7 +34,7 @@ describe('logic', () => {
             logic.registerUser(name, surname, email, password, repassword)
                 .then(result => {
                     expect(result).to.not.exist
-                    users.findOne({ email })
+                    return users.findOne({ email })
                 })
                 .then(user => {
                     expect(user).to.exist

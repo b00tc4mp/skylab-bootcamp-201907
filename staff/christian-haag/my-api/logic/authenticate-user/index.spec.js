@@ -30,50 +30,41 @@ describe('logic', () => {
             email = `email-${Math.random()}@domain.com`
             password = `password-${Math.random()}`
 
-            users.insertOne({ name, surname, email, password })
+            return users.insertOne({ name, surname, email, password })
                 .then(res => id = res.insertedId.toString())
-
         })
 
         it('should suceed on correct data', () =>
             logic.authenticateUser(email, password)
-                .then(res => {
-                    expect(res).to.exist
-                    expect(res).to.be.a('string')
-                    expect(res).to.not.equal(id)
+                .then(_id => {
+                    expect(_id).to.exist
+                    expect(_id).to.be.a('string')
+                    expect(_id).to.equal(id)
                 })
-                .catch(error => { error })
+        )
+
+        it('schould fail on wrong email', () =>
+            logic.authenticateUser('fake@mail.com', password)
+                .then(user => {
+                    expect(user).to.be.defined
+                })
+                .catch(error => {
+                    expect(error).to.exist
+                    expect(error.message).to.equal('wrong credentials')
+                })
 
         )
 
-        it('schould suceed on wrong email', () => {
-            const _email = 'fake@mail.com'
-            logic.authenticateUser(_email, password)
-                .then(data => {
-                    expect(data).to.exist
-                    expect(_email).to.not.equal(email)
-                    expect(password).to.equal(password)
+        it('schould fail on wrong credentials', () =>
+            logic.authenticateUser(email, 'kldjbnfkjabfkb')
+                .then(user => {
+                    expect(user).to.be.undefined
                 })
                 .catch(error => {
                     expect(error).to.exist
                     expect(error.message).to.equal('wrong credentials')
                 })
-        })
-
-        it('schould suceed on wrong credentials', () => {
-            const _password = 'kldjbnfkjabfkb'
-            debugger
-            logic.authenticateUser(email, _password)
-                .then(data => {
-                    expect(data).to.exist
-                    expect(_email).to.not.equal(email)
-                    expect(password).to.equal(password)
-                })
-                .catch(error => {
-                    expect(error).to.exist
-                    expect(error.message).to.equal('wrong credentials')
-                })
-        })
+        )
 
     })
 

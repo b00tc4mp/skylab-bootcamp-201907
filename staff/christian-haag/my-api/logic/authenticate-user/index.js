@@ -1,3 +1,5 @@
+const { ObjectId } = require('mongodb')
+
 /**
  * Authenticate user
  * 
@@ -18,12 +20,10 @@ module.exports = {
 
 
         return this.__users__.findOne({ email, password })
-            .then(response => {
-                if (!response) throw Error('wrong credentials')
-                return response._id.toString()
+            .then(user => {
+                if (!user || user.password !== password) throw new Error(`wrong credentials`)
+                return user._id.toString()
             })
-            .then(() => { })
-
     }
 }
 

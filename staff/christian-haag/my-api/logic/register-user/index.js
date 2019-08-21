@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb')
 /**
  * Register users
  * 
@@ -23,7 +24,7 @@ module.exports = {
         return this.__users__.findOne({ email })
             .then(user => {
                 if (user) throw Error('user already exists')
-                return this.__users__.insertOne({ name, surname, email, password })
+                this.__users__.insertOne({ name, surname, email, password })
             })
             .catch(error => { throw error })
     }
