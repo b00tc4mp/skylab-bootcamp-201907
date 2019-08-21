@@ -32,40 +32,16 @@ describe('logic', () => {
 
         it('should succeed on correct data', () =>
             logic.registerUser(name, surname, email, password, repassword)
-                .then(() => users.findOne({ email }))
+                .then(result => {
+                    expect(result).to.not.exist
+                    users.findOne({ email })
+                })
                 .then(user => {
                     expect(user).to.exist
                     expect(user.name).to.equal(name)
                     expect(user.surname).to.equal(surname)
                     expect(user.email).to.equal(email)
                     expect(user.password).to.equal(password)
-                })
-        )
-    })
-
-    describe('authenticate', () => {
-
-
-        beforeEach(() => {
-            name = `name-${Math.random()}`
-            surname = `surname-${Math.random()}`
-            email = `email-${Math.random()}@domain.com`
-            password = `password-${Math.random()}`
-
-            users.insertOne({ name, surname, email, password })
-
-        })
-
-        it('should suceed on correct data', () =>
-            logic.registerUser(name, surname, email, password)
-                .then(() => {
-                    logic.authenticateUser(email, password)
-                        .then(data => {
-                            expect(data).to.exist
-                            expect(data.id).to.equal(email)
-                            expect(data.token).to.equal(password)
-                        })
-                        .catch(error => { error })
                 })
         )
     })
