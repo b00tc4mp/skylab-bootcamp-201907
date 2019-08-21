@@ -36,11 +36,10 @@ describe('logic', () => {
 
         it('should delete user', () =>
             logic.deleteUser(id)
+                .then(user => { expect(user.deletedCount).to.equal(1) })
+                .then(() => users.findOne({ id }))
                 .then(user => {
-                    user.message
-                    user.result
-                    debugger
-                    expect(user.deletedCount).to.equal(1)
+                    expect(user).to.null
                 })
         )
     })
