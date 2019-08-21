@@ -1,5 +1,5 @@
 const validate = require('../utils/validate')
-// const ObjectId = require('mongodb')
+const { ObjectId } = require('mongodb')
 
 module.exports = {
     /**
@@ -34,36 +34,71 @@ module.exports = {
  
 
 },
+    /**
+     * 
+     * @param {*} email 
+     * @param {*} password 
+     * 
+     * @returns {Promise}
+     */
+    // authenticateUser(email,password){
 
-    authenticateUser(email,password){
+    //     validate.string(email, 'email')
+    //     validate.email(email, 'email')
+    //     validate.string(password, 'password')
 
-        validate.string(email, 'email')
-        validate.email(email, 'email')
-        validate.string(password, 'password')
+    //     return this.__users__.findOne({ email, password})
+    //     .then(response => { 
+    //         if(!response) throw error  
+    //         response.id=`id-${Math.random()}`
+    //         response.token = `token-${Math.random()}`
+    //         return response
+    //     })
 
-        return this.__users__.findOne({ email, password})
-        .then(response => { 
-            if(!response) throw error  
-            response.id=`id-${Math.random()}`
-            response.token = `token-${Math.random()}`
-            return response
-        })
+    authenticateUser(email, password) {
+        // TODO validate fields
 
-       
+        return this.__users__.findOne({ email })
+            .then(user => {
+                if (!user || user.password !== password) throw new Error(`user with e-mail ${email} does not exist`)
 
-},
+                return user._id.toString()
+            })
+    },
 
-    retrieveUser(id, token){
-        // validate.string(id, 'id')
-        // validate.string(token, 'token')
-        debugger
-        return this.__users__.findOne({ id, token})
+
+    /**
+     * 
+     * @param {*} id 
+     * @param {*} token 
+     * 
+     * @returns {Promise}
+     */
+    retrieveUser(id){
+        validate.string(id, 'id')
+        // debugger
+        // return this.__users__.findOne({ id, token})
         
-        .then(response => { 
+        // .then(response => { 
             
-            // if(!response) throw error  
-            return response
-        })     
+        //     // if(!response) throw error  
+        //     return response
+        // })    
+        return this.__users__.findOne({ _id: ObjectId(id) }, { projection: { _id: 0, password: 0 } })
+            .then(user => {
+                user.id = id
 
+                return user
+            }) 
+
+    
+
+    },
+
+    unregisterUser(id){
+        return this.__users__.deleteOne({_id: ObjectId(id)})
+        // .then(user => {
+        //     return {deletedCount: 1}
+        // }) 
     }
 }
