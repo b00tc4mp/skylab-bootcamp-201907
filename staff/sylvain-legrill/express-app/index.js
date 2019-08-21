@@ -130,15 +130,14 @@ app.get(SIGN_UP, (req, res) => {
 
     session.view = SIGN_UP
 
-    const { error, lang, name, surname, email } = session
-
-    res.send(Html(Register(error, name, surname, email, lang)))
-
+    const { error, name, surname, email, lang } = session
+    
     delete session.error
     delete session.name
     delete session.surname
     delete session.email
 
+    res.send(Html(Register(error, name, surname, email, lang)))
 })
 
 app.post(SIGN_UP, formBodyParser, (req, res) => {
@@ -149,8 +148,8 @@ app.post(SIGN_UP, formBodyParser, (req, res) => {
 
     try {
         logic.registerUser(name, surname, email, password, repassword)
-            .then(() => res.send(Html(RegisterSuccess(lang)))) //lang
-            .catch(({message })=> {
+            .then(() => res.send(Html(RegisterSuccess(lang)))) 
+            .catch(({ message })=> {
                 session.error = message
                 session.name = name
                 session.surname = surname
