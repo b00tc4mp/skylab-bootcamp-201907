@@ -1,8 +1,8 @@
 const { MongoClient } = require('mongodb')
 const { expect } = require('chai')
-const logic = require('.')
+const logic = require('../')
 
-describe('Retrieve user', () => {
+describe('Logic - Register user', () => {
     let client, users
 
     before(() => {
@@ -18,34 +18,23 @@ describe('Retrieve user', () => {
             })
     })
 
-    beforeEach(() => {users.deleteMany()})
-    
-    describe('should succeed on correct data', () => {
-        let name, surname, email, password, repassword
-        let id, token
-    
-        beforeEach(() => {
-            name = `name-${Math.random()}`
-            surname = `surname-${Math.random()}`
-            email = `email-${Math.random()}@domain.com`
-            password = `password-${Math.random()}`
-            repassword = password
+    beforeEach(() => users.deleteMany())
+    let name, surname, email, password
 
-            // Register user first to make sure it exists
-            users.insertOne({name, surname, email, password})
-            .then(() => users.findOne({ email }))
-            .then()
+    beforeEach(() => {
+        name = `name-${Math.random()}`
+        surname = `surname-${Math.random()}`
+        email = `email-${Math.random()}@domain.com`
+        password = `password-${Math.random()}`
+    })
 
-        })
+    it('should succeed on correct data', () =>
+        logic.registerUser(name, surname, email, password, password)
+            .then(result => {
+                expect(result).not.to.exist
 
-
-
-        it('should succeed on correct data', () => 
-        logic.registerUser(name, surname, email, password, repassword)
-            .then(response => {
-                expect(response).not.to.exist
-                return users.findOne({ name }
-            )})
+                return users.findOne({ email })
+            })
             .then(user => {
                 expect(user).to.exist
                 expect(user.name).to.equal(name)
@@ -53,20 +42,17 @@ describe('Retrieve user', () => {
                 expect(user.email).to.equal(email)
                 expect(user.password).to.equal(password)
             })
-        )
+    )
 
-        it('existing user', () => 
-            logic.registerUser(name, surname, email, password, repassword)
-                .then(() => users.findOne({ name }))
-                .catch(error => {
-                    expect(error).to.exist
-                    expect(error.message).to.equal('Email already registered') 
-                })
-        )
-       
-
-
-    })
+    it('should succeed on exist user', () =>
+        logic.registerUser(name, surname, email, password, password)
+            .then(data => {
+                expect(data).to.be.undefined
+            })
+            .catch(error => {
+                expect(error.message).to.equal('Email already registered')
+            })
+    )
 
     after(() => client.close())
 })

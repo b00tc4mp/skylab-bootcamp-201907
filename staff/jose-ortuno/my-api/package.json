@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx mocha logic/**/*.spec.js",
-    "test:debug": "mocha debug logic '**/*.spec.js'"
+    "test": "npx mocha '**/*.spec.js'",
+    "test:debug": "mocha debug '**/*.spec.js'"
   },
   "keywords": [],
   "author": "",
