@@ -10,21 +10,14 @@ module.exports = {
     */
 
     authenticateUser(email, password) {
-        // validate.str(email, 'email')
-        validate.email(email, 'email')
-        validate.str(password, 'password')
+            validate.email(email, 'email')
+            validate.str(password, 'password')
 
-        return this.__users__.findOne({ email })
-            .then( user => {
-                if(!user) throw Error ("User not found")
-                else{
-                    if(email !== user.email || password !== user.password){
-                        throw Error ("Wrong credentials")
-                    }else{
-                        return {email: user.email , password: user.password}
-                    }
-                }
-            })
+            return this.__users__.findOne( {$and: [{ email } , { password }]})
+                .then( user => {
+                    if(!user) throw Error ("Wrong credentials")
+                    user._id.toString()
+                }).
+                catch( error => {throw error})
     }
 }
-

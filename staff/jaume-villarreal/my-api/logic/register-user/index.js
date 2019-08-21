@@ -25,6 +25,6 @@ module.exports = {
             .then( user => {
                 if(user) throw Error('This user already exists')
                 this.__users__.insertOne({ name , surname , email , password})
-        })
+            }).then( () => {})
     }
 }

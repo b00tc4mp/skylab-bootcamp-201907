@@ -20,8 +20,8 @@ describe('logic', () => {
 
     beforeEach(() => users.deleteMany())
 
-    describe('register', () => {
-        let name, surname, email, password, repassword
+    describe('authenticate', () => {
+        let email, password
 
         beforeEach(() => {
             name = `name-${Math.random()}`
@@ -29,21 +29,9 @@ describe('logic', () => {
             email = `email-${Math.random()}@domain.com`
             password = `password-${Math.random()}`
             repassword = password
+            users.insertOne({ name , surname , email , password})
         })
 
-        it('should succeed on correct data', () => {
-            return logic.registerUser(name, surname, email, password, repassword)
-               .then(() => users.findOne({ name }))
-               .then(user => {
-                   expect(user).to.exist
-                   expect(user.name).to.equal(name)
-                   expect(user.surname).to.equal(surname)
-                   expect(user.email).to.equal(email)
-                   expect(user.password).to.equal(password)
-               })
-            }
-        )
+        after(() => client.close())
     })
-
-    after(() => client.close())
 })
