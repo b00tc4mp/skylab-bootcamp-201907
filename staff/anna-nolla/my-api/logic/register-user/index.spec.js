@@ -45,9 +45,5 @@ describe('logic', () => {
         
     })
 
-    describe('authenticate', () => {
-        // TODO
-    })
-
     after(() => client.close())
 })

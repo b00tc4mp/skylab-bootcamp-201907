@@ -20,30 +20,32 @@ describe('logic', () => {
 
     beforeEach(() => users.deleteMany())
 
-    describe('authenticate', () => {
-        let name, surname, email, password, repassword
+    describe('retrieve user', () => {
+        let name, surname, email, password, id
 
         beforeEach(() => {
             name = `name-${Math.random()}`
             surname = `surname-${Math.random()}`
             email = `email-${Math.random()}@domain.com`
             password = `password-${Math.random()}`
-            repassword = password
-        return users.insertOne({ name, surname, email, password, repassword })
+
+            return users.insertOne({ name, surname, email, password })
+                .then(result => id = result.insertedId.toString())
         })
 
-        it('should succeed on correct data', () => {
-            return logic.authenticateUser(email, password)
-                .then(userId => {
-                    expect(userId).to.exist
-                    expect(userId).to.be.a("string")
+        it('should succeed on correct data', () =>
+            logic.retrieveUser(id)
+                .then(user => {
+                    expect(user).to.exist
+                    expect(user.id).to.equal(id)
+                    expect(user._id).not.to.exist
+                    expect(user.name).to.equal(name)
+                    expect(user.surname).to.equal(surname)
+                    expect(user.email).to.equal(email)
+                    expect(user.password).not.to.exist
                 })
-        })
+        )
     })
-
-    describe('authenticate', () => {
-        // TODO
-    })
-
+    
     after(() => client.close())
 })

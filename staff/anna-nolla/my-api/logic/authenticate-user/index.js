@@ -14,10 +14,10 @@ module.exports = {
         validate.string(password, 'password')
         
 
-        return this.__users__.findOne({ email: `${email}` })
-            .then ((user) => { if(!user || password !== user.password) console.log("you are a noob try again")
+        return this.__users__.findOne( { $and: [{ email: `${email}` }, {password:`${password}`}] })
+            .then ((user) => { if (!user) console.log("you are a noob try again")
                     console.log("congratz you logued in but nothing happened")
-                    return user
+                    return user._id.toString()
             })
     }
 }
