@@ -20,33 +20,6 @@ describe('logic', () => {
 
     beforeEach(() => users.deleteMany())
 
-    describe('register', () => {
-        let name, surname, email, password
-
-        beforeEach(() => {
-            name = `name-${Math.random()}`
-            surname = `surname-${Math.random()}`
-            email = `email-${Math.random()}@domain.com`
-            password = `password-${Math.random()}`
-        })
-
-        it('should succeed on correct data', () =>
-            logic.registerUser(name, surname, email, password, password)
-                .then(result => {
-                    expect(result).not.to.exist
-
-                    return users.findOne({ email })
-                })
-                .then(user => {
-                    expect(user).to.exist
-                    expect(user.name).to.equal(name)
-                    expect(user.surname).to.equal(surname)
-                    expect(user.email).to.equal(email)
-                    expect(user.password).to.equal(password)
-                })
-        )
-    })
-
     describe('authenticate', () => {
         let name, surname, email, password, id
 
@@ -86,33 +59,6 @@ describe('logic', () => {
                 })
                 .catch(error => {
                     expect(error.message).to.equal('Wrong credentials')
-                })
-        )
-    })
-
-    describe('retrieve user', () => {
-        let name, surname, email, password, id
-
-        beforeEach(() => {
-            name = `name-${Math.random()}`
-            surname = `surname-${Math.random()}`
-            email = `email-${Math.random()}@domain.com`
-            password = `password-${Math.random()}`
-
-            return users.insertOne({ name, surname, email, password })
-                .then(result => id = result.insertedId.toString())
-        })
-
-        it('should succeed on correct data', () =>
-            logic.retrieveUser(id)
-                .then(user => {
-                    expect(user).to.exist
-                    expect(user.id).to.equal(id)
-                    expect(user._id).not.to.exist
-                    expect(user.name).to.equal(name)
-                    expect(user.surname).to.equal(surname)
-                    expect(user.email).to.equal(email)
-                    expect(user.password).not.to.exist
                 })
         )
     })
