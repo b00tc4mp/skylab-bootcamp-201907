@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx mocha logic"
+    "test": "npx mocha logic",
+    "test-debug": "npx mocha --inspect-brk logic"
   },
   "keywords": [],
   "author": "",
