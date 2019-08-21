@@ -23,7 +23,7 @@ describe('logic', () => {
 
     beforeEach(() => users.deleteMany())
 
-    describe('register', () => {
+    describe('delete', () => {
         let name, surname, email, password, repassword
 
         beforeEach(() => {
@@ -31,25 +31,23 @@ describe('logic', () => {
             surname = `surname-${Math.random()}`
             email = `email-${Math.random()}@domain.com`
             password = `password-${Math.random()}`
-            repassword = password
+
+            return users.insertOne({ name, surname, email, password })
+                .then(result => id = result.insertedId)
         })
 
-        it('should succeed on correct data', () =>
-            logic.registerUser(name, surname, email, password, repassword)
-                .then((response) => {
-                    expect(response).to.not.exist
-                    return users.findOne({ name })
+        it('should remove user on correct data', () => {
+            logic.unregisterUser(id)
+                .then(response => {
+                    expect(response).to.exist
+                    expect(response.deletedCount).to.equal(1)
+                    return users.findOne({ id })
+                }).then(response => {
+                    expect(response).not.to.exist
                 })
-                .then(user => {
-                    expect(user).to.exist
-                    expect(user.name).to.equal(name)
-                    expect(user.surname).to.equal(surname)
-                    expect(user.email).to.equal(email)
-                    expect(user.password).to.equal(password)
-                })
-        )
+        })
 
-        // it('should cry if user exists')
+
     })
 
 

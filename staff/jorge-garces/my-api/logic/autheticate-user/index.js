@@ -1,3 +1,12 @@
+/**
+ * Authenticates a user by its credentials.
+ * 
+ * @param {string} email 
+ * @param {string} password 
+ * 
+ * @returns {Promise}
+ */
+
 const validate = require('../../utils/validate')
 module.exports = {
     /**
