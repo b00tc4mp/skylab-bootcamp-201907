@@ -83,10 +83,10 @@ module.exports = {
      * 
      * @returns {Promise}
      */ 
+    updateUser(name, surname, email, password, id) {
+        debugger
 
-    updateUser(email, name, surname, password) {
-
-        return this.__users__.findOneAndUpdate({ email}, { $set: { name, surname, password } })
+        return this.__users__.updateOne({ _id: ObjectId }, { $set: { name, surname, email, password } })
             .then(() =>{
 
             })
