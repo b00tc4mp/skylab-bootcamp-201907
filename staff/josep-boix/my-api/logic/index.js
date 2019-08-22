@@ -2,55 +2,9 @@ const {ObjectId} = require ('mongodb')
 const validate = require ('../utils/validate')
 
 module.exports = {
-    /**
-     * Register an user
-     * 
-     * @param {string} name
-     * @param {string} surname
-     * @param {string} email
-     * @param {string} password
-     * @param {string} repassword
-     * 
-     * @return {Promise}
-     */
-    registerUser (name, surname, email, password, repassword) {
-        validate.string (name, 'name')
-        validate.string (surname, 'surname')
-        validate.string (email, 'email')
-        validate.email (email, 'email')
-        validate.string (password, 'password')
-
-        if (password !== repassword) throw Error ('passwords do not match.')
-
-        return this.__users__.findOne({email})
-            .then (user => {
-                if (user) throw Error (`User with email ${mail} already exists.`)
-
-                return this.__users__.insertOne({name, surname, email, password})
-            })
-            .then (() => {})
+    
+    registerUser: require ('./register-user')
             
-    },
-
-    /**
-     * Authenticate an user by credentials
-     * 
-     * @param {string} email
-     * @param {string} password
-     * 
-     * @returns {Promise}
-     */
-    authenticateUser (email, password) {
-        validate.string (email, 'email')
-        validate.email (email, 'email')
-        validate.string (password, 'password')
-        debugger
-        return this.__users__.findOne ({email})
-            .then (user =>{
-                if (!user || user.password !== password) throw Error ('Wrong credentials')
-
-                return user._id.toString()
-            })
 
     },
 
@@ -62,15 +16,15 @@ module.exports = {
      * 
      * @returns {Promise}
      */
-    // retrieveUser (id, token) {
-    //     return this.__users__.findOne ({_id: ObjectId(id)}, 
-    //         {projection: {id: 0, password: 0}}) //projection: avoid to send this fields as visible information
-    //         .then (user => {
-    //             if (!user) throw Error (`user with id ${id} not found`)
+    retrieveUser (id, token) {
+        return this.__users__.findOne ({_id: ObjectId(id)}, 
+            {projection: {id: 0, password: 0}}) //projection: avoid to send this fields as visible information
+            .then (user => {
+                if (!user) throw Error (`user with id ${id} not found`)
 
-    //             user.id = id
+                user.id = id
 
-    //             return user
-    //         })
-    // }
+                return user
+            })
+    }
 }

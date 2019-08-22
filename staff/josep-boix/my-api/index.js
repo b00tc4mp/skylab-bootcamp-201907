@@ -45,6 +45,8 @@ client.connect ()
                         res.json({message: 'User authenticate succesful.', id, token})
                     })
                     .catch(({message}) => res.json({error: message}))
+            }catch(error) {
+                throw Error (error)
             }
         })
 
