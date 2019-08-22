@@ -1,19 +1,15 @@
-const { MongoClient } = require('mongodb')
+const data = require('../../data')
 const { expect } = require('chai')
-const logic = require('.')
+const logic = require('..')
 
 describe('logic', () => {
     let client, users
 
     before(() => {
-        client = new MongoClient('mongodb://localhost')
-
-        return client.connect()
-            .then(() => {
-                const db = client.db('my-api-test')
-
-                users = db.collection('users')
-
+        data('monogodb://loclahost' , 'my-api-test')
+            .then( ({ client:_client , database }) => {
+                client = _client
+                users = database.collection('users')
                 logic.__users__ = users
             })
     })

@@ -1,28 +1,24 @@
 const { MongoClient } = require('mongodb')
 const { expect } = require('chai')
-const { ObjectId } = require('mongodb')
 const logic = require('.')
+const { ObjectId } = require('mongodb')
 
 describe('logic', () => {
     let client, users
 
     before(() => {
-        client = new MongoClient('mongodb://localhost')
-
-        return client.connect()
-            .then(() => {
-                const db = client.db('my-api-test')
-
-                users = db.collection('users')
-
+        data('mongodb://localhost' , 'my-api-test')
+            .then( ({ client:_client , database}) => {
+                client = _client
+                users = database.collection('users')
                 logic.__users__ = users
             })
     })
 
-    beforeEach(() => users.deleteMany())
+     beforeEach(() => users.deleteMany())
 
-     describe('update', () => {
-        let name, surname, email, password , userId
+     describe('update user', () => {
+        let name, surname, email, password, userId
 
         beforeEach(() => {
             name = `name-${Math.random()}`
@@ -30,70 +26,42 @@ describe('logic', () => {
             email = `email-${Math.random()}@domain.com`
             password = `password-${Math.random()}`
 
-            return users.insertOne({ name , surname , email , password })
-                .then( result => userId = result.insertedId.toString())
+            body = {
+                name: `name-${Math.random()}`,
+                surname: `surname-${Math.random()}`,
+                email: `email-${Math.random()}@domain.com`,
+                password: `password-${Math.random()}`,
+                extra: `extra-${Math.random()}`
+            }
+
+            return users.insertOne({ name, surname, email, password })
+                .then(result => userId = result.insertedId.toString())
         })
 
-        it("should update new name" , () =>
-            logic.updateUser(userId , "John" , surname , email , password)
-                .then( response => {
-                    expect(response.modifiedCount).to.equal(1)
-                    return users.findOne({ _id : ObjectId(userId) })
-                })
-                .then(user => {
-                    debugger
-                    expect(user.name).to.equal('John')
-                    expect(user.surname).to.equal(surname)
-                    expect(user.email).to.equal(email)
-                    expect(user.password).to.equal(password)
-                })
-        )
-        
-        it("should update new surname" , () =>
-            logic.updateUser(userId , name , "Doe" , email , password)
-                .then( response => {
-                    expect(response.modifiedCount).to.equal(1)
-                    return users.findOne({ _id : ObjectId(userId) })
-                })
-                .then(user => {
-                    debugger
-                    expect(user.name).to.equal(name)
-                    expect(user.surname).to.equal("Doe")
-                    expect(user.email).to.equal(email)
-                    expect(user.password).to.equal(password)
-                })
-        )
-        
-        it("should update new email" , () =>
-            logic.updateUser(userId , name , surname , "b@mail.com" , password)
-                .then( response => {
-                    expect(response.modifiedCount).to.equal(1)
-                    return users.findOne({ _id : ObjectId(userId) })
-                })
-                .then(user => {
-                    debugger
-                    expect(user.name).to.equal(name)
-                    expect(user.surname).to.equal(surname)
-                    expect(user.email).to.equal('b@mail.com')
-                    expect(user.password).to.equal(password)
-                })
-        )
-        
-        it("should update new password" , () =>
-            logic.updateUser(userId , name , surname , email , 'abc')
-                .then( response => {
-                    expect(response.modifiedCount).to.equal(1)
-                    return users.findOne({ _id : ObjectId(userId) })
-                })
-                .then(user => {
-                    debugger
-                    expect(user.name).to.equal(name)
-                    expect(user.surname).to.equal(surname)
-                    expect(user.email).to.equal(email)
-                    expect(user.password).to.equal('abc')
-                })
-        )
-    })
+        it('should succeed on correct data', () =>
+        logic.updateUser(userId, body)
+            .then(result => {
+                expect(result).not.to.exist
 
-    after(() => client.close())
+                return users.findOne({ _id: ObjectId(userId) })
+            })
+            .then(user => {
+                expect(user).to.exist
+                expect(user.name).to.equal(body.name)
+                expect(user.surname).to.equal(body.surname)
+                expect(user.email).to.equal(body.email)
+                expect(user.password).to.equal(body.password)
+                expect(user.extra).to.equal(body.extra)
+            })
+    )
+
+    it('should fail on non-existing user', () => {
+        userId = '5d5d5530531d455f75da9fF9'
+
+        return logic.updateUser(userId, body)
+            .then(() => { throw new Error('should not reach this point') })
+            .catch(({ message }) => expect(message).to.equal(`user with id ${userId} does not exist`))
+    })
+    })
+    after(() => client.close)
 })

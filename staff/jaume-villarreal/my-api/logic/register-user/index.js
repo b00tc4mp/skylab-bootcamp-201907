@@ -1,6 +1,5 @@
 const validate = require('../../utils/validate')
 
-module.exports = {
     /**
      * Registers a user.
      * 
@@ -12,7 +11,8 @@ module.exports = {
      * 
      * @returns {Promise}
      */
-    registerUser(name, surname, email, password, repassword) {
+
+module.exports = functtion(name, surname, email, password, repassword) {
         validate.str(name , 'name')
         validate.str(surname , 'surname')
         validate.email(email , 'email')
@@ -28,4 +28,3 @@ module.exports = {
             })
             .then(() => { })
     }
-}

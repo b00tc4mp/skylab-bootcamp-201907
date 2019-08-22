@@ -1,34 +1,32 @@
-const express = require ('express')
-const { MongoClient } = require('mongodb')
-const bodyParser = require('body-parser')
-const jwt = require('jsonwebtoken')
-const logic = ('./logic')
+require('dotenv').config()
 
-const client = new MongoClient("mongodb://localhost" , { useNewUrlParser : true , useUnifiedTopology : true })
-const secret = 'myAppCSecret'
+const express = require('express')
+const logic = require('./logic')
+const data = require('./data')
+const routes = require('./routes')
+const { name , version } = require('package')
 
-client.connect()
-    .then( () => {
-        const db = client.db('my-app')
+const { env : { PORT , DB_URL , DB_NAME }} = process
+
+let client
+
+data(DB_URL , DB_NAME)
+    then( ({ client:_client , db }) => {
+        client = _client
+
         const users = db.collection('users')
-        const logic.__users__ = users
-        const port = { argsv : [ , , port=8080] } = process
+
+        logic.__users__ = users
+
         const app = express()
-        const jsonBodyParser = bodyParser.json()
 
-        app.post('/user' , jsonBodyParser , (req , res) => {
-            const { body : {name , surname , email , password} } = req
+        app.use('/api'  routes)
 
-            try{
-                logic.registerUser( name , surname , email , password)
-                    .then( () => res.status(201).json({ message : "user registered correctly"}))
-                    .catch({ message } => res.status(400).json({ error : message }))
-            } catch({ message }){
-                res.status(400).json(error:message)
-            }
-        })
-    
-        app.listen(port)
+        app.lsiten(PORT , () => console.log(`${name} ${version} up in port ${PORT}`))
     })
 
-
+    process.on('SIGINT' , () => {
+        console.log(`\n${name} ${version} shutting down, disconnecting from db...`)
+        client.close()
+        process.exit(0)
+    })

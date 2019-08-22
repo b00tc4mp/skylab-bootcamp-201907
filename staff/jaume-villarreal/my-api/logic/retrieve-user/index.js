@@ -1,7 +1,6 @@
 const validate = require('../../utils/validate')
 const { ObjectId } = require('mongodb')
 
-module.exports = {
     /**
      * Retrieves a user by its id.
      * 
@@ -9,23 +8,10 @@ module.exports = {
      * 
      * @returns {Promise}
      */
-    retrieveUser(id) {
-        // TODO validate fields
-
-        // VIKING style
-        // return this.__users__.findOne({ _id: ObjectId(id) })
-        //     .then(user => {
-        //         user.id = user._id.toString()
-        //         delete user._id
-        //         delete user.password
-        //         return user
-        //     })
-
-        // TUNED style
+module.exports = function(id) {
         return this.__users__.findOne({ _id: ObjectId(id) }, { projection: { _id: 0, password: 0 } })
             .then(user => {
                 user.id = id
                 return user
             })
     }
-}

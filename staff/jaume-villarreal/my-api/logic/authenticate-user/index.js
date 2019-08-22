@@ -1,5 +1,5 @@
 const validate = require('../../utils/validate')
-module.exports = {
+
     /**
      * Authenticates a user by its credentials.
      * 
@@ -9,7 +9,7 @@ module.exports = {
      * @returns {Promise}
      */
 
-    authenticateUser(email, password) {
+module.exports = function(email, password) {
         validate.str(email , 'email')
         validate.email(email , 'email')
         validate.str(password , 'password')
@@ -23,4 +23,3 @@ module.exports = {
                 return user._id.toString()
             })
     }
-}

@@ -1,8 +1,7 @@
 const validate = require('../../utils/validate')
 const { ObjectId } = require('mongodb')
 
-module.exports = {
-    removeUser(id , password){
+module.exports = function(id , password){
         validate.str(id , 'id')
         validate.str(password , 'password')
         
@@ -12,4 +11,3 @@ module.exports = {
                 return this.__users__.deleteOne({ _id : user._id })
             })
     }
-}
