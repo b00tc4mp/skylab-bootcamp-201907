@@ -14,6 +14,7 @@ module.exports = function(id, fieldsToUpdate) {
     return this.__users__.updateOne({ _id: ObjectId(id) }, { $set: fieldsToUpdate })
         .then(user => {
             if (!user) throw Error('Fail to update fields')
-            else if (!user.result.nModified) throw Error('Wrong fields provided.')
+            else if (!
+                user.result.nModified) throw Error('Wrong fields provided.')
         })
 }
