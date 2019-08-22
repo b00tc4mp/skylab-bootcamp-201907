@@ -15,14 +15,13 @@ module.exports = {
 
    
 
-    registerUser(name, surname, email, password, repassword) {
+    registerUser(name, surname, email, password) {
         // TODO this.__users__.findOne/.insertOne...
         validate.string(name, 'name')
         validate.string(surname, 'surname')
         validate.string(email, 'email')
         validate.email(email, 'email')
         validate.string(password, 'password')
-        validate.string(repassword, 'password repeat')
    
         return this.__users__.findOne({ email})
         .then(user => { 
@@ -57,6 +56,9 @@ module.exports = {
 
     authenticateUser(email, password) {
         // TODO validate fields
+        validate.string(email, 'email')
+        validate.email(email, 'email')
+        validate.string(password, 'password')
 
         return this.__users__.findOne({ email })
             .then(user => {
@@ -86,6 +88,7 @@ module.exports = {
         // })    
         return this.__users__.findOne({ _id: ObjectId(id) }, { projection: { _id: 0, password: 0 } })
             .then(user => {
+                if(!user) throw new Error(`user with id ${id} not found`)
                 user.id = id
 
                 return user
@@ -95,10 +98,41 @@ module.exports = {
 
     },
 
-    unregisterUser(id){
-        return this.__users__.deleteOne({_id: ObjectId(id)})
-        // .then(user => {
-        //     return {deletedCount: 1}
-        // }) 
+    /**
+     * 
+     * @param {*} id 
+     * @param {*} email 
+     * @param {*} password 
+     * 
+     * @returns {Promise}
+     */
+
+    unregisterUser(id, email, password){
+        validate.string(email, 'email')
+        validate.email(email, 'email')
+        validate.string(password, 'password')
+
+        return this.__users__.deleteOne({_id: ObjectId(id), email, password})
+            .then(response=>{
+                if(response.deletedCount===0) throw Error ("There was an error unregistering the user")
+                //return response
+            })
+            
+       
+    },
+        updateUser(id, fieldsToUpdate) {
+        /**
+         * 
+         * @param {*} id
+         * @param {*} fieldsToUpdate 
+         * 
+         * @returns {Promise}
+         */
+         validate.string(id, 'id')
+         return this.__users__.updateOne({ _id: ObjectId(id) }, { $set: fieldsToUpdate })
+            .then(user => {
+                if (!user) throw Error('Fail to update fields')
+                else if (user.result.ok === 0) throw Error('Wrong fields provided.')
+            })
     }
 }

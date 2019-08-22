@@ -190,31 +190,32 @@ describe('logic', () => {
 
 
 
-        it('should fail on incorrect data', ()=>{
+        // it('should fail on incorrect data', ()=>{
+        //     debugger
+        //     logic.unregisterUser(idFalse)
+        //         .then(response => {
+        //             expect(response).to.exist
+        //             expect(response.deletedCount).to.equal(0)
+        //             return users.findOne({idFalse})
+        //         })
+        //         .then(response=>{
+        //             expect(response).not.to.exist
+        //         })
+        // })
+
+
+        it('should succeed on correct data', () =>{
             debugger
-            logic.unregisterUser(idFalse)
+            logic.unregisterUser(id, email, password)
                 .then(response => {
-                    expect(response).to.exist
-                    expect(response.deletedCount).to.equal(0)
-                    return users.findOne({idFalse})
-                })
-                .then(response=>{
                     expect(response).not.to.exist
-                })
-        })
-
-
-        it('should succeed on correct data', () =>
-            logic.unregisterUser(id)
-                .then(response => {
-                    expect(response).to.exist
                     expect(response.deletedCount).to.equal(1)
                     return users.findOne(id)
                 })
                 .then(response=>{
                     expect(response).not.to.exist
                 })
-        )
+            })
 
 
     })

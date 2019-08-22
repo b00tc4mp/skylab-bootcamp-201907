@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "watch2": "npx nodemon .",
+    "watch": "npx nodemon .",
     "debug": "node debug .",
     "test": "npx mocha logic",
     "test-debug": "npx mocha --inspect-brk logic"
