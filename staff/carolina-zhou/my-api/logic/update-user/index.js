@@ -1,28 +1,19 @@
 const validate = require('../../utils/validate')
+const { ObjectId } = require('mongodb')
 
-module.exports = {
-    /**
-     * Updates an existing user account.
-     * 
-     * @param {*} email 
-     * @param {*} name 
-     * @param {*} surname 
-     * @param {*} password 
-     * 
-     * @returns {Promise}
-     */ 
+/**
+ * Updates a user.
+ * 
+ * @param {string} id
+ * @param {Object} data
+ * 
+ * @returns {Promise}
+ */
+module.exports = function (id, data) {
+    validate.string(id, 'id')
 
-    updateUser(email, name, surname, password) {
-
-      validate.string(name, 'name')
-      validate.string(surname, 'surname')
-      validate.string(email, 'email')
-      validate.string(password, 'password')
-
-      return this.__users__.findOneAndUpdate({ email }, { $set: { name, surname, password } })
-        .then(() =>{
-            
+    return this.__users__.updateOne({ _id: ObjectId(id) }, { $set: data })
+        .then(result => {
+            if (!result.result.nModified) throw new Error(`user with id ${id} does not exist`)
         })
-        
-  }
 }

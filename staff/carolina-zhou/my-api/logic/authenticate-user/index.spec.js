@@ -1,17 +1,14 @@
-const { MongoClient } = require('mongodb')
 const { expect } = require('chai')
-const logic = require('.')
+const logic = require('..')
+const data = require('../../data')
 
-
-describe('logic', () => {
+describe('logic - authenticate user', () => {
     let client, users
 
     before(() => {
-        client = new MongoClient('mongodb://localhost')
-
-        return client.connect()
-            .then(() => {
-                const db = client.db('my-api-test')
+        return data('mongodb://localhost', 'my-api-test')
+            .then(({ client: _client, db }) => {
+                client = _client
 
                 users = db.collection('users')
 
@@ -19,62 +16,49 @@ describe('logic', () => {
             })
     })
 
-    beforeEach(() => users.deleteMany())
 
+    let name, surname, email, password, id
 
-     describe('authenticate', () => {
-         let name, surname, email, password
+    beforeEach(() => {
+        name = `name-${Math.random()}`
+        surname = `surname-${Math.random()}`
+        email = `email-${Math.random()}@domain.com`
+        password = `password-${Math.random()}`
 
-        beforeEach(() => {
-            name = `name-${Math.random()}`
-            surname = `surname-${Math.random()}`
-            email = `email-${Math.random()}@domain.com`
-            password = `password-${Math.random()}`
-
-            // Mongo DB driver. Return of promise needed.
-            return users.insertOne({ name, surname, email, password })
-                .then(result => id = result.insertedId.toString())
-        })
-
-/*             it('should succed on correct data', () => {
-                logic.authenticateUser(email, password)
-                .then(credentials => {
-                    expect(credentials).to.exist
-                    expect(credentials.id).to.exist
-                    expect(data.token).to.exist
-                })
-            }) */
-
-            it('should succed on correct data', () => {
-                logic.authenticateUser(email, password)
-                .then(_id => {
-                    expect(_id).to.exist
-                    expect(_id).to.be.a('string')
-                    expect(_id).to.equal(id)
-                })
-            })
-            
-            it('should fail on wrong email', () => 
-            logic.authenticateUser('Jhon@email.com', password)
-            .then(_id => {
-                expect(_id).to.be.undefined
-            })
-            .catch(error =>{
-                expect(error).to.exist
-                expect(error.message).to.equal('Wrong credentials.')
-            })
-            )
-            it('should fail on wrong password', ()=>
-            logic.authenticateUser(email, 'dajhfkasf')
-            .then(data => {
-                expect(data).to.be.undefined
-            })
-            .catch(error=>{
-                expect(error).to.exist
-                expect(error.message).to.equal('Wrong credentials.')
-            })
-            )
+        return users.deleteMany()
+            .then(() => users.insertOne({ name, surname, email, password })
+                .then(result => id = result.insertedId.toString()))
     })
+
+    it('should succeed on correct data', () =>
+        logic.authenticateUser(email, password)
+            .then(_id => {
+                expect(_id).to.exist
+                expect(_id).to.be.a('string')
+                expect(_id).to.equal(id)
+            })
+    )
+
+    it('should fail on wrong email', () => 
+    logic.authenticateUser('Jhon@email.com', password)
+    .then(_id => {
+        expect(_id).to.be.undefined
+    })
+    .catch(error =>{
+        expect(error).to.exist
+        expect(error.message).to.equal('wrong credentials')
+    })
+    )
+    it('should fail on wrong password', ()=>
+    logic.authenticateUser(email, 'dajhfkasf')
+    .then(data => {
+        expect(data).to.be.undefined
+    })
+    .catch(error=>{
+        expect(error).to.exist
+        expect(error.message).to.equal('wrong credentials')
+    })
+    )
 
     after(() => client.close())
 })

@@ -1,40 +1,24 @@
 const validate = require('../../utils/validate')
 
-module.exports = {
 /**
  * Authenticates a user by its credentials.
  * 
- * @param {*} email 
- * @param {*} password 
+ * @param {string} email 
+ * @param {string} password 
  * 
  * @returns {Promise}
  */
+module.exports = function (email, password) {
+    validate.string(email, 'username')
+    validate.email(email, 'username')
+    validate.string(password, 'password')
 
-/*     authenticateUser(email, password) {
-        let data= {}
-        validate.string(email, 'username')
-        validate.email(email, 'username')
-        validate.string(password, 'password')
+    return this.__users__.findOne({ email })
+        .then(user => {
+            if (!user) throw new Error(`wrong credentials`)
 
-        return this.__users__.findOne({ email, password })
-            .then(user => {
-                if (!user) throw Error ('Wrong credentials.')
-                data.id = user._id.toString()
-                data.token = `token-${Math.random()}`
-                return data
-            })
-    } */
+            if (user.password !== password) throw new Error('wrong credentials')
 
-    authenticateUser(email, password) {
-        validate.string(email, 'username')
-        validate.email(email, 'username')
-        validate.string(password, 'password')
-
-        return this.__users__.findOne({ email })
-            .then(user => {
-                if (!user || user.password !== password) throw new Error(`Wrong credentials.`)
-
-                return user._id.toString()
-            })
-    }
+            return user._id.toString()
+        })
 }

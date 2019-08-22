@@ -2,7 +2,7 @@ const { expect } = require('chai')
 const logic = require('..')
 const data = require('../../data')
 
-describe('logic - register user', () => {
+describe('logic - retrieve user', () => {
     let client, users
 
     before(() => {
@@ -16,7 +16,7 @@ describe('logic - register user', () => {
             })
     })
 
-    let name, surname, email, password
+    let name, surname, email, password, id
 
     beforeEach(() => {
         name = `name-${Math.random()}`
@@ -25,21 +25,20 @@ describe('logic - register user', () => {
         password = `password-${Math.random()}`
 
         return users.deleteMany()
+            .then(() => users.insertOne({ name, surname, email, password }))
+            .then(result => id = result.insertedId.toString())
     })
 
     it('should succeed on correct data', () =>
-        logic.registerUser(name, surname, email, password)
-            .then(result => {
-                expect(result).not.to.exist
-
-                return users.findOne({ email })
-            })
+        logic.retrieveUser(id)
             .then(user => {
                 expect(user).to.exist
+                expect(user.id).to.equal(id)
+                expect(user._id).not.to.exist
                 expect(user.name).to.equal(name)
                 expect(user.surname).to.equal(surname)
                 expect(user.email).to.equal(email)
-                expect(user.password).to.equal(password)
+                expect(user.password).not.to.exist
             })
     )
 

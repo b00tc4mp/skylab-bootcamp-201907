@@ -1,7 +1,5 @@
 const validate = require('.')
 
-
-
 const {
     random
 } = Math
