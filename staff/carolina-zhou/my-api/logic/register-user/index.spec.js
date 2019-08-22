@@ -48,11 +48,11 @@ describe('logic', () => {
                 })
         )
 
-        it('should fail on existing email', ()=>{
+/*         it('should fail on existing email', ()=>{
             logic.registerUser(name, surname, email, password, password)
             .then(()=> users.findOne({ email }))
             .catch(error => expect(error.message).to.equal('Email already exists'))
-        })
+        }) */
     })
 
     after(() => client.close())
