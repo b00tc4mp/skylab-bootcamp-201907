@@ -1,52 +1,34 @@
+require('dotenv').config()
+
 const express = require('express')
-const bodyParser = require('body-parser')
+const data = require('./data')
+const { name, version } = require('./package')
 const logic = require('./logic')
-const { MongoClient } = require('mongodb')
-const jwt = require('jsonwebtoken')
+const routes = require('./routes')
 
-const client = new MongoClient('mongodb://localhost', { useNewUrlParser: true, useUnifiedTopology: true })
+const { env: { PORT, DB_URL, DB_NAME } } = process
 
-const secret = "s3cr3t w0rt"
+let client
 
-client.connect()
-    .then(() => {
-        const db = client.db('my-api')
+data(DB_URL, DB_NAME)
+    .then(({ client: _client, db }) => {
+        client = _client
 
         const users = db.collection('users')
 
         logic.__users__ = users
 
-        const { argv: [, , port] } = process
-
         const app = express()
 
-        const jsonBodyParser = bodyParser.json()
+        app.use('/api', routes)
 
-        app.post('/users', jsonBodyParser, (req, res) => {
-            const { body: { name, surname, email, password } } = req
-
-            try {
-                logic.registerUser(name, surname, email, password)
-                    .then(() => res.status(201).json({ message: 'user correctly registered' }))
-                    .catch(({ message }) => res.status(400).json({ error: message }))
-            } catch ({ message }) {
-                res.status(400).json({ error: message })
-            }
-        })
-
-        app.post('/auth', jsonBodyParser, (req, res) => {
-            const { body: { email, password } } = req
-
-            try {
-                logic.authenticateUser(email, password)
-                    .then(id => {
-                        const token = jwt.sign({ sub: id }, secret)
-                        res.json({ message: 'user correctly authenticated', id, token })
-                    })
-                    .catch(({ message }) => res.status(401).json({ error: message }))
-            } catch ({ message }) {
-                res.status(401).json({ error: message })
-            }
-        })
-        app.listen(port)
+        app.listen(PORT, () => console.log(`${name} ${version} up and running on port ${PORT}`))
     })
+
+process.on('SIGINT', () => {
+    console.log(`\n${name} ${version} shutting down, disconnecting from db...`)
+
+    client.close()
+
+    process.exit(0)
+})
