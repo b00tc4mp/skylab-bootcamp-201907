@@ -1,0 +1,33 @@
+.header
+    background-color: transparent
+    padding: 2rem 0 2rem 2rem
+    color: darkslategray
+
+    &__title
+        font-family: "Ribeye Marrow", cursive
+
+    &__button
+        display: block
+        height: 30px
+        width: 100px
+        margin-top: 0.25rem
+        margin-bottom: 1rem
+        font-size: 1.1rem
+        +round-border(0.2rem, 0.6rem, solid, skyblue)
+
+        &:hover
+            background-color: tomato
+            color: white
+    
+    &__back-link
+        display: block
+        width: 200px
+        text-decoration: none
+        text-align: center
+        font-size: 1.1rem
+        color: white
+        +round-border(0.2rem, 0.6rem, solid, white)
+
+        &:hover
+            background-color: white
+            color: skyblue
