@@ -1,0 +1,184 @@
+.feedback {
+  margin: 2rem 0;
+  padding: 1rem;
+  text-align: center;
+  background-color: #F85B4E55;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  border-left: 1rem solid #F85B4E;
+  color: #F85B4E;
+  font-family: Titillium, sans-serif;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form > label {
+  color: #464159;
+  text-align: center;
+  padding: 0.1rem;
+}
+.form > input {
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.form > button {
+  width: 30%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+* {
+  padding: 0;
+}
+
+.duck-detail, .duck-results, .search, .register, .login, .lang, .header {
+  margin: 1.5rem;
+  background-color: lightgray;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #8bbabb;
+  font-family: "Playfair Display", serif;
+  padding: 20px;
+  margin: 0 auto;
+}
+.duck-detail button, .duck-results button, .search button, .register button, .login button, .lang button, .header button {
+  font-family: "Playfair Display", serif;
+  font-size: 16px;
+  background-color: #cabebe;
+  border-radius: 8px;
+  padding: 0.3rem;
+}
+.duck-detail button:hover, .duck-results button:hover, .search button:hover, .register button:hover, .login button:hover, .lang button:hover, .header button:hover {
+  background-color: white;
+  color: #D7D9DA;
+  font-weight: bold;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  width: 60%;
+}
+
+.navigator {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+h1 {
+  display: block;
+}
+
+.lang {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+}
+
+.login {
+  width: 60%;
+  height: 80%;
+}
+.login input {
+  display: block;
+  flex-wrap: wrap;
+}
+
+.register {
+  width: 60%;
+  height: 40%;
+}
+.register input {
+  display: block;
+  flex-wrap: wrap;
+}
+
+.search {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 60%;
+}
+.search button {
+  margin: 0 auto;
+}
+.search input {
+  padding: 0.1rem;
+}
+
+.duck-results {
+  align-items: center;
+  width: 60%;
+  height: 60%;
+}
+.duck-results * {
+  text-align: center;
+}
+.duck-results img {
+  width: 80%;
+  align-self: center;
+}
+.duck-results li {
+  list-style: none;
+}
+.duck-results h3 {
+  align-self: center;
+}
+.duck-results span {
+  display: block;
+}
+
+.duck-detail {
+  align-content: center;
+  background-color: #8bbabb;
+  width: 60%;
+  height: 60%;
+  text-align: justify;
+}
+.duck-detail img {
+  width: 80%;
+  margin: 0 10%;
+}
+.duck-detail span {
+  display: block;
+  color: black;
+  text-align: center;
+}
+.duck-detail a {
+  display: block;
+  text-align: center;
+}
+.duck-detail h3 {
+  text-align: center;
+}
+.duck-detail .fav {
+  text-align: center;
+}
+
+body {
+  background-color: #c7f0db;
+}
+
+h1 {
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  padding: 10px;
+  color: #464159;
+}
+
+a {
+  text-decoration: none;
+  color: #464159;
+  font-size: 18px;
+}
+
+li {
+  list-style-type: none;
+}
+
+/*# sourceMappingURL=style.css.map */
