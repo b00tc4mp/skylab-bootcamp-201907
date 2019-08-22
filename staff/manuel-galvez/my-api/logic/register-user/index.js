@@ -1,5 +1,5 @@
 const validate = require('../../utils/validate')
-module.exports = {
+module.exports = function(name, surname, email, password) {
     /**
      * 
      * @param {*} name 
@@ -11,19 +11,15 @@ module.exports = {
      * @returns {Promise}
      */
 
-    registerUser(name, surname, email, password, repassword) {
-        validate.string(name, 'name')
-        validate.string(surname, 'surname')
-        validate.string(email, 'username')
-        validate.email(email, 'username')
-        validate.string(password, 'password')
-        validate.string(repassword, 'password repeat')
-
-       
-        return this.__users__.findOne({ email })
-            .then(response => {
-                if (response) throw Error('User already exists.')
-                return this.__users__.insertOne({name, surname, email, password})
-            }).then(() => {})
-    }
+    validate.string(name, 'name')
+    validate.string(surname, 'surname')
+    validate.string(email, 'username')
+    validate.email(email, 'username')
+    validate.string(password, 'password')
+    
+    return this.__users__.findOne({ email })
+        .then(response => {
+            if (response) throw Error('User already exists.')
+            return this.__users__.insertOne({name, surname, email, password})
+        }).then(() => {})
 }

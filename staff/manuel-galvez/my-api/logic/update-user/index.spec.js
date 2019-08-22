@@ -1,12 +1,16 @@
 const { MongoClient, ObjectId } = require('mongodb')
 const { expect } = require('chai')
-const logic = require('.')
+const logic = require('../.')
 
 describe('logic', () => {
     let client, users
 
     before(() => {
-        client = new MongoClient('mongodb://localhost')
+       
+        client = new MongoClient('mongodb://localhost', {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        })
 
         return client.connect()
             .then(() => {

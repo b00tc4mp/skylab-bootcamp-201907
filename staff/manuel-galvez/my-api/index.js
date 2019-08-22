@@ -1,67 +1,119 @@
+const bodyParser = require('body-parser')
 const express = require('express')
-const session = require('express-session')
+const jwt = require('jsonwebtoken')
 const logic = require('./logic')
-
-const { argv: [, , port] } = process
-
-const {
-    HOME,
-    SEARCH,
-    SIGN_IN,
-    SIGN_UP,
-    SIGN_OUT,
-    DETAIL,
-    TOGGLE_FAV,
-    LOCALE,
-    FAVORITES
-} = require('./constants')
+const { MongoClient } = require('mongodb')
 
 
-const app = express()
+const client = new MongoClient('mongodb://localhost', { useNewUrlParser: true, useUnifiedTopology: true })
+const secret = 'bootcamp malo rulez'
 
-app.use(express.static('public'))
+client.connect()
+    .then(() => {
 
-app.use(session({
-    secret: 's3cr3t th1ng',
-    saveUninitialized: true,
-    resave: true
-}))
+        /* Database */
+        const db = client.db('my-api')
+        const users = db.collection('users')
 
-app.use(express.urlencoded())
-
-app.get('/sign-up', (req, res) => {
-        res.send(`<form class="register__form form" method="post" action="/sign-up">
-                    <label for="register-name">Name</label>
-                    <input class="register__input register__name form__input" id="register-name" type="text" name="name" />
-                    <label for="register-surname">Surname</label>
-                    <input class="register__input register__name form__input" id="register-surname" type="text" name="surname" />
-                    <label for="register-email">E-mail</label>
-                    <input class="register__input register__name form__input" id="register-email" type="email" name="email" />
-                    <label for="register-password">Password</label>
-                    <input class="register__input register__name form__input" id="register-password" type="password" name="password" />
-                    <label for="register-repassword">Password</label>
-                    <input class="register__input register__name form__input" id="register-repassword" type="password" name="repassword" />
-                    <button class="register__submit btn btn--primary">Repassword</button>
-                </form>`) 
-})
-
-app.post('/sign-up', (req, res) => {
-    const { body, session: { lang = 'en' } } = req
-
-    const { name, surname, email, password, repassword } = body
-    debugger
+        logic.__users__ = users
 
 
-    try {
-        logic.registerUser(name, surname, email, password, repassword)
-            .then(response => res.send(JSON.stringify(response)))
-            .catch(error => error)
-    } catch (error) {
-        console.log(error)
+        /* Express */
+        const { argv: [,,port = 8080] } = process
+        const app = express()
+        const jsonBodyParser = bodyParser.json()
         
-    }
+        /* Endpoints */
+        app.post('/user', jsonBodyParser, (req, res) => {
+
+            const { body: {name, surname, email, password } } = req
+
+            try {
+                logic.registerUser(name, surname, email, password)
+                    .then(() => res.status(201).json({ message: 'User registered successfully'}))
+                    .catch(({ message }) => res.status(400).json({ error: message }))
+            } catch({ message }) {
+                res.status(400).json({ error: message })
+            }
+
+        })
+
+
+        app.post('/auth', jsonBodyParser, (req, res) => {
+
+            const { body: { email, password } } = req
+
+            try {
+                logic.authenticateUser(email, password)
+                    .then(id => {
+                        const token = jwt.sign({ sub: id }, secret, { expiresIn: '1h' })
+                        res.json({message: 'User authenticated successfully', id, token})
+                    })
+                    .catch(({ message }) => res.status(401).json({ error: message }))
+            } catch({ message }) {
+                res.status(401).json({ error: message })
+            }
+        })
+
+        app.get('/user/:id', (req, res) => {
+
+            const { params: { id }, headers: { authorization } } = req
+
+            const token = authorization.slice(authorization.indexOf(' ') + 1)
+
+            try {
+                jwt.verify(token, secret)
+
+                logic.retrieveUser(id)
+                    .then(user => res.json({ message: 'User retrieved successfully', user }))
+                    .catch(({ message }) => res.status(404).json({ error: message }))
+            } catch({ message }) {
+                res.status(404).json({ error: message })
+            }
+        })
+
+        app.delete('/user/:id', jsonBodyParser, (req, res) => {
+
+            const { params: { id }, headers: { authorization }, body: { email, password } } = req
+
+            const token = authorization.slice(authorization.indexOf(' ') + 1)
+
+            try {
+                jwt.verify(token, secret)
+
+                logic.unregisterUser(id, email, password)
+                    .then(() => res.json({ message: 'User unregistered successfully'}))
+                    .catch(({ message }) => res.status(404).json({ error: message }))
+            } catch({ message }) {
+                res.status(404).json({ error: message })
+            }
+        })
+
+
+        app.put('/user/:id', jsonBodyParser, (req, res) => {
+
+            const { params: { id }, headers: { authorization }, body } = req
+
+            const token = authorization.slice(authorization.indexOf(' ') + 1)
+
+            try {
+                jwt.verify(token, secret)
+
+                logic.updateUser(id, body)
+                    .then(() => res.json({ message: 'User updated successfully'}))
+                    .catch(({ message }) => res.status(400).json({ error: message }))
+            } catch({ message }) {
+                res.status(404).json({ error: message })
+            }
+        })
+
+
+    app.listen(port)
 })
 
 
 
-app.listen(port)
+
+
+
+
