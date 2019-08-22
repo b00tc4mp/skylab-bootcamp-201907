@@ -1,0 +1,38 @@
+extends ../html/index
+
+include ../lang-selector/index
+include ../search/index
+include ../duck-results/index
+include ../duck-detail/index
+
+
+block content
+    header.header
+      +lang-selector(selectLangPath)
+      
+      if(name)
+        h1(class='header__title')
+          | Ye Olde Rubber Duck Shop
+        h2(class='header__title')
+          | #{hello}, #{name}!
+        nav
+          ul
+            li(class='form__back-link')
+              a(class='header__back-link' href=favoritePath)= favorite
+            li(class='form__back-link')
+              form(method="post" action=signOutPath)
+                button(class='header__button')= signOut
+      else
+        h1(class='header__title')
+          | Ye Olde Rubber Duck Shop
+        nav
+          ul
+            li(class='form__back-link')
+              a(class='header__back-link' href=signUpPath)= signUp
+            li(class='form__back-link')
+              a(class='header__back-link' href=signInPath)= signIn
+      +search(searchPath, search)
+      if (ducks)
+        +duck-results(ducks)
+      if (duck)
+        +duck-detail(duck)

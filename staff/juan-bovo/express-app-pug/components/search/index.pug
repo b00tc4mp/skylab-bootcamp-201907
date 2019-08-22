@@ -1,0 +1,4 @@
+mixin search(path, search)
+    form(class='form' action=path)
+        input(class='form__text-field' type="text" name="q" value="")
+        button(class='form__button')= search

@@ -1,0 +1,14 @@
+
+extends ../html/index
+
+block content
+    h1(class='header__title')= signIn
+    form(class='form' method="post" action=path)
+      label(class='form__label')
+        | E-mail
+        input(class='form__text-field' type="email" name="email")
+      label(class='form__label')
+        | #{password}
+        input(class='form__text-field' type="password" name="password")
+      button(class='form__button')= signIn
+    a(class='form__back-link' href=goBackPath)= goBack
