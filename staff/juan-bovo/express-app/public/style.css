@@ -1,0 +1,226 @@
+@import url("https://fonts.googleapis.com/css?family=Ribeye+Marrow&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.html {
+  background-image: url("http://static1.squarespace.com/static/5ad632e5cef372d385916334/5ad8f1821ae6cf34b3f33f64/5ada0cac562fa786794ca3c6/1554742517710/rubber+ducks.jpg");
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  width: 80%;
+  margin: 0 auto;
+  background-color: rgba(30, 30, 30, 0.9);
+}
+
+.header {
+  background-color: transparent;
+  padding: 2rem 0 2rem 2rem;
+  color: whitesmoke;
+}
+.header__title {
+  font-family: "Ribeye Marrow", cursive;
+  font-size: 3rem;
+}
+.header__button {
+  display: block;
+  height: 30px;
+  width: 100px;
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  border: 0.1rem solid #ffc56c;
+  border-radius: 0.3rem;
+}
+.header__button:hover {
+  background-color: tomato;
+  color: white;
+  border: 0.1rem solid darkslategray;
+  border-radius: 0.3rem;
+}
+.header__back-link {
+  display: block;
+  width: 200px;
+  text-decoration: none;
+  text-align: center;
+  font-size: 1.1rem;
+  color: white;
+  border: 0.1rem solid white;
+  border-radius: 0.3rem;
+}
+.header__back-link:hover {
+  background-color: white;
+  color: darkslategray;
+}
+
+.form {
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  flex-flow: row wrap;
+  align-items: stretch;
+  justify-content: center;
+}
+.form__text-field {
+  display: block;
+  padding-left: 1rem;
+  width: 100%;
+  max-width: 900px;
+  height: 30px;
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  border: 0.1rem solid #ffc56c;
+  border-radius: 0.3rem;
+}
+.form__list-item {
+  list-style-type: none;
+}
+.form__label {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  color: whitesmoke;
+}
+.form__button {
+  display: block;
+  margin: 0 25%;
+  height: 30px;
+  width: 100px;
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  border: 0.1rem solid #ffc56c;
+  border-radius: 0.3rem;
+}
+.form__button:hover {
+  color: white;
+  background-color: rgba(255, 197, 108, 0.5);
+}
+.form__back-link {
+  display: block;
+  padding-top: 1rem;
+  color: white;
+}
+.form__title {
+  color: #ffc56c;
+}
+
+.lang-selector {
+  float: right;
+  list-style-type: none;
+  position: relative;
+  right: 20px;
+}
+.lang-selector__button-frame {
+  float: left;
+}
+.lang-selector__button {
+  display: block;
+  color: #330300;
+  font-size: 1rem;
+  background-color: #ffc56c;
+  text-align: center;
+  padding: 14px 16px;
+  border: 0.1rem solid darkslategray;
+  border-radius: 0.3rem;
+}
+.lang-selector__button:hover {
+  color: darkslategray;
+  background-color: white;
+}
+
+.duck-results {
+  width: 80%;
+  padding-left: 20%;
+  margin: 2rem;
+}
+.duck-results li {
+  list-style-type: none;
+}
+.duck-results a {
+  text-decoration: none;
+}
+.duck-results h3 {
+  padding: 1rem 0 0.5rem;
+  color: #ffc56c;
+}
+.duck-results img {
+  width: 300px;
+  border: 2px solid #ffc56c;
+}
+.duck-results span {
+  display: block;
+  background-color: transparent;
+  color: #ffc56c;
+  font-size: 2rem;
+  margin: 1rem 0;
+  width: 120px;
+}
+
+.fav-button {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 0.1rem solid white;
+  border-radius: 0.3rem;
+}
+.fav-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.duck-detail {
+  width: 80%;
+  padding-left: 20%;
+  margin: 2rem;
+}
+.duck-detail li {
+  list-style-type: none;
+}
+.duck-detail a {
+  text-decoration: none;
+  padding: 1rem;
+  color: white;
+  margin: 1rem;
+}
+.duck-detail a:hover {
+  color: #ffc56c;
+}
+.duck-detail h3 {
+  padding: 1rem 0 0.5rem;
+  color: #ffc56c;
+}
+.duck-detail img {
+  width: 400px;
+  border: 2px solid #ffc56c;
+}
+.duck-detail p {
+  padding: 1rem 0 0.5rem 1rem;
+  color: white;
+}
+.duck-detail span {
+  display: block;
+  background-color: transparent;
+  color: #ffc56c;
+  font-size: 2rem;
+  margin: 1rem 0;
+  width: 120px;
+}
+.duck-detail button {
+  margin-top: 1rem;
+}
+
+.feedback {
+  color: white;
+  font-size: 2rem;
+  padding-left: 20%;
+}
+
+/*# sourceMappingURL=style.css.map */
