@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb')
 const { expect } = require('chai')
-const logic = require('.')
+const logic = require('../.')
 
 describe('logic', () => {
     let client, users
@@ -37,7 +37,20 @@ describe('logic', () => {
         })
 
         it('should remove user on correct data', () => {
-            logic.unregisterUser(id)
+            logic.unregisterUser(id, email, password)
+                .then(response => {
+                    expect(response).to.exist
+                    expect(response.deletedCount).to.equal(1)
+                    return users.findOne({ id })
+                }).then(response => {
+                    expect(response).not.to.exist
+                })
+        })
+
+        it('should fail on incorrect data', () => {
+            debugger
+            logic.unregisterUser(id, email, 'wrong')
+                .catch(error => console.log(error))
                 .then(response => {
                     expect(response).to.exist
                     expect(response.deletedCount).to.equal(1)
