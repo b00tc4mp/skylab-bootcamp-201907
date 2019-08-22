@@ -6,7 +6,7 @@ describe ('logic', () => {
     let client, users
 
     before (() => {
-        client = new MongoClient('mongodb://localhost')
+        client = new MongoClient('mongodb://localhost', {useNewUrlParser: true, useUnifiedTopology: true})
 
         return client.connect()
             .then (() => {
@@ -20,7 +20,7 @@ describe ('logic', () => {
 
     beforeEach (() => users.deleteMany())
 
-    describe ('register', () => {
+    describe ('register user', () => {
         let name, surname, email, password
 
         beforeEach(() => {
@@ -46,19 +46,25 @@ describe ('logic', () => {
                 })
         )
 
-        // it ('should fail on empty data', () =>
-        //     logic.registerUser('', surname, email, password, password)
-        //         .then (response => {
-        //             expect(response).not.to.exist
-        //             expect(response.name).to.equal('')
-        //             expect(response.surname).to.equal(surname)
-        //             expect(response.email).to.equal(email)
-        //             expect(response.password).to.equal(password)
-        //         })
-        // )
+        it ('should fail on empty name data', () =>
+            expect (() =>  {logic.registerUser('', surname, email, password)}).to.throw ('name is empty or blank')
+        )
+
+        it ('should fail on empty surname data', () =>
+            expect (() =>  {logic.registerUser(name, '', email, password)}).to.throw ('surname is empty or blank')
+        )
+
+        it ('should fail on empty email data', () =>
+            expect (() =>  {logic.registerUser(name, surname, '', password)}).to.throw ('email is empty or blank')
+        )
+
+        it ('should fail on empty password data', () =>
+            expect (() =>  {logic.registerUser(name, surname, email, '')}).to.throw ('password is empty or blank')
+        )
+
     })
 
-    describe ('authenticate', () => {
+    describe ('authenticate user', () => {
         beforeEach (() => {
             name = `name-${Math.random()}`
             surname = `surname-${Math.random()}`
@@ -97,7 +103,36 @@ describe ('logic', () => {
                     expect (error.message).to.equal ('Wrong credentials')
                 })
         )
+        
+        it ('should fail on empty email data', () =>
+            expect (() =>  {logic.authenticateUser('', password)}).to.throw ('email is empty or blank')
+        )
 
+        it ('should fail on empty password data', () =>
+            expect (() =>  {logic.authenticateUser(email, '')}).to.throw ('password is empty or blank')
+        )
+
+    })
+
+    describe ('retrieve user', () => {
+        let name, surname, email, password, id
+
+        beforeEach (() => {
+            name = `name-${Math.random()}` 
+            surname = `surname-${Math.random()}` 
+            email = `email-${Math.random()}@mail.com` 
+            password = `password-${Math.random()}` 
+
+            return users.insertOne ({name, surname, email, password})
+                .then (result => id = result.insertedId.toString())
+        })
+
+        it ('should succed on correct data', () => {
+            logic.retrieveUser(id)
+                .then (user => {
+                    expect (user).to.exist
+                })
+        })
     })
     
     after(() => client.close())
