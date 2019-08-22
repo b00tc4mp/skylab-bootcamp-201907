@@ -33,18 +33,18 @@ describe('logic', () => {
             .then(data => userId = data.insertedId.toString())
         })
 
-        it('should DELETE user', () => {
-            logic.unregister(userId)
+        it('should DELETE user', () => 
+            logic.unregister(userId, password)
                 .then( response => {
                     expect(response).to.exist
                     expect(response.deletedCount).to.equal(1)
                 })
-                    return users.findOne({ userId })
-                    .then(response => {
-                        expect(response).not.to.exist
-                    })
+                // return users.findOne({ userId })
+                //     .then(response => {
+                //         expect(response).not.to.exist
+                //     })
                   
-            })
+            )
     })
 
     after(() => client.close())
