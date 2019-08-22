@@ -12,7 +12,7 @@ module.exports = function(name, surname, email, password, repassword) {
 
         return this.__users__.findOne( { email } )
             .then(user => {
-                debugger
+                
                 if(user) throw Error('Email already registered')
                 return this.__users__.insertOne({ name, surname, email, password})
             }).then(() => {})

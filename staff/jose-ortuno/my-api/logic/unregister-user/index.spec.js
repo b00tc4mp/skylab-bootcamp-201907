@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb')
 const { expect } = require('chai')
 const logic = require('../')
 
-describe('Unregister user', () => {
+describe('Logic - Unregister user', () => {
     let client, users
 
     before(() => {
@@ -33,15 +33,12 @@ describe('Unregister user', () => {
     })
 
     it('should succeed on correct data', () =>
-        logic.unregisterUser(id)
-            .then(deletedCount => {
-                expect(deletedCount).to.exist
-                expect(deletedCount).to.equal(1)
-            })
+        logic.unregisterUser(id, password)
+            .then(response => expect(response).not.to.exist)
     )
 
     it('should succed on incorrect data', () =>
-        logic.unregisterUser('5d5d5fcb844eae22d1cbd34b')
+        logic.unregisterUser('5d5d5fcb844eae22d1cbd34b', password)
             .then(response => expect(response).not.to.exist)
             .catch(error => expect(error.message).to.equal('User does not exist or is not find'))
     )

@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb')
 const { expect } = require('chai')
 const logic = require('../')
 
-describe('Update user', () => {
+describe('Logic - Update user', () => {
     let client, users
 
     before(() => {
@@ -36,9 +36,8 @@ describe('Update user', () => {
         logic.updateUser(id, {
             name: 'armando'
         })
-            .then(updateCount => {
-                expect(updateCount).to.exist
-                expect(updateCount).to.equal(1)
+            .then(response => {
+                expect(response).not.to.exist
             })
             .then(() => users.findOne({ email }))
             .then(user => {
@@ -58,7 +57,7 @@ describe('Update user', () => {
             .catch(error => expect(error.message).to.equal('user does not exist or is not find'))
     )
 
-   xit('should succed error second param empty', () => {
+   it('should succed error second param empty', () => {
         try {
             logic.updateUser('5d5d5fcb844eae22d1cbd34b')
         } catch (error) {
@@ -66,7 +65,7 @@ describe('Update user', () => {
         }
     })
 
-    xit('should succed error update object is empty', () => {
+    it('should succed error update object is empty', () => {
         try {
             logic.updateUser('5d5d5fcb844eae22d1cbd34b', {})
         } catch (error) {

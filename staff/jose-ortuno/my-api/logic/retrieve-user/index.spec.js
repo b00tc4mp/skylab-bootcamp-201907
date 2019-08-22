@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb')
 const { expect } = require('chai')
 const logic = require('../')
 
-describe('Retrieve user', () => {
+describe('Logic - Retrieve user', () => {
     let client, users
 
     before(() => {

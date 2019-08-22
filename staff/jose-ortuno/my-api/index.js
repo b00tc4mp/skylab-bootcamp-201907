@@ -22,6 +22,7 @@ client.connect()
 
         const jsonBodyParser = bodyParser.json() // Creamos el moddleware
 
+        // register user
         app.post('/user', jsonBodyParser, (req, res) => {
             const { body: { name, surname, email, password, repassword } } = req
 
@@ -34,6 +35,7 @@ client.connect()
             }
         })
 
+        // authenticate user
         app.post('/auth', jsonBodyParser, (req, res) => {
             const { body: { email, password } } = req
 
@@ -50,6 +52,7 @@ client.connect()
             }
         })
 
+        // retrieve user
         app.get('/user/:id', jsonBodyParser, (req, res) => {
             const { params: { id }, headers: { authorization } } = req
 
@@ -66,6 +69,25 @@ client.connect()
             }
         })
 
+        // update user
+        app.patch('/user/:id', jsonBodyParser, (req, res) => {
+            const { params: { id }, headers: { authorization }, body: update } = req
+            
+            const token = authorization.slice(authorization.indexOf(' ') + 1)
+
+            try {
+                debugger
+                jwt.verify(token, secret)
+                logic.updateUser(id, update)
+                    .then(() => res.json({ message: 'update user' }))
+                    .catch(({ message }) => res.status(404).json({ error: message }))
+            } catch ({ message }) {
+                debugger
+                res.status(404).json({ error: message })
+            }
+        })
+
+        // unregister user
         app.delete('/user/:id', jsonBodyParser, (req, res) => {
             const { params: { id }, feaders: { autorization } } = req
             const token = autorization.slice(autorization.indexOf(' ') + 1)
