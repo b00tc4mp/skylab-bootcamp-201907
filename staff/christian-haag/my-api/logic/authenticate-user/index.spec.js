@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb')
 const { expect } = require('chai')
-const logic = require('.')
+const logic = require('../.')
 
 describe('logic', () => {
     let client, users
@@ -45,21 +45,15 @@ describe('logic', () => {
 
         it('schould fail on wrong email', () =>
             logic.authenticateUser('fake@mail.com', password)
-                .then(user => {
-                    expect(user).to.be.defined
-                })
                 .catch(error => {
                     expect(error).to.exist
-                    expect(error.message).to.equal('wrong credentials')
+                    expect(error.message).to.equal('User does not exist')
                 })
 
         )
 
         it('schould fail on wrong credentials', () =>
             logic.authenticateUser(email, 'kldjbnfkjabfkb')
-                .then(user => {
-                    expect(user).to.be.undefined
-                })
                 .catch(error => {
                     expect(error).to.exist
                     expect(error.message).to.equal('wrong credentials')

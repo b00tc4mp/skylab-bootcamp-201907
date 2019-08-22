@@ -1,4 +1,4 @@
-const { ObjectId } = require('mongodb')
+
 /**
  * Register users
  * 
@@ -10,22 +10,18 @@ const { ObjectId } = require('mongodb')
  * @return {Promise} 
  * 
  */
-
-
 const validate = require('../../utils/validate')
 
-module.exports = {
-    registerUser(name, surname, email, password) {
-        validate.string(name, 'name')
-        validate.string(surname, 'surname')
-        validate.string(email, 'email')
-        validate.string(password, 'password')
+module.exports = function (name, surname, email, password) {
+    validate.string(name, 'name')
+    validate.string(surname, 'surname')
+    validate.string(email, 'email')
+    validate.string(password, 'password')
 
-        return this.__users__.findOne({ email })
-            .then(user => {
-                if (user) throw Error('user already exists')
-                this.__users__.insertOne({ name, surname, email, password })
-            })
-            .catch(error => { throw error })
-    }
+    return this.__users__.findOne({ email })
+        .then(user => {
+            if (user) throw Error('user already exists')
+            this.__users__.insertOne({ name, surname, email, password })
+        })
+        .then(() => { })
 }
