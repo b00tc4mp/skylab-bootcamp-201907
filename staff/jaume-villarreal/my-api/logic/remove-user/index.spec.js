@@ -34,7 +34,7 @@ describe('logic', () => {
         })
 
         it('should succeed on correct data', () =>
-            logic.removeUser(userId)
+            logic.removeUser(userId , password)
                 .then( response => {
                     expect(response).to.exist
                     expect(response.deletedCount).to.equal(1)
