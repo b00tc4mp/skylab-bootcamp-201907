@@ -7,7 +7,7 @@
     "start": "node .",
     "watch": "npx nodemon .",
     "debug": "node debug .",
-    "test": "npx mocha logic",
+    "test": "npx mocha logic/**/*.spec.js",
     "test-debug": "npx mocha --inspect-brk logic"
   },
   "keywords": [],
