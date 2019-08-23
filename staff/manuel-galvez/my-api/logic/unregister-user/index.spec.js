@@ -23,7 +23,7 @@ describe('logic', () => {
 
     beforeEach(() => users.deleteMany())
 
-    describe('delete', () => {
+    describe('unregister', () => {
         let name, surname, email, password, repassword
         beforeEach(() => {
             name = `name-${Math.random()}`
@@ -39,11 +39,16 @@ describe('logic', () => {
                 .then(response => {
                     expect(response).to.exist
                     expect(response.deletedCount).to.equal(1)
-                    return users.findOne({ email })
-                }).catch(response => {
-                    expect(response).not.to.exist
+                    return users.findOne({ _id: ObjectId(id) })
+                }).then(user => {
+                    expect(user).to.exist
+                    expect(user.name).to.equal(name)
+                    expect(user.surname).to.equal(surname)
+                    expect(user.email).to.equal(email)
+                    expect(user.password).to.equal(password)
                 })
-        })
+                .catch(error => expect(error).not.to.exist)
+            })
     })
 
     after(() => client.close())
