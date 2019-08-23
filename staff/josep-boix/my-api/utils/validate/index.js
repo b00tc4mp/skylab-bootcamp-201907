@@ -19,5 +19,9 @@ module.exports = {
 
     url(target, name) {
         if (!URL_REGEX.test(target)) throw new Error(`${name} with value ${target} is not a valid URL`)
-    }
+    },
+
+    // object (target, name) {
+    //     if (typeof target !== 'object') throw TypeError(`${name} with value ${target} is not an object`)
+    // }
 }

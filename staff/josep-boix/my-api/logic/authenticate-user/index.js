@@ -11,7 +11,7 @@ module.exports = function (email, password) {
     validate.string (email, 'email')
     validate.email (email, 'email')
     validate.string (password, 'password')
-    debugger
+    // debugger
     return this.__users__.findOne ({email})
         .then (user =>{
             if (!user || user.password !== password) throw Error ('Wrong credentials')

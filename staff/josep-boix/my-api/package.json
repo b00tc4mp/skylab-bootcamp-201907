@@ -10,9 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chai": "^4.2.0",
-    "jsonwebtoken": "^8.5.1",
+    "dotenv": "^8.1.0",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "mongodb": "^3.3.0",
     "mocha": "^6.2.0",
-    "mongodb": "^3.3.0"
+    "chai": "^4.2.0"
   }
 }

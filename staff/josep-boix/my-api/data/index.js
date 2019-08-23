@@ -1,7 +1,7 @@
 const { MongoClient } = require ('mongodb')
 
 let connection
-//we connect de mongodb once if it's closed at beggining 
+//we connect the mongodb once if it's disconnect at beggining 
 //& return the database to be used
 
 module.exports = function (url, database) {

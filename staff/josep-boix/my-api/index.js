@@ -1,53 +1,35 @@
+require ('dotenv').config()
+
 const express = require ('express')
+const data = require ('./data')
 const logic = require ('./logic')
-const bodyParser = require ('bodyParser')
-const {MongoClient} = require ('mongodb')
-const jwt = require ('jsonwebtoken')
+const routes = require ('./routes')
+const {name, version} = require ('./package')
 
-const client = new MongoClient ('mongodb://localhost', {useNewUrlParser: true, useUnifiedTopology: true})
+const { env: {PORT, DB_URL, DB_NAME} } = process
 
-const secret = 'bootcamp malo xD'   //added to token
+let client
 
-client.connect ()
-    .then (() => {
-        // database
-        const db = clent.db ('my-api-test')
-        const users = db.collection ('users')
+data(DB_URL, DB_NAME)
+    .then( connection  => {
+        const { client: _client, db } = connection
+        client = _client
+
+        const users = db.collection('users')
 
         logic.__users__ = users
 
-        //express
-        const {argv : [, , port=8080]} = process
-        const app = express
-        const jsonBodyParser = bodyParser.json()
+        const app = express()
 
-        //endpoint
-        app.post ('/user', jsonBodyParser, (req, res) => {
-            const {body: {name, surname,email,password}} = req
+        app.use ('/api', routes)
 
-            try{
-                logic.registerUser (name, surname, email, password)
-                    .then(() => res.status(201).json({message: 'User registration succesful.'}))
-                    .catch(message)
-            }catch({message}){
-                res.status(400).json({error: message})
-            }
-        })
-
-        app.post ('/auth', jsonBodyParser, (req, res) => {
-            const {body: {email, password}} = req
-            
-            try{
-                logic.authenticateUser (email, password)
-                    .then((id) => {
-                        const token = jwt.sign ({sub:id}, secret, {expiresIn: 60 * 60})
-
-                        res.json({message: 'User authenticate succesful.', id, token})
-                    })
-                    .catch(({message}) => res.json({error: message}))
-            }catch(error) {
-                throw Error (error)
-            }
-        })
-
+        app.listen (PORT, () => console.log (`${name}${version} now is up and running on port ${PORT}`))
     })
+
+process.on ('SIGINT', () => {
+    console.log (`\n ${name} ${version} shutting down, disconecting from db...`)
+
+    client.close()
+
+    process.exit(0)
+})

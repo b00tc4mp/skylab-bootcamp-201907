@@ -1,19 +1,11 @@
-const { expect } = require ('chai')
 const logic = require ('..')
 const data = require ('../../data')
+const { expect } = require ('chai')
 
 describe ('register user', () => {
-    let client, users 
-    
+
     beforeEach(() => {
         return data ('mongodb://localhost', 'my-api-test')
-            .then(({client: _client, db}) => {
-                client = _client
-
-                users = db.collection ('users')
-
-                logic.__users__ = users
-            })
     })
 
     let name, surname, email, password
@@ -43,7 +35,7 @@ describe ('register user', () => {
             })
     )
 
-    it ('should fail if user was already registered', () =>
+    it ('should fail if user have been already registered', () =>
         logic.registerUser (name, surname, 'josepboixvillar@gmail.com', password, password)
             .then (user => {
                 expect (user).to.undefined
@@ -70,5 +62,4 @@ describe ('register user', () => {
         expect (() =>  {logic.registerUser(name, surname, email, '')}).to.throw ('password is empty or blank')
     )
 
-    after(() => client.close())
 })
