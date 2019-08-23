@@ -1,3 +1,4 @@
+//has to be always on top
 require('dotenv').config()
 
 const express = require('express')
