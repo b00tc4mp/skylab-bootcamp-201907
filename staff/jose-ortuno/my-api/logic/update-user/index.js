@@ -14,7 +14,6 @@ module.exports =
      * 
      */
     function (id, update) {
-        debugger
         validate.string(id, 'id')
         if (!(update instanceof Object) || update === undefined) throw Error('second param is empty or is not object')
         if (Object.keys(update).length === 0) throw Error('update object is empty')
