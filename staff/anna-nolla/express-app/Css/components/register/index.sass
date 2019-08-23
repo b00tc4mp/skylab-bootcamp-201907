@@ -1,0 +1,27 @@
+.register
+    @extend %main-content-box 
+
+    &__list
+        padding: 0
+        
+    &__item
+        list-style: none
+        margin-top: 2em
+
+    &__input
+        @extend %text-input 
+        border: 3px
+        border-style: inset
+        border-color: grey
+
+    &__button
+        @extend %button
+        border: 1px
+        border-style: outset
+        border-color: grey
+
+    &__link
+        @extend %link
+
+    &__link:hover
+        color: $hover-text-color
