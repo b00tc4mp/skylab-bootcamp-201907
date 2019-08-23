@@ -17,3 +17,20 @@ module.exports = function (id, data) {
             if (!result.result.nModified) throw new Error(`user with id ${id} does not exist`)
         })
 }
+
+// Alternative function
+/* updateUser(email, name, surname, password) {
+
+    validate.string(name, 'name')
+    validate.string(surname, 'surname')
+    validate.string(email, 'email')
+    validate.string(password, 'password')
+
+    return this.__users__.findOneAndUpdate({ email }, { $set: { name, surname, password } })
+      .then((response) =>{
+          if(response.value == null) throw new Error (`error`)
+          else
+          return response
+      })
+      
+  } */
