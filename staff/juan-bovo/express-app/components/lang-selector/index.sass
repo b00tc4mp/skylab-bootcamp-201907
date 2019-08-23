@@ -1,0 +1,21 @@
+.lang-selector
+    float: right
+    list-style-type: none
+    position: relative
+    right: 20px
+
+    &__button-frame
+        float: left
+
+    &__button
+        display: block
+        color: rgb(51, 3, 0)
+        font-size: 1rem
+        background-color: rgb(255, 197, 108)
+        text-align: center
+        padding: 14px 16px
+        +round-border(0.1rem, 0.3rem, solid, darkslategray)
+
+    &__button:hover
+        color: darkslategray
+        background-color: white

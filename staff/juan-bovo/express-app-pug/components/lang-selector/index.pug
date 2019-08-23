@@ -1,0 +1,18 @@
+mixin lang-selector(path)
+    ul(class='lang-selector')
+        li(class='lang-selector__button-frame')
+          form(method="post" action=path)
+            input(type="hidden" name="lang" value="en")
+            button(class='lang-selector__button') EN
+        li(class='lang-selector__button-frame')
+          form(method="post" action=path)
+            input(type="hidden" name="lang" value="es")
+            button(class='lang-selector__button') ES
+        li(class='lang-selector__button-frame')
+          form(method="post" action=path)
+            input(type="hidden" name="lang" value="ca")
+            button(class='lang-selector__button') CA
+        li(class='lang-selector__button-frame')
+          form(method="post" action=path)
+            input(type="hidden" name="lang" value="fr")
+            button(class='lang-selector__button') FR
