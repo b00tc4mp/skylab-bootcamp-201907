@@ -43,16 +43,16 @@ describe ('register user', () => {
             })
     )
 
-    // it ('should fail if user was already registered', () =>
-    //     logic.registerUser (name, surname, 'josepboixvillar@gmail.com', password, password)
-    //         .then (user => {
-    //             expect (user).to.undefined
-    //         })
-    //         .catch (error => {
-    //             expect (error).to.exist
-    //             expect (error.message).to.equal (`User with email josepboixvillar@gmail.com already exists.`)
-    //         })
-    // )
+    it ('should fail if user was already registered', () =>
+        logic.registerUser (name, surname, 'josepboixvillar@gmail.com', password, password)
+            .then (user => {
+                expect (user).to.undefined
+            })
+            .catch (error => {
+                expect (error).to.exist
+                expect (error.message).to.equal (`User with email josepboixvillar@gmail.com already exists.`)
+            })
+    )
 
     it ('should fail on empty name data', () =>
         expect (() =>  {logic.registerUser('', surname, email, password)}).to.throw ('name is empty or blank')
@@ -70,4 +70,5 @@ describe ('register user', () => {
         expect (() =>  {logic.registerUser(name, surname, email, '')}).to.throw ('password is empty or blank')
     )
 
+    after(() => client.close())
 })
