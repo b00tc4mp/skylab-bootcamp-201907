@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 const logic = require('..')
-const data = require('../../data/schemas')
+const data = require('../../data')
 const { ObjectId } = require('mongodb')
 
 describe('logic - unregister user', () => {

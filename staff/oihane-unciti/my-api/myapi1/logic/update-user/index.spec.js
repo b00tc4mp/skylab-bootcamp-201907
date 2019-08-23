@@ -1,11 +1,21 @@
 const { expect } = require('chai')
 const logic = require('..')
-const { User } = require('../../data')
-const mongoose = require('mongoose')
-
+const data = require('../../data')
+const { ObjectId } = require('mongodb')
 
 describe('logic - update user', () => {
-    before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
+    let client, users
+
+    before(() => {
+        return data('mongodb://localhost', 'my-api-test')
+            .then(({ client: _client, db }) => {
+                client = _client
+
+                users = db.collection('users')
+
+                logic.__users__ = users
+            })
+    })
 
     let name, surname, email, password, id, body
 
@@ -41,7 +51,7 @@ describe('logic - update user', () => {
                 expect(user.surname).to.equal(body.surname)
                 expect(user.email).to.equal(body.email)
                 expect(user.password).to.equal(body.password)
-                expect(user.extra).not.to.exist
+                expect(user.extra).to.equal(body.extra)
             })
     )
 

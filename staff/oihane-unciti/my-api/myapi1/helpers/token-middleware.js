@@ -1,3 +1,4 @@
+// Token middleware
 const jwt = require('jsonwebtoken')
 
 const { env: { JWT_SECRET } } = process
