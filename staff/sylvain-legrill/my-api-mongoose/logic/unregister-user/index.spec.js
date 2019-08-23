@@ -1,21 +1,10 @@
 const { expect } = require('chai')
 const logic = require('..')
-const data = require('../../data')
-const { ObjectId } = require('mongodb')
+const { User } = require('../../data')
+const mongoose = require('mongoose')
 
 describe('logic - unregister user', () => {
-    let client, users
-
-    before(() => {
-        return data('mongodb://localhost', 'my-api-test')
-            .then(({ client: _client, db }) => {
-                client = _client
-
-                users = db.collection('users')
-
-                logic.__users__ = users
-            })
-    })
+    before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
 
     let name, surname, email, password, id
 
@@ -25,9 +14,9 @@ describe('logic - unregister user', () => {
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
 
-        return users.deleteMany()
-            .then(() => users.insertOne({ name, surname, email, password }))
-            .then(result => id = result.insertedId.toString())
+        return User.deleteMany()
+            .then(() => User.create({ name, surname, email, password }))
+            .then(user => id = user.id)
     })
 
     it('should succeed on correct data', () =>
@@ -35,7 +24,7 @@ describe('logic - unregister user', () => {
             .then(result => {
                 expect(result).not.to.exist
 
-                return users.findOne({ _id: ObjectId(id) })
+                return User.findById(id)
             })
             .then(user => {
                 expect(user).not.to.exist
@@ -54,5 +43,5 @@ describe('logic - unregister user', () => {
             .catch(({ message }) => expect(message).to.equal('wrong credentials'))
     )
 
-    after(() => client.close())
+    after(() => mongoose.disconnect())
 })
