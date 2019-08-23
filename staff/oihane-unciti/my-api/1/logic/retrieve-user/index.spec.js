@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 const logic = require('..')
-const data = require('../../data')
+const data = require('../../data/schemas')
 
 describe('logic - retrieve user', () => {
     let client, users

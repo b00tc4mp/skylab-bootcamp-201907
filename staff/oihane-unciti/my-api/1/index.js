@@ -1,22 +1,18 @@
 require('dotenv').config()
-
 const express = require('express')
 const data = require('./data')
 const { name, version } = require('./package')
 const logic = require('./logic')
 const routes = require('./routes')
 
-const { env: { PORT, DB_URL, DB_NAME } } = process
+const { mongoose, models } = data
 
-let client
+const { User } = models //models from moongose
+const { env: { PORT, DB_URL } } = process
 
-data(DB_URL, DB_NAME)
-    .then(({ client: _client, db }) => {
-        client = _client
-
-        const users = db.collection('users')
-
-        logic.__users__ = users
+mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+        logic.__users__ = User //moongose User model 
 
         const app = express()
 
@@ -28,7 +24,7 @@ data(DB_URL, DB_NAME)
 process.on('SIGINT', () => {
     console.log(`\n${name} ${version} shutting down, disconnecting from db...`)
 
-    client.close()
+    mongoose.disconnect()
 
     process.exit(0)
 })

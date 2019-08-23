@@ -1,18 +1,8 @@
-const { MongoClient } = require('mongodb')
+const mongoose = require('mongoose')
+const { userSchema } = require('./schemas')
 
-let connection
-
-module.exports = function (url, database) {
-    if (!connection) {
-        const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true })
-
-        connection = client.connect()
-            .then(() => {
-                const db = client.db(database)
-
-                return { client, db }
-            })
-    }
-
-    return connection
+const models = {
+    User: mongoose.model('User', userSchema),
 }
+
+module.exports = { mongoose, models }

@@ -1,20 +1,14 @@
 const { expect } = require('chai')
 const logic = require('..')
-const data = require('../../data')
+const { models: {User} } = require('../../data')
+const mongoose = require('mongoose')
 
-describe('logic - register user', () => {
-    let client, users
+const { mongoose, models } = data
 
-    before(() => {
-        return data('mongodb://localhost', 'my-api-test')
-            .then(({ client: _client, db }) => {
-                client = _client
 
-                users = db.collection('users')
+describe.only('logic - register user', () => {
 
-                logic.__users__ = users
-            })
-    })
+    before(() => mongoose.connect('mongodb://localhost/my-api-test' , { useNewUrlParser: true }))
 
     let name, surname, email, password
 
@@ -24,15 +18,15 @@ describe('logic - register user', () => {
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
 
-        return users.deleteMany()
+        return User.deleteMany()
     })
 
     it('should succeed on correct data', () =>
         logic.registerUser(name, surname, email, password)
             .then(result => {
                 expect(result).not.to.exist
-
-                return users.findOne({ email })
+                
+                return User.findOne({ email })
             })
             .then(user => {
                 expect(user).to.exist
@@ -43,5 +37,5 @@ describe('logic - register user', () => {
             })
     )
 
-    after(() => client.close())
+    after(() => mongoose.disconnect())
 })

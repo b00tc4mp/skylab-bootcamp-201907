@@ -1,4 +1,5 @@
-const { ObjectId } = require('mongodb')
+const  mongoose = require('mongoose')
+
 
 /**
  * Updates a user.
@@ -8,11 +9,16 @@ const { ObjectId } = require('mongodb')
  * 
  * @returns {Promise}
  */
+
+const {models: {User}}= require("../../data")
 module.exports = function (id, data) {
     // TODO validate fields
+    debugger
+    const ida= mongoose.Types.ObjectId(id)
 
-    return this.__users__.updateOne({ _id: ObjectId(id) }, { $set: data })
-        .then(result => {
-            if (!result.result.nModified) throw new Error(`user with id ${id} does not exist`)
+    return User.updateOne({ _id: ida }, { $set: data })
+        .then(data => {
+            debugger
+            if (!data.n) throw new Error(`user with id ${id} does not exist`)
         })
 }
