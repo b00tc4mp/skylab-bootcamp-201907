@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb')
 const { expect } = require('chai')
-const logic = require('.')
+const logic = require('./index_old')
 const {ObjectId} = require('mongodb')
 
 describe('logic', () => {
@@ -187,21 +187,6 @@ describe('logic', () => {
             return users.insertOne({ name, surname, email, password })
                 .then(result => id = result.insertedId)
         })
-
-
-
-        // it('should fail on incorrect data', ()=>{
-        //     debugger
-        //     logic.unregisterUser(idFalse)
-        //         .then(response => {
-        //             expect(response).to.exist
-        //             expect(response.deletedCount).to.equal(0)
-        //             return users.findOne({idFalse})
-        //         })
-        //         .then(response=>{
-        //             expect(response).not.to.exist
-        //         })
-        // })
 
 
         it('should succeed on correct data', () =>{
