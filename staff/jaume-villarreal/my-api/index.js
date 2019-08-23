@@ -4,14 +4,14 @@ const express = require('express')
 const logic = require('./logic')
 const data = require('./data')
 const routes = require('./routes')
-const { name , version } = require('package')
+const { name , version } = require('./package')
 
 const { env : { PORT , DB_URL , DB_NAME }} = process
 
 let client
 
 data(DB_URL , DB_NAME)
-    then( ({ client:_client , db }) => {
+    .then( ({ client:_client , db }) => {
         client = _client
 
         const users = db.collection('users')
@@ -20,9 +20,9 @@ data(DB_URL , DB_NAME)
 
         const app = express()
 
-        app.use('/api'  routes)
+        app.use('/api' , routes)
 
-        app.lsiten(PORT , () => console.log(`${name} ${version} up in port ${PORT}`))
+        app.listen(PORT , () => console.log(`${name} ${version} up in port ${PORT}`))
     })
 
     process.on('SIGINT' , () => {

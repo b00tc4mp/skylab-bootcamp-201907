@@ -1,8 +1,9 @@
 const { expect } = require('chai')
 const logic = require('..')
 const data = require('../../data')
+const { ObjectId } = require('mongodb')
 
-describe('logic - retrieve user', () => {
+describe('logic - unregister user', () => {
     let client, users
 
     before(() => {
@@ -30,16 +31,27 @@ describe('logic - retrieve user', () => {
     })
 
     it('should succeed on correct data', () =>
-        logic.retrieveUser(id)
-            .then(user => {
-                expect(user).to.exist
-                expect(user.id).to.equal(id)
-                expect(user._id).not.to.exist
-                expect(user.name).to.equal(name)
-                expect(user.surname).to.equal(surname)
-                expect(user.email).to.equal(email)
-                expect(user.password).not.to.exist
+        logic.unregisterUser(id, password)
+            .then(result => {
+                expect(result).not.to.exist
+
+                return users.findOne({ _id: ObjectId(id) })
             })
+            .then(user => {
+                expect(user).not.to.exist
+            })
+    )
+
+    it('should fail on unexisting user', () =>
+        logic.unregisterUser('5d5d5530531d455f75da9fF9', password)
+            .then(() => { throw Error('should not reach this point') })
+            .catch(({ message }) => expect(message).to.equal('wrong credentials'))
+    )
+
+    it('should fail on existing user, but wrong password', () =>
+        logic.unregisterUser(id, 'wrong-password')
+            .then(() => { throw Error('should not reach this point') })
+            .catch(({ message }) => expect(message).to.equal('wrong credentials'))
     )
 
     after(() => client.close())

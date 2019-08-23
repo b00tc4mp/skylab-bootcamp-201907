@@ -1,49 +1,49 @@
-const { MongoClient } = require('mongodb')
 const { expect } = require('chai')
-const logic = require('.')
+const logic = require('..')
+const data = require('../../data')
 const { ObjectId } = require('mongodb')
 
-describe('logic', () => {
+describe('logic - update user', () => {
     let client, users
 
     before(() => {
-        data('mongodb://localhost' , 'my-api-test')
-            .then( ({ client:_client , database}) => {
+        return data('mongodb://localhost', 'my-api-test')
+            .then(({ client: _client, db }) => {
                 client = _client
-                users = database.collection('users')
+
+                users = db.collection('users')
+
                 logic.__users__ = users
             })
     })
 
-     beforeEach(() => users.deleteMany())
+    let name, surname, email, password, id, body
 
-     describe('update user', () => {
-        let name, surname, email, password, userId
+    beforeEach(() => {
+        name = `name-${Math.random()}`
+        surname = `surname-${Math.random()}`
+        email = `email-${Math.random()}@domain.com`
+        password = `password-${Math.random()}`
 
-        beforeEach(() => {
-            name = `name-${Math.random()}`
-            surname = `surname-${Math.random()}`
-            email = `email-${Math.random()}@domain.com`
-            password = `password-${Math.random()}`
+        body = {
+            name: `name-${Math.random()}`,
+            surname: `surname-${Math.random()}`,
+            email: `email-${Math.random()}@domain.com`,
+            password: `password-${Math.random()}`,
+            extra: `extra-${Math.random()}`
+        }
 
-            body = {
-                name: `name-${Math.random()}`,
-                surname: `surname-${Math.random()}`,
-                email: `email-${Math.random()}@domain.com`,
-                password: `password-${Math.random()}`,
-                extra: `extra-${Math.random()}`
-            }
+        return users.deleteMany()
+            .then(() => users.insertOne({ name, surname, email, password }))
+            .then(result => id = result.insertedId.toString())
+    })
 
-            return users.insertOne({ name, surname, email, password })
-                .then(result => userId = result.insertedId.toString())
-        })
-
-        it('should succeed on correct data', () =>
-        logic.updateUser(userId, body)
+    it('should succeed on correct data', () =>
+        logic.updateUser(id, body)
             .then(result => {
                 expect(result).not.to.exist
 
-                return users.findOne({ _id: ObjectId(userId) })
+                return users.findOne({ _id: ObjectId(id) })
             })
             .then(user => {
                 expect(user).to.exist
@@ -56,12 +56,12 @@ describe('logic', () => {
     )
 
     it('should fail on non-existing user', () => {
-        userId = '5d5d5530531d455f75da9fF9'
+        id = '5d5d5530531d455f75da9fF9'
 
-        return logic.updateUser(userId, body)
+        return logic.updateUser(id, body)
             .then(() => { throw new Error('should not reach this point') })
-            .catch(({ message }) => expect(message).to.equal(`user with id ${userId} does not exist`))
+            .catch(({ message }) => expect(message).to.equal(`user with id ${id} does not exist`))
     })
-    })
-    after(() => client.close)
+
+    after(() => client.close())
 })

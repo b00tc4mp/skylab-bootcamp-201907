@@ -3,6 +3,8 @@ const logic = require('../logic')
 module.exports = function (req, res) {
     const { body: { name, surname, email, password } } = req
 
+    debugger
+
     try {
         logic.registerUser(name, surname, email, password)
             .then(() => res.status(201).json({ message: 'user correctly registered' }))

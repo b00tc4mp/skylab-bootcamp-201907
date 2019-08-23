@@ -13,10 +13,10 @@ const updateUser = require('./update-user')
 const unregisterUser = require('./unregister-user')
 
 router.post('/users' , jsonBodyParser , registerUser )
-router.post('/users' , jsonBodyParser , authenticateUser )
-router.get('/users/:id' , jsonBodyParser , tokenMiddleware,  retriveUser)
-router.patch('/users/:id' , jsonBodyParser , tokenMiddleware , updateUser)
-router.delete('/users/:id' , jsonBodyParser , tokenMiddleware , unregisterUser)
+router.post('/auth' , jsonBodyParser , authenticateUser )
+router.get('/users/:id' , [tokenMiddleware , jsonBodyParser] , retrieveUser)
+router.patch('/users/:id' , [tokenMiddleware ,jsonBodyParser] , updateUser)
+router.delete('/users/:id' , [tokenMiddleware , jsonBodyParser] , unregisterUser)
 
 module.exports = router
 
