@@ -1,6 +1,7 @@
 const { MongoClient } = require('mongodb')
 const { expect } = require('chai')
 const logic = require('../.')
+const { ObjectId } = require('mongodb')
 
 describe('logic', () => {
     let client, users
@@ -33,7 +34,7 @@ describe('logic', () => {
             password = `password-${Math.random()}`
 
             return users.insertOne({ name, surname, email, password })
-                .then(result => id = result.insertedId)
+                .then(result => id = result.insertedId.toString())
         })
 
         it('should remove user on correct data', () => {
@@ -41,20 +42,20 @@ describe('logic', () => {
                 .then(response => {
                     expect(response).to.exist
                     expect(response.deletedCount).to.equal(1)
-                    return users.findOne({ id })
+                    return users.findOne({ _id: ObjectId(id) })
                 }).then(response => {
                     expect(response).not.to.exist
                 })
         })
 
         it('should fail on incorrect data', () => {
-            debugger
+
             logic.unregisterUser(id, email, 'wrong')
                 .catch(error => console.log(error))
                 .then(response => {
                     expect(response).to.exist
-                    expect(response.deletedCount).to.equal(1)
-                    return users.findOne({ id })
+                    expect(response.deletedCount).to.equal(0)
+                    return users.findOne({ _id: ObjectId(id) })
                 }).then(response => {
                     expect(response).not.to.exist
                 })

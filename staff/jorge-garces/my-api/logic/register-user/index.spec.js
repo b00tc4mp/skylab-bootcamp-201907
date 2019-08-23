@@ -37,6 +37,7 @@ describe('logic', () => {
         it('should succeed on correct data', () =>
             logic.registerUser(name, surname, email, password, repassword)
                 .then((response) => {
+
                     expect(response).to.not.exist
                     return users.findOne({ name })
                 })

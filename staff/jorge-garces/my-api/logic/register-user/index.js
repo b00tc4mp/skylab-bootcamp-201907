@@ -1,6 +1,5 @@
 const validate = require('../../utils/validate')
 
-
 /**
  * 
  * @param {*} name 
@@ -19,8 +18,8 @@ module.exports = function (name, surname, email, password) {
     validate.string(password, 'password')
 
     return this.__users__.findOne({ email })
-        .then(response => {
-            if (response) throw Error('User already exists.')
-            this.__users__.insertOne({ name, surname, email, password })
+        .then(user => {
+            if (user) throw Error('User already exists.')
+            return this.__users__.insertOne({ name, surname, email, password })
         }).then(() => { })
 }
