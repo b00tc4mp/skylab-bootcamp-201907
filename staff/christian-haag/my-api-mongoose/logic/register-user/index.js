@@ -1,3 +1,4 @@
+const { User } = require('../../data')
 /**
  * Registers a user.
  * 
@@ -11,11 +12,11 @@
 module.exports = function (name, surname, email, password) {
     // TODO validate fields
 
-    return this.__users__.findOne({ email })
+    return User.findOne({ email })
         .then(user => {
             if (user) throw new Error(`user with e-mail ${email} already exists`)
 
-            return this.__users__.insertOne({ name, surname, email, password })
+            return User.create({ name, surname, email, password })
         })
         .then(() => { })
 }

@@ -1,4 +1,5 @@
-const { ObjectId } = require('mongodb')
+const { User } = require('../../data')
+
 
 /**
  * Retrieves a user by its id.
@@ -8,7 +9,7 @@ const { ObjectId } = require('mongodb')
  * @returns {Promise}
  */
 module.exports = function (id) {
-    return this.__users__.findOne({ _id: ObjectId(id) }, { projection: { _id: 0, password: 0 } })
+    return User.findOne({ _id: id }, { _id: 0, password: 0 }).lean()
         .then(user => {
             if (!user) throw new Error(`user with id ${id} not found`)
 

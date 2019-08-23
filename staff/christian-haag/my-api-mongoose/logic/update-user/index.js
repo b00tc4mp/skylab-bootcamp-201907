@@ -1,5 +1,4 @@
-const { ObjectId } = require('mongodb')
-
+const { User } = require('../../data')
 /**
  * Updates a user.
  * 
@@ -11,7 +10,7 @@ const { ObjectId } = require('mongodb')
 module.exports = function (id, data) {
     // TODO validate fields
 
-    return this.__users__.updateOne({ _id: ObjectId(id) }, { $set: data })
+    return User.updateOne({ _id: id }, { $set: data })
         .then(result => {
             if (!result.result.nModified) throw new Error(`user with id ${id} does not exist`)
         })

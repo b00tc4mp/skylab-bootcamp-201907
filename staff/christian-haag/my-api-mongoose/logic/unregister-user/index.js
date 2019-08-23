@@ -1,5 +1,4 @@
-const { ObjectId } = require('mongodb')
-
+const { User } = require('../../data')
 /**
  * Unregisters a user.
  * 
@@ -11,7 +10,7 @@ const { ObjectId } = require('mongodb')
 module.exports = function (id, password) {
     // TODO validate fields
 
-    return this.__users__.deleteOne({ _id: ObjectId(id), password })
+    return User.deleteOne({ _id: id, password })
         .then(result => {
             if (!result.deletedCount) throw new Error(`wrong credentials`)
         })
