@@ -1,0 +1,28 @@
+.feedback
+    display: flex
+    flex-flow: column nowrap
+    justify-content: center
+    align-items: center
+    margin-top: 1rem
+
+    &__item
+        width: 95%
+        padding: .9rem
+        margin: .5rem
+        display: flex
+        justify-content: center
+        align-items: center
+        height: 1rem
+        border-radius: 5px
+        font-size: .8rem
+
+    &--error
+        color: red
+        background-color: rgba(255, 0, 0, .3)
+
+    &--warn
+        color: orange
+    &--success
+        color: green
+        background-color: rgba(0, 255, 0, .3)
+
