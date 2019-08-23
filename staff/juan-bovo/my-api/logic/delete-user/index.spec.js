@@ -31,13 +31,14 @@ describe('logic', () => {
             users.insertOne({name, surname, email, password})
         })
 
-        it('should succeed on delete data', () => 
+        it('should succeed on delete data', () => {
+        debugger
             logic.deleteUser(email, password)
              .then(() => users.findOne({ email }))
              .then(user =>{
                 expect(user).to.null
              
-            })
+            })}
         )
     })
     after(() => client.close())

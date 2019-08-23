@@ -66,7 +66,7 @@ client.connect()
             }
         })
 
-        app.put('/user/:id', jsonBodyParser, (req, res) => {
+        app.patch('/user/:id', jsonBodyParser, (req, res) => {
             const { params: { id }, headers: { authorization } } = req
             const { body }  = req
             const token = authorization.slice(authorization.indexOf(' ') + 1)

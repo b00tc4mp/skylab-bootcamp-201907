@@ -6,11 +6,12 @@ module.exports = {
         validate.string(email, 'username')
         validate.email(email, 'username')
         validate.string(password, 'password')
+        debugger
         return this.__users__.findOne({ email, password })
-            .then(user => {
+            .then(user => { debugger
                 if (!user) throw new Error("User does not exist.")
                 return this.__users__.deleteOne( ObjectId(user.id) )
-                .then(()=>{})
+                .then((usern)=>{debugger})
             })
     }
 }
