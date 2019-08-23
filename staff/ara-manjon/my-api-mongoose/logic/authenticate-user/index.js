@@ -1,18 +1,22 @@
 const { User } = require('../../data')
 const validate = require('../../utils/validate')
 
-    /**
-     * Authenticates a user by its credentials.
-     * 
-     * @param {*} email 
-     * @param {*} password 
-     * 
-     * @returns {Promise}
-     */
+/**
+       * Authenticates a user by its credentials.
+       * 
+       * @param {string} email Email introduced by user
+       * @param {string} password Password introduced by user
+       * 
+       * @returns {Promise}
+       * 
+       * Returns the user id.
+       */
 
 
     module.exports = function (email, password) {
-        // TODO validate fields
+        validate.string(email, 'username')
+        validate.email(email, 'username')
+        validate.string(password, 'password')
     
         return User.findOne({ email })
             .then(user => {

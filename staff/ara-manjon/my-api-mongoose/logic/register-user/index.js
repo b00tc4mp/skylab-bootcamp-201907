@@ -1,18 +1,23 @@
 const validate = require('../../utils/validate')
 const { User } = require('../../data')
-    /**
-     * Registers a user.
-     * @param {*} name 
-     * @param {*} surname 
-     * @param {*} email 
-     * @param {*} password 
-     * 
-     * @returns {Promise}
-     */
+      /**
+       * 
+       * @param {string} name String introduced by user
+       * @param {string} surname String introduced by user
+       * @param {string} email String introduced by user, it should has condition of email
+       * @param {string} password String introduced by user
+       * @param {string} repassword String introduced by user, it should be equal to password
+       * Introduce the user dades to mongodb://localhost/skylab. 
+       * @returns {Promise}
+       */
 
 module.exports = function (name, surname, email, password){
-
-        // TODO validate fields
+    validate.string(name, 'name')
+    validate.string(surname, 'surname')
+    validate.string(email, 'email')
+    validate.email(email, 'email')
+    validate.string(password, 'password')
+        
 
 
         return User.findOne({ email })

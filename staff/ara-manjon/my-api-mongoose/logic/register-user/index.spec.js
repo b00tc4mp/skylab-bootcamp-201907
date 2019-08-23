@@ -33,6 +33,13 @@ describe('logic - register user', () => {
                 expect(user.password).to.equal(password)
             })
     )
+    it('should fail on email', () => {
+        logic.registerUser(name, surname, email, password, password)
+            .then(() => users.findOne({
+                email
+            }))
+            .catch(error => expect(error.message).to.equal('Email already exists'))
+    })
 
     after(() => mongoose.disconnect())
 })
