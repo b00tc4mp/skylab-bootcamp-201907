@@ -1,12 +1,12 @@
-const logic = require('../logic')
+const logic = require('../../logic')
 
 module.exports = (req, res) => {
 
-    const { params: { id } } = req
+    const { params: { vehicleId } } = req
 
     try {
-        logic.retrieveUser(id)
-            .then(user => res.json({ message: 'user retrieved correctly', user }))
+        logic.vehicle.retrieve(vehicleId)
+            .then(vehicle => res.json({ message: 'Vehicle retrieved correctly', vehicle }))
             .catch(({ message }) => res.status(404).json({ error: message }))
     } catch ({ message }) {
         res.status(404).json({ error: message })

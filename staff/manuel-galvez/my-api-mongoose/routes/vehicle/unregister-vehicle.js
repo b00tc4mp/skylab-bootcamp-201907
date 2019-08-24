@@ -1,12 +1,12 @@
-const logic = require('../logic')
+const logic = require('../../logic')
 
 module.exports = (req, res) => {
 
-    const { params: { id }, body: { email, password } } = req
+    const { params: { vehicleId } } = req
 
     try {
-        logic.unregisterUser(id, email, password)
-            .then(() => res.json({ message: 'User unregistered successfully'}))
+        logic.vehicle.unregister(vehicleId)
+            .then(() => res.json({ message: 'Vehicle unregistered successfully'}))
             .catch(({ message }) => res.status(404).json({ error: message }))
     } catch({ message }) {
         res.status(404).json({ error: message })

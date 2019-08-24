@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-
 const { Schema } = mongoose
+const cardSchema = require('./card') 
 
 module.exports = new Schema({
     name: {

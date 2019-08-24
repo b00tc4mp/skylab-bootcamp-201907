@@ -1,6 +1,6 @@
 const { ObjectId } = require('mongodb')
-const validate = require('../../utils/validate')
-const { User } = require('../../models')
+const validate = require('../../../utils/validate')
+const { User } = require('../../../models')
 
 /**
  * Unregisters a user by their id
