@@ -1,24 +1,20 @@
 const validate = require('../../utils/validate')
 
-module.exports = {
-    registerUser(name, surname, email, password, repassword) {
-        validate.string(name, 'name')
-        validate.string(surname, 'surname')
-        validate.string(email, 'username')
-        validate.email(email, 'username')
-        validate.string(password, 'password')
-        validate.string(repassword, 'password repeat')
+function registerUser (name, surname, email, password) {
 
-        if (password !== repassword) throw new Error('passwords do not match')
+    validate.string(name, 'name')
+    validate.string(surname, 'surname')
+    validate.string(email, 'email')
+    validate.email(email, 'email')
+    validate.string(password, 'password')
 
-        return this.__users__.findOne({ email })
-            .then(user => {
-                if (user) throw Error('Email is already registered')
+    return this.__users__.findOne({ email })
+        .then(user => {
+            if (user) throw new Error(`user with e-mail ${email} already exists`)
 
-                this.__users__.insertOne({ name: `${name}`, surname: `${surname}`, email: `${email}`, password: `${password}` })
-            }
-            )
-    }
+            return this.__users__.insertOne({ name, surname, email, password })
+        })
+        .then(() => { })
 }
 
-
+module.exports = registerUser

@@ -1,11 +1,11 @@
-const { MongoClient } = require('mongodb')
 const { expect } = require('chai')
-const logic = require('.')
+const logic = require('..')
+const data = require('../../data')
 
-describe('authenticate', () => {
+describe('logic - authenticate user', () => {
     let client, users
 
-    let name, surname, email, password
+    let name, surname, email, password, id
 
     name = `name-${Math.random()}`
     surname = `surname-${Math.random()}`
@@ -13,34 +13,27 @@ describe('authenticate', () => {
     password = `password-${Math.random()}`
 
     before(() => {
+        data('mongodb://localhost', 'my-api-test')
+        .then(({ client: _client, db }) => {
+            client = _client
 
-        client = new MongoClient('mongodb://localhost', { useNewUrlParser: true, useUnifiedTopology: true })
+            users = db.collection('users')
 
-        return client.connect()
-            .then(() => {
-                const db = client.db('my-api-test')
-
-                users = db.collection('users')
-
-                logic.__users__ = users
-
-            })
-            .then(() => users.deleteMany()
-                .then(() => users.insertOne({ name: `${name}`, surname: `${surname}`, email: `${email}`, password: `${password}` })))
+            logic.__users__ = users
+        })
+        .then(users.deleteMany()
+        .then(() => users.insertOne({ name, surname, email, password })
+            .then(result => id = result.insertedId.toString())))
     })
 
-    it('should succeed on correct credentials', () =>
+    it('should succeed on correct data', () =>
         logic.authenticateUser(email, password)
-            .then((user_id) => 
-                expect(user_id).to.exist
-    ))
-
-    it('should fail on wrong credentials', () =>
-        logic.authenticateUser('fulanito@menganito.com', password)
-            .catch(error => expect(error.message).to.equal('Wrong credentials'))
-            
+            .then(_id => {
+                expect(_id).to.exist
+                expect(_id).to.be.a('string')
+                expect(_id).to.equal(id)
+            })
     )
 
     after(() => client.close())
 })
-

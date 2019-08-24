@@ -1,19 +1,19 @@
 const validate = require('../../utils/validate')
 
-module.exports = {
+function authenticateUser (email, password) {
+    
+    validate.string(email, 'email')
+    validate.email(email, 'email')
+    validate.string(password, 'password')
 
-    authenticateUser(email, password) {
-        validate.string(email, 'username')
-        validate.email(email, 'username')
-        validate.string(email, 'password')
+    return this.__users__.findOne({ email })
+        .then(user => {
+            if (!user) throw new Error(`user with e-mail ${email} does not exist`)
 
-        return this.__users__.findOne({ email })
-            .then(user => {
-                if ((!user) || (user.password != password)) throw Error('Wrong credentials')
-                
-                return user._id.toString()
-            }
-            )
-    }
+            if (user.password !== password) throw new Error('wrong credentials')
+
+            return user._id.toString()
+        })
 }
 
+module.exports = authenticateUser
