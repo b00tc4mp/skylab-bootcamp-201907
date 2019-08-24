@@ -14,8 +14,7 @@ describe('logic', () => {
         return client.connect()
             .then(() => {
                 const db = client.db('const { MongoClient, ObjectId } = require('mongodb')
-const { expect } = require('chai')
-const logic = require('../.')
+
 
 describe('logic', () => {
     let client, users

@@ -1,6 +1,7 @@
 const validate = require('../../utils/validate')
-const { ObjectId } = require('mongodb')
-    /**
+const {User} = require('../../models')
+
+/**
      * 
      * @param {*} id 
      * @param {*} email 
@@ -14,11 +15,11 @@ const { ObjectId } = require('mongodb')
         validate.email(email, 'email')
         validate.string(password, 'password')
 
-        return this.__users__.deleteOne({_id: ObjectId(id), email, password})
-            .then(response=>{
-                if(response.deletedCount===0) throw Error ("There was an error unregistering the user")
+        return User.deleteOne({_id: id, email, password})
+            .then(result=>{
+                if(result.deletedCount===0) throw Error ("There was an error unregistering the user")
                 
             })
             
        
-        }
+    }

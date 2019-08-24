@@ -1,24 +1,21 @@
 require('dotenv').config()
 const express = require('express')
-const logic = require('./logic')
-const data= require('./data')
+const mongoose = require('mongoose')
 const {name, version} = require('./package')
 const routes = require('./routes')
 
-const {env :{ PORT, DB_URL, DB_NAME}} = process
+const {env :{ PORT, DB_URL}} = process
 // const client = new Mongoclient('mongodb://localhost' , { useNewUrlParser: true, useUnifiedTopology: true})
 
-let client
-
-data(DB_URL, DB_NAME)
-    .then(connection => {
+mongoose.connect(DB_URL, { useNewUrlParser: true})
+    .then(() => {
     
-    const {client: _client, db} = connection
+    // const {client: _client, db} = connection
     
-    //Database
-    client = _client
-    const users = db.collection('users')
-    logic.__users__= users
+    // //Database
+    // client = _client
+    // const users = db.collection('users')
+    // logic.__users__= users
 
     const app = express()
 
@@ -31,6 +28,6 @@ data(DB_URL, DB_NAME)
 
     process.on('SIGINT', () => {
         console.log(`\n${name} ${version}shutting down server`)
-        client.close()
+        mongoose.disconnect()
         process.exit(0)
     })

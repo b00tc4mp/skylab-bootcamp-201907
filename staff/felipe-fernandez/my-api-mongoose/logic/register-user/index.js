@@ -1,5 +1,5 @@
 const validate = require('../../utils/validate')
-const { ObjectId } = require('mongodb')
+const {User} = require('../../models')
 
 
     /**
@@ -21,10 +21,10 @@ const { ObjectId } = require('mongodb')
         validate.email(email, 'email')
         validate.string(password, 'password')
    
-        return this.__users__.findOne({ email})
+        return User.findOne({ email})
         .then(user => { 
             if(user) throw Error ('User exists')  
-            this.__users__.insertOne({ name, surname, email, password})                
+            User.create({ name, surname, email, password})                
         })
         .then(()=> {})
        
