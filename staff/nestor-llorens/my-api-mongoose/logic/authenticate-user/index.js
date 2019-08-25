@@ -1,4 +1,5 @@
 const validate = require('../../utils/validate')
+const { User } = require('../../data')
 
 function authenticateUser (email, password) {
     
@@ -6,13 +7,13 @@ function authenticateUser (email, password) {
     validate.email(email, 'email')
     validate.string(password, 'password')
 
-    return this.__users__.findOne({ email })
+    return User.findOne({ email })
         .then(user => {
             if (!user) throw new Error(`user with e-mail ${email} does not exist`)
 
-            if (user.password !== password) throw new Error('wrong credentials')
+            if (user.password !== password) throw new Error('wrong credentials')    
 
-            return user._id.toString()
+            return user.id
         })
 }
 

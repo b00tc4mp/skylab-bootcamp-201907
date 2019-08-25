@@ -1,9 +1,9 @@
 const { expect } = require('chai')
 const logic = require('..')
-const data = require('../../data')
+const { User } = require('../../data')
+const mongoose = require('mongoose')
 
 describe('logic - authenticate user', () => {
-    let client, users
 
     let name, surname, email, password
 
@@ -13,17 +13,11 @@ describe('logic - authenticate user', () => {
     password = `password-${Math.random()}`
 
     before(() =>
-        data('mongodb://localhost', 'my-api-test')
-            .then(({ client: _client, db }) => {
-                client = _client
-
-                users = db.collection('users')
-
-                logic.__users__ = users
-            })
-            .then(() => users.deleteMany())
-            .then(() => users.insertOne({ name, surname, email, password }))
-            .then(result => id = result.insertedId.toString())
+        mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true })
+            .then(() => User.deleteMany())
+            .then(() => User.create({ name, surname, email, password }))
+            .then(user => { 
+                id = user.id})
     )
 
     it('should succeed on correct data', () =>
@@ -45,5 +39,5 @@ describe('logic - authenticate user', () => {
             .catch(error => expect(error.message).to.equal('wrong credentials'))
     )
 
-    after(() => client.close())
+    after(() => mongoose.disconnect())
 })

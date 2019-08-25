@@ -1,10 +1,9 @@
 const { expect } = require('chai')
 const logic = require('..')
-const data = require('../../data')
-const { ObjectId } = require('mongodb')
+const { User } = require('../../data')
+const mongoose = require('mongoose')
 
 describe('logic - unregister user', () => {
-    let client, users
 
     let name, surname, email, password
 
@@ -14,17 +13,10 @@ describe('logic - unregister user', () => {
     password = `password-${Math.random()}`
 
     before(() =>
-        data('mongodb://localhost', 'my-api-test')
-            .then(({ client: _client, db }) => {
-                client = _client
-
-                users = db.collection('users')
-
-                logic.__users__ = users
-            })
-            .then(() => users.deleteMany())
-            .then(() => users.insertOne({ name, surname, email, password }))
-            .then(result => id = result.insertedId.toString())
+        mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true })
+            .then(() => User.deleteMany())
+                .then(() => User.create({ name, surname, email, password }))
+                .then(user => id = user.id )
     )
 
     it('should fail on unexisting user', () =>
@@ -42,9 +34,9 @@ describe('logic - unregister user', () => {
         logic.unregisterUser(id, password)
             .then(result =>
                 expect(result).not.to.exist)
-            .then(() => users.findOne({ _id: ObjectId(id) }))
+            .then(() => User.findOne({ _id: id }))
             .then(user => expect(user).not.to.exist)
     )
 
-    after(() => client.close())
+    after(() => mongoose.disconnect())
 })

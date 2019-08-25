@@ -1,30 +1,24 @@
 require('dotenv').config()
 
 const express = require('express')
-const data = require('./data')
+const mongoose = require('mongoose')
 const { name, version } = require('./package')
-const logic = require('./logic')
 const routes = require('./routes')
 
-const { env: { PORT, DB_URL, DB_NAME } } = process
+const { env: { PORT, DB_URL } } = process
 
 let client
 
-data(DB_URL, DB_NAME)
-    .then(({ client: _client, db }) => {
-        client = _client
+mongoose.connect(DB_URL, { useNewUrlParser: true })
+.then(() => {
 
-        const users = db.collection('users')
+    const app = express()
+    app.use(express.json())
 
-        logic.__users__ = users
+    app.use('/api', routes)
 
-        const app = express()
-        app.use(express.json())
-
-        app.use('/api', routes)
-
-        app.listen(PORT, () => console.log(`${name} ${version} up and running on port ${PORT}`))
-    })
+    app.listen(PORT, () => console.log(`${name} ${version} up and running on port ${PORT}`))
+})
 
 process.on('SIGINT', () => {
     console.log(`\n${name} ${version} shutting down, disconnecting from db...`)
