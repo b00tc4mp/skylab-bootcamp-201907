@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
         if (sub !== id) throw new Error(`token id ${sub} does not match user id ${id}`)
 
         next()
-    } catch ({ message }) {
-        res.status(401).json({ error: message })
+    } catch (error) {
+        res.status(401).json({ error: error.message })
     }
 }
