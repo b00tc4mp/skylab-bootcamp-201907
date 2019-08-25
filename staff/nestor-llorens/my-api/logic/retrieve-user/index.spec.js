@@ -5,8 +5,15 @@ const data = require('../../data')
 describe('logic - retrieve user', () => {
     let client, users
 
-    before(() => {
-        return data('mongodb://localhost', 'my-api-test')
+    let name, surname, email, password
+
+    name = `name-${Math.random()}`
+    surname = `surname-${Math.random()}`
+    email = `email-${Math.random()}@domain.com`
+    password = `password-${Math.random()}`
+
+    before(() => 
+        data('mongodb://localhost', 'my-api-test')
             .then(({ client: _client, db }) => {
                 client = _client
 
@@ -14,22 +21,12 @@ describe('logic - retrieve user', () => {
 
                 logic.__users__ = users
             })
-    })
+        .then(() => users.deleteMany())
+        .then(() => users.insertOne({ name, surname, email, password }))
+        .then(result => id = result.insertedId.toString())
+    )
 
-    let name, surname, email, password, id
-
-    beforeEach(() => {
-        name = `name-${Math.random()}`
-        surname = `surname-${Math.random()}`
-        email = `email-${Math.random()}@domain.com`
-        password = `password-${Math.random()}`
-
-        return users.deleteMany()
-            .then(() => users.insertOne({ name, surname, email, password }))
-            .then(result => id = result.insertedId.toString())
-    })
-
-    it('should succeed on correct data', () =>
+    it('should succeed on correct id', () =>
         logic.retrieveUser(id)
             .then(user => {
                 expect(user).to.exist
@@ -40,6 +37,11 @@ describe('logic - retrieve user', () => {
                 expect(user.email).to.equal(email)
                 expect(user.password).not.to.exist
             })
+    )
+
+    it('should fail on wrong id', () =>
+        logic.retrieveUser('123456789012')
+            .catch(error => expect(error.message).to.equal(`user with id 123456789012 not found`))
     )
 
     after(() => client.close())

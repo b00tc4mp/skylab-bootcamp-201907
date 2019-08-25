@@ -19,6 +19,7 @@ data(DB_URL, DB_NAME)
         logic.__users__ = users
 
         const app = express()
+        app.use(express.json())
 
         app.use('/api', routes)
 

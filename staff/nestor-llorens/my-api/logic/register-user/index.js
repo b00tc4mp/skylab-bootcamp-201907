@@ -1,7 +1,7 @@
 const validate = require('../../utils/validate')
 
 function registerUser (name, surname, email, password) {
-
+    debugger
     validate.string(name, 'name')
     validate.string(surname, 'surname')
     validate.string(email, 'email')
