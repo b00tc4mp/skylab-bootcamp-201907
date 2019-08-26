@@ -3,13 +3,13 @@ const { expect } = require ('chai')
 const logic = require ('..')
 const mongoose = require ('mongoose')
 
-describe.only ('logic', () => {
+describe ('logic', () => {
 
     before (() => {
         mongoose.connect('mongodb://localhost/my-api-test', {useNewUrlParser: true})
     })
 
-    // beforeEach(() => User.deleteMany())
+    beforeEach(() => User.deleteMany())
     
     describe ('retrieve user', () => {
         let name, surname, email, password, id
@@ -55,5 +55,6 @@ describe.only ('logic', () => {
             expect(() => {logic.retrieveUser('')}).to.throw ('id is empty or blank')
         })
     })
+
     after(() => mongoose.disconnect())
 })

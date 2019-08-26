@@ -1,24 +1,15 @@
-const {MongoClient} = require('mongodb')
+const {User} = require('../../data')
+const mongoose = require ('mongoose')
 const logic = require('..')
 const { expect } = require('chai')
-const { ObjectId } = require('mongodb')
 
-describe('logic', () => {
-    let client, users
+describe ('logic', () => {
 
     before(() => {
-        client = new MongoClient('mongodb://localhost',{ useNewUrlParser: true, useUnifiedTopology:true})
-        return client.connect()
-        .then (() => {
-            const db = client.db ('my-api-test')
-            
-            users = db.collection ('users')
-            
-            logic.__users__ = users
-        })
+        mongoose.connect('mongodb://localhost/my-api-test', {useNewUrlParser:true})
     })
 
-    beforeEach(() => users.deleteMany())
+    beforeEach(() => User.deleteMany())
 
     describe('unregister user', () => {
         let name, surname, email, password, id
@@ -29,9 +20,9 @@ describe('logic', () => {
             email = `email-${Math.random()}@mail.com`
             password = `password-${Math.random()}`
 
-            return users.deleteMany()
-                .then(() => users.insertOne({ name, surname, email, password }))
-                .then(result => id = result.insertedId.toString())
+            return User.deleteMany()
+                .then(() => User.create({ name, surname, email, password }))
+                .then(result => id = result.id)
         })
 
         it('should succeed on correct data', () =>
@@ -39,7 +30,7 @@ describe('logic', () => {
                 .then(result => {
                     expect(result).not.to.exist
 
-                    return users.findOne({ _id: ObjectId(id) })
+                    return User.findById(id)
                 })
                 .then(user => {
                     expect(user).not.to.exist
@@ -70,5 +61,5 @@ describe('logic', () => {
                 .catch(({ message }) => expect(message).to.equal('wrong credentials'))
         )
     })
-    after (() => client.close())
+    after (() => mongoose.disconnect())
 })

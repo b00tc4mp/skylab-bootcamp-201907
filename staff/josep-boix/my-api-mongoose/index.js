@@ -13,12 +13,12 @@ mongoose.connect(DB_URL, {useNewUrlParser: true})
 
     app.use ( express.json () )
     app.use ( '/api', routes )
-    app.listen ( PORT, () => console.log (`${name} ${version} up and running on PORT ${PORT}`))
+    app.listen ( PORT, () => console.log (`Welcome! ${name} ${version} up and running on PORT ${PORT}`))
 })
 
 process.on ('SIGINT', () => {       
 // in case of signal interrumped
-    console.log (`\n ${name} ${version} shutting down, disconecting from db...`)
+    console.log (`\nBye! ${name} ${version} shutting down, disconecting from db...`)
 
     mongoose.disconnect()
 

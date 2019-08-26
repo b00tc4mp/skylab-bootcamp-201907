@@ -1,26 +1,15 @@
-const { MongoClient } = require('mongodb')
+const { User } = require('../../data')
+const mongoose = require ('mongoose')
 const logic = require('..')
 const { expect } = require('chai')
-const { ObjectId } = require('mongodb')
 
-describe('logic', () => {
-    let client, users
+describe ('logic', () => {
 
     before(() => {
-        client = new MongoClient ('mongodb://localhost', { useNewUrlParser: true, useUnifiedTopology:true })
-        return client.connect()
-        
-            .then (() => {
-                debugger
-                const db = client.db ('my-api-test')
-
-                users = db.collection('users')
-
-                logic.__users__ = users
-            })
+        mongoose.connect('mongodb://localhost/my-api-test', {useNewUrlParser: true})
     })
 
-    beforeEach (() => users.deleteMany())
+    beforeEach (() => User.deleteMany())
 
     describe('update user', () => {
         let name, surname, email, password, id, body
@@ -39,9 +28,9 @@ describe('logic', () => {
                 extra: `extra-${Math.random()}`
             }
 
-            return users.deleteMany()
-                .then(() => users.insertOne({ name, surname, email, password }))
-                .then(result => id = result.insertedId.toString())
+            return User.deleteMany()
+                .then(() => User.create({ name, surname, email, password, password }))
+                .then(result => id = result.id)
         })
 
         it('should succeed on correct data', () =>
@@ -49,7 +38,7 @@ describe('logic', () => {
                 .then(result => {
                     expect(result).not.to.exist
 
-                    return users.findOne({ _id: ObjectId(id) })
+                    return User.findOne({ _id: id })
                 })
                 .then(user => {
                     expect(user).to.exist
@@ -57,7 +46,9 @@ describe('logic', () => {
                     expect(user.surname).to.equal(body.surname)
                     expect(user.email).to.equal(body.email)
                     expect(user.password).to.equal(body.password)
-                    expect(user.extra).to.equal(body.extra)
+                    expect(user.extra).to.undefined
+                    expect(user.extra).not.to.exist
+                    expect(body.extra).to.exist
                 })
         )
 
@@ -70,5 +61,5 @@ describe('logic', () => {
         })
 
     })
-    after(() => client.close())
+    after(() => mongoose.disconnect())
 })
