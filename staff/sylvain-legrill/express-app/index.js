@@ -16,8 +16,8 @@ const formBodyParser = bodyParser.urlencoded({ extended: true })
 const {
     HOME,
     SEARCH,
-    SIGN_IN,
     SIGN_UP,
+    SIGN_IN,
     SIGN_OUT,
     DETAIL,
     TOGGLE_FAV,
@@ -141,7 +141,7 @@ app.get(SIGN_UP, (req, res) => {
 })
 
 app.post(SIGN_UP, formBodyParser, (req, res) => {
-    const { body, session } = req 
+    const { body, session: { lang } } = req 
 
     const { name, surname, email, password, repassword } = body 
     

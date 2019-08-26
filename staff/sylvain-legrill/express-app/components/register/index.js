@@ -2,15 +2,15 @@ const literals = require('./i18n')
 const { path, goBackPath } = require('./config')
 const Feedback = require('../feedback')
 
-function Register(error,name, surname, email, lang) {
-    const { signUp, name: _name, surname: _surname, password, repassword, goBack } = literals[lang]
+module.exports = function (error, name, surname, email, lang) {
+    const { signUp, name: _name, surname: _surname, goBack,  password, repassword, } = literals[lang]
 
     return `<section class="register">
         <h1 class="register__title">${signUp}</h1>
         <form method="post" action="${path}">
             <ul class="register__list">
                 <li class="register__item">
-                    <label>${_name}<input class="register__input" type="text" name="name" value="${name ? name : ''} /></label>
+                    <label>${_name}<input class="register__input" type="text" name="name" value="${name ? name : ''}" /></label>
                 </li>
                 <li class="register__item">
                     <label>${_surname}<input class="register__input" type="text" name="surname" value="${surname ? surname : ''}" /></label>
@@ -33,5 +33,3 @@ function Register(error,name, surname, email, lang) {
         <a class="register__link" href="${goBackPath}">${goBack}</a>
         </section>`
 }
-
-module.exports = Register
