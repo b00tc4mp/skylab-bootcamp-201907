@@ -1,0 +1,33 @@
+.duck-container
+    @extend %item-container
+
+    &__list
+        @extend %item
+       
+        &-h3
+            @extend %item-title
+
+        &-a
+            text-decoration: none
+            
+        &-img
+            @extend %item-image
+
+    &__list-bottom
+        margin: 5px
+        display: flex
+        justify-content: center
+        align-items: center
+
+        &-span
+            margin-right: 25px
+
+@media (min-width: 650px)
+    %item-container
+        width: 100%
+        flex-direction: row
+        flex-wrap: wrap  
+
+    %item
+        width: 40%
+        display: flex          
