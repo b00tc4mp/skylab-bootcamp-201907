@@ -4,10 +4,9 @@ const logic = require('../logic')
 
             const {params:{id}, body:{email, password}} = req
     
-            // const token = authorization.slice(authorization.indexOf(' ') +1)
-    
+                
             try{
-                // jwt.verify(token, secret)
+                
                 logic.unregisterUser(id, email, password)
                  .then(() => res.json({message: 'user uregistered correctly'}))
                  .catch(({message})=> res.status(404).json({error:message}))

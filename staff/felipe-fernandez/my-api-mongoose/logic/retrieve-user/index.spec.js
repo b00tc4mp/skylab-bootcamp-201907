@@ -9,8 +9,7 @@ describe('logic', ()=>{
         mongoose.connect('mongodb://localhost/my-api-mongoose', {useNewUrlParser: true})
     })
 
-    // beforeEach(() => User.deleteMany())
-
+  
     describe('retrieve user', () => {
         let name, surname, email, password, id
 

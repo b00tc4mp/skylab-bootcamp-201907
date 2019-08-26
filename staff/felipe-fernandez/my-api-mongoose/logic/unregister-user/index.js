@@ -23,14 +23,3 @@ const {User} = require('../../models')
             
        
     }
-
-    // module.exports = function (id, password) {
-    //     // validate.string(email, 'email')
-    //     // validate.email(email, 'email')
-    //     validate.string(password, 'password')
-    
-    //     return User.deleteOne({ _id: id, password })
-    //         .then(result => {
-    //             if (!result.deletedCount) throw new Error(`wrong credentials`)
-    //         })
-    // }
