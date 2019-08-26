@@ -1,14 +1,13 @@
 const mongoose = require('mongoose')
 
-const { Schema } = mongoose
+const {Schema} = mongoose
 
-const User = new Schema({
-
+module.exports = new Schema({
     name: {
         type: String,
         required: true
     },
-    surname: {
+    surname:  {
         type: String,
         required: true
     },
@@ -18,10 +17,9 @@ const User = new Schema({
         lowercase: true,
         match: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     },
-    password: {
+    password:  {
         type: String,
         required: true
     }
-})
 
-module.exports = User
+})

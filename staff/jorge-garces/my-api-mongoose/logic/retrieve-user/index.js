@@ -1,34 +1,24 @@
 const validate = require('../../utils/validate')
-const { User } = require('../../models')
+const {User} = require('../../models')
 
-
-/**
-     * Retrieves a user by its id.
+ /**
      * 
-     * @param {string} id 
+     * @param {*} id 
+     * @param {*} token 
      * 
      * @returns {Promise}
      */
+    module.exports = function(id){
+        validate.string(id, 'id')
+       
+        return User.findOne({ _id: id }, {  _id: 0, password: 0  }).lean()
+            .then(user => {
+                if(!user) throw new Error(`user with id ${id} not found`)
+                user.id = id
 
-module.exports = function (id) {
-    // TODO validate fields
+                return user
+            }) 
 
-    // VIKING style
-    // return this.__users__.findOne({ _id: ObjectId(id) })
-    //     .then(user => {
-    //         user.id = user._id.toString()
-    //         delete user._id
-    //         delete user.password
+    
 
-    //         return user
-    //     })
-
-    // TUNED style
-    return User.findOne({ _id: id }, { _id: 0, password: 0 }).lean()
-        .then(user => {
-            if (!user) throw Error(`User with id ${id} does not exist.`)
-            user.id = id
-
-            return user
-        })
 }

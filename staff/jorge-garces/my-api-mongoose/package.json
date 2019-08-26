@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx mocha '**/*.spec.js'",
-    "test-debug": "npx mocha --inspect-brk '**/*.spec.js'"
+    "start": "node .",
+    "watch2": "npx nodemon .",
+    "debug": "node debug .",
+    "test": "npx mocha logic/**/*.spec.js",
+    "test-debug": "npx mocha debug logic/**/*.spec.js",
+    "test-inspect": "npx mocha --inspect-brk logic/**/*.spec.js"
   },
   "keywords": [],
   "author": "",
@@ -15,10 +19,10 @@
     "chai": "^4.2.0",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
-    "js-sha256": "^0.9.0",
     "jsonwebtoken": "^8.5.1",
     "mocha": "^6.2.0",
     "mongodb": "^3.3.0",
-    "mongoose": "^5.6.10"
+    "mongoose": "^5.6.10",
+    "nodemon": "^1.19.1"
   }
 }

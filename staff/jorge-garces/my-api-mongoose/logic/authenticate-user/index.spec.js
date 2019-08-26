@@ -1,77 +1,80 @@
-const { MongoClient } = require('mongodb')
-const { expect } = require('chai')
-const logic = require('../.')
+const mongoose = require('mongoose')
+const {expect} = require('chai')
+const logic = require('..')
+const { User } = require('../../models')
 
-describe('logic', () => {
-    let client, users
+describe('logic', ()=>{
 
-    before(() => {
-        client = new MongoClient('mongodb://172.17.0.2', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        })
-
-        return client.connect()
-            .then(() => {
-                const db = client.db('skylab')
-
-                users = db.collection('users')
-
-                logic.__users__ = users
-            })
+    before(()=>{
+        mongoose.connect('mongodb://localhost/my-api-mongoose', {useNewUrlParser: true})
     })
 
-    beforeEach(() => users.deleteMany())
-
-    describe('authenticate', () => {
+    describe('authentication user', ()=> {
         let name, surname, email, password
 
-        beforeEach(() => {
+        beforeEach(()=>{
+        
             name = `name-${Math.random()}`
             surname = `surname-${Math.random()}`
-            email = `email-${Math.random()}@domain.com`
-            password = `password-${Math.random()}`
+            email = `email-${Math.random()}@mail.com`
+            password = `name-${Math.random()}`
+            
+            return User.deleteMany()
+             .then(()=> User.create({name, surname, email, password}))
+                .then(user =>  id = user.id)
+            
+        })
+        
+        it ('should authenticate on correct data', ()=> 
+            logic.authenticateUser(email, password)
+            .then(result => {
+                expect(result).to.exist
+                expect(result).to.be.a('string')
+                expect(result).to.equal(id)
+            })
+        )
 
-            //TODO: Generate ID & TOKEN
-
-            // Register user first to make sure it exists
-            users.insertOne({ name, surname, email, password })
-                .then(() => users.findOne({ email }))
+        it('should fail on incorrect data', ()=>{
+            let password = "fail"
+            logic.authenticateUser(email, password)
+            .catch(error => {
+                expect(error).to.exist
+            })
         })
 
-        it('should succeed on correct data', () =>
-            logic.authenticateUser(email, password)
-                .then(data => {
-                    expect(data).to.exist
-                    // expect(data.id).to.exist
-                    // expect(data.token).to.exist
-                })
-        )
+             it('should fail on empty username', () => {
+                expect(() =>
+                    logic.authenticateUser('', password)
+                ).to.throw(Error, 'email is empty or blank')
+            })
 
-        it('should fail on wrong email', () =>
-            logic.authenticateUser('fake@email.com', password)
-                .then(data => {
-                    expect(data).to.be.undefined
-                })
-                .catch(error => {
-                    expect(error).to.exist
-                    expect(error.message).to.equal('Wrong credentials.')
-                })
-        )
+            it('should fail on emtpy password', () => {
+                expect(()=> 
+                    logic.authenticateUser(email, '')
+                ).to.throw(Error, 'password is empty or blank')
+            })
 
-        it('should fail on wrong password.', () =>
-            logic.authenticateUser(email, 'fjañlkfjsadñfk')
-                .then(data => {
-                    expect(data).to.be.undefined
-                })
-                .catch(error => {
-                    expect(error).to.exist
-                    expect(error.message).to.equal('Wrong credentials.')
-                })
-        )
+            it('should fail on non-valid username', () => {
+                expect(()=> 
+                    logic.authenticateUser('asdf#adsf.com', password)
+                ).to.throw(Error, 'email with value asdf#adsf.com is not a valid e-mail')
+            })
+
+            it('should fail on non-string username', () => {
+                expect(()=> 
+                    logic.authenticateUser(undefined, password)
+                ).to.throw(Error, 'email with value undefined is not a string')
+            })
+
+            it('should fail on non-string password', () => {
+                expect(()=> 
+                    logic.authenticateUser(email, undefined)
+                ).to.throw(Error, 'password with value undefined is not a string')
+            })
+ 
+        
 
     })
-
-    after(() => client.close())
+   after(()=>mongoose.disconnect())
 
 })
