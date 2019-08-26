@@ -1,6 +1,6 @@
 function FavButton({ active, onToggle}) {
     return <>
-     <p className="fav-text">Favorite</p><button onClick={event => {
+     <p></p><button className="main__favbuttom" onClick={event => {
         event.stopPropagation()
 
             onToggle()

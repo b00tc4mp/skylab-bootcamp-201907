@@ -1,10 +1,8 @@
 function Login({ onLogin, onBack, error }) {
   return (
     <>
-    <nav className="landingContainer">
-    <ul className="landingContainer_container">
-
-      <form className="loginForm"
+      <h2 className="main__nav__title">Log in !</h2>
+      <form className="main__nav__form"
         onSubmit={event => {
           event.preventDefault()
 
@@ -18,18 +16,18 @@ function Login({ onLogin, onBack, error }) {
           onLogin(email, password)
         }}
       >
-        <label htmlFor="email" className="hide">
+        <label htmlFor="email" className="main__nav__form__lab">
           E-mail 
         </label>
         <input placeholder="Email" type="email" name="email" />
-        <label htmlFor="password" className="hide">
+        <label htmlFor="password" className="main__nav__form__lab">
           Password 
         </label>
         <input placeholder="Password" type="password" name="password" />
 
-        <button className='btnGo'>Go!</button>
+        <button className='main__nav__form__go'>Go !</button>
         <a
-          href="#" className='backButton'
+          href="#" className='main__nav__form__back'
           onClick={event => {
             event.preventDefault()
             onBack()
@@ -39,8 +37,6 @@ function Login({ onLogin, onBack, error }) {
         </a>
       </form>
       {error && <Feedback message={error} />}
-      </ul>
-      </nav>
     </>
   )
 }

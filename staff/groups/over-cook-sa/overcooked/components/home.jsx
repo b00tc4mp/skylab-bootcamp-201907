@@ -167,29 +167,30 @@ render () {
     const{ state: { meals, meal, cats , favs, user}, showCat, handleLogout, handleSearch, handleGoBack, handleOnMeal, handleSearchCat, handleGoToCategories, handleSearchIngredient, handleToggleRecipeDetail, handleToggleRecipeList,handleToggleFavorite, handleFavorites} = this
 
     return ( <>
-    <header className='homeHeader sticky'>
+    <header className='home'>
        
             {user && <SmallHeader onLogout={handleLogout} goToCategories={handleGoToCategories} showCat={showCat} user={user} handleFavorites={handleFavorites}  />}       
             <Search onSearchName={handleSearch} onSearchIngredient={handleSearchIngredient}/>
         
     </header>
-    <main className="home-main">
+    <main className="main__home">
         
-        <section>     
+        <section className="main__categories">     
             { cats && <Categories onSearchCat={handleSearchCat} /> }
 
-<section className="wrapper-cont">
-            {!meal ? <Results meals={meals} onMeal={handleOnMeal} goCat={handleGoToCategories} paintMeal = { meal => {return <RecipeItem2 meal={meal} onToggle={handleToggleRecipeList} />}}  />
-            : <RecipeDetails meal={meal} onBack={handleGoBack} onToggle={handleToggleRecipeDetail} ingredients={recipeFormatter(meal)} />}
-           </section>
-
-            {!meal  && <Favorites favs={favs} onMeal={handleOnMeal} goCat={handleGoToCategories} paintMeal = { meal => {return <RecipeItem2 meal={meal} onToggle={handleToggleFavorite} />}}  />
-            }
+            <section className="main__res">
+                {!meal ? <Results meals={meals} onMeal={handleOnMeal} goCat={handleGoToCategories} paintMeal = { meal => {return <RecipeItem2 meal={meal} onToggle={handleToggleRecipeList} />}}  />
+                : <RecipeDetails meal={meal} onBack={handleGoBack} onToggle={handleToggleRecipeDetail} ingredients={recipeFormatter(meal)} />}
+            </section>
+            <section className="main__res">
+                {!meal  && <Favorites favs={favs} onMeal={handleOnMeal} goCat={handleGoToCategories} paintMeal = { meal => {return <RecipeItem2 meal={meal} onToggle={handleToggleFavorite} />}}  />
+                }
+            </section>
         </section>
 
     </main>
 
-    <footer className="footer-home">
+    <footer className="footer">
         <Footer />
     </footer>
     </>

@@ -1,14 +1,14 @@
 function Footer () {
 
     return <>
-    <ul className = "footer-sMedia">
-            <li><i className="fab fa-instagram"></i></li>
-            <li><i className="fab fa-facebook-square"></i></li>
-            <li><i className="fab fa-twitter-square"></i></li>
-            <li><i className="fab fa-github-square"></i></li>
+    <ul className = "footer__list">
+            <li className="footer__item"><i className="fab fa-instagram footer__item__fab"></i></li>
+            <li className="footer__item"><i className="fab fa-facebook-square footer__item__fab"></i></li>
+            <li className="footer__item"><i className="fab fa-twitter-square footer__item__fab"></i></li>
+            <li className="footer__item"><i className="fab fa-github-square footer__item__fab"></i></li>
     </ul>
-    <section className="footer-copyright">
-    <p>Skylab Industries &copy; 2019</p>
+    <section className="footer__sec">
+    <p className="footer__sec__text">Skylab Industries &copy; 2019</p>
     </section>         
     
     </>

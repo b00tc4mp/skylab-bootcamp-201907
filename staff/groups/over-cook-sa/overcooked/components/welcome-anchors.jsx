@@ -1,11 +1,11 @@
 function WelcomeAnchors({ onLogin, onRegister }) {
   return (
     <>
-      <nav className="landingContainer">
+      <nav>
 
-        <ul className="landingContainer_container">
-          <li className="regLog">
-            <a className="landingButton"
+        <ul className="main__nav__welcome">
+          <li className="main__nav__welcome__item">
+            <a className="main__nav__welcome__button"
               href=""
               onClick={event => {
                 event.preventDefault()
@@ -16,8 +16,8 @@ function WelcomeAnchors({ onLogin, onRegister }) {
               Register
             </a>
           </li>
-          <li>
-            <a className="landingButton"
+          <li className="main__nav__welcome__item">
+            <a className="main__nav__welcome__button"
               href=""
               onClick={event => {
                 event.preventDefault()
