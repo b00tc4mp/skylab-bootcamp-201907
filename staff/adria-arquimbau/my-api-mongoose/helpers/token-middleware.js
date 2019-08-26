@@ -10,7 +10,6 @@ module.exports = (req, res, next) => {
 
         const token = authorization.slice(authorization.indexOf(' ') + 1)
 
-
         const { sub } = jwt.verify(token, JWT_SECRET)
 
         if (sub !== id) throw new Error(`token id ${sub} does not match user id ${id}`)

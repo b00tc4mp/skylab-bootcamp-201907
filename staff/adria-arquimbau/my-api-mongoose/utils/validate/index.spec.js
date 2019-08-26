@@ -1,59 +1,60 @@
-const validate = require('./')
+const validate = require('.')
 const { expect } = require('chai')
 
-describe("validate", () => {
-    
+const {
+    random
+} = Math
 
-        describe("string", () => {
-            it ("should detect that it's a string and not throw error", () => {
-                validate.string("hello","string")
-                expect(true).to.be.true
-            })
+describe('logic - validate', () => {
+    describe('string', () => {
+        it('should succeed on correct string', () => {
+            const result = validate.string('query', 'string')
+            expect(result).to.be.undefined
 
-            it ("should detect empty string", () => {
-                //MODO CRUDO
-                 /*    try {
-                        validate.string()
-                        throw Error('should not reach this point')
-                   } catch ({message}) {
-                        expect(message).to.equal("undefined with value undefined is not a string")
-                   } */
-                //MODO PRO
-                  expect(() => { validate.string() }).to.throw(Error, "undefined with value undefined is not a string")
+        })
+        it('should fail on non correct string', () => {
+            expect(() =>
+                validate.string(123, 'string')).to.throw(Error, `string with value 123 is not a string`)
 
-            })
-       })
+        })
+        it('should fail on empty string', () => {
+            expect(() =>
+                validate.string('', 'string')).to.throw(Error, `string is empty or blank`)
 
-       
-
-        describe("email", () => {
-            it ("should detect that it's a email and not throw error", () => {
-                validate.email("a.a@test.com","email")
-                expect(true).to.be.true
-            })
-            it ("should throw error if the email is not a email", () => {
-                expect(() => { validate.email("a.a@com","email") }).to.throw(Error, "email with value a.a@com is not a valid e-mail")
-            })
         })
 
-        describe("function", () => {
-            it ("should detect that it's a function and not throw error", () => {
-                const func = function funct() {}
-                validate.function(func,"function")
-                expect(true).to.be.true 
-            })
-            it ("should trow error if its not a function",() => {
-                expect(() => { validate.function("hola", "function") }).to.throw(Error, "function with value hola is not a function")
-            })
+        it('should fail on empty string', () => {
+            expect(() =>
+                validate.string('', 'string')).to.throw(Error, `string is empty or blank`)
+
         })
 
-        describe("url", () => {
-            it ("should detect that it's a url and not throw error", () => {
-                validate.url("www.url.com","url")
-                expect(true).to.be.true 
-            })
-            it ("should throw error if its not a url ", () => {
-                expect(() => { validate.url("hola", "url") }).to.throw(Error, "url with value hola is not a valid URL")
-            })
-        })
     })
+    describe('email', () => {
+        it('should succeed on correct email', () => {
+            const result = validate.email('John-' + random() + '@gmail.com', 'string')
+            expect(result).to.be.undefined
+
+        })
+        it('should fail on non correct email', () => {
+            expect(() =>
+                validate.email(123, 'email')).to.throw(Error, `email with value 123 is not a valid e-mail`)
+
+        })
+
+    })
+
+    describe('URL', () => {
+            it('should succeed on correct URL', () => {
+                const result = validate.url('https://developer.mozilla.org/es/', 'string')
+                expect(result).to.be.undefined
+
+            })
+            it('should fail on non correct URL', () => {
+                expect(() =>
+                    validate.url(123, 'url')).to.throw(Error, `url with value 123 is not a valid URL`)
+
+            })
+        })
+
+})
