@@ -1,4 +1,5 @@
 const validate = require('../../utils/validate')
+const { User } = require('../../models')
 
 /**
  * 
@@ -17,9 +18,9 @@ module.exports = function (name, surname, email, password) {
     validate.email(email, 'username')
     validate.string(password, 'password')
 
-    return this.__users__.findOne({ email })
+    return User.findOne({ email })
         .then(user => {
             if (user) throw Error('User already exists.')
-            return this.__users__.insertOne({ name, surname, email, password })
+            return User.create({ name, surname, email, password })
         }).then(() => { })
 }

@@ -1,5 +1,5 @@
-const { ObjectId } = require('mongodb')
 const validate = require('../../utils/validate')
+const { User } = require('../../models')
 
 
 /**
@@ -24,7 +24,7 @@ module.exports = function (id) {
     //     })
 
     // TUNED style
-    return this.__users__.findOne({ _id: ObjectId(id) }, { projection: { _id: 0, password: 0 } })
+    return User.findOne({ _id: id }, { _id: 0, password: 0 }).lean()
         .then(user => {
             if (!user) throw Error(`User with id ${id} does not exist.`)
             user.id = id

@@ -1,4 +1,5 @@
 const validate = require('../../utils/validate')
+const { User } = require('../../models')
 
 /**
  * 
@@ -15,10 +16,9 @@ module.exports = function (email, password) {
     validate.string(password, 'password')
 
     // Register
-    return this.__users__.findOne({ email, password })
+    return User.findOne({ email, password })
         .then(user => {
             if (!user) throw Error('Wrong credentials.')
             return user._id.toString()
-
         })
 }
