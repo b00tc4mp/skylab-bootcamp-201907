@@ -1,0 +1,52 @@
+Notas abesti
+
+Musixmatch API
+
+apikey:
+apikey=e492562d27469098b0922d5d580837eb
+(apikey is mandatory)
+
+base url:
+https://api.musixmatch.com/ws/1.1/
+
+API uses different methods, as follow:
+
+OUR CHOICE ON SEARCH --> track.search + q_artist and q_track ("Aerosmith" and "dude looks like a lady")
+https://developer.musixmatch.com/documentation/api-reference/track-search
+https://api.musixmatch.com/ws/1.1/track.search?apikey=e492562d27469098b0922d5d580837eb&q_artist=aerosmith&q_track=dude%20looks%20like%20a%20lady
+
+    other option --> track.search(example using the word "revolution")
+    https://api.musixmatch.com/ws/1.1/track.search?apikey=e492562d27469098b0922d5d580837eb&q_track=%22revolution%22
+
+
+OUR ¡WRONG! CHOICE ON RETRIEVE SONGS || --> No need to use this, because search results has all the needed info to paint search results.
+track.get + commontrack_id (commontrack_id it includes lots of data but no lyrics)
+https://api.musixmatch.com/ws/1.1/track.get?apikey=e492562d27469098b0922d5d580837eb&commontrack_id=74094520
+
+OUR CHOICE ON DISPLAY LYRICS
+track.lyrics + track_id (track_id includes 30% of lyrics but no much data)
+https://api.musixmatch.com/ws/1.1/track.lyrics.get?apikey=e492562d27469098b0922d5d580837eb&track_id=30974361
+
+ALBUM ART:
+https://developer.musixmatch.com/documentation/api-reference/album-get --> not working, sent an email to developers.
+https://api.musixmatch.com/ws/1.1/album.get?album_id=13831951&apikey=e492562d27469098b0922d5d580837eb
+    Alternative!! --> https://musicbrainz.org/doc/Cover_Art_Archive/API, using album_mbid ("musicbrainz id")
+    Album data: https://musicbrainz.org/release/4e0f30f2-18e5-3bcc-822a-527beaea70cf
+
+    get the mbid from Musixmatch API and using it on Musicbrainz: https://wiki.musicbrainz.org/Development/JSON_Web_Service
+
+
+
+OTHER FEATURES
+artist.get
+https://api.musixmatch.com/ws/1.1/artist.get?apikey=e492562d27469098b0922d5d580837eb&artist_id=268
+
+
+FAVORITES:
+    /*- We should talk about this, because retrieve songs and display lyrics features uses two kinds of ID (commontrack_id and track_id, as stated above).
+    - commontrack_id is the one with the lyrics. Toggling a heart on search results (retrieve songs) seems difficult.
+        Or, at least, it should take many API calls: for each commontrack_id showed, we need to check its track_id, call user favorites, check if it's there, and change heart status.
+        Besides, when user is on retrieve songs and potentially wants to add a song (commontrack_id) to favorites, we should also update its associated track_id on user's profile.
+        Favorites can also save each fav in an array of objects: user[X].favorites = [a:{'commontrack_id', 'track_id}', b:{'commontrack_id', 'track_id}']. It simplifies further heart-toggling operations, but seems to be a complex solution for a pointless problem.
+    - So we need to think if we need to show favorites on retrieve songs or just on display lyrics.*/
+- As made with ducks: save each track_id in an array, and add a property favorite to it.
