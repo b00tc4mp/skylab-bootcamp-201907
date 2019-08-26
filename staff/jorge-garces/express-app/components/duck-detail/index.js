@@ -5,7 +5,7 @@ function DuckDetail({ id, favorite, title, imageUrl, price, description, link },
     const { toStore } = literals[lang]
     return `<article>
         <h3>${title}</h3>
-        <img src="${imageUrl}">
+        <img class='imagen' src="${imageUrl}">
         <span>${price}</span>
         <p>${description}</p>
         <a href="${link}" target="_blank">${toStore}</a>

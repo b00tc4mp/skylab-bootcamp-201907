@@ -7,7 +7,7 @@ module.exports = function (ducks, lang) {
     if (ducks.length == 0) return output
     else {
         output = `<h2>${favs}</h2>`
-        output += (`<ul>${ducks.map(duck => `<li>${DuckDetail(duck, lang)}</li>`).join('')}</ul>`)
+        output += (`<section class='landing'> <ul>${ducks.map(duck => `<li>${DuckDetail(duck, lang)}</li>`).join('')} </ul> </section>`)
         return output
     }
 }

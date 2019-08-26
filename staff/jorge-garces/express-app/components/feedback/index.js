@@ -6,7 +6,7 @@ module.exports = function (lang, error) {
 
     return `
     <section class='feedback'>
-        <p>${error}</p>
+        <p id='redAlert'>${error}</p>
     </section>
     `
 }
