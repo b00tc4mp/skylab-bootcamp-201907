@@ -4,7 +4,7 @@ const {User} = require('../../models')
 const mongoose = require('mongoose')
 
 describe('logic - unregister user', () => {
-    before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
+    before(() => mongoose.connect('mongodb://localhost/my-api-mongoose', { useNewUrlParser: true }))
 
     let name, surname, email, password, id
 
