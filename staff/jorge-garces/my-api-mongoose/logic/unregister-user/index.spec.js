@@ -1,10 +1,10 @@
 const { expect } = require('chai')
 const logic = require('..')
-const {User} = require('../../models')
+const { User } = require('../../models')
 const mongoose = require('mongoose')
 
 describe('logic - unregister user', () => {
-    before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
+    before(() => mongoose.connect('mongodb://172.17.0.2/my-api-mongoose', { useNewUrlParser: true }))
 
     let name, surname, email, password, id
 

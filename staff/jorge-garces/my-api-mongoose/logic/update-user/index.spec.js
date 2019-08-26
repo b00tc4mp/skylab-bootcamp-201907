@@ -1,14 +1,14 @@
 const mongoose = require('mongoose')
-const {expect} = require('chai')
-const {User} = require('../../models')
+const { expect } = require('chai')
+const { User } = require('../../models')
 const logic = require('..')
 
 
 
-describe('logic', ()=>{
-    before(()=>{
-        mongoose.connect('mongodb://localhost/my-stuff-api', {useNewUrlParser: true})
-       
+describe('logic', () => {
+    before(() => {
+        mongoose.connect('mongodb://172.17.0.2/my-api-mongoose', { useNewUrlParser: true })
+
     })
 
     beforeEach(() => User.deleteMany())
@@ -22,8 +22,8 @@ describe('logic', ()=>{
             email = `email-${Math.random()}@domain.com`
             password = `password-${Math.random()}`
 
-            return User.create({name, surname, email, password})
-               .then(user =>  id = user.id)
+            return User.create({ name, surname, email, password })
+                .then(user => id = user.id)
         })
 
         it('should succeed on correct data', () =>
@@ -55,5 +55,5 @@ describe('logic', ()=>{
 
     })
 
-    after(()=> mongoose.disconnect())
+    after(() => mongoose.disconnect())
 })
