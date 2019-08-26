@@ -2,6 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const data = require('./data')
+const schemes = require('./data/schemas')
 const { name, version } = require('./package')
 const logic = require('./logic')
 const routes = require('./routes')
