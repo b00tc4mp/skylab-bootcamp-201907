@@ -10,14 +10,14 @@ const {User} = require('../../models')
 
 
  module.exports = function(email, password) {
-        // TODO validate fields
+        
         validate.string(email, 'email')
         validate.email(email, 'email')
         validate.string(password, 'password')
 
         return User.findOne({ email })
             .then(user => {
-                if (!user || user.password !== password) throw new Error(`user with e-mail ${email} does not exist`)
+                if (!user || user.password !== password) throw Error(`user with e-mail ${email} does not exist`)
 
                 return user._id.toString()
             })

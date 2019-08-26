@@ -14,6 +14,8 @@ const {User} = require('../../models')
      */
     
     module.exports = function (name, surname, email, password) {
+
+        
         
         validate.string(name, 'name')
         validate.string(surname, 'surname')
@@ -24,7 +26,7 @@ const {User} = require('../../models')
         return User.findOne({ email})
         .then(user => { 
             if(user) throw Error ('User exists')  
-            User.create({ name, surname, email, password})                
+            return User.create({ name, surname, email, password})                
         })
         .then(()=> {})
        

@@ -11,6 +11,7 @@ const {User} = require('../../models')
 module.exports= function(id, fieldsToUpdate) {
     
      validate.string(id, 'id')
+     
      return User.findByIdAndUpdate({ _id:id}, { $set: fieldsToUpdate })
         .then(user => {
             if (!user) throw Error('Fail to update fields')

@@ -5,18 +5,11 @@ const {name, version} = require('./package')
 const routes = require('./routes')
 
 const {env :{ PORT, DB_URL}} = process
-// const client = new Mongoclient('mongodb://localhost' , { useNewUrlParser: true, useUnifiedTopology: true})
 
 mongoose.connect(DB_URL, { useNewUrlParser: true})
     .then(() => {
     
-    // const {client: _client, db} = connection
     
-    // //Database
-    // client = _client
-    // const users = db.collection('users')
-    // logic.__users__= users
-
     const app = express()
 
     app.use('/api', routes)

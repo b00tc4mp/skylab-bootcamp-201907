@@ -1,27 +1,15 @@
-const { MongoClient } = require('mongodb')
-const { expect } = require('chai')
-const logic = require('../.')
+const mongoose = require('mongoose')
+const {expect} = require('chai')
+const logic = require('..')
+const { User } = require('../../models')
 
-describe('logic', () => {
-    let client, users
+describe('logic', ()=>{
 
-    before(() => {
-        client = new MongoClient('mongodb://localhost', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        })
-
-        return client.connect()
-            .then(() => {
-                const db = client.db('my-api')
-
-                users = db.collection('users')
-
-                logic.__users__ = users
-            })
+    before(()=>{
+        mongoose.connect('mongodb://localhost/my-api-mongoose', {useNewUrlParser: true})
     })
 
-    beforeEach(() => users.deleteMany())
+    // beforeEach(() => User.deleteMany())
 
     describe('retrieve user', () => {
         let name, surname, email, password, id
@@ -31,9 +19,10 @@ describe('logic', () => {
             surname = `surname-${Math.random()}`
             email = `email-${Math.random()}@domain.com`
             password = `password-${Math.random()}`
-
-            return users.insertOne({ name, surname, email, password })
-                .then(result => id = result.insertedId.toString())
+            
+            return User.deleteMany()
+            .then(()=> User.create({name, surname, email, password}))
+               .then(user =>  id = user.id)
         })
 
         it('should succeed on correct data', () =>
@@ -50,6 +39,6 @@ describe('logic', () => {
         )
     })
 
-    after(() => client.close())
+ after(()=>mongoose.disconnect())
 
 })

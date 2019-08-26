@@ -1,122 +1,80 @@
-const { MongoClient } = require('mongodb')
-const { expect } = require('chai')
-const logic = require('../.')
-
-describe('logic', () => {
-    let client, users
-
-    before(() => {
-        client = new MongoClient('mongodb://localhost', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        })
-
-        return client.connect()
-            .then(() => {
-                const db = client.db('const { MongoClient, ObjectId } = require('mongodb')
+const mongoose = require('mongoose')
+const {expect} = require('chai')
+const {User} = require('../../models')
+const logic = require('..')
 
 
-describe('logic', () => {
-    let client, users
 
-    before(() => {
-        client = new MongoClient('mongodb://localhost')
-
-        return client.connect()
-            .then(() => {
-                const db = client.db('my-api')
-
-                users = db.collection('users')
-
-                logic.__users__ = users
-            })
+describe('logic', ()=>{
+    before(()=>{
+        mongoose.connect('mongodb://localhost/my-api-mongoose', {useNewUrlParser: true})
+       
     })
 
-    beforeEach(() => users.deleteMany())
+    describe('register-user', ()=>{
+        let name, surname, email, password
 
-    describe('update user', () => {
-        let userId, name, surname, email, password
-
-        beforeEach(() => {
+        beforeEach(()=>{
             name = `name-${Math.random()}`
             surname = `surname-${Math.random()}`
-            email = `email-${Math.random()}@domain.com`
+            email = `email-${Math.random()}@dsa.com`
             password = `password-${Math.random()}`
 
-            return users.insertOne({ name, surname, email, password })
-                .then(result => userId = result.insertedId.toString())
+            return User.deleteMany()
+           
+
         })
 
-        it('should succeed on correct data', () =>
-            logic.updateUser(userId, { name: 'newName', surname: 'newSurname', email: 'new@email.com', password: 'newPassword' })
-                .then(user => {
-                    expect(user).not.to.exist
-                    return users.findOne({ _id: ObjectId(userId) })
-                })
-                .then(user => {
-                    expect(user).to.exist
-                    expect(user.name).to.equal('newName')
-                    expect(user.surname).to.equal('newSurname')
-                    expect(user.email).to.equal('new@email.com')
-                    expect(user.password).to.equal('newPassword')
-                })
+        it('should succeed on correct data', ()=>
+            
+            logic.registerUser(name, surname, email, password)
+             .then(()=> User.findOne({email}))
+             .then(user => {
+                 expect(user).to.exist
+                 expect(user.name).to.equal(name)
+                 expect(user.surname).to.equal(surname)
+                 expect(user.email).to.equal(email)
+                 
+             })
         )
 
-        it('should fail on empty id', () =>
+        it('should fail on incorrect data', ()=>
+            
+            logic.registerUser('safd', surname, email, password)
+             .then(()=> User.findOne({email}))
+             .then(user => {
+                 expect(user).to.exist 
+                 expect(user.name).to.not.equal(name)
+               
+             })
+        )
+
+       
+
+        it('should fail on non-valid email', () =>
             expect(() =>
-                logic.updateUser('', { name: 'newName', surname: 'newSurname', email: 'new@email.com', password: 'newPassword' })
-            ).to.throw('id is empty or blank')
+                logic.registerUser('John-3', 'Doe-3', 'johndoe-3#mail.com', 'Password3')).to.throw(Error, 'email with value johndoe-3#mail.com is not a valid e-mail')
         )
 
-        it('should fail on undefined id', () =>
+        it('should fail with name if is not  a string', () =>
             expect(() =>
-                logic.updateUser(undefined, { name: 'newName', surname: 'newSurname', email: 'new@email.com', password: 'newPassword' })
-            ).to.throw('id with value undefined is not a string')
+                logic.registerUser([], 'Doe-6', 'johndoe-6@mail.com', 'Password6')).to.throw(Error, 'name with value  is not a string')
         )
 
-    })
-
-    after(() => client.close())
-})')
-
-                users = db.collection('users')
-
-                logic.__users__ = users
-            })
-    })
-
-    beforeEach(() => users.deleteMany())
-
-    describe('register', () => {
-        let name, surname, email, password, repassword
-
-        beforeEach(() => {
-            name = `name-${Math.random()}`
-            surname = `surname-${Math.random()}`
-            email = `email-${Math.random()}@domain.com`
-            password = `password-${Math.random()}`
-            repassword = password
-        })
-
-        it('should succeed on correct data', () =>
-            logic.registerUser(name, surname, email, password, repassword)
-                .then((response) => {
-
-                    expect(response).to.not.exist
-                    return users.findOne({ name })
-                })
-                .then(user => {
-                    expect(user).to.exist
-                    expect(user.name).to.equal(name)
-                    expect(user.surname).to.equal(surname)
-                    expect(user.email).to.equal(email)
-                    expect(user.password).to.equal(password)
-                })
+        it('should fail with surname if is not  a string', () =>
+            expect(() =>
+                logic.registerUser('John-7', NaN, 'johndoe-7@mail.com', 'Password7')).to.throw(Error, 'surname with value NaN is not a string')
         )
 
-        // it('should cry if user exists')
+        
+        it('should fail with password if is not  a string', () =>
+        expect(() =>
+            logic.registerUser('John-7', 'doe', 'johndoe-7@mail.com', [])).to.throw(Error, 'password with value  is not a string')
+        )
+        
+
+       
     })
 
-
-    after(() => client.close())
+    after(()=> mongoose.disconnect())
 })
