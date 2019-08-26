@@ -1,14 +1,12 @@
 function Favorites(props) {
     
-    return <section className="favorites">
-    <ul>
+    return <ul className="main__res__ul">
          {props.favs.map( meal => 
-             <li key={meal.idMeal} onClick={ () => {
+             <li className="main__res__list" key={meal.idMeal} onClick={ () => {
                  props.onMeal(meal.idMeal)
              }} >
                  {props.paintMeal(meal)}
              </li>)
          }
-     </ul>
-     </section>  
+     </ul>  
  }

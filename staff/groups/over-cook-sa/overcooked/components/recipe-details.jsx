@@ -7,33 +7,32 @@ function RecipeDetails({ meal: { idMeal, strMeal, strInstructions, strYoutube, s
 
    return <section className='wrapper_cont'>
    
-        <div className='wrapper'>
-        <h3 className="wrapper__title">{strMeal}</h3> 
+        <div className='main__res'>
+        <h3 className="main__res__title">{strMeal}</h3> 
         <FavButton active={favorite} onToggle={() => onToggle(idMeal)} />
 
-        <img className='wrapper__img' src={strMealThumb} alt=""/>
+        <img className='main__res__img' src={strMealThumb} alt=""/>
         
-        <h2 className="ingredients-title">INGREDIENTS</h2>
+        <h2 className="main__res__title">INGREDIENTS</h2>
 
-        <ul className="ingredients-cont">
+        <ul className="main__res__ul">
             {ingredients.map((ingredient, index) => {
                 
-                return <li className='ingredients-cont__ingredients' key={index}>
+                return <li className='main__res__list' key={index}>
             {<h4>{ingredient.ingredientName}</h4>}
             {<p>{ingredient.measure}</p>}
                 </li>
 
             })}
         </ul>
-       
-
-        <p className='descText'>{strInstructions}</p>
+    
+        <p className='main__res__text'>{strInstructions}</p>
         
-        <iframe className="recipe-video" src={youtubeLink}></iframe>
+        <iframe className="main__res__video" src={youtubeLink}></iframe>
 
-        <a className='btnGo' href={strYoutube} target="_blank" >VIDEO</a>
+        <a className='main__res__a' href={strYoutube} target="_blank" >VIDEO</a>
 
-        <a className='backButton' href="#" onClick={ event => {
+        <a className='main__res__buttom' href="#" onClick={ event => {
             event.preventDefault()
             onBack()
         }} >Go Back</a>

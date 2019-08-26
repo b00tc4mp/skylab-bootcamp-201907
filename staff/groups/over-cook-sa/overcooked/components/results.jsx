@@ -1,16 +1,12 @@
 function Results(props) {
     
-   return<>
-   <section className='wrapper_cont'>
-    <ul>
+   return <ul className="main__res__ul">
             {props.meals.map( meal => 
-                <li key={meal.idMeal} onClick={ () => {
+                <li className="main__res__list" key={meal.idMeal} onClick={ () => {
                     props.onMeal(meal.idMeal)
                 }} >
                     {props.paintMeal(meal)}
                 </li>)
             }
         </ul>
-    </section>
-    </>
 }

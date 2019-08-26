@@ -9,11 +9,11 @@ function Search(props) {
         if(combo === '2') props.onSearchIngredient(query)
         
     }}>
-        <select name="combo">
+        <select name="search__combo">
             <option value="1">by name</option>
             <option value="2">by ingredient</option>
         </select>
         <input type="text" id="mySearch" name="query" />
-        <button className="Search-button">Search</button>
+        <button className="search__button">Search</button>
     </form>
 }

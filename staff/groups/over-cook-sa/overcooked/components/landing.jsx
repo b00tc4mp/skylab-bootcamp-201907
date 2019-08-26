@@ -92,15 +92,13 @@ class Landing extends Component {
       handleGoBack
     } = this
 
-    return (
-      <>
-        
-    <section className="body__background">
-        <header className="header">
-          <BigHeader />
+    return (  
+      <section className="body__background">
+        <header className="landing">
+          < BigHeader />
         </header>
 
-        <main className="main">
+        <main className="main__landing">
       
           <section className="main__nav">
             {view === 'register' && (<Register onRegister={handleRegister} onBack={handleGoBack} error={error} /> )}
@@ -115,11 +113,10 @@ class Landing extends Component {
 
         </main>
      
-     <footer className="footer">
-       <Footer />
-     </footer>
-     </section>
-      </>
+        <footer className="footer">
+          <Footer />
+        </footer>
+      </section>
     )
   }
 }
