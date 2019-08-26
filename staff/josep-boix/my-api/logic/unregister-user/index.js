@@ -1,5 +1,3 @@
-const { ObjectId } = require ('mongodb')
-
 /**
  * Unregister an user
  * 
@@ -8,6 +6,8 @@ const { ObjectId } = require ('mongodb')
  * 
  * @returns {Promise}
  */
+const { ObjectId } = require ('mongodb')
+const validate = require ('../../utils/validate')
 
 module.exports = function (id, password) {
     validate.string (id, 'id')

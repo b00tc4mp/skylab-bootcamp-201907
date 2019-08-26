@@ -5,7 +5,7 @@ module.exports = function (req, res) {
 
     try {
         logic.unregisterUser(id, password)
-            .then(() => res.json({ message: 'user correctly unregistered' }))
+            .then(() => res.json({ message: 'User correctly unregistered. See you soon!' }))
             .catch(({ message }) => res.status(404).json({ error: message }))
     } catch ({ message }) {
         res.status(404).json({ error: message })

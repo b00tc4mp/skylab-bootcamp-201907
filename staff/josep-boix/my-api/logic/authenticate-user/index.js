@@ -6,12 +6,13 @@
  * 
  * @returns {Promise}
  */
-   
+const validate = require ('../../utils/validate')
+
 module.exports = function (email, password) {
     validate.string (email, 'email')
     validate.email (email, 'email')
     validate.string (password, 'password')
-    // debugger
+
     return this.__users__.findOne ({email})
         .then (user =>{
             if (!user || user.password !== password) throw Error ('Wrong credentials')

@@ -12,9 +12,11 @@ module.exports = (request, response, next) => {
 
         const {sub} = jwt.verify(token, JWT_SECRET)
 
-        if (sub !== id) throw new Error (`token id ${sub} not match user id ${id}`)
+        // if (sub !== id) throw new Error (`token id ${sub} not match user id ${id}`)
+        if (sub !== id) throw new Error (`token id does not match with user id ${id}`)
 
         next()
+        
     }catch ({ message }) {
         response.status(401).json({error: message})
     }

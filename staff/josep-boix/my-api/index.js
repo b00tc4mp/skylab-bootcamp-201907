@@ -23,10 +23,11 @@ data(DB_URL, DB_NAME)
 
         app.use ('/api', routes)
 
-        app.listen (PORT, () => console.log (`${name}${version} now is up and running on port ${PORT}`))
+        app.listen (PORT, () => console.log (`Welcome! ${name} ${version} now is up and running on port ${PORT}`))
     })
 
-process.on ('SIGINT', () => {
+process.on ('SIGINT', () => {       
+// in case of signal interrumped
     console.log (`\n ${name} ${version} shutting down, disconecting from db...`)
 
     client.close()
