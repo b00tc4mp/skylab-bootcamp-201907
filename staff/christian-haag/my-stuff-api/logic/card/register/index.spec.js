@@ -26,14 +26,14 @@ describe('logic - add card', () => {
 
     it('should fail if user does not exist', () => {
 
-        return logic.card.register('hbcbw6f461ce8684cv1s', cardBrand, cardType, cardNumber, expiry)
+        return logic.cardRegister('hbcbw6f461ce8684cv1s', cardBrand, cardType, cardNumber, expiry)
             .catch(error => {
                 expect(error).to.throw('User with id hbcbw6f461ce8684cv1s does not exist')
             })
     })
 
     it('schould add card only if user exists', () =>
-        logic.card.register(id, cardBrand, cardType, cardNumber, expiry)
+        logic.cardRegister(id, cardBrand, cardType, cardNumber, expiry)
             .then(() => {
                 return User.findOne({ _id: id }).lean()
                     .then(result => {
@@ -67,13 +67,13 @@ describe('logic - add card', () => {
             return User.create({ name, surname, email, password })
                 .then(user => {
                     id = user.id
-                    return logic.addNewCard(id, cardBrand, cardType, cardNumber, expiry)
+                    return logic.cardRegister(id, cardBrand, cardType, cardNumber, expiry)
                 })
 
         })
 
         it('should add a second card', () =>
-            logic.card.register(id, cardBrand, cardType, number2, expiry)
+            logic.cardRegister(id, cardBrand, cardType, number2, expiry)
                 .then(() => {
                     return User.findOne({ _id: id }).lean()
                         .then(result => {
@@ -86,7 +86,7 @@ describe('logic - add card', () => {
         )
 
         it('should fail if card number already exists', () => {
-            logic.card.register(id, cardBrand, cardType, cardNumber, expiry)
+            logic.cardRegister(id, cardBrand, cardType, cardNumber, expiry)
                 .then(result => {
                     expect(result).to.undefined
                 })
