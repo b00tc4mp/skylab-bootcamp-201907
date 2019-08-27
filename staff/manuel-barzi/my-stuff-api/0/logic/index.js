@@ -5,5 +5,6 @@ module.exports = {
     updateUser: require('./update-user'),
     unregisterUser: require('./unregister-user'),
     registerCard: require('./register-card'),
-    registerVehicle: require('./register-vehicle')
+    registerVehicle: require('./register-vehicle'),
+    registerProperty: require('./register-property')
 }

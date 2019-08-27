@@ -21,13 +21,13 @@ module.exports = function (id, brand, model, license, year, type, color, electri
         .then(([user, vehicle]) => {
             if (!user) throw new Error(`user with id ${id} does not exists`)
 
-            if (vehicle) throw new Error(`car with license ${license} already exists`)
+            if (vehicle) throw new Error(`vehicle with license ${license} already exists`)
 
             vehicle = new Vehicle({ brand, model, license, year, type, color, electric })
 
             vehicle.owner = id
 
-            return Promise.all([user.save(), vehicle.save()])
+            return vehicle.save()
         })
-        .then(([, { id }]) => id)
+        .then(({ id }) => id)
 }
