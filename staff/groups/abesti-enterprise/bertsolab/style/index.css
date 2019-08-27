@@ -1,0 +1,349 @@
+@import url("https://fonts.googleapis.com/css?family=Red+Hat+Display&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Red Hat Display", sans-serif;
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+}
+
+body {
+  width: 100vw;
+  background-color: #0a0a0a;
+}
+
+.header {
+  background-image: linear-gradient(to bottom right, #0a0a0a, purple);
+  background-repeat: no-repeat;
+}
+
+.header__logo--image {
+  width: 60%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  background-color: plum;
+  border: 0.1rem solid purple;
+  border-radius: 0.1rem;
+}
+.form__title {
+  padding: 1rem 1rem 0;
+  font-size: 150%;
+}
+.form__field {
+  padding: 0.5rem;
+  margin: 0.5rem 1rem;
+  font-size: 1.5rem;
+  border: 0.1rem solid #9c50b6;
+  border-radius: 0.3rem;
+}
+.form__field:hover {
+  outline: 2px solid #ecb182;
+}
+.form__field:focus {
+  outline: 5px solid #ecb182;
+}
+.form__button {
+  padding: 0.5rem;
+  margin: 0.5rem 3rem;
+  font-size: 1.5rem;
+  border: 0.1rem solid #9c50b6;
+  border-radius: 0.3rem;
+  background-color: #f4f4f4;
+}
+.form__button:hover {
+  outline: 5px solid #ecb182;
+  background-color: purple;
+  color: white;
+}
+
+.register, .login {
+  margin-bottom: 10%;
+}
+
+.register__title, .login__title {
+  background-color: plum;
+  padding: 1rem;
+  font-size: 120%;
+  border: 0.1rem solid purple;
+  border-bottom: none;
+}
+
+.register__form, .login__form {
+  border-top: none;
+}
+.register__form label, .login__form label {
+  padding-left: 1rem;
+}
+.register__form--field, .login__form--field {
+  width: 90%;
+  font-size: 1rem;
+}
+
+.form__info {
+  color: white;
+  padding: 1em;
+}
+
+.anchor__link {
+  color: white;
+}
+
+.feedback {
+  text-align: center;
+  padding: 1rem;
+  color: tomato;
+  font-size: x-large;
+}
+
+.song-item {
+  color: #f4f4f4;
+  border: 1px solid;
+  text-align: center;
+  margin: 20px;
+  border-radius: 0.3rem;
+}
+.song-item:hover {
+  outline: 2px solid #9c50b6;
+  background-color: #260026;
+}
+
+.fav-button {
+  background-color: transparent;
+  color: #ecb182;
+  font-size: x-large;
+  border: none;
+  margin: 0 1rem;
+}
+
+.results {
+  margin-bottom: 10%;
+}
+
+.lyrics-item {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(10, 10, 10, 0.9);
+  z-index: 1;
+  position: fixed;
+  left: 0;
+  top: 0;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+.lyrics-item__button {
+  background-color: transparent;
+  color: #f4f4f4;
+  font-size: x-large;
+  border: none;
+  margin: 0 1rem;
+  align-items: flex-end;
+}
+.lyrics-item__panel {
+  width: 80vw;
+  padding: 20px;
+  padding-left: 15px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  border-radius: 0.3rem;
+}
+
+.footer {
+  background-image: linear-gradient(to bottom, #0a0a0a, purple);
+  background-repeat: no-repeat;
+  position: fixed;
+  width: 100%;
+  height: 5%;
+  text-align: center;
+  color: white;
+  bottom: 0;
+}
+.footer__content {
+  font-size: smaller;
+  padding-top: 1.5%;
+}
+
+.display-song {
+  height: 100vh;
+  background-color: rgba(10, 10, 10, 0.9);
+  z-index: 1;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: purple;
+  padding: 30px 30px 30px 30px;
+}
+.display-song_cross {
+  background-color: rgba(10, 10, 10, 0.9);
+  color: white;
+}
+
+/* header */
+.header {
+  background-color: #fff;
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
+  width: 100%;
+  z-index: 1;
+  height: 10%;
+}
+
+.user-menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+}
+
+.user-menu__auth-option-link {
+  display: block;
+  padding: 20px 20px;
+  border-right: 0.1rem solid purple;
+  text-decoration: none;
+  color: #f4f4f4;
+}
+
+.user-menu__auth-option-link:hover,
+.header .hamburguer-menu__button:hover {
+  background-color: rgba(96, 96, 96, 0.4);
+  color: #f4f4f4;
+}
+
+.header__logo {
+  padding: 20px;
+}
+
+.header .header__logo {
+  display: block;
+  float: left;
+  text-decoration: none;
+}
+
+/* menu */
+.header .user-menu {
+  clear: both;
+  max-height: 0;
+  transition: max-height 0.2s ease-out;
+}
+
+/* menu icon */
+.header .hamburguer-menu__icon {
+  cursor: pointer;
+  float: right;
+  padding: 28px 20px;
+  position: relative;
+  user-select: none;
+}
+
+.header .hamburguer-menu__icon .hamburguer-menu__navicon {
+  background: #f4f4f4;
+  display: block;
+  height: 2px;
+  position: relative;
+  transition: background 0.2s ease-out;
+  width: 18px;
+}
+
+.header .hamburguer-menu__icon .hamburguer-menu__navicon:before,
+.header .hamburguer-menu__icon .hamburguer-menu__navicon:after {
+  background: #f4f4f4;
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all 0.2s ease-out;
+  width: 100%;
+}
+
+.header .hamburguer-menu__icon .hamburguer-menu__navicon:before {
+  top: 5px;
+}
+
+.header .hamburguer-menu__icon .hamburguer-menu__navicon:after {
+  top: -5px;
+}
+
+/* menu btn */
+.header .hamburguer-menu__button {
+  display: none;
+}
+
+.header .hamburguer-menu__button:checked ~ .user-menu {
+  max-height: 240px;
+}
+
+.header .hamburguer-menu__button:checked ~ .hamburguer-menu__icon .hamburguer-menu__navicon {
+  background: transparent;
+}
+
+.header .hamburguer-menu__button:checked ~ .hamburguer-menu__icon .hamburguer-menu__navicon:before {
+  transform: rotate(-45deg);
+}
+
+.header .hamburguer-menu__button:checked ~ .hamburguer-menu__icon .hamburguer-menu__navicon:after {
+  transform: rotate(45deg);
+}
+
+.header .hamburguer-menu__button:checked ~ .hamburguer-menu__icon:not(.steps) .hamburguer-menu__navicon:before,
+.header .hamburguer-menu__button:checked ~ .hamburguer-menu__icon:not(.steps) .hamburguer-menu__navicon:after {
+  top: 0;
+}
+
+/* 48em = 768px */
+@media (min-width: 48em) {
+  .header__logo--image {
+    width: 100%;
+  }
+
+  .register__title, .login__title {
+    background-color: #0a0a0a;
+    color: white;
+    font-size: 150%;
+    border: none;
+  }
+
+  .form {
+    padding: 1em, 0;
+    border: 0.1rem solid #9c50b6;
+    border-radius: 0.3rem;
+  }
+  .form__field {
+    width: 95%;
+  }
+
+  .user-menu__auth-option {
+    float: left;
+  }
+
+  .user-menu__auth-option-link {
+    padding: 20px 30px;
+    border: 0.1rem solid purple;
+  }
+
+  .header .user-menu {
+    clear: none;
+    float: right;
+    max-height: none;
+  }
+
+  .header .hamburguer-menu__icon {
+    display: none;
+  }
+
+  .footer__content {
+    padding: 0.5% 1.5% 0 0;
+    text-align: right;
+  }
+}
+
+/*# sourceMappingURL=index.css.map */
