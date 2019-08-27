@@ -1,14 +1,17 @@
 require('dotenv').config()
-
 const express = require('express')
 const mongoose = require('mongoose')
 const { name, version } = require('./package')
 const routes = require('./routes')
 
+
 const { env: { PORT, DB_URL } } = process
 
-mongoose.connect(DB_URL, { useNewUrlParser: true })
+
+
+mongoose.connect(DB_URL, {userNewUrlParser: true})
     .then(() => {
+
         const app = express()
 
         app.use('/api', routes)

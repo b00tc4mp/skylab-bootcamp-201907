@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 
-const { Schema } = mongoose
+const {
+    Schema
+} = mongoose
 
 module.exports = new Schema({
     brand: {
@@ -13,22 +15,29 @@ module.exports = new Schema({
     },
     year: {
         type: Number,
-        required: true
+        required: true,
     },
     type: {
         type: String,
         required: true,
-        enum: ['car', 'motorcycle'],
+        enum: ['car', 'motorcycle', 'truck', 'caravan', 'camper van', 'delivery van', 'bicycle'],
         default: 'car'
     },
     color: {
         type: String,
-        required: true
+        required: true,
     },
     electric: {
         type: Boolean,
         required: true,
         default: false
     },
-    owner: { type: ObjectId, ref: 'User' }
+    plate: {
+        type: String,
+        required: true,
+    },
+    extra: {
+        type: String
+    }
+
 })

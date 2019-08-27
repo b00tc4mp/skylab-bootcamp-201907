@@ -1,19 +1,17 @@
-// ENDPOINTS COMPOSTOS
-// user/:idUser/vehicles/:idVehicle
-// al borrar un user borar propiedades si es únicamente suyo. En caso de multipropiedad que no lo borre.
-
 const { Router } = require('express')
 const bodyParser = require('body-parser')
 const tokenMiddleware = require('../helpers/token-middleware')
-const registerUser = require('./register-user')
-const authenticateUser = require('./authenticate-user')
-const retrieveUser = require('./retrieve-user')
-const updateUser = require('./update-user')
-const unregisterUser = require('./unregister-user')
+
+
+const {registerUser, authenticateUser, retrieveUser, updateUser, unregisterUser}= require('./user')
+const {registerVehicle, retrieveVehicle, retrieveAll,updateVehicle,unregisterVehicle}= require('./vehicle')
 
 const router = Router()
 
 const jsonBodyParser = bodyParser.json()
+
+
+/* USER */
 
 router.post('/users', jsonBodyParser, registerUser)
 
@@ -25,7 +23,14 @@ router.patch('/users/:id', [tokenMiddleware, jsonBodyParser], updateUser)
 
 router.delete('/users/:id', [tokenMiddleware, jsonBodyParser], unregisterUser)
 
+
+
+/* VEHICLE */
+
+router.post('/users/:id/vehicles', [tokenMiddleware, jsonBodyParser], registerVehicle)
+router.get('/users/:id/vehicles/', [tokenMiddleware, jsonBodyParser], retrieveAll)
+router.get('/users/:id/vehicles/:vehicleId', [tokenMiddleware, jsonBodyParser], retrieveVehicle)
+router.patch ('/users/:id/vehicles/:vehicleId', [tokenMiddleware, jsonBodyParser], updateVehicle)
+router.delete ('/users/:id/vehicles/:vehicleId', [tokenMiddleware, jsonBodyParser], unregisterVehicle)
+
 module.exports = router
-
-
-
