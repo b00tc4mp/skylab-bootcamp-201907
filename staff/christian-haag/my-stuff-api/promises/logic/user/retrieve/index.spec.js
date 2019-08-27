@@ -20,7 +20,7 @@ describe('logic - retrieve user', () => {
     })
 
     it('should succeed on correct data', () =>
-        logic.user.retrieve(id)
+        logic.retrieveUser(id)
             .then(user => {
                 expect(user).to.exist
                 expect(user.id).to.equal(id)

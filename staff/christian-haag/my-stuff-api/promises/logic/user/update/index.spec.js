@@ -28,7 +28,7 @@ describe('logic - update user', () => {
     })
 
     it('should succeed on correct data', () =>
-        logic.user.update(id, body)
+        logic.updateUser(id, body)
             .then(result => {
                 expect(result).not.to.exist
 
@@ -47,7 +47,7 @@ describe('logic - update user', () => {
     it('should fail on non-existing user', () => {
         id = '5d5d5530531d455f75da9fF9'
 
-        return logic.user.update(id, body)
+        return logic.updateUser(id, body)
             .then(() => { throw new Error('should not reach this point') })
             .catch(({ message }) => expect(message).to.equal(`user with id ${id} does not exist`))
     })

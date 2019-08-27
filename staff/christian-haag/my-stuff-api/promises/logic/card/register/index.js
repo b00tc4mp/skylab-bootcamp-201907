@@ -1,5 +1,6 @@
-const mongoose = require('mongoose')
-const { User, Card } = require('../../../data')
+const { User, Card } = require('../../../data/index')
+const validate = require('../../../utils/validate')
+
 
 /**
  * Checks if user exist and add card . 
@@ -13,18 +14,27 @@ const { User, Card } = require('../../../data')
  * 
  * @returns {Promise}
  */
-module.exports = function (id, cardBrand, cardType, cardNumber, expiry) {
+module.exports = function (id, cardBrand, cardType, number, expiry) {
 
-    return User.findById(id).lean()
+    validate.string(id, 'id')
+    validate.string(cardBrand, 'cardBrand')
+    validate.string(cardType, 'cardType')
+    validate.number(number, 'number')
+    validate.string(expiry, 'expiry')
+
+    return User.findById(id)
         .then(user => {
-            if (!user) throw new Error(`user width ${id} does not exist`)
-            const newCard = new Card({ cardBrand: cardBrand, cardType: cardType, number: cardNumber, expiry: expiry })
+            if (!user) throw new Error(`user with ${id} does not exist`)
 
-            return User.updateOne({ _id: id }, { $push: { "cards": [newCard] } })
-                .then(user => {
-                    return user
-                })
+            const exist = user.cards.some(({ number: _number }) => _number === number)
+            if (exist) throw new Error(`card already exist`)
+
+            const newCard = new Card({ cardBrand, cardType, number, expiry })
+
+            user.cards.push(newCard)
+
+            user.save()
+            return newCard.id
+
         })
-        .catch(({ error }) => { return error })
-
 }

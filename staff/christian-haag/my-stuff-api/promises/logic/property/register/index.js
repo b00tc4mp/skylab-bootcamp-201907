@@ -1,5 +1,5 @@
 const validate = require('../../../utils/validate')
-const { Property } = require('../../../data')
+const { Property, User } = require('../../../data')
 
 /**
  * Add  a property.
@@ -16,11 +16,12 @@ const { Property } = require('../../../data')
 
 module.exports = function (id, address, sqm, yearOfConstruction, cadastre, mortgage) {
 
-    string.validate(address, 'address')
-    string.validate(sqm, 'sqm')
-    string.validate(yearOfConstruction, 'yearOfConstruction')
-    string.validate(cadastre, 'cadastre')
-    string.validate(mortgage, 'mortgage')
+    validate.string(id, 'id')
+    validate.string(address, 'address')
+    validate.number(sqm, 'sqm')
+    validate.number(yearOfConstruction, 'yearOfConstruction')
+    validate.string(cadastre, 'cadastre')
+    validate.boolean(mortgage, 'mortgage')
 
     return Promise.all([User.findById(id), Property.findOne({ cadastre })])
         .then(([user, property]) => {

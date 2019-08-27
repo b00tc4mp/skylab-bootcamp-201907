@@ -1,5 +1,6 @@
 const { expect } = require('chai')
 const logic = require('../../.')
+const randomDate = require('../../../utils/random-date')
 const { User } = require('../../../data')
 const mongoose = require('mongoose')
 
@@ -17,7 +18,7 @@ describe('logic - add card', () => {
         cardBrand = 'Visa'
         cardType = 'Credit'
         cardNumber = Math.floor(Math.random() * 9999999999999999)
-        expiry = new Date
+        expiry = new Date(2025, 06, 29)
 
         await User.deleteMany()
         const user = await User.create({ name, surname, email, password })
@@ -30,7 +31,6 @@ describe('logic - add card', () => {
         } catch ({ message }) {
             expect(message).to.throw('user with id 5d5d5530531d455f75da9fF9 does not exist')
         }
-
     })
 
     it('schould add card only if user exists', async () => {
@@ -49,8 +49,6 @@ describe('logic - add card', () => {
     })
 
 
-
-
     describe('logic - add another card', () => {
 
         let id, name, surname, email, password, cardBrand, cardType, cardNumber, expiry
@@ -64,17 +62,15 @@ describe('logic - add card', () => {
             cardBrand = 'Visa'
             cardType = 'Credit'
             cardNumber = Math.floor(Math.random() * 9999999999999999)
-            expiry = new Date
+            expiry = new Date(2025, 06, 29)
 
             number2 = 1254658912561234
-
 
             const user = await User.create({ name, surname, email, password })
             id = user.id
             await logic.cardRegister(id, cardBrand, cardType, cardNumber, expiry)
-
-
         })
+
 
         it('should add a second card', async () => {
 
@@ -94,18 +90,6 @@ describe('logic - add card', () => {
 
         })
 
-
-        it('should fail if card number already exists', async () => {
-
-            try {
-                await logic.cardRegister(id, cardBrand, cardType, cardNumber, expiry)
-
-            } catch ({ message }) {
-                expect(message).to.throw('user with id ${id} already has card number ${number}')
-            }
-
-
-        })
     })
 
     describe('logic - fail to add card', () => {
@@ -121,14 +105,14 @@ describe('logic - add card', () => {
             cardBrand = 'Visa'
             cardType = 'Credit'
             cardNumber = Math.floor(Math.random() * 9999999999999999)
-            expiry = new Date
+            expiry = new Date(2025, 06, 29)
 
             number2 = 1254658912561234
 
 
             const user = await User.create({ name, surname, email, password })
             id = user.id
-            await User.findOneAndUpdate(id, { $set: { _id: 1254658912561234 } })
+            await User.findOneAndUpdate(id, { $set: { _id: '5d5d5530531d455f75da9fF9' } })
             id = user.id
             await logic.cardRegister(id, cardBrand, cardType, cardNumber, expiry)
 
@@ -143,7 +127,6 @@ describe('logic - add card', () => {
             } catch (error) {
                 expect(error).to.throw('user with id 5d5d5530531d455f75da9fF9 already has card number 1254658912561234')
             }
-
 
         })
     })

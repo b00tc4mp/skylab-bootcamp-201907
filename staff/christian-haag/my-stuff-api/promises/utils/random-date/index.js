@@ -8,7 +8,8 @@ function randomDate() {
     let month = Math.floor(Math.random() * ((12 - 1) + 1) + 1)
     let year = Math.floor(Math.random() * ((2026 - 2019) + 1) + 2019)
 
-    return new Date(`${year}-${checkZero(month)}-${checkZero(day)}`)
+    const date = new Date()
+    return new Date(`${year}/${checkZero(month)}/${checkZero(day)}`)
 }
 
 module.exports = randomDate

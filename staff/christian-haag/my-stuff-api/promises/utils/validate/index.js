@@ -2,7 +2,7 @@ module.exports = (() => {
 
     const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     const URL_REGEX = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/
-    const DATE_REGEX = /[0-1]{1}[0-9]{1}[\/][0-9]{2}/
+    const DATE_REGEX = /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/
 
     return {
         string(target, name, empty = true, values) {
@@ -11,11 +11,14 @@ module.exports = (() => {
             if (values && !values.includes(target)) throw new Error(`${name} with value ${target} does not match one of the expected values: ${values.join(', ')}`)
         },
 
-        number(target, name) {
+        number(target, name, ) {
+            if (target === '') throw new Error(`${name} is empty or blank`)
             if (typeof target !== 'number') throw TypeError(`${name} with value ${target} is not a number`)
+
         },
 
         boolean(target, name) {
+            if (target === '') throw new Error(`${name} is empty or blank`)
             if (typeof target !== 'boolean') throw TypeError(`${name} with value ${target} is not a boolean`)
         },
 

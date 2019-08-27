@@ -32,25 +32,25 @@ describe('logic - retrieve card', () => {
 
     it('should fail on empty id', () =>
         expect(() =>
-            logic.card.retrieve('')
+            logic.retrieveCard('')
         ).to.throw('id is empty or blank')
     )
 
     it('should fail on undefined id', () =>
         expect(() =>
-            logic.card.retrieve(undefined)
+            logic.retrieveCard(undefined)
         ).to.throw(`id with value undefined is not a string`)
     )
 
     it('should fail on wrong data type', () =>
         expect(() =>
-            logic.card.retrieve(123456798)
+            logic.retrieveCard(123456798)
         ).to.throw(`id with value 123456798 is not a string`)
     )
 
 
     it('schould retireve card by id', () => {
-        return logic.card.retrieve(cardId)
+        return logic.retrieveCard(cardId)
             .then(card => {
                 debugger
                 expect(card).to.exist

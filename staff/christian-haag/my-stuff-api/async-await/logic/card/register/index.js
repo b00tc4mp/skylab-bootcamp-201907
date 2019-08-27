@@ -17,10 +17,9 @@ const { User, Card } = require('../../../data')
 module.exports = function (id, cardBrand, cardType, number, expiry) {
 
     validate.string(id, 'id')
-    validate.string(carBrand, 'cardBrand')
+    validate.string(cardBrand, 'cardBrand')
     validate.string(cardType, 'cardType')
     validate.number(number, 'number')
-    validate.date(expiry, 'expiry')
 
     return (async () => {
 

@@ -21,7 +21,7 @@ describe('logic - authenticate user', () => {
     })
 
     it('should succeed on correct data', () =>
-        logic.user.authenticate(email, password)
+        logic.authenticateUser(email, password)
             .then(_id => {
                 expect(_id).to.exist
                 expect(_id).to.be.a('string')

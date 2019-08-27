@@ -18,7 +18,7 @@ describe('logic - register user', () => {
     })
 
     it('should succeed on correct data', () =>
-        logic.user.register(name, surname, email, password)
+        logic.registerUser(name, surname, email, password)
             .then(result => {
                 expect(result).not.to.exist
 
