@@ -24,18 +24,22 @@ module.exports = function (id, cardBrand, cardType, number, expiry) {
 
     return (async () => {
 
-        User.findById(id).lean()
-            .then(user => {
-                if (!user) throw new Error(`user width ${id} does not exist`)
-                const newCard = new Card({ cardBrand: cardBrand, cardType: cardType, number: cardNumber, expiry: expiry })
+        const user = await User.findById(id)
 
-                return User.updateOne({ _id: id }, { $push: { "cards": [newCard] } })
-                    .then(user => {
-                        return user
-                    })
-            })
-            .catch(({ error }) => { return error })
+        if (!user) throw new Error(`user with id ${id} does not exists`)
 
-    })
+        const existing = user.cards.some(({ number: _number }) => _number === number)
+
+        if (existing) throw new Error(`user with id ${id} already has card number ${number}`)
+
+        const card = new Card({ cardBrand, cardType, number, expiry })
+
+        user.cards.push(card)
+
+        await user.save()
+
+        return card.id
+
+    })()
 
 }
