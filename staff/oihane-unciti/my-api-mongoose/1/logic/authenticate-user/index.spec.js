@@ -1,9 +1,11 @@
 const { expect } = require('chai')
 const logic = require('..')
-const { database, models: { User } } = require('../../data')
+const { models : {User} } = require('../../data')
+const mongoose = require('mongoose')
 
 describe('logic - authenticate user', () => {
-    before(() => database.connect('mongodb://localhost/my-api-test'))
+    before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
+
 
     let name, surname, email, password, id
 
@@ -13,9 +15,9 @@ describe('logic - authenticate user', () => {
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
 
-        return User.deleteMany()
-            .then(() => User.create({ name, surname, email, password }))
-            .then(user => id = user.id)
+        return users.deleteMany()
+            .then(() => users.insertOne({ name, surname, email, password })
+                .then(result => id = result.insertedId.toString()))
     })
 
     it('should succeed on correct data', () =>
@@ -27,5 +29,5 @@ describe('logic - authenticate user', () => {
             })
     )
 
-    after(() => database.disconnect())
+    after(() => client.close())
 })

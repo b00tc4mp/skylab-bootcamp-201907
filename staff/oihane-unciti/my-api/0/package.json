@@ -1,0 +1,18 @@
+{
+  "name": "my-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx mocha logic",
+    "test-debug": "npx mocha debug '**/*.spec.js'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
+    "mongodb": "^3.3.0"
+  }
+}
