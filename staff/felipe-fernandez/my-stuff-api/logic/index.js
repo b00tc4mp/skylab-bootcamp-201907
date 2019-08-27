@@ -1,5 +1,6 @@
 module.exports = {
-    registerUser: require('./register-user'),
-    authenticateUser: require('./authenticate-user')
-
+    user: require('./user'),
+    vehicle: require('./vehicle'),
+    property: require('./property'),
+    card: require('./card')
 }

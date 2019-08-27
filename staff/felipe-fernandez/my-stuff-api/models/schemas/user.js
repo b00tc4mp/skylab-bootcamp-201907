@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
+const cardSchema = require('./card') 
 
-const User = new Schema ({
-
+module.exports = new Schema({
     name: {
         type: String,
         required: true
@@ -21,17 +21,6 @@ const User = new Schema ({
         type: String,
         required: true
     },
-    vehicles: {
-        type: Array
 
-    },
-    properties: {
-        type: Array
-    }
-
+    cards: [cardSchema]
 })
-
-module.exports = User
-
-
-
