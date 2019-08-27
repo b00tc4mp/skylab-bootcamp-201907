@@ -1,0 +1,176 @@
+.reg_log {
+  text-align: center;
+  padding-inline-start: 0px;
+}
+.reg_log a {
+  color: #494949;
+  font-size: 1.5rem;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.reg_log button {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  background: none;
+  color: #494949;
+  font-size: 1.5rem;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.search_wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.options {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1rem;
+}
+
+.logoGreet {
+  color: white;
+  width: 50%;
+  height: 50%;
+  align-self: center;
+}
+.logoGreet > img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.logoGreet > h1 {
+  font-family: "Barrio", cursive;
+}
+
+.lang_selector {
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+}
+.lang_selector button {
+  background: none;
+}
+
+h1 {
+  text-align: center;
+}
+
+.fas {
+  color: white;
+}
+
+h1 {
+  color: white;
+  font-family: "Roboto", sans-serif;
+  margin: 1rem auto;
+}
+
+.imagen {
+  width: 80%;
+  height: auto;
+}
+
+.feedback {
+  background: rgba(36, 36, 36, 0.6);
+  width: 60%;
+  margin: auto;
+  border: 1px solid black;
+  border-radius: 20px;
+  border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  color: red;
+  text-align: center;
+}
+
+#redAlert {
+  font-size: 2rem;
+}
+
+.imagen {
+  width: 80%;
+  height: auto;
+}
+
+article > p {
+  color: white;
+}
+
+* {
+  font-family: Verdana;
+  font-size: 0.8rem;
+  box-sizing: border-box;
+  list-style: none;
+  border: none;
+  max-width: 800px;
+}
+
+body {
+  background-image: url("https://wallpapershome.com/images/pages/pic_v/12745.jpg");
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+header {
+  margin-top: 2rem;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  padding: 10px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  min-width: 10rem;
+}
+.form input {
+  border: 1px solid black;
+  text-align: left;
+  padding: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+.form button {
+  font-family: "Barrio", cursive;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: bold;
+  height: 2rem;
+  border-radius: 10px;
+  color: #494949;
+  background-color: #FCFE54;
+  border: 1px solid black;
+}
+
+.landing {
+  background: rgba(36, 36, 36, 0.6);
+  width: 80%;
+  margin: auto;
+  border: 1px solid black;
+  border-radius: 20px;
+  min-height: 20rem;
+  border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.result_wrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-inline-start: 0px;
+}
+
+/*# sourceMappingURL=style.css.map */
