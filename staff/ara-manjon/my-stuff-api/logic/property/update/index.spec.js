@@ -4,7 +4,7 @@ const { expect } = require('chai')
 const { User, Property } = require('../../../data')
 
 
-describe.only('logic - update property', () => {
+describe('logic - update property', () => {
     before(() => mongoose.connect('mongodb://localhost/my-api-test',  { useNewUrlParser: true }))
 
     let id, address, m2, year, cadastre

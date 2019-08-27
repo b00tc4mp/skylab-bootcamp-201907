@@ -3,55 +3,46 @@ const logic = require('../../.')
 const { expect } = require('chai')
 const { User, Card } = require('../../../data')
 
-/* describe('logic', () => {
+describe('logic - unregister card', () => {
 
-    let client, users
+    before(() => mongoose.connect('mongodb://localhost/my-api-test',  { useNewUrlParser: true }))
 
-    before(() => {
+    let cardId, number, expiry, userId
 
-        client = new MongoClient('mongodb://localhost', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        })
+    beforeEach(() => {
+        
+        number = Math.random()
+        expiry = new Date()
 
-        return client.connect()
+        return User.deleteMany()
             .then(() => {
-                const db = client.db('skylab')
-                users = db.collection('users')
-                logic.__users__ = users
-            })
-    })
-
-    beforeEach(() => users.deleteMany())
-
-    describe('unregister', () => {
-        let name, surname, email, password, repassword
-        beforeEach(() => {
-            name = `name-${Math.random()}`
-            surname = `surname-${Math.random()}`
-            email = `email-${Math.random()}@domain.com`
-            password = `password-${Math.random()}`
-            return users.insertOne({ name, surname, email, password })
-                .then(result => id = result.insertedId.toString())
-        })
-
-        it('should remove user on correct data', () => {
-            logic.unregisterUser(id, email, password)
-                .then(response => {
-                    expect(response).to.exist
-                    expect(response.deletedCount).to.equal(1)
-                    return users.findOne({ _id: ObjectId(id) })
-                }).then(user => {
-                    expect(user).to.exist
-                    expect(user.name).to.equal(name)
-                    expect(user.surname).to.equal(surname)
-                    expect(user.email).to.equal(email)
-                    expect(user.password).to.equal(password)
+                name = `name-${Math.random()}`
+                surname = `surname-${Math.random()}`
+                email = `email-${Math.random()}@email.com`
+                password = `123-${Math.random()}`
+                return User.create({ name, surname, email, password })
+                .then(user => {
+                    const newCard = new Card({ number, expiry })
+                    userId = user.id
+                    cardId = newCard.id
+                    user.cards.push(newCard)
+                    return user.save()
                 })
-                .catch(error => expect(error).not.to.exist)
             })
     })
 
-    after(() => client.close())
+    it('should succeed on correct data', () =>
+        logic.card.unregister(cardId, userId)
+            .then(card => {
+                expect(card).not.to.exist
+            })
+    )
 
-}) */
+/*     it('should fail on unexisting card', () =>
+        logic.card.unregister('5d5d5530531d455f75da9fF9')
+            .then(() => { throw Error('should not reach this point') })
+            .catch(({ message }) => expect(message).to.equal('wrong credentials'))
+    ) */
+
+    after(() => mongoose.disconnect())
+})

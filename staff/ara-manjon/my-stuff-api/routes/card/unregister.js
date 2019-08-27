@@ -1,13 +1,14 @@
 const logic = require('../../logic')
 
 module.exports = (req, res) => {
-    const { params: { id } } = req
+
+    const { params: { cardId } } = req
 
     try {
-        logic.user.retrieve(id)
-            .then(user => res.json({ message: 'User retrieved correctly', user }))
+        logic.card.unregister(cardId)
+            .then(() => res.json({ message: 'Card unregistered successfully'}))
             .catch(({ message }) => res.status(404).json({ error: message }))
-    } catch ({ message }) {
+    } catch({ message }) {
         res.status(404).json({ error: message })
     }
 }

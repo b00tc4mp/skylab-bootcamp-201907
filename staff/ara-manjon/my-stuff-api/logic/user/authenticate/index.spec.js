@@ -50,3 +50,4 @@ it('should fail on wrong password', () =>
 
     after(() => mongoose.disconnect())
 })
+

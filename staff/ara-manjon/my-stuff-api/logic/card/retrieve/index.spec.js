@@ -3,7 +3,7 @@ const logic = require('../../.')
 const { expect } = require('chai')
 const { User, Card } = require('../../../data')
 
-describe.only('logic - retrieve card', () => {
+describe('logic - retrieve card', () => {
 
     before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
 
@@ -11,7 +11,7 @@ describe.only('logic - retrieve card', () => {
 
     beforeEach(() => {
 
-        number = `num-${Math.random()}`
+        number = Math.random()
         expiry = new Date()
 
         return User.deleteMany()

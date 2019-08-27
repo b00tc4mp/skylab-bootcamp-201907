@@ -11,7 +11,7 @@ module.exports = (req, res) => {
             .then(id => {
                 const token = jwt.sign({ sub: id }, JWT_SECRET)
 
-                res.json({ message: 'user correctly authenticated', id, token })
+                res.json({ message: 'User correctly authenticated', id, token })
             })
             .catch(({ message }) => res.status(401).json({ error: message }))
     } catch ({ message }) {

@@ -3,7 +3,7 @@ const logic = require('../../.')
 const { expect } = require('chai')
 const { User, Property } = require('../../../data')
 
-describe.only('logic - register property', () => {
+describe('logic - register property', () => {
 
     before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
 

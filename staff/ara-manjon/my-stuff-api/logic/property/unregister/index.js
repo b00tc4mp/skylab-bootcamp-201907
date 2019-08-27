@@ -1,5 +1,5 @@
 const validate = require('../../../utils/validate')
-const { Property } = require('../../../models')
+const { Property } = require('../../../data')
 
 /**
  * Unregisters a user by their id

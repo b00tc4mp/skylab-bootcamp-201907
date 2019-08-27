@@ -1,5 +1,5 @@
 const validate = require('../../../utils/validate')
-const { User } = require('../../../models')
+const { User } = require('../../../data')
 
 /**
  * 

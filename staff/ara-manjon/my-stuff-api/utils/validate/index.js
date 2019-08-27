@@ -32,3 +32,4 @@ module.exports = {
         if (!URL_REGEX.test(target)) throw new Error(`${name} with value ${target} is not a valid URL`)
     }
 }
+

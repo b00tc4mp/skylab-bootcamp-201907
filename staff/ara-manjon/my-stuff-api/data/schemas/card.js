@@ -2,7 +2,7 @@ const { Schema } = require('mongoose')
 
 module.exports = new Schema({
     number: {
-        type: String,
+        type: Number,
         require: true
     },
 
