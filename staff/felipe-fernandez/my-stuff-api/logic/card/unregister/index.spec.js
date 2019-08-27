@@ -1,28 +1,17 @@
-const { MongoClient, ObjectId } = require('mongodb')
+const mongoose = require('mongoose')
 const { expect } = require('chai')
-const logic = require('../.')
+const logic = require('../../../logic')
+const { User, Card } = require('../../../models')
 
-describe('logic', () => {
-
-    let client, users
-
+describe.only('logic', () => {
     before(() => {
-
-        client = new MongoClient('mongodb://localhost', {
+        mongoose.connect('mongodb://172.17.0.2/my-api-test', {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
-
-        return client.connect()
-            .then(() => {
-                const db = client.db('skylab')
-                users = db.collection('users')
-                logic.__users__ = users
-            })
     })
-
-    beforeEach(() => users.deleteMany())
-
+    beforeEach(() => User.deleteMany())
+    let userId, cardId
     describe('unregister', () => {
         let name, surname, email, password, repassword
         beforeEach(() => {
@@ -30,27 +19,37 @@ describe('logic', () => {
             surname = `surname-${Math.random()}`
             email = `email-${Math.random()}@domain.com`
             password = `password-${Math.random()}`
-            return users.insertOne({ name, surname, email, password })
-                .then(result => id = result.insertedId.toString())
+            cardNumber = `${Math.floor(Math.random())}`
+            cardExpiry = '09/19'
+            const newUser = new User({ name, surname, email, password })
+            userId = newUser.id
+            const newCard = new Card({ cardNumber, cardExpiry })
+            cardId = newCard.id
+            newUser.cards.push(newCard)
+            return newUser.save()
         })
-
-        it('should remove user on correct data', () => {
-            logic.unregisterUser(id, email, password)
+        it('should remove card on correct data', () => {
+            return logic.card.unregister(userId, cardId)
                 .then(response => {
-                    expect(response).to.exist
-                    expect(response.deletedCount).to.equal(1)
-                    return users.findOne({ _id: ObjectId(id) })
+                    expect(response).not.to.exist
+                    return User.findById(userId)
                 }).then(user => {
-                    expect(user).to.exist
-                    expect(user.name).to.equal(name)
-                    expect(user.surname).to.equal(surname)
-                    expect(user.email).to.equal(email)
-                    expect(user.password).to.equal(password)
+                    debugger
+                    const cardFound = user.cards.find(card => card.id === cardId)
+                    expect(cardFound).to.be.undefined
                 })
-                .catch(error => expect(error).not.to.exist)
-            })
+        })
+        it('should fail on incorrect user', () => {
+            logic.card.unregister('manolete', cardId)
+                .catch(error => {
+                    expect(error).to.exist
+                })
+        })
+        it('should fail on incorrect card id', () => {
+            logic.card.unregister(userId, cardId)
+                .catch(error => expect(error).to.exist)
+                .then(response => expect(response).not.to.exist)
+        })
     })
-
-    after(() => client.close())
-
+    after(() => mongoose.disconnect())
 })
