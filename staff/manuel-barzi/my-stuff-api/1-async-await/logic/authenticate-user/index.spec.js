@@ -26,5 +26,35 @@ describe('logic - authenticate user', () => {
         expect(_id).to.equal(id)
     })
 
+    it('should fail on missing e-mail', () => {
+        email = ''
+
+        expect(() => logic.authenticateUser(email, password)).to.throw(Error, `e-mail is empty or blank`)
+    })
+
+    it('should fail on wrong e-mail', async () => {
+        email = 'invalid@mail.com'
+
+        try {
+            await logic.authenticateUser(email, password)
+
+            throw new Error('should not reach this point')
+        } catch({message}) {
+            expect(message).to.equal(`user with e-mail ${email} does not exist`)
+        }
+    })
+
+    it('should fail on wrong password', async () => {
+        password = 'wrong password'
+
+        try {
+            await logic.authenticateUser(email, password)
+
+            throw new Error('should not reach this point')
+        } catch({message}) {
+            expect(message).to.equal('wrong credentials')
+        }
+    })
+
     after(() => database.disconnect())
 })
