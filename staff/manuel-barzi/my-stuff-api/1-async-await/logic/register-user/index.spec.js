@@ -2,10 +2,10 @@ const { expect } = require('chai')
 const logic = require('..')
 const { database, models: { User } } = require('../../data')
 
-describe('logic - authenticate user', () => {
+describe('logic - register user', () => {
     before(() => database.connect('mongodb://localhost/my-api-test'))
 
-    let name, surname, email, password, id
+    let name, surname, email, password
 
     beforeEach(() => {
         name = `name-${Math.random()}`
@@ -14,16 +14,21 @@ describe('logic - authenticate user', () => {
         password = `password-${Math.random()}`
 
         return User.deleteMany()
-            .then(() => User.create({ name, surname, email, password }))
-            .then(user => id = user.id)
     })
 
     it('should succeed on correct data', () =>
-        logic.authenticateUser(email, password)
-            .then(_id => {
-                expect(_id).to.exist
-                expect(_id).to.be.a('string')
-                expect(_id).to.equal(id)
+        logic.registerUser(name, surname, email, password)
+            .then(result => {
+                expect(result).not.to.exist
+
+                return User.findOne({ email })
+            })
+            .then(user => {
+                expect(user).to.exist
+                expect(user.name).to.equal(name)
+                expect(user.surname).to.equal(surname)
+                expect(user.email).to.equal(email)
+                expect(user.password).to.equal(password)
             })
     )
 

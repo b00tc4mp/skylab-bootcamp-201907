@@ -2,7 +2,7 @@ const { expect } = require('chai')
 const logic = require('..')
 const { database, models: { User } } = require('../../data')
 
-describe('logic - authenticate user', () => {
+describe('logic - retrieve user', () => {
     before(() => database.connect('mongodb://localhost/my-api-test'))
 
     let name, surname, email, password, id
@@ -19,11 +19,15 @@ describe('logic - authenticate user', () => {
     })
 
     it('should succeed on correct data', () =>
-        logic.authenticateUser(email, password)
-            .then(_id => {
-                expect(_id).to.exist
-                expect(_id).to.be.a('string')
-                expect(_id).to.equal(id)
+        logic.retrieveUser(id)
+            .then(user => {
+                expect(user).to.exist
+                expect(user.id).to.equal(id)
+                expect(user._id).not.to.exist
+                expect(user.name).to.equal(name)
+                expect(user.surname).to.equal(surname)
+                expect(user.email).to.equal(email)
+                expect(user.password).not.to.exist
             })
     )
 
