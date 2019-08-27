@@ -3,7 +3,7 @@ const logic = require('../../.')
 const { expect } = require('chai')
 const { User, Card } = require('../../../models')
 
-describe('logic - register property', () => {
+describe('logic - unregister card', () => {
 
     before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
 
@@ -31,25 +31,25 @@ describe('logic - register property', () => {
     })
 
     it('should succeed on correct data', () =>
-        logic.card.unregister(cardId)
+        logic.card.unregister(userId, cardId)
             .then(card => {
                 expect(card).not.to.exist
-                User.findById(userId)
-                .then(user => {
-                    expect(user).to.exist
-                    expect(user.cards).to.exist
+                return User.findById(userId)
+                    .then(user => {
+                        expect(user).to.exist
+                        expect(user.cards).to.exist
 
-                    const match = user.cards.find(card => card.id === cardId)
-                    expect(match).not.to.exist
+                        const match = user.cards.find(card => card.id === cardId)
+                        expect(match).not.to.exist
                 })
 
             })
     )
 
     it('should fail if card does not exist', () =>
-        Users.findById(userId).then(user => {
+        User.findById(userId).then(user => {
             user.cards = []
-            logic.card.unregister(cardId)
+            return logic.card.unregister(userId, cardId)
             .catch( error =>{
                    expect(error).to.exist
                    expect(error.message).to.equal(`Card with id ${cardId} does not exist.`)
@@ -57,23 +57,42 @@ describe('logic - register property', () => {
         })
    )
 
-    /* ID */
-    it('should fail on empty id', () => 
+    /* USER ID */
+    it('should fail on empty User ID', () => 
         expect(() => 
-               logic.property.retrieve('')
-    ).to.throw('Property ID is empty or blank')
+               logic.card.unregister('', cardId)
+    ).to.throw('User ID is empty or blank')
     )
 
-     it('should fail on undefined id', () => 
+     it('should fail on undefined User ID', () => 
         expect(() => 
-               logic.property.retrieve(undefined)
-    ).to.throw(`Property ID with value undefined is not a string`)
+               logic.card.unregister(undefined, cardId)
+    ).to.throw(`User ID with value undefined is not a string`)
     )
 
      it('should fail on wrong data type for id', () => 
         expect(() => 
-               logic.property.retrieve(123)
-    ).to.throw(`Property ID with value 123 is not a string`)
+               logic.card.unregister(123, cardId)
+    ).to.throw(`User ID with value 123 is not a string`)
+     )
+
+        /* USER ID */
+    it('should fail on empty Card ID', () => 
+        expect(() => 
+               logic.card.unregister(userId, '')
+    ).to.throw('Card ID is empty or blank')
     )
 
-}
+     it('should fail on undefined Card ID', () => 
+        expect(() => 
+               logic.card.unregister(userId, undefined)
+    ).to.throw(`Card ID with value undefined is not a string`)
+    )
+
+     it('should fail on wrong data type for Card ID', () => 
+        expect(() => 
+               logic.card.unregister(userId, 123)
+    ).to.throw(`Card ID with value 123 is not a string`)
+    )
+
+})
