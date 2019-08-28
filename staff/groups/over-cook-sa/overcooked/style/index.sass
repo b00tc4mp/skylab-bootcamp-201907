@@ -1,0 +1,246 @@
+*
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+    margin: auto
+
+
+.landing
+        display: flex
+        width: 100%
+.home
+    display: flex
+    flex-direction: column
+    width: 100%
+    background-color: rgba(64, 145, 204)
+    &__logo
+       width: 100%
+    &__user
+        display: flex
+        justify-content: center
+        &__text
+            margin-bottom: 0.5rem
+            color: white
+    &__section
+        display: flex
+        justify-content: space-around
+        margin-bottom: 0.5rem
+        margin-left: 6rem
+        margin-right: 6rem
+        &__buttom
+            font-size: 0.9rem
+            font-family: Verdana, Geneva, Tahoma, sans-serif
+            font-weight: bold
+            color: white
+.search
+    display: flex
+    height: 2rem
+    margin-bottom: 0.5rem
+
+.body
+    height: 100vh
+    background-image: url('img/fondo-landing.png')
+    background-size: cover
+    background-repeat: no-repeat
+    background-attachment: fixed
+    height: 100%
+
+.main
+
+    &__random-section
+        display: flex
+        flex-direction: column
+        align-items: center
+        margin-top: 2rem
+        box-shadow: 0 4px 6px #bbb
+        background-color: rgba(255, 255, 255, 0.6)
+        border-radius: 3px
+        -moz-border-radius: 3px
+        -webkit-border-radius: 3px
+        width: 90vw
+        height: 100vw
+        
+        &__title
+            font-size: 30px
+        &__recipe
+            padding-bottom: 3vw
+        &__video
+            width: 80vw
+            height: 55vw
+            padding-bottom: 10vw
+            border: none
+            
+    &__nav
+        display: flex
+        flex-direction: column
+       
+        &__welcome
+            display: flex
+            flex-direction: row
+            padding-top: 5vw
+            &__item
+                list-style-type: none
+                padding-right: 0.7vw
+                padding-left: 0.7vw
+            &__button
+                text-decoration: none
+                color: white
+                font-size: 1em
+                font-weight: bolder
+                border-radius: 6px
+                box-shadow: 0 4px 6px #bbb
+                padding: 0.5rem
+                background-color: rgba(91, 177, 222, 0.8)
+
+        &__title    
+            display: flex
+            justify-content: center
+            text-align: center
+            margin: 2rem
+            font-size: 25px
+        &__form
+            display: flex
+            flex-wrap: wrap
+            justify-content: center
+            flex-direction: column
+            box-shadow: 0 4px 6px #bbb
+            background-color: rgba(255, 255, 255, 0.6)
+            padding: 5px 5px 5px 5px
+            border-radius: 3px
+            -moz-border-radius: 3px
+            -webkit-border-radius: 3px
+            &__lab
+                margin: 1vw
+                color: #4091cc
+                text-align: center
+            &__go
+                color: white
+                font-size: 1em
+                font-weight: bolder
+                border-radius: 6px
+                box-shadow: 0 4px 6px #bbb
+                margin-top: 2vw
+                padding: 0.5rem
+                background-color: rgba(91, 177, 222, 0.8)
+            &__back
+                text-decoration: none
+                color: white
+                font-size: 0.7em
+                border-radius: 6px
+                box-shadow: 0 4px 6px #bbb
+                margin-top: 1vw
+                margin-bottom: 3vw
+                padding: 0.5rem
+                background-color: rgba(91, 177, 222, 0.8)   
+
+        &__text       
+            display: flex
+            justify-content: center
+            text-align: center
+            box-shadow: 0 4px 6px #bbb
+            background-color: rgba(255, 255, 255, 0.6)
+            padding: 5px 5px 5px 5px
+            border-radius: 3px
+            -moz-border-radius: 3px
+            -webkit-border-radius: 3px5rem
+            margin: 2rem
+            font-size: 15px
+            &__a 
+                text-decoration: none
+                text-color: blue
+    &__home
+        background-image: url('https://i.pinimg.com/originals/85/5d/c4/855dc497dea9484967fb13036b8d7767.jpg')
+        background-size: cover
+        background-repeat: no-repeat
+        background-attachment: fixed
+        margin-bottom: 1.3rem
+
+    &__categories
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-content: center
+        text-align: center
+        margin-bottom: 0.5rem
+
+    &__res
+        display: flex
+        flex-wrap: wrap
+        flex-direction: column
+        margin-top: 2rem
+        &__ul
+            padding: 0 
+        &__list
+            list-style: none
+            margin-top: 0.2rem
+        &__img
+            display: flex
+            width: 100%
+            margin-bottom: 0.3rem
+        &__text
+            margin: 0.5rem
+            box-shadow: 0 4px 6px #bbb
+            background-color: rgba(255, 255, 255, 0.6)
+            padding: 5px 5px 5px 5px
+            border-radius: 3px
+            -moz-border-radius: 3px
+            -webkit-border-radius: 3px5rem
+        &__video
+            box-shadow: 0 4px 6px #bbb
+            background-color: rgba(255, 255, 255, 0.6)
+            padding: 5px 5px 5px 5px
+            border-radius: 3px
+            -moz-border-radius: 3px
+            -webkit-border-radius: 3px5rem
+        &__a
+            text-decoration: none
+            text-color: blue
+            margin: 0.5rem
+        &__buttom
+            text-decoration: none
+            color: white
+            font-size: 1em
+            font-weight: bolder
+            border-radius: 6px
+            box-shadow: 0 4px 6px #bbb
+            padding: 0.5rem
+            background-color: rgba(91, 177, 222, 0.8)
+            margin-bottom: 0.7rem
+
+    &__favbuttom
+        margin-bottom: 0.4rem
+        margin-top: 0.3rem
+
+.footer
+    display: flex
+    flex-wrap: wrap
+    align-items: baseline
+    align-content: flex-end
+    justify-content: space-between
+    background-color: rgb(163, 15, 50)
+    width: 100vw
+    font-size: 0.8rem
+    position: fixed
+    bottom: 0%
+    margin-top: 2rem
+
+    &__list
+        display: flex
+        align-content: flex-end
+        align-items: fixed
+    &__item
+        list-style-type: none
+        margin: 3px
+        &__fab
+            display: inline-flex
+            flex-wrap: wrap
+            flex: end
+            color: white
+    &__sec
+        color: white
+
+
+    
+    
+
+            
+
+            
