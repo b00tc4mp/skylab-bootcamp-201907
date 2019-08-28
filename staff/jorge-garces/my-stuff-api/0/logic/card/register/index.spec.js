@@ -5,7 +5,7 @@ const { User, Card } = require('../../../models')
 
 describe('logic - register card', () => {
 
-    before(() => mongoose.connect('mongodb://localhost/my-stuff-api-test', { useNewUrlParser: true }))
+    before(() => mongoose.connect('mongodb://172.17.0.2/my-stuff-api-test', { useNewUrlParser: true }))
 
     let number, expiry, id, _user, _cardId
     let name, surname, email, password
@@ -17,7 +17,7 @@ describe('logic - register card', () => {
         email = `email-${Math.random()}@email.com`
         password = `123-${Math.random()}`
 
-        number = `555-${Math.random()}`
+        number = Number((Math.random() * 10000000000).toFixed())
         expiry = '09/19'
 
         return User.deleteMany()
@@ -61,13 +61,13 @@ describe('logic - register card', () => {
      it('should fail on undefined card number', () => 
         expect(() => 
                logic.card.register(id, undefined, expiry)
-    ).to.throw(`card number with value undefined is not a string`)
+    ).to.throw(`card number with value undefined is not a number`)
     )
 
      it('should fail on wrong data type for card number', () => 
         expect(() => 
-               logic.card.register(id, 123, expiry)
-    ).to.throw(`card number with value 123 is not a string`)
+               logic.card.register(id, '123', expiry)
+    ).to.throw(`card number with value 123 is not a number`)
     )
 
     /* Expiry */

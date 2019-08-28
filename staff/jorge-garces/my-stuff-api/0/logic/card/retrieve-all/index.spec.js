@@ -5,15 +5,15 @@ const {User, Card} = require('../../../models')
 
 describe('logic - retrieve all cards', () => {
 
-    before(() => mongoose.connect('mongodb://localhost/my-stuff-api-test', { useNewUrlParser: true }))
+    before(() => mongoose.connect('mongodb://172.17.0.2/my-stuff-api-test', { useNewUrlParser: true }))
 
     let userId, cardId, number, expiry, name, surname, email, password, expiryDate, expiryDate2
 
     beforeEach(() => {
     
-        number = `number-${Math.random()}`
+        number = Number((Math.random() * 10000000000).toFixed())
         expiry = '09/19'
-        number2 = `number-${Math.random()}`
+        number2 = Number((Math.random() * 10000000000).toFixed())
         expiry2 = '04/19'
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`

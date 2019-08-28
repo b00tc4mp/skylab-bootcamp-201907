@@ -1,16 +1,13 @@
 const logic = require('../../logic')
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
 
     const { params: { id } } = req
 
     try {
-        logic.property.retrieveAll(id)
-            .then(properties => res.json({ message: 'Properties retrieved correctly', properties }))
-            .catch(({ message }) => res.status(404).json({ error: message }))
+        const properties = await logic.property.retrieveAll(id)
+        res.json({ message: 'Properties retrieved correctly', properties })
     } catch ({ message }) {
         res.status(404).json({ error: message })
     }
-
-} 
-
+}

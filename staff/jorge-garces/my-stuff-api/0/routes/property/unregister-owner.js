@@ -2,7 +2,7 @@ const logic = require('../../logic')
 
 module.exports = (req, res) => {
 
-    const { params: { propertyId, ownerId } } = req
+    const { params: { propertyId }, body: { ownerId } } = req
 
     try {
         logic.property.unregisterOwner(propertyId, ownerId)

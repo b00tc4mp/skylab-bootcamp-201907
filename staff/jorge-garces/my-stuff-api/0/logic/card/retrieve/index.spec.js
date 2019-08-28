@@ -5,13 +5,13 @@ const { User, Card } = require('../../../models')
 
 describe('logic - retrieve card', () => {
 
-    before(() => mongoose.connect('mongodb://localhost/my-stuff-api-test', { useNewUrlParser: true }))
+    before(() => mongoose.connect('mongodb://172.17.0.2/my-stuff-api-test', { useNewUrlParser: true }))
 
     let userId, cardId, number, expiry, expiryDate
 
     beforeEach(() => {
 
-        number = `number-${Math.random()}`
+        number = Number((Math.random() * 10000000000).toFixed())
         expiry = '09/19'
 
         name = `name-${Math.random()}`
