@@ -3,7 +3,7 @@ const logic = require('../../../logic')
 const {User} = require('../../../models')
 const mongoose = require('mongoose')
 
-describe.only('logic - unregister user', () => {
+describe('logic - unregister user', () => {
     before(() => mongoose.connect('mongodb://localhost/my-stuff-api', { useNewUrlParser: true }))
 
     let name, surname, email, password, id
@@ -28,9 +28,10 @@ describe.only('logic - unregister user', () => {
         })
 
     it('should fail on unexisting user', async () => {
+        id= '5d5d5530531d455f75da9fF9'
         try {
-            const user = await logic.user.unregister('5d5d5530531d455f75da9fF9', email, password)
-            if (user) throw Error('should not reach this point') 
+            await logic.user.unregister(id, email, password)
+            throw Error('should not reach this point') 
         }
         catch({message}){
             expect(message).to.equal('There was an error unregistering the user')
@@ -39,26 +40,19 @@ describe.only('logic - unregister user', () => {
     })
 
     it('should fail on existing user, but wrong password', async () => {
+        password = 'wrong password'
         try {
-            const user = await logic.user.unregister(id, email, 'wrong-password')
-            if (user) throw Error('should not reach this point') 
+           await logic.user.unregister(id, email, password)
+           throw Error('should not reach this point') 
         }
         catch({message}){
             expect(message).to.equal('There was an error unregistering the user')
         }
         
     })
-    it('should fail on existing user, but wrong password', async () => {
-        try {
-            const user = await logic.user.unregister(id, email, password)
-            if (user) throw Error('should not reach this point') 
-        }
-        catch({message}){
-            expect(message).to.equal('There was an error unregistering the user')
-        }
-        
-    })
+    
 
+   
 
     after(() => mongoose.disconnect())
 })

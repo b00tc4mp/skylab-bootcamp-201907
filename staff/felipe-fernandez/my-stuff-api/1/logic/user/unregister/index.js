@@ -1,4 +1,3 @@
-const { ObjectId } = require('mongodb')
 const validate = require('../../../utils/validate')
 const { User } = require('../../../models')
 
