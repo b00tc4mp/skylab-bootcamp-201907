@@ -1,0 +1,238 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.body {
+  width: 100vw;
+  margin: auto;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  color: #555555;
+  background-color: white;
+  background-image: url("https://image.freepik.com/foto-gratis/muchas-luces-bokeh_23-2147955976.jpg");
+  background-size: cover;
+}
+
+.header {
+  background-color: rgba(250, 210, 120, 0.5);
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ul {
+  list-style-type: none;
+  display: flex;
+}
+
+.lang-li {
+  font-size: 0.8em;
+  margin-right: 0.2rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 2rem;
+  align-self: center;
+  padding: 0.3rem;
+  text-align: center;
+}
+
+.button {
+  text-align: center;
+  box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  text-shadow: 0px 0px 0px transparent;
+  background: transparent;
+  text-decoration: none;
+  color: #555555;
+}
+
+.lang-ul {
+  width: 50%;
+}
+
+.nav {
+  width: 50%;
+}
+
+.nav-ul {
+  justify-content: flex-end;
+}
+
+.nav-li {
+  font-size: 0.8em;
+  margin-right: 0.2rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 5rem;
+  align-self: center;
+  padding: 0.3rem;
+  text-align: center;
+}
+
+.search {
+  width: 100vw;
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.form-search {
+  width: 90vw;
+  margin-top: 2rem;
+  padding: 2rem;
+  margin: 2rem auto;
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 10px 10px 9px -4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+input {
+  width: 40%;
+  height: 1.9rem;
+  margin: 0.2rem 0 1rem 0;
+  padding: 2px;
+}
+
+.btn {
+  width: 6rem;
+  font-size: 0.8em;
+  margin: 0.5rem 0.2rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  align-self: center;
+  padding: 0.3rem;
+  text-align: center;
+  border: 0px solid transparent;
+  text-shadow: 0px 0px 0px transparent;
+  text-decoration: none;
+  color: #555555;
+}
+
+.title {
+  color: #b4a096;
+  margin: 2rem auto;
+  font-size: 2rem;
+}
+
+.duck-results {
+  width: 90vw;
+  margin: 1rem auto;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 10px 10px 9px -4px rgba(0, 0, 0, 0.1);
+}
+
+.duck-results__ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  padding: 0.5rem;
+}
+
+.duck-results__li {
+  list-style: none;
+}
+
+.duck-item {
+  width: 60vw;
+  margin: 1em;
+  padding: 0.5em 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
+
+.duck-item__title {
+  width: 60vw;
+  font-size: 1rem;
+  color: black;
+}
+
+.duck-item__image {
+  width: 80vw;
+  margin: 1rem 0;
+}
+
+.duck-item__image:hover {
+  opacity: 0.5;
+  transition: opacity 500ms;
+}
+
+.duck-item__price {
+  color: red;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  font-size: 0.8rem;
+}
+
+.duck-detail {
+  width: 90vw;
+  margin: 1rem auto;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 10px 10px 9px -4px rgba(0, 0, 0, 0.1);
+  padding: 0.5em 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
+
+.duck-detail__title {
+  width: 60vw;
+  font-size: 1rem;
+  color: black;
+}
+
+.duck-detail__img {
+  width: 80vw;
+  margin: 1rem 0;
+}
+
+.duck-detail__description {
+  width: 70vw;
+  margin: 0.8rem auto;
+  font-size: 0.8rem;
+  color: black;
+}
+
+.duck-detail__price {
+  color: red;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  font-size: 0.8rem;
+}
+
+.form-section {
+  width: 90vw;
+  margin-top: 2rem;
+  padding: 2rem;
+  margin: 2rem auto;
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 10px 10px 9px -4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  margin-top: 2rem;
+}
+
+.input {
+  width: 100%;
+  height: 1.5rem;
+  margin: 0.2rem 0 1rem 0;
+  padding: 2px;
+}
+
+.hello {
+  color: white;
+  font-size: 1.4rem;
+  margin: 2rem auto 0 auto;
+}
+
+/*# sourceMappingURL=style.css.map */
