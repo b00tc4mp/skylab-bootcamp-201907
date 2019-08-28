@@ -181,9 +181,6 @@ describe('logic - add property', () => {
 
         let id, name, surname, email, password, address, sqm, yearOfConstruction, cadastre, mortgage
 
-
-
-
         beforeEach(() => {
             name = `g-name-${Math.random()}`
             surname = `surname-${Math.random()}`
