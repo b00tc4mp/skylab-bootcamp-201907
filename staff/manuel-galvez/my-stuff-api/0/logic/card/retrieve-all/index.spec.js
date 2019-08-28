@@ -11,9 +11,9 @@ describe('logic - retrieve all cards', () => {
 
     beforeEach(() => {
     
-        number = `number-${Math.random()}`
+        number = Number((Math.random() * 10000000000).toFixed())
         expiry = '09/19'
-        number2 = `number-${Math.random()}`
+        number2 = Number((Math.random() * 10000000000).toFixed())
         expiry2 = '04/19'
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`

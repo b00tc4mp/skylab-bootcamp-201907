@@ -62,7 +62,6 @@ describe('logic - retrieve all properties', () => {
     it('should fail on incorrect data', () => {
            return logic.property.retrieveAll('3123414')
              .catch(error =>{
-                 debugger
                 expect(error).to.exist
              })
     })

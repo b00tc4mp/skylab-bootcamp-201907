@@ -17,30 +17,28 @@ describe('logic - register user', () => {
         password = `password-${Math.random()}`
    })
 
-    it('should succeed on correct data', () =>
-        logic.user.register(name, surname, email, password)
-            .then(result => {
-                expect(result).not.to.exist
-                return User.findOne({ email, password })
-            })
-            .then(user => {
-                expect(user).to.exist
-                expect(user.name).to.equal(name)
-                expect(user.surname).to.equal(surname)
-                expect(user.email).to.equal(email)
-                expect(user.password).to.equal(password)
-            })
-    )
+    it('should succeed on correct data', async () => {
+        const result = await logic.user.register(name, surname, email, password)
+            expect(result).not.to.exist
+        const user = await User.findOne({ email, password })
+            expect(user).to.exist
+            expect(user.name).to.equal(name)
+            expect(user.surname).to.equal(surname)
+            expect(user.email).to.equal(email)
+            expect(user.password).to.equal(password)
+        })
 
-    it('should fail if the user already exists', () =>
-       User.create({ name, surname, email, password })
-           .then (() => logic.user.register(name, surname, email, password)
-               .catch( error =>{
-                   expect(error).to.exist
-                   expect(error.message).to.equal(`User already exists.`)
-               })
-           )
-    )
+    it('should fail if the user already exists', async () => {
+
+       await User.create({ name, surname, email, password })
+
+       try {
+            await logic.user.register(name, surname, email, password)
+       } catch(error) {
+            expect(error).to.exist
+            expect(error.message).to.equal(`User already exists.`)
+       }
+    })
 
     /* Name */
     it('should fail on empty name', () => 

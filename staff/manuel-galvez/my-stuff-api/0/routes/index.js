@@ -39,7 +39,7 @@ router.post('/users/:id/properties', [tokenMiddleware, jsonBodyParser], register
 router.get('/users/:id/properties/', [tokenMiddleware, jsonBodyParser], retrieveAllProperty)
 router.get('/users/:id/properties/:propertyId', [tokenMiddleware, jsonBodyParser], retrieveProperty)
 router.patch ('/users/:id/properties/:propertyId', [tokenMiddleware, jsonBodyParser], updateProperty)
-router.patch ('/users/:id/properties/:propertyId/owners/:ownerId', [tokenMiddleware, jsonBodyParser], registerPropertyOwner)
+router.patch ('/users/:id/properties/:propertyId/owners/', [tokenMiddleware, jsonBodyParser], registerPropertyOwner)
 router.delete ('/users/:id/properties/:propertyId/owners/:ownerId', [tokenMiddleware, jsonBodyParser], unregisterPropertyOwner)
 router.delete ('/users/:id/properties/:propertyId', [tokenMiddleware, jsonBodyParser], unregisterProperty)
 

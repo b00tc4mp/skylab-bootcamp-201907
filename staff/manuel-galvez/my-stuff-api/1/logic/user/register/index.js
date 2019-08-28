@@ -18,10 +18,10 @@ module.exports = function(name, surname, email, password) {
     validate.string(email, 'email')
     validate.email(email, 'email')
     validate.string(password, 'password')
-    
-    return User.findOne({ email })
-        .then(user => {
-            if (user) throw Error('User already exists.')
-            return User.create({name, surname, email, password})
-        }).then(() => { })
+
+    return ( async () => {
+        const user = await User.findOne({ email })
+        if (user) throw Error('User already exists.')
+        await User.create({name, surname, email, password})
+    })()
 }

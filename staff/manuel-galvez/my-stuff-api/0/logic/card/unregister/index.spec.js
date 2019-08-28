@@ -11,7 +11,7 @@ describe('logic - unregister card', () => {
 
     beforeEach(() => {
 
-        number = `number-${Math.random()}`
+        number = Number((Math.random() * 10000000000).toFixed())
         expiry = '09/19'
 
         name = `name-${Math.random()}`

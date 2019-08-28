@@ -1,16 +1,13 @@
 const logic = require('../../logic')
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
 
     const { params: { id } } = req
 
     try {
-        logic.vehicle.retrieveAll(id)
-            .then(vehicles => res.json({ message: 'Vehicles retrieved correctly', vehicles }))
-            .catch(({ message }) => res.status(404).json({ error: message }))
+        const vehicles = await logic.vehicle.retrieveAll(id)
+        res.json({ message: 'Vehicles retrieved correctly', vehicles })
     } catch ({ message }) {
         res.status(404).json({ error: message })
     }
-
-} 
-
+}

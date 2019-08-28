@@ -1,14 +1,13 @@
 const logic = require('../../logic')
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
 
     const { params: { propertyId } } = req
 
     try {
-        logic.property.unregister(propertyId)
-            .then(() => res.json({ message: 'Property unregistered successfully'}))
-            .catch(({ message }) => res.status(404).json({ error: message }))
-    } catch({ message }) {
+        await logic.property.unregister(propertyId)
+        res.json({ message: 'Property unregistered successfully' })
+    } catch ({ message }) {
         res.status(404).json({ error: message })
     }
 }

@@ -38,6 +38,24 @@ describe('logic', ()=>{
         )
     })
 
+    it('should fail on empty id', () => {
+        expect(() =>
+            logic.user.retrieve('')
+        ).to.throw(Error, 'id is empty or blank')
+    })
+
+    it('should fail on emtpy password', () => {
+        expect(()=> 
+            logic.user.retrieve(undefined)
+        ).to.throw(Error, 'id with value undefined is not a string')
+    })
+
+    it('should fail on non-valid email', () => {
+        expect(()=> 
+            logic.user.retrieve(123)
+        ).to.throw(Error, 'id with value 123 is not a string')
+    })
+
  after(()=>mongoose.disconnect())
 
 })
