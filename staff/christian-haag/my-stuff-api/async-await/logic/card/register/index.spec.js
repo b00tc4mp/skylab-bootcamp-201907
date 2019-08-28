@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 const logic = require('../../.')
-const randomDate = require('../../../utils/random-date')
+const { day, month, year } = require('../../../utils/random-date')
 const { User } = require('../../../data')
 const mongoose = require('mongoose')
 
@@ -18,24 +18,119 @@ describe('logic - add card', () => {
         cardBrand = 'Visa'
         cardType = 'Credit'
         cardNumber = Math.floor(Math.random() * 9999999999999999)
-        expiry = new Date(2025, 06, 29)
+        expiry = new Date
 
         await User.deleteMany()
         const user = await User.create({ name, surname, email, password })
         id = user.id
     })
 
+    //validations
+
+    it('should fail on empty id', () =>
+        expect(() =>
+            logic.registerCard('', cardBrand, cardType, cardNumber, expiry)
+        ).to.throw('id is empty or blank')
+    )
+
+    it('should fail on undefined id', () =>
+        expect(() =>
+            logic.registerCard(undefined, cardBrand, cardType, cardNumber, expiry)
+        ).to.throw(`id with value undefined is not a string`)
+    )
+
+    it('should fail on wrong data type', () =>
+        expect(() =>
+            logic.registerCard(123456798, cardBrand, cardType, cardNumber, expiry)
+        ).to.throw(`id with value 123456798 is not a string`)
+    )
+
+    //cardBrand
+    it('should fail on empty cardBrand', () =>
+        expect(() =>
+            logic.registerCard('5d5d5530531d455f75da9fF9', '', cardType, cardNumber, expiry)
+        ).to.throw('cardBrand is empty or blank')
+    )
+
+    it('should fail on undefined cardBrand', () =>
+        expect(() =>
+            logic.registerCard('5d5d5530531d455f75da9fF9', undefined, cardType, cardNumber, expiry)
+        ).to.throw(`cardBrand with value undefined is not a string`)
+    )
+
+    it('should fail on wrong data type', () =>
+        expect(() =>
+            logic.registerCard('5d5d5530531d455f75da9fF9', 12548, cardType, cardNumber, expiry)
+        ).to.throw(`cardBrand with value 12548 is not a string`)
+    )
+    //cardType
+
+    it('should fail on empty cardType', () =>
+        expect(() =>
+            logic.registerCard('5d5d5530531d455f75da9fF9', cardBrand, '', cardNumber, expiry)
+        ).to.throw('cardType is empty or blank')
+    )
+
+    it('should fail on undefined cardType', () =>
+        expect(() =>
+            logic.registerCard('5d5d5530531d455f75da9fF9', cardBrand, undefined, cardNumber, expiry)
+        ).to.throw(`cardType with value undefined is not a string`)
+    )
+
+    it('should fail on wrong data type', () =>
+        expect(() =>
+            logic.registerCard('5d5d5530531d455f75da9fF9', cardBrand, 12548, cardNumber, expiry)
+        ).to.throw(`cardType with value 12548 is not a string`)
+    )
+    //number
+    it('should fail on empty number', () =>
+        expect(() =>
+            logic.registerCard('5d5d5530531d455f75da9fF9', cardBrand, cardType, '', expiry)
+        ).to.throw('number is empty or blank')
+    )
+
+    it('should fail on undefined number', () =>
+        expect(() =>
+            logic.registerCard('5d5d5530531d455f75da9fF9', cardBrand, cardType, undefined, expiry)
+        ).to.throw(`number with value undefined is not a number`)
+    )
+
+    it('should fail on wrong data type', () =>
+        expect(() =>
+            logic.registerCard('5d5d5530531d455f75da9fF9', cardBrand, cardType, '1245658745', expiry)
+        ).to.throw(`number with value 1245658745 is not a number`)
+    )
+    //expiry
+    it('should fail on empty expiry', () =>
+        expect(() =>
+            logic.registerCard('5d5d5530531d455f75da9fF9', cardBrand, cardType, cardNumber, '')
+        ).to.throw('expiry is empty or blank')
+    )
+
+    it('should fail on undefined expiry', () =>
+        expect(() =>
+            logic.registerCard('5d5d5530531d455f75da9fF9', cardBrand, cardType, cardNumber, undefined)
+        ).to.throw(`expiry with value undefined is not a valid date`)
+    )
+
+    it('should fail on wrong data type', () =>
+        expect(() =>
+            logic.registerCard('5d5d5530531d455f75da9fF9', cardBrand, cardType, cardNumber, 252525)
+        ).to.throw(`expiry with value 252525 is not a valid date`)
+    )
+
+
     it('should fail if user does not exist', async () => {
         try {
-            await logic.cardRegister('5d5d5530531d455f75da9fF9', cardBrand, cardType, cardNumber, expiry)
+            await logic.registerCard('5d5d5530531d455f75da9fF9', cardBrand, cardType, cardNumber, expiry)
         } catch ({ message }) {
-            expect(message).to.throw('user with id 5d5d5530531d455f75da9fF9 does not exist')
+            expect(message).to.equal('user with id 5d5d5530531d455f75da9fF9 does not exist')
         }
     })
 
     it('schould add card only if user exists', async () => {
 
-        await logic.cardRegister(id, cardBrand, cardType, cardNumber, expiry)
+        await logic.registerCard(id, cardBrand, cardType, cardNumber, expiry)
 
         const user = await User.findOne({ _id: id }).lean()
         expect(user).to.exist
@@ -62,19 +157,19 @@ describe('logic - add card', () => {
             cardBrand = 'Visa'
             cardType = 'Credit'
             cardNumber = Math.floor(Math.random() * 9999999999999999)
-            expiry = new Date(2025, 06, 29)
+            expiry = new Date
 
             number2 = 1254658912561234
 
             const user = await User.create({ name, surname, email, password })
             id = user.id
-            await logic.cardRegister(id, cardBrand, cardType, cardNumber, expiry)
+            await logic.registerCard(id, cardBrand, cardType, cardNumber, expiry)
         })
 
 
         it('should add a second card', async () => {
 
-            await logic.cardRegister(id, cardBrand, cardType, number2, expiry)
+            await logic.registerCard(id, cardBrand, cardType, number2, expiry)
 
             const user = await User.findOne({ _id: id }).lean()
 
@@ -105,16 +200,14 @@ describe('logic - add card', () => {
             cardBrand = 'Visa'
             cardType = 'Credit'
             cardNumber = Math.floor(Math.random() * 9999999999999999)
-            expiry = new Date(2025, 06, 29)
+            expiry = new Date
 
             number2 = 1254658912561234
 
 
             const user = await User.create({ name, surname, email, password })
             id = user.id
-            await User.findOneAndUpdate(id, { $set: { _id: '5d5d5530531d455f75da9fF9' } })
-            id = user.id
-            await logic.cardRegister(id, cardBrand, cardType, cardNumber, expiry)
+            await logic.registerCard(id, cardBrand, cardType, number2, expiry)
 
 
         })
@@ -122,10 +215,9 @@ describe('logic - add card', () => {
         it('should fail if card number already exists', async () => {
 
             try {
-                await logic.cardRegister(id, cardBrand, cardType, cardNumber, expiry)
-
-            } catch (error) {
-                expect(error).to.throw('user with id 5d5d5530531d455f75da9fF9 already has card number 1254658912561234')
+                await logic.registerCard(id, cardBrand, cardType, number2, expiry)
+            } catch ({ message }) {
+                expect(message).to.equal('card number 1254658912561234 already exist')
             }
 
         })

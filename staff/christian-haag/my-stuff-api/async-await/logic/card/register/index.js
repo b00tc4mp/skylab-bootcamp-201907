@@ -15,21 +15,21 @@ const { User, Card } = require('../../../data')
  * @returns {Promise}
  */
 module.exports = function (id, cardBrand, cardType, number, expiry) {
-
     validate.string(id, 'id')
     validate.string(cardBrand, 'cardBrand')
     validate.string(cardType, 'cardType')
     validate.number(number, 'number')
+    validate.date(expiry, 'expiry')
 
     return (async () => {
 
         const user = await User.findById(id)
 
-        if (!user) throw new Error(`user with id ${id} does not exists`)
+        if (!user) throw new Error(`user with id ${id} does not exist`)
 
         const existing = user.cards.some(({ number: _number }) => _number === number)
 
-        if (existing) throw new Error(`user with id ${id} already has card number ${number}`)
+        if (existing) throw new Error(`card number ${number} already exist`)
 
         const card = new Card({ cardBrand, cardType, number, expiry })
 
