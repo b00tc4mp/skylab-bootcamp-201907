@@ -9,12 +9,14 @@ const { User, Property } = require('../../../models')
  * 
  * @returns {Promise}
 */
+
 module.exports = function(propertyId, ownerId) {
 
     let _property
 
     validate.string(propertyId, 'Property ID')
     validate.string(ownerId, 'Owner ID')
+
     return Property.findOne({ _id: propertyId })
         .then(property => {
             if (!property) throw Error(`Property with id ${propertyId} does not exist.`)
@@ -30,4 +32,3 @@ module.exports = function(propertyId, ownerId) {
         })
         .then(() => { })
 }
-

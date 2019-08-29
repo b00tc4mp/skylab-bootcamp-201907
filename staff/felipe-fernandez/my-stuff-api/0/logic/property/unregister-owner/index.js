@@ -1,5 +1,6 @@
 const validate = require('../../../utils/validate')
 const { User, Property } = require('../../../models')
+
 /**
  * Unregisters a user by their id
  * 
@@ -8,10 +9,14 @@ const { User, Property } = require('../../../models')
  * 
  * @returns {Promise}
 */
+
 module.exports = function(propertyId, ownerId) {
+
     let _property
+
     validate.string(propertyId, 'Property ID')
     validate.string(ownerId, 'Owner ID')
+
     return Property.findOne({ _id: propertyId })
         .then(property => {
             if (!property) throw Error('Wrong property id provided.')
@@ -26,7 +31,3 @@ module.exports = function(propertyId, ownerId) {
             return _property.save()
         }).then(() => { })
 }
-
-
-
-

@@ -3,16 +3,12 @@ const logic= require('../../.')
 const {expect} = require('chai')
 const {User, Property} = require('../../../models')
 
-
 describe('logic - retrieve all properties', () => {
 
-    before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
-
+    before(() => mongoose.connect('mongodb://localhost/my-stuff-api-test', { useNewUrlParser: true }))
     let propertyId, propertyId2, userId, name, surname, email, password
     let address, address2, m2, m2v2, year, year2, cadastre, cadastre2
-
     beforeEach(()=> {
-
         
         address = `address-${Math.random()}`
         m2 = Number((Math.random().toFixed()))
@@ -23,14 +19,13 @@ describe('logic - retrieve all properties', () => {
         m2v2 = Number((Math.random().toFixed()))
         year2 = Number((Math.random()* (2019-1980) + 1980).toFixed())
         cadastre2 = `cadastre-${Math.random()}`
-
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@email.com`
         password = `123-${Math.random()}`
-
          return Property.deleteMany()
-        .then(() => User.create({ name, surname, email, password }))
+        .then(() => 
+         User.create({ name, surname, email, password }))
         .then(user => {
             
             userId= user.id
@@ -40,15 +35,10 @@ describe('logic - retrieve all properties', () => {
             const newProperty2 = new Property({ address: address2, m2: m2v2, year: year2 , cadastre: cadastre2})
             propertyId2 = newProperty2.id
             newProperty2.owners.push(userId)
-
             return Promise.all([newProperty.save(), newProperty2.save()])
         })
-
-
         
-
     })
-
     it('should succeed on correct data', () => 
         
         logic.property.retrieveAll(userId)
@@ -69,7 +59,6 @@ describe('logic - retrieve all properties', () => {
                 
            })
     )
-
     it('should fail on incorrect data', () => {
            return logic.property.retrieveAll('3123414')
              .catch(error =>{
@@ -77,7 +66,6 @@ describe('logic - retrieve all properties', () => {
                 expect(error).to.exist
              })
     })
-
     it('should fail on incorrect data', () => {
         logic.property.retrieveAll('3123414')
           .catch(error =>{
@@ -88,22 +76,17 @@ describe('logic - retrieve all properties', () => {
    
     it('should fail on empty User ID', () => 
             expect(() =>                    logic.vehicle.retrieveAll('')
-        ).to.throw('User id is empty or blank')
+        ).to.throw('User ID is empty or blank')
         )
         
         it('should fail on undefined User ID', () => 
             expect(() =>                    logic.vehicle.retrieveAll(undefined)
-        ).to.throw(`User id with value undefined is not a string`)
+        ).to.throw(`User ID with value undefined is not a string`)
         )
          it('should fail on wrong data type for User ID', () => 
             expect(() => 
                               logic.vehicle.retrieveAll(123)
-        ).to.throw(`User id with value 123 is not a string`)
+        ).to.throw(`User ID with value 123 is not a string`)
         )
-
-
      after(() => mongoose.disconnect())
-
-
-
 })

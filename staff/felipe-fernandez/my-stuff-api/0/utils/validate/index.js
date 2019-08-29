@@ -11,14 +11,17 @@ module.exports = {
         },
 
         number(target, name) {
+            if (typeof target === 'string' && !target.trim()) throw new Error(`${name} is empty or blank`)
             if (typeof target !== 'number') throw TypeError(`${name} with value ${target} is not a number`)
         },
 
         boolean(target, name) {
+            if (typeof target === 'string' && !target.trim()) throw new Error(`${name} is empty or blank`)
             if (typeof target !== 'boolean') throw TypeError(`${name} with value ${target} is not a boolean`)
         },
 
         date(target, name) {
+            if (typeof target === 'string' && !target.trim()) throw new Error(`${name} is empty or blank`)
             if (!DATE_REGEX.test(target)) throw new Error(`${name} with value ${target} is not a valid date`)
         },
 

@@ -1,5 +1,6 @@
 const validate = require('../../../utils/validate')
-const { User } = require('../../../models')
+const { User, Card } = require('../../../models')
+
 /**
  * Unregisters a user by their id
  * 
@@ -8,13 +9,18 @@ const { User } = require('../../../models')
  * 
  * @returns {Promise}
 */
-module.exports = function (userId, cardId) {
+
+module.exports = function(userId, cardId) {
+
+    validate.string(userId, 'User ID')
+    validate.string(cardId, 'Card ID')
+
     return User.findById(userId)
-        .then(response => {
-            if (!response) throw Error(`User with id ${userId} does not exist.`)
-            const cardFound = response.cards.find(card => card.id === cardId)
-            if (!cardFound) throw Error(`Card with id ${cardId} not found`)
-            response.cards.splice(response.cards.indexOf(cardFound, 1))
-            return response.save()
+        .then(user => {
+            if (!user) throw new Error(`User with id ${cardId} does not exist.`)
+            const match = user.cards.find(card => card.id === cardId)
+            if (!match) throw new Error(`Card with id ${cardId} does not exist.`)
+            user.cards.splice(user.cards.indexOf(match), 1)
+            return user.save()
         }).then(() => { })
 }

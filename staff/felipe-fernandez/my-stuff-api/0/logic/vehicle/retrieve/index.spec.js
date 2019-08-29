@@ -5,7 +5,7 @@ const { User, Vehicle } = require('../../../models')
 
 describe('logic - retrieve vehicle', () => {
 
-    before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
+    before(() => mongoose.connect('mongodb://localhost/my-stuff-api-test', { useNewUrlParser: true }))
 
     let vehicleId, _userId
 
@@ -83,5 +83,5 @@ describe('logic - retrieve vehicle', () => {
                logic.vehicle.retrieve(123)
     ).to.throw(`Vehicle ID with value 123 is not a string`)
     )
-    after(() => mongoose.disconnect())
+
 })

@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
-const {expect} = require('chai')
-const logic = require('../../../logic')
-const {User} = require('../../../models')
+const logic = require('../../.')
+const { expect } = require('chai')
+const { User } = require('../../../models')
 
-describe('logic-retrieve user', ()=>{
+describe('logic', ()=>{
 
     before(()=>{
         mongoose.connect('mongodb://localhost/my-stuff-api', {useNewUrlParser: true})
@@ -36,6 +36,24 @@ describe('logic-retrieve user', ()=>{
                     expect(user.password).not.to.exist
                 })
         )
+    })
+
+    it('should fail on empty id', () => {
+        expect(() =>
+            logic.user.retrieve('')
+        ).to.throw(Error, 'id is empty or blank')
+    })
+
+    it('should fail on emtpy password', () => {
+        expect(()=> 
+            logic.user.retrieve(undefined)
+        ).to.throw(Error, 'id with value undefined is not a string')
+    })
+
+    it('should fail on non-valid email', () => {
+        expect(()=> 
+            logic.user.retrieve(123)
+        ).to.throw(Error, 'id with value 123 is not a string')
     })
 
  after(()=>mongoose.disconnect())

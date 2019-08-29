@@ -34,13 +34,13 @@ describe('logic - unregister user', () => {
     it('should fail on unexisting user', () =>
         logic.user.unregister('5d5d5530531d455f75da9fF9', email, password)
             .then(() => { throw Error('should not reach this point') })
-            .catch(({ message }) => expect(message).to.equal('There was an error unregistering the user'))
+            .catch(({ message }) => expect(message).to.equal('Wrong user or credentials.'))
     )
 
     it('should fail on existing user, but wrong password', () =>
         logic.user.unregister(id, email, 'wrong-password')
             .then(() => { throw Error('should not reach this point') })
-            .catch(({ message }) => expect(message).to.equal('There was an error unregistering the user'))
+            .catch(({ message }) => expect(message).to.equal('Wrong user or credentials.'))
     )
 
     after(() => mongoose.disconnect())

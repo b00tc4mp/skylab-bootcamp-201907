@@ -6,7 +6,7 @@ module.exports = function(req, res) {
 
     try {
         logic.property.register(id, address, m2, year, cadastre)
-            .then((properyId) => res.status(201).json({ message: 'Property registered successfully', properyId}))
+            .then(() => res.status(201).json({ message: 'Property registered successfully'}))
             .catch(({ message }) => res.status(400).json({ error: message }))
     } catch({ message }) {
         res.status(400).json({ error: message })

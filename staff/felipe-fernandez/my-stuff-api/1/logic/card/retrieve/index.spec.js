@@ -1,22 +1,18 @@
-
 const mongoose = require('mongoose')
 const logic = require('../../.')
 const { expect } = require('chai')
 const { User, Card } = require('../../../models')
 
 describe('logic - retrieve card', () => {
-
     before(() => mongoose.connect('mongodb://localhost/my-stuff-api-test', { useNewUrlParser: true }))
     let userId, cardId, number, expiry, expiryDate
-
     beforeEach(() => {
-        number = `number-${Math.random()}`
+        number = Number((Math.random() * 10000000000).toFixed())
         expiry = '09/19'
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@email.com`
         password = `password-${Math.random()}`
-
         return (async () => {
             await User.deleteMany()
             const user = await User.create({ name, surname, email, password })
@@ -32,7 +28,6 @@ describe('logic - retrieve card', () => {
             await user.save()
         })()
     })
-
     it('should succeed on correct data', async () => {
         const card = await logic.card.retrieve(userId, cardId)
         expect(card).to.exist
@@ -40,7 +35,6 @@ describe('logic - retrieve card', () => {
         expect(card.expiry).to.deep.equal(expiryDate)
     }
     )
-
     it('should fail if user does not exist', async () => {
         await User.deleteMany()
         try {
@@ -55,9 +49,9 @@ describe('logic - retrieve card', () => {
         const user = await User.findById(userId)
         expect(user).to.exist
         user.cards = []
-        user.save()
+        await user.save()
         try {
-            logic.card.retrieve(userId, cardId)
+            await logic.card.retrieve(userId, cardId)
         } catch (error) {
             expect(error).to.exist
             expect(error.message).to.equal(`Card with id ${cardId} does not exist.`)

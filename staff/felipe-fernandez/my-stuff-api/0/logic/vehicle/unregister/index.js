@@ -14,7 +14,3 @@ module.exports = function (id) {
             if (!response.deletedCount) throw Error(`Wrong id provided.`)
         })
 }
-
-
-
-

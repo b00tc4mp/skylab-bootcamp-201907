@@ -2,6 +2,7 @@ const { Router } = require('express')
 const tokenMiddleware = require('../helpers/token-middleware')
 const bodyParser = require('body-parser')
 
+
 const { registerUser, authenticateUser, 
         retrieveUser, updateUser, unregisterUser } = require('./user')
     
@@ -17,6 +18,7 @@ const { registerCard, retrieveAllCard,
 
 const router = Router()
 const jsonBodyParser = bodyParser.json()
+
 
 /* USER */
 router.post('/users', jsonBodyParser, registerUser)
@@ -46,5 +48,7 @@ router.post('/users/:id/cards', [tokenMiddleware, jsonBodyParser], registerCard)
 router.get('/users/:id/cards/', [tokenMiddleware, jsonBodyParser], retrieveAllCard)
 router.get('/users/:id/cards/:cardId', [tokenMiddleware, jsonBodyParser], retrieveCard)
 router.delete ('/users/:id/cards/:cardId', [tokenMiddleware, jsonBodyParser], unregisterCard)
+
+
 
 module.exports = router

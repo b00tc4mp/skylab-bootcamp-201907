@@ -10,7 +10,7 @@ const { Property } = require('../../../models')
 
 module.exports = function(id) {
     
-    validate.string(id, 'Property id')
+    validate.string(id, 'Property ID')
 
     return Property.findOne({ _id: id }, { _id: 0 }).lean()
         .then(property => {

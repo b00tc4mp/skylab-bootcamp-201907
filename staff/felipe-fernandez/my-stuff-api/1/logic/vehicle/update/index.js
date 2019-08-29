@@ -17,6 +17,7 @@ module.exports = function (id, fieldsToUpdate) {
     if (color) validate.string(color, 'color')
     if (electric) validate.boolean(electric, 'electric')
     if (plate) validate.string(plate, 'plate')
+
     return (async () => {
         await Vehicle.findByIdAndUpdate(id, fieldsToUpdate)
     })();

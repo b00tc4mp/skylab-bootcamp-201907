@@ -1,17 +1,14 @@
 const validate = require('../../../utils/validate')
 const { Property } = require('../../../models')
-
 /**
  * 
  * @param {*} id 
  * 
  * @returns {Promise}
 */
-
 module.exports = function(id) {
     
     validate.string(id, 'User id')
-
     return Property.find({ owners : id }, { __v: 0 }).lean()
        
         .then(properties => {
@@ -24,6 +21,3 @@ module.exports = function(id) {
             return properties
         })
     }
-
-
-   

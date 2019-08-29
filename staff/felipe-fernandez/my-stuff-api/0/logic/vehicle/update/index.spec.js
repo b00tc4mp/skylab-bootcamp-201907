@@ -5,7 +5,7 @@ const { User, Vehicle } = require('../../../models')
 
 describe('logic', () => {
     before(() => {
-        mongoose.connect('mongodb://localhost/my-api-test', {
+        mongoose.connect('mongodb://localhost/my-stuff-api-test', {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
@@ -14,7 +14,6 @@ describe('logic', () => {
     describe('update vehicle', () => {
         let name, surname, email, password, make, model, year, type, color, electric, plate
         beforeEach(() => {
-
             name = `name-${Math.random()}`
             surname = `surname-${Math.random()}`
             email = `email-${Math.random()}@domain.com`
@@ -42,6 +41,7 @@ describe('logic', () => {
                     expect(response.model).to.equal('newModel')
                 }).catch(error => expect(error).not.to.exist)
         })
+
         it('should fail on make being an array', () => {
             expect(() => logic.vehicle.update(vehicleId, { make: [] })).to.throw(Error)
         })

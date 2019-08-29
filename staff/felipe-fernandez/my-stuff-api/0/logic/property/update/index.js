@@ -1,6 +1,5 @@
 const validate = require('../../../utils/validate')
 const { Property } = require('../../../models')
-
 /**
  * 
  * @param {*} id
@@ -8,14 +7,14 @@ const { Property } = require('../../../models')
  * 
 * @returns {Promise}
 */
-
-module.exports = function(id, fieldsToUpdate) {
+module.exports = function (id, fieldsToUpdate) {
+    const { address, m2, year, cadastre } = fieldsToUpdate
     validate.string(id, 'id')
-
-
-    return Property.findByIdAndUpdate(id,  fieldsToUpdate )
-        .then(property => {
-             if (!property) throw Error(`Property with id ${id} does not exist.`)
-             
-        })
+    if (address) validate.string(address, 'address')
+    if (m2) validate.number(m2, 'm2')
+    if (year) validate.number(year, 'year')
+    if (cadastre) validate.string(cadastre, 'cadastre')
+    return (async () => {
+        await Property.findByIdAndUpdate(id, fieldsToUpdate)
+    })();
 }

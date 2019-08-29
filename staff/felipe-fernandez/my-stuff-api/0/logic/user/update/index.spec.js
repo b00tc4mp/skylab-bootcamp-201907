@@ -1,14 +1,12 @@
 const mongoose = require('mongoose')
 const {expect} = require('chai')
-const logic = require('../../../logic')
 const {User} = require('../../../models')
+const logic = require('../../../logic')
 
 
-
-
-describe('logic-update user', ()=>{
+describe('logic - update user', ()=>{
     before(()=>{
-        mongoose.connect('mongodb://localhost/my-stuff-api', {useNewUrlParser: true})
+        mongoose.connect('mongodb://localhost/my-stuff-api-test', {useNewUrlParser: true})
        
     })
 

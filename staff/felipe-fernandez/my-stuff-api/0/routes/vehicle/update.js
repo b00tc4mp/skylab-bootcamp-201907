@@ -1,6 +1,6 @@
 const logic = require('../../logic')
 
-module.exports = function (req, res) {
+module.exports = (req, res) => {
 
     const { params: { vehicleId }, body } = req
 

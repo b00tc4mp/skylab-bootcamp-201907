@@ -11,10 +11,10 @@ const { Property } = require('../../../models')
 
 module.exports = function(id) {
 
-    validate.string(id, 'id')
+    validate.string(id, 'Property ID')
 
     return Property.deleteOne({ _id: id })
         .then(result => {
-            if (!result.deletedCount) throw Error('Wrong id provided.')
+            if (!result.deletedCount) throw Error(`Property with id ${id} does not exist.`)
         })
 }

@@ -20,6 +20,6 @@ module.exports = function(id, email, password) {
 
     return User.deleteOne({ _id: id, email, password })
         .then(result => {
-            if (!result.deletedCount) throw Error(`There was an error unregistering the user`)
+            if (!result.deletedCount) throw Error(`Wrong user or credentials.`)
         })
 }

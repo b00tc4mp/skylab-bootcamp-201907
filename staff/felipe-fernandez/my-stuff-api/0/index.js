@@ -1,6 +1,7 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require('express')
+const { static } = express
 const { name, version } = require('./package')
 const routes = require('./routes')
 
@@ -11,8 +12,9 @@ mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
 
         const app = express()    
-    
+
         app.use('/api', routes)
+
 
         app.listen(PORT, () => console.log(`${name} ${version} up and running on port ${PORT}`)) 
     })
