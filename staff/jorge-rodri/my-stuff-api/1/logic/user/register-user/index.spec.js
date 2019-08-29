@@ -21,7 +21,9 @@ describe('logic - register user', () => {
 
     it('should succeed on correct data', async () => {
         
-        const user = await logic.registerUser(name, surname, email, password, card)
+        await logic.registerUser(name, surname, email, password, card)
+
+        const user =  await User.findOne({email})
 
         expect(user).to.exist
         expect(user.name).to.equal(name)

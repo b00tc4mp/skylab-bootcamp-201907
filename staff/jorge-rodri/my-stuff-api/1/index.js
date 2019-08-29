@@ -4,13 +4,15 @@ const express = require('express')
 const mongoose = require('mongoose')
 const { name, version } = require('./package')
 const routes = require('./routes')
+const cors = require('cors')
 
-const { env: { PORT, DB_URL } } = process
+const { env: { PORT, DB_URL, DB_URL_TEST } } = process
 
-mongoose.connect(DB_URL, { useNewUrlParser: true })
+mongoose.connect(DB_URL_TEST, { useNewUrlParser: true })
     .then(() => {
         const app = express()
 
+        app.use(cors())
         app.use('/api', routes)
 
         app.listen(PORT, () => console.log(`${name} ${version} up and running on port ${PORT}`))

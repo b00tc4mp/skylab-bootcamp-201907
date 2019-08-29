@@ -17,7 +17,7 @@ module.exports = function (email, password) {
         if (!user) throw  Error(`user with e-mail ${email} does not exist`)
 
         if (user.password !== password) throw  Error('wrong credentials')
-
+        
         return user.id
     })()
 }

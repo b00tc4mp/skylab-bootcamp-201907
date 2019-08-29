@@ -22,6 +22,7 @@ describe('logic - authenticate user', () => {
 
     it('should succeed on correct data', async () => {
         const _id = await logic.authenticateUser(email, password)
+        debugger
         expect(_id).to.exist
         expect(_id).to.be.a('string')
         expect(_id).to.equal(id)

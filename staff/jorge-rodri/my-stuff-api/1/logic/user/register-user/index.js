@@ -18,8 +18,7 @@ module.exports = function (name, surname, email, password, card) {
 
         if (user) throw Error(`user with e-mail ${email} already exists`)
 
-        const res = await User.create({ name, surname, email, password, card })
-        
-        return res
+        await User.create({ name, surname, email, password, card })
+    
     })()
 }
