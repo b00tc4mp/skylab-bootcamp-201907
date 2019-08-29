@@ -21,37 +21,34 @@ describe('logic - register property', () => {
         email = `email-${Math.random()}@email.com`
         password = `password-${Math.random()}`
 
-        return User.create({ name, surname, email, password })
-            .then(user => {
-                userId = user.id
-                const newProperty = new Property({ address, m2, year, cadastre })
-                propertyId = newProperty.id
-                newProperty.owners.push(userId)
-                return newProperty.save()
-            })
+        return (async () => {
+            const user = await User.create({ name, surname, email, password })
+            userId = user.id
+            const newProperty = new Property({ address, m2, year, cadastre })
+            propertyId = newProperty.id
+            newProperty.owners.push(userId)
+            return await newProperty.save()
+        })()
     })
 
-    it('should succeed on correct data', () =>
-        logic.property.retrieve(propertyId)
-            .then(property => {
-                expect(property).to.exist
-                expect(property.address).to.equal(address)
-                expect(property.m2).to.equal(m2)
-                expect(property.year).to.equal(year)
-                expect(property.cadastre).to.equal(cadastre)
-            })
-    )
+    it('should succeed on correct data', async () => {
+        const property = await logic.property.retrieve(propertyId)
+        expect(property).to.exist
+        expect(property.address).to.equal(address)
+        expect(property.m2).to.equal(m2)
+        expect(property.year).to.equal(year)
+        expect(property.cadastre).to.equal(cadastre)
+    })
 
-    it('should fail if the property does not exist', () =>
-        Property.deleteMany()
-        .then(() => {
-            logic.property.retrieve(propertyId)
-            .catch( error =>{
-                   expect(error).to.exist
-                   expect(error.message).to.equal(`Property with id ${propertyId} does not exist.`)
-               })
-        })
-   )
+    it('should fail if the property does not exist', async () => {
+        try {
+            await Property.deleteMany()
+            await logic.property.retrieve(propertyId)
+        } catch(error) {
+            expect(error).to.exist
+            expect(error.message).to.equal(`Property with id ${propertyId} does not exist.`)
+        }
+    })
 
     /* Make */
     it('should fail on empty id', () => 

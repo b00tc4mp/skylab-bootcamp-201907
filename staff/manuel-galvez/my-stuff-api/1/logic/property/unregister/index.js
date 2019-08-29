@@ -9,12 +9,14 @@ const { Property } = require('../../../models')
  * @returns {Promise}
 */
 
-module.exports = function(id) {
+module.exports = function (id) {
 
     validate.string(id, 'Property ID')
+    debugger
 
-    return Property.deleteOne({ _id: id })
-        .then(result => {
-            if (!result.deletedCount) throw Error(`Property with id ${id} does not exist.`)
-        })
+    return (async () => {
+        const result = await Property.deleteOne({ _id: id })
+        if (!result.deletedCount) throw Error(`Property with id ${id} does not exist.`)
+    })()
+
 }

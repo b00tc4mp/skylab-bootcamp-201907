@@ -17,18 +17,15 @@ module.exports = function(propertyId, ownerId) {
     validate.string(propertyId, 'Property ID')
     validate.string(ownerId, 'Owner ID')
 
-    return Property.findOne({ _id: propertyId })
-        .then(property => {
-            if (!property) throw Error(`Property with id ${propertyId} does not exist.`)
-            _property = property
-            return User.findOne({ _id: ownerId })
-        })
-        .then(user => {
-            if (!user) throw Error(`User with id ${ownerId} does not exist.`)
-            const match = _property.owners.find(owner => owner === ownerId)
-            if (match) throw Error(`Owner already registered in property with id ${propertyId}`)
-            _property.owners.push(ownerId)
-            return _property.save()
-        })
-        .then(() => { })
+
+    return (async () => {
+        const property = await Property.findOne({ _id: propertyId })
+        if (!property) throw Error(`Property with id ${propertyId} does not exist.`)
+        const user = await User.findOne({ _id: ownerId })
+        if (!user) throw Error(`User with id ${ownerId} does not exist.`)
+        const match = property.owners.find(owner => owner === ownerId)
+        if (match) throw Error(`Owner already registered in property with id ${propertyId}`)
+        property.owners.push(ownerId)
+        await property.save()
+    })()
 }

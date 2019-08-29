@@ -21,34 +21,32 @@ describe('logic - register property', () => {
         email = `email-${Math.random()}@email.com`
         password = `password-${Math.random()}`
 
-        return User.create({ name, surname, email, password })
-            .then(user => id = user._id.toString())
+        return (async () => {
+            const user =  await User.create({ name, surname, email, password })
+            id =  user.id
+        })()
     })
 
-    it('should succeed on correct data', () =>
-        logic.property.register(id, address, m2, year, cadastre)
-            .then(result => {
-                expect(result).to.exist
-                return Property.findOne({ cadastre })
-            })
-            .then(property => {
-                expect(property).to.exist
-                expect(property.address).to.equal(address)
-                expect(property.m2).to.equal(m2)
-                expect(property.year).to.equal(year)
-                expect(property.cadastre).to.equal(cadastre)
-            })
-    )
+    it('should succeed on correct data', async () => {
+        let property = await logic.property.register(id, address, m2, year, cadastre)
+        expect(property).to.exist
+        property = await Property.findOne({ cadastre })
+        expect(property).to.exist
+        expect(property.address).to.equal(address)
+        expect(property.m2).to.equal(m2)
+        expect(property.year).to.equal(year)
+        expect(property.cadastre).to.equal(cadastre)
+    })
 
-    it('should fail if the property already exists', () =>
-       Property.create({ id, address, m2, year, cadastre })
-           .then (() => logic.property.register(id, address, m2, year, cadastre)
-               .catch( error =>{
-                   expect(error).to.exist
-                   expect(error.message).to.equal(`Property already exists.`)
-               })
-           )
-    )
+    it('should fail if the property already exists', async () => {
+       await Property.create({ id, address, m2, year, cadastre })
+       try {
+            await logic.property.register(id, address, m2, year, cadastre)
+       } catch(error) {
+            expect(error).to.exist
+            expect(error.message).to.equal(`Property already exists.`)
+       }
+    })
 
     /* Address */
     it('should fail on empty address', () => 

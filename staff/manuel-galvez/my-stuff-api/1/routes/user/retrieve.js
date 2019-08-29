@@ -3,7 +3,6 @@ const logic = require('../../logic')
 module.exports = async function(req, res) {
 
     const { params: { id } } = req
-    debugger
 
     try {
         const user = await logic.user.retrieve(id)

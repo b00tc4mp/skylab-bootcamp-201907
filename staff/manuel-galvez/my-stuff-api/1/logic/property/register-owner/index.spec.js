@@ -40,43 +40,43 @@ describe('logic - register property owner', () => {
         return Promise.all([userOne.save(), userTwo.save(), newProperty.save()])
     })
 
-    it('should succeed on correct data', () => {
-        return logic.property.registerOwner(propertyId, userTwoId)
-            .then(response => {
-                expect(response).not.to.exist
-                return Property.findById(propertyId)
-                    .then(property => {
-                        const match = property.owners.find(owner => owner._id.toString() === userTwoId)
-                        expect(match).to.exist
-                })
-            })
+    it('should succeed on correct data', async () => {
+        const response = await logic.property.registerOwner(propertyId, userTwoId)
+        expect(response).not.to.exist
+        const property = await Property.findById(propertyId)
+        const match = property.owners.find(owner => owner._id.toString() === userTwoId)
+        expect(match).to.exist
+    })
+
+    it('should fail if property does not exist', async () => {
+        await Property.deleteMany()
+        try {
+            await logic.property.registerOwner(propertyId, userTwoId)
+        } catch(error) {
+            expect(error).to.exist
+            expect(error.message).to.equal(`Property with id ${propertyId} does not exist.`)
         }
-    )
-
-    it('should fail if property does not exist', () => {
-        return Property.deleteMany()
-        .then(() => logic.property.registerOwner(propertyId, userTwoId))
-        .catch(error =>{
-                expect(error).to.exist
-                expect(error.message).to.equal(`Property with id ${propertyId} does not exist.`)
-        })
     })
 
-    it('should fail if user does not exist', () => {
-        return User.deleteMany()
-        .then(() => logic.property.registerOwner(propertyId, userTwoId))
-        .catch(error =>{
-                expect(error).to.exist
-                expect(error.message).to.equal(`User with id ${userTwoId} does not exist.`)
-        })
+    it('should fail if user does not exist', async() => {
+        await User.deleteMany()
+
+        try {
+            await logic.property.registerOwner(propertyId, userTwoId)
+        } catch(error) {
+            expect(error).to.exist
+            expect(error.message).to.equal(`User with id ${userTwoId} does not exist.`)
+        }
     })
 
-    it('should fail if user is already an owner of the property', () => {
-        return logic.property.registerOwner(propertyId, userOneId)
-        .catch(error =>{
-                expect(error).to.exist
-                expect(error.message).to.equal(`Owner already registered in property with id ${propertyId}`)
-        })
+    it('should fail if user is already an owner of the property', async () => {
+
+        try {
+            await logic.property.registerOwner(propertyId, userOneId)
+        } catch(error) {
+            expect(error).to.exist
+            expect(error.message).to.equal(`Owner already registered in property with id ${propertyId}`)
+        }
     })
 
 

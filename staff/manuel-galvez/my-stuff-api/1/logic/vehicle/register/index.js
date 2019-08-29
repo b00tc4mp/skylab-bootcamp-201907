@@ -26,8 +26,10 @@ module.exports = function(id, make, model, year, type, color, electric, plate) {
     validate.string(plate, 'plate')
     validate.string(id, 'id')
 
-    return Vehicle.findOne({ plate })
-        .then(response => {
+
+    return (async() => {
+        
+        const response  =  await Vehicle.findOne({ plate })
             if (response) throw new Error('Vehicle already exists.')
             const vehicle = new Vehicle({
                 make, 
@@ -37,13 +39,13 @@ module.exports = function(id, make, model, year, type, color, electric, plate) {
                 color,
                 electric,
                 plate 
-            })
-            vehicle.owner = id
-            return vehicle.save()
-        })
-        .then(() => Vehicle.findOne({ plate })
-        ).then(response => {
-            if (!response) throw new Error(`Vehicle with plate ${plate} does not exist`)
-            return response._id.toString()
-        })
+             })
+             debugger
+                vehicle.owner = id
+                await vehicle.save()
+                    const responseVehicle= await Vehicle.findOne({ plate })
+                    if (!responseVehicle) throw new Error(`Vehicle with plate ${plate} does not exist`)
+                    return responseVehicle._id.toString()
+        
+    })()
 }
