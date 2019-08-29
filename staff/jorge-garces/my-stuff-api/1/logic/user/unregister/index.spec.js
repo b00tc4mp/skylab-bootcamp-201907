@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 
 describe('logic - unregister user', () => {
 
-    before(() => mongoose.connect('mongodb://localhost/my-stuff-api', { useNewUrlParser: true }))
+    before(() => mongoose.connect('mongodb://172.17.0.2/my-stuff-api', { useNewUrlParser: true }))
     let name, surname, email, password, id
 
     beforeEach(async () => {

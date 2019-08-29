@@ -4,7 +4,7 @@ const logic = require('../../../logic')
 const { User, Card } = require('../../../models')
 describe('logic', () => {
     before(() => {
-        mongoose.connect('mongodb://localhost/my-api-test', {
+        mongoose.connect('mongodb://172.17.0.2/my-api-test', {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })

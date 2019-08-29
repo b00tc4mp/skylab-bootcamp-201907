@@ -5,7 +5,7 @@ const { User, Vehicle } = require('../../../models')
 
 describe('logic - update vehicle', () => {
     before(() => {
-        mongoose.connect('mongodb://localhost/my-stuff-api-test', {
+        mongoose.connect('mongodb://172.17.0.2/my-stuff-api-test', {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })

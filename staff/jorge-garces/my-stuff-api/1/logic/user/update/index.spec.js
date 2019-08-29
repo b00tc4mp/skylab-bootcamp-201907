@@ -4,7 +4,7 @@ const logic = require('../../../logic')
 const {User} = require('../../../models')
 describe('logic-update user', ()=>{
     before(()=>{
-        mongoose.connect('mongodb://localhost/my-stuff-api', {useNewUrlParser: true})
+        mongoose.connect('mongodb://172.17.0.2/my-stuff-api', {useNewUrlParser: true})
        
     })
     beforeEach(async() => {

@@ -5,7 +5,7 @@ const {User, Card} = require('../../../models')
 
 describe('logic - retrieve all cards', () => {
 
-    before(() => mongoose.connect('mongodb://localhost/my-stuff-api-test', { useNewUrlParser: true }))
+    before(() => mongoose.connect('mongodb://172.17.0.2/my-stuff-api-test', { useNewUrlParser: true }))
 
     let userId, cardId, number, expiry, name, surname, email, password, expiryDate, expiryDate2
 

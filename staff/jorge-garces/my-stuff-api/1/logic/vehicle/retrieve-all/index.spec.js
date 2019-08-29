@@ -5,7 +5,7 @@ const { User, Vehicle } = require('../../../models')
 
 describe('logic - retrieve all vehicle', () => {
 
-    before(() => mongoose.connect('mongodb://localhost/my-stuff-api-test', { useNewUrlParser: true }))
+    before(() => mongoose.connect('mongodb://172.17.0.2/my-stuff-api-test', { useNewUrlParser: true }))
 
     let make, make2, model, model2, year, year2, type, type2, color, color2, electric, electric2, plate, plate2
     let userId, name, surname, email, password, vehIdOne, vehIdTwo
