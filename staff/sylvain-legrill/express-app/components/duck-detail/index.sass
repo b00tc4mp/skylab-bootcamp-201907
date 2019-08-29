@@ -1,0 +1,38 @@
+.duck-detail
+    @extend %main-content-box
+    background-color: $primary-bg-color
+    color: $secondary-text-color
+    margin-bottom: 2em
+    padding: 3em
+    display: flex
+    flex-direction: column
+    align-items: center
+
+    &__title
+        font-size: 2rem
+
+    &__photo
+        // max-width: 80%
+
+    &__price
+        margin-top: 2em
+        border: 2px solid white
+        border-radius: 3em
+        padding: 20px
+        width: 20%
+        align-self: center
+        font-weight: bold
+
+    &__link
+        margin-top: 1em
+        color: white
+        font-weight: bold
+        text-decoration: none 
+    
+    &__back
+        margin-top: 1em
+        color: grey
+        text-decoration: none 
+
+    &__link:hover, &__back:hover
+        color: $hover-text-color
