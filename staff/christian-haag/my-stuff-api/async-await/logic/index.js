@@ -1,5 +1,4 @@
 module.exports = {
-
     registerCard: require('./card/register'),
     retrieveCard: require('./card/retrieve'),
     unregisterCard: require('./card/unregister'),

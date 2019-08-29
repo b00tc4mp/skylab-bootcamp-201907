@@ -9,24 +9,24 @@ const { User, Property } = require('../../../data')
  */
 
 module.exports = function (propertyId, ownerId) {
-    validate.string(propertyId, 'property id')
-    validate.string(userId, 'user id')
+    validate.string(propertyId, 'propertyId')
+    validate.string(ownerId, 'ownerId')
 
-    let _property
+    return (async () => {
+        const [property, user] = await Promise.all([Property.findById(propertyId), User.findById(ownerId)])
 
-    return Property.findById(propertyId)
-        .then(property => {
-            if (!property) throw new Error(`property does not exist`)
+        if (!property) throw new Error(`property does not exist`)
 
-            _property = property
+        if (!user) throw new Error('No permission to add new owner')
 
-            return User.findById(ownerId)
-        })
-        .then(user => {
-            if (!user) throw new Error('wrong owner id')
-            const userFound = _property.owners.find(owner => owner.toString() === ownerId)
-            if (userFound) throw new Error('owner already exist')
-            _property.owners.push(ownerId)
-            return _property.save()
-        })
+        const userFound = property.owners.find(owner => owner.toString() === ownerId)
+
+        if (userFound) throw new Error('owner already exist')
+
+        property.owners.push(user.id)
+
+        await property.save()
+        return property
+    })()
+
 }

@@ -10,16 +10,19 @@ const { User } = require('../../../data')
  * @returns {Promise}
  */
 module.exports = function (email, password) {
-    validate.string(email, 'username')
+
     validate.email(email, 'username')
     validate.string(password, 'password')
 
-    return User.findOne({ email })
-        .then(user => {
-            if (!user) throw new Error(`user with e-mail ${email} does not exist`)
+    return (async () => {
 
-            if (user.password !== password) throw new Error('wrong credentials')
+        const user = await User.findOne({ email })
 
-            return user.id
-        })
+        if (!user) throw new Error(`user with e-mail ${email} does not exist`)
+        debugger
+        if (user.password !== password) throw new Error('wrong credentials')
+
+        return user.id
+
+    })()
 }

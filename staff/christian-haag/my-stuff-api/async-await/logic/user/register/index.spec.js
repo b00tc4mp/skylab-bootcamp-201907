@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 const logic = require('../../.')
-const { User } = require('../../data')
+const { User } = require('../../../data')
 const mongoose = require('mongoose')
 
 describe('logic - register user', () => {
@@ -8,30 +8,30 @@ describe('logic - register user', () => {
 
     let name, surname, email, password
 
-    beforeEach(() => {
+    beforeEach(async () => {
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
 
-        return User.deleteMany()
+        await User.deleteMany()
     })
 
-    it('should succeed on correct data', () =>
-        logic.user.register(name, surname, email, password)
-            .then(result => {
-                expect(result).not.to.exist
+    it('should succeed on correct data', async () => {
 
-                return User.findOne({ email })
-            })
-            .then(user => {
-                expect(user).to.exist
-                expect(user.name).to.equal(name)
-                expect(user.surname).to.equal(surname)
-                expect(user.email).to.equal(email)
-                expect(user.password).to.equal(password)
-            })
-    )
+        const result = await logic.registerUser(name, surname, email, password)
+
+        expect(result).to.exist
+
+        const user = await User.findOne({ email })
+
+        expect(user).to.exist
+        expect(user.name).to.equal(name)
+        expect(user.surname).to.equal(surname)
+        expect(user.email).to.equal(email)
+        expect(user.password).to.equal(password)
+
+    })
 
     after(() => mongoose.disconnect())
 })

@@ -12,22 +12,26 @@ const { User, Property } = require('../../../data')
 
 module.exports = function (propertyId, ownerId) {
 
-    let _property
+    validate.string(propertyId, 'propId')
+    validate.string(ownerId, 'ownerId')
 
-    validate.string(propertyId, 'Property id')
-    validate.string(ownerId, 'Owner id')
+    return (async () => {
+        const [property, user] = await Promise.all([Property.findOne({ _id: propertyId }), User.findOne({ _id: ownerId })])
 
-    return Property.findOne({ _id: propertyId })
-        .then(property => {
-            if (!property) throw Error('wrong property id provided.')
-            _property = property
-            return User.findOne({ _id: ownerId })
-        })
-        .then(user => {
-            if (!user) throw Error('wrong owner id provided.')
-            const match = _property.owners.find(owner => owner.toString() === ownerId)
-            if (!match) throw Error(`user with id ${ownerId} is not an owner.`)
-            _property.owners.splice(_property.owners.indexOf(match))
-            return _property.save()
-        })
+        if (!property) throw Error('wrong property id provided.')
+
+
+        if (!user) throw Error('wrong owner id provided.')
+
+        const match = property.owners.find(owner => owner.toString() === ownerId)
+
+        if (!match) throw Error(`user with id ${ownerId} is not an owner.`)
+
+
+        property.owners.splice(property.owners.indexOf(match), 1)
+
+        return property.save()
+    })()
+
+
 }

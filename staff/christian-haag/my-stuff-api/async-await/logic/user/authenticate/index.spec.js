@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 const logic = require('../../.')
-const { User } = require('../../data')
+const { User } = require('../../../data')
 const mongoose = require('mongoose')
 
 
@@ -9,25 +9,25 @@ describe('logic - authenticate user', () => {
 
     let name, surname, email, password, id
 
-    beforeEach(() => {
+    beforeEach(async () => {
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
 
-        return User.deleteMany()
-            .then(() => User.create({ name, surname, email, password })
-                .then(user => id = user.id))
+        await User.deleteMany()
+        const user = await User.create({ name, surname, email, password })
+        id = user.id
     })
 
-    it('should succeed on correct data', () =>
-        logic.user.authenticate(email, password)
-            .then(_id => {
-                expect(_id).to.exist
-                expect(_id).to.be.a('string')
-                expect(_id).to.equal(id)
-            })
-    )
+    it('should succeed on correct data', async () => {
+        const _id = await logic.authenticateUser(email, password)
+
+        expect(_id).to.exist
+        expect(_id).to.be.a('string')
+        expect(_id).to.equal(id)
+
+    })
 
     after(() => mongoose.disconnect())
 })

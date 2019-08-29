@@ -13,8 +13,8 @@ module.exports = function (id, data) {
 
     validate.string(id, 'id')
 
-    return User.findByIdAndUpdate(id, { $set: data })
-        .then(user => {
-            if (!user) throw new Error(`user with id ${id} does not exist`)
-        })
+    return (async () => {
+        const user = await User.findByIdAndUpdate(id, { $set: data })
+        if (!user) throw new Error(`user with id ${id} does not exist`)
+    })()
 }

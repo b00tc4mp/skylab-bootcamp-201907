@@ -13,8 +13,11 @@ module.exports = function (id, password) {
     validate.string(id, 'id')
     validate.string(password, 'password')
 
-    return User.deleteOne({ _id: id, password })
-        .then(result => {
-            if (!result.deletedCount) throw new Error(`wrong credentials`)
-        })
+    return (async () => {
+        const result = await User.deleteOne({ _id: id, password })
+
+        if (!result.deletedCount) throw new Error(`wrong credentials`)
+
+
+    })()
 }

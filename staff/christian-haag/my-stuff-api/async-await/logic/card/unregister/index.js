@@ -14,8 +14,8 @@ module.exports = function (id) {
 
     validate.string(id, 'id')
 
-    return Card.deleteOne({ _id: id })
-        .then(result => {
-            if (!result.deletedCount) throw new Error(`wrong credentials`)
-        })
+    return (async () => {
+        const result = await Card.deleteOne({ _id: id })
+        if (!result.deletedCount) throw new Error(`wrong credentials`)
+    })()
 }

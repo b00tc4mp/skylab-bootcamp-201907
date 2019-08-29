@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 const logic = require('../../.')
-const { User } = require('../../data')
+const { User } = require('../../../data')
 const mongoose = require('mongoose')
 
 describe('logic - register user', () => {

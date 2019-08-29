@@ -12,12 +12,16 @@ module.exports = function (id) {
 
     validate.string(id, 'id')
 
-    return User.findOne({ _id: id }, { _id: 0, password: 0 }).lean()
-        .then(user => {
-            if (!user) throw new Error(`user with id ${id} not found`)
+    return (async () => {
 
-            user.id = id
+        const user = await User.findOne({ _id: id }, { _id: 0, password: 0 }).lean()
 
-            return user
-        })
+        if (!user) throw new Error(`user with id ${id} not found`)
+
+        user.id = id
+
+        return user
+
+    })()
+
 }

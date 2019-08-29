@@ -21,7 +21,8 @@ module.exports = (() => {
         },
 
         date(target, name) {
-            if (typeof target !== 'date') throw new Error(`${name} with value ${target} is not a valid date`)
+            if (target === '') throw new Error(`${name} is empty or blank`)
+            if (!(target instanceof Date)) throw new Error(`${name} with value ${target} is not a valid date`)
         },
 
         email(target, name) {

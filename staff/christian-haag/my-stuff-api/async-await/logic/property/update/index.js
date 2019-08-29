@@ -12,9 +12,9 @@ const { Property } = require('../../../data')
 module.exports = function (id, data) {
 
     validate.string(id, 'id')
+    return (async () => {
+        const property = await Property.findByIdAndUpdate(id, { $set: data }, { useFindAndModify: false })
 
-    return Property.findByIdAndUpdate(id, { $set: data })
-        .then(user => {
-            if (!user) throw new Error(`user with id ${id} does not exist`)
-        })
+        if (!property) throw new Error(`property with id does not exist`)
+    })()
 }

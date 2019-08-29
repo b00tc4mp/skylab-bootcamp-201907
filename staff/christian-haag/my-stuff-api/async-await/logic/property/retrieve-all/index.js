@@ -11,13 +11,14 @@ module.exports = function (id) {
 
     validate.string(id, 'id')
 
-    return Property.find({ owner: id }, { __v: 0 }).lean()
-        .then(properties => {
-            if (!properties) throw new Error('no properties found for this user id')
-            properties.forEach(property => {
-                property.id = property._id
-                //WTF, why delete?
-                delete property._id
-            })
+    return (async () => {
+        const properties = await Property.find({ owners: id }, { __v: 0 })
+
+        if (!properties) throw new Error('no properties found for this user id')
+        await properties.forEach(property => {
+            property.id = property._id
+            delete property._id
         })
+        return properties
+    })()
 }

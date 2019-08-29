@@ -1,5 +1,5 @@
 const validate = require('../../../utils/validate')
-const { Property } = require('../../../data')
+const { Property, User } = require('../../../data')
 
 /**
  * Add  a property.
@@ -15,24 +15,28 @@ const { Property } = require('../../../data')
  */
 
 module.exports = function (id, address, sqm, yearOfConstruction, cadastre, mortgage) {
+    validate.string(id, 'id')
+    validate.string(address, 'address')
+    validate.number(sqm, 'sqm')
+    validate.number(yearOfConstruction, 'yearOfConstruction')
+    validate.string(cadastre, 'cadastre')
+    validate.boolean(mortgage, 'mortgage')
 
-    string.validate(address, 'address')
-    string.validate(sqm, 'sqm')
-    string.validate(yearOfConstruction, 'yearOfConstruction')
-    string.validate(cadastre, 'cadastre')
-    string.validate(mortgage, 'mortgage')
+    return (async () => {
 
-    return Promise.all([User.findById(id), Property.findOne({ cadastre })])
-        .then(([user, property]) => {
-            if (!user) throw new Error(`user ${id} does not exist`)
+        const [user, property] = await Promise.all([User.findById(id), Property.findOne({ cadastre })])
 
-            if (property) throw new Error(`property with cadastre ${cadastre} already exists`)
+        if (!user) throw new Error(`user ${id} does not exist`)
 
-            const newProperty = new Property({ address, sqm, yearOfConstruction, cadastre, mortgage })
+        if (property) throw new Error(`property with cadastre ${cadastre} already exists`)
 
-            newProperty.owners.push(user.id)
+        const _property = new Property({ address, sqm, yearOfConstruction, cadastre, mortgage })
 
-            return newProperty.save()
-        })
-        .then(({ id }) => id)
+        _property.owners.push(user.id)
+
+        await _property.save()
+
+        return _property.id
+
+    })()
 }

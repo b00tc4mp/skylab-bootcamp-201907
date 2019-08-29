@@ -18,7 +18,7 @@ describe('logic - add card', () => {
         cardBrand = 'Visa'
         cardType = 'Credit'
         cardNumber = Math.floor(Math.random() * 9999999999999999)
-        expiry = new Date
+        expiry = new Date(year, month, day)
 
         await User.deleteMany()
         const user = await User.create({ name, surname, email, password })
@@ -157,7 +157,7 @@ describe('logic - add card', () => {
             cardBrand = 'Visa'
             cardType = 'Credit'
             cardNumber = Math.floor(Math.random() * 9999999999999999)
-            expiry = new Date
+            expiry = new Date(year, month, day)
 
             number2 = 1254658912561234
 
@@ -200,7 +200,7 @@ describe('logic - add card', () => {
             cardBrand = 'Visa'
             cardType = 'Credit'
             cardNumber = Math.floor(Math.random() * 9999999999999999)
-            expiry = new Date
+            expiry = new Date(year, month, day)
 
             number2 = 1254658912561234
 

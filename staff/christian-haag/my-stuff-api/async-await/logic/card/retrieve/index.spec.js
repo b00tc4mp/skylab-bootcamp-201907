@@ -13,7 +13,7 @@ describe('logic - retrieve card', () => {
     let rand = Math.floor(Math.random() * cardArr.length)
     let userId, cardId, name, surname, email, password, cardBrand, cardType, number, expiry
 
-    beforeEach(() => {
+    beforeEach(async () => {
         name = `C-name-${Math.random()}`
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
@@ -21,41 +21,40 @@ describe('logic - retrieve card', () => {
         cardBrand = cardArr[rand]
         cardType = Math.random() >= 0.5 ? 'Credit' : 'Debit'
         number = Math.floor(Math.random() * 9999999999999999)
-        expiry = randomDate()
+        expiry = new Date()
 
 
 
-        return Card.create({ cardBrand, cardType, number, expiry })
-            .then(card => cardId = card.id)
+        const card = await Card.create({ cardBrand, cardType, number, expiry })
+
+        cardId = card.id
 
     })
 
     it('should fail on empty id', () =>
         expect(() =>
-            logic.card.retrieve('')
+            logic.retrieveCard('')
         ).to.throw('id is empty or blank')
     )
 
     it('should fail on undefined id', () =>
         expect(() =>
-            logic.card.retrieve(undefined)
+            logic.retrieveCard(undefined)
         ).to.throw(`id with value undefined is not a string`)
     )
 
     it('should fail on wrong data type', () =>
         expect(() =>
-            logic.card.retrieve(123456798)
+            logic.retrieveCard(123456798)
         ).to.throw(`id with value 123456798 is not a string`)
     )
 
 
-    it('schould retireve card by id', () => {
-        return logic.card.retrieve(cardId)
-            .then(card => {
-                debugger
-                expect(card).to.exist
-                expect(card.id).to.equal(cardId)
-            })
+    it('schould retireve card by id', async () => {
+        const _card = await logic.retrieveCard(cardId)
+        expect(_card).to.exist
+        expect(_card.id).to.equal(cardId)
+
     })
 
     after(() => mongoose.disconnect())
