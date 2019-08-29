@@ -5,7 +5,7 @@ const { User, Card } = require('../../../models')
 
 describe('logic - register card', () => {
 
-    before(() => mongoose.connect('mongodb://172.17.0.2/my-stuff-api-test', { useNewUrlParser: true }))
+    before(() => mongoose.connect('mongodb://localhost/my-stuff-api-test', { useNewUrlParser: true }))
 
     let number, expiry, id, _user, _cardId
     let name, surname, email, password

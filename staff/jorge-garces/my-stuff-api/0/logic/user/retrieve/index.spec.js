@@ -6,7 +6,7 @@ const { User } = require('../../../models')
 describe('logic', ()=>{
 
     before(()=>{
-        mongoose.connect('mongodb://172.17.0.2/my-stuff-api', {useNewUrlParser: true})
+        mongoose.connect('mongodb://localhost/my-stuff-api', {useNewUrlParser: true})
     })
 
   

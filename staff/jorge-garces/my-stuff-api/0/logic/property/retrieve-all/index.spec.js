@@ -5,7 +5,7 @@ const {User, Property} = require('../../../models')
 
 describe('logic - retrieve all properties', () => {
 
-    before(() => mongoose.connect('mongodb://172.17.0.2/my-stuff-api-test', { useNewUrlParser: true }))
+    before(() => mongoose.connect('mongodb://localhost/my-stuff-api-test', { useNewUrlParser: true }))
     let propertyId, propertyId2, userId, name, surname, email, password
     let address, address2, m2, m2v2, year, year2, cadastre, cadastre2
     beforeEach(()=> {

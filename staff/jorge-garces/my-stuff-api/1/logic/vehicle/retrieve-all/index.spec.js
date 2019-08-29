@@ -5,7 +5,7 @@ const { User, Vehicle } = require('../../../models')
 
 describe('logic - retrieve all vehicle', () => {
 
-    before(() => mongoose.connect('mongodb://172.17.0.2/my-stuff-api-test', { useNewUrlParser: true }))
+    before(() => mongoose.connect('mongodb://localhost/my-stuff-api-test', { useNewUrlParser: true }))
 
     let make, make2, model, model2, year, year2, type, type2, color, color2, electric, electric2, plate, plate2
     let userId, name, surname, email, password, vehIdOne, vehIdTwo
@@ -34,9 +34,8 @@ describe('logic - retrieve all vehicle', () => {
         email = `email-${Math.random()}@email.com`
         password = `123-${Math.random()}`
 
-        return Vehicle.deleteMany()
-            .then(() => {
-
+        return ( async() => {
+          await Vehicle.deleteMany()
                 const newUser = new User({ name, surname, email, password })
                 userId = newUser.id
                 const vehicleOne = new Vehicle({ make, model, year, type, color, electric, plate})
@@ -45,13 +44,13 @@ describe('logic - retrieve all vehicle', () => {
                 vehIdTwo = vehicleTwo.id
                 vehicleOne.owner.push(userId)
                 vehicleTwo.owner.push(userId)
-                return Promise.all([newUser.save(), vehicleOne.save(), vehicleTwo.save()])
-            })
+                return await Promise.all([newUser.save(), vehicleOne.save(), vehicleTwo.save()])
+        })()
     })
 
-    it('should succeed on correct data', () =>
-        logic.vehicle.retrieveAll(userId)
-            .then(vehicles => {
+    it('should succeed on correct data', async () =>{
+        const vehicles = await logic.vehicle.retrieveAll(userId)
+           
                 expect(vehicles).to.exist
                 expect(vehicles.length).to.equal(2)
                 const vehOne = vehicles.find(vehicle => vehicle.id.toString() === vehIdOne)
@@ -70,17 +69,18 @@ describe('logic - retrieve all vehicle', () => {
                 expect(vehTwo.color).to.equal(color2)
                 expect(vehTwo.electric).to.equal(electric2)
                 expect(vehTwo.plate).to.equal(plate2)
-            })
-    )
+            
+    })
 
-    it('should fail if the user owns no vehicles', () => {
-        return Vehicle.deleteMany()
-            .then(() => logic.vehicle.retrieveAll(userId))
-            .catch( error =>{
-                expect(error).to.exist
-                expect(error.message).to.equal(`User with id ${userId} does not own any vehicle.`)
-            })
-           
+    it('should fail if the user owns no vehicles', async () => {
+        try {
+            await Vehicle.deleteMany()
+            const vehicle = await logic.vehicle.retrieveAll(userId)
+        }catch ({message}){
+            expect(message).to.exist
+            expect(message).to.equal(`User with id ${userId} does not own any vehicle.`)
+        }
+                   
     })
 
     /* Make */

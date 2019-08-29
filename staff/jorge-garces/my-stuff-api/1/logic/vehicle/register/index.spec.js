@@ -5,7 +5,7 @@ const { User, Vehicle } = require('../../../models')
 
 describe('logic - register vehicle', () => {
 
-    before(() => mongoose.connect('mongodb://172.17.0.2/my-stuff-api-test', { useNewUrlParser: true }))
+    before(() => mongoose.connect('mongodb://localhost/my-stuff-api-test', { useNewUrlParser: true }))
 
     let make, model, year, type, color, electric, plate, id, vehicleId
 
@@ -20,46 +20,50 @@ describe('logic - register vehicle', () => {
         electric = Boolean(Math.round(Math.random()))
         plate = `vehplate-${Math.random()}`
 
-        return Vehicle.deleteMany()
-            .then(() => {
+        return ( async() => {
+            await Vehicle.deleteMany()
+            
                 name = `name-${Math.random()}`
                 surname = `surname-${Math.random()}`
                 email = `email-${Math.random()}@email.com`
                 password = `123-${Math.random()}`
 
-                return User.create({ name, surname, email, password })
-            })
-            .then(user => id = user._id.toString())
+                const user =  await User.create({ name, surname, email, password })
+                id = user._id.toString()
+        })()
     })
 
-    it('should succeed on correct data', () =>
-        logic.vehicle.register(id, make, model, year, type, color, electric, plate)
-            .then(result => {
-                vehicleId = result
-                expect(vehicleId).to.exist
-                return Vehicle.findOne({ plate })
-            })
-            .then(vehicle => {
+    it('should succeed on correct data', async () =>{
+        debugger
+       const vehicle = await logic.vehicle.register(id, make, model, year, type, color, electric, plate)
                 expect(vehicle).to.exist
-                expect(vehicle.id).to.equal(vehicleId)
-                expect(vehicle.make).to.equal(make)
-                expect(vehicle.model).to.equal(model)
-                expect(vehicle.year).to.equal(year)
-                expect(vehicle.type).to.equal(type)
-                expect(vehicle.color).to.equal(color)
-                expect(vehicle.electric).to.equal(electric)
-            })
-    )
+                const vehicleFound = await Vehicle.findOne({ plate })
+                expect(vehicleFound).to.exist
+                expect(vehicleFound.id).to.equal(vehicle)
+                expect(vehicleFound.make).to.equal(make)
+                expect(vehicleFound.model).to.equal(model)
+                expect(vehicleFound.year).to.equal(year)
+                expect(vehicleFound.type).to.equal(type)
+                expect(vehicleFound.color).to.equal(color)
+                expect(vehicleFound.electric).to.equal(electric)
+    })
 
-    it('should fail if the vehicle already exists', () =>
-       Vehicle.create({ make, model, year, type, color, electric, plate })
-           .then (() => logic.vehicle.register(id, make, model, year, type, color, electric, plate)
-               .catch( error =>{
-                   expect(error).to.exist
-                   expect(error.message).to.equal(`Vehicle already exists.`)
-               })
-           )
-    )
+
+   
+
+    it('should fail if the vehicle already exists', async () =>{
+        try {
+            await Vehicle.create({ make, model, year, type, color, electric, plate })
+            const vehicle = await logic.vehicle.register(id, make, model, year, type, color, electric, plate)
+        }
+        catch({message}){
+            expect(message).to.exist
+            expect(message).to.equal(`Vehicle already exists.`) 
+        }
+               
+           })
+        
+    
 
     /* Make */
     it('should fail on empty make', () => 

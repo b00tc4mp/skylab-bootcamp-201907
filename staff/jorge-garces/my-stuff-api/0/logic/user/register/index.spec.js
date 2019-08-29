@@ -5,7 +5,7 @@ const { User } = require('../../../models')
 
 describe('logic - register user', () => {
 
-    before(() => mongoose.connect('mongodb://172.17.0.2/my-stuff-api-test', { useNewUrlParser: true }))
+    before(() => mongoose.connect('mongodb://localhost/my-stuff-api-test', { useNewUrlParser: true }))
 
     let name, surname, email, password
 

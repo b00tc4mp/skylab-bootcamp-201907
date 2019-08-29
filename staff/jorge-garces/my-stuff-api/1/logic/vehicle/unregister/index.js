@@ -9,8 +9,9 @@ const { Vehicle } = require('../../../models')
 */
 module.exports = function (id) {
     validate.string(id, 'Vehicle id')
-    return Vehicle.deleteOne({ _id: id })
-        .then(response => {
-            if (!response.deletedCount) throw Error(`Wrong id provided.`)
-        })
+
+    return (async () => {
+        const response = await Vehicle.deleteOne({ _id: id })
+        if (!response.deletedCount) throw Error(`Wrong id provided.`)
+    })()
 }

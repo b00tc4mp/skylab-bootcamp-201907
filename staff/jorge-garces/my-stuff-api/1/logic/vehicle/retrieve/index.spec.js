@@ -5,7 +5,7 @@ const { User, Vehicle } = require('../../../models')
 
 describe('logic - retrieve vehicle', () => {
 
-    before(() => mongoose.connect('mongodb://172.17.0.2/my-stuff-api-test', { useNewUrlParser: true }))
+    before(() => mongoose.connect('mongodb://localhost/my-stuff-api-test', { useNewUrlParser: true }))
 
     let vehicleId, _userId
 
@@ -20,49 +20,49 @@ describe('logic - retrieve vehicle', () => {
         electric = Boolean(Math.round(Math.random()))
         plate = `vehplate-${Math.random()}`
 
-        return Vehicle.deleteMany()
-            .then(() => {
+        return ( async() => {
+             await Vehicle.deleteMany()
+        
                 name = `name-${Math.random()}`
                 surname = `surname-${Math.random()}`
                 email = `email-${Math.random()}@email.com`
                 password = `123-${Math.random()}`
 
-                return User.create({ name, surname, email, password })
-            })
-            .then(user => id = user.id)
-            .then(userId => {
-                const newVehicle = new Vehicle({ make, model, year, type, color, electric, plate})
-                vehicleId = newVehicle.id
-                _userId = userId
-                newVehicle.owner.push(userId)
-                return newVehicle.save()
-            })
+               const user = await User.create({ name, surname, email, password })
+               id = user.id
+               const newVehicle = new Vehicle({ make, model, year, type, color, electric, plate})
+               vehicleId = newVehicle.id
+               newVehicle.owner.push(id)
+               await newVehicle.save()
+            })()
     })
 
-    it('should succeed on correct data', () =>
-        logic.vehicle.retrieve(vehicleId)
-            .then(vehicle => {
+    it('should succeed on correct data', async () =>{
+        const vehicle = await logic.vehicle.retrieve(vehicleId)
+            debugger
                 expect(vehicle).to.exist
-                expect(vehicle.owner[vehicle.owner.length - 1].toString()).to.equal(_userId)
+                expect(vehicle.owner[vehicle.owner.length - 1].toString()).to.equal(id)
                 expect(vehicle.make).to.equal(make)
                 expect(vehicle.model).to.equal(model)
                 expect(vehicle.year).to.equal(year)
                 expect(vehicle.type).to.equal(type)
                 expect(vehicle.color).to.equal(color)
                 expect(vehicle.electric).to.equal(electric)
-            })
-    )
+    })
+    
 
-    it('should fail if the vehicle already exists', () => {
-       const newVehicle = new Vehicle({ make, model, year, type, color, electric, plate })
-       newVehicle.owner = _userId 
-       return newVehicle.save()
-        .then (() => logic.vehicle.retrieve(vehicleId))
-        .catch( error =>{
-            expect(error).to.exist
-            expect(error.message).to.equal(`Vehicle already exists.`)
-            })
-           
+    it('should fail if the vehicle already exists', async () => {
+
+       try {
+        const newVehicle = new Vehicle({ make, model, year, type, color, electric, plate })
+        newVehicle.owner = _userId 
+        await newVehicle.save()
+        await logic.vehicle.retrieve(vehicleId)
+       }
+       catch({message}){
+            expect(message).to.exist
+            expect(message).to.equal(`Vehicle already exists.`)
+       }
     })
 
     /* Make */
@@ -84,4 +84,5 @@ describe('logic - retrieve vehicle', () => {
     ).to.throw(`Vehicle ID with value 123 is not a string`)
     )
 
+    after(() => mongoose.disconnect())
 })
