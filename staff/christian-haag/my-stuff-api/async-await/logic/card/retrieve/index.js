@@ -1,5 +1,5 @@
 const validate = require('../../../utils/validate')
-const { Card } = require('../../../data')
+const { User } = require('../../../data')
 
 /**
  * 
@@ -8,16 +8,17 @@ const { Card } = require('../../../data')
  * 
  */
 
-module.exports = function (id) {
+module.exports = function (userId, cardId) {
 
-    validate.string(id, 'id')
+    validate.string(userId, 'userId')
+    validate.string(cardId, 'cardId')
 
     return (async () => {
-        const card = await Card.findOne({ _id: id }, { _id: 0, __v: 0 }).lean()
+        const user = await User.findById(userId)
+        if (!user) throw Error(`User with id ${userId} does not exist`)
 
-        if (!card) throw Error(`Card width id ${id} does not exist`)
-
-        card.id = id
+        const card = user.cards.find(card => card.id === cardId)
+        if (!card) throw Error(`Card with id ${cardId} does not exist.`)
 
         return card
 

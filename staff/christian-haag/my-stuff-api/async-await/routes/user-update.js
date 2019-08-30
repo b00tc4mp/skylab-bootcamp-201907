@@ -1,7 +1,7 @@
 const logic = require('../logic')
 
 module.exports = function (req, res) {
-    const { params: { id }, body  } = req
+    const { params: { id }, body } = req
 
     try {
         logic.updateUser(id, body)
