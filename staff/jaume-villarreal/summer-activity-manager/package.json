@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    
     "start": "node .",
     "watch": "npx nodemon .",
     "debug": "node debug .",
