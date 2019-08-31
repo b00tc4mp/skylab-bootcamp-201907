@@ -1,5 +1,5 @@
 module.exports = {
-    user : require('./user'),
+    user : require('./user')
     guardian : require('./guardian'),
     administrator : require('./administrator'),
     activity : require('./activity'),
