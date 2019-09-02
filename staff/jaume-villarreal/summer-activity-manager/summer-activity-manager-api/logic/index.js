@@ -1,3 +1,3 @@
 module.exports = {
-    createCourse : require('./create-course')
+    registerStudent : require('./register-student')
 }

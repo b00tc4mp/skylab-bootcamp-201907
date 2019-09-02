@@ -26,7 +26,7 @@ const guardianSchema = ({
         required: true
     },
     userRef : {
-        type: ObjectId
-        ref : 'User'
+        type: ObjectId,
+        ref : 'Student'
     }
 })
