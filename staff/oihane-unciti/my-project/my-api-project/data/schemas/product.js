@@ -16,7 +16,6 @@ module.exports = new Schema({
     ubication: {
         type: String,
         required: true
-    },
-    user: [{ type: ObjectId, ref: 'User' }],
-    fav:  [{ type: ObjectId, ref: 'Product' }]
+    }
+    
 })

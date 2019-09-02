@@ -8,6 +8,10 @@ This an advertisement website application. Due to all the websites related with 
 
 ![A short story]( https://img.buzzfeed.com/buzzfeed-static/static/2018-03/6/14/asset/buzzfeed-prod-fastlane-03/anigif_sub-buzz-30655-1520365370-1.gif)
 
+##Planification
+
+https://trello.com/b/L6NT6grj/myproject
+
 ## Functional description
 
 Companies can:

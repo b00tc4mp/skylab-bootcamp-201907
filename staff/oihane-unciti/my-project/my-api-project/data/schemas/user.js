@@ -1,6 +1,4 @@
-const mongoose = require('mongoose')
-
-const { Schema } = mongoose
+const { Schema, SchemaTypes: { ObjectId } } = require('mongoose')
 
 module.exports = new Schema({
     name: {
@@ -21,5 +19,5 @@ module.exports = new Schema({
         type: String,
         required: true
     },
-    fav: [string]
+    fav:  [{ type: ObjectId, ref: 'Product' }]
 })
