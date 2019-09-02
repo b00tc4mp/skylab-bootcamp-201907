@@ -7,7 +7,7 @@ module.exports = {
     connect(url){
         return connection ? connection : mongoose.connect(url , {useNewUrlParser : true , useUnifiedTopology : true})
     },
-    discconnect(){
+    disconnect(){
         connection = undefined
         return mongoose.disconnect
     }

@@ -28,6 +28,6 @@ module.exports = new Schema({
     },
     activity : {
         type : ObjectId,
-        required : 'Activity'
+        ref : 'Activity'
     }
 })
