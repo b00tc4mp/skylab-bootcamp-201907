@@ -13,7 +13,6 @@ Developed at:
 
 
 ## Introduction
----
 **e-cohabitat** is a project that stems from the will to create and improve communities by providing an e-platform for the management of shared spaces in collective housing. 
 
 Why? Collective housing offers:
@@ -22,7 +21,6 @@ Why? Collective housing offers:
 - coexistence and cooperation among residents, promoting better social values.
 
 ## Functional description
----
 The application becomes a private network that connects all the users of a real-life physical shared space.
 
 Users, once registered and logged in, will be able to:
@@ -40,5 +38,4 @@ Users, once registered and logged in, will be able to:
 ...
 
 ## Technical description
----
 ...
