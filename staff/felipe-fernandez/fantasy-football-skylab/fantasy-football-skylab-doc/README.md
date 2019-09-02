@@ -2,7 +2,9 @@
 
 ## Introduction
 
-![Fellaini](images/fellaini.jpeg)
+<p align="center">
+ <img src="images/fellaini.jpeg"/>
+</p>
 
 This is a football fantasy application with real players of the Premier League.
 
