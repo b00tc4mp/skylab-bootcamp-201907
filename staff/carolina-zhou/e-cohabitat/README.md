@@ -1,5 +1,4 @@
 # e-cohabitat
----
 
 A project by:
 
@@ -8,3 +7,7 @@ A project by:
 Developed at:
 
 - **Skylab Coders Academy**
+
+### [Documentation](./e-cohabitat-doc/README.md)
+
+### [Trello](https://trello.com/b/wIPmrzRX/e-cohabitat)

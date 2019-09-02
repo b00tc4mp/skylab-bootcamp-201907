@@ -7,10 +7,8 @@
     <meta name="description" content="App for the management of shared spaces in collective housing">
     <meta name="keywords" content="architecture, space, housing, social housing, collective housing, shared space">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <!-- <link href='https://fonts.googleapis.com/css?family=Armata' rel='stylesheet'>
-    <link href='https://fonts.googleapis.com/css?family=Assistant' rel='stylesheet'> -->
     <link href='https://fonts.googleapis.com/css?family=B612 Mono' rel='stylesheet'>
-    <link rel="stylesheet" href="style/index.css" type="text/css">
+    <link rel="stylesheet" href="../../style/index.css" type="text/css">
     <title>e-cohabitat</title>
 
 </head>
@@ -19,7 +17,7 @@
     <header class="header hidden">
 
         <div>
-            <img src="./img/logo.svg" alt="e-COHABITAT project logo" class="header__logo">
+            <img src="../../img/logo.svg" alt="e-COHABITAT project logo" class="header__logo">
             <nav>
                 <ul class="header__main-menu">
                     <li class="header__item"><a class="header__main-link" href="" title="home">Home</a></li>
@@ -29,8 +27,8 @@
         </div>
             <nav>
                 <ul class="header__secondary-menu">
-                    <li class="header__item"><a class="header__secondary-link" title="User area">Username</a></li>
-                    <li class="header__item"><a class="header__secondary-link" href="" title="Sign out">Sign out</a></li>
+                    <li class="header__item"><a class="header__secondary-link" href="" title="Sign up">Sign up</a></li>
+                    <li class="header__item"><a class="header__secondary-link" href="" title="Sign in">Sign in</a></li>
                 </ul>
             </nav>
 
@@ -38,39 +36,37 @@
 
     <main class="main">
 
-        <h1 class="home__title"><span class="main__e">e-</span>cohabitat</h1>
-        <h2 class="home__subtitle">Sharing spaces, building communities</h2>
-
-        <h3 class="home__space">YOUR SPACES</h3>
-
-        <div class="home__spaces">
-            <div class="home__space-image">
-                <div class="home__space-reveal">
-                    <h4 class="home__space-title">Kitchen</h4>
-                    <p class="home__space-subtitle">bla bla bla</p>
-                </div>                  
-                <figure class="home__space-figure">
-                    <img class="home__space-img" alt="Arrels Barcelona" src="./img/space-a.jpg">
-                </figure>          
-            </div>
-
-            <div class="home__space-image">
-                <div class="home__space-reveal">
-                    <h4 class="home__space-title">Garden</h4>
-                    <p class="home__space-subtitle">bla bla bla</p>
-                </div>                  
-                <figure class="home__space-figure">
-                    <img class="home__space-img" alt="Arrels Barcelona" src="./img/space-b.jpg">
-                </figure>          
-            </div>
-        </div>
+        <section class="register">
+            <h1 class="register__title">Sign up</h1>
+            <form>
+                <ul>
+                    <li class="register__form-item">
+                        <label><input class="register__form-input" type="text" name="name" placeholder="name"/></label>
+                    </li>
+                    <li class="register__form-item">
+                        <label><input class="register__form-input" type="text" name="surname" placeholder="surname" /></label>
+                    </li>
+                    <li class="register__form-item">
+                        <label><input class="register__form-input" type="email" name="email" placeholder="email"/></label>
+                    </li>
+                    <li class="register__form-item">
+                        <label><input class="register__form-input" type="password" name="password" placeholder="password"/></label>
+                    </li>
+                    <li class="register__form-item">
+                        <label><input class="register__form-input" type="password" name="repassword" placeholder="repeat password"/></label>
+                    </li>
+                    <button class="register__form-button">Register</button>
+                </ul>
+            </form>
+            <a href="" class="register__back-link"><i class="fas fa-arrow-left"></i> Go back</a>
+        </section>
 
     </main>
 
     <footer class="footer hidden">
  
         <ul class="footer__menu">
-            <li class="footer__item">e-cohabitat <time datetime="2019">· 2019</time></li>
+            <li class="footer__item">e-cohabitat · 2019</time></li>
             <li class="footer__item"><a class="footer__link" href="#" title="Terms of Service">Terms of Service</a></li>
             <li class="footer__item"><a class="footer__link" href="#" title="Copyright">Copyright</a></li>
             <li class="footer__item"><a class="footer__link" href="#" title="Privacy Policy">Privacy Policy</a></li>
