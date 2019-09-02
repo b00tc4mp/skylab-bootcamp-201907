@@ -10,17 +10,15 @@ In this app you will join to a league and get a random team with 18 players and 
 
 The options available to you will be change your start line up and see your team's evolution in the general table of your league.
 
-![](images/Page-1.png=100x20)
-![](images/Page-2.png)
-![](images/Page-3.png)
-![](images/Page-4.png)
-![](images/Page-5.png)
-![](images/Page-6.png)
-![](images/Page-8.png)
-![](images/Page-9.png)
-![](images/Page-10.png)
-![](images/Page-11.png)
-
-
+<img src="images/Page-1.png" width="160" height="200" />
+<img src="images/Page-2.png" width="160" height="200" />
+<img src="images/Page-3.png" width="160" height="200" />
+<img src="images/Page-4.png" width="160" height="200" />
+<img src="images/Page-5.png" width="160" height="200" />
+<img src="images/Page-6.png" width="160" height="200" />
+<img src="images/Page-7.png" width="160" height="200" />
+<img src="images/Page-8.png" width="160" height="200" />
+<img src="images/Page-9.png" width="160" height="200" />
+<img src="images/Page-11.png" width="160" height="200" />
 
 
