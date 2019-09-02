@@ -1,68 +1,33 @@
 const mongoose = require('mongoose')
-const { Schema , Schema : {Types : { ObjectId } } } = mongoose 
-const weekSchema = require('./week')
-
+const { Schema , Schema : { Types : { ObjectId } } } = mongoose
 
 module.exports = new Schema({
     name : {
-        type: String,
+        type : String,
         required : true
     },
     surname : {
-        type: String,
+        type : String,
         required : true
     },
-    birthdate : {
-        type: Date,
+    dni : {
+        type : String,
         required : true
     },
-    school : {
-        type: String,
+    accreditation : {
+        type : String,
         required : true
     },
-    group : {
-        type: String,
+    age : {
+        type : Number,
         required : true
     },
-    healthcard : {
-        type: String,
+    role : {
+        type : String,
         required : true
     },
-    allergy : {
-        type: String,
-        required : true
-    },
-    illness : {
-        type: String,
-        required : true
-    },
-    medication : {
-        type: String,
-        required : true
-    },
-    observations : {
-        type: String,
-        required : true
-    },
-    imageAuthorization : {
-        type: boolean,
-        required : true
-    },
-    excursionAuthorization : {
-        type: boolean,
-        required : true
-    },
-    shirtRef : {
-        type: ObjectId,
-        ref : 'Shirt'
-    },
-    activityRef : {
-        type: ObjectId,
-        ref : 'Activity'
-    },
-    guardianRef : {
-        type: ObjectId,
-        ref : 'Guardian'
-    },
-    weeks : [weekSchema]
+    activity : {
+        type : ObjectId,
+        required : 'Activity'
+    }
 })

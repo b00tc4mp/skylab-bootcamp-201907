@@ -1,8 +1,10 @@
 module.exports = {
-    user : require('./user')
-    guardian : require('./guardian'),
-    administrator : require('./administrator'),
+    student : require('./student'),
+    enrollment : require('./enrollment'),
+    tutor : require('./tutor'),
+    user : require('./user'),
     activity : require('./activity'),
     shirt : require('./shirt'),
-    week : require('./week')
+    week : require('./week'),
+    course : require('./course')
 }

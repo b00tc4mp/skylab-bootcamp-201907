@@ -6,5 +6,5 @@ module.exports = new Schema({
         type : String,
         required : true
     },
-    users : [{ type: ObjectId , ref : 'Users' }]
+    limit : Number
 })

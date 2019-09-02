@@ -16,7 +16,7 @@ module.exports = new Schema({
         required : true
     },
     lunch : {
-        type  boolean,
+        type : boolean,
         required : true
     }
 })

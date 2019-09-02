@@ -1,12 +1,23 @@
 const mongoose = require('mongoose')
 
-const { user , guardian , administrator , activity , shirt , week} = require('./schemas')
+const { 
+        student, 
+        enrollment, 
+        tutor, 
+        user, 
+        activity, 
+        shirt, 
+        week,
+        course
+} = require('./schemas')
 
 module.exports = {
-    User : mongoose.model('User' , user),
-    Guardian : mongoose.model('Guardian' , guardian),
-    Administrator : mongoose.model('Administrator' , administrator),
-    Activity : mongoose.model('Activity' , activity),
-    Shirt : mongoose.model('Model' , model),
-    Week : mongoose.model('Week' , week)
+    Student : mongoose.model('Student', student),
+    Tutor : mongoose.model('Tutor', tutor),
+    Enrollment : mongoose.model('Enrollment', enrollment),
+    User : mongoose.model('User', user),
+    Activity : mongoose.model('Activity', activity),
+    Shirt : mongoose.model('Model', shirt),
+    Week : mongoose.model('Week', week),
+    Course : mongoose.model('Course', course)
 }

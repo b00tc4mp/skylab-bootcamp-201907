@@ -2,10 +2,8 @@ const mongoose = require('mongoose')
 const { Schema , Schema : { Types : { ObjectId } } } = mongoose
 
 module.exports = new Schema({
-    size : {
+    model : {
         type: String,
-        // enum : []
         required : true
-    },
-    users : [{ type : ObjectId , ref : 'User' }]   
+    }
 })
