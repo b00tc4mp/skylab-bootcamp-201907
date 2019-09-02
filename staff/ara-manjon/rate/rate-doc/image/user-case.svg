@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.6, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 841.89 595.28" style="enable-background:new 0 0 841.89 595.28;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#000000;stroke-miterlimit:10;}
+	.st2{fill:none;}
+	.st3{font-family:'Avenir-Roman';}
+	.st4{font-size:16.1974px;}
+	.st5{font-size:12.1481px;}
+	.st6{font-size:9.4485px;}
+</style>
+<circle class="st0" cx="422.47" cy="247.47" r="19.03"/>
+<line class="st1" x1="422.47" y1="266.5" x2="422.47" y2="307.63"/>
+<line class="st1" x1="469.59" y1="295.05" x2="469.59" y2="295.5"/>
+<line class="st1" x1="403.44" y1="287.8" x2="443.77" y2="287.8"/>
+<line class="st1" x1="422.47" y1="307.63" x2="401.77" y2="335.51"/>
+<line class="st1" x1="443.18" y1="335.51" x2="422.47" y2="307.63"/>
+<g>
+	<rect x="231.43" y="273.17" class="st2" width="70.34" height="27.93"/>
+	<text transform="matrix(1 0 0 1 236.7303 285.4133)" class="st3 st4">SIGN IN</text>
+</g>
+<g>
+	<rect x="460.59" y="416.15" class="st2" width="70.34" height="27.93"/>
+	<text transform="matrix(1 0 0 1 463.7986 428.3947)" class="st3 st4">PROFILE</text>
+</g>
+<g>
+	<rect x="268.75" y="366.1" class="st2" width="70.34" height="72.41"/>
+	<text transform="matrix(1 0 0 1 286.2166 378.3498)"><tspan x="0" y="0" class="st3 st4">ADD </tspan><tspan x="-11.1" y="19.44" class="st3 st4">PHOTO</tspan></text>
+</g>
+<rect x="266.6" y="176.34" class="st2" width="70.34" height="27.93"/>
+<text transform="matrix(1 0 0 1 269.8035 188.5866)" class="st3 st4">SIGN UP</text>
+<rect x="355.51" y="121.32" class="st2" width="70.34" height="27.97"/>
+<text transform="matrix(1 0 0 1 364.9095 130.5065)"><tspan x="0" y="0" class="st3 st5">CHOOSE</tspan><tspan x="-7.87" y="14.58" class="st3 st5">LANGUAGE</tspan></text>
+<circle class="st1" cx="301.77" cy="183.28" r="39.29"/>
+<circle class="st1" cx="390.68" cy="135.31" r="39.29"/>
+<rect x="456.47" y="131.2" class="st2" width="70.34" height="53.27"/>
+<text transform="matrix(1 0 0 1 469.8895 143.4406)"><tspan x="0" y="0" class="st3 st4">NEAR </tspan><tspan x="-2.71" y="19.44" class="st3 st4">USERS</tspan></text>
+<circle class="st1" cx="491.64" cy="149.29" r="39.29"/>
+<rect x="530.99" y="215.96" class="st2" width="70.34" height="53.27"/>
+<text transform="matrix(1 0 0 1 532.5447 223.1061)"><tspan x="0" y="0" class="st3 st6">NOTIFICATION </tspan><tspan x="9.55" y="11.34" class="st3 st6">NEW RATE</tspan></text>
+<circle class="st1" cx="565.5" cy="223.15" r="39.29"/>
+<rect x="531.65" y="315.3" class="st2" width="70.34" height="53.27"/>
+<text transform="matrix(1 0 0 1 541.5018 324.4792)"><tspan x="0" y="0" class="st3 st5">RATE TO </tspan><tspan x="5.07" y="14.58" class="st3 st5">OTHER </tspan><tspan x="6.97" y="29.16" class="st3 st5">USERS</tspan></text>
+<circle class="st1" cx="566.16" cy="334.34" r="39.29"/>
+<circle class="st1" cx="266.6" cy="278.61" r="39.29"/>
+<circle class="st1" cx="303.92" cy="383.3" r="39.29"/>
+<circle class="st1" cx="495.76" cy="422.59" r="39.29"/>
+<g>
+	<rect x="359.63" y="431.57" class="st2" width="70.34" height="72.41"/>
+	<text transform="matrix(1 0 0 1 363.2982 443.8127)" class="st3 st4">SEARCH</text>
+</g>
+<circle class="st1" cx="394.8" cy="434.98" r="39.29"/>
+</svg>
