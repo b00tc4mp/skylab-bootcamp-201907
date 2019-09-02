@@ -6,8 +6,8 @@
 
 ## Data model
 ### ER model
-![Data model - ER model](assets/data-model/mongo-ER.png)
-### Mongo schemas
-![Data model - mongo schemas](assets/data-model/mongo-schemas.png)
+![Data model - ER model](assets/data-model/model-ER.png)
+### Data schemas
+![Data model - mongo schemas](assets/data-model/data-schemas.png)
 
 
