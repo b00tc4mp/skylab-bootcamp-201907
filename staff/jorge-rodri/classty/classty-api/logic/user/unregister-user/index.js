@@ -1,4 +1,4 @@
-const { User, Vehicle, Property } = require('../../../data')
+const { User } = require('../../../data')
 /**
  * Unregisters a user.
  * 

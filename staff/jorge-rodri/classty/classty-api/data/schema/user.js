@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
+
 const { Schema } = mongoose
-const cardSchema = require('./card')
 
 module.exports = new Schema({
     name: {
@@ -21,6 +21,11 @@ module.exports = new Schema({
         type: String,
         required: true
     },
-    card: [cardSchema]
+    type: {
+        type: String,
+        required: true,
+        enum: ['mentor', 'teacher', 'student'],
+        default: 'student'
+    }
+    
 })
-
