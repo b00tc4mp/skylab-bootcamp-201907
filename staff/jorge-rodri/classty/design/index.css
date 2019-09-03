@@ -1,0 +1,716 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+/*header*/
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #DDFFE7;
+}
+
+.logo {
+  height: 9vh;
+  width: 22vw;
+  margin-left: 0.5rem;
+}
+
+.nav__main--position {
+  margin-top: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+.nav__list--position {
+  display: flex;
+  padding: 5 rem;
+}
+.nav__list--position li {
+  list-style: none;
+  margin-left: 1em;
+}
+
+/*Main*/
+.main {
+  height: 82vh;
+}
+
+.sub-nav__list--position {
+  display: flex;
+  justify-content: center;
+  padding: 5 rem;
+  background-color: #E8EEF1;
+}
+.sub-nav__list--position li {
+  list-style: none;
+  margin: 1.2rem 0.7rem;
+  padding-top: 1rem;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 0.5rem;
+}
+.sub-nav__list--position li:nth-child(1) {
+  padding-right: 3.2rem;
+  border-right: 2px solid #fefffe;
+}
+.sub-nav__list--position li:nth-child(2) {
+  padding-left: 2rem;
+}
+.sub-nav__list--position li > a {
+  font-size: 1.4em;
+  font-family: "Chilanka", cursive;
+  text-decoration: none;
+  color: #167D7F;
+}
+
+.subject-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.8rem;
+}
+.subject-list li {
+  padding-top: 2rem;
+  list-style: none;
+  border-bottom: 1px solid #152025c2;
+  padding-bottom: 2rem;
+  width: 100vw;
+  text-align: center;
+}
+.subject-list li:last-child {
+  border-bottom: 0px;
+}
+.subject-list li > a {
+  text-decoration: none;
+  color: #397591;
+  font-size: 2em;
+  font-family: "Chilanka", cursive;
+}
+
+/*footer*/
+.social {
+  background: #DDFFE7;
+  height: 9vh;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+/*header*/
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #DDFFE7;
+}
+
+.logo {
+  height: 9vh;
+  width: 22vw;
+  margin-left: 0.5rem;
+}
+
+.nav__main--position {
+  margin-top: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+.nav__list--position {
+  display: flex;
+  padding: 5 rem;
+}
+.nav__list--position li {
+  list-style: none;
+  margin-left: 1em;
+}
+
+/*main*/
+.list-teacher {
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 82vh;
+}
+.list-teacher a {
+  padding-top: 0.5rem;
+  font-size: 1.5em;
+  font-family: "Chilanka", cursive;
+  color: #397591;
+  text-decoration: none;
+}
+.list-teacher a > h3 {
+  padding-top: 0.8rem;
+  padding-bottom: 0.2rem;
+  font-size: 1.5em;
+}
+
+.back {
+  margin-top: 2rem;
+  height: 12vw;
+  width: 40vw;
+  font-size: 1.5em;
+}
+.back a {
+  text-decoration: none;
+  text-align: center;
+}
+
+/*footer*/        
+.social {
+  background: #DDFFE7;
+  height: 9vh;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+/*header*/
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #DDFFE7;
+}
+
+.logo {
+  height: 9vh;
+  width: 22vw;
+  margin-left: 0.5rem;
+}
+
+.nav__main--position {
+  margin-top: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+.nav__list--position {
+  display: flex;
+  padding: 5 rem;
+}
+.nav__list--position li {
+  list-style: none;
+  margin-left: 1em;
+}
+
+/*main*/
+.block {
+  height: 82vh;
+  display: flex;
+  flex-direction: column;
+  order: 3;
+}
+
+.detail-teacher {
+  padding-top: 1.5rem;
+  border-bottom: 0.5px solid #4e4848e0;
+  padding-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.detail-teacher h1 {
+  font-family: "Chilanka", cursive;
+  color: #397591;
+}
+.detail-teacher h3 {
+  padding-top: 0.5rem;
+  font-family: "Chilanka", cursive;
+  color: #397591;
+}
+.detail-teacher textarea {
+  padding-top: 0.5rem;
+  border: 1px solid #4e5a5f9d;
+}
+.detail-teacher button {
+  margin-top: 0.7rem;
+}
+
+.sec {
+  padding-top: 1.5rem;
+}
+
+.message-received h1 {
+  font-family: "Chilanka", cursive;
+  color: #397591;
+}
+.message-received h3 {
+  padding-top: 0.5rem;
+  font-family: "Chilanka", cursive;
+  color: #397591;
+}
+.message-received h2 {
+  padding-top: 1rem;
+  font-family: "Chilanka", cursive;
+  color: #397591;
+}
+.message-received p {
+  padding-top: 1rem;
+  font-family: "Chilanka", cursive;
+  color: #397591;
+}
+
+.back {
+  margin-top: 2rem;
+  height: 12vw;
+  width: 40vw;
+  font-size: 1.5em;
+}
+.back a {
+  text-decoration: none;
+  text-align: center;
+  color: #397591;
+}
+
+/*footer*/        
+.social {
+  background: #DDFFE7;
+  height: 9vh;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+/*header*/
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #DDFFE7;
+}
+
+.logo {
+  height: 9vh;
+  width: 22vw;
+  margin-left: 0.5rem;
+}
+
+.nav__main--position {
+  margin-top: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+.nav__list--position {
+  display: flex;
+  padding: 5 rem;
+}
+.nav__list--position li {
+  list-style: none;
+  margin-left: 1em;
+}
+
+/*main*/
+.list-students {
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-family: "Chilanka", cursive;
+}
+.list-students h3 {
+  color: #397591;
+  font-size: 2em;
+  padding-top: 1.5rem;
+}
+.list-students a {
+  color: #397591;
+  font-size: 1.5em;
+  padding-top: 0.3rem;
+  text-decoration: none;
+}
+
+.back {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  height: 12vw;
+  width: 40vw;
+  font-size: 1.5em;
+}
+.back a {
+  text-decoration: none;
+  text-align: center;
+}
+
+/*footer*/        
+.social {
+  background: #DDFFE7;
+  height: 9vh;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+/*header*/
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #DDFFE7;
+}
+
+.logo {
+  height: 9vh;
+  width: 22vw;
+  margin-left: 0.5rem;
+}
+
+.nav__main--position {
+  margin-top: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+.nav__list--position {
+  display: flex;
+  padding: 5 rem;
+}
+.nav__list--position li {
+  list-style: none;
+  margin-left: 1em;
+}
+
+/*main*/
+.block {
+  height: 82vh;
+  display: flex;
+  flex-direction: column;
+  order: 3;
+}
+
+.detail-student {
+  padding-top: 1.5rem;
+  border-bottom: 0.5px solid #4e4848e0;
+  padding-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.detail-student h1 {
+  font-family: "Chilanka", cursive;
+  color: #397591;
+}
+.detail-student h3 {
+  padding-top: 0.5rem;
+  font-family: "Chilanka", cursive;
+  color: #397591;
+}
+.detail-student textarea {
+  padding-top: 0.5rem;
+  border: 1px solid #4e5a5f9d;
+}
+.detail-student button {
+  margin-top: 0.7rem;
+}
+
+.sec {
+  padding-top: 1.5rem;
+}
+
+.message-received h1 {
+  font-family: "Chilanka", cursive;
+  color: #397591;
+}
+.message-received h3 {
+  padding-top: 0.5rem;
+  font-family: "Chilanka", cursive;
+  color: #397591;
+}
+.message-received h2 {
+  padding-top: 1rem;
+  font-family: "Chilanka", cursive;
+  color: #397591;
+}
+.message-received p {
+  padding-top: 1rem;
+  font-family: "Chilanka", cursive;
+  color: #397591;
+}
+
+.back {
+  margin-top: 2rem;
+  height: 12vw;
+  width: 40vw;
+  font-size: 1.5em;
+}
+.back a {
+  text-decoration: none;
+  text-align: center;
+  color: #397591;
+}
+
+/*footer*/        
+.social {
+  background: #DDFFE7;
+  height: 9vh;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+/*header*/
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #DDFFE7;
+}
+
+.logo {
+  height: 9vh;
+  width: 22vw;
+  margin-left: 0.5rem;
+}
+
+.nav__main--position {
+  margin-top: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+.nav__list--position {
+  display: flex;
+  padding: 5 rem;
+}
+.nav__list--position li {
+  list-style: none;
+  margin-left: 1em;
+}
+
+/*main*/
+.profile {
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-family: "Chilanka", cursive;
+  height: 82vh;
+}
+.profile h3 {
+  color: #397591;
+  font-size: 2em;
+  padding-top: 1.5rem;
+}
+
+.email {
+  color: #397591;
+  font-size: 2em;
+  padding-top: 1.5rem;
+}
+
+.privacy {
+  margin-top: 1.5rem;
+  height: 10vw;
+  width: 30vw;
+}
+.privacy a {
+  text-decoration: none;
+  font-size: 2.2em;
+  color: #397591;
+}
+
+.back {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  height: 12vw;
+  width: 40vw;
+  font-size: 1.5em;
+}
+.back a {
+  text-decoration: none;
+  text-align: center;
+}
+
+/*footer*/        
+.social {
+  background: #DDFFE7;
+  height: 9vh;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+/*header*/
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #DDFFE7;
+}
+
+.logo {
+  height: 9vh;
+  width: 22vw;
+  margin-left: 0.5rem;
+}
+
+.nav__main--position {
+  margin-top: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+.nav__list--position {
+  display: flex;
+  padding: 5 rem;
+}
+.nav__list--position li {
+  list-style: none;
+  margin-left: 1em;
+}
+
+/*main*/
+.messages {
+  padding-top: 1.5rem;
+  font-family: "Chilanka", cursive;
+  height: 82vh;
+  font-size: 2em;
+  color: #397591;
+}
+.messages h3 {
+  padding-top: 1.5rem;
+}
+.messages a {
+  padding-top: 1.5rem;
+  text-decoration: none;
+  color: #397591;
+}
+.messages a > h5 {
+  padding-top: 1.5rem;
+}
+
+.back {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  height: 12vw;
+  width: 40vw;
+  font-size: 1em;
+}
+.back a {
+  text-decoration: none;
+  text-align: center;
+}
+
+/*footer*/        
+.social {
+  background: #DDFFE7;
+  height: 9vh;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+/*header*/
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #DDFFE7;
+}
+
+.logo {
+  height: 9vh;
+  width: 22vw;
+  margin-left: 0.5rem;
+}
+
+.nav__main--position {
+  margin-top: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+.nav__list--position {
+  display: flex;
+  padding: 5 rem;
+}
+.nav__list--position li {
+  list-style: none;
+  margin-left: 1em;
+}
+
+/*Main*/
+.nav-subject {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0.5rem;
+  background-color: #E8EEF1;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+.nav-subject li {
+  list-style: none;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-right: 0.2rem;
+  padding-left: 0.2rem;
+  border-right: 2px solid #fefffe;
+}
+.nav-subject li:last-child {
+  border-right: 0px;
+}
+.nav-subject a {
+  text-decoration: none;
+  color: #397591;
+  font-size: 1.2em;
+  font-family: "Chilanka", cursive;
+}
+
+.new-post {
+  padding: 0.2rem;
+  display: flex;
+  flex-direction: column;
+}
+.new-post textarea {
+  border: 1px solid #5a535311;
+}
+.new-post button {
+  margin-left: 17rem;
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+}
+
+.post {
+  color: #397591;
+  background-color: #ada6a610;
+  margin-top: 2rem;
+  padding: 1rem;
+}
+
+.back-subjects {
+  margin: 1rem;
+  padding: 0.5rem;
+}
+.back-subjects a {
+  text-decoration: none;
+  color: #397591;
+}
+
+/*footer*/
+.social {
+  background: #DDFFE7;
+  height: 9vh;
+}
+
+/*# sourceMappingURL=index.css.map */
