@@ -1,4 +1,4 @@
-module.exports = {
-    registerUser: require('../logic/register-user'),
-    authenticateUser: require('../logic/authenticate-user')
+module.exports =  {
+    validate: require('./validate'),
+    random: require('./random')
 }
