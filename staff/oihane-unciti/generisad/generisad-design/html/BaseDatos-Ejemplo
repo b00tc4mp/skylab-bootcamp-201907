@@ -1,0 +1,19 @@
+//user 
+{
+	name: "Oihane",
+	surname: "Unciti"
+	email: "123@gmail.com",
+	password: "12",
+	favs: [anuncio, anuncio]
+}
+
+// anuncios
+{
+	imagen: "",
+	descripción: "",
+	presio: "",
+	ubicación: "",
+}
+
+
+This an advertisement website application. Due to all the websites related with this matter have the same structure, this application is going to offer a general behaviour. The backend can work with many frontend. This one could be modified by the companies, in order to have a different wetsite.
