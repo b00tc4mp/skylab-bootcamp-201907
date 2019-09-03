@@ -153,7 +153,7 @@ describe('logic - register space', () => {
         }
     })
 
-    it('should fail on undefined property passcode', async () => {
+    it('should fail on undefined space passcode', async () => {
         passcode = undefined
 
         try {
@@ -163,7 +163,7 @@ describe('logic - register space', () => {
         }
     })
 
-    it('should fail on wrong property passcode data type', async () => {
+    it('should fail on wrong space passcode data type', async () => {
         passcode = 123
 
         try {

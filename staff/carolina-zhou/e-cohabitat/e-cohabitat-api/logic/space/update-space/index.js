@@ -2,7 +2,7 @@ const validate = require('../../../utils/validate')
 const { Space } = require('../../../data')
 
 /**
- * Updates a property
+ * Updates a space
  * 
  * @param {*} id
  * @param {*} fieldsToUpdate 

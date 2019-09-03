@@ -1,5 +1,5 @@
-const { Schema } = require('mongoose')
-const spaceSchema = require('./space') 
+const { Schema, ObjectId } = require('mongoose')
+/* const spaceSchema = require('./space')  */
 
 module.exports = new Schema({
     username: {
@@ -27,5 +27,5 @@ module.exports = new Schema({
     extra: {
         type: String
     },
-    spaces: [spaceSchema]
+    spaces: [{ type: ObjectId, ref: 'Space' }] /* [spaceSchema] */
 })

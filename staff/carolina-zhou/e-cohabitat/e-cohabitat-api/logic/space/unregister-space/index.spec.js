@@ -50,7 +50,7 @@ describe('logic - unregister property', () => {
         id = ' '
 
         try {
-            await logic.unregisterSpace(id, password)
+            await logic.unregisterSpace(id)
         } catch({ message }) {
             expect(message).to.equal('space id is empty or blank')
         }
@@ -60,7 +60,7 @@ describe('logic - unregister property', () => {
         id = undefined
 
         try {
-            await logic.unregisterSpace(id, password)
+            await logic.unregisterSpace(id)
         } catch({ message }) {
             expect(message).to.equal("space id with value undefined is not a string")
         }
@@ -70,7 +70,7 @@ describe('logic - unregister property', () => {
         id = 123
 
          try {
-            await logic.unregisterSpace(id, password)
+            await logic.unregisterSpace(id)
         } catch({ message }) {
             expect(message).to.equal("space id with value 123 is not a string")
         }

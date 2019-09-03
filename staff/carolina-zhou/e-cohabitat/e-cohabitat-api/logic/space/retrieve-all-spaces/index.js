@@ -14,7 +14,7 @@ module.exports = function(id) {
     validate.string(id, 'user id')
 
     return (async() => {
-        const spaces = await Space.find({ users : id }, { __v: 0 }).lean()
+        const spaces = await Space.find({ cousers : id }, { __v: 0 }).lean()
         if (!spaces) throw Error(`user with id ${id} does not own any spaces`)
 
         spaces.forEach(space => {

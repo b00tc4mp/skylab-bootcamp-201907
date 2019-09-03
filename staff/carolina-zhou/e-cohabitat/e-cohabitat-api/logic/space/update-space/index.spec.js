@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const logic = require('../../')
 const { expect } = require('chai')
-const { User, Space } = require('../../../data')
+const { Space } = require('../../../data')
 
 describe('logic - update space', () => {
 
@@ -16,14 +16,14 @@ describe('logic - update space', () => {
         passcode = `123-${Math.random()}`
 
         body = {
-            title = `newName-${Math.random()}`,
-            type = `newType-${Math.random()}`
+            title: `newName-${Math.random()}`,
+            type: `newType-${Math.random()}`
         }
         
         await Space.deleteMany()
 
         const newSpace = await Space.create({ title, type, address, passcode })
-        id = newSpace.id
+        id = newSpace.id.toString()
     })
 
     it('should succeed on correct data', async () => {

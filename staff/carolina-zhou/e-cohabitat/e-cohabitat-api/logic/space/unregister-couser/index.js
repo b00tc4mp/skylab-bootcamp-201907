@@ -2,7 +2,7 @@ const validate = require('../../../utils/validate')
 const { User, Space } = require('../../../data')
 
 /**
- * Unregisters a property owner
+ * Unregisters a space co-user
  * 
  * @param {string} spaceId
  * @param {string} coUserId 
@@ -24,9 +24,9 @@ module.exports = function(spaceId, coUserId) {
 
         const user = await User.findOne({ _id: coUserId })
         if (!user) throw Error('wrong co-user id provided')
-        const match = _space.users.find(user => user.toString() === coUserId)
+        const match = _space.cousers.find(user => user.toString() === coUserId)
         if (!match) throw Error(`user with id ${coUserId} is not a co-user`)
-        _space.users.splice(_space.users.indexOf(match))
+        _space.cousers.splice(_space.users.indexOf(match))
         return _space.save()
     })()
 }

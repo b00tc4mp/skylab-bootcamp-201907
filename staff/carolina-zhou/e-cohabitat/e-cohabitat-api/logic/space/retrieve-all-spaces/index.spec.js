@@ -22,7 +22,7 @@ describe('logic - retrieve all spaces', () => {
     })
 
     it('should succeed on correct data', async() => {
-        const spaces = logic.retrieveAllSpaces(id)
+        const spaces = await logic.retrieveAllSpaces(id)
         expect(spaces).to.exist
     })
 

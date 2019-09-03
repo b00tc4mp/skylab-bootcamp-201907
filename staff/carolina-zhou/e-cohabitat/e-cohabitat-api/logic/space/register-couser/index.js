@@ -28,12 +28,12 @@ module.exports = function(spaceId, coUserId) {
 
         if (!user) throw Error('wrong user id provided')
 
-        const match = _space.users.find(user => user === coUserId)
+        const match = _space.cousers.find(user => user === coUserId)
 
         if (match) throw Error(`user already registered in space with id ${spaceId}`)
         
-        _space.users.push(coUserId)
+        _space.cousers.push(coUserId)
         
-        return _space.save()
+        await _space.save()
     })()
 }

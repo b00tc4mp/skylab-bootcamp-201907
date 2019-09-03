@@ -28,11 +28,11 @@ router.delete ('/users/:id', [tokenMiddleware, jsonBodyParser], unregisterUser)
 
 /* SPACE */ 
 router.post('/users/:id/spaces', [tokenMiddleware, jsonBodyParser], registerSpace)
-router.patch ('/users/:id/spaces/:spaceId/owners/:ownerId', [tokenMiddleware, jsonBodyParser], registerSpaceCouser)
+router.patch ('/users/:id/spaces/:spaceId/cousers/:coUserId', [tokenMiddleware, jsonBodyParser], registerSpaceCouser)
 router.get('/users/:id/spaces/', [tokenMiddleware, jsonBodyParser], retrieveAllSpaces)
 router.get('/users/:id/spaces/:spaceId', [tokenMiddleware, jsonBodyParser], retrieveSpace)
 router.patch ('/users/:id/spaces/:spaceId', [tokenMiddleware, jsonBodyParser], updateSpace)
 router.delete ('/users/:id/spaces/:spaceId', [tokenMiddleware, jsonBodyParser], unregisterSpace)
-router.delete ('/users/:id/spaces/:spaceId/owners/:ownerId', [tokenMiddleware, jsonBodyParser], unregisterSpaceCouser)
+router.delete ('/users/:id/spaces/:spaceId/cousers/:coUserId', [tokenMiddleware, jsonBodyParser], unregisterSpaceCouser)
 
 module.exports = router

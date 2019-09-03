@@ -25,11 +25,11 @@ describe('logic - unregister space co-user', () => {
         const newUser = await User.create({ username, name, surname, email, password })
         coUserId = user._id.toString()
 
-        const newProperty = await Space.create({ title, type, address, passcode })
-        spaceId = property.id
+        const newSpace = await Space.create({ title, type, address, passcode })
+        spaceId = space.id
 
-        newProperty.co-users.push(newUser)
-        await newProperty.save()
+        newSpace.users.push(newUser)
+        await newSpace.save()
     })
 
     it('should succeed on correct data', async () => {

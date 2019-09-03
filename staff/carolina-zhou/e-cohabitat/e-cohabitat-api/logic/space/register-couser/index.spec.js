@@ -25,8 +25,8 @@ describe('logic - register space co-user', () => {
         const user = await User.create({ username, name, surname, email, password })
         coUserId = user._id.toString()
 
-        const property = await Space.create({ title, type, address, passcode })
-        spaceId = property.id
+        const space = await Space.create({ title, type, address, passcode })
+        spaceId = space.id.toString()
     })
 
     it('should succeed on correct data', async () => {
@@ -49,7 +49,7 @@ describe('logic - register space co-user', () => {
         }
     })
 
-    // property
+    // space
     it('should fail on empty space id', async () => {
         spaceId = ''
 
