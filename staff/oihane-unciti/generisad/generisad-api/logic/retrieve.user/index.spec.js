@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const { expect } = require('chai')
 const retrieveUser = require('.')
-const { database, models: { User } } = require('my-project-data')
+const { database, models: { User } } = require('generisad-data')
 
 const { env: { DB_URL_TEST }} = process
 
