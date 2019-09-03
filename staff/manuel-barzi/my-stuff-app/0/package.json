@@ -13,7 +13,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache"
+    "test:inspect": "react-scripts --inspect-brk test --runInBand --no-cache",
+    "test:debug": "react-scripts --debug test --runInBand --no-cache"
   },
   "eslintConfig": {
     "extends": "react-app"
