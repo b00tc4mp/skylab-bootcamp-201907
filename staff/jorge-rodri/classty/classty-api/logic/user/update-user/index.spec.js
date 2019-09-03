@@ -1,10 +1,13 @@
+require('dotenv').config()
+
 const { expect } = require('chai')
-const logic = require('..')
-const { User } = require('../../../data')
-const mongoose = require('mongoose')
+const updateUser = require('.')
+const { database, models: { User } } = require('data')
+
+const { env: { DB_URL_TEST }} = process
 
 describe('logic - update user', () => {
-    before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
+    before(() => database.connect(DB_URL_TEST))
 
     let name, surname, email, password, id, body
 
@@ -31,7 +34,7 @@ describe('logic - update user', () => {
 
     it('should succeed on correct data', async () => {
 
-        await logic.updateUser(id, body)
+        await updateUser(id, body)
        
 
         const user = await User.findById(id)
@@ -49,7 +52,7 @@ describe('logic - update user', () => {
         const _id = '5d5d5530531d455f757a8fF9'
         try{
             debugger
-        await logic.updateUser(_id, body)
+        await updateUser(_id, body)
 
         }catch(error){
             debugger
@@ -59,5 +62,5 @@ describe('logic - update user', () => {
 
     })
 
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })

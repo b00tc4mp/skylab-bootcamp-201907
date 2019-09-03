@@ -1,4 +1,6 @@
-const { User } = require('../../../../data')
+debugger
+const { models: { User } } = require('data')
+const { validate } = require('utils')
 
 /**
  * Authenticates a user by its credentials.
@@ -9,7 +11,9 @@ const { User } = require('../../../../data')
  * @returns {Promise}
  */
 module.exports = function (email, password) {
-    // TODO validate fields
+    validate.string(email, 'e-mail')
+    validate.email(email, 'e-mail')
+    validate.string(password)
     return (async () => {
 
         const user = await User.findOne({ email })

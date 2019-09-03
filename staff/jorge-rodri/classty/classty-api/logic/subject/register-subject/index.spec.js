@@ -1,4 +1,4 @@
-const { expect } = require('chai')
+/* const { expect } = require('chai')
 const logic = require('..')
 const { Subject, User } = require('../../../data')
 const mongoose = require('mongoose')
@@ -56,4 +56,4 @@ describe('logic - register subject', () => {
     })
 
     after(() => mongoose.disconnect())
-})
+}) */

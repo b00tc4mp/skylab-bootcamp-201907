@@ -1,10 +1,13 @@
+require('dotenv').config()
+
 const { expect } = require('chai')
-const logic = require('..')
-const { User } = require('../../../data')
-const mongoose = require('mongoose')
+const unregisterUser = require('.')
+const { database, models: { User } } = require('data')
+
+const { env: { DB_URL_TEST }} = process
 
 describe('logic - unregister user', () => {
-    before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true, useUnifiedTopology: true }))
+    before(() => database.connect(DB_URL_TEST))
 
     let name, surname, email, password, id, _user
 
@@ -23,7 +26,7 @@ describe('logic - unregister user', () => {
 
     it('should succeed on correct data', async () => {
         
-        const result = await logic.unregisterUser(id, password)
+        const result = await unregisterUser(id, password)
         expect(result).not.to.exist
 
         const user = await User.findById(id)
@@ -36,7 +39,7 @@ describe('logic - unregister user', () => {
 
         try {
 
-            await logic.unregisterUser(_id, password)
+            await unregisterUser(_id, password)
 
         } catch (error) {
 
@@ -48,7 +51,7 @@ describe('logic - unregister user', () => {
     it('should fail on existing user, because wrong id', async () => {
         try {
 
-            await logic.unregisterUser('', password)
+            await unregisterUser('', password)
 
         } catch (error) {
             
@@ -57,5 +60,5 @@ describe('logic - unregister user', () => {
         }
     })
 
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })

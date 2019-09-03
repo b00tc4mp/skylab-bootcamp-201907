@@ -1,5 +1,5 @@
-const { User } = require('../../../../data')
-
+const { models: { User } } = require('data')
+const { validate } = require('utils')
 /**
  * Retrieves a user by its id.
  * 
@@ -8,6 +8,7 @@ const { User } = require('../../../../data')
  * @returns {Promise}
  */
 module.exports = function (id) {
+    validate.number(id, 'id')
         if( id.length == 0 ) throw Error('id is empty')
     return (async () => {
 

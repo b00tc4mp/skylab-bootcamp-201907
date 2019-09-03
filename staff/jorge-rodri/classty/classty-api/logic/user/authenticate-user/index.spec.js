@@ -1,11 +1,14 @@
+require('dotenv').config()
+debugger
 const { expect } = require('chai')
-const logic = require('..')
-const { User } = require('../../../../data')
-const mongoose = require('mongoose')
-
+const authenticateUser = require('.')
+debugger
+const { database, models: { User } } = require('data')
+debugger
+const { env: { DB_URL_TEST }} = process
 
 describe('logic - authenticate user', () => {
-    before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
+    before(() => database.connect(DB_URL_TEST))
 
     let name, surname, email, password, id
 
@@ -21,7 +24,7 @@ describe('logic - authenticate user', () => {
     })
 
     it('should succeed on correct data', async () => {
-        const _id = await logic.authenticateUser(email, password)
+        const _id = await authenticateUser(email, password)
         debugger
         expect(_id).to.exist
         expect(_id).to.be.a('string')
@@ -32,7 +35,7 @@ describe('logic - authenticate user', () => {
 
         try {
 
-            await logic.authenticateUser("mira@ve.maribe", password)
+            await authenticateUser("mira@ve.maribe", password)
 
 
         } catch (error) {
@@ -46,7 +49,7 @@ describe('logic - authenticate user', () => {
 
         try {
 
-            await logic.authenticateUser(email, "123")
+            await authenticateUser(email, "123")
 
 
         } catch (error) {
@@ -56,5 +59,5 @@ describe('logic - authenticate user', () => {
         }
     })
 
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })

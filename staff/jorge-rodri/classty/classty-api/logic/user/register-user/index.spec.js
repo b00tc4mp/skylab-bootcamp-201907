@@ -1,12 +1,15 @@
+require('dotenv').config()
+
 const { expect } = require('chai')
-const logic = require('..')
-const { User } = require('../../../data')
-const mongoose = require('mongoose')
+const registerUser = require('.')
+const { database, models: { User } } = require('data')
+
+const { env: { DB_URL_TEST }} = process
 
 describe('logic - register user', () => {
-    before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
+    before(() => database.connect(DB_URL_TEST))
 
-    let name, surname, email, password, card
+    let name, surname, email, password
 
     beforeEach(async () => {
 
@@ -14,14 +17,13 @@ describe('logic - register user', () => {
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
-        card = []
         await User.deleteMany()
 
     })
 
     it('should succeed on correct data', async () => {
         
-        await logic.registerUser(name, surname, email, password, card)
+        await registerUser(name, surname, email, password, )
 
         const user =  await User.findOne({email})
 
@@ -34,11 +36,11 @@ describe('logic - register user', () => {
     })
 
     it('error because e-mail already exist', async() => {
-        await User.create({name, surname, email, password, card})
+        await User.create({name, surname, email, password })
         
         try{
 
-            await logic.registerUser(name, surname, email, password, card)
+            await registerUser(name, surname, email, password)
 
         }catch(error){
             
@@ -48,5 +50,5 @@ describe('logic - register user', () => {
         await User.deleteMany()
     })
 
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })

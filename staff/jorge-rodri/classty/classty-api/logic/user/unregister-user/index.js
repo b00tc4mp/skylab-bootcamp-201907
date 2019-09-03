@@ -1,4 +1,5 @@
-const { User } = require('../../../../data')
+const { models: { User } } = require('data')
+const { validate } = require('utils')
 /**
  * Unregisters a user.
  * 
@@ -8,7 +9,9 @@ const { User } = require('../../../../data')
  * @returns {Promise}
  */
 module.exports = function (id, password) {
-    // TODO validate fields
+    validate.number(id, 'id')
+    validate.string(password)
+    
     if(id.length == 0) throw Error('id is empty')
     return (async () => {
 
