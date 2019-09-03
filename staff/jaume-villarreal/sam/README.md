@@ -8,8 +8,8 @@ You can follow project planification in this [trello board](https://trello.com/b
 
 ## Data model
 ### ER model
-![Data model - ER model](assets/data-model/model-ER.png)
+![Data model - ER model](doc/assets/data-model/model-ER.png)
 ### Data schemas
-![Data model - mongo schemas](assets/data-model/data-schemas.png)
+![Data model - mongo schemas](doc/assets/data-model/data-schemas.png)
 
 
