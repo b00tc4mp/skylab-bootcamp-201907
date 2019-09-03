@@ -17,6 +17,10 @@ module.exports = {
         if (typeof target !== 'function') throw TypeError(`${name} with value ${target} is not a function`)
     },
 
+    array(target, name) {
+        if (!target instanceof Array) throw TypeError(`${name} with value ${target} is not a array`)
+    },
+
     url(target, name) {
         if (!URL_REGEX.test(target)) throw new Error(`${name} with value ${target} is not a valid URL`)
     },
