@@ -3,7 +3,7 @@ require('dotenv').config()
 
 const { expect } = require('chai')
 const registerUser = require('.')
-const { database, models: { User } } = require('my-project-data')
+const { database, models: { User } } = require('../register-ad/node_modules/generisad-data')
 
 const { env: { DB_URL_TEST }} = process
 
@@ -14,7 +14,7 @@ describe.only('logic - register user', () => {
     let name, surname, email, password, favorites
 
     beforeEach(async () => {
-        name = `jjjjname-${Math.random()}`
+        name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
@@ -33,7 +33,7 @@ describe.only('logic - register user', () => {
                 expect(user.surname).to.equal(surname)
                 expect(user.email).to.equal(email)
                 expect(user.password).to.equal(password)
-                //expect(user.favorites.length).to.equal(0)
+                expect(user.favorites.length).to.equal(0)
     })
     it('should fail if the mail already exists', async () => {
         await User.create({ name, surname, email, password, favorites })
