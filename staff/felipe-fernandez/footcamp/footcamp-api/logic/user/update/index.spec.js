@@ -1,15 +1,16 @@
-const mongoose = require('mongoose')
+require('dotenv').config()
+
 const {expect} = require('chai')
 const logic = require('../../../logic')
-const { User } = require('../../../../footcamp-data/')
+const { database, models: { User } } = require('footcamp-data')
+
+const { env: { DB_URL_TEST }} = process
 
 
 describe('logic-update user', ()=>{
     
-    before(()=>{
-        mongoose.connect('mongodb://localhost/footcamp-test', {useNewUrlParser: true})
-       
-    })
+    before(() =>  database.connect(DB_URL_TEST))
+
     beforeEach(async() => {
          await User.deleteMany()
     })
@@ -28,7 +29,7 @@ describe('logic-update user', ()=>{
 
         it('should succeed on correct data', async () => {
             
-            const user =  await logic.user.update(id, { name: 'newName', surname: 'newSurname', email: 'new@email.com', password: 'newPassword' })
+            const user =  await logic.updateUser(id, { name: 'newName', surname: 'newSurname', email: 'new@email.com', password: 'newPassword' })
                 expect(user).not.to.exist
                 
             const userUpdate = await User.findOne({ _id: id })
@@ -42,14 +43,14 @@ describe('logic-update user', ()=>{
             })
         it('should fail on empty id', () =>
             expect(() =>
-                logic.user.update('', { name: 'newName', surname: 'newSurname', email: 'new@email.com', password: 'newPassword' })
+                logic.updateUser('', { name: 'newName', surname: 'newSurname', email: 'new@email.com', password: 'newPassword' })
             ).to.throw('id is empty or blank')
         )
         it('should fail on undefined id', () =>
             expect(() =>
-                logic.user.update(undefined, { name: 'newName', surname: 'newSurname', email: 'new@email.com', password: 'newPassword' })
+                logic.updateUser(undefined, { name: 'newName', surname: 'newSurname', email: 'new@email.com', password: 'newPassword' })
             ).to.throw('id with value undefined is not a string')
         )
     })
-    after(()=> mongoose.disconnect())
+    after(()=> database.disconnect())
 })

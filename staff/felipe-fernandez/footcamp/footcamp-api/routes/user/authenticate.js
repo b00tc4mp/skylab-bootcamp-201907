@@ -10,7 +10,7 @@ module.exports = async function(req, res) {
     try {
         
         const id = await logic.user.authenticate(email, password)
-        const token = jwt.sign({ sub: id }, JWT_SECRET, { expiresIn: '1h' })
+        const token = jwt.sign({ sub: id }, JWT_SECRET)
         res.json({message: 'User authenticated successfully', id, token})
                
     } catch({ message }) {

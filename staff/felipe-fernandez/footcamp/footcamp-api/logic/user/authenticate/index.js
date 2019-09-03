@@ -1,5 +1,5 @@
 const {validate} = require('footcamp-utils')
-const { User } = require('footcamp-data')
+const { models: { User } } = require('footcamp-data')
 
  /**
  * 
@@ -16,6 +16,7 @@ module.exports = function(email, password) {
     validate.string(password, 'password')
 
     return (async () => {
+        debugger
         const user = await User.findOne({ email, password })
         if (!user) throw Error('Wrong credentials.')
         return user.id

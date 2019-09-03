@@ -1,11 +1,16 @@
-const { expect } = require('chai')
+require('dotenv').config()
+
+const {expect} = require('chai')
 const logic = require('../../../logic')
-const { User } = require('../../../../footcamp-data/')
-const mongoose = require('mongoose')
+const { database, models: { User } } = require('footcamp-data')
+
+const { env: { DB_URL_TEST }} = process
 
 describe('logic - unregister user', () => {
 
-    before(() => mongoose.connect('mongodb://localhost/footcamp-test', { useNewUrlParser: true }))
+    
+    before(() =>  database.connect(DB_URL_TEST))
+    
     let name, surname, email, password, id
 
     beforeEach(async () => {
@@ -18,7 +23,7 @@ describe('logic - unregister user', () => {
         id = user.id
     })
     it('should succeed on correct data', async () => {
-        const result = await logic.user.unregister(id, email, password)
+        const result = await logic.unregisterUser(id, email, password)
         expect(result).not.to.exist
         const userFind = await User.findById(id)
         expect(userFind).not.to.exist
@@ -27,7 +32,7 @@ describe('logic - unregister user', () => {
     it('should fail on unexisting user', async () => {
         id= '5d5d5530531d455f75da9fF9'
         try {
-            await logic.user.unregister(id, email, password)
+            await logic.unregisterUser(id, email, password)
             throw Error('should not reach this point') 
         }
         catch({message}){
@@ -38,7 +43,7 @@ describe('logic - unregister user', () => {
     it('should fail on existing user, but wrong password', async () => {
         password = 'wrong password'
         try {
-           await logic.user.unregister(id, email, password)
+           await logic.unregisterUser(id, email, password)
            throw Error('should not reach this point') 
         }
         catch({message}){
@@ -47,5 +52,5 @@ describe('logic - unregister user', () => {
         
     })
 
-    after(()=> mongoose.disconnect())
+    after(()=> database.disconnect())
 })

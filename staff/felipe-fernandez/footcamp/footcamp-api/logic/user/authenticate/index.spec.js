@@ -1,13 +1,14 @@
+require('dotenv').config()
+
 const {expect} = require('chai')
 const logic = require('../../../logic')
-const { User } = require('footcamp-data')
+const { database, models: { User } } = require('footcamp-data')
 
+const { env: { DB_URL_TEST }} = process
 
-describe.only('logic-authentication user', ()=>{
+describe('logic-authentication user', ()=>{
 
-    before(async () => {
-        await mongoose.connect('mongodb://localhost/footcamp-test', {useNewUrlParser: true})
-    })
+    before(() =>  database.connect(DB_URL_TEST))
 
     describe('authentication user', ()=> {
         let name, surname, email, password, id
@@ -27,7 +28,7 @@ describe.only('logic-authentication user', ()=>{
         })
         
         it ('should authenticate on correct data', async () => {
-            const result = await logic.user.authenticate(email, password)
+            const result = await logic.authenticateUser(email, password)
             expect(result).to.exist
             expect(result).to.be.a('string')
             expect(result).to.equal(id)
@@ -37,7 +38,7 @@ describe.only('logic-authentication user', ()=>{
             let password = "fail"
 
             try {
-                await logic.user.authenticate(email, password)
+                await logic.authenticateUser(email, password)
             } catch(error) {
                 expect(error).to.exist
             }
@@ -45,35 +46,35 @@ describe.only('logic-authentication user', ()=>{
 
         it('should fail on empty email', () => {
             expect(() =>
-                logic.user.authenticate('', password)
+                logic.authenticateUser('', password)
             ).to.throw(Error, 'email is empty or blank')
         })
 
         it('should fail on emtpy password', () => {
             expect(()=> 
-                logic.user.authenticate(email, '')
+                logic.authenticateUser(email, '')
             ).to.throw(Error, 'password is empty or blank')
         })
 
         it('should fail on non-valid email', () => {
             expect(()=> 
-                logic.user.authenticate('asdf#adsf.com', password)
+                logic.authenticateUser('asdf#adsf.com', password)
             ).to.throw(Error, 'email with value asdf#adsf.com is not a valid e-mail')
         })
 
         it('should fail on non-string email', () => {
             expect(()=> 
-                logic.user.authenticate(undefined, password)
+                logic.authenticateUser(undefined, password)
             ).to.throw(Error, 'email with value undefined is not a string')
         })
 
         it('should fail on non-string password', () => {
             expect(()=> 
-                logic.user.authenticate(email, undefined)
+                logic.authenticateUser(email, undefined)
             ).to.throw(Error, 'password with value undefined is not a string')
         })
 
     })
 
-    after(()=>mongoose.disconnect())
+    after(()=>database.disconnect())
 })

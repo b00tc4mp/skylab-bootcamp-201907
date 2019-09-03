@@ -1,5 +1,6 @@
-const validate = require('../../../../footcamp-utils/validate')
-const { User } = require('../../../../footcamp-data')
+const {validate} = require('footcamp-utils')
+const { models: { User } } = require('footcamp-data')
+ /**
 
 /**
  * 

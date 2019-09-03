@@ -1,13 +1,14 @@
-const mongoose = require('mongoose')
-const logic = require('../../.')
-const { expect } = require('chai')
-const { User } = require('../../../../footcamp-data/')
+require('dotenv').config()
+
+const {expect} = require('chai')
+const logic = require('../../../logic')
+const { database, models: { User } } = require('footcamp-data')
+
+const { env: { DB_URL_TEST }} = process
 
 describe('logic', ()=>{
 
-    before(()=>{
-        mongoose.connect('mongodb://localhost/footcamp-test', {useNewUrlParser: true})
-    })
+    before(() =>  database.connect(DB_URL_TEST))
 
   
     describe('retrieve user', () => {
@@ -27,7 +28,7 @@ describe('logic', ()=>{
         })
 
         it('should succeed on correct data', async () => {
-            const user = await logic.user.retrieve(id)
+            const user = await logic.retrieveUser(id)
                 expect(user).to.exist
                 expect(user.id).to.equal(id)
                 expect(user._id).not.to.exist
@@ -39,23 +40,23 @@ describe('logic', ()=>{
         
         it('should fail on empty id', () => {
             expect(() =>
-                logic.user.retrieve('')
+                logic.retrieveUser('')
             ).to.throw(Error, 'id is empty or blank')
         })
 
         it('should fail on emtpy password', () => {
             expect(()=> 
-                logic.user.retrieve(undefined)
+                logic.retrieveUser(undefined)
             ).to.throw(Error, 'id with value undefined is not a string')
         })
 
         it('should fail on non-valid email', () => {
             expect(()=> 
-                logic.user.retrieve(123)
+                logic.retrieveUser(123)
             ).to.throw(Error, 'id with value 123 is not a string')
         })
     })
 
-    after(()=>mongoose.disconnect())
+    after(()=>database.disconnect())
 
 })
