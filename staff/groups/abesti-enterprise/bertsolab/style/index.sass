@@ -1,0 +1,328 @@
+@import url('https://fonts.googleapis.com/css?family=Red+Hat+Display&display=swap')
+@import ../utils/round-border
+  
+*
+  padding: 0
+  margin: 0
+  font-family: 'Red Hat Display', sans-serif
+  box-sizing: border-box
+
+*:focus 
+  outline: none
+
+body
+  width: 100vw
+  background-color: rgb(10, 10, 10)
+
+.header
+  background-image: linear-gradient(to bottom right, rgb(10, 10, 10), purple)
+  background-repeat: no-repeat
+
+.header__logo--image
+  width: 60%
+
+.form
+  display: flex
+  flex-direction: column
+  background-color: plum
+  +round-border(0.1rem, 0.1rem, solid, purple)
+  
+  &__title
+    padding: 1rem 1rem 0
+    font-size: 150%
+  
+  &__field
+    padding: 0.5rem
+    margin: 0.5rem 1rem
+    font-size: 1.5rem
+    +round-border(0.1rem, 0.3rem, solid, rgb(156, 80, 182))
+  
+  &__field:hover
+    outline: 2px solid rgb(236, 177, 130)
+
+  &__field:focus
+    outline: 5px solid rgb(236, 177, 130)
+  
+  &__button
+    padding: 0.5rem
+    margin: 0.5rem 3rem
+    font-size: 1.5rem
+    +round-border(0.1rem, 0.3rem, solid, rgb(156, 80, 182))
+    background-color: rgb(244, 244, 244)
+
+  &__button:hover
+    outline: 5px solid rgb(236, 177, 130)
+    background-color: purple
+    color: white
+
+.register, .login
+  margin-bottom: 10%
+
+.register__title, .login__title
+  background-color: plum
+  padding: 1rem
+  font-size: 120%
+  border: 0.1rem solid purple
+  border-bottom: none
+
+.register__form, .login__form
+  border-top: none
+
+  & label
+    padding-left: 1rem
+
+  &--field
+    width: 90%
+    font-size: 1rem
+
+.form__info
+  color: white
+  padding: 1em
+
+.anchor__link
+  color: white
+
+.feedback
+  text-align: center
+  padding: 1rem
+  color: tomato
+  font-size: x-large
+
+.song-item
+  color: rgb(244, 244, 244)
+  border: 1px solid
+  text-align: center
+  margin: 20px
+  border-radius: 0.3rem
+  &:hover
+    outline: 2px solid #9c50b6
+    background-color: #260026
+
+
+.fav-button
+  background-color: transparent
+  color: rgb(236, 177, 130)
+  font-size: x-large
+  border: none
+  margin: 0 1rem
+
+.results
+  margin-bottom: 10%
+
+.lyrics-item
+  width: 100vw
+  height: 100vh
+  background-color: rgba(10, 10, 10, 0.9)
+  z-index: 1
+  position: fixed
+  left: 0
+  top: 0
+  color: white
+  display: flex
+  justify-content: center
+  
+  &__button
+    background-color: transparent
+    color: rgb(244, 244, 244)
+    font-size: x-large
+    border: none
+    margin: 0 1rem
+    align-items: flex-end
+  &__panel
+    width: 80vw
+    padding: 20px
+    padding-left: 15px
+    background-color: rgba(255,255,255,0.2)
+    margin: auto
+    display: flex
+    justify-content: center
+    border-radius: 0.3rem
+
+.footer
+  background-image: linear-gradient(to bottom, rgb(10, 10, 10), purple)
+  background-repeat: no-repeat
+  position: fixed
+  width: 100%
+  height: 5%
+  text-align: center
+  color: white
+  bottom: 0
+  &__content
+    font-size: smaller
+    padding-top: 1.5%
+
+
+.display-song
+
+    height: 100vh
+    background-color: rgba(10, 10, 10, 0.9)
+    z-index: 1
+    position: fixed
+    left: 0
+    top: 0
+    display: flex
+    justify-content: center
+    align-items: center
+    color: purple
+    padding: 30px 30px 30px 30px
+
+    &_cross
+      background-color: rgba(10, 10, 10, 0.9)
+      color: white
+
+
+
+
+/* header */
+
+.header 
+  background-color: #fff
+  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1)
+  width: 100%
+  z-index: 1
+  height: 10%
+
+
+.user-menu 
+  margin: 0
+  padding: 0
+  list-style: none
+  overflow: hidden
+
+
+.user-menu__auth-option-link
+  display: block
+  padding: 20px 20px
+  border-right: 0.1rem solid purple
+  text-decoration: none
+  color: rgb(244, 244, 244)
+
+
+.user-menu__auth-option-link:hover,
+.header .hamburguer-menu__button:hover 
+  background-color: rgba(96, 96, 96, 0.4)
+  color: rgb(244, 244, 244)
+
+.header__logo
+  padding: 20px
+
+.header .header__logo 
+  display: block
+  float: left
+  text-decoration: none
+
+
+/* menu */
+
+.header .user-menu 
+  clear: both
+  max-height: 0
+  transition: max-height .2s ease-out
+
+
+/* menu icon */
+
+.header .hamburguer-menu__icon 
+  cursor: pointer
+  //display: inline-block
+  float: right
+  padding: 28px 20px
+  position: relative
+  user-select: none
+
+
+.header .hamburguer-menu__icon .hamburguer-menu__navicon 
+  background: rgb(244, 244, 244)
+  display: block
+  height: 2px
+  position: relative
+  transition: background .2s ease-out
+  width: 18px
+
+
+.header .hamburguer-menu__icon .hamburguer-menu__navicon:before,
+.header .hamburguer-menu__icon .hamburguer-menu__navicon:after 
+  background: rgb(244, 244, 244)
+  content: ''
+  display: block
+  height: 100%
+  position: absolute
+  transition: all .2s ease-out
+  width: 100%
+
+
+.header .hamburguer-menu__icon .hamburguer-menu__navicon:before 
+  top: 5px
+
+
+.header .hamburguer-menu__icon .hamburguer-menu__navicon:after 
+  top: -5px
+
+
+/* menu btn */
+
+.header .hamburguer-menu__button 
+  display: none
+
+
+.header .hamburguer-menu__button:checked ~ .user-menu 
+  max-height: 240px
+
+
+.header .hamburguer-menu__button:checked ~ .hamburguer-menu__icon .hamburguer-menu__navicon 
+  background: transparent
+
+
+.header .hamburguer-menu__button:checked ~ .hamburguer-menu__icon .hamburguer-menu__navicon:before 
+  transform: rotate(-45deg)
+
+
+.header .hamburguer-menu__button:checked ~ .hamburguer-menu__icon .hamburguer-menu__navicon:after 
+  transform: rotate(45deg)
+
+
+.header .hamburguer-menu__button:checked ~ .hamburguer-menu__icon:not(.steps) .hamburguer-menu__navicon:before,
+.header .hamburguer-menu__button:checked ~ .hamburguer-menu__icon:not(.steps) .hamburguer-menu__navicon:after 
+  top: 0
+
+
+/* 48em = 768px */
+
+@media (min-width: 48em)
+  .header__logo--image
+    width: 100%
+
+  .register__title, .login__title
+    background-color: rgb(10, 10, 10)
+    color: white
+    font-size: 150%
+    border: none
+  
+  .form
+    padding: 1em, 0
+    +round-border(0.1rem, 0.3rem, solid, rgb(156, 80, 182))
+
+    &__field
+      width: 95%
+
+  .user-menu__auth-option 
+    float: left
+  
+  .user-menu__auth-option-link 
+    padding: 20px 30px
+    border: 0.1rem solid purple
+  
+  .header .user-menu 
+    clear: none
+    float: right
+    max-height: none
+  
+  .header .hamburguer-menu__icon 
+    display: none
+  
+  .footer__content
+    padding: 0.5% 1.5% 0 0
+    text-align: right
+    
+  
+
