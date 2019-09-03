@@ -1,5 +1,5 @@
-const { models: { User } } = require('my-project-data')
-const { validate } = require('my-project-utils')
+const { models: { User } } = require('generisad-data')
+const { validate } = require('generisad-utils')
 
  /**
  * 
