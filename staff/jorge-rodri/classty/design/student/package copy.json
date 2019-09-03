@@ -1,0 +1,7 @@
+{"scripts": {
+  "sass-c": "sass --watch index.sass index.css"
+},
+  "dependencies": {
+    "sass": "^1.22.10"
+  }
+}
