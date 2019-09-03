@@ -4,7 +4,8 @@ module.exports = {
     retrieveUser: require('./user/retrieve'),
     unregisterUser: require('./user/unregister'),
     updateUser: require('./user/update'),
-    createLeague: require('./league/create')
+    createLeague: require('./league/create'),
+    joinLeague: require('./league/join')
     // property: require('./property'),
     // card: require('./card'),
 }

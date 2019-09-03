@@ -9,8 +9,10 @@ const { models: { User,  League } } = require('footcamp-data')
  * @returns {Promise}
 */
 
-module.exports = function(id, name) {
+module.exports = function(id, name, code) {
    
+    let leagueId
+
     validate.string(id, 'id')
     validate.string(name, 'name')
    
@@ -21,19 +23,16 @@ module.exports = function(id, name) {
         if (!user) throw new Error(`user with id ${id} does not exists`)
 
         const league = await League.findOne({ name })
-
-        if (league) throw Error('League exists!')
+        leagueId = league.id 
+        debugger
+        if (!league) throw Error(`league with name ${name} does not exists`)
+        // if (league.code != code) throw Error(`league with name ${name} does not exists`)
         
-        const newLeague = new League({name})
-        
-        newLeague.admin.push(id)
+        user.league.push(leagueId)
 
-        const initialCode = number(100000,200000)
-
-        newLeague.code = initialCode
-   
-        await newLeague.save()
+        await user.save()
         
-        return newLeague
+        return user
+
     })()
 }
