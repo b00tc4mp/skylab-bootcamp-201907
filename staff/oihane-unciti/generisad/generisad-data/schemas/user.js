@@ -19,5 +19,5 @@ module.exports = new Schema({
         type: String,
         required: true
     },
-    fav:  [{ type: ObjectId, ref: 'Product' }]
+    favorites:  [{ type: ObjectId, ref: 'Product' }]
 })
