@@ -1,5 +1,5 @@
-const {validate} = require('../footcamp-utils')
-const { User } = require('../footcamp-data')
+const {validate} = require('footcamp-utils')
+const { User } = require('footcamp-data')
 
  /**
  * 

@@ -1,6 +1,6 @@
 const {expect} = require('chai')
 const logic = require('../../../logic')
-const { User } = require('../footcamp-data')
+const { User } = require('footcamp-data')
 
 
 describe.only('logic-authentication user', ()=>{
