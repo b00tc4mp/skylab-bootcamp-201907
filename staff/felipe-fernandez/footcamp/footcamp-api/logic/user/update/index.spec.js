@@ -1,15 +1,19 @@
 const mongoose = require('mongoose')
 const {expect} = require('chai')
 const logic = require('../../../logic')
-const {User} = require('../../../models')
+const { User } = require('../../../../footcamp-data/')
+
+
 describe('logic-update user', ()=>{
+    
     before(()=>{
-        mongoose.connect('mongodb://localhost/my-stuff-api', {useNewUrlParser: true})
+        mongoose.connect('mongodb://localhost/footcamp-test', {useNewUrlParser: true})
        
     })
     beforeEach(async() => {
-    await User.deleteMany()
+         await User.deleteMany()
     })
+
     describe('update user', () => {
         let id, name, surname, email, password
         beforeEach(async () => {
@@ -21,6 +25,7 @@ describe('logic-update user', ()=>{
             const user = await User.create({name, surname, email, password})
             id = user.id
         })
+
         it('should succeed on correct data', async () => {
             
             const user =  await logic.user.update(id, { name: 'newName', surname: 'newSurname', email: 'new@email.com', password: 'newPassword' })

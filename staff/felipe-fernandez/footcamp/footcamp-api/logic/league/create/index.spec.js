@@ -3,7 +3,7 @@ const logic = require('../../.')
 const { expect } = require('chai')
 const { User } = require('../../../../footcamp-data/')
 
-describe('logic - register user', () => {
+describe('logic - create league', () => {
     
     before(() => mongoose.connect('mongodb://localhost/footcamp-test', { useNewUrlParser: true }))
 
@@ -15,19 +15,23 @@ describe('logic - register user', () => {
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@email.com`
         password = `password-${Math.random()}`
+
+        return (async () => {
+            await User.deleteMany()
+            const users = await User.create({name, surname, email, password})
+            id = users.id
+        })()
+    
    })
 
     it('should succeed on correct data', async () => {
-        const result = await logic.user.register(name, surname, email, password)
-            expect(result).not.to.exist
-        const user = await User.findOne({ email, password })
-            expect(user).to.exist
-            expect(user.name).to.equal(name)
-            expect(user.surname).to.equal(surname)
-            expect(user.email).to.equal(email)
-            expect(user.password).to.equal(password)
+        const result = await logic.league.create(id, name, code)
+            expect(result).to.exist
+       
         })
 
+
+        
     it('should fail if the user already exists', async () => {
 
        await User.create({ name, surname, email, password })
@@ -122,6 +126,7 @@ describe('logic - register user', () => {
                logic.user.register(name, surname, email, 123)
     ).to.throw(`password with value 123 is not a string`)
     )
+
 
     after(() => mongoose.disconnect())
 })

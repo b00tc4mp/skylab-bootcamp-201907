@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
 const logic = require('../../.')
 const { expect } = require('chai')
-const { User } = require('../../../models')
+const { User } = require('../../../../footcamp-data/')
 
 describe('logic', ()=>{
 
     before(()=>{
-        mongoose.connect('mongodb://localhost/my-stuff-api', {useNewUrlParser: true})
+        mongoose.connect('mongodb://localhost/footcamp-test', {useNewUrlParser: true})
     })
 
   

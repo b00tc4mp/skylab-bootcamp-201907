@@ -1,11 +1,11 @@
 const { expect } = require('chai')
 const logic = require('../../../logic')
-const {User} = require('../../../models')
+const { User } = require('../../../../footcamp-data/')
 const mongoose = require('mongoose')
 
 describe('logic - unregister user', () => {
 
-    before(() => mongoose.connect('mongodb://localhost/my-stuff-api', { useNewUrlParser: true }))
+    before(() => mongoose.connect('mongodb://localhost/footcamp-test', { useNewUrlParser: true }))
     let name, surname, email, password, id
 
     beforeEach(async () => {
@@ -46,4 +46,6 @@ describe('logic - unregister user', () => {
         }
         
     })
+
+    after(()=> mongoose.disconnect())
 })

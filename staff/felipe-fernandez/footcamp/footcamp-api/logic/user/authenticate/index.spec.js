@@ -1,19 +1,19 @@
-const mongoose = require('mongoose')
 const {expect} = require('chai')
 const logic = require('../../../logic')
-const {User} = require('../../../models')
+const { User } = require('../footcamp-data')
 
-describe('logic-authentication user', ()=>{
 
-    before(()=>{
-        mongoose.connect('mongodb://localhost/my-stuff-api', {useNewUrlParser: true})
+describe.only('logic-authentication user', ()=>{
+
+    before(async () => {
+        await mongoose.connect('mongodb://localhost/footcamp-test', {useNewUrlParser: true})
     })
 
     describe('authentication user', ()=> {
         let name, surname, email, password, id
 
         beforeEach(()=> {
-        
+            debugger
             name = `name-${Math.random()}`
             surname = `surname-${Math.random()}`
             email = `email-${Math.random()}@mail.com`
@@ -21,8 +21,8 @@ describe('logic-authentication user', ()=>{
             
             return (async () => {
                 await User.deleteMany()
-                const user = await User.create({name, surname, email, password})
-                id = user.id
+                const users = await User.create({name, surname, email, password})
+                id = users.id
             })()
         })
         
@@ -73,7 +73,7 @@ describe('logic-authentication user', ()=>{
             ).to.throw(Error, 'password with value undefined is not a string')
         })
 
-   after(()=>mongoose.disconnect())
-
     })
+
+    after(()=>mongoose.disconnect())
 })
