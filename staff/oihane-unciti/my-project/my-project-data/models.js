@@ -5,5 +5,5 @@ module.exports = {
     User: mongoose.model('User', user),
     Product: mongoose.model('Product', product),
     Conversation: mongoose.model('Conversation', conversation),
-    mail: mongoose.model('Mail', mail)
+    Mail: mongoose.model('Mail', mail)
 }

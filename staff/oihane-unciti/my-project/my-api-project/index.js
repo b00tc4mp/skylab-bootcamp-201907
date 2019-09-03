@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const { name, version } = require('./package')
 //const routes = require('./routes')
 const cors = require('cors')
+const { database } = require('my-project-data')
 
 const { env: { PORT, DB_URL, DB_URL_TEST } } = process
 

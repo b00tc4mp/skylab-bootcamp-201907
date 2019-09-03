@@ -1,12 +1,14 @@
+
+require('dotenv').config()
+
 const { expect } = require('chai')
 const registerUser = require('.')
-const { database, models: { User } } = require('../../data')
-const mongoose = require('mongoose')
+const { database, models: { User } } = require('my-project-data')
 
 const { env: { DB_URL_TEST }} = process
 
 describe.only('logic - register user', () => {
-    before(() => database.connect(DB_URL_TEST, { useNewUrlParser: true }))
+    before(() => database.connect(DB_URL_TEST))
     //before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
 
     let name, surname, email, password, favorites
@@ -79,5 +81,5 @@ describe.only('logic - register user', () => {
     it('should fail on wrong password type', () =>
         expect(() => registerUser(name, surname, email, 123, favorites)).to.throw('password with value 123 is not a string')
     )
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })

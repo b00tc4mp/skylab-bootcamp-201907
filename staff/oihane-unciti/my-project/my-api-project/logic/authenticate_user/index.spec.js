@@ -1,13 +1,14 @@
 
+require('dotenv').config()
+
 const { expect } = require('chai')
 const authenticateUser = require('.')
-const { database, models: { User } } = require('../../data')
-const mongoose = require('mongoose')
+const { database, models: { User } } = require('my-project-data')
 
 const { env: { DB_URL_TEST }} = process
 
 describe('logic - authenticate user', () => {
-    before(() => database.connect(DB_URL_TEST, { useNewUrlParser: true }))
+    before(() => database.connect(DB_URL_TEST))
 
     let name, surname, email, password, id
 
@@ -69,5 +70,5 @@ describe('logic - authenticate user', () => {
         expect(() => authenticateUser(email, 123)).to.throw('password with value 123 is not a string')
     )
 
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })

@@ -1,9 +1,11 @@
+require('dotenv').config()
+
 const { expect } = require('chai')
 const retrieveUser = require('.')
-const { database, models: { User } } = require('../../data')
-const mongoose = require('mongoose')
+const { database, models: { User } } = require('my-project-data')
 
 const { env: { DB_URL_TEST }} = process
+
 
 describe('logic - retrieve user', () => {
     before(() => database.connect(DB_URL_TEST))
@@ -52,5 +54,5 @@ describe('logic - retrieve user', () => {
     it('should fail on wrong user id type', () =>
         expect(() => retrieveUser(123)).to.throw('user id with value 123 is not a string')
     )
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })

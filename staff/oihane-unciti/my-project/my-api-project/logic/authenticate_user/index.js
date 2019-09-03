@@ -1,7 +1,5 @@
-require('dotenv').config()
-
-const validate = require('../../utils/validate')
-const { User } = require('../../data/models')
+const { models: { User } } = require('my-project-data')
+const { validate } = require('my-project-utils')
 
  /**
  * 
