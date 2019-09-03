@@ -60,7 +60,7 @@ City Halls or their representatives should contact Democratum and, after check t
 ## **Technical Description**
 
 ### Blocks
-![](images/tech-description.png)
+![](images/tech-blocks.png)
 
 
 ### Components
