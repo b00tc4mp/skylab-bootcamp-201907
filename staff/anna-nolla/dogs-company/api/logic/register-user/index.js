@@ -8,7 +8,6 @@ const { validate } = require('utils')
  * @param {string} email 
  * @param {string} password
  * 
- * @returns {Promise}
  */
 
 module.exports = function(name, surname, email, password) {
