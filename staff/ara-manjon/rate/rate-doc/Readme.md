@@ -30,8 +30,11 @@ User can:
 
 ![](./image/user-case.svg)
 ## **Flowcharts**
-
+#### **User**
 ![](./image/user-flow.jpg)
+
+#### **Guest**
+![](./image/guest-flow.png)
 ## **Tecnical Description**
 #### **Blocks**
 
@@ -42,6 +45,7 @@ User can:
 
 #### **React Components**
 #### **Data Model**
+![](./image/data-model.svg)
 #### **Code Coverage**
 
 ## **Technologies**

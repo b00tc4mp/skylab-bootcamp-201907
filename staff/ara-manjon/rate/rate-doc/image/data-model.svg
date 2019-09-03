@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.6, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 560 288" style="enable-background:new 0 0 560 288;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;}
+	.st1{font-family:'DINAlternate-Bold';}
+	.st2{font-size:12px;}
+	.st3{fill:none;stroke:#000000;stroke-miterlimit:10;}
+	.st4{font-size:9px;}
+	.st5{fill:none;}
+	.st6{font-family:'Avenir-Light';}
+	.st7{stroke:#000000;stroke-miterlimit:10;}
+</style>
+<rect x="37.7" y="35.26" class="st0" width="82.53" height="127.39"/>
+<rect x="37.7" y="35.26" class="st0" width="82.53" height="15.74"/>
+<text transform="matrix(1 0 0 1 63.5724 46.6597)" class="st1 st2">USER</text>
+<line class="st3" x1="37.7" y1="72.19" x2="120.22" y2="72.19"/>
+<rect x="37.7" y="51" class="st3" width="21.19" height="21.19"/>
+<text transform="matrix(1 0 0 1 41.5994 66.603)" class="st1 st2">PK</text>
+<text transform="matrix(1 0 0 1 63.5723 64.3904)" class="st1 st4">id: ObjectId</text>
+<rect x="41.61" y="76.64" class="st5" width="75.23" height="87.4"/>
+<text transform="matrix(1 0 0 1 41.6108 83.4473)"><tspan x="0" y="0" class="st6 st4">name: String</tspan><tspan x="0" y="12" class="st6 st4">surname: String</tspan><tspan x="0" y="24" class="st6 st4">username: String</tspan><tspan x="0" y="36" class="st6 st4">email: String</tspan><tspan x="0" y="48" class="st6 st4">password: String</tspan><tspan x="0" y="60" class="st6 st4">image: String</tspan><tspan x="0" y="72" class="st6 st4">situation: String</tspan></text>
+<rect x="150.32" y="35.26" class="st0" width="98.08" height="76.11"/>
+<rect x="150.32" y="35.26" class="st0" width="98.08" height="15.74"/>
+<text transform="matrix(1 0 0 1 160.9145 46.6597)" class="st1 st2">AVERAGE RATE</text>
+<line class="st3" x1="150.32" y1="72.19" x2="248.39" y2="72.19"/>
+<rect x="150.32" y="51" class="st3" width="21.19" height="21.19"/>
+<text transform="matrix(1 0 0 1 154.2199 66.603)" class="st1 st2">PK</text>
+<text transform="matrix(1 0 0 1 176.1928 64.3904)" class="st1 st4">id: ObjectId</text>
+<rect x="154.23" y="76.64" class="st5" width="75.23" height="34.73"/>
+<text transform="matrix(1 0 0 1 154.2308 83.4473)"><tspan x="0" y="0" class="st6 st4">average: Number</tspan><tspan x="0" y="12" class="st6 st4">coment: String</tspan><tspan x="0" y="24" class="st6 st4">response: String</tspan></text>
+<line class="st3" x1="150.32" y1="72.19" x2="140.13" y2="72.41"/>
+<rect x="130.97" y="68.1" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -11.5791 116.858)" class="st7" width="8.61" height="8.61"/>
+<line class="st3" x1="120.22" y1="72.19" x2="129.19" y2="72.19"/>
+</svg>
