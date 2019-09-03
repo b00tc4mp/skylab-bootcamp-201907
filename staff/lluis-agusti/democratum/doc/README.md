@@ -63,8 +63,8 @@ City Halls or their representatives should contact Democratum and, after check t
 ![](images/tech-blocks.png)
 
 
-### Components
-Non
+### Data Model
+![](images/data-model.png)
 
 
 ### Code Coverage
