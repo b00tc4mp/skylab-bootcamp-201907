@@ -4,7 +4,7 @@ const express = require('express')
 const { name, version } = require('./package')
 //const routes = require('./routes')
 const cors = require('cors')
-const { database } = require('my-project-data')
+const { database } = require('generisad-data')
 
 const { env: { PORT, DB_URL, DB_URL_TEST } } = process
 
