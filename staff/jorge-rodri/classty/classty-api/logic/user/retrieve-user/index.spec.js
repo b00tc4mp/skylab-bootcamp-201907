@@ -2,14 +2,14 @@ require('dotenv').config()
 
 const { expect } = require('chai')
 const retrieveUser = require('.')
-const { database, models: { User } } = require('data')
+const { database, models: { User } } = require('classty-data')
 
 const { env: { DB_URL_TEST }} = process
 
 describe('logic - retrieve user', () => {
     before(() => database.connect(DB_URL_TEST))
 
-    let name, surname, email, password, id
+    let name, surname, email, password, id, type
 
     beforeEach(async () => {
 
@@ -17,10 +17,11 @@ describe('logic - retrieve user', () => {
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
+        type = 'student'
 
         await User.deleteMany()
         
-        const user = await User.create({ name, surname, email, password })
+        const user = await User.create({ name, surname, email, password, type })
         id = user.id
 
     })
@@ -35,6 +36,7 @@ describe('logic - retrieve user', () => {
         expect(user.name).to.equal(name)
         expect(user.surname).to.equal(surname)
         expect(user.email).to.equal(email)
+        expect(user.type).to.equal(type)
         expect(user.password).not.to.exist
 
     })
@@ -59,7 +61,7 @@ describe('logic - retrieve user', () => {
             
         }catch(error){
             
-            expect(error.message).to.equal(`id is empty`)
+            expect(error.message).to.equal(`id is empty or blank`)
 
         }
     })

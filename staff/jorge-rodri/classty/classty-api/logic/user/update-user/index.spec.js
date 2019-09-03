@@ -2,48 +2,50 @@ require('dotenv').config()
 
 const { expect } = require('chai')
 const updateUser = require('.')
-const { database, models: { User } } = require('data')
+const { database, models: { User } } = require('classty-data')
 
 const { env: { DB_URL_TEST }} = process
 
 describe('logic - update user', () => {
     before(() => database.connect(DB_URL_TEST))
 
-    let name, surname, email, password, id, body
+    let name, surname, email, password, id, body, type
 
     beforeEach(async () => {
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
+        type = 'student'
 
         body = {
             name: `jorge-${Math.random()}`,
             surname: `surname-${Math.random()}`,
             email: `email-${Math.random()}@domain.com`,
             password: `password-${Math.random()}`,
-            extra: `extra-${Math.random()}`
+            type : 'mentor'
         }
 
         await User.deleteMany()
-        const user = await User.create({ name, surname, email, password })
-
+        const user = await User.create({ name, surname, email, password, type })
+debugger
         id = user.id
     })
 
 
     it('should succeed on correct data', async () => {
-
+debugger
         await updateUser(id, body)
        
 
         const user = await User.findById(id)
+        debugger
         expect(user).to.exist
         expect(user.name).to.equal(body.name)
         expect(user.surname).to.equal(body.surname)
         expect(user.email).to.equal(body.email)
         expect(user.password).to.equal(body.password)
-        expect(user.extra).not.to.exist
+        expect(user.type).to.equal(body.type)
 
     })
 

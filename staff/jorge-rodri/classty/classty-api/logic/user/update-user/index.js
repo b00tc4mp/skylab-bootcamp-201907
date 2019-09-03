@@ -1,5 +1,5 @@
-const { models: { User } } = require('data')
-const { validate } = require('utils')
+const { models: { User } } = require('classty-data')
+const { validate } = require('classty-utils')
 /**
  * Updates a user.
  * 
@@ -9,16 +9,15 @@ const { validate } = require('utils')
  * @returns {Promise}
  */
 module.exports = function (id, data) {
-    validate.number(id, 'id')
+    validate.string(id, 'id')
     
-    if( id.length == 0 ) throw Error('id is empty')
-    debugger
+    
     if( typeof data != 'object') throw Error('data is not a object')
 
     return (async () => {
         const user = await User.findByIdAndUpdate(id, { $set: data })
-        debugger
+        
         if (!user) throw Error(`user with id ${id} does not exist`)
-debugger
+
     })()
 }

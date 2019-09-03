@@ -1,6 +1,5 @@
-debugger
-const { models: { User } } = require('data')
-const { validate } = require('utils')
+const { models: { User } } = require('classty-data')
+const { validate } = require('classty-utils')
 
 /**
  * Authenticates a user by its credentials.

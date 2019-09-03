@@ -1,5 +1,5 @@
-const { models: { User } } = require('data')
-const { validate } = require('utils')
+const { models: { User } } = require('classty-data')
+const { validate } = require('classty-utils')
 /**
  * Unregisters a user.
  * 
@@ -9,11 +9,10 @@ const { validate } = require('utils')
  * @returns {Promise}
  */
 module.exports = function (id, password) {
-    validate.number(id, 'id')
+    validate.string(id, 'id')
     validate.string(password)
     
-    if(id.length == 0) throw Error('id is empty')
-    return (async () => {
+        return (async () => {
 
         const result = await User.deleteOne({ _id: id, password })
 

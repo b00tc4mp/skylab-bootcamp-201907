@@ -1,7 +1,6 @@
-debugger
-const { models } = require('data')
+const { models } = require('classty-data')
 const { User } = models
-const { validate } = require('utils')
+const { validate } = require('classty-utils')
 /**
  * Registers a user.
  * 
@@ -12,18 +11,19 @@ const { validate } = require('utils')
  * 
  * @returns {Promise}
  */
-module.exports = function (name, surname, email, password) {
+module.exports = function (name, surname, email, password, type) {
     validate.string(email, 'e-mail')
     validate.string(name, 'name')
     validate.string(surname, 'surname')
     validate.string(password)
+    validate.string(type)
         return (async () => {
         
         const user = await User.findOne({ email })
 
         if (user) throw Error(`user with e-mail ${email} already exists`)
 
-        await User.create({ name, surname, email, password })
+        await User.create({ name, surname, email, password, type })
     
     })()
 }

@@ -2,24 +2,25 @@ require('dotenv').config()
 
 const { expect } = require('chai')
 const unregisterUser = require('.')
-const { database, models: { User } } = require('data')
+const { database, models: { User } } = require('classty-data')
 
 const { env: { DB_URL_TEST }} = process
 
 describe('logic - unregister user', () => {
     before(() => database.connect(DB_URL_TEST))
 
-    let name, surname, email, password, id, _user
+    let name, surname, email, password, id, _user, type
 
     beforeEach(async () => {
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
+        type = `mentor`
 
 
         await User.deleteMany()
-        _user = await User.create({ name, surname, email, password })
+        _user = await User.create({ name, surname, email, password, type })
         id = _user.id
 
     })
@@ -55,7 +56,7 @@ describe('logic - unregister user', () => {
 
         } catch (error) {
             
-            expect(error.message).to.equal(`id is empty`)
+            expect(error.message).to.equal(`id is empty or blank`)
 
         }
     })

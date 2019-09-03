@@ -1,5 +1,5 @@
-const { models: { User } } = require('data')
-const { validate } = require('utils')
+const { models: { User } } = require('classty-data')
+const { validate } = require('classty-utils')
 /**
  * Retrieves a user by its id.
  * 
@@ -8,8 +8,7 @@ const { validate } = require('utils')
  * @returns {Promise}
  */
 module.exports = function (id) {
-    validate.number(id, 'id')
-        if( id.length == 0 ) throw Error('id is empty')
+    validate.string(id, 'id')
     return (async () => {
 
         let user = await User.findOne({ _id: id }, { _id: 0, password: 0 }).lean()
