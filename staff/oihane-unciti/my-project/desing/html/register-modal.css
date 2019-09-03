@@ -22,6 +22,8 @@
   float: right;
   font-size: 28px;
   font-weight: bold;
+  margin-top: -20px;
+  margin-right: 10px;
 }
 
 .close:hover {
@@ -30,6 +32,10 @@
   cursor: pointer;
   margin-right: 5px;
   margin-top: -15px;
+}
+
+.register-title {
+  text-align: center;
 }
 
 .modal__header {
@@ -44,12 +50,9 @@
   flex-direction: column;
 }
 
-label {
-  width: 100%;
-}
-
 input {
   width: 100%;
+  margin: 2px;
 }
 
 /*# sourceMappingURL=register-modal.css.map */
