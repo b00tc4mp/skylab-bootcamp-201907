@@ -22,13 +22,13 @@ module.exports = new Schema({
     },
     location: {
         type: {
-            type: String, // Don't do `{ location: { type: String } }`
-            enum: ['Point'], // 'location.type' must be 'Point'
-            required: true
+            type: String,
+            enum: ['Point'],
+            default: 'Point'
         },
         coordinates: {
             type: [Number],
-            required: true
+            default: []
         }
     },
     dogs: [{ type: ObjectId, ref: 'Dog' }],
