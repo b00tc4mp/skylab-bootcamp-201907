@@ -1,6 +1,9 @@
 # Bro Holdem
 ![alt text](images/introduction/readme.gif)
 
+
+# [Bro Holdem TRELLO](https://trello.com/b/C3Vl4JBa/bro-holdem) 
+
 ## Introduction
 Bro Holdem is a platform that allows users to host and join real-time online poker games. 
 
