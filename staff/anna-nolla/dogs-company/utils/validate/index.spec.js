@@ -46,11 +46,21 @@ describe("validate", () => {
 
     describe("number", () => {
         it ("should detect that it's a number and not throw error", () => {
-            validate.number(123,"number")
+            validate.number(123, "number")
             expect(true).to.be.true 
         })
         it ("should throw error if its not a number ", () => {
-            expect(() => { validate.number("hola", "number") }).to.throw(Error, "number with value hola is not a valid number")
+            expect(() => { validate.number("hola", "number") }).to.throw(Error, "number with value hola is not a number")
+        })
+    })
+
+    describe("boolean", () => {
+        it ("should detect that it's a boolean and not throw error", () => {
+            validate.boolean(true, "boolean")
+            expect(true).to.be.true 
+        })
+        it ("should throw error if its not a boolean ", () => {
+            expect(() => { validate.number("hola", "boolean") }).to.throw(Error, "boolean with value hola is not a boolean")
         })
     })
 })
