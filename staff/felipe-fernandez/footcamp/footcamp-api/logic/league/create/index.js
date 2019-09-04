@@ -28,13 +28,12 @@ module.exports = function(id, name) {
         
         const newLeague = new League({name})
         
-        newLeague.admin.id
+        newLeague.admin = id
         
         const initialCode = newLeague.id.slice(2,8)
        
         newLeague.code = initialCode
-        debugger
-
+        
         await newLeague.save()
 
         return newLeague

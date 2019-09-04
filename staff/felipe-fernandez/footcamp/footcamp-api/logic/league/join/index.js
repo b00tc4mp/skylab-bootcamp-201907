@@ -1,10 +1,11 @@
-const {validate, random: { number }} = require('footcamp-utils')
+const {validate } = require('footcamp-utils')
 const { models: { User,  League } } = require('footcamp-data')
 
  /**
  * 
  * @param {*} id 
  * @param {*} name 
+ * @param {*} code 
  *  
  * @returns {Promise}
 */
@@ -15,6 +16,7 @@ module.exports = function(id, name, code) {
 
     validate.string(id, 'id')
     validate.string(name, 'name')
+    validate.string(code, 'code')
    
     return (async () => {
         
@@ -23,15 +25,14 @@ module.exports = function(id, name, code) {
         if (!user) throw new Error(`user with id ${id} does not exists`)
 
         const league = await League.findOne({ name })
-
-        
-        code = league.id.slice(2,8)
+       
+        if (!league) throw Error(`league with name ${ name } does not exists`)
 
         debugger
+        if(!league.id.includes(code))throw Error(`code with number ${code} does not exists`)
 
-        if (!league) throw Error(`league with name ${name} does not exists`)
-        // if (league.code != code) throw Error(`league with name ${name} does not exists`)
-        
+        leagueId= league.id
+
         user.leagues.push(leagueId)
 
         await user.save()

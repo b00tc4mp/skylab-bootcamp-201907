@@ -6,7 +6,7 @@ const { database, models: { User, League } } = require('footcamp-data')
 
 const { env: { DB_URL_TEST }} = process
 
-describe.only('logic - create league', () => {
+describe('logic - create league', () => {
     
     before(() =>  database.connect(DB_URL_TEST))
 
@@ -33,9 +33,8 @@ describe.only('logic - create league', () => {
         const result = await logic.createLeague(id, name)
             expect(result).to.exist
             expect(result.code).to.exist
-            debugger
             expect(result.admin).to.exist
-            expect(result.admin.id).to.equal(id)
+            expect(result.admin.toString()).to.equal(id)
             expect(result.name).to.equal(name)
         
         })
