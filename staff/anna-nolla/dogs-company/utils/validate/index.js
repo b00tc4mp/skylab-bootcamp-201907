@@ -27,6 +27,9 @@ module.exports = (() => {
 
         date(target, name) {
             if (!(target instanceof Date)) throw TypeError(`${name} with value ${target} is not a date`)
+        },
+        boolean(target, name) {
+            if (typeof target !== 'boolean')  throw TypeError(`${name} with value ${target} is not a boolean`)
         }
     }
 })()
