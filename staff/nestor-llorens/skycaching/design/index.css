@@ -6,8 +6,29 @@
   display: grid;
   grid-template-rows: 20% 80%;
 }
-.body__main {
+
+.main {
   height: 100vh;
+}
+.main__section {
+  font-family: Lato, sans-serif;
+  padding: 0 1em 0 1em;
+  color: #111111;
+  text-align: center;
+}
+.main__section-p {
+  line-height: 2em;
+}
+.main__section-h {
+  color: #e5474b;
+  line-height: 1.6em;
+}
+.main__section-register {
+  border: 2px solid #e5474b;
+  background: none;
+  padding: 1em;
+  color: #e5474b;
+  font-weight: 550;
 }
 
 .header {
