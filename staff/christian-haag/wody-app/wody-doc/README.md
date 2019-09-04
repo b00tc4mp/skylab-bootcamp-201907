@@ -1,6 +1,6 @@
 ﻿# WODY  fitness web-app 
 
-![logo](logo.png)
+![logo](./images/logo.png)
 
 ## Porqué WODY ?
 
@@ -35,4 +35,8 @@ Una vez realizado el questionario, el usuario accederá al panel de Home donde t
 
 ### Esquema de uso
 
-![user case schema](ucd.jpg)
+![user case schema](./images/ucd.jpg)
+
+### Esquema de datos
+
+![data model](./images/datamodel.jpg)
