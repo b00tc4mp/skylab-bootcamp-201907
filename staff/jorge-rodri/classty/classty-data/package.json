@@ -1,7 +1,7 @@
 {
   "name": "classty-data",
   "version": "1.0.0",
-  "description": "hi",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mongoose": "^5.6.11"
+    "mongoose": "^5.6.12"
   }
 }

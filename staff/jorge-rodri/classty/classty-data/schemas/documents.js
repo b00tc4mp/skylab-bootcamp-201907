@@ -1,10 +1,10 @@
 const mongoose = require('mongoose')
-const { Schema , TypesSchema: { ObjectId } } = mongoose
+const { Schema , SchemaTypes: { ObjectId } } = mongoose
 
-module.exports = {
+module.exports = new Schema ({
     title:{
         type: String,
     },
     subject: { type: ObjectId, ref: 'Subject'},
-    type: ObjectId
-}
+    type:{ type: ObjectId } 
+})
