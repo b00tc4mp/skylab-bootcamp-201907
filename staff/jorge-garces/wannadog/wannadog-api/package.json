@@ -1,0 +1,29 @@
+{
+  "name": "wannadog-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "ISC",
+  "scripts": {
+    "start": "node .",
+    "watch": "npx nodemon .",
+    "debug": "node debug .",
+    "test": "npx mocha logic/**/*.spec.js",
+    "test-debug": "npx mocha debug logic/**/*.spec.js",
+    "test-inspect": "npx mocha --inspect-brk logic/**/*.spec.js"
+  },
+  "dependencies": {
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "wannadog-data": "file:../wannadog-data",
+    "wannadog-utils": "file:../wannadog-utils"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
+    "nodemon": "^1.19.2"
+  },
+  "keywords": [],
+  "author": "",
+  "description": ""
+}
