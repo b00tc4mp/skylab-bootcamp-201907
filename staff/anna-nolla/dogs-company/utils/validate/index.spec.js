@@ -1,8 +1,9 @@
 const validate = require('./')
 const { expect } = require('chai')
 
-describe("validate", () => {
 
+describe("validate", () => {
+  
    describe("string", () => {
        it("should detect that it's a string and not throw error", () => {
            validate.string("hello", "string")
@@ -22,7 +23,7 @@ describe("validate", () => {
            expect(() => { validate.email("a.a@com", "email") }).to.throw(Error, "email with value a.a@com is not a valid e-mail")
        })
    })
-
+   
    describe("function", () => {
        it("should detect that it's a function and not throw error", () => {
            const func = function funct() { }
@@ -33,7 +34,7 @@ describe("validate", () => {
            expect(() => { validate.function("hola", "function") }).to.throw(Error, "function with value hola is not a function")
        })
    })
-
+   
    describe("url", () => {
        it("should detect that it's a url and not throw error", () => {
            validate.url("www.url.com", "url")
@@ -43,7 +44,7 @@ describe("validate", () => {
            expect(() => { validate.url("hola", "url") }).to.throw(Error, "url with value hola is not a valid URL")
        })
    })
-
+   
    describe("number", () => {
        it("should detect that it's a number and not throw error", () => {
            validate.number(123, "number")
@@ -64,3 +65,4 @@ describe("validate", () => {
        })
    })
 })
+
