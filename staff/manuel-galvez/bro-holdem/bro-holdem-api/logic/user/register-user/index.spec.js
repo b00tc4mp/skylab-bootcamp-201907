@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
-const logic = require('../../.')
+const logic = require('../../../logic')
 const { expect } = require('chai')
 const { User } = require('../../../models')
 
-describe.only('logic - register user', () => {
+describe('logic - register user', () => {
 
-    before(() => mongoose.connect('mongodb://localhost/my-stuff-api-test', { useNewUrlParser: true }))
+    before(() => mongoose.connect('mongodb://localhost/bro-holdem-test', { useNewUrlParser: true }))
 
     let name, surname, email, password
 
@@ -17,7 +17,7 @@ describe.only('logic - register user', () => {
     })
 
     it('should succeed on correct data', async () => {
-        const result = await logic.user.register(username, email, password)
+        const result = await logic.registerUser(username, email, password)
         expect(result).not.to.exist
         const user = await User.findOne({ email, password })
         expect(user).to.exist
@@ -31,7 +31,7 @@ describe.only('logic - register user', () => {
         await User.create({ username, email, password })
 
         try {
-            await logic.user.register(username, email, password)
+            await logic.registerUser(username, email, password)
         } catch (error) {
             expect(error).to.exist
             expect(error.message).to.equal(`User with e-mail ${email} already exists.`)
@@ -44,7 +44,7 @@ describe.only('logic - register user', () => {
         await User.create({ username, email, password })
 
         try {
-            await logic.user.register(username, 'another-email@mail.com', password)
+            await logic.registerUser(username, 'another-email@mail.com', password)
         } catch (error) {
             expect(error).to.exist
             expect(error.message).to.equal(`Username is already taken.`)
@@ -54,63 +54,63 @@ describe.only('logic - register user', () => {
     /* Name */
     it('should fail on empty name', () =>
         expect(() =>
-            logic.user.register('', email, password)
+            logic.registerUser('', email, password)
         ).to.throw('username is empty or blank')
     )
 
     it('should fail on undefined name', () =>
         expect(() =>
-            logic.user.register(undefined, email, password)
+            logic.registerUser(undefined, email, password)
         ).to.throw(`username with value undefined is not a string`)
     )
 
     it('should fail on wrong data type for name', () =>
         expect(() =>
-            logic.user.register(123, surname, email, password)
+            logic.registerUser(123, surname, email, password)
         ).to.throw(`username with value 123 is not a string`)
     )
 
     /* Email */
     it('should fail on empty email', () =>
         expect(() =>
-            logic.user.register(username, '', password)
+            logic.registerUser(username, '', password)
         ).to.throw('email is empty or blank')
     )
 
     it('should fail on undefined surname', () =>
         expect(() =>
-            logic.user.register(username, undefined, password)
+            logic.registerUser(username, undefined, password)
         ).to.throw(`email with value undefined is not a string`)
     )
 
     it('should fail on wrong data type for email', () =>
         expect(() =>
-            logic.user.register(username, 123, password)
+            logic.registerUser(username, 123, password)
         ).to.throw(`email with value 123 is not a string`)
     )
 
     it('should fail on wrong email format', () =>
         expect(() =>
-            logic.user.register(username, 'a@a', password)
+            logic.registerUser(username, 'a@a', password)
         ).to.throw(`email with value a@a is not a valid e-mail`)
     )
 
     /* Password */
     it('should fail on empty password', () =>
         expect(() =>
-            logic.user.register(username, email, '')
+            logic.registerUser(username, email, '')
         ).to.throw('password is empty or blank')
     )
 
     it('should fail on undefined password', () =>
         expect(() =>
-            logic.user.register(username, email, undefined)
+            logic.registerUser(username, email, undefined)
         ).to.throw(`password with value undefined is not a string`)
     )
 
     it('should fail on wrong data type for password', () =>
         expect(() =>
-            logic.user.register(username, email, 123)
+            logic.registerUser(username, email, 123)
         ).to.throw(`password with value 123 is not a string`)
     )
 
