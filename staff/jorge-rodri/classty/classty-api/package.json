@@ -12,8 +12,6 @@
     "test-inspect": "npx mocha --inspect-brk logic/**/**/*.spec.js"
   },
   "dependencies": {
-    "classty-data": "../classty-data",
-    "classty-utils": "../classty-utils",
     "cors": "^2.8.5",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",

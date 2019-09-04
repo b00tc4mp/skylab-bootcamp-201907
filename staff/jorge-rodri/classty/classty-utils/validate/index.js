@@ -27,5 +27,8 @@ module.exports = {
 
     date(target, name) {
         if (!(target instanceof Date)) throw TypeError(`${name} with value ${target} is not a date`)
+    },
+    array(target, name) {
+        if (!(target instanceof Array)) throw TypeError(`${name} with value ${target} is not a array`)
     }
 }
