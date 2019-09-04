@@ -9,7 +9,7 @@ https://trello.com/invite/b/ttVfxbI3/adb73360223318d66c2a73b8c28e28db/democratum
 
 
 
-![](https://media.giphy.com/media/26vUCOMzBiBZ0qW1a/source.gif)
+![](https://media.giphy.com/media/l0NgSlYECv58uTfbO/source.gif)
 
 ## **Introduction**
 Democratum is a MERN application that allows an afordable and scalable direct democracy voting system for municipalities to improve local governance quality and transparency.
