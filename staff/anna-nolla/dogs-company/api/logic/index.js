@@ -6,5 +6,6 @@ module.exports = {
     unregisterUser: require('./unregister-user'),
     registerPet: require('./register-pet'),
     retrieveAllPets: require('./retrieve-all-pets'),
-    unregisterPet: require('./unregister-pet')
+    unregisterPet: require('./unregister-pet'),
+    retrievePet: require('./retrieve-pet')
 }

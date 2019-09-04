@@ -22,7 +22,7 @@ module.exports = function(id) {
                 if (user.pets.length === 0) throw Error(`This user does not have pets`) 
                 else {
                     user.pets.forEach((item) => {
-                        pet.push({ 'name': item.name, 'age': item.age, 'characteristics': item.characteristics })
+                        pet.push({ 'name': item.name, 'age': item.age, 'gender': item.gender, 'size': item.size, 'characteristics': item.characteristics, 'petId': item.id })
                     })
                     return pet
                 }

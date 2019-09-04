@@ -6,17 +6,19 @@ const { database, models: { User, Pet } } = require('data')
 
 const { env: { DB_URL_TEST }} = process
 
-describe.only('logic - unregister card', () => {
+describe('logic - unregister card', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
-    let nameP, age, characteristics, name, surname, email, password, id, pet, petId
+    let nameP, age, gender, size, characteristics, name, surname, email, password, id, pet, petId
 
     beforeEach( async () => {
 
         age = Number(Math.random())
         nameP =  `name-${Math.random()}`
         characteristics = `characteristics-${Math.random}`
+        size = `size-${Math.random()}`
+        gender = Math.random() >= 0.5
 
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`
@@ -24,9 +26,8 @@ describe.only('logic - unregister card', () => {
         password = `password-${Math.random()}`
 
         await User.deleteMany()
-            pet = await new Pet({ name: nameP, age, characteristics })
+            pet = await new Pet({ name: nameP, age, gender, size, characteristics })
             const user = await User.create({ name, surname, email, password, pets: pet })
-            
                 petId = user.pets[0]._id.toString()
                 id = user.id
     })      
