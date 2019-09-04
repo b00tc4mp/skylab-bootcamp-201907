@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-
 const { Schema, ObjectId } = mongoose
+const playerSchema = require('./player')
 
 module.exports = new Schema({
     name: {
@@ -34,5 +34,6 @@ module.exports = new Schema({
         default: false
     },
 
-    host: [{ type: ObjectId, ref: 'User' }]
+    host: { type: ObjectId, ref: 'User' },
+    players: [playerSchema]
 })
