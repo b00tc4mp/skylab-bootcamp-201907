@@ -19,6 +19,14 @@ module.exports = (() => {
 
         url(target, name) {
             if (!URL_REGEX.test(target)) throw new Error(`${name} with value ${target} is not a valid URL`)
+        },
+        
+        number(target, name) {
+            if (typeof target !== 'number') throw TypeError(`${name} with value ${target} is not a number`)
+        },
+
+        date(target, name) {
+            if (!(target instanceof Date)) throw TypeError(`${name} with value ${target} is not a date`)
         }
     }
 })()
