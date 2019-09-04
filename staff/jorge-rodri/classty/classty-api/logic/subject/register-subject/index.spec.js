@@ -1,59 +1,66 @@
-/* const { expect } = require('chai')
-const logic = require('..')
-const { Subject, User } = require('../../../data')
-const mongoose = require('mongoose')
+require('dotenv').config()
 
+const { expect } = require('chai')
+const registerSubject = require('.')
+const { database, models: { User, Subject } } = require('classty-data')
+
+const { env: { DB_URL_TEST }} = process
 describe('logic - register subject', () => {
-    before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
+    before(() => database.connect(DB_URL_TEST))
 
-    let nameS, surnameS, emailS, passwordS, nameT, surnameT, emailT, passwordT, nameSubject
+    let nameS, surnameS, emailS, passwordS, typeS, nameT, surnameT, teachers, students, emailT, passwordT, idT, idS, nameSubject
 
     beforeEach(async () => {
 
-        nameS = `Aname-${Math.random()}`
-        surnameS = `Asurname-${Math.random()}`
-        emailS = `Aemail-${Math.random()}@domain.com`
-        passwordS = `Apassword-${Math.random()}`
+        nameS = `Sname-${Math.random()}`
+        surnameS = `Ssurname-${Math.random()}`
+        emailS = `Semail-${Math.random()}@domain.com`
+        passwordS = `Spassword-${Math.random()}`
         typeS = `student`
         nameT = `Tname-${Math.random()}`
         surnameT = `Tsurname-${Math.random()}`
         emailT = `Temail-${Math.random()}@domain.com`
         passwordT = `Tpassword-${Math.random()}`
         typeT = `teacher`
-        nameSubject = `name-${Math.random()}`
+        nameSubject = `subject-${Math.random()}`
        
         await User.deleteMany()
 
+        const student = await User.create({name: nameS, surname: surnameS, email: emailS, password: passwordS, type: typeS})
+        idS = student.id
+        students = [idS]
+        const teacher = await User.create({name: nameT, surname: surnameT, email: emailT, password: passwordT, type: typeT})
+        idT = teacher.id
+        teachers = [idT]
     })
 
     it('should succeed on correct data', async () => {
-        
-        await logic.registerUser(name, surname, email, password, card)
+        debugger
+        await registerSubject(nameSubject, students, teachers)
 
-        const user =  await User.findOne({email})
+        const subject =  await Subject.findOne({nameSubject})
 
-        expect(user).to.exist
-        expect(user.name).to.equal(name)
-        expect(user.surname).to.equal(surname)
-        expect(user.email).to.equal(email)
-        expect(user.password).to.equal(password)
+        expect(subject).to.exist
+        expect(subject.name).to.equal(name)
+        expect(subject.students.length).to.equal(idS.length)
+        expect(subject.teachers.length).to.equal(idT.length)
 
     })
 
-    it('error because e-mail already exist', async() => {
-        await User.create({name, surname, email, password, card})
+    it('error because subject already exist', async() => {
+        await Subject.create({nameSubject, students, teachers})
         
         try{
 
-            await logic.registerUser(name, surname, email, password, card)
+            await registerSubject(nameSubject, students, teachers)
 
         }catch(error){
             
-            expect(error.message).to.equal(`user with e-mail ${email} already exists`)
+            expect(error.message).to.equal(`subject with name ${nameSubject} already exists`)
         }
 
-        await User.deleteMany()
+        await Subject.deleteMany()
     })
 
-    after(() => mongoose.disconnect())
-}) */
+    after(() => database.disconnect())
+})
