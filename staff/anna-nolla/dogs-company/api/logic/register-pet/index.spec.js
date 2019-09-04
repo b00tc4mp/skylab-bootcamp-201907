@@ -6,7 +6,7 @@ const { database, models: { User, Pet } } = require('data')
 
 const { env: { DB_URL_TEST }} = process
 
-describe.only('logic - register card', () => {
+describe('logic - register card', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
@@ -78,9 +78,9 @@ describe.only('logic - register card', () => {
     expect(() => logic.registerPet(id, 123, age, characteristics)).to.throw('name with value 123 is not a string')
     )
 
-    // it('should fail on empty age', () =>
-    // expect(() => logic.registerPet(id, name, "", characteristics)).to.throw('age is empty or blank')
-    // )
+    it('should fail on empty age', () =>
+    expect(() => logic.registerPet(id, name, "123", characteristics)).to.throw('age with value 123 is not a number')
+    )
     
     it('should fail on empty characteristics', () =>
     expect(() => logic.registerPet(id, name, age, "")).to.throw('characteristics is empty or blank')

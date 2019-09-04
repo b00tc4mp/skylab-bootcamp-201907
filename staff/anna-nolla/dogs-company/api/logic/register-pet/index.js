@@ -7,17 +7,21 @@ const { models: { User, Pet } } = require('data')
  * @param {string} id 
  * @param {string} name 
  * @param {number} age 
+ * @param {boolean} gender
+ * @param {string} size
  * @param {string} characteristics
  * 
  * @returns {Promise}
  */
 
-module.exports = function(id, name, age, characteristics) {
+module.exports = function(id, name, age, gender, size, characteristics) {
     let petId
 
     validate.string(id, 'user id')
     validate.string(name, 'name')
-    // validate number falta
+    validate.number(age, 'age')
+    validate.string(size, 'size')
+    validate.boolean(gender, 'gender')
     validate.string(characteristics, 'characteristics')
 
     return (async () => {  
@@ -27,7 +31,7 @@ module.exports = function(id, name, age, characteristics) {
                 const pet = await user.pets.find(pet => (pet.name === name && pet.age === age))
                     if (pet) throw Error('Pet already exists')
                     else {
-                        const newPet = new Pet({ name, age, characteristics })
+                        const newPet = new Pet({ name, age, gender, size, characteristics })
                         petId = newPet.id
                         user.pets.push(newPet)
                         await user.save()
