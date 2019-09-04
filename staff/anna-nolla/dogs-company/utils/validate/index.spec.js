@@ -1,7 +1,8 @@
 const validate = require('./')
 const { expect } = require('chai')
-describe("validate", () => {
 
+describe("validate", () => {
+  
    describe("string", () => {
        it("should detect that it's a string and not throw error", () => {
            validate.string("hello", "string")
