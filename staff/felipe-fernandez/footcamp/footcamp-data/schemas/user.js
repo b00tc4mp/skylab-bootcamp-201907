@@ -1,5 +1,5 @@
 const { Schema } = require('mongoose')
-// const leagueSchema = require('./league')
+const leagueSchema = require('./league')
 
 module.exports = new Schema({
     name: {
@@ -19,9 +19,7 @@ module.exports = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
 
-    
-
-  
+    leagues: [leagueSchema]
 })

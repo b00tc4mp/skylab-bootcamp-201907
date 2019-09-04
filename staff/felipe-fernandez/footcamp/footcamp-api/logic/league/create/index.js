@@ -1,4 +1,4 @@
-const {validate, random: { number }} = require('footcamp-utils')
+const {validate} = require('footcamp-utils')
 const { models: { User,  League } } = require('footcamp-data')
 
  /**
@@ -15,6 +15,8 @@ module.exports = function(id, name) {
     validate.string(name, 'name')
    
     return (async () => {
+
+        debugger
         
         const user = await User.findById(id)
 
@@ -26,14 +28,15 @@ module.exports = function(id, name) {
         
         const newLeague = new League({name})
         
-        newLeague.admin.push(id)
-
-        const initialCode = number(100000,200000)
-
-        newLeague.code = initialCode
-   
-        await newLeague.save()
+        newLeague.admin.id
         
+        const initialCode = newLeague.id.slice(2,8)
+       
+        newLeague.code = initialCode
+        debugger
+
+        await newLeague.save()
+
         return newLeague
     })()
 }

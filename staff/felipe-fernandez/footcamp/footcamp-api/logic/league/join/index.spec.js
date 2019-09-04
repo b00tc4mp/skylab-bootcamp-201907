@@ -6,11 +6,11 @@ const { database, models: { User, League } } = require('footcamp-data')
 
 const { env: { DB_URL_TEST }} = process
 
-describe.only('logic - join league', () => {
+describe('logic - join league', () => {
     
     before(() =>  database.connect(DB_URL_TEST))
 
-    let name, surname, email, password, code
+    let name, surname, email, password, code ,nameLeague
 
     beforeEach(() => {
 
@@ -27,7 +27,8 @@ describe.only('logic - join league', () => {
             debugger
             const users = await User.create({name, surname, email, password})
             id = users.id
-            const league = await League.create({id, name: nameLeague, code})
+            const league = await League.create({id, name: nameLeague})
+            code = league.code
         })()
     
    })
@@ -37,10 +38,7 @@ describe.only('logic - join league', () => {
     const result = await logic.joinLeague(id, nameLeague, code)
         expect(result).to.exist
         expect(result.code).to.exist
-        debugger
-        expect(result.admin).to.exist
-        expect(result.admin[0].toString()).to.equal(id)
-        expect(result.name).to.equal(name)
+               
     
     })
 
