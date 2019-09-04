@@ -42,6 +42,7 @@ module.exports = function (name, max_players, initial_stack, initial_bb, initial
             in_game: true,
             in_hand: false
         })
+        newPlayer.user = mongoose.Types.ObjectId(hostId)
 
         newGame.players.push(newPlayer)
         await newGame.save()

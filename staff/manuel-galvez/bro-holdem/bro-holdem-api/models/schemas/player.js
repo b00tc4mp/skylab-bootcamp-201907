@@ -23,5 +23,5 @@ module.exports = new Schema({
         required: true
     },
 
-    host: [{ type: ObjectId, ref: 'User' }]
+    user: { type: ObjectId, ref: 'User' }
 })

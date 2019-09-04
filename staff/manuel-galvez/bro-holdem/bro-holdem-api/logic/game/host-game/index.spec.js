@@ -6,7 +6,7 @@ const { Game } = require('../../../models')
 describe('logic - host game', () => {
 
     before(() => {
-        mongoose.connect('mongodb://localhost:27017/bro-holdem-test', { useNewUrlParser: true })
+        mongoose.connect('mongodb://localhost/bro-holdem-test', { useNewUrlParser: true })
     })
 
     let name, max_players, initial_stack, initial_bb, initial_sb, blinds_increase
