@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose
 const Photo = require('./photo')
-const Activity = require('./photo')
+const Activity = require('./activity')
 
 
 const cacheSchema = new Schema({
@@ -12,6 +12,12 @@ const cacheSchema = new Schema({
     description: {
         type: String,
         required: true,
+    },
+
+    location: {
+        lan: Number,
+        lng: Number,
+        required: true
     },
     difficulty: {
         type: Number,
@@ -28,10 +34,10 @@ const cacheSchema = new Schema({
     hints: {
         type: String,
     },
-    owner: [{
+    owner: {
         type: ObjectId, 
         ref: 'User'
-    }],
+    },
     photos: [Photo]
     ,
     comments: [Activity]
