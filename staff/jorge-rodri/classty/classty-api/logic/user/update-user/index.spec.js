@@ -28,18 +28,17 @@ describe('logic - update user', () => {
 
         await User.deleteMany()
         const user = await User.create({ name, surname, email, password, type })
-debugger
+
         id = user.id
     })
 
 
     it('should succeed on correct data', async () => {
-debugger
+
         await updateUser(id, body)
        
-
         const user = await User.findById(id)
-        debugger
+        
         expect(user).to.exist
         expect(user.name).to.equal(body.name)
         expect(user.surname).to.equal(body.surname)
@@ -53,11 +52,11 @@ debugger
     it('should fail on non-existing user', async () => {
         const _id = '5d5d5530531d455f757a8fF9'
         try{
-            debugger
+            
         await updateUser(_id, body)
 
         }catch(error){
-            debugger
+            
         expect(error.message).to.equal(`user with id ${_id} does not exist`)
         
         }

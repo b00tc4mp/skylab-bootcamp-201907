@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const { expect } = require('chai')
-const registerSubject = require('.')
+const unregisterSubject = require('.')
 const { database, models: { User, Subject } } = require('classty-data')
 
 const { env: { DB_URL_TEST }} = process
@@ -32,34 +32,33 @@ describe('logic - register subject', () => {
         const teacher = await User.create({name: nameT, surname: surnameT, email: emailT, password: passwordT, type: typeT})
         idT = teacher.id
         teachers = [ idT ]
+
+        await Subject.create({name: nameSubject, students, teachers})
+        
     })
 
     it('should succeed on correct data', async () => {
         
-        await registerSubject(nameSubject, students, teachers)
+        await unregisterSubject(nameSubject)
 
         const subject =  await Subject.findOne({name:nameSubject})
 
-        expect(subject).to.exist
-        expect(subject.name).to.equal(nameSubject)
-        expect(subject.students.length).to.equal(students.length)
-        expect(subject.teachers.length).to.equal(teachers.length)
+        expect(subject).not.to.exist
 
     })
 
-    it('error because subject already exist', async() => {
-        await Subject.create({name: nameSubject, students, teachers})
-        
-        try{
+    it('should fail on unexisting user', async () => {
+        const nameSub = '5d62f4d76fdb415d25a14496'
 
-            await registerSubject(nameSubject, students, teachers)
+        try {
 
-        }catch(error){
-            
-            expect(error.message).to.equal(`subject with name ${nameSubject} already exists`)
+            await unregisterSubject(nameSub)
+
+        } catch (error) {
+
+            expect(error.message).to.equal(`wrong credentials`)
+
         }
-
-        await Subject.deleteMany( )
     })
 
     after(() => database.disconnect())
