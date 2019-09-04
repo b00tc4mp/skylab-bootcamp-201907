@@ -23,5 +23,7 @@ module.exports = function(id) {
 
             return space
         })
+
+        return spaces
     })()
 }

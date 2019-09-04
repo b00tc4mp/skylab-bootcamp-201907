@@ -97,17 +97,17 @@ describe('logic - register space', () => {
         try {
             await logic.registerSpace(title, type, address, passcode, id)
         } catch({message}) {
-            expect(message).to.equal('space type with value undefined is not a number')
+            expect(message).to.equal('space type with value undefined is not a string')
         }
     })
 
     it('should fail on wrong space type data type', async () => {
-        type = '123'
+        type = 123
 
         try {
             await logic.registerSpace(title, type, address, passcode, id)
         } catch({message}) {
-            expect(message).to.equal('space type with value 123 is not a number')
+            expect(message).to.equal('space type with value 123 is not a string')
         }
     })
 
@@ -128,17 +128,17 @@ describe('logic - register space', () => {
         try {
             await logic.registerSpace(title, type, address, passcode, id)
         } catch({message}) {
-            expect(message).to.equal('space address with value undefined is not a number')
+            expect(message).to.equal('space address with value undefined is not a string')
         }
     })
 
     it('should fail on wrong space address data type', async () => {
-        address = '123'
+        address = 123
 
         try {
             await logic.registerSpace(title, type, address, passcode, id)
         } catch({message}) {
-            expect(message).to.equal('space address with value 123 is not a number')
+            expect(message).to.equal('space address with value 123 is not a string')
         }
     })
 

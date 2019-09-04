@@ -12,28 +12,21 @@ const { User, Space } = require('../../../data')
 
 module.exports = function(spaceId, coUserId) {
 
-    let _space
-
     validate.string(spaceId, 'space id')
     validate.string(coUserId, 'co-user id')
 
     return (async () => {
         const space = await Space.findOne({ _id: spaceId })
-
         if (!space) throw Error('wrong space id provided')
 
-        _space = space
-
         const user = await User.findOne({ _id: coUserId })
-
         if (!user) throw Error('wrong user id provided')
 
-        const match = _space.cousers.find(user => user === coUserId)
-
+        const match = space.cousers.find(user => user === coUserId)
         if (match) throw Error(`user already registered in space with id ${spaceId}`)
         
-        _space.cousers.push(coUserId)
+        space.cousers.push(coUserId)
         
-        await _space.save()
+        return space.save()
     })()
 }

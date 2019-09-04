@@ -35,4 +35,7 @@ router.patch ('/users/:id/spaces/:spaceId', [tokenMiddleware, jsonBodyParser], u
 router.delete ('/users/:id/spaces/:spaceId', [tokenMiddleware, jsonBodyParser], unregisterSpace)
 router.delete ('/users/:id/spaces/:spaceId/cousers/:coUserId', [tokenMiddleware, jsonBodyParser], unregisterSpaceCouser)
 
+/* TASK */
+
+
 module.exports = router

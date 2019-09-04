@@ -7,7 +7,11 @@ describe('logic - unregister space co-user', () => {
 
     before(() => mongoose.connect('mongodb://localhost/e-cohabitat-api-test',  { useNewUrlParser: true }))
 
-    let title, type, address, passcode, username, name, surname, email, password, spaceId, coUserId
+    let title, type, address, passcode
+    let username, name, surname, email, password
+    let username2, name2, surname2, email2, password2
+    let username3, name3, surname3, email3, password3
+    let spaceId, coUserIdOne, coUserIdTwo
 
     beforeEach(async() => {
         title = `name-${Math.random()}`
@@ -22,29 +26,44 @@ describe('logic - unregister space co-user', () => {
         email = `email-${Math.random()}@email.com`
         password = `123-${Math.random()}`
 
-        const newUser = await User.create({ username, name, surname, email, password })
-        coUserId = user._id.toString()
+        username2 = `username2-${Math.random()}`
+        name2 = `name2-${Math.random()}`
+        surname2 = `surname2-${Math.random()}`
+        email2 = `email2-${Math.random()}@email.com`
+        password2 = `1232-${Math.random()}`
+
+        const newUserOne = await User.create({ username, name, surname, email, password })
+        coUserIdOne = newUserOne.id
+
+        const newUserTwo = await User.create({ username: username2, name: name2, surname: surname2, email: email2, password :password2 })
+        coUserIdTwo = newUserTwo.id
 
         const newSpace = await Space.create({ title, type, address, passcode })
-        spaceId = space.id
-
-        newSpace.users.push(newUser)
+        newSpace.cousers.push(coUserIdOne, coUserIdTwo)
+        spaceId = newSpace.id
         await newSpace.save()
     })
 
     it('should succeed on correct data', async () => {
-        const result = await logic.unregisterSpaceCouser(spaceId, coUserId)
-        expect(result).to.exist
+        const user = await User.findById(coUserIdOne)
+        expect(user).to.exist
+        expect(user.id).to.equal(coUserIdOne)
+
         const space = await Space.findById(spaceId)
         expect(space).to.exist
-        const user = await User.findById(coUserId)
-        expect(user).not.to.exist
+        expect(space.id).to.equal(spaceId)
+        expect(space.cousers).to.include(coUserIdOne)
+        
+        const result = await logic.unregisterSpaceCouser(spaceId, coUserIdOne)
+        expect(result).to.exist
+        expect(result.cousers).not.to.include(coUserIdOne) 
     })
 
     it('should fail on unexisting property', async () => {
-        spaceId = '12342657'
+        spaceId = "5d5d5530531d455f75db9fF9"
+
         try {
-            await logic.unregisterSpaceCouser(spaceId, coUserId)
+            await logic.unregisterSpaceCouser(spaceId, coUserIdOne)
             
             throw Error('should not reach this point')
         } catch({message}) {
@@ -53,20 +72,28 @@ describe('logic - unregister space co-user', () => {
     })
 
     it('should fail on existing property but wrong co-user', async () => {
-        coUserId = '5d5d5530531d455f75da9fF9'
+        username3 = `username3-${Math.random()}`
+        name3 = `name3-${Math.random()}`
+        surname3 = `surname3-${Math.random()}`
+        email3 = `email3-${Math.random()}@email.com`
+        password3 = `1233-${Math.random()}`
+
+        const newUserThree = await User.create({ username: username3, name: name3, surname: surname3, email: email3, password :password3 })
+        coUserIdThree = newUserThree.id
+
         try {
-            await logic.unregisterSpaceCouser(spaceId, coUserId)
+            await logic.unregisterSpaceCouser(spaceId, coUserIdThree)
             
             throw Error('should not reach this point')
         } catch({message}) {
-            expect(message).to.equal('user with id 5d5d5530531d455f75da9fF9 is not a co-user')
+            expect(message).to.equal(`user with id ${coUserIdThree} is not a co-user`)
         }
     })
 
     it('should fail on unexisting co-user', async () => {
-        coUserId = '124368587'
+        coUserIdOne = '5d5d5530531d455f75da9fF9'
         try {
-            await logic.unregisterSpaceCouser(spaceId, coUserId)
+            await logic.unregisterSpaceCouser(spaceId, coUserIdOne)
             
             throw Error('should not reach this point')
         } catch({message}) {
@@ -78,7 +105,7 @@ describe('logic - unregister space co-user', () => {
         spaceId = ' '
 
         try{
-            await logic.unregisterSpaceCouser(spaceId, coUserId)
+            await logic.unregisterSpaceCouser(spaceId, coUserIdOne)
         } catch({ message }) {
             expect(message).to.equal('space id is empty or blank')
         }
@@ -88,7 +115,7 @@ describe('logic - unregister space co-user', () => {
         spaceId = undefined
 
         try{
-            await logic.unregisterSpaceCouser(spaceId, coUserId)
+            await logic.unregisterSpaceCouser(spaceId, coUserIdOne)
         } catch({ message }) {
             expect(message).to.equal("space id with value undefined is not a string")
         }
@@ -98,37 +125,37 @@ describe('logic - unregister space co-user', () => {
         spaceId = 123
 
          try{
-            await logic.unregisterSpaceCouser(spaceId, coUserId)
+            await logic.unregisterSpaceCouser(spaceId, coUserIdOne)
         } catch({ message }) {
             expect(message).to.equal("space id with value 123 is not a string")
         }
     })
 
     it('should fail on empty co-user id', async () => {
-        coUserId = ' '
+        coUserIdOne = ' '
 
         try{
-            await logic.unregisterSpaceCouser(spaceId, coUserId)
+            await logic.unregisterSpaceCouser(spaceId, coUserIdOne)
         } catch({ message }) {
             expect(message).to.equal('co-user id is empty or blank')
         }
     })
 
     it('should fail on undefined co-user id', async () => {
-        coUserId = undefined
+        coUserIdOne = undefined
 
         try{
-            await logic.unregisterSpaceCouser(spaceId, coUserId)
+            await logic.unregisterSpaceCouser(spaceId, coUserIdOne)
         } catch({ message }) {
             expect(message).to.equal("co-user id with value undefined is not a string")
         }
     })
      
     it('should fail on wrong co-user id data type', async() => {
-        coUserId = 123
+        coUserIdOne = 123
 
          try{
-            await logic.unregisterSpaceCouser(spaceId, coUserId)
+            await logic.unregisterSpaceCouser(spaceId, coUserIdOne)
         } catch({ message }) {
                 expect(message).to.equal("co-user id with value 123 is not a string")
         }

@@ -25,14 +25,14 @@ module.exports = function(title, type, address, passcode, id) {
         const result = await Space.findOne({ passcode })
         if (result) throw Error('space already exists')
         
-        const user = await User.findById(id) // revisar
+        const user = await User.findById(id) 
         if (!user) throw Error('error')
         
         const space = new Space({ title, type, address, passcode })
         space.cousers.push(user._id)
         await space.save()
         
-        const spaceId = space._id
+        const spaceId = space._id.toString()
         user.spaces.push(spaceId)
         await user.save()
     

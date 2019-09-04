@@ -6,15 +6,17 @@ const mongoose = require('mongoose')
 describe('logic - retrieve user', () => {
     before(() => mongoose.connect('mongodb://localhost/e-cohabitat-api-test', { useNewUrlParser: true }))
 
-    let name, surname, email, password, id
+    let username, name, surname, email, password, id
+
     beforeEach(async () => {
+        username = `username-${Math.random()}`
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
 
         await User.deleteMany()
-        const user = await User.create({ name, surname, email, password })
+        const user = await User.create({ username, name, surname, email, password })
         id = user.id
     })
 

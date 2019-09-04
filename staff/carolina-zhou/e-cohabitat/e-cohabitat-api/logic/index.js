@@ -7,8 +7,8 @@ module.exports = {
     registerSpace: require('./space/register-space'),
     registerSpaceCouser: require('./space/register-couser'),
     retrieveAllSpaces: require('./space/retrieve-all-spaces'),
-    retrievespace: require('./space/retrieve-space'),
-    updatespace: require('./space/update-space'),
-    unregisterspace: require('./space/unregister-space'),
-    unregisterspaceCouser: require('./space/unregister-couser')
+    retrieveSpace: require('./space/retrieve-space'),
+    updateSpace: require('./space/update-space'),
+    unregisterSpace: require('./space/unregister-space'),
+    unregisterSpaceCouser: require('./space/unregister-couser')
 }
