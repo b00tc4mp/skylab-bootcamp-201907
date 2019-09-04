@@ -11,7 +11,7 @@ module.exports = new Schema({
         required: true
     },
     cards: {
-        type: Number,
+        type: Array,
         required: true
     },
     in_game: {

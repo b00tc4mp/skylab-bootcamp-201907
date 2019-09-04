@@ -7,7 +7,7 @@ const routes = require('./routes')
 const { env: { PORT, DB_URL } } = process
 
 
-mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost:27017/bro-holdem-test', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
 
         const app = express()
