@@ -20,10 +20,18 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    finds: {
-        type: Number,
-        required: true
-    }
+    found: [{ 
+        type: ObjectId, 
+        ref: 'Cache' 
+    }],
+    favorites: [{
+        type: ObjectId, 
+        ref: 'Cache'
+    }],
+    owned: [{
+        type: ObjectId, 
+        ref: 'Cache'
+    }],
     
 })
 
