@@ -2,7 +2,6 @@ const {validate} = require('footcamp-utils')
 const { models: { User } } = require('footcamp-data')
  
 
-
 /**
  * Unregisters a user by their id
  * 

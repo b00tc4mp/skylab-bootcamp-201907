@@ -5,7 +5,10 @@ module.exports = {
     unregisterUser: require('./user/unregister'),
     updateUser: require('./user/update'),
     createLeague: require('./league/create'),
-    joinLeague: require('./league/join')
+    joinLeague: require('./league/join'), 
+    retrieveLeagues: require('./league/retrieve-leagues'), 
+    leaveLeagues: require('./league/leave'),
+    
     // property: require('./property'),
     // card: require('./card'),
 }

@@ -10,36 +10,38 @@ describe('logic - create league', () => {
     
     before(() =>  database.connect(DB_URL_TEST))
 
-    let name, surname, email, password, code
-
+    let name, surname, email, password, nameLeague
     beforeEach(() => {
 
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@email.com`
         password = `password-${Math.random()}`
+        nameLeague = `nameLeague-${Math.random()}`
 
         return (async () => {
             await User.deleteMany()
-            await League.deleteMany()
+          
             const users = await User.create({name, surname, email, password})
             id = users.id
+           
         })()
     
    })
 
     it('should succeed on correct data', async () => {
+        debugger
+        const result = await logic.createLeague(id, nameLeague)
+            expect(result).not.to.exist
+        const league = await League.findOne({name: nameLeague})
+            expect(league).to.exist
+            expect(league.team).to.exist
+            expect(league.admin.toString()).to.equal(id)
+            expect(league.name).to.equal(nameLeague)
+           
         
-        const result = await logic.createLeague(id, name)
-            expect(result).to.exist
-            expect(result.code).to.exist
-            expect(result.admin).to.exist
-            expect(result.admin.toString()).to.equal(id)
-            expect(result.name).to.equal(name)
-        
-        })
+    })
 
-   
         it('should fail if the league already exists', async () => {
 
             await League.create({ id, name })
@@ -49,7 +51,7 @@ describe('logic - create league', () => {
             } catch(error) {
                 
                  expect(error).to.exist
-                 expect(error.message).to.equal(`League exists!`)
+                 expect(error.message).to.equal(`league with name hola does not exists`)
             }
          })
         
