@@ -7,7 +7,7 @@ module.exports = new Schema({
         required: true
     },
 
-    admin: { type: ObjectId, ref: 'User'},
+    code: {type: String, required: true },
 
     team: [teamSchema]
 })

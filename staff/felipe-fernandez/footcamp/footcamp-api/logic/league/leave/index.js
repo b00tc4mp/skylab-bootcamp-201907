@@ -5,8 +5,8 @@ const { models: { User, League } } = require('footcamp-data')
  * Leave league by league id
  * 
  * @param {string} userId 
- * @param {string} leag
- * @param {string} password 
+ * @param {string} leagueId
+ * 
  * 
  * @returns {Promise}
 */
@@ -20,21 +20,14 @@ module.exports = function(userId, leagueId) {
 
         const user = await User.findById(id)
 
-        if (!user) throw new Error(`user with id ${id} does not exists`)
-
-        const league = await League.findOne({ leagueId })
-
-        if (league) throw Error(`league with name ${ name } does not exists`)
-
+        if (!user) throw new Error(`User with id ${id} does not exists`)
         
-        users.leagues.push(leagues)
-        users.leagues.push(leagues2)
-            
-        await users.save()
-
-        // const user =  await League.deleteOne({ _id: id, email, password })
-
-        // if (!user.deletedCount) throw Error(`There was an error unregistering the user`)
+        const leagueFounded = user.leagues.find(element => element.toString() === leagueId)
+        const leagueIndex = user.leagues.findIndex(element => element.toString() === leagueId)
+        if(!leagueFounded) throw Error(`League with id ${ leagueId } does not exists`)
+        user.leagues.splice(leagueIndex, 1)
+       
+        await user.save()
        
     })()
     

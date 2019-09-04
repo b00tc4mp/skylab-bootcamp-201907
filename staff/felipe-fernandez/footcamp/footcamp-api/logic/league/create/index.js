@@ -5,14 +5,16 @@ const { models: { User,  League } } = require('footcamp-data')
  * creates a league by name within the user passed as id
  * @param {*} id 
  * @param {*} name 
+ * @param {*} code 
  *  
  * @returns {Promise}
 */
 
-module.exports = function(id, name) {
+module.exports = function(id, name, code) {
    
     validate.string(id, 'id')
     validate.string(name, 'name')
+    validate.string(code, 'code')
    
     return (async () => {
 
@@ -23,18 +25,10 @@ module.exports = function(id, name) {
 
         const league = await League.findOne({ name })
 
-        if (league) throw Error(`league with name ${ name } does not exists`)
-        
-        const newLeague = new League({name})
-        
-        //assign id of the user whho creates the league as admin of this league
-        newLeague.admin = id
-        
-        //use the id of the league to extract a code that will need users to join this league
-        const initialCode = newLeague.id.slice(2,8)
-       
-        newLeague.code = initialCode
-        
+        if (league) throw Error(`league with name ${ name } alredy exists`)
+     
+        const newLeague = new League({name, code})
+            
         await newLeague.save()
 
     })()

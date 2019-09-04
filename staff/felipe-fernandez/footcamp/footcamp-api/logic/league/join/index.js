@@ -10,30 +10,21 @@ const { models: { User,  League } } = require('footcamp-data')
  * @returns {Promise}
 */
 
-module.exports = function(id, name, code) {
+module.exports = function(id, code) {
    
-    
     validate.string(id, 'id')
-    validate.string(name, 'name')
     validate.string(code, 'code')
    
     return (async () => {
         
         const user = await User.findById(id)
 
-        if (!user) throw new Error(`user with id ${id} does not exists`)
+        if (!user) throw new Error(`User with id ${id} does not exist.`)
+        
+        const league = await League.findOne({ code }).lean()
+        if (!league) throw Error(`cannot find league with code ${ code }`)
 
-        const league = await League.findOne({ name })
-        
-        if (!league) throw Error(`league with name ${ name } does not exists`)
-        
-        //check if the code is included in league id because the code was generated with the id of the league
-        if(!league.id.includes(code))throw Error(`code with number ${code} does not exists`)
-        
         user.leagues.push(league.id)
-
         await user.save()
-           
-        
     })()
 }

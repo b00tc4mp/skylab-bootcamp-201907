@@ -10,7 +10,7 @@ describe('logic - join league', () => {
     
     before(() =>  database.connect(DB_URL_TEST))
 
-    let name, surname, email, password, code , nameLeague, leagueId
+    let name, surname, email, password, nameLeague
 
     beforeEach(() => {
 
@@ -19,6 +19,8 @@ describe('logic - join league', () => {
         email = `email-${Math.random()}@email.com`
         password = `password-${Math.random()}`
         nameLeague = `nameLeague-${Math.random()}`
+        code = `code-${Math.random()}`
+        
 
         return (async () => {
             await User.deleteMany()
@@ -26,112 +28,101 @@ describe('logic - join league', () => {
             
             const users = await User.create({name, surname, email, password})
             id = users.id
-            const league = await League.create({id, name: nameLeague})
-            //save the league's id to create the code what I will use in the call of joinLeague logic
+            const league = await League.create({id, name: nameLeague, code})
             leagueId = league.id
-            code = leagueId.slice(2,8)
-            
-                                           
+                                   
         })()
     
    })
 
     it('should succeed on correct data', async () => {
         
-        const result = await logic.joinLeague(id, nameLeague, code)
+        const result = await logic.joinLeague(id, code)
             expect(result).not.to.exist
         debugger
-         const findLeague = await League.findOne({name: nameLeague})
+         const findLeague = await League.findOne({code})
             expect(findLeague).to.exist
             expect(findLeague.team).to.exist
             expect(findLeague.name).to.equal(nameLeague)
-        const user = await User.findById(id)
-            expect(user.leagues[0].toString()).to.equal(leagueId)
+            
            
     })
 
+    it('should fail on incorrect user', async () => {
+        id = '5d772fb62bb54120d08d7a7b'
+        try {
+            await logic.joinLeague(id, name, code)
+            throw Error('should not reach this point') 
+        }
+        catch({message}){
+            expect(message).to.equal(`User with id ${id} does not exist.`)
+        }
+        
+    })
 
     it('should fail if the league already exists', async () => {
 
-        await League.create({ id, name })
+        await League.create({ id, name , code})
  
         try {
              await logic.joinLeague(id, 'hola', code)
         } catch(error) {
             
              expect(error).to.exist
-             expect(error.message).to.equal(`league with name hola does not exists`)
+             expect(error.message).to.equal(`cannot find league with code hola`)
         }
      })
 
     it('should fail if the code does not match', async () => {
 
-        await League.create({ id, name: nameLeague })
+        await League.create({ id, name: nameLeague, code })
  
         try {
-             await logic.joinLeague(id, nameLeague, '53534')
+             await logic.joinLeague(id, '53534')
         } catch(error) {
             
              expect(error).to.exist
-             expect(error.message).to.equal(`code with number 53534 does not exists`)
+             expect(error.message).to.equal(`cannot find league with code 53534`)
         }
      })
     
         
 
-    it('should fail on undefined league name', () => 
-        expect(() => 
-            logic.joinLeague(id, undefined, code)
-     ).to.throw(`name with value undefined is not a string`)
-    )
-
     it('should fail on undefined user id', () => 
         expect(() => 
-            logic.joinLeague(undefined, nameLeague, code)
+            logic.joinLeague(undefined, code)
     ).to.throw(`id with value undefined is not a string`)
     )
 
     it('should fail on undefined code', () => 
         expect(() => 
-            logic.joinLeague(id, nameLeague, undefined)
+            logic.joinLeague(id,  undefined)
     ).to.throw(`code with value undefined is not a string`)
     )
 
 
-    it('should fail on non-string league name', () => 
-        expect(() => 
-            logic.joinLeague(id, 12345, code)
-     ).to.throw(`name with value 12345 is not a string`)
-    )
-
     it('should fail on non-string user id', () => 
         expect(() => 
-            logic.joinLeague(12345, nameLeague, code)
+            logic.joinLeague(12345,  code)
     ).to.throw(`id with value 12345 is not a string`)
     )
 
     it('should fail on non-string code', () => 
         expect(() => 
-            logic.joinLeague(id, nameLeague, 12345)
+            logic.joinLeague(id,  12345)
     ).to.throw(`code with value 12345 is not a string`)
     )
 
 
     it('should fail on empty id', () => 
         expect(() => 
-            logic.joinLeague('', nameLeague, code)
+            logic.joinLeague('',  code)
     ).to.throw(`id is empty or blank`)
     )
 
     it('should fail on empty name', () => 
         expect(() => 
-            logic.joinLeague(id, '', code)
-    ).to.throw(`name is empty or blank`)
-    )
-
-    it('should fail on empty name', () => 
-        expect(() => 
-            logic.joinLeague(id, nameLeague, '')
+            logic.joinLeague(id,  '')
     ).to.throw(`code is empty or blank`)
     )
 
