@@ -29,8 +29,12 @@ module.exports = {
         if (!(target instanceof Date)) throw TypeError(`${name} with value ${target} is not a date`)
     },
 
+    array(target, name){
+        if(!(target instanceof Array && target.constructor === Array)) throw TypeError(`${name} with value ${target} is not an array`)
+    },
+
     object(target, name) {
-        if (!(target instanceof Object)) throw TypeError(`${name} with value ${target} is not an object`)
-        if (Object.keys(target).length === 0 && target.constructor === Object) throw new Error(`${name} is empty or blank`)
+        if (!(target instanceof Object && target.constructor === Object)) throw TypeError(`${name} with value ${target} is not an object`)
+        //if (Object.keys(target).length === 0 && target.constructor === Object) throw new Error(`${name} is empty or blank`)
     }
 }

@@ -9,7 +9,7 @@ const { env: { DB_URL_TEST }} = process
 describe('logic - authenticate user', () => {
     before(() => database.connect(DB_URL_TEST))
 
-    let name, surname, nickname, email, password, id
+    let name, surname, nickname, email, password, bookmarks, voted, id
 
     beforeEach(() => {
         name = `name-${Math.random()}`
@@ -17,11 +17,13 @@ describe('logic - authenticate user', () => {
         nickname = `nickname-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
+        bookmarks = []
+        voted = []
 
         // users --> User
         return User.deleteMany()
             // replace users.insertOne() MongoDB method with User.create() Mongoose method.
-            .then(() => User.create({ name, surname, nickname, email, password })
+            .then(() => User.create({ name, surname, nickname, email, password, bookmarks, voted })
                 // .then(result => id = result.insertedId.toString()))
                 .then(user => id = user.id))
     })

@@ -10,7 +10,7 @@ const { env: { DB_URL_TEST }} = process
 describe('logic - unregister user', () => {
     before(() => database.connect(DB_URL_TEST))
 
-    let name, surname, nickname, email, password, id
+    let name, surname, nickname, email, password, bookmarks, voted, id
 
     beforeEach(async () => {
         name = `name-${Math.random()}`
@@ -18,9 +18,11 @@ describe('logic - unregister user', () => {
         nickname = `nickname-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
+        bookmarks = []
+        voted = []
 
         await User.deleteMany()
-            const user = await User.create({ name, surname, nickname, email, password })
+            const user = await User.create({ name, surname, nickname, email, password, bookmarks, voted })
             id = user.id
     })
 

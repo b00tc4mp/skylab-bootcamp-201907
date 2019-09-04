@@ -23,5 +23,5 @@ module.exports = new Schema({
         required: true
     },
     comment: [Comment],
-    votes: [{type: Number}]
+    votes: [{type: Number, min: 1, max: 5}]
 })

@@ -21,4 +21,6 @@ router.delete ('/users/:id', [tokenMiddleware, jsonBodyParser], unregisterUser)
 
 /* POST */
 
+/* COMMENTS */
+
 module.exports = router

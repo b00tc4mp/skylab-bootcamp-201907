@@ -9,7 +9,7 @@ const { env: { DB_URL_TEST }} = process
 describe('logic - retrieve user', () => {
     before(() => database.connect(DB_URL_TEST))
 
-    let name, surname, nickname, email, password, id
+    let name, surname, nickname, email, password, bookmarks, voted, id
 
     beforeEach(async () => {
         name = `name-${Math.random()}`
@@ -17,9 +17,11 @@ describe('logic - retrieve user', () => {
         nickname = `nickname-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
+        bookmarks = []
+        voted = []
 
         await User.deleteMany()
-            const user = await User.create({ name, surname, nickname, email, password })
+            const user = await User.create({ name, surname, nickname, email, password, bookmarks, voted })
             id = user.id
     })
 
@@ -34,6 +36,8 @@ describe('logic - retrieve user', () => {
                 expect(result.nickname).to.equal(nickname)
                 expect(result.email).to.equal(email)
                 expect(result.password).not.to.exist
+                expect(result.bookmarks).to.exist
+                expect(result.voted).to.exist
     })
 
     it('should fail on empty id', async () => {

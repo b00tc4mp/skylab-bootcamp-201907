@@ -13,11 +13,13 @@ const { validate} = require('vltra-utils')
  * @param {*} nickname
  * @param {*} email 
  * @param {*} password 
+ * @param {*} bookmarks 
+ * @param {*} voted 
  * 
  * @returns {Promise}
  */
 
-module.exports = function(name, surname, nickname, email, password) {
+module.exports = function(name, surname, nickname, email, password, bookmarks, voted) {
 
     validate.string(name, 'name')
     validate.string(surname, 'surname')
@@ -25,13 +27,15 @@ module.exports = function(name, surname, nickname, email, password) {
     validate.string(email, 'email')
     validate.email(email, 'email')
     validate.string(password, 'password')
+    validate.array(bookmarks, 'bookmarks')
+    validate.array(voted, 'voted')
     
     return (async () => {
         const user = await User.findOne({ email })
         
         if (user) throw Error(`user with e-mail ${email} already exists`)
             
-        await User.create({name, surname, nickname, email, password})
+        await User.create({name, surname, nickname, email, password, bookmarks, voted})
 
         return user
     })()

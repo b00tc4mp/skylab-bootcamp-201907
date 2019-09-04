@@ -9,7 +9,7 @@ describe('logic - update user', () => {
    
     before(() => database.connect(DB_URL_TEST))
 
-    let name, surname, nickname, email, password, id, body
+    let name, surname, nickname, email, password, id, bookmarks, voted, body
 
     beforeEach(async () => {
         name = `name-${Math.random()}`
@@ -17,6 +17,8 @@ describe('logic - update user', () => {
         nickname = `nickname-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
+        bookmarks = []
+        voted = []
 
         body = {
             name: `new-name-${Math.random()}`,
@@ -28,7 +30,7 @@ describe('logic - update user', () => {
         }
 
         await User.deleteMany()
-            const user = await User.create({ name, surname, nickname, email, password })
+            const user = await User.create({ name, surname, nickname, email, password, bookmarks, voted })
             id = user.id
     })
 
