@@ -9,6 +9,14 @@ module.exports = new Schema({
         type: Number,
         required: false
     },
+    gender: {
+        type: Boolean,
+        required: false
+    },
+    size: {
+        type: String,
+        required:false
+    },
     characteristics: {
         type: String,
         required: false
