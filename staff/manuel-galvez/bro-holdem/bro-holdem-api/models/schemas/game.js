@@ -34,6 +34,13 @@ module.exports = new Schema({
         default: false
     },
 
+    game_status: {
+        type: String,
+        required: true,
+        enum: ['playing', 'open', 'closed'],
+        default: 'open'
+    },
+
     host: { type: ObjectId, ref: 'User' },
-    players: [playerSchema]
+    participants: [{ type: ObjectId, ref: 'User' }]
 })
