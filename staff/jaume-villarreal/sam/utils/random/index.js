@@ -9,6 +9,6 @@ module.exports = {
     },
 
     value(...values) {
-        return values[Math.floor(Math.random() * values.length)-1]
+        return values[Math.floor(Math.random() * values.length)]
     }
 }
