@@ -22,7 +22,7 @@ module.exports = {
     },
 
     number(target, name) {
-        if (typeof target !== 'number') throw TypeError(`${name} with value ${target} is not a number`)
+        if (typeof target !== 'number') throw TypeError(`${name} with value ${target} is not a valid number`)
     },
 
     date(target, name) {
