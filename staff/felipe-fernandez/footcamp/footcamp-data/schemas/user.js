@@ -1,5 +1,4 @@
-const { Schema } = require('mongoose')
-const leagueSchema = require('./league')
+const { Schema, SchemaTypes: { ObjectId } } = require('mongoose')
 
 module.exports = new Schema({
     name: {
@@ -21,5 +20,5 @@ module.exports = new Schema({
         required: true
     },
 
-    leagues: [leagueSchema]
+    leagues: [{ type: ObjectId, ref: 'League' }],
 })
