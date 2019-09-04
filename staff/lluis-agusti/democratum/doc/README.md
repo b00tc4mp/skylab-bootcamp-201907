@@ -4,6 +4,10 @@ A project by:
 **Lluís Agustí Sanés @ Skylab Coders Academy**
 
 
+**Trello Link**
+https://trello.com/invite/b/ttVfxbI3/adb73360223318d66c2a73b8c28e28db/democratum
+
+
 
 ![](https://media.giphy.com/media/26vUCOMzBiBZ0qW1a/source.gif)
 
@@ -19,7 +23,8 @@ Citizens can:
 * Vote on open polls.
 * View past polls.
 * Propose a new poll (city hall will evaluate and publish the poll).
-* Edit and update their profile. Email and ID are not updateable.
+* Edit and update their profile. Email and ID are not be updated.
+
 * Result of participated polls once polls are finished. ---> (count++)
 * Individual poll opinions are not saved. Logic check if the user has already participated on the poll. Then allows to vote, counts++ the vote and pushes the poll ID to the user account.
 
