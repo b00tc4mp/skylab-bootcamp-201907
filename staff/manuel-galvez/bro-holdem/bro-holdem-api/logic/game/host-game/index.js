@@ -32,19 +32,21 @@ module.exports = function (name, max_players, initial_stack, initial_bb, initial
         // Create game
         const newGame = new Game({ name, max_players, initial_stack, initial_bb, initial_sb, blinds_increase })
         const gameId = newGame.id
-        newGame.host = mongoose.Types.ObjectId(hostId)
+        newGame.host = hostId
 
-        // Add host as player
+        // Create new instance of player
         const newPlayer = new Player({
-            position: 0,
-            current_stack: initial_stack,
+            position: newGame.players.length,
+            current_stack: newGame.initial_stack,
             cards: [],
-            in_game: true,
-            in_hand: false
+            in_hand: false,
+            bet_amount: 0
         })
-        newPlayer.user = mongoose.Types.ObjectId(hostId)
+        newPlayer.user = hostId
 
+        // Add player to game
         newGame.players.push(newPlayer)
+
         await newGame.save()
         return gameId
     })()

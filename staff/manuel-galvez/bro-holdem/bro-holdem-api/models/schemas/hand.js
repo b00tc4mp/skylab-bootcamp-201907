@@ -1,6 +1,4 @@
-const { Schema, ObjectId } = require('mongoose')
-const playerSchema = require('./player')
-const roundSchema = require('./round')
+const { Schema } = require('mongoose')
 
 module.exports = new Schema({
 
@@ -29,9 +27,19 @@ module.exports = new Schema({
         required: true
     },
 
-    game: [{ type: ObjectId, ref: 'User' }],
-    table_cards: [{ type: ObjectId, ref: 'Deck' }],
-    players: [playerSchema],
-    round: [roundSchema]
+    round: {
+        type: Number,
+        required: true
+    },
+
+    used_cards: {
+        type: Array,
+        default: []
+    },
+
+    table_cards: {
+        type: Array,
+        default: []
+    }
 })
 

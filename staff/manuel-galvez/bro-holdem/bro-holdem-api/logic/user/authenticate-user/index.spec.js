@@ -3,7 +3,7 @@ const { expect } = require('chai')
 const logic = require('../../../logic')
 const { User } = require('../../../models')
 
-describe('logic - authenticatej user', () => {
+describe('logic - authenticate user', () => {
 
     before(() => {
         mongoose.connect('mongodb://localhost/bro-holdem-test', { useNewUrlParser: true })

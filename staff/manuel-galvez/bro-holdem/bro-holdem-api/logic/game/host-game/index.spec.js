@@ -9,19 +9,19 @@ describe('logic - host game', () => {
         mongoose.connect('mongodb://localhost/bro-holdem-test', { useNewUrlParser: true })
     })
 
-    let name, max_players, initial_stack, initial_bb, initial_sb, blinds_increase
+    let name, max_players, initial_stack, initial_bb, initial_sb, blinds_increase, game_status
     let hostId, validHost
 
     beforeEach(() => {
 
         name = `gameName-${Math.random()}`
-        max_players = Number(Math.random().toFixed())
+        max_players = Number((Math.random() * (6 - 4) + 4).toFixed())
         initial_stack = Number(Math.random().toFixed())
         initial_bb = Number(Math.random().toFixed())
         initial_sb = Number(Math.random().toFixed())
         blinds_increase = Number(Math.random().toFixed())
-        hostId = (new mongoose.Types.ObjectId).toString()
-        validHost = hostId.toString()
+        hostId = new mongoose.Types.ObjectId
+        validHost = String(hostId)
     })
 
     it('should succeed on correct data', async () => {
@@ -30,7 +30,7 @@ describe('logic - host game', () => {
         )
         expect(result).to.exist
 
-        const retrievedGame = await Game.findOne({ _id: result })
+        const retrievedGame = await Game.findById(result)
         expect(retrievedGame).to.exist
         expect(retrievedGame.name).to.equal(name)
         expect(retrievedGame.max_players).to.equal(max_players)
@@ -38,7 +38,9 @@ describe('logic - host game', () => {
         expect(retrievedGame.initial_bb).to.equal(initial_bb)
         expect(retrievedGame.initial_sb).to.equal(initial_sb)
         expect(retrievedGame.blinds_increase).to.equal(blinds_increase)
-        expect(retrievedGame.host.toString()).to.equal(validHost)
+        expect(String(retrievedGame.host)).to.equal(validHost)
+        expect(String(retrievedGame.players[0].user)).to.equal(validHost)
+        expect(String(retrievedGame.status)).to.equal('open')
     })
 
     it('should fail if game already exists', async () => {

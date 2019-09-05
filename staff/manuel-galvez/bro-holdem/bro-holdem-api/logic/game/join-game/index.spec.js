@@ -47,15 +47,18 @@ describe('logic - join game', () => {
             const newGame = new Game({ name, max_players, initial_stack, initial_bb, initial_sb, blinds_increase })
             gameId = newGame.id
             newGame.host = hostId
+
+            // Create new instance of player
             const newPlayer = new Player({
-                position: 0,
+                position: newGame.players.length,
                 current_stack: initial_stack,
                 cards: [],
-                in_game: true,
-                in_hand: false
+                in_hand: false,
+                bet_amount: 0
             })
             newPlayer.user = hostId
             newGame.players.push(newPlayer)
+
             return Promise.all([host.save(), joiner.save(), newGame.save()])
         })()
     })
@@ -64,7 +67,7 @@ describe('logic - join game', () => {
     it('should succeed on correct data', async () => {
         const result = await logic.joinGame(gameId, joinerId)
         expect(result).not.to.exist
-        const game = await Game.findOne({ _id: gameId })
+        const game = await Game.findById(gameId)
         expect(game).to.exist
         expect(game.players.length).to.equal(2)
         expect(String(game.players[0].user)).to.equal(hostId)
@@ -72,7 +75,7 @@ describe('logic - join game', () => {
     })
 
     it('should fail if the game does not exist', async () => {
-        const users = await User.find()
+
         try {
             await logic.joinGame('5d6f7f1a13d960702965554a', joinerId)
         } catch (error) {
@@ -92,7 +95,7 @@ describe('logic - join game', () => {
     })
 
     it('should fail if the playing room is full', async () => {
-        const game = await Game.findOne({ _id: gameId })
+        const game = await Game.findById(gameId)
         game.max_players = 1
         await game.save()
 

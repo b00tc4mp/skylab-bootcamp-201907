@@ -14,14 +14,17 @@ module.exports = new Schema({
         type: Array,
         required: true
     },
-    in_game: {
-        type: Boolean,
-        required: true
-    },
+
     in_hand: {
         type: Boolean,
         required: true
     },
 
-    user: { type: ObjectId, ref: 'User' }
+    bet_amount: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+
+    user: { type: ObjectId, ref: 'User' },
 })

@@ -1,9 +1,18 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
-const moveSchema = require('./move')
 
 module.exports = new Schema({
-    card_code: {
+    suit: {
+        type: String,
+        required: true
+    },
+
+    name: {
+        type: String,
+        required: true
+    },
+
+    ref: {
         type: String,
         required: true
     },
@@ -11,7 +20,5 @@ module.exports = new Schema({
     card_image: {
         type: String,
         required: true,
-    },
-
-    move: [moveSchema]
+    }
 })
