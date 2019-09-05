@@ -1,6 +1,10 @@
 const { models: { User, Post } } = require('vltra-data')
 const { validate} = require('vltra-utils')
 
+/**
+ * TODO
+ */
+
 
 module.exports = function(title, body, author, date, comments, votes) {
 

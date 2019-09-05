@@ -54,8 +54,8 @@ describe('logic - create post', () => {
     })
 
     it('should fail if post has already been published', async () => {
-        debugger
-        const pedo = await Post.create({title, body, author, date, comments, votes})
+        
+        const firstTry = await Post.create({title, body, author, date, comments, votes})
             try{
                 await createPost(title, body, author, date, comments, votes)
                 throw new Error('should not reach this point')
