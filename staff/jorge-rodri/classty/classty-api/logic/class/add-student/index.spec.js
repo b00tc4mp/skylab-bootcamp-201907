@@ -35,21 +35,21 @@ describe('logic - add student to class', () => {
 
         const _class = await Classroom.create({name: nameClass, students, teachers})
         idClass = _class.id
-        debugger
+        
     })
 
     it('should succeed on correct data', async () => {
-        debugger
+        
         const name = "Jorge"
         const surname = "Rodríguez Sánchez"
         const email = `jordi@domain.com`
         const password = `Spassword-${Math.random()}`
         const type = `student`
-        debugger
+        
         await User.create({name, surname, email, password, type})
-debugger
+
         await addStudentToClass( name, surname, idClass)
-debugger
+
         const class_ =  await Classroom.findById(idClass)
 
         expect(class_.students.length).to.equal(2)

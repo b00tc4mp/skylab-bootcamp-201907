@@ -13,17 +13,17 @@ module.exports = (name, surname, id) => {
     validate.string(id, 'idSubject')
     
     return ( async() => {
-debugger
+
         const student = await User.findOne({name, surname})
-        debugger
+        
         if(!student) throw Error(`student with name ${name} don´t exists`)
-debugger
+
         const klass = await Classroom.findOne({_id: id})
-debugger
+
         if(!klass) throw Error(`class with id ${id} don´t exits`)
-debugger
+
         klass.students.push(student)
-       debugger 
+        
         await klass.save()
         
         
