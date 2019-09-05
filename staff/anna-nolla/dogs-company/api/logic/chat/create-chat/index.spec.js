@@ -6,11 +6,11 @@ const { database, models: { User, Chat } } = require('data')
 
 const { env: { DB_URL_TEST }} = process
 
-describe.only('logic - create chat', () => {
+describe('logic - create chat', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
-    let name, surname, email, password, participantName, participantSurname, participantEmail, participantPassword
+    let name, surname, email, password, participantName, participantSurname, participantEmail, participantPassword, id, participantId
 
     beforeEach( async () => {
 
@@ -36,7 +36,7 @@ describe.only('logic - create chat', () => {
     it('should succeed on correct data', async () => {
         const result = await logic.createChat(id, participantId)
             expect(result).to.exist
-            const chat = await Chat.findOne({ _id: id })
+            const chat = await Chat.findOne({ _id: result })
                 expect(chat).to.exist
             })
 
@@ -46,7 +46,7 @@ describe.only('logic - create chat', () => {
                 await logic.createChat(id, participantId)
             }catch(error) {
                 expect(error).to.exist
-                expect(error.message).to.equal(`chat already exists.`)
+                expect(error.message).to.equal(`chat already exists`)
             }
     })
 
@@ -84,7 +84,7 @@ describe.only('logic - create chat', () => {
         ).to.throw('participant id is empty or blank')
     )
 
-    it('should fail on wrong address type', () =>
+    it('should fail on wrong participantId type', () =>
         expect(() =>
             logic.createChat(id, 123)
         ).to.throw('participant id with value 123 is not a string')

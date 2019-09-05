@@ -10,26 +10,22 @@ const { models: { User, Chat } } = require('data')
  * @returns {Promise}
  */
 
-module.exports = function(id, participantId) {
-    validate.string(participantId, 'participant id')
+module.exports = function (id, participantId) {
     validate.string(id, 'user id')
+    validate.string(participantId, 'participant id')
 
     return (async () => {
         const user = await User.findById(id)
-            if (!user) throw Error('User does not exists.')
-            else {
-                const participantUser = await User.findById(participantId)
-                    if (!participantUser) throw Error('User does not exists.')
-                    else{
-                        // const chatP = await Chat.participants.find(chatP => (chatP.participants.includes(id, participantId)))
-                        //     if (chatP) throw Error('chat already exists')
-                            // else{
-                                const chatC = await new Chat({})
-                                chatC.participants.push(id, participantId)
-                                const chat = await chatC.save()
-                                return chat._id.toString()
-                            // }
-                    }
-            }
+        if (!user) throw Error('User does not exists.')
+
+        const participantUser = await User.findById(participantId)
+        if (!participantUser) throw Error('User does not exists.')
+
+        const chat_ = await Chat.findOne({ participants: [id, participantId] })
+        if (chat_) throw Error('chat already exists')
+
+        const chat = await Chat.create({ participants: [id, participantId] })
+                    
+        return chat._id.toString()
     })()
 }    

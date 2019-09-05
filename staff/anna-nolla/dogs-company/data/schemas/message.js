@@ -6,8 +6,8 @@ module.exports = new Schema({
         required:true
     },
     from: { 
-        type: String, 
-        required: true
+        type: ObjectId, 
+        ref: 'User'
     },
     text: {
         type: String,

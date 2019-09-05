@@ -6,11 +6,12 @@ const { database, models: { User, Pet } } = require('data')
 
 const { env: { DB_URL_TEST }} = process
 
-describe('logic - unregister card', () => {
+describe('logic - unregister pet', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
-    let nameP, age, gender, size, characteristics, name, surname, email, password, id, pet, petId
+    let nameP, age, gender, size, characteristics, name, surname, email, password, id, pet, petId,
+    name1, age1, characteristics1, size1, gender1, name2, surname1, email1, password1
 
     beforeEach( async () => {
 
@@ -20,13 +21,28 @@ describe('logic - unregister card', () => {
         size = `size-${Math.random()}`
         gender = Math.random() >= 0.5
 
+        age1 = Number(Math.random())
+        name1 =  `name-${Math.random()}`
+        characteristics1 = `characteristics-${Math.random}`
+        size1 = `size-${Math.random()}`
+        gender1 = Math.random() >= 0.5
+
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@mail.com`
         password = `password-${Math.random()}`
 
+        name2 = `name-${Math.random()}`
+        surname1 = `surname-${Math.random()}`
+        email1 = `email-${Math.random()}@mail.com`
+        password1 = `password-${Math.random()}`
+
         await User.deleteMany()
             pet = await new Pet({ name: nameP, age, gender, size, characteristics })
+            pet1 = await new Pet({ name: name1, age: age1, gender: gender1, size: size1, characteristics: characteristics1 })
+            const user1 = await User.create({ name: name2, surname: surname1, email: email1, password: password1, pets: pet1 })
+                petId1 = user1.pets[0]._id.toString()
+                id1 = user1.id
             const user = await User.create({ name, surname, email, password, pets: pet })
                 petId = user.pets[0]._id.toString()
                 id = user.id
@@ -44,7 +60,7 @@ describe('logic - unregister card', () => {
                 expect(res).not.to.exist
         }catch (error){
                 expect(error).to.exist
-                expect(error.message).to.equal(`This pet does not exist`)
+                expect(error.message).to.equal('This pet is not from this owner')
         }
     })
 
