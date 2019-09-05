@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx mocha '**/*.spec.js'",
-    "test-debug": "npx mocha --inspect-brk '**/*.spec.js'",
+    "test-debug": "npx mocha --inspect-brk '**/*.spec.js'"
   },
   "keywords": [],
   "author": "Manuel Gálvez",
@@ -22,6 +22,6 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^6.2.0",
+    "mocha": "^6.2.0"
   }
 }

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const { Schema, ObjectId } = mongoose
 const playerSchema = require('./player')
+const handSchema = require('./hand')
 
 module.exports = new Schema({
     name: {
@@ -34,7 +35,7 @@ module.exports = new Schema({
         default: false
     },
 
-    game_status: {
+    status: {
         type: String,
         required: true,
         enum: ['playing', 'open', 'closed'],
@@ -42,5 +43,6 @@ module.exports = new Schema({
     },
 
     host: { type: ObjectId, ref: 'User' },
-    participants: [{ type: ObjectId, ref: 'User' }]
+    players: [playerSchema],
+    hands: [handSchema]
 })

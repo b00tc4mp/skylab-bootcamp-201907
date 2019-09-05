@@ -39,9 +39,8 @@ describe('logic - host game', () => {
         expect(retrievedGame.initial_sb).to.equal(initial_sb)
         expect(retrievedGame.blinds_increase).to.equal(blinds_increase)
         expect(String(retrievedGame.host)).to.equal(validHost)
-        expect(retrievedGame.participants.length).to.equal(1)
-        expect(String(retrievedGame.participants[0])).to.equal(validHost)
-        expect(String(retrievedGame.game_status)).to.equal('open')
+        expect(String(retrievedGame.players[0].user)).to.equal(validHost)
+        expect(String(retrievedGame.status)).to.equal('open')
     })
 
     it('should fail if game already exists', async () => {

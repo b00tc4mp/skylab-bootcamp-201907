@@ -1,9 +1,8 @@
 module.exports = {
-    deck: require('./deck'),
+    card: require('./card'),
     game: require('./game'),
     hand: require('./hand'),
     move: require('./move'),
     player: require('./player'),
-    round: require('./round'),
-    user: require('./user')
+    user: require('./user'),
 }

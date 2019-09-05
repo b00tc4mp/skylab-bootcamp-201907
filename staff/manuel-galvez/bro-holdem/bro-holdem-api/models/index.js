@@ -1,12 +1,11 @@
 const mongoose = require('mongoose')
-const { deck, game, hand, move, player, round, user } = require('./schemas')
+const { card, game, hand, move, player, user } = require('./schemas')
 
 module.exports = {
-    Deck: mongoose.model('Deck', deck),
+    Card: mongoose.model('Card', card),
     Game: mongoose.model('Game', game),
     Hand: mongoose.model('Hand', hand),
     Move: mongoose.model('Move', move),
     Player: mongoose.model('Player', player),
-    Round: mongoose.model('Round', round),
     User: mongoose.model('User', user)
 }

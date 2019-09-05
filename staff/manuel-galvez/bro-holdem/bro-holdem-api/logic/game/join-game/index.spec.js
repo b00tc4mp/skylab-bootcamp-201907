@@ -47,7 +47,18 @@ describe('logic - join game', () => {
             const newGame = new Game({ name, max_players, initial_stack, initial_bb, initial_sb, blinds_increase })
             gameId = newGame.id
             newGame.host = hostId
-            newGame.participants.push(hostId)
+
+            // Create new instance of player
+            const newPlayer = new Player({
+                position: newGame.players.length,
+                current_stack: initial_stack,
+                cards: [],
+                in_hand: false,
+                bet_amount: 0
+            })
+            newPlayer.user = hostId
+            newGame.players.push(newPlayer)
+
             return Promise.all([host.save(), joiner.save(), newGame.save()])
         })()
     })
@@ -58,9 +69,9 @@ describe('logic - join game', () => {
         expect(result).not.to.exist
         const game = await Game.findById(gameId)
         expect(game).to.exist
-        expect(game.participants.length).to.equal(2)
-        expect(String(game.participants[0])).to.equal(hostId)
-        expect(String(game.participants[1])).to.equal(joinerId)
+        expect(game.players.length).to.equal(2)
+        expect(String(game.players[0].user)).to.equal(hostId)
+        expect(String(game.players[1].user)).to.equal(joinerId)
     })
 
     it('should fail if the game does not exist', async () => {

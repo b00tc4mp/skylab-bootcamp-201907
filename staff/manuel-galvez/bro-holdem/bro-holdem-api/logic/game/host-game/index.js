@@ -33,7 +33,19 @@ module.exports = function (name, max_players, initial_stack, initial_bb, initial
         const newGame = new Game({ name, max_players, initial_stack, initial_bb, initial_sb, blinds_increase })
         const gameId = newGame.id
         newGame.host = hostId
-        newGame.participants.push(hostId)
+
+        // Create new instance of player
+        const newPlayer = new Player({
+            position: newGame.players.length,
+            current_stack: newGame.initial_stack,
+            cards: [],
+            in_hand: false,
+            bet_amount: 0
+        })
+        newPlayer.user = hostId
+
+        // Add player to game
+        newGame.players.push(newPlayer)
 
         await newGame.save()
         return gameId
