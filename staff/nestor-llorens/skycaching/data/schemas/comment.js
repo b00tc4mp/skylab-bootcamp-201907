@@ -2,13 +2,21 @@ const mongoose = require('mongoose')
 const Schema = mongoose
 
 const commentSchema = new Schema({
-    name: {
+    username: {
         type: String,
         required: true
     },
-    path: {
+    found: {
+        type: Boolean,
+        required: true
+    },
+    date: {
+        type: Date,
+        required: true
+    },
+    comment: {
         type: String,
-        required: true,
+        required: true
     }
     
 })
