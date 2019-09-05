@@ -1,0 +1,59 @@
+* {
+  box-sizing: border-box;
+}
+
+.body {
+  display: grid;
+  grid-template-rows: 20% 80%;
+}
+
+.main {
+  height: 100vh;
+}
+.main__section {
+  font-family: Lato, sans-serif;
+  padding: 0 1em 0 1em;
+  color: #111111;
+  text-align: center;
+}
+.main__section-p {
+  line-height: 2em;
+}
+.main__section-h {
+  color: #e5474b;
+  line-height: 1.6em;
+}
+.main__section-register {
+  border: 2px solid #e5474b;
+  background: none;
+  padding: 1em;
+  color: #e5474b;
+  font-weight: 550;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  background-color: #1c1c1c;
+}
+.header__nav {
+  list-style: none;
+  display: flex;
+}
+.header__nav-item {
+  background: none;
+  border: 0px;
+  color: white;
+  padding-right: 0.5em;
+  padding-top: 1.3em;
+  font-family: Lato, sans-serif;
+  font-weight: 550;
+}
+.header__title {
+  font-family: "Dancing Script", cursive;
+  color: #e5474b;
+  padding-left: 0.5em;
+}
+
+/*# sourceMappingURL=index.css.map */
