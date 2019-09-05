@@ -1,14 +1,30 @@
 const mongoose = require('mongoose')
 
+// let connection
+
+// function connect (url) {
+//     return connection ? connection : connection = mongoose.connect(url, { useNewUrlParser: true })
+// }
+// function disconnect() {
+//     connection = undefined
+
+//     return mongoose.disconnect()
+// }
+
+// module.exports =  { connect, disconnect }
+
+// const mongoose = require('mongoose')
+
 let connection
 
-function connect (url) {
-    return connection ? connection : connection = mongoose.connect(url, { useNewUrlParser: true })
-}
-function disconnect() {
-    connection = undefined
+module.exports = {
+    connect(url) {
+        return connection ? connection : connection = mongoose.connect(url, { useNewUrlParser: true })
+    },
 
-    return mongoose.disconnect()
-}
+    disconnect() {
+        connection = undefined
 
-module.exports =  connect, disconnect
+        return mongoose.disconnect()
+    }
+}

@@ -1,6 +1,6 @@
 module.exports = {
     user: require('./user'),
     cache: require('./cache'),
-    activity: require('./activity'),
+    comment: require('./comment'),
     photo: require('./photo')
 }

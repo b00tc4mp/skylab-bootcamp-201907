@@ -1,6 +1,6 @@
 const { Schema, SchemaTypes: { ObjectId } } = require('mongoose')
 const Photo = require('./photo')
-const Activity = require('./activity')
+const Comment = require('./comment')
 
 
 const cacheSchema = new Schema({
@@ -50,7 +50,7 @@ const cacheSchema = new Schema({
     
     photos: [Photo]
     ,
-    comments: [Activity]
+    comments: [Comment]
     
 })
 
