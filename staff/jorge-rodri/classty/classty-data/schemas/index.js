@@ -2,7 +2,7 @@ module.exports = {
 
     user: require('./user'),
     subject: require('./subject'),
-    classI: require('./classI'),
+    classroom: require('./classroom'),
     conversation: require('./conversation'),
     documents: require('./documents'),
     homework: require('./homework'),

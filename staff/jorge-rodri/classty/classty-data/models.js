@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
-const { user, subject, classI, conversation, documents, homework, message, post, exam } = require('./schemas')
+const { user, subject, classroom, conversation, documents, homework, message, post, exam } = require('./schemas')
 
 module.exports = {
 
     User: mongoose.model('User', user),
     Subject: mongoose.model('Subject', subject),
-    Class: mongoose.model('Class', classI),
+    Classroom: mongoose.model('Classroom', classroom),
     Conversation: mongoose.model('Conversation', conversation),
     Documents: mongoose.model('Documents', documents),
     Homework: mongoose.model('Homework', homework),
