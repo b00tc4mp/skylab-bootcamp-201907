@@ -54,7 +54,7 @@ describe('logic - add teacher', () => {
             type: 'student'
         }
         await User.create(bodyStudent)
-        debugger
+        
     })
 
     it('should succeed on correct data', async () => {

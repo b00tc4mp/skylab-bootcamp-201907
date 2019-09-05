@@ -23,7 +23,7 @@ module.exports = new Schema({
     },
     type: {
         type: String,
-        required = true,
+        required: true,
         enum: ['mentor', 'teacher', 'student'],
         default: 'student'
    }

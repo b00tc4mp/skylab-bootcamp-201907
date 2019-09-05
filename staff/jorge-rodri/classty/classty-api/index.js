@@ -4,7 +4,7 @@ const express = require('express')
 const { name, version } = require('./package')
 const routes = require('./routes')
 const cors = require('cors')
-const { database } = require('my-stuff-data')
+const { database } = require('classty-data')
 
 const { env: { PORT, DB_URL } } = process
 
