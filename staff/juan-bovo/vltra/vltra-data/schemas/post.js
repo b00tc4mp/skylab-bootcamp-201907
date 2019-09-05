@@ -22,6 +22,6 @@ module.exports = new Schema({
         type: Date,
         required: true
     },
-    comment: [Comment],
+    comments: [Comment],
     votes: [{type: Number, min: 1, max: 5}]
 })
