@@ -1,39 +1,41 @@
+require('dotenv').config()
+
 const { expect } = require('chai')
 const logic = require('../.')
-const { User } = require('../../../../data')
-const mongoose = require('mongoose')
+const { models: { User }, database } = require('data')
+
+const { env: { DB_URL_TEST }} = process
 
 describe('logic - register user', () => {
 
-    let name, surname, email, password
+    let username, email, password, avatar
 
-    name = `name-${Math.random()}`
-    surname = `surname-${Math.random()}`
+    username = `username-${Math.random()}`
     email = `email-${Math.random()}@domain.com`
     password = `password-${Math.random()}`
+    avatar = `path-${Math.random()}`
 
     before(async() => {
-        await mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true })
+        await database.connect(DB_URL_TEST)
             .then(() => User.deleteMany())
-            })
+    })
 
     it('should succeed on correct data', async() => {
         
-        const result = await logic.registerUser(name, surname, email, password)
+        const result = await logic.registerUser(username, email, password, avatar)
         expect(result).not.to.exist
         
         const user = await User.findOne({ email })
         expect(user).to.exist
-        expect(user.name).to.equal(name)
-        expect(user.surname).to.equal(surname)
+        expect(user.username).to.equal(username)
         expect(user.email).to.equal(email)
         expect(user.password).to.equal(password)
-            
+        expect(user.avatar).to.equal(avatar)        
     })
 
     it('should fail on existing email', async() => {
         try{
-            await logic.registerUser(name, surname, email, password)
+            await logic.registerUser(username, email, password, avatar)
             
         }
         catch(error){
@@ -42,5 +44,5 @@ describe('logic - register user', () => {
         }        
     })
 
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })

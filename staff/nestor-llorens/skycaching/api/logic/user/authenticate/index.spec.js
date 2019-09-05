@@ -6,7 +6,7 @@ const { models: { User }, database } = require('data')
 
 const { env: { DB_URL_TEST }} = process
 
-describe.only('logic - authenticate user', () => {
+describe('logic - authenticate user', () => {
 
     let username, email, password, avatar
 

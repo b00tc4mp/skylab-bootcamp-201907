@@ -1,19 +1,18 @@
-const validate = require('../../../../utils/validate')
-const { User } = require('../../../../data')
+const validate = require('utils/validate')
+const { models: { User } } = require('data')
 
-function registerUser (name, surname, email, password) {
+function registerUser (username, email, password, avatar) {
 
-    validate.string(name, 'name')
-    validate.string(surname, 'surname')
-    validate.string(email, 'email')
+    validate.string(username, 'username')
     validate.email(email, 'email')
     validate.string(password, 'password')
+    validate.string(avatar, 'avatar')
 
     return (async () => {
         
         const user = await User.findOne({ email })
         if (user) throw new Error(`user with e-mail ${email} already exists`)
-        await User.create({ name, surname, email, password })
+        await User.create({ username, email, password, avatar })
 
     })()
 }

@@ -1,5 +1,5 @@
-const validate = require('../../../../utils/validate')
-const { User } = require('../../../../data')
+const validate = require('utils/validate')
+const { models: { User } } = require('data')
 
 function retrieveUser (id) {
 
@@ -7,6 +7,7 @@ function retrieveUser (id) {
 
     return (async () => {
     const user = await User.findOne({ _id: id }, { _id: 0, password: 0 }).lean()
+    debugger
     if (!user) throw new Error(`user with id ${id} not found`)
 
     user.id = id
