@@ -2,6 +2,8 @@
 
 ![](skylab.PNG)
 
+## TRELLO
+[link](https://trello.com/b/2O243NBC/skyshop)
 
 ## INTRODUCTION
 The following app is an e-commerce app which enables you to search and buy different products from Skylab Coders Acemy.
@@ -33,7 +35,7 @@ When going to the cart page the user can remove items or go directly to the chec
 
 **DATA MODEL**
 
-![](dataModel.PNG)
+![](dataModelUpdate.PNG)
 
 ### CODE COVERAGE
 
