@@ -28,8 +28,8 @@ router.get('/products',jsonBodyParser,retrieveAll)
 router.get('/product/q/:title',jsonBodyParser,retrieveProducts)
 
 //ORDER
-/* router.post('/orders/:id',[tokenMiddleware, jsonBodyParser],registerOrder)
-router.get('/orders', [tokenMiddleware, jsonBodyParser], retrieveAll) */
+router.post('/orders/:id',[tokenMiddleware, jsonBodyParser],registerOrder)
+router.get('/orders', [tokenMiddleware, jsonBodyParser], retrieveAll)
 
 //ITEM
 router.post('/items/:productId',jsonBodyParser,registerItem)

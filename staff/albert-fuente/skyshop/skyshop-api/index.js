@@ -13,7 +13,7 @@ database.connect(DB_URL)
     .then(()=>{
         const app=express()
         app.use(cors())
-        app.use('./api',routes)
+        app.use('/api',routes)
         app.listen(PORT, () => console.log(`${name} ${version} up and running on port ${PORT}`)) 
     })
 

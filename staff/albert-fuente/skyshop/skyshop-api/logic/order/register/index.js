@@ -4,26 +4,23 @@ const { models:{Order }} = require('skyshop-data')
 
 /**
  * 
- * @param {*} date 
- * @param {*} state 
+ * @param {*} ownerId 
+ * @param {*} itemId 
  * 
  * @returns {Promise}
  */
 
-module.exports = function(id,products) {
-    //products array de IDs
-
-
+module.exports = function(ownerId,itemId) {
+    validate.string(ownerId,"ownerId")
+    validate.array(itemId,"itemId")
+    
      return(async()=>{
-         
-        const product=await product.findOne({_id:productId}).lean()
-         
-
-        const order = await new Order({ id, products })
-        order.owners=id
+       const order = await new Order()
         order.date=new Date()
+        order.owners=ownerId
+        order.items.push(itemId)
         const response= await order.save()
-        return response._id.toString()
+        return response
 
     })() 
 }   
