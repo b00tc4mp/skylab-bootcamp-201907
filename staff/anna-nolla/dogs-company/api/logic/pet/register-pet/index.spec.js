@@ -1,12 +1,12 @@
 require('dotenv').config()
 
 const { expect } = require('chai')
-const logic = require('..')
+const logic = require('../..')
 const { database, models: { User, Pet } } = require('data')
 
 const { env: { DB_URL_TEST }} = process
 
-describe('logic - register card', () => {
+describe('logic - register pet', () => {
 
     before(() => database.connect(DB_URL_TEST))
 

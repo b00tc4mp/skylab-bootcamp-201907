@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const { expect } = require('chai')
-const logic = require('..')
+const logic = require('../..')
 const { database, models: { User, Pet } } = require('data')
 
 const { env: { DB_URL_TEST }} = process
