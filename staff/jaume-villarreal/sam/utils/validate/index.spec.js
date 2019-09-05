@@ -11,14 +11,6 @@ describe("validate", () => {
             })
 
             it ("should detect empty string", () => {
-                //MODO CRUDO
-                 /*    try {
-                        validate.string()
-                        throw Error('should not reach this point')
-                   } catch ({message}) {
-                        expect(message).to.equal("undefined with value undefined is not a string")
-                   } */
-                //MODO PRO
                   expect(() => { validate.string() }).to.throw(Error, "undefined with value undefined is not a string")
 
             })
