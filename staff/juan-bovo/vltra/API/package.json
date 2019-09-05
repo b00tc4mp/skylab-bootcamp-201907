@@ -9,7 +9,8 @@
     "debug": "node debug .",
     "test": "npx mocha logic/**/*.spec.js",
     "test-debug": "npx mocha debug logic/**/*.spec.js",
-    "test-inspect": "npx mocha --inspect-brk logic/**/*.spec.js"
+    "test-inspect": "npx mocha --inspect-brk logic/**/*.spec.js",
+    "test:coverage": "nyc --reporter=html --reporter=text mocha logic/**/*.spec.js --runInBand"
   },
   "keywords": [],
   "author": "",
@@ -21,11 +22,13 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "vltra-data": "file:../vltra-data",
-    "vltra-utils": "file:../vltra-utils"
+    "vltra-utils": "file:../vltra-utils",
+    "yarn": "^1.17.3"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^6.2.0",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "nyc": "^14.1.1"
   }
 }
