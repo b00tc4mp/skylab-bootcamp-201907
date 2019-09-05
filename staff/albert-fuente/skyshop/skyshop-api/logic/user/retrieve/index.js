@@ -1,6 +1,5 @@
-const { ObjectId } = require('mongodb')
-const validate = require('../../../utils/validate')
-const { User } = require('../../../models')
+const {validate} = require('skyshop-utils')
+const {models:{User} } = require('skyshop-data')
 
 /**
  * 

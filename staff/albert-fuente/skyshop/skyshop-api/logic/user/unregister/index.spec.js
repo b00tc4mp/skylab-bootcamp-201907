@@ -1,10 +1,12 @@
+require('dotenv').config() //nuevo
 const { expect } = require('chai')
-const logic = require('../../.')
-const { User } = require('../../../models')
-const mongoose = require('mongoose')
+const unregister=require('.')
+const {database, models:{User} } = require('skyshop-data')
+
+const{env: {DB_URL_TEST}}=process //nuevo
 
 describe('logic - unregister user', () => {
-    before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
+    before(() => database.connect(DB_URL_TEST)) //nuevo
 
     let name, surname, email, password, id
 
@@ -20,7 +22,7 @@ describe('logic - unregister user', () => {
     })
 
     it('should succeed on correct data',async () =>{
-        const result=await logic.user.unregister(id, password)
+        const result=await unregister(id, password)
  
         expect(result).not.to.exist
         const user=await User.findById(id)  
@@ -39,7 +41,7 @@ describe('logic - unregister user', () => {
 
     it('should fail on unexisting user',async () =>{
         try{
-            await logic.user.unregister('5d5d5530531d455f75da9fF9', password)
+            await unregister('5d5d5530531d455f75da9fF9', password)
             throw Error('should not reach this point') 
 
         }catch(error){
@@ -50,7 +52,7 @@ describe('logic - unregister user', () => {
 
     it('should fail on existing user, but wrong password', async() =>{
         try{
-            await logic.user.unregister(id, 'wrong-password')
+            await unregister(id, 'wrong-password')
 
         }catch(error){
             expect(error.message).to.equal('wrong credentials')
@@ -58,5 +60,5 @@ describe('logic - unregister user', () => {
         }
     })
 
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })

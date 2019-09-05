@@ -1,4 +1,4 @@
-const { Product } = require('../../../models')
+const { models:{Product} } = require('skyshop-data')
 /**
  * 
  * 

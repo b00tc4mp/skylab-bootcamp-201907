@@ -1,5 +1,5 @@
-const { User } = require('../../../models')
-const validate = require('../../../utils/validate')
+const { models:{User} } = require('skyshop-data')
+const {validate} = require('skyshop-utils')
 /**
  * Unregisters a user.
  * 

@@ -1,5 +1,5 @@
-const validate = require('../../../utils/validate')
-const { Product } = require('../../../models')
+const {validate} = require('skyshop-utils')
+const { models:{Product} } = require('skyshop-data')
 /**
  * 
  *  
