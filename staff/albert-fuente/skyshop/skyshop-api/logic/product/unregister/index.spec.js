@@ -1,13 +1,14 @@
-const mongoose = require('mongoose')
-const logic = require('../../.')
+require('dotenv').config() //nuevo
+const unregister = require('.')
 const { expect } = require('chai')
-const { Product } = require('../../../models')
+const { database,models:{User, Product} } = require('skyshop-data')
+const{env: {DB_URL_TEST}}=process //nuevo
 
 describe('logic - delete product', () => {
     
     let title,image,description,size,color, price, id, productId
 
-    before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
+    before(() => database.connect(DB_URL_TEST)) //nuevo
     
     beforeEach(async() => {
 
@@ -27,7 +28,7 @@ describe('logic - delete product', () => {
     })
 
     it('should succeed on correct data',async () =>{        
-        const productResult=await logic.product.unregister(productId)   
+        const productResult=await unregister(productId)   
                              
                 expect(productResult).not.to.exist
             }
@@ -38,7 +39,7 @@ describe('logic - delete product', () => {
         it('should fail if there is no product',async () =>{
         let x= '5d5d5530531d455f75da9fF9'
         try{
-            logic.product.unregister( x)
+            unregister( x)
 
 
         }catch(error){
@@ -46,6 +47,6 @@ describe('logic - delete product', () => {
                 expect(error.message).to.equal(`Product with id ${x} does not exist.`)
         }
     }) 
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })
 

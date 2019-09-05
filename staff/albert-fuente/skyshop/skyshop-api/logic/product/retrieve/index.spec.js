@@ -1,10 +1,11 @@
-const mongoose = require('mongoose')
-const logic = require('../../.')
+require('dotenv').config() //nuevo
+const retrieve = require('.')
 const { expect } = require('chai')
-const { User, Product } = require('../../../models')
+const {database, models:{User, Product} } = require('skyshop-data')
+const{env: {DB_URL_TEST}}=process //nuevo
 
 describe('logic - retrieve product', () => {
-    before(() => mongoose.connect('mongodb://localhost/my-stuff-api-test', { useNewUrlParser: true }))
+    before(() => database.connect(DB_URL_TEST)) //nuevo
     let  productId
     let title,image,description,size,color, price
 
@@ -25,7 +26,7 @@ describe('logic - retrieve product', () => {
         })()
     })
     it('should succeed on correct data', async () => {
-        const product = await logic.product.retrieve( productId)
+        const product = await retrieve( productId)
         expect(product).to.exist
         expect(product.title).to.equal(title)
         expect(product.image).to.deep.equal(image)
@@ -36,17 +37,17 @@ describe('logic - retrieve product', () => {
 
     it('should fail on empty Product ID', () =>
         expect(() =>
-            logic.product.retrieve('')
+            retrieve('')
         ).to.throw('Product ID is empty or blank')
     )
     it('should fail on undefined Product ID', () =>
         expect(() =>
-            logic.product.retrieve( undefined)
+            retrieve( undefined)
         ).to.throw(`Product ID with value undefined is not a string`)
     )
     it('should fail on wrong data type for Product ID', () =>
         expect(() =>
-            logic.product.retrieve( 123)
+            retrieve( 123)
         ).to.throw(`Product ID with value 123 is not a string`)
     )
 })

@@ -1,11 +1,13 @@
-const mongoose = require('mongoose')
-const logic = require('../../.')
+require('dotenv').config() //nuevo
+const register = require('.')
 const { expect } = require('chai')
-const { User, Product } = require('../../../models')
+const { database,models:{User, Product} } = require('skyshop-data')
+const{env: {DB_URL_TEST}}=process //nuevo
+
 
 describe('logic - register product', () => {
 
-    before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
+    before(() => database.connect(DB_URL_TEST)) //nuevo
 
     let title,image,description,size,color, price, productId
 
@@ -23,7 +25,7 @@ describe('logic - register product', () => {
 
     it('should succeed on correct data', async() =>{
         
-        let result= await logic.product.register(title,image,description,size,color,price)
+        let result= await register(title,image,description,size,color,price)
                 
                 productId = result
                 expect(productId).to.exist
@@ -91,7 +93,7 @@ describe('logic - register product', () => {
     ).to.throw(`expiry date with value  is not a valid date`)
     ) */
 
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })
 
 

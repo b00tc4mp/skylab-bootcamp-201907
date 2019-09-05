@@ -1,11 +1,12 @@
+require('dotenv').config() //nuevo
 const { expect } = require('chai')
-const logic = require('../../.')
-const { User } = require('../../../models')
-const mongoose = require('mongoose')
+const authenticate=require('.')
+const { database,models:{User} } = require('skyshop-data')
 
+const{env: {DB_URL_TEST}}=process //nuevo
 
 describe('logic - authenticate user', () => {
-    before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
+    before(() => database.connect(DB_URL_TEST)) //nuevo
 
     let name, surname, email, password, id
 
@@ -21,7 +22,7 @@ describe('logic - authenticate user', () => {
     })
 
     it('should succeed on correct data',async () =>{
-        const _id=await logic.user.authenticate(email, password)
+        const _id=await authenticate(email, password)
         .then(_id => {
             expect(_id).to.exist
             expect(_id).to.be.a('string')
@@ -31,7 +32,7 @@ describe('logic - authenticate user', () => {
     })
     it('should fail on incorrect mail',async () => {
         try{
-            await logic.user.authenticate("pepito@mail.com", password)
+            await authenticate("pepito@mail.com", password)
 
         }catch(error){
             expect(error).to.exist
@@ -42,7 +43,7 @@ describe('logic - authenticate user', () => {
     )
     it('should fail on wrong password',async () =>{
         try{
-            await logic.user.authenticate(email, "123")
+            await authenticate(email, "123")
 
         }catch(error){
             expect(error).to.exist
@@ -51,5 +52,5 @@ describe('logic - authenticate user', () => {
     }) 
 
 
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })

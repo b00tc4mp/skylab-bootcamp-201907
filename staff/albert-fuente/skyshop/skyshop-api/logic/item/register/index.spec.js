@@ -1,11 +1,14 @@
-const mongoose = require('mongoose')
-const logic = require('../../.')
+require('dotenv').config() //nuevo
 const { expect } = require('chai')
-const { Item, Product } = require('../../../models')
+
+const register = require('.')
+const { database,models:{Item, Product} } = require('skyshop-data')
+const{env: {DB_URL_TEST}}=process //nuevo
+
 
 describe('logic - register item', () => {
 
-    before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
+    before(() => database.connect(DB_URL_TEST)) //nuevo
 
     let id, quantity, itemId
 
@@ -27,7 +30,7 @@ describe('logic - register item', () => {
     })
 
     it('should succeed on correct data',async () =>{
-        const result= await logic.item.register(id, quantity)
+        const result= await register(id, quantity)
         debugger
         
                 itemId = result
@@ -44,7 +47,7 @@ describe('logic - register item', () => {
         item.product=id
         await item.save()
         try{
-            await logic.item.register(id, quantity)
+            await register(id, quantity)
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal('Item already exists.')
@@ -53,17 +56,17 @@ describe('logic - register item', () => {
 
     it('should fail on empty id', () => 
         expect(() => 
-               logic.item.register("", quantity)
+               register("", quantity)
     ).to.throw('id is empty or blank')
     )
 
      it('should fail on undefined id', () => 
         expect(() => 
-               logic.item.register(undefined, quantity)
+               register(undefined, quantity)
     ).to.throw(`id with value undefined is not a string`)
     )
 
  
 
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })

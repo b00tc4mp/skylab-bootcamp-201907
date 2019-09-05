@@ -1,5 +1,6 @@
-const { Item } = require('../../../models')
-const validate = require('../../../utils/validate')
+const { models:{Item} } = require('skyshop-data')
+const {validate} = require('skyshop-utils')
+
 /**
  * Unregisters an item.
  * 

@@ -1,10 +1,12 @@
+require('dotenv').config() //nuevo
 const { expect } = require('chai')
-const logic = require('../../.')
-const { User } = require('../../../models')
-const mongoose = require('mongoose')
+const retrieve=require('.')
+const {database, models:{User} } = require('skyshop-data')
+
+const{env: {DB_URL_TEST}}=process //nuevo
 
 describe('logic - retrieve user', () => {
-    before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
+    before(() => database.connect(DB_URL_TEST)) //nuevo
 
     let name, surname, email, password, id
 
@@ -20,7 +22,7 @@ describe('logic - retrieve user', () => {
     })
 
     it('should succeed on correct data', async() =>{
-        const user=await logic.user.retrieve(id)
+        const user=await retrieve(id)
         
             expect(user).to.exist
             expect(user.id).to.equal(id)
@@ -33,7 +35,7 @@ describe('logic - retrieve user', () => {
     })
     it('should throw an error with a wrong id',async () =>{
         try{
-            await logic.user.retrieve("5d5fe532b4f3f827e6fc64f8")
+            await retrieve("5d5fe532b4f3f827e6fc64f8")
 
         }catch(error){
             expect(error).to.exist
@@ -41,5 +43,5 @@ describe('logic - retrieve user', () => {
 
         }
     })
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })

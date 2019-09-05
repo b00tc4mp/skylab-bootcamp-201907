@@ -1,10 +1,12 @@
+require('dotenv').config() //nuevo
 const { expect } = require('chai')
-const logic = require('../../.')
-const { User } = require('../../../models')
-const mongoose = require('mongoose')
+const update=require('.')
+const {database, models:{User} } = require('skyshop-data')
+
+const{env: {DB_URL_TEST}}=process //nuevo
 
 describe('logic - update user', () => {
-    before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
+    before(() => database.connect(DB_URL_TEST)) //nuevo
 
     let name, surname, email, password, id, body
 
@@ -28,7 +30,7 @@ describe('logic - update user', () => {
     })
 
     it('should succeed on correct data', async() =>{
-        const result=await logic.user.update(id, body)
+        const result=await update(id, body)
 
             expect(result).not.to.exist
 
@@ -48,7 +50,7 @@ describe('logic - update user', () => {
     it('should fail on non-existing user', async () => {
         id = '5d5d5530531d455f75da9fF9'
         try{
-            await logic.user.update(id, body)
+            await update(id, body)
              throw new Error('should not reach this point') 
 
         }catch(error){
@@ -56,5 +58,5 @@ describe('logic - update user', () => {
         }
     })
 
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })

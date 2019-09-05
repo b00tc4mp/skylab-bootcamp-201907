@@ -1,11 +1,13 @@
-const mongoose = require('mongoose')
-const logic = require('../../.')
+require('dotenv').config() //nuevo
 const { expect } = require('chai')
-const { Item, Product } = require('../../../models')
 
-describe.only('logic - unregister item', () => {
+const unregister = require('.')
+const { database, models:{Item, Product} } = require('skyshop-data')
+const{env: {DB_URL_TEST}}=process //nuevo
 
-    before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
+describe('logic - unregister item', () => {
+
+    before(() => database.connect(DB_URL_TEST)) //nuevo
 
     let id, itemId
 
@@ -27,7 +29,7 @@ describe.only('logic - unregister item', () => {
     })
 
     it('should succeed on correct data',async () =>{
-        const result= await logic.item.unregister(id)
+        const result= await unregister(id)
         debugger
         
                 expect(result).not.to.exist
@@ -45,17 +47,17 @@ describe.only('logic - unregister item', () => {
 
     it('should fail on empty id', () => 
         expect(() => 
-               logic.item.unregister("")
+               unregister("")
     ).to.throw('id is empty or blank')
     )
 
      it('should fail on undefined id', () => 
         expect(() => 
-               logic.item.unregister(undefined)
+               unregister(undefined)
     ).to.throw(`id with value undefined is not a string`)
     )
 
  
 
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })
