@@ -1,5 +1,5 @@
 module.exports = {
     register: require('./register'),
-    retrieveAll: require('./retrieveAll')
+    placeOrder:require('./place-order')
     
 }

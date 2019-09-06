@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
 /* const cardSchema = require('./card') 
- */const productSchema=require('./product')
+ */const Item=require('./item')
 
 module.exports = new Schema({
     name: {
@@ -27,7 +27,9 @@ module.exports = new Schema({
         type:Boolean,
         required:false,
         default: false
-    }
+    },
+
+    cart:[Item]
 
     /* cards: [cardSchema], */
 })

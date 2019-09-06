@@ -2,10 +2,12 @@ const logic = require('../../logic')
 
 module.exports = async(req, res)=> {
 
-    const { body: { date,state }, params: { id } } = req
+    const { body:{productId,quantity}, params: { id } } = req
 
     try {
-        await logic.order.register(id,date,state)
+        debugger
+
+        await logic.order.placeOrder(id,productId,quantity)
             .then((orderId) => res.status(201).json({ message: 'Order registered successfully',orderId}))
     } catch({ message }) {
         res.status(400).json({ error: message })

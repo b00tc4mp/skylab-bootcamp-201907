@@ -1,4 +1,5 @@
 module.exports={
-    registerOrder:require('./register'),
-    retrieveAll:require('./retrieveAll')
+    registerOrder:require('./place-order'),
+    retrieveAll:require('./retrieveAll'),
+    placeOrder:require('./place-order')
 }
