@@ -6,7 +6,7 @@ const { database, models: { User, Subject } } = require('classty-data')
 
 const { env: { DB_URL_TEST }} = process
 
-describe('logic - retrieve user', () => {
+describe('logic - register homework', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let student1, student2, teacher1, teacher2, subject, idS11,idS22, idT11, idT22, homework, idSub
@@ -72,10 +72,10 @@ describe('logic - retrieve user', () => {
 
     it('should succeed on correct data', async () => {
 
-        const _homework = await resgisterHomework(idSub, homework)
+        const _subject = await resgisterHomework(idSub, homework)
 
-        expect(_homework).to.exist
-        expect(_homework.name).to.equal(homework.title)
+        expect(_subject).to.exist
+        expect(_subject.homeworks[0].title).to.equal(homework.title)
 
     })
 
