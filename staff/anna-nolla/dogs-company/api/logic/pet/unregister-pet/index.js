@@ -2,7 +2,7 @@ const { validate } = require('utils')
 const { ObjectId, models: { User } } = require('data')
 
 /**
- * Unregisters a pet through the id
+ * Unregisters a pet through the id and the pet id
  * 
  * @param {string} id 
  * @param {string} petId
