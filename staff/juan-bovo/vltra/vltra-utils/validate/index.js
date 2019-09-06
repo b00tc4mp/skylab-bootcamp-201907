@@ -40,6 +40,7 @@ module.exports = {
     },
 
     objectId(target, name){
-        if(!ObjectId.isValid(target)) throw TypeError(`${name} with value ${target} is not a valid ObjectId`)
+        
+        if(!ObjectId.isValid(target) || (typeof target === 'number')) throw TypeError(`${name} with value ${target} is not a valid ObjectId`)
     }
 }

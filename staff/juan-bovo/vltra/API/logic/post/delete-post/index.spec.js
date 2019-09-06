@@ -75,8 +75,10 @@ describe('logic - delete post', () => {
     )
 
     it('should fail on wrong postId data type', () =>
-        expect(() =>
-            deletePost('123')
+        expect(() =>{
+            debugger
+            deletePost(123)
+        }
         ).to.throw(`postId with value 123 is not a valid ObjectId`)
     )
 

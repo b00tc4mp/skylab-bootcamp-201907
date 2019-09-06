@@ -14,6 +14,8 @@ module.exports = function(title, body, author, date, comments, votes) {
     validate.date(date, 'date')
     validate.array(comments, 'comments')
     validate.array(votes, 'votes')
+
+    if(body.length > 2000) throw Error('post body is too long')
     
     return (async () => {
         const post = await Post.findOne({ body })
@@ -28,7 +30,7 @@ module.exports = function(title, body, author, date, comments, votes) {
             votes
         })
         newPost.author = author
-        debugger
+        
         await  newPost.save()
 
         const response = await Post.findOne({ body })

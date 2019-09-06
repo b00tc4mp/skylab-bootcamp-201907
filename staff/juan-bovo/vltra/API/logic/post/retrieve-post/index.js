@@ -11,7 +11,6 @@ module.exports = function(id){
         if(!post) throw Error(`post with id ${id} does not exist`)
         
         post.id = id
-        debugger
 
         return post
     })()

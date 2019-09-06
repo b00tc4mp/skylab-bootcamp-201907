@@ -65,6 +65,18 @@ describe('logic - create post', () => {
                 }
     })
 
+    it('should fail if body is larger than 2000 chars', async () => {
+        const largeBody = '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'
+
+        try {
+            await createPost(title, largeBody, author, date, comments, votes)
+            throw new Error('should not reach this point')
+        } catch (error) {
+            expect(error).to.exist
+            expect(error.message).to.equal(`post body is too long`)
+        }
+    })
+
     it('should fail on empty title', () => 
         expect(() => 
             createPost('', body, author, date, comments, votes)

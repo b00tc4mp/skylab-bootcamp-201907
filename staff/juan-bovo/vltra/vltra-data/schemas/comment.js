@@ -3,17 +3,17 @@
 const { Schema, SchemaTypes: { ObjectId } } = require('mongoose')
 
 module.exports = new Schema({
-    author: {
+    commentAuthor: {
         type: ObjectId,
         ref: 'User',
         required: true
     },
-    body: {
+    commentBody: {
         type: String,
         required: true,
         maxlength: 500
     },
-    date: {
+    commentDate: {
         type: Date,
         required: true
     }
