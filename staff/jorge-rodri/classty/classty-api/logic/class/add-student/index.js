@@ -18,6 +18,8 @@ module.exports = (name, surname, id) => {
         
         if(!student) throw Error(`student with name ${name} don´t exists`)
 
+        if(student.type != 'student') throw Error(`user with id ${id} is not a mentor`)
+
         const klass = await Classroom.findOne({_id: id})
 
         if(!klass) throw Error(`class with id ${id} don´t exits`)
