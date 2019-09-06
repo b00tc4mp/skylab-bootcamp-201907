@@ -2,6 +2,7 @@ const { validate } = require('utils')
 const { models: { Chat, Message, User } } = require('data')
 
 /**
+ * update chat through the messages
  * 
  * @param {string} id
  * @param {string} chatId

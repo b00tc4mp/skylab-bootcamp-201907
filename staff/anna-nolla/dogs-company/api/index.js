@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const { name, version } = require('./package')
-// const routes = require('./routes')
+const routes = require('./routes')
 const cors = require('cors')
 const { database } = require('data')
 
@@ -13,7 +13,9 @@ database.connect(DB_URL)
         const app = express()
 
         app.use(cors())
-       // app.use('/api', routes)
+        app.use(express.json())
+        //app.use(express.urlencoded())
+        app.use('/dc', routes)
 
         app.listen(PORT, () => console.log(`${name} ${version} up and running on port ${PORT}`))
     })
