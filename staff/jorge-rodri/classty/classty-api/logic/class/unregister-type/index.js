@@ -15,13 +15,13 @@ module.exports = function (id, nameClass) {
         return (async () => {
         
         const _class = await Classroom.findOne({name: nameClass})
-        debugger
+        
         const i = _class.students.findIndex(student => student._id==id)
-        debugger
+        
         if(i == -1) throw Error(`student with id: ${id} not found.`)
-        debugger
+        
         _class.students.splice(i, 1)
-        debugger
+        
         await _class.save()
 
     })()
