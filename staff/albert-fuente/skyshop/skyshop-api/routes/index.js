@@ -6,7 +6,7 @@ const { registerUser, authenticateUser, retrieveUser, updateUser, unregisterUser
 
 const {registerProduct, retrieveProduct, unregisterProduct, retrieveAll, retrieveProducts}=require('./product')
 
-const{placeOrder}=require('./order')
+const{placeOrder,listOrders, retrieveOrder}=require('./order')
 
 const {addToCart, removeProduct}= require('./cart')
 
@@ -29,11 +29,13 @@ router.get('/product/q/:title',jsonBodyParser,retrieveProducts)
 
 //ORDER
 router.post('/users/:id/orders',[tokenMiddleware, jsonBodyParser],placeOrder)
-//router.get('/orders', [tokenMiddleware, jsonBodyParser], retrieveAll)
+router.get('/users/:id/orders', [tokenMiddleware, jsonBodyParser], listOrders)
+router.get('/users/:id/order/:orderId', [tokenMiddleware, jsonBodyParser], retrieveOrder)
 
 //CART
 router.post('/users/:id/cart',[tokenMiddleware, jsonBodyParser],addToCart)
 router.patch('/users/:id/cart/deleteItem',[tokenMiddleware, jsonBodyParser],removeProduct)
+
 
 
 

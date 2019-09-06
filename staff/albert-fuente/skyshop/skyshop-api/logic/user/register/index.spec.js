@@ -41,5 +41,49 @@ describe('logic - register user', () => {
             expect(error).to.exist
             expect(error.message).to.equal(`user with e-mail ${email} already exists`)
         }})
+
+    it('should fail on empty name', () =>
+    expect(() =>
+        register( '',surname,email,password)
+    ).to.throw('name is empty or blank')
+    )
+    it('should fail on undefined name', () =>
+        expect(() =>
+            register( undefined,surname,email,password)
+        ).to.throw(`name with value undefined is not a string`)
+    )
+
+    it('should fail on empty surname', () =>
+    expect(() =>
+        register( name,'',email,password)
+    ).to.throw('surname is empty or blank')
+    )
+    it('should fail on undefined surname', () =>
+        expect(() =>
+            register( name,undefined,email,password)
+        ).to.throw(`surname with value undefined is not a string`)
+    )
+
+/*     it('should fail on empty email', () =>
+    expect(() =>
+        register( name,surname,'',password)
+    ).to.throw('email is empty or blank')
+    )
+    it('should fail on undefined email', () =>
+        expect(() =>
+            register( name,surname,undefined,password)
+        ).to.throw(`email with value undefined is not a string`)
+    )
+
+    it('should fail on empty password', () =>
+    expect(() =>
+        register( name,surname,email,'')
+    ).to.throw('email is empty or blank')
+    )
+    it('should fail on undefined password', () =>
+        expect(() =>
+            register( name,surname,email,undefined)
+        ).to.throw(`password with value undefined is not a string`)
+    ) */
     after(() => database.disconnect())
 })

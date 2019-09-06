@@ -9,17 +9,18 @@ const { validate } = require('skyshop-utils')
  * @returns {Promise}
  */
 
-module.exports = function (userId, productId, quantity) {
-    debugger
+module.exports = function (userId, productId) {
+    
     validate.string(userId, 'userId')
+    validate.string(productId, 'productId')
     return (async () => {
         const user = await User.findById(userId)
-        debugger
+        
 
         if (!user) throw Error('User not found')
 
         let item = user.cart.findIndex(item => { 
-            debugger
+            
             return item.product.toString() === productId
             
          })

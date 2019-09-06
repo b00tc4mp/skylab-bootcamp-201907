@@ -1,12 +1,12 @@
 require('dotenv').config() //nuevo
 const { expect } = require('chai')
 
-const register = require('.')
+const addToCart = require('.')
 const { database,models:{User, Product} } = require('skyshop-data')
 const{env: {DB_URL_TEST}}=process //nuevo
 
 
-describe('logic - register item', () => {
+describe.only('logic - add to cart', () => {
 
     before(() => database.connect(DB_URL_TEST)) //nuevo
     
@@ -43,19 +43,19 @@ describe('logic - register item', () => {
             const item=new Item({product:productId,quantity:quantity1})
             itemId=item.id
 
-            items=[itemId]
+            user.cart.push(item)
     })
 
     it('should succeed on correct data',async () =>{
         
-        const result=await register(state,userId,items)
-        orderId = result.id
+        const result=await addToCart(userId,productId,quantity1)
+        cartId = result.id
         expect(result).to.exist
         
-        const order=await Order.findById(orderId)
-        expect(order).to.exist
-        expect(order.date).to.equal(date)
-        expect(order.owners).to.equal(userId)
+        const cart=await Cart.findById(cartId)
+        expect(cart).to.exist
+        expect(cart.date).to.equal(date)
+        expect(cart.owners).to.equal(userId)
 
     })
 /* 
@@ -64,7 +64,7 @@ describe('logic - register item', () => {
         item.product=id
         await item.save()
         try{
-            await register(id, quantity)
+            await addToCart(id, quantity)
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal('Item already exists.')
