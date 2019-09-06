@@ -1,22 +1,25 @@
+require('dotenv').config()
+
 const { expect } = require('chai')
 const logic = require('../.')
-const { User } = require('../../../../data')
-const mongoose = require('mongoose')
+const { models: { User }, database } = require('data')
+
+const { env: { DB_URL_TEST }} = process
 
 describe('logic - unregister user', () => {
 
-    let name, surname, email, password
+    let username, email, password, avatar
 
-    name = `name-${Math.random()}`
-    surname = `surname-${Math.random()}`
+    username = `username-${Math.random()}`
     email = `email-${Math.random()}@domain.com`
     password = `password-${Math.random()}`
+    avatar = `path-${Math.random()}`
 
-    before(async () => {
-        await mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true })
+    before(async() => {
+        await database.connect(DB_URL_TEST)
             .then(() => User.deleteMany())
 
-        const user = await User.create({ name, surname, email, password })
+        const user = await User.create({ username, email, password, avatar })
         id = user.id
     })
 
@@ -49,5 +52,5 @@ describe('logic - unregister user', () => {
         expect(user).not.to.exist
     })
 
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })

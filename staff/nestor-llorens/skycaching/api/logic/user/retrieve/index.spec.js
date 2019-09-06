@@ -6,7 +6,7 @@ const { models: { User }, database } = require('data')
 
 const { env: { DB_URL_TEST }} = process
 
-describe.only('logic - retrieve user', () => {
+describe('logic - retrieve user', () => {
 
     let username, email, password, avatar
 
@@ -19,7 +19,6 @@ describe.only('logic - retrieve user', () => {
         await database.connect(DB_URL_TEST)
             .then(() => User.deleteMany())
 
-
         const user = await User.create({ username, email, password, avatar })
         id = user.id
     })
@@ -28,11 +27,11 @@ describe.only('logic - retrieve user', () => {
         const user = await logic.retrieveUser(id)
             expect(user).to.exist
             expect(user.id).to.equal(id)
-            expect(user._id).not.to.exist
+            expect(user._id)
             expect(user.username).to.equal(username)
             expect(user.email).to.equal(email)
-            expect(user.password).to.equal(password)
-            expect(user.avatar).not.to.exist
+            expect(user.password).not.to.exist
+            expect(user.avatar).to.equal(avatar)
     
     })
 

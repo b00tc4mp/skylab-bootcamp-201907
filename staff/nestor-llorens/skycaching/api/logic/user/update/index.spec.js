@@ -1,31 +1,32 @@
+require('dotenv').config()
+
 const { expect } = require('chai')
 const logic = require('../.')
-const { User } = require('../../../../data')
-const mongoose = require('mongoose')
+const { models: { User }, database } = require('data')
+
+const { env: { DB_URL_TEST }} = process
 
 describe('logic - update user', () => {
 
-    let name, surname, email, password, body
+    let username, email, password, avatar
 
-    name = `name-${Math.random()}`
-    surname = `surname-${Math.random()}`
-    email = `email-${Math.random()}@domain.com`
-    password = `password-${Math.random()}`
+    username = `username-${Math.random()}`
+    email = `email-${Math.random()}@domain.com`   
+    password = `password-${Math.random()}@domain.com`
+    avatar = `path-${Math.random()}`
 
     body = {
-        name: `name-${Math.random()}`,
-        surname: `surname-${Math.random()}`,
+        username: `username-${Math.random()}`,
         email: `email-${Math.random()}@domain.com`,
-        password: `password-${Math.random()}`,
+        password: `password-${Math.random()}@domain.com`,
+        avatar: `path-${Math.random()}`,
     }
 
-    before(async () => {
-        await mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true })
+    before(async() => {
+        await database.connect(DB_URL_TEST)
             .then(() => User.deleteMany())
-        
-        mongoose.set('useFindAndModify', false)
 
-        const user = await User.create({ name, surname, email, password })
+        const user = await User.create({ username, email, password, avatar })
         id = user.id
     })
 
@@ -33,11 +34,13 @@ describe('logic - update user', () => {
         const result = await logic.updateUser(id, body)
         expect(result).not.to.exist
         const user = await User.findById(id)
+        debugger
+        
         expect(user).to.exist
-        expect(user.name).to.equal(body.name)
-        expect(user.surname).to.equal(body.surname)
+        expect(user.username).to.equal(body.username)
         expect(user.email).to.equal(body.email)
         expect(user.password).to.equal(body.password)
+        expect(user.avatar).to.equal(body.avatar)
         
     })
             
@@ -51,5 +54,5 @@ describe('logic - update user', () => {
         }
     })
 
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })

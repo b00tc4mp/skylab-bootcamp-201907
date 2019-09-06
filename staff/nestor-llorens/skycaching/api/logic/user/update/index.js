@@ -1,5 +1,5 @@
-const validate = require('../../../../utils/validate')
-const { User } = require('../../../../data')
+const validate = require('utils/validate')
+const { models: { User } } = require('data')
 
 
 function updateUser (id, data) {

@@ -19,9 +19,9 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    found: [{ 
-        type: ObjectId, 
-        ref: 'Cache' 
+    found: [{
+        type: ObjectId,
+        ref: "Cache"
     }],
     favorites: [{
         type: ObjectId, 

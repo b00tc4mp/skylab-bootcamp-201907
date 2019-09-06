@@ -14,7 +14,7 @@ const cacheSchema = new Schema({
         required: true
     },
 
-    lan: {
+    lat: {
         type: Number,
         required: true
     },
@@ -26,17 +26,23 @@ const cacheSchema = new Schema({
 
     difficulty: {
         type: Number,
-        required: true
+        required: true,
+        enum: [1,2,3],
+        default: 1
     },
 
     terrain: {
         type: Number,
-        required: true
+        required: true,
+        enum: [1,2,3],
+        default: 1
     },
 
     size: {
-        type: Number,
-        required: true
+        type: String,
+        required: true,
+        enum: ['small', 'medium', 'big'],
+        default: 'small'
     },
 
     hints: {
@@ -47,6 +53,12 @@ const cacheSchema = new Schema({
         type: ObjectId, 
         ref: 'User'
     },
+    active: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+
     
     photos: [Photo]
     ,
