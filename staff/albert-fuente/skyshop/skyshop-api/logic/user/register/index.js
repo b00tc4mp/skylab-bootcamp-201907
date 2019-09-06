@@ -18,7 +18,6 @@ module.exports = function(name, surname, email, password,isAdmin) {
     validate.string(surname, 'surname')
     validate.string(email, 'username')
     validate.email(email, 'username')
-    //validate.boolean(isAdmin,'isAdmin')
 
     return(async()=>{
         const user= await User.findOne({ email })

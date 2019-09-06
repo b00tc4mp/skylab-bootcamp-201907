@@ -15,7 +15,7 @@ module.exports = function(userId, productId, quantity) {
         const user = await User.findById(userId)
         debugger
 
-        if (!user) throw Error('TODO')
+        if (!user) throw Error(`User with id ${userId} does not exist`)
 
         let item = user.cart.find(item => item.product.toString() === productId)
         

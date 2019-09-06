@@ -8,7 +8,7 @@ module.exports = async(req, res)=> {
         debugger
 
         await logic.order.placeOrder(id,productId,quantity)
-            .then((orderId) => res.status(201).json({ message: 'Order registered successfully',orderId}))
+            .then((orderId) => res.status(201).json({ message: 'Order placed registered successfully',orderId}))
     } catch({ message }) {
         res.status(400).json({ error: message })
     }

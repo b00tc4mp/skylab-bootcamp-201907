@@ -1,5 +1,6 @@
 module.exports = {
-    register: require('./register'),
-    placeOrder:require('./place-order')
+    placeOrder:require('./place-order'),
+    listOrders:require('./list-orders'),
+    retrieveOrder:require('./retrieve-order')
     
 }
