@@ -7,15 +7,17 @@ const itemSchema = require('./item')
 module.exports = new Schema({
     date: {
         type: Date,
-        required: true
+        required: false
     },
+    
     state: {
-        type: String,
-        required: true
+        type: ['opened','closed'],
+        required: false,
+        default:'opened'
     },
-
-    owners: { type: ObjectId,
-         ref: 'User'
+    owner: { type: ObjectId,
+         ref: 'User',
+         require: true
     }, // per referencia schema
 
     items: [itemSchema] //array de items

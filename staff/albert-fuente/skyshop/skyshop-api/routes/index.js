@@ -6,9 +6,9 @@ const { registerUser, authenticateUser, retrieveUser, updateUser, unregisterUser
 
 const {registerProduct, retrieveProduct, unregisterProduct, retrieveAll, retrieveProducts}=require('./product')
 
-/* const{registerOrder, retrieveAll}=require('./order')
- */
-const {registerItem, unregisterItem}= require('./item')
+const{placeOrder}=require('./order')
+
+const {addToCart, removeProduct}= require('./cart')
 
 const router = Router()
 const jsonBodyParser = bodyParser.json()
@@ -28,12 +28,13 @@ router.get('/products',jsonBodyParser,retrieveAll)
 router.get('/product/q/:title',jsonBodyParser,retrieveProducts)
 
 //ORDER
-router.post('/orders/:id',[tokenMiddleware, jsonBodyParser],registerOrder)
-router.get('/orders', [tokenMiddleware, jsonBodyParser], retrieveAll)
+router.post('/users/:id/orders',[tokenMiddleware, jsonBodyParser],placeOrder)
+//router.get('/orders', [tokenMiddleware, jsonBodyParser], retrieveAll)
 
-//ITEM
-router.post('/items/:productId',jsonBodyParser,registerItem)
-router.delete('/items/:productId/delete',jsonBodyParser,unregisterItem)
+//CART
+router.post('/users/:id/cart',[tokenMiddleware, jsonBodyParser],addToCart)
+router.patch('/users/:id/cart/deleteItem',[tokenMiddleware, jsonBodyParser],removeProduct)
+
 
 
 module.exports = router

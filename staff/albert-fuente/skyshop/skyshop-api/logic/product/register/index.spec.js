@@ -5,7 +5,7 @@ const { database,models:{User, Product} } = require('skyshop-data')
 const{env: {DB_URL_TEST}}=process //nuevo
 
 
-describe.omly('logic - register product', () => {
+describe('logic - register product', () => {
 
     before(() => database.connect(DB_URL_TEST)) //nuevo
 
