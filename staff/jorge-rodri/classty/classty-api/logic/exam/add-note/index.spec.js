@@ -7,7 +7,7 @@ const { convertDate } = require('classty-utils')
 
 const { env: { DB_URL_TEST }} = process
 
-describe('logic - unregister exam', () => {
+describe('logic - add note', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let student1, student2, teacher1, teacher2, subject, idS11,idS22, idT11, idT22, exam, idSub, idEx, note
@@ -83,8 +83,8 @@ describe('logic - unregister exam', () => {
 
         const ex = await addNote(idSub, idEx, student1.name, student1.surname, note.note)
 
-        expect(ex).to.exist
-        expect(ex.title).to.equal(exam.title)
+        expect(ex[0]).to.exist
+        expect(ex[0].title).to.equal(exam.title)
 
     })
 
