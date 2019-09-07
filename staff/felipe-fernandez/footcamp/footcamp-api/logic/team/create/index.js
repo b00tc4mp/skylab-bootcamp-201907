@@ -41,90 +41,128 @@ module.exports = function(id, code, name, points) {
         //add team to the array in the league
         league.team.push(team)
 
+        let players = await Player.find({}).lean()
+        //get all the players in the team
+        // let playersArray = await Promise.all(players.map((player) =>
+        //     Player.findOne({ _id : idPlayer})
+        //  ))
+debugger
+        let goalkeeper = [] , defender =[], midfielder=[], striker = []
+        //select all the players by position and splice 1 goalkeeper, 4 defenders, 4 midfielders, 2 strikers
+        let goalkeepers = players.filter(player => player.position === 1).splice(0,20) 
+
+        let defenders = players.filter(player => player.position === 2).splice(0,100)
+        let midfielders = players.filter(player => player.position === 3).splice(0,100)
+        let strikers = players.filter(player => player.position === 4).splice(0,100)
+
+        for (let i=0; i<2; i++){
+
+            goalkeeper.push(goalkeepers[Math.floor(Math.random() * goalkeepers.length)])
+        }
+        for (let i=0; i<6; i++){
+            defender.push(defenders[Math.floor(Math.random() * defenders.length)])
+        }
+        for (let i=0; i<6; i++){
+             midfielder.push(midfielders[Math.floor(Math.random() * midfielders.length)])
+        }
+        for (let i=0; i<4; i++){
+             striker.push(strikers[Math.floor(Math.random() * strikers.length)])
+
+        }
 
         
-        //check if the players belongs to others teams in the league
-        let teamsLeague= []
-        //save the players of the league in this array for the future condition
-        let playersLeague= []
-        
-        league.team.forEach(teams => {
-            teamsLeague.push(teams)
-        })
 
-        teamsLeague.forEach(teamplayers => {
-            playersLeague.push(teamplayers.players)  
-        })
+
+
+        let initialTeam=[...goalkeeper, ...defender, ...midfielder, ...striker]
+ 
+         team.save()
+ 
+         return initialTeam
+
+        
+        // //check if the players belongs to others teams in the league
+        // let teamsLeague= []
+        // //save the players of the league in this array for the future condition
+        // let playersLeague= []
+        
+        // league.team.forEach(teams => {
+        //     teamsLeague.push(teams)
+        // })
+
+        // teamsLeague.forEach(teamplayers => {
+        //     playersLeague.push(teamplayers.players)  
+        // })
     
 
        
-        //generate 18 random players for the team
-        let players
+        // //generate 18 random players for the team
+        // let players
         
      
-        let playersUsed = []
-        let playersSelectedGoalKeeper = []
-        let playersSelectedDefender = []
-        let playersSelectedMidfielder = []
-        let playersSelectedStriker = []
+        // let playersUsed = []
+        // let playersSelectedGoalKeeper = []
+        // let playersSelectedDefender = []
+        // let playersSelectedMidfielder = []
+        // let playersSelectedStriker = []
         
 
 
         
-        //loop to extract one player at time
+        // //loop to extract one player at time
 
-        for (let i= 0; playersUsed.length<18; i++ ){
+        // for (let i= 0; playersUsed.length<18; i++ ){
            
-            //extract one player from the database
-           players = await Player.aggregate([{ $sample: { size: 1 } }])
+        //     //extract one player from the database
+        //    players = await Player.aggregate([{ $sample: { size: 1 } }])
           
             
-            //condition to check if the player was selected before for the agrregate method
-            if (!(playersUsed.includes(players[0]._id.toString())) && (!(playersLeague.includes(players[0]._id.toString()))) ){
+        //     //condition to check if the player was selected before for the agrregate method
+        //     if (!(playersUsed.includes(players[0]._id.toString())) && (!(playersLeague.includes(players[0]._id.toString()))) ){
                     
                 
-                const rules = [
-                    {position: 1, max: 2},
-                    {position: 2, max: 6},
-                    {position: 3, max: 6},
-                    {position: 4, max: 4}
-                ]
+        //         const rules = [
+        //             {position: 1, max: 2},
+        //             {position: 2, max: 6},
+        //             {position: 3, max: 6},
+        //             {position: 4, max: 4}
+        //         ]
                 
-                const match = rules.find(rule => players[0].position === rule.position)
+        //         const match = rules.find(rule => players[0].position === rule.position)
 
               
-                if (match.position===1 && playersSelectedGoalKeeper.length < match.max){
-                    playersSelectedGoalKeeper.push(players[0]._id.toString())
-                    playersUsed.push(players[0]._id.toString())
-                    // team.players.push(players[0]._id.toString())
+        //         if (match.position===1 && playersSelectedGoalKeeper.length < match.max){
+        //             playersSelectedGoalKeeper.push(players[0]._id.toString())
+        //             playersUsed.push(players[0]._id.toString())
+        //             // team.players.push(players[0]._id.toString())
                 
-                }
-                else if (match.position===2 && playersSelectedDefender.length < match.max){
-                    playersSelectedDefender.push(players[0]._id.toString())
-                    playersUsed.push(players[0]._id.toString())
-                    // team.players.push(players[0]._id.toString())
+        //         }
+        //         else if (match.position===2 && playersSelectedDefender.length < match.max){
+        //             playersSelectedDefender.push(players[0]._id.toString())
+        //             playersUsed.push(players[0]._id.toString())
+        //             // team.players.push(players[0]._id.toString())
                     
-                }
-                else if (match.position===3 && playersSelectedMidfielder.length < match.max){
-                    playersSelectedMidfielder.push(players[0]._id.toString())
-                    playersUsed.push(players[0]._id.toString())
-                    // team.players.push(players[0]._id.toString())
-                }
+        //         }
+        //         else if (match.position===3 && playersSelectedMidfielder.length < match.max){
+        //             playersSelectedMidfielder.push(players[0]._id.toString())
+        //             playersUsed.push(players[0]._id.toString())
+        //             // team.players.push(players[0]._id.toString())
+        //         }
 
-                else if (match.position===4 && playersSelectedStriker.length < match.max){
-                    playersSelectedStriker.push(players[0]._id.toString())
-                    playersUsed.push(players[0]._id.toString())
-                    // team.players.push(players[0]._id.toString())
-                }
+        //         else if (match.position===4 && playersSelectedStriker.length < match.max){
+        //             playersSelectedStriker.push(players[0]._id.toString())
+        //             playersUsed.push(players[0]._id.toString())
+        //             // team.players.push(players[0]._id.toString())
+        //         }
                 
-                //assign the array with 18 players to the property players of the created team
-                team.players=playersUsed
-         } 
+        //         //assign the array with 18 players to the property players of the created team
+        //         team.players=playersUsed
+        //  } 
 
-        }      
+        // }      
 
-        await league.save()
-        await team.save()
+        // await league.save()
+        // await team.save()
           
 
     })()

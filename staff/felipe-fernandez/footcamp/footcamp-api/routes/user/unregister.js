@@ -3,11 +3,11 @@ const logic = require('../../logic')
 module.exports = async function(req, res) {
 
 
-    const { params: { id }, body: { email, password } } = req
+    const {  id , body: { email, password } } = req
 
     try {
         
-        await logic.user.unregister(id, email, password)
+        await logic.unregisterUser(id, email, password)
          res.json({ message: 'User unregistered successfully'})
             
     } catch({ message }) {

@@ -6,7 +6,7 @@ const { database, models: { User, League, Team } } = require('footcamp-data')
 
 const { env: { DB_URL_TEST }} = process
 
-describe('logic - create team', () => {
+describe.only('logic - create team', () => {
     
     // before(() =>  database.connect(DB_URL_TEST))
     before(() =>  database.connect('mongodb://localhost/footcamp-test-create-players', { useNewUrlParser: true }))
@@ -45,14 +45,14 @@ describe('logic - create team', () => {
     it('should succeed on correct data', async () => {
         debugger
         const result = await logic.createTeam(id, code, nameTeam, points)
-            expect(result).not.to.exist
+            expect(result).to.exist
         const league = await League.findOne({code})
             expect(league).to.exist
             debugger
         const team = await Team.findOne({name: nameTeam})
             expect(team).to.exist
             debugger
-            expect(team.players.length).to.equal(18)
+            expect(team.length).to.equal(18)
             expect(team.owner.toString()).to.equal(id)
             expect(team.name).to.equal(nameTeam)
             expect(team.points).to.equal(points)        

@@ -10,9 +10,9 @@ const { models: { User, League } } = require('footcamp-data')
  * 
  * @returns {Promise}
 */
-module.exports = function(userId, code) {
+module.exports = function(id, code) {
 
-    validate.string(userId, 'User id')
+    validate.string(id, 'User id')
     validate.string(code, 'code')
    
 

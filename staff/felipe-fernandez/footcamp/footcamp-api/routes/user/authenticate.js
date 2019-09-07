@@ -9,7 +9,7 @@ module.exports = async function(req, res) {
 
     try {
         
-        const id = await logic.user.authenticate(email, password)
+        const id = await logic.authenticateUser(email, password)
         const token = jwt.sign({ sub: id }, JWT_SECRET)
         res.json({message: 'User authenticated successfully', id, token})
                
@@ -17,3 +17,5 @@ module.exports = async function(req, res) {
         res.status(401).json({ error: message })
     }
 }
+
+

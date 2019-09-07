@@ -23,8 +23,8 @@ module.exports = function(id, code) {
         const league = await League.findOne({ code })
 
         if (!league) throw Error(`cannot find league with code ${ code }`)
-
-        const participantExist = league.participants.find(participant=> participant===id)
+        
+        const participantExist = league.participants.find(participant=> participant.toString()===id)
 
         if(participantExist) throw Error(`User with id ${id} already plays in this league`)
 

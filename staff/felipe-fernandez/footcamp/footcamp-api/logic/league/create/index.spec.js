@@ -31,8 +31,10 @@ describe('logic - create league', () => {
    })
 
     it('should succeed on correct data', async () => {
+        
         const result = await logic.createLeague(id, nameLeague, code)
-            expect(result).not.to.exist
+            expect(result).to.exist
+
         const league = await League.findOne({name: nameLeague, code})
             expect(league).to.exist
             expect(league.team).to.exist

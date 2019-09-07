@@ -21,26 +21,26 @@ module.exports = function(id, code) {
 
         if (!user) throw new Error(`User with id ${id} does not exist`)
 
-        const league = await League.findOne({ code }).lean()
+        const leagues = await League.findOne({ code }).lean()
         
-        if (!league) throw Error(`league with code ${ code } does not exist`)
+        if (!leagues) throw Error(`league with code ${ code } does not exist`)
         
         //check the team in the database and select name, participants and teams
         let name, codes, teams
         let participants = []
         debugger
-        name= league.name
-        codes = league.code
-        league.participants.forEach(element => {
+        name= leagues.name
+        codes = leagues.code
+        leagues.participants.forEach(element => {
             participants.push(element.toString())
             
         })
 
-        teams = league.team
+        teams = leagues.team
 
-        let getleagues = { name, code: codes, participants, teams}
+        let league = { name, code: codes, participants, teams}
 
-        return getleagues
+        return league
 
     })()
 }

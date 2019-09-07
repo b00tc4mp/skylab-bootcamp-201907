@@ -73,7 +73,7 @@ describe('logic - retrieve lineup', () => {
    })
 
     it('should succeed on correct data', async () => {
-        debugger
+        
         const result = await logic.lineUpTeam(id, code, nameTeam)
         
         

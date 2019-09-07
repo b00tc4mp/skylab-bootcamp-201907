@@ -2,10 +2,10 @@ const logic = require('../../logic')
 
 module.exports = async function(req, res) {
 
-    const { params: { id }, body } = req
+    const { id , body } = req
 
     try {
-        await logic.user.update(id, body)
+        await logic.updateUser(id, body)
         res.json({ message: 'User updated successfully'})
            
         } catch({ message }) {

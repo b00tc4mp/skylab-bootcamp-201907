@@ -1,31 +1,50 @@
 const { Router } = require('express')
 const tokenMiddleware = require('../helpers/token-middleware')
 const bodyParser = require('body-parser')
+const registerUser = require('./user/register')
+const authenticateUser = require('./user/authenticate')
+const retrieveUser = require('./user/retrieve')
+const updateUser = require('./user/update')
+const unregisterUser = require('./user/unregister')
 
+const createLeague = require('./league/create')
+const joinLeague = require('./league/join')
+const retrieveLeague = require('./league/retrieve')
+const leaveLeagues = require('./league/leave')
 
-const { registerUser, authenticateUser, 
-        retrieveUser, updateUser, unregisterUser } = require('./user')
-    
-// const { registerVehicle, retrieveAllVehicle,
-//         retrieveVehicle, updateVehicle, unregisterVehicle } = require('./vehicle')
-    
-// const { registerProperty, retrieveAllProperty,
-//         retrieveProperty, updateProperty, unregisterProperty,
-//         registerPropertyOwner, unregisterPropertyOwner } = require('./property')
+const createTeam = require('./team/create')
+const retrieveTeam = require('./team/retrieve.js')
+const lineUpTeam = require('./team/lineup')
+const classificationTeam = require('./team/classification')
 
-// const { registerCard, retrieveAllCard,
-//         retrieveCard, unregisterCard } = require('./card')
+const retrievePlayer = require('./player/retrieve')
+
 
 const router = Router()
 const jsonBodyParser = bodyParser.json()
 
-
 /* USER */
 router.post('/users', jsonBodyParser, registerUser)
 router.post('/auth', jsonBodyParser, authenticateUser)
-router.get('/users/:id', [tokenMiddleware, jsonBodyParser], retrieveUser)
-router.patch ('/users/:id', [tokenMiddleware, jsonBodyParser], updateUser)
-router.delete ('/users/:id', [tokenMiddleware, jsonBodyParser], unregisterUser)
+router.get('/users', [tokenMiddleware, jsonBodyParser], retrieveUser)
+router.patch ('/users', [tokenMiddleware, jsonBodyParser], updateUser)
+router.delete ('/users', [tokenMiddleware, jsonBodyParser], unregisterUser)
+
+/*LEAGUE*/
+router.post('/users/leagues', [tokenMiddleware, jsonBodyParser], createLeague)
+router.post ('/users/leagues/join', [tokenMiddleware, jsonBodyParser], joinLeague)
+router.get ('/users/leagues', [tokenMiddleware, jsonBodyParser], retrieveLeague)
+router.delete ('/users/leagues', [tokenMiddleware, jsonBodyParser], leaveLeagues)
+
+
+/*TEAM*/
+router.post('/users/leagues/team', [tokenMiddleware, jsonBodyParser], createTeam)
+router.get ('/users/leagues/team', [tokenMiddleware, jsonBodyParser], retrieveTeam)
+router.get ('/users/leagues/team/lineup', [tokenMiddleware, jsonBodyParser], lineUpTeam)
+router.get ('/users/leagues/table', [tokenMiddleware, jsonBodyParser], classificationTeam)
+
+/**TEAM**/
+router.get ('/users/leagues/idLeague/player/idPlayer', [tokenMiddleware, jsonBodyParser], retrievePlayer)
 
 // /* VEHICLE */
 // router.post('/users/:id/vehicles', [tokenMiddleware, jsonBodyParser], registerVehicle)
