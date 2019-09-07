@@ -14,6 +14,7 @@ module.exports = function (id, idH, idS) {
 
         if (!subject) throw new Error(`wrong credentials`)
 
+
         subject.homeworks.forEach(homework => {
             if(homework._id.toString() == idH ){
                 homework.delivery.push(idS)
@@ -24,6 +25,7 @@ module.exports = function (id, idH, idS) {
         if (count==0 && count > 1) throw Error(`homework with id ${idH} dont exist`)
         
         await subject.save()
+
 
         return subject
     })()
