@@ -8,21 +8,23 @@ module.exports = function (id, idH, idS) {
     let count=0
     return ( async ()=>{
 
+        const student = await User.findOne({ _id: idS })
+        if(!student) throw Error(`student with id ${idS} does not exist`)
         const subject = await Subject.findById(id)
-debugger
+
         if (!subject) throw new Error(`wrong credentials`)
-debugger
+
         subject.homeworks.forEach(homework => {
             if(homework._id.toString() == idH ){
                 homework.delivery.push(idS)
                 count ++
             }
         }) 
-debugger
+
         if (count==0 && count > 1) throw Error(`homework with id ${idH} dont exist`)
-        debugger
+        
         await subject.save()
-debugger
+
         return subject
     })()
 }

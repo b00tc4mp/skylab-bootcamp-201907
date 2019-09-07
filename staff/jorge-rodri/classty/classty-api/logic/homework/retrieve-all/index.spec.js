@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const { expect } = require('chai')
-const addDelivery = require('.')
+const retrieveAllHomeWorks = require('.')
 const { database, models: { User, Subject, Homework } } = require('classty-data')
 const { convertDate } = require('classty-utils')
 
@@ -10,7 +10,7 @@ const { env: { DB_URL_TEST }} = process
 describe('logic - delivery homework', () => {
     before(() => database.connect(DB_URL_TEST))
 
-    let student1, student2, teacher1, teacher2, subject, idS11,idS22, idT11, idT22, homework, idSub, idHo
+    let student1, student2, teacher1, teacher2, subject, idS11,idS22, idT11, idT22, homework1, homework2, idSub, idHo
 
     beforeEach(async () => {
         student1 = {
@@ -52,34 +52,41 @@ describe('logic - delivery homework', () => {
         idT11 = teacher11.id
         const teacher22 = await User.create(teacher2)
         idT22 = teacher22.id
-        homework = {
+        homework1 = {
             title: `title-${Math.random()}`,
             comment: `comment-${Math.random()}`,
-            expiry: convertDate(`1${Math.random()}/2${Math.random()}/200${Math.random()}`),
+            expiry: convertDate(`1${Math.random()}/1${Math.random()}/200${Math.random()}`),
             delivery:[idS11]
         }
+        homework2 = {
+            title: `title-${Math.random()}`,
+            comment: `comment-${Math.random()}`,
+            expiry: convertDate(`1${Math.random()}/1${Math.random()}/200${Math.random()}`),
+            delivery:[idS22]
+        }
         
-        const _homework = new Homework(homework)
-        idHo = _homework.id
+        const _homework1 = new Homework(homework1)
+        const _homework2 = new Homework(homework2)
+
+        
         subject = {
             name: `name-${Math.random()}`,
             students:[idS11, idS22],
             teachers: [idT11, idT22],
-            homeworks: [_homework]
+            homeworks: [_homework1,_homework2]
         }
 
         const subject1 = await Subject.create(subject)
         idSub = subject1.id
-        idHo = subject1.homeworks[0].id
-        
+        debugger
     })
 
     it('should succeed on correct data', async () => {
-
-        const _subject = await addDelivery(idSub, idHo, idS22)
-
-        expect(_subject).to.exist
-        expect(_subject.homeworks[0].delivery.length).to.equal(2)
+debugger
+        const hw = await retrieveAllHomeWorks(idSub)
+debugger
+        expect(hw).to.exist
+        expect(hw.length).to.equal(2)
 
     })
 

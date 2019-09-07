@@ -63,12 +63,11 @@ describe('logic - retrieve user', () => {
     })
 
     it('should succeed on correct data', async () => {
-        let isIn = 0
         
         const subjects = await retrieveSubjectToStudent(idS1)
 
         expect(subjects).to.exist
-        
+        debugger
         expect(subjects.length).to.equal(3)
 
     })

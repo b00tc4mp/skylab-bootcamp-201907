@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const { expect } = require('chai')
-const addDelivery = require('.')
+const retrieveHomework = require('.')
 const { database, models: { User, Subject, Homework } } = require('classty-data')
 const { convertDate } = require('classty-utils')
 
@@ -71,15 +71,15 @@ describe('logic - delivery homework', () => {
         const subject1 = await Subject.create(subject)
         idSub = subject1.id
         idHo = subject1.homeworks[0].id
-        
+        debugger
     })
 
     it('should succeed on correct data', async () => {
-
-        const _subject = await addDelivery(idSub, idHo, idS22)
-
-        expect(_subject).to.exist
-        expect(_subject.homeworks[0].delivery.length).to.equal(2)
+debugger
+        const hw = await retrieveHomework(idSub, idHo)
+debugger
+        expect(hw).to.exist
+        expect(hw.title).to.equal(homework.title)
 
     })
 
