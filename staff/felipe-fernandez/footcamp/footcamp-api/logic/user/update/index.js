@@ -1,8 +1,6 @@
 const {validate} = require('footcamp-utils')
 const { models: { User } } = require('footcamp-data')
  
-
-
 /**
  * 
  * @param {*} id
@@ -10,12 +8,15 @@ const { models: { User } } = require('footcamp-data')
  * 
 * @returns {Promise}
 */
+
 module.exports = function(id, fieldsToUpdate) {
     validate.string(id, 'id')
-    return (async()=>{
+  
+    return (async () => {
+
         const user = await User.findByIdAndUpdate(id, { $set: fieldsToUpdate })
         if (!user) throw Error(`User with id ${id} does not exist.`)
-        
+
+              
     })()
-   
 }

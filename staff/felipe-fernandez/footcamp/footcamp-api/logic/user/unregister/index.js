@@ -12,9 +12,11 @@ const { models: { User } } = require('footcamp-data')
  * @returns {Promise}
 */
 module.exports = function(id, email, password) {
+
     validate.string(id, 'id')
     validate.string(email, 'email')
     validate.string(password, 'password')
+    
     return (async()=>{
         const user =  await User.deleteOne({ _id: id, email, password })
         if (!user.deletedCount) throw Error(`There was an error unregistering the user`)
