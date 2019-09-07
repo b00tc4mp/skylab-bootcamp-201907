@@ -31,14 +31,11 @@ describe('logic - retrieve ALL products', () => {
         
         expect(product[0].title).to.equal(title)
         expect(product[0].image).to.deep.equal(image)
-        expect(product[0].size).to.deep.equal(size)
-        
+        expect(product[0].size).to.deep.equal(size)        
 
-    }
-    )
+    })
  
     it('should fail if product does not exist', async () => {
-
         try {
             await retrieveAll()
         } catch (error) {

@@ -40,63 +40,75 @@ describe('logic - register product', () => {
 /*                 expect(product.size).to.equal(size)
  */                expect(product.color).to.equal(color)
                 expect(product.price).to.equal(price)
-        }
-    
-        
+        }       
     )
 
-   /*  it('should succeed on correct data', async() =>{
-        
-        logic.card.register(id, number,expiry)
-            .then(result => {
-                cardId = result
-                expect(cardId).to.exist
-                
-                return Card.findOne({ cardId })
-                
-            })
-            .then(card => {
-                
-                expect(card).to.exist
-                expect(card.number).to.equal(number)
-                expect(card.expiry).to.equal(expiry)
-            })}
-    
-        
-    ) */
-
-    /* it('should fail if the card already exists', () =>
-       Card.create({ number,expiry })
-           .then (() => logic.card.register(id, number,expiry)
-               .catch( error =>{
-                   expect(error).to.exist
-                   expect(error.message).to.equal(`Card already exists.`)
-               })
-           )
+    it('should fail on empty title', () =>
+    expect(() =>
+        register('',image,description,size,color,price)
+    ).to.throw('title is empty or blank')
+    )
+    it('should fail on undefined title', () =>
+        expect(() =>
+            register(undefined,image,description,size,color,price)
+        ).to.throw(`title with value undefined is not a string`)
     )
 
-     it('should fail on empty number', () => 
-        expect(() => 
-               logic.card.register(id, '', expiry)
-    ).to.throw('number is empty or blank')
+    it('should fail on empty image', () =>
+    expect(() =>
+        register(title,'',description,size,color,price)
+    ).to.throw('image is empty or blank')
+    )
+    it('should fail on undefined image', () =>
+        expect(() =>
+            register(title,undefined,description,size,color,price)
+        ).to.throw(`image with value undefined is not a string`)
     )
 
-     it('should fail on undefined number', () => 
-        expect(() => 
-               logic.card.register(id, undefined, expiry)
-    ).to.throw(`number with value undefined is not a string`)
+    it('should fail on empty description', () =>
+    expect(() =>
+        register(title,image,'',size,color,price)
+    ).to.throw('description is empty or blank')
+    )
+    it('should fail on undefined description', () =>
+        expect(() =>
+            register(title,image,undefined,size,color,price)
+        ).to.throw(`description with value undefined is not a string`)
     )
 
-     it('should fail on empty expiry', () => 
-        expect(() => 
-               logic.card.register(id, number, "")
-    ).to.throw(`expiry date with value  is not a valid date`)
-    ) */
+    it('should fail on empty color', () =>
+    expect(() =>
+        register(title,image,description,size,'',price)
+    ).to.throw('color is empty or blank')
+    )
+    it('should fail on undefined color', () =>
+        expect(() =>
+            register(title,image,description,size,undefined,price)
+        ).to.throw(`color with value undefined is not a string`)
+    )
 
+    it('should fail on undefined price', () =>
+        expect(() =>
+            register(title,image,description,size,color,undefined)
+        ).to.throw(`price with value undefined is not a number`)
+    )
+
+    it('should fail on wrong size', () =>
+    expect(() =>
+        register(title,image,description,'size',color,price)
+    ).to.throw(`size with value size is not a array`)
+    )
+    it('should fail on undefined size', () =>
+    expect(() =>
+        register(title,image,description,undefined,color,price)
+    ).to.throw(`size with value undefined is not a array`)
+    )
+    it('should fail on wrong size', () =>
+    expect(() =>
+        register(title,image,description,124,color,price)
+    ).to.throw(`size with value 124 is not a array`)
+    )
+  
     after(() => database.disconnect())
 })
 
-
-/* number = `1-${Math.random()}`
-            expiry = `"0"+${Math.floor(Math.random() * 9)}/"0"+${Math.floor(Math.random() * 9)}`
-             */

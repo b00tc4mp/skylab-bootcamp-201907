@@ -10,7 +10,8 @@ const { models:{Product} } = require('skyshop-data')
 */
 
 
-module.exports = function(productId) {   
+module.exports = function(productId) { 
+    validate.string(productId, 'productId')
     return(async()=>{
 
             const product = await Product.deleteOne({_id:productId})

@@ -1,4 +1,4 @@
-require('dotenv').config() //nuevo
+/* require('dotenv').config() //nuevo
 const { expect } = require('chai')
 
 const register = require('.')
@@ -69,4 +69,4 @@ describe('logic - register item', () => {
  
 
     after(() => database.disconnect())
-})
+}) */

@@ -35,16 +35,6 @@ describe('logic - unregister item', () => {
                 expect(result).not.to.exist
     })
 
-    /* it('should fail if the item does not exists',async () =>{
-        
-        try{
-            await logic.item.unregister('35432535525')
-        }catch(error){
-            expect(error).to.exist
-            expect(error.message).to.equal('Item already exists.')
-        }
-    }) */
-
     it('should fail on empty id', () => 
         expect(() => 
                unregister("")
@@ -60,4 +50,4 @@ describe('logic - unregister item', () => {
  
 
     after(() => database.disconnect())
-})
+}) 

@@ -3,11 +3,7 @@ const {models:{User} } = require('skyshop-data')
 
 /**
  * 
- * @param {*} name 
- * @param {*} surname 
- * @param {*} email 
- * @param {*} password 
- * @param {*} repassword 
+ * @param {*} id 
  * 
  * @returns {Promise}
 */
@@ -31,4 +27,6 @@ module.exports = function(id) {
             user.id = id
             return user
         }) */
+
+
 }

@@ -2,6 +2,7 @@ require('dotenv').config() //nuevo
 const { expect } = require('chai')
 const authenticate=require('.')
 const { database,models:{User} } = require('skyshop-data')
+const bcrypt = require('bcryptjs')
 
 const{env: {DB_URL_TEST}}=process //nuevo
 
@@ -17,7 +18,7 @@ describe('logic - authenticate user', () => {
         password = `password-${Math.random()}`
 
         await User.deleteMany()
-            const user=await User.create({ name, surname, email, password })
+            const user=await User.create({ name, surname, email, password: await bcrypt.hash (password, 10) })
             id = user.id
     })
 
@@ -47,9 +48,36 @@ describe('logic - authenticate user', () => {
 
         }catch(error){
             expect(error).to.exist
-            expect(error.message).to.equal('Wrong credentials.')
+            expect(error.message).to.equal('wrong credentials')
         }
     }) 
+
+    it('should fail on empty email', () =>
+    expect(() =>
+        authenticate( '',password)
+    ).to.throw('username is empty or blank')
+    )
+    it('should fail on undefined email', () =>
+        expect(() =>
+            authenticate( undefined,password)
+        ).to.throw(`username with value undefined is not a string`)
+    )
+    it('should fail on incorrect email', () =>
+        expect(() =>
+            authenticate( 'sdfka',password)
+        ).to.throw(`username with value sdfka is not a valid e-mail`)
+    )
+
+    it('should fail on empty password', () =>
+    expect(() =>
+        authenticate( email,'')
+    ).to.throw('password is empty or blank')
+    )
+    it('should fail on undefined password', () =>
+        expect(() =>
+            authenticate( email,undefined)
+        ).to.throw(`password with value undefined is not a string`)
+    )
 
 
     after(() => database.disconnect())

@@ -1,5 +1,7 @@
 const {validate} = require('skyshop-utils')
-const { models:{User} } = require('skyshop-data')  //referencia a un modulo 
+const { models:{User} } = require('skyshop-data') 
+const bcrypt = require('bcryptjs')
+
 
 /**
  * 
@@ -18,21 +20,20 @@ module.exports = function(name, surname, email, password,isAdmin) {
     validate.string(surname, 'surname')
     validate.string(email, 'username')
     validate.email(email, 'username')
+    validate.string(password, 'password')
 
     return(async()=>{
         const user= await User.findOne({ email })
 
             if (user) throw Error(`user with e-mail ${email} already exists`)
-            await User.create({name, surname, email, password,isAdmin})
+            
+            const hash=await bcrypt.hash(password,10)
+
+            await User.create({name, surname, email, password: hash,isAdmin})
             return user
-       /*  .then(() => { }) */
     })()
     
-/*     return User.findOne({ email })
-        .then(user => {
-            if (user) throw Error(`user with e-mail ${email} already exists`)
-            return User.create({name, surname, email, password})
-        }).then(() => { }) */
+
 }
 
 
