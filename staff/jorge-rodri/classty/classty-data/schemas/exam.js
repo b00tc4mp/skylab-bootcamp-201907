@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 const { Schema, SchemaTypes: { ObjectId } } = mongoose
 
 module.exports = new Schema({
-    subjects: [ { type: ObjectId, ref: 'Subject'} ],
 
     title:{
         type: String,
