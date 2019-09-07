@@ -6,7 +6,7 @@ const { database, models: { User, Subject } } = require('classty-data')
 
 const { env: { DB_URL_TEST }} = process
 
-describe('logic - register homework', () => {
+describe('logic - register exam', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let student1, student2, teacher1, teacher2, subject, idS11,idS22, idT11, idT22, exam, idSub
@@ -74,7 +74,7 @@ describe('logic - register homework', () => {
         const _subject = await resgisterExam(idSub, exam)
 
         expect(_subject).to.exist
-        expect(_subject.exam[0].title).to.equal(exam.title)
+        expect(_subject.exams[0].title).to.equal(exam.title)
 
     })
 

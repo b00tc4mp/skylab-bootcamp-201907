@@ -12,7 +12,7 @@ module.exports = function (id, idH) {
         if (!subject) throw new Error(`wrong credentials`)
 
         const homework = subject.homeworks.find(homework => homework._id.toString()==idH) 
-        debugger
+        
         return homework
     })()
 }

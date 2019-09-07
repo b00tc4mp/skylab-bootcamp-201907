@@ -65,7 +65,7 @@ describe('logic - retrieve user', () => {
     it('should succeed on correct data', async () => {
 
         const subjects = await retrieveSubjectToStudent(idS1)
-
+debugger
         expect(subjects).to.exist
         expect(subjects.length).to.equal(3)
 
