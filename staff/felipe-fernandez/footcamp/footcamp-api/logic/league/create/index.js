@@ -23,13 +23,15 @@ module.exports = function(id, name, code) {
 
         if (!user) throw new Error(`user with id ${id} does not exists`)
 
-        const league = await League.findOne({ name })
+        const leagues = await League.findOne({ name })
 
-        if (league) throw Error(`league with name ${ name } alredy exists`)
+        if (leagues) throw Error(`league with name ${ name } alredy exists`)
      
-        const newLeague = new League({name, code})
+        const league = new League({name, code})
+
+        league.participants.push(id)
             
-        await newLeague.save()
+        await league.save()
 
     })()
 }

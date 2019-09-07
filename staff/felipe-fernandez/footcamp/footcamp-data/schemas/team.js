@@ -1,5 +1,5 @@
 const { Schema, ObjectId } = require('mongoose')
-const playerSchema = require('./player')
+// const playerSchema = require('./player')
 
 module.exports = new Schema({
     name: {
@@ -12,8 +12,8 @@ module.exports = new Schema({
         required: true
     },
 
-    owner: [{ type: ObjectId, ref: 'User'}],
+    owner: { type: ObjectId, ref: 'User'},
 
-    player: [playerSchema]
+    players: [{ type: ObjectId, ref: 'Player'}]
 })
 

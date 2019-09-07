@@ -38,6 +38,19 @@ describe('logic', ()=>{
                 expect(user.password).not.to.exist
             })
         
+         it('should fail on incorrect user id', async () => {
+                id = '5d772fb62bb54120d08d7a7b'
+                try {
+                    await logic.retrieveUser(id)
+                    throw Error('should not reach this point') 
+                }
+                catch({message}){
+                    expect(message).to.equal(`User with id ${id} does not exist.`)
+                }
+                
+        })
+
+
         it('should fail on empty id', () => {
             expect(() =>
                 logic.retrieveUser('')

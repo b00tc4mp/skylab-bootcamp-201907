@@ -9,6 +9,8 @@ module.exports = new Schema({
 
     code: {type: String, required: true },
 
+    participants: [{ type: ObjectId, ref: 'User' }],
+
     team: [teamSchema]
 })
 

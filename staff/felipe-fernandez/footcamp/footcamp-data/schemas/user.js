@@ -18,8 +18,8 @@ module.exports = new Schema({
     password: {
         type: String,
         required: true
-    },
+    }
 
-    leagues: [{ type: ObjectId, ref: 'League' }]
+    
 
 })

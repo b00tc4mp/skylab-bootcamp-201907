@@ -38,6 +38,8 @@ describe('logic - create league', () => {
             expect(league.team).to.exist
             expect(league.name).to.equal(nameLeague)
             expect(league.code).to.equal(code)
+            expect(league.participants.length).to.equal(1)
+            expect(league.participants[0].toString()).to.equal(id)
            
         
     })

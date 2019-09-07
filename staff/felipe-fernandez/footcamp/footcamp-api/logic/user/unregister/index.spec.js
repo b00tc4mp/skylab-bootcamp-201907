@@ -29,6 +29,9 @@ describe('logic - unregister user', () => {
         expect(userFind).not.to.exist
            
         })
+
+       
+
     it('should fail on unexisting user', async () => {
         id= '5d5d5530531d455f75da9fF9'
         try {
@@ -40,6 +43,8 @@ describe('logic - unregister user', () => {
         }
         
     })
+
+
     it('should fail on existing user, but wrong password', async () => {
         password = 'wrong password'
         try {
@@ -51,6 +56,65 @@ describe('logic - unregister user', () => {
         }
         
     })
+
+        it('should fail on empty id', () => {
+            expect(() =>
+                logic.unregisterUser('', email, password)
+            ).to.throw(Error, 'id is empty or blank')
+        })
+
+        it('should fail on undefined id', () => {
+            expect(()=> 
+                logic.unregisterUser(undefined, email, password)
+            ).to.throw(Error, 'id with value undefined is not a string')
+        })
+
+        it('should fail on non-valid id', () => {
+            expect(()=> 
+                logic.unregisterUser(123, email, password)
+            ).to.throw(Error, 'id with value 123 is not a string')
+        })
+
+
+
+
+        it('should fail on empty email', () => {
+            expect(() =>
+                logic.unregisterUser(id, '', password)
+            ).to.throw(Error, 'email is empty or blank')
+        })
+
+        it('should fail on undefined email', () => {
+            expect(()=> 
+                logic.unregisterUser(id, undefined, password)
+            ).to.throw(Error, 'email with value undefined is not a string')
+        })
+
+        it('should fail on non-valid email', () => {
+            expect(()=> 
+                logic.unregisterUser(id, 123, password)
+            ).to.throw(Error, 'email with value 123 is not a string')
+        })
+
+
+
+        it('should fail on empty password', () => {
+            expect(() =>
+                logic.unregisterUser(id, email, '')
+            ).to.throw(Error, 'password is empty or blank')
+        })
+
+        it('should fail on undefined password', () => {
+            expect(()=> 
+                logic.unregisterUser(id, undefined, '')
+            ).to.throw(Error, 'email with value undefined is not a string')
+        })
+
+        it('should fail on non-valid password', () => {
+            expect(()=> 
+                logic.unregisterUser(id, 123, password)
+            ).to.throw(Error, 'email with value 123 is not a string')
+        })
 
     after(()=> database.disconnect())
 })

@@ -6,9 +6,13 @@ module.exports = {
     updateUser: require('./user/update'),
     createLeague: require('./league/create'),
     joinLeague: require('./league/join'), 
-    retrieveLeagues: require('./league/retrieve-leagues'), 
     leaveLeagues: require('./league/leave'),
+    retrieveLeague: require('./league/retrieve'),
+    createTeam: require('./team/create'),
+    retrieveTeam: require('./team/retrieve'),
+    classificationTeam: require ('./team/classification'),
+    lineUpTeam: require('./team/team-lineup'),
+    retrievePlayer: require('./player/retrieve')
     
-    // property: require('./property'),
-    // card: require('./card'),
+    
 }

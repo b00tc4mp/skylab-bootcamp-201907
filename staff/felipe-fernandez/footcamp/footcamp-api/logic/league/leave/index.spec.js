@@ -30,39 +30,32 @@ describe('logic - leave league', () => {
             id = users.id
           
             const leagues = new League({id, name: nameLeague, code})
-            leagueId = leagues.id
-
-            const leagues2 = new League({id: id2, name: nameLeague2, code: code2 })
-            leagueId2 = leagues2.id
-
-            users.leagues.push(leagueId)
-            users.leagues.push(leagueId2)
             
+            leagues.participants.push(id)
+                      debugger
             await leagues.save()
 
-            await users.save()
-                                   
+                                              
         })()
     
    })
 
     
-
-
-
     it('should remove league on correct data', async() => {
-        const result = await logic.leaveLeagues(id, leagueId)
+        const result = await logic.leaveLeagues(id, code)
             expect(result).not.to.exist
-        const userFind = await User.findById(id)
-        const leagueFound = userFind.leagues.find(league => league.toString() === leagueId)
-            expect(leagueFound).not.to.exist
+
+        const findLeague = await League.findOne({code})
+            expect(findLeague).to.exist
+            expect(findLeague.participants.length).to.equal(0)
+                   
        
-        })
+     })
 
     it('should fail on incorrect user id', async () => {
         id = '5d772fb62bb54120d08d7a7b'
         try {
-            await logic.leaveLeagues(id, leagueId)
+            await logic.leaveLeagues(id, code)
             throw Error('should not reach this point') 
         }
         catch({message}){
@@ -70,54 +63,55 @@ describe('logic - leave league', () => {
         }
         
     })
-    it('should fail on incorrect league id', async () => {
-        leagueId = '12345'
+    it('should fail on incorrect league code', async () => {
+        code = '12345'
+
         try {
-            await logic.leaveLeagues(id, leagueId)
+            await logic.leaveLeagues(id, code)
             throw Error('should not reach this point') 
         }
         catch({message}){
-            expect(message).to.equal(`League with id ${ leagueId } does not exists`)
+            expect(message).to.equal(`cannot find league with code ${ code }`)
         }
         
     })
 
     it('should fail on undefined user id', () => 
         expect(() => 
-            logic.leaveLeagues(undefined, leagueId)
+            logic.leaveLeagues(undefined, code)
     ).to.throw(`id with value undefined is not a string`)
     )
 
-    it('should fail on undefined league id', () => 
+    it('should fail on undefined league code', () => 
         expect(() => 
             logic.leaveLeagues(id,  undefined)
-    ).to.throw(`League Id with value undefined is not a string`)
+    ).to.throw(`code with value undefined is not a string`)
     )
 
 
     it('should fail on non-string user id', () => 
         expect(() => 
-            logic.leaveLeagues(12345,  leagueId)
+            logic.leaveLeagues(12345,  code)
     ).to.throw(`id with value 12345 is not a string`)
     )
 
-    it('should fail on non-string league id', () => 
+    it('should fail on non-string league code', () => 
         expect(() => 
             logic.leaveLeagues(id,  12345)
-    ).to.throw(`League Id with value 12345 is not a string`)
+    ).to.throw(`code with value 12345 is not a string`)
     )
 
 
-    it('should fail on empty id', () => 
+    it('should fail on empty code', () => 
         expect(() => 
-            logic.leaveLeagues('',  leagueId)
+            logic.leaveLeagues('',  code)
     ).to.throw(`id is empty or blank`)
     )
 
     it('should fail on empty name', () => 
         expect(() => 
             logic.leaveLeagues(id,  '')
-    ).to.throw(`League Id is empty or blank`)
+    ).to.throw(`code is empty or blank`)
     )
 
 

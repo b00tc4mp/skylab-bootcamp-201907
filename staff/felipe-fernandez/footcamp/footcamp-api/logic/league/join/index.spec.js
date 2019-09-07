@@ -10,7 +10,7 @@ describe('logic - join league', () => {
     
     before(() =>  database.connect(DB_URL_TEST))
 
-    let name, surname, email, password, nameLeague
+    let name, surname, email, password, nameLeague, code
 
     beforeEach(() => {
 
@@ -39,19 +39,21 @@ describe('logic - join league', () => {
         
         const result = await logic.joinLeague(id, code)
             expect(result).not.to.exist
-        debugger
+        
          const findLeague = await League.findOne({code})
             expect(findLeague).to.exist
             expect(findLeague.team).to.exist
             expect(findLeague.name).to.equal(nameLeague)
+            expect(findLeague.participants.length).to.equal(1)
+            expect(findLeague.participants[0].toString()).to.equal(id)
             
            
-    })
+     })
 
     it('should fail on incorrect user', async () => {
         id = '5d772fb62bb54120d08d7a7b'
         try {
-            await logic.joinLeague(id, name, code)
+            await logic.joinLeague(id, code)
             throw Error('should not reach this point') 
         }
         catch({message}){
@@ -62,10 +64,10 @@ describe('logic - join league', () => {
 
     it('should fail if the league already exists', async () => {
 
-        await League.create({ id, name , code})
+        await League.create({ id, name: nameLeague, code})
  
         try {
-             await logic.joinLeague(id, 'hola', code)
+             await logic.joinLeague(id, 'hola')
         } catch(error) {
             
              expect(error).to.exist
@@ -83,6 +85,22 @@ describe('logic - join league', () => {
             
              expect(error).to.exist
              expect(error.message).to.equal(`cannot find league with code 53534`)
+        }
+     })
+
+     it('should fail if the user already exists in the league', async () => {
+
+        const league= await League.create({ id, name: nameLeague, code})
+        league.participants.push(id)
+        
+        await league.save() 
+ 
+        try {
+             await logic.joinLeague(id, code)
+        } catch(error) {
+            
+             expect(error).to.exist
+             expect(error.message).to.equal(`User with id ${id} already plays in this league`)
         }
      })
     
@@ -131,4 +149,5 @@ describe('logic - join league', () => {
 
 
 after(() => database.disconnect())
+
 })

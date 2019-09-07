@@ -10,10 +10,10 @@ const { models: { User, League } } = require('footcamp-data')
  * 
  * @returns {Promise}
 */
-module.exports = function(userId, leagueId) {
+module.exports = function(userId, code) {
 
     validate.string(userId, 'User id')
-    validate.string(leagueId, 'League Id')
+    validate.string(code, 'code')
    
 
     return (async()=>{
@@ -21,13 +21,18 @@ module.exports = function(userId, leagueId) {
         const user = await User.findById(id)
 
         if (!user) throw new Error(`User with id ${id} does not exists`)
+
+        const league = await League.findOne({ code })
+
+        if (!league) throw Error(`cannot find league with code ${ code }`)
         
-        const leagueFounded = user.leagues.find(element => element.toString() === leagueId)
-        const leagueIndex = user.leagues.findIndex(element => element.toString() === leagueId)
-        if(!leagueFounded) throw Error(`League with id ${ leagueId } does not exists`)
-        user.leagues.splice(leagueIndex, 1)
-       
-        await user.save()
+        const participantExist = league.participants.find(participant=> participant.toString()===id)
+        const participantExistIndex = league.participants.findIndex(participant=> participant.toString()===id)
+        
+        if(!participantExist) throw Error(`User with id ${id} do not play in this league`)
+        league.participants.splice(participantExistIndex, 1)
+    
+        await league.save()
        
     })()
     
