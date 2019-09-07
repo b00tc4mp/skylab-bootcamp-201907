@@ -14,9 +14,5 @@ module.exports = new Schema({
         type: Date,
         required: true
     },
-    type:{
-        type: String,
-        enum: ['todo','done','review']
-    },
     delivery:[ { type: ObjectId, ref:'User' } ]
 })
