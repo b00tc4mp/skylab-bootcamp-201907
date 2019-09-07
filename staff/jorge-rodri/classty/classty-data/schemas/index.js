@@ -8,6 +8,7 @@ module.exports = {
     homework: require('./homework'),
     message: require('./message'),
     post: require('./post'),
-    exam: require('./exam')
+    exam: require('./exam'),
+    note: require('./note')
 
 }
