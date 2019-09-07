@@ -8,6 +8,7 @@ const { convertDate } = require('classty-utils')
 const { env: { DB_URL_TEST }} = process
 
 describe('logic - add note', () => {
+
     before(() => database.connect(DB_URL_TEST))
 
     let student1, student2, teacher1, teacher2, subject, idS11,idS22, idT11, idT22, exam, idSub, idEx, note
@@ -85,6 +86,7 @@ describe('logic - add note', () => {
 
         expect(ex[0]).to.exist
         expect(ex[0].title).to.equal(exam.title)
+
 
     })
 
