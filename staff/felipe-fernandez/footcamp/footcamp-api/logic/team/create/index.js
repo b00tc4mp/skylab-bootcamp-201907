@@ -41,7 +41,8 @@ module.exports = function(id, code, name, points) {
         //add team to the array in the league
         league.team.push(team)
 
-debugger
+
+        
         //check if the players belongs to others teams in the league
         let teamsLeague= []
         //save the players of the league in this array for the future condition
@@ -68,6 +69,8 @@ debugger
         let playersSelectedStriker = []
         
 
+
+        
         //loop to extract one player at time
 
         for (let i= 0; playersUsed.length<18; i++ ){

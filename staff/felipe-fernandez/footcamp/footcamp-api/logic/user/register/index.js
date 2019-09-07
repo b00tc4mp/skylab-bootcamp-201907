@@ -1,6 +1,7 @@
 const {validate} = require('footcamp-utils')
 const { models: { User } } = require('footcamp-data')
- /**
+const bcrypt = require('bcryptjs')
+
 /**
  * 
  * @param {*} name 
@@ -21,7 +22,12 @@ module.exports = function(name, surname, email, password) {
 
     return ( async () => {
         const user = await User.findOne({ email })
+
         if (user) throw Error('User already exists.')
-        await User.create({name, surname, email, password})
+
+        const hash = await bcrypt.hash(password,10)
+        
+        await User.create({ name , surname ,  email , password : hash })
+        
     })()
 }

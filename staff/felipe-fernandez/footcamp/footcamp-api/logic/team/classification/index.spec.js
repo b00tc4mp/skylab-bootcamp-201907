@@ -7,7 +7,7 @@ const {  random : { number }  } = require('footcamp-utils')
 
 const { env: { DB_URL_TEST }} = process
 
-describe.only('logic - retrieve teams classification ', () => {
+describe('logic - retrieve teams classification ', () => {
     
     before(() =>  database.connect(DB_URL_TEST))
 
@@ -151,21 +151,6 @@ describe.only('logic - retrieve teams classification ', () => {
         
     })
 
-    it('should fail if the team name does not exist', async () => {
-
-        await League.create({ id, name: nameLeague,code  })
-
-       
-        try {
-            await logic.classificationTeam(id, code, '12345', points)
-            throw Error('should not reach this point') 
-        }
-        catch({message}){
-            expect(message).to.equal(`Team with name 12345 does not exist`)
-        }
-        
-    })
-     
      
 
     it('should fail on undefined league name', () => 

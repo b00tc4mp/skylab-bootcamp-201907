@@ -3,6 +3,7 @@ require('dotenv').config()
 const {expect} = require('chai')
 const logic = require('../../../logic')
 const { database, models: { User } } = require('footcamp-data')
+const bcrypt = require('bcryptjs')
 
 const { env: { DB_URL_TEST }} = process
 
@@ -22,20 +23,21 @@ describe('logic-authentication user', ()=>{
             
             return (async () => {
                 await User.deleteMany()
-                const users = await User.create({name, surname, email, password})
+                const users = await User.create({ name, surname, email, password : await bcrypt.hash(password,10) })
+
                 id = users.id
             })()
         })
         
         it ('should authenticate on correct data', async () => {
             const result = await logic.authenticateUser(email, password)
-            expect(result).to.exist
-            expect(result).to.be.a('string')
-            expect(result).to.equal(id)
+                expect(result).to.exist
+                expect(result).to.be.a('string')
+                expect(result).to.equal(id)
         })
 
         it('should fail on incorrect data', async ()=>{
-            let password = "fail"
+            let password = "fake-mail"
 
             try {
                 await logic.authenticateUser(email, password)

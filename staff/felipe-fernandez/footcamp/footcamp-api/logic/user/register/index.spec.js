@@ -3,6 +3,7 @@ require('dotenv').config()
 const {expect} = require('chai')
 const logic = require('../../../logic')
 const { database, models: { User } } = require('footcamp-data')
+const bcrypt = require('bcryptjs')
 
 const { env: { DB_URL_TEST }} = process
 
@@ -23,12 +24,14 @@ describe('logic - register user', () => {
     it('should succeed on correct data', async () => {
         const result = await logic.registerUser(name, surname, email, password)
             expect(result).not.to.exist
-        const user = await User.findOne({ email, password })
+        const user = await User.findOne({ email })
             expect(user).to.exist
             expect(user.name).to.equal(name)
             expect(user.surname).to.equal(surname)
             expect(user.email).to.equal(email)
-            expect(user.password).to.equal(password)
+        const match = await bcrypt.compare(password,user.password)
+            expect(match).to.be.true
+           
         })
 
     it('should fail if the user already exists', async () => {

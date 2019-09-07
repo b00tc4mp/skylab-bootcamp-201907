@@ -30,7 +30,7 @@ module.exports = function(id, code, name, points) {
         if (!league) throw Error(`League with code ${ code } does not exist`)
 
         const teams = await Promise.all(league.team.map(team => team))
-      
+
         return teams
         
 
