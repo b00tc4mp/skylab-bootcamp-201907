@@ -12,6 +12,7 @@ describe('logic - unregister exam', () => {
 
     let student1, student2, teacher1, teacher2, subject, idS11,idS22, idT11, idT22, exam, idSub, idEx, note
 
+
     beforeEach(async () => {
         student1 = {
             name: `name-${Math.random()}`,
@@ -56,11 +57,13 @@ describe('logic - unregister exam', () => {
             student: idS11,
             note: 5
         }
+
         exam = {
             title: `title-${Math.random()}`,
             date: convertDate(`1${Math.random()}/2${Math.random()}/200${Math.random()}`),
             presented:[],
             note: [note]
+
         }
         
         const _exam = new Exam(exam)

@@ -4,6 +4,7 @@ const { expect } = require('chai')
 const resgisterExam = require('.')
 const { database, models: { User, Subject, Note } } = require('classty-data')
 
+
 const { env: { DB_URL_TEST }} = process
 
 describe('logic - register exam', () => {
@@ -11,6 +12,7 @@ describe('logic - register exam', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let student1, student2, teacher1, teacher2, subject, idS11,idS22, idT11, idT22, exam, idSub, note
+
 
     beforeEach(async () => {
         student1 = {
@@ -62,6 +64,7 @@ describe('logic - register exam', () => {
         const subject1 = await Subject.create(subject)
         idSub = subject1.id
 
+
         note = {
             student: idS11,
             note: 5
@@ -72,6 +75,7 @@ describe('logic - register exam', () => {
             date: `1${Math.random()}/2${Math.random()}/200${Math.random()}`,
             presented:[],
             note: [note]
+
         }
     })
 
