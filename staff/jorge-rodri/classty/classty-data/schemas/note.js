@@ -1,16 +1,14 @@
 const mongoose = require('mongoose')
 const { Schema, SchemaTypes: { ObjectId } } = mongoose
-const Note = require('./note')
 
 module.exports = new Schema({
 
-    title:{
-        type: String,
-        required: true
+    student:{
+        type: ObjectId,
+        ref: 'User'
     },
-    date:{
-        type: Date,
+    note:{
+        type: Number,
         required: true
-    },
-    notes: [Note]
+    }
 })
