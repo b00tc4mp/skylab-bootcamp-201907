@@ -10,7 +10,8 @@ const { env: { DB_URL_TEST }} = process
 describe('logic - retireve all exams', () => {
     before(() => database.connect(DB_URL_TEST))
 
-    let student1, student2, teacher1, teacher2, subject, idS11,idS22, idT11, idT22, exam1, exam2, idSub, idEx
+    let student1, student2, teacher1, teacher2, subject, idS11,idS22, idT11, idT22, exam1, exam2, idSub, idEx, note
+
 
     beforeEach(async () => {
         student1 = {
@@ -52,17 +53,24 @@ describe('logic - retireve all exams', () => {
         idT11 = teacher11.id
         const teacher22 = await User.create(teacher2)
         idT22 = teacher22.id
+        note = {
+            student: idS11,
+            note: 5
+        }
+
         exam1 = {
             title: `title-${Math.random()}`,
             date: convertDate(`1${Math.random()}/2${Math.random()}/200${Math.random()}`),
             presented:[],
-            note: Number(`${Math.random()}`)
+            note: [note]
+
         }
         exam2 = {
             title: `title-${Math.random()}`,
             date: convertDate(`1${Math.random()}/2${Math.random()}/200${Math.random()}`),
             presented:[],
-            note: Number(`${Math.random()}`)
+            note: [note]
+
         }
         
         const _exam1 = new Exam(exam1)
