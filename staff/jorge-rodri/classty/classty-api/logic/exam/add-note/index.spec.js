@@ -1,16 +1,16 @@
 require('dotenv').config()
 
 const { expect } = require('chai')
-const resgisterExam = require('.')
-const { database, models: { User, Subject, Note } } = require('classty-data')
+const addNote = require('.')
+const { database, models: { User, Subject, Exam, Note } } = require('classty-data')
+const { convertDate } = require('classty-utils')
 
 const { env: { DB_URL_TEST }} = process
 
-describe('logic - register exam', () => {
-
+describe('logic - unregister exam', () => {
     before(() => database.connect(DB_URL_TEST))
 
-    let student1, student2, teacher1, teacher2, subject, idS11,idS22, idT11, idT22, exam, idSub, note
+    let student1, student2, teacher1, teacher2, subject, idS11,idS22, idT11, idT22, exam, idSub, idEx, note
 
     beforeEach(async () => {
         student1 = {
@@ -52,36 +52,39 @@ describe('logic - register exam', () => {
         idT11 = teacher11.id
         const teacher22 = await User.create(teacher2)
         idT22 = teacher22.id
-
-        subject = {
-            name: `name-${Math.random()}`,
-            students:[idS11, idS22],
-            teachers: [idT11, idT22]
-        }
-
-        const subject1 = await Subject.create(subject)
-        idSub = subject1.id
-
         note = {
             student: idS11,
             note: 5
         }
-
+        const _note = new Note(note)
         exam = {
             title: `title-${Math.random()}`,
-            date: `1${Math.random()}/2${Math.random()}/200${Math.random()}`,
+            date: convertDate(`1${Math.random()}/2${Math.random()}/200${Math.random()}`),
             presented:[],
-            note: [note]
+            note: [_note]
         }
+        
+        const _exam = new Exam(exam)
+        idEx = _exam.id
+        subject = {
+            name: `name-${Math.random()}`,
+            students:[idS11, idS22],
+            teachers: [idT11, idT22],
+            exams: [_exam]
+        }
+
+        const subject1 = await Subject.create(subject)
+        idSub = subject1.id
+        idEx = subject1.exams[0].id
+        
     })
 
     it('should succeed on correct data', async () => {
 
-        const _subject = await resgisterExam(idSub, exam)
+        const ex = await addNote(idSub, idEx, student1.name, student1.surname, note.note)
 
-        expect(_subject).to.exist
-        expect(_subject.exams[0].title).to.equal(exam.title)
-
+        expect(ex).to.exist
+        expect(ex.title).to.equal(exam.title)
 
     })
 
