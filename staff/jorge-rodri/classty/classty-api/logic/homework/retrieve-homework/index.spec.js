@@ -71,13 +71,13 @@ describe('logic - delivery homework', () => {
         const subject1 = await Subject.create(subject)
         idSub = subject1.id
         idHo = subject1.homeworks[0].id
-        debugger
+        
     })
 
     it('should succeed on correct data', async () => {
-debugger
+
         const hw = await retrieveHomework(idSub, idHo)
-debugger
+
         expect(hw).to.exist
         expect(hw.title).to.equal(homework.title)
 

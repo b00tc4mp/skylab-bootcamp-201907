@@ -19,7 +19,7 @@ module.exports = function (id) {
             } 
             return homework
         });
-debugger
+
         return homeworks
     })()
 }
