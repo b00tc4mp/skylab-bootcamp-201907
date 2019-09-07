@@ -65,7 +65,6 @@ describe('logic - register homework', () => {
             title: `title-${Math.random()}`,
             comment: `comment-${Math.random()}`,
             expiry: `1${Math.random()}/2${Math.random()}/200${Math.random()}`,
-            type: `todo`,
             delivery:[idS11, idS22]
         }
     })

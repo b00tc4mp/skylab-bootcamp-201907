@@ -1,13 +1,13 @@
 require('dotenv').config()
 
 const { expect } = require('chai')
-const unregisterHomework = require('.')
+const addDelivery = require('.')
 const { database, models: { User, Subject, Homework } } = require('classty-data')
 const { convertDate } = require('classty-utils')
 
 const { env: { DB_URL_TEST }} = process
 
-describe('logic - unregister homework', () => {
+describe('logic - delivery homework', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let student1, student2, teacher1, teacher2, subject, idS11,idS22, idT11, idT22, homework, idSub, idHo
@@ -56,11 +56,11 @@ describe('logic - unregister homework', () => {
             title: `title-${Math.random()}`,
             comment: `comment-${Math.random()}`,
             expiry: convertDate(`1${Math.random()}/2${Math.random()}/200${Math.random()}`),
-            delivery:[idS11, idS22]
+            delivery:[idS11]
         }
         
         const _homework = new Homework(homework)
-        
+        idHo = _homework.id
         subject = {
             name: `name-${Math.random()}`,
             students:[idS11, idS22],
@@ -71,14 +71,15 @@ describe('logic - unregister homework', () => {
         const subject1 = await Subject.create(subject)
         idSub = subject1.id
         idHo = subject1.homeworks[0].id
+        debugger
     })
 
     it('should succeed on correct data', async () => {
-
-        const _subject = await unregisterHomework(idSub, idHo)
-
+debugger
+        const _subject = await addDelivery(idSub, idHo, idS22)
+debugger
         expect(_subject).to.exist
-        expect(_subject.homeworks.length).to.equal(0)
+        expect(_subject.homeworks[0].delivery.length).to.equal(2)
 
     })
 
