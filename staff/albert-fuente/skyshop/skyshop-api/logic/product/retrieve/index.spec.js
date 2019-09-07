@@ -34,6 +34,16 @@ describe('logic - retrieve product', () => {
 
     }
     )
+    it('should throw an error with a wrong id',async () =>{
+        try{
+            await retrieve("5d5fe532b4f3f827e6fc64f8")
+
+        }catch(error){
+            expect(error).to.exist
+            expect(error.message).to.equal(`Product with id 5d5fe532b4f3f827e6fc64f8 does not exist.`)
+
+        }
+    })
 
     it('should fail on empty Product ID', () =>
         expect(() =>

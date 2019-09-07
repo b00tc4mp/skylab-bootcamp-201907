@@ -41,7 +41,7 @@ describe('logic - retrieve products', () => {
             await retrieveProducts("xxx")
         } catch (error) {
             expect(error).to.exist
-            expect(error.message).to.equal(`Card with id ${title} does not exist.`)
+            expect(error.message).to.equal(`Product with id ${title} does not exist.`)
         }
     })
     

@@ -43,5 +43,21 @@ describe('logic - retrieve user', () => {
 
         }
     })
+
+    it('should fail on empty id', () =>
+    expect(() =>
+        retrieve( "")
+    ).to.throw('id is empty or blank')
+    )
+    it('should fail on undefined id', () =>
+        expect(() =>
+            retrieve( undefined)
+        ).to.throw(`id with value undefined is not a string`)
+    )
+    it('should fail on wrong id', () =>
+    expect(() =>
+        retrieve( 123)
+    ).to.throw(`id with value 123 is not a string`)
+)
     after(() => database.disconnect())
 })

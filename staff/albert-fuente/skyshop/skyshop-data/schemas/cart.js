@@ -1,12 +1,12 @@
 const { Schema } = require('mongoose')
 
 module.exports = new Schema({
-    number: {
+    productId: {
         type: Number,
         required: true
     },
-    expiry: {
-        type: Date,
-        required: true
-    }
+    quantity: {
+        type:Number,
+        required:true
+    } 
 })

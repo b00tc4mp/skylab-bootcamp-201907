@@ -18,8 +18,4 @@ module.exports = function (id, password) {
 
     })()
 
-    /* return User.deleteOne({ _id: id, password })
-        .then(result => {
-            if (!result.deletedCount) throw new Error(`wrong credentials`)
-        }) */
 }

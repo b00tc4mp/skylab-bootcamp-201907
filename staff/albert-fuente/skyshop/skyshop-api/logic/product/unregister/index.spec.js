@@ -11,7 +11,6 @@ describe('logic - delete product', () => {
     before(() => database.connect(DB_URL_TEST)) //nuevo
     
     beforeEach(async() => {
-
                 title = `title-${Math.random()}`
                 image = `image-${Math.random()}`
                 description = `description-${Math.random()}`
@@ -31,22 +30,34 @@ describe('logic - delete product', () => {
         const productResult=await unregister(productId)   
                              
                 expect(productResult).not.to.exist
-            }
-    
-        
+            }        
     )
 
         it('should fail if there is no product',async () =>{
         let x= '5d5d5530531d455f75da9fF9'
         try{
             unregister( x)
-
-
         }catch(error){
             expect(error).to.exist
                 expect(error.message).to.equal(`Product with id ${x} does not exist.`)
         }
     }) 
+
+        it('should fail on empty Product ID', () =>
+        expect(() =>
+        unregister('')
+        ).to.throw('productId is empty or blank')
+    )
+    it('should fail on undefined Product ID', () =>
+        expect(() =>
+        unregister( undefined)
+        ).to.throw(`productId with value undefined is not a string`)
+    )
+    it('should fail on wrong data type for Product ID', () =>
+        expect(() =>
+        unregister( 123)
+        ).to.throw(`productId with value 123 is not a string`)
+    )
     after(() => database.disconnect())
 })
 

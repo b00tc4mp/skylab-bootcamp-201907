@@ -4,7 +4,6 @@ const { validate } = require('skyshop-utils')
 /**
  * 
  * @param {*} userId 
- * @param {*} productId 
  * 
  * @returns {Promise}
  */

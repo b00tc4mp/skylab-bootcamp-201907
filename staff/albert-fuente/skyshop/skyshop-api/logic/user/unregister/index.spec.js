@@ -27,17 +27,7 @@ describe('logic - unregister user', () => {
         expect(result).not.to.exist
         const user=await User.findById(id)  
         expect(user).not.to.exist
-    }
-/*         logic.user.unregister(id, password)
-            .then(result => {
-                expect(result).not.to.exist
-
-                return User.findById(id)
-            })
-            .then(user => {
-                expect(user).not.to.exist
-            }) */
-    )
+    })
 
     it('should fail on unexisting user',async () =>{
         try{
@@ -59,6 +49,33 @@ describe('logic - unregister user', () => {
 
         }
     })
+
+    it('should fail on empty id', () =>
+    expect(() =>
+        unregister( '',password)
+    ).to.throw('id is empty or blank')
+    )
+    it('should fail on undefined id', () =>
+        expect(() =>
+            unregister( undefined,password)
+        ).to.throw(`id with value undefined is not a string`)
+    )
+    it('should fail on wrong id', () =>
+    expect(() =>
+        unregister( 123,password)
+    ).to.throw(`id with value 123 is not a string`)
+)
+
+    it('should fail on empty password', () =>
+    expect(() =>
+        unregister( id,'')
+    ).to.throw('password is empty or blank')
+    )
+    it('should fail on undefined password', () =>
+        expect(() =>
+            unregister( id,undefined)
+        ).to.throw(`password with value undefined is not a string`)
+    )
 
     after(() => database.disconnect())
 })

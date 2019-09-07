@@ -43,9 +43,7 @@ describe('logic - update user', () => {
             expect(user.password).to.equal(body.password)
             expect(user.extra).not.to.exist
   
-    }
-        
-    )
+    })
 
     it('should fail on non-existing user', async () => {
         id = '5d5d5530531d455f75da9fF9'
@@ -57,6 +55,30 @@ describe('logic - update user', () => {
             expect(error.message).to.equal(`User with id ${id} does not exist.`)
         }
     })
+
+    it('should fail on non-existing body', async () => {
+        
+        try{
+            await update(id, )
+             throw new Error('should not reach this point') 
+
+        }catch(error){
+            expect(error.message).to.equal(`No field to update provided`)
+        }
+    })
+
+    it('should fail on empty id', () =>
+    expect(() =>
+        update("", body)
+    ).to.throw('id is empty or blank')
+    )
+    it('should fail on undefined id', () =>
+        expect(() =>
+            update(undefined, body)
+        ).to.throw(`id with value undefined is not a string`)
+    )
+
+
 
     after(() => database.disconnect())
 })

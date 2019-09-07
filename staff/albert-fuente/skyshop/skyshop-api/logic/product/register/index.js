@@ -20,7 +20,7 @@ const {models:{Product}}=require('skyshop-data')
      validate.string(title,'title')
      validate.string(image,'image')
      validate.string(description,'description')
-     //validate.string(size,'size')
+     validate.array(size,'size')
      validate.string(color,'color')
      validate.number(price,'price')
 

@@ -4,6 +4,7 @@ const { expect } = require('chai')
 //const logic = require('../../.') no llamas a la logica llamas al metodo
 const register=require('.')
 const { database,models:{User} } = require('skyshop-data')
+const bcrypt = require('bcryptjs')
 //const mongoose = require('mongoose')
 
 const{env: {DB_URL_TEST}}=process //nuevo
@@ -31,7 +32,10 @@ describe('logic - register user', () => {
             expect(user.name).to.equal(name)
             expect(user.surname).to.equal(surname)
             expect(user.email).to.equal(email)
-            expect(user.password).to.equal(password)
+            //expect(user.password).to.equal(password)
+
+            const match = await bcrypt.compare(password, user.password)
+            expect(match).to.be.true
     })
     it('should fail if the mail already exists', async () => {
         try{
@@ -52,6 +56,11 @@ describe('logic - register user', () => {
             register( undefined,surname,email,password)
         ).to.throw(`name with value undefined is not a string`)
     )
+    it('should fail on wrong name', () =>
+    expect(() =>
+        register( 124,surname,email,password)
+    ).to.throw(`name with value 124 is not a string`)
+)
 
     it('should fail on empty surname', () =>
     expect(() =>
@@ -63,27 +72,32 @@ describe('logic - register user', () => {
             register( name,undefined,email,password)
         ).to.throw(`surname with value undefined is not a string`)
     )
+    it('should fail on wrong surname', () =>
+    expect(() =>
+        register( name,124,email,password)
+    ).to.throw('name with value 124 is not a string')
+    )
 
-/*     it('should fail on empty email', () =>
+  it('should fail on empty email', () =>
     expect(() =>
         register( name,surname,'',password)
-    ).to.throw('email is empty or blank')
+    ).to.throw('username is empty or blank')
     )
     it('should fail on undefined email', () =>
         expect(() =>
             register( name,surname,undefined,password)
-        ).to.throw(`email with value undefined is not a string`)
+        ).to.throw(`username with value undefined is not a string`)
     )
 
     it('should fail on empty password', () =>
     expect(() =>
         register( name,surname,email,'')
-    ).to.throw('email is empty or blank')
-    )
+    ).to.throw('password is empty or blank')
+    )  
     it('should fail on undefined password', () =>
         expect(() =>
             register( name,surname,email,undefined)
         ).to.throw(`password with value undefined is not a string`)
-    ) */
+    ) 
     after(() => database.disconnect())
 })
