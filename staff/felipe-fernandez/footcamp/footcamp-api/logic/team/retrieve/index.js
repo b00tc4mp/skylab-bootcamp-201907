@@ -40,7 +40,7 @@ module.exports = function(id, code, name) {
         points = findTeam.points
         owner = findTeam.owner.toString()
         findTeam.players.forEach(element => {
-            players.push(element)
+            players.push(element.toString())
             
         })
         

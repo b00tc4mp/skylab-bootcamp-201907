@@ -1,6 +1,6 @@
 const {validate} = require('footcamp-utils')
 const { models: { User } } = require('footcamp-data')
- 
+const bcrypt = require('bcryptjs')
 
 /**
  * Unregisters a user by their email
@@ -11,15 +11,24 @@ const { models: { User } } = require('footcamp-data')
  * 
  * @returns {Promise}
 */
-module.exports = function(id, email) {
+module.exports = function(id, email, password) {
 
     validate.string(id, 'id')
     validate.string(email, 'email')
+    validate.email(email, 'email')
     validate.string(password, 'password')
     
     return (async()=>{
-        const user =  await User.deleteOne({ _id: id, email })
-        if (!user.deletedCount) throw Error(`There was an error unregistering the user`)
+
+        const user = await User.findOne({ email })
+        if (!user) throw Error('Wrong credentials.')
+        
+        const match = await bcrypt.compare(password, user.password)
+        if (!match) throw Error('Wrong credentials')
+
+        const userDeleted =  await User.deleteOne({ email })
+        if (userDeleted.deletedCount===0) throw Error(`There was an error unregistering the user`)
+       
        
     })()
 

@@ -34,8 +34,8 @@ module.exports = function(id, code, name) {
         //if the team exists extract 11 players: 1 goalkeeper, 4 defenders, 4 midfielders, 2 strikers
 debugger
         //get all the players in the team
-        let players = await Promise.all(team.players.map((idPlayer) =>
-            Player.findOne({id: idPlayer})
+        let players = await Promise.all(team.players.map((id_player) =>
+            Player.findOne({_id: id_player})
          ))
 
         //select all the players by position and splice 1 goalkeeper, 4 defenders, 4 midfielders, 2 strikers
@@ -48,11 +48,13 @@ debugger
          //extract the id of the players
         
          let idsGoalkeeper = [], idsDefender=[], idsMidfielder=[], idsStriker= []
-         idsGoalkeeper = goalkeepers.map((player)=> player.id)
-         idsDefender = defenders.map((player)=> player.id)
-         idsMidfielder = midfielders.map((player)=> player.id)
-         idsStriker = strikers.map((player)=> player.id)
+         idsGoalkeeper = goalkeepers.map((player)=> player._id.toString())
+         idsDefender = defenders.map((player)=> player._id.toString())
+         idsMidfielder = midfielders.map((player)=> player._id.toString())
+         idsStriker = strikers.map((player)=> player._id.toString())
  
+                
+
         debugger
         let lineup=[...idsGoalkeeper, ...idsDefender, ...idsMidfielder, ...idsStriker]
         
@@ -63,7 +65,7 @@ debugger
          await league.save()
          await team.save()
  
-         return team.players
+         return lineup
 
 
     })()

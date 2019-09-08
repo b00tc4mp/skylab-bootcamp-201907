@@ -16,6 +16,7 @@ database.connect(DB_URL)
         const app = express()    
 
         app.use(cors())
+        app.use(express.static('public'))
 
         app.use('/api', routes)
 

@@ -14,7 +14,7 @@ module.exports = function(id, code, player_id) {
 
     validate.string(id, 'id')
     validate.string(code, 'code')
-    validate.number(player_id, 'player id')
+    validate.string(player_id, 'player id')
    
    
     return (async () => {
@@ -24,13 +24,14 @@ module.exports = function(id, code, player_id) {
 
         if (!user) throw new Error(`User with id ${id} does not exist`)
 
-        const player = await Player.findOne({ player_id}).lean()
+        const player = await Player.findOne({ _id: player_id}).lean()
         debugger
         if (!player) throw Error(`Player with id ${ player_id } does not exist`)
         
         player.id = player._id.toString()
         delete player._id
 
+        
         return player
         
     })()

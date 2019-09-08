@@ -12,7 +12,7 @@ describe('logic - retrieve all league teams ', () => {
     before(() =>  database.connect(DB_URL_TEST))
 
     let name, surname, email, password, nameTeam, nameLeague, points, code, nameTeam2, name2, surname2, email2, password2, id_player2, id_player
-    let namePlayer, namePlayer2,  surnamePlayer, surnamePlayer2, player_id, player_id2, real_team, real_team2, position, position2, points_per_game, points_per_game2
+    let namePlayer, namePlayer2,  surnamePlayer, surnamePlayer2, playerId, playerId2, real_team, real_team2, position, position2, points_per_game, points_per_game2
     let total_points, total_points2, yellow_cards, yellow_cards2, red_cards, red_cards2, goals, goals2, minutes, minutes2, photo, cost, cost2
 
     beforeEach(() => {
@@ -33,7 +33,7 @@ describe('logic - retrieve all league teams ', () => {
         //create player 1
         namePlayer = `name-${Math.random()}`
         surnamePlayer = `surname-${Math.random()}`
-        player_id = number(1111,2241111)
+        playerId = number(1111,2241111)
         real_team = `realTeam-${Math.random()}`
         position = 1
         points_per_game = number(1111,2241111)
@@ -46,7 +46,7 @@ describe('logic - retrieve all league teams ', () => {
         //create player 2
         namePlayer2 = `name-${Math.random()}`
         surnamePlayer2 = `surname-${Math.random()}`
-        player_id2 = number(1111,2241111)
+        playerId2 = number(1111,2241111)
         real_team2 = `realTeam-${Math.random()}`
         position2 = 2
         points_per_game2 = number(1111,2241111)
@@ -78,8 +78,8 @@ describe('logic - retrieve all league teams ', () => {
             league.participants.push(users)
             league.participants.push(users2)
 
-            const player = new Player({name: namePlayer, surname: surnamePlayer, player_id, real_team, position, points_per_game, total_points, yellow_cards, red_cards,  goals, minutes, cost  })
-            const player2 = new Player({name: namePlayer2, surname: surnamePlayer2, player_id: player_id2, real_team: real_team2 , position: position2,   points_per_game:  points_per_game2, total_points: total_points2, yellow_cards: yellow_cards2, red_cards: red_cards2,  goals: goals2, minutes: minutes2, cost: cost2  })
+            const player = new Player({name: namePlayer, surname: surnamePlayer, playerId, real_team, position, points_per_game, total_points, yellow_cards, red_cards,  goals, minutes, cost  })
+            const player2 = new Player({name: namePlayer2, surname: surnamePlayer2, playerId: playerId2, real_team: real_team2 , position: position2,   points_per_game:  points_per_game2, total_points: total_points2, yellow_cards: yellow_cards2, red_cards: red_cards2,  goals: goals2, minutes: minutes2, cost: cost2  })
             id_player = player.id
             id_player2 = player2.id
 

@@ -32,12 +32,13 @@ module.exports = function(id, code, name) {
 
         if (findTeam) throw Error(`Team with name ${ name } already exist`)
         
-        //if the user is not in the league he cannnot create a team in this league
+        //if the user is not in the league is not possible to  create a team
         if (!(league.participants.includes(user.id))) throw Error(`You haven't joined the league with code ${code} yet`)
 
-        //TODO
-        //not possible to create a team in the league if the user has one team created
-        if(league.team.includes({owner: user.id})) throw Error(`You cannot create more than one tea in this league`)
+        // debugger
+        // //TODO
+        // //not possible to create a team in the league if the user has one team created
+        // if(league.team.includes({owner: user.id})) throw Error(`You cannot create more than one tea in this league`)
               
         const team = new Team({code, name})
     
@@ -100,38 +101,32 @@ module.exports = function(id, code, name) {
         //extract the id of the players
         debugger
         let idsGoalkeeper = [], idsDefender=[], idsMidfielder=[], idsStriker= []
-        idsGoalkeeper = goalkeeper.map((player)=> {
-            player._id.toString(),
-            player.id
-        })
+        idsGoalkeeper = goalkeeper.map((player)=>  player._id.toString())
 
-        idsDefender = defender.map((player)=> {
-            player._id.toString(),
-            player.id})
+        idsDefender = defender.map((player)=>  player._id.toString() )
 
-        idsMidfielder = midfielder.map((player)=> {
-            player._id.toString(),
-            player.id
-        })
-
-        idsStriker = striker.map((player)=> {
-            player._id.toString(),
-            player.id
-        })
+        idsMidfielder = midfielder.map((player)=>  player._id.toString())
+           
+        idsStriker = striker.map((player)=> player._id.toString())
+       
 
         //put the ids into an array
        let initialTeam=[...idsGoalkeeper, ...idsDefender, ...idsMidfielder, ...idsStriker]
-
+      
+   
         //insert all the ids in the array of players of the team 
-        initialTeam.forEach((element, i) => {
+        initialTeam.forEach((element) => {
             team.players.push(element)
         })
-       
+
+
         
-        await league.save()
+       
         await team.save()
+        await league.save()
+      
  
-        return team.players
+        return initialTeam
 
                  
 

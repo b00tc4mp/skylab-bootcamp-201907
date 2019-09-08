@@ -28,7 +28,7 @@ describe('logic - retrieve team', () => {
         //create player 1
         namePlayer = `name-${Math.random()}`
         surnamePlayer = `surname-${Math.random()}`
-        player_id = number(1111,2241111)
+        playerId = number(1111,2241111)
         real_team = `realTeam-${Math.random()}`
         position = number(1111,2241111)
         points_per_game = number(1111,2241111)
@@ -41,7 +41,7 @@ describe('logic - retrieve team', () => {
         //create player 2
         namePlayer2 = `name-${Math.random()}`
         surnamePlayer2 = `surname-${Math.random()}`
-        player_id2 = number(1111,2241111)
+        playerId2 = number(1111,2241111)
         real_team2 = `realTeam-${Math.random()}`
         position2 = number(1111,2241111)
         points_per_game2 = number(1111,2241111)
@@ -65,15 +65,16 @@ describe('logic - retrieve team', () => {
 
             const league= new League({id, name: nameLeague, code})
 
-            const player = new Player({name: namePlayer, surname: surnamePlayer, player_id, real_team, position, points_per_game, total_points, yellow_cards, red_cards,  goals, minutes, cost  })
-            const player2 = new Player({name: namePlayer2, surname: surnamePlayer2, player_id: player_id2, real_team: real_team2 , position: position2,   points_per_game:  points_per_game2, total_points: total_points2, yellow_cards: yellow_cards2, red_cards: red_cards2,  goals: goals2, minutes: minutes2, cost: cost2  })
-            
+            const player = new Player({name: namePlayer, surname: surnamePlayer, playerId, real_team, position, points_per_game, total_points, yellow_cards, red_cards,  goals, minutes, cost  })
+            const player2 = new Player({name: namePlayer2, surname: surnamePlayer2, playerId: playerId2, real_team: real_team2 , position: position2,   points_per_game:  points_per_game2, total_points: total_points2, yellow_cards: yellow_cards2, red_cards: red_cards2,  goals: goals2, minutes: minutes2, cost: cost2  })
+            idPlayer = player.id
+            idPlayer2 = player2.id
 
             const team = new Team({id, name: nameTeam, points})
             team.owner = id
             
-            team.players.push(player_id)
-            team.players.push(player_id2)
+            team.players.push(idPlayer)
+            team.players.push(idPlayer2)
             
             await users.save()
             await league.save()

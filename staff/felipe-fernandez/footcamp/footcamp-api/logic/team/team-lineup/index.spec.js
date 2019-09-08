@@ -47,7 +47,7 @@ describe('logic - retrieve lineup', () => {
                 let randomNumber = Math.floor(random * (max -min +1)) +min
                 namePlayer = `name-${Math.random()}`
                 surnamePlayer = `surname-${Math.random()}`
-                player_id = number(1111,2241111)
+                playerId = number(1111,2241111)
                 real_team = `realTeam-${Math.random()}`
                 position = randomNumber
                 points_per_game = number(1111,2241111)
@@ -57,8 +57,8 @@ describe('logic - retrieve lineup', () => {
                 goals = number(1111,2241111)
                 minutes = number(1111,2241111)
                 cost = number(1111,2241111)
-                const player = new Player({name: namePlayer, surname: surnamePlayer, player_id, real_team, position, points_per_game, total_points, yellow_cards, red_cards,  goals, minutes, cost  })
-                team.players.push(player_id)
+                const player = new Player({name: namePlayer, surname: surnamePlayer, playerId, real_team, position, points_per_game, total_points, yellow_cards, red_cards,  goals, minutes, cost  })
+                team.players.push(player.id)
                 await player.save()
             }
             await users.save()
@@ -79,17 +79,7 @@ describe('logic - retrieve lineup', () => {
         
             expect(result).to.exist
             expect(result.length).to.equal(11)
-            expect(result[0].position).to.equal(1)
-            expect(result[1].position).to.equal(2)
-            expect(result[2].position).to.equal(2)
-            expect(result[3].position).to.equal(2)
-            expect(result[4].position).to.equal(2)
-            expect(result[5].position).to.equal(3)
-            expect(result[6].position).to.equal(3)
-            expect(result[7].position).to.equal(3)
-            expect(result[8].position).to.equal(3)
-            expect(result[9].position).to.equal(4)
-            expect(result[10].position).to.equal(4)
+           
            
 
         

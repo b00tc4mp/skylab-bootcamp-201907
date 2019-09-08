@@ -12,6 +12,7 @@ module.exports = {
     createTeam: require('./team/create'),
     retrieveTeam: require('./team/retrieve'),
     lineUpTeam: require('./team/team-lineup'),
+    deleteTeam: require('./team/delete'),
     retrievePlayer: require('./player/retrieve')
     
     

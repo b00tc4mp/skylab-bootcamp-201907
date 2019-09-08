@@ -14,7 +14,8 @@ module.exports = function(id, fieldsToUpdate) {
   
     return (async () => {
 
-        const user = await User.findByIdAndUpdate(id, { $set: fieldsToUpdate })
+        const user = await User.findByIdAndUpdate(id, { $set: fieldsToUpdate})
+
         if (!user) throw Error(`User with id ${id} does not exist.`)
 
               

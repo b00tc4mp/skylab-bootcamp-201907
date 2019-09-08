@@ -3,6 +3,7 @@ require('dotenv').config()
 const {expect} = require('chai')
 const logic = require('../../../logic')
 const { database, models: { User } } = require('footcamp-data')
+const bcrypt = require('bcryptjs')
 
 const { env: { DB_URL_TEST }} = process
 
@@ -19,27 +20,28 @@ describe('logic - unregister user', () => {
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
         await User.deleteMany()
-        const user = await User.create({ name, surname, email, password })
-        id = user.id
+        const users = await User.create({ name, surname, email, password : await bcrypt.hash(password,10) })
+        id = users.id
     })
     it('should succeed on correct data', async () => {
+        
         const result = await logic.unregisterUser(id, email, password)
-        expect(result).not.to.exist
+            expect(result).not.to.exist
         const userFind = await User.findById(id)
-        expect(userFind).not.to.exist
+            expect(userFind).not.to.exist
            
         })
 
        
 
     it('should fail on unexisting user', async () => {
-        id= '5d5d5530531d455f75da9fF9'
+        email = "fake@fake.com"
         try {
             await logic.unregisterUser(id, email, password)
             throw Error('should not reach this point') 
         }
         catch({message}){
-            expect(message).to.equal('There was an error unregistering the user')
+            expect(message).to.equal('Wrong credentials.')
         }
         
     })
@@ -47,12 +49,13 @@ describe('logic - unregister user', () => {
 
     it('should fail on existing user, but wrong password', async () => {
         password = 'wrong password'
+        await bcrypt.hash(password,10)
         try {
            await logic.unregisterUser(id, email, password)
            throw Error('should not reach this point') 
         }
         catch({message}){
-            expect(message).to.equal('There was an error unregistering the user')
+            expect(message).to.equal('Wrong credentials')
         }
         
     })

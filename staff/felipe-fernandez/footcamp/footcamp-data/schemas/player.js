@@ -12,7 +12,7 @@ module.exports = new Schema({
         required: true
     },
 
-    player_id: {
+    playerId: {
         type: Number,
         required: true
     },

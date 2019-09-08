@@ -14,6 +14,6 @@ module.exports = new Schema({
 
     owner: { type: ObjectId, ref: 'User'},
 
-    players: [{ type: Number, ref: 'Player'}]
+    players: [{ type: ObjectId, ref: 'Player'}]
 })
 

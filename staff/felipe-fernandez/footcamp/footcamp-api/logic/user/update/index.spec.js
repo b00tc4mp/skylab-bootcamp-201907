@@ -52,13 +52,13 @@ describe('logic-update user', ()=>{
 
         
      it('should fail on unexisting user', async () => {
-        id= '5d5d5530531d455f75da9fF9'
+        id="5d772fb62bb54120d08d7a7b"
         try {
-            await logic.unregisterUser(id, email, password)
+            await logic.updateUser(id, {name: 'newName', surname: 'newSurname', email: 'new@email.com', password })
             throw Error('should not reach this point') 
         }
         catch({message}){
-            expect(message).to.equal('There was an error unregistering the user')
+            expect(message).to.equal(`User with id ${id} does not exist.`)
         }
         
      })
