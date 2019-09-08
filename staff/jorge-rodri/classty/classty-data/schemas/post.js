@@ -4,6 +4,6 @@ const { Schema, SchemaTypes: { ObjectId } } = mongoose
 const Message = require('./message')
 
 module.exports = new Schema({
-    subject: {type: ObjectId, ref:'Subject'},
+    user: {type: ObjectId, ref:'User'},
     message: [Message]
  })
