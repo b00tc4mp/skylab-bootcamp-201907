@@ -1,5 +1,5 @@
-const { validate } = require('../../../../e-cohabitat-utils')
-const { models: { User, Task } } = require('../../../../e-cohabitat-data')
+const { validate } = require('utils')
+const { models: { User, Task } } = require('data')
 
 /**
  * Deletes a task

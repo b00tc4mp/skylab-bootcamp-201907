@@ -6,7 +6,7 @@ module.exports = (req, res) => {
 
     try {
         logic.retrieveAllTasks(id)
-            .then(spaces => res.json({ message: 'tasks retrieved correctly', spaces }))
+            .then(userTasks => res.json({ message: 'tasks retrieved correctly', userTasks }))
             .catch(({ message }) => res.status(404).json({ error: message }))
     } catch ({ message }) {
         res.status(404).json({ error: message })

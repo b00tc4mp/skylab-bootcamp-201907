@@ -58,8 +58,13 @@ describe('logic - remove task companion', () => {
         newTask.taskSpace.push(spaceId)
         newTask.companions.push(companionIdOne, companionIdTwo)
         taskId = newTask._id.toString()
-
         await newTask.save()
+
+        newUserOne.tasks.push(taskId)
+        await newUserOne.save()
+
+        newUserTwo.tasks.push(taskId)
+        await newUserTwo.save()
     })
 
     it('should succeed on correct data', async () => {

@@ -1,9 +1,10 @@
-const { validate } = require('../../../../e-cohabitat-utils')
-const { models: { User, Task, Comment } } = require('../../../../e-cohabitat-data')
+const { validate } = require('utils')
+const { models: { User, Task, Comment } } = require('data')
 
 /**
  * Posts a comment
  * 
+ * @param {*} authorId 
  * @param {*} author 
  * @param {*} posted 
  * @param {*} text 
@@ -12,22 +13,23 @@ const { models: { User, Task, Comment } } = require('../../../../e-cohabitat-dat
  * @returns {Promise}
  */
 
-module.exports = function(author, posted, text, taskId) {
+module.exports = function(authorId, author, posted, text, taskId) {
 
-    validate.string(author, 'author id')
+    validate.string(authorId, 'author id')
+    validate.string(author, 'author username')
     validate.date(posted, 'comment date')
     validate.string(text, 'comment text')
     validate.string(taskId, 'task id')
 
     return (async () => {
         
-        const user = await User.findById(author) 
+        const user = await User.findById(authorId) 
         if (!user) throw Error('user does not exist')
 
         const task = await Task.findById(taskId)
         if (!task) throw Error('task does not exist')
         
-        const comment = await Comment.create({ author, posted, text, taskId })
+        const comment = await Comment.create({ authorId, author, posted, text })
         task.comments.push(comment)
         await task.save()
         

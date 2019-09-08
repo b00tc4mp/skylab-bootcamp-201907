@@ -1,5 +1,5 @@
-const { validate } = require('../../../../e-cohabitat-utils')
-const { models: { User } } = require('../../../../e-cohabitat-data')
+const { validate } = require('utils')
+const { models: { User } } = require('data')
 
 /**
  * Unregisters an existing user account.

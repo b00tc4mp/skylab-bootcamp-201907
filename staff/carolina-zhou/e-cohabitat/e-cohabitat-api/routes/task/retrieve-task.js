@@ -2,11 +2,11 @@ const logic = require('../../logic')
 
 module.exports = (req, res) => {
 
-    const { params: { taskId } } = req
+    const { params: { id, spaceId, taskId } } = req
 
     try {
-        logic.retrieveTask(taskId)
-            .then(space => res.json({ message: 'task retrieved correctly', space }))
+        logic.retrieveTask(id, spaceId, taskId)
+            .then(task => res.json({ message: 'task retrieved correctly', task }))
             .catch(({ message }) => res.status(404).json({ error: message }))
     } catch ({ message }) {
         res.status(404).json({ error: message })

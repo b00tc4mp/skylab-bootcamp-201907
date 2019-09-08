@@ -10,8 +10,8 @@ describe('logic - delete comment', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
-    let author, posted, text, taskId
-    let username, name, surname, email, password, userId
+    let authorId, author, posted, text, taskId
+    let username, name, surname, email, password, spaces, tasks, userId
     let taskName, taskType, description, date, taskSpace, companions, comments
 
     beforeEach(async() => {   
@@ -21,7 +21,7 @@ describe('logic - delete comment', () => {
         email = `email-${Math.random()}@email.com`
         password = `123-${Math.random()}`
 
-        const user = await User.create({ username, name, surname, email, password })
+        const user = await User.create({ username, name, surname, email, password, spaces, tasks })
         userId = user._id.toString()
 
         const taskTypeArray = ['particular', 'collective', 'maintenance']
@@ -32,14 +32,19 @@ describe('logic - delete comment', () => {
 
         const task = await Task.create({ taskName, taskType, description, date, taskSpace, companions, comments })
 
-        author = userId
+        authorId = userId
+        author = username
         posted = new Date
         text = `comment-${Math.random()}`
         taskId = task._id.toString()
 
-        const newComment = await Comment.create({ author, posted, text })
+        const newComment = await Comment.create({ authorId, author, posted, text })
         commentId = newComment._id.toString()
 
+        user.tasks.push(taskId)
+        await user.save()
+
+        task.companions.push(userId)
         task.comments.push(newComment)
         await task.save()
     })
@@ -62,10 +67,9 @@ describe('logic - delete comment', () => {
         }
     })
 
-    
     it('should fail on unexistent task', async () => {
         try {
-            await logic.deleteComment(userId, '5d5d5530531d455f75da9fF9', commentId)
+            await logic.deleteComment(userId, '5d5d5566531d455f75da9fF9', commentId)
             
             throw Error('should not reach this point')
         } catch({message}) {

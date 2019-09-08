@@ -1,19 +1,21 @@
-const { validate } = require('../../../../e-cohabitat-utils')
-const { models: { User, Space } } = require('../../../../e-cohabitat-data')
+const { validate } = require('utils')
+const { models: { User, Space } } = require('data')
 
 /**
  * Unregisters a space
  * 
  * @param {string} userId
  * @param {string} spaceId 
+ * @param {string} passcode 
  * 
  * @returns {Promise}
 */
 
-module.exports = function(userId, spaceId) {
+module.exports = function(userId, spaceId, passcode) {
 
     validate.string(userId, 'user id')
     validate.string(spaceId, 'space id')
+    validate.string(passcode, 'space passcode')
 
     return (async () => {
         const user = await User.findById(userId)
@@ -25,7 +27,7 @@ module.exports = function(userId, spaceId) {
         const space = user.spaces.find(space => space.toString() === spaceId)
         if(space === undefined) throw Error('this user is not a co-user of the space introduced')
 
-        const result = await Space.deleteOne({ _id: spaceId })
+        const result = await Space.deleteOne({ _id: spaceId, passcode })
         if (!result.deletedCount) throw Error('wrong data provided')
 
         user.spaces.splice(user.spaces.indexOf(space), 1)

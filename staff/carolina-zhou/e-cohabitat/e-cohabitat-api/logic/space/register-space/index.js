@@ -1,5 +1,5 @@
-const { validate } = require('../../../../e-cohabitat-utils')
-const { models: { User, Space } } = require('../../../../e-cohabitat-data')
+const { validate } = require('utils')
+const { models: { User, Space } } = require('data')
 
 /**
  * Registers a space

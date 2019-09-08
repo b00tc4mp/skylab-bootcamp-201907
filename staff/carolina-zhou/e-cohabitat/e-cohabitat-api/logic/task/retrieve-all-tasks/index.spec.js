@@ -61,7 +61,7 @@ describe('logic - retrieve all tasks', () => {
         expect(tasks).to.exist
         expect(tasks).not.to.be.empty
 
-        expect(tasks[0].id.toString()).to.equal(taskId)
+        expect(tasks.toString()).to.equal(taskId)
     })
 
     it('should fail on empty id', async () => {

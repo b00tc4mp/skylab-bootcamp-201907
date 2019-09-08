@@ -1,5 +1,5 @@
-const { validate } = require('../../../../e-cohabitat-utils')
-const { models: { User } } = require('../../../../e-cohabitat-data')
+const { validate } = require('utils')
+const { models: { User } } = require('data')
 
 /**
  * Retrieves all the tasks added by a particular user
@@ -18,15 +18,14 @@ module.exports = function(userId) {
         const user = await User.findById(userId)
         if (!user) throw Error(`user with id ${userId} does not exist`)
 
-        if (user.tasks.length === 0) throw Error(`this user does not have any tasks`) 
+        const userTasks = user.tasks
 
-        user.tasks.forEach(task => {
-            task.id = task._id.toString()
-            delete task._id
+        if (userTasks.length === 0) throw Error(`this user does not have any tasks`) 
 
-            return task        
+        userTasks.forEach(task => {
+            return task.id.toString()        
         })
 
-        return user.tasks
+        return userTasks
     })()
 }

@@ -1,5 +1,5 @@
-const { validate } = require('../../../../e-cohabitat-utils')
-const { models: { User, Space, Task } } = require('../../../../e-cohabitat-data')
+const { validate } = require('utils')
+const { models: { User, Space, Task } } = require('data')
 
 /**
  * Retrieves a task by its id

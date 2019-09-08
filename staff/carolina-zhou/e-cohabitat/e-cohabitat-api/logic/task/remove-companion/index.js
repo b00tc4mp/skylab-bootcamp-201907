@@ -1,5 +1,5 @@
-const { validate } = require('../../../../e-cohabitat-utils')
-const { models: { User, Task } } = require('../../../../e-cohabitat-data')
+const { validate } = require('utils')
+const { models: { User, Task } } = require('data')
 
 /**
  * Unregisters a task companion
@@ -22,10 +22,14 @@ module.exports = function(taskId, companionId) {
         const user = await User.findOne({ _id: companionId })
         if (!user) throw Error('wrong companion id provided')
 
-        const match = task.companions.find(user => user.toString() === companionId)
-        if (!match) throw Error(`user with id ${companionId} is not a task companion`)
+        const matchTask = user.tasks.find(task => task.toString() === taskId)
+        const matchCompanion = task.companions.find(user => user.toString() === companionId)
+        if ((matchTask === undefined) || (matchCompanion === undefined)) throw Error(`user with id ${companionId} is not a task companion`)
 
-        task.companions.splice(task.companions.indexOf(match), 1)
+        user.tasks.splice(user.tasks.indexOf(matchTask), 1)
+        await user.save()
+
+        task.companions.splice(task.companions.indexOf(matchCompanion), 1)
         await task.save()
         if (task.companions.length === 0) {
             const result = await task.deleteOne({ _id: taskId })

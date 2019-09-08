@@ -1,5 +1,5 @@
-const { validate } = require('../../../../e-cohabitat-utils')
-const { models: { User, Space, Task } } = require('../../../../e-cohabitat-data')
+const { validate } = require('utils')
+const { models: { User, Space, Task } } = require('data')
 
 /**
  * Adds a task companion
@@ -35,6 +35,9 @@ module.exports = function(taskId, spaceId, companionId) {
         
         task.companions.push(companionId)
         await task.save()
+
+        user.tasks.push(taskId)
+        await user.save()
 
         return task
     })()

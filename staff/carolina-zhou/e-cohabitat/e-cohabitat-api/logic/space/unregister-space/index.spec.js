@@ -42,7 +42,7 @@ describe('logic - unregister space', () => {
     })
 
     it('should succeed on correct data', async () => {
-        const result = await logic.unregisterSpace(userId, spaceId)
+        const result = await logic.unregisterSpace(userId, spaceId, passcode)
         expect(result).not.to.exist
 
         const space = await Space.findById(spaceId)
@@ -51,7 +51,7 @@ describe('logic - unregister space', () => {
 
     it('should fail on unexistent user', async () => {
         try {
-            await logic.unregisterSpace('5d5d5530531d455f75da9fF9', spaceId)
+            await logic.unregisterSpace('5d5d5530531d455f75da9fF9', spaceId, passcode)
             
             throw Error('should not reach this point')
         } catch({message}) {
@@ -61,7 +61,7 @@ describe('logic - unregister space', () => {
 
     it('should fail on unexistent space', async () => {
         try {
-            await logic.unregisterSpace(userId, '5d5d5530531d455f75da9fF9')
+            await logic.unregisterSpace(userId, '5d5d5530531d455f75da9fF9', passcode)
             
             throw Error('should not reach this point')
         } catch({message}) {
@@ -69,11 +69,21 @@ describe('logic - unregister space', () => {
         }
     })
 
+    it('should fail on wrong passcode', async () => {
+        try {
+            await logic.unregisterSpace(userId, spaceId, 'hahaha')
+            
+            throw Error('should not reach this point')
+        } catch({message}) {
+            expect(message).to.equal('wrong data provided')
+        }
+    })
+
     it('should fail on empty user id', async () => {
         userId = ' '
 
         try {
-            await logic.unregisterSpace(userId, spaceId)
+            await logic.unregisterSpace(userId, spaceId, passcode)
         } catch({ message }) {
             expect(message).to.equal('user id is empty or blank')
         }
@@ -83,7 +93,7 @@ describe('logic - unregister space', () => {
         userId = undefined
 
         try {
-            await logic.unregisterSpace(userId, spaceId)
+            await logic.unregisterSpace(userId, spaceId, passcode)
         } catch({ message }) {
             expect(message).to.equal("user id with value undefined is not a string")
         }
@@ -93,7 +103,7 @@ describe('logic - unregister space', () => {
         userId = 123
 
          try {
-            await logic.unregisterSpace(userId, spaceId)
+            await logic.unregisterSpace(userId, spaceId, passcode)
         } catch({ message }) {
             expect(message).to.equal("user id with value 123 is not a string")
         }
@@ -104,7 +114,7 @@ describe('logic - unregister space', () => {
         spaceId = ' '
 
         try {
-            await logic.unregisterSpace(userId, spaceId)
+            await logic.unregisterSpace(userId, spaceId, passcode)
         } catch({ message }) {
             expect(message).to.equal('space id is empty or blank')
         }
@@ -114,7 +124,7 @@ describe('logic - unregister space', () => {
         spaceId = undefined
 
         try {
-            await logic.unregisterSpace(userId, spaceId)
+            await logic.unregisterSpace(userId, spaceId, passcode)
         } catch({ message }) {
             expect(message).to.equal("space id with value undefined is not a string")
         }
@@ -124,11 +134,40 @@ describe('logic - unregister space', () => {
         spaceId = 123
 
          try {
-            await logic.unregisterSpace(userId, spaceId)
+            await logic.unregisterSpace(userId, spaceId, passcode)
         } catch({ message }) {
             expect(message).to.equal("space id with value 123 is not a string")
         }
-       
+    })
+
+    it('should fail on empty space passcode', async () => {
+        passcode = ' '
+
+        try {
+            await logic.unregisterSpace(userId, spaceId, passcode)
+        } catch({ message }) {
+            expect(message).to.equal('space passcode is empty or blank')
+        }
+    })
+
+    it('should fail on undefined space passcode', async () => {
+        passcode = undefined
+
+        try {
+            await logic.unregisterSpace(userId, spaceId, passcode)
+        } catch({ message }) {
+            expect(message).to.equal("space passcode with value undefined is not a string")
+        }
+    })
+     
+    it('should fail on wrong space passcode data type', async() => {
+        passcode = 123
+
+         try {
+            await logic.unregisterSpace(userId, spaceId, passcode)
+        } catch({ message }) {
+            expect(message).to.equal("space passcode with value 123 is not a string")
+        }
     })
 
     after(() => database.disconnect())

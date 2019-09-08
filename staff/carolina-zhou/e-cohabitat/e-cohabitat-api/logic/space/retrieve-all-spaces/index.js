@@ -1,5 +1,5 @@
-const { validate } = require('../../../../e-cohabitat-utils')
-const { models: { Space } } = require('../../../../e-cohabitat-data')
+const { validate } = require('utils')
+const { models: { Space } } = require('data')
 
 /**
  * Retrieves all the spaces shared by a particular user

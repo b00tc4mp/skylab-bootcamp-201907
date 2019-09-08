@@ -48,7 +48,7 @@ router.delete ('/users/:id/spaces/:spaceId/cousers/:coUserId', [tokenMiddleware]
 /* TASK */
 router.post('/users/:id/spaces/:spaceId/tasks', [tokenMiddleware], addTask)
 router.patch ('/users/:id/spaces/:spaceId/tasks/:taskId/companions/:companionId', [tokenMiddleware], addTaskCompanion)
-router.get('/users/:id/spaces/:spaceId/tasks/', [tokenMiddleware], retrieveAllTasks)
+router.get('/users/:id/spaces/:spaceId/tasks', [tokenMiddleware], retrieveAllTasks)
 router.get('/users/:id/spaces/:spaceId/tasks/:taskId', [tokenMiddleware], retrieveTask)
 router.patch ('/users/:id/spaces/:spaceId/tasks/:taskId', [tokenMiddleware], editTask)
 router.delete ('/users/:id/spaces/:spaceId/tasks/:taskId', [tokenMiddleware], deleteTask)

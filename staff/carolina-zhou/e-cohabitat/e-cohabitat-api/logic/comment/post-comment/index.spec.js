@@ -32,27 +32,29 @@ describe('logic - post comment', () => {
 
         const task = await Task.create({ taskName, taskType, description, date, taskSpace, companions, comments })
 
-        author = userId
+        authorId = userId
+        author = username
         posted = new Date
         text = `comment-${Math.random()}`
         taskId = task._id.toString()
     })
 
     it('should succeed on correct data', async () => {
-        const commentId = await logic.postComment(author, posted, text, taskId)
+        const commentId = await logic.postComment(authorId, author, posted, text, taskId)
         expect(commentId).to.exist
 
         const comment = await Comment.findOne({ _id: commentId })
         expect(comment).to.exist
         expect(comment.id).to.equal(commentId)
-        expect(comment.author.toString()).to.equal(author)
+        expect(comment.authorId.toString()).to.equal(authorId)
+        expect(comment.author).to.equal(author)
         expect(comment.posted).to.deep.equal(posted)
         expect(comment.text).to.equal(text)
     })
 
     it('should fail on unexistent user', async () => {
         try {
-            await logic.postComment('5d5d5530531d455f75da9fF9', posted, text, taskId)
+            await logic.postComment('5d5d5530531d455f75da9fF9', author, posted, text, taskId)
 
             throw Error('should not reach this point')
         } catch({message}) {
@@ -62,7 +64,7 @@ describe('logic - post comment', () => {
 
     it('should fail on unexistent task', async () => {
         try {
-            await logic.postComment(author, posted, text, '5d5d5530531d455f75da9fF9')
+            await logic.postComment(authorId, author, posted, text, '5d5d5530531d455f75da9fF9')
             
             throw Error('should not reach this point')
         } catch({message}) {
@@ -70,14 +72,45 @@ describe('logic - post comment', () => {
         }
     })
 
-    // author
+    // author id
+    it('should fail on empty author id', async () => {
+        authorId = ''
+
+        try {
+            await logic.postComment(authorId, author, posted, text, taskId)
+        } catch({message}) {
+            expect(message).to.equal('author id is empty or blank')
+        }
+    })
+
+    it('should fail on undefined author id', async () => {
+        authorId = undefined
+
+        try {
+            await logic.postComment(authorId, author, posted, text, taskId)
+        } catch({message}) {
+            expect(message).to.equal('author id with value undefined is not a string')
+        }
+    })
+
+    it('should fail on wrong author id data type', async () => {
+        authorId = 123
+
+        try {
+            await logic.postComment(authorId, author, posted, text, taskId)
+        } catch({message}) {
+            expect(message).to.equal('author id with value 123 is not a string')
+        }
+    })
+
+    // author username
     it('should fail on empty author id', async () => {
         author = ''
 
         try {
-            await logic.postComment(author, posted, text, taskId)
+            await logic.postComment(authorId, author, posted, text, taskId)
         } catch({message}) {
-            expect(message).to.equal('author id is empty or blank')
+            expect(message).to.equal('author username is empty or blank')
         }
     })
 
@@ -85,9 +118,9 @@ describe('logic - post comment', () => {
         author = undefined
 
         try {
-            await logic.postComment(author, posted, text, taskId)
+            await logic.postComment(authorId, author, posted, text, taskId)
         } catch({message}) {
-            expect(message).to.equal('author id with value undefined is not a string')
+            expect(message).to.equal('author username with value undefined is not a string')
         }
     })
 
@@ -95,9 +128,9 @@ describe('logic - post comment', () => {
         author = 123
 
         try {
-            await logic.postComment(author, posted, text, taskId)
+            await logic.postComment(authorId, author, posted, text, taskId)
         } catch({message}) {
-            expect(message).to.equal('author id with value 123 is not a string')
+            expect(message).to.equal('author username with value 123 is not a string')
         }
     })
 
@@ -106,7 +139,7 @@ describe('logic - post comment', () => {
         posted = ''
 
         try {
-            await logic.postComment(author, posted, text, taskId)
+            await logic.postComment(authorId, author, posted, text, taskId)
         } catch({message}) {
             expect(message).to.equal('comment date is empty or blank')
         }
@@ -116,7 +149,7 @@ describe('logic - post comment', () => {
         posted = undefined
 
         try {
-            await logic.postComment(author, posted, text, taskId)
+            await logic.postComment(authorId, author, posted, text, taskId)
         } catch({message}) {
             expect(message).to.equal('comment date with value undefined is not a date')
         }
@@ -126,7 +159,7 @@ describe('logic - post comment', () => {
         posted = 123
 
         try {
-            await logic.postComment(author, posted, text, taskId)
+            await logic.postComment(authorId, author, posted, text, taskId)
         } catch({message}) {
             expect(message).to.equal('comment date with value 123 is not a date')
         }
@@ -137,7 +170,7 @@ describe('logic - post comment', () => {
         text = ''
 
         try {
-            await logic.postComment(author, posted, text, taskId)
+            await logic.postComment(authorId, author, posted, text, taskId)
         } catch({message}) {
             expect(message).to.equal('comment text is empty or blank')
         }
@@ -147,7 +180,7 @@ describe('logic - post comment', () => {
         text = undefined
 
         try {
-            await logic.postComment(author, posted, text, taskId)
+            await logic.postComment(authorId, author, posted, text, taskId)
         } catch({message}) {
             expect(message).to.equal('comment text with value undefined is not a string')
         }
@@ -157,7 +190,7 @@ describe('logic - post comment', () => {
         text = 123
 
         try {
-            await logic.postComment(author, posted, text, taskId)
+            await logic.postComment(authorId, author, posted, text, taskId)
         } catch({message}) {
             expect(message).to.equal('comment text with value 123 is not a string')
         }
@@ -168,7 +201,7 @@ describe('logic - post comment', () => {
         taskId = ''
 
         try {
-            await logic.postComment(author, posted, text, taskId)
+            await logic.postComment(authorId, author, posted, text, taskId)
         } catch({message}) {
             expect(message).to.equal('task id is empty or blank')
         }
@@ -178,7 +211,7 @@ describe('logic - post comment', () => {
         taskId = undefined
 
         try {
-            await logic.postComment(author, posted, text, taskId)
+            await logic.postComment(authorId, author, posted, text, taskId)
         } catch({message}) {
             expect(message).to.equal('task id with value undefined is not a string')
         }
@@ -188,7 +221,7 @@ describe('logic - post comment', () => {
         taskId = 123
 
         try {
-            await logic.postComment(author, posted, text, taskId)
+            await logic.postComment(authorId, author, posted, text, taskId)
         } catch({message}) {
             expect(message).to.equal('task id with value 123 is not a string')
         }

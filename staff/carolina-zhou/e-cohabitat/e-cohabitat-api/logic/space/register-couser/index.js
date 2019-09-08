@@ -1,5 +1,5 @@
-const { validate } = require('../../../../e-cohabitat-utils')
-const { models: { User, Space } } = require('../../../../e-cohabitat-data')
+const { validate } = require('utils')
+const { models: { User, Space } } = require('data')
 
 /**
  * Registers a space co-user
@@ -12,6 +12,8 @@ const { models: { User, Space } } = require('../../../../e-cohabitat-data')
 
 module.exports = function(spaceId, coUserId) {
 
+    let _space
+
     validate.string(spaceId, 'space id')
     validate.string(coUserId, 'co-user id')
 
@@ -19,14 +21,20 @@ module.exports = function(spaceId, coUserId) {
         const space = await Space.findOne({ _id: spaceId })
         if (!space) throw Error('wrong space id provided')
 
+        _space = space
+
         const user = await User.findOne({ _id: coUserId })
         if (!user) throw Error('wrong user id provided')
 
-        const match = space.cousers.find(user => user === coUserId)
-        if (match) throw Error(`user already registered in space with id ${spaceId}`)
-        
-        space.cousers.push(coUserId)
-        
-        return space.save()
+        const match = _space.cousers.find(user => user.toString() === coUserId)
+        if (match === coUserId) throw Error(`user already registered in space with id ${spaceId}`)
+
+        user.spaces.push(spaceId)
+        await user.save()
+
+        _space.cousers.push(coUserId)
+        await _space.save()
+
+        return _space
     })()
 }

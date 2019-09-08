@@ -10,8 +10,8 @@ describe('logic - register space co-user', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
-    let title, type, address, passcode
-    let username, name, surname, email, password
+    let title, type, address, passcode, cousers
+    let username, name, surname, email, password, spaces
     let username2, name2, surname2, email2, password2
     let spaceId, coUserId, existentUserId
 
@@ -36,14 +36,17 @@ describe('logic - register space co-user', () => {
         email2 = `email-${Math.random()}@email.com`
         password2 = `123-${Math.random()}`
 
-        const user = await User.create({ username, name, surname, email, password })
+        const user = await User.create({ username, name, surname, email, password, spaces })
         coUserId = user._id.toString()
 
-        const space = await Space.create({ title, type, address, passcode, coUserId })
+        const space = await Space.create({ title, type, address, passcode, cousers })
         spaceId = space._id.toString()
 
-        const existentUser = await User.create({ username: username2, name: name2, surname: surname2, email: email2, password: password2 })
+        const existentUser = await User.create({ username: username2, name: name2, surname: surname2, email: email2, password: password2, spaces })
         existentUserId = existentUser._id.toString()
+
+        existentUser.spaces.push(spaceId)
+        await existentUser.save()
 
         space.cousers.push(existentUserId)
         await space.save()
@@ -58,6 +61,9 @@ describe('logic - register space co-user', () => {
         expect(space.type).to.equal(type)
         expect(space.address).to.equal(address)
         expect(space.passcode).to.equal(passcode)
+        expect(space.cousers).to.include(existentUserId, coUserId)
+        expect(space.cousers[0].toString()).to.equal(existentUserId)
+        expect(space.cousers[1].toString()).to.equal(coUserId)
     })
 
     it('should fail if the co-user is already registered', async () => {

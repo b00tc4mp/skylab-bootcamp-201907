@@ -1,5 +1,5 @@
-const { validate } = require('../../../../e-cohabitat-utils')
-const { models: { User, Task, Comment } } = require('../../../../e-cohabitat-data')
+const { validate } = require('utils')
+const { models: { User, Task, Comment } } = require('data')
 
 /**
  * Unregisters a space
@@ -22,15 +22,13 @@ module.exports = function(userId, taskId, commentId) {
 
         const searchComment = await Comment.findById(commentId)
         if(!searchComment) throw Error(`there is no comment with the provided comment id`)
-        if(searchComment.author.toString() !== userId) throw Error('this user is not the author of the comment to delete')
 
         const task = await Task.findById(taskId)
         if(!task) throw Error(`there is no task with the provided task id`)
 
         const comment = task.comments.find(comment => comment._id.toString() === commentId)
-        if(comment === undefined) throw Error('this comment was not posted in the task introduced')
-
-        if(comment.author.toString() !== userId) throw Error('this user is not the author of the comment to delete')
+        if(!comment) throw Error('this comment was not found in the task introduced')
+        if(searchComment.authorId.toString() !== userId) throw Error('this user is not the author of the comment to delete')
 
         const result = await Comment.deleteOne({ _id: commentId })
         if (!result.deletedCount) throw Error('wrong data provided')
