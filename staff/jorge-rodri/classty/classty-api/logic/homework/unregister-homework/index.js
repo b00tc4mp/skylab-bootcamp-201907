@@ -12,7 +12,6 @@ module.exports = function (id, idh) {
     
         const i = subject.homeworks.findIndex(homework => homework._id.toString()==idh) 
         
-
         if(i==-1) throw new Error(`wrong id of card`)
         
         subject.homeworks.splice(i,1)

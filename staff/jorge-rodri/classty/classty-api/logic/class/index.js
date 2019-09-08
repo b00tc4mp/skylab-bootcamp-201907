@@ -1,0 +1,6 @@
+module.exports = {
+    addStudent: require('./add-student'),
+    registerClass: require('./register-class'),
+    unregisterClass: require('./unregister-class'),
+    unregisterType: require('./unregister-type')
+}

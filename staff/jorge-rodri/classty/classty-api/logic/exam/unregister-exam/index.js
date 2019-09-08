@@ -11,8 +11,11 @@ module.exports = function (id, idEx) {
 
         if (!subject) throw new Error(`wrong credentials`)
 
-        const exam = subject.exams.find(exam => exam._id.toString()==idEx) 
+        const examIndex = subject.exams.findIndex(exam => exam._id.toString()==idEx) 
         
-        return exam
+        subject.exams.splice(examIndex, 1)
+        
+        await subject.save()
+
     })()
 }
