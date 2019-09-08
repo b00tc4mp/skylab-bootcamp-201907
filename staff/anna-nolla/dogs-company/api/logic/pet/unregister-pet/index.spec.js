@@ -15,13 +15,13 @@ describe('logic - unregister pet', () => {
 
     beforeEach( async () => {
 
-        age = Number(Math.random())
+        age = new Date
         nameP =  `name-${Math.random()}`
         characteristics = `characteristics-${Math.random}`
         size = `size-${Math.random()}`
         gender = Math.random() >= 0.5
 
-        age1 = Number(Math.random())
+        age1 = new Date
         name1 =  `name-${Math.random()}`
         characteristics1 = `characteristics-${Math.random}`
         size1 = `size-${Math.random()}`

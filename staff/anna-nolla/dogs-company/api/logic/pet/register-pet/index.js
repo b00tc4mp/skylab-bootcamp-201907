@@ -6,7 +6,7 @@ const { models: { User, Pet } } = require('data')
  * 
  * @param {string} id 
  * @param {string} name 
- * @param {number} age 
+ * @param {date} age 
  * @param {boolean} gender
  * @param {string} size
  * @param {string} characteristics
@@ -19,7 +19,7 @@ module.exports = function(id, name, age, gender, size, characteristics) {
 
     validate.string(id, 'user id')
     validate.string(name, 'name')
-    validate.number(age, 'age')
+    validate.date(age, 'age')
     validate.string(size, 'size')
     validate.boolean(gender, 'gender')
     validate.string(characteristics, 'characteristics')
