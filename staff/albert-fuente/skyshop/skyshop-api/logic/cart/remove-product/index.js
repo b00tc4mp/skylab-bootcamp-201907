@@ -20,7 +20,7 @@ module.exports = function (userId, productId) {
         if (!user) throw Error('User not found')
 
         let item = user.cart.findIndex(item => { 
-            
+            debugger
             return item.product.toString() === productId
             
          })

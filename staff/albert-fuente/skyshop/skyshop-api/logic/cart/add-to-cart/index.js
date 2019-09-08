@@ -25,11 +25,18 @@ module.exports = function(userId, productId, quantity) {
         let item = user.cart.find(item => item.product.toString() === productId)
         
         if (item) item.quantity += quantity
+
         else {
             item = new Item({product: productId, quantity})
             user.cart.push(item)
         }
         await user.save()
+        const user1 = await User.findById(userId)
+        let item1 = user1.cart.find(item => item.product.toString() === productId)
+        if(item1.quantity<0) item1.quantity=0
+
+        await user1.save()
+
     })()
 }
 
