@@ -9,6 +9,7 @@ module.exports = {
     message: require('./message'),
     post: require('./post'),
     exam: require('./exam'),
-    note: require('./note')
+    note: require('./note'),
+    particpant: require('./participant')
 
 }

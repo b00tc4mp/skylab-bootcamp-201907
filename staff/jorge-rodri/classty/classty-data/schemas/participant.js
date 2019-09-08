@@ -2,14 +2,13 @@ const mongoose = require('mongoose')
 const { Schema, SchemaTypes: { ObjectId } } = mongoose
 
 module.exports = new Schema({
-    
-    title:{
-        type: String,
+    users:{
+        type: ObjectId,
         required: true
     },
-    body:{
-        type: String,
+    delivery:{
+        type: Boolean,
+        default: false,
         required: true
     }
-
 })
