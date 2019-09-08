@@ -44,30 +44,28 @@ describe('logic - add comment to a post', () => {
 
         commentAuthor = userId
         commentBody = `commentBody-${Math.random()}`
-        commentDate = new Date
     })
 
     it('should add a comment on correct data', async () => {
-        const comment = await addComment(postId, commentAuthor, commentBody, commentDate)
+        const comment = await addComment(postId, commentAuthor, commentBody)
         
         const commentId = comment
         
         const post = await Post.findById(postId)
-        debugger
-
+        
         expect(post.comments).to.exist
         expect(post.comments.length).to.equal(1)
         expect(post.comments[0].id.toString()).to.equal(commentId)
         expect(post.comments[0].commentAuthor.toString()).to.equal(commentAuthor)
         expect(post.comments[0].commentBody).to.equal(commentBody)
-        expect(post.comments[0].commentDate).to.deep.equal(commentDate)
+        expect(post.comments[0].commentDate).to.exist
     })
 
     it('should fail if commentBody is larger than 500 chars', async () => {
         const largerBody ='83vZi1r0qqHKMcvMf0kKj5vDKfa8tnohh180XduYZYWww0GSjj7ldu4cOc9dZVIa0eaoA0BFehS0hYkF7gv8fOcOMA2sRV2DaI70SD9WD2m5kDEaHIjiiDsHy7QcRIByvvhAmgF8ACZEcMyC11L5eM28kEXH9Uhk7yND4ePpMNlvDbEhkvcN3IER71Pu3FHSnUM79fMBaXKmo25I7OfSNj3jt49cJEj2V4T2HoRRT9kdVfxeEQt1RrP3hGagcKwvDxdtU3W7Dyx8vpNI828KYp1f7EDSoVxcSUqUXHnkqCM3A3psphSiTKJnTsyiAhk5VOQr5W1MeyI1RhkheumphNjHv3UgXhehCadJaxF3i43nI1PkhovCNSxWXxCsJg7I4uC0ZUhCMymZEFjR8Xweg5ZvXW5gpodXL27lQlWfl2b9225fxhAl4APcuxqAOIYLHiYqJ1kXgnFKNSGd9ckNhUFvSPYO81FsS1vZXpdx7juLk6XOXl1HI'
         
         try{
-            const comment = await addComment(postId, commentAuthor, largerBody, commentDate)
+            const comment = await addComment(postId, commentAuthor, largerBody)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -79,7 +77,7 @@ describe('logic - add comment to a post', () => {
         const wrongPostId = '5d72794a24912c10b5c089e1' //--> 5d72794a24914c10b5c089e1
         
         try{
-            const comment = await addComment(wrongPostId, commentAuthor, commentBody, commentDate)
+            const comment = await addComment(wrongPostId, commentAuthor, commentBody)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -90,7 +88,7 @@ describe('logic - add comment to a post', () => {
     it('should fail on empty commentAuthor', async () => {
         
         try{
-            const comment = await addComment(postId, '', commentBody, commentDate)
+            const comment = await addComment(postId, '', commentBody)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -101,7 +99,7 @@ describe('logic - add comment to a post', () => {
     it('should fail on undefined commentAuthor', async () => {
         
         try{
-            const comment = await addComment(postId, undefined, commentBody, commentDate)
+            const comment = await addComment(postId, undefined, commentBody)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -112,7 +110,7 @@ describe('logic - add comment to a post', () => {
     it('should fail on wrong commentAuthor data type', async () => {
         
         try{
-            const comment = await addComment(postId, 123, commentBody, commentDate)
+            const comment = await addComment(postId, 123, commentBody)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -120,10 +118,10 @@ describe('logic - add comment to a post', () => {
         }
     })
 
-    it('should fail on empty commentAuthor', async () => {
+    it('should fail on empty commentBody', async () => {
         
         try{
-            const comment = await addComment(postId, commentAuthor, '', commentDate)
+            const comment = await addComment(postId, commentAuthor, '')
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -131,10 +129,10 @@ describe('logic - add comment to a post', () => {
         }
     })
 
-    it('should fail on undefined commentAuthor', async () => {
+    it('should fail on undefined commentBody', async () => {
         
         try{
-            const comment = await addComment(postId, commentAuthor, undefined, commentDate)
+            const comment = await addComment(postId, commentAuthor, undefined)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -142,10 +140,10 @@ describe('logic - add comment to a post', () => {
         }
     })
 
-    it('should fail on wrong commentAuthor data type', async () => {
+    it('should fail on wrong commentBody data type', async () => {
         
         try{
-            const comment = await addComment(postId, commentAuthor, 123, commentDate)
+            const comment = await addComment(postId, commentAuthor, 123)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist

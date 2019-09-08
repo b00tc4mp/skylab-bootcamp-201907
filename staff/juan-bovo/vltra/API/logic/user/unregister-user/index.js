@@ -14,8 +14,9 @@ const { validate} = require('vltra-utils')
 
 module.exports = function(id, email, password) {
 
-    validate.string(id, 'id')
+    validate.objectId(id, 'id')
     validate.string(email, 'email')
+    validate.email(email, 'email')
     validate.string(password, 'password')
 
     return(async ()=>{

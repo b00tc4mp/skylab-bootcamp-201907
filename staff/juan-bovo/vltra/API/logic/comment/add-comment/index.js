@@ -3,16 +3,16 @@ const { validate} = require('vltra-utils')
 
 
 
-module.exports = function(postId, commentAuthor, commentBody, commentDate) {
+module.exports = function(postId, commentAuthor, commentBody) {
 
     validate.objectId(postId, 'postId')
     validate.objectId(commentAuthor, 'commentAuthor')
     validate.string(commentBody, 'commentBody')
-    validate.date(commentDate, 'commentDate')
 
     if(commentBody.length > 500) throw Error('comments larger than 500 chars are not allowed')
     
     return (async () => {
+        const commentDate = new Date
         const postToComment = await Post.findOne({ _id:postId })
         
         if (!postToComment) throw Error(`post with id ${postId} does not exists`)

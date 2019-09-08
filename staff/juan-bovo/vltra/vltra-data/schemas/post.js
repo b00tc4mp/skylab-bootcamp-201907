@@ -6,6 +6,7 @@ const Comment = require('./comment')
 module.exports = new Schema({
     title: {
         type: String,
+        maxlength: 100,
         required: true
     },
     body: {

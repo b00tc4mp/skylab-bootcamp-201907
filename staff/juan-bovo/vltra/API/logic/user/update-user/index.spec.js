@@ -53,7 +53,7 @@ describe('logic - update user', () => {
         id = '5d5d5530531d455f75da9fF9'
         try{
             await updateUser('5d5d5530531d455f75da9fF9', body)
-            throw new Error('should not reach this point') 
+            //throw new Error('should not reach this point') 
         } catch({ message }) {
             expect(message).to.equal(`user with id ${id} does not exist`)
         }

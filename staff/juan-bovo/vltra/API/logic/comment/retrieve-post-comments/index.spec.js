@@ -106,14 +106,6 @@ describe('logic - retrieve user posts', () => {
     })
 
     it('should retrieve no comments for a post withous comments', async() =>{
-        // try{
-        //     const postWithNoComments = await retrievePostsComments(postId3)
-        //     throw new Error('should not reach this point')
-        // }catch(error){
-        //     expect(error).to.exist
-        //     expect(error.message).to.equal(`post with postId ${postId3} does not have any comments`)
-        // }
-
         const postWithNoComments = await retrievePostsComments(postId3)
         expect(postWithNoComments).to.exist
         expect(postWithNoComments.length).to.equal(0)

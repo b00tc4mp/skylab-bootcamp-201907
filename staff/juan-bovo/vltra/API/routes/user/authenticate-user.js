@@ -1,4 +1,4 @@
-const logic = require('../../logic')
+const {authenticateUser} = require('../../logic')
 const jwt = require('jsonwebtoken')
 
 const { env: { JWT_SECRET } } = process
@@ -7,7 +7,7 @@ module.exports = (req, res) => {
     const { body: { email, password } } = req
 
     try {
-        logic.authenticateUser(email, password)
+        authenticateUser(email, password)
             .then(id => {
                 const token = jwt.sign({ sub: id }, JWT_SECRET)
 

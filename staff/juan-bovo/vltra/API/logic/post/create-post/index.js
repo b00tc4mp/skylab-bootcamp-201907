@@ -6,22 +6,26 @@ const { validate} = require('vltra-utils')
  */
 
 
-module.exports = function(title, body, author, date, comments, votes) {
+module.exports = function(title, body, author) {
 
     validate.string(title, 'title')
     validate.string(body, 'body')
     validate.objectId(author, 'author')
-    validate.date(date, 'date')
-    validate.array(comments, 'comments')
-    validate.array(votes, 'votes')
+    //validate.date(date, 'date')
+    //validate.array(comments, 'comments')
+    //validate.array(votes, 'votes')
 
-    if(body.length > 2000) throw Error('post body is too long')
+    if(body.length > 2000) throw Error('post body is too long (max. 2000 characters)')
+    if(title.length > 100) throw Error('title body is too long (max. 100 characters)')
     
     return (async () => {
+        const date = new Date
+        const comments = []
+        const votes = []
+
         const post = await Post.findOne({ body })
-        
         if (post) throw Error(`post with content ${body} already exists`)
-            
+        
         const newPost = new Post({
             title, 
             body, 
@@ -34,7 +38,7 @@ module.exports = function(title, body, author, date, comments, votes) {
         await  newPost.save()
 
         const response = await Post.findOne({ body })
-
+        
         if (!response) throw new Error(`post with content ${body} does not exist`)
         newPostId = response._id.toString()
         return newPostId

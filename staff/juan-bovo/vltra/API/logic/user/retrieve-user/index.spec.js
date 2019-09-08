@@ -27,7 +27,6 @@ describe('logic - retrieve user', () => {
 
     it('should succeed on correct data', async() =>{
          const result = await retrieveUser(id)
-            debugger
                 expect(result).to.exist
                 expect(result.id).to.equal(id)
                 expect(result._id).not.to.exist
