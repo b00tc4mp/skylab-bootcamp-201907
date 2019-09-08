@@ -3,6 +3,7 @@ module.exports = {
     retrieve: require('./retrieve'),
     unregister: require('./unregister'),
     retrieveAll: require('./retrieveAll'),
-    retrieveProducts: require('./retrieveProducts')
+    retrieveProducts: require('./retrieveProducts'),
+    update:require('./update')
 
 }

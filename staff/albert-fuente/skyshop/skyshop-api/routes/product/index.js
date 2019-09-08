@@ -3,7 +3,7 @@ module.exports={
     retrieveProduct:require('./retrieve'),
     unregisterProduct:require('./unregister'),
     retrieveAll:require('./retrieveAll'),
-    retrieveProducts:require('./retrieveProducts')
-
+    retrieveProducts:require('./retrieveProducts'),
+    updateProduct:require('./update')
 
 }

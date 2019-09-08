@@ -4,9 +4,9 @@ const bodyParser = require('body-parser')
 
 const { registerUser, authenticateUser, retrieveUser, updateUser, unregisterUser } = require('./user')
 
-const {registerProduct, retrieveProduct, unregisterProduct, retrieveAll, retrieveProducts}=require('./product')
+const {registerProduct, retrieveProduct, unregisterProduct, retrieveAll, retrieveProducts, updateProduct}=require('./product')
 
-const{placeOrder,listOrders, retrieveOrder}=require('./order')
+const{placeOrder,listOrders, retrieveOrder, retrieveAllOrders}=require('./order')
 
 const {addToCart, removeProduct}= require('./cart')
 
@@ -26,11 +26,14 @@ router.get('/product/one/:productId',jsonBodyParser,retrieveProduct)
 router.delete('/products/:productId',jsonBodyParser,unregisterProduct)
 router.get('/products',jsonBodyParser,retrieveAll)
 router.get('/product/q/:title',jsonBodyParser,retrieveProducts)
+router.patch('/products/:productId',jsonBodyParser,updateProduct)
 
 //ORDER
 router.post('/users/:id/orders',[tokenMiddleware, jsonBodyParser],placeOrder)
 router.get('/users/:id/orders', [tokenMiddleware, jsonBodyParser], listOrders)
 router.get('/users/:id/order/:orderId', [tokenMiddleware, jsonBodyParser], retrieveOrder)
+router.get('/users/:id/allorders/', [tokenMiddleware, jsonBodyParser], retrieveAllOrders)
+
 
 //CART
 router.post('/users/:id/cart',[tokenMiddleware, jsonBodyParser],addToCart)
