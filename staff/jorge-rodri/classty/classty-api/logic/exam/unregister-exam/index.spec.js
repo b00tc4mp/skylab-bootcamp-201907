@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const { expect } = require('chai')
-const retrieveHomework = require('.')
+const unregisterExam = require('.')
 const { database, models: { User, Subject, Exam } } = require('classty-data')
 const { convertDate } = require('classty-utils')
 
@@ -83,10 +83,9 @@ describe('logic - unregister exam', () => {
 
     it('should succeed on correct data', async () => {
 
-        const ex = await retrieveHomework(idSub, idEx)
+        const ex = await unregisterExam(idSub, idEx)
 
-        expect(ex).to.exist
-        expect(ex.title).to.equal(exam.title)
+        expect(ex).to.not.exist
 
     })
 

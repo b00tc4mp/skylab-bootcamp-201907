@@ -15,7 +15,7 @@ module.exports = function (type) {
 
         if (!users) throw Error(`user with id ${type} not found`)
 
-        users.forEach(user => {; user.id = user._id.toString(); delete user._id; });
+        users.forEach(user => { user.id = user._id.toString(); delete user._id; });
         
         return users
     })()
