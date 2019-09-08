@@ -23,7 +23,7 @@ module.exports = function(id) {
 
             chats.forEach((chat, index) => {
             chats[index].id = chat._id.toString()
-            delete chat._id
+                delete chat._id
             chat.participants.forEach((item , numb) => {
                 return chat.participants[numb] = item.toString()
             })   

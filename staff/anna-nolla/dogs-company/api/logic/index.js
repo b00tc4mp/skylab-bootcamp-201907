@@ -2,5 +2,6 @@ module.exports = {
     ...require('./user'),
     ...require('./pet'),
     ...require('./chat'),
-    //...require('./message')
+    ...require('./notification'),
+    ...require('./geolocation')
 }

@@ -14,7 +14,7 @@ describe('logic - retrieve pets', () => {
 
     beforeEach( async () => {
 
-        age = Number(Math.random())
+        age = new Date
         nameP =  `name-${Math.random()}`
         characteristics = `characteristics-${Math.random}`
         size = `size-${Math.random()}`
@@ -37,7 +37,7 @@ describe('logic - retrieve pets', () => {
         const pet = await logic.retrieveAllPets(id)
             expect(pet).to.exist
             expect(pet[0].name).to.equal(nameP)
-            expect(pet[0].age).to.equal(age)
+            expect(pet[0].age).to.deep.equal(age)
             expect(pet[0].gender).to.equal(gender)
             expect(pet[0].size).to.equal(size)
             expect(pet[0].characteristics).to.equal(characteristics)

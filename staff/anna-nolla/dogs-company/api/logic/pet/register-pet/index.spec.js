@@ -14,7 +14,7 @@ describe('logic - register pet', () => {
 
     beforeEach( async () => {
 
-        age = Number(Math.random())
+        age = new Date
         nameP = `name-${Math.random()}`
         characteristics = `characteristics-${Math.random()}`
         size = `size-${Math.random()}`
@@ -37,7 +37,7 @@ describe('logic - register pet', () => {
             const user = await User.findOne({ "pets._id": petId })
                 expect(user).to.exist
                 expect(user.pets[0].name).to.equal(nameP)
-                expect(user.pets[0].age).to.equal(age)
+                expect(user.pets[0].age).to.deep.equal(age)
                 expect(user.pets[0].gender).to.equal(gender)
                 expect(user.pets[0].size).to.equal(size)
                 expect(user.pets[0].characteristics).to.equal(characteristics)
@@ -83,7 +83,7 @@ describe('logic - register pet', () => {
     )
 
     it('should fail on empty age', () =>
-    expect(() => logic.registerPet(id, name, "123", gender, size, characteristics)).to.throw('age with value 123 is not a number')
+    expect(() => logic.registerPet(id, name, "123", gender, size, characteristics)).to.throw('age with value 123 is not a date')
     )
     
     it('should fail on empty characteristics', () =>

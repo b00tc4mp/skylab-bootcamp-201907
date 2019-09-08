@@ -20,8 +20,7 @@ module.exports = function(id, petId) {
             if(!user) throw Error('There is no user with this id')
          
         const pet = user.pets.findIndex(pet => pet._id === petId)
-            if(pet.length === 0) throw Error('This pet is not from this owner')
-                  
+            if(pet.length === 0) throw Error('This pet is not from this owner')        
         user.pets.splice(pet, 1)
         user.save()
                  
