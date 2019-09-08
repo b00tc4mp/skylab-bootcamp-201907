@@ -18,14 +18,23 @@
         <section class="form-section">
             <h1>Register</h1>
             <form class="form" onSubmit="">
-              <label>Name<input type="text" name="name"></input></label>
-              <label>Surname<input type="text" name="surname"></input></label>
+              <label>Full Name<input type="text" name="name"></input></label>
+              <label>Surname<input list="cities">
+                <datalist id="cityselector">
+                <option value="Barcelona">
+                <option value="Girona">
+                <option value="Tarragona">
+                <option value="Lleida">
+                <option value="Vic">
+              </datalist>
+            </input></label>
+              <label>City<input type="text" name="surname"></input></label>
               <label>Citizen ID<input type="file" name="citizenid"></input></label>
               <label>E-mail<input type="email" name="email"></input></label>
               <label>Password<input type="password" name="password"></input></label>
               <label>Repeat password<input type="password" name="repassword" /></label>
               <button class="main__button" >Register</button>
-            </form>
+            </form>                               
         </section>
     </main>
    </body>
