@@ -3,11 +3,11 @@ const logic = require('../../logic')
 
 module.exports = (req, res) => {
 
-    const { userId, params: { petId }, body } = req
+    const { userId, params: { notificationId }, body } = req
 
     try {
-        logic.updatePet(userId, petId, body)
-            .then(() => res.json({ message: 'Pet updated successfully'}))
+        logic.updateNotification(userId, notificationId, body)
+            .then(() => res.json({ message: 'Notification updated successfully'}))
             .catch(({ message }) => res.status(400).json({ error: message }))
         } catch({ message }) {
                 res.status(404).json({ error: message })
