@@ -10,6 +10,10 @@ module.exports = (() => {
        if (empty && !target.trim()) throw new Error(`${name} is empty or blank`)
        if (values && !values.includes(target)) throw new Error(`${name} with value ${target} does not match one of the expected values: ${values.join(', ')}`)
        },
+       
+       observation(target, name) {
+       if (typeof target !== 'string') throw TypeError(`${name} with value ${target} is not a string`)
+       },
 
        number(target, name) {
            if (typeof target !== 'number') throw TypeError(`${name} with value ${target} is not a number`)

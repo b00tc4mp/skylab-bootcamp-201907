@@ -2,7 +2,6 @@ const validate = require('./')
 const { expect } = require('chai')
 
 describe("validate", () => {
-    
 
         describe("string", () => {
             it ("should detect that it's a string and not throw error", () => {
@@ -14,9 +13,19 @@ describe("validate", () => {
                   expect(() => { validate.string() }).to.throw(Error, "undefined with value undefined is not a string")
 
             })
-       })
-
-       
+        })
+        
+        describe("observation", () => {
+            it ("should detect that it's a string and not throw error", () => {
+                validate.observation("this is an obsrvation","string")
+                expect(true).to.be.true
+            })
+            
+            it ("should detect that it's an empty string and not throw error", () => {
+                validate.observation("","string")
+                expect(true).to.be.true
+            })
+        })
 
         describe("email", () => {
             it ("should detect that it's a email and not throw error", () => {

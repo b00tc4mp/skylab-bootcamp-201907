@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx mocha **/*.spec.js"
+    "test": "npx mocha **/*.spec.js",
+    "test:coverage": "nyc --reporter=html --reporter=text mocha **/*.spec.js --runInBand"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +13,7 @@
   "dependencies": {},
   "devDependencies": {
     "mocha": "^6.2.0",
-    "chai": "^4.2.0"
+    "chai": "^4.2.0",
+    "nyc": "^14.1.1"
   }
 }
