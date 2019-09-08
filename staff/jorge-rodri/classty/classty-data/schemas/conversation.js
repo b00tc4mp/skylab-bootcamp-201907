@@ -2,10 +2,13 @@ const mongoose = require('mongoose')
 const { Schema, SchemaTypes: { ObjectId } } = mongoose
 
 const Message = require('./message')
+const Participant = require('./participant')
 
 module.exports = new Schema({
-    users: [
-        { type: ObjectId, ref: 'User'}
-    ],
-    message: [Message]
+
+    sender: { type:ObjectId, ref:'User' },
+    delivery: [ Participant ],
+    message: [ Message ],
+    date:{ type: Date, required: true }
+
  })
