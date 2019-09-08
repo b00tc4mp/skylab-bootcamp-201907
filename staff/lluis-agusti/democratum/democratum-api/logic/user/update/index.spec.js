@@ -1,78 +1,107 @@
-const mongoose = require('mongoose')
-const logic = require('../../.')
+const logic = require('../..')
+const bcrypt = require('bcrypt')
 const { expect } = require('chai')
-const { User } = require('../../../models')
-
+const { models , mongoose } = require('democratum-data')
+const { User } = models
 
 describe('logic - update user', () => {
-    before(() => mongoose.connect('mongodb://localhost/my-api-test',  { useNewUrlParser: true }))
 
-    let name, surname, email, password, id, body
+    before(() =>  mongoose.connect('mongodb://localhost/democratum-test', { useNewUrlParser: true }))
+
+    let cityId, fullname, address, documentId, email, imgDocId, password, participatedPolls, proposedPolls, userRole
 
     beforeEach(async () => {
-        name = `name-${Math.random()}`
-        surname = `surname-${Math.random()}`
-        email = `email-${Math.random()}@domain.com`
-        password = `password-${Math.random()}`
-
-        body = {
-            name: `name-${Math.random()}`,
-            surname: `surname-${Math.random()}`,
-            email: `email-${Math.random()}@domain.com`,
-            password: `password-${Math.random()}`,
-            extra: `extra-${Math.random()}`
-        }
 
         await User.deleteMany()
-        const user = await User.create({ name, surname, email, password })
-        id = user.id
+
+        cityId = `city-${Math.random()}`
+        fullname = `fullname-${Math.random()}`
+        address = `address-${Math.random()}`
+        documentId = `documentid-${Math.random()}`
+        email = `email@-${Math.random()}.com`
+        imgDocId = `imgdocid-${Math.random()}`
+        password = `password-${Math.random()}`
+        participatedPolls = `partipolls-${Math.random()}`
+        proposedPolls = `proposed-${Math.random()}`
+        userRole = 'citizen'
+
+        body = {
+            cityId: `city-${Math.random()}`,
+            fullname: `fullname-${Math.random()}`,
+            address: `address-${Math.random()}`,
+            documentId: `documentid-${Math.random()}`,
+            email: `email@-${Math.random()}.com`,
+            imgDocId: `imgdocid-${Math.random()}`,
+            password: `password-${Math.random()}`,
+            participatedPolls: `partipolls-${Math.random()}`,
+            proposedPolls: `proposed-${Math.random()}`,
+            userRole: 'citizen'
+        }
+
+    
+            const user = await User.create({cityId, fullname, address, documentId, email, imgDocId, password: await bcrypt.hash (password, 10), participatedPolls, proposedPolls, userRole})
+
+            id = user.id
     })
 
-    it('should succeed on correct data', async () => {
-        const result = await logic.user.update(id, body)
-        
-        expect(result).not.to.exist
+    it('should succeed on correct data', async () =>{
+        const response = await logic.updateUser(id, body)
 
-        const user = await User.findById(id)
-            expect(user).to.exist
-            expect(user.name).to.equal(body.name)     
-            expect(user.surname).to.equal(body.surname)
-            expect(user.email).to.equal(body.email)
-            expect(user.password).to.equal(body.password)
-            expect(user.extra).to.not.exist
+            expect(response).to.exist
+
+
+            return ( async () => {
+            
+            const user = await User.findById(id)
+           
+                expect(user).to.exist
+                expect(user.cityId).to.equal(body.cityId)
+                expect(user.fullname).to.equal(body.fullname)
+                expect(user.address).to.equal(body.address)
+                expect(user.documentId).to.equal(body.documentId)
+                expect(user.email).to.equal(body.email)
+                expect(user.imgDocId).to.equal(body.imgDocId)
+            /*  expect(user.password).to.exist
+                expect(user.participatedPolls).to.equal(body.participatedPolls)
+                expect(user.proposedPolls).to.equal(body.proposedPolls) */
+                expect(user.userRole).to.equal(body.userRole)
+
+
+        })
     })
 
     it('should fail on non-existing user', async () => {
         id = '5d5d5530531d455f75da9fF9'
         try{
-            await logic.user.update(id, body )
-        }catch({ message }){
-            expect(message).to.equal(`user with id ${id} does not exist`)
+            await logic.updateUser(id, body)
+             throw new Error('should not reach this point') 
+
+        }catch(error){
+            expect(error.message).to.equal(`User with id ${id} does not exist.`)
         }
     })
 
-    it('should fail on empty id', async () => {
+    it('should fail on non-existing body', async () => {
+        
         try{
-          await logic.user.update('', body)
-      } catch({ message }) {
-          expect(message).to.equal("id is empty or blank")
-      }
-  })
-  it('should fail on undefined id', async () => {
-      try{
-        await logic.user.update(undefined)
-    } catch({ message }) {
-        expect(message).to.equal("id with value undefined is not a string")
-    }
- })
- it('should fail on wrong id data type', async() => {
-     try{
-            await logic.user.update(123)
-        } catch({ message }) {
-            expect(message).to.equal("id with value 123 is not a string")
+            await logic.updateUser(id, )
+             throw new Error('should not reach this point') 
+
+        }catch(error){
+            expect(error.message).to.equal(`No field to update provided`)
         }
-   
- })
+    })
+
+    it('should fail on empty id', () =>
+    expect(() =>
+    logic.updateUser("", body)
+    ).to.throw('id is empty or blank')
+    )
+    it('should fail on undefined id', () =>
+        expect(() =>
+        logic.updateUser(undefined, body)
+        ).to.throw(`id with value undefined is not a string`)
+    )
 
     after(() => mongoose.disconnect())
 })

@@ -1,8 +1,8 @@
 module.exports = {
-    registerUser : require('./register'),
+    registerUser: require('./register'),
     authenticateUser: require('./authenticate'),
-    retrieveUser : require('./retrieve'),
-    updateUser : require('./update'),
-    unregisterUser : require('./unregister')
+    //retrieve : require('./retrieve'),
+    updateUser: require('./update')
+    //unregister : require('./unregister')
 }
 

@@ -1,5 +1,5 @@
 require('dotenv').config()
-const mongoose = require('mongoose')
+const { mongoose } = require('democratum-data')
 const express = require('express')
 const { name, version } = require('./package')
 const routes = require('./routes')
@@ -26,10 +26,3 @@ process.on('SIGINT', () => {
     
     process.exit(0)
 })
-        
-
-
-
-
-
-

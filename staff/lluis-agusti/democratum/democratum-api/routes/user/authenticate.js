@@ -8,7 +8,7 @@ module.exports = (req, res) => {
     const { body: { email, password } } = req
 
     try {
-        logic.user.authenticate(email, password)
+        logic.authenticateUser(email, password)
             .then(id => {
                 const token = jwt.sign({ sub: id }, JWT_SECRET, { expiresIn: '1h' })
                 res.json({message: 'User authenticated successfully', id, token})
