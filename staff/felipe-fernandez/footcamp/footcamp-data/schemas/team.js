@@ -9,11 +9,11 @@ module.exports = new Schema({
 
     points: {
         type: Number,
-        required: true
+       
     },
 
     owner: { type: ObjectId, ref: 'User'},
 
-    players: [{ type: ObjectId, ref: 'Player'}]
+    players: [{ type: Number, ref: 'Player'}]
 })
 

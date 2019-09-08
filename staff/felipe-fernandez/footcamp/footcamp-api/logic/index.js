@@ -8,10 +8,9 @@ module.exports = {
     joinLeague: require('./league/join'), 
     leaveLeagues: require('./league/leave'),
     retrieveLeague: require('./league/retrieve'),
-    retrieveAllLeague: require('./league/retrieve-all'),
+    retrieveAllLeagues: require ('./league/retrieve-all'),
     createTeam: require('./team/create'),
     retrieveTeam: require('./team/retrieve'),
-    classificationTeam: require ('./team/classification'),
     lineUpTeam: require('./team/team-lineup'),
     retrievePlayer: require('./player/retrieve')
     

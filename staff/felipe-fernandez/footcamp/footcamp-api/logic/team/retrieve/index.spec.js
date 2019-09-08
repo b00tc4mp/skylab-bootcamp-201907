@@ -67,15 +67,14 @@ describe('logic - retrieve team', () => {
 
             const player = new Player({name: namePlayer, surname: surnamePlayer, player_id, real_team, position, points_per_game, total_points, yellow_cards, red_cards,  goals, minutes, cost  })
             const player2 = new Player({name: namePlayer2, surname: surnamePlayer2, player_id: player_id2, real_team: real_team2 , position: position2,   points_per_game:  points_per_game2, total_points: total_points2, yellow_cards: yellow_cards2, red_cards: red_cards2,  goals: goals2, minutes: minutes2, cost: cost2  })
-            id_player = player.id
-            id_player2 = player2.id
+            
 
             const team = new Team({id, name: nameTeam, points})
             team.owner = id
             
-            team.players.push(id_player)
-            team.players.push(id_player2)
-
+            team.players.push(player_id)
+            team.players.push(player_id2)
+            
             await users.save()
             await league.save()
             await player.save()
@@ -91,7 +90,7 @@ describe('logic - retrieve team', () => {
         const result = await logic.retrieveTeam(id, code, nameTeam, points)
         
             expect(result).to.exist
-            expect(result._name).to.equal(nameTeam)
+            expect(result.name_team).to.equal(nameTeam)
             expect(result.owner.toString()).to.equal(id)
             expect(result.points).to.equal(0)
 
@@ -102,6 +101,7 @@ describe('logic - retrieve team', () => {
             expect(team.name).to.equal(nameTeam)
             expect(team.owner.toString()).to.equal(id)
             expect(team.points).to.equal(0)
+           
         
     })
 
@@ -165,12 +165,7 @@ describe('logic - retrieve team', () => {
         ).to.throw(`code with value undefined is not a string`)
         )
         
-        it('should fail on undefined points', () => 
-             expect(() => 
-               logic.retrieveTeam(id, code, nameTeam, undefined)
-         ).to.throw(`points with value undefined is not a number`)
-          )
-
+     
 
         it('should fail on non-string team name', () => 
             expect(() => 
@@ -190,11 +185,7 @@ describe('logic - retrieve team', () => {
         ).to.throw(`code with value 12345 is not a string`)
         )
 
-        it('should fail on non-number points', () => 
-            expect(() => 
-            logic.retrieveTeam(id, code, nameTeam, 'points')
-        ).to.throw(`points with value points is not a number`)
-        )
+       
 
                 
          it('should fail on empty id', () => 

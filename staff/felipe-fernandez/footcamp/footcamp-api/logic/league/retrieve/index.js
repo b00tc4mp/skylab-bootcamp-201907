@@ -27,8 +27,9 @@ module.exports = function(id, code) {
         
         //check the team in the database and select name, participants and teams
         let name, codes, teams
+
         let participants = []
-        debugger
+        
         name= leagues.name
         codes = leagues.code
         leagues.participants.forEach(element => {

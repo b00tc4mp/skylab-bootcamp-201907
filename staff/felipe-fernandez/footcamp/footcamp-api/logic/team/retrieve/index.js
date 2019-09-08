@@ -6,17 +6,16 @@ const { models: { User,  League, Team } } = require('footcamp-data')
  * @param {*} id 
  * @param {*} code 
  * @param {*} name 
- * @param {*} points 
+ * 
  *  
  * @returns {Promise}
 */
 
-module.exports = function(id, code, name, points) {
+module.exports = function(id, code, name) {
    
     validate.string(id, 'id')
     validate.string(code, 'code')
     validate.string(name, 'name')
-    validate.number(points, 'points')
    
     return (async () => {
 
@@ -34,24 +33,22 @@ module.exports = function(id, code, name, points) {
         if (!findTeam) throw Error(`Team with name ${ name } does not exist`)
 
          //check the team in the database and select name, owner and players ids
-        let _name, points, owner
+        let name_team, points, owner
         let players = []
-        
-        _name= findTeam.name
+        debugger
+        name_team= findTeam.name
         points = findTeam.points
         owner = findTeam.owner.toString()
         findTeam.players.forEach(element => {
-            players.push(element.toString())
+            players.push(element)
             
         })
         
-        let getHome = { _name, points, owner, players}
+        let team = { name_team, points, owner, players}
 
-        // await user.save()
-        // await league.save()
         
 
-        return getHome
+        return team
 
     })()
 }

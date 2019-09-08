@@ -58,7 +58,7 @@ describe('logic - retrieve lineup', () => {
                 minutes = number(1111,2241111)
                 cost = number(1111,2241111)
                 const player = new Player({name: namePlayer, surname: surnamePlayer, player_id, real_team, position, points_per_game, total_points, yellow_cards, red_cards,  goals, minutes, cost  })
-                team.players.push(player.id)
+                team.players.push(player_id)
                 await player.save()
             }
             await users.save()
@@ -73,7 +73,7 @@ describe('logic - retrieve lineup', () => {
    })
 
     it('should succeed on correct data', async () => {
-        
+        debugger
         const result = await logic.lineUpTeam(id, code, nameTeam)
         
         

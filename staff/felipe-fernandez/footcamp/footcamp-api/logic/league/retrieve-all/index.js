@@ -1,40 +1,49 @@
-const {validate } = require('footcamp-utils')
-const { models: { User,  League } } = require('footcamp-data')
+const {validate} = require('footcamp-utils')
+const { models: { User,  League, Team } } = require('footcamp-data')
 
  /**
- * 
+ * retrieves all the teams of the league
  * @param {*} id 
  * @param {*} code 
- *   
+ *
+ *  
  * @returns {Promise}
 */
 
-module.exports = function(id) {
+module.exports = function(id, code) {
    
-    
     validate.string(id, 'id')
-    // validate.string(code, 'code')
-    let idLeague
+    validate.string(code, 'code')
+    
+   
     return (async () => {
-        
+
+                
         const user = await User.findById(id)
 
         if (!user) throw new Error(`User with id ${id} does not exist`)
-        
-        let leagues = user.leagues.map(league=>  idLeague.push(league) )
-        
-        //get all the players in the team
-        let leagues2 = await Promise.all(ids(() =>
-            League.findOne({ ids }).select('-__v').lean()
-            
-         ))
-        
-         leagues.map(league => {
-            league.id = league._id.toString()
-            delete league._id
-        })
 
-         return leagues
+        const league = await League.findOne({ code })
+
+        if (!league) throw Error(`League with code ${ code } does not exist`)
+
+        const teams = await Promise.all(league.team.map(team => team))
+
+        let allTeams = []
+
+        //create an array of objects with the properties of the teams to return
+        teams.forEach(element => {
+          let  team = {
+            name :  element.name,
+            points : element.points,
+            owner : element.owner.toString()
+            }
+            allTeams.push(team)
+        })
+       
+                
+
+        return allTeams
         
 
     })()

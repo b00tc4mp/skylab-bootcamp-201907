@@ -6,7 +6,7 @@ const { database, models: { User, League, Team } } = require('footcamp-data')
 
 const { env: { DB_URL_TEST }} = process
 
-describe.only('logic - retrieve league', () => {
+describe('logic - retrieve league', () => {
     
     before(() =>  database.connect(DB_URL_TEST))
 
