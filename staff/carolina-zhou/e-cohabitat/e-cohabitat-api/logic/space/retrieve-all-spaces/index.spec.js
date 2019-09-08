@@ -1,11 +1,14 @@
+require('dotenv').config()
+
 const { expect } = require('chai')
-const logic = require('../../')
-const { User, Space } = require('../../../data')
-const mongoose = require('mongoose')
+const logic = require('../..')
+const { database, models: { User, Space } } = require('data')
+
+const { env: { DB_URL_TEST }} = process
 
 describe('logic - retrieve all spaces', () => {
 
-    before(() => mongoose.connect('mongodb://localhost/e-cohabitat-api-test', { useNewUrlParser: true }))
+    before(() => database.connect(DB_URL_TEST))
     
     let id, username, name, surname, email, password
 
@@ -50,5 +53,5 @@ describe('logic - retrieve all spaces', () => {
         }
     })
 
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })

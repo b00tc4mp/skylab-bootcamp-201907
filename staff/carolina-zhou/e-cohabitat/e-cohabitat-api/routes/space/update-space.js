@@ -8,9 +8,9 @@ module.exports = (req, res) => {
         logic.updateSpace(spaceId, body)
             .then(() => res.json({ message: 'space updated successfully'}))
             .catch(({ message }) => res.status(400).json({ error: message }))
-        } catch({ message }) {
-                res.status(404).json({ error: message })
-        }
+    } catch({ message }) {
+        res.status(404).json({ error: message })
+    }
 }
 
 

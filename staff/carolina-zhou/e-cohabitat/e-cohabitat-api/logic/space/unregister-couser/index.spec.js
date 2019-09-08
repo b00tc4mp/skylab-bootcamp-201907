@@ -1,11 +1,14 @@
-const mongoose = require('mongoose')
-const logic = require('../../')
+require('dotenv').config()
+
 const { expect } = require('chai')
-const { User, Space } = require('../../../data')
+const logic = require('../..')
+const { database, models: { User, Space } } = require('data')
+
+const { env: { DB_URL_TEST }} = process
 
 describe('logic - unregister space co-user', () => {
 
-    before(() => mongoose.connect('mongodb://localhost/e-cohabitat-api-test',  { useNewUrlParser: true }))
+    before(() => database.connect(DB_URL_TEST))
 
     let title, type, address, passcode
     let username, name, surname, email, password
@@ -14,8 +17,10 @@ describe('logic - unregister space co-user', () => {
     let spaceId, coUserIdOne, coUserIdTwo
 
     beforeEach(async() => {
+        const spaceTypeArray = ['kitchen', 'bathroom', 'living room', 'coworking', 'garden', 'rooftop', 'other']
+        
         title = `name-${Math.random()}`
-        type = `type-${Math.random()}`
+        type = `${spaceTypeArray[Math.floor(Math.random() * spaceTypeArray.length)]}`
         address = `address-${Math.random()}`
         passcode = `123-${Math.random()}`
 
@@ -59,7 +64,7 @@ describe('logic - unregister space co-user', () => {
         expect(result.cousers).not.to.include(coUserIdOne) 
     })
 
-    it('should fail on unexisting property', async () => {
+    it('should fail on unexistent property', async () => {
         spaceId = "5d5d5530531d455f75db9fF9"
 
         try {
@@ -71,7 +76,7 @@ describe('logic - unregister space co-user', () => {
         }
     })
 
-    it('should fail on existing property but wrong co-user', async () => {
+    it('should fail on existent property but wrong co-user', async () => {
         username3 = `username3-${Math.random()}`
         name3 = `name3-${Math.random()}`
         surname3 = `surname3-${Math.random()}`
@@ -90,7 +95,7 @@ describe('logic - unregister space co-user', () => {
         }
     })
 
-    it('should fail on unexisting co-user', async () => {
+    it('should fail on unexistent co-user', async () => {
         coUserIdOne = '5d5d5530531d455f75da9fF9'
         try {
             await logic.unregisterSpaceCouser(spaceId, coUserIdOne)
@@ -161,5 +166,5 @@ describe('logic - unregister space co-user', () => {
         }
     })
 
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })

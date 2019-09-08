@@ -1,5 +1,5 @@
-const validate = require('../../../utils/validate')
-const { User } = require('../../../data')
+const { validate } = require('../../../../e-cohabitat-utils')
+const { models: { User } } = require('../../../../e-cohabitat-data')
 
 /**
  * Registers a user.
@@ -12,11 +12,14 @@ const { User } = require('../../../data')
  * 
  * @returns {Promise}
  */
+
 module.exports = function (username, name, surname, email, password) {
-    validate.string(username, 'name')
+   
+    validate.string(username, 'username')
     validate.string(name, 'name')
     validate.string(surname, 'surname')
     validate.string(email, 'e-mail')
+    validate.email(email, 'e-mail@gmail.com')
     validate.string(password, 'password')
 
     return (async () => {
@@ -24,6 +27,6 @@ module.exports = function (username, name, surname, email, password) {
 
         if (user) throw new Error(`user with e-mail ${email} already exists`)
 
-        return User.create({ username, name, surname, email, password })
+        await User.create({ username, name, surname, email, password })
     })()
 }

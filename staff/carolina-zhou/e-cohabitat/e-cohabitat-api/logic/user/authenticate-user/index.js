@@ -1,5 +1,5 @@
-const validate = require('../../../utils/validate')
-/* Add: */ const { User } = require('../../../data')
+const { validate } = require('../../../../e-cohabitat-utils')
+const { models: { User } } = require('../../../../e-cohabitat-data')
 
 /**
  * Authenticates a user by its credentials.
@@ -9,14 +9,15 @@ const validate = require('../../../utils/validate')
  * 
  * @returns {Promise}
  */
+
 module.exports = function (email, password) {
+
     validate.string(email, 'e-mail')
     validate.email(email, 'e-mail@gmail.com')
     validate.string(password, 'password')
 
     return (async () => {
         const user = await User.findOne({ email })
-    
         if (!user) throw new Error(`wrong credentials`)
     
         if (user.password !== password) throw new Error('wrong credentials')

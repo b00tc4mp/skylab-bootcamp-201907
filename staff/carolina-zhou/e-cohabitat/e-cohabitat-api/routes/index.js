@@ -1,5 +1,4 @@
 const { Router } = require('express')
-const bodyParser = require('body-parser')
 const tokenMiddleware = require('../helpers/token-middleware')
 
 const registerUser = require('./user/register-user')
@@ -16,26 +15,48 @@ const updateSpace = require('./space/update-space')
 const unregisterSpace = require('./space/unregister-space')
 const unregisterSpaceCouser = require('./space/unregister-couser')
 
+const addTask = require('./task/add-task')
+const addTaskCompanion = require('./task/add-companion')
+const retrieveAllTasks = require('./task/retrieve-all-tasks')
+const retrieveTask = require('./task/retrieve-task')
+const editTask = require('./task/edit-task')
+const deleteTask = require('./task/delete-task')
+const removeTaskCompanion = require('./task/remove-companion')
+
+const postComment = require('./comment/post-comment')
+const editComment = require('./comment/edit-comment')
+const deleteComment = require('./comment/delete-comment')
+
 const router = Router()
-const jsonBodyParser = bodyParser.json()
 
 /* USER */
-router.post('/users', jsonBodyParser, registerUser)
-router.post('/auth', jsonBodyParser, authenticateUser)
-router.get('/users/:id', [tokenMiddleware, jsonBodyParser], retrieveUser)
-router.patch ('/users/:id', [tokenMiddleware, jsonBodyParser], updateUser)
-router.delete ('/users/:id', [tokenMiddleware, jsonBodyParser], unregisterUser)
+router.post('/users', registerUser)
+router.post('/auth', authenticateUser)
+router.get('/users/:id', [tokenMiddleware], retrieveUser)
+router.patch ('/users/:id', [tokenMiddleware], updateUser)
+router.delete ('/users/:id', [tokenMiddleware], unregisterUser)
 
 /* SPACE */ 
-router.post('/users/:id/spaces', [tokenMiddleware, jsonBodyParser], registerSpace)
-router.patch ('/users/:id/spaces/:spaceId/cousers/:coUserId', [tokenMiddleware, jsonBodyParser], registerSpaceCouser)
-router.get('/users/:id/spaces/', [tokenMiddleware, jsonBodyParser], retrieveAllSpaces)
-router.get('/users/:id/spaces/:spaceId', [tokenMiddleware, jsonBodyParser], retrieveSpace)
-router.patch ('/users/:id/spaces/:spaceId', [tokenMiddleware, jsonBodyParser], updateSpace)
-router.delete ('/users/:id/spaces/:spaceId', [tokenMiddleware, jsonBodyParser], unregisterSpace)
-router.delete ('/users/:id/spaces/:spaceId/cousers/:coUserId', [tokenMiddleware, jsonBodyParser], unregisterSpaceCouser)
+router.post('/users/:id/spaces', [tokenMiddleware], registerSpace)
+router.patch ('/users/:id/spaces/:spaceId/cousers/:coUserId', [tokenMiddleware], registerSpaceCouser)
+router.get('/users/:id/spaces/', [tokenMiddleware], retrieveAllSpaces)
+router.get('/users/:id/spaces/:spaceId', [tokenMiddleware], retrieveSpace)
+router.patch ('/users/:id/spaces/:spaceId', [tokenMiddleware], updateSpace)
+router.delete ('/users/:id/spaces/:spaceId', [tokenMiddleware], unregisterSpace)
+router.delete ('/users/:id/spaces/:spaceId/cousers/:coUserId', [tokenMiddleware], unregisterSpaceCouser)
 
 /* TASK */
+router.post('/users/:id/spaces/:spaceId/tasks', [tokenMiddleware], addTask)
+router.patch ('/users/:id/spaces/:spaceId/tasks/:taskId/companions/:companionId', [tokenMiddleware], addTaskCompanion)
+router.get('/users/:id/spaces/:spaceId/tasks/', [tokenMiddleware], retrieveAllTasks)
+router.get('/users/:id/spaces/:spaceId/tasks/:taskId', [tokenMiddleware], retrieveTask)
+router.patch ('/users/:id/spaces/:spaceId/tasks/:taskId', [tokenMiddleware], editTask)
+router.delete ('/users/:id/spaces/:spaceId/tasks/:taskId', [tokenMiddleware], deleteTask)
+router.delete ('/users/:id/spaces/:spaceId/tasks/:taskId/companions/:companionId', [tokenMiddleware], removeTaskCompanion)
 
+/* COMMENT */
+router.post('/users/:id/spaces/:spaceId/tasks/:taskId/comments', [tokenMiddleware], postComment)
+router.patch ('/users/:id/spaces/:spaceId/tasks/:taskId/comments/:commentId', [tokenMiddleware], editComment)
+router.delete ('/users/:id/spaces/:spaceId/tasks/:taskId/comments/:commentId', [tokenMiddleware], deleteComment)
 
 module.exports = router

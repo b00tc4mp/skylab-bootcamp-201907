@@ -1,5 +1,4 @@
 const { Schema, ObjectId } = require('mongoose')
-/* const spaceSchema = require('./space')  */
 
 module.exports = new Schema({
     username: {
@@ -24,8 +23,9 @@ module.exports = new Schema({
         type: String,
         required: true
     },
+    spaces: [{ type: ObjectId, ref: 'Space' }],
+    tasks: [{ type: ObjectId, ref: 'Task' }],
     extra: {
         type: String
-    },
-    spaces: [{ type: ObjectId, ref: 'Space' }] /* [spaceSchema] */
+    }
 })

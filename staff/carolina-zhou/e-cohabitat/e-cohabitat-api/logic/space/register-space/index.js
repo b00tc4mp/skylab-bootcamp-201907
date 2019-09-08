@@ -1,5 +1,5 @@
-const validate = require('../../../utils/validate')
-const { User, Space } = require('../../../data')
+const { validate } = require('../../../../e-cohabitat-utils')
+const { models: { User, Space } } = require('../../../../e-cohabitat-data')
 
 /**
  * Registers a space
@@ -26,7 +26,7 @@ module.exports = function(title, type, address, passcode, id) {
         if (result) throw Error('space already exists')
         
         const user = await User.findById(id) 
-        if (!user) throw Error('error')
+        if (!user) throw Error('user does not exist')
         
         const space = new Space({ title, type, address, passcode })
         space.cousers.push(user._id)

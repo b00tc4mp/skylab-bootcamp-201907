@@ -1,17 +1,22 @@
-const mongoose = require('mongoose')
-const logic = require('../../')
+require('dotenv').config()
+
 const { expect } = require('chai')
-const { User, Space } = require('../../../data')
+const logic = require('../..')
+const { database, models: { User, Space } } = require('data')
+
+const { env: { DB_URL_TEST }} = process
 
 describe('logic - retrieve space', () => {
 
-    before(() => mongoose.connect('mongodb://localhost/e-cohabitat-api-test', { useNewUrlParser: true }))
+    before(() => database.connect(DB_URL_TEST))
 
     let title, type, address, passcode, id, spaceId, username, name, surname, email, password
 
     beforeEach(async() => {
+        const spaceTypeArray = ['kitchen', 'bathroom', 'living room', 'coworking', 'garden', 'rooftop', 'other']
+        
         title = `name-${Math.random()}`
-        type = `type-${Math.random()}`
+        type = `${spaceTypeArray[Math.floor(Math.random() * spaceTypeArray.length)]}`
         address = `address-${Math.random()}`
         passcode = `123-${Math.random()}`
 
@@ -63,5 +68,5 @@ describe('logic - retrieve space', () => {
         }
     })
 
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })

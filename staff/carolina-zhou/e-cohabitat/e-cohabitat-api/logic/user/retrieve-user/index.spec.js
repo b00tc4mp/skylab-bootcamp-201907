@@ -1,10 +1,13 @@
+require('dotenv').config()
+
 const { expect } = require('chai')
-const logic = require('../../')
-const { User } = require('../../../data')
-const mongoose = require('mongoose')
+const logic = require('../..')
+const { database, models: { User } } = require('data')
+
+const { env: { DB_URL_TEST }} = process
 
 describe('logic - retrieve user', () => {
-    before(() => mongoose.connect('mongodb://localhost/e-cohabitat-api-test', { useNewUrlParser: true }))
+    before(() => database.connect(DB_URL_TEST))
 
     let username, name, surname, email, password, id
 
@@ -21,19 +24,29 @@ describe('logic - retrieve user', () => {
     })
 
     it('should succeed on correct data', async() =>{
-         const result = await logic.retrieveUser(id)
+        const result = await logic.retrieveUser(id)
             
-                expect(result).to.exist
-                expect(result.id).to.equal(id)
-                expect(result._id).not.to.exist
-                expect(result.name).to.equal(name)
-                expect(result.surname).to.equal(surname)
-                expect(result.email).to.equal(email)
-                expect(result.password).not.to.exist
+        expect(result).to.exist
+        expect(result.id).to.equal(id)
+        expect(result._id).not.to.exist
+        expect(result.name).to.equal(name)
+        expect(result.surname).to.equal(surname)
+        expect(result.email).to.equal(email)
+        expect(result.password).not.to.exist
+    })
+
+    it('should fail on wrong id', async () =>{
+        try{
+            await logic.retrieveUser('5d5fe532b4f3f827e6fc46f9')
+            throw new Error('should not reach this point')
+        }catch(error){
+            expect(error).to.exist
+            expect(error.message).to.equal(`user with id 5d5fe532b4f3f827e6fc46f9 not found`)
+        }
     })
 
     it('should fail on empty id', async () => {
-        try{
+        try {
             await logic.retrieveUser(' ')
         } catch({ message }) {
             expect(message).to.equal('user id is empty or blank')
@@ -41,7 +54,7 @@ describe('logic - retrieve user', () => {
     })
 
      it('should fail on undefined id', async () => {
-          try{
+        try {
             await logic.retrieveUser(undefined)
         } catch({ message }) {
             expect(message).to.equal("user id with value undefined is not a string")
@@ -49,13 +62,12 @@ describe('logic - retrieve user', () => {
      })
      
      it('should fail on wrong id data type', async() => {
-         try{
+         try {
                 await logic.retrieveUser(123)
-            } catch({ message }) {
+        } catch({ message }) {
                 expect(message).to.equal("user id with value 123 is not a string")
-            }
-       
+        }
      })
 
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })

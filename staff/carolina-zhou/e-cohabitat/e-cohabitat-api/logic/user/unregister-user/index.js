@@ -1,16 +1,17 @@
-const validate = require('../../../utils/validate')
-// const { ObjectId } = require('mongodb')
-/* Add: */ const { User } = require('../../../data')
+const { validate } = require('../../../../e-cohabitat-utils')
+const { models: { User } } = require('../../../../e-cohabitat-data')
 
 /**
- * Unregisters an existent user account.
+ * Unregisters an existing user account.
  * 
  * @param {string} id
  * @param {string} password
  * 
  * @returns {Promise}
  */
+
 module.exports = function (id, password) {
+    
     validate.string(id, 'user id')
     validate.string(password, 'password')
 

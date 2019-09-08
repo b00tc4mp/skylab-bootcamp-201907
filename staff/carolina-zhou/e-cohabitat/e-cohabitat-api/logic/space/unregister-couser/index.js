@@ -1,5 +1,5 @@
-const validate = require('../../../utils/validate')
-const { User, Space } = require('../../../data')
+const { validate } = require('../../../../e-cohabitat-utils')
+const { models: { User, Space } } = require('../../../../e-cohabitat-data')
 
 /**
  * Unregisters a space co-user

@@ -1,4 +1,4 @@
-module.exports = {
+module.exports =  {
     registerUser: require('./user/register-user'),
     authenticateUser: require('./user/authenticate-user'),
     retrieveUser: require('./user/retrieve-user'),
@@ -10,5 +10,15 @@ module.exports = {
     retrieveSpace: require('./space/retrieve-space'),
     updateSpace: require('./space/update-space'),
     unregisterSpace: require('./space/unregister-space'),
-    unregisterSpaceCouser: require('./space/unregister-couser')
+    unregisterSpaceCouser: require('./space/unregister-couser'),
+    addTask: require('./task/add-task'),
+    addTaskCompanion: require('./task/add-companion'),
+    retrieveAllTasks: require('./task/retrieve-all-tasks'),
+    retrieveTask: require('./task/retrieve-task'),
+    editTask: require('./task/edit-task'),
+    deleteTask: require('./task/delete-task'),
+    removeTaskCompanion: require('./task/remove-companion'),
+    postComment: require('./comment/post-comment'),
+    editComment: require('./comment/edit-comment'),
+    deleteComment: require('./comment/delete-comment')
 }

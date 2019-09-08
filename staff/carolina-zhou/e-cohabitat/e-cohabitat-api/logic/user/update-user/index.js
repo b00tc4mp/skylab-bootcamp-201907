@@ -1,5 +1,5 @@
-const validate = require('../../../utils/validate')
-const { User } = require('../../../data')
+const { validate } = require('../../../../e-cohabitat-utils')
+const { models: { User } } = require('../../../../e-cohabitat-data')
 
 /**
  * Updates a user.
@@ -9,12 +9,14 @@ const { User } = require('../../../data')
  * 
  * @returns {Promise}
  */
-module.exports = function (id, data) {
+
+module.exports = function (id, dataToUpdate) {
+
     validate.string(id, 'user id')
-    validate.object(data, 'body')
+    validate.object(dataToUpdate, 'body')
 
     return (async() => {
-        const user = await User.findByIdAndUpdate(id, { $set: data })
+        const user = await User.findByIdAndUpdate(id, { $set: dataToUpdate })
         if (!user) throw new Error(`user with id ${id} does not exist`)
     })()
 }

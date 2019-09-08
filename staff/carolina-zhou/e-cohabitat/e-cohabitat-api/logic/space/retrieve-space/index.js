@@ -1,5 +1,5 @@
-const validate = require('../../../utils/validate')
-const { Space } = require('../../../data')
+const { validate } = require('../../../../e-cohabitat-utils')
+const { models: { Space } } = require('../../../../e-cohabitat-data')
 
 /**
  * Retrieves a space by its id

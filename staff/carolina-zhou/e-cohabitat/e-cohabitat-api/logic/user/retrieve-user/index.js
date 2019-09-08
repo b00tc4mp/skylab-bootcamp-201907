@@ -1,6 +1,5 @@
-const validate = require('../../../utils/validate')
-const { User } = require('../../../data')
-const mongoose = require('mongoose')
+const { validate } = require('../../../../e-cohabitat-utils')
+const { models: { User } } = require('../../../../e-cohabitat-data')
 
 /**
  * Retrieves a user by its id.
@@ -9,7 +8,9 @@ const mongoose = require('mongoose')
  * 
  * @returns {Promise}
  */
+
 module.exports = function (id) {
+    
     validate.string(id, 'user id')
 
     return ( async() => {

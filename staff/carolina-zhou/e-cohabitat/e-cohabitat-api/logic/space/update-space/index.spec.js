@@ -1,23 +1,28 @@
-const mongoose = require('mongoose')
-const logic = require('../../')
+require('dotenv').config()
+
 const { expect } = require('chai')
-const { Space } = require('../../../data')
+const logic = require('../..')
+const { database, models: { Space } } = require('data')
+
+const { env: { DB_URL_TEST }} = process
 
 describe('logic - update space', () => {
 
-    before(() => mongoose.connect('mongodb://localhost/e-cohabitat-api-test',  { useNewUrlParser: true }))
+    before(() => database.connect(DB_URL_TEST))
 
     let title, type, address, passcode, id
 
     beforeEach(async() => {
+        const spaceTypeArray = ['kitchen', 'bathroom', 'living room', 'coworking', 'garden', 'rooftop', 'other']
+        
         title = `name-${Math.random()}`
-        type = `type-${Math.random()}`
+        type = `${spaceTypeArray[Math.floor(Math.random() * spaceTypeArray.length)]}`
         address = `address-${Math.random()}`
         passcode = `123-${Math.random()}`
 
         body = {
             title: `newName-${Math.random()}`,
-            type: `newType-${Math.random()}`
+            type: `${spaceTypeArray[Math.floor(Math.random() * spaceTypeArray.length)]}`
         }
         
         await Space.deleteMany()
@@ -36,7 +41,7 @@ describe('logic - update space', () => {
             
     })
 
-     it('should fail on non-existing space', async () => {
+     it('should fail on non-existent space', async () => {
         id = '5d5d5530531d455f75da9fF9'
 
         try{
@@ -108,5 +113,5 @@ describe('logic - update space', () => {
         }
     })
 
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })

@@ -1,6 +1,5 @@
 const { Schema, ObjectId } = require('mongoose')
 
-
 module.exports = new Schema({
     title: {
         type: String,
@@ -8,7 +7,8 @@ module.exports = new Schema({
     },
     type: {
         type: String,
-        required: true
+        required: true,
+        enum: ['kitchen', 'bathroom', 'living room', 'coworking', 'garden', 'rooftop', 'other']
     },
     address: {
         type: String,

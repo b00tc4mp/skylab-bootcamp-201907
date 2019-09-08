@@ -1,17 +1,25 @@
-const mongoose = require('mongoose')
-const logic = require('../../')
+require('dotenv').config()
+
 const { expect } = require('chai')
-const { User, Space } = require('../../../data')
+const logic = require('../..')
+const { database, models: { User, Space } } = require('data')
+
+const { env: { DB_URL_TEST }} = process
 
 describe('logic - register space co-user', () => {
 
-    before(() => mongoose.connect('mongodb://localhost/e-cohabitat-api-test', { useNewUrlParser: true }))
+    before(() => database.connect(DB_URL_TEST))
 
-    let title, type, address, passcode, username, name, surname, email, password, spaceId, coUserId
+    let title, type, address, passcode
+    let username, name, surname, email, password
+    let username2, name2, surname2, email2, password2
+    let spaceId, coUserId, existentUserId
 
     beforeEach(async() => {
+        const spaceTypeArray = ['kitchen', 'bathroom', 'living room', 'coworking', 'garden', 'rooftop', 'other']
+        
         title = `name-${Math.random()}`
-        type = `type-${Math.random()}`
+        type = `${spaceTypeArray[Math.floor(Math.random() * spaceTypeArray.length)]}`
         address = `address-${Math.random()}`
         passcode = `123-${Math.random()}`
 
@@ -22,11 +30,23 @@ describe('logic - register space co-user', () => {
         email = `email-${Math.random()}@email.com`
         password = `123-${Math.random()}`
 
+        username2 = `username-${Math.random()}`
+        name2 = `name-${Math.random()}`
+        surname2 = `surname-${Math.random()}`
+        email2 = `email-${Math.random()}@email.com`
+        password2 = `123-${Math.random()}`
+
         const user = await User.create({ username, name, surname, email, password })
         coUserId = user._id.toString()
 
-        const space = await Space.create({ title, type, address, passcode })
+        const space = await Space.create({ title, type, address, passcode, coUserId })
         spaceId = space._id.toString()
+
+        const existentUser = await User.create({ username: username2, name: name2, surname: surname2, email: email2, password: password2 })
+        existentUserId = existentUser._id.toString()
+
+        space.cousers.push(existentUserId)
+        await space.save()
     })
 
     it('should succeed on correct data', async () => {
@@ -40,12 +60,12 @@ describe('logic - register space co-user', () => {
         expect(space.passcode).to.equal(passcode)
     })
 
-    it('should fail if the space already exists', async () => {
+    it('should fail if the co-user is already registered', async () => {
         try {
-            await logic.registerSpaceCouser(spaceId, coUserId)
+            await logic.registerSpaceCouser(spaceId, existentUserId)
         } catch({error}) {
             expect(error).to.exist
-            expect(error.message).to.equal(`space already exists`)
+            expect(error.message).to.equal(`user already registered in space with id ${spaceId}`)
         }
     })
 
@@ -111,5 +131,5 @@ describe('logic - register space co-user', () => {
         }
     })
 
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })

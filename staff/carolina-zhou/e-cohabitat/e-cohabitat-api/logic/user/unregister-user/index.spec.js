@@ -1,11 +1,14 @@
+require('dotenv').config()
+
 const { expect } = require('chai')
-const logic = require('../../')
-const { User } = require('../../../data')
-const mongoose = require('mongoose')
+const logic = require('../..')
+const { database, models: { User } } = require('data')
+
+const { env: { DB_URL_TEST }} = process
 
 describe('logic - unregister user', () => {
 
-    before(() => mongoose.connect('mongodb://localhost/e-cohabitat-api-test', { useNewUrlParser: true }))
+    before(() => database.connect(DB_URL_TEST))
 
     let username, name, surname, email, password, id
 
@@ -24,11 +27,12 @@ describe('logic - unregister user', () => {
     it('should succeed on correct data', async () => {
         const result = await logic.unregisterUser(id, password)
         expect(result).not.to.exist
+
         const user = await User.findById(id)
         expect(user).not.to.exist
     })
 
-    it('should fail on unexisting user', async () => {
+    it('should fail on unexistent user', async () => {
         id =  '5d5d5530531d455f75da9fF9'
 
         try {
@@ -114,5 +118,5 @@ describe('logic - unregister user', () => {
        
     })
 
-    after(() => mongoose.disconnect())
+    after(() => database.disconnect())
 })
