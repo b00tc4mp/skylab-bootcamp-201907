@@ -2,7 +2,7 @@ const {validate} = require('footcamp-utils')
 const { models: { User, League } } = require('footcamp-data')
  
 /**
- * Leave league by league id
+ * User leave the league
  * 
  * @param {string} userId 
  * @param {string} leagueId
@@ -27,6 +27,7 @@ module.exports = function(id, code) {
         if (!league) throw Error(`cannot find league with code ${ code }`)
         
         const participantExist = league.participants.find(participant=> participant.toString()===id)
+        
         const participantExistIndex = league.participants.findIndex(participant=> participant.toString()===id)
         
         if(!participantExist) throw Error(`User with id ${id} do not play in this league`)

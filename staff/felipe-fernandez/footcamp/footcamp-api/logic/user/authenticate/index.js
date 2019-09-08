@@ -3,7 +3,8 @@ const { models: { User } } = require('footcamp-data')
 const bcrypt = require('bcryptjs')
 
  /**
- * 
+ * Authenticate a user
+
  * @param {*} email 
  * @param {*} password 
  * 
@@ -17,7 +18,7 @@ module.exports = function(email, password) {
     validate.string(password, 'password')
 
     return (async () => {
-        debugger
+        
         const user = await User.findOne({ email })
         if (!user) throw Error('Wrong credentials.')
 

@@ -2,7 +2,8 @@ const {validate } = require('footcamp-utils')
 const { models: { User,  League } } = require('footcamp-data')
 
  /**
- * 
+ * Retrieve the league information with all participants and their teams
+ *
  * @param {*} id 
  * @param {*} code 
  *   
@@ -36,7 +37,7 @@ module.exports = function(id, code) {
             participants.push(element.toString())
             
         })
-
+    
         teams = leagues.team
 
         let league = { name, code: codes, participants, teams}

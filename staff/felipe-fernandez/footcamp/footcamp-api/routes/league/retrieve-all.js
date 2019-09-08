@@ -7,7 +7,7 @@ module.exports = async function(req, res) {
     try {
         
        const teams = await logic.retrieveAllLeagues(id, code)
-           res.status(200).json({ message: 'Classification retrieved successfully', teams})
+           res.status(200).json({ message: 'All teams retrieved successfully', teams})
     } catch({ message }) {
         res.status(400).json({ error: message })
     }

@@ -2,7 +2,8 @@ const {validate} = require('footcamp-utils')
 const { models: { User } } = require('footcamp-data')
  
 /**
- * 
+ * Update user informtaion
+ 
  * @param {*} id
  * @param {*} fieldsToUpdate 
  * 

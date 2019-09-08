@@ -3,7 +3,8 @@ const { models: { User } } = require('footcamp-data')
  /**
 
 /**
- * 
+ * Retrieve user information
+
  * @param {*} name 
  * @param {*} surname 
  * @param {*} email 

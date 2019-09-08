@@ -2,7 +2,8 @@ const {validate} = require('footcamp-utils')
 const { models: { User,  League, Team } } = require('footcamp-data')
 
  /**
- * retrieves a team by name within the league and linked to the user id
+ * Deletes a team by name and the code of the league what he belongs
+ *
  * @param {*} id 
  * @param {*} code 
  * @param {*} name 
@@ -18,8 +19,7 @@ module.exports = function(id, code, name) {
     validate.string(name, 'name')
    
     return (async () => {
-
-                
+   
         const user = await User.findById(id)
 
         if (!user) throw new Error(`User with id ${id} does not exist`)

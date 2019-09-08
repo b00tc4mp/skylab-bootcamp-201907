@@ -2,7 +2,8 @@ const {validate} = require('footcamp-utils')
 const { models: { User,  League, Team } } = require('footcamp-data')
 
  /**
- * retrieves all the teams of the league
+ * Retrieves all the leagues of the user where he's a participant
+
  * @param {*} id 
  * @param {*} code 
  *
@@ -15,10 +16,8 @@ module.exports = function(id, code) {
     validate.string(id, 'id')
     validate.string(code, 'code')
     
-   
     return (async () => {
-
-                
+        
         const user = await User.findById(id)
 
         if (!user) throw new Error(`User with id ${id} does not exist`)
@@ -41,10 +40,7 @@ module.exports = function(id, code) {
             allTeams.push(team)
         })
        
-                
-
         return allTeams
-        
 
     })()
 }

@@ -2,6 +2,7 @@ const {validate } = require('footcamp-utils')
 const { models: { User,  League } } = require('footcamp-data')
 
  /**
+ * User joins to an existent league
  * 
  * @param {*} id 
  * @param {*} code 

@@ -16,6 +16,7 @@ const retrieveAllLeagues = require('./league/retrieve-all')
 const createTeam = require('./team/create')
 const retrieveTeam = require('./team/retrieve')
 const lineUpTeam = require('./team/lineup')
+const deleteTeam = require('./team/delete')
 
 const retrievePlayer = require('./player/retrieve')
 
@@ -41,33 +42,11 @@ router.get ('/users/leagues/table', [tokenMiddleware, jsonBodyParser], retrieveA
 router.post('/users/leagues/team', [tokenMiddleware, jsonBodyParser], createTeam)
 router.get ('/users/leagues/team', [tokenMiddleware, jsonBodyParser], retrieveTeam)
 router.get ('/users/leagues/team/lineup', [tokenMiddleware, jsonBodyParser], lineUpTeam)
+router.delete ('/users/leagues/team', [tokenMiddleware, jsonBodyParser], deleteTeam)
 
 
 /**PLAYER**/
 router.get ('/users/leagues/player', [tokenMiddleware, jsonBodyParser], retrievePlayer)
-
-// /* VEHICLE */
-// router.post('/users/:id/vehicles', [tokenMiddleware, jsonBodyParser], registerVehicle)
-// router.get('/users/:id/vehicles/', [tokenMiddleware, jsonBodyParser], retrieveAllVehicle)
-// router.get('/users/:id/vehicles/:vehicleId', [tokenMiddleware, jsonBodyParser], retrieveVehicle)
-// router.patch ('/users/:id/vehicles/:vehicleId', [tokenMiddleware, jsonBodyParser], updateVehicle)
-// router.delete ('/users/:id/vehicles/:vehicleId', [tokenMiddleware, jsonBodyParser], unregisterVehicle)
-
-// /* PROPERTY */ 
-// router.post('/users/:id/properties', [tokenMiddleware, jsonBodyParser], registerProperty)
-// router.get('/users/:id/properties/', [tokenMiddleware, jsonBodyParser], retrieveAllProperty)
-// router.get('/users/:id/properties/:propertyId', [tokenMiddleware, jsonBodyParser], retrieveProperty)
-// router.patch ('/users/:id/properties/:propertyId', [tokenMiddleware, jsonBodyParser], updateProperty)
-// router.patch ('/users/:id/properties/:propertyId/owners/:ownerId', [tokenMiddleware, jsonBodyParser], registerPropertyOwner)
-// router.delete ('/users/:id/properties/:propertyId/owners/:ownerId', [tokenMiddleware, jsonBodyParser], unregisterPropertyOwner)
-// router.delete ('/users/:id/properties/:propertyId', [tokenMiddleware, jsonBodyParser], unregisterProperty)
-
-// //CARD
-// router.post('/users/:id/cards', [tokenMiddleware, jsonBodyParser], registerCard)
-// router.get('/users/:id/cards/', [tokenMiddleware, jsonBodyParser], retrieveAllCard)
-// router.get('/users/:id/cards/:cardId', [tokenMiddleware, jsonBodyParser], retrieveCard)
-// router.delete ('/users/:id/cards/:cardId', [tokenMiddleware, jsonBodyParser], unregisterCard)
-
 
 
 module.exports = router

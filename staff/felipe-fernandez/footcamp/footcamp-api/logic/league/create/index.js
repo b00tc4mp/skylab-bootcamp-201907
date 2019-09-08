@@ -2,7 +2,8 @@ const {validate} = require('footcamp-utils')
 const { models: { User,  League } } = require('footcamp-data')
 
  /**
- * creates a league by name within the user passed as id
+ * Create a league with name and code and it relates to the user
+ *
  * @param {*} id 
  * @param {*} name 
  * @param {*} code 
@@ -31,8 +32,6 @@ module.exports = function(id, name, code) {
 
         if (leaguesCode) throw Error(`code alredy exists`)
 
-
-             
         const league = new League({name, code})
 
         league.participants.push(id)

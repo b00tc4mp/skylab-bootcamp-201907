@@ -3,12 +3,14 @@ const { models: { User } } = require('footcamp-data')
 const bcrypt = require('bcryptjs')
 
 /**
- * 
+ * Register a user 
+
  * @param {*} name 
  * @param {*} surname 
  * @param {*} email 
  * @param {*} password 
- * 
+ * @throws {TypeError} - If any param is not a string, email or password
+
  * @returns {Promise}
  */
 

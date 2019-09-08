@@ -8,7 +8,7 @@ const {  random : { number }  } = require('footcamp-utils')
 
 const { env: { DB_URL_TEST }} = process
 
-describe.only('logic - create team', () => {
+describe('logic - create team', () => {
     
     // before(() =>  database.connect(DB_URL_TEST))
     before(() =>  database.connect('mongodb://localhost/footcamp-test-create-players', { useNewUrlParser: true }))
