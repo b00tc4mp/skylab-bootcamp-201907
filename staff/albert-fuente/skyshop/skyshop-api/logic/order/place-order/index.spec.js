@@ -2,7 +2,7 @@ require('dotenv').config()
 const { expect } = require('chai')
 
 const placeOrder = require('.')
-const { database,models:{User, Product, Item} } = require('skyshop-data')
+const { database,models:{User, Product, Item, Order} } = require('skyshop-data')
 const{env: {DB_URL_TEST}}=process 
 
 
@@ -10,15 +10,15 @@ describe('logic - place order', () => {
 
     before(() => database.connect(DB_URL_TEST)) 
     
-    let name, surname, email, password, userId
+    let name, surname, email, password, userId, user
     let title,image,description,size,color,price, productId
-    let quantity,itemId
+    let quantity1,itemId
     let orderId
     
 
     beforeEach(async() => {
 
-        quantity = Number((Math.random()*1000).toFixed())
+        quantity1 = Number((Math.random()*1000).toFixed())
         date= new Date()
 
         await User.deleteMany()
@@ -36,15 +36,14 @@ describe('logic - place order', () => {
 
             const product=await Product.create({ title,image,description,size,color,price })
             productId = product.id.toString()
-            debugger
+            
             const user=await User.create({ name, surname, email, password })
             userId = user.id
-            debugger
-            const item=await Item.create({product:productId, quantity})
-            itemId=item.id
+            
+            let item = new Item({product:productId,quantity:quantity1})
             debugger
             user.cart.push(item)
-            debugger
+            await user.save()
          
     })
 
@@ -56,11 +55,14 @@ describe('logic - place order', () => {
 
         const order=await Order.findById(orderId)
         expect(order).to.exist
-        expect(user.cart).to.exist
-        expect(user.cart[0].quantity).to.equal(quantity)
+        expect(order.date).to.exist
+        expect(order.owner.toString()).to.equal(userId)
     }) 
 
     it('should fail on empty cart',async () =>{
+        const user=await User.findById(userId)
+        user.cart.pop()
+        await user.save()
         try{
             await placeOrder(userId)
 
@@ -71,9 +73,10 @@ describe('logic - place order', () => {
         }
     }) 
 
-    it('should fail on empty cart',async () =>{
+    it('should fail on wrong user',async () =>{
+        userId:'15985d5fe532b4f3f827e6fc64f87104'
         try{
-            await placeOrder('15985d5fe532b4f3f827e6fc64f87104')
+            await placeOrder(userId)
             
         }catch(error){
             expect(error).to.exist

@@ -38,16 +38,19 @@ describe('logic - remove from cart', () => {
             user=await User.create({ name, surname, email, password })
             userId = user.id
 
-            let item = new Item({product:productId,quantity1})
+            let item = new Item({product:productId,quantity:quantity1})
             debugger
             user.cart.push(item)
+            await user.save()
                   
     })
 
     it('should succeed on correct data',async () =>{
   
+
         await removeProduct(userId,productId)
-              
+        const user=await User.findById(userId)
+              debugger
         expect(user.cart[0]).to.not.exist
         //expect(user.cart).to.exist
 /*         expect(user.cart[0].quantity).to.not.exist

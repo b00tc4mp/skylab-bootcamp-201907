@@ -1,7 +1,7 @@
 require('dotenv').config()
 ​
 const validate = require('../../../utils/validate')
-const { models } = require('democratum-data')
+const { models } = require('skyshop-data')
 const { User } = models
 const streamifier = require('streamifier')
 const cloudinary = require('cloudinary')
