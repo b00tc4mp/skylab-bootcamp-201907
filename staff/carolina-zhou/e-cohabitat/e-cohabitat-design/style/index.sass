@@ -1,0 +1,123 @@
+*
+    margin: 0
+    padding: 0
+    font-family: B612 Mono, Helvetica, sans-serif
+    font-size: 1rem
+    box-sizing: border-box
+
+html
+    min-width: 350px
+    min-height: 100%
+    
+body
+    min-height: 100vh
+
+.hidden
+    display: none
+
+.main
+    padding: 4em
+    // landing
+    &__title
+        display: none
+    &__subtitle
+        text-align: center
+        font-size: 1.2rem
+        font-weight: normal
+    &__logo
+        margin: 2em 0 2em 0
+    &__mobile-menu
+        margin: 5em 0 
+    &__item
+        list-style: none
+        margin: 1em auto
+        padding: 1em
+        width: 50%
+        background-color: black
+        text-align: center
+    &__link
+        text-decoration: none
+        color: white
+
+@media screen and (min-width: 840px) 
+    .hidden
+        display: initial
+
+    .header
+        display: flex
+        justify-content: space-between
+        padding: 1em 2em
+
+        &__logo
+            width: 100px
+        &__main-menu
+            margin-top: 1em
+            padding: 0
+            font-weight: bold
+        &__secondary-menu
+            display: flex
+        &__item
+            list-style: none
+            padding: 0 0 1em 2em
+        &__main-link
+            text-decoration: none
+            color: black
+            margin-left: -2em
+        &__secondary-link
+            text-decoration: none
+            color: grey
+        &__main-link:hover, &__secondary-link:hover
+            color: deeppink
+
+    .main
+        padding: 0 7em
+        text-align: center
+        min-height: calc(100vh - 80px - 228.8px)
+        // landing
+        &__e
+            font-weight: lighter
+            font-size: 1.5rem
+        &__title
+            display: block
+            font-family: Helvetica, Roboto, sans-serif
+            font-size: 2rem
+            padding-top: 3em
+        &__subtitle
+            font-weight: normal
+            margin-top: 3em
+        &__logo, &__mobile-menu
+            display: none
+
+
+    .footer
+        display: flex
+        flex-wrap: wrap
+        justify-content: space-between
+        padding: 2em
+
+        &__menu
+            display: flex
+        &__item
+            list-style: none
+            padding-right: 2em
+            font-size: .75rem
+        &__link
+            text-decoration: none
+            color: grey
+            font-size: .75rem
+        &__link:hover, .fab:hover
+            color: deeppink
+        .fab
+            text-decoration: none
+            color: black
+            font-size: .85rem
+            margin: auto -2em auto 2em 
+
+@import ../templates/register/
+@import ../templates/register-success/
+@import ../templates/login/
+@import ../templates/home/
+@import ../templates/space-module/
+@import ../templates/monthly-calendar/
+@import ../templates/weekly-calendar/
+@import ../templates/daily-timetable/
