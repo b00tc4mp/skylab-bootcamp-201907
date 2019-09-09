@@ -1,6 +1,6 @@
 require('dotenv').config()
 const { expect } = require('chai')
-const retrieveAllGeo = require('.')
+const logic = require('../..')
 const { database, models: { User } } = require('data')
 
 
@@ -22,14 +22,14 @@ describe('logic - retrieve users by geolocation ', () => {
         longitude =  2.1894
         latitude =  41.403 
        
-            const location= {type: 'Point', coordinates: [longitude, latitude]}
-            const user = await User.create({ name, surname, username, email, password, location})
+            const location = {type: 'Point', coordinates: [longitude, latitude]}
+            const user = await User.create({ name, surname, username, email, password, static: location})
             id = user.id
     })
 
     it('should succeed on correct data', async () => {
         
-        const users = await retrieveAllGeo(id, distance)   
+        const users = await logic.retrieveAllStatic(id, distance)   
         debugger      
         expect(users[users.length -1]).to.exist
         })

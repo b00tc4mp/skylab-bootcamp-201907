@@ -1,10 +1,11 @@
 require('dotenv').config()
+
 const { expect } = require('chai')
-const updateGeo = require('.')
+const logic = require('../..')
 const { database, models: { User } } = require('data')
 const { env: { DB_URL_TEST }} = process
 
-describe('logic - update geo', () => {
+describe('logic - update static geolocation', () => {
     before(() =>  database.connect(DB_URL_TEST))
 
     let name, surname, email, username, password, longitude, latitude, id
@@ -18,45 +19,48 @@ describe('logic - update geo', () => {
         longitude= Math.random()
         latitude= Math.random()
 
-
-
-
         await User.deleteMany()
-        /* const location= {type: 'Point', coordinates: [longitude, latitude]} */
             const user = await User.create({ name, surname, username, email, password})
-            id = user.id
+                id = user.id
     })
 
     it('should succeed on correct data', async () =>{
-        const response = await updateGeo(id, longitude, latitude)
-        
+        const response = await logic.updateStatic(id, longitude, latitude)
+     
             expect(response).not.to.exist
-            return ( async () => {
-            
+
             const user = await User.findById(id)
-           
                 expect(user).to.exist
-                expect(user.name).to.equal(body.name)
-                expect(user.surname).to.equal(body.surname)
-                expect(user.username).to.equal(body.username)
-                expect(user.email).to.equal(body.email)
-                expect(user.password).to.equal(body.password)
-                expect(user.longitud).to.equal(body.longitud)
-                expect(user.latitude).to.equal(body.latitude)
-               
-                
-        })
+                expect(user.static.coordinates[0]).to.equal(longitude)
+                expect(user.static.coordinates[1]).to.equal(latitude)
     })
 
     it('should fail on non-existing user', async () => {
-        const fakeid = '5e711645a4734dc78985edb0'
-       try{
-        await updateGeo(fakeid,longitude,latitude)
-       }catch({ message }){
-           expect(message).to.equal(`user with id ${fakeid} does not exist`)
+
+        const _id = '5e711645a4734dc78985edb0'
+
+        try{
+            const result = await logic.updateStatic(_id, longitude, latitude)
+                expect(result).to.exist
+        }catch({ message }){
+           expect(message).to.equal(`User not found`)
         }
     })
+    it('should fail on empty user id', () =>
+        expect(() => logic.updateStatic("", longitude, latitude)).to.throw('user id is empty or blank')
+    )
 
+    it('should fail on wrong user id type', () =>
+        expect(() => logic.updateStatic(123, longitude, latitude)).to.throw('user id with value 123 is not a string')
+    )
+
+    it('should fail on wrong longitude type', () =>
+        expect(() => logic.updateStatic(id, 'longitude', latitude)).to.throw('longitude with value longitude is not a number')
+    )
+
+    it('should fail on wrong latitude type ', () =>
+        expect(() => logic.updateStatic(id, longitude, 'latitude')).to.throw('latitude with value latitude is not a number')
+    )
 
     after(() => database.disconnect())
 })
