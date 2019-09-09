@@ -7,6 +7,7 @@ const authenticateUser = require('./user/authenticate-user')
 const retrieveUser = require('./user/retrieve-user')
 const updateUser = require('./user/update-user')
 const unregisterUser = require('./user/unregister-user')
+const toggleBookmarks = require('./user/toggle-bookmark')
 
 const createPost = require('./post/create-post')
 const retrievePost = require('./post/retrieve-post')
@@ -28,6 +29,7 @@ router.post('/auth', jsonBodyParser, authenticateUser)
 router.get('/users', [tokenMiddleware, jsonBodyParser], retrieveUser) //'user: id'
 router.patch ('/users', [tokenMiddleware, jsonBodyParser], updateUser) //'user: id'
 router.delete ('/users', [tokenMiddleware, jsonBodyParser], unregisterUser) //'user: id'
+router.post('/bookmark', jsonBodyParser, toggleBookmarks)
 
 /* POST */
 router.post('/posts', jsonBodyParser, createPost)
