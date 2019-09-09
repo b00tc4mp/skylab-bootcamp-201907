@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
 const Pet = require('./pet')
+const Notification = require('./notification')
 
 module.exports = new Schema({
     name: {
@@ -21,5 +22,33 @@ module.exports = new Schema({
         type: String,
         required: true
     },
-    pets: [Pet]
+    pets: [Pet],
+    notification: [Notification],
+    static: {
+        type: {
+            type: String, 
+            enum: ['Point'],
+            default: 'Point'
+            /*required: true */
+        },
+        coordinates: {
+            type: [Number],
+            default: [0,0]
+            /*required: true */
+        }
+    },
+    dinamic: {
+        type: {
+            type: String, 
+            enum: ['Point'],
+            default: 'Point'
+            /*required: true */
+        },
+        coordinates: {
+            type: [Number],
+            default: [0,0]
+            /*required: true */
+        }
+    }
+
 })
