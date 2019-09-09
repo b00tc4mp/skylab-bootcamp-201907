@@ -1,51 +1,43 @@
 import retrieveUser from '.'
+import { database, models } from 'my-stuff-data'
+import jwt from 'jsonwebtoken'
 
-const { random } = Math
+const { User } = models
 
-const REACT_APP_API_URL = process.env.REACT_APP_API_URL
+// const { env: { DB_URL_TEST }} = process
+const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
+const REACT_APP_JWT_SECRET_TEST = process.env.REACT_APP_JWT_SECRET_TEST
 
 describe('logic - retrieve user', () => {
-    let name, surname, email, password, id, token
+    beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
 
-    beforeEach(async () => {
-        name = `name-${random()}`
-        surname = `surname-${random()}`
-        email = `email-${random()}@mail.com`
-        password = `password-${random()}`
+    let name, surname, email, password, id
 
-        await fetch(`${REACT_APP_API_URL}/users`, {
-            method: 'post',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({ name, surname, email, password })
-        })
+    beforeEach(() => {
+        name = `name-${Math.random()}`
+        surname = `surname-${Math.random()}`
+        email = `email-${Math.random()}@domain.com`
+        password = `password-${Math.random()}`
 
-        const response = await fetch(`${REACT_APP_API_URL}/auth`, {
-            method: 'post',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({ email, password })
-        })
-
-        const result = await response.json()
-
-        debugger
-
-        id = result.id
-        token = result.token
+        return User.deleteMany()
+            .then(() => User.create({ name, surname, email, password }))
+            .then(user => id = user.id)
     })
 
     it('should succeed on correct data', async () => {
-        const user = await retrieveUser(id, token)
+        const token = jwt.sign({ sub: id }, REACT_APP_JWT_SECRET_TEST)
 
-        expect(user).toBeDefined()
+        await retrieveUser(id, token)
+            .then(user => {
+                expect(user).toBeDefined()
+                expect(user.id).toBe(id)
+                expect(user._id).toBeUndefined()
+                expect(user.name).toBe(name)
+                expect(user.surname).toBe(surname)
+                expect(user.email).toBe(email)
+                expect(user.password).toBeUndefined()
+            })
+        })
 
-        expect(user.id).toBe(id)
-        expect(user.name).toBe(name)
-        expect(user.surname).toBe(surname)
-        expect(user.email).toBe(email)
-        expect(user.password).toBeUndefined()
-    })
+    afterAll(() => database.disconnect())
 })

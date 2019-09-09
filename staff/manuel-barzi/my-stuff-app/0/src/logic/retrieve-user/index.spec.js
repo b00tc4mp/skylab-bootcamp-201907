@@ -31,8 +31,6 @@ describe('logic - retrieve user', () => {
 
         const result = await response.json()
 
-        debugger
-
         id = result.id
         token = result.token
     })
