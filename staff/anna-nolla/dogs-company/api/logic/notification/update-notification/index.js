@@ -1,5 +1,5 @@
 const { validate } = require('utils')
-const { models: { User } } = require('data')
+const { models: { User, Notification } } = require('data')
 
 /**
  * Update a user notification
@@ -18,18 +18,16 @@ module.exports = function (id, notificationId, data) {
     validate.string(data.text, 'text')
 
     return (async () => {
-       
         let user = await User.findById(id)
             if (!user) throw Error('User does not exists.')
             if (user.notification.length < 0) throw Error('This user does not have notifications')
     
-        let notIndex = await user.notification.findIndex(item => item.id === notificationId)
-           if (notIndex === -1) throw Error("This user has no notifications")
+        let notification = await user.notification.find(item => item.id === notificationId)
+           if (!notification) throw Error("This user has no notifications")
 
-            user.notification[notIndex] = data
-            user.notification[notIndex]._id = notificationId
-    
-        // await User.update({ "id": id, "notification.id": notificationId}, { "$set": { "notification.0.title": data.title }})
+            notification.title = data.title
+            notification.text = data.text
+            
         await user.save()
     })()
 }    

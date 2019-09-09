@@ -27,12 +27,15 @@ module.exports = function (id, petId, data) {
             if (!user) throw Error('User does not exists.')
             if (user.pets.length < 0) throw Error('This user does not have pets')
     
-        let petIndex = await user.pets.findIndex(item => item.id === petId)
-           if (petIndex === -1) throw Error("This user has no pet with this id")
+        let pet = await user.pets.find(item => item.id === petId)
+           if (!pet) throw Error("This user has no pet with this id")
 
-            user.pets[petIndex] = data
-            user.pets[petIndex]._id = petId
-    
+           pet.name = data.name
+           pet.age = data.age
+           pet.gender = data.gender
+           pet.size = data.size
+           pet.characteristics = data.characteristics
+
         await user.save()
     })()
 }    
