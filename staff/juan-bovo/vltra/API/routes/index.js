@@ -14,6 +14,7 @@ const retrievePost = require('./post/retrieve-post')
 const retrieveAllPosts = require('./post/retrieve-all-posts')
 const retrieveUserPosts = require('./post/retrieve-user-posts')
 const deletePost = require('./post/delete-post')
+const votePost = require('./post/vote-post')
 
 const addComment = require('./comment/add-comment')
 const retrievePostComments = require('./comment/retrieve-post-comments')
@@ -37,6 +38,7 @@ router.get('/post', [tokenMiddleware, jsonBodyParser], retrievePost)
 router.get('/posts', [tokenMiddleware, jsonBodyParser], retrieveAllPosts)
 router.get('/posts/author', [tokenMiddleware, jsonBodyParser], retrieveUserPosts)
 router.delete ('/posts', [tokenMiddleware, jsonBodyParser], deletePost)
+router.post('/post/vote', jsonBodyParser, votePost)
 
 /* COMMENTS */
 router.post('/posts/comments', jsonBodyParser, addComment)

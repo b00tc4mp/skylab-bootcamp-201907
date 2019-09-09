@@ -1,6 +1,7 @@
 //const validate = require('../../../utils/validate')
 const { models: { User } } = require('vltra-data')
 const { validate} = require('vltra-utils')
+const bcrypt = require('bcryptjs')
 
 /* Add: const { User } = require('../../../data')*/ 
 
@@ -37,8 +38,10 @@ module.exports = function(name, surname, nickname, email, password) {
 
         const user = await User.findOne({ email })
         if (user) throw Error(`user with e-mail ${email} already exists`)
+
+        const hash = await bcrypt.hash(password,10)
         
-        await User.create({name, surname, nickname, email, password, bookmarks, voted})
+        await User.create({name, surname, nickname, email, password : hash, bookmarks, voted})
 
         return user
     })()

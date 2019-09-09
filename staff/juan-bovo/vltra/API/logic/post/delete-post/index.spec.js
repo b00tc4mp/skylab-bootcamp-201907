@@ -55,7 +55,7 @@ describe('logic - delete post', () => {
 
         try{
             const post = await deletePost(wrongPostId)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error) {
                 expect(error).to.exist
                 expect(error.message).to.equal(`post with id ${wrongPostId} does not exist`)

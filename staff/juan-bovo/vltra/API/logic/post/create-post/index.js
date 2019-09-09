@@ -39,7 +39,7 @@ module.exports = function(title, body, author) {
 
         const response = await Post.findOne({ body })
         
-        if (!response) throw new Error(`post with content ${body} does not exist`)
+        //if (!response) throw new Error(`post with content ${body} does not exist`)
         newPostId = response._id.toString()
         return newPostId
 

@@ -66,7 +66,7 @@ describe('logic - toggle bookmark', () => {
         }
     })
 
-    it('should fail on wrong wrongPostId', async() => {
+    it('should fail on wrong PostId', async() => {
         const wrongPostId = "5d73952803f75b35e0b8d85e"
         try{
             const comment = await toggleBookmark(userId, wrongPostId)
