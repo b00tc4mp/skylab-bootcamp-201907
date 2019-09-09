@@ -12,8 +12,8 @@ describe('logic - retrieve team', () => {
     before(() =>  database.connect(DB_URL_TEST))
 
     let name, surname, email, password, nameTeam, nameLeague, points, code
-    let namePlayer, namePlayer2,  surnamePlayer, surnamePlayer2, player_id, player_id2, real_team, real_team2, position, position2, points_per_game, points_per_game2
-    let total_points, total_points2, yellow_cards, yellow_cards2, red_cards, red_cards2, goals, goals2, minutes, minutes2, photo, cost, cost2
+    let namePlayer, namePlayer2,  surnamePlayer, surnamePlayer2, playerId, playerId2, realTeam, realTeam2, position, position2, pointsPerGame, pointsPerGame2
+    let totalPoints, totalPoints2, yellowCards, yellowCards2, redCards, redCards2, goals, goals2, minutes, minutes2, photo, cost, cost2
 
     beforeEach(() => {
 
@@ -29,12 +29,12 @@ describe('logic - retrieve team', () => {
         namePlayer = `name-${Math.random()}`
         surnamePlayer = `surname-${Math.random()}`
         playerId = number(1111,2241111)
-        real_team = `realTeam-${Math.random()}`
+        realTeam = `realTeam-${Math.random()}`
         position = number(1111,2241111)
-        points_per_game = number(1111,2241111)
-        total_points = number(1111,2241111)
-        yellow_cards = number(1111,2241111)
-        red_cards = number(1111,2241111)
+        pointsPerGame = number(1111,2241111)
+        totalPoints = number(1111,2241111)
+        yellowCards = number(1111,2241111)
+        redCards = number(1111,2241111)
         goals = number(1111,2241111)
         minutes = number(1111,2241111)
         cost = number(1111,2241111)
@@ -42,12 +42,12 @@ describe('logic - retrieve team', () => {
         namePlayer2 = `name-${Math.random()}`
         surnamePlayer2 = `surname-${Math.random()}`
         playerId2 = number(1111,2241111)
-        real_team2 = `realTeam-${Math.random()}`
+        realTeam2 = `realTeam-${Math.random()}`
         position2 = number(1111,2241111)
-        points_per_game2 = number(1111,2241111)
-        total_points2 = number(1111,2241111)
-        yellow_cards2 = number(1111,2241111)
-        red_cards2 = number(1111,2241111)
+        pointsPerGame2 = number(1111,2241111)
+        totalPoints2 = number(1111,2241111)
+        yellowCards2 = number(1111,2241111)
+        redCards2 = number(1111,2241111)
         goals2 = number(1111,2241111)
         minutes2 = number(1111,2241111)
         cost2 = number(1111,2241111)
@@ -65,8 +65,8 @@ describe('logic - retrieve team', () => {
 
             const league= new League({id, name: nameLeague, code})
 
-            const player = new Player({name: namePlayer, surname: surnamePlayer, playerId, real_team, position, points_per_game, total_points, yellow_cards, red_cards,  goals, minutes, cost  })
-            const player2 = new Player({name: namePlayer2, surname: surnamePlayer2, playerId: playerId2, real_team: real_team2 , position: position2,   points_per_game:  points_per_game2, total_points: total_points2, yellow_cards: yellow_cards2, red_cards: red_cards2,  goals: goals2, minutes: minutes2, cost: cost2  })
+            const player = new Player({name: namePlayer, surname: surnamePlayer, playerId, realTeam, position, pointsPerGame, totalPoints, yellowCards, redCards,  goals, minutes, cost  })
+            const player2 = new Player({name: namePlayer2, surname: surnamePlayer2, playerId: playerId2, realTeam: realTeam2 , position: position2,   pointsPerGame:  pointsPerGame2, totalPoints: totalPoints2, yellowCards: yellowCards2, redCards: redCards2,  goals: goals2, minutes: minutes2, cost: cost2  })
             idPlayer = player.id
             idPlayer2 = player2.id
 

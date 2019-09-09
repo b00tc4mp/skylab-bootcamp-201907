@@ -12,7 +12,7 @@ describe('logic - retrieve lineup', () => {
     before(() =>  database.connect(DB_URL_TEST))
 
     let name, surname, email, password, nameTeam, nameLeague, points, code
-    let namePlayer, surnamePlayer, player_id, real_team, position, points_per_game,  total_points,  yellow_cards,  red_cards,  goals,  minutes,  cost
+    let namePlayer, surnamePlayer, playerId, realTeam, position, pointsPerGame,  totalPoints,  yellowCards,  redCards,  goals,  minutes,  cost
     
     beforeEach(() => {
 
@@ -48,16 +48,16 @@ describe('logic - retrieve lineup', () => {
                 namePlayer = `name-${Math.random()}`
                 surnamePlayer = `surname-${Math.random()}`
                 playerId = number(1111,2241111)
-                real_team = `realTeam-${Math.random()}`
+                realTeam = `realTeam-${Math.random()}`
                 position = randomNumber
-                points_per_game = number(1111,2241111)
-                total_points = number(1111,2241111)
-                yellow_cards = number(1111,2241111)
-                red_cards = number(1111,2241111)
+                pointsPerGame = number(1111,2241111)
+                totalPoints = number(1111,2241111)
+                yellowCards = number(1111,2241111)
+                redCards = number(1111,2241111)
                 goals = number(1111,2241111)
                 minutes = number(1111,2241111)
                 cost = number(1111,2241111)
-                const player = new Player({name: namePlayer, surname: surnamePlayer, playerId, real_team, position, points_per_game, total_points, yellow_cards, red_cards,  goals, minutes, cost  })
+                const player = new Player({name: namePlayer, surname: surnamePlayer, playerId, realTeam, position, pointsPerGame, totalPoints, yellowCards, redCards,  goals, minutes, cost  })
                 team.players.push(player.id)
                 await player.save()
             }

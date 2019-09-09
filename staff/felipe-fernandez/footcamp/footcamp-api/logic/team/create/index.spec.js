@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const {expect} = require('chai')
 const logic = require('../..')
-const { database, models: { User, League, Team, Player } } = require('footcamp-data')
+const { database, models: { User, League, Team } } = require('footcamp-data')
 const {  random : { number }  } = require('footcamp-utils')
 
 

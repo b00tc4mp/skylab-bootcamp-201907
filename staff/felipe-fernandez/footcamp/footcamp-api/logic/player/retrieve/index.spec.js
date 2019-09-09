@@ -12,8 +12,8 @@ describe('logic - retrieve player', () => {
     before(() =>  database.connect(DB_URL_TEST))
 
     let name, surname, email, password, nameTeam, nameLeague, points, code
-    let namePlayer,  surnamePlayer,  player_id,  real_team,  position,  points_per_game
-    let total_points,  yellow_cards,  red_cards,  goals,  minutes,   cost
+    let namePlayer,  surnamePlayer,  playerIid,  realTeam,  position,  pointsPerGame
+    let totalPoints,  yellowCards,  redCards,  goals,  minutes,   cost
 
     beforeEach(() => {
 
@@ -29,12 +29,12 @@ describe('logic - retrieve player', () => {
         namePlayer = `webName-${Math.random()}`
         surnamePlayer = `webName-${Math.random()}`
         playerId = number(1111,2241111)
-        real_team = `realTeam-${Math.random()}`
+        realTeam = `realTeam-${Math.random()}`
         position = number(1111,2241111)
-        points_per_game = number(1111,2241111)
-        total_points = number(1111,2241111)
-        yellow_cards = number(1111,2241111)
-        red_cards = number(1111,2241111)
+        pointsPerGame = number(1111,2241111)
+        totalPoints = number(1111,2241111)
+        yellowCards = number(1111,2241111)
+        redCards = number(1111,2241111)
         goals = number(1111,2241111)
         minutes = number(1111,2241111)
         cost = number(1111,2241111)
@@ -52,7 +52,7 @@ describe('logic - retrieve player', () => {
 
             const league= new League({id, name: nameLeague, code})
 
-            const player = new Player({name: namePlayer, surname: surnamePlayer, playerId, real_team, position, points_per_game, total_points, yellow_cards, red_cards,  goals, minutes, cost  }) 
+            const player = new Player({name: namePlayer, surname: surnamePlayer, playerId, realTeam, position, pointsPerGame, totalPoints, yellowCards, redCards,  goals, minutes, cost  }) 
             idPlayer = player.id
             
             const team = new Team({id, name: nameTeam, points})
@@ -79,11 +79,11 @@ describe('logic - retrieve player', () => {
             expect(result.name).to.equal(namePlayer)
             expect(result.surname).to.equal(surnamePlayer)
             expect(result.position).to.equal(position)
-            expect(result.real_team).to.equal(real_team)
-            expect(result.total_points).to.equal(total_points)
-            expect(result.points_per_game).to.equal(points_per_game)
-            expect(result.yellow_cards).to.equal(yellow_cards)
-            expect(result.red_cards).to.equal(red_cards)
+            expect(result.realTeam).to.equal(realTeam)
+            expect(result.totalPoints).to.equal(totalPoints)
+            expect(result.pointsPerGame).to.equal(pointsPerGame)
+            expect(result.yellowCards).to.equal(yellowCards)
+            expect(result.redCards).to.equal(redCards)
             expect(result.goals).to.equal(goals)
             expect(result.minutes).to.equal(minutes)
             expect(result.cost).to.equal(cost)
@@ -107,7 +107,7 @@ describe('logic - retrieve player', () => {
 
                 await League.create({ id, name: nameLeague,code  })
                 await Team.create({id, name: nameTeam, points})
-                await Player.create({name: namePlayer, surname: surnamePlayer, playerId, real_team, position, points_per_game, total_points, yellow_cards, red_cards,  goals, minutes, cost})
+                await Player.create({name: namePlayer, surname: surnamePlayer, playerId, realTeam, position, pointsPerGame, totalPoints, yellowCards, redCards,  goals, minutes, cost})
                 await Player.deleteMany()
         
                 try {
