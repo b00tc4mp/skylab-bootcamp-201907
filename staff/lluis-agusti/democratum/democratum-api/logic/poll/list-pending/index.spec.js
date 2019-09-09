@@ -3,7 +3,7 @@ const { expect } = require('chai')
 const { models , mongoose } = require('democratum-data')
 const { Citizen } = models
 
-describe('logic - update citizen', () => {
+describe('logic - list all pending polls of a city', () => {
 
     before(() =>  mongoose.connect('mongodb://localhost/democratum-test', { useNewUrlParser: true }))
 

@@ -12,9 +12,9 @@ describe('logic - authenticate citizen', () => {
 
     beforeEach(async () => {
 
-        await User.deleteMany()
+        //await User.deleteMany()
 
-        cityId = `cityid-${Math.random()}`
+        cityId = `FROMAUTH-${Math.random()}`
         fullname = `fullname-${Math.random()}`
         address = `address-${Math.random()}`
         documentId = `documentid-${Math.random()}@domain.com`
@@ -25,9 +25,11 @@ describe('logic - authenticate citizen', () => {
         proposedPolls = ['k89236423894y2348', '12323']
         userRole = 'citizen'
 
-        const user = await User.create({cityId, fullname, address, documentId, email, imgDocId, password: await bcrypt.hash (password, 10), participatedPolls, proposedPolls, userRole})
+        const user = await User.create({cityId, fullname, address, documentId, email, imgDocId, password, participatedPolls, proposedPolls, userRole})
 
         id = user.id
+
+        // password: await bcrypt.hash (password, 10)
         
     })
 

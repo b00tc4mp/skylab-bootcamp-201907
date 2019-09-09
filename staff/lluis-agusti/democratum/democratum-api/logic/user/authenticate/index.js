@@ -23,13 +23,13 @@ module.exports = function(email, password) {
         
         if(!user) throw new Error(`user with e-mail ${email} does not exist`)
             
-        //if (user.password !== password) throw Error('wrong credentials')
+        if (user.password !== password) throw Error('wrong credentials')
 
         const { id } = user
 
-        const match = await bcrypt.compare(password, user.password)
+        //const match = await bcrypt.compare(password, user.password)
 
-        if (!match) throw Error('wrong credentials')
+        //if (!match) throw Error('wrong credentials')
 
         return id
     })()

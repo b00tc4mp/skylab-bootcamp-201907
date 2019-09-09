@@ -3,7 +3,7 @@ const { expect } = require('chai')
 const { models , mongoose } = require('democratum-data')
 const { User, Poll } = models
 
-describe.only('logic - vote poll', () => {
+describe('logic - vote poll', () => {
     before(() => mongoose.connect('mongodb://localhost/democratum-test',  { useNewUrlParser: true }))
 
     let cityPollId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, negatives, pollStatus, pollId
@@ -12,10 +12,10 @@ describe.only('logic - vote poll', () => {
     let vote
 
     beforeEach(async() => {
-        await Poll.deleteMany()
-        await User.deleteMany()
+        //await Poll.deleteMany()
+        //await User.deleteMany()
 
-        cityId = `cityID-${Math.random()}`
+        cityId = `VOTEPOLL-${Math.random()}`
 
         authorId = `vehmodel-${Math.random()}`
         question = `question-${Math.random()}`
@@ -28,7 +28,7 @@ describe.only('logic - vote poll', () => {
         negatives = 1
         pollStatus = 'pending'
 
-        fullname = `fullname-${Math.random()}`
+        fullname = `VOTEUSER-${Math.random()}`
         address = `address-${Math.random()}`
         documentId = `documentid-${Math.random()}@domain.com`
         email = `email@-${Math.random()}.com`
@@ -41,7 +41,12 @@ describe.only('logic - vote poll', () => {
         const user = await User.create({cityId, fullname, address, documentId, email, imgDocId, password, participatedPolls, proposedPolls, userRole})
         userId = user.id
 
-        const poll = await Poll.create({ cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, negatives, pollStatus })
+        /* const poll = await Poll.create({ cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, negatives, pollStatus })
+        pollId = poll.id */
+
+        const poll = new Poll ({ cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, negatives, pollStatus, pollId })
+
+        await poll.save()
         pollId = poll.id
 
     })
