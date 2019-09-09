@@ -7,12 +7,9 @@ module.exports = new Schema({
         required: true
     },
 
-    code: {
-        type: Number,
-        required: true
-    },
+    code: {type: String, required: true },
 
-    admin: [{ type: ObjectId, ref: 'User'}],
+    participants: [{ type: ObjectId, ref: 'User' }],
 
     team: [teamSchema]
 })
