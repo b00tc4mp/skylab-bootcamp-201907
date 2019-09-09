@@ -31,7 +31,7 @@ module.exports = new Schema({
         required: true
     },
 
-    totaPoints: {
+    totalPoints: {
         type: Number,
         required: true
     },
