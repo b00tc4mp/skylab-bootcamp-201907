@@ -1,7 +1,11 @@
 const { Schema, ObjectId } = require('mongoose')
 
 module.exports = new Schema({
-    author: { type: ObjectId, ref: 'User'},
+    authorId: { type: ObjectId, ref: 'User'},
+    author: {
+        type: String,
+        required: true
+    },
     posted: {
         type: Date,
         required:true

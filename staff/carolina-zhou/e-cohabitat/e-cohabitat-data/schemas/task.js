@@ -9,7 +9,7 @@ module.exports = new Schema({
     taskType: {
         type: String,
         required: true,
-        enum: ['particular', 'collective', 'maintenance']
+        enum: ['particular', 'collective', 'maintenance', 'other']
     },
     description: {
         type: String,
