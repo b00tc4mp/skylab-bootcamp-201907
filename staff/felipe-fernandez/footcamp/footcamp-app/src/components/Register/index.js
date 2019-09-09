@@ -1,17 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import logic from '../../logic'
+import { withRouter} from 'react-router-dom'
 
-
-function Register() {
-
+function Register(props) {
+    const { history } = props
+    
     function handleRegister (name, surname, email, password) {
 
         (async()=>{
             
             try {
-               logic.registerUser(name, surname, email, password)
-        
-              console.log('ok, registered... TODO show succeed register panel')
+               await logic.registerUser(name, surname, email, password)
+               history.push('/register-success')
+            
             } catch ({ message }) {
               console.log('fail register', message)
             }
@@ -75,8 +76,9 @@ function Register() {
                 />
                 <button className="button is-fullwidth is-info is-outlined">Submit</button>
             </form>
+            
         </div>
     )
 }
 
-export default Register
+export default withRouter(Register)

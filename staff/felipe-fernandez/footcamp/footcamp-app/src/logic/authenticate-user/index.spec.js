@@ -47,7 +47,7 @@ describe('logic-authenticate user', ()=>{
         try {
             await authenticateUser(email, password)
         } catch({message}) {
-         expect(message).toBe(`Wrong credentials.`)
+         expect(message).toBe(`Wrong credentials`)
         }
     })
 })
