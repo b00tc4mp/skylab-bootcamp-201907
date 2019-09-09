@@ -13,7 +13,7 @@ function registerUser (username, email, password, avatar) {
         const user = await User.findOne({ email })
         if (user) throw new Error(`user with e-mail ${email} already exists`)
         await User.create({ username, email, password, avatar })
-
+        
     })()
 }
 
