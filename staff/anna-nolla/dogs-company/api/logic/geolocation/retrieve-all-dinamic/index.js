@@ -15,16 +15,15 @@ module.exports = function (id, distance){
     validate.number(distance, 'distance')   
         
     return (async () => {   
-        // let response = []
 
         const user = await User.findById(id)
-            if (!user) throw new Error(`user not found`)
+            if (!user) throw new Error(`User not found`)
         
         const location = user.dinamic
+        if (user.dinamic.coordinates[0] === 0 & user.dinamic.coordinates[1] === 0 ) throw new Error(`User dinamic location not found`)
         //const { location: { coordinates: shh } } = user
-            if (!location) throw new Error(`user location not found`)
         
-        response = await User.find({ dinamic: { $near: { $geometry: location , $maxDistance: distance} } })
+        response = await User.find({ dinamic: { $near: { $geometry: location, $maxDistance: distance} } })
 
         return response    
         })()    

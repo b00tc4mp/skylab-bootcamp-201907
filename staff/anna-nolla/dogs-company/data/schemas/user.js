@@ -27,26 +27,26 @@ module.exports = new Schema({
     static: {
         type: {
             type: String, 
-            enum: ['Point']
+            enum: ['Point'],
+            default: 'Point'
             /*required: true */
         },
         coordinates: {
             type: [Number],
-            index: '2dsphere',
-            default: []
+            default: [0,0]
             /*required: true */
         }
     },
     dinamic: {
         type: {
             type: String, 
-            enum: ['Point']
+            enum: ['Point'],
+            default: 'Point'
             /*required: true */
         },
         coordinates: {
             type: [Number],
-            index: '2dsphere',
-            default: []
+            default: [0,0]
             /*required: true */
         }
     }
