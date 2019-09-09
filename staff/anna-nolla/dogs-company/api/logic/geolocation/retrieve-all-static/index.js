@@ -1,5 +1,5 @@
 const { models: { User } } = require('data')
-const { validate }= require('utils')
+const { validate } = require('utils')
       /**
        * Retrieves users by geolocation respect a coordenates of id user.
        * 
@@ -10,15 +10,21 @@ const { validate }= require('utils')
        * 
        */
 module.exports = function (id, distance){
-    validate.string(id,'id')   
-        return (async () => {            
-            const user = await User.findById(id).lean()
-                if (!user) throw new Error(`user not found`)
-            
-            const _location = user.static.coordinates
-                if (!_location) throw new Error(`user location not found`)
-            
-            const response = await User.find({ static: { $nearSphere: { $geometry: { type: "Point", coordinates }, $maxDistance: distance } } })
+
+    validate.string(id,'user id')
+    validate.number(distance, 'distance')   
+        
+    return (async () => {   
+debugger
+        const user = await User.findById(id)
+            if (!user) throw new Error(`User not found`)
+        
+        const location = user.dinamic
+            if (user.dinamic.coordinates[0] === 0 & user.dinamic.coordinates[1] === 0 ) throw new Error(`User dinamic location not found`)
+      
+        
+        response = await User.find({ static: { $near: { $geometry: location, $maxDistance: distance} } })
+
         return response    
         })()    
 }

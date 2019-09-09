@@ -91,7 +91,7 @@ describe('logic - update pet', () => {
         expect(() => logic.updatePet(id, petId, { 'name': "", 'age': ageM, 'gender': genderM, 'size': sizeM, 'characteristics': characteristicsM })).to.throw('name is empty or blank')
     )
 
-    it('should fail on wrong title type', () =>
+    it('should fail on wrong name type', () =>
         expect(() => logic.updatePet(id, petId, { 'name': 123, 'age': ageM, 'gender': genderM, 'size': sizeM, 'characteristics': characteristicsM })).to.throw('name with value 123 is not a string')
     )
 
