@@ -1,5 +1,4 @@
 const { Schema, ObjectId } = require('mongoose')
-// const playerSchema = require('./player')
 
 module.exports = new Schema({
     name: {
@@ -17,7 +16,7 @@ module.exports = new Schema({
         required: true
     },
 
-    real_team: {
+    realTeam: {
         type: String,
         required: true
     },
@@ -27,22 +26,22 @@ module.exports = new Schema({
         required: true
     },
 
-    points_per_game: {
+    pointsPerGame: {
         type: Number,
         required: true
     },
 
-    total_points: {
+    totaPoints: {
         type: Number,
         required: true
     },
 
-    yellow_cards: {
+    yellowCards: {
         type: Number,
         required: true
     },
     
-    red_cards: {
+    redCards: {
         type: Number,
         required: true
     },
