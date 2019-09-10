@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
 
         const { sub } = jwt.verify(token, JWT_SECRET)
 
-        if (sub !== id) throw new Error(`token id ${sub} does not match user id ${id}`)
+        req.userId = sub
 
         next()
     } catch ({ message }) {

@@ -79,9 +79,9 @@ describe('logic - retrieve post', () => {
     })
 
     it('should succeed on correct data', async () => {
-debugger
+
         const _subject = await retrievePosts(idSub)
-debugger
+
         expect(_subject).to.exist
         expect(_subject.length).to.equal(2)
 

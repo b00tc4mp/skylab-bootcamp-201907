@@ -7,10 +7,9 @@ const { validate } = require('classty-utils')
  * @param {Array} surname is array of ids 
  * 
  */
-module.exports = (name, surname, id) => {
+module.exports = (name, surname, nameClass) => {
     validate.string(name, 'name')
     validate.string(surname, 'surname')
-    validate.string(id, 'idSubject')
     
     return ( async() => {
 
@@ -20,9 +19,13 @@ module.exports = (name, surname, id) => {
 
         if(student.type != 'student') throw Error(`user with id ${id} is not a mentor`)
 
-        const klass = await Classroom.findOne({_id: id})
+        const klass = await Classroom.findOne({name: nameClass})
 
         if(!klass) throw Error(`class with id ${id} don´t exits`)
+
+        const exist = klass.students.includes(student.id);
+
+        if(exist) throw Error(`student with id ${student.id} already exist`)
 
         klass.students.push(student)
         

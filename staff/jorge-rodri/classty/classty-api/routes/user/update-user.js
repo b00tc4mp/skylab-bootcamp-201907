@@ -1,10 +1,10 @@
 const { user } = require('../../logic')
 
 module.exports = function (req, res) {
-    const { params: { id }, body  } = req
+    const { userId, body  } = req
 
     try {
-        user.updateUser(id, body)
+        user.updateUser(userId, body)
             .then(() => res.json({ message: 'user correctly updated' }))
             .catch(({ message }) => res.status(404).json({ error: message }))
     } catch ({ message }) {

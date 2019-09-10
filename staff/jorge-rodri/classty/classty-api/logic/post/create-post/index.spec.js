@@ -6,7 +6,7 @@ const { database, models: { User, Subject, Message } } = require('classty-data')
 
 const { env: { DB_URL_TEST }} = process
 
-describe('logic - register homework', () => {
+describe('logic - create post', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let student1, student2, teacher1, teacher2, subject, idS11,idS22, idT11, idT22, post, idSub, message

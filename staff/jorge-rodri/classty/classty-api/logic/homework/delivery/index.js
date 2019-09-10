@@ -1,8 +1,8 @@
 const { models:{ Subject, User } } = require('classty-data')
 const { validate } = require('classty-utils')
 
-module.exports = function (id, idH, idS) {
-    validate.string(id, 'id')
+module.exports = function (idSub, idH, idS) {
+    validate.string(idSub, 'id')
     validate.string(idH, 'idH')
     validate.string(idS, 'idS')
     let count=0
@@ -10,7 +10,7 @@ module.exports = function (id, idH, idS) {
 
         const student = await User.findOne({ _id: idS })
         if(!student) throw Error(`student with id ${idS} does not exist`)
-        const subject = await Subject.findById(id)
+        const subject = await Subject.findById(idSub)
 
         if (!subject) throw new Error(`wrong credentials`)
 

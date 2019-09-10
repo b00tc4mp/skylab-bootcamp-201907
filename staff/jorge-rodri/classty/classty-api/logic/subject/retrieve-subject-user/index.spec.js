@@ -6,7 +6,7 @@ const { database, models: { User, Subject } } = require('classty-data')
 
 const { env: { DB_URL_TEST }} = process
 
-describe('logic - retrieve user', () => {
+describe('logic - retrieve subject to user', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let student, idS1, teacher, idT1, subject1, subject2, subject3, subject4
@@ -65,7 +65,7 @@ describe('logic - retrieve user', () => {
     it('should succeed on correct data', async () => {
 
         const subjects = await retrieveSubjectToStudent(idS1)
-debugger
+
         expect(subjects).to.exist
         expect(subjects.length).to.equal(3)
 
