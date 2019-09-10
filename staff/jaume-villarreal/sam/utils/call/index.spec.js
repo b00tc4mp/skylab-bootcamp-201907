@@ -1,7 +1,7 @@
 const call = require('.')
 const { expect } = require('chai')
 
-describe("call() => IS IN CHARGE TO MANAGING REQUESTS TO API's" , () => {
+describe.only("call() => IS IN CHARGE TO MANAGING REQUESTS TO API's" , () => {
     const { random } = Math
     describe('GET case => retrieve data from API' , () => {
         it("should succeed on retrieving ducks" , () => {
@@ -64,7 +64,7 @@ describe("call() => IS IN CHARGE TO MANAGING REQUESTS TO API's" , () => {
         it("should throw an error => wrong url string" , () => {
             expect( () => {
                 return call(1 , undefined , undefined , undefined)
-            }).to.throw(TypeError , "string with value 1 is not a valid string")
+            }).to.throw(TypeError , "string with value 1 is not a string")
         })
         it("should throw an error => wrong url definition" , () => {
             expect( () => {
@@ -74,7 +74,7 @@ describe("call() => IS IN CHARGE TO MANAGING REQUESTS TO API's" , () => {
         it("should throw an error => wrong method definition" , () => {
             expect( () => {
                 return call("http://duckling-api.herokuapp.com/api/search?q=white" , 'describe' , undefined , undefined)
-            }).to.throw(TypeError , "method with value describe does not match one of the following values: get, post, put, patch, delete")
+            }).to.throw(Error , "method with value describe does not match one of the expected values: get, post, put, patch, delete")
         })
     })
 })

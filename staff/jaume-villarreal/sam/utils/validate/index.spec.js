@@ -5,13 +5,16 @@ describe("validate", () => {
 
         describe("string", () => {
             it ("should detect that it's a string and not throw error", () => {
-                validate.string("hello","string")
+                validate.string("hello","name")
                 expect(true).to.be.true
             })
 
             it ("should detect empty string", () => {
                   expect(() => { validate.string() }).to.throw(Error, "undefined with value undefined is not a string")
-
+            })
+            
+            it ("should detect numeric string", () => {
+                  expect(() => { validate.string("905.4" , "name") }).to.throw(Error, "name is not a valid string")
             })
         })
         
