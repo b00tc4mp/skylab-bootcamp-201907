@@ -1,7 +1,7 @@
 const { subject } = require('../../logic')
 
 module.exports = async(req, res) => {
-    const { body: { name } } = req
+    const { params: { name } } = req
 
     try {
        const result = await subject.retrieveSubject(name)

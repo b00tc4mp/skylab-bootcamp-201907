@@ -1,7 +1,7 @@
 const { exam } = require('../../logic')
 
 module.exports = async(req, res) => {
-    const { body: { idSub } } = req
+    const { params: { idSub } } = req
 
     try {
         const result = await exam.retrieveAll(idSub)

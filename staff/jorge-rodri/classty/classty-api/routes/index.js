@@ -20,7 +20,7 @@ router.post('/auth', jsonBodyParser, authenticateUser)
 
 router.get('/users', [tokenMiddleware, jsonBodyParser], retrieveUser)
 
-router.get('/users-all', [tokenMiddleware, jsonBodyParser], retrieveAll)
+router.get('/users-all/:type', [tokenMiddleware, jsonBodyParser], retrieveAll)
 
 router.patch('/users/', [tokenMiddleware, jsonBodyParser], updateUser)
 
@@ -29,7 +29,7 @@ router.delete('/users/', [tokenMiddleware, jsonBodyParser], unregisterUser)
 //CLASSES
 router.post('/class', [tokenMiddleware, jsonBodyParser], registerClass)
 
-router.get('/class', [tokenMiddleware, jsonBodyParser], retrieveClass)
+router.get('/class/:name', [tokenMiddleware, jsonBodyParser], retrieveClass)
 
 router.post('/addStudent', [tokenMiddleware, jsonBodyParser], addStudent)
 
@@ -40,9 +40,9 @@ router.delete('/classStu', [tokenMiddleware, jsonBodyParser], unregisterType)
 //SUBJECTS
 router.post('/subject', [tokenMiddleware, jsonBodyParser], registerSubject)
 
-router.get('/subject', [tokenMiddleware, jsonBodyParser], retrieveSubject)
+router.get('/subject/:name', [tokenMiddleware, jsonBodyParser], retrieveSubject)
 
-router.get('/subjectStu', [tokenMiddleware, jsonBodyParser], retrieveAllSubjectToStudent)
+router.get('/subjectStu/:id', [tokenMiddleware, jsonBodyParser], retrieveAllSubjectToStudent)
 
 router.post('/addTeacher', [tokenMiddleware, jsonBodyParser], addTeacher)
 
@@ -53,9 +53,9 @@ router.delete('/subject', [tokenMiddleware, jsonBodyParser], unregisterSubject)
 //HOMEWORK
 router.post('/homeworks', [tokenMiddleware, jsonBodyParser], registerHomework)
 
-router.get('/homeworks', [tokenMiddleware, jsonBodyParser], retrieveHomework)
+router.get('/homeworks/:idS/:idH', [tokenMiddleware, jsonBodyParser], retrieveHomework)
 
-router.get('/homeworksAll', [tokenMiddleware, jsonBodyParser], retrieveAllHomework)
+router.get('/homeworksAll/:idS', [tokenMiddleware, jsonBodyParser], retrieveAllHomework)
 
 router.post('/delivery', [tokenMiddleware, jsonBodyParser], delivery)
 
@@ -64,7 +64,7 @@ router.delete('/homeworks', [tokenMiddleware, jsonBodyParser], unregisterHomewor
 //EXAM
 router.post('/exams', [tokenMiddleware, jsonBodyParser], registerExam)
 
-router.get('/exams', [tokenMiddleware, jsonBodyParser], retrieveAllExam)
+router.get('/exams/:idSub', [tokenMiddleware, jsonBodyParser], retrieveAllExam)
 
 router.post('/addNote', [tokenMiddleware, jsonBodyParser], addNote)
 
@@ -73,7 +73,7 @@ router.delete('/exam', [tokenMiddleware, jsonBodyParser], unregisterExam)
 //POST
 router.post('/post', [tokenMiddleware, jsonBodyParser], createPost)
 
-router.get('/post', [tokenMiddleware, jsonBodyParser], retrievePost)
+router.get('/post/:idSub', [tokenMiddleware, jsonBodyParser], retrievePost)
 
 router.delete('/post', [tokenMiddleware, jsonBodyParser], removePost)
 

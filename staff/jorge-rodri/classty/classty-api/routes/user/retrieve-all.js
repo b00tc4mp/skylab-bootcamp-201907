@@ -1,7 +1,7 @@
 const { user } = require('../../logic')
 
 module.exports = async (req, res) => {
-    const { body: { type } } = req
+    const { params: { type } } = req
 
     try {
 
