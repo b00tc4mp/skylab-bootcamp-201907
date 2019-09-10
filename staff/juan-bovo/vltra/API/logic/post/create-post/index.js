@@ -2,7 +2,12 @@ const { models: { User, Post } } = require('vltra-data')
 const { validate} = require('vltra-utils')
 
 /**
- * TODO
+ * Creates a new post on database
+ * @param {string} title post's title
+ * @param {string} body post's content
+ * @param {objectId} author post's author (mongoose objectId reference)
+ * 
+ * @returns {string} generated post's id
  */
 
 

@@ -1,7 +1,13 @@
 const { models: { User, Post, Comment } } = require('vltra-data')
 const { validate} = require('vltra-utils')
 
-
+/**
+ * Deletes a comment from a post
+ * @param {objectId} commentId mongoose embedded comment id to delete
+ * @param {objectId} postId mongoose post id where comment should be embedded
+ * 
+ * @returns {Promise}
+ */
 
 module.exports = function(commentId, postId) { //(commentId, postId, email, password)
     

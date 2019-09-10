@@ -1,6 +1,14 @@
 const { models: { User, Post, Comment } } = require('vltra-data')
 const { validate} = require('vltra-utils')
 
+/**
+ * Adds a comment to a post
+ * @param {objectId} postId mongoose post id to add the comment
+ * @param {objectId} commentAuthor mongoose user id who place the comment
+ * @param {string} commentBody comment content
+ * 
+ * @returns {String} generated comment's id
+ */
 
 
 module.exports = function(postId, commentAuthor, commentBody) {

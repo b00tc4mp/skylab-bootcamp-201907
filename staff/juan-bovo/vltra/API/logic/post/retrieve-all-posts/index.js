@@ -1,6 +1,11 @@
 const { models: { User, Post } } = require('vltra-data')
 // const { validate} = require('vltra-utils')
 
+/**
+ * retrieves all posts from db
+ * 
+ * @returns {Array} array with posts from db.
+ */
 
 module.exports = function(){
 
@@ -13,6 +18,7 @@ module.exports = function(){
             post.id = post._id
             delete post._id
         })
+        
         return posts
     })()
 }

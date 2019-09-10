@@ -1,6 +1,12 @@
 const { models: { User, Post,Comment } } = require('vltra-data')
 const { validate} = require('vltra-utils')
 
+/**
+ * Retrieves all the comments for a post
+ * @param {objectId} postId mongoose post id to retrieve comments from
+ * 
+ * @returns {Array} array with requested comments' ids
+ */
 
 module.exports = async function(postId){
     validate.objectId(postId, 'postId')
