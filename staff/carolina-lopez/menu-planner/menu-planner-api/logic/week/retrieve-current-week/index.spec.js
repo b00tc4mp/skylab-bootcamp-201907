@@ -8,7 +8,7 @@ const moment = require('moment')
 
 const { env: { DB_URL_TEST } } = process
 
-describe.only('logic - retrieve current week', () => {
+describe('logic - retrieve current week', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
@@ -166,8 +166,22 @@ describe.only('logic - retrieve current week', () => {
         debugger
 
         expect(week).to.exist
+        expect(week.id).to.be.a('string')
+        expect(week.id).to.have.lengthOf(24)
         expect(week.id).to.equal(currentWeek.id)
+        expect(week._id).not.to.exist
+        
         expect(week.monday).to.exist
+        expect(week.monday.id).to.be.a('string')
+        expect(week.monday.id).to.have.lengthOf(24)
+        expect(week.monday._id).not.to.exist
+        expect(week.monday.breakfast).to.be.a('string')
+        expect(week.monday.id).to.have.lengthOf(24)
+        expect(week.monday.breakfast._id).not.to.exist
+        // TODO same for lunch, snack, and dinner
+
+        // TODO same for rest of the days
+
         expect(week.tuesday).to.exist
         expect(week.wednesday).to.exist
         expect(week.thursday).to.exist
