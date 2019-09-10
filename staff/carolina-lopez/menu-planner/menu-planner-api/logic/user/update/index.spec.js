@@ -6,7 +6,7 @@ const { database, models: { User } } = require('menu-planner-data')
 
 const { env: { DB_URL_TEST }} = process
 
-describe.only('logic - update user', () => {
+describe('logic - update user', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let name, surname, email, password, userId, body

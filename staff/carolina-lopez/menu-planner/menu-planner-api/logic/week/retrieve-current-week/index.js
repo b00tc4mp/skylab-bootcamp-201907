@@ -1,25 +1,39 @@
 const { validate } = require('menu-planner-utils')
 const { models } = require('menu-planner-data')
-const { Week } = models
+const { User, Week } = models
+const moment = require('moment')
+
 /**
- * Searches the DB a day by ID
+ * Retrieves the current week for a given user id
  * 
- * @param {string} category 
+ * @param {string} userId
  * 
  * @returns {Promise}
 */
-module.exports = function (id, userId) { // userId
-    
-    validate.string(id, 'id')
+module.exports = function (userId) {
     validate.string(userId, 'userId')
 
     return (async () => {
-        const user = await User.findOne({_id: userId}, {_id: 0, _v: 0 }).lean()
+        const user = await User.findById(userId)
+
+        // calculate current week monday exact date
+        const day = moment().date() - moment().day() + 1,
+            month = moment().month(),
+            year = moment().year()
+
+        const date = new Date(year, month, day)
+
         const { weeks } = user
-        const week = weeks.find(week => {
-            if(week._id.toString() === id)
-            return week })
-        if (!week) throw new Error(`no week found with id ${id}`)
+
+        let week = weeks.find(week => moment(week.date).isSame(date))
+
+        if (week) return week
+
+        week = new Week({ date })
+
+        user.weeks.push(week)
+
+        await user.save()
 
         return week
     })()
