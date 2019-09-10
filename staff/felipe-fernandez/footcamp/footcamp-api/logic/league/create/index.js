@@ -33,12 +33,13 @@ module.exports = function(id, name, code) {
         if (leaguesCode) throw Error(`code alredy exists`)
 
         const league = new League({name, code})
+        league.id = league._id
 
         league.participants.push(id)
             
         await league.save()
 
-        return league.code
+        return league.id
 
     })()
 }

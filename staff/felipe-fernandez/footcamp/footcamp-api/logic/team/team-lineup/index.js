@@ -5,17 +5,18 @@ const { models: { User,  League, Team , Player } } = require('footcamp-data')
  * Retrieves a static lineup for the user's team
  *
  * @param {*} id 
- * @param {*} code 
- * @param {*} name 
+ * @param {*} leagueId 
+ * @param {*} teamId 
+ * 
  *   
  * @returns {Promise}
 */
 
-module.exports = function(id, code, name) {
+module.exports = function(id, leagueId, teamId) {
    
     validate.string(id, 'id')
-    validate.string(code, 'code')
-    validate.string(name, 'name')
+    validate.string(leagueId, 'league Id')
+    validate.string(teamId, 'team id')
        
     return (async () => {
         
@@ -23,13 +24,13 @@ module.exports = function(id, code, name) {
 
         if (!user) throw new Error(`User with id ${id} does not exist`)
 
-        const league = await League.findOne({ code })
+        const league = await League.findOne({ _id: leagueId })
 
-        if (!league) throw Error(`League with code ${ code } does not exist`)
+        if (!league) throw Error(`League with code ${ leagueId } does not exist`)
 
-        const team = await Team.findOne({ name })
+        const team = await Team.findOne({_id: teamId })
 
-        if (!team) throw Error(`Team with name ${ name } does not exist`)
+        if (!team) throw Error(`Team with name ${ teamId } does not exist`)
 
         //if the team exists extract 11 players: 1 goalkeeper, 4 defenders, 4 midfielders, 2 strikers
 
@@ -59,7 +60,7 @@ module.exports = function(id, code, name) {
             team.players.push(element)
         })
         
-        await league.save()
+        // await league.save()
         await team.save()
  
         return lineup

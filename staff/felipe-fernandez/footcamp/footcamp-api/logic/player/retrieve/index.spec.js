@@ -72,7 +72,7 @@ describe.only('logic - retrieve player', () => {
    })
 
     it('should succeed on correct data', async () => {
-        debugger
+        
         const result = await logic.retrievePlayer(id, idPlayer)
         
             expect(result).to.exist

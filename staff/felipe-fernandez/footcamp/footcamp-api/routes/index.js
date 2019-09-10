@@ -10,8 +10,9 @@ const unregisterUser = require('./user/unregister')
 const createLeague = require('./league/create')
 const joinLeague = require('./league/join')
 const retrieveLeague = require('./league/retrieve')
-const leaveLeagues = require('./league/leave')
 const retrieveAllLeagues = require('./league/retrieve-all')
+const leaveLeagues = require('./league/leave')
+const retrieveTable = require('./league/retrieve-table')
 
 const createTeam = require('./team/create')
 const retrieveTeam = require('./team/retrieve')
@@ -34,15 +35,16 @@ router.delete ('/users', [tokenMiddleware, jsonBodyParser], unregisterUser)
 /*LEAGUE*/
 router.post('/users/leagues', [tokenMiddleware, jsonBodyParser], createLeague)
 router.post ('/users/leagues/join', [tokenMiddleware, jsonBodyParser], joinLeague)
-router.get ('/users/leagues', [tokenMiddleware, jsonBodyParser], retrieveLeague)
-router.delete ('/users/leagues', [tokenMiddleware, jsonBodyParser], leaveLeagues)
-router.get ('/users/leagues/table', [tokenMiddleware, jsonBodyParser], retrieveAllLeagues)
+router.get ('/users/leagues/:leagueId', [tokenMiddleware, jsonBodyParser], retrieveLeague)
+router.get ('/users/leagues', [tokenMiddleware, jsonBodyParser], retrieveAllLeagues)
+router.delete ('/users/leagues/:leagueId', [tokenMiddleware, jsonBodyParser], leaveLeagues)
+router.get ('/users/leagues/:leagueId/table', [tokenMiddleware, jsonBodyParser], retrieveTable)
 
 /*TEAM*/
-router.post('/users/leagues/team', [tokenMiddleware, jsonBodyParser], createTeam)
-router.get ('/users/leagues/team', [tokenMiddleware, jsonBodyParser], retrieveTeam)
-router.get ('/users/leagues/team/lineup', [tokenMiddleware, jsonBodyParser], lineUpTeam)
-router.delete ('/users/leagues/team', [tokenMiddleware, jsonBodyParser], deleteTeam)
+router.post('/users/leagues/:leagueId/team', [tokenMiddleware, jsonBodyParser], createTeam)
+router.get ('/users/leagues/:leagueId/team/:teamId', [tokenMiddleware, jsonBodyParser], retrieveTeam)
+router.get ('/users/leagues/:leagueId/team/:teamId/lineup', [tokenMiddleware, jsonBodyParser], lineUpTeam)
+router.delete ('/users/leagues/:leagueId/team/:teamId', [tokenMiddleware, jsonBodyParser], deleteTeam)
 
 
 /**PLAYER**/

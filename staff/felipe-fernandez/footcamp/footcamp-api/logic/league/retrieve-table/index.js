@@ -5,12 +5,13 @@ const { models: { User,  League, Team } } = require('footcamp-data')
  * Retrieves all the leagues of the user where he's a participant
 
  * @param {*} id 
- * 
+ * @param {*} league id 
+ *
  *  
  * @returns {Promise}
 */
 
-module.exports = function(id) {
+module.exports = function(id, leagueId) {
    
     validate.string(id, 'id')
     validate.string(leagueId, 'league id')
@@ -21,21 +22,25 @@ module.exports = function(id) {
 
         if (!user) throw new Error(`User with id ${id} does not exist`)
 
-        const leagues = await Promise.all(user.leagues.map(league => league))
+        const league = await League.findOne({ _id: leagueId })
 
-        let allLeagues = []
+        if (!league) throw Error(`League with id ${ leagueId } does not exist`)
+
+        const teams = await Promise.all(league.team.map(team => team))
+
+        let allTeams = []
 
         //create an array of objects with the properties of the teams to return
-        leagues.forEach(element => {
-          let  league = {
+        teams.forEach(element => {
+          let  team = {
             name :  element.name,
             points : element.points ? element.points: 0,
-            
+            owner : element.owner.toString()
             }
-            allLeagues.push(league)
+            allTeams.push(team)
         })
        
-        return allLeagues
+        return allTeams
 
     })()
 }

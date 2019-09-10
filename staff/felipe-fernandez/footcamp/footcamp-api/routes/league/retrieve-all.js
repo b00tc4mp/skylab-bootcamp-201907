@@ -2,13 +2,14 @@ const logic = require('../../logic')
 
 module.exports = async function(req, res) {
 
-    const { id, body: { code } } = req
+    const { id } = req
+
 
     try {
         
-       const teams = await logic.retrieveAllLeagues(id, code)
-           res.status(200).json({ message: 'All teams retrieved successfully', teams})
+       const leagues = await logic.retrieveAllLeagues(id)
+           res.status(200).json({ message: 'All teams retrieved successfully', leagues})
     } catch({ message }) {
-        res.status(400).json({ error: message })
+        res.status(404).json({ error: message })
     }
 }

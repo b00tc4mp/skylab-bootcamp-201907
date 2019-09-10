@@ -9,6 +9,6 @@ module.exports = async function(req, res) {
        await logic.joinLeague(id, code)
            res.status(200).json({ message: 'Joined to league successfully'})
     } catch({ message }) {
-        res.status(400).json({ error: message })
+        res.status(404).json({ error: message })
     }
 }

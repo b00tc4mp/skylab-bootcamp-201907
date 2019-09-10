@@ -58,7 +58,7 @@ describe('logic - retrieve league', () => {
 
      it('should succeed on correct data', async () => {
             
-        const result = await logic.retrieveLeague(id, code)
+        const result = await logic.retrieveLeague(id, leagueId)
         
             expect(result).to.exist
             expect(result.code).to.equal(code) 
@@ -74,7 +74,7 @@ describe('logic - retrieve league', () => {
         it('should fail on incorrect user id', async () => {
             id = '5d772fb62bb54120d08d7a7b'
             try {
-                await logic.retrieveLeague(id, code)
+                await logic.retrieveLeague(id, leagueId)
                 throw Error('should not reach this point') 
             }
             catch({message}){
@@ -85,12 +85,12 @@ describe('logic - retrieve league', () => {
         
         it('should fail if the league do not exist', async () => {
            
-            await League.create({ id, name , code})
+            await League.create({ id, name, code})
 
-            code = 'fakecode'
+            leagueId = 'fakecode'
 
             try {
-                 await logic.retrieveLeague(id ,code)
+                 await logic.retrieveLeague(id ,leagueId)
             } catch(error) {
                 
                  expect(error).to.exist
@@ -99,42 +99,42 @@ describe('logic - retrieve league', () => {
          })
     
       
-        it('should fail on undefined league code', () => 
+        it('should fail on undefined league leagueId', () => 
             expect(() => 
                 logic.retrieveLeague(id, undefined)
-         ).to.throw(`code with value undefined is not a string`)
+         ).to.throw(`league id with value undefined is not a string`)
         )
     
         it('should fail on undefined user id', () => 
             expect(() => 
-                logic.retrieveLeague(undefined, code)
+                logic.retrieveLeague(undefined, leagueId)
         ).to.throw(`id with value undefined is not a string`)
         )
     
         
-        it('should fail on non-string league code', () => 
+        it('should fail on non-string league leagueId', () => 
             expect(() => 
                 logic.retrieveLeague(id, 12345)
-         ).to.throw(`code with value 12345 is not a string`)
+         ).to.throw(`league id with value 12345 is not a string`)
         )
     
         it('should fail on non-string user id', () => 
             expect(() => 
-                logic.retrieveLeague(12345, code)
+                logic.retrieveLeague(12345, leagueId)
         ).to.throw(`id with value 12345 is not a string`)
         )
     
 
         it('should fail on empty id', () => 
             expect(() => 
-                logic.retrieveLeague('', code)
+                logic.retrieveLeague('', leagueId)
         ).to.throw(`id is empty or blank`)
         )
     
-        it('should fail on empty code', () => 
+        it('should fail on empty leagueId', () => 
             expect(() => 
                 logic.retrieveLeague(id, '')
-        ).to.throw(`code is empty or blank`)
+        ).to.throw(`league id is empty or blank`)
         )
    
         

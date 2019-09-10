@@ -2,13 +2,13 @@ const logic = require('../../logic')
 
 module.exports = async function(req, res) {
 
-    const { id, body: {code, name} } = req
+    const { id, params:{ leagueId, teamId } } = req
 
     try {
         
-       const players = await logic.deleteTeam(id, code, name)
-           res.status(200).json({ message: 'Team created successfully'})
+       await logic.deleteTeam(id, leagueId, teamId)
+           res.status(200).json({ message: 'Team deleted successfully'})
     } catch({ message }) {
-        res.status(400).json({ error: message })
+        res.status(404).json({ error: message })
     }
 }

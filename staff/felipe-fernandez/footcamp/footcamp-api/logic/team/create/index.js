@@ -5,14 +5,15 @@ const { models: { User,  League, Team, Player } } = require('footcamp-data')
  * Creates a team by name within the league and linked to the user 
  *
  * @param {*} id 
+ * @param {*} leagueId 
  * @param {*} code 
  * @param {*} name 
- * @param {*} points 
+ * 
  *  
  * @returns {Promise}
 */
 
-module.exports = function(id, code, name) {
+module.exports = function(id, leagueId, code, name) {
    
     validate.string(id, 'id')
     validate.string(code, 'code')
@@ -24,9 +25,9 @@ module.exports = function(id, code, name) {
 
         if (!user) throw new Error(`User with id ${id} does not exist`)
 
-        const league = await League.findOne({ code })
+        const league = await League.findOne({ _id: leagueId })
 
-        if (!league) throw Error(`League with code ${ code } does not exist`)
+        if (!league) throw Error(`League with code ${ leagueId } does not exist`)
 
         const findTeam = await Team.findOne({ name })
 
@@ -35,11 +36,13 @@ module.exports = function(id, code, name) {
         //if the user is not in the league is not possible to  create a team
         if (!(league.participants.includes(user.id))) throw Error(`You haven't joined the league with code ${code} yet`)
 
+            
         
         // //TODO
         // //not possible to create a team in the league if the user has one team created
         // if(league.team.includes({owner: user.id})) throw Error(`You cannot create more than one tea in this league`)
-              
+        //let playersUsed = league.playersUsed
+
         const team = new Team({code, name})
     
         //associate the owner of the team to this team
@@ -48,15 +51,15 @@ module.exports = function(id, code, name) {
         //select all the players of the database
         const players = await Player.find({}).lean()
         
-        let goalkeeper = [] , defender =[], midfielder=[], striker = [], playersUsed = []
+        let goalkeeper = [] , defender =[], midfielder=[], striker = []
 
         //select all the players by position and splice 1 goalkeeper, 4 defenders, 4 midfielders, 2 strikers
 
         //filter all the players by position
-        const goalkeepers = players.filter(player => player.position === 1).splice(0,20) 
-        const defenders = players.filter(player => player.position === 2).splice(0,100)
-        const midfielders = players.filter(player => player.position === 3).splice(0,100)
-        const strikers = players.filter(player => player.position === 4).splice(0,100)
+        const goalkeepers = players.filter(player => player.position === 1).splice(0,60) 
+        const defenders = players.filter(player => player.position === 2).splice(0,150)
+        const midfielders = players.filter(player => player.position === 3).splice(0,150)
+        const strikers = players.filter(player => player.position === 4).splice(0,150)
 
         let match, keeper
            
@@ -64,10 +67,12 @@ module.exports = function(id, code, name) {
             
             do {
                 keeper = goalkeepers[Math.floor(Math.random() * goalkeepers.length)]
-                match = playersUsed.includes(keeper)
+                match = league.playersUsed.includes(keeper)
             } while(match)
                 goalkeeper.push(keeper)
-                playersUsed.push(keeper)
+                debugger
+                //playersUsed.push(keeper)
+                league.playersUsed.push(keeper)
                 match = false
         }
         
@@ -76,11 +81,12 @@ module.exports = function(id, code, name) {
         for (let i=0; i<6; i++){
             do {
                 def = defenders[Math.floor(Math.random() * defenders.length)]
-                match2 = playersUsed.includes(def)
-            }while(match)
+                match2 = league.playersUsed.includes(def)
+            }while(match2)
                 defender.push(def)
-                playersUsed.push(def)
-                match = false
+                //playersUsed.push(def)
+                league.playersUsed.push(def)
+                match2 = false
 
         }
 
@@ -90,22 +96,24 @@ module.exports = function(id, code, name) {
             do {
               
               mid = midfielders[Math.floor(Math.random() * midfielders.length)]
-              match3 = playersUsed.includes(mid)
-            }while(match)
+              match3 = league.playersUsed.includes(mid)
+            }while(match3)
                 midfielder.push(mid)
-                playersUsed.push(mid)
-                match = false
+               // playersUsed.push(mid)
+                league.playersUsed.push(mid)
+                match3 = false
         }
 
          let match4, strike
          for (let i=0; i<4; i++){
             do {
                  strike = strikers[Math.floor(Math.random() * strikers.length)]
-                 match4 = playersUsed.includes(strike)
-            }while(match)
+                 match4 = league.playersUsed.includes(strike)
+            }while(match4)
                 striker.push(strike)
-                playersUsed.push(strike)
-                match = false
+               // playersUsed.push(strike)
+                league.playersUsed.push(strike)
+                match4 = false
 
         }
 
@@ -123,7 +131,11 @@ module.exports = function(id, code, name) {
         initialTeam.forEach((element) => {
             team.players.push(element)
         })
-    
+        
+        debugger
+        //add players to used players in the league
+       // league.playersUsed.push(initialTeam)
+
         //add team to the array in the league
         league.team.push(team)
 
@@ -132,8 +144,12 @@ module.exports = function(id, code, name) {
        
         await team.save()
         await league.save()
-      
-        return initialTeam
+        let teamCreated = {
+            id: team.id,
+            players: initialTeam
+        }
+        return teamCreated
+        // return initialTeam
    
 
     })()
