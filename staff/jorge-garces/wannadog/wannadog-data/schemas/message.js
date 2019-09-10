@@ -12,7 +12,8 @@ module.exports = new Schema({
     },
     viewed: {
         type: Boolean,
-        required: true
+        required: true,
+        default: false
     },
     user: { type: ObjectId, ref: 'User' }
 })

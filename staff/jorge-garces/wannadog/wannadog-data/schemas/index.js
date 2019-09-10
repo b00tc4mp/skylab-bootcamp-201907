@@ -1,7 +1,7 @@
 module.exports = {
     user: require('./user'),
     dog: require('./dog'),
-    conversation: require('./conversation'),
+    chat: require('./chat'),
     message: require('./message'),
     wish: require('./wish')
 }
