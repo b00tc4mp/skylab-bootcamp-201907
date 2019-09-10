@@ -31,7 +31,7 @@ function MyTeam (props) {
     }, [])
 
     return <div>
-                {/* <h2>{result.team.name_team}</h2> */}
+                <h2>MY LEAGUES</h2>
             <ul>
                 
             {player && player.map(teamplayer => <li  key={teamplayer.id}> <PlayerResult player={teamplayer}/> </li>)}

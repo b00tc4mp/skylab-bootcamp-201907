@@ -9,7 +9,7 @@ export default function ( token, teamId ) {
     
     return (async () => {
         
-        const response = await fetch(`${REACT_APP_API_URL}/users/leagues/team/${teamId}`, {
+        const response = await fetch(`${REACT_APP_API_URL}/users/leagues/team/${teamId}/lineup`, {
 
             method: 'get',
             headers: {

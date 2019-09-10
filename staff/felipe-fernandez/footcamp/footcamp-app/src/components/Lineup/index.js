@@ -14,8 +14,10 @@ function MyTeam (props) {
     useEffect(() => {
         (async () => {
             const token = logic.userCredentials
-            const result  = await logic.retrieveTeam(token, teamId)
-            const team  = result.team.players.map(results=> results)
+            
+            const result  = await logic.retrieveLineup(token, teamId)
+            debugger
+            const team  = result.lineup.map(results=> results)
            
             setTeam(team)
 

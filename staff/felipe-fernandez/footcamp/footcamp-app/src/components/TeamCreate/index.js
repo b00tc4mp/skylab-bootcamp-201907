@@ -8,23 +8,23 @@ function CreateTeam(props) {
 
     const { history } = props
     
-    const { name, setName, code, setCode, teamName, setTeamName, teamId, setTeamId, player, setPlayer } = useContext(Context)
+    const { name, setName, code, setCode, teamName, setTeamName, teamId, setTeamId, player, setPlayer, existTeam, setExistTeam } = useContext(Context)
 
     const handleNameInput = event => setName(event.target.value)
     const handleCodeInput = event => setCode(event.target.value)
     
     function handleCreateTeam(code, name) {
 
+
         (async()=>{
             
             try {
-                debugger
+                
                 const token = logic.userCredentials
                 //call to logic and recveive 18 players and the id of the team
                 const result  = await logic.createTeam(code, name, token)
                 const players  = result.team.players.map(results=> results)
                 const teamId = result.team.id
-                
                 setTeamId(teamId) 
                 setTeamName(name)
                 
@@ -35,8 +35,7 @@ function CreateTeam(props) {
                 
                 setPlayer(player)
                 
-                // history.push('/myteam')
-                    
+                                   
                 console.log('ok, league created right')
 
             } catch ({ message }) {
@@ -78,7 +77,7 @@ function CreateTeam(props) {
             {player && player.map(oneplayer => <li  key={oneplayer.id}> <PlayerResult player={oneplayer} /> </li>)}
             <a href="#" onClick={event => {
                 event.preventDefault()
-                history.push('/myteam')
+                history.push('/innerlanding')
             }}>OK</a>
          
 

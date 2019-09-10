@@ -1,7 +1,5 @@
 import React from 'react';
 
-
- {/* {onePlayer.map(one => <li  key={one.id}> {one.name} <img src={"http://localhost:8080" + one.photo} /></li>)} */}
 function PlayerResult({ player }) {
 
     const {name, surname, playerId, realTeam, position, pointsPerGame, totalPoints, yellowCards, redCards,  goals, minutes, photo, cost}  = player
