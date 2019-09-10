@@ -10,10 +10,10 @@ module.exports = (() => {
           if (typeof target !== 'string') throw TypeError(`${name} with value ${target} is not a string`)
           if (empty && !target.trim()) throw new Error(`${name} is empty or blank`)
           if (values && !values.includes(target)) throw new Error(`${name} with value ${target} does not match one of the expected values: ${values.join(', ')}`)
-          const parsedString = parseInt(target)
      },
      
-     alphabetic(name){
+     alphabetic(target , name){
+          const parsedString = parseInt(target)
           if(NUMERIC_REGEX.test(parsedString)) throw new Error(`${name} is not a valid string`)
      },
        

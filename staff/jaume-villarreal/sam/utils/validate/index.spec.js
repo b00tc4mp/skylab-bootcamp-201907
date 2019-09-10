@@ -16,8 +16,12 @@ describe.only("validate", () => {
         })
         
         describe("alphabetic", () => {
-            it ("should detect numeric string", () => {
+            it ("should detect decimal numeric string", () => {
                   expect(() => { validate.alphabetic("905.4" , "string") }).to.throw(Error, "string is not a valid string")
+            })
+            
+            it ("should detect enter numeric string", () => {
+                  expect(() => { validate.alphabetic("905" , "string") }).to.throw(Error, "string is not a valid string")
             })
         })
         
