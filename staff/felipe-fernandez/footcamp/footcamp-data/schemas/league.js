@@ -11,6 +11,11 @@ module.exports = new Schema({
 
     participants: [{ type: ObjectId, ref: 'User' }],
 
-    team: [teamSchema]
+    team: [teamSchema],
+    
+    playersUsed: {
+        type: Array,
+        default : []
+    }
 })
 
