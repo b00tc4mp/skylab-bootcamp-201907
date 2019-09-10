@@ -16,7 +16,7 @@ module.exports = function (id, nameClass) {
         
         const _class = await Classroom.findOne({name: nameClass})
         
-        const i = _class.students.findIndex(student => student._id==id)
+        const i = _class.students.findIndex(student => student._id.toString()==id)
         
         if(i == -1) throw Error(`student with id: ${id} not found.`)
         

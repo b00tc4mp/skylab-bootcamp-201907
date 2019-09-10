@@ -5,7 +5,7 @@ const unregisterSubject = require('.')
 const { database, models: { User, Subject } } = require('classty-data')
 
 const { env: { DB_URL_TEST }} = process
-describe('logic - register subject', () => {
+describe('logic - unregister subject', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let nameS, surnameS, emailS, passwordS, typeS, nameT, surnameT, teachers, students, emailT, passwordT, idT, idS, nameSubject

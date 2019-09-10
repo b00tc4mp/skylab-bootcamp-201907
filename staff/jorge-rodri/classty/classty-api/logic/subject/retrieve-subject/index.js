@@ -7,22 +7,21 @@ const { validate } = require('classty-utils')
  * 
  * @returns {Promise}
  */
-module.exports = function (id) {
-    validate.string(id, 'id')
+module.exports = function (name) {
     return (async () => {
         
-        const subject = await Subject.findOne({ _id: id }).lean()
+        const subject = await Subject.findOne({ name: name }).lean()
 
-        if (!subject) throw Error(`user with id ${id} not found`)
-    
+        if (!subject) throw Error(`user with id ${subject.id} not found`)
+        debugger
         let getSubject = {
-            id:subject.id,
+            id:subject._id.toString(),
             name: subject.name,
             students: subject.students,
             teachers: subject.teachers,
             homeworks: subject.homeworks,
             exams: subject.exams,
-            posts: subject.posts
+            posts: subject.post
         }
 
         return getSubject

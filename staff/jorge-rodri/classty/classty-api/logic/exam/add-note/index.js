@@ -1,5 +1,5 @@
-const { models: {User, Subject, Exam, Note} } = require('classty-data')
-const { validate, convertDate } = require('classty-utils')
+const { models: {User, Subject, Note} } = require('classty-data')
+
 
 module.exports = function (idSub, idEx, name, surname, valor) {
     

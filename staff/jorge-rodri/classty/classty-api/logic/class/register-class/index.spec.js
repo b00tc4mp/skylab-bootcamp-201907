@@ -5,7 +5,7 @@ const registerClass = require('.')
 const { database, models: { User, Classroom } } = require('classty-data')
 
 const { env: { DB_URL_TEST }} = process
-describe('logic - register subject', () => {
+describe('logic - register class', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let student1, student2, mentor, teacher1, teacher2, idM, students, teachers, name
@@ -65,7 +65,7 @@ describe('logic - register subject', () => {
 
     it('should succeed on correct data', async () => {
         
-        await registerClass(name, idM, students, teachers)
+        await registerClass(idM, name, students, teachers)
 
         const _class =  await Classroom.findOne({name})
 

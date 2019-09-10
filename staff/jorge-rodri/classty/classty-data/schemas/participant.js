@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const { Schema, SchemaTypes: { ObjectId } } = mongoose
 
 module.exports = new Schema({
-    users:{
+    user:{
         type: ObjectId,
         required: true
     },

@@ -1,7 +1,9 @@
 module.exports = {
     user: require('./user'),
+    _class: require('./class'),
     subject: require('./subject'),
     homework: require('./homework'),
     exam: require('./exam'),
-    class: require('./class')
+    post: require('./post'),
+    conversation: require('./conversation')
 }

@@ -48,9 +48,10 @@ describe('logic - add student to class', () => {
         
         await User.create({name, surname, email, password, type})
 
-        await addStudentToClass( name, surname, idClass)
+        await addStudentToClass( name, surname, nameClass)
 
-        const class_ =  await Classroom.findById(idClass)
+        const class_ =  await Classroom.findOne({name: nameClass})
+
 
         expect(class_.students.length).to.equal(2)
 

@@ -7,7 +7,7 @@ const { validate } = require('classty-utils')
  * @param {Array} teachers is array of ids 
  * 
  */
-module.exports = (nameClass, idMentor, students, teachers) => {
+module.exports = (idMentor, nameClass, students, teachers) => {
     validate.string(nameClass, 'subject')
     validate.array(students, 'students')
     validate.array(teachers, 'teachers')

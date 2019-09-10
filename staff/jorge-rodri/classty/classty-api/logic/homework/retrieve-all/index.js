@@ -1,4 +1,5 @@
-const { models:{ Subject, User } } = require('classty-data')
+const { models:{ Subject } } = require('classty-data')
+
 const { validate } = require('classty-utils')
 
 module.exports = function (id) {
