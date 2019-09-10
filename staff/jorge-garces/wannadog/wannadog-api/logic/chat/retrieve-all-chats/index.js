@@ -16,7 +16,7 @@ module.exports = function (id) {
     validate.string(id, 'user id')
 
     return (async () => {
-        debugger
+
         const user = await User.findById(id)
         if (!user) throw Error(`This user does not exist.`)
 

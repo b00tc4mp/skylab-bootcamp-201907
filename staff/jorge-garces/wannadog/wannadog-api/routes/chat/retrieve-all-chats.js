@@ -1,7 +1,7 @@
 const retrieveAllChats = require('../../logic/chat/retrieve-all-chats')
 
 module.exports = async function (req, res) {
-
+    debugger
     const { userId } = req
 
     try {

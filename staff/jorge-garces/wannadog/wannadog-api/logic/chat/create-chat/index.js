@@ -22,10 +22,10 @@ module.exports = function (id, participantId) {
         const participantUser = await User.findById(participantId)
         if (!participantUser) throw Error('User does not exists.')
 
-        const chat_ = await Chat.findOne({ participants: [id, participantId] })
+        const chat_ = await Chat.findOne({ members: [id, participantId] })
         if (chat_) throw Error('chat already exists')
 
-        const chat = await Chat.create({ participants: [id, participantId] })
+        const chat = await Chat.create({ members: [id, participantId] })
 
         return chat._id.toString()
     })()
