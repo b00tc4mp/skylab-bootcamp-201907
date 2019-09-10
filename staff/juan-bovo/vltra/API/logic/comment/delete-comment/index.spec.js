@@ -92,7 +92,7 @@ describe('logic - retrieve user posts', () => {
     })
 
     it('should succesfully delete a comment', async ()  =>{
-        const commentToDelete = await deleteComment(postId, commentId2)
+        const commentToDelete = await deleteComment(commentId2, postId)
         expect(commentToDelete).not.to.exist
 
         const post = await Post.findById(postId)//findOne({ _id : postId }, { _id: 0, __v: 0 })
@@ -110,7 +110,7 @@ describe('logic - retrieve user posts', () => {
         const wrongPostId = '5d72794a24912c10b5c089e1' //--> 5d72794a24914c10b5c089e1
         
         try{
-            const comment = await deleteComment(wrongPostId, commentId1)
+            const comment = await deleteComment(commentId1, wrongPostId)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -122,7 +122,7 @@ describe('logic - retrieve user posts', () => {
         const wrongCommentId = '5d72794a24912c10b5c089e1' //--> 5d72794a24914c10b5c089e1
         
         try{
-            const comment = await deleteComment(postId, wrongCommentId)
+            const comment = await deleteComment(wrongCommentId, postId)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -133,7 +133,7 @@ describe('logic - retrieve user posts', () => {
     it('should fail on empty postId', async () => {
         
         try{
-            const comment = await deleteComment('', commentId1)
+            const comment = await deleteComment(commentId1, '')
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -144,7 +144,7 @@ describe('logic - retrieve user posts', () => {
     it('should fail on undefined postId', async () => {
         
         try{
-            const comment = await deleteComment(undefined, commentId1)
+            const comment = await deleteComment(commentId1, undefined)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -155,7 +155,7 @@ describe('logic - retrieve user posts', () => {
     it('should fail on wrong postId data type', async () => {
         
         try{
-            const comment = await deleteComment(123456, commentId1)
+            const comment = await deleteComment(commentId1, 123456)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -166,7 +166,7 @@ describe('logic - retrieve user posts', () => {
     it('should fail on empty commentId', async () => {
         
         try{
-            const comment = await deleteComment(postId, '')
+            const comment = await deleteComment('', postId)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -177,7 +177,7 @@ describe('logic - retrieve user posts', () => {
     it('should fail on undefined commentId', async () => {
         
         try{
-            const comment = await deleteComment(postId,undefined)
+            const comment = await deleteComment(undefined, postId)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -188,7 +188,7 @@ describe('logic - retrieve user posts', () => {
     it('should fail on wrong commentId data type', async () => {
         
         try{
-            const comment = await deleteComment(postId,123456)
+            const comment = await deleteComment(123456, postId)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist

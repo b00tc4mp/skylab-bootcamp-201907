@@ -3,7 +3,7 @@ const { validate} = require('vltra-utils')
 
 
 
-module.exports = function(postId, commentId) { //(commentId, postId, email, password)
+module.exports = function(commentId, postId) { //(commentId, postId, email, password)
     
     validate.objectId(commentId, 'commentId')
     validate.objectId(postId, 'postId')

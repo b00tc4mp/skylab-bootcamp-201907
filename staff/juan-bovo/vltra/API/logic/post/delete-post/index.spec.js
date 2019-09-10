@@ -10,7 +10,7 @@ const { env: { DB_URL_TEST }} = process
 describe('logic - delete post', () => {
     before(() =>  database.connect(DB_URL_TEST))
 
-    let title, body, author, date, comments, votes, postId
+    let title, body, author, date, comments, votes, userId, postId
 
     beforeEach(async () => {
         await User.deleteMany()
@@ -27,6 +27,7 @@ describe('logic - delete post', () => {
         votes = []
         
         const user = await User.create({ name, surname, nickname, email, password, bookmarks, voted })
+        userId = user.id
         
         title = `title-${Math.random()}`
         body = `body-${Math.random()}`
@@ -40,7 +41,7 @@ describe('logic - delete post', () => {
     })
 
     it('should succeed on deleting an existing post', async () => {
-        const post = await deletePost(postId)
+        const post = await deletePost(postId, userId)
         
         expect(post).not.to.exist
 
@@ -54,31 +55,60 @@ describe('logic - delete post', () => {
         const wrongPostId = '5d71070c887d12667c6095cc'
 
         try{
-            const post = await deletePost(wrongPostId)
-            //throw new Error('should not reach this point')
+            const post = await deletePost(wrongPostId, userId)
+            throw new Error('should not reach this point')
         }catch(error) {
                 expect(error).to.exist
                 expect(error.message).to.equal(`post with id ${wrongPostId} does not exist`)
             }
     })
 
+    it('should fail on wrong post id', async() => {
+        const wrongUserId = '5d71070c887d12667c6095cc'
+
+        try{
+            const post = await deletePost(postId, wrongUserId)
+            throw new Error('should not reach this point')
+        }catch(error) {
+                expect(error).to.exist
+                expect(error.message).to.equal(`postId ${postId} does not belong to userId ${wrongUserId}`)
+            }
+    })
+
     it('should fail on empty postId', () =>
         expect(() =>
-            deletePost('')
+            deletePost('', userId)
         ).to.throw('postId with value  is not a valid ObjectId')
     )
-
     it('should fail on undefined postId', () =>
         expect(() =>
-            deletePost(undefined)
+            deletePost(undefined, userId)
         ).to.throw(`postId with value undefined is not a valid ObjectId`)
     )
-
     it('should fail on wrong postId data type', () =>
         expect(() =>{
-            deletePost(123)
+            deletePost(123, userId)
         }
         ).to.throw(`postId with value 123 is not a valid ObjectId`)
+    )
+
+    it('should fail on empty userId', () =>
+        expect(() =>
+            deletePost(postId, '')
+        ).to.throw('userId with value  is not a valid ObjectId')
+    )
+
+    it('should fail on undefined userId', () =>
+        expect(() =>
+            deletePost(postId, undefined)
+        ).to.throw(`userId with value undefined is not a valid ObjectId`)
+    )
+
+    it('should fail on wrong userId data type', () =>
+        expect(() =>{
+            deletePost(postId, 123)
+        }
+        ).to.throw(`userId with value 123 is not a valid ObjectId`)
     )
 
     after(() => database.disconnect())
