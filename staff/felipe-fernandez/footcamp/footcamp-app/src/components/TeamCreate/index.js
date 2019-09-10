@@ -9,6 +9,7 @@ function CreateTeam(props) {
     const [name, setName] = useState(null)
     const [code, setCode] = useState(null)
     const [team, setTeam] = useState(null)
+    const [onePlayer, setonePlayer] = useState(null)
       
     const handleNameInput = event => setName(event.target.value)
     const handleCodeInput = event => setCode(event.target.value)
@@ -18,21 +19,32 @@ function CreateTeam(props) {
         (async()=>{
             
             try {
-               
+
+              
                 const token = logic.userCredentials
-                debugger
-                const team = await logic.createTeam(code, name, token)
                 
-                const [players] = team
+                const {players} = await logic.createTeam(code, name, token)
                 
                 setTeam(players)
+                debugger
+                const res = await Promise.all(players.map((playerId) => 
+                     logic.retrievePlayer(token, playerId)
+                ))
+                const player  = res.map(res=> res.player)
+                debugger
+                
+                // const {player} = await logic.retrievePlayer(token, players[0])
+
+                
+                setonePlayer(player)
+                
                 // history.push('/myteam')
                     
                 console.log('ok, league created right')
 
             } catch ({ message }) {
                 
-              console.log('fail create league', message)
+              console.log('fail create team', message)
             }
         })()
       }
@@ -67,10 +79,11 @@ function CreateTeam(props) {
                 <button className="button is-fullwidth is-info is-outlined">Submit</button>
             </form>
 
-           {team  && <ul className="">
-                {team.map(teams => <li  key={teams.id}> {teams.id} </li>)}
+           {onePlayer  && <ul >
+                {onePlayer.map(one => <li  key={one.id}> {one.name} <img src={"http://localhost:8080" + one.photo} /></li>)}
                  </ul>
            }
+           
     </div>
     )
 }

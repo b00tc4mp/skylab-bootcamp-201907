@@ -6,7 +6,7 @@ export default function ( name, code, token) {
     
     validate.string(name, 'name')
     validate.string(code, 'code')
-    debugger
+    
     return (async () => {
         const response = await fetch(`${REACT_APP_API_URL}/users/leagues`, {
 

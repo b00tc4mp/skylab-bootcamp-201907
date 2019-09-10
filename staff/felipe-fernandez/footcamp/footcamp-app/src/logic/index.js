@@ -4,6 +4,7 @@ import authenticateUser from './authenticate-user'
 import retrieveUser from './retrieve-user'
 import createLeague from './league-create'
 import createTeam from './team-create'
+import retrievePlayer from './player-retrieve'
 
 
 export default {
@@ -19,5 +20,6 @@ export default {
     isUserLogged,
     retrieveUser,
     createLeague, 
-    createTeam
+    createTeam,
+    retrievePlayer
 }
