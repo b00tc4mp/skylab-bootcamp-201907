@@ -6,6 +6,7 @@ const Comment = require('./comment')
 module.exports = new Schema({
     title: {
         type: String,
+        maxlength: 100,
         required: true
     },
     body: {
@@ -22,6 +23,6 @@ module.exports = new Schema({
         type: Date,
         required: true
     },
-    comment: [Comment],
+    comments: [Comment],
     votes: [{type: Number, min: 1, max: 5}]
 })
