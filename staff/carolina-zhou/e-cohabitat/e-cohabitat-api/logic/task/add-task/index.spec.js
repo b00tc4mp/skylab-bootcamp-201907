@@ -11,7 +11,7 @@ describe('logic - add task', () => {
     before(() => database.connect(DB_URL_TEST))
     
     let taskName, taskType, description, date, spaceId, userId
-    let title, type, address, passcode
+    let title, type, picture, address, passcode
     let username, name, surname, email, password
 
     beforeEach(async() => {
@@ -32,13 +32,14 @@ describe('logic - add task', () => {
 
         title = `name-${Math.random()}`
         type = `${spaceTypeArray[Math.floor(Math.random() * spaceTypeArray.length)]}`
+        picture = `picture-${Math.random()}`
         address = `address-${Math.random()}`
         passcode = `123-${Math.random()}`
 
         const user = await User.create({ username, name, surname, email, password })
         userId = user._id.toString()
 
-        const space = await Space.create({ title, type, address, passcode, userId })
+        const space = await Space.create({ title, type, picture, address, passcode, userId })
         spaceId = space._id.toString()
     })
 

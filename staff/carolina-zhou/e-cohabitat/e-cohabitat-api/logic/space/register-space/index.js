@@ -6,6 +6,7 @@ const { models: { User, Space } } = require('data')
  * 
  * @param {*} title 
  * @param {*} type 
+ * @param {*} picture
  * @param {*} address 
  * @param {*} passcode 
  * @param {*} id 
@@ -13,10 +14,11 @@ const { models: { User, Space } } = require('data')
  * @returns {Promise}
  */
 
-module.exports = function(title, type, address, passcode, id) {
+module.exports = function(title, type, picture, address, passcode, id) {
 
     validate.string(title, 'space name')
     validate.string(type, 'space type')
+    validate.string(picture, 'picture')
     validate.string(address, 'space address')
     validate.string(passcode, 'space passcode')
     validate.string(id, 'creator-user id')
@@ -28,7 +30,7 @@ module.exports = function(title, type, address, passcode, id) {
         const user = await User.findById(id) 
         if (!user) throw Error('user does not exist')
         
-        const space = new Space({ title, type, address, passcode })
+        const space = new Space({ title, type, picture, address, passcode })
         space.cousers.push(user._id)
         await space.save()
         

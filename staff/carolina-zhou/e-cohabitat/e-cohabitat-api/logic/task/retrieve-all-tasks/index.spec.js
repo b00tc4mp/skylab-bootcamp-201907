@@ -11,7 +11,7 @@ describe('logic - retrieve all tasks', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let taskName, taskType, description, date, taskSpace, companions, taskId
-    let title, type, address, passcode, cousers, spaceId
+    let title, type, picture, address, passcode, cousers, spaceId
     let username, name, surname, email, password, spaces, tasks, userId   
 
     beforeEach(async() => {
@@ -20,6 +20,7 @@ describe('logic - retrieve all tasks', () => {
         
         taskName = `taskName-${Math.random()}`
         taskType =  `${taskTypeArray[Math.floor(Math.random() * taskTypeArray.length)]}`
+        picture = `picture-${Math.random()}`
         description = `description-${Math.random()}`
         date = new Date
 
@@ -38,7 +39,7 @@ describe('logic - retrieve all tasks', () => {
         const user = await User.create({ username, name, surname, email, password, spaces, tasks })
         userId = user._id.toString()
 
-        const space = await Space.create({ title, type, address, passcode, cousers })
+        const space = await Space.create({ title, type, picture, address, passcode, cousers })
         spaceId = space._id.toString()
 
         const task = await Task.create({ taskName, taskType, description, date, taskSpace, companions })

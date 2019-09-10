@@ -10,6 +10,10 @@ module.exports = new Schema({
         required: true,
         enum: ['kitchen', 'bathroom', 'living room', 'coworking', 'garden', 'rooftop', 'other']
     },
+    picture: {
+        type: String,
+        required: true
+    },
     address: {
         type: String,
         required: true

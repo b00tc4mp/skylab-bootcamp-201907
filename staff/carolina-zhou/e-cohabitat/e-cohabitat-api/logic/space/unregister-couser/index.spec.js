@@ -10,7 +10,7 @@ describe('logic - unregister space co-user', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
-    let title, type, address, passcode
+    let title, type, picture, address, passcode
     let username, name, surname, email, password
     let username2, name2, surname2, email2, password2
     let username3, name3, surname3, email3, password3
@@ -21,6 +21,7 @@ describe('logic - unregister space co-user', () => {
         
         title = `name-${Math.random()}`
         type = `${spaceTypeArray[Math.floor(Math.random() * spaceTypeArray.length)]}`
+        picture = `picture-${Math.random()}`
         address = `address-${Math.random()}`
         passcode = `123-${Math.random()}`
 
@@ -43,7 +44,7 @@ describe('logic - unregister space co-user', () => {
         const newUserTwo = await User.create({ username: username2, name: name2, surname: surname2, email: email2, password :password2 })
         coUserIdTwo = newUserTwo.id
 
-        const newSpace = await Space.create({ title, type, address, passcode })
+        const newSpace = await Space.create({ title, type, picture, address, passcode })
         newSpace.cousers.push(coUserIdOne, coUserIdTwo)
         spaceId = newSpace.id
         await newSpace.save()

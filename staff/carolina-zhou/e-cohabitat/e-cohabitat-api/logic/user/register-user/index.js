@@ -1,5 +1,6 @@
 const { validate } = require('utils')
 const { models: { User } } = require('data')
+const bcrypt = require('bcryptjs')
 
 /**
  * Registers a user.
@@ -27,6 +28,8 @@ module.exports = function (username, name, surname, email, password) {
 
         if (user) throw new Error(`user with e-mail ${email} already exists`)
 
-        await User.create({ username, name, surname, email, password })
+        const hash = await bcrypt.hash(password, 10)
+
+        await User.create({ username, name, surname, email, password: hash })
     })()
 }

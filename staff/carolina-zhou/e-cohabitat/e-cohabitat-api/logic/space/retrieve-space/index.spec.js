@@ -10,13 +10,14 @@ describe('logic - retrieve space', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
-    let title, type, address, passcode, id, spaceId, username, name, surname, email, password
+    let title, type, picture, address, passcode, id, spaceId, username, name, surname, email, password
 
     beforeEach(async() => {
         const spaceTypeArray = ['kitchen', 'bathroom', 'living room', 'coworking', 'garden', 'rooftop', 'other']
         
         title = `name-${Math.random()}`
         type = `${spaceTypeArray[Math.floor(Math.random() * spaceTypeArray.length)]}`
+        picture = `picture-${Math.random()}`
         address = `address-${Math.random()}`
         passcode = `123-${Math.random()}`
 
@@ -30,7 +31,7 @@ describe('logic - retrieve space', () => {
         const user = await User.create({ username, name, surname, email, password })
         id = user._id.toString()
 
-        const space = await Space.create({ title, type, address, passcode })
+        const space = await Space.create({ title, type, picture, address, passcode })
         spaceId = space.id
     })
 
@@ -40,6 +41,7 @@ describe('logic - retrieve space', () => {
         expect(space.id).to.equal(spaceId)
         expect(space.title).to.equal(title)
         expect(space.type).to.equal(type)
+        expect(space.picture).to.equal(picture)
         expect(space.address).to.equal(address)
         expect(space.passcode).to.equal(passcode)
     })

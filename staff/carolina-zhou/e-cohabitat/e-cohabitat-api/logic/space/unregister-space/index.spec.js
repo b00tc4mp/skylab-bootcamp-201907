@@ -10,13 +10,14 @@ describe('logic - unregister space', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
-    let title, type, address, passcode, cousers, userId, spaceId, username, name, surname, email, password, spaces
+    let title, type, picture, address, passcode, cousers, userId, spaceId, username, name, surname, email, password, spaces
 
     beforeEach(async() => {
         const spaceTypeArray = ['kitchen', 'bathroom', 'living room', 'coworking', 'garden', 'rooftop', 'other']
         
         title = `name-${Math.random()}`
         type = `${spaceTypeArray[Math.floor(Math.random() * spaceTypeArray.length)]}`
+        picture = `picture-${Math.random()}`
         address = `address-${Math.random()}`
         passcode = `123-${Math.random()}`
 
@@ -28,7 +29,7 @@ describe('logic - unregister space', () => {
 
         await User.deleteMany()
 
-        const newSpace = await Space.create({ title, type, address, passcode, cousers })
+        const newSpace = await Space.create({ title, type, picture, address, passcode, cousers })
         spaceId = newSpace._id.toString() 
 
         const user = await User.create({ username, name, surname, email, password, spaces})

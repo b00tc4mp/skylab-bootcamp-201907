@@ -10,7 +10,7 @@ describe('logic - register space co-user', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
-    let title, type, address, passcode, cousers
+    let title, type, picture, address, passcode, cousers
     let username, name, surname, email, password, spaces
     let username2, name2, surname2, email2, password2
     let spaceId, coUserId, existentUserId
@@ -20,6 +20,7 @@ describe('logic - register space co-user', () => {
         
         title = `name-${Math.random()}`
         type = `${spaceTypeArray[Math.floor(Math.random() * spaceTypeArray.length)]}`
+        picture = `picture-${Math.random()}`
         address = `address-${Math.random()}`
         passcode = `123-${Math.random()}`
 
@@ -39,7 +40,7 @@ describe('logic - register space co-user', () => {
         const user = await User.create({ username, name, surname, email, password, spaces })
         coUserId = user._id.toString()
 
-        const space = await Space.create({ title, type, address, passcode, cousers })
+        const space = await Space.create({ title, type, picture, address, passcode, cousers })
         spaceId = space._id.toString()
 
         const existentUser = await User.create({ username: username2, name: name2, surname: surname2, email: email2, password: password2, spaces })
@@ -59,6 +60,7 @@ describe('logic - register space co-user', () => {
         expect(space.id).to.equal(spaceId)
         expect(space.title).to.equal(title)
         expect(space.type).to.equal(type)
+        expect(space.picture).to.equal(picture)
         expect(space.address).to.equal(address)
         expect(space.passcode).to.equal(passcode)
         expect(space.cousers).to.include(existentUserId, coUserId)

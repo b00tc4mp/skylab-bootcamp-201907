@@ -10,13 +10,14 @@ describe('logic - update space', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
-    let title, type, address, passcode, id
+    let title, type, picture, address, passcode, id
 
     beforeEach(async() => {
         const spaceTypeArray = ['kitchen', 'bathroom', 'living room', 'coworking', 'garden', 'rooftop', 'other']
         
         title = `name-${Math.random()}`
         type = `${spaceTypeArray[Math.floor(Math.random() * spaceTypeArray.length)]}`
+        picture = `picture-${Math.random()}`
         address = `address-${Math.random()}`
         passcode = `123-${Math.random()}`
 
@@ -27,7 +28,7 @@ describe('logic - update space', () => {
         
         await Space.deleteMany()
 
-        const newSpace = await Space.create({ title, type, address, passcode })
+        const newSpace = await Space.create({ title, type, picture, address, passcode })
         id = newSpace.id.toString()
     })
 
@@ -38,6 +39,9 @@ describe('logic - update space', () => {
         expect(space).to.exist
         expect(space.title).to.equal(body.title)
         expect(space.type).to.equal(body.type) 
+        expect(space.id).to.equal(id)
+        expect(space.address).to.equal(address)
+        expect(space.passcode).to.equal(passcode)
             
     })
 
