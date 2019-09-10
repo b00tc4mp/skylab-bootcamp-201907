@@ -21,14 +21,17 @@ export default function ( code, name, token) {
    
             body: JSON.stringify({ code,name })
         })
-        const responseJson =response.json()
+        debugger
+        const responseJson =await response.json()
 
         if (response.status !== 200) {
             const { error } = await response.json()
             throw Error(error)
         }
+        
         else {
-            return await responseJson
+            
+            return  responseJson
         }
        
     })()

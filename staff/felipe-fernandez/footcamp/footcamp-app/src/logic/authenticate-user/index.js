@@ -10,7 +10,7 @@ export default function (email, password) {
 
 
     return (async () => {
-        debugger
+        
         const response = await fetch(`${REACT_APP_API_URL}/auth`, {
             method: 'post',
             headers: { 'content-type': 'application/json' },

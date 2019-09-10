@@ -5,21 +5,24 @@ import Home from './Home'
 import LeagueLanding from './LeagueLanding'
 import RegisterSuccess from './Register-success'
 import CreateTeam from './TeamCreate'
+import MyTeam from './MyTeam'
+import logic from '../logic'
 
 import { withRouter, Route } from 'react-router-dom'
-import logic from '../logic'
 
 const { token } = sessionStorage
 
 function App({ history }) {
-  const [view, setView] = useState('')
-  const [credentials, setCredentials] = useState({ token })
-  const [user, setUser] = useState(undefined)
-  
+  const [name, setName] = useState(null)
+  const [code, setCode] = useState(null)
+  const [player, setPlayer] = useState(null)
+  const [teamName, setTeamName] = useState(null)
+  const [teamId, setTeamId] = useState(null)
+      
 
   return (
       <div className="App">
-        <Context.Provider value={{ view, setView, credentials, setCredentials, user, setUser }} >
+        <Context.Provider value={{name, setName, code, setCode, player, setPlayer, teamName, setTeamName, teamId, setTeamId }} >
 
           <Route exact path="/" render={() => logic.isUserLogged() ? history.push('/home') : <Landing /> } />
 
@@ -31,7 +34,7 @@ function App({ history }) {
           
           <Route path="/teams" render={() => logic.isUserLogged() ? <CreateTeam /> :  history.push('/')  } />
           
-          {/* <Route path="/myteam" render={() => logic.isUserLogged() ? <MyTeam /> :  history.push('/')  } /> */}
+          <Route path="/myteam" render={() => logic.isUserLogged() ? <MyTeam /> :  history.push('/')  } /> 
           
         </Context.Provider>
         </div>

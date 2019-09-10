@@ -5,6 +5,7 @@ import retrieveUser from './retrieve-user'
 import createLeague from './league-create'
 import createTeam from './team-create'
 import retrievePlayer from './player-retrieve'
+import retrieveTeam from './retrieve-team'
 
 
 export default {
@@ -21,5 +22,6 @@ export default {
     retrieveUser,
     createLeague, 
     createTeam,
-    retrievePlayer
+    retrievePlayer,
+    retrieveTeam
 }

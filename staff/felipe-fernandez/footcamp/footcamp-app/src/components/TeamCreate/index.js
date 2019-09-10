@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,useContext } from 'react'
 import logic from '../../logic'
+import PlayerResult from '../PlayerResult'
 import { withRouter } from 'react-router-dom'
+import Context from '../Context'
 
 function CreateTeam(props) {
 
     const { history } = props
     
-    const [name, setName] = useState(null)
-    const [code, setCode] = useState(null)
-    const [team, setTeam] = useState(null)
-    const [onePlayer, setonePlayer] = useState(null)
-      
+    const { name, setName, code, setCode, teamName, setTeamName, teamId, setTeamId, player, setPlayer } = useContext(Context)
+
     const handleNameInput = event => setName(event.target.value)
     const handleCodeInput = event => setCode(event.target.value)
     
@@ -19,24 +18,22 @@ function CreateTeam(props) {
         (async()=>{
             
             try {
-
-              
-                const token = logic.userCredentials
-                
-                const {players} = await logic.createTeam(code, name, token)
-                
-                setTeam(players)
                 debugger
+                const token = logic.userCredentials
+                //call to logic and recveive 18 players and the id of the team
+                const result  = await logic.createTeam(code, name, token)
+                const players  = result.team.players.map(results=> results)
+                const teamId = result.team.id
+                
+                setTeamId(teamId) 
+                setTeamName(name)
+                
                 const res = await Promise.all(players.map((playerId) => 
                      logic.retrievePlayer(token, playerId)
                 ))
                 const player  = res.map(res=> res.player)
-                debugger
                 
-                // const {player} = await logic.retrievePlayer(token, players[0])
-
-                
-                setonePlayer(player)
+                setPlayer(player)
                 
                 // history.push('/myteam')
                     
@@ -78,11 +75,15 @@ function CreateTeam(props) {
                 />
                 <button className="button is-fullwidth is-info is-outlined">Submit</button>
             </form>
+            {player && player.map(oneplayer => <li  key={oneplayer.id}> <PlayerResult player={oneplayer} /> </li>)}
+            <a href="#" onClick={event => {
+                event.preventDefault()
+                history.push('/myteam')
+            }}>OK</a>
+         
 
-           {onePlayer  && <ul >
-                {onePlayer.map(one => <li  key={one.id}> {one.name} <img src={"http://localhost:8080" + one.photo} /></li>)}
-                 </ul>
-           }
+
+                
            
     </div>
     )
