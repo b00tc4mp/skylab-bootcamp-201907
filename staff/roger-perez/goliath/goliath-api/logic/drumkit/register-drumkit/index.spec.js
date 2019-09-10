@@ -6,7 +6,7 @@ const { User, Drumkit } = require('../../../data')
 describe('logic - register drumkit', () => {
     before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
 
-    let name, surname,instrument,description, email, password, id, _name, drumkitName
+    let name, surname,instrument,description, email, password, id, _name, drumkitName, sequences,creator
     beforeEach(async() => {
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`
@@ -20,11 +20,12 @@ describe('logic - register drumkit', () => {
         await User.deleteMany()
         const user = await User.create({ name, surname,instrument,description, email, password })
         id = user.id
+        const drumkit = await Drumkit.create({ drumkitName, sequences,creator })
         drumkit.creator.push(id)
     })
 
     it('should succeed on correct data', async () => {
-        const _id = await logic.registerDrumkit(id, drumkitName, sequences)
+        const _id = await logic.registerDrumkit(id, drumkitName, sequences,creator)
         expect(drumkit).to.exist
 
         drumkitId = _id
@@ -68,67 +69,7 @@ describe('logic - register drumkit', () => {
         }
     })
 
-    // number
-    it('should fail on empty number', async () => {
-        number = ''
-
-        try {
-            await logic.registerDrumkit(id, _number, expiration)
-        } catch({message}) {
-            expect(message).to.equal('number is empty or blank')
-        }
-    })
-
-    it('should fail on undefined number', async () => {
-        number = undefined
-
-        try {
-            await logic.registerDrumkit(id, _number, expiration)
-        } catch({message}) {
-            expect(message).to.equal('number with value undefined is not a string')
-        }
-    })
-
-    it('should fail on wrong number data type', async () => {
-        number = 123
-
-        try {
-            await logic.registerDrumkit(id, _number, expiration)
-        } catch({message}) {
-            expect(message).to.equal('number with value 123 is not a string')
-        }
-    })
-
-    // expiration
-    it('should fail on empty expiration', async () => {
-        expiration = ''
-
-        try {
-            await logic.registerDrumkit(id, _number, expiration)
-        } catch({message}) {
-            expect(message).to.equal('expiration is empty or blank')
-        }
-    })
-
-    it('should fail on undefined expiration', async () => {
-        expiration = undefined
-
-        try {
-            await logic.registerDrumkit(id, _number, expiration)
-        } catch({message}) {
-            expect(message).to.equal('expiration date with value undefined is not a date')
-        }
-    })
-
-    it('should fail on wrong expiration data type', async () => {
-        expiration = 123
-
-        try {
-            await logic.registerDrumkit(id, _number, expiration)
-        } catch({message}) {
-            expect(message).to.equal('expiration date with value 123 is not a date')
-        }
-    })
+    
 
     after(() => mongoose.disconnect())
 })

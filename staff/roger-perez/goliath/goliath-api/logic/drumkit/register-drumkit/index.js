@@ -5,7 +5,7 @@ const { User, } = require('../../../data')
  * Registers a drumkit associated to a user
  * 
  * @param {string} id 
- * @param {string} name 
+ * @param {string} drumkitName 
  * @param {date} sequences 
  * 
  * @returns {Promise}
@@ -21,7 +21,7 @@ module.exports = function(id, drumkitName, sequences) {
 
         if (!user) throw new Error(`user with id ${id} does not exists`)
 
-        const existing = user.drumkits.some(({ name: _name }) => _name === name)
+        const existing = user.drumkit.some(({ name: _name }) => _name === name)
 
         if (existing) throw new Error(`user with id ${id} already has drumkit name ${name}`)
 
@@ -31,7 +31,8 @@ module.exports = function(id, drumkitName, sequences) {
 
         await user.save()
 
-        return drumkit.id
+        return drumkit
     })()
 
 }
+
