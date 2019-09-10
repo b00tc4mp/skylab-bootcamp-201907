@@ -8,6 +8,7 @@ const { convertDate } = require('classty-utils')
 const { env: { DB_URL_TEST }} = process
 
 describe('logic - retrieve homework', () => {
+
     before(() => database.connect(DB_URL_TEST))
 
     let student1, student2, teacher1, teacher2, subject, idS11,idS22, idT11, idT22, homework, idSub, idHo

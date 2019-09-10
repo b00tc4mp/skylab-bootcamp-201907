@@ -3,6 +3,7 @@ const { validate } = require('classty-utils')
 
 module.exports = function (idSub, idH, idS) {
     validate.string(idSub, 'id')
+
     validate.string(idH, 'idH')
     validate.string(idS, 'idS')
     let count=0

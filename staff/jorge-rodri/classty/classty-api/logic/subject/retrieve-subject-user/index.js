@@ -22,7 +22,7 @@ module.exports = function (id) {
             isIn = subject.students.findIndex(student => student.toString()==id)
             
             if(isIn > -1) listSub.push(subject._id.toString())
-            
+        
         })
         return listSub
     })()

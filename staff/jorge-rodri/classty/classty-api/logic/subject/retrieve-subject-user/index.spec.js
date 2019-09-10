@@ -7,6 +7,7 @@ const { database, models: { User, Subject } } = require('classty-data')
 const { env: { DB_URL_TEST }} = process
 
 describe('logic - retrieve subject to user', () => {
+
     before(() => database.connect(DB_URL_TEST))
 
     let student, idS1, teacher, idT1, subject1, subject2, subject3, subject4

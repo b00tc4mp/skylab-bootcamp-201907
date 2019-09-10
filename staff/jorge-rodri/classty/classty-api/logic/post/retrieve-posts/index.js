@@ -10,7 +10,7 @@ module.exports = function (id) {
         const subject = await Subject.findById(id)
 
         if (!subject) throw new Error(`subject with id ${id} not exists.`)
-        
+
         return subject.post
     })()
 }

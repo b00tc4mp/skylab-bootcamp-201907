@@ -6,6 +6,4 @@ module.exports = {
     exam: require('./exam'),
     post: require('./post'),
     conversation: require('./conversation')
-
-/*conversation: require('./conversation')*/
 }

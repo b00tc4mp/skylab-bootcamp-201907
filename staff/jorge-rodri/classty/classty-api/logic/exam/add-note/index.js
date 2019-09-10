@@ -1,5 +1,6 @@
 const { models: {User, Subject, Note} } = require('classty-data')
 
+
 module.exports = function (idSub, idEx, name, surname, valor) {
     
     // validate.string(id, 'id')

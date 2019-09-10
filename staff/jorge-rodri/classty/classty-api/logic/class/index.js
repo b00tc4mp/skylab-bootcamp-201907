@@ -4,4 +4,5 @@ module.exports = {
     unregisterClass: require('./unregister-class'),
     unregisterType: require('./unregister-type'),
     retrieveClass: require('./retrieve-class')
+
 }

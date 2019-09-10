@@ -52,6 +52,7 @@ describe('logic - add student to class', () => {
 
         const class_ =  await Classroom.findOne({name: nameClass})
 
+
         expect(class_.students.length).to.equal(2)
 
     })
