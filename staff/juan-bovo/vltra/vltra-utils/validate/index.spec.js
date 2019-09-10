@@ -65,7 +65,7 @@ describe("validate", () => {
        })
 
        it("should throw error if its not an array", () => {
-           expect(() => {validate.array("hola", "number")}).to.throw(Error, "number with value hola is not an array")
+           expect(() => {validate.array("hola", "array")}).to.throw(Error, "array with value hola is not an array")
        })
    })
 
@@ -75,8 +75,19 @@ describe("validate", () => {
            expect(true).to.be.true
        })
 
-       it("should throw error if its not an array", () => {
-           expect(() => {validate.array("hola", "number")}).to.throw(Error, "number with value hola is not an array")
+       it("should throw error if its not an object", () => {
+           expect(() => {validate.object("hola", "object")}).to.throw(Error, "object with value hola is not an object")
+       })
+   })
+
+   describe("validate objectId", () => {
+       it("should detect that it is a valid ObjectId and not throw error", () => {
+           validate.objectId('551137c2f9e1fac808a5f572', "objectId")
+           expect(true).to.be.true
+       })
+
+       it("should throw error if its not a valid ObjectId", () => {
+           expect(() => {validate.objectId("hola", "objectId")}).to.throw(Error, "objectId with value hola is not a valid ObjectId")
        })
    })
 })
