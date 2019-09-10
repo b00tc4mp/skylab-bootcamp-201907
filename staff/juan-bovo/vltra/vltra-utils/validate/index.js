@@ -1,3 +1,4 @@
+var { ObjectId } = require('mongoose').Types
 
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 const URL_REGEX = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/
@@ -36,5 +37,10 @@ module.exports = {
     object(target, name) {
         if (!(target instanceof Object && target.constructor === Object)) throw TypeError(`${name} with value ${target} is not an object`)
         //if (Object.keys(target).length === 0 && target.constructor === Object) throw new Error(`${name} is empty or blank`)
+    },
+
+    objectId(target, name){
+        
+        if(!ObjectId.isValid(target) || (typeof target === 'number')) throw TypeError(`${name} with value ${target} is not a valid ObjectId`)
     }
 }
