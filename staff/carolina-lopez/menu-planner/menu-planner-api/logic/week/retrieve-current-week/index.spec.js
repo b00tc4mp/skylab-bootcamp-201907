@@ -159,7 +159,7 @@ describe('logic - retrieve current week', () => {
         })()
     })
 
-    it("should succeed on correct data", async () => {
+    it.only("should succeed on correct data", async () => {
 
         const week = await retrieveCurrentWeek(userId)
 
@@ -175,9 +175,12 @@ describe('logic - retrieve current week', () => {
         expect(week.monday.id).to.be.a('string')
         expect(week.monday.id).to.have.lengthOf(24)
         expect(week.monday._id).not.to.exist
-        expect(week.monday.breakfast).to.be.a('string')
-        expect(week.monday.id).to.have.lengthOf(24)
+        expect(week.monday.breakfast).to.be.an('object')
+        expect(week.monday.breakfast.id).to.be.a('string')
+        expect(week.monday.breakfast.id).to.have.lengthOf(24)
         expect(week.monday.breakfast._id).not.to.exist
+        expect(week.monday.breakfast.title).to.be.a('string')
+        expect(week.monday.breakfast.id).to.have.length.above(0)
         // TODO same for lunch, snack, and dinner
 
         // TODO same for rest of the days
