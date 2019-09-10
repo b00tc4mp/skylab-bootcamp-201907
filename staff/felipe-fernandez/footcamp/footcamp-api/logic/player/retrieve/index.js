@@ -4,16 +4,14 @@ const { models: {  User, Player } } = require('footcamp-data')
  /**
  * Retrieves all the information of the player 
  * @param {*} id 
- * @param {*} name 
  * @param {*} id_player 
  *  
  * @returns {Promise}
 */
 
-module.exports = function(id, code, player_id) {
+module.exports = function(id, player_id) {
 
     validate.string(id, 'id')
-    validate.string(code, 'code')
     validate.string(player_id, 'player id')
    
      return (async () => {

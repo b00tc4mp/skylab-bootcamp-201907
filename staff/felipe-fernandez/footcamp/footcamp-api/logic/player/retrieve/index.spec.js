@@ -7,7 +7,7 @@ const {  random : { number }  } = require('footcamp-utils')
 
 const { env: { DB_URL_TEST }} = process
 
-describe('logic - retrieve player', () => {
+describe.only('logic - retrieve player', () => {
     
     before(() =>  database.connect(DB_URL_TEST))
 
@@ -73,7 +73,7 @@ describe('logic - retrieve player', () => {
 
     it('should succeed on correct data', async () => {
         debugger
-        const result = await logic.retrievePlayer(id, code, idPlayer)
+        const result = await logic.retrievePlayer(id, idPlayer)
         
             expect(result).to.exist
             expect(result.name).to.equal(namePlayer)
@@ -94,7 +94,7 @@ describe('logic - retrieve player', () => {
         it('should fail on incorrect user id', async () => {
             id = '5d772fb62bb54120d08d7a7b'
             try {
-                await logic.retrievePlayer(id, code, idPlayer)
+                await logic.retrievePlayer(id, idPlayer)
                 throw Error('should not reach this point') 
             }
             catch({message}){
@@ -111,7 +111,7 @@ describe('logic - retrieve player', () => {
                 await Player.deleteMany()
         
                 try {
-                     await logic.retrievePlayer(id, code, idPlayer)
+                     await logic.retrievePlayer(id, idPlayer)
                 } catch(error) {
                     
                      expect(error).to.exist
@@ -122,56 +122,40 @@ describe('logic - retrieve player', () => {
 
         it('should fail on undefined id user', () => 
             expect(() => 
-                logic.retrievePlayer(undefined, code, idPlayer)
+                logic.retrievePlayer(undefined,  idPlayer)
      
              ).to.throw(`id with value undefined is not a string`)
             )
 
        
-        it('should fail on undefined code name', () => 
-            expect(() => 
-                logic.retrievePlayer(id, undefined, idPlayer)
-         ).to.throw(`code with value undefined is not a string`)
-        )
-
         it('should fail on undefined player id', () => 
             expect(() => 
-                logic.retrievePlayer(id, code, undefined)
+                logic.retrievePlayer(id,  undefined)
         ).to.throw(`player id with value undefined is not a string`)
         )
 
       
         it('should fail on empty code league id user', () => 
              expect(() => 
-            logic.retrievePlayer('',code, idPlayer)
+            logic.retrievePlayer('', idPlayer)
  
          ).to.throw(`id is empty or blank`)
         )
 
-        it('should fail on empty code league', () => 
-            expect(() => 
-            logic.retrievePlayer(id, '', idPlayer)
-        ).to.throw(`code is empty or blank`)
-        )
+        
 
         it('should fail on non-string user id', () => 
              expect(() => 
-                 logic.retrievePlayer(12345, code, idPlayer)
+                 logic.retrievePlayer(12345,  idPlayer)
 
          ).to.throw(`id with value 12345 is not a string`)
         )
 
       
-        it('should fail on non-string code', () => 
-             expect(() => 
-                 logic.retrievePlayer(id, 12345, idPlayer)
-
-         ).to.throw(`code with value 12345 is not a string`)
-        )
-
+        
         it('should fail on non-string player id', () => 
              expect(() => 
-                 logic.retrievePlayer(id, code, 12345)
+                 logic.retrievePlayer(id,  12345)
 
          ).to.throw(`player id with value 12345 is not a string`)
         )

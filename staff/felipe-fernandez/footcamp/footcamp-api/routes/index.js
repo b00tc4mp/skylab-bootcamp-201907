@@ -46,7 +46,7 @@ router.delete ('/users/leagues/team', [tokenMiddleware, jsonBodyParser], deleteT
 
 
 /**PLAYER**/
-router.get ('/users/leagues/player', [tokenMiddleware, jsonBodyParser], retrievePlayer)
+router.get ('/users/leagues/player/:playerId', [tokenMiddleware, jsonBodyParser], retrievePlayer)
 
 
 module.exports = router
