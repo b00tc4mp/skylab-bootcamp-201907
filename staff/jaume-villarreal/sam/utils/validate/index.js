@@ -6,44 +6,47 @@ module.exports = (() => {
     const NUMERIC_REGEX = /^[0-9]*$/
 
    return {
-       string(target, name, empty = true, values) {
+     string(target, name, empty = true, values) {
           if (typeof target !== 'string') throw TypeError(`${name} with value ${target} is not a string`)
           if (empty && !target.trim()) throw new Error(`${name} is empty or blank`)
           if (values && !values.includes(target)) throw new Error(`${name} with value ${target} does not match one of the expected values: ${values.join(', ')}`)
           const parsedString = parseInt(target)
+     },
+     
+     alphabetic(name){
           if(NUMERIC_REGEX.test(parsedString)) throw new Error(`${name} is not a valid string`)
-       },
+     },
        
-       observation(target, name) {
-            if (typeof target !== 'string') throw TypeError(`${name} with value ${target} is not a string`)
-       },
+     observation(target, name) {
+          if (typeof target !== 'string') throw TypeError(`${name} with value ${target} is not a string`)
+     },
 
-       number(target, name) {
-            if (typeof target !== 'number') throw TypeError(`${name} with value ${target} is not a number`)
-       },
+     number(target, name) {
+          if (typeof target !== 'number') throw TypeError(`${name} with value ${target} is not a number`)
+     },
 
-       boolean(target, name) {
-            if (typeof target !== 'boolean') throw TypeError(`${name} with value ${target} is not a boolean`)
-       },
+     boolean(target, name) {
+          if (typeof target !== 'boolean') throw TypeError(`${name} with value ${target} is not a boolean`)
+     },
 
-       date(target, name) {
-            if (!DATE_REGEX.test(target)) throw new Error(`${name} with value ${target} is not a valid date`)
-       },
+     date(target, name) {
+          if (!DATE_REGEX.test(target)) throw new Error(`${name} with value ${target} is not a valid date`)
+     },
 
-       email(target, name) {
-            if (!EMAIL_REGEX.test(target)) throw new Error(`${name} with value ${target} is not a valid e-mail`)
-       },
+     email(target, name) {
+          if (!EMAIL_REGEX.test(target)) throw new Error(`${name} with value ${target} is not a valid e-mail`)
+     },
 
-       function(target, name) {
-            if (typeof target !== 'function') throw TypeError(`${name} with value ${target} is not a function`)
-       },
-       
-       array(target, name) {
-            if (typeof target !== 'array') throw TypeError(`${name} with value ${target} is not an array`)
-       },
-       
-       url(target, name) {
-            if (!URL_REGEX.test(target)) throw new Error(`${name} with value ${target} is not a valid URL`)
-       }
+     function(target, name) {
+          if (typeof target !== 'function') throw TypeError(`${name} with value ${target} is not a function`)
+     },
+     
+     array(target, name) {
+          if (typeof target !== 'array') throw TypeError(`${name} with value ${target} is not an array`)
+     },
+     
+     url(target, name) {
+          if (!URL_REGEX.test(target)) throw new Error(`${name} with value ${target} is not a valid URL`)
+     }
    }
 })()

@@ -1,7 +1,7 @@
 const call = require('.')
 const { expect } = require('chai')
 
-describe.only("call() => IS IN CHARGE TO MANAGING REQUESTS TO API's" , () => {
+describe.skip("call() => IS IN CHARGE TO MANAGING REQUESTS TO API's" , () => {
     const { random } = Math
     describe('GET case => retrieve data from API' , () => {
         it("should succeed on retrieving ducks" , () => {
