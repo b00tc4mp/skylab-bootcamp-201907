@@ -1,0 +1,37 @@
+.duck-container
+    @extend %item-container
+
+    &__item
+        @extend %item
+
+        &-price
+            @extend %item-price
+       
+        &-h3
+            @extend %item-title
+        
+        &-image
+            @extend %item-image
+        
+        &-description
+            font-family: $thinfont
+            padding: 5px
+            margin: 0 5px
+            text-align: justify
+
+    &__item-bottom
+        margin: 5px
+        display: flex
+        justify-content: center
+        align-items: center
+
+        &-link
+            margin-right: 25px
+
+@media (min-width: 650px)    
+    %item
+        min-width: 80%
+        margin-left: 10%
+        flex-direction: column
+        
+        

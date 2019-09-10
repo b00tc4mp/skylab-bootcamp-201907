@@ -1,0 +1,40 @@
+.duck-detail
+    @extend %panel
+
+    background-color: plum
+
+    &__photo
+        width: 333px
+
+    &__price
+        background-color: #FF6000
+        color: #ffffff
+        padding: 5px
+        padding-left: 20px
+        padding-right: 20px
+        margin-left: 20px
+        border-radius: 5%
+
+    &__fav
+        background-color: transparent
+        color: #888888
+        border: 2px solid #888888
+        background: none
+        border-radius: 50%
+        padding: 5px
+        cursor: pointer
+        &:hover
+            color: red
+            border: 2px solid red
+    a
+        border: 2px solid black
+        padding: 5px
+        margin: 5px
+        color: black
+        border-radius: 20%
+        text-decoration: none
+        background: #ffff
+        color: #333333
+        &:hover
+            background: #333333
+            color: #ffffff

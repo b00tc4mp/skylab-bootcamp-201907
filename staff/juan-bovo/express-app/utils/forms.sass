@@ -1,0 +1,49 @@
+.form
+    padding: 0 2rem
+    display: flex
+    flex-direction: column
+    flex-flow: row wrap
+    align-items: stretch
+    justify-content: center
+
+    &__text-field
+        display: block
+        padding-left: 1rem
+        width: 100%
+        max-width: 900px
+        height: 30px
+        margin-top: 0.25rem
+        margin-bottom: 1rem
+        font-size: 1.2rem
+        +round-border(0.1rem, 0.3rem, solid, rgb(255, 197, 108))
+
+    &__list-item
+        list-style-type: none
+        
+    &__label
+        display: block
+        width: 100%
+        max-width: 900px
+        color: whitesmoke
+
+    &__button
+        display: block
+        margin: 0 25%
+        height: 30px
+        width: 100px
+        margin-top: 0.25rem
+        margin-bottom: 1rem
+        font-size: 1.1rem
+        +round-border(0.1rem, 0.3rem, solid, rgb(255, 197, 108))
+
+    &__button:hover
+        color: white
+        background-color: rgba(255, 197, 108, 0.5)
+
+    &__back-link
+        display: block
+        padding-top: 1rem
+        color: white
+
+    &__title
+        color: rgb(255, 197, 108)

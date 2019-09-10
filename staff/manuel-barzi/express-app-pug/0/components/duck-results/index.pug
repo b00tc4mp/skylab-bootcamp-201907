@@ -1,0 +1,8 @@
+mixin duck-results(ducks)
+    ul
+      each duck in ducks
+        li
+            a(href='/ducks/' + duck.id)
+            h3= duck.title
+            img(src=duck.imageUrl)
+            span= duck.price

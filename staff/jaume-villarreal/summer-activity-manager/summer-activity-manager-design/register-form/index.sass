@@ -1,0 +1,180 @@
+$margin-bottom: 2rem
+$border-radius: .5em
+$width-box: 85%
+$height-box: 3rem
+$border-box: #ccc
+$box-color: #f6f6f6
+
+.fieldset
+    &__body
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        .legend
+            padding: 1.5rem
+            font-size: 1.5rem
+            font-weight: bold
+        >label
+            padding-left: 1.5rem
+            margin-bottom: .5rem
+            align-self: flex-start
+            font-family: 'Raleway', sans-serif
+            font-size: 1rem
+        .input__form
+            margin-bottom: $margin-bottom
+            padding: .5rem
+            width: $width-box
+            height: $height-box
+            font-family: 'Roboto', sans-serif
+            font-size: 1.25rem
+            border: 0 none
+            border-radius: $border-radius
+            background-color: $box-color
+            outline: none
+            &:focus
+                border: 1px solid $border-box
+        .select--wrapper
+            width: 100%
+            margin-bottom: $margin-bottom
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            >label
+                width: 100%
+                padding-left: 1.5rem
+                margin-bottom: .5rem
+            .select__box
+                margin: 0
+                width: $width-box
+                max-width: 100% 
+                height: $height-box
+                display: block
+                font-size: 1rem
+                font-family: sans-serif
+                font-weight: 700
+                color: #444
+                line-height: 1.3
+                padding: .6em 1.4em .5em .8em
+                box-sizing: border-box
+                box-shadow: 0 1px 0 1px rgba(0,0,0,.04)
+                border: 1px solid $border-box
+                border-radius: $border-radius
+                -moz-appearance: none
+                -webkit-appearance: none
+                appearance: none
+                background-color: $box-color
+                outline: none
+                &::-ms-expand 
+                    display: none
+                &:hover
+                    border-color: $border-box
+                &:focus
+                    border-color: $border-box
+                    box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7)
+                    box-shadow: 0 0 0 3px -moz-mac-focusring
+                    color: #222
+                    outline: none
+    
+    &__observations
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        >label
+            padding-left: 1.5rem
+            margin-bottom: .5rem
+            align-self: flex-start
+        &--text-area
+            display: block
+            margin-bottom: $margin-bottom
+            width: 100%
+            border: 1px solid $border-box
+            border-radius: $border-radius
+            background-color: $box-color
+    &--wider
+        width: 95%
+    &__modality
+        .availability-table
+            width: 100%
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            text-align: center
+            >table
+                width: 100%
+                border-collapse: collapse
+                .caption th
+                    padding: .75rem
+                td
+                    border-bottom: 1px solid $border-box
+                    padding: .25rem
+                .radio-item
+                    width: 100%
+                    height: $height-box
+                    display: flex
+                    justify-content: space-between
+                    align-items: center
+                    >input
+                        width: 5%
+                    >label
+                        width: 95%
+                        text-align: left
+    &__schedule
+        .schedule
+            width: 100%
+            border: 1px solid
+            border-collapse: collapse
+            text-align: center
+            tr th:first-child
+                background-color: white
+            .row-head    
+                background-color: $box-color
+            tr th
+                background-color: $box-color
+                height: $height-box
+            tr td
+                border-bottom: 1px solid $border-box
+                padding: 1.25rem 0
+                .select--wrapper
+                    width: 100%
+                    display: flex
+                    flex-direction: column
+                    justify-content: center
+                    align-items: center
+                    >label
+                        width: 100%
+                        padding-left: 1.5rem
+                        margin-bottom: .5rem
+                    .select__box
+                        margin: 0
+                        width: $width-box
+                        max-width: 100% 
+                        display: block
+                        font-size: 1rem
+                        font-family: sans-serif
+                        font-weight: 700
+                        color: #444
+                        line-height: 1.3
+                        padding: .6em 1.4em .5em .8em
+                        box-sizing: border-box
+                        box-shadow: 0 1px 0 1px rgba(0,0,0,.04)
+                        border: 1px solid $border-box
+                        border-radius: $border-radius
+                        -moz-appearance: none
+                        -webkit-appearance: none
+                        appearance: none
+                        background-color: $box-color
+                        outline: none
+                        &::-ms-expand 
+                            display: none
+                        &:hover
+                            border-color: $border-box
+                        &:focus
+                            border-color: $border-box
+                            box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7)
+                            box-shadow: 0 0 0 3px -moz-mac-focusring
+                            color: #222
+                            outline: none

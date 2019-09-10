@@ -1,0 +1,7 @@
+mixin duck-detail(duck)
+        article
+          h3= duck.title
+          img(src=duck.imageUrl)
+          span= duck.price
+          p= duck.description
+          +fav-button(duck.id, duck.favorite)

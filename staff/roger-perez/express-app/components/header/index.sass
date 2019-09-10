@@ -1,0 +1,45 @@
+.header
+    background-color: $secondary-bg-color
+    padding: 30px
+    text-align: center
+
+    &__title
+        margin: 0
+        padding: 25px
+
+    &__nav
+        list-style: none
+        display: flex
+        flex-direction: column
+        align-items: flex-end
+        margin-top: 5px
+        padding: 0
+    
+    &__item
+        margin: 5px 15px
+        width: 235px
+        border: 1px solid $link-text-color
+        padding: 10px 0px
+    
+    &__form
+        padding: 0
+
+    &__logout
+        color: $link-text-color
+        background: none
+        border: none
+        padding: 5px 17px
+        font-size: 22px
+
+    &__message
+        font-size: 2rem
+        margin: auto
+
+    &__link
+        color: $link-text-color
+        text-decoration: none
+        margin: 15px
+        padding: 5px 17px
+    
+    &__link:hover, &__logout:hover
+        color: $hover-text-color

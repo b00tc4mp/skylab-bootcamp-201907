@@ -1,0 +1,225 @@
+* {
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+}
+
+.container {
+  color: white;
+  padding: 20px;
+  text-align: center;
+  display: block;
+  font-family: "Playfair Display", serif;
+}
+.container__campName {
+  display: none;
+}
+.container__input {
+  border-radius: 10px;
+  border: 2px solid #6F6F6F;
+  background-color: white;
+  margin-top: 1rem;
+  width: 75%;
+  padding: 8px;
+  max-width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.container__advice {
+  display: none;
+}
+.container__button {
+  border: 2px solid #6F6F6F;
+  background-color: white;
+  border-radius: 10px;
+  width: 50%;
+  margin-top: 50px;
+  max-width: 150px;
+  height: 30px;
+}
+
+.full {
+  background-image: url("https://cdn.pixabay.com/photo/2016/11/21/12/59/electronics-1845272_960_720.jpg");
+  background-position: center;
+  background-size: cover;
+  padding: 50px;
+}
+
+h1 {
+  font-size: 35px;
+}
+
+.header {
+  background-color: black;
+  border-bottom: 2px solid white;
+  padding: 20px;
+  font-family: "Playfair Display", serif;
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+  height: 8rem;
+}
+.header__nav {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.header__ul {
+  display: flex;
+  list-style: none;
+}
+.header__li {
+  margin-left: 20px;
+}
+.header__a {
+  text-decoration: none;
+  color: white;
+  color-margin-top: 20px;
+  color-display: inline;
+}
+.header__logo {
+  display: inline-block;
+}
+.header__h2 {
+  text-decoration: none;
+  color: white;
+  font-size: 33px;
+  font-weight: bold;
+}
+
+.header__a:hover {
+  color: skyblue;
+}
+
+.footer {
+  width: 100vw;
+  background-color: black;
+  bottom: 0px;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+.footer__title {
+  font-family: "Playfair Display", serif;
+  font-size: 14px;
+}
+.footer__p {
+  font-size: 12px;
+  font-family: "Playfair Display", serif;
+}
+
+.login {
+  background-image: url("https://cdn.pixabay.com/photo/2016/11/23/00/58/record-player-1851576_960_720.jpg");
+  background-position: center;
+  background-size: cover;
+  min-height: 70vh;
+  text-align: center;
+  color: white;
+}
+
+.results__li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.results__ul--res {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+}
+
+.container__search {
+  font-size: 1.3rem;
+}
+
+.success {
+  background-image: url("https://cdn.pixabay.com/photo/2015/04/20/13/19/concert-731227_960_720.jpg");
+  min-height: 500px;
+  background-size: cover;
+}
+.success__a {
+  color: red;
+}
+
+.container__background {
+  background-image: url("https://cdn.pixabay.com/photo/2015/03/26/09/58/headphones-690685_960_720.jpg");
+  padding: 50px;
+  background-position: center;
+}
+
+.container__title {
+  font-size: 40px;
+}
+
+.container__item {
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
+  max-height: 400px;
+  margin-top: 50px;
+}
+
+.container__img {
+  width: 100%;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container__ul--detail {
+  list-style: none;
+  color: white;
+  padding: 0;
+}
+
+.container__a {
+  color: white;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.container__a:visited {
+  color: white;
+}
+
+.fa {
+  font-size: 28px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fa-heart-o {
+  color: green;
+}
+
+.fa-heart {
+  color: plum;
+}
+
+.button__fav {
+  background-color: black;
+  border: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.fa-external-link {
+  font-size: 0.8rem;
+}
+
+/*# sourceMappingURL=index.css.map */
