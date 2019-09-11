@@ -2,20 +2,38 @@ require('dotenv').config()
 
 const { expect } = require('chai')
 const retrieveRecipe = require('.')
-const { database, models: { Recipe }} = require('menu-planner-data')
+const { database, models: { Recipe, Ingredient }} = require('menu-planner-data')
+const { random } = require('menu-planner-utils')
 
 const { env: { DB_URL_TEST } } = process
 
-describe('logic - retrieve recipe', () => {
+describe.only('logic - retrieve recipe', () => {
 
-    const typeArray = ['breakfast', 'lunch', 'snack', 'dinner']
-    let title, image, description, category, id
-
+    
     before(() => database.connect(DB_URL_TEST))
-
+    
+    
     beforeEach(() => {
-
+        
         return (async () => {
+            
+            const typeArray = ['breakfast', 'lunch', 'snack', 'dinner']
+            let title, image, description, category
+           
+            await Ingredient.deleteMany()
+
+            const ingredientIds = []
+
+            for (let i = 0; i < 10; i++) {
+                const ingredient = {
+                    title: `title-${Math.random()}`,
+                    unit: `units-${Math.random()}`
+                }
+
+                const { id } = await Ingredient.create(ingredient)
+
+                ingredientIds.push(id)
+            }
 
             await Recipe.deleteMany()
 
@@ -28,7 +46,7 @@ describe('logic - retrieve recipe', () => {
                 let items = []
 
                 for (let i = 0; i < 4; i++) {
-                    ingredient = `322432523645678953748436`
+                    ingredient = random.value(...ingredientIds)
                     quantity = Number((Math.random() * 1000).toFixed())
                     itemDescription = `description-${Math.random()}`
 
