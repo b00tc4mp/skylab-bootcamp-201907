@@ -8,14 +8,14 @@ const { random } = require('menu-planner-utils')
 const { env: { DB_URL_TEST } } = process
 
 describe('logic - retrieve recipe', () => {
-
-
     before(() => database.connect(DB_URL_TEST))
+
+    let title, image, items, description, category
 
     beforeEach(() => {
         return (async () => {
             const typeArray = ['breakfast', 'lunch', 'snack', 'dinner']
-            let title, image, description, category
+            //let title, image, description, category
 
             await Ingredient.deleteMany()
 
@@ -40,7 +40,7 @@ describe('logic - retrieve recipe', () => {
             category = `${typeArray[Math.floor(Math.random() * typeArray.length)]}`
 
             let ingredient, quantity, itemDescription
-            let items = []
+            items = []
 
             for (let i = 0; i < 4; i++) {
                 ingredient = random.value(...ingredientIds)
@@ -62,7 +62,12 @@ describe('logic - retrieve recipe', () => {
         expect(recipe).to.exist
         expect(recipe.id).to.equal(id)
         expect(recipe.image).to.equal(image)
-        // TODO other fields
+        expect(recipe.items[0].ingredient.toString()).to.deep.include(items[0].ingredient)
+        expect(recipe.items[1].ingredient.toString()).to.deep.include(items[1].ingredient)
+        expect(recipe.items[2].ingredient.toString()).to.deep.include(items[2].ingredient)
+        expect(recipe.items[3].ingredient.toString()).to.deep.include(items[3].ingredient)
+        expect(recipe.description).to.equal(description)
+        expect(recipe.category).to.equal(category)
     })
 
     it("should fail on non existant id", async () => {

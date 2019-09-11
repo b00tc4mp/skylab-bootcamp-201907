@@ -13,6 +13,7 @@ const bcrypt = require('bcryptjs')
 
 
 module.exports = function (userId, data) {
+    
     validate.string(userId, 'id')
 
     return(async () => {

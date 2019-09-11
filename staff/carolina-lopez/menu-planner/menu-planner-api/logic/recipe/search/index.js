@@ -8,13 +8,11 @@ const { Recipe } = models
  * 
  * @returns {Promise}
 */
-module.exports = function (category) {
+module.exports = function (categorySearch) {
     
-    //validate.string(category, 'category')
-
+    validate.string(categorySearch, 'category')
     return (async () => {
-        const recipes = await Recipe.find({category: category.category}, { __v: 0 }).lean()
-        
+        const recipes = await Recipe.find({category: categorySearch}, { __v: 0 }).lean()
         if (recipes.length === 0) throw Error(`No recipes found for query ${category}`)
         recipes.map(recipe => {
             recipe.id = recipe._id.toString()

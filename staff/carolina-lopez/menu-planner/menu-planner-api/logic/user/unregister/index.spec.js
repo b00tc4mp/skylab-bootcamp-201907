@@ -12,7 +12,7 @@ describe('logic - unregister user', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
-    let name, surname, email, password, id
+    let name, surname, email, password, userId
 
     beforeEach(async () => {
         name = `name-${Math.random()}`
@@ -23,16 +23,16 @@ describe('logic - unregister user', () => {
         await User.deleteMany()
 
         const user = await User.create({ name, surname, email, password : await bcrypt.hash(password, 10)})
-        id = user.id
+        userId = user.id
     })
 
     it('should succeed on correct data', async () => {
 
-        const result = await unregisterUser(id, password)
+        const result = await unregisterUser(userId, password)
             
             expect(result).not.to.exist
 
-            const user = await User.findById(id)
+            const user = await User.findById(userId)
             
             expect(user).not.to.exist   
     })
@@ -42,24 +42,24 @@ describe('logic - unregister user', () => {
             await unregisterUser('5d5d5530531d455f75da9fF9', password)
 
         } catch({ message }) {
-            expect(message).to.equal('wrong credentials1')
+            expect(message).to.equal('wrong credentials')
         }
     }
     )
 
     it('should fail on existing user, but wrong password', async () => {
         try{
-            await unregisterUser(id, 'wrongpassword')
+            await unregisterUser(userId, 'wrongpassword')
 
         } catch({ message }) {
-            expect(message).to.equal('wrong credentials2')
+            expect(message).to.equal('wrong credentials')
         }
     })
 
     it('should fail on wrong data type', () => 
         expect(() => 
             unregisterUser(123, password)
-        ).to.throw(`id with value 123 is not a string`)
+        ).to.throw(`userId with value 123 is not a string`)
     )
 
     after(() => database.disconnect())
