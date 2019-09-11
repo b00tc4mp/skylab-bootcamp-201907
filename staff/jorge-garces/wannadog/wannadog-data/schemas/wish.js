@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { Schema, ObjectId } = mongoose
+const { Schema } = mongoose
 
 module.exports = new Schema({
 
@@ -28,16 +28,6 @@ module.exports = new Schema({
         type: Boolean
     },
     location: {
-        type: {
-            type: String, // Don't do `{ location: { type: String } }`
-            enum: ['Point'], // 'location.type' must be 'Point'
-            required: true
-        },
-        coordinates: {
-            type: [Number],
-            required: true
-        }
-    },
-
-    wisher: { type: ObjectId, ref: 'User' }
+        type: Number
+    }
 })

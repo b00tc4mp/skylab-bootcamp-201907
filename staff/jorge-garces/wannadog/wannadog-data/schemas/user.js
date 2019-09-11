@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const { Schema, ObjectId } = mongoose
+const Wish = require('./wish')
 
 module.exports = new Schema({
     name: {
@@ -31,6 +32,9 @@ module.exports = new Schema({
             default: [0, 0]
         }
     },
-    dogs: [{ type: ObjectId, ref: 'Dog' }],
-    chats: [{ type: ObjectId, ref: 'Conversation' }]
+    favorites: [{ type: ObjectId, ref: 'Dog' }],
+
+    wishes: [Wish],
+    dogs: [{ type: ObjectId, ref: 'Dog' }]
+    // chats: [{ type: ObjectId, ref: 'Conversation' }]
 })

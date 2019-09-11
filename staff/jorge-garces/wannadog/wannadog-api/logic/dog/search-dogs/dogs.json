@@ -1,0 +1,78 @@
+{
+	"name": "Perro cercano 1",
+	"breed": "Belgian Malinois",
+	"gender": true,
+	"size": "large",
+	"age": {
+		"years": 9,
+		"months": 4
+	},
+	"notes": "Best dog ever",
+	"neutered": false,
+	"withDogs": true,
+	"withCats": true,
+	"withChildren": true,
+	"chip": "3254431234514",
+	"location": {
+		"coordinates": [2.190577, 41.399693]
+	}
+}
+
+{
+	"name": "Perro cercano 2",
+	"breed": "Belgian Malinois",
+	"gender": true,
+	"size": "large",
+	"age": {
+		"years": 9,
+		"months": 4
+	},
+	"notes": "Best dog ever",
+	"neutered": false,
+	"withDogs": true,
+	"withCats": true,
+	"withChildren": true,
+	"chip": "3254431234515",
+	"location": {
+		"coordinates": [2.203624, 41.401134]
+	}
+}
+
+{
+	"name": "Perro lejano",
+	"breed": "Belgian Malinois",
+	"gender": true,
+	"size": "large",
+	"age": {
+		"years": 9,
+		"months": 4
+	},
+	"notes": "Best dog ever",
+	"neutered": false,
+	"withDogs": true,
+	"withCats": true,
+	"withChildren": true,
+	"chip": "3254431234516",
+	"location": {
+		"coordinates": [2.144948, 41.408562]
+	}
+}
+
+{
+	"breed": "Belgian Malinois",
+	"gender": true,
+	"size": "large",
+	"neutered": false,
+	"withChildren": true,
+	"location": {
+		"coordinates": [2.199794, 41.398719]
+    },
+    "distance": 1000
+}
+
+
+
+// skylab: 41.398719, 2.199794 [2.199794, 41.398719]
+// cercano1: 41.399693, 2.190577
+// cercano2: 41.401134, 2.203624
+// lejano: 41.408562, 2.144948

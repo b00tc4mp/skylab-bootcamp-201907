@@ -15,13 +15,16 @@ describe('logic - register user', () => {
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@email.com`
         password = `password-${Math.random()}`
-        longitude = Number((Math.random() * 180).toFixed(2))
-        latitude = Number((Math.random() * 180).toFixed(2))
+        longitude = Number((Math.random() * (-180, 180)).toFixed(3) * 1)
+        latitude = Number((Math.random() * (-90, 90)).toFixed(3) * 1)
 
-        return (async () => await User.deleteMany())()
+        // return (async () => await User.deleteMany())()
     })
 
     it('should succeed on correct data', async () => {
+
+        latitude = 41.398457
+        longitude = 2.1998465
 
         const result = await logic.registerUser(name, surname, email, password, longitude, latitude)
         expect(result).not.to.exist

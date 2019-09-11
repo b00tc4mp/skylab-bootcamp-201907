@@ -18,8 +18,8 @@ describe('logic-update user', () => {
             surname = `surname-${Math.random()}`
             email = `email-${Math.random()}@mail.com`
             password = `name-${Math.random()}`
-            longitude = Number((Math.random() * 180).toFixed(2))
-            latitude = Number((Math.random() * 180).toFixed(2))
+            longitude = Number((Math.random() * (-180, 180)).toFixed(3) * 1)
+            latitude = Number((Math.random() * (-90, 90)).toFixed(3) * 1)
 
             return (async () => {
                 await User.deleteMany()

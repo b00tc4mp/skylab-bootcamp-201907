@@ -1,5 +1,6 @@
 const { validate } = require('wannadog-utils')
 const { models } = require('wannadog-data')
+const bcrypt = require('bcryptjs')
 const { User } = models
 
 /**
@@ -15,22 +16,22 @@ const { User } = models
  * @returns {Promise}
  */
 
-module.exports = function (name, surname, email, password, longitude, latitude) {
+module.exports = function (registerInfo) {
+
+    const { name, surname, email, password, location: { coordinates: [longitude, latitude] } } = registerInfo
 
     validate.string(name, 'name')
     validate.string(surname, 'surname')
     validate.string(email, 'email')
     validate.email(email, 'email')
     validate.string(password, 'password')
-    validate.number(longitude, 'longitude')
-    validate.number(latitude, 'latitude')
+    if (longitude) validate.number(longitude, 'longitude')
+    if (latitude) validate.number(latitude, 'latitude')
 
     return (async () => {
-
-        const user = await User.findOne({ email })
+        const user = await User.findOne({ email: registerInfo.email })
         if (user) throw Error('User already exists.')
-        const newUser = new User({ name, surname, email, password })
-        newUser.location.coordinates.push(longitude, latitude)
-        await newUser.save()
+        registerInfo.password = await bcrypt.hash(password, 10)
+        await User.create(registerInfo)
     })()
 }

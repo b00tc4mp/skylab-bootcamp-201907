@@ -3,9 +3,9 @@ const { expect } = require('chai')
 const { database, models } = require('wannadog-data')
 const { User } = models
 
-describe.only('logic', () => {
+describe('logic', () => {
 
-    before(() => database.connect('mongodb://172.17.0.2/my-stuff-api', { useNewUrlParser: true }))
+    before(() => database.connect('mongodb://172.17.0.2/wannadog-test'))
 
     describe('user deletion', () => {
 
@@ -17,8 +17,12 @@ describe.only('logic', () => {
             email = `email-${Math.random()}@domain.com`
             password = `password-${Math.random()}`
             await User.deleteMany()
-            const user = await User.create({ name, surname, email, password })
+            const user = new User({ name, surname, email, password })
             id = user.id
+            user.dogs.push("5d7129e6b03f1d1aa25b4923", "5d713fc870c48f631964f4e7")
+
+            await user.save()
+
         })
         it('should succeed on correct data', async () => {
             const result = await logic.unregisterUser(id, email, password)

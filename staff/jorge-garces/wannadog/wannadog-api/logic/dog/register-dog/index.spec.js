@@ -3,185 +3,284 @@ const { expect } = require('chai')
 const { database, models } = require('wannadog-data')
 const { User, Dog } = models
 
-describe('logic - register user', () => {
+describe('logic - register dog', () => {
 
-    let name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, location, id, dogId
+    before(() => database.connect('mongodb://172.17.0.2/wannadog-test'))
 
-    let name, surname
+    let name, breed, gender, size, months, years, notes, neutered, withDogs, withCats, withChildren, chip, longitude, latitude, id
+
+    let userName, surname, email, password, userLongitude, userLatitude
+
 
     beforeEach(() => {
-        const typeArray = ['sedan', 'cabrio', 'truck']
+        const breedArray = ['Sussex Spaniel', 'Swedish Vallhund', 'Tibetan Mastiff']
+        const sizeArray = ['small', 'medium', 'large', 'xl']
 
         name = `dogname-${Math.random()}`
-        breed = `dogbreed-${Math.random()}`
+        breed = `${breedArray[Math.floor(Math.random() * breedArray.length)]}`
         gender = Boolean(Math.round(Math.random()))
-        year = Number((Math.random() * (2019 - 1980) + 1980).toFixed())
-        type = `${typeArray[Math.floor(Math.random() * typeArray.length)]}`
-        color = `vehcolor-${Math.random()}`
-        electric = Boolean(Math.round(Math.random()))
-        plate = `vehplate-${Math.random()}`
+        size = `${sizeArray[Math.floor(Math.random() * sizeArray.length)]}`
+        years = Math.round(Math.random() * 20)
+        months = Math.round(Math.random() * 12)
+        notes = `notes-${Math.random()}`
+        neutered = Boolean(Math.round(Math.random()))
+        withDogs = Boolean(Math.round(Math.random()))
+        withCats = Boolean(Math.round(Math.random()))
+        withChildren = Boolean(Math.round(Math.random()))
+        chip = `chip - ${Math.random()}`
+        longitude = Number((Math.random() * (-180, 180)).toFixed(3) * 1)
+        latitude = Number((Math.random() * (-90, 90)).toFixed(3) * 1)
 
         return (async () => {
-            await Vehicle.deleteMany()
 
-            name = `name-${Math.random()}`
+
+            userName = `name-${Math.random()}`
             surname = `surname-${Math.random()}`
-            email = `email-${Math.random()}@email.com`
-            password = `123-${Math.random()}`
+            email = `email-${Math.random()}@mail.com`
+            password = `name-${Math.random()} `
+            userLongitude = Number((Math.random() * (-180, 180)).toFixed(3) * 1)
+            userLatitude = Number((Math.random() * (-90, 90)).toFixed(3) * 1)
+            const user = await User.create({ name: userName, surname, email, password, location: { coordinates: [userLongitude, userLatitude] } })
+            id = user.id
 
-            const user = await User.create({ name, surname, email, password })
-            id = user._id.toString()
         })()
     })
 
     it('should succeed on correct data', async () => {
 
-        const result = await logic.registerUser(name, surname, email, password, longitude, latitude)
-        expect(result).not.to.exist
-        const user = await User.findOne({ email, password })
-        const { name: _name, surname: _surname, email: _email, password: _password, location: { coordinates } } = user
-        expect(user).to.exist
-        expect(_name).to.equal(name)
-        expect(_surname).to.equal(surname)
-        expect(_email).to.equal(email)
-        expect(_password).to.equal(password)
-        expect(coordinates[0]).to.equal(longitude)
-        expect(coordinates[1]).to.equal(latitude)
+        const dog = await logic.registerDog(id, name, breed, gender, size, years, months, notes, neutered, withDogs, withCats, withChildren, chip, longitude, latitude)
+        expect(dog).to.exist
+        const dogFound = await Dog.findOne({ chip })
+        expect(dogFound).to.exist
+        expect(dogFound.id).to.equal(dog)
+        expect(dogFound.breed).to.equal(breed)
+        expect(dogFound.gender).to.equal(gender)
+        expect(dogFound.size).to.equal(size)
+        expect(dogFound.age.years).to.equal(years)
+        expect(dogFound.age.months).to.equal(months)
+        expect(dogFound.neutered).to.equal(neutered)
+        expect(dogFound.withDogs).to.equal(withDogs)
+        expect(dogFound.withCats).to.equal(withCats)
+        expect(dogFound.withChildren).to.equal(withChildren)
+        expect(dogFound.chip).to.equal(chip)
     })
 
-    it('should fail if the user already exists', async () => {
-
-        const newUser = new User({ name, surname, email, password })
-        newUser.location.coordinates.push(longitude, latitude)
-        await newUser.save()
-
+    it('should fail if the dog already exists', async () => {
         try {
-            await logic.registerUser(name, surname, email, password, longitude, latitude)
-        } catch ({ message }) {
+            await Dog.create({ name, breed, gender, size, years, months, notes, neutered, withDogs, withCats, withChildren, chip, longitude, latitude })
+
+            await logic.registerDog(id, name, breed, gender, size, years, months, notes, neutered, withDogs, withCats, withChildren, chip, longitude, latitude)
+        }
+        catch ({ message }) {
             expect(message).to.exist
-            expect(message).to.equal(`User already exists.`)
+            expect(message).to.equal(`Dog with chip ${chip} already exists`)
         }
     })
+
 
     /* Name */
     it('should fail on empty name', () =>
         expect(() =>
-            logic.registerUser('', surname, email, password, longitude, latitude)
+            logic.registerDog(undefined, '', breed, gender, size, years, months, notes, neutered, withDogs, withCats, withChildren, chip, longitude, latitude)
         ).to.throw('name is empty or blank')
     )
 
     it('should fail on undefined name', () =>
         expect(() =>
-            logic.registerUser(undefined, surname, email, password, longitude, latitude)
-        ).to.throw(`name with value undefined is not a string`)
+            logic.registerDog(undefined, undefined, breed, gender, size, years, months, notes, neutered, withDogs, withCats, withChildren, chip, longitude, latitude)
+        ).to.throw('name with value undefined is not a string')
     )
 
-    it('should fail on wrong data type for name', () =>
+    it('should fail on wrong data type', () =>
         expect(() =>
-            logic.registerUser(123, surname, email, password, longitude, latitude)
+            logic.registerDog(undefined, 123, breed, gender, size, years, months, notes, neutered, withDogs, withCats, withChildren, chip, longitude, latitude)
         ).to.throw(`name with value 123 is not a string`)
     )
 
-    /* Surname */
-    it('should fail on empty surname', () =>
+    /* Breed */
+    it('should fail on empty breed', () =>
         expect(() =>
-            logic.registerUser(name, '', email, password, longitude, latitude)
-        ).to.throw('surname is empty or blank')
+            logic.registerDog(undefined, name, '', gender, size, years, months, notes, neutered, withDogs, withCats, withChildren, chip, longitude, latitude)
+        ).to.throw('breed is empty or blank')
     )
 
-    it('should fail on undefined surname', () =>
+    it('should fail on undefined breed', () =>
         expect(() =>
-            logic.registerUser(name, undefined, email, password, longitude, latitude)
-        ).to.throw(`surname with value undefined is not a string`)
+            logic.registerDog(undefined, name, undefined, gender, size, years, months, notes, neutered, withDogs, withCats, withChildren, chip, longitude, latitude)
+        ).to.throw('breed with value undefined is not a string')
     )
 
-    it('should fail on wrong data type for surname', () =>
+    it('should fail on wrong data type', () =>
         expect(() =>
-            logic.registerUser(name, 123, email, password, longitude, latitude)
-        ).to.throw(`surname with value 123 is not a string`)
+            logic.registerDog(undefined, name, 123, gender, size, years, months, notes, neutered, withDogs, withCats, withChildren, chip, longitude, latitude)
+        ).to.throw(`breed with value 123 is not a string`)
+    )
+
+    /*Gender*/
+    it('should fail on empty gender', () =>
+        expect(() =>
+            logic.registerDog(undefined, name, breed, '', size, years, months, notes, neutered, withDogs, withCats, withChildren, chip, longitude, latitude)
+        ).to.throw('gender is empty or blank')
+    )
+
+    it('should fail on undefined gender', () =>
+        expect(() =>
+            logic.registerDog(undefined, name, breed, undefined, size, years, months, notes, neutered, withDogs, withCats, withChildren, chip, longitude, latitude)
+        ).to.throw('gender with value undefined is not a boolean')
+    )
+
+    it('should fail on wrong data type', () =>
+        expect(() =>
+            logic.registerDog(undefined, name, breed, 123, size, years, months, notes, neutered, withDogs, withCats, withChildren, chip, longitude, latitude)
+        ).to.throw(`gender with value 123 is not a boolean`)
+    )
+    /*Size*/
+    it('should fail on empty size', () =>
+        expect(() =>
+            logic.registerDog(undefined, name, breed, gender, '', years, months, notes, neutered, withDogs, withCats, withChildren, chip, longitude, latitude)
+        ).to.throw('size is empty or blank')
+    )
+
+    it('should fail on undefined size', () =>
+        expect(() =>
+            logic.registerDog(undefined, name, breed, gender, undefined, years, months, notes, neutered, withDogs, withCats, withChildren, chip, longitude, latitude)
+        ).to.throw('size with value undefined is not a string')
+    )
+
+    it('should fail on wrong data type', () =>
+        expect(() =>
+            logic.registerDog(undefined, name, breed, gender, 123, notes, neutered, withDogs, withCats, withChildren, chip, longitude, latitude)
+        ).to.throw(`size with value 123 is not a string`)
+    )
+
+    /*notes*/
+
+    it('should fail on undefined notes', () =>
+        expect(() =>
+            logic.registerDog(undefined, name, breed, gender, size, years, months, undefined, neutered, withDogs, withCats, withChildren, chip, longitude, latitude)
+        ).to.throw('notes with value undefined is not a string')
+    )
+
+    it('should fail on wrong data type', () =>
+        expect(() =>
+            logic.registerDog(undefined, name, breed, gender, size, years, months, 123, neutered, withDogs, withCats, withChildren, chip, longitude, latitude)
+        ).to.throw(`notes with value 123 is not a string`)
+    )
+
+    /* Neutered */
+    it('should fail on empty neutered', () =>
+        expect(() =>
+            logic.registerDog(undefined, name, breed, gender, size, years, months, notes, '', withDogs, withCats, withChildren, chip, longitude, latitude)).to.throw('neutered is empty or blank')
+    )
+
+    it('should fail on undefined neutered', () =>
+        expect(() =>
+            logic.registerDog(undefined, name, breed, gender, size, years, months, notes, undefined, withDogs, withCats, withChildren, chip, longitude, latitude)
+        ).to.throw('neutered with value undefined is not a boolean')
+    )
+
+    it('should fail on wrong data type', () =>
+        expect(() =>
+            logic.registerDog(undefined, name, breed, gender, size, years, months, notes, 123, withDogs, withCats, withChildren, chip, longitude, latitude)
+        ).to.throw(`neutered with value 123 is not a boolean`)
+    )
+    /* With Dogs */
+    it('should fail on empty withDogs', () =>
+        expect(() =>
+            logic.registerDog(undefined, name, breed, gender, size, years, months, notes, neutered, '', withCats, withChildren, chip, longitude, latitude)).to.throw('withDogs is empty or blank')
+    )
+
+    it('should fail on undefined withDogs', () =>
+        expect(() =>
+            logic.registerDog(undefined, name, breed, gender, size, years, months, notes, neutered, undefined, withCats, withChildren, chip, longitude, latitude)
+        ).to.throw('withDogs with value undefined is not a boolean')
+    )
+
+    it('should fail on wrong data type', () =>
+        expect(() =>
+            logic.registerDog(undefined, name, breed, gender, size, years, months, notes, neutered, 123, withCats, withChildren, chip, longitude, latitude)
+        ).to.throw(`withDogs with value 123 is not a boolean`)
+    )
+    /* With Cats */
+    it('should fail on empty withCats', () =>
+        expect(() =>
+            logic.registerDog(undefined, name, breed, gender, size, years, months, notes, neutered, withDogs, '', withChildren, chip, longitude, latitude)).to.throw('withCats is empty or blank')
+    )
+
+    it('should fail on undefined withCats', () =>
+        expect(() =>
+            logic.registerDog(undefined, name, breed, gender, size, years, months, notes, neutered, withDogs, undefined, withChildren, chip, longitude, latitude)
+        ).to.throw('withCats with value undefined is not a boolean')
+    )
+
+    it('should fail on wrong data type', () =>
+        expect(() =>
+            logic.registerDog(undefined, name, breed, gender, size, years, months, notes, neutered, withDogs, 123, withChildren, chip, longitude, latitude)
+        ).to.throw(`withCats with value 123 is not a boolean`)
+    )
+    /* With Children */
+    it('should fail on empty withChildren', () =>
+        expect(() =>
+            logic.registerDog(undefined, name, breed, gender, size, years, months, notes, neutered, withDogs, withCats, '', chip, longitude, latitude)).to.throw('withChildren is empty or blank')
+    )
+
+    it('should fail on undefined withChildren', () =>
+        expect(() =>
+            logic.registerDog(undefined, name, breed, gender, size, years, months, notes, neutered, withDogs, withCats, undefined, chip, longitude, latitude)
+        ).to.throw('withChildren with value undefined is not a boolean')
+    )
+
+    it('should fail on wrong data type', () =>
+        expect(() =>
+            logic.registerDog(undefined, name, breed, gender, size, years, months, notes, neutered, withDogs, withCats, 123, chip, longitude, latitude)
+        ).to.throw(`withChildren with value 123 is not a boolean`)
+    )
+    /* chip */
+    it('should fail on empty chip', () =>
+        expect(() =>
+            logic.registerDog(undefined, name, breed, gender, size, years, months, notes, neutered, withDogs, withCats, withCats, '', longitude, latitude)).to.throw('chip is empty or blank')
+    )
+
+    it('should fail on undefined chip', () =>
+        expect(() =>
+            logic.registerDog(undefined, name, breed, gender, size, years, months, notes, neutered, withDogs, withCats, withCats, undefined, longitude, latitude)
+        ).to.throw('chip with value undefined is not a string')
+    )
+
+    it('should fail on wrong data type', () =>
+        expect(() =>
+            logic.registerDog(undefined, name, breed, gender, size, years, months, notes, neutered, withDogs, withCats, withCats, 123, longitude, latitude)
+        ).to.throw(`chip with value 123 is not a string`)
     )
 
 
-    /* Email */
-    it('should fail on empty email', () =>
-        expect(() =>
-            logic.registerUser(name, surname, '', password, longitude, latitude)
-        ).to.throw('email is empty or blank')
-    )
+    // TODO => COORDINATES VALIDATION
 
-    it('should fail on undefined surname', () =>
-        expect(() =>
-            logic.registerUser(name, surname, undefined, password, longitude, latitude)
-        ).to.throw(`email with value undefined is not a string`)
-    )
+    // /* Longitude */
+    // it('should fail on undefined longitude', () =>
+    //     expect(() =>
+    //         logic.registerDog(undefined, name, breed, gender, size, age, notes, neutered, withDogs, withCats, withCats, chip, undefined, latitude)
+    //     ).to.throw('Longitude with value undefined is not a Number')
+    // )
 
-    it('should fail on wrong data type for email', () =>
-        expect(() =>
-            logic.registerUser(name, surname, 123, password, longitude, latitude)
-        ).to.throw(`email with value 123 is not a string`)
-    )
+    // it('should fail on wrong longitude type', () =>
+    //     expect(() =>
+    //         logic.registerDog(undefined, name, breed, gender, size, age, notes, neutered, withDogs, withCats, withCats, chip, 'hola', latitude)
+    //     ).to.throw(`Longitude with value hola is not a Number`)
+    // )
 
-    it('should fail on wrong email format', () =>
-        expect(() =>
-            logic.registerUser(name, surname, 'a@a', password, longitude, latitude)
-        ).to.throw(`email with value a@a is not a valid e-mail`)
-    )
+    // /* Latitude */
+    // it('should fail on undefined Latitude', () =>
+    //     expect(() =>
+    //         logic.registerDog(undefined, name, breed, gender, size, age, notes, neutered, withDogs, withCats, withCats, chip, undefined, latitude)
+    //     ).to.throw('Latitude with value undefined is not a Number')
+    // )
 
-    /* Password */
-    it('should fail on empty password', () =>
-        expect(() =>
-            logic.registerUser(name, surname, email, '')
-        ).to.throw('password is empty or blank')
-    )
-
-    it('should fail on undefined password', () =>
-        expect(() =>
-            logic.registerUser(name, surname, email, undefined, longitude, latitude)
-        ).to.throw(`password with value undefined is not a string`)
-    )
-
-    it('should fail on wrong data type for password', () =>
-        expect(() =>
-            logic.registerUser(name, surname, email, 123, longitude, latitude)
-        ).to.throw(`password with value 123 is not a string`)
-    )
-    /*Longitude*/
-    it('should fail on empty longitude', () =>
-        expect(() =>
-            logic.registerUser(name, surname, email, password, '', latitude)
-        ).to.throw('longitude is empty or blank')
-    )
-
-    it('should fail on undefined longitude', () =>
-        expect(() =>
-            logic.registerUser(name, surname, email, password, undefined, latitude)
-        ).to.throw('longitude with value undefined is not a number')
-    )
-
-    it('should fail on wrong data type for longitude', () =>
-        expect(() =>
-            logic.registerUser(name, surname, email, password, 'hello', latitude)
-        ).to.throw('longitude with value hello is not a number')
-    )
-
-    /*Latitude*/
-    it('should fail on empty latitude', () =>
-        expect(() =>
-            logic.registerUser(name, surname, email, password, longitude, '')
-        ).to.throw('latitude is empty or blank')
-    )
-
-    it('should fail on undefined latitude', () =>
-        expect(() =>
-            logic.registerUser(name, surname, email, password, longitude, undefined)
-        ).to.throw('latitude with value undefined is not a number')
-    )
-
-    it('should fail on wrong data type for latitude', () =>
-        expect(() =>
-            logic.registerUser(name, surname, email, password, longitude, 'hello')
-        ).to.throw('latitude with value hello is not a number')
-    )
+    // it('should fail on wrong Latitude type', () =>
+    //     expect(() =>
+    //         logic.registerDog(undefined, name, breed, gender, size, age, notes, neutered, withDogs, withCats, withCats, chip, 'hola', latitude)
+    //     ).to.throw(`Latitude with value hola is not a Number`)
+    // )
 
     after(() => database.disconnect())
 })
