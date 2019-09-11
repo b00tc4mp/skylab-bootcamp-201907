@@ -18,15 +18,13 @@ const { User } = models
 
 module.exports = function (registerInfo) {
 
-    const { name, surname, email, password, location: { coordinates: [longitude, latitude] } } = registerInfo
+    const { name, surname, email, password } = registerInfo
 
     validate.string(name, 'name')
     validate.string(surname, 'surname')
     validate.string(email, 'email')
     validate.email(email, 'email')
     validate.string(password, 'password')
-    if (longitude) validate.number(longitude, 'longitude')
-    if (latitude) validate.number(latitude, 'latitude')
 
     return (async () => {
         const user = await User.findOne({ email: registerInfo.email })
