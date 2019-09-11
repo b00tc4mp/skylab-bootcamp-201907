@@ -15,14 +15,13 @@ const { Dog } = models
  * @param {boolean} withCats
  * @param {boolean} withChildren
  * @param {number} distance
- * @param {number} months
- * @param {number} years
+ * @param {number} age
  * 
  * @returns {Promise}
 */
 
 module.exports = function (searchParams) {
-
+    debugger
     const { location, distance } = searchParams
     const { coordinates } = location
 
@@ -41,8 +40,7 @@ module.exports = function (searchParams) {
     if (searchParams.withCats) validate.boolean(searchParams.withCats, 'withCats')
     if (searchParams.withChildren) validate.boolean(searchParams.withChildren, 'withChildren')
     if (searchParams.distance) validate.number(searchParams.distance, 'distance')
-    if (searchParams.months) validate.number(searchParams.months, 'months')
-    if (searchParams.years) validate.number(searchParams.years, 'years')
+    if (searchParams.age) validate.number(searchParams.age, 'age')
 
     return (async () => {
         let dogs
@@ -54,12 +52,10 @@ module.exports = function (searchParams) {
             searchParams.location = { $nearSphere: { $geometry: { type: "Point", coordinates }, $maxDistance: distance } }
             dogs = await Dog.find(searchParams, { __v: 0 }).lean()
         }
-
         dogs.map(dog => {
             dog.id = dog._id.toString()
             delete dog._id
         })
         return dogs
-    }
-    )()
+    })()
 }

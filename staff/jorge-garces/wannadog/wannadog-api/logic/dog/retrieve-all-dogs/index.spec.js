@@ -7,7 +7,7 @@ describe('logic - retrieve all dogs', () => {
 
     before(() => database.connect('mongodb://172.17.0.2/wannadog-test'))
 
-    let name, name2, breed, breed2, gender, gender2, size, size2, years, months, notes, notes2, neutered, neutered2, withDogs, withDogs2, withCats, withCats2, withChildren, withChildren2, chip, chip2, longitude, longitude2, latitude, latitude2
+    let name, name2, breed, breed2, gender, gender2, size, size2, age, notes, notes2, neutered, neutered2, withDogs, withDogs2, withCats, withCats2, withChildren, withChildren2, chip, chip2, longitude, longitude2, latitude, latitude2
 
     let userId, userName, surname, email, password, userLongitude, userLatitude, dogIdOne, dogIdTwo
 
@@ -21,8 +21,7 @@ describe('logic - retrieve all dogs', () => {
         breed = `${breedArray[Math.floor(Math.random() * breedArray.length)]}`
         gender = Boolean(Math.round(Math.random()))
         size = `${sizeArray[Math.floor(Math.random() * sizeArray.length)]}`
-        years = Math.round(Math.random() * 20)
-        months = Math.round(Math.random() * 12)
+        years = Math.round(Math.random() * 4)
         notes = `notes-${Math.random()}`
         neutered = Boolean(Math.round(Math.random()))
         withDogs = Boolean(Math.round(Math.random()))
@@ -37,6 +36,7 @@ describe('logic - retrieve all dogs', () => {
         gender2 = Boolean(Math.round(Math.random()))
         size2 = `${sizeArray[Math.floor(Math.random() * sizeArray.length)]}`
         notes2 = `notes - ${Math.random()}`
+        age = Math.floor(Math.random() * 5)
         neutered2 = Boolean(Math.round(Math.random()))
         withDogs2 = Boolean(Math.round(Math.random()))
         withCats2 = Boolean(Math.round(Math.random()))
@@ -63,12 +63,12 @@ describe('logic - retrieve all dogs', () => {
             userId = newUser.id
 
             const dogOne = new Dog({
-                name, breed, gender, size, age: { years, months }, notes, neutered, withDogs, withCats, withChildren, chip
+                name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, chip
             })
             dogOne.location.coordinates.push(longitude, latitude)
 
             const dogTwo = new Dog({
-                name: name2, breed: breed2, gender: gender2, size: size2, age: { years, months }, notes: notes2, neutered: neutered2, withDogs: withDogs2, withCats: withCats2, withChildren: withChildren2, chip: chip2
+                name: name2, breed: breed2, gender: gender2, size: size2, age, notes: notes2, neutered: neutered2, withDogs: withDogs2, withCats: withCats2, withChildren: withChildren2, chip: chip2
             })
             dogTwo.location.coordinates.push(longitude2, latitude2)
 
@@ -87,7 +87,6 @@ describe('logic - retrieve all dogs', () => {
     it('should succeed on correct data', async () => {
 
         const dogs = await logic.retrieveAllDogs(userId)
-        debugger
         expect(dogs).to.exist
         expect(dogs.length).to.equal(2)
         const dogOne = dogs.find(dog => dog.id.toString() === dogIdOne)
@@ -95,21 +94,19 @@ describe('logic - retrieve all dogs', () => {
         expect(dogOne.name).to.equal(name)
         expect(dogOne.breed).to.equal(breed)
         expect(dogOne.size).to.equal(size)
-        expect(dogOne.age.years).to.equal(years)
-        expect(dogOne.age.months).to.equal(months)
         expect(dogOne.notes).to.equal(notes)
         expect(dogOne.neutered).to.equal(neutered)
         expect(dogOne.withDogs).to.equal(withDogs)
         expect(dogOne.withCats).to.equal(withCats)
         expect(dogOne.withChildren).to.equal(withChildren)
         expect(dogOne.chip).to.equal(chip)
+        debugger
         expect(dogOne.location.coordinates[0]).to.equal(longitude)
         expect(dogOne.location.coordinates[1]).to.equal(latitude)
         expect(dogTwo.name).to.equal(name2)
         expect(dogTwo.breed).to.equal(breed2)
         expect(dogTwo.size).to.equal(size2)
-        expect(dogTwo.age.years).to.equal(years)
-        expect(dogTwo.age.months).to.equal(months)
+        expect(dogTwo.age).to.equal(age)
         expect(dogTwo.notes).to.equal(notes2)
         expect(dogTwo.neutered).to.equal(neutered2)
         expect(dogTwo.withDogs).to.equal(withDogs2)

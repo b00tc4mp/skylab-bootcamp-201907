@@ -22,14 +22,13 @@ const { User, Dog } = models
  * @returns {Promise}
  */
 
-module.exports = function (id, name, breed, gender, size, years, months, notes, neutered, withDogs, withCats, withChildren, chip, longitude, latitude) {
+module.exports = function (id, name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, chip, longitude, latitude) {
 
     validate.string(name, 'name')
     validate.string(breed, 'breed')
     validate.boolean(gender, 'gender')
     validate.string(size, 'size')
-    validate.number(years, 'age')
-    validate.number(months, 'months')
+    validate.number(age, 'age')
     validate.string(notes, 'notes')
     validate.boolean(neutered, 'neutered')
     validate.boolean(withDogs, 'withDogs')
@@ -45,7 +44,7 @@ module.exports = function (id, name, breed, gender, size, years, months, notes, 
         if ((await Dog.findOne({ chip: chip }))) throw new Error(`Dog with chip ${chip} already exists`)
 
         const dog = new Dog({
-            name, breed, gender, size, age: { years, months }, notes, neutered, withDogs, withCats, withChildren, chip, location: { coordinates: [longitude, latitude] }
+            name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, chip, location: { coordinates: [longitude, latitude] }
         })
 
         dog.owner = id
