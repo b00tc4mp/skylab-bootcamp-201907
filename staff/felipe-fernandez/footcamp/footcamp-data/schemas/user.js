@@ -20,6 +20,9 @@ module.exports = new Schema({
         required: true
     },
 
-    leagues: [{ type: ObjectId, ref: 'League' }]
+    leagues: {
+        type: Array,
+        default : []
+    }
 
 })
