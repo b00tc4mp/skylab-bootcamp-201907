@@ -11,7 +11,8 @@
   "dependencies": {
     "bcrypt": "^3.0.6",
     "bcryptjs": "^2.4.3",
-    "cloudinary": "^1.14.0",
+    "busboy": "^0.3.1",
+    "cloudinary": "^1.15.0",
     "cors": "^2.8.5",
     "coverage": "^0.4.1",
     "dotenv": "^8.1.0",

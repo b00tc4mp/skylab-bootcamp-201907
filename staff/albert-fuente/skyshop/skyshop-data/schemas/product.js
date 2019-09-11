@@ -8,7 +8,6 @@ module.exports = new Schema({
 
     image: {
         type: String,
-        require: true
     },
 
     description:{

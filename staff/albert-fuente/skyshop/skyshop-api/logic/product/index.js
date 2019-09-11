@@ -4,6 +4,7 @@ module.exports = {
     unregister: require('./unregister'),
     retrieveAll: require('./retrieveAll'),
     retrieveProducts: require('./retrieveProducts'),
-    update:require('./update')
+    update:require('./update'),
+    updatePhoto:require('./update-photo')
 
 }
