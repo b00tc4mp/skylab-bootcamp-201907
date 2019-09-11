@@ -11,7 +11,7 @@ module.exports = function (id) {
     validate.string(id, 'id')
     return (async () => {
 
-        let user = await User.findOne({ _id: id }, { _id: 0, password: 0 }).lean()
+        let user = await User.findOne({ _id: id }, { _id: 0, password: 0, _v: 0 }).lean()
 
         if (!user) throw Error(`user with id ${id} not found`)
 

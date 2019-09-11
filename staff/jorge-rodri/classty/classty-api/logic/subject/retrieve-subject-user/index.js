@@ -20,8 +20,11 @@ module.exports = function (id) {
 
         subjects.forEach(subject => {
             isIn = subject.students.findIndex(student => student.toString()==id)
-            
-            if(isIn > -1) listSub.push(subject._id.toString())
+            let subj = {
+                id: subject._id.toString(),
+                title: subject.name
+            }
+            if(isIn > -1) listSub.push(subj)
         
         })
         return listSub

@@ -1,11 +1,11 @@
-const { user } = require('../../logic')
+const { users } = require('../../logic')
 
 module.exports = async (req, res) => {
     const { params: { type } } = req
 
     try {
 
-        const _user = await user.retrieveAll(type)
+        const _user = await users.retrieveAll(type)
 
         res.json({ message: 'user retrieved correctly', _user })
 
