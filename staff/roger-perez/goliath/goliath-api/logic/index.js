@@ -16,8 +16,8 @@ module.exports = {
     // updateProperty: require('./instrument/update-property'),
     // unregisterProperty: require('./instrument/unregister-property'),
     // unregisterPropertyOwner: require('./instrument/unregister-owner'),
-    registerDrumkit: require('./drumkit/register-drumkit'),
-    retrieveDrumkit: require('./drumkit/retrieve-drumkit'),
-    retrieveAllDrumkits: require('./drumkit/retrieve-all-drumkits'),
-    unregisterDrumkit: require('./drumkit/unregister-drumkit')
+    // registerDrumkit: require('./drumkit/register-drumkit'),
+    // retrieveDrumkit: require('./drumkit/retrieve-drumkit'),
+    // retrieveAllDrumkits: require('./drumkit/retrieve-all-drumkits'),
+    // unregisterDrumkit: require('./drumkit/unregister-drumkit')
 }

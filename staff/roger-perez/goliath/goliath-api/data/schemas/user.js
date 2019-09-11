@@ -28,7 +28,7 @@ module.exports = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
     drumkits: [drumkits]
    
 })
