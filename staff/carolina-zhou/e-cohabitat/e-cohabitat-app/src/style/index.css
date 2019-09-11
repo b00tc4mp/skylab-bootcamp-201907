@@ -235,8 +235,13 @@ body {
 .home__logo, .home__mobile-menu {
   display: none;
 }
+.home__square {
+  margin: 2em auto;
+  border: 5px solid black;
+  padding: 2em;
+}
 .home__space {
-  margin: 4em 0 1em 0;
+  margin-bottom: 1em;
 }
 .home__space-add {
   margin-bottom: 3em;
@@ -257,6 +262,7 @@ body {
   position: relative;
   margin-bottom: 1em;
   width: 100%;
+  list-style: none;
 }
 .home__space-reveal {
   position: absolute;
@@ -265,14 +271,20 @@ body {
   z-index: -1;
 }
 .home__space-title {
-  position: absolute;
-  margin: 1em 0 0 1em;
-  font-size: 1rem;
+  margin: 2em 0 0 2em;
+  font-size: 1.2rem;
 }
 .home__space-subtitle {
-  position: absolute;
-  margin: 3em 0 0 1em;
+  margin: 0.5em 0 0 2em;
   font-size: 1rem;
+}
+.home__space-address {
+  margin: 0.5em 0 0 2em;
+  font-size: 0.85rem;
+  color: grey;
+}
+.home__space-message {
+  color: grey;
 }
 .home__space-figure {
   margin: 0 0 5px 0;
@@ -338,7 +350,7 @@ body {
   align-items: center;
   margin: 2em 0 10em 0;
 }
-.module__calendar, .module__week {
+.module__calendar, .module__today {
   background-color: black;
   color: white;
   text-align: center;
@@ -348,10 +360,17 @@ body {
   padding: 0.5em;
   width: 40%;
 }
-.module__week {
+.module__today {
   background-color: white;
   border: 1px solid black;
   color: black;
+}
+.module__back-link {
+  text-decoration: none;
+  color: grey;
+}
+.module__calendar:hover, .module__today:hover, .module__back-link:hover {
+  color: deeppink;
 }
 
 @media screen and (min-width: 840px) {

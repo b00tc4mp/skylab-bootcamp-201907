@@ -4,7 +4,7 @@
         display: initial
         font-family: Helvetica, Roboto, sans-serif
         font-size: 2rem
-    &__address
+    &__type, &__address
         font-size: 1.2rem
         font-weight: normal
         margin-top: 1em
@@ -29,7 +29,7 @@
         flex-direction: column
         align-items: center
         margin: 2em 0 10em 0
-    &__calendar, &__week
+    &__calendar, &__today
         background-color: black
         color: white
         text-align: center
@@ -38,10 +38,15 @@
         border: none
         padding: .5em
         width: 40%
-    &__week
+    &__today
         background-color: white
         border: 1px solid black
         color: black
+    &__back-link
+        text-decoration: none
+        color: grey
+    &__calendar:hover, &__today:hover, &__back-link:hover
+        color: deeppink
 
 @media screen and (min-width: 840px) 
     .module

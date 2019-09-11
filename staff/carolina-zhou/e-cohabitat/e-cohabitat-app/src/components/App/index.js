@@ -23,14 +23,19 @@ function App({ history }) {
 
   const [view, setView] = useState('')
   const [credentials, setCredentials] = useState({ id, token })
+  //useState: state and setter --> [space,setSpace] = useState(*default value*)
+  const[spaces, setSpaces] = useState() 
+  const [spaceId, setSpaceId] = useState()
+  const [mySpace, setMySpace] = useState()
 
+  
   return (
     <>
 
-    <Context.Provider value = {{ view, setView, credentials, setCredentials }} >
+    <Context.Provider value = {{ view, setView, credentials, setCredentials, spaces, setSpaces, spaceId, setSpaceId, mySpace, setMySpace }} >
 
       <Header/>
-
+      
       <Route exact path="/" render={() => logic.isUserLogged() ? history.push('/home') : <Landing/>} />
       <Route path="/sign-up" render={() => logic.isUserLogged() ? history.push('/home') : <Register />} />
       <Route path="/sign-up-success" render={() => logic.isUserLogged() ? history.push('/home') : <RegisterSuccess />} />

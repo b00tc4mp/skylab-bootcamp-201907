@@ -1,7 +1,30 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+import Context from '../context'
+import logic from '../../logic'
 import { withRouter } from 'react-router-dom'
+import queryString from 'query-string'
 
-function Space({ history }) {
+
+function Space({ history, location }) {
+    
+    const { spaceId, mySpace, setMySpace } = useContext(Context)
+
+    
+    useEffect(() => {
+        (async () =>{
+            
+            const { myspace: spaceId } = queryString.parse(location.search);
+            
+            try {
+                
+                const mySpace = await logic.retrieveSpace(spaceId)
+                
+                setMySpace(mySpace)
+            } catch(error) {
+                console.log(error.message)
+            }
+            })()
+    },[])
 
     function handleMonth(event) {
         event.preventDefault()
@@ -16,22 +39,29 @@ function Space({ history }) {
     }
 
     return <>
-    <main class="main"> 
+    <main class="main">
+    { mySpace && <> 
         <div class="module">
-            <h1 class="module__title">Kitchen</h1>
-            <p class="module__address">Building Z, 2nd floor</p>
-            <p class="module__users">20 users </p>
+           
+           <h1 class="module__title">{mySpace.title}</h1>
+            <p class="module__type">{mySpace.type}</p>
+            <p class="module__address">{mySpace.address}</p>
+            <p class="module__users">{mySpace.cousers.length} users </p>
             <a class="module__users-link" href=""><i class="far fa-eye"></i> who?</a>
                     
             <figure class="module__figure">
-                <img class="module__img" alt="kitchen image" src={require('../../img/space-a.jpg')}/>
-            </figure>          
+                <img class="module__img" alt="kitchen image" src={mySpace.picture}/>
+            </figure>     
+             
 
-            <form class="module__form">
+            <div class="module__form">
                 <button class="module__calendar" onClick={handleMonth}>General calendar</button>
-                <button class="module__week" onClick={handleDay}>What's up today?</button>
-            </form>
+                <button class="module__today" onClick={handleDay}>What's up today?</button>
+                <a href={`/home`} class="module__back-link"><i class="fas fa-arrow-left"></i> Back to your spaces</a>
+            </div>
         </div>
+    </>}
+    {!mySpace && <p>Space not found</p>}
     </main>
     </>
 }

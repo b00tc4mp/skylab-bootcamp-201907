@@ -10,19 +10,21 @@ export default function() {
     const { id } = sessionStorage
 
 
-    debugger
+    
     function handleSubmit(event) {
             event.preventDefault()
             let picture
             const { target: { title: { value: title }, address: { value: address }, passcode: { value: passcode }} } = event
-            debugger
             
-            if (type === 'kitchen') picture = 'kitchen-1.jpg'
-            if (type === 'bathroom')  picture = 'bathroom-1.jpg'
-            if (type === 'living room')  picture = 'living-1.jpg'
-            if (type === 'coworking')  picture = 'coworking-1.jpg'
-            if (type === 'garden')  picture = 'garden-1.jpg'
-
+            
+            if (type === 'kitchen') picture = 'https://res.cloudinary.com/czhoulin/image/upload/v1568190112/images/kitchen-1_unqzwo.jpg'
+            if (type === 'bathroom')  picture = 'https://res.cloudinary.com/czhoulin/image/upload/v1568190108/images/bathroom-1_gorccu.jpg'
+            if (type === 'living room')  picture = 'https://res.cloudinary.com/czhoulin/image/upload/v1568190109/images/living-1_bmvmtp.jpg'
+            if (type === 'coworking')  picture = 'https://res.cloudinary.com/czhoulin/image/upload/v1568190117/images/coworking-1_g8egym.jpg'
+            if (type === 'garden')  picture = 'https://res.cloudinary.com/czhoulin/image/upload/v1568190108/images/garden-1_pe9pqt.jpg'
+            if (type === 'rooftop')  picture = 'https://res.cloudinary.com/czhoulin/image/upload/v1568190111/images/rooftop-1_oehaoy.jpg'
+            if (type === 'other')  picture = 'https://res.cloudinary.com/czhoulin/image/upload/v1568190110/images/other-3_sbctr2.jpg'
+        debugger
             handleRegister(title, type, picture, address, passcode, id)
 
     }
@@ -39,7 +41,7 @@ export default function() {
 
     }
     
-    debugger
+    
     function checkSelectOption(option){
         const element = document.getElementById('otherInputOption')
         option = document.getElementById("typeSelector").value

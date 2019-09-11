@@ -24,9 +24,11 @@ module.exports = function (username, name, surname, email, password) {
     validate.string(password, 'password')
 
     return (async () => {
-        const user = await User.findOne({ email })
+        const userEmail = await User.findOne({ email })
+        const userUsername = await User.findOne({ username })
 
-        if (user) throw new Error(`user with e-mail ${email} already exists`)
+        if (userEmail) throw new Error(`user with e-mail ${email} already exists`)
+        if (userUsername) throw new Error(`user with username ${username} already exists`)
 
         const hash = await bcrypt.hash(password, 10)
 

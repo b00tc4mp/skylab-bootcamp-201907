@@ -1,26 +1,30 @@
 import React, { useContext, useEffect } from 'react'
 import Context from '../context'
-import retrieveAllSpaces from '../../logic'
+import logic from '../../logic'
 import { withRouter } from 'react-router-dom'
 
-/* import { Redirect} from "react-router-dom"
- */
-function SpaceRegister({ history }) {
 
-    const { spaces, setSpaces } = useContext(Context)
+function Home({ history }) {
+
+    const { spaces, setSpaces, spaceId, setSpaceId } = useContext(Context)
 
     useEffect(() => {
-
         (async () =>{
           try {
-            const spaces = await retrieveAllSpaces()
+            const { id } = sessionStorage
+            const spaces = await logic.retrieveAllSpaces(id)
             
             setSpaces(spaces)
+
+            /* const space = spaces.map(space => {
+                space.id = document.getElementById('mySpace').dataset.id
+                return space
+            }) */
+            setSpaceId(spaceId)
           } catch(error) {
             console.log(error.message)
           }
         })()
-
     },[])
 
     function handleAddSpace(event) {
@@ -29,10 +33,10 @@ function SpaceRegister({ history }) {
         history.push('/space-register')
     }
 
-    function handleGoToSpace(event) {
-        event.preventDefault()
-
-        history.push('/space')
+    function handleGoToSpace(spaceId) {
+        debugger
+        //event.preventDefault()
+        history.push(`/space?myspace=${spaceId}`)
     }
 
     return <>
@@ -41,105 +45,36 @@ function SpaceRegister({ history }) {
                 <h1 class="home__title"><span class="main__e">e-</span>cohabitat</h1>
                 <h2 class="home__subtitle">Sharing spaces, building communities</h2>
 
-                <h3 class="home__space">SPACES</h3>
-                <p class="home__space-add" onClick={handleAddSpace}><i class="fas fa-plus-circle"></i> Add a space</p>
-                
+                <div class="home__square">
+                    <h3 class="home__space">SPACES</h3>
+                    <p class="home__space-add" onClick={handleAddSpace}><i class="fas fa-plus-circle"></i> Add a space</p>
+                    
 
-                {spaces ?
-                <div class="home__spaces">
-
-                    <ul>
-                        {spaces.map(item=> {
+                    {spaces ?
+                    <ul class="home__spaces">
+                        {spaces.map(space=> {
                         return<>
-                            <li onClick={handleGoToSpace} >
-                                <div class="home__space-image">
+                            <li id="mySpace" class="home__space-image" data-id={space.id} onClick={() => handleGoToSpace(space.id)} >
                                     <div class="home__space-reveal">
-                                        <h4 class="home__space-title">{item.title}</h4>
-                                        <p class="home__space-subtitle">{item.type}</p>
-                                        <p>{item.address}</p>
+                                        <h4 class="home__space-title">{space.title}</h4>
+                                        <p class="home__space-subtitle">Type: {space.type}</p>   
+                                        <p class="home__space-address">{space.address}</p>                                     
                                     </div>                  
                                     <figure class="home__space-figure">
-                                        <a href={`/#/space`}><img class="home__space-img" alt="kitchen image" src={item.picture}/></a>
+                                        <img class="home__space-img" alt="kitchen image" src={space.picture}/>
                                     </figure>          
-                                </div>
                             </li>
                         </>
                         }
                         )} 
                     </ul> 
-
+                    :
+                    <p class="home__space-message">You haven't registered any spaces yet</p>
+                    }
                 </div>
-                :
-                <p>You haven't registered any spaces yet</p>
-                }
             </section>
         </main>
     </>
 }
 
-export default withRouter(SpaceRegister)
-
-
-
-/* {spaces ?
-    <div class="home__spaces">
-
-        <div class="home__space-image">
-            <div class="home__space-reveal">
-                <h4 class="home__space-title">Kitchen</h4>
-                <p class="home__space-subtitle">bla bla bla</p>
-            </div>                  
-            <figure class="home__space-figure">
-                <a href={`/#/space`}><img class="home__space-img" alt="kitchen image" src={require('../../img/space-a.jpg')}/></a>
-            </figure>          
-        </div>
-
-    </div>
-    :
-    <p>You haven't registered any spaces yet</p>
-    }
-
-function Articles() {
-    
-    const { setCredentials, setView, view, articles, setArticles, setArticleQuery} = useContext(Context)
-
-    useEffect(() => {
-        (async () =>{
-          try{
-            const articles = await retrieveAllArticles()
-            
-            setArticles(articles)
-          }catch(error){
-            console.log(error.message)
-          }
-        })()
-           
-  },[])
-  
-
-    return <>
-    {view==="articlesDetail" && <Redirect to="/articleDetail"/>}
-    {articles &&
-            <ul>
-                 {articles.map(item=> {
-                   return<>
-                    <ul className='article'onClick={event => {
-                event.preventDefault()
-                setView("articlesDetail")
-                setArticleQuery(item._id)
-            }} >
-                    <li className="article-title">{item.title}</li>
-                    <li className="article-ref">{item.ref}</li>
-                    <li className="article-image"><img src={item.img} /></li>
-                    <li className="article-quantity">Stock: {item.quantity} uds</li>
-                    </ul>
-                   </>
-                 }
-                 
-                  )} 
-            </ul> 
-    }     
-    </>
-}
-
-export default Articles */
+export default withRouter(Home)

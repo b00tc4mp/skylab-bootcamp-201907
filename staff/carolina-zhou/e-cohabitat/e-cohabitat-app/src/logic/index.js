@@ -7,8 +7,8 @@ import unregisterUser from './user/unregister-user' */
 import registerSpace from './space/register-space'
 /* import registerSpaceCouser from './space/register-couser'*/
 import retrieveAllSpaces from './space/retrieve-all-spaces'
-/* import retrieveSpace from './space/retrieve-space'
-import updateSpace from './space/update-space'
+import retrieveSpace from './space/retrieve-space'
+/* import updateSpace from './space/update-space'
 import unregisterSpace from './space/unregister-space'
 import unregisterSpaceCouser from './space/unregister-couser'
 import addTask from './task/add-task'
@@ -32,7 +32,7 @@ export default {
         return { id: sessionStorage.id , token: sessionStorage.token }
     },
     isUserLogged, registerUser, authenticateUser, /* retrieveUser, updateUser, unregisterUser, */
-    registerSpace, /*registerSpaceCouser, */ retrieveAllSpaces/*, retrieveSpace, updateSpace, unregisterSpace, unregisterSpaceCouser,
+    registerSpace, /*registerSpaceCouser, */ retrieveAllSpaces, retrieveSpace/*, updateSpace, unregisterSpace, unregisterSpaceCouser,
     addTask, addTaskCompanion, retrieveAllTasks, retrieveTask, editTask, deleteTask, removeTaskCompanion,
     postComment, editComment, deleteComment */
 }

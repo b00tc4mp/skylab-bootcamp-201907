@@ -17,13 +17,18 @@ module.exports = function(id) {
         const spaces = await Space.find({ cousers : id }, { __v: 0 }).lean()
         if (!spaces) throw Error(`user with id ${id} does not own any spaces`)
 
-        spaces.forEach(space => {
+        /* spaces.forEach(space => {
             space.id = space._id
             delete space._id
 
             return space
         })
 
+        await spaces */
+        spaces.forEach(space => {
+            space.id = space._id
+            delete space._id
+        })
         return spaces
     })()
 }
