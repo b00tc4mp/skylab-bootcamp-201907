@@ -6,12 +6,16 @@ function retrieveCache(id) {
     validate.string(id, 'id')
 
     return (async () => {
-        const cache = await Cache.findOne({ _id: id })
+        const cache = await Cache.findById(id)
 
         if (!cache) throw new Error(`cache with id ${id} not found`)
         
         cache.id = id
-        
+
+        cache.owner.id = cache.owner._id.toString()
+        delete cache._id
+        delete cache.owner._id
+
         return cache
          
     })()

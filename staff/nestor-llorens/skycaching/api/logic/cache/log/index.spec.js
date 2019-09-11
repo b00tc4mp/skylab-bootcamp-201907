@@ -6,7 +6,7 @@ const { models: { User, Cache }, database } = require('data')
 
 const { env: { DB_URL_TEST }} = process
 
-describe('logic - retrieve cache', () => {
+describe('logic - log cache', () => {
 
     before(async () => 
         await database.connect(DB_URL_TEST)
@@ -43,39 +43,14 @@ describe('logic - retrieve cache', () => {
 
     it('should succeed on correct data', async() => {
         
-        const cache = await logic.retrieveCache(cacheId)
-        debugger
-        expect(cache).to.exist
+        const result = await logic.logCache(id, cacheId)
+
+        const user = await User.findById(id)
     
-        expect(cache.id).to.equal(cacheId)
-        expect(cache.owner.id).to.equal(id)
-        expect(cache.name).to.equal(name)
-        expect(cache.description).to.equal(description)
-        
-        expect(cache.location.coordinates).to.deep.equal(location.coordinates)
-        expect(cache.location.type).to.equal(location.type)
-        debugger
-        expect(cache.difficulty).to.equal(randomDiff)
-        expect(cache.terrain).to.equal(randomTerr)
-
+        expect(result).to.not.exist
+        expect(user.found[0]).to.exist
+        expect(user.found.toString()).to.equal(cacheId) 
     })
-
-    it('should fail on wrong id', async() => {
-        
-        try {
-            await logic.retrieveCache('wrongCacheId')
-        }catch(error) {
-            expect(error.message).to.equal("cache with id wrongCacheId not found")
-        }
-    })
-
-    it('should fail on empty user id', () =>
-    expect(() => logic.retrieveCache("")).to.throw('id is empty or blank')
-)
-
-    it('should fail on wrong user id type', () =>
-    expect(() => logic.retrieveCache(123)).to.throw('id with value 123 is not a string')
-)
 
     after(() => database.disconnect())
 })

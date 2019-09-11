@@ -1,12 +1,14 @@
 const logic = require('../../logic/user')
 
-module.exports = function (req, res) {
-    const { body: { name, surname, email, password } } = req
+module.exports = async function (req, res) {
+    debugger
+    const { body: { username, password, email, avatar } } = req
 
     try {
-        logic.registerUser(name, surname, email, password)
-            .then(() => res.status(201).json({ message: 'user correctly registered' }))
-            .catch(({ message }) => res.status(400).json({ error: message }))
+    
+    await logic.registerUser(username, password, email, avatar)
+    res.status(201).json({ message: 'user correctly registered' })
+
     } catch ({ message }) {
         res.status(400).json({ error: message })
     }

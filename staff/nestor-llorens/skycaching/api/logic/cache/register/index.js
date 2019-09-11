@@ -1,31 +1,31 @@
 const validate = require('utils/validate')
 const { models: { User, Cache } } = require('data')
 
-function registerCache(userId, name, description, lat, lon, difficulty, terrain, hints) {
+function registerCache(userId, name, description, location, difficulty, terrain, hints) {
     
+    validate.string(userId, 'user id')
     validate.string(name, 'name')
     validate.string(description, 'description')
-    validate.number(lat, 'lan')
-    validate.number(lon, 'lon')
     validate.number(difficulty, 'difficulty')
     validate.number(terrain, 'terrain')
     validate.string(hints, 'hints')
 
+    if (location.coordinates[0] === 0 && location.coordinates[1] === 0) throw new Error(`cache coordinates not found`)
+
     return (async () => {
-        const [user, cache] = await Promise.all([User.findById(userId), Cache.findOne({ name })])
+        let [user, cache, cacheLoc] = await Promise.all([User.findById(userId), Cache.findOne({ name }), Cache.findOne({ location })])
 
         if (!user) throw new Error(`user with id ${id} does not exist`)
 
         if (cache) throw new Error(`cache with name ${name} already exists`)
 
-        const _cache = new Cache({ name, description, lat, lon, difficulty, terrain, hints })
+        if (cacheLoc) throw new Error(`there is already a cache on ${location.coordinates}`)
 
-        _cache.owner = userId
+        const _cache = new Cache({ owner: userId, name, description, location, difficulty, terrain, hints })
 
-        const savedCache = await _cache.save()
-        
-        return savedCache.id
-         
+        await _cache.save()
+
+        return _cache.id
     })()
 }
 

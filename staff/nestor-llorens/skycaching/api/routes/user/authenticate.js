@@ -4,14 +4,14 @@ const jwt = require('jsonwebtoken')
 const { env: { JWT_SECRET } } = process
 
 module.exports = (req, res) => {
-    const { body: { email, password } } = req
+    const { body: { username, password } } = req
 
     try {
-        logic.authenticateUser(email, password)
+        logic.authenticateUser(username, password)
             .then(id => {
-                const token = jwt.sign({ sub: id }, JWT_SECRET)
+                const token = jwt.sign({ sub: id }, JWT_SECRET, { expiresIn: '24h' })
 
-                res.json({ message: 'user correctly authenticated', id, token })
+                res.json({ message: 'user correctly authenticated', token })
             })
             .catch(({ message }) => res.status(401).json({ error: message }))
     } catch ({ message }) {

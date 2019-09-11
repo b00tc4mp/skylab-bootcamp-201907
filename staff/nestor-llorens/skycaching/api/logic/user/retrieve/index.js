@@ -11,6 +11,7 @@ function retrieveUser (id) {
     if (!user) throw new Error(`user with id ${id} not found`)
 
     user.id = id
+    delete user._id
 
     return user
     })()

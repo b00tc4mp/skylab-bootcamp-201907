@@ -14,14 +14,20 @@ const cacheSchema = new Schema({
         required: true
     },
 
-    lat: {
-        type: Number,
-        required: true
-    },
+    location: {
+        type: {
+            type: String, 
+            enum: ['Point'],
+            default: 'Point',
+            required: true
 
-    lon: {
-        type: Number,
-        required: true
+        },
+        coordinates: {
+            type: [Number],
+            default: [0,0],
+            required: true
+        },
+        
     },
 
     difficulty: {

@@ -8,10 +8,10 @@ router.post('/users', registerUser)
 
 router.post('/auth', authenticateUser)
 
-router.get('/users/:id', tokenMiddleware, retrieveUser)
+router.get('/users', tokenMiddleware, retrieveUser)
 
-router.patch('/users/:id', tokenMiddleware, updateUser)
+router.patch('/users', tokenMiddleware, updateUser)
 
-router.delete('/users/:id', tokenMiddleware, unregisterUser)
+router.delete('/users', tokenMiddleware, unregisterUser)
 
 module.exports = router
