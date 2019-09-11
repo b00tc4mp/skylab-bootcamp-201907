@@ -7,7 +7,7 @@ const {  random : { number }  } = require('footcamp-utils')
 
 const { env: { DB_URL_TEST }} = process
 
-describe.only('logic - retrieve player', () => {
+describe('logic - retrieve player', () => {
     
     before(() =>  database.connect(DB_URL_TEST))
 
