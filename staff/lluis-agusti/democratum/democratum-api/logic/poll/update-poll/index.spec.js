@@ -26,7 +26,7 @@ describe('logic - update poll', () => {
         pollStatus = 'pending'
 
         body = {
-            cityId: `UPDATEEEEEED-${Math.random()}`,
+            cityId: `5d70f41b7d4edc12334851db`,
             authorId: `UPDATEEEEEED-${Math.random()}`,
             question: `UPDATEEEEEED-${Math.random()}`,
             optionA: `UPDATEEEEEED-${Math.random()}`,

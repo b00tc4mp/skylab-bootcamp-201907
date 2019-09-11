@@ -40,9 +40,9 @@ module.exports = function(cityId, fullname, address, documentId, email, imgDocId
 
         if (user) throw Error(`user with email ${email} already exists`)
 
-        //const hash = await bcrypt.hash(password, 10) // he quitado password: hash
+        const hash = await bcrypt.hash(password, 10)
         
-        user = new User({ cityId, fullname, address, documentId, email, imgDocId, password, participatedPolls, proposedPolls, userRole })
+        user = new User({ cityId, fullname, address, documentId, email, imgDocId, password: hash, participatedPolls, proposedPolls, userRole })
 
         await user.save()
 

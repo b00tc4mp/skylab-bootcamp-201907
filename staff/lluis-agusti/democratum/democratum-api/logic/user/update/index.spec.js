@@ -1,18 +1,16 @@
 const logic = require('../..')
-const bcrypt = require('bcrypt')
 const { expect } = require('chai')
 const { models , mongoose } = require('democratum-data')
+const bcrypt = require ('bcryptjs')
 const { User } = models
 
-describe('logic - update user', () => {
+describe('logic - update citizen', () => {
 
     before(() =>  mongoose.connect('mongodb://localhost/democratum-test', { useNewUrlParser: true }))
 
     let cityId, fullname, address, documentId, email, imgDocId, password, participatedPolls, proposedPolls, userRole
 
     beforeEach(async () => {
-
-        //await User.deleteMany()
 
         cityId = `city-${Math.random()}`
         fullname = `fullname-${Math.random()}`
@@ -30,7 +28,7 @@ describe('logic - update user', () => {
             fullname: `UPDATEEEEEED-${Math.random()}`,
             address: `UPDATEEEEEED-${Math.random()}`,
             documentId: `UPDATEEEEEED-${Math.random()}`,
-            email: `updated@-${Math.random()}.com`,
+            //email: `updated@-${Math.random()}.com`,
             imgDocId: `UPDATEEEEEED-${Math.random()}`,
             password: `UPDATEEEEEED-${Math.random()}`,
             participatedPolls: `UPDATEEEEEED-${Math.random()}`,
@@ -38,8 +36,9 @@ describe('logic - update user', () => {
             userRole: 'citizen'
         }
 
-    
-            const user = await User.create({cityId, fullname, address, documentId, email, imgDocId, password: await bcrypt.hash (password, 10), participatedPolls, proposedPolls, userRole})
+            const hash = await bcrypt.hash(password, 10)
+
+            const user = await User.create({cityId, fullname, address, documentId, email, imgDocId, password: hash, participatedPolls, proposedPolls, userRole})
 
             id = user.id
     })
@@ -47,7 +46,7 @@ describe('logic - update user', () => {
     it('should succeed on correct data', async () =>{
         const response = await logic.updateUser(id, body)
 
-            expect(response).to.exist
+            expect(response).not.to.exist
 
             return ( async () => {
             
@@ -60,7 +59,7 @@ describe('logic - update user', () => {
                 expect(user.documentId).to.equal(body.documentId)
                 expect(user.email).to.equal(body.email)
                 expect(user.imgDocId).to.equal(body.imgDocId)
-              expect(user.password).to.exist
+                expect(user.password).to.exist
                 expect(user.participatedPolls).to.equal(body.participatedPolls)
                 expect(user.proposedPolls).to.equal(body.proposedPolls)
                 expect(user.userRole).to.equal(body.userRole)

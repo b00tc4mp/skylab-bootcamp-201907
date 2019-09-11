@@ -13,6 +13,7 @@ mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
 
         const app = express()    
         
+        app.use(express.static('public'))
         app.use(cors())
         app.use('/api', routes)
 

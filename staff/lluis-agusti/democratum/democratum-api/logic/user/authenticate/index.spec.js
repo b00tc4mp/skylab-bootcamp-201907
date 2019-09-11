@@ -7,7 +7,7 @@ const { User } = models
 describe('logic - authenticate citizen', () => {
 
     before(() =>  mongoose.connect('mongodb://localhost/democratum-test', { useNewUrlParser: true }))
-        
+
     let cityId, fullname, address, documentId, email, imgDocId, password, participatedPolls, proposedPolls, userRole, id
 
     beforeEach(async () => {
@@ -25,11 +25,9 @@ describe('logic - authenticate citizen', () => {
         proposedPolls = ['k89236423894y2348', '12323']
         userRole = 'citizen'
 
-        const user = await User.create({cityId, fullname, address, documentId, email, imgDocId, password, participatedPolls, proposedPolls, userRole})
+        const user = await User.create({cityId, fullname, address, documentId, email, imgDocId, password: await bcrypt.hash(password, 10), participatedPolls, proposedPolls, userRole})
 
         id = user.id
-
-        // password: await bcrypt.hash (password, 10)
         
     })
 

@@ -1,24 +1,34 @@
 const validate = require('../../../utils/validate')
 const { models } = require('democratum-data')
-const { Poll } = models
+const bcrypt = require('bcryptjs')
+const { Poll, User } = models
 
 /**
  * 
+ * @param {String} userId
  * @param {String} cityId
- *
  * 
  * @returns {Promise}
  */
 
-module.exports = function(cityId, ) {
+module.exports = function(userId, ciudad) {
 
-    validate.string(cityId ,'cityId')
 
-    return (async () => { 
+    validate.string(userId ,'userId')
+    validate.string(ciudad ,'ciudad')
 
-        const polls = await Poll.find({owner :cityId},{ __v: 0 }).lean();
+    return (async () => {
+        
+        const user = await User.findById(userId)
+
+        if (!user) throw Error(`The user is not logged in`)
+
+        const polls = await Poll.find({cityId : ciudad})
+        
             if (!polls) throw Error(`There are no polls to show`)
+
             else {
+    
                 return polls
             }
     })()

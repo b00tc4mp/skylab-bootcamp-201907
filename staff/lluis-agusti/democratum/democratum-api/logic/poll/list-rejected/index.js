@@ -1,21 +1,38 @@
 const validate = require('../../../utils/validate')
 const { models } = require('democratum-data')
-const { Citizen } = models
+//const bcrypt = require('bcryptjs')
+const { Poll, User } = models
 
 /**
- * Updates a user.
  * 
- * @param {string} id
- * @param {Object} data
+ * @param {String} userId
+ * @param {String} ciudad
+ * @param {String} estado
+ *
  * 
  * @returns {Promise}
  */
 
-module.exports = function (id, data) {
-     validate.string(id, 'id')
-    
-    async () => {
-        const citizen = await Citizen.findByIdAndUpdate(id, {$set:data})
-        if (!citizen) throw new Error(`user with id ${id} does not exist`)
-        }
+module.exports = function(userId, ciudad, estado) {
+
+
+    validate.string(userId ,'userId')
+    validate.string(ciudad ,'ciudad')
+    validate.string(estado ,'estado')
+
+    return (async () => {
+
+        const user = await User.findById(userId, ciudad)
+
+        if (!user) throw Error(`You have to log in to list polls`)
+        
+        const polls = await Poll.find({ pollStatus : estado })
+  
+            if (!polls) throw Error(`There are no rejected polls to show`)
+            else {
+
+            return polls
+
+            }
+    })()
 }

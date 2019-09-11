@@ -1,35 +1,50 @@
 const validate = require('../../../utils/validate')
 const { models } = require('democratum-data')
-const { User, Poll } = models
+//const bcrypt = require('bcryptjs')
+const { Poll, User } = models
 
 /**
-* Retrieves approved/active polls.
-* 
-* @param {string} id
-* 
-* @returns {Promise}
-*/
+ * 
+ * @param {String} userId
+ * @param {String} ciudad
+ * @param {String} estado
+ *
+ * 
+ * @returns {Promise}
+ */
 
-
-module.exports = function (id) {
-
-    validate.string(id, 'id')
+module.exports = function(userId, ciudad, estado) {
+    
+    validate.string(userId ,'userId')
+    validate.string(ciudad ,'ciudad')
+    validate.string(estado ,'estado')
 
     return (async () => {
-        const user = await User.findById(id).lean()
 
-        if (!user) throw new Error(`user with id ${id} not found`)
+        const user = await User.findById(userId, ciudad)
 
-        const list = await Poll.find({ _id: pollId }, { _v: 0}).lean()
+        if (!user) throw Error(`You have to log in to list polls`)
+        
+        const polls = await Poll.find({ pollStatus : estado })
+  
+            if (!polls) throw Error(`There are no approved polls to show`)
+            else {
 
-        if(!poll) throw new Error(`Poll with id ${pollId} not exist`)
+            return polls
 
-        poll.forEach(polls => {
-            polls.id = polls._id.toString()
-
-            delete polls._id
-        })
-
-        return polls
+            }
     })()
 }
+
+/*
+
+ module.exports = function() {
+    
+    return (async () => {
+        const polls = await Poll.find( {},{ __v: 0 }).sort({_id:1}).lean() 
+        if (!polls) throw Error(`there are no polls`)   
+        
+        return polls
+    })()
+
+*/
