@@ -42,7 +42,7 @@ router.post('/subject', [tokenMiddleware, jsonBodyParser], registerSubject)
 
 router.get('/subject/:name', [tokenMiddleware, jsonBodyParser], retrieveSubject)
 
-router.get('/subjectStu/:id', [tokenMiddleware, jsonBodyParser], retrieveAllSubjectToStudent)
+router.get('/subjectStu', [tokenMiddleware, jsonBodyParser], retrieveAllSubjectToStudent)
 
 router.post('/addTeacher', [tokenMiddleware, jsonBodyParser], addTeacher)
 
