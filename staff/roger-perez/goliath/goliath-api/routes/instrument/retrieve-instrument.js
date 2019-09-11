@@ -1,16 +1,13 @@
 const logic = require('../../logic')
 
 module.exports = (req, res) => {
-
-    const { params: { propertyId } } = req
+    const { params: { id } } = req
 
     try {
-        logic.retrieveProperty(propertyId)
-            .then(property => res.json({ message: 'Property retrieved correctly', property }))
+        logic.retrieveInstrument(id)
+            .then(instrument => res.json({ message: 'instrument retrieved correctly', instrument }))
             .catch(({ message }) => res.status(404).json({ error: message }))
     } catch ({ message }) {
         res.status(404).json({ error: message })
     }
-
-} 
-
+}

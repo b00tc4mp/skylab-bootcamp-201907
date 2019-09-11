@@ -29,6 +29,10 @@ module.exports = new Schema({
         type: String,
         required: true
     },
-    drumkits: [drumkit]
+    drumkits: [drumkit],
+    admin:{
+        type: Boolean,
+        required: true
+    }
    
 })

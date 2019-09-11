@@ -16,9 +16,7 @@ const { User } = require('../../../data')
  */
 
 
-module.exports = function (name, surname,instrument,description,email,password,drumkits) {
-
-    console.log(" pdrumkitsp " + drumkits);
+module.exports = function (name, surname,instrument,description,email,password,drumkits,admin) {
     
     validate.string(name, 'name')
     validate.string(surname, 'surname')
@@ -27,6 +25,7 @@ module.exports = function (name, surname,instrument,description,email,password,d
     validate.string(email, 'email')
     validate.string(password, 'password')
     validate.object(drumkits, 'drumkits')
+    validate.boolean(admin, 'admin')
 
     
     return User.findOne({ email })
@@ -35,7 +34,7 @@ module.exports = function (name, surname,instrument,description,email,password,d
 
           
 
-            return User.create({ name, surname,instrument,description, email, password,drumkits })
+            return User.create({ name, surname,instrument,description, email, password,drumkits,admin })
         })
         .then(() => { })
 }

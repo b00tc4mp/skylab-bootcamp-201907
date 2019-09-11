@@ -1,6 +1,4 @@
 const validate = require('../../../utils/validate')
-// const { ObjectId } = require('mongodb')
-// Add:
 const { User } = require('../../../data')
 const mongoose = require('mongoose')
 
