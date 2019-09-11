@@ -67,7 +67,8 @@ module.exports = new Schema({
         },
         coordinates: {
             type: [Number],
-            default: []
+            required: true,
+            default: [0, 0]
         }
     },
     owner: { type: ObjectId, ref: 'User' }

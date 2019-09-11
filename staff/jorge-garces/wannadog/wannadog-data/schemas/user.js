@@ -29,7 +29,7 @@ module.exports = new Schema({
         },
         coordinates: {
             type: [Number],
-            default: []
+            default: [0, 0]
         }
     },
     favorites: [{ type: ObjectId, ref: 'Dog' }],
