@@ -9,15 +9,16 @@ const { Recipe } = models
  * @returns {Promise}
 */
 module.exports = function (id) {
-    
-validate.string(id, 'id')
-    
+    validate.string(id, 'id')
 
-    return (async () => { 
-        const recipe = await Recipe.findById(id)
+    return (async () => {
+        const recipe = await Recipe.findById(id).lean()
+
         if (!recipe) throw Error(`No recipes found with id ${id}`)
+
         recipe.id = recipe._id.toString()
         delete recipe._id
+
         return recipe
     })()
 }

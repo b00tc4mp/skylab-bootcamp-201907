@@ -1,54 +1,67 @@
 const { models: { User, Day, Recipe } } = require('menu-planner-data')
 const { validate } = require('menu-planner-utils')
+const moment = require('moment')
 
 /**
+ * Registers a day in the week. If day already exists, then it replaces the old one meals.
  * 
- * @param {*} breakfast 
- * @param {*} lunch
- * @param {*} snack
- * @param {*} dinner 
- * @param {*} id 
+ * @param {string} userId 
+ * @param {string} day A day of the week ('monday', 'tuesday', 'wednesday', thursday', 'friday', 'saturday', 'sunday')
+ * @param {string} breakfast 
+ * @param {string} lunch
+ * @param {string} snack
+ * @param {string} dinner 
  * 
  * @returns {Promise}
  */
-module.exports = function (userId, day, /* userId, day ('monday', 'tuesday', 'wednesday', thursday', 'friday', ... ) */ breakfast, lunch, snack, dinner) {
-
+module.exports = function (userId, day, breakfast, lunch, snack, dinner) {
     //VALIDATE TODO STRING
 
     // TODO find user by id, if not found then error, otherwise proceed
     // TODO check weeks and find matching week with current date (new Date) if no week, then Error, otherwise proceed to create day in that week
 
-
     return (async () => {
+        const user = await User.findById(userId)
+        if(!user) throw new Error(`user with id ${userId} not found`)
 
-        const user = await User.findOne({_id: userId}, {_id: 0, v:_0}).lean()
-        if(!user) throw new Error(`no user with id ${userId}`)
+        // calculate current week monday exact date
+        const __day = moment().date() - moment().day() + 1,
+        month = moment().month(),
+        year = moment().year()
 
-        var date = new Date();
+        const currentWeekMondayDate = new Date(year, month, __day)
+
+        const { weeks } = user
+
+        const week = weeks.find(week => moment(week.date).isSame(currentWeekMondayDate))
+
+        if (!week) throw Error(`current week does not exist for user with id ${userId}`)
 
         const _breakfast = await Recipe.findById(breakfast)
-        if (!_breakfast) throw Error(`No recipes found with id ${breakfast}`)
+        if (!_breakfast) throw Error(`recipe with id ${breakfast} not found`)
 
-        const _lunch = await Recipes.findById(lunch)
-        if (!_lunch) throw Error(`No recipes found with id ${lunch}`)
+        const _lunch = await Recipe.findById(lunch)
+        if (!_lunch) throw Error(`recipe with id ${lunch} not found`)
 
-        const _snack = await Recipes.findById(snack)
-        if (!_snack) throw Error(`No recipes found with id ${snack}`)
+        const _snack = await Recipe.findById(snack)
+        if (!_snack) throw Error(`recipe with id ${snack} not found`)
 
-        const _dinner = await Recipes.findById(dinner)
-        if (!_dinner) throw Error(`No recipes found with id ${dinner}`)
+        const _dinner = await Recipe.findById(dinner)
+        if (!_dinner) throw Error(`recipe with id ${dinner} not found`)
 
-        let day = await Day.findOne({ breakfast, lunch, snack, dinner }) // TODO find day in week. it is not an independent collection.
+        let _day = week[day]
 
-        // TODO week[day] -> undefined, no exisita. week[day] = day
+        if (!_day) {
+            _day = new Day()
 
-        if (day) throw new Error('day already exists.')
+            week[day] = _day
+        }
 
-        day = new Day({ breakfast, lunch, snack, dinner })
+        _day.breakfast = breakfast
+        _day.lunch = lunch
+        _day.snack = snack
+        _day.dinner = dinner
 
-        await day.save() // user.save()
-
-        return day._id.toString() // should not return
+        await user.save()
     })()
-
 }    
