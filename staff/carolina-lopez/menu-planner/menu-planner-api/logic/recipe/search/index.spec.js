@@ -7,9 +7,9 @@ const { random } = require('menu-planner-utils')
 
 const { env: { DB_URL_TEST } } = process
 
-describe('logic - search recipe', () => {
+describe.only('logic - search recipe', () => {
 
-    let title
+    let category
     
     before(() => database.connect(DB_URL_TEST))
     

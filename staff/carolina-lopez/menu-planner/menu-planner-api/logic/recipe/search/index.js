@@ -1,6 +1,6 @@
 const { validate } = require('menu-planner-utils')
 const { models } = require('menu-planner-data')
-const { Recipe } = models
+const { Recipe, Ingredient } = models
 /**
  * Searches the DB for recipes matching criteria
  * 
