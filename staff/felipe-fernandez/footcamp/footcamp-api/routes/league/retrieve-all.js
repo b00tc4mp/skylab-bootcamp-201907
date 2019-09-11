@@ -8,7 +8,7 @@ module.exports = async function(req, res) {
     try {
         
        const leagues = await logic.retrieveAllLeagues(id)
-           res.status(200).json({ message: 'All teams retrieved successfully', leagues})
+           res.status(200).json({ message: 'All leagues retrieved successfully', leagues})
     } catch({ message }) {
         res.status(404).json({ error: message })
     }

@@ -13,7 +13,6 @@ const { models: { User,  League, Team } } = require('footcamp-data')
 module.exports = function(id) {
    
     validate.string(id, 'id')
-    validate.string(leagueId, 'league id')
     
     return (async () => {
         
@@ -22,7 +21,7 @@ module.exports = function(id) {
         if (!user) throw new Error(`User with id ${id} does not exist`)
 
         const leagues = await Promise.all(user.leagues.map(league => league))
-
+        debugger
         let allLeagues = []
 
         //create an array of objects with the properties of the teams to return
@@ -34,7 +33,9 @@ module.exports = function(id) {
             }
             allLeagues.push(league)
         })
-       
+
+        await user.save()
+        
         return allLeagues
 
     })()
