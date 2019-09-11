@@ -4,7 +4,7 @@ let connection
 
 module.exports = {
     connect(url) {
-        return connection ? connection : connection = mongoose.connect(url, { useNewUrlParser: true })
+        return connection ? connection : connection = mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
     },
 
     disconnect() {

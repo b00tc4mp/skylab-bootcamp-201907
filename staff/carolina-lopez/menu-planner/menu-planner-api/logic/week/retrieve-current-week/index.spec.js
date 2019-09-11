@@ -154,12 +154,14 @@ describe('logic - retrieve current week', () => {
             const email = `email-${Math.random()}@mail.com`
             const password = `password-${Math.random()}`
 
+            await User.deleteMany()
+
             const { id } = await User.create({ name, surname, email, password, weeks: [currentWeek, pastWeek1, pastWeek2, pastWeek3, pastWeek4] })
             userId = id
         })()
     })
 
-    it.only("should succeed on correct data", async () => {
+    it("should succeed on correct data", async () => {
 
         const week = await retrieveCurrentWeek(userId)
 

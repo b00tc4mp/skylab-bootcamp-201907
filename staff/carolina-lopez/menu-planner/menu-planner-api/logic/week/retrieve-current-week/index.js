@@ -16,6 +16,8 @@ module.exports = function (userId) {
     return (async () => {
         let user = await User.findById(userId).populate('weeks.monday.breakfast weeks.monday.lunch weeks.monday.snack weeks.monday.dinner weeks.tuesday.breakfast weeks.tuesday.lunch weeks.tuesday.snack weeks.tuesday.dinner weeks.wednesday.breakfast weeks.wednesday.lunch weeks.wednesday.snack weeks.wednesday.dinner weeks.thursday.breakfast weeks.thursday.lunch weeks.thursday.snack weeks.thursday.dinner weeks.friday.breakfast weeks.friday.lunch weeks.friday.snack weeks.friday.dinner weeks.saturday.breakfast weeks.saturday.lunch weeks.saturday.snack weeks.saturday.dinner weeks.sunday.breakfast weeks.sunday.lunch weeks.sunday.snack weeks.sunday.dinner').lean()
 
+        // TODO check user is defined, otherwise error (user not found)
+
         debugger
 
         // calculate current week monday exact date
