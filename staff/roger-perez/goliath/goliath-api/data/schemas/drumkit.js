@@ -9,5 +9,9 @@ module.exports = new Schema({
         type: String,
         required: true
     },
+    bpm:{
+        type:Number,
+        required: true
+    },
     sequences: [sequence]
 })
