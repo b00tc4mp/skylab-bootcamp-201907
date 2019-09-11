@@ -4,6 +4,7 @@ module.exports={
     unregisterProduct:require('./unregister'),
     retrieveAll:require('./retrieveAll'),
     retrieveProducts:require('./retrieveProducts'),
-    updateProduct:require('./update')
+    updateProduct:require('./update'),
+    uploadPhoto:require('./uploadPhoto')
 
 }

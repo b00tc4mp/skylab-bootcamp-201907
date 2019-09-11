@@ -1,56 +1,42 @@
 require('dotenv').config()
-​
-const validate = require('../../../utils/validate')
-const { models } = require('skyshop-data')
-const { User } = models
-const streamifier = require('streamifier')
+const {validate} = require('skyshop-utils')
+
+const {models:{Product}}=require('skyshop-data')
 const cloudinary = require('cloudinary')
-​
-const { CLOUDINARY_API_KEY, CLOUDINARY_NAME, CLOUDINARY_SECRET_KEY } = require('../config')
-​
+const { env: { CLOUDINARY_API_KEY, CLOUDINARY_NAME, CLOUDINARY_SECRET_KEY } } = process
 /**
-* Update user information.
+* Update product information.
 * 
-* @param {String} userId 
+* @param {String} productId 
 * @param {Buffer} buffer 
 * 
-* @throws {TypeError} - if userId is not a string or buffer is not a buffer.
-* @throws {Error} - if any param is empty, user is not found or image could not be uploaded.
+* @throws {TypeError} - if productId is not a string or buffer is not a buffer.
+* @throws {Error} - if any param is empty, product is not found or image could not be uploaded.
 *
-* @returns {Object} - user.  
+* @returns {Object} - product.  
 */
-​
-module.exports = function (userId, buffer) {
-​
-    validate.string(userId, 'user id')
-    validate.object(buffer, 'buffer');
-​
+module.exports = function (productId, image) {
+    validate.string(productId, 'product id')
+    //validate.object(image, 'image')
     return (async () => {
-        const user = await User.findById(userId)
-        if (!user) throw new Error(`user with userId ${userId} not found`)
-​
+        const product = await Product.findById(productId)
+        if (!product) throw new Error(`product with userId ${productId} not found`)
         cloudinary.config({
             cloud_name: CLOUDINARY_NAME,
             api_key: CLOUDINARY_API_KEY,
             api_secret: CLOUDINARY_SECRET_KEY
             })
         
-        const image = await new Promise((resolve, reject) => {
-​
-            const upload_stream = cloudinary.uploader.upload_stream((err,image) => {
-​
+        const _image = await new Promise((resolve, reject) => {
+            const upload_stream = cloudinary.v2.uploader.upload_stream((err,image) => {
                 if (err) return reject (`Image could not be uploaded: ${err}`)
-​
                 resolve(image)
             })
-            streamifier.createReadStream(buffer).pipe(upload_stream)
+            image.pipe(upload_stream)
         })
-​
-        let _user = await User.findByIdAndUpdate(userId, { image: image.secure_url }, { new: true, runValidators: true }).select('-__v -password').lean()
-        
-        _user.id = user._id.toString()
-        delete _user._id
-​
-        return _user
+        product.image = _image.secure_url
+        product.id = product._id.toString()
+        delete product._img
+        await product.save()
     })()
 }

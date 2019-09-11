@@ -27,23 +27,6 @@ module.exports = function(userId) {
             return orders
         }
     })()
-/*     return (async () => {
-        const user = await User.findById(userId)
-        debugger
-
-        if (!user) throw Error('User does not exist')
-
-        const orders = await Order.find({ owner: userId}, { __v: 0 }).sort({ _id: 1 }).lean()
-        if(!orders) throw Error('No orders available')
-
-        orders.forEach(items=>{
-            items.id=items._id.toString()
-            delete items._id
-           
-        })
-
-        return orders
-    })() */
 
 }
 
