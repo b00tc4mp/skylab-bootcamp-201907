@@ -1,5 +1,5 @@
 const validate = require('../../../utils/validate')
-/* Add: */ const { User } = require('../../../data')
+const { User } = require('../../../data')
 
 /**
  * Registers a user.
@@ -10,18 +10,23 @@ const validate = require('../../../utils/validate')
  * @param {string} description 
  * @param {string} email 
  * @param {string} password
+ * @param {array} drumkits
  * 
  * @returns {Promise}
  */
 
 
-module.exports = function (name, surname,instrument,description,email, password) {
+module.exports = function (name, surname,instrument,description,email,password,drumkits) {
+
+    console.log(" pdrumkitsp " + drumkits);
+    
     validate.string(name, 'name')
     validate.string(surname, 'surname')
     validate.string(instrument, 'instrument')
     validate.string(description, 'description')
     validate.string(email, 'email')
     validate.string(password, 'password')
+    validate.object(drumkits, 'drumkits')
 
     
     return User.findOne({ email })
@@ -30,7 +35,7 @@ module.exports = function (name, surname,instrument,description,email, password)
 
           
 
-            return User.create({ name, surname,instrument,description, email, password })
+            return User.create({ name, surname,instrument,description, email, password,drumkits })
         })
         .then(() => { })
 }

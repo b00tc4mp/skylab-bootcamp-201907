@@ -38,5 +38,9 @@ module.exports = {
         object(target, name) {
             if (typeof target !== 'object' && target !== '') throw new Error(`${name} with value ${target} is not an object`)
             if (target === '') throw new Error(`${name} is empty or blank`)
+        },
+        array(target, name) {
+            if (typeof target !== 'array' && target !== '') throw new Error(`${name} with value ${target} is not an array`)
+            if (target === '') throw new Error(`${name} is empty or blank`)
         }
 }

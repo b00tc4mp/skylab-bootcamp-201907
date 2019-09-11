@@ -9,6 +9,5 @@ module.exports = new Schema({
         type: String,
         required: true
     },
-    sequences: [sequence],
-    creator: [{ type: ObjectId, ref: 'User' }]
+    sequences: [sequence]
 })

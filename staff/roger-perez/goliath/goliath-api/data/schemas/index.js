@@ -1,6 +1,6 @@
 module.exports = {
     user: require('./user'),
-    drumkit: require('./drumkits'),
+    drumkit: require('./drumkit'),
     instrument: require('./instrument'),
     sequence: require('./sequence'),
     tracks: require('./tracks')

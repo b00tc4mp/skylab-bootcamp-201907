@@ -1,5 +1,5 @@
 const { Schema } = require('mongoose')
-const drumkits = require('./drumkits')
+const drumkit = require('./drumkit')
 
 
 module.exports = new Schema({
@@ -29,6 +29,6 @@ module.exports = new Schema({
         type: String,
         required: true
     },
-    drumkits: [drumkits]
+    drumkits: [drumkit]
    
 })
