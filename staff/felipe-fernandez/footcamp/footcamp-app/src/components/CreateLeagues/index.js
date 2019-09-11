@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import logic from '../../logic'
 import { withRouter } from 'react-router-dom'
+import Context from '../Context'
 
-function LeagueLanding(props) {
+function CreateLeagues(props) {
 
     const { history } = props
-    
+    const { nameLeague, setNameLeague, leagueId, setLeagueId, existLeague, setExistLeague} = useContext(Context)
     const [name, setName] = useState(null)
     const [code, setCode] = useState(null)
       
@@ -13,15 +14,45 @@ function LeagueLanding(props) {
     const handleCodeInput = event => setCode(event.target.value)
     
     function handleCreate (name, code) {
-
+       
         (async()=>{
             
             try {
                
                 const token = logic.userCredentials
-                await logic.createLeague(name, code, token)
+                const {leagueId} = await logic.createLeague(name, code, token)
+                setNameLeague(name)
+                setCode(code)
+                //set the id of the league to use after in the creation of teams
+                setLeagueId(leagueId)
+               
+                debugger
+                history.push('/create-teams')
+                    
+                console.log('ok, league created right')
+
+            } catch ({ message }) {
                 
-                history.push('/teams')
+              console.log('fail create league', message)
+            }
+        })()
+      }
+
+      function handleJoin (name, code) {
+       
+        (async()=>{
+            
+            try {
+               
+                const token = logic.userCredentials
+                const {leagueId} = await logic.joinLeague(name, code, token)
+                
+                setNameLeague(name)
+                setCode(code)
+                  //set the id of the league to use after in the creation of teams
+                setLeagueId(leagueId)
+              
+                history.push('/create-teams')
                     
                 console.log('ok, league created right')
 
@@ -32,18 +63,21 @@ function LeagueLanding(props) {
         })()
       }
     
-    
-    const handleFormSubmit = event => {
+    const handleFormSubmitCreate = event => {
         event.preventDefault()
         handleCreate(name, code)
     }
 
+    const handleFormSubmitJoin = event => {
+        event.preventDefault()
+        handleJoin(name, code)
+    }
 
     
     return (
         <div className="useState" >
             <h2>Create a league</h2>
-            <form onSubmit={handleFormSubmit}>
+            <form onSubmit={handleFormSubmitCreate}>
                 <input
                     className="input is-info"
                     type="name"
@@ -64,7 +98,7 @@ function LeagueLanding(props) {
             </form>
 
             <h2>Join a league</h2>
-            <form onSubmit={handleFormSubmit}>
+            <form onSubmit={handleFormSubmitJoin}>
                 <input
                     className="input is-info"
                     type="name"
@@ -87,4 +121,4 @@ function LeagueLanding(props) {
     )
 }
 
-export default withRouter(LeagueLanding)
+export default withRouter(CreateLeagues)

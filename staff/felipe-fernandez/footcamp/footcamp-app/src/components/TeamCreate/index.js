@@ -8,12 +8,11 @@ function CreateTeam(props) {
 
     const { history } = props
     
-    const { name, setName, code, setCode, teamName, setTeamName, teamId, setTeamId, player, setPlayer, existTeam, setExistTeam } = useContext(Context)
+    const { name, setName, teamName, setTeamName, leagueId, setLeagueId, teamId, setTeamId, player, setPlayer, existTeam, setExistTeam } = useContext(Context)
 
     const handleNameInput = event => setName(event.target.value)
-    const handleCodeInput = event => setCode(event.target.value)
     
-    function handleCreateTeam(code, name) {
+    function handleCreateTeam( name) {
 
 
         (async()=>{
@@ -22,7 +21,8 @@ function CreateTeam(props) {
                 
                 const token = logic.userCredentials
                 //call to logic and recveive 18 players and the id of the team
-                const result  = await logic.createTeam(code, name, token)
+                debugger
+                const result  = await logic.createTeam(name, token, leagueId)
                 const players  = result.team.players.map(results=> results)
                 const teamId = result.team.id
                 setTeamId(teamId) 
@@ -47,7 +47,7 @@ function CreateTeam(props) {
     
     const handleFormSubmit = event => {
         event.preventDefault()
-        handleCreateTeam(code, name)
+        handleCreateTeam( name)
     }
 
 
@@ -56,14 +56,7 @@ function CreateTeam(props) {
     <div className="useState" >
             <h2>Create a team</h2>
             <form onSubmit={handleFormSubmit}>
-                <input
-                    className="input is-info"
-                    type="code"
-                    name="code"
-                    placeholder="code"
-                    onChange={handleCodeInput}
-                    required
-                />
+               
                 <input
                     className="input is-info"
                     type="name"
@@ -77,7 +70,7 @@ function CreateTeam(props) {
             {player && player.map(oneplayer => <li  key={oneplayer.id}> <PlayerResult player={oneplayer} /> </li>)}
             <a href="#" onClick={event => {
                 event.preventDefault()
-                history.push('/innerlanding')
+                history.push('/home-landing')
             }}>OK</a>
          
 

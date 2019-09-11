@@ -8,7 +8,7 @@ export default function ( name, code, token) {
     validate.string(code, 'code')
     
     return (async () => {
-        const response = await fetch(`${REACT_APP_API_URL}/users/leagues`, {
+        const response = await fetch(`${REACT_APP_API_URL}/users/leagues/join`, {
 
             
             method: 'post',

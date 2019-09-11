@@ -3,10 +3,14 @@ import isUserLogged from './is-user-logged'
 import authenticateUser from './authenticate-user'
 import retrieveUser from './retrieve-user'
 import createLeague from './league-create'
+import joinLeague from './league-join'
 import createTeam from './team-create'
 import retrievePlayer from './player-retrieve'
 import retrieveTeam from './retrieve-team'
+import getLineup from './get-lineup'
 import retrieveLineup from './retrieve-lineup'
+import retrieveAllLeagues from './retrieve-leagues'
+import retrieveTable from './retrieve-table'
 
 
 export default {
@@ -22,8 +26,13 @@ export default {
     isUserLogged,
     retrieveUser,
     createLeague, 
+    joinLeague,
     createTeam,
     retrievePlayer,
     retrieveTeam,
-    retrieveLineup
+    getLineup,
+    retrieveLineup,
+    retrieveAllLeagues,
+    retrieveTable
+
 }

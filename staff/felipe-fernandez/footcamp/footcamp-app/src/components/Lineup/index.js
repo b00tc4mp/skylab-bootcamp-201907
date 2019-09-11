@@ -7,16 +7,17 @@ import PlayerResult from '../PlayerResult'
 
 function MyTeam (props) {
   
-    const { team, setTeam, teamName, setTeamName, teamId, setTeamId, player, setPlayer } = useContext(Context)
+    const { team, setTeam,leagueId,  teamName, setTeamName, teamId, setTeamId, player, setPlayer } = useContext(Context)
     const { history} = props
     
 
     useEffect(() => {
         (async () => {
+            
             const token = logic.userCredentials
             
-            const result  = await logic.retrieveLineup(token, teamId)
-            debugger
+            const result  = await logic.getLineup(token,teamId, leagueId)
+            
             const team  = result.lineup.map(results=> results)
            
             setTeam(team)

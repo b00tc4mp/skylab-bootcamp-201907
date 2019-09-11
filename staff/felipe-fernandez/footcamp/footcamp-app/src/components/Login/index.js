@@ -1,9 +1,11 @@
 import React, { useState, useContext } from 'react'
 import logic from '../../logic'
 import { withRouter } from "react-router-dom";
+import Context from '../Context'
 
 function Login(props) {
 
+  const { existLeague, setExistLeague } = useContext(Context)
   const { history } = props
 
   function handleLogin(email, password) 
@@ -11,11 +13,16 @@ function Login(props) {
     return(async()=>{
 
         try{
-          
+          debugger
           const {token} = await logic.authenticateUser(email, password)
           logic.userCredentials = token 
-              console.log('ok, you are logged')
-               history.push('/leagues')
+
+          //check if the user has leagues
+          debugger
+          const existLeague = await logic.retrieveAllLeagues(token)
+          existLeague.leagues.length === 0 ? history.push('/create-leagues') : history.push('/myleagues')
+          
+
         } catch({message}) {
           console.log('fail login', message)
         }
