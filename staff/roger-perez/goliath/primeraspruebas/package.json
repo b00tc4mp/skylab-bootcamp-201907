@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "mongoose": "^5.6.10",
+    "tone": "^13.8.26"
+  }
+}
