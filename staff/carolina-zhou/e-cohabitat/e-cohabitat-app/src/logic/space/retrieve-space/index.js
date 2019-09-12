@@ -9,12 +9,12 @@ const { id, token } = sessionStorage
  * 
  * @returns {}
 */
-debugger
+
 export default function(spaceId) {
     
     validate.string(spaceId, 'space id')
 
-    debugger
+    
     return (async () => {
         const response = await fetch(`${REACT_APP_API_URL}/users/${id}/spaces/${spaceId}`, {
             method: 'get',

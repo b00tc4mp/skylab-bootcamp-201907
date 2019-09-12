@@ -43,10 +43,10 @@ function Space({ history, location }) {
     { mySpace && <> 
         <div class="module">
            
-           <h1 class="module__title">{mySpace.title}</h1>
-            <p class="module__type">{mySpace.type}</p>
+            <h1 class="module__title">{mySpace.title}</h1>
+            <p class="module__type">Type: {mySpace.type}</p>
             <p class="module__address">{mySpace.address}</p>
-            <p class="module__users">{mySpace.cousers.length} users </p>
+            <p class="module__users">{mySpace.cousers.length} user/s</p>
             <a class="module__users-link" href=""><i class="far fa-eye"></i> who?</a>
                     
             <figure class="module__figure">

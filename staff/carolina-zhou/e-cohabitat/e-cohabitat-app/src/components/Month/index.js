@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
+import moment from "moment"
 
 function Month({ history }) {
+
+    /* const [currentDate, setCurrentDate] = useState(new Date())
+    const [selectedDate, setSelectedDate] = useState(new Date()) */
+
+    // year: moment().format('YYYY'), month: moment().format('MM'), day: moment().format('DD')
 
     function handleMonth(event) {
         event.preventDefault()
@@ -20,6 +26,28 @@ function Month({ history }) {
 
         history.push('/day')
     }
+
+/*     function handleGoToNextMonth() {
+        setCurrentDate(moment.addMonths(currentDate, 1))
+    }
+     
+    function handleGoToPreviousMonth()  {
+        setCurrentDate(moment.subMonths(currentDate, 1))
+    }
+
+    function setDaysOfWeek {
+        const dateFormat = "ddd";
+        const days = [];
+        let startDate = dateFns.startOfWeek(currentDate);
+        for (let i = 0; i < 7; i++) {
+              days.push(
+                 <div className="column col-center" key={i}>
+                 {dateFns.format(dateFns.addDays(startDate, i), dateFormat)}
+                 </div>
+              );
+           }
+           return <div className="days row">{days}</div>;
+    } */
 
     return <>
     

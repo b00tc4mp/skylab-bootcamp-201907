@@ -3,13 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "utils": "file:../e-cohabitat-utils",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.26",
     "node-sass": "^4.12.0",
     "query-string": "^6.8.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.1.1"
+    "react-scripts": "3.1.1",
+    "utils": "file:../e-cohabitat-utils"
   },
   "scripts": {
     "start": "react-scripts start",

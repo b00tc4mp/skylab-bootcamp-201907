@@ -4,17 +4,23 @@
         display: initial
         font-family: Helvetica, Roboto, sans-serif
         font-size: 2rem
-    &__type, &__address
+    &__type
         font-size: 1.2rem
         font-weight: normal
         margin-top: 1em
+    &__address
+        font-size: .9rem
+        margin-top: .9em
+        color: grey
     &__users
-        font-size: 1.2rem
+        font-size: .9rem
         font-weight: normal
-        margin-top: 1em
+        margin-top: 1.5em
     &__users-link
+        font-size: .8rem
         text-decoration: none
         color: grey
+        margin-top: 1em
     &__users-link:hover
         color: deeppink
     &__logo, &__mobile-menu
@@ -23,7 +29,7 @@
         margin-top: 2em
         padding: 0
     &__img 
-        width: 40%
+        width: 60%
     &__form
         display: flex
         flex-direction: column
@@ -37,7 +43,7 @@
         margin-bottom: 1em
         border: none
         padding: .5em
-        width: 40%
+        width: 60%
     &__today
         background-color: white
         border: 1px solid black
@@ -47,6 +53,8 @@
         color: grey
     &__calendar:hover, &__today:hover, &__back-link:hover
         color: deeppink
+.fa-eye
+    font-size: .8rem
 
 @media screen and (min-width: 840px) 
     .module

@@ -24,7 +24,7 @@ export default function() {
             if (type === 'garden')  picture = 'https://res.cloudinary.com/czhoulin/image/upload/v1568190108/images/garden-1_pe9pqt.jpg'
             if (type === 'rooftop')  picture = 'https://res.cloudinary.com/czhoulin/image/upload/v1568190111/images/rooftop-1_oehaoy.jpg'
             if (type === 'other')  picture = 'https://res.cloudinary.com/czhoulin/image/upload/v1568190110/images/other-3_sbctr2.jpg'
-        debugger
+        
             handleRegister(title, type, picture, address, passcode, id)
 
     }

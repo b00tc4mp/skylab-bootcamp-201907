@@ -273,15 +273,18 @@ body {
 .home__space-title {
   margin: 2em 0 0 2em;
   font-size: 1.2rem;
+  text-align: left;
 }
 .home__space-subtitle {
   margin: 0.5em 0 0 2em;
   font-size: 1rem;
+  text-align: left;
 }
 .home__space-address {
   margin: 0.5em 0 0 2em;
-  font-size: 0.85rem;
-  color: grey;
+  font-size: 0.9rem;
+  color: lightgrey;
+  text-align: left;
 }
 .home__space-message {
   color: grey;
@@ -317,19 +320,26 @@ body {
   font-family: Helvetica, Roboto, sans-serif;
   font-size: 2rem;
 }
-.module__address {
+.module__type {
   font-size: 1.2rem;
   font-weight: normal;
   margin-top: 1em;
+}
+.module__address {
+  font-size: 0.9rem;
+  margin-top: 1em;
+  color: grey;
 }
 .module__users {
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   font-weight: normal;
-  margin-top: 1em;
+  margin-top: 1.5em;
 }
 .module__users-link {
+  font-size: 0.8rem;
   text-decoration: none;
   color: grey;
+  margin-top: 1em;
 }
 .module__users-link:hover {
   color: deeppink;
@@ -342,7 +352,7 @@ body {
   padding: 0;
 }
 .module__img {
-  width: 40%;
+  width: 60%;
 }
 .module__form {
   display: flex;
@@ -358,7 +368,7 @@ body {
   margin-bottom: 1em;
   border: none;
   padding: 0.5em;
-  width: 40%;
+  width: 60%;
 }
 .module__today {
   background-color: white;
@@ -371,6 +381,10 @@ body {
 }
 .module__calendar:hover, .module__today:hover, .module__back-link:hover {
   color: deeppink;
+}
+
+.fa-eye {
+  font-size: 0.8rem;
 }
 
 @media screen and (min-width: 840px) {

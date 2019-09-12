@@ -4,11 +4,11 @@ const { env: { JWT_SECRET } } = process
 
 
 module.exports = (req, res, next) => {
-    debugger
+    
     try {
         const { headers: { authorization } } = req
         if (!authorization) throw new Error('no authorization token received')
-        debugger
+        
         const token = authorization.slice(authorization.indexOf(' ') + 1)
         
         const { sub } = jwt.verify(token, JWT_SECRET)

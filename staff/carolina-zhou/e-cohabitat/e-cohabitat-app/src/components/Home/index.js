@@ -1,12 +1,11 @@
-import React, { useContext, useEffect } from 'react'
-import Context from '../context'
+import React, { useState, useEffect } from 'react'
 import logic from '../../logic'
 import { withRouter } from 'react-router-dom'
 
 
 function Home({ history }) {
 
-    const { spaces, setSpaces, spaceId, setSpaceId } = useContext(Context)
+    const [spaces, setSpaces] = useState()
 
     useEffect(() => {
         (async () =>{
@@ -15,12 +14,6 @@ function Home({ history }) {
             const spaces = await logic.retrieveAllSpaces(id)
             
             setSpaces(spaces)
-
-            /* const space = spaces.map(space => {
-                space.id = document.getElementById('mySpace').dataset.id
-                return space
-            }) */
-            setSpaceId(spaceId)
           } catch(error) {
             console.log(error.message)
           }
@@ -34,9 +27,9 @@ function Home({ history }) {
     }
 
     function handleGoToSpace(spaceId) {
-        debugger
+        
         //event.preventDefault()
-        history.push(`/space?myspace=${spaceId}`)
+        history.push(`/spaces/${spaceId}`)
     }
 
     return <>
