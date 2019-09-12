@@ -7,7 +7,7 @@ const { registerUser, authenticateUser,
 
 const { retrieveRecipe, searchRecipe } = require('./recipe')
 
-//const { registerDay, retrieveDay } = require('./day')
+const { registerDay, retrieveDay } = require('./day')
 
 //const { registerWeek, retrieveWeek } = require('./week')
 
@@ -26,8 +26,8 @@ router.get('/recipe/:id', jsonBodyParser, retrieveRecipe)
 router.get('/recipes/:category', jsonBodyParser, searchRecipe)
 
 /* DAY */
-//router.post('/users/week/:id/days', jsonBodyParser, registerDay)
-//router.get('/users/week/:id/days', jsonBodyParser, retrieveDay) 
+router.post('/users/days', [tokenMiddleware, jsonBodyParser ] , registerDay)
+router.get('/users/days', [tokenMiddleware, jsonBodyParser ], retrieveDay) 
 
 /* WEEK */ 
 //router.post('/weeks', jsonBodyParser, registerWeek)

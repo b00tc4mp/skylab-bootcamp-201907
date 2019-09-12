@@ -56,7 +56,7 @@ describe('logic - retrieve recipe', () => {
         })()
     })
 
-    it("should retrieve a recipe on correct data", async () => { debugger
+    it("should retrieve a recipe on correct data", async () => { 
         const recipe = await retrieveRecipe(id)
 
         expect(recipe).to.exist
