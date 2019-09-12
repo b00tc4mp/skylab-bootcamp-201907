@@ -1,4 +1,4 @@
-import retrieveUser from '.'
+import logic from '..'
 import { database, models } from 'my-stuff-data'
 import jwt from 'jsonwebtoken'
 
@@ -20,16 +20,18 @@ describe('logic - retrieve user', () => {
         password = `password-${Math.random()}`
 
         await User.deleteMany()
-        
-        const user = await User.create({ name, surname, email, password })
-        
-        id = user.id
-    })
 
-    it('should succeed on correct data', async () => {
+        const user = await User.create({ name, surname, email, password })
+
+        id = user.id
+
         const token = jwt.sign({ sub: id }, REACT_APP_JWT_SECRET_TEST)
 
-        await retrieveUser(id, token)
+        logic.__token__ = token
+    })
+
+    it('should succeed on correct data', async () =>
+        await logic.retrieveUser()
             .then(user => {
                 expect(user).toBeDefined()
                 expect(user.id).toBe(id)
@@ -39,7 +41,7 @@ describe('logic - retrieve user', () => {
                 expect(user.email).toBe(email)
                 expect(user.password).toBeUndefined()
             })
-        })
+    )
 
     afterAll(() => database.disconnect())
 })
