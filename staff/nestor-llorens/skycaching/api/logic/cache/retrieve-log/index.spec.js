@@ -53,7 +53,7 @@ describe('logic - retrieve logged caches', () => {
     
         expect(result).to.exist
         expect(result[0]).to.exist
-        expect(result[0].id).to.equal(cacheId) 
+        expect(result[0].toString()).to.equal(cacheId) 
     })
 
     after(() => database.disconnect())

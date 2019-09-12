@@ -1,5 +1,5 @@
 const validate = require('utils/validate')
-const { models: { User } } = require('data')
+const { models: { User, Cache } } = require('data')
 
 
 function unregisterUser (id, password) {
@@ -14,6 +14,9 @@ function unregisterUser (id, password) {
     const result = await User.deleteOne({ _id: id, password })
 
     if (!result.deletedCount) throw new Error(`wrong credentials`)
+
+    await Cache.deleteMany({ owner: id})
+
     })()
     
 }

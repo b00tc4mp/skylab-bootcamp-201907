@@ -1,14 +1,16 @@
 const logic = require('../../logic/user')
 
-module.exports = (req, res) => {
+async function retrieveUser (req, res) {
+    
     const { userId } = req
 
-
     try {
-        logic.retrieveUser(userId)
-            .then(user => res.json({ message: 'user retrieved correctly', user }))
-            .catch(({ message }) => res.status(404).json({ error: message }))
+        const user = await logic.retrieveUser(userId)
+        res.json({ message: 'user retrieved correctly', user })
+
     } catch ({ message }) {
         res.status(404).json({ error: message })
     }
 }
+
+module.exports = retrieveUser

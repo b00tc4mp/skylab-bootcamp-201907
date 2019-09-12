@@ -12,6 +12,8 @@ function logCache(userId, cacheId) {
         const user = await User.findById(userId)
         if (!user) throw new Error(`user with id ${userId} not found`)
 
+        if (user.owned.includes(cacheId)) throw new Error('cant log your own cache')
+
         user.found.push(cacheId)
         
         await user.save()

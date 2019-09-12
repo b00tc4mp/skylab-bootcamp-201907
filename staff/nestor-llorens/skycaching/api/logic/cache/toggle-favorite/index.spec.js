@@ -66,7 +66,7 @@ describe('logic - toggle favorite', () => {
 
     it('should succeed on correct data', async() => {
         
-        await logic.toggleFavoriteCache(id, cacheId)
+        await logic.toggleFavorite(id, cacheId)
 
         const user = await User.findById(id)
         const cache = await Cache.findOne({ _id: cacheId})

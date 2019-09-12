@@ -11,10 +11,6 @@ function retrieveFavorites(userId) {
         if (!user) throw new Error(`user with id ${userId} not found`)
         if (user.favorites.length === 0) throw new Error(`user with id ${userId} does not have favorites`)
         
-        user.favorites.forEach(item => {
-            item.id = item._id.toString()
-        })
-        
         return user.favorites
     })()
 }

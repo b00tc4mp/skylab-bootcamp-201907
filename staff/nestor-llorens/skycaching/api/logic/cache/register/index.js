@@ -13,7 +13,7 @@ function registerCache(userId, name, description, location, difficulty, terrain,
     if (location.coordinates[0] === 0 && location.coordinates[1] === 0) throw new Error(`cache coordinates not found`)
 
     return (async () => {
-        let [user, cache, cacheLoc] = await Promise.all([User.findById(userId), Cache.findOne({ name }), Cache.findOne({ location })])
+        const [user, cache, cacheLoc] = await Promise.all([User.findById(userId), Cache.findOne({ name }), Cache.findOne({ location })])
 
         if (!user) throw new Error(`user with id ${id} does not exist`)
 
@@ -24,6 +24,10 @@ function registerCache(userId, name, description, location, difficulty, terrain,
         const _cache = new Cache({ owner: userId, name, description, location, difficulty, terrain, hints })
 
         await _cache.save()
+
+        user.owned.push(_cache.id)
+
+        await user.save()
 
         return _cache.id
     })()

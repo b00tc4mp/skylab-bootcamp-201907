@@ -75,8 +75,8 @@ describe('logic - retrieve favorites', () => {
 
         expect(favorites[0]).to.exist
         expect(favorites[1]).to.exist
-        expect(favorites[0].id).to.equal(cacheId)
-        expect(favorites[1].id).to.equal(cache2Id)
+        expect(favorites[0].toString()).to.equal(cacheId)
+        expect(favorites[1].toString()).to.equal(cache2Id)
 
     })
 

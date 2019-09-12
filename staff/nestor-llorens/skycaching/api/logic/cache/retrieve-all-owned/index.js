@@ -6,11 +6,11 @@ function retrieveAllUserCaches(userId) {
     validate.string(userId, 'user id')
 
     return (async () => {
-        const user = await User.findById(id)
+        const user = await User.findById(userId)
 
         if (!user) throw new Error(`user does not exist`)
         
-        const caches = Cache.find({ owner: id})
+        const caches = Cache.find({ owner: userId})
     
         return caches
          

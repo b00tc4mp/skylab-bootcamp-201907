@@ -1,14 +1,14 @@
 module.exports = {
-    registerCache: require('./register'),
+    registerCache : require('./register'),
     retrieveCache: require('./retrieve'),
     unregisterCache: require('./unregister'),
+    logCache: require('./log'),
+    updateCache: require('./update'),
     retrieveAllCaches: require('./retrieve-all'),
     retrieveAllOwnedCaches: require('./retrieve-all-owned'),
-    retrieveFavorites: require('./retrieve-favorites'),
-    logCache: require('./log'),
-    retrieveNear: require('./retrieve-near'),
-    retrieveLog: require('./retrieve-log'),
-    updateCache: require('./update'),
     toggleFavorite: require('./toggle-favorite'),
+    retrieveFavorites: require('./retrieve-favorites'),
+    retrieveLog: require('./retrieve-log'),
+    retrieveNear: require('./retrieve-near')
 
 }
