@@ -32,6 +32,6 @@ router.post('/user/dog', [tokenMiddleware, jsonBodyParser], registerDog)
 router.get('/dog/:dogId', jsonBodyParser, retrieveDog)
 router.delete('/user/:dogId', [tokenMiddleware, jsonBodyParser], unregisterDog)
 router.get('/user/dogs', [tokenMiddleware, jsonBodyParser], retrieveAllDogs)
-router.get('/dogs', jsonBodyParser, search)
+router.post('/dogs', jsonBodyParser, search)
 
 module.exports = router

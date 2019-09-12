@@ -1,7 +1,7 @@
 const search = require('../../logic/dog/search-dogs')
 
 module.exports = async function (req, res) {
-
+    debugger
     const { body: { breed, gender, size, age, neutered, withDogs, withCats, withChildren, location: { coordinates: [longitude, latitude] }, distance } } = req
 
     try {

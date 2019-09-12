@@ -3,7 +3,7 @@ const { models } = require('wannadog-data')
 const { Dog } = models
 
 /**
- * Searches the DB for dogs matching criteria
+ * Scans the DB for dogs matching search criteria
  * 
  * @param {string} breed
  * @param {boolean} gender
@@ -21,20 +21,23 @@ const { Dog } = models
 */
 
 module.exports = function (searchParams) {
-    debugger
     const { location, distance } = searchParams
     const { coordinates } = location
 
     if (!(searchParams instanceof Object)) throw Error(`Input ${searchParams} is not an Object`)
     if (Object.keys(searchParams).length === 0) throw Error('Input is empty')
 
-    Object.keys(searchParams).forEach(key => searchParams[key] === undefined ? delete searchParams[key] : '')
+    Object.keys(searchParams).forEach(key => {
+
+        (searchParams[key] === undefined || searchParams[key] === 0) ? delete searchParams[key] : ''
+        searchParams[key] == 'true' ? searchParams[key] = true : ''
+        searchParams[key] == 'false' ? searchParams[key] = false : ''
+    })
 
     if (searchParams.breed) validate.string(searchParams.breed, 'breed')
     if (searchParams.gender) validate.boolean(searchParams.gender, 'gender')
     if (searchParams.size) validate.string(searchParams.size, 'size')
-    if (searchParams.years) validate.number(searchParams.years, 'years')
-    if (searchParams.months) validate.number(searchParams.months, 'months')
+    if (searchParams.age) validate.number(searchParams.age, 'age')
     if (searchParams.neutered) validate.boolean(searchParams.neutered, 'neutered')
     if (searchParams.withDogs) validate.boolean(searchParams.withDogs, 'withDogs')
     if (searchParams.withCats) validate.boolean(searchParams.withCats, 'withCats')

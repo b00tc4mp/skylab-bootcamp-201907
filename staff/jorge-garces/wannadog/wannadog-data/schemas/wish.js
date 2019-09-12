@@ -13,7 +13,7 @@ module.exports = new Schema({
         type: String
     },
     age: {
-        type: Date
+        type: Number
     },
     neutered: {
         type: Boolean
