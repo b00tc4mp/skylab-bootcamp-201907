@@ -1,0 +1,48 @@
+.header 
+  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1)
+  width: 100%
+  z-index: 1
+  height: 10%
+
+
+.user-menu 
+  margin: 30px 0 0 0
+  padding: 0
+  width: 30%
+  float: right
+  list-style: none
+  overflow: hidden
+  border: 1px solid gray
+
+
+.user-menu__auth-option-link
+  display: block
+  padding: 20px 20px
+  text-decoration: none
+  border: 1px solid lightgray
+  color: rgb(60, 60, 60)
+
+
+.user-menu__auth-option-link:hover
+    background-color: rgba(180, 180, 180, 0.4)
+
+.header__logo, .user-menu
+  margin: 20px 5%
+
+.header .header__logo 
+  display: block
+  float: left
+  text-decoration: none
+
+
+@media (min-width: 48em)
+  .user-menu__auth-option-link
+    padding: 20px 30px
+
+  .header .user-menu
+    clear: none
+    float: right
+    max-height: none
+
+  .header .hamburguer-menu__icon
+    display: none
