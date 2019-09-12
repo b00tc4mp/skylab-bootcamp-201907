@@ -3,6 +3,7 @@ require('dotenv').config()
 const { expect } = require('chai')
 const authenticateUser = require('.')
 const { database, models: { User } } = require('vltra-data')
+const bcrypt = require('bcryptjs')
 
 const { env: { DB_URL_TEST }} = process
 
@@ -11,7 +12,7 @@ describe('logic - authenticate user', () => {
 
     let name, surname, nickname, email, password, bookmarks, voted, id
 
-    beforeEach(() => {
+    beforeEach( async () => {
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`
         nickname = `nickname-${Math.random()}`
@@ -20,12 +21,9 @@ describe('logic - authenticate user', () => {
         bookmarks = []
         voted = []
 
-        // users --> User
-        return User.deleteMany()
-            // replace users.insertOne() MongoDB method with User.create() Mongoose method.
-            .then(() => User.create({ name, surname, nickname, email, password, bookmarks, voted })
-                // .then(result => id = result.insertedId.toString()))
-                .then(user => id = user.id))
+        await  User.deleteMany()
+            const user = await User.create({ name, surname, nickname, email, password : await bcrypt.hash(password,10), bookmarks, voted })
+            id = user.id
     })
 
     it('should succeed on correct data', () =>
@@ -44,7 +42,7 @@ describe('logic - authenticate user', () => {
     })
     .catch(error =>{
         expect(error).to.exist
-        expect(error.message).to.equal('wrong credentials')
+        expect(error.message).to.equal(`user with email Jhon@email.com does not exist`)
     })
     )
     it('should fail on wrong password', ()=>

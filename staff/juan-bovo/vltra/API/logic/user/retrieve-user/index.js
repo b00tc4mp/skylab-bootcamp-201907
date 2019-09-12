@@ -9,6 +9,7 @@ const { validate} = require('vltra-utils')
  * @returns {Promise}
  */
 module.exports = function (id) {
+    
     validate.string(id, 'id')
 
     return (async () => {

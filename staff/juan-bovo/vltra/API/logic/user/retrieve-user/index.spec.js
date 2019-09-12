@@ -27,7 +27,6 @@ describe('logic - retrieve user', () => {
 
     it('should succeed on correct data', async() =>{
          const result = await retrieveUser(id)
-            debugger
                 expect(result).to.exist
                 expect(result.id).to.equal(id)
                 expect(result._id).not.to.exist
@@ -38,6 +37,18 @@ describe('logic - retrieve user', () => {
                 expect(result.password).not.to.exist
                 expect(result.bookmarks).to.exist
                 expect(result.voted).to.exist
+    })
+
+    it('should fail unexistant postId', async () => {
+        const wrongId = '5d72794a24912c10b5c089e1' //--> 5d72794a24914c10b5c089e1
+        
+        try{
+            await retrieveUser(wrongId)
+            //throw new Error('should not reach this point')
+        }catch(error){
+            expect(error).to.exist
+            expect(error.message).to.equal(`user with id ${wrongId} not found`)
+        }
     })
 
     it('should fail on empty id', async () => {
