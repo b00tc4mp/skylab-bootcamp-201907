@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 let connection
 
 function connect (url) {
-    return connection ? connection : connection = mongoose.connect(url, { useNewUrlParser: true })
+    return connection ? connection : connection = mongoose.connect(url, { useNewUrlParser: true, useFindAndModify: false })
 }
 function disconnect() {
     connection = undefined
@@ -11,4 +11,4 @@ function disconnect() {
     return mongoose.disconnect()
 }
 
-module.exports =  connect, disconnect
+module.exports =  { connect, disconnect }

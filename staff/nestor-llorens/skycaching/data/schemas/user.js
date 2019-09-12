@@ -1,5 +1,4 @@
-const mongoose = require('mongoose')
-const Schema = mongoose
+const { Schema, SchemaTypes: { ObjectId } } = require('mongoose')
 
 const userSchema = new Schema({
     username: {
@@ -20,9 +19,20 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    found: [{ 
-        type: ObjectId, 
-        ref: 'Cache' 
+    location: {
+        type: {
+            type: String, 
+            enum: ['Point'],
+            default: 'Point'
+        },
+        coordinates: {
+            type: [Number],
+            default: [0,0]
+        }
+    },
+    found: [{
+        type: ObjectId,
+        ref: "Cache"
     }],
     favorites: [{
         type: ObjectId, 
