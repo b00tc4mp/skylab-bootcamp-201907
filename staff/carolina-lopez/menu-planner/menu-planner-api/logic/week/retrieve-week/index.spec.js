@@ -121,7 +121,12 @@ describe.skip('logic - retrieve week', () => {
             const sunday = new Day({ breakfast: id1, lunch: id2, snack: id3, dinner: id4 })
 
             // week
-            const week = new Week({ monday, tuesday, wednesday, thursday, friday, saturday, saturday, sunday })
+
+            const day = moment().date() - moment().day() + 1,
+            month = moment().month(),
+            year = moment().year()
+
+            const week = new Week({ date: new Date(year, month, day), monday, tuesday, wednesday, thursday, friday, saturday, sunday })
 
             const name = `name-${Math.random()}`
             const surname = `surname-${Math.random()}`
@@ -137,7 +142,7 @@ describe.skip('logic - retrieve week', () => {
 
     it("should succeed on correct data", async () => {
 
-        const week = await retrieveWeek(weekId)
+        const week = await retrieveWeek(userId)
 
         expect(week).to.exist
         expect(week.id).to.equal(weekId)
@@ -155,21 +160,21 @@ describe.skip('logic - retrieve week', () => {
         }
     })
 
-    it("should fail if query is not a string", () => {
-        expect(() => retrieveWeek(123)).to.throw(Error, "id with value 123 is not a string")
-    })
+    // it("should fail if query is not a string", () => {
+    //     expect(() => retrieveWeek(123)).to.throw(Error, "id with value 123 is not a string")
+    // })
 
-    it('should fail on empty id', () =>
-        expect(() =>
-            retrieveWeek('')
-        ).to.throw('id is empty or blank')
-    )
+    // it('should fail on empty id', () =>
+    //     expect(() =>
+    //         retrieveWeek('')
+    //     ).to.throw('id is empty or blank')
+    // )
 
-    it('should fail on undefined id', () =>
-        expect(() =>
-            retrieveWeek(undefined)
-        ).to.throw(`id with value undefined is not a string`)
-    )
+    // it('should fail on undefined id', () =>
+    //     expect(() =>
+    //         retrieveWeek(undefined)
+    //     ).to.throw(`id with value undefined is not a string`)
+    // )
 
     after(() => database.disconnect())
 })

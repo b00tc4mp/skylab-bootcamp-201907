@@ -30,7 +30,8 @@ router.post('/users/days', [tokenMiddleware, jsonBodyParser ] , registerDay)
 router.get('/users/days', [tokenMiddleware, jsonBodyParser ], retrieveDay) 
 
 /* WEEK */ 
+
 //router.post('/weeks', jsonBodyParser, registerWeek)
-//router.get('/weeks/:id', [tokenMiddleware, jsonBodyParser], retrieveWeek)
+router.get('/weeks/:id', [tokenMiddleware, jsonBodyParser], retrieveCurrentWeek)
 
 module.exports = router
