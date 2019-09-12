@@ -1,16 +1,15 @@
-const logic = require('../../logic')
+const listRejected = require('../../logic/poll/list-rejected')
+const bcrypt = require('bcryptjs')
 
 module.exports = (req, res) => {
 
-    const { params: { id } } = req
+    const { userId, params: { targetCityId } } = req
 
     try {
-        logic.property.retrieveAll(id)
-            .then(properties => res.json({ message: 'Properties retrieved correctly', properties }))
+        listRejected(userId, targetCityId, 'rejected')
+            .then(polls => res.json({ message: 'Rejected polls list:', polls }))
             .catch(({ message }) => res.status(404).json({ error: message }))
     } catch ({ message }) {
         res.status(404).json({ error: message })
     }
-
-} 
-
+}

@@ -121,22 +121,22 @@ it('should fail on wrong data type', () =>
     ).to.throw(`userId with value 123 is not a string`)
 )
 
- it('should fail on empty ciudad', () =>
+ it('should fail on empty targetCityId', () =>
     expect(() =>
         logic.listApproved(userId, '', 'approved')
-    ).to.throw('ciudad is empty or blank')
+    ).to.throw('targetCityId is empty or blank')
 )
 
-it('should fail on undefined ciudad', () =>
+it('should fail on undefined targetCityId', () =>
     expect(() =>
         logic.listApproved(userId, undefined, 'approved')
-    ).to.throw(`ciudad with value undefined is not a string`)
+    ).to.throw(`targetCityId with value undefined is not a string`)
 )
 
 it('should fail on wrong data type', () =>
     expect(() =>
         logic.listApproved(userId, 123, 'approved')
-    ).to.throw(`ciudad with value 123 is not a string`)
+    ).to.throw(`targetCityId with value 123 is not a string`)
 )
 
 // no me pasa estos tres tests!!!!

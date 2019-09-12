@@ -30,8 +30,6 @@ module.exports = function(cityId, fullname, address, documentId, email, imgDocId
     validate.email(email, 'email')
     validate.string(imgDocId, 'imgDocId')
     validate.string(password, 'password')
-    /* validate.array(participatedPolls, 'participatedPolls')
-    validate.array(proposedPolls, 'proposedPolls') */
     validate.string(userRole, 'userRole')
 
     return (async () => {

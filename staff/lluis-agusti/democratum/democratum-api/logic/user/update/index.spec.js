@@ -23,17 +23,17 @@ describe('logic - update citizen', () => {
         proposedPolls = `proposed-${Math.random()}`
         userRole = 'citizen'
 
-        body = {
-            cityId: `UPDATEEEEEED-${Math.random()}`,
-            fullname: `UPDATEEEEEED-${Math.random()}`,
-            address: `UPDATEEEEEED-${Math.random()}`,
-            documentId: `UPDATEEEEEED-${Math.random()}`,
-            //email: `updated@-${Math.random()}.com`,
-            imgDocId: `UPDATEEEEEED-${Math.random()}`,
-            password: `UPDATEEEEEED-${Math.random()}`,
-            participatedPolls: `UPDATEEEEEED-${Math.random()}`,
-            proposedPolls: `UPDATEEEEEED-${Math.random()}`,
-            userRole: 'citizen'
+        data = {
+            cityId1: `UPDATEEEEEED-${Math.random()}`,
+            fullname1: `UPDATEEEEEED-${Math.random()}`,
+            address1: `UPDATEEEEEED-${Math.random()}`,
+            documentId1: `UPDATEEEEEED-${Math.random()}`,
+            //email1: `updated@-${Math.random()}.com`,
+            imgDocId1: `UPDATEEEEEED-${Math.random()}`,
+            password1: `UPDATEEEEEED-${Math.random()}`,
+            participatedPolls1: `UPDATEEEEEED-${Math.random()}`,
+            proposedPolls1: `UPDATEEEEEED-${Math.random()}`,
+            userRole1: 'citizen'
         }
 
             const hash = await bcrypt.hash(password, 10)
@@ -44,7 +44,7 @@ describe('logic - update citizen', () => {
     })
 
     it('should succeed on correct data', async () =>{
-        const response = await logic.updateUser(id, body)
+        const response = await logic.updateUser(id, data)
 
             expect(response).not.to.exist
 
@@ -53,16 +53,16 @@ describe('logic - update citizen', () => {
             const user = await User.findById(id)
            
                 expect(user).to.exist
-                expect(user.cityId).to.equal(body.cityId)
-                expect(user.fullname).to.equal(body.fullname)
-                expect(user.address).to.equal(body.address)
-                expect(user.documentId).to.equal(body.documentId)
+                expect(user.cityId).to.equal(body.cityId1)
+                expect(user.fullname).to.equal(body.fullname1)
+                expect(user.address).to.equal(body.address1)
+                expect(user.documentId).to.equal(body.documentId1)
                 expect(user.email).to.equal(body.email)
-                expect(user.imgDocId).to.equal(body.imgDocId)
+                expect(user.imgDocId).to.equal(body.imgDocId1)
                 expect(user.password).to.exist
-                expect(user.participatedPolls).to.equal(body.participatedPolls)
-                expect(user.proposedPolls).to.equal(body.proposedPolls)
-                expect(user.userRole).to.equal(body.userRole)
+                expect(user.participatedPolls).to.equal(body.participatedPolls1)
+                expect(user.proposedPolls).to.equal(body.proposedPolls1)
+                expect(user.userRole).to.equal(body.userRole1)
 
 
         })
@@ -71,7 +71,7 @@ describe('logic - update citizen', () => {
     it('should fail on non-existing user', async () => {
         id = '5d5d5530531d455f75da9fF9'
         try{
-            await logic.updateUser(id, body)
+            await logic.updateUser(id, data)
              throw new Error('should not reach this point') 
 
         }catch(error){
@@ -92,12 +92,12 @@ describe('logic - update citizen', () => {
 
     it('should fail on empty id', () =>
     expect(() =>
-    logic.updateUser("", body)
+    logic.updateUser("", data)
     ).to.throw('id is empty or blank')
     )
     it('should fail on undefined id', () =>
         expect(() =>
-        logic.updateUser(undefined, body)
+        logic.updateUser(undefined, data)
         ).to.throw(`id with value undefined is not a string`)
     )
 

@@ -1,4 +1,5 @@
 const validate = require('../../../utils/validate')
+const bcrypt = require('bcryptjs')
 const { models } = require('democratum-data')
 const { User, Poll } = models
 
@@ -12,10 +13,10 @@ const { User, Poll } = models
  * @returns {Object} 
  */
 
-module.exports = function (userId, pollId, vote) {
+module.exports = function (targetPollId, userId, vote) {
 
     validate.string(userId, 'userId')
-    validate.string(pollId, 'pollId')
+    validate.string(targetPollId, 'targetPollId')
     validate.string(vote, 'vote')
     
     return (async () => {
@@ -23,15 +24,15 @@ module.exports = function (userId, pollId, vote) {
         const user = await User.findById(userId)
         if (!user) throw new Error(`user with id ${userId} does not exist`)
 
-        const poll = await Poll.findById(pollId)
-        if(!poll) throw new Error(`poll with id ${pollId} does not exist`)
+        const poll = await Poll.findById(targetPollId)
+        if(!poll) throw new Error(`poll with id ${targetPollId} does not exist`)
 
-        const alreadyVoted = user.participatedPolls.find(poll => {
-            return poll.id === pollId
+        const alreadyVoted = user.participatedPolls.find(targetPollId => {
+            return poll.id === targetPollId
         })
 
-        if(alreadyVoted) throw Error(`user already voted in poll ${pollId}`)
-        user.participatedPolls.push(pollId)
+        if(alreadyVoted) throw Error(`user already voted in poll ${targetPollId}`)
+        user.participatedPolls.push(targetPollId)
 
         if(vote === 'positive') {
             poll.positives++
@@ -43,6 +44,11 @@ module.exports = function (userId, pollId, vote) {
         await poll.save()
         await user.save()
 
-        return { pollId, positives: poll.positives, negatives: poll.negatives }
+        return { targetPollId, positives: poll.positives, negatives: poll.negatives }
     })()
 }
+
+
+
+
+// verificar alreadyVoited

@@ -10,17 +10,17 @@ const { User } = models
 *
 */
 
-module.exports = function (id) {
+module.exports = function (userId) {
 
     //validate.string(id, 'user id')
 
     return (async () => {
-        const user = await User.findOne({ _id: id }, { _id: 0, password: 0 }).lean()
+        const user = await User.findOne({ _id: userId }, { _id: 0, password: 0 }).lean()
         
-        if (!user) throw Error(`citizen ${id} not found`)
+        if (!user) throw Error(`citizen ${userId} not found`)
         
         else {
-            user.id = id
+            user.id = userId
             return await user
         }
     })()

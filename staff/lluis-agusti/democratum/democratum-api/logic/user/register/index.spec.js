@@ -41,14 +41,13 @@ describe('logic - register citizen', () => {
         expect(user.documentId).to.equal(documentId)
         expect(user.email).to.equal(email)
         expect(user.imgDocId).to.equal(imgDocId)
-        //expect(user.password).to.equal(password)
-        //expect(user.participatedPolls).to.equal(participatedPolls) // me dice que debe ser array
-        //expect(user.proposedPolls).to.equal(proposedPolls) // me dice que debe ser array
+        expect(user.participatedPolls).to.deep.equal(participatedPolls)
+        expect(user.proposedPolls).to.deep.equal(proposedPolls)
         expect(user.userRole).to.equal(userRole)
 
-        //const match = await bcrypt.compare(password, user.password)
+        const match = await bcrypt.compare(password, user.password)
 
-        //expect(match).to.be.true
+        expect(match).to.be.true
     })
 
 

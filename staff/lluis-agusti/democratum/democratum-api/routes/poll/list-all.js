@@ -1,12 +1,12 @@
-const logic = require('../../logic')
+const listAll = require('../../logic/poll/list-all')
 const bcrypt = require('bcryptjs')
 
 module.exports = (req, res) => {
 
-    const { userId, params: {id: ciudad} } = req
+    const { userId, params: { targetCityId } } = req
 
     try {
-        logic.listAll(userId, ciudad)
+        listAll(userId, targetCityId)
             .then(polls => res.json({ message: 'Polls retrieved correctly', polls }))
             .catch(({ message }) => res.status(404).json({ error: message }))
     } catch ({ message }) {

@@ -11,26 +11,23 @@ const { Poll, User } = models
  * @returns {Promise}
  */
 
-module.exports = function(userId, ciudad) {
-
+module.exports = function(userId, targetCityId) {
 
     validate.string(userId ,'userId')
-    validate.string(ciudad ,'ciudad')
+    validate.string(targetCityId ,'targetCityId')
 
     return (async () => {
-        
-        const user = await User.findById(userId)
 
+        const user = await User.findById(userId)
         if (!user) throw Error(`The user is not logged in`)
 
-        const polls = await Poll.find({cityId : ciudad})
-        
-            if (!polls) throw Error(`There are no polls to show`)
+        const polls = await Poll.find({cityId : targetCityId})
+        if (!polls) throw Error(`There are no polls to show`)
 
-            else {
+        else {
     
-                return polls
-            }
+            return polls
+        }
     })()
 }
 

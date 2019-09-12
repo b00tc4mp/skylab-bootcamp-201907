@@ -1,28 +1,32 @@
 const validate = require('../../../utils/validate')
 const { models } = require('democratum-data')
-const { Poll } = models
+const { User, Poll } = models
 
 /**
- * Updates a user .
+ * Updates body of a poll.
  * 
- * @param {string} id
- * @param {Object} data
+ * @param {string} pollId
+ * @param {Object} body
  * 
  * @returns {Promise}
  */
 
-module.exports = function (id, data) {
+module.exports = function (id, body) {
     
-    validate.string(id, 'id')
+    //validate.string(pollId, 'pollId')
     
-    async () => {
-        const poll = await Poll.findByIdAndUpdate(id, {$set:data})
+    return (async () => {
 
-        if (!poll) throw new Error(`user with id ${id} does not exist`)
+        //if (userRole !== "admin") throw new Error('You have no authorization to update the poll')
+
+        //const user = await User.findById(id)
+        //if (!user) throw new Error(`user with id ${id} does not exist`)
+
+        const poll = await Poll.findByIdAndUpdate(id, {$set:body})
+        if (!poll) throw new Error(`poll with id ${id} does not exist`)
         
-        poll.id = poll._id.toString()
+        /* poll.id = poll._id.toString()
 
-        delete poll._id
-
-    }
+        delete poll._id */
+    })()
 }

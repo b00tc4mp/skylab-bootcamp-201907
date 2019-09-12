@@ -1,4 +1,6 @@
 const logic = require('../../logic')
+const bcrypt = require('bcryptjs')
+
 
 module.exports = function(req, res) {
 
@@ -7,7 +9,7 @@ module.exports = function(req, res) {
     try {
         logic.newPoll(cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, negatives, pollStatus)
             .then(() => res.status(201).json({
-                message: 'Poll created successfully. Poll Id: ' + id 
+                message: 'Poll created successfully. Thank you :-)' 
                 }))
             .catch(({ message }) => res.status(400).json({ error: message }))
     } catch({ message }) {

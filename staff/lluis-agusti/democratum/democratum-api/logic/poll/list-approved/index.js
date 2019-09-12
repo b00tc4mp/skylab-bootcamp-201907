@@ -6,45 +6,30 @@ const { Poll, User } = models
 /**
  * 
  * @param {String} userId
- * @param {String} ciudad
- * @param {String} estado
+ * @param {String} targetCityId
+ * @param {String} status
  *
  * 
  * @returns {Promise}
  */
 
-module.exports = function(userId, ciudad, estado) {
+module.exports = function(userId, targetCityId, status) {
     
     validate.string(userId ,'userId')
-    validate.string(ciudad ,'ciudad')
-    validate.string(estado ,'estado')
+    validate.string(targetCityId ,'targetCityId')
+    validate.string(status ,'status')
 
     return (async () => {
 
-        const user = await User.findById(userId, ciudad)
-
+        const user = await User.findById(userId, targetCityId)
         if (!user) throw Error(`You have to log in to list polls`)
         
-        const polls = await Poll.find({ pollStatus : estado })
-  
-            if (!polls) throw Error(`There are no approved polls to show`)
-            else {
+        const polls = await Poll.find({ pollStatus : status })
+        if (!polls) throw Error(`There are no approved polls to show`)
+        else {
 
-            return polls
+        return polls
 
-            }
+        }
     })()
 }
-
-/*
-
- module.exports = function() {
-    
-    return (async () => {
-        const polls = await Poll.find( {},{ __v: 0 }).sort({_id:1}).lean() 
-        if (!polls) throw Error(`there are no polls`)   
-        
-        return polls
-    })()
-
-*/

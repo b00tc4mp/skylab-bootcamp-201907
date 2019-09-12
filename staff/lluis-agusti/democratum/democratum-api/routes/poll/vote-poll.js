@@ -1,12 +1,15 @@
 const votePoll = require('../../logic/poll/vote-poll')
+const bcrypt = require('bcryptjs')
 
-module.exports = function(req, res) {
-    debugger
-    const { body: { vote }, params: { id, pollId } } = req
+module.exports = (req, res) => {
+
+    // const { body: { vote }, params: { pollId }, userId } = req
+
+    const { params: { targetPollId }, userId, vote } = req
 
     try {
-        votePoll(id, pollId, vote)
-            .then(() => res.status(201).json({ message: 'Vote ok'}))
+        votePoll(targetPollId, userId, vote)
+            .then(() => res.status(201).json({ message: 'Thank you for your vote.'}))
             .catch(({ message }) => res.status(400).json({ error: message }))
     } catch({ message }) {
         res.status(400).json({ error: message })

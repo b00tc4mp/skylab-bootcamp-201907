@@ -1,6 +1,6 @@
 const validate = require('../../../utils/validate')
 const { models } = require('democratum-data')
-const { Poll } = models
+const { User, Poll } = models
 
 /**
  * Creates a new poll. Users with the role 'citizen' only can create polls with status 'pending'.
@@ -25,7 +25,7 @@ const { Poll } = models
 
 
 
-module.exports = function(cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, negatives, pollStatus, id) {
+module.exports = function(cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, negatives, pollStatus) {
 
     validate.string(cityId, 'cityId')
     validate.string(authorId, 'authorId')
@@ -41,15 +41,16 @@ module.exports = function(cityId, authorId, question, optionA, optionB, descript
     
     return (async () => {
 
-        const poll = await Poll.findOne({ id })
-        
-        //if (poll) throw Error('Poll already exists.')
+        let poll = await Poll.findOne({ question })
+        if (poll) throw Error('Poll already exists.')
 
         // Hauria de buscar l'usuari i verificar que es admin --> status approved
         // Si no es admin el pollStatus queda amb pending
 
-        const result = await Poll.create ({ cityId, authorId, question, optionA, optionB, description, expiryDate,imagePoll, positives, negatives, pollStatus, id })
+        poll = new Poll ({ cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, negatives, pollStatus })
 
-        return result
+        await poll.save()
+
+        return poll
     })()
 }

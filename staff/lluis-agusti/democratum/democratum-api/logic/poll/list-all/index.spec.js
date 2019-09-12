@@ -21,7 +21,7 @@ describe('logic - list all polls of a city', () => {
 
     beforeEach(async () => {
 
-        //await Poll.deleteMany()
+        await Poll.deleteMany()
 
         cityId1 = '5d70f41b7d4edc12334851db'
         authorId1 = `LISTALL1-${Math.random()}`
@@ -74,11 +74,11 @@ describe('logic - list all polls of a city', () => {
 
     it('should succeed on correct data', async () =>{
         const polls = await logic.listAll(userId, '5d70f41b7d4edc12334851db')
-                debugger
+        
                 expect(polls).to.exist
-                /* //expect(polls.length).to.equal(2)
                 expect(polls[0]).to.exist
-                debugger
+
+
                 expect(polls[0].cityId).to.equal(cityId1)
                 expect(polls[0].authorId).to.equal(authorId1)
                 expect(polls[0].question).to.equal(question1)
@@ -89,7 +89,8 @@ describe('logic - list all polls of a city', () => {
                 expect(polls[0].imagePoll).to.equal(imagePoll1)
                 expect(polls[0].positives).to.equal(positives1)
                 expect(polls[0].negatives).to.equal(negatives1)
-                expect(polls[0].pollStatus).to.equal(pollStatus1) */
+                expect(polls[0].pollStatus).to.equal(pollStatus1)
+
 
                 // no ho entenc!!!
 
@@ -125,22 +126,22 @@ it('should fail on wrong data type', () =>
     ).to.throw(`userId with value 123 is not a string`)
 )
 
-it('should fail on empty ciudad', () =>
+it('should fail on empty targetCityId', () =>
     expect(() =>
         logic.listAll(userId, '')
-    ).to.throw('ciudad is empty or blank')
+    ).to.throw('targetCityId is empty or blank')
 )
 
-it('should fail on undefined ciudad', () =>
+it('should fail on undefined targetCityId', () =>
     expect(() =>
         logic.listAll(userId, undefined)
-    ).to.throw(`ciudad with value undefined is not a string`)
+    ).to.throw(`targetCityId with value undefined is not a string`)
 )
 
 it('should fail on wrong data type', () =>
     expect(() =>
         logic.listAll(userId, 123)
-    ).to.throw(`ciudad with value 123 is not a string`)
+    ).to.throw(`targetCityId with value 123 is not a string`)
 )
     
    
