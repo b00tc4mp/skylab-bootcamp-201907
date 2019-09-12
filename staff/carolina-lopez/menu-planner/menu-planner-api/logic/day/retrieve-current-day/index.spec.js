@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const { expect } = require('chai')
-const retrieveDay = require('.')
+const retrieveCurrentDay = require('.')
 const { database, models: { Recipe, Day, Week, Ingredient, User } } = require('menu-planner-data')
 const { random } = require('menu-planner-utils')
 const moment = require('moment')
@@ -154,13 +154,12 @@ describe('logic - retrieve day', () => {
 
             const { id } = await User.create({ name, surname, email, password, weeks: [week] })
             userId = id
-
         })()
     
     })
 
-    it("should retrieve a day on correct data", async () => {
-        const day = await retrieveDay(userId)
+    it("should retrieve a day on correct data", async () => { 
+        const day = await retrieveCurrentDay(userId)
 
         expect(day).to.exist
         

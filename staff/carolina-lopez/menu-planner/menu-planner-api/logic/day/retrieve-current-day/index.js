@@ -62,12 +62,13 @@ module.exports = function (userId) {
         const { breakfast: breakfastId, lunch: lunchId, snack: snackId, dinner: dinnerId } = day
 
         const breakfast = await Recipe.findById(breakfastId).lean()
+        
         if (!breakfast) throw Error(`recipe with id ${breakfastId} not found`)
         sanitize.id(breakfast)
 
         const lunch = await Recipe.findById(lunchId).lean()
         if (!lunch) throw Error(`recipe with id ${lunchId} not found`)
-        sanitize.id(lunch)
+        sanitize.id(lunch) 
 
         const snack = await Recipe.findById(snackId).lean()
         if (!snack) throw Error(`recipe with id ${snackId} not found`)

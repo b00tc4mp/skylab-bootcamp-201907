@@ -2,12 +2,14 @@ require('dotenv').config()
 
 const { expect } = require('chai')
 const retrieveWeek = require('.')
-const { database, models: { Recipe, Day, Week } } = require('menu-planner-data')
+const { database, models: { Recipe, Day, Week, User } } = require('menu-planner-data')
+const moment = require('moment')
+
 
 const { env: { DB_URL_TEST } } = process
 
 describe.skip('logic - retrieve week', () => {   
-    let userId
+    let userId, weekId
 
     let title1, image1, description1, category1, id1
     let title2, image2, description2, category2, id2
@@ -140,6 +142,7 @@ describe.skip('logic - retrieve week', () => {
         })()
     })
 
+
     it("should succeed on correct data", async () => {
 
         const week = await retrieveWeek(userId)
@@ -150,15 +153,15 @@ describe.skip('logic - retrieve week', () => {
     })
 
 
-    it("should fail on non existant id", async () => {
-        id = "5d740a810a6041a5ae918901"
-        try {
-            await retrieveWeek(weekId)
-        } catch ({ message }) {
-            expect(message).to.exist
-            expect(message).to.equal(`No weeks found with id ${weekId}`)
-        }
-    })
+    // it("should fail on non existant id", async () => {
+    //     id = "5d740a810a6041a5ae918901"
+    //     try {
+    //         await retrieveWeek(weekId)
+    //     } catch ({ message }) {
+    //         expect(message).to.exist
+    //         expect(message).to.equal(`No weeks found with id ${weekId}`)
+    //     }
+    // })
 
     // it("should fail if query is not a string", () => {
     //     expect(() => retrieveWeek(123)).to.throw(Error, "id with value 123 is not a string")
