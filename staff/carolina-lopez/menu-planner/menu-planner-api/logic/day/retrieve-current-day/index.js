@@ -1,5 +1,5 @@
 const { validate } = require('menu-planner-utils')
-const { models } = require('menu-planner-data')
+const { models, sanitize } = require('menu-planner-data')
 const moment = require('moment')
 const { User, Recipe } = models
 /**
@@ -10,7 +10,6 @@ const { User, Recipe } = models
  * @returns {Promise}
 */
 module.exports = function (userId) {
-    debugger
     validate.string(userId, 'userId')
 
     return (async () => {
@@ -27,9 +26,11 @@ module.exports = function (userId) {
         const { weeks } = user
 
         let week = weeks.find(week => moment(week.date).isSame(date))
-        debugger
+
+        if (!week) throw Error(`week does not exist for user with id ${userId}`)
 
         const dayOftheWeek = moment().day()
+
         let day
         switch (dayOftheWeek) {
             case 0:
@@ -59,19 +60,23 @@ module.exports = function (userId) {
         }
 
         const { breakfast: breakfastId, lunch: lunchId, snack: snackId, dinner: dinnerId } = day
-        if (!week) throw Error(`week does not exist for user with id ${userId}`)
 
         const breakfast = await Recipe.findById(breakfastId).lean()
+        
         if (!breakfast) throw Error(`recipe with id ${breakfastId} not found`)
+        sanitize.id(breakfast)
 
         const lunch = await Recipe.findById(lunchId).lean()
         if (!lunch) throw Error(`recipe with id ${lunchId} not found`)
+        sanitize.id(lunch) 
 
         const snack = await Recipe.findById(snackId).lean()
         if (!snack) throw Error(`recipe with id ${snackId} not found`)
+        sanitize.id(snack)
 
         const dinner = await Recipe.findById(dinnerId).lean()
         if (!dinner) throw Error(`recipe with id ${dinnerId} not found`)
+        sanitize.id(dinner)
         
         return { breakfast, lunch, snack, dinner }
     })()

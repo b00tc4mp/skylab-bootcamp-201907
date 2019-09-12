@@ -1,16 +1,17 @@
-const { retrieveDay } = require('../../logic')
+const { retrieveCurrentDay } = require('../../logic')
 
 module.exports = async (req, res) => {
 
-    const { userId } = req
+    const { userId , params: { id }  } = req
 
     try { 
-        const day = await retrieveDay(userId)
-            res.json({ message: 'day retrieved correctly', day })
+        day = id
+        const day = await retrieveCurrentDay(userId)
+        res.json({ message: 'day retrieved correctly', day })
     } catch ({ message }) {
         res.status(404).json({ error: message })
     }
 
-} 
+}
 
 

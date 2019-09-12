@@ -1,4 +1,4 @@
-const { models: { User, Day, Recipe } } = require('menu-planner-data')
+const { models: { User, Day, Recipe, Week } } = require('menu-planner-data')
 const { validate } = require('menu-planner-utils')
 const moment = require('moment')
 
@@ -14,7 +14,7 @@ const moment = require('moment')
  * 
  * @returns {Promise}
  */
-module.exports = function (userId, day, breakfast, lunch, snack, dinner) { 
+module.exports = function (userId, day, breakfast, lunch, snack, dinner) {
     //VALIDATE TODO STRING
     validate.string(userId, 'userId')
     //validate.string(day, 'day')
@@ -22,22 +22,25 @@ module.exports = function (userId, day, breakfast, lunch, snack, dinner) {
     // TODO find user by id, if not found then error, otherwise proceed
     // TODO check weeks and find matching week with current date (new Date) if no week, then Error, otherwise proceed to create day in that week
 
-    return (async () => { 
+    return (async () => {
         const user = await User.findById(userId)
-        if(!user) throw new Error(`user with id ${userId} not found`)
+        if (!user) throw new Error(`user with id ${userId} not found`)
 
         // calculate current week monday exact date
         const __day = moment().date() - moment().day() + 1,
-        month = moment().month(),
-        year = moment().year()
+            month = moment().month(),
+            year = moment().year()
 
         const currentWeekMondayDate = new Date(year, month, __day)
 
         const { weeks } = user
 
-        const week = weeks.find(week => moment(week.date).isSame(currentWeekMondayDate))
+        let week = weeks.find(week => moment(week.date).isSame(currentWeekMondayDate))
 
-        if (!week) throw Error(`current week does not exist for user with id ${userId}`)
+        if (!week) {
+            week = new Week({ date: currentWeekMondayDate })
+            user.weeks.push(week)
+        }
 
         const _breakfast = await Recipe.findById(breakfast)
         if (!_breakfast) throw Error(`recipe with id ${breakfast} not found`)
@@ -53,16 +56,20 @@ module.exports = function (userId, day, breakfast, lunch, snack, dinner) {
 
         let _day = week[day]
 
-        if (!_day) {
-            _day = new Day()
-
-            week[day] = _day
-        }
+        if (!_day) _day = new Day()
 
         _day.breakfast = breakfast
         _day.lunch = lunch
         _day.snack = snack
         _day.dinner = dinner
+
+        week[day] = _day
+
+        user.weeks = user.weeks.map(__week => {
+            if (moment(week.date).isSame(currentWeekMondayDate))
+                __week = week
+            return __week
+        })
 
         await user.save()
     })()

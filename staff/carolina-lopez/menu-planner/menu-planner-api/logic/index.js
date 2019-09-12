@@ -9,7 +9,7 @@ module.exports = {
     retrieveRecipe: require('./recipe/retrieve'),
 
     registerDay: require('./day/register-day'),
-    retrieveDay: require('./day/retrieve'),
+    retrieveCurrentDay: require('./day/retrieve-current-day'),
 
-    //retrieveWeek: require('./week/retrieve')
+    retrieveCurrentWeek: require('./week/retrieve-current-week')
 }

@@ -1,4 +1,4 @@
 module.exports = {
     registerDay : require('./register'),
-    retrieveDay : require('./retrieve')
+    retrieveCurrentDay : require('./retrieve')
 }
