@@ -2,7 +2,7 @@ const { searchRecipe } = require('../../logic')
 
 module.exports = async (req, res) => {
 
-  const { params :  category  } = req
+  const { params :  { category } } = req
 
   try {
     const recipes = await searchRecipe(category)

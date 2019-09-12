@@ -8,9 +8,8 @@ module.exports = {
     searchRecipe: require('./recipe/search'),
     retrieveRecipe: require('./recipe/retrieve'),
 
-    registerDay: require('./day/register'),
-    retrieveDay: require('./day/retrieve'),
+    //registerDay: require('./day/register'),
+    //retrieveDay: require('./day/retrieve'),
 
-    registerWeek: require('./week/register'),
-    retrieveWeek: require('./week/retrieve')
+    //retrieveWeek: require('./week/retrieve')
 }

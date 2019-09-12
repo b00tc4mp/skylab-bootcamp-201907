@@ -181,56 +181,47 @@ describe('logic - register day', () => {
         expect(day.dinner.toString()).to.equal(id1)
     })
 
-    // it("should fail on non existant id", async () => {
-    //   id = "5d740a810a6041a5ae918901"
-    //   try {
-    //     await retrieveRecipe(id)
-    //   } catch({message}) {
-    //     expect(message).to.exist
-    //     expect(message).to.equal(`No recipes found with id ${id}`)
-    //   }
-    // })
+    it("should fail on non existant id", async () => {
+      id1 = "5d740a810a6041a5ae918901"
+      const _day = random.value('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday')
 
-    // it("should fail if query is not a string", () => {
-    //      expect(() => retrieveRecipe(123)).to.throw(Error, "id with value 123 is not a string")
-    // })
+      try {
+        await registerDay(userId, _day, id4, id3, id2, id1)
+      } catch({message}) {
+        expect(message).to.exist
+        expect(message).to.equal(`recipe with id ${id1} not found`)
+      }
+    })
 
-    // it('should fail on empty id', () => 
-    //     expect(() => 
-    //         retrieveRecipe('')
-    //     ).to.throw('id is empty or blank')
-    // )
+    it("should fail if query is not a string", () => {
+        const _day = random.value('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday')
 
-    // it('should fail on undefined id', () => 
-    //     expect(() => 
-    //         retrieveRecipe(undefined)
-    //     ).to.throw(`id with value undefined is not a string`)
-    // )
+         expect(() => registerDay(123, _day, id4, id3, id2, id1 )).to.throw(Error, "userId with value 123 is not a string")
+    })
+
+    it('should fail on empty id', () => {
+        const _day = random.value('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday')
+        
+        expect(() => 
+            registerDay('', _day, id4, id3, id2, id1)
+        ).to.throw('userId is empty or blank')
+    })
+
+    it('should fail on undefined id', () => {
+        const _day = random.value('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday')
+
+        expect(() => 
+            registerDay(undefined, _day, id4, id3, id2, id1)
+        ).to.throw(`userId with value undefined is not a string`)
+    })
+
+    it('should fail on empty day', () => {
+    const _day = ''
+    
+        expect(() => 
+            registerDay(userId, _day , id4, id3, id2, id1)
+    ).to.throw('day is empty or blank')
+    })
 
     after(() => database.disconnect())
 })
-
-
-//     /* Following 3 tests 
-//     for every parameter passed to logic */
-
-//     it('should fail on empty breakfast', () => 
-//         expect(() => 
-//         registerDay(id, ' ', lunch, snack, dinner)
-//     ).to.throw('breakfast is empty or blank')
-//     )
-
-//      it('should fail on undefined breakfast', () => 
-//         expect(() => 
-//         registerDay(id, undefined, lunch, snack, dinner)
-//     ).to.throw(`breakfast with value undefined is not a string`)
-//     )
-
-//      it('should fail on wrong data type', () => 
-//         expect(() => 
-//                registerDay(id, 123, lunch, snack, dinner)
-//     ).to.throw(`breakfast with value 123 is not a string`)
-//     )
-
-//     after(() => database.disconnect())
-// })

@@ -16,6 +16,8 @@ const moment = require('moment')
  */
 module.exports = function (userId, day, breakfast, lunch, snack, dinner) {
     //VALIDATE TODO STRING
+    validate.string(userId, 'userId')
+    validate.string(day, 'day')
 
     // TODO find user by id, if not found then error, otherwise proceed
     // TODO check weeks and find matching week with current date (new Date) if no week, then Error, otherwise proceed to create day in that week

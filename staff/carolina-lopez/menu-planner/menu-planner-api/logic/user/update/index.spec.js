@@ -27,15 +27,15 @@ describe('logic - update user', () => {
 
         await User.deleteMany()
         const user = await User.create({ name, surname, email, password })
-        id = user.id
+        userId = user.id
     })
 
     it('should succeed on correct data', async () => {
-        const result = await updateUser(id, body)
+        const result = await updateUser(userId, body)
         
         expect(result).not.to.exist
 
-        const user = await User.findById(id)
+        const user = await User.findById(userId)
             expect(user).to.exist
             expect(user.name).to.equal(body.name)     
             expect(user.surname).to.equal(body.surname)

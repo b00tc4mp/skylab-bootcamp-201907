@@ -18,7 +18,6 @@ module.exports = function (userId) {
 
         // TODO check user is defined, otherwise error (user not found)
 
-        debugger
 
         // calculate current week monday exact date
         const day = moment().date() - moment().day() + 1,

@@ -4,15 +4,16 @@ const { Recipe } = models
 /**
  * Searches the DB a recipe by ID
  * 
- * @param {string} category 
+ * @param {string} id 
  * 
  * @returns {Promise}
 */
-module.exports = function (id) {
+module.exports = function (id) { 
+    
     validate.string(id, 'id')
 
     return (async () => {
-        const recipe = await Recipe.findById(id).lean()
+        const recipe = await Recipe.findOne({_id: id}).lean()
 
         if (!recipe) throw Error(`No recipes found with id ${id}`)
 
