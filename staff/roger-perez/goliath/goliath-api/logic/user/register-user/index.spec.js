@@ -149,6 +149,5 @@ describe('logic - register user', () => {
     ).to.throw(`password with value 123 is not a string`)
     )
 
-    // after(() => client.close())
     after(() => mongoose.disconnect())
 })

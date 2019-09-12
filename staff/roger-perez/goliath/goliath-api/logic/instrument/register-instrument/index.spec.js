@@ -1,154 +1,96 @@
 const { expect } = require('chai')
 const logic = require('../../')
-const { User } = require('../../../data')
+const { Instrument } = require('../../../data')
+const { value } = require('../../../utils/random')
 const mongoose = require('mongoose')
 
-describe('logic - register user', () => {
+describe('logic - register instrument', () => {
 
     before(() => mongoose.connect('mongodb://localhost/goliath-api-test', { useNewUrlParser: true }))
 
-    let name, surname, instrument, description, email, password
+    let name, style, audio
 
     beforeEach(() => {
         name = `name-${Math.random()}`
-        surname = `surname-${Math.random()}`
-        instrument = `instrument-${Math.random()}`
-        description = `description-${Math.random()}`
-        email = `email-${Math.random()}@domain.com`
-        password = `password-${Math.random()}`
+        style = value('rock',"electro",'jazz')
+        audio = `audio-${Math.random()}`
+     
 
        
-        return User.deleteMany()
+        return Instrument.deleteMany()
     })
 
     it('should succeed on correct data', () =>
-        logic.registerUser(name, surname, instrument, description, email, password)
+        logic.registerInstrument(name, style, audio)
             .then(result => {
                 expect(result).not.to.exist
 
-                return User.findOne({ email })
+                return Instrument.findOne({ name })
             })
-            .then(user => {
-                expect(user).to.exist
-                expect(user.name).to.equal(name)
-                expect(user.surname).to.equal(surname)
-                expect(user.instrument).to.equal(instrument)
-                expect(user.description).to.equal(description)
-                expect(user.email).to.equal(email)
-                expect(user.password).to.equal(password)
+            .then(instrument => {
+                expect(instrument).to.exist
+                expect(instrument.name).to.equal(name)
+                expect(instrument.style).to.equal(style)
+                expect(instrument.audio).to.equal(audio)
             })
     )
 
     // name
     it('should fail on empty name', () => 
         expect(() => 
-               logic.registerUser('', surname, instrument,description, email, password)
+               logic.registerInstrument('', style, audio)
     ).to.throw('name is empty or blank')
     )
 
      it('should fail on undefined name', () => 
         expect(() => 
-               logic.registerUser(undefined, surname, instrument,description, email, password)
+               logic.registerInstrument(undefined, style, audio)
     ).to.throw(`name with value undefined is not a string`)
     )
 
      it('should fail on wrong name data type', () => 
         expect(() => 
-               logic.registerUser(123, surname, instrument,description, email, password)
+               logic.registerInstrument(123, style, audio)
     ).to.throw(`name with value 123 is not a string`)
     )
 
-    // surname
-    it('should fail on empty surname', () => 
+    // style
+    it('should fail on empty style', () => 
         expect(() => 
-               logic.registerUser(name, '',description, email, password)
-    ).to.throw('surname is empty or blank')
+               logic.registerInstrument(name, '', audio)
+    ).to.throw('style is empty or blank')
     )
 
-     it('should fail on undefined surname', () => 
+     it('should fail on undefined style', () => 
         expect(() => 
-               logic.registerUser(name, undefined,description, email, password)
-    ).to.throw(`surname with value undefined is not a string`)
+               logic.registerInstrument(name, undefined, audio)
+    ).to.throw(`style with value undefined is not a string`)
     )
 
-     it('should fail on wrong surname data type', () => 
+     it('should fail on wrong style data type', () => 
         expect(() => 
-               logic.registerUser(name, 123,description, email, password)
-    ).to.throw(`surname with value 123 is not a string`)
+               logic.registerInstrument(name, 123, audio)
+    ).to.throw(`style with value 123 is not a string`)
     )
 
    
-    // instrument
-    it('should fail on empty instrument', () => 
+    // audio
+    it('should fail on empty audio', () => 
         expect(() => 
-            logic.registerUser(name,surname, '',description, email, password)
-    ).to.throw('instrument is empty or blank')
+            logic.registerInstrument(name,style, '')
+    ).to.throw('audio is empty or blank')
     )
 
-     it('should fail on undefined instrument', () => 
+     it('should fail on undefined audio', () => 
         expect(() => 
-               logic.registerUser(name,surname, undefined,description, email, password)
-    ).to.throw(`instrument with value undefined is not a string`)
+               logic.registerInstrument(name,style, undefined)
+    ).to.throw(`audio with value undefined is not a string`)
     )
 
-     it('should fail on wrong instrument data type', () => 
+     it('should fail on wrong audio data type', () => 
         expect(() => 
-               logic.registerUser(name, surname, 123,description, email, password)
-    ).to.throw(`instrument with value 123 is not a string`)
+               logic.registerInstrument(name, style, 123)
+    ).to.throw(`audio with value 123 is not a string`)
     )
 
-    // description
-    it('should fail on empty description', () => 
-        expect(() => 
-               logic.registerUser(name, surname,instrument,'', email, password)
-    ).to.throw('description is empty or blank')
-    )
-
-     it('should fail on undefined description', () => 
-        expect(() => 
-               logic.registerUser(name, surname,instrument,undefined, email, password)
-    ).to.throw(`description with value undefined is not a string`)
-    )
-
-     it('should fail on wrong description data type', () => 
-        expect(() => 
-               logic.registerUser(name, surname, instrument,123, email, password)
-    ).to.throw(`description with value 123 is not a string`)
-    )
-
-
-    // email
-     it('should fail on undefined email', () => 
-        expect(() => 
-               logic.registerUser(name, surname, instrument,description, undefined, password)
-    ).to.throw(`email with value undefined is not a string`)
-    )
-
-     it('should fail on wrong email data type', () => 
-        expect(() => 
-               logic.registerUser(name, surname, instrument,description, 123, password)
-    ).to.throw(`email with value 123 is not a string`)
-    )
-
-    // password
-    it('should fail on empty password', () => 
-        expect(() => 
-               logic.registerUser(name, surname, instrument,description, email, '')
-    ).to.throw('password is empty or blank')
-    )
-
-     it('should fail on undefined password', () => 
-        expect(() => 
-               logic.registerUser(name, surname, instrument,description, email, undefined)
-    ).to.throw(`password with value undefined is not a string`)
-    )
-
-     it('should fail on wrong password data type', () => 
-        expect(() => 
-               logic.registerUser(name, surname, instrument,description, email, 123)
-    ).to.throw(`password with value 123 is not a string`)
-    )
-
-    // after(() => client.close())
-    after(() => mongoose.disconnect())
 })
