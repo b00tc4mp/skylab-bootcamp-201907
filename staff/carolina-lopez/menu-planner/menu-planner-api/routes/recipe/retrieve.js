@@ -2,7 +2,7 @@ const { retrieveRecipe } = require('../../logic')
 
 module.exports = async (req, res) => {
 
-    const { params: id } = req
+    const { params: { id }} = req
 
     try { 
         const recipe = await retrieveRecipe(id)

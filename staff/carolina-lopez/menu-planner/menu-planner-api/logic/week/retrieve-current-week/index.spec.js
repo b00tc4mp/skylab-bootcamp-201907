@@ -165,8 +165,6 @@ describe('logic - retrieve current week', () => {
 
         const week = await retrieveCurrentWeek(userId)
 
-        debugger
-
         expect(week).to.exist
         expect(week.id).to.be.a('string')
         expect(week.id).to.have.lengthOf(24)

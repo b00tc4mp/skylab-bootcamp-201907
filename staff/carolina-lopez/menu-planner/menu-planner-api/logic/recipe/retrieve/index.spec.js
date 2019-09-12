@@ -14,6 +14,7 @@ describe('logic - retrieve recipe', () => {
 
     beforeEach(() => {
         return (async () => {
+            
             const typeArray = ['breakfast', 'lunch', 'snack', 'dinner']
             //let title, image, description, category
 
@@ -49,14 +50,13 @@ describe('logic - retrieve recipe', () => {
 
                 items.push({ ingredient, quantity, description: itemDescription })
             }
-
             const recipe = await Recipe.create({ title, image, description, category, items })
 
             id = recipe._id.toString()
         })()
     })
 
-    it("should retrieve a recipe on correct data", async () => {
+    it("should retrieve a recipe on correct data", async () => { debugger
         const recipe = await retrieveRecipe(id)
 
         expect(recipe).to.exist

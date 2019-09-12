@@ -2,13 +2,13 @@ require('dotenv').config()
 
 const { expect } = require('chai')
 const retrieveDay = require('.')
-const { database, models: { Recipe, Day, Week, Ingredient,User }} = require('menu-planner-data')
+const { database, models: { Recipe, Day, Week, Ingredient, User }} = require('menu-planner-data')
 const { random } = require('menu-planner-utils')
 const moment = require('moment')
 
 const { env: { DB_URL_TEST } } = process
 
-describe.only('logic - retrieve day', () => {
+describe('logic - retrieve day', () => {
     
     before(() => database.connect(DB_URL_TEST))
 
@@ -161,7 +161,6 @@ describe.only('logic - retrieve day', () => {
         })()
     })
 
-       debugger        
 
     it("should retrieve a day on correct data", async () => {
 

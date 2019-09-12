@@ -11,6 +11,7 @@ const { Recipe, Ingredient } = models
 module.exports = function (categorySearch) {
     
     validate.string(categorySearch, 'category')
+    
     return (async () => {
         const recipes = await Recipe.find({category: categorySearch}, { __v: 0 }).lean()
         if (recipes.length === 0) throw Error(`No recipes found for query ${category}`)
