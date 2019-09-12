@@ -14,15 +14,15 @@ const moment = require('moment')
  * 
  * @returns {Promise}
  */
-module.exports = function (userId, day, breakfast, lunch, snack, dinner) {
+module.exports = function (userId, day, breakfast, lunch, snack, dinner) { 
     //VALIDATE TODO STRING
     validate.string(userId, 'userId')
-    validate.string(day, 'day')
+    //validate.string(day, 'day')
 
     // TODO find user by id, if not found then error, otherwise proceed
     // TODO check weeks and find matching week with current date (new Date) if no week, then Error, otherwise proceed to create day in that week
 
-    return (async () => {
+    return (async () => { 
         const user = await User.findById(userId)
         if(!user) throw new Error(`user with id ${userId} not found`)
 
@@ -30,7 +30,7 @@ module.exports = function (userId, day, breakfast, lunch, snack, dinner) {
         const __day = moment().date() - moment().day() + 1,
         month = moment().month(),
         year = moment().year()
-
+debugger
         const currentWeekMondayDate = new Date(year, month, __day)
 
         const { weeks } = user

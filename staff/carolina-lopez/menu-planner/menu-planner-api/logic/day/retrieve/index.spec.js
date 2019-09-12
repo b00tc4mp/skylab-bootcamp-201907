@@ -2,28 +2,29 @@ require('dotenv').config()
 
 const { expect } = require('chai')
 const retrieveDay = require('.')
-const { database, models: { Recipe, Day, Week, Ingredient, User }} = require('menu-planner-data')
+const { database, models: { Recipe, Day, Week, Ingredient, User } } = require('menu-planner-data')
 const { random } = require('menu-planner-utils')
 const moment = require('moment')
 
 const { env: { DB_URL_TEST } } = process
 
-describe('logic - retrieve day', () => {
-    
+describe.only('logic - retrieve day', () => {
+
     before(() => database.connect(DB_URL_TEST))
 
-    let currentWeek, userId
+    let week, userId, id1, id2, id3, id4
 
     beforeEach(() => {
         return (async () => {
-            let title1, image1, description1, category1, id1
-            let title2, image2, description2, category2, id2
-            let title3, image3, description3, category3, id3
-            let title4, image4, description4, category4, id4
-
+            await User.deleteMany()
             await Ingredient.deleteMany()
 
+            //Ingredients and Recipe creation
             const ingredientIds = []
+            let title1, image1, description1, category1
+            let title2, image2, description2, category2
+            let title3, image3, description3, category3
+            let title4, image4, description4, category4
 
             for (let i = 0; i < 10; i++) {
                 const ingredient = {
@@ -122,7 +123,7 @@ describe('logic - retrieve day', () => {
             const recipe4 = await Recipe.create({ title: title4, image: image4, description: description4, category: category4, items: items4 })
             id4 = recipe4._id.toString()
 
-            // day 
+            // Creation of Days 
             const monday = new Day({ breakfast: id1, lunch: id2, snack: id3, dinner: id4 })
 
             const tuesday = new Day({ breakfast: id1, lunch: id2, snack: id3, dinner: id4 })
@@ -143,31 +144,32 @@ describe('logic - retrieve day', () => {
                 year = moment().year()
 
             // week
-            currentWeek = new Week({ date: new Date(year, month, day), monday, tuesday, wednesday, thursday, friday, saturday, saturday, sunday })
-            const pastWeek1 = new Week({ date: new Date(year - 1, month, day) })
-            const pastWeek2 = new Week({ date: new Date(year - 2, month, day) })
-            const pastWeek3 = new Week({ date: new Date(year - 3, month, day) })
-            const pastWeek4 = new Week({ date: new Date(year - 4, month, day) })
+            week = new Week({ date: new Date(year, month, day), monday, tuesday, wednesday, thursday, friday, saturday, sunday })
 
+            //user creation
             const name = `name-${Math.random()}`
             const surname = `surname-${Math.random()}`
             const email = `email-${Math.random()}@mail.com`
             const password = `password-${Math.random()}`
 
-            await User.deleteMany()
-
-            const { id } = await User.create({ name, surname, email, password, weeks: [currentWeek, pastWeek1, pastWeek2, pastWeek3, pastWeek4] })
+            const { id } = await User.create({ name, surname, email, password, weeks: [week] })
             userId = id
+
         })()
+    
     })
 
 
     it("should retrieve a day on correct data", async () => {
 
         const day = await retrieveDay(userId)
-        
+
         expect(day).to.exist
-        expect(day.id).to.equal(day)
+        debugger
+        expect(day.breakfast._id.toString()).to.equal(id1)
+        expect(day.lunch._id.toString()).to.equal(id2)
+        expect(day.snack._id.toString()).to.equal(id3)
+        expect(day.dinner._id.toString()).to.equal(id4)
     })
 
     // it("should fail on non existant id", async () => {

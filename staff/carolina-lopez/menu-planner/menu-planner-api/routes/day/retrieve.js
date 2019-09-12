@@ -2,13 +2,15 @@ const { retrieveDay } = require('../../logic')
 
 module.exports = async (req, res) => {
 
-    const { params: id } = req
+    const { userId } = req
 
     try { 
-        const day = await retrieveDay(id)
+        const day = await retrieveDay(userId)
             res.json({ message: 'day retrieved correctly', day })
     } catch ({ message }) {
         res.status(404).json({ error: message })
     }
 
 } 
+
+
