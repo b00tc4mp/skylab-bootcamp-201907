@@ -13,6 +13,7 @@ import { withRouter, Route } from 'react-router-dom'
 const { token } = sessionStorage
 
 function App({ history }) {
+  const [user, setUser] = useState(null)
   const [name, setName] = useState(null)
   const [code, setCode] = useState(null)
   const [nameLeague, setNameLeague] = useState(null)
@@ -28,7 +29,7 @@ function App({ history }) {
 
   return (
       <div className="App">
-        <Context.Provider value={{name, setName, code, setCode, nameLeague, setNameLeague, leagueId, setLeagueId,  player, setPlayer, teamName, setTeamName, teamId, setTeamId, teams, setTeams, existLeague, setExistLeague, lineup, setLineup, setPlayerLineup, playerLineup }} >
+        <Context.Provider value={{name, setName, user, setUser, code, setCode, nameLeague, setNameLeague, leagueId, setLeagueId,  player, setPlayer, teamName, setTeamName, teamId, setTeamId, teams, setTeams, existLeague, setExistLeague, lineup, setLineup, setPlayerLineup, playerLineup }} >
 
           <Route exact path="/" render={() => logic.isUserLogged() ? history.push('/home') : <Landing /> } />
 

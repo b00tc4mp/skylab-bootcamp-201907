@@ -18,6 +18,7 @@ export default {
 
     set userCredentials(token){
         sessionStorage.token = token
+       
     },
     get userCredentials(){
         return sessionStorage.token

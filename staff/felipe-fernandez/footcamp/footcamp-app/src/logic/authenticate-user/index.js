@@ -16,14 +16,14 @@ export default function (email, password) {
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({email, password})
         })
-        const responseJson =response.json()
+        const responseJson = await response.json()
         
         if (response.status !== 200) {
             const { error } = await responseJson
             throw Error(error)
         }
         else {
-            return await responseJson
+            return  responseJson
         }
             
     })()

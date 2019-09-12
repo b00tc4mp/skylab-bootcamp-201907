@@ -5,26 +5,31 @@ import Context from '../Context'
 
 function Login(props) {
 
-  const { existLeague, setExistLeague } = useContext(Context)
+  const { user, setUser, existLeague, setExistLeague } = useContext(Context)
   const { history } = props
 
-  function handleLogin(email, password) 
-  {
+
+
+  function handleLogin(email, password)  {
+
     return(async()=>{
 
         try{
           debugger
-          const {token,id} = await logic.authenticateUser(email, password)
+          const {token} = await logic.authenticateUser(email, password)
           logic.userCredentials = token 
 
+          const user = await logic.retrieveUser(token)
+
+          setUser(user)
           //check if the user has leagues
           debugger
-          const existLeague = await logic.retrieveAllLeagues(token)
-          const leaguesId = existLeague.leagues.map(results=> results.id)
+          const leagueId = await logic.retrieveAllLeagues(token)
+        //   const leaguesId = existLeague.leagues.map(results=> results.id)
           // const leaguesRetrieved = await logic.retrieveLeague(token, leaguesId[0])
 
           // !(leagues.league.participants.includes(id))  || existLeague.leagues.length === 0 ? history.push('/create-leagues') : history.push('/myleagues')
-         existLeague.leagues.length === 0 ? history.push('/create-leagues') : history.push('/myleagues')
+          !leagueId ? history.push('/create-leagues') : history.push('/myleagues')
           
 
         } catch({message}) {

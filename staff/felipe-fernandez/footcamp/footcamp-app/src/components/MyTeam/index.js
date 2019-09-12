@@ -14,10 +14,12 @@ function MyTeam (props) {
     useEffect(() => {
         (async () => {
             const token = logic.userCredentials
-            debugger
+            
           
             //const user  = await logic.retrieveUser(token)
-             const result  = await logic.retrieveTeam(token, teamId, leagueId)
+            debugger
+            const leagueId  = await logic.retrieveAllLeagues(token)
+            const result  = await logic.retrieveTeam(token, teamId, leagueId)
             //const result  = await logic.retrieveTeam(token, teamId, user.leagues[0])
 
             const teams  = result.team.players.map(results=> results)
@@ -36,7 +38,7 @@ function MyTeam (props) {
     }, [])
 
     return <div>
-                {/* <h2>{result.team.name_team}</h2> */}
+            
             <ul>
                 
             {player && player.map(teamplayer => <li  key={teamplayer.id}> <PlayerResult player={teamplayer}/> </li>)}

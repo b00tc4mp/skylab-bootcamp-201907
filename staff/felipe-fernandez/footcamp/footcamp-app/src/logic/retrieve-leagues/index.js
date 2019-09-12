@@ -24,7 +24,7 @@ export default function ( token ) {
             throw Error(error)
         }
         else {
-            return responseJson
+            return responseJson.leagues
         }
        
     })()

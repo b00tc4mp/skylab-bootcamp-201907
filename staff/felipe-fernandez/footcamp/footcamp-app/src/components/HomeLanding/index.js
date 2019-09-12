@@ -1,22 +1,24 @@
-
-import React, { useContext } from 'react'
+import React, {  useContext } from 'react'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import MyTeam from "../MyTeam"
 import MyLineup from "../MyLineup"
 import MyLeagues from "../MyLeagues"
 import LeagueTable from "../LeagueTable"
 import Context from '../Context'
+// import logic from '../../logic'
+
 
 function AppRouter(props) {
+ 
+  const { user } = useContext(Context)
+ 
 
-  const { name, setName, teamName, setTeamName, leagueId, setLeagueId, teamId, setTeamId, player, setPlayer, existTeam, setExistTeam } = useContext(Context)
-    const { history } = props
   return (
     <Router>
       <div>
         <nav>
           <ul>
-            
+            Hola, {user && user.name}!
             <li>
               <Link to="/">My Leagues</Link>
             </li>
@@ -29,6 +31,8 @@ function AppRouter(props) {
             <li>
               <Link to="/leaguetable/">League table</Link>
             </li>
+            
+         
           </ul>
         </nav>
         
