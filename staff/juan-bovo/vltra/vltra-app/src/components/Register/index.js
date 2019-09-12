@@ -17,6 +17,8 @@ function Register(){
             
             <button className="register__button form__button">¡Registrarme!</button>
         </form>
+        <p className="register__info form__info">¿Ya tienes una cuenta en Vltra? ¡<Link to="/login" className="register__on-login anchor__link">Inicia sesión</Link>!</p>
+        <p className="register__info form__info"><Link to="/">Volver a la página principal</Link></p>
     </section>
 </>
 }
