@@ -19,6 +19,14 @@ const validate = (() => {
 
         url(target, name) {
             if (!URL_REGEX.test(target)) throw new Error(`${name} with value ${target} is not a valid URL`)
+        },
+        object(target, name) {
+            if (typeof target !== 'object' && target !== '') throw new Error(`${name} with value ${target} is not an object`)
+            if (target === '') throw new Error(`${name} is empty or blank`)
+        },
+        array(target, name) {
+            if (typeof target !== 'array' && target !== '') throw new Error(`${name} with value ${target} is not an array`)
+            if (target === '') throw new Error(`${name} is empty or blank`)
         }
     }
 })()

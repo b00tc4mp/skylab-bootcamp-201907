@@ -10,7 +10,7 @@ class App extends Component {
 
         id && token && (credentials = { id, token })
 
-        this.state = { view: 'landing', credentials, error: undefined } // view: 'register', 'login', ...
+        this.state = { view: 'landing', credentials, error: undefined } 
 
         this.handleGoToRegister = this.handleGoToRegister.bind(this)
         this.handleBackToLanding = this.handleBackToLanding.bind(this)
@@ -28,14 +28,15 @@ class App extends Component {
         this.setState({ view: 'landing' })
     }
 
-    handleRegister(name, surname, email, password, repassword) {
-        try {
-            logic.registerUser(name, surname, email, password, repassword)
+    handleRegister(name, surname,instrument, description, email, password, repassword) {
+       
+            logic.registerUser(name, surname, instrument, description, email, password, repassword)
                 .then(() => this.setState({ view: 'register-success' }))
-                .catch(({ message }) => this.setState({ error: message }))
-        } catch ({ message }) {
-            this.setState({ error: message })
-        }
+                .catch(({ message }) => {
+                    console.log('message :', message);
+                    this.setState({ error: message })
+                })
+       
     }
 
     handleGoToLogin() {
