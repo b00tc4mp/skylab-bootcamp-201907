@@ -11,7 +11,7 @@ function AdminRegisterProduct() {
 
     function handleSubmit(event) {
         event.preventDefault()
-        const { target: { title: { value: title }, image: { value: image }, description: { value: description }, size: { value: size },color: { value: color },price: { value: price } } } = event
+        const { target: { title: { value: title }, image: { files: [image] }, description: { value: description }, size: { value: size },color: { value: color },price: { value: price } } } = event
         
         handleRegisterProduct(title,image,description,size,color,(parseInt(price)))
     }

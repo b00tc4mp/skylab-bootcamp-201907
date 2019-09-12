@@ -1,17 +1,16 @@
 import validate from '../../utils/validate'
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
-export default function (productId, file) {
+export default function (productId, image) {
 
     validate.string(productId, 'id')
-    //validate.string(token, 'token')
-    const formData = new window.FormData();
+    let formData = new FormData()
+    formData.append('file', image)
 
-    formData.append('file', file);
     return (async () => {
         const response = await fetch(`${REACT_APP_API_URL}/products/${productId}/photo`, {
             method: 'POST',
-            headers: { 'Content-Type': 'multipart/form-data'},
+            //headers: {},
             body: formData
         })
         debugger
