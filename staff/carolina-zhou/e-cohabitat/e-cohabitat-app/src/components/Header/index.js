@@ -5,8 +5,7 @@ import logic from '../../logic/'
 export default function() {
 
     function handleLogout(){
-        delete sessionStorage.id
-        delete sessionStorage.token
+        logic.logUserOut()
     }
 
     return <>
@@ -21,7 +20,7 @@ export default function() {
               </nav>
           </div>
               
-          {logic.isUserLogged() ?  
+          {logic.isUserLoggedIn() ?  
             <nav>
                 <ul class="header__secondary-menu">
                     <li class="header__item"><a class="header__secondary-link" title="User area">User area</a></li>

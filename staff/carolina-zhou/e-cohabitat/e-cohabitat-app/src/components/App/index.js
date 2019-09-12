@@ -36,16 +36,16 @@ function App({ history }) {
 
       <Header/>
       
-      <Route exact path="/" render={() => logic.isUserLogged() ? history.push('/home') : <Landing/>} />
-      <Route path="/sign-up" render={() => logic.isUserLogged() ? history.push('/home') : <Register />} />
-      <Route path="/sign-up-success" render={() => logic.isUserLogged() ? history.push('/home') : <RegisterSuccess />} />
-      <Route path="/sign-in" render={() => logic.isUserLogged() ? history.push('/home') : <Login />} />
-      <Route path="/home" render={() => logic.isUserLogged() ? <Home /> :  history.push('/')} />
-      <Route path="/space" render={() => !logic.isUserLogged() ? history.push('/') : <Space />} />
-      <Route path="/space-register" render={() => !logic.isUserLogged() ? history.push('/') : <SpaceRegister />} />
-      <Route path="/month" render={() => !logic.isUserLogged() ? history.push('/') : <Month />} />
-      <Route path="/week" render={() => !logic.isUserLogged() ? history.push('/') : <Week />} />
-      <Route path="/day" render={() => !logic.isUserLogged() ? history.push('/') : <Day />} />
+      <Route exact path="/" render={() => logic.isUserLoggedIn() ? history.push('/home') : <Landing/>} />
+      <Route path="/sign-up" render={() => logic.isUserLoggedIn() ? history.push('/home') : <Register />} />
+      <Route path="/sign-up-success" render={() => logic.isUserLoggedIn() ? history.push('/home') : <RegisterSuccess />} />
+      <Route path="/sign-in" render={() => logic.isUserLoggedIn() ? history.push('/home') : <Login />} />
+      <Route path="/home" render={() => logic.isUserLoggedIn() ? <Home /> :  history.push('/')} />
+      <Route path="/space" render={() => !logic.isUserLoggedIn() ? history.push('/') : <Space />} />
+      <Route path="/space-register" render={() => !logic.isUserLoggedIn() ? history.push('/') : <SpaceRegister />} />
+      <Route path="/month" render={() => !logic.isUserLoggedIn() ? history.push('/') : <Month />} />
+      <Route path="/week" render={() => !logic.isUserLoggedIn() ? history.push('/') : <Week />} />
+      <Route path="/day" render={() => !logic.isUserLoggedIn() ? history.push('/') : <Day />} />
 
       <Footer/>
 

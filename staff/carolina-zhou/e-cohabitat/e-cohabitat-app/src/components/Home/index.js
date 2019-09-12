@@ -10,8 +10,7 @@ function Home({ history }) {
     useEffect(() => {
         (async () =>{
           try {
-            const { id } = sessionStorage
-            const spaces = await logic.retrieveAllSpaces(id)
+            const spaces = await logic.retrieveAllSpaces()
             
             setSpaces(spaces)
           } catch(error) {

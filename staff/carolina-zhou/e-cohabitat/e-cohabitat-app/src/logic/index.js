@@ -1,6 +1,7 @@
-import isUserLogged from './user/log-status'
+import isUserLoggedIn from './user/is-user-logged-in'
 import registerUser from './user/register-user'
 import authenticateUser from './user/authenticate-user'
+import logUserOut from './user/log-user-out'
 /* import retrieveUser from './user/retrieve-user'
 import updateUser from './user/update-user'
 import unregisterUser from './user/unregister-user' */
@@ -23,15 +24,18 @@ import editComment from './comment/edit-comment'
 import deleteComment from './comment/delete-comment' */
 
 export default {
-
-    set userCredentials({id,token}){
+    set __userCredentials__({ id, token }) {
         sessionStorage.token = token
         sessionStorage.id = id
     },
-    get userCredentials(){
-        return { id: sessionStorage.id , token: sessionStorage.token }
+    get __userCredentials__() {
+        return { id: sessionStorage.id, token: sessionStorage.token }
     },
-    isUserLogged, registerUser, authenticateUser, /* retrieveUser, updateUser, unregisterUser, */
+    isUserLoggedIn,
+    registerUser,
+    authenticateUser,
+    logUserOut,
+    /* retrieveUser, updateUser, unregisterUser, */
     registerSpace, /*registerSpaceCouser, */ retrieveAllSpaces, retrieveSpace/*, updateSpace, unregisterSpace, unregisterSpaceCouser,
     addTask, addTaskCompanion, retrieveAllTasks, retrieveTask, editTask, deleteTask, removeTaskCompanion,
     postComment, editComment, deleteComment */
