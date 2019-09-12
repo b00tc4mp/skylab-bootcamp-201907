@@ -1,7 +1,8 @@
 import validate from '../../utils/validate'
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
-export default function (title,image,description,size,color,price) {
+export default function (title,{name},description,size,color,price) {
+    const image=name
 
     validate.string(title,'title')
      validate.string(image,'image')
