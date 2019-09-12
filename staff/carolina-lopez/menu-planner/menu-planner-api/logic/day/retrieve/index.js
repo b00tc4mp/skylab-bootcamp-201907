@@ -72,7 +72,7 @@ module.exports = function (userId) {
 
         const dinner = await Recipe.findById(dinnerId).lean()
         if (!dinner) throw Error(`recipe with id ${dinnerId} not found`)
-        debugger
+        
         return { breakfast, lunch, snack, dinner }
     })()
 }

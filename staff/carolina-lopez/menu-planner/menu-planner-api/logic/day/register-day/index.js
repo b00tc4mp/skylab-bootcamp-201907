@@ -30,7 +30,7 @@ module.exports = function (userId, day, breakfast, lunch, snack, dinner) {
         const __day = moment().date() - moment().day() + 1,
         month = moment().month(),
         year = moment().year()
-debugger
+
         const currentWeekMondayDate = new Date(year, month, __day)
 
         const { weeks } = user
