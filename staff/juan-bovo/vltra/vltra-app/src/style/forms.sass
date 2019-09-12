@@ -1,0 +1,58 @@
+@import round-border
+
+.form
+  display: flex
+  flex-direction: column
+  background-color: lightgray
+  border: 0.1rem solid black
+  border-radius: 0.1rem
+
+.form__title
+  padding: 1rem 1rem 0
+  font-size: 150%
+
+.form__field
+  padding: 0.5rem
+  margin: 0.5rem 1rem
+  font-size: 1.5rem
+  border: 0.1rem solid red
+  border-radius: 0.3rem
+
+.form__field:hover
+  outline: 2px solid blue
+
+.form__field:focus
+  outline: 5px solid darkgreen
+
+.form__button
+  padding: 0.5rem
+  margin: 0.5rem 3rem
+  font-size: 1.5rem
+  border: 0.1rem solid red
+  border-radius: 0.3rem
+  background-color: lightgray
+
+.form__button:hover
+  outline: 5px solid white
+  background-color: black
+  color: white
+
+.register, .login
+  margin-bottom: 10%
+
+.register__title, .login__title
+  background-color: lightgray
+  padding: 1rem
+  font-size: 120%
+  border: 0.1rem solid gray
+
+.register__form label, .login__form label
+  padding-left: 1rem
+
+.register__form--field, .login__form--field
+  width: 90%
+  font-size: 1rem
+
+.form__info
+  color: white
+  padding: 1em

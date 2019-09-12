@@ -1,19 +1,22 @@
 import React from 'react'
 import { withRouter, Link } from 'react-router-dom'
 
+import './style.sass'
+
 function Register(){
     return <>
-    <section>
-        <h2>Register</h2>
-        <form onSubmit={handleSubmit}>
-            <input type="name" name="name" />
-            <input type="surname" name="surname" />
-            <input type="nickname" name="nickname" />
-            <input type="email" name="email" />
-            <input type="password" name="password" />
-            <button>Submit</button>
+    <section className="register">
+        <h2 className="title register__title">Regístrate</h2>
+        <form className="form register__form">
+            <label>Nombre<input className="register__form--field form__field" type="text" name="name" placeholder="Ingresa tu nombre"/></label>
+            <label>Apellido<input className="register__form--field form__field" type="text" name="surname" placeholder="Aquí va tu apellido"/></label>
+            <label>Seudónimo<input className="register__form--field form__field" type="text" name="nickname" placeholder="Tu seudónimo"/></label>
+            <label>Email<input className="register__form--field form__field" type="email" name="email" placeholder="Un correo electrónico"/></label>
+            <label>Contraseña<input className="register__form--field form__field" type="password" name="password" placeholder="Una contraseña"/></label>
+            <label>Repite contraseña<input className="register__form--field form__field" type="password" name="repassword" placeholder="Repite la contraseña anterior"/></label>
+            
+            <button className="register__button form__button">¡Registrarme!</button>
         </form>
-        <Link to="/">Go Back</Link>
     </section>
 </>
 }
