@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import logic from '../../logic'
-import { withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom"
 import Context from '../Context'
 
 function Login(props) {
@@ -15,15 +15,16 @@ function Login(props) {
     return(async()=>{
 
         try{
-          debugger
+          
           const {token} = await logic.authenticateUser(email, password)
           logic.userCredentials = token 
-
+          
+          //setting the user for further use
           const user = await logic.retrieveUser(token)
-
           setUser(user)
+
           //check if the user has leagues
-          debugger
+          
           const leagueId = await logic.retrieveAllLeagues(token)
         //   const leaguesId = existLeague.leagues.map(results=> results.id)
           // const leaguesRetrieved = await logic.retrieveLeague(token, leaguesId[0])
@@ -50,9 +51,15 @@ function Login(props) {
 
     const handlePasswordInput = event => setPassword(event.target.value)
 
+    
+  const handleBack = () => {
+     
+        history.push('/')
+    }
   
     return (
         <div className="useState" >
+          <h2>LOGIN</h2>
             <form onSubmit={handleFormSubmit}>
                 <input
                     className="input is-info"
@@ -72,7 +79,11 @@ function Login(props) {
                 />
                 <button className="button is-fullwidth is-info is-outlined">Submit</button>
             </form>
-           
+
+            <a href="#" onClick={event => {
+            event.preventDefault()
+            handleBack()
+        }}>Go back</a>
         </div>
     )
 }

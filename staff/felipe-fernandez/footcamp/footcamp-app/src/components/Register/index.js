@@ -38,9 +38,18 @@ function Register(props) {
     const handleEmailInput = event => setEmail(event.target.value)
 
     const handlePasswordInput = event => setPassword(event.target.value)
+
+
+    const handleBack = () => {
+        
+            history.push('/')
+      }
+
+
     
     return (
         <div className="useState" >
+            <h2>REGISTER</h2>
             <form onSubmit={handleFormSubmit}>
                 <input
                     className="input is-info"
@@ -76,6 +85,10 @@ function Register(props) {
                 />
                 <button className="button is-fullwidth is-info is-outlined">Submit</button>
             </form>
+            <a href="#" onClick={event => {
+            event.preventDefault()
+            handleBack()
+        }}>Go back</a>
             
         </div>
     )

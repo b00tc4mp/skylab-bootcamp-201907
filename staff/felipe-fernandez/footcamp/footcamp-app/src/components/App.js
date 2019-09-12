@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Context from './Context'
 import Landing from './Landing'
+import Login from './Login'
+import Register from './Register'
 import CreateLeagues from './CreateLeagues'
 import RegisterSuccess from './Register-success'
 import CreateTeam from './TeamCreate'
@@ -34,6 +36,10 @@ function App({ history }) {
           <Route exact path="/" render={() => logic.isUserLogged() ? history.push('/home') : <Landing /> } />
 
           <Route path="/home" render={() => logic.isUserLogged() ? <Landing /> :  history.push('/')  } />
+
+           <Route exact path="/login" render={() => logic.isUserLogged() ? <Login />  : <Landing /> } />
+          
+          <Route exact path="/register" render={() => logic.isUserLogged() ? <Register /> : <Landing /> } /> 
 
           <Route path="/register-success"  component = {RegisterSuccess} />
 

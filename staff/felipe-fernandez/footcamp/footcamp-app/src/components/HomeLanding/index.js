@@ -9,9 +9,13 @@ import Context from '../Context'
 
 
 function AppRouter(props) {
- 
+  const { history } = props
   const { user } = useContext(Context)
  
+  const handleLogout = () => {
+    sessionStorage.clear()
+    
+  }
 
   return (
     <Router>
@@ -30,6 +34,12 @@ function AppRouter(props) {
             </li>
             <li>
               <Link to="/leaguetable/">League table</Link>
+            </li>
+            <li>
+              <a href="#" onClick={event => {
+                event.preventDefault()
+                handleLogout()
+            }}>Logout</a>
             </li>
             
          
