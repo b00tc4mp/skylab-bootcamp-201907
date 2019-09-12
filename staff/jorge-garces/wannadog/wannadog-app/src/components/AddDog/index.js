@@ -1,33 +1,26 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default function ({ onSearch }) {
+export default function ({ onRegisterDog }) {
 
     return <>
         <Link to="/sign">Back</Link>
-        <h2>Find your Dog</h2>
+        <h2>Add Dog</h2>
         <form onSubmit={event => {
             event.preventDefault()
 
-            const { target: { distance: { value: distance }, breed: { value: breed }, gender: { value: gender }, size: { value: size }, age: { value: age }, neutered: { value: neutered }, withDogs: { value: withDogs }, withCats: { value: withCats }, withChildren: { value: withChildren } } } = event
+            const { target: { name: { value: name }, breed: { value: breed }, gender: { value: gender }, size: { value: size }, age: { value: age }, notes: { value: notes }, neutered: { value: neutered }, withDogs: { value: withDogs }, withCats: { value: withCats }, withChildren: { value: withChildren } } } = event
 
-            onSearch(Number(distance), breed, gender, size, Number(age), neutered, withDogs, withCats, withChildren)
+            onRegisterDog(name, breed, gender, size, Number(age), notes, neutered, withDogs, withCats, withChildren)
         }}>
 
-            <label htmlFor="distance">Distance</label>
-            <select name="distance">
-                <option value="500000"> Up to 500km</option>
-                <option value="0"> I don't mind</option>
-                <option value="10000"> Up to 10km</option>
-                <option value="50000"> Up to 50km</option>
-                <option value="100000"> Up to 100km</option>
-                <option value="200000"> Up to 200km</option>
-                <option value="500000"> Up to 500km</option>
-            </select>
+            <label htmlFor="name">Name</label>
+            <input type="text" name="name"></input>
+
+            <textarea name="notes" placeholder="Notes ..."></textarea>
 
             <label htmlFor="breed">Breed</label>
             <select name="breed">
-                <option value="Belgian Malinois"> Belgian Malinois</option>
                 <option value="other"> other / mix</option>
                 <option value="developer"> developer</option>
                 <option value="Blue Lacy"> Blue Lacy</option>
@@ -247,7 +240,6 @@ export default function ({ onSearch }) {
 
             <label htmlFor="size">Size</label>
             <select name="size">
-                <option value="large"> Large</option>
                 <option value="small"> Small</option>
                 <option value="medium"> Medium</option>
                 <option value="large"> Large</option>
@@ -256,7 +248,6 @@ export default function ({ onSearch }) {
 
             <label htmlFor="age">Age</label>
             <select name="age">
-                <option value="2"> Less than a year</option>
                 <option value="0"> I don't mind</option>
                 <option value="1"> Puppy</option>
                 <option value="2"> Less than a year</option>
@@ -267,7 +258,6 @@ export default function ({ onSearch }) {
 
             <label htmlFor="neutered">Neutered</label>
             <select name="neutered">
-                <option value="false"> No</option>
                 <option value="true" defaultValue> Yes</option>
                 <option value="false"> No</option>
             </select>
@@ -290,7 +280,7 @@ export default function ({ onSearch }) {
                 <option value="false"> No / Not tested</option>
             </select>
 
-            <button>FETCH!</button>
+            <button>SAVE</button>
         </form>
     </>
 }
