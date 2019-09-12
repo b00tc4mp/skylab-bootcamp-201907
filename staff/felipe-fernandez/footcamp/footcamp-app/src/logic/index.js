@@ -10,6 +10,7 @@ import retrieveTeam from './retrieve-team'
 import getLineup from './get-lineup'
 import retrieveLineup from './retrieve-lineup'
 import retrieveAllLeagues from './retrieve-leagues'
+import retrieveLeague from './retrieve-league'
 import retrieveTable from './retrieve-table'
 
 
@@ -33,6 +34,7 @@ export default {
     getLineup,
     retrieveLineup,
     retrieveAllLeagues,
+    retrieveLeague,
     retrieveTable
 
 }

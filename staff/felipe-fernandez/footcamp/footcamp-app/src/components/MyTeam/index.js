@@ -7,7 +7,7 @@ import PlayerResult from '../PlayerResult'
 
 function MyTeam (props) {
   
-    const { team, setTeam, leagueId, teamName, setTeamName, teamId, setTeamId, player, setPlayer } = useContext(Context)
+    const { teams, setTeams, leagueId, teamName, setTeamName, teamId, setTeamId, player, setPlayer } = useContext(Context)
     const { history} = props
     
 
@@ -15,12 +15,16 @@ function MyTeam (props) {
         (async () => {
             const token = logic.userCredentials
             debugger
-            const result  = await logic.retrieveTeam(token, teamId, leagueId)
-            const team  = result.team.players.map(results=> results)
-           
-            setTeam(team)
+          
+            //const user  = await logic.retrieveUser(token)
+             const result  = await logic.retrieveTeam(token, teamId, leagueId)
+            //const result  = await logic.retrieveTeam(token, teamId, user.leagues[0])
 
-            const res = await Promise.all(team.map((playerId) => 
+            const teams  = result.team.players.map(results=> results)
+           
+            setTeams(teams)
+
+            const res = await Promise.all(teams.map((playerId) => 
                      logic.retrievePlayer(token, playerId)
                 ))
             const player  = res.map(res=> res.player)

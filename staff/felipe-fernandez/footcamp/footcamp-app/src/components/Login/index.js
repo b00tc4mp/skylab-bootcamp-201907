@@ -14,13 +14,17 @@ function Login(props) {
 
         try{
           debugger
-          const {token} = await logic.authenticateUser(email, password)
+          const {token,id} = await logic.authenticateUser(email, password)
           logic.userCredentials = token 
 
           //check if the user has leagues
           debugger
           const existLeague = await logic.retrieveAllLeagues(token)
-          existLeague.leagues.length === 0 ? history.push('/create-leagues') : history.push('/myleagues')
+          const leaguesId = existLeague.leagues.map(results=> results.id)
+          // const leaguesRetrieved = await logic.retrieveLeague(token, leaguesId[0])
+
+          // !(leagues.league.participants.includes(id))  || existLeague.leagues.length === 0 ? history.push('/create-leagues') : history.push('/myleagues')
+         existLeague.leagues.length === 0 ? history.push('/create-leagues') : history.push('/myleagues')
           
 
         } catch({message}) {

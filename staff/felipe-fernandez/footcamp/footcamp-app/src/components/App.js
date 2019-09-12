@@ -20,13 +20,15 @@ function App({ history }) {
   const [player, setPlayer] = useState(null)
   const [teamName, setTeamName] = useState(null)
   const [teamId, setTeamId] = useState(null)
-  const [team, setTeam] = useState(null)
+  const [teams, setTeams] = useState(null)
+  const [lineup, setLineup] = useState(null)
+  const [playerLineup, setPlayerLineup] = useState(null)
   const [existLeague, setExistLeague] = useState()
       
 
   return (
       <div className="App">
-        <Context.Provider value={{name, setName, code, setCode, nameLeague, setNameLeague, leagueId, setLeagueId,  player, setPlayer, teamName, setTeamName, teamId, setTeamId, team, setTeam, existLeague, setExistLeague }} >
+        <Context.Provider value={{name, setName, code, setCode, nameLeague, setNameLeague, leagueId, setLeagueId,  player, setPlayer, teamName, setTeamName, teamId, setTeamId, teams, setTeams, existLeague, setExistLeague, lineup, setLineup, setPlayerLineup, playerLineup }} >
 
           <Route exact path="/" render={() => logic.isUserLogged() ? history.push('/home') : <Landing /> } />
 

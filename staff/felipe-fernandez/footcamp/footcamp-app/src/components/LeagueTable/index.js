@@ -13,18 +13,20 @@ function MyLeagues (props) {
 
     useEffect(() => {
         (async () => {
+            try {
+
             debugger
             const token = logic.userCredentials
             const result  = await logic.retrieveTable(token, leagueId)
-            
+            // const user  = await logic.retrieveUser(token)
+            // const result  = await logic.retrieveTeam(token,  user.leagues[0])
             const table  = result.teams.map(results=> results)
             setTable(table)
 
-            // const names  = result.leagues.map(results=> results.name)
-            // setNames(names)
-            // const points  = result.leagues.map(results=> results.points)
-            // setPoints(points)
            
+           } catch({message}) {
+          console.log('fail login', message)
+        }
                  
         })()
     }, [])

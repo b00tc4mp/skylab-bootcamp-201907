@@ -1,13 +1,15 @@
-import React from "react"
+
+import React, { useContext } from 'react'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
-import logic from "../../logic"
 import MyTeam from "../MyTeam"
-import Lineup from "../Lineup"
+import MyLineup from "../MyLineup"
 import MyLeagues from "../MyLeagues"
 import LeagueTable from "../LeagueTable"
-
+import Context from '../Context'
 
 function AppRouter(props) {
+
+  const { name, setName, teamName, setTeamName, leagueId, setLeagueId, teamId, setTeamId, player, setPlayer, existTeam, setExistTeam } = useContext(Context)
     const { history } = props
   return (
     <Router>
@@ -31,7 +33,7 @@ function AppRouter(props) {
         </nav>
         
         <Route path="/" exact component={MyLeagues} />
-        <Route path="/mylineup" exact component={Lineup} />
+        <Route path="/mylineup" exact component={MyLineup} />
         <Route path="/myteam/" component={MyTeam} /> 
         <Route path="/leaguetable/" component={LeagueTable} /> 
 
