@@ -35,11 +35,12 @@ function App({ history }) {
 
           <Route exact path="/" render={() => logic.isUserLogged() ? history.push('/home') : <Landing /> } />
 
-          <Route path="/home" render={() => logic.isUserLogged() ? <Landing /> :  history.push('/')  } />
 
-           <Route exact path="/login" render={() => logic.isUserLogged() ? <Login />  : <Landing /> } />
+          <Route path="/login" render={() => <Login /> } />
           
-          <Route exact path="/register" render={() => logic.isUserLogged() ? <Register /> : <Landing /> } /> 
+          <Route path="/register" render={() => <Register /> } /> 
+
+        
 
           <Route path="/register-success"  component = {RegisterSuccess} />
 
