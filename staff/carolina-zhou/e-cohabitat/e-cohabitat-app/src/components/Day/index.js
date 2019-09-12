@@ -1,5 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
+import moment from "moment"
 
 function Day({ history }) {
 
@@ -27,8 +28,8 @@ function Day({ history }) {
 
         <div class="day">
 
-            <h1 class="day__title"><i class="fas fa-caret-left"></i> Monday 1st <i class="fas fa-caret-right"></i></h1>
-            <p class="day__month-year">September 2019 - Week 1</p>
+            <h1 class="day__title"><i class="fas fa-caret-left"></i> {moment().format('dddd Do')} <i class="fas fa-caret-right"></i></h1>
+            <p class="day__month-year">September 2019  -  Week {moment().week()}</p>
 
             <div class="day__toolbar">
                 <div class="day__toggle">

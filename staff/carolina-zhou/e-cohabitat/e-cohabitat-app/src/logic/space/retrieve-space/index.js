@@ -10,9 +10,10 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 */
 
 export default function(spaceId) {
+    
     validate.string(spaceId, 'space id')
 
-    const { id, token } = this.__userCredentials__()
+    const { id, token } = this.__userCredentials__
     
     return (async () => {
         const response = await fetch(`${REACT_APP_API_URL}/users/${id}/spaces/${spaceId}`, {

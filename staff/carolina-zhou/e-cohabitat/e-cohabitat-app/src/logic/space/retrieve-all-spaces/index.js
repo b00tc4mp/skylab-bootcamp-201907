@@ -6,6 +6,7 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
  * @returns {}
  */
 export default function () {
+    
     const { id, token } = this.__userCredentials__
 
     return (async () => {

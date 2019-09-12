@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function({ onBack, onLogin }) {
+export default function() {
     return <>
     <main class="main"> 
         <img src={require('../../img/logo.svg')} alt="e-cohabitat project logo" class="main__logo"/>

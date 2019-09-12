@@ -1,11 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import logic from '../../logic/'
-import Context from '../context'
-import {Redirect} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
-export default function() {
-
-    const { view, setView } = useContext(Context)
+function Register({ history }) {
 
     function handleSubmit(event) {
             event.preventDefault()
@@ -20,8 +17,8 @@ export default function() {
 
         try {
             await logic.registerUser(username, name, surname, email, password)
-            setView('sign-up-success')
-            console.log('register successful')
+
+            history.push('/sign-up-success')
         } catch(error) {
             console.log(error.message)
         }
@@ -29,7 +26,6 @@ export default function() {
     }
 
     return <>
-        {view==="sign-up-success" && <Redirect to="/sign-up-success"/>}
         <main class="main"> 
             <section class="register">
                 <h1 class="register__title">Sign up</h1>
@@ -61,3 +57,5 @@ export default function() {
         </main>
     </>
 }
+
+export default withRouter(Register)

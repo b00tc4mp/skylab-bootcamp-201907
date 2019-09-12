@@ -23,9 +23,9 @@ export default function (email, password) {
         })
 
         if (response.status === 200) {
-            const { token, id } = await response.json()
+            const { id, token } = await response.json()
 
-            this.__userCredentials__ = { token, id }
+            this.__userCredentials__ = { id, token }
         } else {
             const { error } = await response.json()
             throw Error(error)

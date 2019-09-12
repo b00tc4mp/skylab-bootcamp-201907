@@ -1,6 +1,5 @@
 import { validate } from 'utils'
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
-const { id, token } = sessionStorage
 
 /**
  * Registers a space
@@ -16,14 +15,15 @@ const { id, token } = sessionStorage
  */
 
 
-export default function (title, type, picture, address, passcode, id) {
+export default function (title, type, picture, address, passcode) {
 
     validate.string(title, 'space name')
     validate.string(type, 'space type')
     validate.string(picture, 'picture')
     validate.string(address, 'space address')
     validate.string(passcode, 'space passcode')
-    validate.string(id, 'creator-user id')
+
+    const { id, token } = this.__userCredentials__
     
     return (async () => {
         const response = await fetch(`${REACT_APP_API_URL}/users/${id}/spaces`, {

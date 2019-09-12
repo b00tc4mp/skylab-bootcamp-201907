@@ -1,5 +1,5 @@
 import Context from '../context';
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import logic from '../../logic'
 
 import Header from '../Header'
@@ -17,14 +17,13 @@ import Footer from '../Footer'
 
 import { withRouter, Route } from 'react-router-dom'
 
-const { id, token } = sessionStorage
 
 function App({ history }) {
 
-  const [view, setView] = useState('')
-  const [credentials, setCredentials] = useState({ id, token })
+  const { id, token } = logic.__userCredentials__
+
   //useState: state and setter --> [space,setSpace] = useState(*default value*)
-  const[spaces, setSpaces] = useState() 
+  const [credentials, setCredentials] = useState({ id, token })
   const [spaceId, setSpaceId] = useState()
   const [mySpace, setMySpace] = useState()
 
@@ -32,7 +31,7 @@ function App({ history }) {
   return (
     <>
 
-    <Context.Provider value = {{ view, setView, credentials, setCredentials, spaces, setSpaces, spaceId, setSpaceId, mySpace, setMySpace }} >
+    <Context.Provider value = {{ credentials, setCredentials, spaceId, setSpaceId, mySpace, setMySpace }} >
 
       <Header/>
       
@@ -41,7 +40,7 @@ function App({ history }) {
       <Route path="/sign-up-success" render={() => logic.isUserLoggedIn() ? history.push('/home') : <RegisterSuccess />} />
       <Route path="/sign-in" render={() => logic.isUserLoggedIn() ? history.push('/home') : <Login />} />
       <Route path="/home" render={() => logic.isUserLoggedIn() ? <Home /> :  history.push('/')} />
-      <Route path="/space" render={() => !logic.isUserLoggedIn() ? history.push('/') : <Space />} />
+      <Route path="/spaces/:spaceId" render={() => !logic.isUserLoggedIn() ? history.push('/') : <Space/>} />
       <Route path="/space-register" render={() => !logic.isUserLoggedIn() ? history.push('/') : <SpaceRegister />} />
       <Route path="/month" render={() => !logic.isUserLoggedIn() ? history.push('/') : <Month />} />
       <Route path="/week" render={() => !logic.isUserLoggedIn() ? history.push('/') : <Week />} />

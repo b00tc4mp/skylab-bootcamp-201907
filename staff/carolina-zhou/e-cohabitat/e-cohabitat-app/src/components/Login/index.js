@@ -1,8 +1,9 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import logic from '../../logic/'
 import { withRouter } from 'react-router-dom'
 
 function Login({ history }) {
+
     function handleSubmit(event) {
             event.preventDefault()
 
@@ -16,7 +17,6 @@ function Login({ history }) {
             await logic.authenticateUser(email, password)
         
             history.push('/home')
-            console.log('login successful')
         } catch(error) {
             console.log(error.message)
         }

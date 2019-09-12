@@ -4,10 +4,8 @@ import moment from "moment"
 
 function Month({ history }) {
 
-    /* const [currentDate, setCurrentDate] = useState(new Date())
-    const [selectedDate, setSelectedDate] = useState(new Date()) */
-
-    // year: moment().format('YYYY'), month: moment().format('MM'), day: moment().format('DD')
+    const [currentDate, setCurrentDate] = useState(moment())
+    const [selectedDate, setSelectedDate] = useState(moment())
 
     function handleMonth(event) {
         event.preventDefault()
@@ -27,27 +25,116 @@ function Month({ history }) {
         history.push('/day')
     }
 
-/*     function handleGoToNextMonth() {
-        setCurrentDate(moment.addMonths(currentDate, 1))
-    }
-     
-    function handleGoToPreviousMonth()  {
-        setCurrentDate(moment.subMonths(currentDate, 1))
+    function handleGoToNextMonth() {
+            setCurrentDate(moment().add(1, 'months'))
     }
 
-    function setDaysOfWeek {
-        const dateFormat = "ddd";
-        const days = [];
-        let startDate = dateFns.startOfWeek(currentDate);
-        for (let i = 0; i < 7; i++) {
-              days.push(
-                 <div className="column col-center" key={i}>
-                 {dateFns.format(dateFns.addDays(startDate, i), dateFormat)}
-                 </div>
-              );
-           }
-           return <div className="days row">{days}</div>;
+    function handleGoToPreviousMonth() {
+           setCurrentDate(moment().subtrack(1, 'months')) 
+    }
+
+    /* function onDateClick(day) {
+        setSelectedDate(day)
     } */
+    
+    const header = () => {
+
+        return (
+        <>
+            <h1 class="month__title"><i class="fas fa-caret-left" onClick={handleGoToPreviousMonth}></i> {moment().format("MMMM")} <i class="fas fa-caret-right" onClick={handleGoToNextMonth}></i></h1>
+            <p class="month__year">{moment().format("YYYY")}</p>
+        </>
+        )
+    }
+
+    const week = () => {
+
+        const days = []
+        const startDate = moment().startOf('week')
+        
+        for (let i = 0; i < 7; i++) {
+            days.push(
+                <div>
+                    {startDate.add(1, 'days').format('ddd')}
+                </div>      
+            )       
+        }
+        return <div class="calendar__header">{days}</div>
+    }
+
+    const days = () => {
+
+/*         const monthStart = moment().startOf('month')
+        const monthEnd = moment(monthStart).endOf('month')
+        const startDate = moment(monthStart).startOf('week')
+        const endDate = moment(monthEnd).endOf('week') 
+        const rows = []
+
+        let days = []
+        let day = startDate
+        let formattedDate = ""
+
+        let prevDays = []
+        let nextDays = []
+        let monthDays = []
+
+        while (day <= endDate) {
+            for (let i = 0; i < 7; i++) {
+                const month = moment().format('MM')
+                const todayName = moment().format('ddd')
+                const todayNum = moment().format('D')
+
+                while (todayNum !== '1' ) {
+                    prevDays.push(moment().subtrack(1, 'days'))
+                } 
+                 
+                while (todayNum !== '1' ) {
+                    nextDays.push(moment().add(1, 'days'))
+                } 
+
+                if (todayNum === '1' && todayName === 'MON' ) {
+                    days.push(
+                        <div class="calendar__day day" key={day}>
+                        {formattedDate}
+                        </div>
+                    )
+                    day = day.add(1, 'days')
+                }
+                
+
+            }
+            rows.push( <div class="calendar__week" key={day}> {days} </div>)
+            days = []
+        }
+        return <div>{rows}</div>  */
+        
+
+        const monthStart = moment().startOf('month')
+        const monthEnd = moment(monthStart).endOf('month')
+        const startDate = moment(monthStart).startOf('week')
+        const endDate = moment(monthEnd).endOf('week') 
+        const rows = []
+
+        let days = []
+        let day = startDate
+        let formattedDate = ""
+
+        while (day <= endDate) {
+            for (let i = 0; i < 7; i++) {
+                formattedDate = day.format('D')
+
+                days.push(
+                    <div class="calendar__day day" key={day}>
+                       {formattedDate}
+                    </div>
+                )
+                day = day.add(1, 'days')
+            }
+            rows.push( <div class="calendar__week" key={day}> {days} </div>)
+            days = []
+        }
+        return <div>{rows}</div>
+    }
 
     return <>
     
@@ -55,8 +142,9 @@ function Month({ history }) {
 
         <div class="month">
 
-            <h1 class="month__title"><i class="fas fa-caret-left"></i> September <i class="fas fa-caret-right"></i></h1>
-            <p class="month__year">2019</p>
+            {/* <h1 class="month__title"><i class="fas fa-caret-left" onClick={handleGoToPreviousMonth}></i> September <i class="fas fa-caret-right" onClick={handleGoToNextMonth}></i></h1>
+            <p class="month__year">2019</p> */}
+            <div>{header()}</div>
 
             <div class="month__toolbar">
                 <div class="month__toggle">
@@ -91,6 +179,11 @@ function Month({ history }) {
                 </div>
                 
                 <div class="calendar">
+                    <div>{week()}</div>
+                    <div>{days()}</div>
+                </div>                 
+
+                {/* <div class="calendar">
                     <div class="calendar__header">
                         <div>mon</div>
                         <div>tue</div>
@@ -145,10 +238,10 @@ function Month({ history }) {
                         <div class="calendar__day day">3</div>
                         <div class="calendar__day day">4</div>
                     </div>
-                </div>
+                </div> */}
             </div>
 
-        </div>
+        </div> 
 
     </main>
     </>

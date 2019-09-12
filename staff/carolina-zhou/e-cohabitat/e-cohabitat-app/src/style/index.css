@@ -327,7 +327,7 @@ body {
 }
 .module__address {
   font-size: 0.9rem;
-  margin-top: 1em;
+  margin-top: 0.9em;
   color: grey;
 }
 .module__users {
@@ -426,7 +426,7 @@ body {
   padding: 0.5em;
 }
 .register__otherOption {
-  display: none;
+  display: block;
   margin: auto;
   padding: 0.5em;
   width: 65%;

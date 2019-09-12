@@ -1,51 +1,48 @@
-import registerUser from '.'
-/* const { User } = require('data') */
+import logic from '..'
 
 const { random } = Math
+const { database, models: { User } } = require('my-stuff-data')
+const bcrypt = require('bcryptjs')
+
+// const { env: { DB_URL_TEST }} = process // WARN this destructuring doesn't work in react-app :(
+const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
 
 describe('logic - register user', () => {
-    
-    let username, name, surname, email, password
+    let name, surname, email, password
 
-    beforeEach(() => {
-        username = `username-${random()}`
+    beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
+
+    beforeEach(async () => {
         name = `name-${random()}`
         surname = `surname-${random()}`
         email = `email-${random()}@mail.com`
         password = `password-${random()}`
+
+        await User.deleteMany()
     })
 
-    /* it('should succeed on correct data', async () => {
-        const response = await registerUser(username, name, surname, email, password)
+    it('should succeed on correct data', async () => {
+        const response = await logic.registerUser(name, surname, email, password)
+
         expect(response).toBeUndefined()
 
         const user = await User.findOne({ email })
+        
         expect(user).toBeDefined()
-        expect(user.username).toBe(username)
         expect(user.name).toBe(name)
         expect(user.surname).toBe(surname)
         expect(user.email).toBe(email)
-        expect(user.password).toBe(password)
+        // expect(user.password).toBe(password)
+
+        const match = await bcrypt.compare(password, user.password)
+        expect(match).toBeTruthy()
     })
 
-    it('should fail if the e-mail is already registered', async () => {
-        await User.create({ username, name, surname, email, password })
-
-        try {
-            await registerUser(username, name, surname, email, password)
-            throw new Error('should not reach this point')
-        } catch(error) {
-            expect(error).toBeDefined()
-            expect(error.message).toBe(`user with e-mail ${email} already exists`)
-        }
-    }) */
-
-    // username
     it('should fail on empty username', async () => {
         username = ''
 
         try {
-            await registerUser(username, name, surname, email, password)
+            await logic.registerUser(username, name, surname, email, password)
         } catch({message}) {
             expect(message).toBe('username is empty or blank')
         }
@@ -55,7 +52,7 @@ describe('logic - register user', () => {
         username = undefined
 
         try {
-            await registerUser(username, name, surname, email, password)
+            await logic.registerUser(username, name, surname, email, password)
         } catch({message}) {
             expect(message).toBe('username with value undefined is not a string')
         }
@@ -65,7 +62,7 @@ describe('logic - register user', () => {
         username = 123
 
         try {
-            await registerUser(username, name, surname, email, password)
+            await logic.registerUser(username, name, surname, email, password)
         } catch({message}) {
             expect(message).toBe('username with value 123 is not a string')
         }
@@ -76,7 +73,7 @@ describe('logic - register user', () => {
         name = ''
 
         try {
-            await registerUser(username, name, surname, email, password)
+            await logic.registerUser(username, name, surname, email, password)
         } catch({message}) {
             expect(message).toBe('name is empty or blank')
         }
@@ -86,7 +83,7 @@ describe('logic - register user', () => {
         name = undefined
 
         try {
-            await registerUser(username, name, surname, email, password)
+            await logic.registerUser(username, name, surname, email, password)
         } catch({message}) {
             expect(message).toBe('name with value undefined is not a string')
         }
@@ -96,7 +93,7 @@ describe('logic - register user', () => {
         name = 123
 
         try {
-            await registerUser(username, name, surname, email, password)
+            await logic.registerUser(username, name, surname, email, password)
         } catch({message}) {
             expect(message).toBe('name with value 123 is not a string')
         }
@@ -107,7 +104,7 @@ describe('logic - register user', () => {
         surname = ''
 
         try {
-            await registerUser(username, name, surname, email, password)
+            await logic.registerUser(username, name, surname, email, password)
         } catch({message}) {
             expect(message).toBe('surname is empty or blank')
         }
@@ -117,7 +114,7 @@ describe('logic - register user', () => {
         surname = undefined
 
         try {
-            await registerUser(username, name, surname, email, password)
+            await logic.registerUser(username, name, surname, email, password)
         } catch({message}) {
             expect(message).toBe('surname with value undefined is not a string')
         }
@@ -127,7 +124,7 @@ describe('logic - register user', () => {
         surname = 123
 
         try {
-            await registerUser(username, name, surname, email, password)
+            await logic.registerUser(username, name, surname, email, password)
         } catch({message}) {
             expect(message).toBe('surname with value 123 is not a string')
         }
@@ -138,7 +135,7 @@ describe('logic - register user', () => {
         email = ''
 
         try {
-            await registerUser(username, name, surname, email, password)
+            await logic.registerUser(username, name, surname, email, password)
         } catch({message}) {
             expect(message).toBe('e-mail is empty or blank')
         }
@@ -148,7 +145,7 @@ describe('logic - register user', () => {
         email = undefined
 
         try {
-            await registerUser(username, name, surname, email, password)
+            await logic.registerUser(username, name, surname, email, password)
         } catch({message}) {
             expect(message).toBe('e-mail with value undefined is not a string')
         }
@@ -158,7 +155,7 @@ describe('logic - register user', () => {
         email = 123
 
         try {
-            await registerUser(username, name, surname, email, password)
+            await logic.registerUser(username, name, surname, email, password)
         } catch({message}) {
             expect(message).toBe('e-mail with value 123 is not a string')
         }
@@ -169,7 +166,7 @@ describe('logic - register user', () => {
         password = ''
 
         try {
-            await registerUser(username, name, surname, email, password)
+            await logic.registerUser(username, name, surname, email, password)
         } catch({message}) {
             expect(message).toBe('password is empty or blank')
         }
@@ -179,7 +176,7 @@ describe('logic - register user', () => {
         password = undefined
 
         try {
-            await registerUser(username, name, surname, email, password)
+            await logic.registerUser(username, name, surname, email, password)
         } catch({message}) {
             expect(message).toBe('password with value undefined is not a string')
         }
@@ -189,9 +186,11 @@ describe('logic - register user', () => {
         password = 123
 
         try {
-            await registerUser(username, name, surname, email, password)
+            await logic.registerUser(username, name, surname, email, password)
         } catch({message}) {
             expect(message).toBe('password with value 123 is not a string')
         }
     })
+
+    afterAll(() => database.disconnect())
 })

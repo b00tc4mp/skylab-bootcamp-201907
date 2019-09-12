@@ -1,5 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
+import moment from "moment"
 
 function Week({ history }) {
 
@@ -20,6 +21,53 @@ function Week({ history }) {
 
         history.push('/day')
     }
+    
+    
+    const header = () => {
+
+        return (
+        <>
+            <h1 class="month__title"><i class="fas fa-caret-left" /* onClick={handleGoToPreviousMonth} */></i> Week {moment().week()} <i class="fas fa-caret-right" /* onClick={handleGoToNextMonth} */></i></h1>
+            <p class="month__year">{moment().format("MMMM YYYY")}</p>
+        </>
+        )
+    }
+
+    const days = () => {
+        const days = []
+        const monday = moment().startOf('week')
+        
+        for (let i = 0; i < 7; i++) {
+            days.push(
+                <div>
+                    {monday.add(1, 'days').format('ddd')}
+                </div>      
+            )       
+        }
+        return <div class="weekly__header">{days}</div>
+    }
+
+    const cells = () => {
+        const startDate = moment().startOf('week')
+        const endDate = moment().endOf('week')
+        const rows = []
+        let days = []
+        let day = startDate
+        while (day <= endDate) {
+            for (let i = 0; i < 7; i++) {
+                days.push(
+                    <div class="weekly__day day">
+                       {startDate.add(1, 'days').format('D')}
+                    </div>
+                )
+            }
+            rows.push( <div class="weekly__week" key={day}> {days} </div>)
+            days = []
+        }
+        return <div class="body">{rows}</div>
+    }
+
+
 
     return <>
     
@@ -27,8 +75,9 @@ function Week({ history }) {
 
         <div class="week">
 
-            <h1 class="week__title"><i class="fas fa-caret-left"></i> Week 1 <i class="fas fa-caret-right"></i></h1>
-            <p class="week__month-year">September 2019</p>
+            {/* <h1 class="week__title"><i class="fas fa-caret-left"></i> Week 1 <i class="fas fa-caret-right"></i></h1>
+            <p class="week__month-year">September 2019</p> */}
+            <div>{header()}</div>
 
             <div class="week__toolbar">
                 <div class="week__toggle">
@@ -61,8 +110,14 @@ function Week({ history }) {
                           </ul>
                       </div>
               </div>
-              
+
               <div class="weekly">
+                <div>{days()}</div>
+                <div>{cells()}</div>
+              </div> 
+
+              
+              {/* <div class="weekly">
                 <div class="weekly__header">
                   <div>mon</div>
                   <div>tue</div>
@@ -81,7 +136,7 @@ function Week({ history }) {
                   <div class="weekly__day day">6</div>
                   <div class="weekly__day day">7</div>
                 </div>
-              </div>
+              </div> */}
             </div>
 
         </div>

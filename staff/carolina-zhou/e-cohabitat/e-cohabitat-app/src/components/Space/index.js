@@ -2,21 +2,16 @@ import React, { useContext, useEffect } from 'react'
 import Context from '../context'
 import logic from '../../logic'
 import { withRouter } from 'react-router-dom'
-import queryString from 'query-string'
 
 
-function Space({ history, location }) {
+function Space({ history }) {
     
     const { spaceId, mySpace, setMySpace } = useContext(Context)
-
     
     useEffect(() => {
         (async () =>{
             
-            const { myspace: spaceId } = queryString.parse(location.search);
-            
             try {
-                
                 const mySpace = await logic.retrieveSpace(spaceId)
                 
                 setMySpace(mySpace)
