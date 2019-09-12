@@ -1,10 +1,13 @@
+require('dotenv').config()
+
 const { database, models: { Recipe, Item, Ingredient } } = require('..')
 const ingredients = require('./ingredients')
 const recipes = require('./recipes');
 
+const { env: { DB_URL }} = process;
 
 (async () => {
-    await database.connect('mongodb://localhost:27017/menu-planner-api')
+    await database.connect(DB_URL)
 
     await Recipe.deleteMany()
     await Ingredient.deleteMany()

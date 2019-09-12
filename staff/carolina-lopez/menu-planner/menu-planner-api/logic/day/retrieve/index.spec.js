@@ -8,7 +8,7 @@ const moment = require('moment')
 
 const { env: { DB_URL_TEST } } = process
 
-describe.only('logic - retrieve day', () => {
+describe('logic - retrieve day', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
@@ -159,17 +159,15 @@ describe.only('logic - retrieve day', () => {
     
     })
 
-
     it("should retrieve a day on correct data", async () => {
-
         const day = await retrieveDay(userId)
 
         expect(day).to.exist
-        debugger
-        expect(day.breakfast._id.toString()).to.equal(id1)
-        expect(day.lunch._id.toString()).to.equal(id2)
-        expect(day.snack._id.toString()).to.equal(id3)
-        expect(day.dinner._id.toString()).to.equal(id4)
+        
+        expect(day.breakfast.id.toString()).to.equal(id1)
+        expect(day.lunch.id.toString()).to.equal(id2)
+        expect(day.snack.id.toString()).to.equal(id3)
+        expect(day.dinner.id.toString()).to.equal(id4)
     })
 
     // it("should fail on non existant id", async () => {

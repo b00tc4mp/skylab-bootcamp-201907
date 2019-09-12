@@ -1,5 +1,5 @@
 const { validate } = require('menu-planner-utils')
-const { models } = require('menu-planner-data')
+const { models, sanitize } = require('menu-planner-data')
 const { User, Week } = models
 const moment = require('moment')
 
@@ -45,7 +45,7 @@ module.exports = function (userId) {
 }
 
 function sanitizeWeek(week) {
-    sanitizeId(week)
+    sanitize.id(week)
 
     const { monday, tuesday, wednesday, thursday, friday, saturday, sunday } = week
 
@@ -61,17 +61,24 @@ function sanitizeWeek(week) {
 }
 
 function sanitizeDay(day) {
-    sanitizeId(day)
+    sanitize.id(day)
 
     const { breakfast, lunch, snack, dinner } = day
 
-    sanitizeId(breakfast)
-    sanitizeId(lunch)
-    sanitizeId(snack)
-    sanitizeId(dinner)
+    sanitizeRecipe(breakfast)
+    sanitizeRecipe(lunch)
+    sanitizeRecipe(snack)
+    sanitizeRecipe(dinner)
 }
 
-function sanitizeId(object) {
-    object.id = object._id.toString()
-    delete object._id
+function sanitizeRecipe(recipe) {
+    sanitize.id(recipe)
+
+    const { items } = recipe
+
+    items.forEach(item => {
+        sanitize.id(item)
+
+        item.ingredient = item.ingredient.toString()
+    })
 }

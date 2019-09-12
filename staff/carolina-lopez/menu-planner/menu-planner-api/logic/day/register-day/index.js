@@ -53,16 +53,14 @@ module.exports = function (userId, day, breakfast, lunch, snack, dinner) {
 
         let _day = week[day]
 
-        if (!_day) {
-            _day = new Day()
-
-            week[day] = _day
-        }
+        if (!_day) _day = new Day()
 
         _day.breakfast = breakfast
         _day.lunch = lunch
         _day.snack = snack
         _day.dinner = dinner
+
+        week[day] = _day
 
         await user.save()
     })()

@@ -11,5 +11,5 @@ module.exports = {
     registerDay: require('./day/register-day'),
     retrieveDay: require('./day/retrieve'),
 
-    //retrieveWeek: require('./week/retrieve')
+    retrieveCurrentWeek: require('./week/retrieve-current-week')
 }
