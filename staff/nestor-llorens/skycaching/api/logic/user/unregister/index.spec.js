@@ -3,6 +3,8 @@ require('dotenv').config()
 const { expect } = require('chai')
 const logic = require('../.')
 const { models: { User }, database } = require('data')
+const bcrypt = require('bcryptjs')
+
 
 const { env: { DB_URL_TEST } } = process
 
@@ -18,7 +20,10 @@ describe('logic - unregister user', () => {
         avatar = `path-to-avatar-${Math.random()}`
 
         await User.deleteMany()
-        const user = await User.create({ username, password, email, avatar })
+
+        const hash = await bcrypt.hash(password, 10)
+
+        const user = await User.create({ username, password: hash, email, avatar })
         id = user.id
     })
 

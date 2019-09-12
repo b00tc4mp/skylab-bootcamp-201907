@@ -3,6 +3,7 @@ require('dotenv').config()
 const { expect } = require('chai')
 const logic = require('../.')
 const { models: { User }, database } = require('data')
+const bcrypt = require('bcryptjs')
 
 const { env: { DB_URL_TEST } } = process
 
@@ -27,7 +28,10 @@ describe('logic - register user', () => {
         const user = await User.findById(result)
         expect(user).to.exist
         expect(user.username).to.equal(username)
-        expect(user.password).to.equal(password)
+
+        const match = await bcrypt.compare(password, user.password)
+        expect(match).to.be.true
+
         expect(user.email).to.equal(email)
         expect(user.avatar).to.equal(avatar)
         expect(user.favorites).to.exist

@@ -3,6 +3,8 @@ require('dotenv').config()
 const { expect } = require('chai')
 const logic = require('../.')
 const { models: { User }, database } = require('data')
+const bcrypt = require('bcryptjs')
+
 
 const { env: { DB_URL_TEST } } = process
 
@@ -18,13 +20,16 @@ describe('logic - authenticate user', () => {
         email = `email-${Math.random()}@domain.com`
         avatar = `path-to-avatar-${Math.random()}`
 
+        const hash = await bcrypt.hash(password, 10)
+
         await User.deleteMany()
-        const user = await User.create({ username, password, email, avatar })
+        const user = await User.create({ username, password: hash, email, avatar })
         id = user.id
     })
 
     it('should succeed on correct data', async () => {
-        const _id = await logic.authenticateUser(username, password)
+        debugger
+        const _id = await logic.authenticateUser( username, password )
         expect(_id).to.exist
         expect(_id).to.be.a('string')
         expect(_id).to.equal(id)
@@ -58,11 +63,7 @@ describe('logic - authenticate user', () => {
         expect(() => logic.authenticateUser("", password)).to.throw('username is empty or blank')
     )
 
-    // it('should fail on wrong email type', () =>
-    //     expect(() => logic.authenticateUser("wrong_email", password)).to.throw('email with value wrong_email is not a valid e-mail')
-    // )
-
-    it('should fail on wrong password type', () =>
+    it('should fail on wrong username type', () =>
         expect(() => logic.authenticateUser(12345, password)).to.throw('username with value 12345 is not a string')
     )
 

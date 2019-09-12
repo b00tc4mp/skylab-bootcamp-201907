@@ -1,5 +1,6 @@
 const validate = require('utils/validate')
 const { models: { User } } = require('data')
+const bcrypt = require('bcryptjs')
 
 function registerUser (username, password, email, avatar) {
 
@@ -20,7 +21,9 @@ function registerUser (username, password, email, avatar) {
         user = await User.findOne({ username })
         if (user) throw new Error(`user with username ${username} already exists`)
 
-        user = await User.create({ username, password, email, avatar, favorites, owned, found })
+        const hash = await bcrypt.hash(password, 10)
+
+        user = await User.create({ username, password: hash, email, avatar, favorites, owned, found })
         
         return user.id
         

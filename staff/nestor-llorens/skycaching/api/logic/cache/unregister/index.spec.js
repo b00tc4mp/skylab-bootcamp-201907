@@ -6,6 +6,8 @@ const { models: { User, Cache }, database } = require('data')
 
 const { env: { DB_URL_TEST }} = process
 
+const bcrypt = require('bcryptjs')
+
 describe('logic - unregister cache', () => {
 
     before(async() => 
@@ -14,7 +16,7 @@ describe('logic - unregister cache', () => {
             .then(() => Cache.deleteMany())
     )
             
-    let username, email, password, avatar, name, description, lat, lon, difficulty, terrain, hints, owner, id
+    let username, email, password, avatar, name, description, lat, lng, difficulty, terrain, hints
 
     beforeEach(async () => {
 
@@ -33,9 +35,10 @@ describe('logic - unregister cache', () => {
         randomDiff = difficulty[Math.floor(Math.random()*difficulty.length)]
         randomTerr = terrain[Math.floor(Math.random()*terrain.length)]
         hints = `hints-${Math.random()}`
+
+        const hash = await bcrypt.hash(password, 10)
         
-        
-        const user = await User.create({ username, password, email, avatar })
+        const user = await User.create({ username, password: hash, email, avatar })
         userId = user.id
         const cache = await Cache.create({ owner: userId, name, description, location, randomDiff, randomTerr, hints})
         cacheId = cache.id
@@ -89,7 +92,8 @@ describe('logic - unregister cache', () => {
     })
 
     it('should fail on existing user, but not owner', async() => {
-        const user = await User.create({ username, password, email, avatar })
+        const hash = await bcrypt.hash(password, 10)
+        const user = await User.create({ username, password: hash, email, avatar })
         const id = user.id
     
         try {

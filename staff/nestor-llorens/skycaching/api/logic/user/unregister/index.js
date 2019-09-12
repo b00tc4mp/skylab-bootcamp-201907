@@ -1,6 +1,6 @@
 const validate = require('utils/validate')
 const { models: { User, Cache } } = require('data')
-
+const bcrypt = require('bcryptjs')
 
 function unregisterUser (id, password) {
     
@@ -9,11 +9,17 @@ function unregisterUser (id, password) {
 
     return (async () => {
 
-    const user = await User.findOne({ _id: id }, { _id: 0, password: 0 }).lean()
-    if (!user) throw new Error(`user with id ${id} not found`)
-    const result = await User.deleteOne({ _id: id, password })
+    const user = await User.findById(id)
 
-    if (!result.deletedCount) throw new Error(`wrong credentials`)
+    if (!user) throw new Error(`user with id ${id} not found`)
+
+    const match = await bcrypt.compare(password, user.password)
+
+    if (!match) throw new Error(`wrong credentials`)
+
+    const result = await User.deleteOne({ _id: id })
+
+    if (!result.deletedCount) throw new Error(`could not delete user`)
 
     await Cache.deleteMany({ owner: id})
 
