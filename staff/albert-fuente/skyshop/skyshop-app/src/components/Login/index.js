@@ -19,12 +19,10 @@ function Login() {
 
     async function handleLogin(email, password) {
         try {
-            const { id, token } = await logic.authenticateUser(email, password)
-            setCredentials({ id, token })
+            await logic.authenticateUser(email, password)
+            
             setView('toLanding')
             setError(undefined)
-
-            logic.userCredentials=token //llamas al setter i el token lo ponen a sessionstorage
         } catch(error) {
             setError(error.message)
         }

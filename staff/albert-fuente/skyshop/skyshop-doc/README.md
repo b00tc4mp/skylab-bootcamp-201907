@@ -1,6 +1,6 @@
 # SKYSHOP
 
-![](skylab.PNG)
+![](images/skylab.PNG)
 
 ## TRELLO
 [link](https://trello.com/b/2O243NBC/skyshop)
@@ -18,24 +18,24 @@ When going to the cart page the user can remove items or go directly to the chec
 
 **USE CASES**
 
-![](Usecases.PNG)
+![](images/Usecases.PNG)
 
 **FLOW DIAGRAM**
 
-![](flowDiagram.jpg)
+![](images/flowDiagram.jpg)
 
 
 **BLOCK DIAGRAM**
 
-![](BlockDiagram.PNG)
+![](images/BlockDiagram.PNG)
 
 **COMPONENTS**
 
-![](Components.PNG)
+![](images/Components.PNG)
 
 **DATA MODEL**
 
-![](dataModelUpdate.PNG)
+![](images/dataModelUpdate.PNG)
 
 ### CODE COVERAGE
 

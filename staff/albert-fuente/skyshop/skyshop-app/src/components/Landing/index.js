@@ -4,21 +4,16 @@ import Context from '../Context'
 import logic from '../../logic'
 import { Redirect} from "react-router-dom"
 
-
-import '../App.sass'
-
 export default function Landing(){
 
     const { credentials, view, setView, user, setUser, admin,setAdmin , advancedSearch, setAdvancedSearch,product, setProduct, productQuery,setProductQuery, cart,setCart} = useContext(Context)
 
     useEffect(() => {
 
-        if (credentials) {
-          const { id, token } = credentials
-
+        if (logic.isUserLoggedIn()) {
           async function retrieve() {
             try {
-              const { user: userRetrieved } = await logic.retrieveUser(id, token)
+              const { user: userRetrieved } = await logic.retrieveUser()
 
               setUser(userRetrieved)
               
