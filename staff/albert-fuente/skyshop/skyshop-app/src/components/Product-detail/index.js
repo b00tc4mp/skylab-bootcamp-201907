@@ -14,16 +14,13 @@ function ProductDetail() {
 
   let quantity=counter
   
-    const { user, credentials, setView, view, product, setProduct,productQuery,setProductQuery } = useContext(Context)
-    const { id, token } = credentials
+    const {  setView, view, product, setProduct,productQuery,setProductQuery } = useContext(Context)
     const productId=productQuery
 
     useEffect(() => {
       (async () =>{
         try{
-          const product=await logic.retrieveProduct(productQuery)
-         
-          
+          const product=await logic.retrieveProduct(productQuery)    
           setProduct(product)
         }catch(error){
           console.log(error.message)
@@ -38,12 +35,12 @@ function ProductDetail() {
 
   function handleAdd(event){
     event.preventDefault()
-    handleAddCart(id,token,productId, quantity)
+    handleAddCart(productId, quantity)
   }
 
-  async function handleAddCart(id,token,productId,quantity){
+  async function handleAddCart(productId,quantity){
     try{
-      await logic.addToCart(id,token,productId,quantity)
+      await logic.addToCart(productId,quantity)
       setSuccess(true)
       console.log("added to cart")
 
@@ -59,7 +56,7 @@ function ProductDetail() {
      { product && <div>
                     <hr></hr>
                     <ul className='detail'>
-                    <li className="detail-picture">{product.image}</li>
+                    <li className="detail-picture"><img src={product.image}/></li>
                     <li className="detail-price">{product.price+" J"}</li>
                     <li className="detail-description">{product.description}</li>
                     </ul> 

@@ -1,6 +1,9 @@
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
-export default function (id,token) {
+export default function () {
+
+    const { id, token } = this.__credentials__
+
 
     return (async () => {
         const response = await fetch(

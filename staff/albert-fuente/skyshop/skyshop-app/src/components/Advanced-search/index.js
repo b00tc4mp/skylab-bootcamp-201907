@@ -35,7 +35,7 @@ function AdvancedSearch() {
            <option value="duck">Ducks</option>
            <option value="mug">Pigs</option>
            <option value="mug">Mugs</option>
-           <option value="mug">Notebooks</option>
+           <option value="mug">Frames</option>
        </select>
    
                <button type="submit" className="select-submit" >Search </button>

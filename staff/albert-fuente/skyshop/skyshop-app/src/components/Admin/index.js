@@ -8,7 +8,7 @@ import { Redirect} from "react-router-dom"
 
 function Admin() {
     
-    const { setView,view,setCredentials,admin,setUser } = useContext(Context)
+    const { setView,view,setCredentials,admin,setUser,setAdmin } = useContext(Context)
 
     function handleGoRegisterProduct(event){
         event.preventDefault()
@@ -31,6 +31,8 @@ function Admin() {
                 event.preventDefault()  
                 setCredentials(undefined)
                 setView("redirectLanding")
+                setUser(undefined)
+                setAdmin("")
                 sessionStorage.clear()
                 //setUser()
                 console.log("no credentials")

@@ -23,11 +23,13 @@ import ShowAllOrdersUser from '../User-orders'
 import UserRemove from '../User-remove'
 import SumButton from '../SumButton'
 import UserCart from '../User-cart'
+import Succes from '../User-success'
 
 
 import { withRouter, Route } from 'react-router-dom'
 
 import './index.sass'
+import Checkout from '../User-success'
 
 function App() {
 
@@ -71,6 +73,7 @@ function App() {
       <Route path="/profile/user-remove" render={() => <UserRemove /> } />
       <Route path="/sum" render={() => <SumButton /> } />
       <Route path="/user-cart" render={() => <UserCart /> } />
+      <Route path="/profile/success" render={() => <Checkout /> } />
 
 
 

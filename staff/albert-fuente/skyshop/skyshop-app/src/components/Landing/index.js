@@ -1,12 +1,11 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext, useEffect } from 'react'
 import Context from '../Context'
 import logic from '../../logic'
-import { Redirect} from "react-router-dom"
+import { Redirect, withRouter} from "react-router-dom"
 
-export default function Landing(){
+function Landing({history}){
 
-    const { credentials, view, setView, user, setUser, admin,setAdmin , advancedSearch, setAdvancedSearch,product, setProduct, productQuery,setProductQuery, cart,setCart} = useContext(Context)
+    const {  view, setView, user, setUser, admin,setAdmin , advancedSearch, setAdvancedSearch,product, setProduct, productQuery,setProductQuery, cart,setCart} = useContext(Context)
 
     useEffect(() => {
 
@@ -14,21 +13,18 @@ export default function Landing(){
           async function retrieve() {
             try {
               const { user: userRetrieved } = await logic.retrieveUser()
-
-              setUser(userRetrieved)
-              
+              setUser(userRetrieved)        
               setAdmin(userRetrieved.isAdmin)  
               setCart(userRetrieved.cart.length)         
               console.log('is admin?'+userRetrieved.isAdmin)
             } catch(error) {
-              console.log(error.message)
-              
+              console.log(error.message)          
             }
           }
           retrieve()
 
         }
-    }, [credentials])
+    }, [history.location])
 
 
     function handleGoAdvancedSearch(event){
@@ -41,7 +37,6 @@ export default function Landing(){
     <header>
     {view==="landing" && <Redirect to="/"/>}
     {view==="productCategory" && <Redirect to="/productsCategory"/>}
-    {admin===true && <Redirect to="/admin"/>}
     {admin===true &&
         <nav className="nav">
         <ul className="ul">
@@ -92,20 +87,21 @@ export default function Landing(){
                 event.preventDefault()
                 setView("productCategory")
                 setProductQuery("t-shirt")
-            }} >Camisetas</a></li>
+            }} >t-shirts</a></li>
                 <li><a className="nav2-but" onClick={event => {
                 event.preventDefault()
                 setView("productCategory")
                 setProductQuery("mug")
-            }}>Tazas</a></li>
+            }}>mugs</a></li>
                 <li><a className="nav2-but" onClick={event => {
                 event.preventDefault()
                 setView("productCategory")
                 setProductQuery("duck")
-            }}>Patos</a></li>
+            }}>ducks</a></li>
                 <li><a className="nav2-but--small"  onClick={handleGoAdvancedSearch}  ><i className="fas fa-search"></i></a></li>
             </ul>
     </nav>
     
     </>
 }
+export default withRouter(Landing)
