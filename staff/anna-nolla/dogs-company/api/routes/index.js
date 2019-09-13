@@ -10,7 +10,6 @@ const { createChat, updateChat, retrieveAllChats, retrieveChat } = require('./ch
 const { createNotification, deleteNotification, updateNotification, retrieveNotification } = require('./notification')
 
 const { retrieveAllDinamic, updateDinamic, retrieveAllStatic, updateStatic } = require('./geolocation')
-
 const router = Router()
 
 router.post('/user', registerUser)
@@ -37,7 +36,7 @@ router.patch ('/user/notification/:notificationId', [tokenMiddleware], updateNot
 router.delete ('/user/notification/:notificationId', [tokenMiddleware], deleteNotification)
 
 // To Try in Posman
-router.get('/user/dinamic', [tokenMiddleware], retrieveAllDinamic)
+router.get('/user/dinamic', tokenMiddleware, retrieveAllDinamic)
 router.patch ('/user/dinamic/:longitude/:latitude', [tokenMiddleware], updateDinamic)
 router.get('/user/static', [tokenMiddleware], retrieveAllStatic)
 router.patch ('/user/static/:longitude/:latitude', [tokenMiddleware], updateStatic)

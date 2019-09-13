@@ -15,11 +15,13 @@ module.exports = function (id, petId, data) {
     validate.string(id, 'user id')
     validate.string(petId, 'pet id')
     validate.string(data.name, 'name')
-    validate.date(data.age, 'age')
+    validate.string(data.age, 'age')
     validate.boolean(data.gender, 'gender')
     validate.string(data.size, 'size')
     validate.string(data.characteristics, 'characteristics')
 
+    let petDate = new Date(data.age)
+    validate.date(petDate, 'age')
 
     return (async () => {
        
@@ -31,7 +33,7 @@ module.exports = function (id, petId, data) {
            if (!pet) throw Error("This user has no pet with this id")
 
            pet.name = data.name
-           pet.age = data.age
+           pet.age = petDate
            pet.gender = data.gender
            pet.size = data.size
            pet.characteristics = data.characteristics

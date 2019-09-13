@@ -37,8 +37,7 @@ module.exports = function(id, chatId) {
     
         chat.id = chat._id.toString()
         delete chat._id
-
-
+        
         return chat
     })()
 }

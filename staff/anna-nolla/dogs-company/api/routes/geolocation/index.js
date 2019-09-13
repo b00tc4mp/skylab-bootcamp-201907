@@ -1,6 +1,6 @@
 module.exports = {
-    retrieveDinamic: require('./retrieve-dinamic'),
+    retrieveAllDinamic: require('./retrieve-dinamic'),
     updateDinamic: require('./update-dinamic'),
-    retrieveStatic: require('./retrieve-static'),
+    retrieveAllStatic: require('./retrieve-static'),
     updateStatic: require('./update-static')
 }

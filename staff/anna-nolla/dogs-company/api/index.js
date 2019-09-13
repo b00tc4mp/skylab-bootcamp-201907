@@ -12,10 +12,16 @@ database.connect(DB_URL)
     .then(() => {
         const app = express()
 
-        app.use(cors())
+        app.use((req, res, next) => {
+            debugger
+
+            next()
+        })
+
         app.use(express.json())
+        app.use(cors())
         //app.use(express.urlencoded())
-        app.use('/dc', routes)
+        app.use('/api', routes)
 
         app.listen(PORT, () => console.log(`${name} ${version} up and running on port ${PORT}`))
     })

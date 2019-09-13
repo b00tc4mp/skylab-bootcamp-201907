@@ -20,7 +20,7 @@ module.exports = function(name, surname, email, password) {
 
     return (async () => {
         const user = await User.findOne({ email })
-            if (user) throw new Error(`user with e-mail ${email} already exists`)
-            else await User.create({name, surname, email, password})
+            if (user) throw Error(`user with e-mail ${email} already exists`)
+            await User.create({name, surname, email, password})
     })()    
 }

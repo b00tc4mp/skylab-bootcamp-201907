@@ -19,10 +19,13 @@ module.exports = function(id, name, age, gender, size, characteristics) {
 
     validate.string(id, 'user id')
     validate.string(name, 'name')
-    validate.date(age, 'age')
+    validate.string(age, 'age')
     validate.string(size, 'size')
     validate.boolean(gender, 'gender')
     validate.string(characteristics, 'characteristics')
+    
+    const petDate = new Date(age)
+    validate.date(petDate, 'age')
 
     return (async () => {  
         const user = await User.findById(id)
@@ -31,7 +34,7 @@ module.exports = function(id, name, age, gender, size, characteristics) {
                 const pet = await user.pets.find(pet => (pet.name === name && pet.age === age))
                     if (pet) throw Error('Pet already exists')
                     else {
-                        const newPet = new Pet({ name, age, gender, size, characteristics })
+                        const newPet = new Pet({ name, age: petDate, gender, size, characteristics })
                         petId = newPet.id
                         user.pets.push(newPet)
                         await user.save()
