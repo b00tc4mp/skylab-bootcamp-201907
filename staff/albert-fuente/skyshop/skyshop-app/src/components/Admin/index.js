@@ -25,6 +25,7 @@ function Admin() {
         <ul >
             <li ><a className="nav-but" href='/#/admin/register-products'> Register Products</a></li>
             <li ><a className="nav-but" href=''> Update product TODO!!!!</a></li>
+            <li ><a className="nav-but" href='/#/admin/stock'> Stock control</a></li>
             <li ><a className="nav-but" href='/#/admin/view-orders'> View orders</a></li>
             <li ><a className="nav-but" href='/#/admin/admin-update'> Update profile</a></li>
             <li ><a className="nav-but" onClick={event => {

@@ -2,11 +2,13 @@
 import React, { useContext } from 'react'
 import Context from '../Context'
 import logic from '../../logic'
+import { Redirect} from "react-router-dom"
+
 
 
 function AdminRegisterProduct() {
     
-    const { setView , admin} = useContext(Context)
+    const { setView , admin, view} = useContext(Context)
     let productId=""
 
     function handleSubmit(event) {
@@ -19,19 +21,20 @@ function AdminRegisterProduct() {
     async function handleRegisterProduct(title,image,description,size,color,price) {
     
           try {
-              debugger
+              
               const response= await logic.registerProduct(title,image,description,size,color,price)
-              console.log("PRODUCT REGISTERED")
-              debugger
+              console.log("PRODUCT REGISTERED")              
               productId=response.id
               await logic.uploadPhoto(productId,image)
-              //setView("login")
+              console.log('picture uploaded')
+              setView("productSuccess")
           } catch(error) {
               console.log(error.message)
           }
       } 
     
     return <>
+        {view==="productSuccess" && <Redirect to="/admin/success"/>}
         <h2 className="formPanel">Register products</h2>
         <hr></hr>
         {admin===true &&

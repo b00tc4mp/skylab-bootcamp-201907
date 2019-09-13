@@ -14,7 +14,7 @@ function ProductDetail() {
 
   let quantity=counter
   
-    const {  setView, view, product, setProduct,productQuery,setProductQuery } = useContext(Context)
+    const {  setView, view, product, setProduct,productQuery,user } = useContext(Context)
     const productId=productQuery
 
     useEffect(() => {
@@ -52,10 +52,9 @@ function ProductDetail() {
 
     return <>
   {view==="landing" && <Redirect to="/"/>}
-    <a onClick={handleGoBack}><i className="far fa-2x fa-arrow-alt-circle-left addCart-a backFromDetail"></i></a>
-     { product && <div>
-                    <hr></hr>
+     { product && user && <div>
                     <ul className='detail'>
+                    <li className="detail-title">{product.title}</li>
                     <li className="detail-picture"><img src={product.image}/></li>
                     <li className="detail-price">{product.price+" J"}</li>
                     <li className="detail-description">{product.description}</li>
@@ -64,21 +63,23 @@ function ProductDetail() {
                     <div className="detail-counter">         
                             <button className="detail-operator" onClick={event => {
                         event.preventDefault()  
-                        setCounter(counter+1)
+                        setCounter(counter-1)
+                        if(counter==1) setCounter(1)
+
                         
-                    }}>+</button>
+                    }}>-</button>
                 <p className="detail-result">{counter}</p>
                 <button className="detail-operator" onClick={event => {
                         event.preventDefault()  
-                        setCounter(counter-1)
-                        if(counter==1) setCounter(1)
+                        setCounter(counter+1)
                         
-                    }}>-</button>
+                    }}>+</button>
                     </div> 
 
                     <button className="addCart"><a className="addCart-a" onClick={handleAdd}>Add to Cart</a></button>
                     </div>
-                    <hr></hr>
+                    <a onClick={handleGoBack}><i className="far fa-2x fa-arrow-alt-circle-left addCart-a backFromDetail"></i></a>
+
 
                     </div> 
     }

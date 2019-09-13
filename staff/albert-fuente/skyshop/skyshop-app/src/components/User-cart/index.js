@@ -44,7 +44,6 @@ function UserCart() {
 
   return <>
     {view==="success" && <Redirect to="/profile/success"/>}
-    <a href="/#/"><i className="far fa-2x fa-arrow-alt-circle-left addCart-a backArrow"></i></a>
     {cart && cart instanceof Array &&
       <div>
         <ul>
@@ -56,25 +55,25 @@ function UserCart() {
                   
                   let productId = item.product._id
                   handleUpdateCart(productId)
-                }}>><i class="far fa-times-circle"></i></li>
-                <li className="userCart-description">{item.product.title}</li>
+                }}><i class="far fa-times-circle"></i></li>
+                <li className="userCart-title">{item.product.title}</li>
                 <li className="userCart-description"><img src={item.product.image}/></li>
                 <li className="userCart-description">{'Size: ' + item.product.size}</li>
-                <li className="userCart-description">{item.product.description}</li>
                 <li className="userCart-description">{'Color:' + item.product.size}</li>
                 <li className="userCart-description">{'Price:' + item.product.price + " €"}</li>
                 <li className="userCart-description">{'Quantity: ' + item.quantity}</li>
-                <li className="userCart-description">{'Total: '+(total+=(item.product.price*item.quantity))+ " €"}</li>
-                
+                <li className="userCart-hidden">{'Total: '+(total+=(item.product.price*item.quantity))+ " €"}</li>         
               </ul>
             </>
           }
           )}
         </ul>
-        <h2>Total:</h2><p>{total + " JOSETAS"}</p>
+        <h3 className="userCart-total">Total: {total + " €"}</h3>
         
 
         <button className="formPanel-submit-buy" onClick={handleCheckout} >Checkout</button>
+        <p><a href="/#/"><i className="far fa-2x fa-arrow-alt-circle-left addCart-a userCart-backArrow"></i></a></p>
+
       </div>
     }
   </>

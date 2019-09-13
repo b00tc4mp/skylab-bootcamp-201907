@@ -40,7 +40,6 @@ function Landing({history}){
     {admin===true &&
         <nav className="nav">
         <ul className="ul">
-            <li><img className="fav-logo-bco" src={require("../../styles/img/logo-bco.png")}></img> </li>
             <li className="li--title"><a className="nav-title" onClick={event=>{
                 event.preventDefault()
                 setView('landing')
@@ -53,7 +52,6 @@ function Landing({history}){
     {user && admin===false &&
         <nav className="nav">
         <ul className="ul">
-            <li><img className="fav-logo-bco" src={require("../../styles/img/logo-bco.png")}></img> </li>
             <li className="li--title"><a className="nav-title" onClick={event=>{
                 event.preventDefault()
                 setView('landing')
@@ -67,7 +65,6 @@ function Landing({history}){
         {!user &&
         <nav className="nav">
         <ul className="ul">
-            <li><img className="fav-logo-bco" src={require("../../styles/img/logo-bco.png")}></img> </li>
             <li className="li--title"><a className="nav-title" onClick={event=>{
                 event.preventDefault()
                 setView('landing')
@@ -86,17 +83,17 @@ function Landing({history}){
                 <li><a className="nav2-but" onClick={event => {
                 event.preventDefault()
                 setView("productCategory")
-                setProductQuery("t-shirt")
+                setProductQuery("T-shirt")
             }} >t-shirts</a></li>
                 <li><a className="nav2-but" onClick={event => {
                 event.preventDefault()
                 setView("productCategory")
-                setProductQuery("mug")
+                setProductQuery("Mug")
             }}>mugs</a></li>
                 <li><a className="nav2-but" onClick={event => {
                 event.preventDefault()
                 setView("productCategory")
-                setProductQuery("duck")
+                setProductQuery("Duck")
             }}>ducks</a></li>
                 <li><a className="nav2-but--small"  onClick={handleGoAdvancedSearch}  ><i className="fas fa-search"></i></a></li>
             </ul>

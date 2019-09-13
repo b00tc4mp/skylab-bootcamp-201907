@@ -23,13 +23,15 @@ import ShowAllOrdersUser from '../User-orders'
 import UserRemove from '../User-remove'
 import SumButton from '../SumButton'
 import UserCart from '../User-cart'
-import Succes from '../User-success'
+import Checkout from '../User-success'
+import Stock from '../Admin-Stock'
+import ProductSuccess from '../Admin-Success'
+
 
 
 import { withRouter, Route } from 'react-router-dom'
 
 import './index.sass'
-import Checkout from '../User-success'
 
 function App() {
 
@@ -65,8 +67,10 @@ function App() {
       <Route path="/spinner" render={() => <Spinner /> } />
       <Route exact path="/admin" render={() => <Admin /> } />
       <Route path="/admin/admin-update" render={() => <AdminUpdate /> } />
+      <Route path="/admin/success" render={() => <ProductSuccess /> } />
       <Route path="/admin/register-products" render={() => <AdminRegisterProduct /> } />
       <Route path="/admin/view-orders" render={() => <ShowAllOrders /> } />
+      <Route path="/admin/stock" render={() => <Stock /> } />
       <Route exact path="/profile" render={() => <User /> } />
       <Route path="/profile/user-update" render={() => <UserUpdate /> } />
       <Route path="/profile/user-orders" render={() => <ShowAllOrdersUser /> } />
@@ -74,6 +78,7 @@ function App() {
       <Route path="/sum" render={() => <SumButton /> } />
       <Route path="/user-cart" render={() => <UserCart /> } />
       <Route path="/profile/success" render={() => <Checkout /> } />
+
 
 
 
