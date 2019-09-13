@@ -13,7 +13,7 @@ export default function (productId, image) {
             //headers: {},
             body: formData
         })
-        debugger
+        
         if (response.status !== 200) {
             const { error } = await response.json()
             throw Error(error)

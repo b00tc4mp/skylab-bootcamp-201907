@@ -15,23 +15,17 @@ function ShowAllOrdersUser() {
 
     useEffect(() => {    
           (async ()=> {
-            try {
-              
+            try {              
               const orderId = await logic.retrieveAllOrdersUser()
-
               setOrders(orderId)      
-              setError(undefined)
-                  
+              setError(undefined)                 
               console.log('is order? '+orderId)
             } catch(error) {
               setError(error.message)
-              console.log(error.message)
-              
+              console.log(error.message)              
             }
           }
-          )()
-
-        
+          )()      
     }, [])
 
  
@@ -40,7 +34,7 @@ function ShowAllOrdersUser() {
     {user &&
     <div>
       
-   <h4>All orders for user:</h4>
+   <h4>History of orders:</h4>
          {error!=undefined && <Feedback message={error} />} 
 
     {orders &&
@@ -53,7 +47,7 @@ function ShowAllOrdersUser() {
                     <label className="orders-label">DATE:</label>
                     <li className="">{item.date.slice(0,16)}</li>
                     <label className="orders-label">ITEMS:</label>
-                    <li className="">{item.items.map(prod=>"\n Product reference: "+prod.product+ "        Quantity: \n"+prod.quantity + "    ")}</li>
+                    <li className="">{item.items.map(prod=>"Product: "+prod.product.title+ " Description: "+prod.product.description + " Price: " + prod.product.price + "        Quantity: \n"+prod.quantity + "    ")}</li>
 
                     </ul>
                    </>

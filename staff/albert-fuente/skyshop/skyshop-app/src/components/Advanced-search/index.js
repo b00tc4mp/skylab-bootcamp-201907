@@ -29,13 +29,13 @@ function AdvancedSearch() {
         
      }}>
            <option>Select a category</option>
-           <option value="t-shirt">T-shirts</option>
-           <option value="t-shirt">Hoodies</option>
-           <option value="duck">Caps</option>
-           <option value="duck">Ducks</option>
-           <option value="mug">Pigs</option>
+           <option value="T-shirt">T-shirts</option>
+           <option value="Nocilla">Nocilla</option>
+           <option value="Duck">Duck</option>
+           <option value="Pig">Pig</option>
+           <option value="Full equip">team</option>
            <option value="mug">Mugs</option>
-           <option value="mug">Frames</option>
+           <option value="Frame">Frames</option>
        </select>
    
                <button type="submit" className="select-submit" >Search </button>

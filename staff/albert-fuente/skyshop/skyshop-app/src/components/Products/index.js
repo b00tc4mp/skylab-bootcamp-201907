@@ -56,9 +56,9 @@ function Products() {
                 setView("productDetail")
                 setProductQuery(item._id)
             }} >
-                    <li className="product-description">{item.description}</li>
-                    <img src={item.image}/>
-                    <li className="product-price">{item.price+" J"}</li>
+                  <li className="product-description">{item.title}</li>
+                  <li className="product-image"><img src={item.image}/></li>
+                  <li className="product-price">{item.price+" J"}</li>
                     </ul>
                    </>
                  }
@@ -82,8 +82,8 @@ function Products() {
                 
                 
                 }} >
-                  <li className="product-description">{item.description}</li>
-                  <img src={item.image}/>
+                  <li className="product-description">{item.title}</li>
+                  <li className="product-image"><img src={item.image}/></li>
                   <li className="product-price">{item.price+" J"}</li>
                   </ul>
                 </>
