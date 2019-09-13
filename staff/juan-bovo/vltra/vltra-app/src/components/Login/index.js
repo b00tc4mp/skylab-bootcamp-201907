@@ -13,6 +13,8 @@ function Login(){
             
             <button className="login__button form__button">Iniciar sesión</button>
         </form>
+        <p className="login__info form__info">¿Aún no tienes una cuenta? Entonces comienza por <Link to="/register" className="login__on-register anchor__link">registrarte en Vltra</Link> </p>
+        <p className="login__info form__info"><Link to="/" className="login__on-register anchor__link">Volver a la página principal</Link></p>
     </section>
 </>
 }
