@@ -14,7 +14,7 @@ function Login(props) {
 
     return(async()=>{
 
-        try{
+        try {
           
           const {token} = await logic.authenticateUser(email, password)
           logic.userCredentials = token 

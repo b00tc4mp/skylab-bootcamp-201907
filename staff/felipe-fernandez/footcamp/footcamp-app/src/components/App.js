@@ -35,12 +35,9 @@ function App({ history }) {
 
           <Route exact path="/" render={() => logic.isUserLogged() ? history.push('/home') : <Landing /> } />
 
-
           <Route path="/login" render={() => <Login /> } />
           
           <Route path="/register" render={() => <Register /> } /> 
-
-        
 
           <Route path="/register-success"  component = {RegisterSuccess} />
 
@@ -50,11 +47,10 @@ function App({ history }) {
           
           <Route path="/myleagues" render={() => logic.isUserLogged() ? <MyLeagues /> :  history.push('/')  } />
 
-           <Route path="/home-landing" render={() => logic.isUserLogged() ? <HomeLanding /> :  history.push('/')  } />  
+          <Route path="/home-landing" render={() => logic.isUserLogged() ? <HomeLanding /> :  history.push('/')  } />  
 
 
 
-          {/* <Route path="/myteam" render={() => logic.isUserLogged() ? <Myteam /> :  history.push('/')  } />  */}
           
         </Context.Provider>
         </div>

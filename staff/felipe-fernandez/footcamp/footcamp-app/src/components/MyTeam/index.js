@@ -15,9 +15,8 @@ function MyTeam (props) {
         (async () => {
             const token = logic.userCredentials
             
-          
             //const user  = await logic.retrieveUser(token)
-            debugger
+            
             const leagueId  = await logic.retrieveAllLeagues(token)
             const result  = await logic.retrieveTeam(token, teamId, leagueId)
             //const result  = await logic.retrieveTeam(token, teamId, user.leagues[0])
