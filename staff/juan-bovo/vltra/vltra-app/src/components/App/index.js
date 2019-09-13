@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Link, Route, withRouter } from 'react-router-dom'
 
 import Home from '../Home'
 import Header from '../Header'
@@ -11,7 +11,11 @@ import RegisterSuccess from '../Register-success'
 
 import './style.sass'
 
+
 function App() {
+  const [view, setView] = useState('/')
+
+  
   return <>
     <Router>
       <Header />
@@ -24,4 +28,4 @@ function App() {
   </>
 }
 
-export default App
+export default withRouter(App)
