@@ -1,5 +1,10 @@
+import { validate } from 'wannadog-utils'
+
 export default function (email, password) {
-    // validate fields
+    validate.string(email, 'e-mail')
+    validate.email(email, 'e-mail')
+    validate.string(password, 'password')
+
 
     return (async () => {
         const response = await fetch(`http://localhost:8080/api/auth`, {
@@ -9,9 +14,10 @@ export default function (email, password) {
         })
 
         if (response.status === 200) {
-            const { token, id } = await response.json()
+            const { token } = await response.json()
 
-            return { token, id }
+            this.__token__ = token
+            return
         }
 
         const { error } = await response.json()

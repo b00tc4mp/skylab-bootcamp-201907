@@ -4,18 +4,21 @@ import { Link } from 'react-router-dom'
 export default function ({ onRegisterDog }) {
 
     return <>
-        <Link to="/sign">Back</Link>
+        <Link to="/mydogs">Back</Link>
         <h2>Add Dog</h2>
         <form onSubmit={event => {
             event.preventDefault()
 
-            const { target: { name: { value: name }, breed: { value: breed }, gender: { value: gender }, size: { value: size }, age: { value: age }, notes: { value: notes }, neutered: { value: neutered }, withDogs: { value: withDogs }, withCats: { value: withCats }, withChildren: { value: withChildren } } } = event
+            const { target: { name: { value: name }, breed: { value: breed }, gender: { value: gender }, size: { value: size }, age: { value: age }, notes: { value: notes }, neutered: { value: neutered }, withDogs: { value: withDogs }, withCats: { value: withCats }, withChildren: { value: withChildren }, chip: { value: chip } } } = event
 
-            onRegisterDog(name, breed, gender, size, Number(age), notes, neutered, withDogs, withCats, withChildren)
+            onRegisterDog(name, breed, gender, size, Number(age), notes, neutered, withDogs, withCats, withChildren, chip)
         }}>
 
             <label htmlFor="name">Name</label>
             <input type="text" name="name"></input>
+
+            <label htmlFor="chip">Chip</label>
+            <input type="text" name="chip"></input>
 
             <textarea name="notes" placeholder="Notes ..."></textarea>
 

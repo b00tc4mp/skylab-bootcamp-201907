@@ -1,19 +1,25 @@
-export default function (distance, breed, gender, size, age, neutered, withDogs, withCats, withChildren) {
+export default function (distance, breed, gender, size, age, neutered, withDogs, withCats, withChildren, callback) {
     debugger
-    let latitude, longitude
+    let latitude, longitude, dogs
     navigator.geolocation.getCurrentPosition(function (position) {
         latitude = position.coords.latitude
         longitude = position.coords.longitude
-        return search(distance, breed, gender, size, age, neutered, withDogs, withCats, withChildren, longitude, latitude)
+        return (async () => {
+            const { results: dogs } = await search(distance, breed, gender, size, age, neutered, withDogs, withCats, withChildren, longitude, latitude)
+            callback(dogs)
+        })()
     },
         function (error) {
             if (error.code === error.PERMISSION_DENIED) {
-                alert('Not usin geolocation heavily limits wannadogs functionality, please relaunch the application if you want to activate it')
+                alert('Not using geolocation heavily limits wannadogs functionality, please relaunch the application if you want to activate it')
                 latitude = 0
                 longitude = 0
-                return search(distance, breed, gender, size, age, neutered, withDogs, withCats, withChildren, longitude, latitude)
+                return (async () => {
+                    return await search(distance, breed, gender, size, age, neutered, withDogs, withCats, withChildren, longitude, latitude)
+                })()
             }
         })
+    return dogs
 }
 
 async function search(distance, breed, gender, size, age, neutered, withDogs, withCats, withChildren, longitude, latitude) {
@@ -24,12 +30,10 @@ async function search(distance, breed, gender, size, age, neutered, withDogs, wi
         body: JSON.stringify({ distance, breed, gender, size, age, neutered, withDogs, withCats, withChildren, location: { coordinates: [longitude, latitude] } }),
     })
 
-    debugger
-
-    response = await response.json()
-
-    if (response.status !== 201) {
+    if (response.status !== 200) {
         const { error } = await response.json()
         throw Error(error)
     }
+    const _response = await response.json()
+    return _response
 }

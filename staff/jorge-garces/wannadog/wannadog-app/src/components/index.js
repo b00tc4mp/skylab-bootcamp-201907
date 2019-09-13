@@ -5,6 +5,6 @@ import Success from './Success'
 import Confirm from './Confirm'
 import Search from './Search'
 import Profile from './Profile'
-import AddDog from './AddDog'
+import RegisterDog from './RegisterDog'
 
-export { Landing, Sign, Register, Success, Confirm, Search, Profile, AddDog }
+export { Landing, Sign, Register, Success, Confirm, Search, Profile, RegisterDog }
