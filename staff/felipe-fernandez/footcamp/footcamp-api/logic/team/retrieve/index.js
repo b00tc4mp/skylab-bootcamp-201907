@@ -6,7 +6,7 @@ const { models: { User,  League, Team } } = require('footcamp-data')
  *
  * @param {*} id 
  * @param {*} leagueId 
- * @param {*} name 
+ * @param {*} teamId 
  * 
  *  
  * @returns {Promise}
@@ -26,7 +26,7 @@ module.exports = function(id, leagueId, teamId) {
 
         const league = await League.findOne({ _id: leagueId })
 
-        if (!league) throw Error(`League with code ${ leagueId } does not exist`)
+        if (!league) throw Error(`League with id ${ leagueId } does not exist`)
 
         const findTeam = await Team.findOne({_id: teamId })
 
