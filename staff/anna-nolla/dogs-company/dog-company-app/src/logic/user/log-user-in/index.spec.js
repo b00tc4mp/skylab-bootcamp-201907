@@ -1,6 +1,6 @@
 import logIn from '.'
 
-xdescribe('logic - register user', () => {
+xdescribe('logic - log user in', () => {
 
     let name, surname, email, password, repassword
    

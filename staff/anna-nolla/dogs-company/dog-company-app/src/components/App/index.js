@@ -19,13 +19,13 @@ function App({history}) {
   const [addPet, setAddPet] = useState(false)
 
   return  <MyContext.Provider value = { { view, setView, user, setUser, addPet, setAddPet } }>  
-            { logic.userLoggedIn() && <Header/> }
+            { logic.isUserLoggedIn() && <Header/> }
               <div className="App">
-                <Route exact path = "/" render = { () => !logic.userLoggedIn() ? <Landing/> : <Home/>} />
+                <Route exact path = "/" render = { () => !logic.isUserLoggedIn() ? <Landing/> : <Home/>} />
                 <Route path = "/register" render = { () => <Register/> } />
                 <Route path = "/login" render = { () => <Login/> } />
-                <Route path = "/home" render = { () => !logic.userLoggedIn() ? <Landing/> : <Home/> } />
-                <Route path = "/user" render = { () => !logic.userLoggedIn() ? <Login/> : <User/> } /> 
+                <Route path = "/home" render = { () => !logic.isUserLoggedIn() ? <Landing/> : <Home/> } />
+                <Route path = "/user" render = { () => !logic.isUserLoggedIn() ? <Login/> : <User/> } /> 
               </div>
           </MyContext.Provider>
 }

@@ -6,7 +6,7 @@ module.exports = function(url, method = 'get', headers, body) {
     validate.string(method, 'method', true, ['get', 'post', 'put', 'patch', 'delete'])
 
     return fetch(url, {
-        method,
+        method: method.toUpperCase(),
         headers,
         body: JSON.stringify(body)
     })

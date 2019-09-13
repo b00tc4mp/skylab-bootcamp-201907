@@ -1,7 +1,7 @@
 import registerUser from './user/register-user'
-import logIn from './user/logIn-user'
+import logUserIn from './user/log-user-in'
 import retrieveUser from './user/retrieve-user'
-import userLoggedIn from './user-logged-in'
+import isUserLoggedIn from './user/is-user-logged-in'
 import logUserOut from './log-out'
 import updateUser from './user/update-user'
 import registerPet from './pet/register-pet'
@@ -31,9 +31,9 @@ export default {
     },
 
     registerUser,
-    logIn, 
+    logUserIn, 
     retrieveUser,
-    userLoggedIn,
+    isUserLoggedIn,
     logUserOut,
     updateUser,
     registerPet,

@@ -7,7 +7,7 @@ function Login ({ history }) {
     const [error , setError] = useState(undefined)
     async function onLogIn(email, password){
         try {
-            await logic.logIn(email, password)
+            await logic.logUserIn(email, password)
                 history.push('/home')
 
         } catch ({ message }) {
