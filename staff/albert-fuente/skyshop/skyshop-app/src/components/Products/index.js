@@ -57,7 +57,7 @@ function Products() {
                 setProductQuery(item._id)
             }} >
                     <li className="product-description">{item.description}</li>
-                    <li className="product-picture">{item.image}</li>
+                    <img src={item.image}/>
                     <li className="product-price">{item.price+" J"}</li>
                     </ul>
                    </>
@@ -83,7 +83,7 @@ function Products() {
                 
                 }} >
                   <li className="product-description">{item.description}</li>
-                  <li className="product-picture">{item.image}</li>
+                  <img src={item.image}/>
                   <li className="product-price">{item.price+" J"}</li>
                   </ul>
                 </>

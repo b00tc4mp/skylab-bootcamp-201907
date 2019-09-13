@@ -1,6 +1,7 @@
 import registerUser from './register-user'
 import authenticateUser from './authenticate-user'
 import retrieveUser from './retrieve-user'
+import isUserLoggedIn from './is-user-logged-in'
 import registerProduct from './register-product'
 import retrieveAllProducts from './retrieve-all-products'
 import retrieveProduct from './retrieve-product'
@@ -15,20 +16,20 @@ import placeOrder from './order-place'
 import uploadPhoto from './upload-picture'
 import retrieveCart from './retrieve-cart'
 
+export default {
+    set __credentials__({ id, token }) {
+        sessionStorage.id = id
+        sessionStorage.token = token
+    },
+    get __credentials__() {
+        const { id, token } = sessionStorage
 
-export default{
-    set userCredentials(token){
-        sessionStorage.token=token
-    },
-    get userCredentials(){
-        return sessionStorage.token
-    },
-    isUserLogged(){
-        return !!this.userCredentials //desde fuera puedes consultar si hay session storage o no logic.isUserLogged?
+        return { id, token }
     },
     registerUser,
     authenticateUser,
     retrieveUser,
+    isUserLoggedIn,
     registerProduct,
     retrieveAllProducts,
     retrieveProduct,

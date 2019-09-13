@@ -9,18 +9,17 @@ import { Redirect} from "react-router-dom"
 function UserRemove() {
     const[remove,setRemove]=useState(false)
     const { user,setView,view,setCredentials,credentials,setUser } = useContext(Context)
-    const { id, token } = credentials
 
     function handleSubmit(event) {
         event.preventDefault()
         const { target: { password: { value: password } } } = event
-        handleRemove( id,token,password)
+        handleRemove( password)
     }
     
-    async function handleRemove(id,token, password) {
+    async function handleRemove( password) {
     
           try {
-              await logic.removeUser(id,token, password)
+              await logic.removeUser(password)
               setView('registerSuccess')
              
               console.log("user is removed")

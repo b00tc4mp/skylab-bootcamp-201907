@@ -10,18 +10,14 @@ import Feedback from '../Feedback'
 
 function ShowAllOrdersUser() {
   const[error,setError]=useState(undefined)
+  
+    const { user, orders,setOrders} = useContext(Context)
 
-    
-    const { credentials, setCredentials, setView, user, products, setProducts,productQuery,setProductQuery , orders,setOrders} = useContext(Context)
-
-    useEffect(() => {
-
-        if (credentials) {
-          const { id, token } = credentials
-          
-          async function retrieve() {
+    useEffect(() => {    
+          (async ()=> {
             try {
-              const orderId = await logic.retrieveAllOrdersUser(id, token)
+              
+              const orderId = await logic.retrieveAllOrdersUser()
 
               setOrders(orderId)      
               setError(undefined)
@@ -33,10 +29,10 @@ function ShowAllOrdersUser() {
               
             }
           }
-          retrieve()
+          )()
 
-        }
-    }, [credentials])
+        
+    }, [])
 
  
 
@@ -44,7 +40,7 @@ function ShowAllOrdersUser() {
     {user &&
     <div>
       
-   <h4>All orders:</h4>
+   <h4>All orders for user:</h4>
          {error!=undefined && <Feedback message={error} />} 
 
     {orders &&

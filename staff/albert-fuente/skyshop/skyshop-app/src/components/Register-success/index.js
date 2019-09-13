@@ -5,15 +5,13 @@ import logic from '../../logic'
 
 
 function RegisterSuccess() {
-    
-    const { setView } = useContext(Context)
-   
+       
     return <>
         <p className="formPanel">You have been succesfully registered, continue to:</p>
         
-        <div className="formPanel-form">
-            <a href='/#/login' onClick="">Login</a>
-        </div>
+        
+        <a href='/#/login' className="formPanel-submit-explore" >Login</a>
+        
         
     </>
 }

@@ -6,7 +6,6 @@ import logic from '../../logic'
 
 function UserUpdate() {
     const { setView , credentials} = useContext(Context)
-    const { id, token } = credentials
 
     function handleSubmit(event) {
         event.preventDefault()
@@ -17,13 +16,13 @@ function UserUpdate() {
             email,
             password,
         }
-        handleUpdate(id,token,body)
+        handleUpdate(body)
     }
     
-    async function handleUpdate(id, token,body) {
+    async function handleUpdate(body) {
         
           try {
-              await logic.updateUser(id, token, body)
+              await logic.updateUser(body)
               setView('registerSuccess')
              
               console.log("user is updated")

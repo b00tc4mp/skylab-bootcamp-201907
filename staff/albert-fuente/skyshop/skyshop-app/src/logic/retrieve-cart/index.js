@@ -1,7 +1,9 @@
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
-export default function (id,token) {
-    debugger
+
+export default function () {
+
+    const { id, token } = this.__credentials__
 
     return (async () => {
         
@@ -16,9 +18,7 @@ export default function (id,token) {
         }
         else {
             const res=await response.json()
-            return res.cart
-            
+            return res.cart   
         }
-            
     })()
 }

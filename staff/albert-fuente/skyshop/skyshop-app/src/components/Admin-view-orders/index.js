@@ -8,16 +8,15 @@ import { Redirect} from "react-router-dom"
 
 function ShowAllOrders() {
     
-    const { credentials, setCredentials, setView, view, products, setProducts,productQuery,setProductQuery , orders,setOrders} = useContext(Context)
+    const { view, products, setProducts,productQuery,setProductQuery , orders,setOrders} = useContext(Context)
 
     useEffect(() => {
 
-        if (credentials) {
-          const { id, token } = credentials
+      
           
-          async function retrieve() {
+          (async ()=> {
             try {
-              const orderId = await logic.retrieveAllOrders(id, token)
+              const orderId = await logic.retrieveAllOrders()
 
               setOrders(orderId)           
               console.log('is order? '+orderId)
@@ -25,11 +24,10 @@ function ShowAllOrders() {
               console.log(error.message)
               
             }
-          }
-          retrieve()
-
-        }
-    }, [credentials])
+          })()
+        
+        
+    }, [])
 
 
     return <>

@@ -7,7 +7,7 @@ import { Redirect} from "react-router-dom"
 
 function ProductsCategory() {
     
-    const { setCredentials, setView, view, products, setProducts,productQuery,setProductQuery } = useContext(Context)
+    const {  setView, view, products, setProducts,productQuery,setProductQuery } = useContext(Context)
 
     useEffect(() => {
         (async () =>{
@@ -34,7 +34,7 @@ function ProductsCategory() {
                 setProductQuery(item._id)
             }} >
                     <li className="product-description">{item.description}</li>
-                    <li className="product-picture">{item.image}</li>
+                    <img src={item.image}/>
                     <li className="product-price">{item.price+" J"}</li>
                     </ul>
                    </>

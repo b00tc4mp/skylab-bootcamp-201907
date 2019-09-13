@@ -2,14 +2,14 @@
 import React, { useContext,useState } from 'react'
 import Context from '../Context'
 import logic from '../../logic'
-import { Redirect} from "react-router-dom"
+import { Redirect , withRouter } from "react-router-dom"
 import Feedback from '../Feedback'
 
 
-function Login() {
+function Login({history}) {
     const[error,setError]=useState(undefined)
    
-    const { setCredentials, setView,view } = useContext(Context)
+    const { setView,view } = useContext(Context)
     
     function handleSubmit(event) {
         event.preventDefault()
@@ -19,19 +19,19 @@ function Login() {
 
     async function handleLogin(email, password) {
         try {
-            const { id, token } = await logic.authenticateUser(email, password)
-            setCredentials({ id, token })
-            setView('toLanding')
-            setError(undefined)
-
-            logic.userCredentials=token //llamas al setter i el token lo ponen a sessionstorage
+            await logic.authenticateUser(email, password)
+            
+            setView('landing')
+            history.push("/")
+            
         } catch(error) {
             setError(error.message)
         }
     }
 
     return <>
-        {view==="toLanding" && <Redirect to="/"/>}
+       
+        
         <h2 className="formPanel">Login</h2>
         <hr></hr>
         <div className="formPanel-form">
@@ -51,4 +51,9 @@ function Login() {
     </>
 }
 
-export default Login
+export default withRouter(Login)
+
+
+
+
+/* {view==="landing" && <Redirect to="/"/>}  */
