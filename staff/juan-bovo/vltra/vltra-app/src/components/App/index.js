@@ -13,21 +13,14 @@ import './style.sass'
 
 function App() {
   return <>
-  {/* <Header/>
-  <Login/>
-  <Register/>
-  <Main/>
-<Footer/> */}
-  <Router>
-    <Header/>
-    <Route exact path="/" component={Home}/>
-    <Route path="/login" component={Login}/>
-    <Route path="/register" component={Register}/>
-    <Route path="/register-success" component={RegisterSuccess}/>
-    <Footer/>
-  </Router>
-
-
+    <Router>
+      <Header />
+      <Route exact path="/" component={Home} />
+      <Route path="/login" component={Login} />
+      <Route path="/register" component={Register} />
+      <Route path="/register-success" component={RegisterSuccess} />
+      <Footer />
+    </Router>
   </>
 }
 
