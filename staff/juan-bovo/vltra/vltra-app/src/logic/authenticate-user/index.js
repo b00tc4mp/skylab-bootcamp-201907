@@ -1,11 +1,11 @@
 // const { env: { REACT_APP_API_URL } } = process
-import { validate } from 'my-stuff-utils'
+import { validate } from 'vltra-utils'
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 export default function (email, password) {
-    validate.string(email, 'e-mail')
-    validate.email(email, 'e-mail')
+    validate.email(email, 'email')
+    validate.string(email, 'email')
     validate.string(password, 'password')
 
     return (async () => {
