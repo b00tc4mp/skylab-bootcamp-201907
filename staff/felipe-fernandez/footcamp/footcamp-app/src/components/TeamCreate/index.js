@@ -23,8 +23,8 @@ function CreateTeam(props) {
                 //call to logic and recveive 18 players and the id of the team
                 debugger
                 const result  = await logic.createTeam(name, token, leagueId)
-                const players  = result.team.players.map(results=> results)
-                const teamId = result.team.id
+                const players  = result.players.players.map(results=> results)
+                const teamId = result.players.id
                 setTeamId(teamId) 
                 setTeamName(name)
                 
