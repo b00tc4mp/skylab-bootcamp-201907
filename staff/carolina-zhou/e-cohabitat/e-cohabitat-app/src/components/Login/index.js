@@ -23,25 +23,25 @@ function Login({ history }) {
     }
 
     return <>
-        <main class="main"> 
+        <main className="main"> 
 
-            <section class="login">
-                <h1 class="login__title">Sign in</h1>
+            <section className="login">
+                <h1 className="login__title">Sign in</h1>
                 <form onSubmit={ handleSubmit }>
                     <ul>
-                        <li class="login__form-item">
+                        <li className="login__form-item">
                             <label for="email"></label>
-                            <input class="login__form-input" type="email" name="email" id="email"  placeholder="email"/>
+                            <input className="login__form-input" type="email" name="email" id="email"  placeholder="email"/>
                         </li>
-                        <li class="login__form-item">
+                        <li className="login__form-item">
                             <label for="password"></label>
-                            <input class="login__form-input" type="password" name="password" id="password" placeholder="password"/>
+                            <input className="login__form-input" type="password" name="password" id="password" placeholder="password"/>
                         </li>
                     </ul>
-                    <button class="login__form-button" type="submit">Log in</button>
+                    <button className="login__form-button" type="submit">Log in</button>
                 </form>
                 
-                <a href={`/`} class="login__back-link"><i class="fas fa-arrow-left"></i> Go back</a>
+                <a href={`/`} className="login__back-link"><i className="fas fa-arrow-left"></i> Go back</a>
             </section>
         </main>
     </>

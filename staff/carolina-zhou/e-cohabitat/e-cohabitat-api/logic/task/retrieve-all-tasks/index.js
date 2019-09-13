@@ -15,7 +15,7 @@ module.exports = function(userId) {
 
     return (async() => {
 
-        const user = await User.findById(userId)
+        /* const user = await User.findById(userId)
         if (!user) throw Error(`user with id ${userId} does not exist`)
 
         const userTasks = user.tasks
@@ -26,6 +26,11 @@ module.exports = function(userId) {
             return task.id.toString()        
         })
 
-        return userTasks
+        return userTasks */
+
+        const user = await User.findById(userId).populate('tasks')
+        if (!user) throw Error(`user with id ${userId} does not exist`)
+
+        return user.tasks
     })()
 }

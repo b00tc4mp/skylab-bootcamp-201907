@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import moment from "moment"
+import Chores from '../Chores'
+
 
 function Day({ history }) {
+
+    const [currentDate, setCurrentDate] = useState(moment())
 
     function handleMonth(event) {
         event.preventDefault()
@@ -22,123 +26,119 @@ function Day({ history }) {
         history.push('/day')
     }
 
+    function handleGoToNextDay(event) {
+        event.preventDefault()
+
+        setCurrentDate(moment(currentDate).add(1, 'days'))
+    }
+
+    function handleGoToPreviousDay(event) {
+        event.preventDefault()
+          
+        setCurrentDate(moment(currentDate).subtract(1, 'days')) 
+    }
+
     return <>
     
-    <main class="main"> 
+    <main className="main"> 
 
-        <div class="day">
+        <div className="day">
 
-            <h1 class="day__title"><i class="fas fa-caret-left"></i> {moment().format('dddd Do')} <i class="fas fa-caret-right"></i></h1>
-            <p class="day__month-year">September 2019  -  Week {moment().week()}</p>
+            <div className="day__header">
+                <i className="fas fa-caret-left" onClick={handleGoToPreviousDay}></i><h1 className="day__title"> {moment(currentDate).format('dddd Do')} </h1><i className="fas fa-caret-right" onClick={handleGoToNextDay}></i>
+            </div> 
+            <p className="day__month-year">{moment(currentDate).format('MMMM')} 2019  -  Week {moment(currentDate).week()}</p>
 
-            <div class="day__toolbar">
-                <div class="day__toggle">
-                  <div class="month__toggle-option month__toggle-option--selected" onClick={handleDay}>today</div>
-                  <div class="month__toggle-option" onClick={handleWeek}>week</div>
-                  <div class="month__toggle-option" onClick={handleMonth}>month</div>
+            <div className="day__toolbar">
+                <div className="day__toggle">
+                  <div className="month__toggle-option month__toggle-option--selected" onClick={handleDay}>today</div>
+                  <div className="month__toggle-option" onClick={handleWeek}>week</div>
+                  <div className="month__toggle-option" onClick={handleMonth}>month</div>
                 </div>
                 <form>
-                  <input class="day__search-input" type="text" placeholder="Search"/> <i class="fa fa-search"></i>
+                  <input className="day__search-input" type="text" placeholder="Search"/> <i className="fa fa-search"></i>
                 </form>
             </div>
 
-            <div class="day__act">
-               <div class="day__activity">
-                    <div class="day__chores">
-                        <p class="day__list-title"><strong>Regular chores</strong></p>
-                        <ul class="day__list">
-                            <li class="day__item"><i class="far fa-square"></i> cleaning</li>
-                            <li class="day__item"><i class="far fa-square"></i> listing stock</li>
-                            <li class="day__item"><i class="far fa-square"></i> re-stocking</li>
-                            <li class="day__item"><i class="far fa-plus-square"></i></li>
-                        </ul>
-                    </div>
-                    <div class="day__tags">
-                        <p class="day__list-title"><strong>Activity Tags</strong></p>
-                        <ul class="day__list">
-                            <li class="day__item"><i class="fas fa-square"></i> cooking</li>
-                            <li class="day__item"><i class="fas fa-square"></i> eating</li>
-                            <li class="day__item"><i class="fas fa-plus-square"></i></li>
-                        </ul>
-                    </div>
-                </div>
+            <div className="day__act">
+                <Chores />
             
-                <table class="timetable">
-                    <tr class="timetable__tr">
-                        <th class="timetable__th" scope="row">7-8h</th>
-                        <td class="timetable__td"></td>
+                <table className="timetable">
+                    <tr className="timetable__tr">
+                        <th className="timetable__th" scope="row">7-8h</th>
+                        <td className="timetable__td"></td>
                     </tr>
-                    <tr class="timetable__tr">
-                        <th class="timetable__th" scope="row">8-9h</th>
-                        <td class="timetable__td"></td>
+                    <tr className="timetable__tr">
+                        <th className="timetable__th" scope="row">8-9h</th>
+                        <td className="timetable__td"></td>
                     </tr>
-                    <tr class="timetable__tr">
-                        <th class="timetable__th" scope="row">10-11h</th>
-                        <td class="timetable__td"></td>
+                    <tr className="timetable__tr">
+                        <th className="timetable__th" scope="row">10-11h</th>
+                        <td className="timetable__td"></td>
                     </tr>
-                    <tr class="timetable__tr">
-                        <th class="timetable__th" scope="row">11-12h</th>
-                        <td class="timetable__td"></td>
+                    <tr className="timetable__tr">
+                        <th className="timetable__th" scope="row">11-12h</th>
+                        <td className="timetable__td"></td>
                     </tr>
-                    <tr class="timetable__tr">
-                        <th class="timetable__th" scope="row">12-13h</th>
-                        <td class="timetable__td"></td>
+                    <tr className="timetable__tr">
+                        <th className="timetable__th" scope="row">12-13h</th>
+                        <td className="timetable__td"></td>
                     </tr>
-                    <tr class="timetable__tr">
-                        <th class="timetable__th" scope="row">14-15h</th>
-                        <td class="timetable__td"></td>
+                    <tr className="timetable__tr">
+                        <th className="timetable__th" scope="row">14-15h</th>
+                        <td className="timetable__td"></td>
                     </tr>
-                    <tr class="timetable__tr">
-                        <th class="timetable__th" scope="row">15-16h</th>
-                        <td class="timetable__td"></td>
+                    <tr className="timetable__tr">
+                        <th className="timetable__th" scope="row">15-16h</th>
+                        <td className="timetable__td"></td>
                     </tr>
-                    <tr class="timetable__tr">
-                        <th class="timetable__th" scope="row">16-17h</th>
-                        <td class="timetable__td"></td>
+                    <tr className="timetable__tr">
+                        <th className="timetable__th" scope="row">16-17h</th>
+                        <td className="timetable__td"></td>
                     </tr>
-                    <tr class="timetable__tr">
-                        <th class="timetable__th" scope="row">17-18h</th>
-                        <td class="timetable__td"></td>
+                    <tr className="timetable__tr">
+                        <th className="timetable__th" scope="row">17-18h</th>
+                        <td className="timetable__td"></td>
                     </tr>
-                    <tr class="timetable__tr">
-                        <th class="timetable__th" scope="row">19-20h</th>
-                        <td class="timetable__td"></td>
+                    <tr className="timetable__tr">
+                        <th className="timetable__th" scope="row">19-20h</th>
+                        <td className="timetable__td"></td>
                     </tr>
-                    <tr class="timetable__tr">
-                        <th class="timetable__th" scope="row">21-22h</th>
-                        <td class="timetable__td"></td>
+                    <tr className="timetable__tr">
+                        <th className="timetable__th" scope="row">21-22h</th>
+                        <td className="timetable__td"></td>
                     </tr>
-                    <tr class="timetable__tr">
-                        <th class="timetable__th" scope="row">23-24h</th>
-                        <td class="timetable__td"></td>
+                    <tr className="timetable__tr">
+                        <th className="timetable__th" scope="row">23-24h</th>
+                        <td className="timetable__td"></td>
                     </tr>
-                    <tr class="timetable__tr">
-                        <th class="timetable__th" scope="row">24-1h</th>
-                        <td class="timetable__td"></td>
+                    <tr className="timetable__tr">
+                        <th className="timetable__th" scope="row">24-1h</th>
+                        <td className="timetable__td"></td>
                     </tr>
-                    <tr class="timetable__tr">
-                        <th class="timetable__th" scope="row">1-2h</th>
-                        <td class="timetable__td"></td>
+                    <tr className="timetable__tr">
+                        <th className="timetable__th" scope="row">1-2h</th>
+                        <td className="timetable__td"></td>
                     </tr>
-                    <tr class="timetable__tr">
-                        <th class="timetable__th" scope="row">2-3h</th>
-                        <td class="timetable__td"></td>
+                    <tr className="timetable__tr">
+                        <th className="timetable__th" scope="row">2-3h</th>
+                        <td className="timetable__td"></td>
                     </tr>
-                    <tr class="timetable__tr">
-                        <th class="timetable__th" scope="row">3-4h</th>
-                        <td class="timetable__td"></td>
+                    <tr className="timetable__tr">
+                        <th className="timetable__th" scope="row">3-4h</th>
+                        <td className="timetable__td"></td>
                     </tr>
-                    <tr class="timetable__tr">
-                        <th class="timetable__th" scope="row">4-5h</th>
-                        <td class="timetable__td"></td>
+                    <tr className="timetable__tr">
+                        <th className="timetable__th" scope="row">4-5h</th>
+                        <td className="timetable__td"></td>
                     </tr>
-                    <tr class="timetable__tr">
-                        <th class="timetable__th" scope="row">5-6h</th>
-                        <td class="timetable__td"></td>
+                    <tr className="timetable__tr">
+                        <th className="timetable__th" scope="row">5-6h</th>
+                        <td className="timetable__td"></td>
                     </tr>
-                    <tr class="timetable__tr">
-                        <th class="timetable__th" scope="row">6-7h</th>
-                        <td class="timetable__td"></td>
+                    <tr className="timetable__tr">
+                        <th className="timetable__th" scope="row">6-7h</th>
+                        <td className="timetable__td"></td>
                     </tr>
                 </table>
             </div>

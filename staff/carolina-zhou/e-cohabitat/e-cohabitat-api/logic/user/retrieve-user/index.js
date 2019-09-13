@@ -2,7 +2,7 @@ const { validate } = require('utils')
 const { models: { User } } = require('data')
 
 /**
- * Retrieves a user by its id.
+ * Retrieves a user by id.
  * 
  * @param {string} id 
  * 

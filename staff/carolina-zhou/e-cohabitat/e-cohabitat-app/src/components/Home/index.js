@@ -34,28 +34,28 @@ function Home({ history }) {
     }
 
     return <>
-        <main class="main"> 
-            <section class="home">
-                <h1 class="home__title"><span class="main__e">e-</span>cohabitat</h1>
-                <h2 class="home__subtitle">Sharing spaces, building communities</h2>
+        <main className="main"> 
+            <section className="home">
+                <h1 className="home__title"><span className="main__e">e-</span>cohabitat</h1>
+                <h2 className="home__subtitle">Sharing spaces, building communities</h2>
 
-                <div class="home__square">
-                    <h3 class="home__space">SPACES</h3>
-                    <p class="home__space-add" onClick={handleAddSpace}><i class="fas fa-plus-circle"></i> Add a space</p>
+                <div className="home__square">
+                    <h3 className="home__space">SPACES</h3>
+                    <p className="home__space-add" onClick={handleAddSpace}><i className="fas fa-plus-circle"></i> Add a space</p>
                     
 
                     {spaces ?
-                    <ul class="home__spaces">
-                        {spaces.map(space=> {
-                        return<>
-                            <li id="mySpace" class="home__space-image" data-id={space.id} onClick={() => handleGoToSpace(space.id)} >
-                                    <div class="home__space-reveal">
-                                        <h4 class="home__space-title">{space.title}</h4>
-                                        <p class="home__space-subtitle">Type: {space.type}</p>   
-                                        <p class="home__space-address">{space.address}</p>                                     
+                    <ul className="home__spaces">
+                        {spaces.map(space => {
+                        return <>
+                            <li id="mySpace" className="home__space-image" data-id={space.id} onClick={() => handleGoToSpace(space.id)} >
+                                    <div className="home__space-reveal">
+                                        <h4 className="home__space-title">{space.title}</h4>
+                                        <p className="home__space-subtitle">Type: {space.type}</p>   
+                                        <p className="home__space-address">{space.address}</p>                                     
                                     </div>                  
-                                    <figure class="home__space-figure">
-                                        <img class="home__space-img" alt="kitchen image" src={space.picture}/>
+                                    <figure className="home__space-figure">
+                                        <img className="home__space-img" alt="kitchen image" src={space.picture}/>
                                     </figure>          
                             </li>
                         </>
@@ -63,7 +63,7 @@ function Home({ history }) {
                         )} 
                     </ul> 
                     :
-                    <p class="home__space-message">You haven't registered any spaces yet</p>
+                    <p className="home__space-message">You haven't registered any spaces yet</p>
                     }
                 </div>
             </section>

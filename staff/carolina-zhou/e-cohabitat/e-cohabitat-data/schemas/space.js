@@ -22,5 +22,7 @@ module.exports = new Schema({
         type: String,
         required: true
     },
-    cousers: [{ type: ObjectId, ref: 'User' }]
+    cousers: [{ type: ObjectId, ref: 'User' }],
+    maintenance: [ String ],
+    tags: [ String ]
 })

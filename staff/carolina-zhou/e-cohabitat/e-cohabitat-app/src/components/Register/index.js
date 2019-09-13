@@ -26,33 +26,33 @@ function Register({ history }) {
     }
 
     return <>
-        <main class="main"> 
-            <section class="register">
-                <h1 class="register__title">Sign up</h1>
+        <main className="main"> 
+            <section className="register">
+                <h1 className="register__title">Sign up</h1>
                 <form onSubmit={ handleSubmit }>
                     <ul>
-                        <li class="register__form-item">
-                            <label><input class="register__form-input" type="text" name="username" placeholder="username"/></label>
+                        <li className="register__form-item">
+                            <label><input className="register__form-input" type="text" name="username" placeholder="username"/></label>
                         </li>
-                        <li class="register__form-item">
-                            <label><input class="register__form-input" type="text" name="name" placeholder="name"/></label>
+                        <li className="register__form-item">
+                            <label><input className="register__form-input" type="text" name="name" placeholder="name"/></label>
                         </li>
-                        <li class="register__form-item">
-                            <label><input class="register__form-input" type="text" name="surname" placeholder="surname" /></label>
+                        <li className="register__form-item">
+                            <label><input className="register__form-input" type="text" name="surname" placeholder="surname" /></label>
                         </li>
-                        <li class="register__form-item">
-                            <label><input class="register__form-input" type="email" name="email" placeholder="email"/></label>
+                        <li className="register__form-item">
+                            <label><input className="register__form-input" type="email" name="email" placeholder="email"/></label>
                         </li>
-                        <li class="register__form-item">
-                            <label><input class="register__form-input" type="password" name="password" placeholder="password"/></label>
+                        <li className="register__form-item">
+                            <label><input className="register__form-input" type="password" name="password" placeholder="password"/></label>
                         </li>
-                        <li class="register__form-item">
-                            <label><input class="register__form-input" type="password" name="repassword" placeholder="repeat password"/></label>
+                        <li className="register__form-item">
+                            <label><input className="register__form-input" type="password" name="repassword" placeholder="repeat password"/></label>
                         </li>
-                        <button class="register__form-button">Register</button>
+                        <button className="register__form-button">Register</button>
                     </ul>
                 </form>
-                <a href={`/`} class="register__back-link"><i class="fas fa-arrow-left"></i> Go back</a>
+                <a href={`/`} className="register__back-link"><i className="fas fa-arrow-left"></i> Go back</a>
             </section>
         </main>
     </>

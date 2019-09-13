@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import Context from '../context'
 import { withRouter } from 'react-router-dom'
 import moment from "moment"
+import Chores from '../Chores'
+
 
 function Week({ history }) {
+
+    const { currentDate, setCurrentDate } = useContext(Context)
 
     function handleMonth(event) {
         event.preventDefault()
@@ -21,21 +26,35 @@ function Week({ history }) {
 
         history.push('/day')
     }
+
+    function handleGoToNextWeek(event) {
+        event.preventDefault()
+
+        setCurrentDate(moment(currentDate).add(1, 'weeks'))
+    }
+
+    function handleGoToPreviousWeek(event) {
+        event.preventDefault()
+          
+        setCurrentDate(moment(currentDate).subtract(1, 'weeks')) 
+    }
     
     
     const header = () => {
 
         return (
         <>
-            <h1 class="month__title"><i class="fas fa-caret-left" /* onClick={handleGoToPreviousMonth} */></i> Week {moment().week()} <i class="fas fa-caret-right" /* onClick={handleGoToNextMonth} */></i></h1>
-            <p class="month__year">{moment().format("MMMM YYYY")}</p>
+            <div className="week__header">
+                <i className="fas fa-caret-left" onClick={handleGoToPreviousWeek}></i><h1 className="week__title"> Week {moment(currentDate).week()} </h1><i className="fas fa-caret-right" onClick={handleGoToNextWeek}></i>
+            </div>
+            <p className="week__month-year">{moment(currentDate).format("MMMM YYYY")}</p>
         </>
         )
     }
 
-    const days = () => {
+    const week = () => {
         const days = []
-        const monday = moment().startOf('week')
+        const monday = moment(currentDate).startOf('week')
         
         for (let i = 0; i < 7; i++) {
             days.push(
@@ -44,99 +63,58 @@ function Week({ history }) {
                 </div>      
             )       
         }
-        return <div class="weekly__header">{days}</div>
+        return <div className="weekly__header">{days}</div>
     }
 
-    const cells = () => {
-        const startDate = moment().startOf('week')
-        const endDate = moment().endOf('week')
+    const days = () => {
+        const startDate = moment(currentDate).startOf('week')
+        const endDate = moment(currentDate).endOf('week')
         const rows = []
         let days = []
         let day = startDate
         while (day <= endDate) {
             for (let i = 0; i < 7; i++) {
                 days.push(
-                    <div class="weekly__day day">
+                    <div className="weekly__day day">
                        {startDate.add(1, 'days').format('D')}
                     </div>
                 )
             }
-            rows.push( <div class="weekly__week" key={day}> {days} </div>)
+            rows.push( <div className="weekly__week" key={day}> {days} </div>)
             days = []
         }
-        return <div class="body">{rows}</div>
+        return <div className="body">{rows}</div>
     }
 
 
 
     return <>
     
-    <main class="main"> 
+    <main className="main"> 
 
-        <div class="week">
+        <div className="week">
 
-            {/* <h1 class="week__title"><i class="fas fa-caret-left"></i> Week 1 <i class="fas fa-caret-right"></i></h1>
-            <p class="week__month-year">September 2019</p> */}
             <div>{header()}</div>
 
-            <div class="week__toolbar">
-                <div class="week__toggle">
-                  <div class="month__toggle-option" onClick={handleDay}>today</div>
-                  <div class="month__toggle-option month__toggle-option--selected" onClick={handleWeek}>week</div>
-                  <div class="month__toggle-option" onClick={handleMonth}>month</div>
+            <div className="week__toolbar">
+                <div className="week__toggle">
+                  <div className="month__toggle-option" onClick={handleDay}>today</div>
+                  <div className="month__toggle-option month__toggle-option--selected" onClick={handleWeek}>week</div>
+                  <div className="month__toggle-option" onClick={handleMonth}>month</div>
                 </div>
                 <form>
-                  <input class="week__search-input" type="text" placeholder="Search"/> <i class="fa fa-search"></i>
+                  <input className="week__search-input" type="text" placeholder="Search"/> <i className="fa fa-search"></i>
                 </form>
             </div>
 
-            <div class="week__act">
-              <div class="week__activity">
-                      <div class="week__chores">
-                          <p class="week__list-title"><strong>Regular chores</strong></p>
-                          <ul class="week__list">
-                              <li class="week__item"><i class="far fa-square"></i> cleaning</li>
-                              <li class="week__item"><i class="far fa-square"></i> listing stock</li>
-                              <li class="week__item"><i class="far fa-square"></i> re-stocking</li>
-                              <li class="week__item"><i class="far fa-plus-square"></i></li>
-                          </ul>
-                      </div>
-                      <div class="week__tags">
-                          <p class="week__list-title"><strong>Activity Tags</strong></p>
-                          <ul class="week__list">
-                              <li class="week__item"><i class="fas fa-square"></i> cooking</li>
-                              <li class="week__item"><i class="fas fa-square"></i> eating</li>
-                              <li class="week__item"><i class="fas fa-plus-square"></i></li>
-                          </ul>
-                      </div>
-              </div>
+            <div className="week__act">
+                <Chores />
 
-              <div class="weekly">
-                <div>{days()}</div>
-                <div>{cells()}</div>
-              </div> 
+                <div className="weekly">
+                    <div>{week()}</div>
+                    <div>{days()}</div>
+                </div> 
 
-              
-              {/* <div class="weekly">
-                <div class="weekly__header">
-                  <div>mon</div>
-                  <div>tue</div>
-                  <div>wed</div>
-                  <div>thu</div>
-                  <div>fri</div>
-                  <div>sat</div>
-                  <div>sun</div>
-                </div>
-                <div class="weekly__week">
-                  <div class="weekly__day day">1</div>
-                  <div class="weekly__day day">2</div>
-                  <div class="weekly__day day">3</div>
-                  <div class="weekly__day day">4</div>
-                  <div class="weekly__day day">5</div>
-                  <div class="weekly__day day">6</div>
-                  <div class="weekly__day day">7</div>
-                </div>
-              </div> */}
             </div>
 
         </div>

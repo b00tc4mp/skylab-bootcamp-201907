@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
+import Context from '../context'
 import { withRouter } from 'react-router-dom'
 import moment from "moment"
+import Chores from '../Chores'
 
 function Month({ history }) {
 
-    const [currentDate, setCurrentDate] = useState(moment())
-    const [selectedDate, setSelectedDate] = useState(moment())
+    const { currentDate, setCurrentDate } = useContext(Context)
+    /* const [selectedDate, setSelectedDate] = useState(new Date) */
 
     function handleMonth(event) {
         event.preventDefault()
@@ -25,12 +27,16 @@ function Month({ history }) {
         history.push('/day')
     }
 
-    function handleGoToNextMonth() {
-            setCurrentDate(moment().add(1, 'months'))
+    function handleGoToNextMonth(event) {
+        event.preventDefault()
+
+        setCurrentDate(moment(currentDate).add(1, 'months'))
     }
 
-    function handleGoToPreviousMonth() {
-           setCurrentDate(moment().subtrack(1, 'months')) 
+    function handleGoToPreviousMonth(event) {
+        event.preventDefault()
+          
+        setCurrentDate(moment(currentDate).subtract(1, 'months')) 
     }
 
     /* function onDateClick(day) {
@@ -41,8 +47,10 @@ function Month({ history }) {
 
         return (
         <>
-            <h1 class="month__title"><i class="fas fa-caret-left" onClick={handleGoToPreviousMonth}></i> {moment().format("MMMM")} <i class="fas fa-caret-right" onClick={handleGoToNextMonth}></i></h1>
-            <p class="month__year">{moment().format("YYYY")}</p>
+            <div className="month__header">
+                <i className="fas fa-caret-left" onClick={handleGoToPreviousMonth}></i><h1 className="month__title"> {moment(currentDate).format("MMMM")} </h1><i className="fas fa-caret-right" onClick={handleGoToNextMonth}></i>
+            </div>
+            <p className="month__year">{moment(currentDate).format("YYYY")}</p>
         </>
         )
     }
@@ -50,7 +58,7 @@ function Month({ history }) {
     const week = () => {
 
         const days = []
-        const startDate = moment().startOf('week')
+        const startDate = moment(currentDate).startOf('week')
         
         for (let i = 0; i < 7; i++) {
             days.push(
@@ -59,186 +67,102 @@ function Month({ history }) {
                 </div>      
             )       
         }
-        return <div class="calendar__header">{days}</div>
+        return <div className="calendar__header">{days}</div>
     }
 
     const days = () => {
 
-/*         const monthStart = moment().startOf('month')
-        const monthEnd = moment(monthStart).endOf('month')
-        const startDate = moment(monthStart).startOf('week')
-        const endDate = moment(monthEnd).endOf('week') 
-        const rows = []
+        const monthStart = moment(currentDate).startOf('month'),
+        monthEnd = moment(currentDate).endOf('month'),
+        endDate = moment(monthEnd).endOf('week'),
+        rows = []
 
         let days = []
-        let day = startDate
-        let formattedDate = ""
+        let formattedDate = ''
 
-        let prevDays = []
-        let nextDays = []
-        let monthDays = []
+        let first = monthStart
+        switch (first.day()) {
+            case 1:
+                first.add(7, 'days')
+                break
+            case 2:
+                first.add(6, 'days')
+                break
+            case 3:
+                first.add(5, 'days')
+                break
+            case 4:
+                first.add(4, 'days')
+                break
+            case 5:
+                first.add(3, 'days')
+                break
+            case 6:
+                first.add(2, 'days')
+                break
+            case 0:
+                first.add(1, 'days')
+        }
 
-        while (day <= endDate) {
-            for (let i = 0; i < 7; i++) {
-                const month = moment().format('MM')
-                const todayName = moment().format('ddd')
-                const todayNum = moment().format('D')
-
-                while (todayNum !== '1' ) {
-                    prevDays.push(moment().subtrack(1, 'days'))
-                } 
-                 
-                while (todayNum !== '1' ) {
-                    nextDays.push(moment().add(1, 'days'))
-                } 
-
-                if (todayNum === '1' && todayName === 'MON' ) {
+        if (monthStart.day() !== '1') {
+            first = moment(first).subtract(1, 'week')
+            while (first <= moment(first).endOf('week').day()) {
+                for (let i = 0; i < 7; i++) {
+                    formattedDate = first.format('D')
                     days.push(
-                        <div class="calendar__day day" key={day}>
-                        {formattedDate}
+                        <div className="calendar__day day">
+                           {formattedDate}
                         </div>
                     )
-                    day = day.add(1, 'days')
+                    first = first.add(1, 'days')
                 }
-                
-
             }
-            rows.push( <div class="calendar__week" key={day}> {days} </div>)
-            days = []
         }
-        return <div>{rows}</div>  */
-        
 
-        const monthStart = moment().startOf('month')
-        const monthEnd = moment(monthStart).endOf('month')
-        const startDate = moment(monthStart).startOf('week')
-        const endDate = moment(monthEnd).endOf('week') 
-        const rows = []
-
-        let days = []
-        let day = startDate
-        let formattedDate = ""
-
-        while (day <= endDate) {
+        while (first <= endDate) {
             for (let i = 0; i < 7; i++) {
-                formattedDate = day.format('D')
-
+                formattedDate = first.format('D')
                 days.push(
-                    <div class="calendar__day day" key={day}>
+                    <div className="calendar__day day">
                        {formattedDate}
                     </div>
                 )
-                day = day.add(1, 'days')
+                first = first.add(1, 'days')
             }
-            rows.push( <div class="calendar__week" key={day}> {days} </div>)
+            rows.push( <div className="calendar__week"> {days} </div>)
             days = []
         }
+
         return <div>{rows}</div>
     }
 
     return <>
     
-    <main class="main"> 
+    <main className="main"> 
 
-        <div class="month">
+        <div className="month">
 
-            {/* <h1 class="month__title"><i class="fas fa-caret-left" onClick={handleGoToPreviousMonth}></i> September <i class="fas fa-caret-right" onClick={handleGoToNextMonth}></i></h1>
-            <p class="month__year">2019</p> */}
             <div>{header()}</div>
 
-            <div class="month__toolbar">
-                <div class="month__toggle">
-                  <div class="month__toggle-option" onClick={handleDay}>today</div>
-                  <div class="month__toggle-option" onClick={handleWeek}>week</div>
-                  <div class="month__toggle-option month__toggle-option--selected" onClick={handleMonth}>month</div>
+            <div className="month__toolbar">
+                <div className="month__toggle">
+                  <div className="month__toggle-option" onClick={handleDay}>today</div>
+                  <div className="month__toggle-option" onClick={handleWeek}>week</div>
+                  <div className="month__toggle-option month__toggle-option--selected" onClick={handleMonth}>month</div>
                 </div>
                 <form>
-                  <input class="month__search-input" type="text" placeholder="Search"/> <i class="fa fa-search"></i>
+                  <input className="month__search-input" type="text" placeholder="Search"/> <i className="fa fa-search"></i>
                 </form>
             </div>
 
-            <div class="month__act">
-                <div class="month__activity">
-                    <div class="month__chores">
-                        <p class="month__list-title"><strong>Regular chores</strong></p>
-                        <ul class="month__list">
-                            <li class="month__item"><i class="far fa-square"></i> cleaning</li>
-                            <li class="month__item"><i class="far fa-square"></i> listing stock</li>
-                            <li class="month__item"><i class="far fa-square"></i> re-stocking</li>
-                            <li class="month__item"><i class="far fa-plus-square"></i></li>
-                        </ul>
-                    </div>
-                    <div class="month__tags">
-                        <p class="month__list-title"><strong>Activity Tags</strong></p>
-                        <ul class="month__list">
-                            <li class="month__item"><i class="fas fa-square"></i> cooking</li>
-                            <li class="month__item"><i class="fas fa-square"></i> eating</li>
-                            <li class="month__item"><i class="fas fa-plus-square"></i></li>
-                        </ul>
-                    </div>
-                </div>
+            <div className="month__act">
+                <Chores />
                 
-                <div class="calendar">
+                <div className="calendar">
                     <div>{week()}</div>
                     <div>{days()}</div>
                 </div>                 
 
-                {/* <div class="calendar">
-                    <div class="calendar__header">
-                        <div>mon</div>
-                        <div>tue</div>
-                        <div>wed</div>
-                        <div>thu</div>
-                        <div>fri</div>
-                        <div>sat</div>
-                        <div>sun</div>
-                    </div>
-                    <div class="calendar__week">
-                        <div class="calendar__day day">1</div>
-                        <div class="calendar__day day">2</div>
-                        <div class="calendar__day day">3</div>
-                        <div class="calendar__day day">4</div>
-                        <div class="calendar__day day">5</div>
-                        <div class="calendar__day day">6</div>
-                        <div class="calendar__day day">7</div>
-                    </div>
-                    <div class="calendar__week">
-                        <div class="calendar__day day">8</div>
-                        <div class="calendar__day day">9</div>
-                        <div class="calendar__day day">10</div>
-                        <div class="calendar__day day">11</div>
-                        <div class="calendar__day day">12</div>
-                        <div class="calendar__day day">13</div>
-                        <div class="calendar__day day">14</div>        
-                    </div>
-                    <div class="calendar__week">
-                        <div class="calendar__day day">15</div>
-                        <div class="calendar__day day">16</div>
-                        <div class="calendar__day day">17</div>
-                        <div class="calendar__day day">18</div>
-                        <div class="calendar__day day">19</div>
-                        <div class="calendar__day day">20</div>
-                        <div class="calendar__day day">21</div>    
-                    </div>
-                    <div class="calendar__week">
-                        <div class="calendar__day day">22</div>
-                        <div class="calendar__day day">23</div>
-                        <div class="calendar__day day">24</div>
-                        <div class="calendar__day day">25</div>
-                        <div class="calendar__day day">26</div> 
-                        <div class="calendar__day day">27</div> 
-                        <div class="calendar__day day">28</div> 
-                    </div>
-                    <div class="calendar__week">
-                        <div class="calendar__day day">29</div>
-                        <div class="calendar__day day">30</div>
-                        <div class="calendar__day day">31</div>
-                        <div class="calendar__day day">1</div>
-                        <div class="calendar__day day">2</div>
-                        <div class="calendar__day day">3</div>
-                        <div class="calendar__day day">4</div>
-                    </div>
-                </div> */}
             </div>
 
         </div> 

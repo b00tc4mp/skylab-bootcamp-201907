@@ -442,6 +442,12 @@ body {
 .month {
   margin: 0;
 }
+.month__header {
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+}
 .month__title {
   display: initial;
   font-family: Helvetica, Roboto, sans-serif;
@@ -508,6 +514,10 @@ body {
   margin: 0 1em;
 }
 
+.fa-caret-right:hover, .fa-caret-left:hover {
+  color: deeppink;
+}
+
 .fa-plus-square:hover, .fa-search:hover {
   color: deeppink;
 }
@@ -545,9 +555,18 @@ body {
   font-size: 0.8em;
   font-weight: bold;
 }
+.calendar__disabled {
+  color: red;
+}
 
 .day {
   margin: 0;
+}
+.day__header {
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
 }
 .day__title {
   display: initial;
@@ -633,6 +652,12 @@ body {
 
 .week {
   margin: 0;
+}
+.week__header {
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
 }
 .week__title {
   display: initial;
@@ -727,6 +752,47 @@ body {
   text-transform: uppercase;
   font-size: 0.8em;
   font-weight: bold;
+}
+
+.chores {
+  margin: 0;
+}
+.chores__activity {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+}
+.chores__maintenance, .chores__tags {
+  text-align: left;
+  margin-bottom: 2em;
+}
+.chores__list-title {
+  font-size: 2rem;
+}
+.chores__list {
+  list-style: none;
+}
+.chores__add {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+}
+.chores__input {
+  margin-top: 0.5em;
+  padding: 0.1em;
+  font-size: 0.75rem;
+  width: 90%;
+}
+
+.fa-plus {
+  background-color: white;
+  margin: 0.5em 0.5em 0 0;
+  border: none;
+  padding: 0.1em;
+}
+
+.fa-plus:hover, .fa-search:hover {
+  color: deeppink;
 }
 
 /*# sourceMappingURL=index.css.map */

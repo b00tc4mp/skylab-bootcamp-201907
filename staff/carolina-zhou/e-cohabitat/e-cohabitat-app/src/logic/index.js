@@ -9,8 +9,8 @@ import registerSpace from './space/register-space'
 /* import registerSpaceCouser from './space/register-couser'*/
 import retrieveAllSpaces from './space/retrieve-all-spaces'
 import retrieveSpace from './space/retrieve-space'
-/* import updateSpace from './space/update-space'
-import unregisterSpace from './space/unregister-space'
+import updateSpace from './space/update-space'
+/* import unregisterSpace from './space/unregister-space'
 import unregisterSpaceCouser from './space/unregister-couser'
 import addTask from './task/add-task'
 import addTaskCompanion from './task/add-companion'
@@ -36,7 +36,7 @@ export default {
     authenticateUser,
     logUserOut,
     /* retrieveUser, updateUser, unregisterUser, */
-    registerSpace, /*registerSpaceCouser, */ retrieveAllSpaces, retrieveSpace/*, updateSpace, unregisterSpace, unregisterSpaceCouser,
+    registerSpace, /*registerSpaceCouser, */ retrieveAllSpaces, retrieveSpace, updateSpace/*, unregisterSpace, unregisterSpaceCouser,
     addTask, addTaskCompanion, retrieveAllTasks, retrieveTask, editTask, deleteTask, removeTaskCompanion,
     postComment, editComment, deleteComment */
 }

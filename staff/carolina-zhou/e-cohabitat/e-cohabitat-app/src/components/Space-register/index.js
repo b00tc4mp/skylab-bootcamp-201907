@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom'
 function SpaceRegister({ history }) {
 
     const { credentials } = useContext(Context)
-    const [type,setType] = useState("")
+    const [type, setType] = useState("")
     const id = credentials.id
 
     function handleSubmit(event) {
@@ -44,13 +44,13 @@ function SpaceRegister({ history }) {
 
     
     return <>
-        <main class="main"> 
-            <section class="register">
-                <h1 class="register__title">Add a space to cohabit!</h1>
+        <main className="main"> 
+            <section className="register">
+                <h1 className="register__title">Add a space to cohabit!</h1>
                 <form onSubmit={ handleSubmit }>
                     <ul>
-                        <li class="register__form-item">
-                            <select name="type" form="space type" id="typeSelector" class="register__typeSelector" onChange={e => {
+                        <li className="register__form-item">
+                            <select name="type" form="space type" id="typeSelector" className="register__typeSelector" onChange={e => {
                                 setType(e.target.value)
                             }}>
                                 <option selected disabled>What type of space is it?</option>
@@ -62,24 +62,24 @@ function SpaceRegister({ history }) {
                                 <option value="rooftop">rooftop</option>
                                 <option value="other">other</option>
                             </select>
-                            {type === 'other' && <input type="text" name="type" class="register__otherOption" id="otherInputOption" placeholder="tell us what type of space it is"/>}
+                            {type === 'other' && <input type="text" name="type" className="register__otherOption" id="otherInputOption" placeholder="tell us what type of space it is"/>}
                         </li>                        
-                        <li class="register__form-item">
-                            <label><input class="register__form-input" type="text" name="title" placeholder="name your space!"/></label>
+                        <li className="register__form-item">
+                            <label><input className="register__form-input" type="text" name="title" placeholder="name your space!"/></label>
                         </li>
-                        <li class="register__form-item">
-                            <label><input class="register__form-input" type="address" name="address" placeholder="address"/></label>
+                        <li className="register__form-item">
+                            <label><input className="register__form-input" type="address" name="address" placeholder="address"/></label>
                         </li>
-                        <li class="register__form-item">
-                            <label><input class="register__form-input" type="password" name="passcode" placeholder="passcode"/></label>
+                        <li className="register__form-item">
+                            <label><input className="register__form-input" type="password" name="passcode" placeholder="passcode"/></label>
                         </li>
-                        <li class="register__form-item">
-                            <label><input class="register__form-input" type="password" name="repasscode" placeholder="repeat passcode"/></label>
+                        <li className="register__form-item">
+                            <label><input className="register__form-input" type="password" name="repasscode" placeholder="repeat passcode"/></label>
                         </li>
-                        <button class="register__form-button">Register space</button>
+                        <button className="register__form-button">Register space</button>
                     </ul>
                 </form>
-                <a href='#' class="register__back-link"><i class="fas fa-arrow-left" onClick={() => {
+                <a href='#' className="register__back-link"><i className="fas fa-arrow-left" onClick={() => {
                     history.push('/')
                 }}></i> Go back</a>
             </section>
