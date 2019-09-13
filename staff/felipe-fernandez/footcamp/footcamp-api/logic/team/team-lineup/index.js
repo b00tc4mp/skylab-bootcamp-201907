@@ -54,16 +54,18 @@ module.exports = function(id, leagueId, teamId) {
         idsMidfielder = midfielders.map((player)=> player._id.toString())
         idsStriker = strikers.map((player)=> player._id.toString())
  
-        let lineup=[...idsGoalkeeper, ...idsDefender, ...idsMidfielder, ...idsStriker]
+        let lineups=[...idsGoalkeeper, ...idsDefender, ...idsMidfielder, ...idsStriker]
         
-        lineup.forEach((element, i) => {
-            team.players.push(element)
+        //add the lineup to an array inside of the team
+        lineups.forEach((element, i) => {
+            team.lineup.push(element)
         })
         
-        // await league.save()
+        
+        
         await team.save()
  
-        return lineup
+        return lineups
 
     })()
 }

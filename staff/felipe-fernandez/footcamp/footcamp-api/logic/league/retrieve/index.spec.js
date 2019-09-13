@@ -87,14 +87,14 @@ describe('logic - retrieve league', () => {
            
             await League.create({ id, name, code})
 
-            leagueId = 'fakecode'
+            leagueId = '5d772fb62bb54120d08d7a7b'
 
             try {
                  await logic.retrieveLeague(id ,leagueId)
             } catch(error) {
                 
                  expect(error).to.exist
-                 expect(error.message).to.equal(`league with code fakecode does not exist`)
+                 expect(error.message).to.equal(`league with code 5d772fb62bb54120d08d7a7b does not exist`)
             }
          })
     

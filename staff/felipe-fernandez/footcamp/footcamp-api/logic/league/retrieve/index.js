@@ -5,7 +5,7 @@ const { models: { User,  League } } = require('footcamp-data')
  * Retrieve the league information with all participants and their teams
  *
  * @param {*} id 
- * @param {*} league id 
+ * @param {*} leagueid 
  *   
  * @returns {Promise}
 */

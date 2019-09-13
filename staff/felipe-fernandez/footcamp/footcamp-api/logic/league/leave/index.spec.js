@@ -19,7 +19,6 @@ describe('logic - leave league', () => {
         email = `email-${Math.random()}@email.com`
         password = `password-${Math.random()}`
         nameLeague = `nameLeague-${Math.random()}`
-        leagueId = `league-${Math.random()}`
         code = `code-${Math.random()}`
         
 
@@ -31,6 +30,7 @@ describe('logic - leave league', () => {
             id = users.id
           
             const leagues = new League({name: nameLeague, code})
+            leagueId= leagues.id
             
             leagues.participants.push(id)
                       
@@ -65,7 +65,7 @@ describe('logic - leave league', () => {
         
     })
     it('should fail on incorrect league code', async () => {
-        leagueId = '12345'
+        leagueId = '5d772fb62bb54120d08d7a7b'
 
         try {
             await logic.leaveLeagues(id, leagueId)

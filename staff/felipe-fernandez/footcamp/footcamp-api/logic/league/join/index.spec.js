@@ -38,11 +38,12 @@ describe('logic - join league', () => {
     it('should succeed on correct data', async () => {
         
         const result = await logic.joinLeague(id, code)
-            expect(result).not.to.exist
+            expect(result).to.exist
         
          const findLeague = await League.findOne({code})
             expect(findLeague).to.exist
             expect(findLeague.team).to.exist
+            expect(findLeague.id).to.equal(leagueId)
             expect(findLeague.name).to.equal(nameLeague)
             expect(findLeague.participants.length).to.equal(1)
             expect(findLeague.participants[0].toString()).to.equal(id)

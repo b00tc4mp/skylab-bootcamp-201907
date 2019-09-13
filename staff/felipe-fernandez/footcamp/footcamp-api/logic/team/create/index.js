@@ -6,17 +6,16 @@ const { models: { User,  League, Team, Player } } = require('footcamp-data')
  *
  * @param {*} id 
  * @param {*} leagueId 
- * @param {*} code 
  * @param {*} name 
  * 
  *  
  * @returns {Promise}
 */
 
-module.exports = function(id, leagueId, code, name) {
+module.exports = function(id, leagueId, name) {
    
     validate.string(id, 'id')
-    validate.string(code, 'code')
+    validate.string(leagueId, 'leagueId')
     validate.string(name, 'name')
    
     return (async () => {
@@ -27,7 +26,7 @@ module.exports = function(id, leagueId, code, name) {
 
         const league = await League.findOne({ _id: leagueId })
 
-        if (!league) throw Error(`League with code ${ leagueId } does not exist`)
+        if (!league) throw Error(`League with leagueId ${ leagueId } does not exist`)
 
         const findTeam = await Team.findOne({ name })
 
@@ -43,7 +42,7 @@ module.exports = function(id, leagueId, code, name) {
         // if(league.team.includes({owner: user.id})) throw Error(`You cannot create more than one tea in this league`)
         //let playersUsed = league.playersUsed
 
-        const team = new Team({code, name})
+        const team = new Team({name})
     
         //associate the owner of the team to this team
         team.owner = id
@@ -132,21 +131,22 @@ module.exports = function(id, leagueId, code, name) {
             team.players.push(element)
         })
         
-        debugger
-        //add players to used players in the league
-       // league.playersUsed.push(initialTeam)
+      
 
         //add team to the array in the league
+    
+        
+        teamId = team.id
         league.team.push(team)
-
-        team.id = team._id
         delete team._id
        
         await team.save()
         await league.save()
+
         let teamCreated = {
-            id: team.id,
-            players: initialTeam
+            id: teamId,
+            players: initialTeam,
+    
         }
         return teamCreated
         // return initialTeam

@@ -36,7 +36,7 @@ module.exports = function(id, name, code) {
         league.id = league._id
 
         league.participants.push(id)
-        user.leagues.push(league)
+        user.leagues.push(league.id)
             
         await user.save()
         await league.save()

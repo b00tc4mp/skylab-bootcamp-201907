@@ -30,8 +30,11 @@ module.exports = function(id, code) {
         if(participantExist) throw Error(`User with id ${id} already plays in this league`)
 
         league.participants.push(id)
-        
+        user.leagues.push(league.id)
+        await user.save()
         await league.save()
+
+        return league.id
         
     })()
 }

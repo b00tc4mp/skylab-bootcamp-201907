@@ -9,7 +9,7 @@ const {  random : { number }  } = require('footcamp-utils')
 
 const { env: { DB_URL_TEST }} = process
 
-describe.only('logic - retrieve all league teams ', () => {
+describe('logic - retrieve all league teams ', () => {
     
     before(() =>  database.connect(DB_URL_TEST))
 
@@ -117,82 +117,68 @@ describe.only('logic - retrieve all league teams ', () => {
     it('should succeed on correct data', async () => {
         
         debugger
-        const result = await logic.retrieveAllLeagues(id, code)
+        const result = await logic.retrieveAllLeagues(id)
         
             expect(result).to.exist
-            expect(result.length).to.equal(2)
-            expect(result[0].owner.toString()).to.equal(id)
-            expect(result[1].owner.toString()).to.equal(id2)
+            expect(result.code).to.equal(code)
+            expect(result.name).to.equal(nameLeague)
+            expect(result.participants.length).to.equal(2)
+            expect(result.team.length).to.equal(2)
+          
            
             
     })
 
-//     it('should fail if the league does not exist', async () => {
+    it('should fail if the league does not exist', async () => {
 
-//         await League.create({ id, name: nameLeague, code })
-//         await League.deleteMany()
-//         try {
-//              await logic.retrieveAllLeagues(id, code)
-//         } catch(error) {
+        await League.create({ id, name: nameLeague, code })
+        await League.deleteMany()
+        try {
+             await logic.retrieveAllLeagues(id)
+        } catch(error) {
             
-//              expect(error).to.exist
-//              expect(error.message).to.equal(`League with code ${code} does not exist`)
-//         }
-//      })
+             expect(error).to.exist
+             expect(error.message).to.equal(`League with code ${code} does not exist`)
+        }
+     })
 
-//     it('should fail on incorrect user id', async () => {
-//         id = '5d772fb62bb54120d08d7a7b'
-//         try {
-//             await logic.retrieveAllLeagues(id, code, nameTeam, points)
-//             throw Error('should not reach this point') 
-//         }
-//         catch({message}){
-//             expect(message).to.equal(`User with id ${id} does not exist`)
-//         }
+    it('should fail on incorrect user id', async () => {
+        id = '5d772fb62bb54120d08d7a7b'
+        try {
+            await logic.retrieveAllLeagues(id)
+            throw Error('should not reach this point') 
+        }
+        catch({message}){
+            expect(message).to.equal(`User with id ${id} does not exist`)
+        }
         
-//     })
+    })
 
      
 
     
-//     it('should fail on undefined user id', () => 
-//         expect(() => 
-//             logic.retrieveAllLeagues(undefined, code, nameTeam ,points)
-//     ).to.throw(`id with value undefined is not a string`)
-//     )
+    it('should fail on undefined user id', () => 
+        expect(() => 
+            logic.retrieveAllLeagues(undefined)
+    ).to.throw(`id with value undefined is not a string`)
+    )
 
-//     it('should fail on undefined code', () => 
-//         expect(() => 
-//             logic.retrieveAllLeagues(id, undefined, nameTeam, points)
-//     ).to.throw(`code with value undefined is not a string`)
-//     )
+  
 
 
-//    it('should fail on non-string user id', () => 
-//         expect(() => 
-//             logic.retrieveAllLeagues(12345, code, nameTeam ,points)
-//     ).to.throw(`id with value 12345 is not a string`)
-//     )
+   it('should fail on non-string user id', () => 
+        expect(() => 
+            logic.retrieveAllLeagues(12345)
+    ).to.throw(`id with value 12345 is not a string`)
+    )
 
-//     it('should fail on non-string code', () => 
-//         expect(() => 
-//             logic.retrieveAllLeagues(id, 12345, nameTeam, points)
-//     ).to.throw(`code with value 12345 is not a string`)
-//     )
 
-   
             
-//      it('should fail on empty id', () => 
-//         expect(() => 
-//                 logic.retrieveAllLeagues('', code, nameTeam, points)
-//         ).to.throw(`id is empty or blank`)
-//         )
-
-//     it('should fail on empty code', () => 
-//         expect(() => 
-//                 logic.retrieveAllLeagues(id, '', nameTeam ,points)
-//     ).to.throw(`code is empty or blank`)
-//         )
+     it('should fail on empty id', () => 
+        expect(() => 
+                logic.retrieveAllLeagues('')
+        ).to.throw(`id is empty or blank`)
+        )
 
    
 
