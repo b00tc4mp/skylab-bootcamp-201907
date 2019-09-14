@@ -62,6 +62,16 @@ describe('logic - register user', () => {
                 }
     })
 
+    it('should fail if the nickname is longer than 20 characters', async () => {
+        try {
+            await registerUser(name, surname, 'thisnicknameislargerthan20characters', email, password)
+            throw new Error('should not reach this point')
+        } catch (error) {
+            expect(error).to.exist
+            expect(error.message).to.equal('nickname can not have more than 20 characters')
+        }
+    })
+
     it('should fail on empty name', () =>
         expect(() => registerUser("", surname, nickname, email, password)).to.throw('name is empty or blank')
     )

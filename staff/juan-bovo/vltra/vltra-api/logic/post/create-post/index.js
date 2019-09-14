@@ -16,9 +16,6 @@ module.exports = function(title, body, author) {
     validate.string(title, 'title')
     validate.string(body, 'body')
     validate.objectId(author, 'author')
-    //validate.date(date, 'date')
-    //validate.array(comments, 'comments')
-    //validate.array(votes, 'votes')
 
     if(body.length > 2000) throw Error('post body is too long (max. 2000 characters)')
     if(title.length > 100) throw Error('title body is too long (max. 100 characters)')
@@ -46,6 +43,7 @@ module.exports = function(title, body, author) {
         
         //if (!response) throw new Error(`post with content ${body} does not exist`)
         newPostId = response._id.toString()
+        debugger
         return newPostId
 
     })()

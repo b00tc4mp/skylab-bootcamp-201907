@@ -31,6 +31,8 @@ module.exports = function(name, surname, nickname, email, password) {
     
     const bookmarks = []
     const voted = []
+
+    if(nickname.length > 20) throw Error('nickname can not have more than 20 characters')
     
     return (async () => {
         const nicknameCheck = await User.findOne({ nickname })
