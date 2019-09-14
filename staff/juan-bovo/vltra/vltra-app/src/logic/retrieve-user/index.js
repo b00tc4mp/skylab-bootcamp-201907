@@ -15,7 +15,6 @@ export default function () {
 
         if (response.status !== 200) {
             const { error } = await response.json()
-
             throw Error(error)
         }
 

@@ -3,14 +3,17 @@ const { validate} = require('vltra-utils')
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
-export default function (name, surname, nickname, email, password) {
+export default function (name, surname, nickname, email, password, repassword) {
     validate.string(name, 'name')
     validate.string(surname, 'surname')
     validate.string(nickname, 'nickname')
     validate.string(email, 'email')
     validate.email(email, 'email')
     validate.string(password, 'password')
+    validate.string(repassword, 'repassword')
 
+    if(password !== repassword) throw Error('El password ingresado y su comprobación no coinciden, ¡revísalos!')
+    
     return (async () => {
         const response = await fetch(`${REACT_APP_API_URL}/users`, {
             method: 'post',
