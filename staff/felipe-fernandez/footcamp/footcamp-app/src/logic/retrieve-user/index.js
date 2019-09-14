@@ -1,16 +1,16 @@
-const {validate} = require('footcamp-utils')
+// const {validate} = require('footcamp-utils')
+
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
-function RetrieveUser(token) {
+export default function () {
 
-  //  validate.string(token, 'token')
 
     return (async () => {
         const response = await fetch(`${REACT_APP_API_URL}/users`, {
             method: 'get',
             headers: {
-                authorization: `bearer ${token}`
+                authorization: `bearer ${this.__token__}`
             }
         })
 
@@ -25,5 +25,3 @@ function RetrieveUser(token) {
         return user
      })()
 }
-
-export default RetrieveUser

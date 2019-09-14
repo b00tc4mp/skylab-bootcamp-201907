@@ -3,6 +3,7 @@ import Context from '../Context'
 import logic from '../../logic'
 import Login from '../Login'
 import Register from '../Register'
+import InitialHeader from '../InitialHeader'
 import { Route, Link, withRouter } from "react-router-dom"
 
 
@@ -23,16 +24,13 @@ function Landing(props) {
 
 
     return  <>
-  
-        <header>
-           <h1>FANTASY SKYLAB</h1>
-        </header>
-         
+         <InitialHeader />
+                
 
-
+        
         <ul>
-    <li><a href="" onClick={handleGoToRegister}>Register</a></li>
-    <li><a href="" onClick={handleGoToLogin}>Login</a></li>
+          <li><a  className="links" href="" onClick={handleGoToRegister}>Register</a></li>
+          <li><a  className="links" href="" onClick={handleGoToLogin}>Login</a></li>
         </ul>
      
     

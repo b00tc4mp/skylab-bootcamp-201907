@@ -2,10 +2,14 @@ import React from 'react';
 
 function PlayerResult({ player }) {
 
+   
     const {name, surname, playerId, realTeam, position, pointsPerGame, totalPoints, yellowCards, redCards,  goals, minutes, photo, cost}  = player
     
-    return <div class="card">
+    return <div class="card"> 
+   
+
         <div class="card-image">
+               
             <figure class="image is-4by4">
                 <img src={"http://localhost:8080" + photo} width="300px"/> 
             </figure>
@@ -17,7 +21,11 @@ function PlayerResult({ player }) {
         </div>
 
     </div>
+
+
 }
 
 export default PlayerResult
+
+
 

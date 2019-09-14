@@ -1,5 +1,5 @@
-function isUserLogged(){
+function isUserLogIn(){
     return sessionStorage.token
 }
 
-export default isUserLogged
+export default isUserLogIn

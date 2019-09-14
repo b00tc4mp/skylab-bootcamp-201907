@@ -3,14 +3,16 @@ import  {validate} from 'footcamp-utils'
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
-export default function (leagueId, teamId ) {
+export default function (  leagueId, teamId ) {
     
-    validate.string(teamId, 'team id')
+
     validate.string(leagueId, 'league id')
+    validate.string(teamId, 'team id')
     
     return (async () => {
+        debugger
         
-        const response = await fetch(`${REACT_APP_API_URL}/users/leagues/${leagueId}/team/${teamId}`, {
+        const response = await fetch(`${REACT_APP_API_URL}/users/leagues/${leagueId}/team/${teamId}/lineup`, {
 
             method: 'get',
             headers: {

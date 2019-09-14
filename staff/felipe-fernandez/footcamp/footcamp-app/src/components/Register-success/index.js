@@ -7,18 +7,19 @@ function RegisterSuccess(props){
     
     return (
         <div>
+            <section class="register-successful">
             <h2>Register Success</h2>
 
             <a href="#" onClick={event => {
             event.preventDefault()
-            history.push('/home')
+            history.push('/')
               }}>Go back</a>
 
             <a href="#" onClick={event => {
                 event.preventDefault()
                 history.push('/login')
             }}>Go to Login</a>
-
+        </section>
        </div>
         
     )

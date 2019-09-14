@@ -1,40 +1,41 @@
-function DuckDetail({ duck: { id, title, imageUrl, price, description, link, favorite }, onBack, onToggle }) {
-    return <>
-        <h3>{title}</h3>
-        <img src={imageUrl} />
-        <span>{price}</span>
-        <FavButton active={favorite} onToggle={() => onToggle(id)}/>
-        <p>{description}</p>
-        <a href={link}>Go to store</a>
-        {onBack && <a href="" onClick={ event => {
+import React, { useState, useEffect } from 'react'
+import logic from '../../logic'
+import { withRouter} from 'react-router-dom'
+import Header from '../Header'
+
+ function PlayerDetail ({ match, history }) {
+    const [player, setPlayer] = useState()
+
+    useEffect(() => {
+        (async () => {
+            const { params: { id }} = match
+            
+            const player = await logic.retrievePlayer(id)
+
+            setPlayer(player)
+        })()
+    }, [])
+      
+  const handleBack = () => {
+     
+    history.push('/myteam')
+}
+
+    return <section>
+        <Header />
+        {player && <>
+            <img src={"http://localhost:8080" + player.player.photo} width="300px"/>
+            <p>Name: {player.player.name}</p>
+            <p>Surname: {player.player.surname}</p>
+            <p>Total points: {player.player.totalPoints}</p>
+            <p>Goals: {player.player.goals}</p>
+            <p>Cost: {player.player.cost}</p>
+            <a href="#" onClick={event => {
             event.preventDefault()
-
-            onBack()
-        }}>Go back</a>}
-    </>
+            handleBack()
+        }}>Go back</a>
+        </>}
+    </section>
 }
 
-
-import React from 'react';
-
-function PlayerResult({ player }) {
-
-    const {name, surname, playerId, realTeam, position, pointsPerGame, totalPoints, yellowCards, redCards,  goals, minutes, photo, cost}  = player
-    
-    return <div class="card">
-        <div class="card-image">
-            <figure class="image is-4by4">
-                <img src={"http://localhost:8080" + photo} width="300px"/> 
-            </figure>
-        </div>
-        <div class="card-content" >
-            <h3 class="title is-4">{name}</h3>
-            <p class="subtitle is-6">{surname}</p>
-            <p class="subtitle is-6">{position}</p>
-        </div>
-
-    </div>
-}
-
-export default PlayerResult
-
+export default withRouter(PlayerDetail)

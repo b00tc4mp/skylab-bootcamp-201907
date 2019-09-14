@@ -14,35 +14,49 @@ function MyLeagues (props) {
 
     useEffect(() => {
         (async () => {
-            
-            const token = logic.userCredentials
-            const leagueId  = await logic.retrieveAllLeagues(token)
-            setLeagueId(leagueId)
-               
-            const {league:leagues} = await logic.retrieveLeague(token, leagueId)
-
-            //let leagues = Object.values(leagues3)
-            setLeagues(leagues)
-            
-            //match the team's users connected with the teams in the league
-            // const user = await logic.retrieveAllLeagues(token)
             debugger
-
-            const teamId = leagues.teams.find(team => { 
-                if (team.owner === user.id) return team._id
-            })
+            try {
+            const leagueId  = await logic.retrieveAllLeagues()
             
-            setTeamId(teamId._id)
+            sessionStorage.league = leagueId
+            const {league:leagues} = await logic.retrieveLeague(leagueId)
+
+            setLeagues(leagues)
+       
+            const teamId = leagues.teams.find(team => { 
+                if (team.owner === sessionStorage.id) return team._id
+            })
+            sessionStorage.team = teamId._id
+            // setTeamId(teamId._id)
             // const owners= leagues.teams.map(result=> result.owner)
             
             // const teamId = owners.find(element =>{
             //     if (element === user.id) return element._id
             // })
-           
+         } catch({message}) {
+            console.log('fail login', message)
+          }
         })()
     }, [])
 
- 
+    function leaveLeague(){
+
+        return(async()=>{
+        try {
+            
+            const leagueId  = await logic.retrieveAllLeagues()
+            await logic.leaveLeague(leagueId)
+            await logic.deleteTeam(leagueId, sessionStorage.team)
+            sessionStorage.clear()
+            history.push('/')
+  
+          } catch({message}) {
+            console.log('fail login', message)
+          }
+      })()
+
+    }
+  
 
 
     return <div>
@@ -58,11 +72,15 @@ function MyLeagues (props) {
                 
                 <a href="" onClick={event => {
                     event.preventDefault()
-                    // goToLeagues(league.id)
-                   
-                    
-                    history.push('/home-landing')
+                                      
+                    history.push('/myteam')
                 }}>Go league</a>
+
+                <button onClick={event => {
+                    event.preventDefault()
+                    leaveLeague()
+                    
+                }}>Leave the league</button>
                </>
             }
             </div>

@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "footcamp-utils": "file:../footcamp-utils",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
@@ -14,7 +13,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test:inspect": "react-scripts --inspect-brk=9230 test --runInBand --no-cache"
+    "test-debug": "react-scripts --inspect-brk=9230 test --runInBand --no-cache"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -32,7 +31,9 @@
     ]
   },
   "devDependencies": {
+    "bcryptjs": "^2.4.3",
     "footcamp-data": "file:../footcamp-data",
+    "footcamp-utils": "file:../footcamp-utils",
     "jsonwebtoken": "^8.5.1"
   }
 }

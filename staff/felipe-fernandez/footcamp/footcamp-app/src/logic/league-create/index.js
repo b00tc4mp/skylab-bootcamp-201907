@@ -1,9 +1,10 @@
-const {validate} = require('footcamp-utils')
+// const {validate} = require('footcamp-utils')
+import {validate} from 'footcamp-utils'
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
-export default function ( name, code, token) {
-    
+export default function ( name, code) {
+    debugger
     validate.string(name, 'name')
     validate.string(code, 'code')
     
@@ -14,7 +15,7 @@ export default function ( name, code, token) {
             method: 'post',
             headers: {
                
-                 'authorization': `bearer ${token}`,
+                 'authorization': `bearer ${this.__token__}`,
                  'content-type': 'application/json' 
                 
                 },

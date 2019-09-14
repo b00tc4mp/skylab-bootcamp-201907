@@ -1,12 +1,12 @@
-const {validate} = require('footcamp-utils')
+// const {validate} = require('footcamp-utils')
+import  {validate} from 'footcamp-utils'
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
-export default function ( token, playerId) {
+export default function ( playerId) {
     
-    // validate.string(id, 'id')
-    // validate.string(code, 'code')
-    
+    validate.string(playerId, 'player id')
+        
     return (async () => {
         
         const response = await fetch(`${REACT_APP_API_URL}/users/leagues/player/${playerId}`, {
@@ -14,7 +14,7 @@ export default function ( token, playerId) {
             method: 'get',
             headers: {
                
-                 'authorization': `bearer ${token}`,
+                 'authorization': `bearer ${this.__token__}`,
                            
                 }
    

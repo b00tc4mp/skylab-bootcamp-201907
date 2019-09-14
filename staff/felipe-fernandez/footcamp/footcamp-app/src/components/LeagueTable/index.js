@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import logic from '../../logic'
 import { withRouter} from 'react-router-dom'
 import Context from '../Context'
-
+import Header from '../Header'
 
 
 function MyLeagues (props) {
@@ -14,14 +14,22 @@ function MyLeagues (props) {
     useEffect(() => {
         (async () => {
             try {
-
-            debugger
-            const token = logic.userCredentials
-            const result  = await logic.retrieveTable(token, leagueId)
-            // const user  = await logic.retrieveUser(token)
-            // const result  = await logic.retrieveTeam(token,  user.leagues[0])
+                
+            const leagueId  = await logic.retrieveAllLeagues()
+            const result  = await logic.retrieveTable(leagueId)
+            sessionStorage.league = leagueId
             const table  = result.teams.map(results=> results)
             setTable(table)
+            
+            // const teamLeague = await logic.retrieveTeam( leagueId, table.id)
+           
+
+            // const res = await Promise.all(teamLeague.team.players.map((playerId) => 
+            //          logic.retrievePlayer( playerId)
+            //     ))
+            // const player  = res.map(res=> res.player)
+                
+            // setPlayer(player)
 
            
            } catch({message}) {
@@ -32,13 +40,17 @@ function MyLeagues (props) {
     }, [])
 
     return <div>
+           <Header />
                 <h2>MY TABLE</h2>
               
             <ul>
                  {table && table.map(tables => <li  key={tables.id}> 
+                <a href={`/#/team/${tables.id}`}>
                  <h3>{tables.name}</h3>
-                 <h3> {tables.points}
-                 </h3>
+                 <h3> {tables.points} </h3>
+                 
+                
+                 </a>
                   </li>)}
             </ul>
             

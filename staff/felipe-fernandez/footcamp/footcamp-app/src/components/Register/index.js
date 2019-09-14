@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import logic from '../../logic'
 import { withRouter} from 'react-router-dom'
+import Feedback from '../Feedback'
 
 function Register(props) {
     const { history } = props
-    
+    const [error , setError] = useState(undefined) 
+
     function handleRegister (name, surname, email, password) {
 
         (async()=>{
@@ -14,7 +16,7 @@ function Register(props) {
                history.push('/register-success')
             
             } catch ({ message }) {
-              console.log('fail register', message)
+                setError("There has been an error in the process of register")
             }
         })()
       }
@@ -51,40 +53,47 @@ function Register(props) {
         <div className="useState" >
             <h2>REGISTER</h2>
             <form onSubmit={handleFormSubmit}>
+            <div class="form-inputs">
                 <input
                     className="input is-info"
                     type="name"
                     name="name"
                     placeholder="Name"
                     onChange={handleNameInput}
-                    required
+                    
                 />
+            </div>
+            <div class="form-inputs">
                 <input
                     className="input is-info"
                     type="surname"
                     name="surname"
                     placeholder="Surname"
                     onChange={handleSurnameInput}
-                    required
+                    
                 />
+            </div>
+            <div class="form-inputs">
                 <input
                     className="input is-info"
                     type="email"
                     name="email"
                     placeholder="Email"
                     onChange={handleEmailInput}
-                    required
+                    
                 />
+            </div>
                 <input
                     className="input is-info"
                     type="password"
                     name="password"
                     placeholder="Password"
                     onChange={handlePasswordInput}
-                    required
+                    
                 />
                 <button className="button is-fullwidth is-info is-outlined">Submit</button>
             </form>
+            {error && <Feedback message={error}/>}
             <a href="#" onClick={event => {
             event.preventDefault()
             handleBack()

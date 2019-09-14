@@ -1,4 +1,5 @@
-const {validate} = require('footcamp-utils')
+// const {validate} = require('footcamp-utils')
+import {validate} from 'footcamp-utils'
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 

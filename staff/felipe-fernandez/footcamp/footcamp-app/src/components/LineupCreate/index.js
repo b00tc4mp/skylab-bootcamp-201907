@@ -18,13 +18,13 @@ function MyLineup (props) {
             try {
             
             const leagueId  = await logic.retrieveAllLeagues()
-            
+            debugger
             // const result  = await logic.retrieveTeam(leagueId,  sessionStorage.team)
     
-            const resultTeam  = await logic.retrieveLineup(leagueId, sessionStorage.team )
+            const resultTeam  = await logic.getLineup(sessionStorage.league, teamId)
             sessionStorage.league = leagueId
             
-            const lineup  = resultTeam.teamLineup.map(results=> results)
+            const lineup  = resultTeam.lineup.map(results=> results)
            
             setLineup(lineup)
 
@@ -43,18 +43,20 @@ function MyLineup (props) {
     }, [])
 
     return <div>
-            <Header />
-             <div className="container">     
-                <ul>
-                
-                {playerLineup && playerLineup.map(playerlineup => 
-                <li  key={playerlineup.id}>
-                    <a href={`/#/lineup/${playerlineup.id}`}> 
-                        <PlayerResultLineup playerLineup={playerlineup}/>
-                        </a>  
-                     </li>)}
-             </ul>
-            </div>
+                <h2>THIS IS YOUR INITIAL LINEUP</h2>   
+            <ul>
+            
+            {playerLineup && playerLineup.map(playerlineup => 
+            <li  key={playerlineup.id}>
+              
+                <PlayerResultLineup playerLineup={playerlineup}/>
+                     
+             </li>)}
+             <a href="#" onClick={event => {
+                event.preventDefault()
+                history.push('/myleague')
+            }}>OK</a>
+        </ul>
         </div>
 }
 

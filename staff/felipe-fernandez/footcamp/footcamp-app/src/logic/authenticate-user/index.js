@@ -1,4 +1,5 @@
-const {validate} = require('footcamp-utils')
+// const {validate} = require('footcamp-utils')
+import {validate} from 'footcamp-utils'
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
@@ -16,14 +17,16 @@ export default function (email, password) {
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({email, password})
         })
-        const responseJson = await response.json()
+        
         
         if (response.status !== 200) {
-            const { error } = await responseJson
+            const { error } = await response.json()
             throw Error(error)
         }
         else {
-            return  responseJson
+            const { token } = await response.json()
+            this.__token__= (token) 
+            return
         }
             
     })()
