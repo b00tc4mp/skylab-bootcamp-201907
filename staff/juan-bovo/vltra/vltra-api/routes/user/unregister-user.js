@@ -5,7 +5,6 @@ module.exports = function (req, res) {
     const { id, body: { email, password } } = req
 
     try {
-        debugger
         unregisterUser(id, email, password)
             .then(() => res.json({ message: 'user correctly unregistered' }))
             .catch(({ message }) => res.status(404).json({ error: message }))

@@ -18,7 +18,7 @@ module.exports = function(postId, userId) {
         const post = await Post.findById(postId)
 
         if (!post) throw Error(`post with id ${postId} does not exist`)
-        debugger
+        
         if (post.author.toString() !== userId) throw Error(`postId ${postId} does not belong to userId ${userId}`)
 
         await Post.deleteOne({ _id : postId })

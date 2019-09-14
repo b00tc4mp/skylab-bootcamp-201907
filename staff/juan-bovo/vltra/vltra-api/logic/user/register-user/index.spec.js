@@ -24,7 +24,7 @@ describe('logic - register user', () => {
     })
 
     it('should succeed on correct data', async () => {
-        const result = await registerUser(name, surname, nickname, email, password)
+        const result = await registerUser(name, surname, nickname.substr(0, 20), email, password)
             
         expect(result).not.to.exist
         const user = await User.findOne({ email })
@@ -32,7 +32,7 @@ describe('logic - register user', () => {
         expect(user).to.exist
         expect(user.name).to.equal(name)
         expect(user.surname).to.equal(surname)
-        expect(user.nickname).to.equal(nickname)
+        expect(user.nickname).to.equal(nickname.substr(0, 20))
         expect(user.email).to.equal(email)
         // expect(user.password).to.eq(password)
         const match = await bcrypt.compare(password,user.password)
@@ -41,7 +41,7 @@ describe('logic - register user', () => {
     })
 
     it('should fail if the mail already exists', async () => {
-        await User.create({ name, surname, nickname, email, password })
+        await User.create({ name, surname, nickname : nickname.substr(0, 20), email, password })
             try{
                 await registerUser('name', 'surname', 'nickname', email, 'password')
                 throw new Error('should not reach this point')
@@ -52,13 +52,13 @@ describe('logic - register user', () => {
     })
 
     it('should fail if the nickname is already in use', async () => {
-        await User.create({ name, surname, nickname, email, password })
+        await User.create({ name, surname, nickname : nickname.substr(0, 20), email, password })
             try{
-                await registerUser('name', 'surname', nickname, 'email@mail.com', 'password')
+                await registerUser('name', 'surname', nickname.substr(0, 20), 'email@mail.com', 'password')
                 throw new Error('should not reach this point')
             }catch(error) {
                     expect(error).to.exist
-                    expect(error.message).to.equal(`nickname ${nickname} is already in use`)
+                    expect(error.message).to.equal(`nickname ${nickname.substr(0, 20)} is already in use`)
                 }
     })
 

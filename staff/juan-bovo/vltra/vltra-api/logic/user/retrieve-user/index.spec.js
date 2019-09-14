@@ -21,7 +21,7 @@ describe('logic - retrieve user', () => {
         voted = []
 
         await User.deleteMany()
-            const user = await User.create({ name, surname, nickname, email, password, bookmarks, voted })
+            const user = await User.create({ name, surname, nickname : nickname.substr(0, 20), email, password, bookmarks, voted })
             id = user.id
     })
 
@@ -32,14 +32,14 @@ describe('logic - retrieve user', () => {
                 expect(result._id).not.to.exist
                 expect(result.name).to.equal(name)
                 expect(result.surname).to.equal(surname)
-                expect(result.nickname).to.equal(nickname)
+                expect(result.nickname).to.equal(nickname.substr(0, 20))
                 expect(result.email).to.equal(email)
                 expect(result.password).not.to.exist
                 expect(result.bookmarks).to.exist
                 expect(result.voted).to.exist
     })
 
-    it('should fail unexistant postId', async () => {
+    it('should fail unexistant userId', async () => {
         const wrongId = '5d72794a24912c10b5c089e1' //--> 5d72794a24914c10b5c089e1
         
         try{

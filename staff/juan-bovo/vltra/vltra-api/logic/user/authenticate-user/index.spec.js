@@ -22,7 +22,7 @@ describe('logic - authenticate user', () => {
         voted = []
 
         await  User.deleteMany()
-            const user = await User.create({ name, surname, nickname, email, password : await bcrypt.hash(password,10), bookmarks, voted })
+            const user = await User.create({ name, surname, nickname:nickname.substr(0, 20), email, password : await bcrypt.hash(password,10), bookmarks, voted })
             id = user.id
     })
 
