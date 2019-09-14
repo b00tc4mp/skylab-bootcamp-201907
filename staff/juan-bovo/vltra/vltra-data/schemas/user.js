@@ -13,6 +13,7 @@ module.exports = new Schema({
     },
     nickname: {
         type: String,
+        maxlength: 20,
         required: true
     },
     email: {

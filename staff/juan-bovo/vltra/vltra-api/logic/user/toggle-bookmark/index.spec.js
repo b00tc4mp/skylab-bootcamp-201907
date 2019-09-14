@@ -11,7 +11,7 @@ describe('logic - toggle bookmark', () => {
 
     let name, surname, nickname, email, password, bookmarks, voted, title, body, author, date, comments, votes, userId, postId
     
-    beforeEach(async () => {debugger
+    beforeEach(async () => {
         await Post.deleteMany()
         await User.deleteMany()
 
@@ -23,7 +23,7 @@ describe('logic - toggle bookmark', () => {
         bookmarks = []
         voted = []
 
-        const user = await User.create({ name, surname, nickname, email, password, bookmarks, voted })
+        const user = await User.create({ name, surname, nickname : nickname.substr(0, 20), email, password, bookmarks, voted })
         userId = user.id
 
         title = `title-${Math.random()}`

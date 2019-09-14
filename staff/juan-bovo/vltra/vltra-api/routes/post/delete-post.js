@@ -5,7 +5,6 @@ module.exports = function (req, res) {
     const { id, body: { postId, userId } } = req
 
     try {
-        debugger
         deletePost(postId, userId)
             .then(() => res.json({ message: `postId with id ${postId} has been deleted` }))
             .catch(({ message }) => res.status(404).json({ error: message }))

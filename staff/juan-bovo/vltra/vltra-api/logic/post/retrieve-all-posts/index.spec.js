@@ -38,10 +38,10 @@ describe('logic - retrieve all posts', () => {
         bookmarks2 = []
         votes2 = []
         
-        const user = await User.create({ name, surname, nickname, email, password, bookmarks, voted })
+        const user = await User.create({ name, surname, nickname : nickname.substr(0, 20), email, password, bookmarks, voted })
         authorId = user.id
         
-        const user2 = await User.create({ name: name2, surname:surname2, nickname:nickname2, email:email2, password:password2, bookmarks:bookmarks2, voted:voted2 })
+        const user2 = await User.create({ name: name2, surname:surname2, nickname:nickname2.substr(0, 20), email:email2, password:password2, bookmarks:bookmarks2, voted:voted2 })
         authorId2 = user2.id
 
         title = `title-${Math.random()}`

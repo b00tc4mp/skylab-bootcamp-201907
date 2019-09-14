@@ -26,7 +26,7 @@ describe('logic - add comment to a post', () => {
         bookmarks = []
         voted = []
         
-        const user = await User.create({ name, surname, nickname, email, password, bookmarks, voted })
+        const user = await User.create({ name, surname, nickname:nickname.substr(0, 20), email, password, bookmarks, voted })
         userId = user.id
 
         let title, body, author, date, comments, votes
