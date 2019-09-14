@@ -36,6 +36,7 @@ describe('logic - create post', () => {
 
     it('should succeed creating a post on correct data', async () => {
         const result = await createPost(title, body, author)
+        debugger
         postId = result
         expect(postId).to.exist
 

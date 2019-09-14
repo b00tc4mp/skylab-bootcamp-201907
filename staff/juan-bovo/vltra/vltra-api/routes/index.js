@@ -33,7 +33,8 @@ router.delete ('/users', [tokenMiddleware, jsonBodyParser], unregisterUser) //'u
 router.post('/bookmark', [tokenMiddleware, jsonBodyParser], toggleBookmarks) //router.post('/bookmark', jsonBodyParser, toggleBookmarks)
 
 /* POST */
-router.post('/posts', [tokenMiddleware, jsonBodyParser], createPost) //router.post('/posts', jsonBodyParser, createPost)
+//router.post('/posts', [tokenMiddleware, jsonBodyParser], createPost) //router.post('/posts', jsonBodyParser, createPost)
+router.post('/posts', jsonBodyParser, createPost)
 router.get('/post', jsonBodyParser, retrievePost) //router.get('/post', [tokenMiddleware, jsonBodyParser], retrievePost)
 router.get('/posts', [] , retrieveAllPosts) // router.get('/posts', [tokenMiddleware, jsonBodyParser], retrieveAllPosts)
 router.get('/posts/author', [tokenMiddleware, jsonBodyParser], retrieveUserPosts) //router.get('/posts/author', [tokenMiddleware, jsonBodyParser], retrieveUserPosts)
