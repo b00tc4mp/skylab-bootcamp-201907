@@ -27,7 +27,7 @@ describe('logic - authenticate user', () => {
 
         const hash = await bcrypt.hash(password, 10)
 
-        const user = await User.create({ name, surname, nickname, email, password: hash })
+        const user = await User.create({ name, surname, nickname: nickname.substr(0, 20), email, password: hash })
 
         id = user.id
     })

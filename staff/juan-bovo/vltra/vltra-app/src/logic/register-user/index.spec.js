@@ -24,7 +24,7 @@ describe('logic - register user', () => {
     })
 
     it('should succeed on correct data', async () => {
-        const response = await registerUser(name, surname, nickname, email, password, repassword)
+        const response = await registerUser(name, surname, nickname.substr(0, 20), email, password, repassword)
 
         expect(response).toBeUndefined()
 
@@ -33,6 +33,7 @@ describe('logic - register user', () => {
         expect(user).toBeDefined()
         expect(user.name).toBe(name)
         expect(user.surname).toBe(surname)
+        expect(user.nickname).toBe(nickname.substr(0, 20))
         expect(user.email).toBe(email)
         // expect(user.password).toBe(password)
 
@@ -43,7 +44,7 @@ describe('logic - register user', () => {
     })
 
     it('should fail if the mail already exists', async () => {
-        await User.create({ name, surname, nickname, email, password, repassword })
+        await User.create({ name, surname, nickname:nickname.substr(0, 20), email, password, repassword })
             try{
                 await registerUser('name', 'surname', 'nickname', email, 'password', 'password')
                 throw new Error('should not reach this point')
@@ -54,19 +55,19 @@ describe('logic - register user', () => {
     })
 
     it('should fail if the nickname is already in use', async () => {
-        await User.create({ name, surname, nickname, email, password, repassword })
+        await User.create({ name, surname, nickname:nickname.substr(0, 20), email, password, repassword })
             try{
-                await registerUser('name', 'surname', nickname, 'email@mail.com', 'password', 'password')
+                await registerUser('name', 'surname', nickname.substr(0, 20), 'email@mail.com', 'password', 'password')
                 throw new Error('should not reach this point')
             }catch(error) {
                     expect(error).toBeDefined()
-                    expect(error.message).toBe(`nickname ${nickname} is already in use`)
+                    expect(error.message).toBe(`nickname ${nickname.substr(0, 20)} is already in use`)
                 }
     })
 
     it('should fail if the password and repassword do not match', async () => {
             try{
-                await registerUser(name, surname, nickname, email, password, 'differentpassword')
+                await registerUser(name, surname, nickname.substr(0, 20), email, password, 'differentpassword')
                 throw new Error('should not reach this point')
             }catch(error) {
                     expect(error).toBeDefined()
@@ -75,23 +76,23 @@ describe('logic - register user', () => {
     })
 
     it('should fail on empty name', () =>
-        expect(() => registerUser("", surname, nickname, email, password, repassword)).toThrow('name is empty or blank')
+        expect(() => registerUser("", surname, nickname.substr(0, 20), email, password, repassword)).toThrow('name is empty or blank')
     )
     it('should fail on undefined name', () =>
-        expect(() => registerUser(undefined, surname, nickname, email, password, repassword)).toThrow('name with value undefined is not a string')
+        expect(() => registerUser(undefined, surname, nickname.substr(0, 20), email, password, repassword)).toThrow('name with value undefined is not a string')
     )
     it('should fail on wrong name type', () =>
-        expect(() => registerUser(123, surname, nickname, email, password, repassword)).toThrow('name with value 123 is not a string')
+        expect(() => registerUser(123, surname, nickname.substr(0, 20), email, password, repassword)).toThrow('name with value 123 is not a string')
     )
 
     it('should fail on empty surname', () =>
-        expect(() => registerUser(name, "", nickname, email, password, repassword)).toThrow('surname is empty or blank')
+        expect(() => registerUser(name, "", nickname.substr(0, 20), email, password, repassword)).toThrow('surname is empty or blank')
     )
     it('should fail on undefined surname', () =>
-        expect(() => registerUser(name, undefined, nickname, email, password, repassword)).toThrow('surname with value undefined is not a string')
+        expect(() => registerUser(name, undefined, nickname.substr(0, 20), email, password, repassword)).toThrow('surname with value undefined is not a string')
     )
     it('should fail on wrong surname type', () =>
-        expect(() => registerUser(name, 123, nickname, email, password, repassword)).toThrow('surname with value 123 is not a string')
+        expect(() => registerUser(name, 123, nickname.substr(0, 20), email, password, repassword)).toThrow('surname with value 123 is not a string')
     )
 
     it('should fail on empty nickname', () =>
@@ -105,26 +106,26 @@ describe('logic - register user', () => {
     )
     
     it('should fail on empty email', () =>
-        expect(() => registerUser(name, surname, nickname, "", password, repassword)).toThrow('email is empty or blank')
+        expect(() => registerUser(name, surname, nickname.substr(0, 20), "", password, repassword)).toThrow('email is empty or blank')
     )
     it('should fail on undefined email', () =>
-    expect(() => registerUser(name, surname, nickname, undefined, password, repassword)).toThrow('email with value undefined is not a string')
+    expect(() => registerUser(name, surname, nickname.substr(0, 20), undefined, password, repassword)).toThrow('email with value undefined is not a string')
     )
     it('should fail on wrong email type', () =>
-        expect(() => registerUser(name, surname, nickname, 123, password, repassword)).toThrow('email with value 123 is not a string')
+        expect(() => registerUser(name, surname, nickname.substr(0, 20), 123, password, repassword)).toThrow('email with value 123 is not a string')
     )
     it('should fail on wrong email format', () =>
-        expect(() => registerUser(name, surname, nickname, "123@mailcom", password, repassword)).toThrow('email with value 123@mailcom is not a valid e-mail')
+        expect(() => registerUser(name, surname, nickname.substr(0, 20), "123@mailcom", password, repassword)).toThrow('email with value 123@mailcom is not a valid e-mail')
     )
 
     it('should fail on empty password', () =>
-        expect(() => registerUser(name, surname, nickname, email, "", repassword)).toThrow('password is empty or blank')
+        expect(() => registerUser(name, surname, nickname.substr(0, 20), email, "", repassword)).toThrow('password is empty or blank')
     )
     it('should fail on undefined password', () =>
-    expect(() => registerUser(name, surname, nickname, email, undefined, repassword)).toThrow('password with value undefined is not a string')
+    expect(() => registerUser(name, surname, nickname.substr(0, 20), email, undefined, repassword)).toThrow('password with value undefined is not a string')
     )
     it('should fail on wrong password type', () =>
-        expect(() => registerUser(name, surname, nickname, email, 123, repassword)).toThrow('password with value 123 is not a string')
+        expect(() => registerUser(name, surname, nickname.substr(0, 20), email, 123, repassword)).toThrow('password with value 123 is not a string')
     )
 
     afterAll(() => database.disconnect())
