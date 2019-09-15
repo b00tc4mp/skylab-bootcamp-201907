@@ -1,6 +1,6 @@
 function Login({ onLogin, onBack, error }) {
     return <>
-        <h1>Login</h1>
+        <h1>Login!</h1>
         <form onSubmit={event => {
             event.preventDefault()
 

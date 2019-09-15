@@ -4,22 +4,16 @@ class Landing extends Component {
     constructor() {
         super()
 
-        this.state = { view: 'search', query: undefined, ducks: [], duck: undefined, error: undefined, user: undefined, favs: [] }
-        
+        this.state = { view: 'search',  error: undefined, user: undefined, }
 
-        this.handleSearch = this.handleSearch.bind(this)
-        this.handleRetrieveDuck = this.handleRetrieveDuck.bind(this)
-        this.handleBackFromDetail = this.handleBackFromDetail.bind(this)
+
         this.handleRegister = this.handleRegister.bind(this)
         this.handleLogin = this.handleLogin.bind(this)
         this.handleLogout = this.handleLogout.bind(this)
-        this.handleToggleFavDuckFromDuckItem = this.handleToggleFavDuckFromDuckItem.bind(this)
-        this.handleToggleFavDuckFromDuckDetail = this.handleToggleFavDuckFromDuckDetail.bind(this)
         this.handleAcceptError = this.handleAcceptError.bind(this)
-        this.handleFavorites = this.handleFavorites.bind(this)
-        this.handleGoToSearch = this.handleGoToSearch.bind(this)
-        this.handleToggleFavDuckFromFavorites = this.handleToggleFavDuckFromFavorites.bind(this)
-    }
+        this.handleDrumkit = this.handleDrumkit.bind(this)
+        this.handleCheck = this.handleCheck.bind(this)
+         }
 
     componentWillMount() {
         const { props: { credentials } } = this
@@ -37,29 +31,8 @@ class Landing extends Component {
         }
     }
 
-    handleSearch(query) {
-        const { props: { credentials } } = this
 
-        let id, token
-
-        credentials && (id = credentials.id, token = credentials.token)
-
-        logic.searchDucks(id, token, query)
-            .then(ducks => this.setState({ ducks, query }))
-            .catch(({ message }) => this.setState({ error: message }))
-    }
-
-    handleRetrieveDuck(duckId) {
-        const { props: { credentials } } = this
-
-        let id, token
-
-        credentials && (id = credentials.id, token = credentials.token)
-
-        logic.retrieveDuck(id, token, duckId)
-            .then(duck => this.setState({ duck }))
-            .catch(({ message }) => this.setState({ error: message }))
-    }
+  
 
     handleRegister(event) {
         event.preventDefault()
@@ -67,17 +40,7 @@ class Landing extends Component {
         this.props.onRegister()
     }
 
-    handleBackFromDetail() {
-        const { state: { query }, props: { credentials } } = this
 
-        let id, token
-
-        credentials && (id = credentials.id, token = credentials.token)
-
-        logic.searchDucks(id, token, query)
-            .then(ducks => this.setState({ ducks, duck: undefined }))
-            .catch(({ message }) => this.setState({ error: message }))
-    }
 
     handleLogin(event) {
         event.preventDefault()
@@ -93,66 +56,33 @@ class Landing extends Component {
         this.setState({ user: undefined, view: 'search' }, () => onLogout())
     }
 
-    handleToggleFavDuckFromDuckItem(duckId) {
-        const { props: { onLogin, credentials }, handleSearch, state: { query } } = this
-
-        let id, token
-
-        credentials && (id = credentials.id, token = credentials.token)
-
-        credentials ? logic.toggleFavDuck(id, token, duckId).then(() => handleSearch(query)).catch(({ message }) => this.setState({ error: message })) : onLogin()
-    }
-
-    handleToggleFavDuckFromDuckDetail(duckId) {
-        const { props: { onLogin, credentials }, handleRetrieveDuck } = this
-
-        let id, token
-
-        credentials && (id = credentials.id, token = credentials.token)
-
-        credentials ? logic.toggleFavDuck(id, token, duckId).then(() => handleRetrieveDuck(duckId)).catch(({ message }) => this.setState({ error: message })) : onLogin()
-    }
+ 
 
     handleAcceptError() {
         this.setState({ error: undefined })
     }
 
-    handleFavorites() {
-        const { props: { credentials } } = this
-
-        let id, token
-
-        credentials && (id = credentials.id, token = credentials.token)
-
-        logic.retrieveFavDucks(id, token)
-            .then(favs => this.setState({ view: 'favorites', favs }))
-            .catch(({ message }) => this.setState({ error: message }))
-    }
-
-    handleGoToSearch(event) {
+    handleDrumkit(event) {
         event.preventDefault()
 
-        this.setState({ view: 'search' })
+        this.props.onDrumkit()
     }
 
-    handleToggleFavDuckFromFavorites(duckId) {
-        const { props: { onLogin, credentials }, handleFavorites } = this
-
-        let id, token
-
-        credentials && (id = credentials.id, token = credentials.token)
-
-        credentials ? logic.toggleFavDuck(id, token, duckId).then(() => handleFavorites()).catch(({ message }) => this.setState({ error: message })) : onLogin()
+    handleCheck(event)  {
+        event.preventDefault()
+        console.log('called')
     }
+
+   
+
+   
 
     render() {
         const {
-            state: { view, ducks, duck, error, user, favs },
-            handleSearch, handleRetrieveDuck, handleRegister,
-            handleBackFromDetail, handleLogin, handleLogout,
-            handleToggleFavDuckFromDuckItem, handleToggleFavDuckFromDuckDetail,
-            handleAcceptError, handleFavorites, handleGoToSearch,
-            handleToggleFavDuckFromFavorites
+            state: { view, error, user, favs },
+            handleRegister,
+            handleLogin, handleLogout,
+            handleDrumkit, handleCheck
         } = this
 
         return <>
@@ -174,23 +104,14 @@ class Landing extends Component {
 
                 </nav>
             </header>
+            <img src="../imgs/logo.png" alt="" />
+            <a href="" onClick={handleDrumkit}>Drumkit</a>
+            
 
-            <h1>Landing</h1>
 
-            {view === 'search' && <>
-                <h3>Search</h3>
-                <Search onSearch={handleSearch} />
+            
 
-                {!duck ?
-                    <Results items={ducks} paintItem={duck => {
-                        return <DuckItem duck={duck} onToggle={handleToggleFavDuckFromDuckItem} />
-                    }} onItem={handleRetrieveDuck} />
-                    :
-                    <DuckDetail duck={duck} onBack={handleBackFromDetail} onToggle={handleToggleFavDuckFromDuckDetail} />}
-
-                {error && <Modal message={error} onAccept={handleAcceptError} />}
-            </>}
-
+            
             {view === 'favorites' && <>
                 <h3>Favorites</h3>
                 <Results items={favs} paintItem={duck => {

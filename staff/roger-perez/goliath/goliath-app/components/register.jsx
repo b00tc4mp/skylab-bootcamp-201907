@@ -11,7 +11,7 @@ function Register({ onRegister, onBack, error }) {
             <label>Name<input type="text" name="name" /></label>
             <label>Surname<input type="text" name="surname" /></label>
             <label>Instrument<input type="text" name="instrument" /></label>
-            <label>Description<input type="text" name="description" /></label>
+            <label>Description<input type="textarea" name="description" /></label>
             <label>E-mail<input type="email" name="email" /></label>
             <label>Password<input type="password" name="password" /></label>
             <label>Repeat password<input type="password" name="repassword" /></label>

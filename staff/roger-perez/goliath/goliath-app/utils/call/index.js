@@ -1,18 +1,31 @@
-function call(url, method = 'get', headers, body) {
+function call(url, method = "get", headers, body) {
     // validate.string(url, 'url')
     // validate.url(url, 'url')
-    validate.string(method, 'method', true, ['get', 'post', 'put', 'patch', 'delete'])
-
+    validate.string(method, "method", true, [
+      "get",
+      "post",
+      "put",
+      "patch",
+      "delete"
+    ]);
+  
     return fetch(url, {
-        method,
-        headers,
-        body: JSON.stringify(body)
+      method,
+      headers,
+      body: JSON.stringify(body)
     })
-        .then(res => {
-            console.log('res on call before :', res);
-            if (res.status !== 200 || res.status !== 201 ) {
-                throw new Error(res)
-            }
-            return res.json()
-        })
-}
+      .then(res => {
+        if (res.status !== 200 && res.status !== 201) {
+          return res.json().then(json => {
+            return Promise.reject(json.error);
+          });
+        } else {
+          return res.json().then(json => {
+            return json;
+          });
+        }
+      })
+      .catch(err => {
+        throw new Error(err);
+      });
+  }
