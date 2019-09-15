@@ -33,17 +33,17 @@ router.delete ('/users', [tokenMiddleware, jsonBodyParser], unregisterUser) //'u
 router.post('/bookmark', [tokenMiddleware, jsonBodyParser], toggleBookmarks) //router.post('/bookmark', jsonBodyParser, toggleBookmarks)
 
 /* POST */
-//router.post('/posts', [tokenMiddleware, jsonBodyParser], createPost) //router.post('/posts', jsonBodyParser, createPost)
-router.post('/posts', jsonBodyParser, createPost)
-router.get('/post', jsonBodyParser, retrievePost) //router.get('/post', [tokenMiddleware, jsonBodyParser], retrievePost)
+router.post('/posts', [tokenMiddleware, jsonBodyParser], createPost) //router.post('/posts', jsonBodyParser, createPost)
+//router.post('/posts', jsonBodyParser, createPost)
+router.get('/post/:postId', jsonBodyParser, retrievePost) //router.get('/post', [tokenMiddleware, jsonBodyParser], retrievePost)
 router.get('/posts', [] , retrieveAllPosts) // router.get('/posts', [tokenMiddleware, jsonBodyParser], retrieveAllPosts)
-router.get('/posts/author', [tokenMiddleware, jsonBodyParser], retrieveUserPosts) //router.get('/posts/author', [tokenMiddleware, jsonBodyParser], retrieveUserPosts)
+router.get('/posts/author/:authorId', [tokenMiddleware, jsonBodyParser], retrieveUserPosts) //router.get('/posts/author', [tokenMiddleware, jsonBodyParser], retrieveUserPosts)
 router.delete ('/posts', [tokenMiddleware, jsonBodyParser], deletePost)
 router.post('/post/vote', [tokenMiddleware, jsonBodyParser], votePost) //router.post('/post/vote', jsonBodyParser, votePost)
 
 /* COMMENTS */
-router.post('/posts/comments', [tokenMiddleware, jsonBodyParser], addComment) //router.post('/posts/comments', jsonBodyParser, addComment)
-router.get('/posts/comments/', jsonBodyParser, retrievePostComments) //router.get('/posts/comments/', [tokenMiddleware, jsonBodyParser], retrievePostComments)
+router.post('/posts/comments/', [tokenMiddleware, jsonBodyParser], addComment) //router.post('/posts/comments', jsonBodyParser, addComment)
+router.get('/posts/comments/:postId', jsonBodyParser, retrievePostComments) //router.get('/posts/comments/', [tokenMiddleware, jsonBodyParser], retrievePostComments)
 router.delete ('/posts/comments', [tokenMiddleware, jsonBodyParser], deleteComment)
 
 module.exports = router

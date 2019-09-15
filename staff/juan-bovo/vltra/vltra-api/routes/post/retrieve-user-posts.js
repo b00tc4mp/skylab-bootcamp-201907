@@ -2,7 +2,7 @@ const { retrieveUserPosts } = require('../../logic')
 
 module.exports = (req, res) => {
     //const { params: { id } } = req
-    const { id, body: { authorId } } = req
+    const { id, params: { authorId } } = req
     
     try {
         retrieveUserPosts(authorId)

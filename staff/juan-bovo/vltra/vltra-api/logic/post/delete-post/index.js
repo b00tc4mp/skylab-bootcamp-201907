@@ -9,10 +9,10 @@ const { validate} = require('vltra-utils')
  * @returns {Promise} post deletion on db
  */
 
-module.exports = function(postId, userId) {
+module.exports = function(userId, postId) {
     
-    validate.objectId(postId, 'postId')
     validate.objectId(userId, 'userId')
+    validate.objectId(postId, 'postId')
     
     return( async () => {
         const post = await Post.findById(postId)
