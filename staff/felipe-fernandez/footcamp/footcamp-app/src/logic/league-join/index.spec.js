@@ -8,7 +8,7 @@ const { User , League } = models
 const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
 const REACT_APP_JWT_SECRET_TEST = process.env.REACT_APP_JWT_SECRET_TEST
 
-describe('logic - create league', () => {
+describe.only('logic - join league', () => {
     beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
 
     let name, surname, email, password, id,nameLeague, code
@@ -27,6 +27,9 @@ describe('logic - create league', () => {
         const user = await User.create({ name, surname, email, password })
 
         id = user.id
+        
+        const league = await League.create({id, name: nameLeague, code})
+        
 
         const token = jwt.sign({ sub: id }, REACT_APP_JWT_SECRET_TEST)
 
@@ -36,7 +39,7 @@ describe('logic - create league', () => {
     it('should succeed on correct data', async () =>{
             
                 
-            const result = await logic.createLeague(nameLeague, code)
+            const result = await logic.joinLeague(code)
               expect(result).toBeDefined()
 
             const league = await League.findOne({name: nameLeague, code})

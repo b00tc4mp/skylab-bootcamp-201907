@@ -4,7 +4,7 @@ import {validate} from 'footcamp-utils'
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 export default function ( name, code) {
-    debugger
+    
     validate.string(name, 'name')
     validate.string(code, 'code')
     

@@ -46,13 +46,10 @@ function CreateLeagues(props) {
             debugger
             try {
               
-            const {leagueId} = await logic.joinLeague(code)
+            const leagueId = await logic.joinLeague(code)
             setLeagueId(leagueId)
-                
-               
-            // setCode(code)
-          
-                
+            sessionStorage.league=leagueId  
+       
                 
             history.push('/create-teams')
                     

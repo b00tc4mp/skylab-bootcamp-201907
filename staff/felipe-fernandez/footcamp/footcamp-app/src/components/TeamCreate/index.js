@@ -9,8 +9,10 @@ function CreateTeam(props) {
 
     const { history } = props
     
-    const { name, setName, teamName, setTeamName, leagueId, setLeagueId, teamId, setTeamId, player, setPlayer, existTeam, setExistTeam } = useContext(Context)
+    const { name, setName, teamName, setTeamName, leagueId, setLeagueId, teamId, setTeamId,  existTeam, setExistTeam } = useContext(Context)
     const [error , setError] = useState(undefined) 
+    const [player , setPlayer] = useState(undefined) 
+    
 
     const handleNameInput = event => setName(event.target.value)
     
@@ -20,7 +22,7 @@ function CreateTeam(props) {
         (async()=>{
             
             try {
-                debugger
+                
                 //call to logic and recveive 18 players and the id of the team
                 const result  = await logic.createTeam(name, leagueId)
                 const players  = result.players.players.map(results=> results)
@@ -34,7 +36,7 @@ function CreateTeam(props) {
                 const player  = res.map(res=> res.player)
                 
                 setPlayer(player)
-                
+               
                  
             } catch ({ message }) {
                 
@@ -48,6 +50,7 @@ function CreateTeam(props) {
         handleCreateTeam( name)
     }
 
+   
 
     return (
     
@@ -63,14 +66,15 @@ function CreateTeam(props) {
                     onChange={handleNameInput}
                     required
                 />
-                <button className="button is-fullwidth is-info is-outlined">Submit</button>
+                {/* <button  className="button is-fullwidth is-info is-outlined">Submit</button> */}
             </form>
             {error && <Feedback message={error}/>}
             {player && player.map(oneplayer => <li  key={oneplayer.id}> <PlayerResult player={oneplayer} /> </li>)}
-            <a href="#" onClick={event => {
+            {player && <a href="#" onClick={event => {
                 event.preventDefault()
+                
                 history.push('/create-lineup')
-            }}>OK</a>
+            }}>OK</a>}
          
 
 

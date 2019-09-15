@@ -19,7 +19,7 @@ function MyLeagues (props) {
             const leagueId  = await logic.retrieveAllLeagues()
             
             sessionStorage.league = leagueId
-            const {league:leagues} = await logic.retrieveLeague(leagueId)
+            const leagues = await logic.retrieveLeague(leagueId)
 
             setLeagues(leagues)
        
@@ -39,23 +39,23 @@ function MyLeagues (props) {
         })()
     }, [])
 
-    function leaveLeague(){
+    // function leaveLeague(){
 
-        return(async()=>{
-        try {
+    //     return(async()=>{
+    //     try {
             
-            const leagueId  = await logic.retrieveAllLeagues()
-            await logic.leaveLeague(leagueId)
-            await logic.deleteTeam(leagueId, sessionStorage.team)
-            sessionStorage.clear()
-            history.push('/')
+    //         const leagueId  = await logic.retrieveAllLeagues()
+    //         await logic.leaveLeague(leagueId)
+    //         await logic.deleteTeam(leagueId, sessionStorage.team)
+    //         sessionStorage.clear()
+    //         history.push('/')
   
-          } catch({message}) {
-            console.log('fail login', message)
-          }
-      })()
+    //       } catch({message}) {
+    //         console.log('fail login', message)
+    //       }
+    //   })()
 
-    }
+    // }
   
 
 
@@ -76,11 +76,11 @@ function MyLeagues (props) {
                     history.push('/myteam')
                 }}>Go league</a>
 
-                <button onClick={event => {
+                {/* <button onClick={event => {
                     event.preventDefault()
                     leaveLeague()
                     
-                }}>Leave the league</button>
+                }}>Leave the league</button> */}
                </>
             }
             </div>

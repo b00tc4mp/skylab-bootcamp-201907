@@ -23,7 +23,7 @@ function MyLineup (props) {
     
             const resultTeam  = await logic.retrieveLineup(leagueId, sessionStorage.team )
             sessionStorage.league = leagueId
-            
+
             const lineup  = resultTeam.teamLineup.map(results=> results)
            
             setLineup(lineup)
@@ -44,11 +44,11 @@ function MyLineup (props) {
 
     return <div>
             <Header />
-             <div className="container">     
-                <ul>
+             <div>     
+                <ul className="container">
                 
-                {playerLineup && playerLineup.map(playerlineup => 
-                <li  key={playerlineup.id}>
+                {playerLineup && playerLineup.map((playerlineup, i)  => 
+                <li className={`item item${i}`} key={playerlineup.id}>
                     <a href={`/#/lineup/${playerlineup.id}`}> 
                         <PlayerResultLineup playerLineup={playerlineup}/>
                         </a>  

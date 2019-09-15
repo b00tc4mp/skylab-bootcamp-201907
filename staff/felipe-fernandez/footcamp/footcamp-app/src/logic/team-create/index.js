@@ -23,7 +23,8 @@ export default function ( name, leagueId) {
    
             body: JSON.stringify({ name })
         })
-        
+
+        const responseJson = await response.json()
         
 
         if (response.status !== 200) {
@@ -33,7 +34,7 @@ export default function ( name, leagueId) {
         
         else {
             
-            return  await response.json()
+            return  responseJson
         }
        
     })()

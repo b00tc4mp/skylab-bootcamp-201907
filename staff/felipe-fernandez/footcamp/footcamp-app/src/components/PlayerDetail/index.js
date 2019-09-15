@@ -16,15 +16,21 @@ import Header from '../Header'
         })()
     }, [])
       
-  const handleBack = () => {
+    function handleBack ()  {
      
-    history.push('/myteam')
-}
+        history.push('/myteam')
+    }
+
+    function addDefaultSrc(event) {
+        
+        event.target.src = 'http://localhost:8080/images/avatar.jpg'
+        
+    }
 
     return <section>
         <Header />
         {player && <>
-            <img src={"http://localhost:8080" + player.player.photo} width="300px"/>
+            <img onError={addDefaultSrc} src={"http://localhost:8080" + player.player.photo} width="300px"/>
             <p>Name: {player.player.name}</p>
             <p>Surname: {player.player.surname}</p>
             <p>Total points: {player.player.totalPoints}</p>

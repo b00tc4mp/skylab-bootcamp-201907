@@ -161,22 +161,19 @@ input {
   text-align: center;
 }
 
-.item1 {
-  width: 10%;
+.item0 {
   margin: 0 auto;
   grid-column-start: 1;
   grid-column-end: 5;
 }
 
-.item10 {
-  width: 20%;
+.item9 {
   margin: 0 auto;
   grid-column-start: 1;
   grid-column-end: 3;
 }
 
-.item11 {
-  width: 20%;
+.item10 {
   margin: 0 auto;
   grid-column-start: 3;
   grid-column-end: 5;
@@ -191,6 +188,16 @@ button {
   width: 30%;
   margin: 10px auto;
   text-align: center;
+}
+
+.card__image {
+  width: 95%;
+  height: 95%;
+}
+
+img {
+  width: 100%;
+  height: 100%;
 }
 
 .header-app {

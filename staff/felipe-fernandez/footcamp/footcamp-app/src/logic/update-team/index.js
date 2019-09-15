@@ -26,17 +26,13 @@ export default function ( leagueId ,teamId, id1, id2) {
    
         })
         
-                await response.json()
+               
 
         if (response.status !== 200) {
             const { error } = await response.json()
             throw Error(error)
         }
         
-        else {
-            
-            return  
-        }
        
     })()
 }

@@ -1,4 +1,4 @@
-import React, {  useContext, useEffect } from 'react'
+import React, {  useState, useEffect } from 'react'
 import { withRouter, Link } from "react-router-dom"
 import Context from '../Context'
 import logic from '../../logic'
@@ -7,14 +7,18 @@ import logic from '../../logic'
 function Header(props) {
 
   const { history } = props
-  const { user, setUser } = useContext(Context)
+  const [user, setUser] = useState(null)
     
   useEffect(() => {
+    
     (async () => {
-                    
-      const user = await logic.retrieveUser()
-      setUser(user)
-            
+      try {    
+          const user = await logic.retrieveUser()
+          setUser(user)
+      }
+      catch({message}) {
+        console.log('fail login', message)
+      }   
         
     })()
 }, [])

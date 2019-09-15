@@ -70,6 +70,12 @@ function LineupUpdate({match ,history}) {
             }
         })()
     }
+
+    function addDefaultSrc(event) {
+        
+        event.target.src = 'http://localhost:8080/images/avatar.jpg'
+        
+    }
         
     return <div class="card"> 
    
@@ -87,7 +93,7 @@ function LineupUpdate({match ,history}) {
                 }}> 
                
                      <figure class="image is-4by4">
-                 <img src={"http://localhost:8080" + playerlineup.player.photo} width="300px"/>  
+                 <img onError={addDefaultSrc} src={"http://localhost:8080" + playerlineup.player.photo} width="300px"/>  
                     </figure>
                     <h3 class="title is-4">{playerlineup.player.name}</h3>
                     <p class="subtitle is-6">{playerlineup.player.surname}</p>        

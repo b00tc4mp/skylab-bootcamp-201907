@@ -8,10 +8,10 @@ const { User , League } = models
 const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
 const REACT_APP_JWT_SECRET_TEST = process.env.REACT_APP_JWT_SECRET_TEST
 
-describe('logic - create league', () => {
+describe.only('logic - leave league', () => {
     beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
 
-    let name, surname, email, password, id,nameLeague, code
+    let name, surname, email, password, id,nameLeague, code, leagueId
 
     beforeEach(async () => {
         name = `name-${Math.random()}`
@@ -27,6 +27,12 @@ describe('logic - create league', () => {
         const user = await User.create({ name, surname, email, password })
 
         id = user.id
+        
+        const league = await League.create({id, name: nameLeague, code})
+        leagueId= league.id
+
+        league.participants.push(id)
+        await league.save()
 
         const token = jwt.sign({ sub: id }, REACT_APP_JWT_SECRET_TEST)
 
@@ -34,18 +40,14 @@ describe('logic - create league', () => {
     })
 
     it('should succeed on correct data', async () =>{
-            
-                
-            const result = await logic.createLeague(nameLeague, code)
-              expect(result).toBeDefined()
+        const result = await logic.leaveLeague(leagueId)
+            expect(result).toBeDefined()
 
-            const league = await League.findOne({name: nameLeague, code})
-                expect(league).toBeDefined()
-                expect(league.team).toBeDefined()
-                expect(league.name).toBe(nameLeague)
-                expect(league.code).toBe(code)
-                expect(league.participants.length).toBe(1)
-                expect(league.participants[0].toString()).toBe(id)
+        const findLeague = await League.findOne({_id: leagueId})
+            expect(findLeague).toBeDefined()
+            expect(findLeague.participants.length).toBe(0)
+                
+          
           
         })
 

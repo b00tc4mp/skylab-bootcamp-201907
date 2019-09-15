@@ -17,14 +17,13 @@ export default function (leagueId) {
                 }
         })
         
-        const responseJson = await response.json()
-
+        
         if (response.status !== 200) {
             const { error } = await response.json()
             throw Error(error)
         }
         else {
-            return 
+            return await response.json()
         }
        
     })()

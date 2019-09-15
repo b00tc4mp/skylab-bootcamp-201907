@@ -6,15 +6,15 @@ import Header from '../Header'
 
 function UserProfile({history}) {
 
-    const [userProfile, setUserProfile] = useState(null)
+    const [user, setUser] = useState(null)
     // const { user, setUser } = useContext(Context)
     debugger
     useEffect(() => {
         (async () => {
             try {        
                 debugger
-            const {user: userProfile} = await logic.retrieveUser()
-            setUserProfile(userProfile)
+                const user = await logic.retrieveUser()
+                setUser(user)
 
         } catch({message}) {
             console.log('fail login', message)
@@ -31,12 +31,12 @@ function UserProfile({history}) {
         <div>
             <Header />
             <div class="card"> 
-{/*         
-            <div class="card-content" >
-                    <h3 class="title is-4">{userProfile.name}</h3>
-                    <p class="subtitle is-6">{userProfile.surname}</p>
-                    <p class="subtitle is-6">{userProfile.email}</p>
-                </div> */}
+         
+             {user && <div class="card-content" >
+                    <h3 class="title is-4">{user.name}</h3>
+                    <p class="subtitle is-6">{user.surname}</p>
+                    <p class="subtitle is-6">{user.email}</p>
+                </div> }
                 <a href="#" onClick={event => {
                     event.preventDefault()
                     handleBack()

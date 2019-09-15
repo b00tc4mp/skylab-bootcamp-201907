@@ -21,6 +21,7 @@ export default function ( ) {
             throw Error(error)
         }
         else {
+            
             return responseJson.leagues
         }
        

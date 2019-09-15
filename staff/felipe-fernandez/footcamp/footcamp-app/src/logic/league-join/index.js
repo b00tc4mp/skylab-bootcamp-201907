@@ -4,8 +4,7 @@ import {validate} from 'footcamp-utils'
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 export default function ( code) {
-    debugger
-    // validate.string(name, 'name')
+      
     validate.string(code, 'code')
   
     return (async () => {
@@ -23,14 +22,14 @@ export default function ( code) {
                
             body: JSON.stringify({ code })
         })
-         
+       
         if (response.status !== 200) {
             const { error } = await response.json()
             throw Error(error)
         }
         else {
-            
-            return await response.json()
+            const {leagueId} =await response.json()
+            return  leagueId
         }
     })()
 }
