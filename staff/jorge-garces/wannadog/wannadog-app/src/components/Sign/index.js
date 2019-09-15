@@ -18,7 +18,7 @@ export default function ({ onLogin }) {
             <button>LOGIN</button>
         </form>
 
-        <p>don't have an account? Sign-up!</p>
-        <Link to="/register">Sign-up!</Link>
+        <p>don't have an account? <Link to="/register">Sign-up!</Link></p>
+
     </>
 }

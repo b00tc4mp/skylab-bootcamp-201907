@@ -6,5 +6,16 @@ import Confirm from './Confirm'
 import Search from './Search'
 import Profile from './Profile'
 import RegisterDog from './RegisterDog'
+import SearchResults from './SearchResults'
+import DogResult from './DogResult'
+import DogShowcase from './DogShowcase'
+import Favorites from './Favorites'
+import DogDetail from './DogDetail'
+import MyDogs from './MyDogs'
+import About from './About'
+import ChatLounge from './ChatLounge'
+import Chat from './Chat'
+import MessageShowcase from './MessageShowcase'
+import ChatShowcase from './ChatShowcase'
 
-export { Landing, Sign, Register, Success, Confirm, Search, Profile, RegisterDog }
+export { Landing, Sign, Register, Success, Confirm, Search, Profile, RegisterDog, SearchResults, DogResult, DogShowcase, Favorites, DogDetail, MyDogs, About, ChatLounge, Chat, MessageShowcase, ChatShowcase }

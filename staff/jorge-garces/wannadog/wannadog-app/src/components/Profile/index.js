@@ -16,11 +16,12 @@ export default withRouter(function ({ history, onLogout }) {
     }, [history.location])
 
     return <>
+        <Link to="/search">Go Back</Link>
         <h2>{user && user.name}</h2>
         <Link to="/mydogs">My Dogs</Link>
         <Link to="/favorites">Favorites</Link>
         <Link to="/alerts">Alerts</Link>
-        <Link to="/messages">Messages</Link>
+        <Link to="/chats">Messages</Link>
         <Link to="/about">About WannaDOG</Link>
         <button onClick={onLogout}>Logout</button>
     </>

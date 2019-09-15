@@ -251,7 +251,6 @@ export default function ({ onRegisterDog }) {
 
             <label htmlFor="age">Age</label>
             <select name="age">
-                <option value="0"> I don't mind</option>
                 <option value="1"> Puppy</option>
                 <option value="2"> Less than a year</option>
                 <option value="3"> From 1 to 5 years</option>

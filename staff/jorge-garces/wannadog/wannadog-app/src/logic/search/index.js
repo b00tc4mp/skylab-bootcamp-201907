@@ -1,5 +1,5 @@
 export default function (distance, breed, gender, size, age, neutered, withDogs, withCats, withChildren, callback) {
-    debugger
+
     let latitude, longitude, dogs
     navigator.geolocation.getCurrentPosition(function (position) {
         latitude = position.coords.latitude

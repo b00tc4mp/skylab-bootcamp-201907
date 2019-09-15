@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { withRouter, Route, Switch } from 'react-router-dom'
-import { Landing, Sign, Register, Success, Confirm, Search, Profile, RegisterDog } from '../../components'
+import { Landing, Sign, Register, Success, Confirm, Search, Profile, RegisterDog, Favorites, DogDetail, MyDogs, About, ChatLounge, Chat } from '../../components'
 import logic from '../../logic'
+import SearchResults from '../SearchResults'
 
 function App({ history }) {
 
   const [dogs, setDogs] = useState([])
-  const [view, setView] = useState(logic.isUserLoggedIn() ? 'home' : undefined)
 
   async function handleRegister(name, surname, email, password) {
     try {
@@ -22,7 +22,6 @@ function App({ history }) {
     try {
       await logic.authenticateUser(email, password)
 
-      setView('profile')
       history.push('/profile')
     } catch ({ message }) {
       console.log('fail authenticate', message)
@@ -31,20 +30,14 @@ function App({ history }) {
 
   const handleLogout = () => {
     logic.logUserOut()
-    setView(undefined)
+    // setView(undefined)
     history.push('/')
   }
 
-  useEffect(() => {
-    if (history.location.pathname === '/') setView(undefined)
-  }, [history.location])
-
-
   const callback = dogs => {
-    console.log(dogs)
     setDogs(dogs)
+    history.push('/searchResults')
   }
-
 
   async function handleSearch(distance, breed, gender, size, age, neutered, withDogs, withCats, withChildren) {
     try {
@@ -73,14 +66,20 @@ function App({ history }) {
       <Route path="/success" render={() => <Success />} />
       <Route path="/confirm" render={() => <Confirm />} />
       <Route path="/search" render={() => <Search onSearch={handleSearch} />} />
-      {logic.isUserLoggedIn() && <Route path="/profile" render={() => <Profile onLogout={handleLogout} />} />}
-      {logic.isUserLoggedIn() && <Route path="/add" render={() => <RegisterDog onRegisterDog={handleRegisterDog} />} />}
+      <Route path="/searchResults" render={() => dogs.length > 0 && <SearchResults dogs={dogs} />} />
+      <Route path="/profile" render={() => logic.isUserLoggedIn() ? <Profile onLogout={handleLogout} /> : history.push('/sign')} />
+      <Route path="/dog/:id" render={() => <DogDetail />} />
+      <Route path="/favorites" render={() => logic.isUserLoggedIn() ? <Favorites /> : history.push('/sign')} />
+      <Route path="/mydogs" render={() => logic.isUserLoggedIn() ? <MyDogs /> : history.push('/sign')} />
+      <Route path="/about" render={() => logic.isUserLoggedIn() ? <About /> : history.push('/sign')} />
+      <Route path="/add" render={() => logic.isUserLoggedIn() ? <RegisterDog onRegisterDog={handleRegisterDog} /> : history.push('/sign')} />
+      <Route path="/chats" render={() => logic.isUserLoggedIn() ? <ChatLounge /> : {}} />
+      <Route path="/chat/:id" render={props => logic.isUserLoggedIn() ? <Chat chatId={props.match.params.id} /> : {}} />
+
       {/* <Route path="/favorites" render={() => <Favorites  />} />
-      <Route path="/messages" render={() => <Messages />} />
-      TODO ----->    dogs.length && <Results dogs={dogs}>
-      <Route path="/about" render={() => <About />} /> */}
+      <Route path="/messages" render={() => <Messages />} />*/}
     </Switch>
-  );
+  )
 }
 
 export default withRouter(App);
