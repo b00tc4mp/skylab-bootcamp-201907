@@ -11,7 +11,7 @@ const { validate} = require('vltra-utils')
  */
 
 
-module.exports = function(title, body, author) {
+module.exports = function(author, title, body) {
 
     validate.string(title, 'title')
     validate.string(body, 'body')

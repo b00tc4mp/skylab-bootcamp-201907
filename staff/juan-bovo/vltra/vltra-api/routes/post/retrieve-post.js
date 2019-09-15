@@ -2,7 +2,8 @@ const {retrievePost} = require('../../logic')
 
 module.exports = (req, res) => {
     //const { params: { id } } = req
-    const { id, body: { postId } } = req
+    // const { id, body: { postId } } = req
+    const { id, params: { postId } } = req
     
     try {
         retrievePost(postId)

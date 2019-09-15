@@ -41,7 +41,7 @@ describe('logic - delete post', () => {
     })
 
     it('should succeed on deleting an existing post', async () => {
-        const post = await deletePost(postId, userId)
+        const post = await deletePost(userId, postId)
         
         expect(post).not.to.exist
 
@@ -55,7 +55,7 @@ describe('logic - delete post', () => {
         const wrongPostId = '5d71070c887d12667c6095cc'
 
         try{
-            const post = await deletePost(wrongPostId, userId)
+            const post = await deletePost(userId, wrongPostId)
             throw new Error('should not reach this point')
         }catch(error) {
                 expect(error).to.exist
@@ -63,11 +63,11 @@ describe('logic - delete post', () => {
             }
     })
 
-    it('should fail on wrong post id', async() => {
+    it('should fail on wrong user id', async() => {
         const wrongUserId = '5d71070c887d12667c6095cc'
 
         try{
-            const post = await deletePost(postId, wrongUserId)
+            const post = await deletePost(wrongUserId, postId)
             throw new Error('should not reach this point')
         }catch(error) {
                 expect(error).to.exist
@@ -77,36 +77,36 @@ describe('logic - delete post', () => {
 
     it('should fail on empty postId', () =>
         expect(() =>
-            deletePost('', userId)
+            deletePost(userId, '')
         ).to.throw('postId with value  is not a valid ObjectId')
     )
     it('should fail on undefined postId', () =>
         expect(() =>
-            deletePost(undefined, userId)
+            deletePost(userId, undefined)
         ).to.throw(`postId with value undefined is not a valid ObjectId`)
     )
     it('should fail on wrong postId data type', () =>
         expect(() =>{
-            deletePost(123, userId)
+            deletePost(userId, 123)
         }
         ).to.throw(`postId with value 123 is not a valid ObjectId`)
     )
 
     it('should fail on empty userId', () =>
         expect(() =>
-            deletePost(postId, '')
+            deletePost('', postId)
         ).to.throw('userId with value  is not a valid ObjectId')
     )
 
     it('should fail on undefined userId', () =>
         expect(() =>
-            deletePost(postId, undefined)
+            deletePost(undefined, postId)
         ).to.throw(`userId with value undefined is not a valid ObjectId`)
     )
 
     it('should fail on wrong userId data type', () =>
         expect(() =>{
-            deletePost(postId, 123)
+            deletePost(123, postId)
         }
         ).to.throw(`userId with value 123 is not a valid ObjectId`)
     )
