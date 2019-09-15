@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './components/App'
-import { HashRouter as Router } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
+import 'leaflet/dist/leaflet.css'
 
-ReactDOM.render(<Router><App /></Router>, document.getElementById('root'))
+ReactDOM.render(<HashRouter><App /></HashRouter>, document.getElementById('root'))

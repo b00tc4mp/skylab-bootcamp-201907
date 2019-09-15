@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function ({ onBack, onLogin }) {
-    return <>
+function Login ({ onLogin }) {
+    return ( <>
         <h2>Login</h2>
         <form onSubmit={event => {
             event.preventDefault()
@@ -14,10 +14,8 @@ export default function ({ onBack, onLogin }) {
             <input type="password" name="password" />
             <button>Proceed</button>
         </form>
-        <a href="#" onClick={event => {
-            event.preventDefault()
-
-            onBack()
-        }}>Go back</a>
     </>
+    )
 }
+
+export default Login

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 // import './index.sass'
 import logic from '../../logic'
+import MapHome from '../Map-Home'
 import { withRouter } from 'react-router-dom'
 
-export default withRouter(function ({ history, onLogout }) {
-    const [user, setUser] = useState()
+function Home ({ history, setUser}) {
 
     useEffect(() => {
         (async () => {
@@ -14,8 +14,12 @@ export default withRouter(function ({ history, onLogout }) {
         })()
     }, [history.location])
 
-    return <main className="home">
-        Hola, {user && user.username}!
-        <button onClick={onLogout}>Logout</button>
+    return (
+    <main className="home">
+        <section><MapHome /></section>
+    
     </main>
-})
+    )
+}
+
+export default withRouter(Home)

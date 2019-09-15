@@ -2,11 +2,11 @@ const logic = require('../../logic/user')
 
 async function registerUser (req, res) {
     
-    const { body: { username, password, email, avatar } } = req
+    const { body: { username, password, email } } = req
 
     try {
     
-        await logic.registerUser(username, password, email, avatar)
+        await logic.registerUser(username, password, email)
         res.status(201).json({ message: 'user correctly registered' })
 
     } catch ({ message }) {

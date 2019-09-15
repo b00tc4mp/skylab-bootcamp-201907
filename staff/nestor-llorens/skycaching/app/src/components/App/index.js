@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react'
 // import './index.sass'
-import Register from '../Register'
-import Login from '../Login'
+import { Favorites, Finds, Header, Hides, Home, Landing, Login, MapHome, Profile, Register }  from '../index.js'
 import logic from '../../logic'
 import { Route, withRouter } from 'react-router-dom'
-import Home from '../Home'
 
-export default withRouter(function ({ history }) {
-  const [view, setView] = useState(logic.isUserLoggedIn() ? 'home' : undefined)
+function App ({ history}) {
 
-  const handleBack = () => {
-    setView(undefined)
+  const [user, setUser] = useState()
 
-    history.push('/')
-  }
+  const [view, setView] = useState(history.location.pathname === '/' ? 'landing' : history.location.pathname.slice(1))
+
+  useEffect(() => {
+    if (history.location.pathname === '/') setView('landing')
+  }, [history.location])
 
   const handleRegister = async (username, password, email) => {
     try {
@@ -28,62 +27,25 @@ export default withRouter(function ({ history }) {
   const handleLogin = async (email, password) => {
     try {
       await logic.authenticateUser(email, password)
-
+      history.push('/')
       setView('home')
-      history.push('/home')
+      
     } catch ({ message }) {
       console.log('fail login', message)
     }
   }
 
-  const handleGoToRegister = event => {
-    event.preventDefault()
-
-    setView('register')
-
-    history.push('/register')
-  }
-
-  const handleGoToLogin = event => {
-    event.preventDefault()
-
-    setView('login')
-
-    history.push('/login')
-  }
-
-  useEffect(() => {
-    if (history.location.pathname === '/') setView(undefined)
-  }, [history.location])
-
-  const handleLogout = () => {
-    logic.logUserOut()
-
-    setView(undefined)
-    history.push('/')
-  }
-
-  return <div className="App">
-    {/* <header>
-        <nav>
-          <ul>
-            <li><Link to="/register">Register</Link></li>
-            <li><Link to="/login">Login</Link></li>
-          </ul>
-        </nav>
-      </header> */}
-
-    <header>
-      {view !== 'home' && <nav>
-        <ul>
-          {view !== 'register' && <li><a href="" onClick={handleGoToRegister}>Register</a></li>}
-          {view !== 'login' && <li><a href="" onClick={handleGoToLogin}>Login</a></li>}
-        </ul>
-      </nav>}
-    </header>
-
-    <Route path="/register" render={() => <Register onBack={handleBack} onRegister={handleRegister} />} />
-    <Route path="/login" render={() => <Login onBack={handleBack} onLogin={handleLogin} />} />
-    {logic.isUserLoggedIn() && <Route path="/home" render={() => <Home onLogout={handleLogout}/>} />}
+  return (
+  
+  <div className="App">
+    <Header view={view} setView={setView} user={user} />
+    <Route exact path='/' render={() => logic.isUserLoggedIn() ? <Home setUser={setUser}/> : <Landing/>} />
+    <Route path="/register" render={() => <Register onRegister={handleRegister} />} />
+    <Route path="/login" render={() => <Login onLogin={handleLogin} />} />
+    <Route path="/profile" render={() => logic.isUserLoggedIn() ? <Profile/> : <Landing/>} />
+    <Route path="/favorites" render={() => logic.isUserLoggedIn() ? <Favorites/> : <Landing/>} />
   </div>
-})
+  )
+}
+
+export default withRouter(App)

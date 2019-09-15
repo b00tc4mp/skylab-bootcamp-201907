@@ -29,17 +29,16 @@ describe('logic - retrieve user', () => {
         logic.__token__ = token
     })
 
-    it('should succeed on correct data', async () =>
-        await logic.retrieveUser()
-            .then(user => {
-                expect(user).toBeDefined()
-                expect(user.id).toBe(id)
-                expect(user._id).toBeUndefined()
-                expect(user.username).toBe(username)
-                expect(user.email).toBe(email)
-                expect(user.password).toBeUndefined()
-            })
-    )
+    it('should succeed on correct data', async () => {
+        const user = await logic.retrieveUser(id)
+        expect(user).toBeDefined()
+        expect(user.id).toBe(id)
+        expect(user._id).toBeUndefined()
+        expect(user.username).toBe(username)
+        expect(user.email).toBe(email)
+        expect(user.password).toBeUndefined()
+            
+    })
 
     afterAll(() => database.disconnect())
 })

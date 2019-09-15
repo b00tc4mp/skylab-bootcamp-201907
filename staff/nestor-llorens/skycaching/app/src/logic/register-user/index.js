@@ -10,7 +10,7 @@ export default function (username, password, email) {
 
     return (async () => {
         const response = await fetch(`${REACT_APP_API_URL}/users`, {
-            method: 'post',
+            method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({ username, password, email })
         })

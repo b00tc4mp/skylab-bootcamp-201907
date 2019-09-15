@@ -25,7 +25,7 @@ describe('logic - register user', () => {
         expect(response).toBeUndefined()
 
         const user = await User.findOne({ email })
-        debugger
+    
         expect(user).toBeDefined()
         
         expect(user.username).toBe(username)
