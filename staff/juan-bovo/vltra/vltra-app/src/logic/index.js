@@ -5,6 +5,7 @@ import logUserOut from './log-user-out'
 import retrieveUser from './retrieve-user'
 import createPost from './create-post'
 import retrieveAllPosts from './retrieve-all-posts'
+import retrievePost from './retrieve-post'
 
 export default {
     set __token__(token) {
@@ -21,7 +22,8 @@ export default {
     logUserOut,
     retrieveUser,
     createPost,
-    retrieveAllPosts
+    retrieveAllPosts,
+    retrievePost
 
     // async searchDucks(query) {
     //     const response = await fetch(`https://duckling-api.herokuapp.com/api/search?q=${query}`)

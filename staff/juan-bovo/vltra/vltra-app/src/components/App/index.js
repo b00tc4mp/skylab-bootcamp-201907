@@ -10,8 +10,10 @@ import Main from '../Main'
 import Register from '../Register'
 import Login from '../Login'
 import RegisterSuccess from '../Register-success'
+import CreatePost from '../CreatePost'
 
 import './style.sass'
+import PublishSuccess from '../Publish-Success'
 
 
 function App({history}) {
@@ -31,6 +33,8 @@ function App({history}) {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/register-success" component={RegisterSuccess} />
+        <Route path="/create-post" component={CreatePost} />
+        <Route path="/publish-success" component={PublishSuccess} />
         <Footer />
       {/* </Router>
     </Context.Provider> */}

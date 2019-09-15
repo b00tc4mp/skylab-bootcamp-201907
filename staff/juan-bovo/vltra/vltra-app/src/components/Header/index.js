@@ -24,6 +24,10 @@ function Header({ history }) {
         })() : setUser(undefined)
     }, [history.location])
 
+    const handleGoToCreatePost = () => {
+        history.push('/create-post')
+    }
+
     return <>
         <header className="header">
             <Link to="/" className="header__logo"><img className="header__logo--image" src="./img/logo.jpg" alt="VLTRA" /></Link>
@@ -35,11 +39,14 @@ function Header({ history }) {
                         <li className="user-menu__auth-option" ><Link to="/login" className="user-menu__auth-option-link" href="">Inicia sesión</Link></li>
                     </ul> :
                     <ul className="user-menu">
-                        <p className="user-menu__user-option">¡Hola, {user && user.nickname}!</p>
+                        <div className="user-menu__avatar-container">
+                            <img className="user-menu__avatar-img" src={user && user.avatar}></img>
+                        </div>
+                        <p className="user-menu__user-option">{user && user.nickname}</p>
                         <li className="user-menu__auth-option" >
                             <a className="user-menu__auth-option-link" href="" onClick={event => {
                                 event.preventDefault()
-                                //--> Here comes a function!
+                                handleGoToCreatePost()
                                 }}>¡Escribir post!</a></li>
                         <li className="user-menu__auth-option" >
                             <a className="user-menu__auth-option-link" href="" onClick={event => {

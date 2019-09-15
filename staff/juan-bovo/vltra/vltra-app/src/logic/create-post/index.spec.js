@@ -1,22 +1,23 @@
 import createPost from '.'
+import logic from '..'
 
 const { random } = Math
 const { database, models: { User, Post } } = require('vltra-data')
-
+const jwt = require('jsonwebtoken')
+const REACT_APP_JWT_SECRET_TEST = process.env.REACT_APP_JWT_SECRET_TEST
+debugger
 // const { env: { DB_URL_TEST }} = process // WARN this destructuring doesn't work in react-app :(
 const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
 
 describe('logic - create post', () => {
     beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
 
-    let title, body, author
+    let title, body, author, id, token
 
     beforeEach(async () => {
-        await Post.deleteMany()
-        await User.deleteMany()
-
+        
         let name, surname, nickname, email, password, bookmarks, voted
-
+        
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`
         nickname = `nickname-${Math.random()}`
@@ -25,17 +26,28 @@ describe('logic - create post', () => {
         bookmarks = []
         voted= []
 
-        const user = await User.create({ name, surname, nickname : nickname.substr(0, 20), email, password, bookmarks, voted })
-            
-        //id = user.id
+        await Post.deleteMany()
+        await User.deleteMany()
+
+        const pipo = logic
+
+        const user = await User.create({ name, surname, nickname, email, password })
+
+        id = user.id
+
+        const token = jwt.sign({ sub: id }, REACT_APP_JWT_SECRET_TEST)
+
+        logic.__token__ = token
+        
+        debugger
 
         title = `title-${Math.random()}`
         body = `body-${Math.random()}`
-        author = user.id
+        // author = user.id
     })
 
     it('should succeed creating a post on correct data', async () => {
-        await createPost(title, body, author)
+        await createPost(title, body)
 
         const post = await Post.findOne({body})
         
@@ -52,6 +64,7 @@ describe('logic - create post', () => {
         const date = new Date
         const comments = []
         const votes = []
+        const author = '5d74c89d6b50d08960730147'
         
         const firstTry = await Post.create({title, body, author, date, comments, votes})
             try{
@@ -119,21 +132,21 @@ describe('logic - create post', () => {
     ).toThrow(`body with value 123 is not a string`)
     )
 
-    it('should fail on empty author', () => 
-        expect(() => 
-            createPost(title, body, '')
-    ).toThrow('author with value  is not a valid ObjectId')
-    )
-    it('should fail on undefined author', () => 
-        expect(() => 
-            createPost(title, body, undefined)
-    ).toThrow(`author with value undefined is not a valid ObjectId`)
-    )
-    it('should fail on wrong author data type', () => 
-        expect(() => 
-            createPost(title, body, 'author')
-    ).toThrow(`author with value author is not a valid ObjectId`)
-    )
+    // it('should fail on empty author', () => 
+    //     expect(() => 
+    //         createPost(title, body, '')
+    // ).toThrow('author with value  is not a valid ObjectId')
+    // )
+    // it('should fail on undefined author', () => 
+    //     expect(() => 
+    //         createPost(title, body, undefined)
+    // ).toThrow(`author with value undefined is not a valid ObjectId`)
+    // )
+    // it('should fail on wrong author data type', () => 
+    //     expect(() => 
+    //         createPost(title, body, 'author')
+    // ).toThrow(`author with value author is not a valid ObjectId`)
+    // )
 
     afterAll(() => database.disconnect())
 })
