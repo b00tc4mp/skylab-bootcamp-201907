@@ -27,7 +27,7 @@ export default function(spaceId) {
             throw Error(error)
         }
 
-        const { tasks } = await response.json()
-        return tasks
+        const { spaceTasks } = await response.json()
+        return spaceTasks
     })()
 } 
