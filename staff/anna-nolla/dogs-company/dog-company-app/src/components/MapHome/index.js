@@ -16,31 +16,36 @@ var myIcon = L.icon({
 })
 
 function MapHome() {
-  const [error , setError] = useState(undefined)
+  const [error , setError] = useState()
   const [position, setPosition] = useState([0, 0])
   const [zoom, setZoom] = useState(2)
   const [haveUsersLocation, setHaveUsersLocation] = useState(false)
-  const [users, setUsers] = useState(undefined)
+  const [users, setUsers] = useState()
   const { setUser, setView } = useContext(MyContext)
 
   useEffect(() => {
+    setZoom(17)
+
     const interval = setInterval(() => {
+      
       navigator.geolocation.getCurrentPosition(position => {
-        setZoom(17)
         const latitude = position.coords.latitude
-        const longitude = position.coords.longitude
-        async function updateLocation(longitude, latitude){
+        const longitude = position.coords.longitude;
+        
+        (async function (longitude, latitude){
           await logic.updateDinamicLocation(Number(longitude), Number(latitude))
+
           const { user } = await logic.retrieveUser()
+          
+          const {static: users} = await logic.retrieveAllUsers(400000000000)
+          
+          setPosition([latitude, longitude])
           setUser(user)
-          const response = await logic.retrieveAllUsers(400000000000)
-          console.log(response.static)
-          setUsers(response.static)
-        }
-        updateLocation(longitude, latitude)
-        setPosition([latitude, longitude])
-        setHaveUsersLocation(true)
-        setView('home')
+          setUsers(users)
+          setHaveUsersLocation(true)
+          // setView('home')
+        })(longitude, latitude)
+
       }, error => console.log(error.message))
     }, 5000)
     return () => clearInterval(interval)
@@ -64,10 +69,7 @@ function MapHome() {
       { haveUsersLocation ? <Marker position={position} icon={myIcon}></Marker> : '' }
 
       {/*{users && {onRetrieveWalkingUsers}} */}
-      {/* { users.map( marker => {
-         return <><Marker key ={marker._id} position={marker.static.coordinates[1],marker.static.coordinates[0]} icon={myIcon}/> </>
-      })
-      } */}
+      { users && users.length && users.map( user => <Marker key ={user._id} position={[user.static.coordinates[1],user.static.coordinates[0]]} icon={myIcon}/>) }
     </Map>
 }
 export default MapHome
