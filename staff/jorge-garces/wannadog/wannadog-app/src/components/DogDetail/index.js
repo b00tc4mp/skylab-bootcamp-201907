@@ -60,32 +60,41 @@ export default withRouter(function ({ history, match }) {
             const { chatId } = await logic.createChat(ownerId)
             history.push(`/chat/${chatId}`)
         } catch ({ message }) {
-            console.log(message)
+            history.push(`/chat/${message.split(',')[0]}`)
         }
     }
 
     return <>
 
-        <button onClick={goBack}>Back</button>
-
         {dog && <>
-            <h2>{dog.name}</h2>
-            <h3>Breed</h3>
-            <p>{dog.breed}</p>
-            <h2>Neutered</h2>
-            <h3>Size</h3>
-            <p>{dog.size}</p>
-            <h3>Gender</h3>
-            <p>{dog.gender}</p>
-            <h3>Age</h3>
-            <p>{dog.age}</p>
-            {dog.withDogs ? <p>{dog.withDogs}</p> : {}}
-            {dog.withCats ? <p>{dog.withCats}</p> : {}}
-            {dog.withChildren ? <p>{dog.withChildren}</p> : {}}
-            <p>{dog.notes}</p>
+            <section className="body detail">
+                <Link className="back" onClick={goBack}><i class="fas fa-arrow-left"></i></Link>
+                <img className="detail__image" src="/img/testDog.jpg"></img>
+                <section className="detail__main">
+                    <h2 className="detail__name">{dog.name}</h2>
+                    <h4>Breed</h4>
+                    <p>{dog.breed}</p>
+                    <h2 className="detail__neutered">Neutered</h2>
+                    <section className="detail__three">
+                        <h3>Size</h3>
+                        <h3>Gender</h3>
+                        <h3>Age</h3>
+                        <p>{dog.size}</p>
+                        <p>{dog.gender}</p>
+                        <p>{dog.age}</p>
+                    </section>
+                    <article className="detail__skills">
+                        {dog.withDogs ? <p>{dog.withDogs}</p> : {}}
+                        {dog.withCats ? <p>{dog.withCats}</p> : {}}
+                        {dog.withChildren ? <p>{dog.withChildren}</p> : {}}
+                    </article>
+                    <h4>Notes</h4>
+                    <p>{dog.notes}</p>
+                </section>
+            </section>
         </>}
 
-        {user === "owner" && <button onClick={deleteForm}>DELETE DOG</button>}
+        {user === "owner" && <button className="button" onClick={deleteForm}>DELETE DOG</button>}
         {deletion && <>
 
             <form onSubmit={event => {
@@ -103,14 +112,13 @@ export default withRouter(function ({ history, match }) {
         </>
         }
 
-        <button onClick={handleCreatChat}>CONTACT</button>
+
 
         {user === "notOwner" && <>
-            {!isFavorite && <button onClick={handleToggleDog}>ADD FAVORITE</button>}
-            {isFavorite && <button onClick={handleToggleDog}>REMOVE FAVORITE</button>}
+            <button className="button" onClick={handleCreatChat}>CONTACT</button>
+            {!isFavorite && <button className="button" onClick={handleToggleDog}>ADD FAVORITE</button>}
+            {isFavorite && <button className="button" onClick={handleToggleDog}>REMOVE FAVORITE</button>}
         </>}
-
-
 
         {dog && !user && <>
             <p>In love with {dog.name}? <Link to="/sign">Log-in</Link> to contact the owner

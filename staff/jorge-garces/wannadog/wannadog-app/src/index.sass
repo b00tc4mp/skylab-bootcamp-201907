@@ -1,0 +1,171 @@
+*
+    padding: 0
+    margin: 0
+    box-sizing: border-box
+
+.body
+    width: 100vw
+    min-height: 100vh
+    background-color: white
+    font-family: 'Open Sans', sans-serif
+
+.back
+    z-index: 1
+    position: absolute
+    margin: 0.2rem 0.6rem
+    font-size: 1.85rem
+    color: rgb(50,50,50)
+
+.to-profile
+    color: rgb(50,50,50)
+
+.body-landing
+    width: 100vw
+    min-height: 100vh
+    font-family: 'Open Sans', sans-serif
+    background-image: url("/img/landing.jpg")
+    background-size: cover
+
+    &__container
+        width: 60vw
+        height: 100vh
+        margin: auto
+        padding-bottom: 1rem
+        display: flex
+        flex-direction: column
+        justify-content: flex-end
+        text-align: center
+
+.body-form
+    width: 100vw
+    min-height: 100vh
+    background-image: url("/img/landing_blur.jpg")
+    background-size: cover
+    display: flex
+    flex-direction: column
+
+.form-section
+    width: 60vw
+    margin: auto
+    text-algin: center
+    justify-content: center
+    display: flex
+    flex-direction: column
+
+input
+    width: 100%
+    height: 1.5rem
+    margin: 0.2rem 0
+    border: 0.05rem solid gray
+    padding: 0.5rem
+
+
+.button
+    display: flex
+    width: 50vw
+    height: 6vh
+    margin: 1rem auto
+    padding: 0.6rem
+    border: 0.5px solid black
+    background-color: white
+    color: black
+    text-decoration: none
+    justify-content: center
+    align-items: center
+
+.body-profile
+    font-family: 'Open Sans', sans-serif
+
+.container
+    &__title
+        text-align: center
+        padding: 3rem
+        font-size: 3rem
+
+// PROFILE
+
+.body-profile
+    // background-image: url("/img/profile.jpg")
+    // background-size: auto
+
+.body-profile__nav
+    display: flex
+    flex-direction: column
+    padding: 1rem
+    border-bottom: 1px solid black
+    border-top: 1px solid black
+
+.body-profile__link
+    text-decoration: none
+    color: rgb(50,50,50)
+    font-size: 1
+    padding: 0.5rem
+
+.about
+    margin-top: 6rem
+    text-align: center
+    padding: 0.5rem
+    border-top: 1px solid black
+    border-bottom: 1px solid black
+
+.logout
+    margin-top: 3.5rem
+    text-transform: uppercase
+
+// DOG DETAIL
+.detail
+    width: 100vw
+    &__image
+        width: 100vw
+    &__main
+        width: 90vw
+        margin: auto
+    &__name 
+        margin-bottom: 0.5rem
+    &__neutered
+        margin: 0.6rem 0
+        text-align: center
+        text-transform: uppercase
+    &__three
+        width: 90vw
+        display: grid
+        text-transform: capitalize
+        text-align: center
+        grid-template-columns: 1fr 1fr 1fr
+        grid-template-rows: 1fr 1fr
+        margin-bottom: 1rem
+    &__skills
+        margin-bottom: 1rem
+
+// SEARCH RESULTS
+
+.navi
+    display: flex
+    width: 100vw
+    padding: 0.5rem
+    align-items: center
+    &__logo
+        font-size: 1.2rem
+        width: 10vw
+        color: rgb(50,50,50)
+    &__search
+        width: 90vw
+
+.results
+    width: 100vw
+    margin: 0
+    display: flex
+    flex-flow: column nowrap
+    &__ul
+        margin: auto
+        columns: 2
+        grid-gap: 0.5rem
+        list-style-type: none
+        width: 100%
+       
+    &__li
+        width: 100%
+        border: 0.05rem solid rgb(70,70,70) 
+        
+    &__img
+        width: 100%

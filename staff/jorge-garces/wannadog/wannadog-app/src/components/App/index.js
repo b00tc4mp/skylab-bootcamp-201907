@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { withRouter, Route, Switch } from 'react-router-dom'
-import { Landing, Sign, Register, Success, Confirm, Search, Profile, RegisterDog, Favorites, DogDetail, MyDogs, About, ChatLounge, Chat } from '../../components'
+import { Landing, Sign, Register, Success, DogSuccess, Confirm, Search, Profile, RegisterDog, Favorites, DogDetail, MyDogs, About, ChatLounge, Chat } from '../../components'
 import logic from '../../logic'
 import SearchResults from '../SearchResults'
 
@@ -48,11 +48,11 @@ function App({ history }) {
 
   }
 
-  async function handleRegisterDog(name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, chip) {
+  async function handleRegisterDog(image, name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, chip) {
 
     try {
-      const response = await logic.registerDog(name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, chip, setDogs)
-      console.log(response)
+      const response = await logic.registerDog(image, name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, chip, setDogs)
+      history.push('/dogsuccess')
     } catch ({ message }) {
       console.log('something went wrong with registry', message)
     }
@@ -64,6 +64,7 @@ function App({ history }) {
       <Route path="/sign" render={() => <Sign onLogin={handleLogin} />} />
       <Route path="/register" render={() => <Register onRegister={handleRegister} />} />
       <Route path="/success" render={() => <Success />} />
+      <Route path="/dogsuccess" render={() => <DogSuccess />} />
       <Route path="/confirm" render={() => <Confirm />} />
       <Route path="/search" render={() => <Search onSearch={handleSearch} />} />
       <Route path="/searchResults" render={() => dogs.length > 0 && <SearchResults dogs={dogs} />} />
@@ -75,9 +76,6 @@ function App({ history }) {
       <Route path="/add" render={() => logic.isUserLoggedIn() ? <RegisterDog onRegisterDog={handleRegisterDog} /> : history.push('/sign')} />
       <Route path="/chats" render={() => logic.isUserLoggedIn() ? <ChatLounge /> : {}} />
       <Route path="/chat/:id" render={props => logic.isUserLoggedIn() ? <Chat chatId={props.match.params.id} /> : {}} />
-
-      {/* <Route path="/favorites" render={() => <Favorites  />} />
-      <Route path="/messages" render={() => <Messages />} />*/}
     </Switch>
   )
 }

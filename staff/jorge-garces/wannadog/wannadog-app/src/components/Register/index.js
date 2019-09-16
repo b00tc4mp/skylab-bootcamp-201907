@@ -4,21 +4,26 @@ import { Link } from 'react-router-dom'
 export default function ({ onRegister }) {
 
     return <>
-        <Link to="/sign">Back</Link>
-        <form onSubmit={event => {
-            event.preventDefault()
+        <section className="body-form">
+            <Link to="/sign">Back</Link>
 
-            const { target: { name: { value: name }, surname: { value: surname }, email: { value: email }, password: { value: password } } } = event
+            <form className="form-section" onSubmit={event => {
+                event.preventDefault()
 
-            onRegister(name, surname, email, password)
+                const { target: { name: { value: name }, surname: { value: surname }, email: { value: email }, password: { value: password } } } = event
 
-        }}>
-            <input type="text" name="name" />
-            <input type="text" name="surname" />
-            <input type="email" name="email" />
-            <input type="password" name="password" />
+                onRegister(name, surname, email, password)
 
-            <button>SUBMIT</button>
-        </form>
+            }}>
+                <input type="text" name="name" placeholder="name" />
+                <input type="text" name="surname" placeholder="surname" />
+                <input type="email" name="email" placeholder="email" />
+                <input type="password" name="password" placeholder="password" />
+                <input type="password" name="repassword" placeholder="repeat password" />
+
+                <button className="button">SUBMIT</button>
+            </form>
+
+        </section>
     </>
 }

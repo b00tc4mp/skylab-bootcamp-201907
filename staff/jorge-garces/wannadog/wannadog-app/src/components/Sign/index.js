@@ -1,11 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+import logic from '../../logic'
 
-export default function ({ onLogin }) {
+export default withRouter(function ({ onLogin, history }) {
+
+
+    { logic.isUserLoggedIn() && history.push('/profile') }
     return <>
         <Link to="/">Back</Link>
-        <h2>Login with Google</h2>
-        <p>------- or ---------</p>
+
         <form onSubmit={event => {
             event.preventDefault()
 
@@ -19,6 +22,5 @@ export default function ({ onLogin }) {
         </form>
 
         <p>don't have an account? <Link to="/register">Sign-up!</Link></p>
-
     </>
-}
+})

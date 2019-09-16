@@ -10,19 +10,25 @@ export default withRouter(function ({ history, onLogout }) {
     useEffect(() => {
         (async () => {
             const user = await logic.retrieveUser()
-
+            sessionStorage.name = user.name
             setUser(user)
         })()
     }, [history.location])
 
     return <>
-        <Link to="/search">Go Back</Link>
-        <h2>{user && user.name}</h2>
-        <Link to="/mydogs">My Dogs</Link>
-        <Link to="/favorites">Favorites</Link>
-        <Link to="/alerts">Alerts</Link>
-        <Link to="/chats">Messages</Link>
-        <Link to="/about">About WannaDOG</Link>
-        <button onClick={onLogout}>Logout</button>
+        <section className="body-profile">
+            <Link className="back" to="/search"><i class="fas fa-arrow-left"></i></Link>
+            <h2 className="container__title">{user && user.name}</h2>
+            <section className="body-profile__nav">
+                <Link className="body-profile__link" to="/mydogs">My Dogs</Link>
+                <Link className="body-profile__link" to="/favorites">Favorites</Link>
+                <Link className="body-profile__link" to="/alerts">Alerts</Link>
+                <Link className="body-profile__link" to="/chats">Messages</Link>
+            </section>
+            <div className="about">
+                <Link className="body-profile__link" to="/about">About WannaDOG</Link>
+            </div>
+            <button class="logout button" Name onClick={onLogout}>Logout</button>
+        </section>
     </>
 })

@@ -5,16 +5,9 @@ export default withRouter(function DogResult({ dog }) {
 
     const { name, gender, id } = dog
 
-    return <ul>
-        <li>
-            <div className="card">
-                <div className="card-content" >
-                    <a href={`/#/dog/${id}`}>
-                        <h3 className="">{name}</h3>
-                    </a>
-                    <p className="">{gender}</p>
-                </div>
-            </div>
-        </li>
-    </ul>
+    return <li className="results__li">
+        <a href={`/#/dog/${id}`}><img className="results__img" src="/img/resultTest.jpg"></img></a>
+        <h3 className="">{name}</h3>
+        <p className="">{gender}</p>
+    </li>
 })

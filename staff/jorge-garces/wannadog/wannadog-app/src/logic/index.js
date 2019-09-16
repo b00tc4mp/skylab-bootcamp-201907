@@ -13,6 +13,8 @@ import unregisterDog from './unregister-dog'
 import createChat from './create-chat'
 import updateChat from './update-chat'
 import retrieveChat from './retrieve-chat'
+import retrieveAllChats from './retrieve-all-chats'
+import getUserId from './geUserID'
 
 export default {
     set __token__(token) {
@@ -37,5 +39,7 @@ export default {
     unregisterDog,
     createChat,
     updateChat,
-    retrieveChat
+    retrieveChat,
+    retrieveAllChats,
+    getUserId
 }

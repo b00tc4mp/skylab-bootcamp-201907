@@ -9,7 +9,7 @@ export default function ({ onRegisterDog }) {
         <form onSubmit={event => {
             event.preventDefault()
 
-            const { target: { name: { value: name }, breed: { value: breed }, gender: { value: gender }, size: { value: size }, age: { value: age }, notes: { value: notes }, neutered: { value: neutered }, withDogs: { value: withDogs }, withCats: { value: withCats }, withChildren: { value: withChildren }, chip: { value: chip } } } = event
+            const { target: { name: { value: name }, breed: { value: breed }, gender: { value: gender }, size: { value: size }, age: { value: age }, notes: { value: notes }, neutered: { value: neutered }, withDogs: { value: withDogs }, withCats: { value: withCats }, withChildren: { value: withChildren }, chip: { value: chip }, image: { files: [image] } } } = event
 
             onRegisterDog(name, breed, gender, size, Number(age), notes, neutered, withDogs, withCats, withChildren, chip)
         }}>
@@ -282,7 +282,43 @@ export default function ({ onRegisterDog }) {
                 <option value="false"> No / Not tested</option>
             </select>
 
+            <label htmlFor="">Image</label>
+            <input type="file" name="image" />
+
             <button>SAVE</button>
         </form>
     </>
 }
+
+
+// function Publish({ history }) {
+//     let adId
+//     function handleSubmit(event) {
+//         event.preventDefault()
+
+//         if (logic.isUserLoggedIn()) {
+//             const { target: { image: { files: [image] }, title: { value: title }, description: { value: description }, price: { value: price }, location: { value: location } } } = event
+//             onPublish(image, title, description, price, location)
+//         }
+//         else {
+//             history.push('/auth')
+//         }
+//     }
+//     async function onPublish(image, title, description, price, location) {
+//         try {
+//             const publish = await logic.publish(image, title, description, price, location)
+//             adId = publish
+
+
+//             await logic.upload(adId, image)
+//             history.push("/")
+//         } catch (error) {
+//             console.log(error.message)
+//         }
+//     }
+//     return  <>
+//         <section class="publish__content">
+//             <h3 class="publish__title">Publica tu anuncio</h3>
+//             <form onSubmit={handleSubmit} method="post" enctype="multipart/form-data" >
+//                 <label htmlFor="">Image</label>
+//                 <input class="modal__input" type="file" name="image" id="" />
