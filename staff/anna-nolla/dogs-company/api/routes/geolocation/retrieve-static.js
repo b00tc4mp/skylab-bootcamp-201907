@@ -2,7 +2,7 @@ const logic = require('../../logic')
 
 module.exports = (req, res) => {
 
-    const { userId, body: { distance }} = req
+    const { userId, params: {distance} } = req
 
     try {
         logic.retrieveAllStatic(userId, distance)

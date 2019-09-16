@@ -3,7 +3,7 @@ const logic = require('../../logic')
 
 module.exports = (req, res) => {
 
-    const { userId, params: { longitude, latitude } } = req
+    const { userId, body: { longitude, latitude } } = req
 
     try {
         logic.updateStatic(userId, longitude, latitude)

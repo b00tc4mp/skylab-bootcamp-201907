@@ -35,10 +35,9 @@ router.get('/user/notification', [tokenMiddleware], retrieveNotification)
 router.patch ('/user/notification/:notificationId', [tokenMiddleware], updateNotification)
 router.delete ('/user/notification/:notificationId', [tokenMiddleware], deleteNotification)
 
-// To Try in Posman
-router.get('/user/dinamic', tokenMiddleware, retrieveAllDinamic)
-router.patch ('/user/dinamic/:longitude/:latitude', [tokenMiddleware], updateDinamic)
-router.get('/user/static', [tokenMiddleware], retrieveAllStatic)
-router.patch ('/user/static/:longitude/:latitude', [tokenMiddleware], updateStatic)
+router.get('/user/dinamic/:distance', [tokenMiddleware], retrieveAllDinamic)
+router.patch ('/user/dinamic', [tokenMiddleware], updateDinamic)
+router.get('/user/static/:distance', [tokenMiddleware], retrieveAllStatic)
+router.patch ('/user/static', [tokenMiddleware], updateStatic)
 
 module.exports = router

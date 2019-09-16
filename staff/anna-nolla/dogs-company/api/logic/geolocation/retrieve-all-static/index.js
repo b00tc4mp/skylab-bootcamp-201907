@@ -9,21 +9,18 @@ const { validate } = require('utils')
        * @returns {Promise}
        * 
        */
-module.exports = function (id, distance){
+module.exports = function (userId, distance){
 
-    validate.string(id,'user id')
-    validate.number(distance, 'distance')   
+    validate.string(userId,'user id')
+       
         
     return (async () => {   
-debugger
-        const user = await User.findById(id)
+        const user = await User.findById(userId)
             if (!user) throw new Error(`User not found`)
-        
-        const location = user.dinamic
-            if (user.dinamic.coordinates[0] === 0 & user.dinamic.coordinates[1] === 0 ) throw new Error(`User dinamic location not found`)
+            // if (user.dinamic.coordinates[0] === 0 & user.dinamic.coordinates[1] === 0 ) throw new Error(`User dinamic location not found`)
       
         
-        response = await User.find({ static: { $near: { $geometry: location, $maxDistance: distance} } })
+        response = await User.find({ static: { $near: { $geometry: {type:"point", coordinates:[user.dinamic.coordinates[0], user.dinamic.coordinates[1]]}, $maxDistance: distance }} })
 
         return response    
         })()    
