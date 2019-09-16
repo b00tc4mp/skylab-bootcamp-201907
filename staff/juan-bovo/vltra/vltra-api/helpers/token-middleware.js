@@ -3,17 +3,13 @@
 const jwt = require('jsonwebtoken')
 const { env: { JWT_SECRET } } = process
 module.exports = (req, res, next) => {
-    debugger
     try {
         const { headers: { authorization } } = req
         if (!authorization) throw new Error('no authorization token received')
         const token = authorization.slice(authorization.indexOf(' ') + 1)
-        debugger
         const { sub } = jwt.verify(token, JWT_SECRET)
-        debugger
         // req.userId = sub
         req.id = sub
-        debugger
         next()
     } catch ({ message }) {
         res.status(401).json({ error: message })

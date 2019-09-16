@@ -37,7 +37,7 @@ router.post('/posts', [tokenMiddleware, jsonBodyParser], createPost) //router.po
 //router.post('/posts', jsonBodyParser, createPost)
 router.get('/post/:postId', jsonBodyParser, retrievePost) //router.get('/post', [tokenMiddleware, jsonBodyParser], retrievePost)
 router.get('/posts', [] , retrieveAllPosts) // router.get('/posts', [tokenMiddleware, jsonBodyParser], retrieveAllPosts)
-router.get('/posts/author/:authorId', [tokenMiddleware, jsonBodyParser], retrieveUserPosts) //router.get('/posts/author', [tokenMiddleware, jsonBodyParser], retrieveUserPosts)
+router.get('/posts/author/:authorId', [tokenMiddleware], retrieveUserPosts) //router.get('/posts/author', [tokenMiddleware, jsonBodyParser], retrieveUserPosts)
 router.delete ('/posts', [tokenMiddleware, jsonBodyParser], deletePost)
 router.post('/post/vote', [tokenMiddleware, jsonBodyParser], votePost) //router.post('/post/vote', jsonBodyParser, votePost)
 
