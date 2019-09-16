@@ -34,9 +34,9 @@ function sequencer(){
         );
         let crashInputs = document.querySelector(`.crash input:nth-child(${step + 1})`
         );
+        
         if(kickInputs.checked){
             kick.start();
-
         }
         if(snareInputs.checked){
             snare.start()

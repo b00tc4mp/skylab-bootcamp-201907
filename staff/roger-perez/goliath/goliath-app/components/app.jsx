@@ -7,7 +7,7 @@ class App extends Component {
     super();
 
     let credentials;
-    let checked;
+    
 
     const { id, token } = sessionStorage;
 

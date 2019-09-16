@@ -23,7 +23,9 @@ class Landing extends Component {
 
             try {
                 logic.retrieveUser(id, token)
-                    .then(user => this.setState({ user }))
+                    .then(user => {
+                        this.setState({user: user.user })
+                    })
                     .catch(({ message }) => this.setState({ error: message }))
             } catch ({ message }) {
                 this.setState({ error: message })
@@ -82,13 +84,15 @@ class Landing extends Component {
             state: { view, error, user, favs },
             handleRegister,
             handleLogin, handleLogout,
-            handleDrumkit, handleCheck
+            handleDrumkit
         } = this
 
-        return <>
+        return (
+        <>
             <header>
                 {user && <p>Hello, {user.name}</p>}
                 <nav>
+
                     {!user ? <ul>
                         <li><a href="" onClick={handleRegister}>Register</a></li>
                         <li><a href="" onClick={handleLogin}>Login</a></li>
@@ -98,6 +102,7 @@ class Landing extends Component {
 
                                 handleFavorites()
                             }}>Favorites</a></li>}
+                            <a href="" onClick={handleDrumkit}>Drumkit</a>
                             {view === 'favorites' && <li><a href="" onClick={handleGoToSearch}>Search</a></li>}
                             <li><a href="" onClick={handleLogout}>Logout</a></li>
                         </ul>}
@@ -105,7 +110,7 @@ class Landing extends Component {
                 </nav>
             </header>
             <img src="../imgs/logo.png" alt="" />
-            <a href="" onClick={handleDrumkit}>Drumkit</a>
+            
             
 
 
@@ -119,5 +124,6 @@ class Landing extends Component {
                 }} onItem={handleRetrieveDuck} />
             </>}
         </>
+        )
     }
 }

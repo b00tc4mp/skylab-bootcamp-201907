@@ -5,7 +5,6 @@ logic.authenticateUser = function (email, password) {
     return call('http://localhost:8080/api/auth', 'post', { 'content-type': 'application/json' }, { email, password })
         .then(response => {
             if (response.status === 'OK' ) throw new Error(response.error)
-            
-            return response.data
+            return response
         })
 }

@@ -6,6 +6,6 @@ logic.retrieveUser = function (id, token) {
         .then(response => {
             if (response.status === '400') throw new Error(response.error)
 
-            return response.data
+            return response
         })
 }
