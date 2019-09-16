@@ -8,13 +8,12 @@ const { validate } = require('classty-utils')
  * 
  * @returns {Promise}
  */
-module.exports = function (id, password) {
+module.exports = function (id) {
     validate.string(id, 'id')
-    validate.string(password)
     
         return (async () => {
-
-        const result = await User.deleteOne({ _id: id, password })
+        
+        const result = await User.deleteOne({ _id: id })
 
         if (!result.deletedCount) throw Error(`wrong credentials`)
 

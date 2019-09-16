@@ -1,8 +1,9 @@
 module.exports = {
     registerSubject: require('./register-subject'),
-    retrieveSubject: require('./retrieve-subject'),
+    retrieveSubjectTeacher: require('./retrieve-subject-teacher'),
     retrieveAllSubjectToStudent: require('./retrieve-subjec-user'),
     addTeacher: require('./add-teacher'),
     addStudentSub: require('./add-student'),
-    unregisterSubject: require('./unregister-subject')
+    unregisterSubject: require('./unregister-subject'),
+    retrieveST: require('./retrieve-s-t')
 }

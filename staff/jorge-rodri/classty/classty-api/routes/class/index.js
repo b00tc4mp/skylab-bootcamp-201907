@@ -3,5 +3,6 @@ module.exports = {
     addStudent: require('./add-student'),
     retrieveClass: require('./retrieve-class'),
     unregisterClass: require('./unregister-class'),
-    unregisterType: require('./unregister-student')
+    unregisterType: require('./unregister-student'),
+    retrieveClasses: require('./retrieve-classes')
 }

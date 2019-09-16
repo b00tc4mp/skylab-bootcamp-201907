@@ -10,7 +10,7 @@ module.exports = function (id, idh) {
         
         if (!subject) throw new Error(`wrong credentials`)
     
-        const i = subject.homeworks.findIndex(homework => homework._id.toString()==idh) 
+        const i = subject.homeworks.findIndex(homework => homework.id==idh) 
         
         if(i==-1) throw new Error(`wrong id of card`)
         

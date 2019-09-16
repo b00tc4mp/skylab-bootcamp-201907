@@ -1,7 +1,7 @@
 const { exam } = require('../../logic')
 
 module.exports = async(req, res) => {
-    const { body: { idSub, idEx, name, surname, valor } } = req
+    const { params:{ idSub, idEx }, body: { name, surname, valor } } = req
 
     try {
         await exam.addNote(idSub, idEx, name, surname, valor)

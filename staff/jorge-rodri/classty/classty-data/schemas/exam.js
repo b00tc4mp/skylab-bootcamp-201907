@@ -12,6 +12,5 @@ module.exports = new Schema({
         type: Date,
         required: true
     },
-    presented:[{ type: ObjectId, ref: 'User'}],
     notes: [Note]
 })

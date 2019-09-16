@@ -1,12 +1,13 @@
 const { models: {Subject, Homework} } = require('classty-data')
-const { validate, convertDate } = require('classty-utils')
+const { validate } = require('classty-utils')
+const convertDate = require('./convertDate')
 
 module.exports = function (id, body) {
     
     validate.string(id, 'id')
     // validate.object(body, 'body')
     return (async () => {
-        
+        debugger
         const subject = await Subject.findById(id)
 
         if (!subject) throw new Error(`subject with id ${id} not exists.`)

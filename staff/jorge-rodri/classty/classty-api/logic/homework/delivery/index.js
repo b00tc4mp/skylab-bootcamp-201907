@@ -11,23 +11,23 @@ module.exports = function (idSub, idH, idS) {
 
         const student = await User.findOne({ _id: idS })
         if(!student) throw Error(`student with id ${idS} does not exist`)
-        const subject = await Subject.findById(idSub)
-
+        const subject = await Subject.findById(idSub).populate('delivery')
+debugger
         if (!subject) throw new Error(`wrong credentials`)
 
-
-        subject.homeworks.forEach(homework => {
-            if(homework._id.toString() == idH ){
-                homework.delivery.push(idS)
+debugger
+        subject.homeworks.forEach(homework => {debugger
+            if(homework._id.toString() == idH ){debugger
+                homework.delivery.push({student: idS, name:student.name, surname: student.surname})
                 count ++
+                debugger
             }
         }) 
 
         if (count==0 && count > 1) throw Error(`homework with id ${idH} dont exist`)
-        
+        debugger
         await subject.save()
 
 
-        return subject
     })()
 }

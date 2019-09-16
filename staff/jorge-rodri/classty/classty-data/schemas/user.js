@@ -26,5 +26,8 @@ module.exports = new Schema({
         required: true,
         enum: ['mentor', 'teacher', 'student'],
         default: 'student'
+   },
+   image: {
+       type: String
    }
 })

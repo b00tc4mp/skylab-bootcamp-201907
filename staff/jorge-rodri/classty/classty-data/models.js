@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { user, subject, classroom, conversation, documents, homework, message, post, exam, note, particpant } = require('./schemas')
+const { user, subject, classroom, conversation, delivery, documents, homework, message, post, exam, note, particpant } = require('./schemas')
 
 module.exports = {
 
@@ -13,6 +13,8 @@ module.exports = {
     Post: mongoose.model('Post', post),
     Exam: mongoose.model('Exam', exam),
     Note: mongoose.model('Note', note),
-    Participant: mongoose.model('Participant', particpant)
+    Participant: mongoose.model('Participant', particpant),
+    Delivery: mongoose.model('Delivery', delivery)
+
 
  }

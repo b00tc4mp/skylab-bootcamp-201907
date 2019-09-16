@@ -2,9 +2,8 @@ const { models:{ Subject } } = require('classty-data')
 
 const { validate } = require('classty-utils')
 
-module.exports = function (id, idH) {
+module.exports = function (id) {
     validate.string(id, 'id')
-    validate.string(idH, 'idH')
 
     return ( async ()=>{
 
@@ -12,7 +11,7 @@ module.exports = function (id, idH) {
 
         if (!subject) throw new Error(`wrong credentials`)
 
-        const homework = subject.homeworks.find(homework => homework._id.toString()==idH) 
+        const homework = subject.homeworks
 
         return homework
     })()

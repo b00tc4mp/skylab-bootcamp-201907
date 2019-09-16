@@ -1,10 +1,12 @@
 const { homework } = require('../../logic')
 
 module.exports = async(req, res) => {
-    const { body: { idS, _body } } = req
+    const { params:{idSub}, body: {  title, comment, expiry, delivery=[] } } = req
+    const _body ={ title, comment, expiry, delivery} 
 
+debugger
     try {
-        await homework.registerHomework(idS, _body)
+        await homework.registerHomework(idSub, _body)
         res.status(201).json({ message: 'homework correctly registered' })
         
     } catch ({ message }) {

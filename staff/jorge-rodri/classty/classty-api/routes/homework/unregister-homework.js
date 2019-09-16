@@ -1,7 +1,7 @@
 const { homework } = require('../../logic')
 
 module.exports = async(req, res) => {
-    const { body: { idSub, idH } } = req
+    const { params: { idSub, idH } } = req
 
     try {
         await homework.unregisterHomework(idSub, idH)

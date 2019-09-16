@@ -15,7 +15,7 @@ module.exports = (idMentor, nameClass, students, teachers) => {
     
     return ( async() => {
 
-        const _class = await Classroom.find({nameClass})
+        const _class = await Classroom.find({name: nameClass})
         
         if(!_class.length==0) throw Error(`class with name ${nameClass} already exists`)
 

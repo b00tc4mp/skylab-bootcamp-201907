@@ -1,10 +1,10 @@
 const { exam } = require('../../logic')
 
 module.exports = async(req, res) => {
-    const { body: { idSub, _body } } = req
-
+    const { params:{ idSub },body: {title, date, notes=[]} } = req
+debugger
     try {
-        await exam.registerExam(idSub, _body)
+        await exam.registerExam(idSub, title, date, notes)
         res.status(201).json({ message: 'exam correctly registered' })
         
     } catch ({ message }) {

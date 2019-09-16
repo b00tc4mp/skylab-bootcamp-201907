@@ -10,6 +10,7 @@ module.exports = {
     post: require('./post'),
     exam: require('./exam'),
     note: require('./note'),
-    particpant: require('./participant')
+    particpant: require('./participant'),
+    delivery: require('./delivery')
 
 }

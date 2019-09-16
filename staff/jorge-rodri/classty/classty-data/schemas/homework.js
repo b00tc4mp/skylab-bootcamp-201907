@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 const { Schema , SchemaTypes: { ObjectId } } = mongoose
 
+const Delivery = require('./delivery')
+
+
 module.exports = new Schema({
     title:{
         type: String,
@@ -14,5 +17,5 @@ module.exports = new Schema({
         type: Date,
         required: true
     },
-    delivery:[ { type: ObjectId, ref:'User' } ]
+    delivery:[ Delivery ]
 })

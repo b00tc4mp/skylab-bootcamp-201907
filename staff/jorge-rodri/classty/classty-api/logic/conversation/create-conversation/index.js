@@ -5,7 +5,7 @@ module.exports = function (idE, idR, conversation) {
     validate.string(idR, 'id')
     // validate.object(body, 'body')
     return (async () => {
-        debugger
+        
         const userE = await User.findById(idE)
 
         if(!userE) throw Error(`user with id ${idE} does not exist`)
@@ -23,7 +23,7 @@ module.exports = function (idE, idR, conversation) {
         const _sender = new Participant({user: idE, delivery: false})
         const _reciver = new Participant({user: idR, delivery: true})
         const _message = new Message(conversation.message)
-        debugger
+        
         const _conversation = {
             
             sender: idE,

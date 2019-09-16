@@ -62,6 +62,8 @@ describe('logic - create post', () => {
 
         post = {
             user: idS11,
+            name:student11.name,
+            surname:student11.surname,
             message: [_message]
         }
 

@@ -1,7 +1,7 @@
 const { post } = require('../../logic')
 
 module.exports = async(req, res) => {
-    const { body: { idSub, idP } } = req
+    const { params: { idSub, idP } } = req
 
     try {
         await post.removePost(idSub, idP)

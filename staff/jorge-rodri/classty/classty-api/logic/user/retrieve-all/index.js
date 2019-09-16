@@ -8,6 +8,7 @@ const { validate } = require('classty-utils')
  * @returns {Promise}
  */
 module.exports = function (type) {
+    
     validate.string(type, 'type')
     return (async () => {
 

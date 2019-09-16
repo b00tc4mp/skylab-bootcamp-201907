@@ -5,5 +5,7 @@ const Message = require('./message')
 
 module.exports = new Schema({
     user: {type: ObjectId, ref:'User'},
-    message: [Message]
+    name: {type:String},
+    surname: {type:String},
+    message: Message
  })

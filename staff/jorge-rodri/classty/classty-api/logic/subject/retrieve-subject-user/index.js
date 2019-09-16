@@ -22,7 +22,8 @@ module.exports = function (id) {
             isIn = subject.students.findIndex(student => student.toString()==id)
             let subj = {
                 id: subject._id.toString(),
-                title: subject.name
+                title: subject.name,
+                teachers : subject.teachers
             }
             if(isIn > -1) listSub.push(subj)
         
