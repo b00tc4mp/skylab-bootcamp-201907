@@ -41,7 +41,7 @@ describe('logic - vote - post', () => {
 
     it('should succeed on adding a vote to a post', async () => {
         const userVote = 2
-        await votePost(postId, userVote, userId)
+        await votePost(userId, postId, userVote)
 
         const post = await Post.findById(postId)
 
@@ -54,10 +54,10 @@ describe('logic - vote - post', () => {
 
     it('should fail on post already voted by the same user', async () => {
         //userVote = 5
-        await votePost(postId, 5, userId)
+        await votePost(userId, postId, 5)
         
         try{
-            await votePost(postId, 3, userId)
+            await votePost(userId, postId, 3)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -69,7 +69,7 @@ describe('logic - vote - post', () => {
         userVote = 6
         
         try{
-            await votePost(postId, userVote, userId)
+            await votePost(userId, postId, userVote)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -81,7 +81,7 @@ describe('logic - vote - post', () => {
         userVote = 0
         
         try{
-            await votePost(postId, userVote, userId)
+            await votePost(userId, postId, userVote)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -93,7 +93,7 @@ describe('logic - vote - post', () => {
         userVote = -2
         
         try{
-            await votePost(postId, userVote, userId)
+            await votePost(userId, postId, userVote)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -104,7 +104,7 @@ describe('logic - vote - post', () => {
     it('should fail on wrong userId', async() => {
         const wrongUserId = "5d73b6051b33294ec553d343"
         try{
-            await votePost(postId, 4, wrongUserId)
+            await votePost(wrongUserId, postId, 4)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -115,7 +115,7 @@ describe('logic - vote - post', () => {
     it('should fail on wrong PostId', async() => {
         const wrongPostId = "5d73952803f75b35e0b8d85e"
         try{
-            await votePost(wrongPostId, 2, userId)
+            await votePost(userId, wrongPostId, 2)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -125,7 +125,7 @@ describe('logic - vote - post', () => {
 
     it('should fail on empty userId', async () => {
         try{
-            await votePost(postId, 3, '')
+            await votePost('', postId, 3)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -134,7 +134,7 @@ describe('logic - vote - post', () => {
     })
     it('should fail on undefined userId', async () => {
         try{
-            await votePost(postId, 4, undefined)
+            await votePost(undefined, postId, 4)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -143,7 +143,7 @@ describe('logic - vote - post', () => {
     })
     it('should fail on wrong userId data type', async () => {
         try{
-            await votePost(postId, 2, 123)
+            await votePost(123, postId, 2)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -153,7 +153,7 @@ describe('logic - vote - post', () => {
 
     it('should fail on empty postId', async () => {
         try{
-            await votePost('', 3, userId)
+            await votePost(userId, '', 3)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -162,7 +162,7 @@ describe('logic - vote - post', () => {
     })
     it('should fail on undefined postId', async () => {
         try{
-            await votePost(undefined, 4, userId)
+            await votePost(userId, undefined, 4)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -171,7 +171,7 @@ describe('logic - vote - post', () => {
     })
     it('should fail on wrong postId data type', async () => {
         try{
-            await votePost(123, 2, userId)
+            await votePost(userId, 123, 2)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -181,7 +181,7 @@ describe('logic - vote - post', () => {
 
     it('should fail on empty userVote', async () => {
         try{
-            await votePost(postId, '', userId)
+            await votePost(userId, postId, '')
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -190,7 +190,7 @@ describe('logic - vote - post', () => {
     })
     it('should fail on undefined userVote', async () => {
         try{
-            await votePost(postId, undefined, userId)
+            await votePost(userId, postId, undefined)
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -199,7 +199,7 @@ describe('logic - vote - post', () => {
     })
     it('should fail on wrong userVote data type', async () => {
         try{
-            await votePost(postId, '3', userId)
+            await votePost(userId, postId, '3')
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
@@ -208,7 +208,7 @@ describe('logic - vote - post', () => {
     })
 
     it('should fail on wrong userVote data type', () =>
-       expect(() => votePost(postId, '3', userId)).to.throw(`userVote with value 3 is not a valid number`)
+       expect(() => votePost(userId, postId, '3')).to.throw(`userVote with value 3 is not a valid number`)
     )
 
     after(() => database.disconnect())

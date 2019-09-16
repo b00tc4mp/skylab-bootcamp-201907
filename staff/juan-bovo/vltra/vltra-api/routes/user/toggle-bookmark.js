@@ -2,10 +2,10 @@ const { toggleBookmark } = require('../../logic')
 
 module.exports = function (req, res) {
     // const { params: { id }, body  } = req
-    const { id, body: { userId, postId } } = req
-
+    const { id, body: { postId } } = req
+    debugger
     try {
-        toggleBookmark(userId, postId)
+        toggleBookmark(id, postId)
             .then(() => res.json({ message: 'bookmark correctly toggled' }))
             .catch(({ message }) => res.status(404).json({ error: message }))
     } catch ({ message }) {
