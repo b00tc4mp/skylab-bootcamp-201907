@@ -2,6 +2,8 @@ require('dotenv').config() //nuevo
 const { expect } = require('chai')
 const unregister=require('.')
 const {database, models:{User} } = require('skyshop-data')
+const bcrypt = require('bcryptjs')
+
 
 const{env: {DB_URL_TEST}}=process //nuevo
 
@@ -17,7 +19,7 @@ describe('logic - unregister user', () => {
         password = `password-${Math.random()}`
 
         await User.deleteMany()
-        const user=await User.create({ name, surname, email, password })
+        const user=await User.create({ name, surname, email, password: await bcrypt.hash (password, 10)  })
             id = user.id
     })
 
@@ -35,7 +37,7 @@ describe('logic - unregister user', () => {
             throw Error('should not reach this point') 
 
         }catch(error){
-            expect(error.message).to.equal('wrong credentials')
+            expect(error.message).to.equal('Wrong credentials.')
 
         }
     })

@@ -10,6 +10,8 @@ const{placeOrder,listOrders, retrieveOrder, retrieveAllOrders}=require('./order'
 
 const {addToCart, removeProduct, listCart}= require('./cart')
 
+const{setProduct, retrieveAuction, updateAuction}=require('./auction')
+
 const router = Router()
 const jsonBodyParser = bodyParser.json()
 
@@ -27,10 +29,7 @@ router.delete('/products/:productId',jsonBodyParser,unregisterProduct)
 router.get('/products',jsonBodyParser,retrieveAll)
 router.get('/product/q/:title',jsonBodyParser,retrieveProducts)
 router.patch('/products/:productId',jsonBodyParser,updateProduct)
-//upload PHOTO
 router.post('/products/:productId/photo',uploadPhoto)
-
-
 
 //ORDER
 router.post('/users/:id/orders',[tokenMiddleware, jsonBodyParser],placeOrder)
@@ -38,11 +37,17 @@ router.get('/users/:id/orders', [tokenMiddleware, jsonBodyParser], listOrders)
 router.get('/users/:id/order/:orderId', [tokenMiddleware, jsonBodyParser], retrieveOrder)
 router.get('/users/:id/allorders/', [tokenMiddleware, jsonBodyParser], retrieveAllOrders)
 
-
 //CART
 router.post('/users/:id/cart',[tokenMiddleware, jsonBodyParser],addToCart)
 router.patch('/users/:id/cart/deleteItem',[tokenMiddleware, jsonBodyParser],removeProduct)
 router.get('/users/:id/cart/',[tokenMiddleware, jsonBodyParser],listCart)
+
+//AUCTION
+router.post('/auction/:id/product/:productId',[tokenMiddleware, jsonBodyParser],setProduct)
+router.get('/auction/one/:auctionId',jsonBodyParser,retrieveAuction)
+router.patch('/auction/:userId/:auctionId',jsonBodyParser,updateAuction)
+
+
 
 
 

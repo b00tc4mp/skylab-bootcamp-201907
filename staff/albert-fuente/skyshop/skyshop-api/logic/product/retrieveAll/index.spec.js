@@ -13,7 +13,7 @@ describe('logic - retrieve ALL products', () => {
         title = `title-${Math.random()}`
         image = `image-${Math.random()}`
         description = `description-${Math.random()}`
-        size = [`l`]
+        size = `l`
         color = `color-${Math.random()}`
         price = Math.random()
         

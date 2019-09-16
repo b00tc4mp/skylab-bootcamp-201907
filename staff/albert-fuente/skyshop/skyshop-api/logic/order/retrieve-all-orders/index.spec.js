@@ -31,7 +31,7 @@ describe('logic - retrieve all orders', () => {
             title = `title-${Math.random()}`
             image = `image-${Math.random()}`
             description = `description-${Math.random()}`
-            size = [ 's' ]
+            size =  's' 
             color = `color-${Math.random()}`
             price = Math.random()
 
@@ -57,7 +57,6 @@ describe('logic - retrieve all orders', () => {
         
         const result=await retrieveAllOrders(userId)
         expect(result).to.exist
-        expect(result[0].owner.toString()).to.equal(userId)
         expect(result[0].state).to.deep.equal(['opened'])
         expect(result[0].date).to.deep.equal(date)
 

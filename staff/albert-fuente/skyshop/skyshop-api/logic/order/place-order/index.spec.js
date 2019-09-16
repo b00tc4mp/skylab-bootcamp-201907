@@ -30,7 +30,7 @@ describe('logic - place order', () => {
             title = `title-${Math.random()}`
             image = `image-${Math.random()}`
             description = `description-${Math.random()}`
-            size = [ 's' ]
+            size =  's' 
             color = `color-${Math.random()}`
             price = Math.random()
 
