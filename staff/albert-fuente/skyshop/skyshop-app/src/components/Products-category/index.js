@@ -30,7 +30,7 @@ function ProductsCategory() {
                    return<>
                     <ul className='product'onClick={event => {
                 event.preventDefault()
-                debugger
+                
                 setView("productDetail")
                 setProductQuery(item._id)
             }} >

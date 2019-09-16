@@ -7,7 +7,7 @@ export default function (title,{name},description,size,color,price) {
     validate.string(title,'title')
      validate.string(image,'image')
      validate.string(description,'description')
-     //validate.string(size,'size')
+     validate.string(size,'size')
      validate.string(color,'color')
      validate.number(price,'price')
 

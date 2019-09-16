@@ -15,6 +15,11 @@ import updateCart from './update-cart'
 import placeOrder from './order-place'
 import uploadPhoto from './upload-picture'
 import retrieveCart from './retrieve-cart'
+import updateProduct from './update-product'
+import removeProduct from './remove-product'
+import updateAuction from './update-auction'
+import setAuction from './set-auction'
+import retrieveAuction from './retrieve-auction'
 
 export default {
     set __credentials__({ id, token }) {
@@ -42,5 +47,10 @@ export default {
     updateCart,
     placeOrder,
     uploadPhoto,
-    retrieveCart
+    retrieveCart,
+    updateProduct,
+    removeProduct,
+    setAuction,
+    updateAuction,
+    retrieveAuction
 }

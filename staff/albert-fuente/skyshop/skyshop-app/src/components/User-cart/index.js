@@ -5,14 +5,17 @@ import { Redirect} from "react-router-dom"
 
 
 function UserCart() {
-  const { cart, setCart,setView,view } = useContext(Context)
+  const { cart, setCart,setView,view, setFromCart,fromCart } = useContext(Context)
   let total=0
+  let lengthcart
 
   useEffect(() => {
     (async () => {
       try {
         const cart = await logic.retrieveCart()
         setCart(cart)
+        
+        lengthcart=cart.length
       } catch (error) {
         console.log(error.message)
       }
@@ -36,6 +39,7 @@ function UserCart() {
     try {
       await logic.placeOrder()
       setView("success")
+      setFromCart(true)
     } catch (error) {
       console.log(error.message)
     }
@@ -43,6 +47,13 @@ function UserCart() {
 
 
   return <>
+
+            {cart=="" || cart==undefined &&
+            <div>
+            <p className="formPanel">Cart is empty</p>
+            
+            </div>
+          }
     {view==="success" && <Redirect to="/profile/success"/>}
     {cart && cart instanceof Array &&
       <div>
@@ -68,10 +79,10 @@ function UserCart() {
           }
           )}
         </ul>
-        <h3 className="userCart-total">Total: {total + " €"}</h3>
+        {cart!=""&& cart!=undefined &&<h3 className="userCart-total">Total: {total + " €"}</h3>}
         
 
-        <button className="formPanel-submit-buy" onClick={handleCheckout} >Checkout</button>
+        {cart!=""&& cart!=undefined && <button className="formPanel-submit-buy" onClick={handleCheckout} >Checkout</button>}
         <p><a href="/#/"><i className="far fa-2x fa-arrow-alt-circle-left addCart-a userCart-backArrow"></i></a></p>
 
       </div>
