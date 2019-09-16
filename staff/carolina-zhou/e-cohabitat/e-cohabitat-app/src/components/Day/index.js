@@ -16,7 +16,7 @@ function Day({ history, match }) {
         (async () =>{
           try {
             const tasks = await logic.retrieveAllSpaceTasks(spaceId)
-
+            debugger
             const dayTasks = tasks.filter(task => moment(thisDay).isSame(task.date, 'day'))
             setDayTasks(dayTasks)
 
@@ -65,11 +65,7 @@ function Day({ history, match }) {
         history.push(`/${spaceId}/task-register`)
     }
     
-    debugger
-    return <>
-
-        <div className="day">
-
+    return <div className="day">
             <div className="day__header">
                 <i className="fas fa-caret-left" onClick={handleGoToPreviousDay}></i><h1 className="day__title"> {moment(thisDay).format('dddd Do')} </h1><i className="fas fa-caret-right" onClick={handleGoToNextDay}></i>
             </div>
@@ -206,8 +202,6 @@ function Day({ history, match }) {
                 </table>
             </div>
         </div>
-
-    </>
 }
 
 export default withRouter(Day)

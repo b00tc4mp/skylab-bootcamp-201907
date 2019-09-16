@@ -28,7 +28,7 @@ function Month({ history, match }) {
     }
 
     function handleGoToDay(day) {
-        
+        debugger
         setThisDay(moment(day))
         history.push(`/${spaceId}/day`)
     }
@@ -80,8 +80,6 @@ function Month({ history, match }) {
         rows = []
 
         let days = []
-        let formattedDate = ''
-        let dataDate = ''
 
         let first = monthStart
         switch (first.day()) {
@@ -111,8 +109,8 @@ function Month({ history, match }) {
             first = moment(first).subtract(1, 'week')
             while (first <= moment(first).endOf('week').day()) {
                 for (let i = 0; i < 7; i++) {
-                    formattedDate = first.format('D')
-                    dataDate = first.format()
+                    const formattedDate = first.format('D')
+                    const dataDate = first.format()
                     days.push(
                         <div className="calendar__day day" data-date={dataDate} onClick={() => {handleGoToDay(dataDate)}}>
                            {formattedDate}
@@ -125,10 +123,10 @@ function Month({ history, match }) {
 
         while (first <= endDate) {
             for (let i = 0; i < 7; i++) {
-                formattedDate = first.format('D')
-                dataDate = first.format()
+                const formattedDate = first.format('D')
+                const dataDate = first.format()
                 days.push(
-                    <div className="calendar__day day" data-date={dataDate} onClick={() => {handleGoToDay({dataDate})}}>
+                    <div className="calendar__day day" onClick={() => {handleGoToDay(dataDate)}}>
                        {formattedDate}
                     </div>
                 )
