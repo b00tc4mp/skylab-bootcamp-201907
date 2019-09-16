@@ -8,6 +8,9 @@ import updateUser from './update-user'
 import retrieveNear from './retrieve-near'
 import updateCache from './update-cache'
 import registerCache from './register-cache'
+import retrieveOwnCaches from './retrieve-own-caches'
+import unregisterCache from './unregister-cache'
+import retrieveCache from './retrieve-cache'
 
 export default {
     set __token__(token) {
@@ -27,5 +30,8 @@ export default {
     updateUser,
     retrieveNear,
     updateCache,
-    registerCache
+    registerCache,
+    retrieveOwnCaches,
+    unregisterCache,
+    retrieveCache
 }

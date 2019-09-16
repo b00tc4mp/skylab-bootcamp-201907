@@ -32,7 +32,7 @@ router.post('/caches', tokenMiddleware, registerCache)
 
 router.get('/caches/owned', tokenMiddleware, retrieveAllOwnedCaches)
 
-router.get('/caches/:distance', tokenMiddleware, retrieveNear)
+// router.get('/caches/:distance', tokenMiddleware, retrieveNear)
 
 router.get('/caches/:cacheId', tokenMiddleware, retrieveCache)
 

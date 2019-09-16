@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
+import { withRouter } from 'react-router-dom'
+
 import L from 'leaflet'
 import logic from '../../logic'
 import './index.css';
@@ -13,13 +15,19 @@ var myIcon = L.icon({
   popupAnchor: [0, -41],
 });
 
-function MapHome() {
+var myIcon2 = L.icon({
+  iconUrl: 'https://image.flaticon.com/icons/png/512/97/97895.png',
+  iconSize: [50, 82],
+  iconAnchor: [12.5, 41],
+  popupAnchor: [0, -41],
+})
+
+function MapHome({ history }) {
 
   const [position, setPosition] = useState([0, 0])
   const [zoom, setZoom] = useState(2)
   const [haveUsersLocation, setHaveUsersLocation] = useState(false)
-  const [caches, setCaches] = useState()
-
+  const [allCaches, setAllCaches] = useState()
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -29,39 +37,52 @@ function MapHome() {
         setHaveUsersLocation(true)
 
       }, error => console.log(error.message))
-    }, 5000);
+    }, 3000);
     return () => clearInterval(interval);
-
-
   }, [])
 
   useEffect(() => {
 
-    async function retrieveAll() {
+    (async function () {
       const loc = { location: { type: 'Point', coordinates: [position[1], position[0]] } }
       await logic.updateUser(loc)
-      const caches = await logic.retrieveNear(2000)
-      setCaches(caches)
-    }
-    retrieveAll()
-  })
+      const caches = await logic.retrieveAllCaches()
+      setAllCaches(caches)
+    })()
 
-  return (
+  }, [])
 
+  const handleGoToDetails = async (cacheId) => {
+    history.push(`/details/${cacheId}`)
+}
+
+
+  return (<>
     <Map className="map" center={position} zoom={zoom}>
       <TileLayer
         attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
       />
       {
         haveUsersLocation ?
-          <Marker position={position} icon={myIcon} >
+          <Marker position={position} icon={myIcon2} >
             <Popup>
               Hello World!
         </Popup>
           </Marker> : ''
       }
+      {allCaches && allCaches.length && allCaches.map(cache => <Marker key={cache._id} draggable={false}
+        position={[cache.location.coordinates[1], cache.location.coordinates[0]]} icon={myIcon}>
+        <Popup>
+          <form onSubmit={event => {
+                event.preventDefault()
+                handleGoToDetails(event.target.cacheId.value)
+            }}>
+                <input type='hidden' name="cacheId" value={cache._id} />
+                <button>{cache.name}</button></form>
+        </Popup>
+      </Marker>)}
     </Map>
-  )
+  </>)
 }
-export default MapHome;
+export default withRouter(MapHome)

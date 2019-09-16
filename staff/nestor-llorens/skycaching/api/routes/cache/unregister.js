@@ -2,11 +2,11 @@ const logic = require('../../logic/cache')
 
 async function unregisterCache (req, res) {
     
-    const { userId, body: { password }, params: { cacheId }} = req
+    const { userId, params: { cacheId }} = req
 
     try {
         debugger
-        await logic.unregisterCache(userId, password, cacheId)
+        await logic.unregisterCache(userId, cacheId)
         res.json({ message: 'cache correctly unregistered' })
 
     } catch ({ message }) {
