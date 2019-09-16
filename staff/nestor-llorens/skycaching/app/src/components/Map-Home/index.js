@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
+import logic from '../../logic'
 import './index.css';
 
 var myIcon = L.icon({
@@ -17,16 +18,33 @@ function MapHome() {
   const [position, setPosition] = useState([0, 0])
   const [zoom, setZoom] = useState(2)
   const [haveUsersLocation, setHaveUsersLocation] = useState(false)
+  const [caches, setCaches] = useState()
 
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(position => {
-      setZoom(17)
-      setPosition([position.coords.latitude, position.coords.longitude])
-      setHaveUsersLocation(true)
+    const interval = setInterval(() => {
+      navigator.geolocation.getCurrentPosition(position => {
+        setZoom(17)
+        setPosition([position.coords.latitude, position.coords.longitude])
+        setHaveUsersLocation(true)
 
-    }, error => console.log(error.message))
+      }, error => console.log(error.message))
+    }, 5000);
+    return () => clearInterval(interval);
+
+
   }, [])
+
+  useEffect(() => {
+
+    async function retrieveAll() {
+      const loc = { location: { type: 'Point', coordinates: [position[1], position[0]] } }
+      await logic.updateUser(loc)
+      const caches = await logic.retrieveNear(2000)
+      setCaches(caches)
+    }
+    retrieveAll()
+  })
 
   return (
 
@@ -37,7 +55,7 @@ function MapHome() {
       />
       {
         haveUsersLocation ?
-          <Marker draggable={true} position={position} icon={myIcon} >
+          <Marker position={position} icon={myIcon} >
             <Popup>
               Hello World!
         </Popup>

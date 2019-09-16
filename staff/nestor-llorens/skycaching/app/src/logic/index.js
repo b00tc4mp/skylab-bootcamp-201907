@@ -3,6 +3,11 @@ import authenticateUser from './authenticate-user'
 import isUserLoggedIn from './is-user-logged-in'
 import logUserOut from './log-user-out'
 import retrieveUser from './retrieve-user'
+import retrieveAllCaches from './retrieve-all-caches'
+import updateUser from './update-user'
+import retrieveNear from './retrieve-near'
+import updateCache from './update-cache'
+import registerCache from './register-cache'
 
 export default {
     set __token__(token) {
@@ -18,5 +23,9 @@ export default {
     isUserLoggedIn,
     logUserOut,
     retrieveUser,
-    
+    retrieveAllCaches,
+    updateUser,
+    retrieveNear,
+    updateCache,
+    registerCache
 }

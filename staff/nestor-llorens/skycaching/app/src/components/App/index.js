@@ -35,6 +35,17 @@ function App ({ history}) {
     }
   }
 
+  const handleRegisterCache = async (name, description, difficulty, terrain, size, hints) => {
+    try{
+      await logic.registerCache(name, description, difficulty, terrain, size, hints ) 
+
+    }catch{
+
+    }
+
+
+  }
+
   return (
   
   <div className="App">
@@ -42,7 +53,7 @@ function App ({ history}) {
     <Route exact path='/' render={() => logic.isUserLoggedIn() ? <Home setUser={setUser}/> : <Landing/>} />
     <Route path="/register" render={() => <Register onRegister={handleRegister} />} />
     <Route path="/login" render={() => <Login onLogin={handleLogin} />} />
-    <Route path="/profile" render={() => logic.isUserLoggedIn() ? <Profile/> : <Landing/>} />
+    <Route path="/profile" render={() => logic.isUserLoggedIn() ? <Profile user={user} onRegisterCache={handleRegisterCache}/> : <Landing/>} />
     <Route path="/favorites" render={() => logic.isUserLoggedIn() ? <Favorites/> : <Landing/>} />
   </div>
   )
