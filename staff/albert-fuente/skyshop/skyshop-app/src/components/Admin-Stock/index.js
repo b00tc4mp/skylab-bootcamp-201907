@@ -52,9 +52,9 @@ function Stock() {
     {orders &&
     orders.map(item=>{
         item.items.filter(prod=>{    
-        if(prod.product.title==="t-shirt") tshirts+=parseInt(prod.quantity)
-        if(prod.product.title==="duck") ducks+=parseInt(prod.quantity)
-        if(prod.product.title==="mug") mugs+=parseInt(prod.quantity)
+        if(prod.product.title==="T-shirt") tshirts+=parseInt(prod.quantity)
+        if(prod.product.title==="Duck") ducks+=parseInt(prod.quantity)
+        if(prod.product.title==="Mug") mugs+=parseInt(prod.quantity)
 
     })})} 
         <h3> Needed stock for thsirts: {tshirts}</h3>

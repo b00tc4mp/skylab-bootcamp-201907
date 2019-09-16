@@ -35,6 +35,7 @@ function Landing({history}){
 
     return <>
     <header>
+    {view==="auctions" && <Redirect to="/auctions"/>}
     {view==="landing" && <Redirect to="/"/>}
     {view==="productCategory" && <Redirect to="/productsCategory"/>}
     {admin===true &&
@@ -71,7 +72,7 @@ function Landing({history}){
             }}>Skyshop</a></li>
             <li className="li"><a href="" className="nav-but" href='/#/register'   >Register</a></li>
             <li className="li--small"><a className="nav-but" href='/#/login' > <i className="fas fa-user"></i></a></li>
-            <li className="li--small--cart"><a href='/#/cart' ><i className="fas fa-cart-plus" ></i></a></li>
+            <li className="li--small--cart"><a href='/#/cart' ><i className="fas fa-cart-plus " ></i></a></li>
         </ul> 
         </nav>
         }
@@ -82,10 +83,9 @@ function Landing({history}){
             <ul className="nav2-ul">
                 <li><a className="nav2-but" onClick={event => {
                 event.preventDefault()
-                setView("productCategory")
-                setProductQuery("T-shirt")
-            }} >t-shirts</a></li>
-                <li><a className="nav2-but" onClick={event => {
+                setView("auctions")
+            }} >Auctions</a></li>
+                {/* <li><a className="nav2-but" onClick={event => {
                 event.preventDefault()
                 setView("productCategory")
                 setProductQuery("Mug")
@@ -94,7 +94,7 @@ function Landing({history}){
                 event.preventDefault()
                 setView("productCategory")
                 setProductQuery("Duck")
-            }}>ducks</a></li>
+            }}>ducks</a></li> */}
                 <li><a className="nav2-but--small"  onClick={handleGoAdvancedSearch}  ><i className="fas fa-search"></i></a></li>
             </ul>
     </nav>

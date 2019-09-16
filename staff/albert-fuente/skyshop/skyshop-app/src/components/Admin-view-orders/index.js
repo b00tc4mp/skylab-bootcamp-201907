@@ -45,8 +45,20 @@ function ShowAllOrders() {
                     <label className="orders-label">OWNER:</label>
                     <li className="">{item.owner.name}</li>
                     <label className="orders-label">ITEMS:</label>
-                    <li className="">{item.items.map(prod=>"Product: "+prod.product.title+ " Description: "+prod.product.description + " Price: " + prod.product.price + "        Quantity: \n"+prod.quantity + "    ")}</li>
 
+                    <ul className='orders'>
+                      {item.items.map(prod=>{
+                        return<>
+                        <li>{"Product: "+prod.product.title}</li>
+                        <li>{"Price: "+prod.product.price}</li>
+                        <li>{"Quantity: "+prod.quantity}</li>
+                        <hr></hr>
+
+                        </>
+                      })}
+                    </ul>
+{/*                     <li className="">{item.items.map(prod=>"Product: "+prod.product.title+ " Description: "+prod.product.description + " Price: " + prod.product.price + "        Quantity: \n"+prod.quantity + "   || ")}</li>
+ */}
                     </ul>
                    </>
                  }

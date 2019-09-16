@@ -10,6 +10,7 @@ import Feedback from '../Feedback'
 
 function ShowAllOrdersUser() {
   const[error,setError]=useState(undefined)
+  let total=0
   
     const { user, orders,setOrders} = useContext(Context)
 
@@ -47,7 +48,20 @@ function ShowAllOrdersUser() {
                     <label className="orders-label">DATE:</label>
                     <li className="">{item.date.slice(0,16)}</li>
                     <label className="orders-label">ITEMS:</label>
-                    <li className="">{item.items.map(prod=>"Product: "+prod.product.title+ " Description: "+prod.product.description + " Price: " + prod.product.price + "        Quantity: \n"+prod.quantity + "    ")}</li>
+                    <ul className='orders'>
+                      {item.items.map(prod=>{
+                        return<>
+                        <li>{"Product: "+prod.product.title}</li>
+                        <li>{"Description: "+prod.product.description}</li>
+                        <li>{"Price: "+prod.product.price}</li>
+                        <li>{"Quantity: "+prod.quantity}</li>
+                        <hr></hr>
+                        </>
+                      })}
+                    </ul>
+                    <li className="userCart-hidden">{item.items.map(prod=> 'Total: '+(total+=(prod.product.price*prod.quantity))+ " €")}</li>  
+                    <p>{"Total: "+total+ " €"}</p>
+       
 
                     </ul>
                    </>
