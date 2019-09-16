@@ -17,7 +17,9 @@ export default function (longitude, latitude) {
     validate.number(latitude, 'latitude')
     
     return (async () => {
-        const response = await call(`${REACT_APP_API_URL}/user/dinamic/${longitude}/${latitude}` , 'patch' , { 'authorization': `bearer ${this.__token__}` }, undefined )
+        const response = await call(`${REACT_APP_API_URL}/user/dinamic` , 'patch' , 
+        { 'authorization': `bearer ${this.__token__}`, 'content-type': 'application/json' }, 
+        {longitude, latitude})
     
         if (response.error) {
             const { error } = response

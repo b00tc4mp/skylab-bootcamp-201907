@@ -7,12 +7,13 @@ const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
 
 
 describe('logic - register user', () => {
+    debugger
     
     beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
     let name, surname, email, password, repassword
     
     beforeEach(async () => {
-
+debugger
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@mail.com`

@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import MyContext from '../Provider-Context'
 import logic from '../../logic'
+import MapHome from '../Map-home'
 
 function Home() {
     
@@ -21,10 +22,9 @@ function Home() {
     }, [])
    
     return  <main>
-                <section>
-                    <a href="google maps">Map</a> {/* <!--aqui va el mapa de google--> */}
-                    <a href="human gps">Man</a> {/* !--ninot per canviar la ubicacio en tems real--> */}
-              </section>
+                <section className = 'map-home'>
+                    <MapHome/>
+                </section>
                 <section>
                     <h3> notifications </h3>
                     <ul>

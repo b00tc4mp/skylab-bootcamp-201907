@@ -20,6 +20,7 @@ import deleteNotification from './notifications/delete-notification'
 import retrieveNotification from './notifications/retrieve-notification'
 import updateStaticLocation from './geo/update-static'
 import updateDinamicLocation from './geo/update-dinamic'
+import retrieveAllUsers from './geo/retrieve-all-users'
 
 export default {
 
@@ -51,5 +52,6 @@ export default {
     deleteNotification,
     retrieveNotification,
     updateStaticLocation,
-    updateDinamicLocation
+    updateDinamicLocation,
+    retrieveAllUsers
 }
