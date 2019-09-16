@@ -11,6 +11,7 @@ function Day({ history, match }) {
     const { params: { spaceId } } = match
     const { thisDay, setThisDay, setThisHour } = useContext(Context)
     const [ dayTasks, setDayTasks ] = useState()
+    const [ update, setUpdate ] = useState(false)
 
     useEffect(() => {
         (async () =>{
@@ -20,12 +21,13 @@ function Day({ history, match }) {
             const dayTasks = tasks.filter(task => moment(thisDay).isSame(task.date, 'day'))
             setDayTasks(dayTasks)
 
+            setUpdate(false)
           } catch(error) {
             console.log(error.message)
           }
         })()
-    },[])
-    
+    },[update, thisDay])
+
 
     function handleMonth(event) {
         event.preventDefault()
@@ -64,11 +66,33 @@ function Day({ history, match }) {
         history.push(`/${spaceId}/task-register`)
     }
 
+    function handleDeleteTask(taskId) {
+
+        handleRemoval(taskId)
+    }
+
+    async function handleRemoval(taskId) {
+        try {
+            await logic.deleteTask(spaceId, taskId)
+
+            setUpdate(true)
+        } catch(error) {
+            console.log(error.message)
+        }
+    }
+
     function handleHour(start, end){
         return dayTasks.map(task => {
             let hour = Number(moment(task.date).format('H'))
             if (start <= hour && hour < end) {
-                return <p className="timetable__task-user">{task.companionNames} <span className="timetable__task-name">({task.taskName})</span></p>                 
+                return <>
+                <div className="timetable__task-intro">
+                   <p className="timetable__task-user">{task.companionNames}</p> 
+                   <p className="timetable__task-name">({task.taskName})</p>
+                   <i class="fas fa-minus-circle" onClick={() => handleDeleteTask(task._id)}></i>
+                </div>
+                <p className="timetable__task-description">- {task.description}</p>
+                </>                 
             }
         })
     }

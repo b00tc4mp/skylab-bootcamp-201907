@@ -19,7 +19,7 @@ export default function(spaceId, dataToUpdate) {
     
     return (async () => {
         const response = await fetch(`${REACT_APP_API_URL}/users/${id}/spaces/${spaceId}`, {
-            method: 'patch',
+            method: 'PATCH',
             headers: { authorization: `bearer ${token}` },
             body: JSON.stringify({ dataToUpdate })
         })

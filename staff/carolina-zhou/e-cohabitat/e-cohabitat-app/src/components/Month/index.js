@@ -139,7 +139,11 @@ function Month({ history, match }) {
                     const formattedDate = first.format('D')
                     const dataDate = first.format()
                     days.push(
-                        <div className="calendar__day day" onClick={() => {handleGoToDay(dataDate)}}>
+                        <div onClick={() => {handleGoToDay(dataDate)}} className={`${!moment(currentDate).isSame(dataDate, 'month')
+                            ? "calendar__disabled"
+                            : moment().isSame(dataDate, 'day')
+                            ? "calendar__selected"
+                            : "calendar__day day"}`} >
                             {formattedDate}
                             {monthTasks && <div className="calendar__tasks">{handleDayTasks(dataDate)}</div>}
                         </div>
@@ -154,7 +158,11 @@ function Month({ history, match }) {
                 const formattedDate = first.format('D')
                 const dataDate = first.format()
                 days.push(
-                    <div className="calendar__day day" onClick={() => {handleGoToDay(dataDate)}}>
+                    <div onClick={() => {handleGoToDay(dataDate)}} className={`${!moment(currentDate).isSame(dataDate, 'month')
+                            ? "calendar__disabled"
+                            : moment().isSame(dataDate, 'day')
+                            ? "calendar__selected"
+                            : "calendar__day day"}`} >
                        {formattedDate}
                        {monthTasks && <div className="calendar__tasks">{handleDayTasks(dataDate)}</div>}
                     </div>
@@ -167,7 +175,7 @@ function Month({ history, match }) {
 
         return <div>{rows}</div>
     }
-
+debugger
     return <>
     
         <div className="month">

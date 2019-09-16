@@ -1,4 +1,4 @@
-require('dotenv').config()
+/* require('dotenv').config()
 
 const { expect } = require('chai')
 const logic = require('../..')
@@ -50,7 +50,6 @@ describe('logic - delete task', () => {
         await user.save()
 
         space.cousers.push(userId)
-        space.spaceTasks.push(taskId)
         await space.save()
 
         task.taskSpace.push(spaceId)
@@ -59,7 +58,7 @@ describe('logic - delete task', () => {
     })
 
     it('should succeed on correct data', async () => {
-        const result = await logic.deleteTask(userId, spaceId, taskId)
+        const result = await logic.deleteTask(userId, taskId)
         expect(result).not.to.exist
         const task = await Task.findById(taskId)
         expect(task).not.to.exist
@@ -67,7 +66,7 @@ describe('logic - delete task', () => {
 
     it('should fail on unexistent user', async () => {
         try {
-            await logic.deleteTask('5d5d5530531d455f75da9fF9', spaceId, taskId)
+            await logic.deleteTask('5d5d5530531d455f75da9fF9', taskId)
             
             throw Error('should not reach this point')
         } catch({message}) {
@@ -75,19 +74,9 @@ describe('logic - delete task', () => {
         }
     })
 
-    it('should fail on unexistent space', async () => {
-        try {
-            await logic.deleteTask(userId, '5d5d5530531d455f75da9fF9', taskId) 
-            
-            throw Error('should not reach this point')
-        } catch({message}) {
-            expect(message).to.equal('there is no space with the provided space id')
-        }
-    })
-
     it('should fail on unexistent task', async () => {
         try {
-            await logic.deleteTask(userId, spaceId, '5d5d5530531d455f75da9fF9')
+            await logic.deleteTask(userId, '5d5d5530531d455f75da9fF9')
             
             throw Error('should not reach this point')
         } catch({message}) {
@@ -99,7 +88,7 @@ describe('logic - delete task', () => {
         userId = ' '
 
         try {
-            await logic.deleteTask(userId, spaceId, taskId)
+            await logic.deleteTask(userId, taskId)
         } catch({ message }) {
             expect(message).to.equal('user id is empty or blank')
         }
@@ -109,7 +98,7 @@ describe('logic - delete task', () => {
         userId = undefined
 
         try {
-            await logic.deleteTask(userId, spaceId, taskId)
+            await logic.deleteTask(userId, taskId)
         } catch({ message }) {
             expect(message).to.equal("user id with value undefined is not a string")
         }
@@ -119,48 +108,18 @@ describe('logic - delete task', () => {
         userId = 123
 
          try {
-            await logic.deleteTask(userId, spaceId, taskId)
+            await logic.deleteTask(userId, taskId)
         } catch({ message }) {
             expect(message).to.equal("user id with value 123 is not a string")
         }
        
     })
 
-    it('should fail on empty space id', async () => {
-        spaceId = ' '
-
-        try {
-            await logic.deleteTask(userId, spaceId, taskId)
-        } catch({ message }) {
-            expect(message).to.equal('space id is empty or blank')
-        }
-    })
-
-    it('should fail on undefined space id', async () => {
-        spaceId = undefined
-
-        try {
-            await logic.deleteTask(userId, spaceId, taskId)
-        } catch({ message }) {
-            expect(message).to.equal("space id with value undefined is not a string")
-        }
-    })
-     
-    it('should fail on wrong space id data type', async() => {
-        spaceId = 123
-
-        try {
-            await logic.deleteTask(userId, spaceId, taskId)
-        } catch({ message }) {
-            expect(message).to.equal("space id with value 123 is not a string")
-        }
-    })
-
     it('should fail on empty task id', async () => {
         taskId = ' '
 
         try {
-            await logic.deleteTask(userId, spaceId, taskId)
+            await logic.deleteTask(userId, taskId)
         } catch({ message }) {
             expect(message).to.equal('task id is empty or blank')
         }
@@ -170,7 +129,7 @@ describe('logic - delete task', () => {
         taskId = undefined
 
         try {
-            await logic.deleteTask(userId, spaceId, taskId)
+            await logic.deleteTask(userId, taskId)
         } catch({ message }) {
             expect(message).to.equal("task id with value undefined is not a string")
         }
@@ -180,11 +139,11 @@ describe('logic - delete task', () => {
         taskId = 123
 
         try {
-            await logic.deleteTask(userId, spaceId, taskId)
+            await logic.deleteTask(userId, taskId)
         } catch({ message }) {
             expect(message).to.equal("task id with value 123 is not a string")
         }
     })
 
     after(() => database.disconnect())
-})
+}) */

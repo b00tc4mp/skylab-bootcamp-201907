@@ -16,9 +16,9 @@ import addTask from './task/add-task'
 /* import addTaskCompanion from './task/add-companion' */
 import retrieveAllSpaceTasks from './task/retrieve-all-space-tasks'
 /* import retrieveTask from './task/retrieve-task'
-import editTask from './task/edit-task'
+import editTask from './task/edit-task'*/
 import deleteTask from './task/delete-task'
-import removeTaskCompanion from './task/remove-companion'
+/* import removeTaskCompanion from './task/remove-companion'
 import postComment from './comment/post-comment'
 import editComment from './comment/edit-comment'
 import deleteComment from './comment/delete-comment' */
@@ -43,6 +43,7 @@ export default {
     updateSpace,
     /* unregisterSpace, unregisterSpaceCouser*/
     addTask, /*addTaskCompanion, */
-    retrieveAllSpaceTasks/* , retrieveTask, editTask, deleteTask, removeTaskCompanion,
+    retrieveAllSpaceTasks,/*  retrieveTask, editTask, */
+    deleteTask/* , removeTaskCompanion,
     postComment, editComment, deleteComment */
 }
