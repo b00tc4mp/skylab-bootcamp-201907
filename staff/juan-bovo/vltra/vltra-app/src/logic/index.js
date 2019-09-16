@@ -6,6 +6,9 @@ import retrieveUser from './retrieve-user'
 import createPost from './create-post'
 import retrieveAllPosts from './retrieve-all-posts'
 import retrievePost from './retrieve-post'
+import retrieveUserPosts from './retrieve-user-posts'
+import votePost from './vote-post'
+import toggleBookmark from './toggle-bookmark'
 
 export default {
     set __token__(token) {
@@ -23,7 +26,10 @@ export default {
     retrieveUser,
     createPost,
     retrieveAllPosts,
-    retrievePost
+    retrievePost,
+    retrieveUserPosts,
+    votePost,
+    toggleBookmark
 
     // async searchDucks(query) {
     //     const response = await fetch(`https://duckling-api.herokuapp.com/api/search?q=${query}`)
