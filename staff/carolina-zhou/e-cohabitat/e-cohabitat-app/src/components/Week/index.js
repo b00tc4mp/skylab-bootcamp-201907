@@ -1,14 +1,30 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import Context from '../context'
 import { withRouter } from 'react-router-dom'
 import moment from "moment"
 import Chores from '../Chores'
+import logic from '../../logic/'
 
 
 function Week({ history, match }) {
 
     const { params: { spaceId } } = match
-    const { currentDate, setCurrentDate } = useContext(Context)
+    const { currentDate, setCurrentDate, setThisDay } = useContext(Context)
+    const [ weekTasks, setWeekTasks ] = useState([])
+
+    useEffect(() => {
+        (async () =>{
+          try {
+            const tasks = await logic.retrieveAllSpaceTasks(spaceId)
+            
+            const weekTasks = tasks.filter(task => moment(currentDate).isSame(task.date, 'week'))
+            setWeekTasks(weekTasks)
+
+          } catch(error) {
+            console.log(error.message)
+          }
+        })()
+    },[])
 
     function handleMonth(event) {
         event.preventDefault()
@@ -25,7 +41,13 @@ function Week({ history, match }) {
     function handleDay(event) {
         event.preventDefault()
 
-        const today = moment()
+        history.push(`/${spaceId}/day`)
+    }
+
+    function handleGoToDay(day) {
+        
+        day = moment(day).add(1, 'days')
+        setThisDay(moment(day))
         history.push(`/${spaceId}/day`)
     }
 
@@ -39,6 +61,16 @@ function Week({ history, match }) {
         event.preventDefault()
           
         setCurrentDate(moment(currentDate).subtract(1, 'weeks')) 
+    }
+
+    function handleDayTasks(date){
+        return weekTasks.map(task => {
+            let taskDay = moment(task.date).format('YYYY MMMM D')
+            let currentDay = moment(date).format('YYYY MMMM D')
+            if (taskDay === currentDay) {
+                return <div className="weekly__task"><i class="far fa-circle"></i> <p className="weekly__task-name">{task.taskName}</p></div>                 
+            }
+        })
     }
     
     
@@ -76,9 +108,11 @@ function Week({ history, match }) {
         let day = startDate
         while (day <= endDate) {
             for (let i = 0; i < 7; i++) {
+                const dataDate = startDate.format()
                 days.push(
-                    <div className="weekly__day day">
+                    <div className="weekly__day day" onClick={() => {handleGoToDay(dataDate)}}>
                        {startDate.add(1, 'days').format('D')}
+                       {weekTasks && <div className="weekly__tasks">{handleDayTasks(startDate)}</div>}
                     </div>
                 )
             }

@@ -1,13 +1,30 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import Context from '../context'
 import { withRouter } from 'react-router-dom'
 import moment from "moment"
 import Chores from '../Chores'
+import logic from '../../logic/'
+
 
 function Month({ history, match }) {
 
     const { params: { spaceId } } = match
     const { setThisDay, currentDate, setCurrentDate } = useContext(Context)
+    const [ monthTasks, setMonthTasks ] = useState([])
+
+    useEffect(() => {
+        (async () =>{
+          try {
+            const tasks = await logic.retrieveAllSpaceTasks(spaceId)
+            
+            const monthTasks = tasks.filter(task => moment(currentDate).isSame(task.date, 'month'))
+            setMonthTasks(monthTasks)
+
+          } catch(error) {
+            console.log(error.message)
+          }
+        })()
+    },[])
 
     function handleMonth(event) {
         event.preventDefault()
@@ -28,7 +45,7 @@ function Month({ history, match }) {
     }
 
     function handleGoToDay(day) {
-        debugger
+        
         setThisDay(moment(day))
         history.push(`/${spaceId}/day`)
     }
@@ -43,6 +60,16 @@ function Month({ history, match }) {
         event.preventDefault()
           
         setCurrentDate(moment(currentDate).subtract(1, 'months')) 
+    }
+
+    function handleDayTasks(dataDate){
+        return monthTasks.map(task => {
+            let taskDay = moment(task.date).format('YYYY MMMM D')
+            let currentDay = moment(dataDate).format('YYYY MMMM D')
+            if (taskDay === currentDay) {
+                return <i class="fas fa-circle">{task.name}</i>                 
+            }
+        })
     }
     
     const header = () => {
@@ -112,8 +139,9 @@ function Month({ history, match }) {
                     const formattedDate = first.format('D')
                     const dataDate = first.format()
                     days.push(
-                        <div className="calendar__day day" data-date={dataDate} onClick={() => {handleGoToDay(dataDate)}}>
-                           {formattedDate}
+                        <div className="calendar__day day" onClick={() => {handleGoToDay(dataDate)}}>
+                            {formattedDate}
+                            {monthTasks && <div className="calendar__tasks">{handleDayTasks(dataDate)}</div>}
                         </div>
                     )
                     first = first.add(1, 'days')
@@ -128,6 +156,7 @@ function Month({ history, match }) {
                 days.push(
                     <div className="calendar__day day" onClick={() => {handleGoToDay(dataDate)}}>
                        {formattedDate}
+                       {monthTasks && <div className="calendar__tasks">{handleDayTasks(dataDate)}</div>}
                     </div>
                 )
                 first = first.add(1, 'days')

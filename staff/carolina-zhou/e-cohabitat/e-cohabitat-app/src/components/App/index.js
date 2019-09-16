@@ -26,7 +26,7 @@ function App({ history }) {
   const [mySpace, setMySpace] = useState()
   const [chores, setChores] = useState()
   const [ currentDate, setCurrentDate ] = useState(moment())
-  const [ thisDay, setThisDay ] = useState(moment())
+  const [ thisDay, setThisDay ] = useState()
   const [ thisHour, setThisHour ] = useState()
   const [ myTask, setMyTask ] = useState()
   const [ tasks, setTasks ] = useState()
