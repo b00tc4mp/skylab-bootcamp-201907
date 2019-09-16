@@ -2,15 +2,18 @@
   width: 90%
   height: 33vh
   margin: 0 auto
+  border: 5px solid black
 
+nav
+  height: 100%
 .user-menu 
   margin: auto 0
   padding: 0
+  height: 100%
   width: 33%
   float: right
   list-style: none
   overflow: hidden
-  border: 1px solid gray
 
 
 .user-menu__auth-option-link, .user-menu__user-option
@@ -27,10 +30,10 @@
 
 
 .user-menu__auth-option-link:hover
-    background-color: rgba(180, 180, 180, 0.4)
+  background-color: rgba(180, 180, 180, 0.4)
 
-// .header__logo, .user-menu
-//   margin: 3%
+.header__logo, .user-menu
+  border: 5px solid black
 
 .header .header__logo 
   display: block
@@ -38,7 +41,6 @@
   text-decoration: none
 
 .user-menu__avatar-container
-  border: 1px solid black
   width: 100%
 
 .user-menu__avatar-img
@@ -51,7 +53,7 @@
 
 @media (min-width: 48em)
   .user-menu__auth-option-link
-    padding: 20px 30px
+    //padding: 20px 30px
 
   .header .user-menu
     clear: none
