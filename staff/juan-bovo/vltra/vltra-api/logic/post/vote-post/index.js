@@ -2,11 +2,11 @@ const { models: { User, Post } } = require('vltra-data')
 const { validate} = require('vltra-utils')
 
 
-module.exports = function(postId, userVote, userId) {
+module.exports = function(userId, postId, userVote) {
     
+    validate.objectId(userId, 'userId')
     validate.objectId(postId, 'postId')
     validate.number(userVote, 'userVote')
-    validate.objectId(userId, 'userId')
 
     if(userVote < 1 || userVote > 5) throw Error('userVote min value = 1, max value = 5')
     
