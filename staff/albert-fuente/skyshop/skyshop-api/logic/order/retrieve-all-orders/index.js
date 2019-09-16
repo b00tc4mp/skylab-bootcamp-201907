@@ -20,7 +20,7 @@ module.exports = function(userId) {
         
         if(user.isAdmin){
             
-            const orders = await Order.find({ __v: 0 }).sort({ _id: 1 }).lean()
+            const orders = await Order.find({ __v: 0 }).populate('owner').populate('items.product').sort({ _id: 1 }).lean()
             if(!orders) throw Error('No orders available')
 
             orders.forEach(items=>{

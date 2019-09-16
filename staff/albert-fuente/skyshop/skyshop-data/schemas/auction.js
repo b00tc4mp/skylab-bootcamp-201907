@@ -1,4 +1,6 @@
-const { Schema } = require('mongoose')
+const mongoose = require('mongoose')
+
+const { Schema, ObjectId } = mongoose
 
 module.exports = new Schema({
     title: {
@@ -28,5 +30,16 @@ module.exports = new Schema({
     price:{
         type:Number,
         required:true
+    },
+
+    date: {
+        type: Date,
+        required: false
+    },
+
+    owner: { type: ObjectId,
+         ref: 'User',
+         require: true
     }
+
 })

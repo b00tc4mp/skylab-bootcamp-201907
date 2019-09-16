@@ -3,5 +3,6 @@ module.exports = {
     product: require('./product'),
     order:require('./order'),
     item:require('./item'),
-    cart:require('./cart')
+    cart:require('./cart'),
+    auction:require('./auction')
 }

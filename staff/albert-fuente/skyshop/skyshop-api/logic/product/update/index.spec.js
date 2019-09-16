@@ -14,7 +14,7 @@ describe('logic - update product', () => {
         title = `title-${Math.random()}`
         image = `image-${Math.random()}`
         description = `description-${Math.random()}`
-        size = [`l`]
+        size = `l`
         color = `color-${Math.random()}`
         price = Math.random()
 
@@ -22,7 +22,7 @@ describe('logic - update product', () => {
             title :`title`,
             image : `image`,
             description : `description`,
-            size : [`l`],
+            size : `l`,
             color : `color`,
             price : 12
         }

@@ -14,7 +14,7 @@ module.exports = function(userId) {
     return (async () => {
         const user = await User.findById(userId)
         if (!user) throw Error(`User with id ${userId} does not exist`)
-        const orders = await Order.find({ owner: userId}, { __v: 0 }).sort({ _id: 1 }).lean()
+        const orders = await Order.find({ owner: userId}, { __v: 0 }).populate('items.product').sort({ _id: 1 }).lean()
         if(!orders) throw new Error(`Order with id ${orderId} not exist`)
         
         orders.forEach(order => {

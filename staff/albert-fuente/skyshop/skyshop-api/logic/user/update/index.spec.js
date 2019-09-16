@@ -2,6 +2,8 @@ require('dotenv').config() //nuevo
 const { expect } = require('chai')
 const update=require('.')
 const {database, models:{User} } = require('skyshop-data')
+const bcrypt = require('bcryptjs')
+
 
 const{env: {DB_URL_TEST}}=process //nuevo
 
@@ -40,9 +42,9 @@ describe('logic - update user', () => {
             expect(user.name).to.equal(body.name)
             expect(user.surname).to.equal(body.surname)
             expect(user.email).to.equal(body.email)
-            expect(user.password).to.equal(body.password)
             expect(user.extra).not.to.exist
-  
+            expect(user.password).to.equal(body.password)
+             
     })
 
     it('should fail on non-existing user', async () => {
@@ -52,7 +54,7 @@ describe('logic - update user', () => {
              throw new Error('should not reach this point') 
 
         }catch(error){
-            expect(error.message).to.equal(`User with id ${id} does not exist.`)
+            expect(error.message).to.equal(`user with id ${id} does not exist`)
         }
     })
 

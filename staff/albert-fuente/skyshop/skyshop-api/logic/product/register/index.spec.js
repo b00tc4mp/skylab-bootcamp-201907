@@ -16,7 +16,7 @@ describe('logic - register product', () => {
         title = `title-${Math.random()}`
         image = `image-${Math.random()}`
         description = `description-${Math.random()}`
-        size = [ 's' ]
+        size = "s"
         color = `color-${Math.random()}`
         price = Math.random()
 
@@ -37,8 +37,8 @@ describe('logic - register product', () => {
                 expect(product.title).to.equal(title)
                 expect(product.image).to.equal(image)
                 expect(product.description).to.equal(description)
-/*                 expect(product.size).to.equal(size)
- */                expect(product.color).to.equal(color)
+                 expect(product.size).to.equal(size)
+                expect(product.color).to.equal(color)
                 expect(product.price).to.equal(price)
         }       
     )
@@ -95,18 +95,18 @@ describe('logic - register product', () => {
 
     it('should fail on wrong size', () =>
     expect(() =>
-        register(title,image,description,'size',color,price)
-    ).to.throw(`size with value size is not a array`)
+        register(title,image,description,'',color,price)
+    ).to.throw(`size is empty or blank`)
     )
     it('should fail on undefined size', () =>
     expect(() =>
         register(title,image,description,undefined,color,price)
-    ).to.throw(`size with value undefined is not a array`)
+    ).to.throw(`size with value undefined is not a string`)
     )
     it('should fail on wrong size', () =>
     expect(() =>
         register(title,image,description,124,color,price)
-    ).to.throw(`size with value 124 is not a array`)
+    ).to.throw(`size with value 124 is not a string`)
     )
   
     after(() => database.disconnect())
