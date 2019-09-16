@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import MyContext from '../Provider-Context'
 import logic from '../../logic'
-import MapHome from '../Map-home'
+import MapHome from '../MapHome'
 
 function Home() {
     

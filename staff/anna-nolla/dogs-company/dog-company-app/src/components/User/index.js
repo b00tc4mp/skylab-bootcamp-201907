@@ -4,7 +4,7 @@ import MyContext from '../Provider-Context'
 import logic from '../../logic'
 import Pet from '../Pet'
 import Feedback from '../Feedback'
-import MapUpdatePosition from '../Map-update-position'
+import MapUpdatePosition from '../MapUpdatePosition'
 
 function User() {
 
@@ -49,6 +49,9 @@ function User() {
     async function onUnregister(petId){
         try{
             await logic.unregisterPet(petId)
+            const { user } = await logic.retrieveUser()
+            setUser(user)
+            setView('user')
                 
         }catch({ message }) {
             setError(message)
@@ -80,31 +83,16 @@ function User() {
            { pets.length >= 0 && <section>
             <h4>Owned pets:</h4>
             {pets.map(pet => (
-                
                 <ul>
-                    <li>
-                        <h6>Name:</h6>
-                        <p>{pet.name}</p>
-                    </li>
-                    <li>
-                        <h6>Age:</h6>
-                        <p>{pet.age}</p>
-                    </li>
-                    <li>
-                        <h6>Gender:</h6>
-                        <p>{pet.gender}</p>
-                    </li>
-                    <li>
-                        <h6>Size:</h6>
-                        <p>{pet.size}</p>
-                    </li>
-                    <li>
-                        <h6>Characteristics:</h6>
-                        <p>{pet.characteristis}</p>
-                    </li>
+                    <li><p>Name: {pet.name}</p></li>
+                    <li><p>Age: {pet.age}</p></li>
+                    <li><p>Gender: {pet.gender}</p></li>
+                    <li><p>Size: {pet.size}</p></li>
+                    <li><p>Characteristics: {pet.characteristics}</p></li>
+
                     <form onSubmit = {event => {
                         event.preventDefault() 
-                        onUnregister(event.target.petId.pet._id)
+                        onUnregister(event.target.petId.pet.id)
                     }}>
                         <input type = 'hidden' name = "petId" value= {pet._id}/>
                         <button>Unregister</button>
