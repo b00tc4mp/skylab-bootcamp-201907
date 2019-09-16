@@ -6,7 +6,7 @@ const { database, models: { User, Space, Task } } = require('data')
 
 const { env: { DB_URL_TEST }} = process
 
-describe('logic - retrieve all tasks', () => {
+describe('logic - retrieve all user tasks', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
@@ -58,16 +58,16 @@ describe('logic - retrieve all tasks', () => {
     })
 
     it('should succeed on correct data', async() => {
-        const tasks = await logic.retrieveAllTasks(userId)
+        const tasks = await logic.retrieveAllUserTasks(userId)
         expect(tasks).to.exist
         expect(tasks).not.to.be.empty
 
-        expect(tasks.toString()).to.equal(taskId)
+        expect(tasks[0]._id.toString()).to.equal(taskId)
     })
 
     it('should fail on empty id', async () => {
         try{
-            await logic.retrieveAllSpaces(' ')
+            await logic.retrieveAllUserTasks(' ')
         } catch({ message }) {
             expect(message).to.equal('user id is empty or blank')
         }
@@ -75,7 +75,7 @@ describe('logic - retrieve all tasks', () => {
 
     it('should fail on undefined id', async () => {
           try{
-            await logic.retrieveAllSpaces(undefined)
+            await logic.retrieveAllUserTasks(undefined)
         } catch({ message }) {
             expect(message).to.equal("user id with value undefined is not a string")
         }
@@ -83,7 +83,7 @@ describe('logic - retrieve all tasks', () => {
      
     it('should fail on wrong id data type', async() => {
          try{
-            await logic.retrieveAllSpaces(123)
+            await logic.retrieveAllUserTasks(123)
         } catch({ message }) {
                 expect(message).to.equal("user id with value 123 is not a string")
         }

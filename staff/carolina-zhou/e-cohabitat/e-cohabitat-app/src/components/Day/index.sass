@@ -1,4 +1,4 @@
-.week
+.day
     margin: 0
     &__header
         margin: auto
@@ -24,7 +24,7 @@
         text-align: left
     &__list-title
         font-size: 2rem
-    &__list
+    &__item
         list-style: none
     &__toolbar
         display: flex
@@ -52,30 +52,28 @@
         font-size: .75rem
         padding: .75em
 
-.weekly
+.timetable
     margin: 1em 0 5em 0
     border: 1px solid lightgrey
     width: 100%
-
-    &__week, &__header 
-        display: grid
-        grid-template-columns: repeat(7, 1fr)
-    &__week
-        grid-auto-rows: 700px
-        text-align: right
-    &__header 
-        grid-auto-rows: 50px
-        align-items: center
-        text-align: center
-    &__day 
-        font-size: .75rem
+    text-align-last: justify
+    border-collapse: collapse
+    &__tr
+        border: 1px solid lightgrey
+    &__th
+        border: 1px solid lightgrey
+        padding: .75em
+        font-weight: normal
         color: grey
-        padding: 16px
-        border-right: 1px solid lightgrey
-        border-top: 1px solid lightgrey
-    &__day:last-child 
-        border-right: 0
-    &__header > div 
-        text-transform: uppercase
-        font-size: 0.8em
-        font-weight: bold
+    &__td
+        padding: .75em
+        width: 90%
+
+.fa-plus-circle
+    background-color: white
+    color: lightgrey
+    border: none
+    text-align: right
+
+.fa-plus-circle:hover
+    color: black

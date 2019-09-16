@@ -4,27 +4,33 @@ import { withRouter } from 'react-router-dom'
 import moment from "moment"
 import Chores from '../Chores'
 
-function Month({ history }) {
+function Month({ history, match }) {
 
-    const { currentDate, setCurrentDate } = useContext(Context)
-    /* const [selectedDate, setSelectedDate] = useState(new Date) */
+    const { params: { spaceId } } = match
+    const { setThisDay, currentDate, setCurrentDate } = useContext(Context)
 
     function handleMonth(event) {
         event.preventDefault()
 
-        history.push('/month')
+        setCurrentDate(moment())
     }
 
     function handleWeek(event) {
         event.preventDefault()
 
-        history.push('/week')
+        history.push(`/${spaceId}/week`)
     }
 
     function handleDay(event) {
         event.preventDefault()
 
-        history.push('/day')
+        history.push(`/${spaceId}/day`)
+    }
+
+    function handleGoToDay(day) {
+        
+        setThisDay(moment(day))
+        history.push(`/${spaceId}/day`)
     }
 
     function handleGoToNextMonth(event) {
@@ -38,10 +44,6 @@ function Month({ history }) {
           
         setCurrentDate(moment(currentDate).subtract(1, 'months')) 
     }
-
-    /* function onDateClick(day) {
-        setSelectedDate(day)
-    } */
     
     const header = () => {
 
@@ -79,12 +81,10 @@ function Month({ history }) {
 
         let days = []
         let formattedDate = ''
+        let dataDate = ''
 
         let first = monthStart
         switch (first.day()) {
-            case 1:
-                first.add(7, 'days')
-                break
             case 2:
                 first.add(6, 'days')
                 break
@@ -102,6 +102,9 @@ function Month({ history }) {
                 break
             case 0:
                 first.add(1, 'days')
+                break
+            default:
+                first.add(7, 'days')
         }
 
         if (monthStart.day() !== '1') {
@@ -109,8 +112,9 @@ function Month({ history }) {
             while (first <= moment(first).endOf('week').day()) {
                 for (let i = 0; i < 7; i++) {
                     formattedDate = first.format('D')
+                    dataDate = first.format()
                     days.push(
-                        <div className="calendar__day day">
+                        <div className="calendar__day day" data-date={dataDate} onClick={() => {handleGoToDay(dataDate)}}>
                            {formattedDate}
                         </div>
                     )
@@ -122,8 +126,9 @@ function Month({ history }) {
         while (first <= endDate) {
             for (let i = 0; i < 7; i++) {
                 formattedDate = first.format('D')
+                dataDate = first.format()
                 days.push(
-                    <div className="calendar__day day">
+                    <div className="calendar__day day" data-date={dataDate} onClick={() => {handleGoToDay({dataDate})}}>
                        {formattedDate}
                     </div>
                 )
@@ -138,8 +143,6 @@ function Month({ history }) {
 
     return <>
     
-    <main className="main"> 
-
         <div className="month">
 
             <div>{header()}</div>
@@ -167,7 +170,6 @@ function Month({ history }) {
 
         </div> 
 
-    </main>
     </>
 }
 

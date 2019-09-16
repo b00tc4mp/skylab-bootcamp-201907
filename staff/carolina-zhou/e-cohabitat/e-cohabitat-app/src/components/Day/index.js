@@ -1,53 +1,77 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import Context from '../context'
 import { withRouter } from 'react-router-dom'
-import moment from "moment"
+import moment from 'moment'
+import logic from '../../logic/'
+
 import Chores from '../Chores'
 
+function Day({ history, match }) {
 
-function Day({ history }) {
+    const { params: { spaceId } } = match
+    const { thisDay, setThisDay, setThisHour } = useContext(Context)
+    const [ dayTasks, setDayTasks ] = useState()
 
-    const [currentDate, setCurrentDate] = useState(moment())
+    
+    useEffect(() => {
+        (async () =>{
+          try {
+            const tasks = await logic.retrieveAllSpaceTasks(spaceId)
+
+            const dayTasks = tasks.filter(task => task.date === moment(thisDay).format())
+            setDayTasks(dayTasks)
+          } catch(error) {
+            console.log(error.message)
+          }
+        })()
+    },[])
+    debugger
 
     function handleMonth(event) {
         event.preventDefault()
 
-        history.push('/month')
+        history.push(`/${spaceId}/month`)
     }
 
     function handleWeek(event) {
         event.preventDefault()
 
-        history.push('/week')
+        history.push(`/${spaceId}/week`)
     }
 
     function handleDay(event) {
         event.preventDefault()
 
-        history.push('/day')
+        setThisDay(moment())
     }
 
     function handleGoToNextDay(event) {
         event.preventDefault()
 
-        setCurrentDate(moment(currentDate).add(1, 'days'))
+        setThisDay(moment(thisDay).add(1, 'days'))
     }
 
     function handleGoToPreviousDay(event) {
         event.preventDefault()
           
-        setCurrentDate(moment(currentDate).subtract(1, 'days')) 
+        setThisDay(moment(thisDay).subtract(1, 'days')) 
     }
 
-    return <>
+    function handleAddTask(thisHour) {
+
+        setThisHour(thisHour)
+        history.push(`/${spaceId}/task-register`)
+    }
+    debugger
     
-    <main className="main"> 
+    return <>
 
         <div className="day">
 
             <div className="day__header">
-                <i className="fas fa-caret-left" onClick={handleGoToPreviousDay}></i><h1 className="day__title"> {moment(currentDate).format('dddd Do')} </h1><i className="fas fa-caret-right" onClick={handleGoToNextDay}></i>
+                <i className="fas fa-caret-left" onClick={handleGoToPreviousDay}></i><h1 className="day__title"> {moment(thisDay).format('dddd Do')} </h1><i className="fas fa-caret-right" onClick={handleGoToNextDay}></i>
             </div> 
-            <p className="day__month-year">{moment(currentDate).format('MMMM')} 2019  -  Week {moment(currentDate).week()}</p>
+            <p className="day__month-year">{moment(thisDay).format('MMMM')} 2019  -  Week {moment(thisDay).week()}</p>
 
             <div className="day__toolbar">
                 <div className="day__toggle">
@@ -64,87 +88,115 @@ function Day({ history }) {
                 <Chores />
             
                 <table className="timetable">
-                    <tr className="timetable__tr">
-                        <th className="timetable__th" scope="row">7-8h</th>
-                        <td className="timetable__td"></td>
-                    </tr>
-                    <tr className="timetable__tr">
-                        <th className="timetable__th" scope="row">8-9h</th>
-                        <td className="timetable__td"></td>
-                    </tr>
-                    <tr className="timetable__tr">
-                        <th className="timetable__th" scope="row">10-11h</th>
-                        <td className="timetable__td"></td>
-                    </tr>
-                    <tr className="timetable__tr">
-                        <th className="timetable__th" scope="row">11-12h</th>
-                        <td className="timetable__td"></td>
-                    </tr>
-                    <tr className="timetable__tr">
-                        <th className="timetable__th" scope="row">12-13h</th>
-                        <td className="timetable__td"></td>
-                    </tr>
-                    <tr className="timetable__tr">
-                        <th className="timetable__th" scope="row">14-15h</th>
-                        <td className="timetable__td"></td>
-                    </tr>
-                    <tr className="timetable__tr">
-                        <th className="timetable__th" scope="row">15-16h</th>
-                        <td className="timetable__td"></td>
-                    </tr>
-                    <tr className="timetable__tr">
-                        <th className="timetable__th" scope="row">16-17h</th>
-                        <td className="timetable__td"></td>
-                    </tr>
-                    <tr className="timetable__tr">
-                        <th className="timetable__th" scope="row">17-18h</th>
-                        <td className="timetable__td"></td>
-                    </tr>
-                    <tr className="timetable__tr">
-                        <th className="timetable__th" scope="row">19-20h</th>
-                        <td className="timetable__td"></td>
-                    </tr>
-                    <tr className="timetable__tr">
-                        <th className="timetable__th" scope="row">21-22h</th>
-                        <td className="timetable__td"></td>
-                    </tr>
-                    <tr className="timetable__tr">
-                        <th className="timetable__th" scope="row">23-24h</th>
-                        <td className="timetable__td"></td>
-                    </tr>
-                    <tr className="timetable__tr">
-                        <th className="timetable__th" scope="row">24-1h</th>
-                        <td className="timetable__td"></td>
-                    </tr>
-                    <tr className="timetable__tr">
-                        <th className="timetable__th" scope="row">1-2h</th>
-                        <td className="timetable__td"></td>
-                    </tr>
-                    <tr className="timetable__tr">
-                        <th className="timetable__th" scope="row">2-3h</th>
-                        <td className="timetable__td"></td>
-                    </tr>
-                    <tr className="timetable__tr">
-                        <th className="timetable__th" scope="row">3-4h</th>
-                        <td className="timetable__td"></td>
-                    </tr>
-                    <tr className="timetable__tr">
-                        <th className="timetable__th" scope="row">4-5h</th>
-                        <td className="timetable__td"></td>
-                    </tr>
-                    <tr className="timetable__tr">
-                        <th className="timetable__th" scope="row">5-6h</th>
-                        <td className="timetable__td"></td>
-                    </tr>
-                    <tr className="timetable__tr">
-                        <th className="timetable__th" scope="row">6-7h</th>
-                        <td className="timetable__td"></td>
-                    </tr>
+                    <tbody>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">7-8h <button className="fas fa-plus-circle" data-hour='7' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"> 
+                                {dayTasks && dayTasks.map(dayTask => { 
+                                    return <>
+                                        <p>{dayTask.taskName}</p>
+                                        <p>{dayTask.companions}</p>
+                                    </>
+                                })} 
+                            </td>
+                        </tr>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">8-9h <button className="fas fa-plus-circle" data-hour='8' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"></td>
+                        </tr>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">9-10h <button className="fas fa-plus-circle" data-hour='9' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"></td>
+                        </tr>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">10-11h <button className="fas fa-plus-circle" data-hour='10' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"></td>
+                        </tr>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">11-12h <button className="fas fa-plus-circle" data-hour='11' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"></td>
+                        </tr>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">12-13h <button className="fas fa-plus-circle" data-hour='12' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"></td>
+                        </tr>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">13-14h <button className="fas fa-plus-circle" data-hour='13' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"></td>
+                        </tr>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">14-15h <button className="fas fa-plus-circle" data-hour='14' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"></td>
+                        </tr>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">15-16h <button className="fas fa-plus-circle" data-hour='15' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"></td>
+                        </tr>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">16-17h <button className="fas fa-plus-circle" data-hour='16' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"></td>
+                        </tr>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">17-18h <button className="fas fa-plus-circle" data-hour='17' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"></td>
+                        </tr>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">18-19h <button className="fas fa-plus-circle" data-hour='18' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"></td>
+                        </tr>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">19-20h <button className="fas fa-plus-circle" data-hour='19' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"></td>
+                        </tr>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">20-21h <button className="fas fa-plus-circle" data-hour='20' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"></td>
+                        </tr>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">21-22h <button className="fas fa-plus-circle" data-hour='21' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"></td>
+                        </tr>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">22-23h <button className="fas fa-plus-circle" data-hour='22' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"></td>
+                        </tr>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">23-0h <button className="fas fa-plus-circle" data-hour='23' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"></td>
+                        </tr>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">0-1h <button className="fas fa-plus-circle" data-hour='0' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"></td>
+                        </tr>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">1-2h <button className="fas fa-plus-circle" data-hour='1' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"></td>
+                        </tr>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">2-3h <button className="fas fa-plus-circle" data-hour='2' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"></td>
+                        </tr>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">3-4h <button className="fas fa-plus-circle" data-hour='3' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"></td>
+                        </tr>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">4-5h <button className="fas fa-plus-circle" data-hour='4' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"></td>
+                        </tr>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">5-6h <button className="fas fa-plus-circle" data-hour='5' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"></td>
+                        </tr>
+                        <tr className="timetable__tr">
+                            <th className="timetable__th" scope="row">6-7h <button className="fas fa-plus-circle" data-hour='6' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
+                            <td className="timetable__td"></td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
 
-    </main>
     </>
 }
 

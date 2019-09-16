@@ -10,7 +10,7 @@ describe('logic - register space', () => {
 
     before(() => database.connect(DB_URL_TEST))
     
-    let title, type, picture, address, passcode, id, username, name, surname, email, password
+    let title, type, picture, address, passcode, cousers, id, username, name, surname, email, password
 
     beforeEach(async() => {
         const spaceTypeArray = ['kitchen', 'bathroom', 'living room', 'coworking', 'garden', 'rooftop', 'other']
@@ -43,11 +43,12 @@ describe('logic - register space', () => {
         expect(space.type).to.equal(type)
         expect(space.address).to.equal(address)
         expect(space.passcode).to.equal(passcode)
+        expect(space.cousers).to.include(id)
     })
 
     it('should fail if the space already exists', async () => {
         try {
-            Space.create({ title, type, picture, address, passcode, id })
+            Space.create({ title, type, picture, address, passcode })
             await logic.registerSpace(title, type, picture, address, passcode, id)
         } catch({error}) {
             expect(error).to.exist

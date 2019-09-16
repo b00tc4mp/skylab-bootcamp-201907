@@ -4,25 +4,54 @@
         display: initial
         font-family: Helvetica, Roboto, sans-serif
         font-size: 2rem
+        border-bottom: 1px solid
     &__type
         font-size: 1.2rem
         font-weight: normal
         margin-top: 1em
     &__address
         font-size: .9rem
-        margin-top: .9em
+        margin-top: .5em
         color: grey
     &__users
         font-size: .9rem
         font-weight: normal
-        margin-top: 1.5em
+        margin: 1.75em 0 .5em 0
     &__users-link
         font-size: .8rem
         text-decoration: none
         color: grey
-        margin-top: 1em
     &__users-link:hover
         color: deeppink
+    &__users-list
+        display: flex
+        flex-direction: column
+        align-items: center
+        margin: 1em auto
+        border: 1px solid grey
+        padding: 2em
+        width: 60%
+        color: grey
+        font-weight: normal
+    &__users-list-title
+        margin-bottom: 2em
+        color: black
+    &__add-users
+        background-color: black
+        color: white
+        margin-top: 2em
+        border: none
+        padding: .5em
+        font-size: .9rem
+        width: 30%
+    &__close
+        background-color: lightgrey
+        color: white
+        margin-top: 1em
+        border: none
+        padding: 2px 5px
+        font-size: .9rem
+        width: 30%
     &__logo, &__mobile-menu
         display: none
     &__figure 
@@ -34,7 +63,7 @@
         display: flex
         flex-direction: column
         align-items: center
-        margin: 2em 0 10em 0
+        margin: 2em 0 4em 0
     &__calendar, &__today
         background-color: black
         color: white

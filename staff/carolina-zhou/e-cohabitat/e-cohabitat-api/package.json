@@ -8,7 +8,7 @@
     "watch": "npx nodemon .",
     "debug": "node debug .",
     "test": "npx mocha logic/**/**/*.spec.js --timeout 10000",
-    "test-debug": "npx mocha debug logic/**/**/*.spec.js",
+    "test-debug": "npx mocha debug logic/**/**/*.spec.js --timeout 10000",
     "test-inspect": "npx mocha --inspect-brk logic/**/**/*.spec.js",
     "coverage": "nyc --reporter=html --reporter=text mocha logic/**/**/*.spec.js --timeout 10000 --runInBand"
   },

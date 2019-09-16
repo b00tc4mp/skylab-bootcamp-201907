@@ -26,7 +26,7 @@ function Register({ history }) {
     }
 
     return <>
-        <main className="main"> 
+
             <section className="register">
                 <h1 className="register__title">Sign up</h1>
                 <form onSubmit={ handleSubmit }>
@@ -54,7 +54,7 @@ function Register({ history }) {
                 </form>
                 <a href={`/`} className="register__back-link"><i className="fas fa-arrow-left"></i> Go back</a>
             </section>
-        </main>
+
     </>
 }
 

@@ -1,66 +1,33 @@
-import React, { useContext, useState } from 'react'
+import React, { useState, useEffect, useContext} from 'react'
 import Context from '../context'
-import logic from '../../logic/'
-import { withRouter } from 'react-router-dom'
+import ChoreAddition from '../Chore-addition'
 
 function Chores() {
 
-    let [chores, setChores] = useState()
-    const [tags, setTags] = useState()
     const { mySpace } = useContext(Context)
+    const [ chores, setChores ] = useState()
 
-debugger
-    function handleMaintenance(event) {
-        event.preventDefault()
-
-        const { target: { maintenance: { value: maintenance } } } = event
-
-        let chores = mySpace.maintenance
-        setChores(chores)
-
-        chores.push(maintenance)
-
-        /* addMaintenance(spaceId, maintenance) */
-    }
-
-
-    /* async function addMaintenance(spaceId, maintenance) {
-
-        try {
-            const addedMaintenance = await logic.updateSpace(spaceId, { maintenance: [maintenance] })
-
-            let chores = addedMaintenance.maintenance
+    useEffect(() => {
+        (async () =>{
+          try {
+            const chores = await mySpace.maintenance
             setChores(chores)
-        } catch(error) {
+
+          } catch(error) {
             console.log(error.message)
-        }
-    } */
+          }
+        })()
+    },[mySpace])
 
-debugger
-    function handleTags(event) {
-        event.preventDefault()
+	const addChore = chore => {
+		chores.push(chore)
+		setChores([...chores])
+	}
 
-        const { target: { tag: { value: tag } } } = event
-
-        let tags = mySpace.tags
-        setTags(tags)
-        
-        tags.push(tag)
-        /* addTag(spaceId, tag) */
+	const deleteChore = chore => {
+        let result = chores.filter(item => item !== chore)
+		setChores(result)
     }
-
-
-    /* async function addTag(spaceId, tag) {
-
-        try {
-            const addedTag = await logic.updateSpace(spaceId, { tag: [tag] })
-
-            let tags = addedTag.tags
-            setTags(tags)
-        } catch(error) {
-            console.log(error.message)
-        }
-    } */
 
     return <>
         <div className="chores__activity">
@@ -70,32 +37,36 @@ debugger
                 <ul className="chores__list">
                     {chores.map(chore => {
                     return <>    
-                        <li className="chores__item"><i className="fas fa-list-ul"></i> {chore}</li>
+                        <li className="chores__item">
+                            <div><i className="fas fa-list-ul"></i> {chore}</div>
+                            <button class="far fa-trash-alt" onClick={() => deleteChore(chore)}></button>
+                        </li>
                     </>
                     }
                     )}
                 </ul>
                 }
-                <form onSubmit={handleMaintenance}>
+                <ChoreAddition addChore={addChore} />
+                {/* <form onSubmit={handleMaintenance}>
                     <ul className="chores__add">
                         <li>
                             <button className="fas fa-plus"></button>
                         </li>
                         <li>
-                            <label for='maintenanceChore'>
+                            <label htmlFor='maintenanceChore'>
                                 <input className="chores__input" id='maintenanceChore' type='text' name='maintenance' placeholder='add chore' />
                             </label>
                         </li>
                     </ul>
-                </form>
+                </form> */}
             </div>
-            <div className="chores__tags">
+            {/* <div className="chores__tags">
                 <p className="chores__list-title"><strong>Activity Tags</strong></p>
-                {tags &&
+                {props.tags.length > 0 &&
                 <ul className="chores__list">
                     {tags.map(tag => {
                     return <>    
-                        <li className="chores__item"><i className="fas fa-tag"></i>  {tag}</li>
+                        <li className="chores__item"><i className="fas fa-tag"></i>  {tag} <button class="far fa-trash-alt" onClick={() => props.deleteTag(tag.id)}></button></li>
                     </>
                     }
                     )}
@@ -107,15 +78,15 @@ debugger
                             <button className="fas fa-plus"></button>
                         </li>
                         <li>
-                            <label for='activityTag'>
+                            <label htmlFor='activityTag'>
                                 <input className="chores__input" id='activityTag' type='text' name='tag' placeholder='add tag' />
                             </label>
                         </li>
                     </ul>
                 </form>
-            </div>
+            </div> */}
         </div>
     </>
 }
 
-export default withRouter(Chores)
+export default Chores

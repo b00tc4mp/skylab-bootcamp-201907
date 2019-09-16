@@ -38,6 +38,8 @@ module.exports = function(taskName, taskType, description, date, spaceId, userId
         const taskId = task._id.toString()
         user.tasks.push(taskId)
         await user.save()
+        space.spaceTasks.push(taskId)
+        await space.save()
     
         return taskId
     })()

@@ -2,7 +2,6 @@
     margin: 0
     &__e
         font-weight: lighter
-        font-size: 1.5rem
     &__title
         display: initial
         font-family: Helvetica, Roboto, sans-serif
@@ -14,11 +13,11 @@
     &__logo, &__mobile-menu
         display: none
     &__square
-        margin: 2em auto
-        border: 5px solid black
-        padding: 2em
+        margin: 2em 0 4em
+        border: .2em solid black
+        padding: 2em 4em
     &__space
-        margin-bottom: 1em
+        margin-bottom: 3em
     &__space-add
         margin-bottom: 3em
     &__space-add:hover
@@ -41,28 +40,26 @@
         top: 0
         left: 0
         z-index: -1
-    &__space-title 
-        margin: 2em 0 0 2em
-        font-size: 1.2rem
-        text-align: left
+        padding: 2em
+        display: flex
+        flex-direction: column
+    &__space-title, &__space-subtitle, &__space-address
+        margin: 0
+        padding: .5em
+        font-size: 1.5rem
     &__space-subtitle 
-        margin: .5em 0 0 2em
         font-size: 1rem
-        text-align: left
     &__space-address 
-        margin: .5em 0 0 2em
-        font-size: .9rem
-        color: lightgrey
-        text-align: left
+        font-size: 1rem
+        color: grey
     &__space-message
         color: grey 
     &__space-figure 
         margin: 0 0 5px 0
     &__space-img 
-        display: block
         width: 100%
     &__space-img:hover 
-        opacity: 0.01
+        opacity: 0.3
         transition: opacity 500ms
 
 @media screen and (min-width: 840px) 

@@ -17,9 +17,14 @@ module.exports = function (id, password) {
     validate.string(password, 'password')
 
     return (async () => {
-        const hash = await bcrypt.hash(password, 10)
 
-        const user = await User.deleteOne({ _id: id, password: hash })
-        if (!user.deletedCount) throw new Error(`wrong credentials`)
+        const user = await User.findById({ _id: id })
+        if (!user) throw Error('wrong credentials')
+
+        const match = await bcrypt.compare(password, user.password)
+        if (!match) throw Error('wrong credentials')
+
+        const deletedUser = await User.deleteOne({ _id: id })
+        if (deletedUser.deletedCount === 0) throw new Error(`there was an error unregistering the user`)
     })()
 }

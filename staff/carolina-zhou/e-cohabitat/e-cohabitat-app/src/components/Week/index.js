@@ -5,26 +5,28 @@ import moment from "moment"
 import Chores from '../Chores'
 
 
-function Week({ history }) {
+function Week({ history, match }) {
 
+    const { params: { spaceId } } = match
     const { currentDate, setCurrentDate } = useContext(Context)
 
     function handleMonth(event) {
         event.preventDefault()
 
-        history.push('/month')
+        history.push(`/${spaceId}/month`)
     }
 
     function handleWeek(event) {
         event.preventDefault()
 
-        history.push('/week')
+        setCurrentDate(moment())
     }
 
     function handleDay(event) {
         event.preventDefault()
 
-        history.push('/day')
+        const today = moment()
+        history.push(`/${spaceId}/day`)
     }
 
     function handleGoToNextWeek(event) {
@@ -89,8 +91,6 @@ function Week({ history }) {
 
 
     return <>
-    
-    <main className="main"> 
 
         <div className="week">
 
@@ -119,7 +119,6 @@ function Week({ history }) {
 
         </div>
 
-    </main>
     </>
 }
 

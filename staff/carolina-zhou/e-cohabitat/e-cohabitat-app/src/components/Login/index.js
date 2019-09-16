@@ -23,18 +23,17 @@ function Login({ history }) {
     }
 
     return <>
-        <main className="main"> 
 
             <section className="login">
                 <h1 className="login__title">Sign in</h1>
                 <form onSubmit={ handleSubmit }>
                     <ul>
                         <li className="login__form-item">
-                            <label for="email"></label>
+                            <label htmlFor="email"></label>
                             <input className="login__form-input" type="email" name="email" id="email"  placeholder="email"/>
                         </li>
                         <li className="login__form-item">
-                            <label for="password"></label>
+                            <label htmlFor="password"></label>
                             <input className="login__form-input" type="password" name="password" id="password" placeholder="password"/>
                         </li>
                     </ul>
@@ -43,7 +42,7 @@ function Login({ history }) {
                 
                 <a href={`/`} className="login__back-link"><i className="fas fa-arrow-left"></i> Go back</a>
             </section>
-        </main>
+
     </>
 }
 

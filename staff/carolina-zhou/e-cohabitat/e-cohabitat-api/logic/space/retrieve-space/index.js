@@ -14,9 +14,10 @@ module.exports = function(id) {
     validate.string(id, 'space id')
 
     return (async () => {
-        const space = await Space.findOne({ _id: id }, { _id: 0 }).lean()
+        const space = await Space.findOne({ _id: id }, { _id: 0 }).lean().populate('cousers')
         if (!space) throw Error(`space with id ${id} does not exist.`)
         space.id = id
+        
         return space
     })()
 }

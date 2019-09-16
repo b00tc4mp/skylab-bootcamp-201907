@@ -11,21 +11,33 @@
         font-size: 2rem
     &__list
         list-style: none
+    &__item
+        display: flex
+        justify-content: space-between
+        width: 75%
     &__add
+        margin-top: 1em
         list-style: none
         display: flex
         flex-direction: row
+        align-items: center
     &__input
-        margin-top: .5em
         padding: .1em
         font-size: .75rem
         width: 90%
 
 .fa-plus
     background-color: white
-    margin: .5em .5em 0 0
+    margin: 0 .5em 0 0 
     border: none
-    padding: .1em
+
+.fa-trash-alt
+    background-color: white
+    color: lightgrey
+    border: none
+    
+.fa-trash-alt:hover
+    color: grey
 
 .fa-plus:hover, .fa-search:hover
     color: deeppink

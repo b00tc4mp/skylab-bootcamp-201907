@@ -23,6 +23,7 @@ module.exports = new Schema({
         required: true
     },
     cousers: [{ type: ObjectId, ref: 'User' }],
+    spaceTasks: [{ type: ObjectId, ref: 'Task' }],
     maintenance: [ String ],
     tags: [ String ]
 })

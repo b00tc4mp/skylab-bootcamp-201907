@@ -19,11 +19,9 @@ describe('logic - unregister user', () => {
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
-
-        const hash = await bcrypt.hash(password, 10)
-
         await User.deleteMany()
-        const user = await User.create({ username, name, surname, email, password: hash })
+
+        const user = await User.create({ username, name, surname, email, password: await bcrypt.hash(password, 10) })
         id = user.id
     })
 
