@@ -1,5 +1,6 @@
 import React from 'react'
-import { withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom"
+import InitialHeader from '../InitialHeader'
 
 function RegisterSuccess(props){
     
@@ -7,6 +8,8 @@ function RegisterSuccess(props){
     
     return (
         <div>
+            <InitialHeader />
+
             <section class="register-successful">
             <h2>Register Success</h2>
 

@@ -30,12 +30,12 @@ function UserProfile({history}) {
     return (
         <div>
             <Header />
-            <div class="card"> 
+            <div className="card"> 
          
-             {user && <div class="card-content" >
-                    <h3 class="title is-4">{user.name}</h3>
-                    <p class="subtitle is-6">{user.surname}</p>
-                    <p class="subtitle is-6">{user.email}</p>
+             {user && <div className="card__content" >
+                    <p className="card__content__user">{user.name}</p>
+                    <p className="card__ontent__surname">{user.surname}</p>
+                    <p clasclassNames="card__content__email">{user.email}</p>
                 </div> }
                 <a href="#" onClick={event => {
                     event.preventDefault()

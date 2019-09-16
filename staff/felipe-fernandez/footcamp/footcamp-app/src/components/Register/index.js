@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import logic from '../../logic'
 import { withRouter} from 'react-router-dom'
 import Feedback from '../Feedback'
+import InitialHeader from '../InitialHeader'
 
 function Register(props) {
     const { history } = props
@@ -16,7 +17,7 @@ function Register(props) {
                history.push('/register-success')
             
             } catch ({ message }) {
-                setError("There has been an error in the process of register")
+                setError(message)
             }
         })()
       }
@@ -50,7 +51,9 @@ function Register(props) {
 
     
     return (
-        <div className="useState" >
+        <div >
+            <InitialHeader />
+
             <h2>REGISTER</h2>
             <form onSubmit={handleFormSubmit}>
             <div class="form-inputs">

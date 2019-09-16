@@ -4,6 +4,7 @@ import PlayerResult from '../PlayerResult'
 import { withRouter } from 'react-router-dom'
 import Context from '../Context'
 import Feedback from '../Feedback'
+import InitialHeader from '../InitialHeader'
 
 function CreateTeam(props) {
 
@@ -55,6 +56,8 @@ function CreateTeam(props) {
     return (
     
     <div className="useState" >
+        <InitialHeader />
+
             <h2>Create a team</h2>
             <form onSubmit={handleFormSubmit}>
                
@@ -69,7 +72,7 @@ function CreateTeam(props) {
                 {/* <button  className="button is-fullwidth is-info is-outlined">Submit</button> */}
             </form>
             {error && <Feedback message={error}/>}
-            {player && player.map(oneplayer => <li  key={oneplayer.id}> <PlayerResult player={oneplayer} /> </li>)}
+            {player && player.map(oneplayer => <li className ="players-create" key={oneplayer.id}> <PlayerResult player={oneplayer} /> </li>)}
             {player && <a href="#" onClick={event => {
                 event.preventDefault()
                 

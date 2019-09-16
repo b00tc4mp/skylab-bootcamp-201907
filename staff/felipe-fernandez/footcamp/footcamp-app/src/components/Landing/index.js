@@ -24,7 +24,11 @@ function Landing(props) {
 
 
     return  <>
-         <InitialHeader />
+        <div className="header">
+        <InitialHeader />
+
+        </div>
+        
                 
 
         
@@ -32,11 +36,10 @@ function Landing(props) {
           <li><a  className="links" href="" onClick={handleGoToRegister}>Register</a></li>
           <li><a  className="links" href="" onClick={handleGoToLogin}>Login</a></li>
         </ul>
-     
+        </>
     
         
-        
-      </>
+     
 }
 
 export default withRouter(Landing)

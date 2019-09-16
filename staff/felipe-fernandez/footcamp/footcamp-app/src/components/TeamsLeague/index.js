@@ -35,19 +35,19 @@ import PlayerResult from '../PlayerResult'
       
   const handleBack = () => {
      
-    history.push('/myteam')
+    history.go(-1)
 }
 
     return <div>
         <Header />
-           
+          
         <ul>
 
             {player && player.map(teamplayer => <li 
             
-            
+           
             key={teamplayer.id}>
-                <a href={`/#/player/${teamplayer.id}`}>
+                <a className ="players"  href={`/#/player/${teamplayer.id}`}>
                  
                  <PlayerResult player={teamplayer}/> 
                  

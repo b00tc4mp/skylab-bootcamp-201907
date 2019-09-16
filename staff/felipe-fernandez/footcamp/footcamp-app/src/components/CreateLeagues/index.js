@@ -3,6 +3,7 @@ import logic from '../../logic'
 import { withRouter } from 'react-router-dom'
 import Context from '../Context'
 import Feedback from '../Feedback'
+import InitialHeader from '../InitialHeader'
 
 function CreateLeagues(props) {
 
@@ -73,7 +74,9 @@ function CreateLeagues(props) {
 
     
     return (
-        <div className="useState" >
+        <div >
+        <InitialHeader />
+      
             <h2>Create a league</h2>
             <form onSubmit={handleFormSubmitCreate}>
                 <input

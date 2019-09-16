@@ -60,7 +60,6 @@ function App(props) {
           
           <Route path="/create-teams" render={() => logic.isUserLogIn() ? <CreateTeam /> :  history.push('/')  } />
           
-
           <Route path="/myleague"  render={() => logic.isUserLogIn() ? <MyLeagues /> :  history.push('/')  } />
 
           <Route path="/create-lineup"  render={() => logic.isUserLogIn() ? <LineupCreate  /> :  history.push('/')  } />

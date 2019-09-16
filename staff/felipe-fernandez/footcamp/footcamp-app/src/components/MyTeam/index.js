@@ -39,13 +39,13 @@ function MyTeam (props) {
 
     return <div>
             <Header />
-
+            <h2>MY TEAM</h2>
              <ul>
 
                  {player && player.map(teamplayer => <li 
             
                  key={teamplayer.id}>
-                <a href={`/#/player/${teamplayer.id}`}>
+                <a className ="players" href={`/#/player/${teamplayer.id}`}>
                  
                  <PlayerResult player={teamplayer}/> 
                  

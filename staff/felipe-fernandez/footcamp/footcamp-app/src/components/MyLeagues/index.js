@@ -39,49 +39,32 @@ function MyLeagues (props) {
         })()
     }, [])
 
-    // function leaveLeague(){
-
-    //     return(async()=>{
-    //     try {
-            
-    //         const leagueId  = await logic.retrieveAllLeagues()
-    //         await logic.leaveLeague(leagueId)
-    //         await logic.deleteTeam(leagueId, sessionStorage.team)
-    //         sessionStorage.clear()
-    //         history.push('/')
-  
-    //       } catch({message}) {
-    //         console.log('fail login', message)
-    //       }
-    //   })()
-
-    // }
-  
+     
 
 
     return <div>
                 
+                <div className="header-app header-access">FANTASY FOOTBALL SKYLAB</div>
              
                 {leagues && 
-                <>
-                <h2>MY LEAGUES</h2>
+                <div className="league">
+                <h2 className="league__title">MY LEAGUES</h2>
             
-                 <h3> {leagues.name} </h3>
-                 {/* <h3> {leagues.points}</h3> */}
-                 <h3> {leagues.team}</h3>
+                 <h3 className="league__name"> Liga: {leagues.name} </h3>
+                 <h3> {leagues.nameTeam}</h3>
                 
                 <a href="" onClick={event => {
                     event.preventDefault()
                                       
                     history.push('/myteam')
-                }}>Go league</a>
+                }}>Go to league</a>
 
                 {/* <button onClick={event => {
                     event.preventDefault()
                     leaveLeague()
                     
                 }}>Leave the league</button> */}
-               </>
+               </div>
             }
             </div>
       

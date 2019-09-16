@@ -3,6 +3,7 @@ import logic from '../../logic'
 import { withRouter } from "react-router-dom"
 import Context from '../Context'
 import Feedback from '../Feedback'
+import InitialHeader from '../InitialHeader'
 
 function Login(props) {
 
@@ -39,7 +40,7 @@ function Login(props) {
           
 
         } catch({message}) {
-            setError("Wrong credentials")
+            setError(message)
         }
     })()
  }
@@ -63,10 +64,12 @@ function Login(props) {
     }
   
     return (
-        <div className="useState" >
+        <div  >
+          <InitialHeader />
+
           <h2>LOGIN</h2>
             <form onSubmit={handleFormSubmit}>
-             <div className="form--inputs"> 
+             <div className="form__inputs"> 
                 <input
                     
                     type="email"
@@ -76,7 +79,7 @@ function Login(props) {
                     
                 />
             </div>
-            <div className="form--inputs">
+            <div className="form__inputs">
                 <input
                     
                     type="password"

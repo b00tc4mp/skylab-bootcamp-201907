@@ -3,7 +3,7 @@ import React from 'react';
 function PlayerResult({ player }) {
 
    
-    const {name, surname, playerId, realTeam, position, pointsPerGame, totalPoints, yellowCards, redCards,  goals, minutes, photo, cost}  = player
+    const {name, surname, position, photo}  = player
     
     function addDefaultSrc(event) {
        
@@ -11,20 +11,30 @@ function PlayerResult({ player }) {
           
     }
 
-    
-    return <div class="card"> 
+    function positionPlayer(number){
+        switch(number){
+            case 1: 
+            return 'Goalkeeper'
+            break;
+            case 2:
+            return 'Defender'
+            break;
+            case 2:
+            return 'Midfielder'
+            break;
+            case 2:
+            return 'Striker'
+            break;
+        }
+    }
+    return <div className="card-players"> 
    
-
-        <div class="card-image">
-               
-            <figure class="image is-4by4">
-                <img onError={addDefaultSrc} src={"http://localhost:8080" + photo}  width="300px"/> 
-            </figure>
-        </div>
-        <div class="card-content" >
-            <h3 class="title is-4">{name}</h3>
-            <p class="subtitle is-6">{surname}</p>
-            <p class="subtitle is-6">{position}</p>
+        
+            <img className="card-players__image" onError={addDefaultSrc} src={"http://localhost:8080" + photo} /> 
+            
+              <div className="card-players__content" >
+            <p className="card-players__content__name">{name} {surname} </p>
+            <p className="card-players__content__position">{positionPlayer(position)}</p>
         </div>
 
     </div>

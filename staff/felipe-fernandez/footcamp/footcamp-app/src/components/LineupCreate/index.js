@@ -2,14 +2,15 @@ import React, { useState, useEffect, useContext } from 'react'
 import logic from '../../logic'
 import { withRouter} from 'react-router-dom'
 import Context from '../Context'
-import PlayerResultLineup from '../PlayerResultLineup'
-import Header from '../Header'
+import PlayerResult from '../PlayerResult'
+import InitialHeader from '../InitialHeader'
 
 function MyLineup (props) {
   
     const { team, setTeam,  leagueId, teamId, setTeamId} = useContext(Context)
-    const [playerLineup, setPlayerLineup] = useState()
+    // const [playerLineup, setPlayerLineup] = useState()
     const [lineup, setLineup] = useState()
+    const [player, setPlayer] = useState()
     const { history} = props
     
 
@@ -31,25 +32,28 @@ function MyLineup (props) {
             const res = await Promise.all(lineup.map((playerId) => 
                      logic.retrievePlayer( playerId)
                 ))
-            const playerLineup  = res.map(res=> res.player)
+            const player  = res.map(res=> res.player)
                 
-            setPlayerLineup(playerLineup)
+            setPlayer(player)
+
         } catch ({ message }) {
                 
-            console.log('fail create team', message)
+            console.log(message)
           }
             
         })()
     }, [])
 
     return <div>
+          <InitialHeader />
+
                 <h2>THIS IS YOUR INITIAL LINEUP</h2>   
             <ul>
             
-            {playerLineup && playerLineup.map(playerlineup => 
-            <li  key={playerlineup.id}>
+            {player && player.map(playerlineup => 
+            <li className="item-players-lineup"  key={playerlineup.id}>
               
-                <PlayerResultLineup playerLineup={playerlineup}/>
+                <PlayerResult player={playerlineup}/>
                      
              </li>)}
              <a href="#" onClick={event => {

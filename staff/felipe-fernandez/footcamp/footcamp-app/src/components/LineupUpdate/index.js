@@ -77,11 +77,11 @@ function LineupUpdate({match ,history}) {
         
     }
         
-    return <div class="card"> 
+    return <div> 
    
         <Header />
             <ul>
-                
+                <h2>AVAILABLE PLAYERS</h2>
                 {playerLineup && playerLineup.map(playerlineup => 
                 <li  key={playerlineup.player.id}
                    
@@ -92,12 +92,13 @@ function LineupUpdate({match ,history}) {
                     
                 }}> 
                
-                     <figure class="image is-4by4">
-                 <img onError={addDefaultSrc} src={"http://localhost:8080" + playerlineup.player.photo} width="300px"/>  
-                    </figure>
-                    <h3 class="title is-4">{playerlineup.player.name}</h3>
-                    <p class="subtitle is-6">{playerlineup.player.surname}</p>        
-                        
+                    <div className="player-lineup">
+                    <img className="player-lineup__image" onError={addDefaultSrc} src={"http://localhost:8080" + playerlineup.player.photo} width="300px"/>
+                    <div className="player-lineup__content">
+                        <p className="player-lineup__content__name">{playerlineup.player.name} {playerlineup.player.surname}</p>
+                        <p className="player-lineup__content__points">Total points: {playerlineup.player.totalPoints}</p>
+                    </div>
+            </div>
                 </li>)}
 
             </ul>
