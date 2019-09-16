@@ -34,6 +34,7 @@ module.exports = function(taskId, spaceId, companionId) {
         if (matchUser === companionId) throw Error(`user already added to task with id ${taskId}`)
         
         task.companions.push(companionId)
+        task.companionNames.push(user.username)
         await task.save()
 
         user.tasks.push(taskId)

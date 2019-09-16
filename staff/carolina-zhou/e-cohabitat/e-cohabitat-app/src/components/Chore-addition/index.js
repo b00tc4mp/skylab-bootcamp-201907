@@ -4,9 +4,9 @@ const ChoreAddition = props => {
     const [ chore, setChore ] = useState()
 
 	const handleInputChange = event => {
-		const { value: chore } = event.target
+		const { value } = event.target
 
-		setChore(chore)
+        setChore(value)
 	}
 
 	return (

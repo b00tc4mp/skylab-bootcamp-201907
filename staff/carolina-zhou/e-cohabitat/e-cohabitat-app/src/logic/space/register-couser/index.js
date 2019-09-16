@@ -20,7 +20,7 @@ export default function(email, passcode, spaceId) {
 debugger
     return (async () => {
         const response = await fetch(`${REACT_APP_API_URL}/users/${id}/spaces/${spaceId}/cousers`, {
-            method: 'patch',
+            method: 'PATCH',
             headers: {'Access-Control-Allow-Origin': '*', 'content-type': 'application/json', 'authorization': `bearer ${token}`},
             mode: 'cors',
             body: JSON.stringify({ email, passcode })

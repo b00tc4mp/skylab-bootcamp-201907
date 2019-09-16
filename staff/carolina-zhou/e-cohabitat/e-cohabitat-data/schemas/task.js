@@ -21,6 +21,7 @@ module.exports = new Schema({
     },
     taskSpace: [{ type: ObjectId, ref: 'Space' }],
     companions: [{ type: ObjectId, ref: 'User' }],
+    companionNames: [ String ],
     comments: [Comment],
     tags: [ String ]
 })

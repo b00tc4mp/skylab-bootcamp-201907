@@ -9,8 +9,8 @@ import Chores from '../Chores'
 function Day({ history, match }) {
 
     const { params: { spaceId } } = match
-    const { thisDay, setThisDay, setThisHour } = useContext(Context)
-    const [ dayTasks, setDayTasks ] = useState()
+    const { thisDay, setThisDay, thisHour, setThisHour } = useContext(Context)
+    const [ dayTasks, setDayTasks/* , hourTasks, setHourTasks */ ] = useState()
 
     
     useEffect(() => {
@@ -18,14 +18,17 @@ function Day({ history, match }) {
           try {
             const tasks = await logic.retrieveAllSpaceTasks(spaceId)
 
-            const dayTasks = tasks.filter(task => task.date === moment(thisDay).format())
+            const dayTasks = tasks.filter(task => moment(thisDay).isSame(task.date, 'day'))
             setDayTasks(dayTasks)
+
+            /* const hourTasks = tasks.filter(task => moment(thisHour).isSame(task.date, 'hour'))
+            setHourTasks(hourTasks) */
           } catch(error) {
             console.log(error.message)
           }
         })()
     },[])
-    debugger
+    
 
     function handleMonth(event) {
         event.preventDefault()
@@ -62,8 +65,8 @@ function Day({ history, match }) {
         setThisHour(thisHour)
         history.push(`/${spaceId}/task-register`)
     }
-    debugger
     
+    debugger
     return <>
 
         <div className="day">
@@ -92,11 +95,13 @@ function Day({ history, match }) {
                         <tr className="timetable__tr">
                             <th className="timetable__th" scope="row">7-8h <button className="fas fa-plus-circle" data-hour='7' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
                             <td className="timetable__td"> 
-                                {dayTasks && dayTasks.map(dayTask => { 
-                                    return <>
-                                        <p>{dayTask.taskName}</p>
-                                        <p>{dayTask.companions}</p>
-                                    </>
+                                {dayTasks && dayTasks.map(task => {
+                                    let hour = Number(moment(task.date).format('H'))
+                                    if (7 <= hour && hour < 8) {
+                                        return <>
+                                            <p className="timetable__task-user">{task.companionNames} <span className="timetable__task-name">({task.taskName})</span></p>
+                                        </>                                         
+                                    }
                                 })} 
                             </td>
                         </tr>
@@ -122,7 +127,13 @@ function Day({ history, match }) {
                         </tr>
                         <tr className="timetable__tr">
                             <th className="timetable__th" scope="row">13-14h <button className="fas fa-plus-circle" data-hour='13' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
-                            <td className="timetable__td"></td>
+                            <td className="timetable__td">
+                                {/*  {hourTasks && hourTasks.map(task => {
+                                    return <>
+                                        <p className="timetable__task-user">{task.companionNames} <span className="timetable__task-name">({task.taskName})</span></p>
+                                    </>                                         
+                                })}  */}
+                            </td>
                         </tr>
                         <tr className="timetable__tr">
                             <th className="timetable__th" scope="row">14-15h <button className="fas fa-plus-circle" data-hour='14' onClick={e => {handleAddTask(moment(thisDay).hour(e.target.dataset.hour).minute(0))}}></button></th>
