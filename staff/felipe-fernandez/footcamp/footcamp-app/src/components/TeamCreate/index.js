@@ -1,6 +1,6 @@
-import React, { useState, useEffect,useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import logic from '../../logic'
-import PlayerResult from '../PlayerResult'
+import PlayerResultInitial from '../PlayerResultInitial'
 import { withRouter } from 'react-router-dom'
 import Context from '../Context'
 import Feedback from '../Feedback'
@@ -10,7 +10,7 @@ function CreateTeam(props) {
 
     const { history } = props
     
-    const { name, setName, teamName, setTeamName, leagueId, setLeagueId, teamId, setTeamId,  existTeam, setExistTeam } = useContext(Context)
+    const { name, setName, teamName, setTeamName, leagueId, setLeagueId, teamId, setTeamId } = useContext(Context)
     const [error , setError] = useState(undefined) 
     const [player , setPlayer] = useState(undefined) 
     
@@ -62,7 +62,6 @@ function CreateTeam(props) {
             <form onSubmit={handleFormSubmit}>
                
                 <input
-                    className="input is-info"
                     type="name"
                     name="name"
                     placeholder="name"
@@ -72,7 +71,11 @@ function CreateTeam(props) {
                 {/* <button  className="button is-fullwidth is-info is-outlined">Submit</button> */}
             </form>
             {error && <Feedback message={error}/>}
-            {player && player.map(oneplayer => <li className ="players-create" key={oneplayer.id}> <PlayerResult player={oneplayer} /> </li>)}
+            {player && player.map(oneplayer => 
+                <li className="players-create" key={oneplayer.id}> 
+                
+                    <PlayerResultInitial player={oneplayer} />
+               </li>)}
             {player && <a href="#" onClick={event => {
                 event.preventDefault()
                 

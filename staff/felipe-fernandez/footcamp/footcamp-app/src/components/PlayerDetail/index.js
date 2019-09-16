@@ -42,7 +42,7 @@ import Header from '../Header'
             <a href="#" onClick={event => {
             event.preventDefault()
             handleBack()
-        }}>Go back</a>
+        }}><i className="fas fa-arrow-circle-left fa-2x"></i></a>
         </div>}
     </section>
 }

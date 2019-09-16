@@ -8,7 +8,7 @@ import InitialHeader from '../InitialHeader'
 function CreateLeagues(props) {
 
     const { history } = props
-    const { nameLeague, setNameLeague, leagueId, setLeagueId, existLeague, setExistLeague} = useContext(Context)
+    const {leagueId, setLeagueId} = useContext(Context)
     const [name, setName] = useState(null)
     const [code, setCode] = useState(null)
     const [error , setError] = useState(undefined) 
@@ -23,9 +23,7 @@ function CreateLeagues(props) {
             try {
                
                 const {leagueId} = await logic.createLeague(name, code)
-                // setNameLeague(name)
-                // setCode(code)
-                //set the id of the league to use after in the creation of teams
+                
                 if(leagueId) {
                 setLeagueId(leagueId)               
                 sessionStorage.league=leagueId
@@ -76,49 +74,48 @@ function CreateLeagues(props) {
     return (
         <div >
         <InitialHeader />
-      
-            <h2>Create a league</h2>
-            <form onSubmit={handleFormSubmitCreate}>
+            <div className="create">
+            <h2>CREATE A LEAGUE</h2>
+            <form className="form-create" onSubmit={handleFormSubmitCreate}>
+             <div class="form-create-inputs">
                 <input
-                    className="input is-info"
+                   
                     type="name"
                     name="name"
                     placeholder="Name"
                     onChange={handleNameInput}
                     required
                 />
-                <input
-                    className="input is-info"
+             </div>
+             <div class="form-create-inputs">
+             <input
+                   
                     type="code"
                     name="code"
                     placeholder="Code"
                     onChange={handleCodeInput}
                     required
                 />
-                <button className="button is-fullwidth is-info is-outlined">Submit</button>
+            </div>
+                <button>Submit</button>
             </form>
 
-            <h2>Join a league</h2>
-            <form onSubmit={handleFormSubmitJoin}>
-                {/* <input
-                    className="input is-info"
-                    type="name"
-                    name="name"
-                    placeholder="Name"
-                    onChange={handleNameInput}
-                    required
-                /> */}
+            <h2>JOIN A lEAGUE</h2>
+            <form className="form-create" onSubmit={handleFormSubmitJoin}>
+            <div class="form-create-inputs">
                 <input
-                    className="input is-info"
+                 
                     type="code"
                     name="code"
                     placeholder="Code"
                     onChange={handleCodeInput}
                     required
                 />
-                <button className="button is-fullwidth is-info is-outlined">Submit</button>
+             </div>
+                <button>Submit</button>
             </form>
             {error && <Feedback message={error}/>} 
+        </div>
         </div>
     )
 }

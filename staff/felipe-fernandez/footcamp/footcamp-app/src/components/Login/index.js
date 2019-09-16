@@ -64,9 +64,9 @@ function Login(props) {
     }
   
     return (
-        <div  >
+        <div >
           <InitialHeader />
-
+          <div className="login">
           <h2>LOGIN</h2>
             <form onSubmit={handleFormSubmit}>
              <div className="form__inputs"> 
@@ -89,13 +89,14 @@ function Login(props) {
                     
                 />
               </div>
-                <button className="">Submit</button>
+                <button>Submit</button>
             </form>
             {error && <Feedback message={error}/>}
             <a href="#" onClick={event => {
             event.preventDefault()
             handleBack()
-        }}>Go back</a>
+        }}><i className="fas fa-arrow-circle-left fa-2x"></i></a>
+        </div>
         </div>
     )
 }

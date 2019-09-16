@@ -15,6 +15,8 @@ import PlayerDetail from './PlayerDetail'
 import TeamsLeague from './TeamsLeague'
 import UserProfile from './UserProfile'
 import LineupUpdate from './LineupUpdate'
+
+
 import logic from '../logic'
 
 import { withRouter, Route, Redirect } from 'react-router-dom'

@@ -53,12 +53,12 @@ function Register(props) {
     return (
         <div >
             <InitialHeader />
-
+            <div className="register">
             <h2>REGISTER</h2>
             <form onSubmit={handleFormSubmit}>
             <div class="form-inputs">
                 <input
-                    className="input is-info"
+                   
                     type="name"
                     name="name"
                     placeholder="Name"
@@ -68,7 +68,7 @@ function Register(props) {
             </div>
             <div class="form-inputs">
                 <input
-                    className="input is-info"
+                   
                     type="surname"
                     name="surname"
                     placeholder="Surname"
@@ -78,7 +78,7 @@ function Register(props) {
             </div>
             <div class="form-inputs">
                 <input
-                    className="input is-info"
+                    
                     type="email"
                     name="email"
                     placeholder="Email"
@@ -86,22 +86,24 @@ function Register(props) {
                     
                 />
             </div>
+            <div class="form-inputs">
                 <input
-                    className="input is-info"
+                    
                     type="password"
                     name="password"
                     placeholder="Password"
                     onChange={handlePasswordInput}
                     
                 />
-                <button className="button is-fullwidth is-info is-outlined">Submit</button>
+            </div>
+                <button className="button">Submit</button>
             </form>
             {error && <Feedback message={error}/>}
             <a href="#" onClick={event => {
             event.preventDefault()
             handleBack()
-        }}>Go back</a>
-            
+        }}><i className="fas fa-arrow-circle-left fa-2x"></i></a>
+        </div>
         </div>
     )
 }

@@ -67,6 +67,13 @@ table {
   text-align: center;
 }
 
+.landing {
+  width: 80%;
+  padding: 20px;
+  margin: 20% auto;
+  border: 1px solid white;
+}
+
 .feedback__text {
   color: red;
   text-align: center;
@@ -106,6 +113,12 @@ input {
   margin: 2%;
 }
 
+.login {
+  width: 80%;
+  margin: 20% auto;
+  border: 1px solid white;
+}
+
 .links {
   display: flex;
   flex-direction: column;
@@ -140,140 +153,91 @@ input {
   margin: 2%;
 }
 
-.league__name {
-  text-align: center;
-  margin: 0 auto;
+.register {
+  width: 80%;
+  margin: 20% auto;
+  border: 1px solid white;
 }
 
-.header-app {
-  background-color: white;
-  padding: 10px;
-  text-align: center;
-  font-size: 25px;
-}
-
-.header-access {
-  padding: 10%;
+.league {
+  width: 80%;
+  margin: 20% auto;
+  border: 1px solid white;
 }
 
 .header {
   display: flex;
   padding: 5%;
+  justify-content: space-between;
 }
 
-a {
+/* Navbar container */
+.navbar {
+  overflow: hidden;
+  background-color: #394a6d;
+}
+
+/* Links inside the navbar */
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
   text-decoration: none;
-  color: #232323;
-  transition: color 0.3s ease;
 }
 
-a:hover {
-  color: blue;
+/* The dropdown container */
+.dropdown {
+  float: left;
+  overflow: hidden;
 }
 
-#menuToggle {
-  display: block;
-  position: relative;
-  top: 20px;
-  left: 5%;
-  z-index: 1;
-  -webkit-user-select: none;
-  user-select: none;
-}
-
-#menuToggle input {
-  display: block;
-  width: 40px;
-  height: 32px;
-  position: absolute;
-  top: -7px;
-  left: -5px;
-  cursor: pointer;
-  opacity: 0;
-  z-index: 2;
-  -webkit-touch-callout: none;
-}
-
-/* * Just a quick hamburger
- * */
-#menuToggle span {
-  display: block;
-  width: 33px;
-  height: 4px;
-  margin-bottom: 5px;
-  position: relative;
-  background: #cdcdcd;
-  border-radius: 3px;
-  z-index: 1;
-  transform-origin: 4px 0px;
-  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
-  transition-background: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
-  transition-opacity: 0.55s ease;
-}
-
-#menuToggle span:first-child {
-  transform-origin: 0% 0%;
-}
-
-#menuToggle span:nth-last-child(2) {
-  transform-origin: 0% 100%;
-}
-
-/* * Transform all the slices of hamburger
- * * into a crossmark.
- * */
-#menuToggle input:checked ~ span {
-  opacity: 1;
-  transform: rotate(45deg) translate(-2px, -1px);
-  background: #537d91;
-}
-
-/* * But let's hide the middle one.
- * */
-#menuToggle input:checked ~ span:nth-last-child(3) {
-  opacity: 0;
-  transform: rotate(0deg) scale(0.2, 0.2);
-}
-
-/* * Ohyeah and the last one should go the other direction
- * */
-#menuToggle input:checked ~ span:nth-last-child(2) {
-  transform: rotate(-45deg) translate(0, -1px);
-}
-
-/* * Make this absolute positioned
- * * at the top left of the screen
- * */
-.menu {
-  position: absolute;
-  width: 300px;
-  margin: -100px 0 0 -50px;
-  padding: 50px;
-  padding-top: 125px;
-  background: #ededed;
-  list-style-type: none;
-  -webkit-font-smoothing: antialiased;
-  /* to stop flickering of text in safari */
-  transform-origin: 0% 0%;
-  transform: translate(-100%, 0);
-  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
-}
-.menu__profile {
-  margin: 0;
-}
-.menu__logout {
+/* Dropdown button */
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: "Monda", sans-serif;
   margin: 0;
 }
 
-.menu li {
-  padding: 10px 0;
-  font-size: 22px;
+/* Add a red background color to navbar links on hover */
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: #394a6d;
 }
 
-/* * And let's slide it in from the left
- * */
-#menuToggle input:checked ~ ul {
-  transform: none;
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 .title {
@@ -292,6 +256,16 @@ a:hover {
   align-items: center;
 }
 
+.code {
+  color: black;
+  font-size: 16px;
+  text-align: left;
+}
+
+.title__user {
+  font-size: 14px;
+}
+
 ul {
   width: 100%;
 }
@@ -306,6 +280,44 @@ ul {
   background-color: #394a6d;
   width: 70%;
   border: 1px solid white;
+}
+
+.card-initial {
+  margin: 15%;
+  padding: 5px;
+  width: 100%;
+}
+.card-initial p {
+  text-align: center;
+  color: white;
+  font-size: 20px;
+}
+.card-initial a {
+  font-size: 1px;
+}
+.card-initial__image {
+  width: 100%;
+}
+.card-initial__image--img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+.card-initial__content {
+  border: 0.5px solid white;
+  padding: 0.5em;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.card-initial__content__name {
+  padding-right: 0.5em;
+}
+.card-initial__content__surname {
+  padding-right: 0.5em;
+}
+.card-initial__content__points {
+  padding-right: 0.5em;
 }
 
 .card-players {
@@ -366,15 +378,10 @@ p {
   font-size: 20px;
 }
 
-.header-app {
-  background-color: white;
-  padding: 10px;
+.initial-header {
   text-align: center;
   font-size: 25px;
-}
-
-.header-access {
-  padding: 10%;
+  border: 1px solid white;
 }
 
 .clasification {
@@ -404,6 +411,7 @@ p {
   text-align: center;
   color: white;
   font-size: 20px;
+  padding: 5%;
 }
 .card__content {
   border: 0.5px solid white;
@@ -421,7 +429,7 @@ p {
 
 .players-create {
   background-color: #394a6d;
-  width: 90%;
+  width: 70%;
   margin: 0 5%;
 }
 
@@ -466,6 +474,7 @@ h1 {
   font-size: 30px;
   text-align: center;
   margin: 5%;
+  font-family: "Monda", sans-serif;
 }
 
 h2 {
@@ -473,18 +482,22 @@ h2 {
   font-size: 20px;
   text-align: center;
   margin: 5%;
+  font-family: "Monda", sans-serif;
 }
 
 a {
   color: black;
   text-decoration: none;
-  background-color: white;
   font-size: 18px;
   display: block;
   padding: 3%;
-  width: 25%;
   margin: 5px auto;
   text-align: center;
+  font-family: "Monda", sans-serif;
+}
+
+p {
+  font-family: "Monda", sans-serif;
 }
 
 /*# sourceMappingURL=index.css.map */

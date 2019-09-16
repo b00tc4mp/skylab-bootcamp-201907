@@ -2,14 +2,13 @@ import React, { useState, useEffect, useContext } from 'react'
 import logic from '../../logic'
 import { withRouter} from 'react-router-dom'
 import Context from '../Context'
-import PlayerResult from '../PlayerResult'
+import PlayerResultInitial from '../PlayerResultInitial'
 import InitialHeader from '../InitialHeader'
 
 function MyLineup (props) {
   
-    const { team, setTeam,  leagueId, teamId, setTeamId} = useContext(Context)
-    // const [playerLineup, setPlayerLineup] = useState()
-    const [lineup, setLineup] = useState()
+    const { leagueId, teamId, setTeamId} = useContext(Context)
+        const [lineup, setLineup] = useState()
     const [player, setPlayer] = useState()
     const { history} = props
     
@@ -53,7 +52,7 @@ function MyLineup (props) {
             {player && player.map(playerlineup => 
             <li className="item-players-lineup"  key={playerlineup.id}>
               
-                <PlayerResult player={playerlineup}/>
+                <PlayerResultInitial player={playerlineup}/>
                      
              </li>)}
              <a href="#" onClick={event => {

@@ -42,45 +42,41 @@ function Header(props) {
 
 return (
   <div>
-  
-        <div className="header">
-          <div id="menuToggle">
-          <input type="checkbox" />
-        
-          <span></span>
-          <span></span>
-          <span></span>
-        
-              <ul className="menu">
-            
+      <nav className="header">
+
+        <div className="navbar">
+      
+          <div className="dropdown">
+            <button className="dropbtn">
+            <i className="fas fa-bars"></i>
+            </button>
+            <div className="dropdown-content">
+            <Link to="/profile/" >Profile</Link>
+            <a href="#">{code &&  <p className="code">Code: {code}</p>} </a>
+              <a className="menu__logout" href="#" onClick={event => {
+                        event.preventDefault()
+                        handleLogout()
+                        }}>Logout</a>
               
-                <li className="menu__profile">
-                  <Link to="/profile/">Profile</Link>
-                </li>
-                <li>
-                {code &&  <p>Code of the league: {code}</p>}
-                </li>
-                <a className="menu__logout" href="#" onClick={event => {
-                event.preventDefault()
-                handleLogout()
-                }}>Logout</a>
-                
-                </ul>
             </div>
-          {/* </nav>   */}
-              
-          
+          </div>
+      </div>
+      
+  
+                
           <div className="title">    
 
               <h2 className="title__name">FOOTCAMP FANTASY</h2>
-              <div className="menu-title__big"></div>
-              {user && <p className="title__user">{user.name}</p>} 
-          </div> 
-          
-        </div>
-
-            
-              <ul className="low-menu">
+          </div>  
+          <div>
+              <div className="title__big"></div>
+              {user && <p className="title__user">Hello {user.name}!</p>} 
+           </div>             
+         
+      
+   </nav>    
+           <div>
+             <ul className="low-menu">
                 <li className="low-menu__items">
                   <Link to="/"><i class="fas fa-futbol fa-2x"></i></Link>
                 </li>
@@ -94,43 +90,13 @@ return (
                   <Link to="/leaguetable/"><i class="fas fa-table fa-2x"></i></Link>
                 </li>
               </ul>
+      
+         </div>
         
-        
+
+
 </div>
-
-
     
-//       // <div>
-//       //   <nav>
-//       //     <ul>
-//       //       Hola, {user && user.name}!
-//       //       <li>
-//       //         <Link to="/">My Leagues</Link>
-//       //       </li>
-//       //       <li>
-//       //         <Link to="/mylineup/">My line up</Link>
-//       //       </li>
-//       //       <li>
-//       //         <Link to="/myteam/">My Team</Link>
-//       //       </li>
-//       //       <li>
-//       //         <Link to="/leaguetable/">League table</Link>
-//       //       </li>
-//       //       <li>
-//       //         <Link to="/profile/">Profile</Link>
-//       //       </li>
-            
-//       //       <a href="#" onClick={event => {
-//       //       event.preventDefault()
-//       //       handleLogout()
-//       //        }}>Logout</a>
-            
-         
-//       //     </ul>
-//       //   </nav>
-        
-       
-//       // </div>
 
   )
 

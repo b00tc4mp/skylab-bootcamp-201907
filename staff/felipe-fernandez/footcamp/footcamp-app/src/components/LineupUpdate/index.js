@@ -106,7 +106,7 @@ function LineupUpdate({match ,history}) {
             <a href="#" onClick={event => {
                     event.preventDefault()
                     handleBack()
-                }}>Go back</a>
+                }}><i class="fas fa-arrow-circle-left fa-2x"></i></a>
                 
             </div>
 

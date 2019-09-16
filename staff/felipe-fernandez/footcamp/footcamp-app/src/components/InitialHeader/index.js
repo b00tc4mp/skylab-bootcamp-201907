@@ -6,13 +6,11 @@ function InitialHeader() {
 
   return (
     
-      <div>
-        <nav>
-        <div className="header-app header-access">FANTASY FOOTBALL SKYLAB</div>
-        <h2>The soccer fantasy game for all the enthusiastics of football</h2>
-   
-        </nav>
+      <div className="initial-header">
+       
+        <h1>FANTASY FOOTBALL SKYLAB</h1>
         
+   
        
       </div>
 

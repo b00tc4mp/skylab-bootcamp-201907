@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import logic from '../../logic'
 import { withRouter} from 'react-router-dom'
 import Context from '../Context'
-
+import InitialHeader from '../InitialHeader'
 
 
 function MyLeagues (props) {
@@ -43,14 +43,13 @@ function MyLeagues (props) {
 
 
     return <div>
+                <InitialHeader />
                 
-                <div className="header-app header-access">FANTASY FOOTBALL SKYLAB</div>
-             
                 {leagues && 
                 <div className="league">
                 <h2 className="league__title">MY LEAGUES</h2>
             
-                 <h3 className="league__name"> Liga: {leagues.name} </h3>
+                 <h3 className="league__name"> <p>Liga: {leagues.name}</p> </h3>
                  <h3> {leagues.nameTeam}</h3>
                 
                 <a href="" onClick={event => {
@@ -59,11 +58,7 @@ function MyLeagues (props) {
                     history.push('/myteam')
                 }}>Go to league</a>
 
-                {/* <button onClick={event => {
-                    event.preventDefault()
-                    leaveLeague()
-                    
-                }}>Leave the league</button> */}
+               
                </div>
             }
             </div>

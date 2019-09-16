@@ -24,18 +24,19 @@ function Landing(props) {
 
 
     return  <>
-        <div className="header">
+        
         <InitialHeader />
 
-        </div>
+        <h2>The soccer fantasy game for all the enthusiastics of football</h2>
         
-                
+        <div className="landing">         
 
         
         <ul>
           <li><a  className="links" href="" onClick={handleGoToRegister}>Register</a></li>
           <li><a  className="links" href="" onClick={handleGoToLogin}>Login</a></li>
         </ul>
+        </div>
         </>
     
         
