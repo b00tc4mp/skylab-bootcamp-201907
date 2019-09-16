@@ -1,5 +1,5 @@
 import logic from '..'
-import { database, models } from 'my-stuff-data'
+import { database, models } from 'vltra-data'
 import jwt from 'jsonwebtoken'
 
 const { User } = models
@@ -11,17 +11,18 @@ const REACT_APP_JWT_SECRET_TEST = process.env.REACT_APP_JWT_SECRET_TEST
 describe('logic - retrieve user', () => {
     beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
 
-    let name, surname, email, password, id
+    let name, surname, email, nickname, password, id
 
     beforeEach(async () => {
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`
+        nickname = `nickname-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
 
         await User.deleteMany()
 
-        const user = await User.create({ name, surname, email, password })
+        const user = await User.create({ name, surname, nickname, email, password })
 
         id = user.id
 
@@ -38,6 +39,7 @@ describe('logic - retrieve user', () => {
                 expect(user._id).toBeUndefined()
                 expect(user.name).toBe(name)
                 expect(user.surname).toBe(surname)
+                expect(user.nickname).toBe(nickname)
                 expect(user.email).toBe(email)
                 expect(user.password).toBeUndefined()
             })

@@ -4,7 +4,7 @@ import './style.sass'
 
 function Footer(){
     return <footer className="footer">
-    <p className="footer__content">Copyrigth © SkyLab 2019 </p>
+    <p className="footer__content">© Juampi @ SkyLab 2019 </p>
 </footer>
 }
 

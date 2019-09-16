@@ -1,36 +1,52 @@
 .header 
-  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1)
-  width: 100%
+  width: 90%
   height: 33vh
+  margin: 0 auto
 
 .user-menu 
   margin: auto 0
   padding: 0
-  width: 30%
+  width: 33%
   float: right
   list-style: none
   overflow: hidden
   border: 1px solid gray
 
 
-.user-menu__auth-option-link
+.user-menu__auth-option-link, .user-menu__user-option
   display: block
-  padding: 20px 20px
+  padding: 5% 0
   text-decoration: none
   border: 1px solid lightgray
   color: rgb(60, 60, 60)
+  text-align: center
+
+.user-menu__user-option
+  font-style: italic
+  font-weight: bold
 
 
 .user-menu__auth-option-link:hover
     background-color: rgba(180, 180, 180, 0.4)
 
-.header__logo, .user-menu
-  margin: 20px 5%
+// .header__logo, .user-menu
+//   margin: 3%
 
 .header .header__logo 
   display: block
   float: left
   text-decoration: none
+
+.user-menu__avatar-container
+  border: 1px solid black
+  width: 100%
+
+.user-menu__avatar-img
+  display: block
+  border-radius: 15%
+  margin: 0 auto
+  border: 5px solid black
+  width: 50%
 
 
 @media (min-width: 48em)
