@@ -147,7 +147,7 @@ describe('logic - unregister user', () => {
     it('should fail on wrong password data type', async () => {
         try{
             await await unregisterUser(id, email, 123)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`password with value 123 is not a string`)

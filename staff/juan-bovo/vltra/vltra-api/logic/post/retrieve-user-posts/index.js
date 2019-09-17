@@ -9,7 +9,7 @@ module.exports = async function(authorId){
     if(!user) throw Error(`user with id ${authorId} does not exist`)
 
     return( async () => {
-        const posts = await Post.find({author: authorId }, {_id: 0, __v: 0 }).lean()
+        const posts = await Post.find({author: authorId }, { __v: 0 }).lean()
         
         if(posts.length === 0) throw Error(`author with authorId ${authorId} does not have any posts`)
         
