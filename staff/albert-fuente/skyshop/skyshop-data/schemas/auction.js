@@ -3,6 +3,10 @@ const mongoose = require('mongoose')
 const { Schema, ObjectId } = mongoose
 
 module.exports = new Schema({
+    product:{ type: ObjectId,
+        ref: 'Product',
+        require: true
+   },
     title: {
         type: String,
         require: true
@@ -37,9 +41,19 @@ module.exports = new Schema({
         required: false
     },
 
+    
+
     owner: { type: ObjectId,
          ref: 'User',
          require: true
-    }
+    }, 
+
+    date2: {
+        type: Date,
+        required: false
+    },
+
+
+    
 
 })

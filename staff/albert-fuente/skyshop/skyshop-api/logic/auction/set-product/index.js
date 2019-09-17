@@ -33,7 +33,7 @@ module.exports = function(userId, productId) {
             const date=await new Date()
             
             
-            const auction = await  Auction.create({title:product.title, image:product.image,
+            const auction = await  Auction.create({product:productId,title:product.title, image:product.image,
                 description:product.description,size:product.size,color:product.color,price:product.price,
                 date: date, owner:userId})
             
