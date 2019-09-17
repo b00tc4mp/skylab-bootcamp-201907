@@ -2,14 +2,12 @@
 import React, { useContext , useEffect} from 'react'
 import Context from '../Context'
 import logic from '../../logic'
-import { Redirect} from "react-router-dom"
-
-
 
 
 function RemoveProducts() {
     
-    const { setView , admin, view, price,products, setProductQuery, setProducts, css,setCss,productQuery } = useContext(Context)
+    const { setView ,  view, products, setProductQuery, setProducts, css,productQuery } = useContext(Context)
+    let productId=""
 
     useEffect(() => {
         (async () =>{
@@ -24,8 +22,6 @@ function RemoveProducts() {
            
   },[view])
 
-    let productId=""
-
     
     return <>
         <h2 className="formPanel">Select the product to remove</h2>
@@ -34,9 +30,9 @@ function RemoveProducts() {
                  {products.map(item=> {
                    return<>
                     <ul onClick={event => {
-                event.preventDefault()
-                setProductQuery(item._id)
-                setView("acceptToRemove")
+                  event.preventDefault()
+                  setProductQuery(item._id)
+                  setView("acceptToRemove")
             }} >
                   <li  className={css}>{'Title: '+item.title}</li>
                   <li  className={css}>{'Color: '+item.color}</li>
@@ -44,10 +40,10 @@ function RemoveProducts() {
                   {productQuery===item._id
                 && <a onClick={(event)=>{
                     event.preventDefault()
-                setProductQuery(item._id)
-                productId=item._id
-                productId=item._id
-                //handleRemove(productId)
+                  setProductQuery(item._id)
+                  productId=item._id
+                  productId=item._id
+                  //handleRemove(productId)
                 async function handleRemove(productId){
                     try{                     
                         await logic.removeProduct(productId)

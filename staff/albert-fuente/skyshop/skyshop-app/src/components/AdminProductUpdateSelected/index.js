@@ -24,8 +24,7 @@ function UpdateSelectedProduct() {
         event.preventDefault()
         const { target: { title: { value: title }, image: { files: [image] }, description: { value: description }, size: { value: size },color: { value: color },price: { value: price } } } = event
         const body={
-            title,
-            
+            title,       
             description,
             size,
             color,

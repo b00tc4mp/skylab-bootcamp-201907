@@ -12,7 +12,6 @@ function UpdateProducts() {
         (async () =>{
           try{
             const products=await logic.retrieveAllProducts()
-            
             setProducts(products)
           }catch(error){
             console.log(error.message)
@@ -21,11 +20,8 @@ function UpdateProducts() {
            
   },[price])
 
-    let productId=""
-
     return <>
         {view==="selectedProduct" && <Redirect to="/admin/update-selected"/>}
-
         <h2 className="formPanel">Select the product to update</h2>
         {products &&
             <ul>

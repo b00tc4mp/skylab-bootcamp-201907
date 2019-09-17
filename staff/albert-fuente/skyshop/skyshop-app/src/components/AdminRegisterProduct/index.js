@@ -12,20 +12,16 @@ function AdminRegisterProduct() {
 
     function handleSubmit(event) {
         event.preventDefault()
-        const { target: { title: { value: title }, image: { files: [image] }, description: { value: description }, size: { value: size },color: { value: color },price: { value: price } } } = event
-        
+        const { target: { title: { value: title }, image: { files: [image] }, description: { value: description }, size: { value: size },color: { value: color },price: { value: price } } } = event    
         handleRegisterProduct(title,image,description,size,color,(parseInt(price)))
     }
     
     async function handleRegisterProduct(title,image,description,size,color,price) {
     
-          try {
-              
+          try {         
               const response= await logic.registerProduct(title,image,description,size,color,price)
-              console.log("PRODUCT REGISTERED")              
               productId=response.id
               await logic.uploadPhoto(productId,image)
-              console.log('picture uploaded')
               setView("productSuccess")
           } catch(error) {
               console.log(error.message)
@@ -55,9 +51,7 @@ function AdminRegisterProduct() {
         </form>
         <a href='/#/admin'><i className="far fa-2x fa-arrow-alt-circle-left backArrow"></i></a>
     </div>
-        }
-        
-        
+        }       
     </>
 }
 

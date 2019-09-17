@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext,useState } from 'react'
 import Context from '../Context'
 import logic from '../../logic'
@@ -6,7 +5,6 @@ import { Redirect , withRouter } from "react-router-dom"
 import Feedback from '../Feedback'
 
 import './index.sass'
-
 
 
 function Login({history}) {
@@ -22,8 +20,7 @@ function Login({history}) {
 
     async function handleLogin(email, password) {
         try {
-            await logic.authenticateUser(email, password)
-            
+            await logic.authenticateUser(email, password)         
             setView('landing')
             history.push("/")
             
@@ -56,7 +53,3 @@ function Login({history}) {
 
 export default withRouter(Login)
 
-
-
-
-/* {view==="landing" && <Redirect to="/"/>}  */

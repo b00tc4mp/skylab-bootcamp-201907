@@ -15,7 +15,6 @@ function Admin() {
  
     return <>
         {view==="redirectLanding" && <Redirect to="/landing"/>}
-
         <h2 className="formPanel">Admin</h2>
         {admin===true &&
         <nav>

@@ -10,11 +10,11 @@ function AuctionDetail() {
   // Random component
   const Completionist = () => <span>Auction finished !!!</span>;
   // Renderer callback with condition
-  const renderer = ({ minutes, seconds, completed }) => {
+  const renderer = ({hours, minutes, seconds, completed }) => {
     if (completed) {
       return <Completionist />;
     } else {
-      return <span>Remaining minutes: {minutes}:{seconds}</span>
+      return <span>Remaining hours: {hours}:{minutes}:{seconds}</span>
     }
   }
 
@@ -31,6 +31,7 @@ function AuctionDetail() {
   let initialTime
   let actualTime
   let diffTime
+  let days, hours, minutes
 
   const { setView, view, product, setProduct, productQuery, user } = useContext(Context)
   const productId = productQuery
@@ -68,22 +69,16 @@ function AuctionDetail() {
           setCounter(response.auction.price)
           setOwner(response.auction.owner.name)
 
-          initialTime = moment(response.auction.date).minutes()
-          actualTime = moment().minutes()
 
-          if (actualTime < initialTime) {
-            diffTime = initialTime - actualTime
-          }
+          const now = moment()
+          const expiration = moment(response.auction.date).add(1, 'days')
+          const diff = expiration.diff(now)
+          const diffDuration = moment.duration(diff)
+          days=diffDuration.days()
+          hours=diffDuration.hours()
+          minutes=diffDuration.minutes()
 
-          if (actualTime > initialTime) {
-            diffTime = 60 - actualTime + initialTime
-          }
-
-          const finalTime = parseInt(diffTime * 60000)
-
-          console.log(finalTime)
-
-          debugger
+          const finalTime = parseInt((days*24*60*60000)+(hours*60*60000)+(minutes*60000))
 
           setFinalTime(finalTime)
         }
@@ -217,6 +212,10 @@ function AuctionDetail() {
       <a onClick={handleGoBack}><i className="far fa-2x fa-arrow-alt-circle-left backFromDetail"></i></a>
     </div>
     }
+
+
+
+    
 
   </>
 }

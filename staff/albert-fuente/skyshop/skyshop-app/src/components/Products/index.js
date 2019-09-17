@@ -1,11 +1,8 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext, useEffect,useState } from 'react'
 import Context from '../Context'
 import logic from '../../logic'
 import { Redirect} from "react-router-dom"
-
 import './index.sass'
-
 
 
 
@@ -65,7 +62,6 @@ function Products() {
                     </ul>
                    </>
                  }
-                // <img className="fav-logo-bco" src={require("../../styles/img/logo-bco.png")}></img>
                   )} 
 
                 {price==="cheap" &&
@@ -91,7 +87,6 @@ function Products() {
                   </ul>
                 </>
                 }
-                // <img className="fav-logo-bco" src={require("../../styles/img/logo-bco.png")}></img>
                 )} 
             </ul> 
             </div>

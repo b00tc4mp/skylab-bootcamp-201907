@@ -22,8 +22,6 @@ function User() {
                 setView("redirectLanding")
                 setUser(undefined)
                 sessionStorage.clear()
-                //setUser()
-                console.log("no credentials")
             }}> Log out</a></li>
              <li ><a className="nav-but2" href='/#/profile/user-remove' > Remove profile</a></li>
 

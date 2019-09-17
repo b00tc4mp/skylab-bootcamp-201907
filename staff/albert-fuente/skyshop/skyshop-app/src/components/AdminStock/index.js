@@ -4,7 +4,6 @@ import logic from '../../logic'
 import { Redirect} from "react-router-dom"
 import './index.sass'
 
-
 function Stock() {
     
     const { view, orders,setOrders} = useContext(Context)

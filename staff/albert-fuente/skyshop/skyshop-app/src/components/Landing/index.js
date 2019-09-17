@@ -8,7 +8,6 @@ function Landing({history}){
 
     const {  view, setView, user, setUser, admin,setAdmin , advancedSearch, setAdvancedSearch,setCart} = useContext(Context)
 
-    
     useEffect(() => {
 
         if (logic.isUserLoggedIn()) {
@@ -18,7 +17,6 @@ function Landing({history}){
               setUser(userRetrieved)        
               setAdmin(userRetrieved.isAdmin)  
               setCart(userRetrieved.cart.length)         
-              console.log('is admin?'+userRetrieved.isAdmin)
             } catch(error) {
               console.log(error.message)          
             }
@@ -33,7 +31,6 @@ function Landing({history}){
       event.preventDefault() 
       setAdvancedSearch(!advancedSearch)
     }
-
 
     return <>
     <header>
