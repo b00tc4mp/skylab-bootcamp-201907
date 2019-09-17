@@ -18,6 +18,7 @@ module.exports = function(email, password) {
     // validate.string(password)
 
     return (async () => {
+
         const user =  await User.findOne({ email })
 
         if(!user) throw new Error(`user with e-mail ${email} does not exist`)

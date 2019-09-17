@@ -22,8 +22,8 @@ router.patch ('/users', [tokenMiddleware, jsonBodyParser], updateUser)
 router.delete ('/users', [tokenMiddleware, jsonBodyParser], unregisterUser)
 
 /* RECIPE */
-router.get('/recipe/:id', jsonBodyParser, retrieveRecipe)
-router.get('/recipes/:category', jsonBodyParser, searchRecipe)
+router.get('/recipes/:id', jsonBodyParser, retrieveRecipe)
+router.get('/recipes/search/:category', jsonBodyParser, searchRecipe)
 
 /* DAY */
 router.post('/days', [tokenMiddleware, jsonBodyParser ] , registerDay)
