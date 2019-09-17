@@ -16,6 +16,10 @@ export default function (productId) {
         }
         else {
             return await response.json()
+
+            // TODO do not return message, but just the auction
+            // const { auction } = await response.json()
+            // return auction
         }
     })()
 }
