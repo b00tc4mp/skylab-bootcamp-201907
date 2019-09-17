@@ -24,7 +24,7 @@ function UserProfile({history}) {
 
     function handleBack(){
        
-        history.push('/myleague')
+        history.push('/myteam')
     }
     
     return (

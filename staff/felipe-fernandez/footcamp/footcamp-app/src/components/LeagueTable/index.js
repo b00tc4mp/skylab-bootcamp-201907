@@ -7,26 +7,26 @@ import Header from '../Header'
 
 function MyLeagues (props) {
     const [table, setTable] = useState(null)
-    const [points, setPoints] = useState(null)
-    const { team, setTeam, leagueId, teamName, setTeamName, teamId, setTeamId, player, setPlayer } = useContext(Context)
+    const [error , setError] = useState(undefined) 
+    // const [points, setPoints] = useState(null)
+    // const { team, setTeam, leagueId, teamName, setTeamName, teamId, setTeamId, player, setPlayer } = useContext(Context)
     const { history} = props
     
 
     useEffect(() => {
         (async () => {
             try {
-                debugger
-            const leagueId  = await logic.retrieveAllLeagues()
-            const result  = await logic.retrieveTable(leagueId)
-            sessionStorage.league = leagueId
-            const tableSorted  = result.teams.map(results=> results)
-            const table = tableSorted.sort((a, b) => (b.totalPoints - a.totalPoints))
-            setTable(table)                
+                
+                const leagueId  = await logic.retrieveAllLeagues()
+                const result  = await logic.retrieveTable(leagueId)
+                sessionStorage.league = leagueId
+                const tableSorted  = result.teams.map(results=> results)
+                const table = tableSorted.sort((a, b) => (b.totalPoints - a.totalPoints))
+                setTable(table)                
 
-      
- 
+
            } catch({message}) {
-          console.log( message)
+            setError(message)
         }
                  
         })()

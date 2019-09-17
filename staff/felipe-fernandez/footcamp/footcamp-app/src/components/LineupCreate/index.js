@@ -8,8 +8,9 @@ import InitialHeader from '../InitialHeader'
 function MyLineup (props) {
   
     const { leagueId, teamId, setTeamId} = useContext(Context)
-        const [lineup, setLineup] = useState()
+    const [lineup, setLineup] = useState()
     const [player, setPlayer] = useState()
+    const [error , setError] = useState(undefined) 
     const { history} = props
     
 
@@ -18,9 +19,7 @@ function MyLineup (props) {
             try {
             
             const leagueId  = await logic.retrieveAllLeagues()
-            debugger
-            // const result  = await logic.retrieveTeam(leagueId,  sessionStorage.team)
-    
+                     
             const resultTeam  = await logic.getLineup(sessionStorage.league, teamId)
             sessionStorage.league = leagueId
             
@@ -37,7 +36,7 @@ function MyLineup (props) {
 
         } catch ({ message }) {
                 
-            console.log(message)
+            setError(message)
           }
             
         })()

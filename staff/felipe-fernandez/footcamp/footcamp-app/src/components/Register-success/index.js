@@ -13,15 +13,17 @@ function RegisterSuccess(props){
             <div className="register-successful">
             <h2>REGISTER SUCCESS</h2>
 
-            <a href="#" onClick={event => {
-            event.preventDefault()
-            history.push('/')
-              }}> <i className="fas fa-arrow-circle-left fa-2x"> </i></a>
-
+            
             <a href="#" onClick={event => {
                 event.preventDefault()
                 history.push('/login')
             }}>Go to Login</a>
+
+          <a href="#" onClick={event => {
+            event.preventDefault()
+            history.push('/')
+              }}> <i className="fas fa-arrow-circle-left fa-2x"> </i></a>
+
          </div>
        </div>
         

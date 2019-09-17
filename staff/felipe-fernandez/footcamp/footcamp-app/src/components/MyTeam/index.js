@@ -8,10 +8,9 @@ import Header from '../Header'
 
 function MyTeam (props) {
   
-    const { teams, setTeams, leagueId, teamId, setTeamId } = useContext(Context)
+    const { teams, setTeams,  } = useContext(Context)
     const [player, setPlayer] = useState()
-    const { history} = props
-    
+       
 
     useEffect(() => {
         (async () => {

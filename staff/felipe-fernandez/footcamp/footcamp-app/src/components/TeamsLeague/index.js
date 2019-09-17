@@ -7,6 +7,7 @@ import PlayerResult from '../PlayerResult'
  function TeamsLeague ({ match, history }) {
     const [teamLeague, setTeamLeague] = useState()
     const [player, setPlayer] = useState()
+    const [error , setError] = useState(undefined) 
 
     useEffect(() => {
         (async () => {
@@ -28,7 +29,7 @@ import PlayerResult from '../PlayerResult'
             setPlayer(player)
 
         } catch({message}) {
-            console.log('fail login', message)
+            setError(message)
           }
         })()
     }, [])

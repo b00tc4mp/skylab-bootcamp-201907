@@ -10,7 +10,7 @@ function CreateTeam(props) {
 
     const { history } = props
     
-    const { name, setName, teamName, setTeamName, leagueId, setLeagueId, teamId, setTeamId } = useContext(Context)
+    const { name, setName,  leagueId, teamId, setTeamId } = useContext(Context)
     const [error , setError] = useState(undefined) 
     const [player , setPlayer] = useState(undefined) 
     
@@ -29,7 +29,7 @@ function CreateTeam(props) {
                 const players  = result.players.players.map(results=> results)
                 const teamId = result.players.id
                 setTeamId(teamId) 
-                setTeamName(name)
+                
                 
                 const res = await Promise.all(players.map((playerId) => 
                      logic.retrievePlayer(playerId)
@@ -41,34 +41,34 @@ function CreateTeam(props) {
                  
             } catch ({ message }) {
                 
-                setError("There has been an error creating the league")
+                setError(message)
             }
         })()
       }
     
     const handleFormSubmit = event => {
         event.preventDefault()
-        handleCreateTeam( name)
+        handleCreateTeam(name)
     }
 
    
 
     return (
     
-    <div className="useState" >
+    <div>
         <InitialHeader />
 
-            <h2>Create a team</h2>
-            <form onSubmit={handleFormSubmit}>
-               
-                <input
-                    type="name"
-                    name="name"
-                    placeholder="name"
-                    onChange={handleNameInput}
-                    required
-                />
-                {/* <button  className="button is-fullwidth is-info is-outlined">Submit</button> */}
+            <h2 className="create__title">Create a team</h2>
+            <form className="form-create" onSubmit={handleFormSubmit}>
+                <div class="form-create-inputs">
+                    <input
+                        type="name"
+                        name="name"
+                        placeholder="name"
+                        onChange={handleNameInput}
+                        required
+                    />
+                </div>
             </form>
             {error && <Feedback message={error}/>}
             {player && player.map(oneplayer => 

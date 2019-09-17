@@ -10,8 +10,7 @@ export default function ( name, code) {
     
     return (async () => {
         const response = await fetch(`${REACT_APP_API_URL}/users/leagues`, {
-
-            
+    
             method: 'post',
             headers: {
                

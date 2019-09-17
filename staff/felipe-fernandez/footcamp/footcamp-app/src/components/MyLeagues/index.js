@@ -1,20 +1,19 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect} from 'react'
 import logic from '../../logic'
 import { withRouter} from 'react-router-dom'
-import Context from '../Context'
+
 import InitialHeader from '../InitialHeader'
 
 
 function MyLeagues (props) {
     const [leagues, setLeagues] = useState(null)
-    const [points, setPoints] = useState(null)
-    const { user, team, setTeam,  teamId, setTeamId, player, setPlayer, leagueId, setLeagueId } = useContext(Context)
+    const [error , setError] = useState(undefined) 
     const { history} = props
     
 
     useEffect(() => {
         (async () => {
-            debugger
+            
             try {
             const leagueId  = await logic.retrieveAllLeagues()
             
@@ -27,14 +26,9 @@ function MyLeagues (props) {
                 if (team.owner === sessionStorage.id) return team._id
             })
             sessionStorage.team = teamId._id
-            // setTeamId(teamId._id)
-            // const owners= leagues.teams.map(result=> result.owner)
-            
-            // const teamId = owners.find(element =>{
-            //     if (element === user.id) return element._id
-            // })
+           
          } catch({message}) {
-            console.log('fail login', message)
+            setError(message)
           }
         })()
     }, [])
@@ -44,10 +38,11 @@ function MyLeagues (props) {
 
     return <div>
                 <InitialHeader />
-                
+                <h2 className="league-title">MY LEAGUES</h2>
+
                 {leagues && 
                 <div className="league">
-                <h2 className="league__title">MY LEAGUES</h2>
+                
             
                  <h3 className="league__name"> <p>Liga: {leagues.name}</p> </h3>
                  <h3> {leagues.nameTeam}</h3>
@@ -56,7 +51,7 @@ function MyLeagues (props) {
                     event.preventDefault()
                                       
                     history.push('/myteam')
-                }}>Go to league</a>
+                }}><i class="fas fa-arrow-alt-circle-right fa-2x"></i></a>
 
                
                </div>

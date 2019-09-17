@@ -7,8 +7,9 @@ import InitialHeader from '../InitialHeader'
 
 function Login(props) {
 
-  const { user, setUser, existLeague, setExistLeague } = useContext(Context)
+  const { user, setUser } = useContext(Context)
   const [error , setError] = useState(undefined) 
+  const [league , setLeague] = useState(undefined) 
   const { history } = props
 
 
@@ -20,28 +21,23 @@ function Login(props) {
         try {
           
           await logic.authenticateUser(email, password)
-          // logic.userCredentials = token 
           
           //setting the user for further use
           const user = await logic.retrieveUser()
           setUser(user)
           sessionStorage.id= user.id
           
-
           //check if the user has leagues
-          
           const leagueId = await logic.retrieveAllLeagues()
           if (leagueId) sessionStorage.league=leagueId
-        //   const leaguesId = existLeague.leagues.map(results=> results.id)
-          // const leaguesRetrieved = await logic.retrieveLeague(token, leaguesId[0])
-
-          // !(leagues.league.participants.includes(id))  || existLeague.leagues.length === 0 ? history.push('/create-leagues') : history.push('/myleagues')
           !leagueId ? history.push('/create-leagues') : history.push('/myleague')
-          
 
         } catch({message}) {
             setError(message)
         }
+        
+      
+        
     })()
  }
 

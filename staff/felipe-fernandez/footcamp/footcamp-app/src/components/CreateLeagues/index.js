@@ -19,7 +19,7 @@ function CreateLeagues(props) {
     function handleCreate (name, code) {
        
         (async()=>{
-            
+            debugger
             try {
                
                 const {leagueId} = await logic.createLeague(name, code)
@@ -34,7 +34,7 @@ function CreateLeagues(props) {
               
             } catch ({ message }) {
                 
-                setError("There has been an error creating the league")
+                setError(message)
             }
         })()
       }
@@ -42,7 +42,7 @@ function CreateLeagues(props) {
       function handleJoin(code) {
        
         (async()=>{
-            debugger
+            
             try {
               
             const leagueId = await logic.joinLeague(code)
@@ -55,7 +55,7 @@ function CreateLeagues(props) {
                
             } catch ({ message }) {
                 
-                setError("There has been an error joining the league")
+                setError(message)
             }
         })()
       }
@@ -75,7 +75,7 @@ function CreateLeagues(props) {
         <div >
         <InitialHeader />
             <div className="create">
-            <h2>CREATE A LEAGUE</h2>
+            <h2 className="create__title">CREATE A LEAGUE</h2>
             <form className="form-create" onSubmit={handleFormSubmitCreate}>
              <div class="form-create-inputs">
                 <input
@@ -100,7 +100,7 @@ function CreateLeagues(props) {
                 <button>Submit</button>
             </form>
 
-            <h2>JOIN A lEAGUE</h2>
+            <h2 className="create__title">JOIN A lEAGUE</h2>
             <form className="form-create" onSubmit={handleFormSubmitJoin}>
             <div class="form-create-inputs">
                 <input

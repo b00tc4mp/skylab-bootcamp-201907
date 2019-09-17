@@ -3,7 +3,7 @@ import React from 'react';
 function PlayerResult({ player }) {
 
    
-    const {name, surname, position, photo}  = player
+    const {name, surname, position, photo, totalPoints}  = player
     
     function addDefaultSrc(event) {
        
@@ -35,6 +35,7 @@ function PlayerResult({ player }) {
               <div className="card-players__content" >
             <p className="card-players__content__name">{name} {surname} </p>
             <p className="card-players__content__position">{positionPlayer(position)}</p>
+            <p className="card-players__content__name">Points: {totalPoints} </p>
         </div>
 
     </div>

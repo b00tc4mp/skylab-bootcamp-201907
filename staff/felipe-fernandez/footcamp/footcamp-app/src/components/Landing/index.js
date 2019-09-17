@@ -1,10 +1,6 @@
-import React, {  useState } from 'react'
-import Context from '../Context'
-import logic from '../../logic'
-import Login from '../Login'
-import Register from '../Register'
+import React from 'react'
 import InitialHeader from '../InitialHeader'
-import { Route, Link, withRouter } from "react-router-dom"
+import { withRouter } from "react-router-dom"
 
 
 function Landing(props) {
@@ -29,13 +25,11 @@ function Landing(props) {
 
         <h2>The soccer fantasy game for all the enthusiastics of football</h2>
         
-        <div className="landing">         
-
-        
-        <ul>
-          <li><a  className="links" href="" onClick={handleGoToRegister}>Register</a></li>
-          <li><a  className="links" href="" onClick={handleGoToLogin}>Login</a></li>
-        </ul>
+        <div className="landing">  
+           <ul>
+              <li><a  className="links" href="" onClick={handleGoToRegister}>Register</a></li>
+              <li><a  className="links" href="" onClick={handleGoToLogin}>Login</a></li>
+            </ul>
         </div>
         </>
     

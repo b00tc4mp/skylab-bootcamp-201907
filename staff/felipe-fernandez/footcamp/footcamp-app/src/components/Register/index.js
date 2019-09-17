@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import logic from '../../logic'
 import { withRouter} from 'react-router-dom'
 import Feedback from '../Feedback'
@@ -7,6 +7,10 @@ import InitialHeader from '../InitialHeader'
 function Register(props) {
     const { history } = props
     const [error , setError] = useState(undefined) 
+    const [name, setName] = useState(null)
+    const [surname, setSurname] = useState(null)
+    const [email, setEmail] = useState(null)
+    const [password, setPassword] = useState(null)
 
     function handleRegister (name, surname, email, password) {
 
@@ -29,25 +33,15 @@ function Register(props) {
     }
 
 
-        const [name, setName] = useState(null)
-        const [surname, setSurname] = useState(null)
-        const [email, setEmail] = useState(null)
-        const [password, setPassword] = useState(null)
-  
-
     const handleNameInput = event => setName(event.target.value)
     const handleSurnameInput = event => setSurname(event.target.value)
-
     const handleEmailInput = event => setEmail(event.target.value)
-
     const handlePasswordInput = event => setPassword(event.target.value)
-
 
     const handleBack = () => {
         
             history.push('/')
       }
-
 
     
     return (
@@ -98,7 +92,9 @@ function Register(props) {
             </div>
                 <button className="button">Submit</button>
             </form>
+            
             {error && <Feedback message={error}/>}
+
             <a href="#" onClick={event => {
             event.preventDefault()
             handleBack()

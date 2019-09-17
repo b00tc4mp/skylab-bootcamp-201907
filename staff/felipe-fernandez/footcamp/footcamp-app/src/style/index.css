@@ -75,8 +75,12 @@ table {
 }
 
 .feedback__text {
-  color: red;
+  color: #F77754;
   text-align: center;
+  width: 80%;
+  margin: 5% auto;
+  padding: 5%;
+  border: 1px solid white;
 }
 
 .links {
@@ -161,14 +165,52 @@ input {
 
 .league {
   width: 80%;
-  margin: 20% auto;
+  margin: 10% auto;
   border: 1px solid white;
+}
+.league__name {
+  margin: 5%;
+}
+
+.league-title {
+  text-align: center;
+}
+
+.form-create {
+  text-align: center;
+}
+.form-create__inputs {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+label {
+  font-size: 18px;
+}
+
+input {
+  padding: 2%;
+  margin: 2%;
+}
+
+.create {
+  width: 80%;
+  margin: 10% auto;
+  border: 1px solid white;
+}
+.create__title {
+  margin-bottom: 0;
 }
 
 .header {
   display: flex;
   padding: 5%;
   justify-content: space-between;
+  align-items: center;
+}
+.header > div {
+  width: 30%;
 }
 
 /* Navbar container */
@@ -265,6 +307,9 @@ input {
 .title__user {
   font-size: 14px;
 }
+.title__name {
+  font-size: 25px;
+}
 
 ul {
   width: 100%;
@@ -284,7 +329,6 @@ ul {
 
 .card-initial {
   margin: 15%;
-  padding: 5px;
   width: 100%;
 }
 .card-initial p {
@@ -296,15 +340,11 @@ ul {
   font-size: 1px;
 }
 .card-initial__image {
-  width: 100%;
-}
-.card-initial__image--img {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
+  width: 90%;
 }
 .card-initial__content {
   border: 0.5px solid white;
+  width: 85%;
   padding: 0.5em;
   display: flex;
   justify-content: center;
@@ -437,6 +477,16 @@ li {
   list-style: none;
 }
 
+.item-players-lineup {
+  background-color: #394a6d;
+  width: 75%;
+  margin: 0 5%;
+}
+
+li {
+  list-style: none;
+}
+
 .player-lineup {
   display: flex;
   flex-direction: column;
@@ -498,6 +548,19 @@ a {
 
 p {
   font-family: "Monda", sans-serif;
+}
+
+button {
+  margin: 5%;
+  font-family: "Monda", sans-serif;
+  font-size: 14px;
+  background-color: white;
+  border-radius: 8px;
+}
+button button:hover {
+  background-color: white;
+  color: #D7D9DA;
+  font-weight: bold;
 }
 
 /*# sourceMappingURL=index.css.map */

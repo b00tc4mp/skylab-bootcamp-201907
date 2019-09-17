@@ -7,12 +7,13 @@ function LineupUpdate({match ,history}) {
 
     const [lineupChanges, setLineupChanges] = useState()
     const [playerLineup, setPlayerLineup] = useState()
-    const [idPlayerToChange, setIdPlayerToChange] = useState()
+    const [error , setError] = useState(undefined) 
+    // const [idPlayerToChange, setIdPlayerToChange] = useState()
 
     useEffect(() => {
         (async () => {
             try {
-                debugger
+                
             const { params: { id }} = match
             const leagueId  = await logic.retrieveAllLeagues()
             
@@ -38,9 +39,10 @@ function LineupUpdate({match ,history}) {
             
                 
             setPlayerLineup(playerLineup)
+
         } catch ({ message }) {
                 
-            console.log('fail create team', message)
+            setError(message)
           }
             
         })()
@@ -76,6 +78,24 @@ function LineupUpdate({match ,history}) {
         event.target.src = 'http://localhost:8080/images/avatar.jpg'
         
     }
+
+
+    function positionPlayer(number){
+        switch(number){
+            case 1: 
+            return 'Goalkeeper'
+            break;
+            case 2:
+            return 'Defender'
+            break;
+            case 2:
+            return 'Midfielder'
+            break;
+            case 2:
+            return 'Striker'
+            break;
+        }
+    }
         
     return <div> 
    
@@ -96,6 +116,7 @@ function LineupUpdate({match ,history}) {
                     <img className="player-lineup__image" onError={addDefaultSrc} src={"http://localhost:8080" + playerlineup.player.photo} width="300px"/>
                     <div className="player-lineup__content">
                         <p className="player-lineup__content__name">{playerlineup.player.name} {playerlineup.player.surname}</p>
+                        <p className="player-lineup__content__position">{positionPlayer(playerlineup.player.position)}</p>
                         <p className="player-lineup__content__points">Total points: {playerlineup.player.totalPoints}</p>
                     </div>
             </div>

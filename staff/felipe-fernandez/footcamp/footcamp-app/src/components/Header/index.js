@@ -62,16 +62,15 @@ return (
           </div>
       </div>
       
-  
-                
+    
           <div className="title">    
 
               <h2 className="title__name">FOOTCAMP FANTASY</h2>
           </div>  
           <div>
-              <div className="title__big"></div>
-              {user && <p className="title__user">Hello {user.name}!</p>} 
-           </div>             
+            
+              {user && <p className="title__user">{user.name}</p>} 
+           </div>              
          
       
    </nav>    
