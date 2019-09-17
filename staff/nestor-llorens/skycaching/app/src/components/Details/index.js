@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import logic from '../../logic'
 import { withRouter } from 'react-router-dom'
+import moment from 'moment'
 
 function Details(props) {
 
@@ -43,29 +44,33 @@ function Details(props) {
 
     return (<>
         <h2>Details</h2>
-        <p>Name: {cache.name}</p>
-        <p>Description: {cache.name}</p>
-        <p>Difficulty: {cache.difficulty}</p>
-        <p>Terrain: {cache.terrain}</p>
-        <p>Size: {cache.size}</p>
-        <p>Hints: {cache.hints}</p>
-        <p>Owner: {owner.username}</p>
-        {logged || owned ? '' : (<form onSubmit={event => {
-            event.preventDefault()
-            handleLogCache(event.target.cacheId.value, event.target.comment.value)
-            props.history.push('/')
+        <ul>
+            <li><p>Name: {cache.name}</p></li>
+            <li><p>Description: {cache.name}</p></li>
+            <li><p>Difficulty: {cache.difficulty}</p></li>
+            <li><p>Terrain: {cache.terrain}</p></li>
+            <li><p>Size: {cache.size}</p></li>
+            <li><p>Hints: {cache.hints}</p></li>
+            <li><p>Owner: {owner.username}</p></li>
+            {logged || owned ? '' : (<form onSubmit={event => {
+                event.preventDefault()
+                handleLogCache(event.target.cacheId.value, event.target.comment.value)
+                props.history.push('/')
 
-        }}>
-            <input type='hidden' name="cacheId" value={cache._id} />
-            <textarea rows="4" cols="50" name='comment' />
-            <button>Log</button>
-        </form>)}
+            }}>
+                <input type='hidden' name="cacheId" value={cache._id} />
+                <textarea rows="4" cols="50" name='comment' />
+                <button>Log</button>
+            </form>)}
+        </ul>
         <ul>Comments
-        {comments.map((comment) => (
-            <li key={comment._id}>
-                <p>{comment.username}</p>
-                <p>{comment.date}</p>
-                <p>{comment.comment}</p>
+        {comments.map((comment, key) => (
+            <li key={key}>
+                <ul>
+                    <li><p>{comment.username}</p></li>
+                    <li><p>{moment(comment.date).format("DD/MM/YYYY")}</p></li>
+                    <li><p>{comment.comment}</p></li>
+                </ul>
             </li>
         ))}
         </ul>
