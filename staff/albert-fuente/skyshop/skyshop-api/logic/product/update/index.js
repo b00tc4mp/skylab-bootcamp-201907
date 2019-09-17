@@ -2,6 +2,8 @@ const {validate} = require('skyshop-utils')
 const {models:{Product}}=require('skyshop-data')
 
 /**
+ * Updates a product
+ * 
  * @param {*} productId
  * @param {*} fieldsToUpdate
  * 

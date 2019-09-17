@@ -2,6 +2,7 @@ const {validate} = require('skyshop-utils')
 const {models:{User} } = require('skyshop-data')
 
 /**
+ * Retreives one user
  * 
  * @param {*} id 
  * 

@@ -2,7 +2,7 @@ const {validate} = require('skyshop-utils')
 const { models:{Product} } = require('skyshop-data')
 
 /**
- * Unregisters a user by their id
+ * Unregisters a product by its id
  * 
  * @param {string} productId
  * 

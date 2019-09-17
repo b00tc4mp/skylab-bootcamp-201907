@@ -2,10 +2,11 @@ const {validate} = require('skyshop-utils')
 const {models:{Auction, User}}=require('skyshop-data')
 
 /**
+ * Inserts a second date 
+ * 
  * @param {*} auctionId
  * @param {*} userId
- * @param {*} fieldsToUpdate
- * 
+ *  
  * @returns {Promise}
  */
 

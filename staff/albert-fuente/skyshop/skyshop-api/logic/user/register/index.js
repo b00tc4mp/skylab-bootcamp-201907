@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs')
 
 
 /**
+ * Registers a new user
  * 
  * @param {*} name 
  * @param {*} surname 

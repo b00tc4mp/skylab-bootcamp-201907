@@ -1,7 +1,7 @@
 const {validate} = require('skyshop-utils')
 const { models:{Product} } = require('skyshop-data')
 /**
- * 
+ * Retrieves one product
  *  
  * @param {*} productId 
  * @returns {Promise}

@@ -2,9 +2,8 @@ const {validate} = require('skyshop-utils')
 const { models:{User} } = require('skyshop-data')
 const bcrypt = require('bcryptjs')
 
-
-
 /**
+ * Updates one user
  * 
  * @param {*} id
  * @param {*} fieldsToUpdate 

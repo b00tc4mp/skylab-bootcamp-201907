@@ -1,9 +1,9 @@
 const {validate} = require('skyshop-utils')
 const { models:{Auction} } = require('skyshop-data')
 /**
- * 
+ * Retrieves an auction based on productId
  *  
- * @param {*} auctionId 
+ * @param {*} productId 
  * @returns {Promise}
  * 
 */

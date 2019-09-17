@@ -3,7 +3,7 @@ const {validate} = require('skyshop-utils')
 const {models:{Product}}=require('skyshop-data')
 
 /**
- * 
+ * Registers a product
  * 
  * @param {*} title
  * @param {*} image
