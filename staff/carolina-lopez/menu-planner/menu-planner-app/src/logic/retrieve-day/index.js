@@ -1,8 +1,8 @@
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
-export default function () {
+export default function (id) {
     return (async () => {
-        const response = await fetch(`${REACT_APP_API_URL}/users`, {
+        const response = await fetch(`${REACT_APP_API_URL}/days/${id}`, {
             method: 'get',
             headers: {
                 authorization: `bearer ${this.__token__}`
@@ -15,8 +15,8 @@ export default function () {
             throw Error(error)
         }
 
-        const { user } = await response.json()
+        const { day } = await response.json()
 
-        return user
+        return day
      })()
 }
