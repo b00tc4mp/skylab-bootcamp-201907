@@ -10,7 +10,7 @@ describe('logic - edit task', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
-    let taskName, taskType, description, date, taskSpace, companions, id
+    let taskName, taskType, description, date, companions, id
     let title, type, picture, address, passcode, cousers, spaceId
     let username, name, surname, email, password, spaces, tasks, userId   
 
@@ -47,7 +47,7 @@ describe('logic - edit task', () => {
         const space = await Space.create({ title, type, picture, address, passcode, cousers })
         spaceId = space._id.toString()
 
-        const task = await Task.create({ taskName, taskType, description, date, taskSpace, companions })
+        const task = await Task.create({ taskName, taskType, description, date, taskSpace: space._id, companions })
         id = task._id.toString()
 
         user.spaces.push(spaceId)
@@ -57,7 +57,6 @@ describe('logic - edit task', () => {
         space.cousers.push(userId)
         await space.save()
 
-        task.taskSpace.push(spaceId)
         task.companions.push(userId)
         await task.save()
     })

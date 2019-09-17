@@ -71,6 +71,7 @@ describe('logic - register space co-user', () => {
     it('should fail if the co-user is already registered', async () => {
         try {
             await logic.registerSpaceCouser(email2, passcode, spaceId, existentUserId)
+
         } catch({error}) {
             expect(error).to.exist
             expect(error.message).to.equal(`user already registered in space with id ${spaceId}`)

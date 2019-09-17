@@ -42,7 +42,7 @@ describe('logic - retrieve all user tasks', () => {
         const space = await Space.create({ title, type, picture, address, passcode, cousers })
         spaceId = space._id.toString()
 
-        const task = await Task.create({ taskName, taskType, description, date, taskSpace, companions })
+        const task = await Task.create({ taskName, taskType, description, date, taskSpace: space._id, companions })
         taskId = task._id.toString()
 
         user.spaces.push(spaceId)
@@ -52,7 +52,6 @@ describe('logic - retrieve all user tasks', () => {
         space.cousers.push(userId)
         await space.save()
 
-        task.taskSpace.push(spaceId)
         task.companions.push(userId)
         await task.save()
     })
@@ -62,7 +61,13 @@ describe('logic - retrieve all user tasks', () => {
         expect(tasks).to.exist
         expect(tasks).not.to.be.empty
 
-        expect(tasks[0]._id.toString()).to.equal(taskId)
+        expect(tasks[0].taskName).to.equal(taskName)
+        expect(tasks[0].taskType).to.equal(taskType)
+        expect(tasks[0].description).to.equal(description)
+        expect(tasks[0].date).to.deep.equal(date)
+        expect(tasks[0].taskSpace.toString()).to.equal(spaceId)
+        expect(tasks[0].companions).to.include(userId)
+        expect(tasks[0].id).to.equal(taskId)
     })
 
     it('should fail on empty id', async () => {

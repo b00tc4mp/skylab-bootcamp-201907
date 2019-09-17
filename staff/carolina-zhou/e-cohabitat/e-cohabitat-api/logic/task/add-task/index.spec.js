@@ -10,9 +10,9 @@ describe('logic - add task', () => {
 
     before(() => database.connect(DB_URL_TEST))
     
-    let taskName, taskType, description, date, spaceId, userId
-    let title, type, picture, address, passcode
-    let username, name, surname, email, password
+    let taskName, taskType, description, date, taskSpace, companions
+    let title, type, picture, address, passcode, spaceId
+    let username, name, surname, email, password, userId
 
     beforeEach(async() => {
         const taskTypeArray = ['particular', 'collective', 'maintenance']
@@ -22,6 +22,7 @@ describe('logic - add task', () => {
         taskType =  `${taskTypeArray[Math.floor(Math.random() * taskTypeArray.length)]}`
         description = `description-${Math.random()}`
         date = new Date
+        companions = []
 
         await Task.deleteMany()
         username = `username-${Math.random()}`
@@ -41,6 +42,8 @@ describe('logic - add task', () => {
 
         const space = await Space.create({ title, type, picture, address, passcode, userId })
         spaceId = space._id.toString()
+
+        /* companions.push(userId) */
     })
 
     it('should succeed on correct data', async () => {
@@ -54,7 +57,7 @@ describe('logic - add task', () => {
         expect(task.taskType).to.equal(taskType)
         expect(task.description).to.equal(description)
         expect(task.date).to.deep.equal(date)
-        expect(task.taskSpace).to.include(spaceId)
+        expect(task.taskSpace.toString()).to.equal(spaceId)
         expect(task.companions).to.include(userId)
     })
 

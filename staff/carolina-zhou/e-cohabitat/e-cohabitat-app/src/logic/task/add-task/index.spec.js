@@ -1,20 +1,22 @@
-/* require('dotenv').config()
+import logic from '../../'
+import { database, models } from 'data'
+import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
 
-const { expect } = require('chai')
-const logic = require('../..')
-const { database, models: { User, Space, Task } } = require('data')
+const { User, Space, Task } = models
 
-const { env: { DB_URL_TEST }} = process
+const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
+const REACT_APP_JWT_SECRET_TEST = process.env.REACT_APP_JWT_SECRET_TEST
+
 
 describe('logic - add task', () => {
+    beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
 
-    before(() => database.connect(DB_URL_TEST))
-    
-    let taskName, taskType, description, date, spaceId, userId
-    let title, type, picture, address, passcode
-    let username, name, surname, email, password
+    let taskName, taskType, description, date, taskSpace, companions
+    let title, type, picture, address, passcode, cousers, spaceId
+    let username, name, surname, email, password, spaces, tasks, id
 
-    beforeEach(async() => {
+    beforeEach(async () => {
         const taskTypeArray = ['particular', 'collective', 'maintenance']
         const spaceTypeArray = ['kitchen', 'bathroom', 'living room', 'coworking', 'garden', 'rooftop', 'other']
         
@@ -22,6 +24,7 @@ describe('logic - add task', () => {
         taskType =  `${taskTypeArray[Math.floor(Math.random() * taskTypeArray.length)]}`
         description = `description-${Math.random()}`
         date = new Date
+        companions = []
 
         await Task.deleteMany()
         username = `username-${Math.random()}`
@@ -36,26 +39,39 @@ describe('logic - add task', () => {
         address = `address-${Math.random()}`
         passcode = `123-${Math.random()}`
 
-        const user = await User.create({ username, name, surname, email, password })
-        userId = user._id.toString()
+        await User.deleteMany()
 
-        const space = await Space.create({ title, type, picture, address, passcode, userId })
-        spaceId = space._id.toString()
+        const hash = await bcrypt.hash(password, 10)
+        const user = await User.create({ username, name, surname, email, password: hash, spaces, tasks })
+        id = user.id
+
+        const space = await Space.create({ title, type, picture, address, passcode, cousers })
+        spaceId = space.id
+        space.cousers.push(id)
+        await space.save()
+        
+        user.spaces.push(spaceId)
+        await user.save()
+        
+        const token = jwt.sign({ sub: id }, REACT_APP_JWT_SECRET_TEST)
+
+        logic.__userCredentials__ = { id: id, token: token }
+        
     })
 
     it('should succeed on correct data', async () => {
-        const taskId = await logic.addTask(taskName, taskType, description, date, spaceId, userId)
-        expect(taskId).to.exist
+        const response = await logic.addTask(taskName, taskType, description, date, spaceId)
+        expect(response).toBeUndefined()
 
-        const task = await Task.findOne({ _id: taskId })
-        expect(task).to.exist
-        expect(task.id).to.equal(taskId)
-        expect(task.taskName).to.equal(taskName)
-        expect(task.taskType).to.equal(taskType)
-        expect(task.description).to.equal(description)
-        expect(task.date).to.deep.equal(date)
-        expect(task.taskSpace).to.include(spaceId)
-        expect(task.companions).to.include(userId)
+        const task = await Task.findOne({ description, date  })
+        expect(task).toBeDefined()
+        expect(task._id).toBeDefined()
+        expect(task.taskName).toBe(taskName)
+        expect(task.taskType).toBe(taskType)
+        expect(task.description).toBe(description)
+        expect(new Date(task.date)).toEqual(date)
+        expect(task.taskSpace.toString()).toBe(spaceId)
+        expect(task.companions).toHaveLength(1)
     })
 
     // task name
@@ -63,9 +79,9 @@ describe('logic - add task', () => {
         taskName = ''
 
         try {
-            await logic.addTask(taskName, taskType, description, date, spaceId, userId)
+            await logic.addTask(taskName, taskType, description, date, spaceId)
         } catch({message}) {
-            expect(message).to.equal('task name is empty or blank')
+            expect(message).toBe('task name is empty or blank')
         }
     })
 
@@ -73,9 +89,9 @@ describe('logic - add task', () => {
         taskName = undefined
 
         try {
-            await logic.addTask(taskName, taskType, description, date, spaceId, userId)
+            await logic.addTask(taskName, taskType, description, date, spaceId)
         } catch({message}) {
-            expect(message).to.equal('task name with value undefined is not a string')
+            expect(message).toBe('task name with value undefined is not a string')
         }
     })
 
@@ -83,9 +99,9 @@ describe('logic - add task', () => {
         taskName = 123
 
         try {
-            await logic.addTask(taskName, taskType, description, date, spaceId, userId)
+            await logic.addTask(taskName, taskType, description, date, spaceId)
         } catch({message}) {
-            expect(message).to.equal('task name with value 123 is not a string')
+            expect(message).toBe('task name with value 123 is not a string')
         }
     })
 
@@ -94,9 +110,9 @@ describe('logic - add task', () => {
         taskType = ''
 
         try {
-            await logic.addTask(taskName, taskType, description, date, spaceId, userId)
+            await logic.addTask(taskName, taskType, description, date, spaceId)
         } catch({message}) {
-            expect(message).to.equal('task type is empty or blank')
+            expect(message).toBe('task type is empty or blank')
         }
     })
 
@@ -104,9 +120,9 @@ describe('logic - add task', () => {
         taskType = undefined
 
         try {
-            await logic.addTask(taskName, taskType, description, date, spaceId, userId)
+            await logic.addTask(taskName, taskType, description, date, spaceId)
         } catch({message}) {
-            expect(message).to.equal('task type with value undefined is not a string')
+            expect(message).toBe('task type with value undefined is not a string')
         }
     })
 
@@ -114,9 +130,9 @@ describe('logic - add task', () => {
         taskType = 123
 
         try {
-            await logic.addTask(taskName, taskType, description, date, spaceId, userId)
+            await logic.addTask(taskName, taskType, description, date, spaceId)
         } catch({message}) {
-            expect(message).to.equal('task type with value 123 is not a string')
+            expect(message).toBe('task type with value 123 is not a string')
         }
     })
 
@@ -125,9 +141,9 @@ describe('logic - add task', () => {
         description = ''
 
         try {
-            await logic.addTask(taskName, taskType, description, date, spaceId, userId)
+            await logic.addTask(taskName, taskType, description, date, spaceId)
         } catch({message}) {
-            expect(message).to.equal('task description is empty or blank')
+            expect(message).toBe('task description is empty or blank')
         }
     })
 
@@ -135,9 +151,9 @@ describe('logic - add task', () => {
         description = undefined
 
         try {
-            await logic.addTask(taskName, taskType, description, date, spaceId, userId)
+            await logic.addTask(taskName, taskType, description, date, spaceId)
         } catch({message}) {
-            expect(message).to.equal('task description with value undefined is not a string')
+            expect(message).toBe('task description with value undefined is not a string')
         }
     })
 
@@ -145,9 +161,9 @@ describe('logic - add task', () => {
         description = 123
 
         try {
-            await logic.addTask(taskName, taskType, description, date, spaceId, userId)
+            await logic.addTask(taskName, taskType, description, date, spaceId)
         } catch({message}) {
-            expect(message).to.equal('task description with value 123 is not a string')
+            expect(message).toBe('task description with value 123 is not a string')
         }
     })
 
@@ -156,9 +172,9 @@ describe('logic - add task', () => {
         date = ''
 
         try {
-            await logic.addTask(taskName, taskType, description, date, spaceId, userId)
+            await logic.addTask(taskName, taskType, description, date, spaceId)
         } catch({message}) {
-            expect(message).to.equal('task date is empty or blank')
+            expect(message).toBe('task date is empty or blank')
         }
     })
 
@@ -166,9 +182,9 @@ describe('logic - add task', () => {
         date = undefined
 
         try {
-            await logic.addTask(taskName, taskType, description, date, spaceId, userId)
+            await logic.addTask(taskName, taskType, description, date, spaceId)
         } catch({message}) {
-            expect(message).to.equal('task date with value undefined is not a date')
+            expect(message).toBe('task date with value undefined is not a date')
         }
     })
 
@@ -176,9 +192,9 @@ describe('logic - add task', () => {
         date = 123
 
         try {
-            await logic.addTask(taskName, taskType, description, date, spaceId, userId)
+            await logic.addTask(taskName, taskType, description, date, spaceId)
         } catch({message}) {
-            expect(message).to.equal('task date with value 123 is not a date')
+            expect(message).toBe('task date with value 123 is not a date')
         }
     })
 
@@ -187,9 +203,9 @@ describe('logic - add task', () => {
         spaceId = ''
 
         try {
-            await logic.addTask(taskName, taskType, description, date, spaceId, userId)
+            await logic.addTask(taskName, taskType, description, date, spaceId)
         } catch({message}) {
-            expect(message).to.equal('space id is empty or blank')
+            expect(message).toBe('space id is empty or blank')
         }
     })
 
@@ -197,9 +213,9 @@ describe('logic - add task', () => {
         spaceId = undefined
 
         try {
-            await logic.addTask(taskName, taskType, description, date, spaceId, userId)
+            await logic.addTask(taskName, taskType, description, date, spaceId)
         } catch({message}) {
-            expect(message).to.equal('space id with value undefined is not a string')
+            expect(message).toBe('space id with value undefined is not a string')
         }
     })
 
@@ -207,42 +223,11 @@ describe('logic - add task', () => {
         spaceId = 123
 
         try {
-            await logic.addTask(taskName, taskType, description, date, spaceId, userId)
+            await logic.addTask(taskName, taskType, description, date, spaceId)
         } catch({message}) {
-            expect(message).to.equal('space id with value 123 is not a string')
+            expect(message).toBe('space id with value 123 is not a string')
         }
     })
 
-    // user id
-    it('should fail on empty creator-user id', async () => {
-        id = ''
-
-        try {
-            await logic.addTask(taskName, taskType, description, date, spaceId, userId)
-        } catch({message}) {
-            expect(message).to.equal('creator-user id is empty or blank')
-        }
-    })
-
-    it('should fail on undefined creator-user id', async () => {
-        id = undefined
-
-        try {
-            await logic.addTask(taskName, taskType, description, date, spaceId, userId)
-        } catch({message}) {
-            expect(message).to.equal('creator-user id with value undefined is not a string')
-        }
-    })
-
-    it('should fail on wrong creator-user id data type', async () => {
-        id = 123
-
-        try {
-            await logic.addTask(taskName, taskType, description, date, spaceId, userId)
-        } catch({message}) {
-            expect(message).to.equal('creator-user id with value 123 is not a string')
-        }
-    })
-
-    after(() => database.disconnect())
-}) */
+    afterAll(() => database.disconnect())
+})

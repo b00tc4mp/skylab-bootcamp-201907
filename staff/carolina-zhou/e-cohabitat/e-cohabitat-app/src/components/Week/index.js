@@ -24,7 +24,7 @@ function Week({ history, match }) {
             console.log(error.message)
           }
         })()
-    },[])
+    },[spaceId, currentDate])
 
     function handleMonth(event) {
         event.preventDefault()

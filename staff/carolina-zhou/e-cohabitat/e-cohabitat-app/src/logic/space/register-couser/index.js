@@ -15,9 +15,10 @@ export default function(email, passcode, spaceId) {
 
     validate.string(email, 'co-user email')
     validate.string(passcode, 'space passcode')
+    validate.string(spaceId, 'space id')
 
     const { id, token } = this.__userCredentials__
-debugger
+
     return (async () => {
         const response = await fetch(`${REACT_APP_API_URL}/users/${id}/spaces/${spaceId}/cousers`, {
             method: 'PATCH',

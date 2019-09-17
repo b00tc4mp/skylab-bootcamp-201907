@@ -1,18 +1,19 @@
-/* require('dotenv').config()
+import logic from '../../'
+import { database, models } from 'data'
+import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
 
-const { expect } = require('chai')
-const logic = require('../..')
-const { database, models: { User, Space, Task } } = require('data')
+const { User, Space, Task } = models
 
-const { env: { DB_URL_TEST }} = process
+const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
+const REACT_APP_JWT_SECRET_TEST = process.env.REACT_APP_JWT_SECRET_TEST
 
-describe('logic - retrieve all tasks', () => {
-
-    before(() => database.connect(DB_URL_TEST))
+describe('logic - retrieve all space tasks', () => {
+    beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
 
     let taskName, taskType, description, date, taskSpace, companions, taskId
-    let title, type, picture, address, passcode, cousers, spaceId
-    let username, name, surname, email, password, spaces, tasks, userId   
+    let title, type, picture, address, passcode, cousers, spaceTasks, spaceId
+    let username, name, surname, email, password, spaces, tasks, id   
 
     beforeEach(async() => {
         const taskTypeArray = ['particular', 'collective', 'maintenance']
@@ -30,64 +31,77 @@ describe('logic - retrieve all tasks', () => {
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@email.com`
         password = `123-${Math.random()}`
+        spaces = []
+        tasks = []
 
         title = `name-${Math.random()}`
         type = `${spaceTypeArray[Math.floor(Math.random() * spaceTypeArray.length)]}`
         address = `address-${Math.random()}`
         passcode = `123-${Math.random()}`
 
-        const user = await User.create({ username, name, surname, email, password, spaces, tasks })
-        userId = user._id.toString()
+        const hash = await bcrypt.hash(password, 10)
+        const user = await User.create({ username, name, surname, email, password: hash, spaces, tasks })
+        id = user.id
 
-        const space = await Space.create({ title, type, picture, address, passcode, cousers })
+        const space = await Space.create({ title, type, picture, address, passcode, cousers, spaceTasks })
         spaceId = space._id.toString()
 
-        const task = await Task.create({ taskName, taskType, description, date, taskSpace, companions })
+        const task = await Task.create({ taskName, taskType, description, date, taskSpace: space._id, companions })
         taskId = task._id.toString()
 
         user.spaces.push(spaceId)
         user.tasks.push(taskId)
         await user.save()
 
-        space.cousers.push(userId)
+        space.cousers.push(id)
+        space.spaceTasks.push(taskId)
         await space.save()
 
-        task.taskSpace.push(spaceId)
-        task.companions.push(userId)
+        task.companions.push(id)
         await task.save()
+
+        const token = jwt.sign({ sub: id }, REACT_APP_JWT_SECRET_TEST)
+
+        logic.__userCredentials__ = { id: id, token: token }
     })
 
     it('should succeed on correct data', async() => {
-        const tasks = await logic.retrieveAllTasks(userId)
-        expect(tasks).to.exist
-        expect(tasks).not.to.be.empty
+        const tasks = await logic.retrieveAllSpaceTasks(spaceId)
+        expect(tasks).toBeDefined
+        expect(tasks.length).toBeGreaterThan(0)
 
-        expect(tasks.toString()).to.equal(taskId)
+        const taskDate = new Date(tasks[0].date)
+        expect(tasks[0].taskName).toBe(taskName)
+        expect(tasks[0].taskType).toBe(taskType)
+        expect(tasks[0].description).toBe(description)
+        expect(taskDate).toEqual(date)
+        expect(tasks[0].taskSpace.toString()).toBe(spaceId)
+        expect(tasks[0]._id).toBe(taskId)
     })
 
-    it('should fail on empty id', async () => {
+    // space id
+    it('should fail on empty space id', async () => {
         try{
-            await logic.retrieveAllSpaces(' ')
+            await logic.retrieveAllSpaceTasks(' ')
         } catch({ message }) {
-            expect(message).to.equal('user id is empty or blank')
+            expect(message).toBe('space id is empty or blank')
         }
     })
 
-    it('should fail on undefined id', async () => {
+    it('should fail on undefined space id', async () => {
           try{
-            await logic.retrieveAllSpaces(undefined)
+            await logic.retrieveAllSpaceTasks(undefined)
         } catch({ message }) {
-            expect(message).to.equal("user id with value undefined is not a string")
+            expect(message).toBe("space id with value undefined is not a string")
         }
     })
      
-    it('should fail on wrong id data type', async() => {
+    it('should fail on wrong space id data type', async() => {
          try{
-            await logic.retrieveAllSpaces(123)
+            await logic.retrieveAllSpaceTasks(123)
         } catch({ message }) {
-                expect(message).to.equal("user id with value 123 is not a string")
+                expect(message).toBe("space id with value 123 is not a string")
         }
     })
-
-    after(() => database.disconnect())
-}) */
+    afterAll(() => database.disconnect())
+})

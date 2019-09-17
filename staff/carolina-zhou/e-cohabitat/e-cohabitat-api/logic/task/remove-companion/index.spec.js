@@ -55,8 +55,7 @@ describe('logic - remove task companion', () => {
         spaceId = newSpace.id
         await newSpace.save()
 
-        const newTask = await Task.create({ taskName, taskType, description, date, taskSpace, companions })
-        newTask.taskSpace.push(spaceId)
+        const newTask = await Task.create({ taskName, taskType, description, date, taskSpace: newSpace._id, companions })
         newTask.companions.push(companionIdOne, companionIdTwo)
         taskId = newTask._id.toString()
         await newTask.save()

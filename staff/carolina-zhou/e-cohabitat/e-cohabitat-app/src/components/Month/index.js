@@ -24,7 +24,7 @@ function Month({ history, match }) {
             console.log(error.message)
           }
         })()
-    },[])
+    },[spaceId, currentDate])
 
     function handleMonth(event) {
         event.preventDefault()
@@ -176,7 +176,7 @@ function Month({ history, match }) {
 
         return <div>{rows}</div>
     }
-debugger
+
     return <>
     
         <div className="month">

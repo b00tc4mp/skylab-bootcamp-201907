@@ -30,8 +30,7 @@ module.exports = function(taskName, taskType, description, date, spaceId, userId
         const space = await Space.findById(spaceId)
         if (!space) throw Error('space does not exist') 
         
-        const task = new Task({ taskName, taskType, description, date })
-        task.taskSpace.push(spaceId)
+        const task = new Task({ taskName, taskType, description, date, taskSpace: spaceId })
         task.companions.push(userId)
         task.companionNames.push(user.username)
         await task.save()

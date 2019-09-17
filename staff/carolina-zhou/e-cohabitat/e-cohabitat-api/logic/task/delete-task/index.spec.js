@@ -10,7 +10,7 @@ describe('logic - delete task', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
-    let taskName, taskType, description, date, taskSpace, companions, taskId
+    let taskName, taskType, description, date, companions, taskId
     let title, type, picture, address, passcode, cousers, spaceId
     let username, name, surname, email, password, spaces, tasks, userId   
 
@@ -42,7 +42,7 @@ describe('logic - delete task', () => {
         const space = await Space.create({ title, type, picture, address, passcode, cousers })
         spaceId = space._id.toString()
 
-        const task = await Task.create({ taskName, taskType, description, date, taskSpace, companions })
+        const task = await Task.create({ taskName, taskType, description, date, taskSpace: space._id, companions })
         taskId = task._id.toString()
 
         user.spaces.push(spaceId)
@@ -53,7 +53,6 @@ describe('logic - delete task', () => {
         space.spaceTasks.push(taskId)
         await space.save()
 
-        task.taskSpace.push(spaceId)
         task.companions.push(userId)
         await task.save()
     })
@@ -61,6 +60,7 @@ describe('logic - delete task', () => {
     it('should succeed on correct data', async () => {
         const result = await logic.deleteTask(userId, spaceId, taskId)
         expect(result).not.to.exist
+
         const task = await Task.findById(taskId)
         expect(task).not.to.exist
     })

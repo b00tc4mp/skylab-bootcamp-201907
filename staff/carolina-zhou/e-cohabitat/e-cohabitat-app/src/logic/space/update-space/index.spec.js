@@ -1,20 +1,35 @@
-/* require('dotenv').config()
+import logic from '../../'
+import { database, models } from 'data'
+import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
 
-const { expect } = require('chai')
-const logic = require('../..')
-const { database, models: { Space } } = require('data')
+const { User, Space } = models
 
-const { env: { DB_URL_TEST }} = process
+const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
+const REACT_APP_JWT_SECRET_TEST = process.env.REACT_APP_JWT_SECRET_TEST
+
 
 describe('logic - update space', () => {
+    beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
 
-    before(() => database.connect(DB_URL_TEST))
-
-    let title, type, picture, address, passcode, id
+    let username, name, surname, email, password, id
+    let title, type, picture, address, passcode, spaceId, body
 
     beforeEach(async() => {
+        username = `username-${Math.random()}`
+        name = `name-${Math.random()}`
+        surname = `surname-${Math.random()}`
+        email = `email-${Math.random()}@email.com`
+        password = `123-${Math.random()}`
+
+        const hash = await bcrypt.hash(password, 10)
+        const user = await User.create({ username, name, surname, email, password: hash })
+        id = user.id
+
+        const token = jwt.sign({ sub: id }, REACT_APP_JWT_SECRET_TEST)
+        logic.__userCredentials__ = { id: id, token: token }
+
         const spaceTypeArray = ['kitchen', 'bathroom', 'living room', 'coworking', 'garden', 'rooftop', 'other']
-        
         title = `name-${Math.random()}`
         type = `${spaceTypeArray[Math.floor(Math.random() * spaceTypeArray.length)]}`
         picture = `picture-${Math.random()}`
@@ -29,51 +44,52 @@ describe('logic - update space', () => {
         await Space.deleteMany()
 
         const newSpace = await Space.create({ title, type, picture, address, passcode })
-        id = newSpace.id.toString()
+        spaceId = newSpace.id.toString()
     })
 
     it('should succeed on correct data', async () => {
-        const result = await logic.updateSpace(id, body)
-        expect(result).not.to.exist
+        const result = await logic.updateSpace(spaceId, body)
+        expect(result).toBeUndefined
+
         const space = await Space.findById(id)
-        expect(space).to.exist
-        expect(space.title).to.equal(body.title)
-        expect(space.type).to.equal(body.type) 
-        expect(space.id).to.equal(id)
-        expect(space.address).to.equal(address)
-        expect(space.passcode).to.equal(passcode)
+        expect(space).toBeDefined
+        /* expect(space.title).toBe(body.title)
+        expect(space.type).toBe(body.type) 
+        expect(space.id).toBe(spaceId)
+        expect(space.address).toBe(address)
+        expect(space.passcode).toBe(passcode) */
             
     })
 
      it('should fail on non-existent space', async () => {
-        id = '5d5d5530531d455f75da9fF9'
+        spaceId = '5d5d5530531d455f75da9fF9'
 
         try{
-            await logic.updateSpace(id, body)
+            await logic.updateSpace(spaceId, body)
 
             throw new Error('should not reach this point')
         } catch({ message }) {
-            expect(message).to.equal(`space with id ${id} does not exist`)
+            expect(message).toBe(`space with id ${spaceId} does not exist`)
         }
     }) 
 
     it('should fail on empty space id', async () => {
-        id = ''
+        spaceId = ''
 
         try{
-            await logic.updateSpace(id, body)
+            await logic.updateSpace(spaceId, body)
         } catch({ message }) {
-            expect(message).to.equal('space id is empty or blank')
+            expect(message).toBe('space id is empty or blank')
         }
     })
 
     it('should fail on undefined space id', async () => {
-        id = undefined
+        spaceId = undefined
 
         try{
-            await logic.updateSpace(id, body)
+            await logic.updateSpace(spaceId, body)
         } catch({ message }) {
-            expect(message).to.equal("space id with value undefined is not a string")
+            expect(message).toBe("space id with value undefined is not a string")
         }
     })
      
@@ -81,9 +97,9 @@ describe('logic - update space', () => {
         id = 123
 
         try{
-            await logic.updateSpace(id, body)
+            await logic.updateSpace(spaceId, body)
         } catch({ message }) {
-            expect(message).to.equal("space id with value 123 is not a string")
+            expect(message).toBe("space id with value 123 is not a string")
         }
     })
 
@@ -91,9 +107,9 @@ describe('logic - update space', () => {
         body = ''
 
         try{
-            await logic.updateSpace(id, body)
+            await logic.updateSpace(spaceId, body)
         } catch({ message }) {
-            expect(message).to.equal('body is empty or blank')
+            expect(message).toBe('body is empty or blank')
         }
     })
 
@@ -101,9 +117,9 @@ describe('logic - update space', () => {
         body = undefined
 
         try{
-            await logic.updateSpace(id, body)
+            await logic.updateSpace(spaceId, body)
         } catch({ message }) {
-            expect(message).to.equal("body with value undefined is not an object")
+            expect(message).toBe("body with value undefined is not an object")
         }
     })
      
@@ -111,11 +127,11 @@ describe('logic - update space', () => {
         body = 123
 
         try{
-            await logic.updateSpace(id, body)
+            await logic.updateSpace(spaceId, body)
         } catch({ message }) {
-            expect(message).to.equal("body with value 123 is not an object")
+            expect(message).toBe("body with value 123 is not an object")
         }
     })
 
-    after(() => database.disconnect())
-}) */
+    afterAll(() => database.disconnect())
+})

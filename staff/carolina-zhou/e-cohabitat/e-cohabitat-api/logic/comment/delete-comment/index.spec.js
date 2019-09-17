@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const { expect } = require('chai')
 const logic = require('../..')
-const { database, models: { User, Task, Comment } } = require('data')
+const { database, models: { User, Space, Task, Comment } } = require('data')
 
 const { env: { DB_URL_TEST }} = process
 
@@ -11,6 +11,7 @@ describe('logic - delete comment', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let authorId, author, posted, text, taskId
+    let title, type, picture, address, passcode
     let username, name, surname, email, password, spaces, tasks, userId
     let taskName, taskType, description, date, taskSpace, companions, comments
 
@@ -24,11 +25,22 @@ describe('logic - delete comment', () => {
         const user = await User.create({ username, name, surname, email, password, spaces, tasks })
         userId = user._id.toString()
 
+        const spaceTypeArray = ['kitchen', 'bathroom', 'living room', 'coworking', 'garden', 'rooftop', 'other']
+        title = `name-${Math.random()}`
+        type = `${spaceTypeArray[Math.floor(Math.random() * spaceTypeArray.length)]}`
+        picture = `picture-${Math.random()}`
+        address = `address-${Math.random()}`
+        passcode = `123-${Math.random()}`
+
+        const space = await Space.create({ title, type, picture, address, passcode })
+        spaceId = space.id.toString()
+
         const taskTypeArray = ['particular', 'collective', 'maintenance']
         taskName = `taskName-${Math.random()}`
         taskType =  `${taskTypeArray[Math.floor(Math.random() * taskTypeArray.length)]}`
         description = `description-${Math.random()}`
         date = new Date
+        taskSpace = space.id
 
         const task = await Task.create({ taskName, taskType, description, date, taskSpace, companions, comments })
 
@@ -37,6 +49,7 @@ describe('logic - delete comment', () => {
         posted = new Date
         text = `comment-${Math.random()}`
         taskId = task._id.toString()
+        taskSpace = space.id
 
         const newComment = await Comment.create({ authorId, author, posted, text })
         commentId = newComment._id.toString()
@@ -86,6 +99,56 @@ describe('logic - delete comment', () => {
             expect(message).to.equal('there is no comment with the provided comment id')
         }
     })
+
+    it('should fail on if the comment does not match the task', async () => {
+        const spaceTypeArray = ['kitchen', 'bathroom', 'living room', 'coworking', 'garden', 'rooftop', 'other']
+        title = `name-${Math.random()}`
+        type = `${spaceTypeArray[Math.floor(Math.random() * spaceTypeArray.length)]}`
+        picture = `picture-${Math.random()}`
+        address = `address-${Math.random()}`
+        passcode = `123-${Math.random()}`
+
+        const space = await Space.create({ title, type, picture, address, passcode })
+        spaceId = space.id.toString()
+
+        const taskTypeArray = ['particular', 'collective', 'maintenance']
+        taskName = `taskName2-${Math.random()}`
+        taskType =  `${taskTypeArray[Math.floor(Math.random() * taskTypeArray.length)]}`
+        description = `description2-${Math.random()}`
+        date = new Date
+        taskSpace = space.id
+
+        const task2 = await Task.create({ taskName, taskType, description, date, taskSpace, companions, comments })
+        const task2Id = task2._id.toString()
+
+        try {
+            await logic.deleteComment(userId, task2Id, commentId)
+            
+            throw Error('should not reach this point')
+        } catch({message}) {
+            expect(message).to.equal('this comment was not found in the task introduced')
+        }
+    })
+
+    it('should fail on if the user is not the author of the comment', async () => {
+        username = `username2-${Math.random()}`
+        name = `name2-${Math.random()}`
+        surname = `surname2-${Math.random()}`
+        email = `email2-${Math.random()}@email.com`
+        password = `0123-${Math.random()}`
+
+        const user2 = await User.create({ username, name, surname, email, password, spaces, tasks })
+        const user2Id = user2._id.toString()
+
+        try {
+            await logic.deleteComment(user2Id, taskId, commentId)
+            
+            throw Error('should not reach this point')
+        } catch({message}) {
+            expect(message).to.equal('this user is not the author of the comment to delete')
+        }
+    })
+
 
     it('should fail on empty user id', async () => {
         userId = ' '

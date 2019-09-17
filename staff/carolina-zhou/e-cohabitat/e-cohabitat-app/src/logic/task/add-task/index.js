@@ -29,12 +29,14 @@ export default function (taskName, taskType, description, date, spaceId) {
             headers: { 'authorization': `bearer ${token}`, 'content-type': 'application/json' },
             body: JSON.stringify({ taskName, taskType, description, date })
         })
+        
 
         if (response.status !== 201) {
             const { error } = await response.json()
 
             throw Error(error)
         }
+        
     })()
 }    
 

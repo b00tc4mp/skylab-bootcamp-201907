@@ -21,7 +21,7 @@ function Chores({ history, spaceId }) {
                 console.log(error.message)
             }
             })()
-    },[])
+    },[spaceId])
 
     
     function handleAdd(event) {

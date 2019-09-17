@@ -27,8 +27,7 @@ module.exports = function(taskId, spaceId, companionId) {
         const task = await Task.findOne({ _id: taskId })
         if (!task) throw Error('wrong task id provided')
 
-        const matchSpace = task.taskSpace.find(location => location.toString() === spaceId)
-        if (!matchSpace) throw Error(`task with id ${taskId} does not match space with id ${spaceId}`)
+        if (task.taskSpace.toString() != spaceId) throw Error(`task with id ${taskId} does not match space with id ${spaceId}`)
 
         const matchUser = task.companions.find(companion => companion.toString() === companionId)
         if (matchUser === companionId) throw Error(`user already added to task with id ${taskId}`)

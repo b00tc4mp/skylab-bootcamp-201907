@@ -42,7 +42,7 @@ describe('logic - retrieve all space tasks', () => {
         const space = await Space.create({ title, type, picture, address, passcode, cousers, spaceTasks })
         spaceId = space._id.toString()
 
-        const task = await Task.create({ taskName, taskType, description, date, taskSpace, companions })
+        const task = await Task.create({ taskName, taskType, description, date, taskSpace: space._id, companions })
         taskId = task._id.toString()
 
         user.spaces.push(spaceId)
@@ -53,38 +53,69 @@ describe('logic - retrieve all space tasks', () => {
         space.spaceTasks.push(taskId)
         await space.save()
 
-        task.taskSpace.push(spaceId)
         task.companions.push(userId)
         await task.save()
     })
 
     it('should succeed on correct data', async() => {
-        const tasks = await logic.retrieveAllSpaceTasks(spaceId)
+        const tasks = await logic.retrieveAllSpaceTasks(userId, spaceId)
         expect(tasks).to.exist
         expect(tasks).not.to.be.empty
 
-        expect(tasks.toString()).to.equal(taskId)
+        expect(tasks[0].taskName).to.equal(taskName)
+        expect(tasks[0].taskType).to.equal(taskType)
+        expect(tasks[0].description).to.equal(description)
+        expect(tasks[0].date).to.deep.equal(date)
+        expect(tasks[0].taskSpace.toString()).to.equal(spaceId)
+        expect(tasks[0].companions).to.include(userId)
+        expect(tasks[0].id).to.equal(taskId)
     })
 
-    it('should fail on empty id', async () => {
+    // user id
+    it('should fail on empty user id', async () => {
         try{
-            await logic.retrieveAllSpaceTasks(' ')
+            await logic.retrieveAllSpaceTasks(' ', spaceId)
+        } catch({ message }) {
+            expect(message).to.equal('user id is empty or blank')
+        }
+    })
+
+    it('should fail on undefined user id', async () => {
+          try{
+            await logic.retrieveAllSpaceTasks(undefined, spaceId)
+        } catch({ message }) {
+            expect(message).to.equal("user id with value undefined is not a string")
+        }
+    })
+     
+    it('should fail on wrong user id data type', async() => {
+         try{
+            await logic.retrieveAllSpaceTasks(123, spaceId)
+        } catch({ message }) {
+                expect(message).to.equal("user id with value 123 is not a string")
+        }
+    })
+
+    // space id
+    it('should fail on empty space id', async () => {
+        try{
+            await logic.retrieveAllSpaceTasks(userId, ' ')
         } catch({ message }) {
             expect(message).to.equal('space id is empty or blank')
         }
     })
 
-    it('should fail on undefined id', async () => {
+    it('should fail on undefined space id', async () => {
           try{
-            await logic.retrieveAllSpaceTasks(undefined)
+            await logic.retrieveAllSpaceTasks(userId, undefined)
         } catch({ message }) {
             expect(message).to.equal("space id with value undefined is not a string")
         }
     })
      
-    it('should fail on wrong id data type', async() => {
+    it('should fail on wrong space id data type', async() => {
          try{
-            await logic.retrieveAllSpaceTasks(123)
+            await logic.retrieveAllSpaceTasks(userId, 123)
         } catch({ message }) {
                 expect(message).to.equal("space id with value 123 is not a string")
         }

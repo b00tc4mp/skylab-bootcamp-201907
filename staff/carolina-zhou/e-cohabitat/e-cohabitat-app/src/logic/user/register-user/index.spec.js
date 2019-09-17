@@ -1,43 +1,44 @@
-import logic from '..'
+import logic from '../../'
+import { database, models } from 'data'
+import bcrypt from 'bcryptjs'
 
-const { random } = Math
-const { database, models: { User } } = require('my-stuff-data')
-const bcrypt = require('bcryptjs')
+const { User } = models
 
-// const { env: { DB_URL_TEST }} = process // WARN this destructuring doesn't work in react-app :(
 const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
 
-describe('logic - register user', () => {
-    let name, surname, email, password
 
+describe('logic - register user', () => {
     beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
 
+    let username, name, surname, email, password
+
     beforeEach(async () => {
-        name = `name-${random()}`
-        surname = `surname-${random()}`
-        email = `email-${random()}@mail.com`
-        password = `password-${random()}`
+        username = `name-${Math.random()}`
+        name = `name-${Math.random()}`
+        surname = `surname-${Math.random()}`
+        email = `email-${Math.random()}@mail.com`
+        password = `password-${Math.random()}`
 
         await User.deleteMany()
     })
 
     it('should succeed on correct data', async () => {
-        const response = await logic.registerUser(name, surname, email, password)
-
+        const response = await logic.registerUser(username, name, surname, email, password)
         expect(response).toBeUndefined()
 
         const user = await User.findOne({ email })
         
         expect(user).toBeDefined()
+        expect(user.username).toBe(username)
         expect(user.name).toBe(name)
         expect(user.surname).toBe(surname)
         expect(user.email).toBe(email)
-        // expect(user.password).toBe(password)
 
         const match = await bcrypt.compare(password, user.password)
         expect(match).toBeTruthy()
     })
 
+    // username
     it('should fail on empty username', async () => {
         username = ''
 

@@ -24,7 +24,6 @@ describe('logic - add task companion', () => {
         taskType =  `${taskTypeArray[Math.floor(Math.random() * taskTypeArray.length)]}`
         description = `description-${Math.random()}`
         date = new Date
-        taskSpace = []
         companions = []
 
         await Task.deleteMany()
@@ -57,6 +56,7 @@ describe('logic - add task companion', () => {
 
         const space = await Space.create({ title, type, picture, address, passcode, cousers })
         spaceId = space._id.toString()
+        taskSpace = space._id
 
         const task = await Task.create({ taskName, taskType, description, date, taskSpace, companions })
         taskId = task._id.toString()
@@ -71,7 +71,6 @@ describe('logic - add task companion', () => {
         space.cousers.push(existentUserId, companionId)
         await space.save()
 
-        task.taskSpace.push(spaceId)
         task.companions.push(existentUserId)
         await task.save()
     })
@@ -85,7 +84,7 @@ describe('logic - add task companion', () => {
         expect(result.taskType).to.equal(taskType)
         expect(result.description).to.equal(description)
         expect(result.date).to.deep.equal(date)
-        expect(result.taskSpace).to.include(spaceId)
+        expect(result.taskSpace.toString()).to.equal(spaceId)
         expect(result.companions).to.include(existentUserId, companionId)
 
     })

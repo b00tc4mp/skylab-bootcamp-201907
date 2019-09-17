@@ -26,7 +26,7 @@ function Day({ history, match }) {
             console.log(error.message)
           }
         })()
-    },[update, thisDay])
+    },[spaceId, update, thisDay])
 
 
     function handleMonth(event) {

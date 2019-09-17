@@ -19,7 +19,11 @@ module.exports = new Schema({
         type: Date,
         required: true
     },
-    taskSpace: [{ type: ObjectId, ref: 'Space' }],
+    taskSpace: { 
+        type: ObjectId, 
+        ref: 'Space', 
+        required: true 
+    },
     companions: [{ type: ObjectId, ref: 'User' }],
     companionNames: [ String ],
     comments: [Comment],

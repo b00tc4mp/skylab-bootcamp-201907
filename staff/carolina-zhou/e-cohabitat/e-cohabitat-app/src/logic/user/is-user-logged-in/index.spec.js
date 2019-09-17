@@ -1,7 +1,7 @@
-import logic from '..'
-
+import logic from '../../'
 
 describe('logic - is user logged in', () => {
+
     beforeEach(async () => {
         logic.__userCredentials__ = { id: '123', token: '123'}
     })
@@ -12,4 +12,5 @@ describe('logic - is user logged in', () => {
         expect(typeof loggedIn).toBe('boolean')
         expect(loggedIn).toBeTruthy()
     })
+    
 })

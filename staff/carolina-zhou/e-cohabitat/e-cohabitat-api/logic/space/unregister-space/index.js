@@ -31,6 +31,6 @@ module.exports = function(userId, spaceId, passcode) {
         if (!result.deletedCount) throw Error('wrong data provided')
 
         user.spaces.splice(user.spaces.indexOf(space), 1)
-        user.save()
+        await user.save()
     })()
 }

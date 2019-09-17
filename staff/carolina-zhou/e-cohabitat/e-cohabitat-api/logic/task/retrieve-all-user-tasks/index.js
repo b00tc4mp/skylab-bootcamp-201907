@@ -15,19 +15,6 @@ module.exports = function(userId) {
 
     return (async() => {
 
-        /* const user = await User.findById(userId)
-        if (!user) throw Error(`user with id ${userId} does not exist`)
-
-        const userTasks = user.tasks
-
-        if (userTasks.length === 0) throw Error(`this user does not have any tasks`) 
-
-        userTasks.forEach(task => {
-            return task.id.toString()        
-        })
-
-        return userTasks */
-
         const user = await User.findById(userId).populate('tasks')
         if (!user) throw Error(`user with id ${userId} does not exist`)
 
