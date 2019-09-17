@@ -5,6 +5,7 @@ const {  random : { number }  } = require('footcamp-utils')
 
 const { User , League, Team, Player } = models
 
+
 // const { env: { DB_URL_TEST }} = process // WARN this destructuring doesn't work in react-app :(
 const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
 const REACT_APP_JWT_SECRET_TEST = process.env.REACT_APP_JWT_SECRET_TEST
@@ -161,6 +162,21 @@ describe('logic - update team', () => {
              expect(team.lineup[0]).toBe(idPlayer3)
     
           
+        })
+
+        it('should fail if the team id does not exist', async () => {
+            teamId = '5d772fb62bb54120d08d7a7b'
+            await League.create({ id, name: nameLeague,code  })
+
+           
+            try {
+                await logic.updateTeam(leagueId, teamId, idPlayer, idPlayer3)
+                throw Error('should not reach this point') 
+            }
+            catch({message}){
+                expect(message).to.equal(`Team with id 5d772fb62bb54120d08d7a7b does not exist`)
+            }
+            
         })
 
     afterAll(() => database.disconnect())

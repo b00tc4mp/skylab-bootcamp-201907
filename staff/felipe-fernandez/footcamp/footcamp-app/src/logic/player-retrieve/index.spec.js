@@ -92,5 +92,53 @@ describe('logic - retrieve player', () => {
           
         })
 
+        it('should fail on incorrect user id', async () => {
+            id = '5d772fb62bb54120d08d7a7b'
+            try {
+                await logic.retrievePlayer(idPlayer)
+                throw Error('should not reach this point') 
+            }
+            catch({message}){
+                expect(message).toBe(`User with id ${id} does not exist`)
+            }
+            
+        })
+
+        it('should fail if the player does not exist', async () => {
+
+                await League.create({ id, name: nameLeague,code  })
+                await Team.create({id, name: nameTeam, points})
+                await Player.create({name: namePlayer, surname: surnamePlayer, playerId, realTeam, position, pointsPerGame, totalPoints, yellowCards, redCards,  goals, minutes, cost})
+                await Player.deleteMany()
+        
+                try {
+                     await logic.retrievePlayer(idPlayer)
+                } catch(error) {
+                    
+                     expect(error).toBeDefined()
+                     expect(error.message).toBe(`Player with id ${idPlayer} does not exist`)
+                }
+
+         })
+
+         
+
+    
+        it('should fail on undefined player id', () => 
+            expect(() => 
+                logic.retrievePlayer(undefined)
+        ).to.throw(`player id with value undefined is not a string`)
+        )
+
+           
+        
+        it('should fail on non-string player id', () => 
+            expect(() => 
+                logic.retrievePlayer(12345)
+
+        ).to.throw(`player id with value 12345 is not a string`)
+        )
+
+
     afterAll(() => database.disconnect())
 })

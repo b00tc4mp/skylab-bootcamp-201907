@@ -98,37 +98,38 @@ function LineupUpdate({match ,history}) {
     }
         
     return <div> 
-   
-        <Header />
-            <ul>
-                <h2>AVAILABLE PLAYERS</h2>
-                {playerLineup && playerLineup.map(playerlineup => 
-                <li  key={playerlineup.player.id}
-                   
-                onClick={event => {
-                    event.preventDefault()
-                    const playerIdToChange =playerlineup.player.id
-                    handleLineup(playerIdToChange)
+            <section className="lineupdate">
+                <Header />
+                <ul>
+                    <h2>AVAILABLE PLAYERS</h2>
+                    {playerLineup && playerLineup.map(playerlineup => 
+                    <li  key={playerlineup.player.id}
                     
-                }}> 
-               
-                    <div className="player-lineup">
-                    <img className="player-lineup__image" onError={addDefaultSrc} src={"http://localhost:8080" + playerlineup.player.photo} width="300px"/>
-                    <div className="player-lineup__content">
-                        <p className="player-lineup__content__name">{playerlineup.player.name} {playerlineup.player.surname}</p>
-                        <p className="player-lineup__content__position">{positionPlayer(playerlineup.player.position)}</p>
-                        <p className="player-lineup__content__points">Total points: {playerlineup.player.totalPoints}</p>
-                    </div>
-            </div>
-                </li>)}
-
-            </ul>
-
-            <a href="#" onClick={event => {
-                    event.preventDefault()
-                    handleBack()
-                }}><i class="fas fa-arrow-circle-left fa-2x"></i></a>
+                    onClick={event => {
+                        event.preventDefault()
+                        const playerIdToChange =playerlineup.player.id
+                        handleLineup(playerIdToChange)
+                        
+                    }}> 
                 
+                        <div className="player-lineup">
+                        <img className="player-lineup__image" onError={addDefaultSrc} src={"http://localhost:8080" + playerlineup.player.photo} width="300px"/>
+                        <div className="player-lineup__content">
+                            <p className="player-lineup__content__name">{playerlineup.player.name} {playerlineup.player.surname}</p>
+                            <p className="player-lineup__content__position">{positionPlayer(playerlineup.player.position)}</p>
+                            <p className="player-lineup__content__points">Total points: {playerlineup.player.totalPoints}</p>
+                        </div>
+                </div>
+                    </li>)}
+
+                </ul>
+
+                <a href="#" onClick={event => {
+                        event.preventDefault()
+                        handleBack()
+                    }}><i class="fas fa-arrow-circle-left fa-2x"></i></a>
+                    
+             </section>   
             </div>
 
 

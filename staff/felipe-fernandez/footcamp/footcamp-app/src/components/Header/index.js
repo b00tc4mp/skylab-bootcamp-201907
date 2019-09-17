@@ -7,8 +7,8 @@ import logic from '../../logic'
 function Header(props) {
 
   const { history } = props
-  const [user, setUser] = useState(null)
-  const [code, setCode] = useState(null)
+  const [user, setUser] = useState()
+  const [code, setCode] = useState()
     
   useEffect(() => {
     
@@ -40,6 +40,13 @@ function Header(props) {
       history.push('/')
   }
 
+
+  function goToMain (event) {
+    event.preventDefault()
+    history.push('/myteam')
+ }
+ 
+
 return (
   <div>
       <nav className="header">
@@ -65,11 +72,15 @@ return (
     
           <div className="title">    
 
-              <h2 className="title__name">FOOTCAMP FANTASY</h2>
+            <h2 className="title__name" onClick={event => {
+            
+                goToMain()
+
+              }}>FOOTCAMP FANTASY</h2>
           </div>  
           <div>
             
-              {user && <p className="title__user">{user.name}</p>} 
+              {user && <p className="title__user">{user.name} <i class="fas fa-user"></i></p>} 
            </div>              
          
       

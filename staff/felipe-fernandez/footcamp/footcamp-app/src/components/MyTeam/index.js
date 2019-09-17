@@ -37,6 +37,7 @@ function MyTeam (props) {
 
 
     return <div>
+            <section className="myteam">
             <Header />
             <h2>MY TEAM</h2>
              <ul>
@@ -50,7 +51,8 @@ function MyTeam (props) {
                  
                  </a>
                  </li>)}
-          </ul>
+            </ul>
+            </section>
         </div>
 }
 

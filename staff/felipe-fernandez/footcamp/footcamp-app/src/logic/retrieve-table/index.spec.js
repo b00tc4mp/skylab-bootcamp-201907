@@ -8,7 +8,7 @@ const { User , League , Team, Player } = models
 const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
 const REACT_APP_JWT_SECRET_TEST = process.env.REACT_APP_JWT_SECRET_TEST
 
-describe.only('logic - retrieve table', () => {
+describe('logic - retrieve table', () => {
     beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
 
    
@@ -121,6 +121,50 @@ describe.only('logic - retrieve table', () => {
             expect(result.teams[1].owner.toString()).toBe(id2)
           
         })
+
+         it('should fail if the team name does not exist', async () => {
+       
+        teamId ='5d772fb62bb54120d08d7a7b'
+        await League.create({ id, name: nameLeague,code  })
+
+       
+        try {
+            await logic.retrievelineUpTeam(id, leagueId, teamId)
+            throw Error('should not reach this point') 
+        }
+        catch({message}){
+            expect(message).to.equal(`Team with name 5d772fb62bb54120d08d7a7b does not exist`)
+        }
+        
+    })
+
+
+       
+    
+
+    it('should fail on undefined leagueId', () => 
+        expect(() => 
+            logic.retrieveTable(undefined)
+    ).to.throw(`league id with value undefined is not a string`)
+    )
+
+
+    it('should fail on non-string leagueId', () => 
+        expect(() => 
+            logic.retrieveTable(12345)
+    ).to.throw(`league id with value 12345 is not a string`)
+    )
+
+
+
+
+    it('should fail on empty leagueId', () => 
+        expect(() => 
+                logic.retrieveTable('')
+    ).to.throw(`league id is empty or blank`)
+        )
+
+
 
     afterAll(() => database.disconnect())
 })

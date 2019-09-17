@@ -11,17 +11,19 @@ function PlayerResultInitial({ player }) {
           
     }
 
-    return <div className="card-initial"> 
-   
-            {/* <figure className="card-initial__image"> */}
-            <img  className="card-initial__image" onError={addDefaultSrc} src={"http://localhost:8080" + photo} /> 
-            {/* </figure> */}
-              <div className="card-initial__content" >
-            <p className="card-initial__content__name">{name} {surname} </p>
-            
-        </div>
-
+    return <div>
+              <div className="card-initial">
+                {/* <figure className="card-initial__image"> */}
+                <img  className="card-initial__image" onError={addDefaultSrc} src={"http://localhost:8080" + photo} /> 
+                {/* </figure> */}
+                <div className="card-initial__info" >
+                    <p className="card-initial_info__name">{name} {surname} </p>
+                </div>
+                </div>
+           
+        
     </div>
+    
 
 
 }

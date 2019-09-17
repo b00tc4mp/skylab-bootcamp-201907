@@ -21,16 +21,18 @@ function Landing(props) {
 
     return  <>
         
+        <section className="body-landing">
+         
         <InitialHeader />
-
-        <h2>The soccer fantasy game for all the enthusiastics of football</h2>
-        
-        <div className="landing">  
-           <ul>
-              <li><a  className="links" href="" onClick={handleGoToRegister}>Register</a></li>
-              <li><a  className="links" href="" onClick={handleGoToLogin}>Login</a></li>
-            </ul>
-        </div>
+          <h2>The soccer fantasy game for all football enthusiastics</h2>
+          
+          <div className="body-landing__content">  
+            <ul>
+                <li><a  className="body-landing__links" href="" onClick={handleGoToRegister}>Register</a></li>
+                <li><a  className="body-landing__links" href="" onClick={handleGoToLogin}>Login</a></li>
+              </ul>
+          </div>
+        </section>
         </>
     
         

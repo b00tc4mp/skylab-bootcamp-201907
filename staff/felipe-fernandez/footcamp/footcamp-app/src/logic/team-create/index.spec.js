@@ -62,5 +62,53 @@ describe('logic - create team', () => {
           
         })
 
+         
+   
+        it('should fail on undefined league name', () => 
+            expect(() => 
+                logic.createTeam(undefined, leagueId)
+         ).to.throw(`name with value undefined is not a string`)
+        )
+
+        
+
+        it('should fail on undefined leagueId', () => 
+            expect(() => 
+                logic.createTeam(nameTeam, undefined)
+        ).to.throw(`leagueId with value undefined is not a string`)
+        )
+        
+     
+
+        it('should fail on non-string team name', () => 
+            expect(() => 
+                logic.createTeam(12345, leagueId)
+        ).to.throw(`name with value 12345 is not a string`)
+        )
+
+
+        it('should fail on non-string leagueId', () => 
+            expect(() => 
+                logic.createTeam(nameTeam, 12345)
+        ).to.throw(`leagueId with value 12345 is not a string`)
+        )
+
+      
+                
+         
+
+        it('should fail on empty leagueId', () => 
+            expect(() => 
+                    logic.createTeam(nameTeam, '' )
+        ).to.throw(`leagueId is empty or blank`)
+            )
+
+        it('should fail on empty name team', () => 
+             expect(() => 
+                    logic.createTeam('', leagueId)
+        ).to.throw(`name is empty or blank`)
+            )
+
+
     afterAll(() => database.disconnect())
 })

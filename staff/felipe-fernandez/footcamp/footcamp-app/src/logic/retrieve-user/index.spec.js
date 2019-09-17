@@ -43,5 +43,7 @@ describe('logic - retrieve user', () => {
           
         })
 
+       
+    
     afterAll(() => database.disconnect())
 })

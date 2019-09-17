@@ -108,5 +108,49 @@ describe('logic - retrieve team', () => {
           
         })
 
+
+   
+        it('should fail on undefined league team id', () => 
+            expect(() => 
+                logic.retrieveTeam(leagueId, undefined)
+         ).to.throw(`team id with value undefined is not a string`)
+        )
+
+
+        it('should fail on undefined code', () => 
+            expect(() => 
+                logic.retrieveTeam(undefined, teamId)
+        ).to.throw(`league Id with value undefined is not a string`)
+        )
+        
+     
+
+        it('should fail on non-string team teamId', () => 
+            expect(() => 
+                logic.retrieveTeam(leagueId, 12345)
+        ).to.throw(`team id with value 12345 is not a string`)
+        )
+
+
+        it('should fail on non-string code', () => 
+            expect(() => 
+                logic.retrieveTeam(12345, teamId)
+        ).to.throw(`league Id with value 12345 is not a string`)
+        )
+
+       
+
+        it('should fail on empty code', () => 
+            expect(() => 
+                    logic.retrieveTeam('', teamId )
+        ).to.throw(`league Id is empty or blank`)
+            )
+
+        it('should fail on empty team id ', () => 
+             expect(() => 
+                    logic.retrieveTeam(leagueId, '')
+        ).to.throw(`team id is empty or blank`)
+            )
+
     afterAll(() => database.disconnect())
 })

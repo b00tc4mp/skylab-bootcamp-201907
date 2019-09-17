@@ -8,13 +8,11 @@ import joinLeague from './league-join'
 import createTeam from './team-create'
 import retrievePlayer from './player-retrieve'
 import retrieveTeam from './retrieve-team'
-import deleteTeam from './delete-team'
 import updateTeam from './update-team'
 import getLineup from './get-lineup'
 import retrieveLineup from './retrieve-lineup'
 import retrieveAllLeagues from './retrieve-leagues'
 import retrieveLeague from './retrieve-league'
-import leaveLeague from './leave-league'
 import retrieveTable from './retrieve-table'
 
 
@@ -35,7 +33,6 @@ export default {
     createLeague, 
     joinLeague,
     createTeam,
-    deleteTeam,
     retrievePlayer,
     retrieveTeam,
     updateTeam,
@@ -43,7 +40,6 @@ export default {
     retrieveLineup,
     retrieveAllLeagues,
     retrieveLeague,
-    leaveLeague,
     retrieveTable
 
 }

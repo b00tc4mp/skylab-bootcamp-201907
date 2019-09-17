@@ -44,11 +44,12 @@ function MyLineup (props) {
     }, [])
 
     return <div>
+            <section className="mylineup">
             <Header />
             <h2>MY LINEUP</h2>
              <div>     
-                <ul className="container">
-                {/* className={`item item${i}`}  */}
+                <ul>
+             
                 {player && player.map((playerlineup, i)  => 
                 <li key={playerlineup.id}>
                      <a className="item-players" href={`/#/lineup/${playerlineup.id}`}> 
@@ -59,6 +60,7 @@ function MyLineup (props) {
                      </li>)}
              </ul>
             </div>
+            </section>
         </div>
 }
 

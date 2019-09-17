@@ -85,5 +85,68 @@ describe('logic - retrieve lineup', () => {
           
         })
 
+        it('should fail if the team name does not exist', async () => {
+       
+            teamId ='5d772fb62bb54120d08d7a7b'
+            await League.create({ id, name: nameLeague,code  })
+    
+           
+            try {
+                await logic.retrievelineUpTeam(leagueId, teamId)
+                throw Error('should not reach this point') 
+            }
+            catch({message}){
+                expect(message).to.equal(`Team with name 5d772fb62bb54120d08d7a7b does not exist`)
+            }
+            
+        })
+
+
+
+        it('should fail on undefined league team Id', () => 
+            expect(() => 
+                logic.retrieveLineup(leagueId, undefined)
+        ).to.throw(`team id with value undefined is not a string`)
+        )
+
+       
+
+        it('should fail on undefined leagueId', () => 
+            expect(() => 
+                logic.retrieveLineup(undefined, teamId)
+        ).to.throw(`league Id with value undefined is not a string`)
+        )
+
+
+
+        it('should fail on non-string team id', () => 
+            expect(() => 
+                logic.retrieveLineup(leagueId, 12345)
+        ).to.throw(`team id with value 12345 is not a string`)
+        )
+
+        it('should fail on non-string leagueId', () => 
+            expect(() => 
+                logic.retrieveLineup(12345, teamId)
+        ).to.throw(`league Id with value 12345 is not a string`)
+        )
+
+
+        
+
+        it('should fail on empty leagueId', () => 
+            expect(() => 
+                    logic.retrieveLineup('', teamId)
+        ).to.throw(`league Id is empty or blank`)
+            )
+
+        it('should fail on empty team id', () => 
+            expect(() => 
+                    logic.retrieveLineup(leagueId, '')
+        ).to.throw(`team id is empty or blank`)
+            )
+
+
+
     afterAll(() => database.disconnect())
 })

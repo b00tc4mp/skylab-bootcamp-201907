@@ -73,7 +73,59 @@ describe.only('logic - retrieve league', () => {
             expect(result.teams[0].name).toBe(nameteam)    
           
           
+        }) 
+        
+        it('should fail on incorrect user id', async () => {
+            id = '5d772fb62bb54120d08d7a7b'
+            try {
+                await logic.retrieveLeague(leagueId)
+                throw Error('should not reach this point') 
+            }
+            catch({message}){
+                expect(message).toBe(`User with id ${id} does not exist`)
+            }
+            
         })
+        
+        it('should fail if the league do not exist', async () => {
+           
+            await League.create({ id, name, code})
+
+            leagueId = '5d772fb62bb54120d08d7a7b'
+
+            try {
+                 await logic.retrieveLeague(leagueId)
+            } catch(error) {
+                
+                 expect(error).toBeDefined()
+                 expect(error.message).toBe(`league with id 5d772fb62bb54120d08d7a7b does not exist`)
+            }
+         })
+
+
+        it('should fail on undefined league leagueId', () => 
+        expect(() => 
+            logic.retrieveLeague(undefined)
+     ).to.throw(`league id with value undefined is not a string`)
+    )
+
+   
+    
+    it('should fail on non-string league leagueId', () => 
+        expect(() => 
+            logic.retrieveLeague(12345)
+     ).to.throw(`league id with value 12345 is not a string`)
+    )
+
+    
+
+    it('should fail on empty leagueId', () => 
+        expect(() => 
+            logic.retrieveLeague(id, '')
+    ).to.throw(`league id is empty or blank`)
+    )
+
+    
 
     afterAll(() => database.disconnect())
 })

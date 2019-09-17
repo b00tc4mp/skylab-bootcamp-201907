@@ -73,49 +73,52 @@ function CreateLeagues(props) {
     
     return (
         <div >
-        <InitialHeader />
-            <div className="create">
-            <h2 className="create__title">CREATE A LEAGUE</h2>
-            <form className="form-create" onSubmit={handleFormSubmitCreate}>
-             <div class="form-create-inputs">
+        <section className="create">
+            <InitialHeader />
+                <div className="create__content">
+                <h2 className="create__content__title">CREATE A LEAGUE</h2>
+                <form className="create__content__form-create" onSubmit={handleFormSubmitCreate}>
+                <div class="create__content__form-create-inputs">
+                    <input
+                    
+                        type="name"
+                        name="name"
+                        placeholder="Name"
+                        onChange={handleNameInput}
+                        required
+                    />
+                </div>
+                <div class="create__content__form-create-inputs">
                 <input
-                   
-                    type="name"
-                    name="name"
-                    placeholder="Name"
-                    onChange={handleNameInput}
-                    required
-                />
-             </div>
-             <div class="form-create-inputs">
-             <input
-                   
-                    type="code"
-                    name="code"
-                    placeholder="Code"
-                    onChange={handleCodeInput}
-                    required
-                />
-            </div>
-                <button>Submit</button>
-            </form>
+                    
+                        type="code"
+                        name="code"
+                        placeholder="Code"
+                        onChange={handleCodeInput}
+                        required
+                    />
+                </div>
+                    <button>Submit</button>
+                </form>
 
-            <h2 className="create__title">JOIN A lEAGUE</h2>
-            <form className="form-create" onSubmit={handleFormSubmitJoin}>
-            <div class="form-create-inputs">
-                <input
-                 
-                    type="code"
-                    name="code"
-                    placeholder="Code"
-                    onChange={handleCodeInput}
-                    required
-                />
-             </div>
-                <button>Submit</button>
-            </form>
-            {error && <Feedback message={error}/>} 
-        </div>
+                <h2 className="create__content__create__title">JOIN A lEAGUE</h2>
+                <form className="create__content__form-create" onSubmit={handleFormSubmitJoin}>
+                <div class="create__content__form-create-inputs">
+                    <input
+                    
+                        type="code"
+                        name="code"
+                        placeholder="Code"
+                        onChange={handleCodeInput}
+                        required
+                    />
+                </div>
+                    <button>Submit</button>
+                {error && <Feedback message={error}/>} 
+                </form>
+                
+            </div>
+        </section>
         </div>
     )
 }

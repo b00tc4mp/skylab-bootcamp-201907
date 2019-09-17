@@ -130,6 +130,54 @@ describe.only('logic - retrieve leagues', () => {
           
           
         })
+        
+        it('should fail if the league does not exist', async () => {
+
+            await League.create({ id, name: nameLeague, code })
+            await League.deleteMany()
+            try {
+                 await logic.retrieveAllLeagues(id)
+            } catch(error) {
+                
+                 expect(error).toBeDefined()
+                 expect(error.message).toBe(`League with code ${code} does not exist`)
+            }
+         })
+    
+        it('should fail on incorrect user id', async () => {
+            id = '5d772fb62bb54120d08d7a7b'
+            try {
+                await logic.retrieveAllLeagues(id)
+                throw Error('should not reach this point') 
+            }
+            catch({message}){
+                expect(message).toBe(`User with id ${id} does not exist`)
+            }
+            
+        })
+
+
+            
+        it('should fail on undefined user id', () => 
+            expect(() => 
+                logic.retrieveAllLeagues(undefined)
+        ).to.throw(`id with value undefined is not a string`)
+        )
+
+
+        it('should fail on non-string user id', () => 
+            expect(() => 
+                logic.retrieveAllLeagues(12345)
+        ).to.throw(`id with value 12345 is not a string`)
+        )
+       
+        it('should fail on empty id', () => 
+            expect(() => 
+                    logic.retrieveAllLeagues('')
+            ).to.throw(`id is empty or blank`)
+            )
+
+
 
     afterAll(() => database.disconnect())
 })

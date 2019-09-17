@@ -7,19 +7,33 @@ import InitialHeader from '../InitialHeader'
 
 function Login(props) {
 
+
+  // const { target: { email: { value: email }, password: { value: password } } } = event
+  
+  const [email, setEmail] = useState()
+  const [password, setPassword] = useState()
   const { user, setUser } = useContext(Context)
   const [error , setError] = useState(undefined) 
   const [league , setLeague] = useState(undefined) 
   const { history } = props
+  
+  
+  function handleEmailInput(event) {
+    event.preventDefault()
+    setEmail(event.target.value)
+  }
 
-
+  function handlePasswordInput (event) {
+    event.preventDefault()
+    setPassword(event.target.value)
+  }
 
   function handleLogin(email, password)  {
 
     return(async()=>{
 
         try {
-          
+          debugger
           await logic.authenticateUser(email, password)
           
           //setting the user for further use
@@ -46,14 +60,6 @@ function Login(props) {
    handleLogin(email, password)
 }
 
-    const [email, setEmail] = useState(null)
-    const [password, setPassword] = useState(null)
-
-    const handleEmailInput = event => setEmail(event.target.value)
-
-    const handlePasswordInput = event => setPassword(event.target.value)
-
-    
   const handleBack = () => {
      
         history.push('/')
@@ -61,8 +67,9 @@ function Login(props) {
   
     return (
         <div >
+          <section className="login">
           <InitialHeader />
-          <div className="login">
+          <div className="login__content">
           <h2>LOGIN</h2>
             <form onSubmit={handleFormSubmit}>
              <div className="form__inputs"> 
@@ -93,6 +100,8 @@ function Login(props) {
             handleBack()
         }}><i className="fas fa-arrow-circle-left fa-2x"></i></a>
         </div>
+       
+        </section>
         </div>
     )
 }

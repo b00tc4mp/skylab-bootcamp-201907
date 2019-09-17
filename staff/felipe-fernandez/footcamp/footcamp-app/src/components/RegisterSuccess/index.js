@@ -8,9 +8,10 @@ function RegisterSuccess(props){
     
     return (
         <div>
+          <section className="register-successful">
             <InitialHeader />
 
-            <div className="register-successful">
+            <div className="register-successful__content">
             <h2>REGISTER SUCCESS</h2>
 
             
@@ -22,9 +23,13 @@ function RegisterSuccess(props){
           <a href="#" onClick={event => {
             event.preventDefault()
             history.push('/')
-              }}> <i className="fas fa-arrow-circle-left fa-2x"> </i></a>
+              }}> 
+              <i className="fas fa-arrow-circle-left fa-2x"> </i>
+            </a>
+
 
          </div>
+         </section>
        </div>
         
     )

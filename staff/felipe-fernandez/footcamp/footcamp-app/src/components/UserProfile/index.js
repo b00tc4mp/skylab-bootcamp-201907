@@ -29,21 +29,23 @@ function UserProfile({history}) {
     
     return (
         <div>
-            <Header />
-            <div className="card"> 
-         
-             {user && <div className="card__content" >
-                    <p className="card__content__user">Name: {user.name}</p>
-                    <p className="card__ontent__surname">Surname: {user.surname}</p>
-                    <p clasclassNames="card__content__email">E-mail: {user.email}</p>
-                </div> }
-                <a href="#" onClick={event => {
-                    event.preventDefault()
-                    handleBack()
-                }}><i className="fas fa-arrow-circle-left fa-2x"></i></a>
-                
+            <section className="user-profile">
+                <Header />
+                <div className="user-profile__card"> 
+            
+                {user && <div className="user-profile__card__content" >
+                        <p className="user-profile__card__content__user">Name: {user.name}</p>
+                        <p className="user-profile__card__ontent__surname">Surname: {user.surname}</p>
+                        <p clasclassNames="user-profile__card__content__email">E-mail: {user.email}</p>
+                    </div> }
+                    <a href="#" onClick={event => {
+                        event.preventDefault()
+                        handleBack()
+                    }}><i className="fas fa-arrow-circle-left fa-2x"></i></a>
+                    
 
-            </div>
+                </div>
+            </section>
         </div>
     )
     

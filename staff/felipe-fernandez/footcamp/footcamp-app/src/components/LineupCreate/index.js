@@ -43,22 +43,24 @@ function MyLineup (props) {
     }, [])
 
     return <div>
-          <InitialHeader />
+         {/* <section className="create-teams"> */}
+            <InitialHeader />
 
-                <h2>THIS IS YOUR INITIAL LINEUP</h2>   
-            <ul>
-            
-            {player && player.map(playerlineup => 
-            <li className="item-players-lineup"  key={playerlineup.id}>
-              
-                <PlayerResultInitial player={playerlineup}/>
-                     
-             </li>)}
-             <a href="#" onClick={event => {
-                event.preventDefault()
-                history.push('/myleague')
-            }}>OK</a>
-        </ul>
+                    <h2>THIS IS YOUR INITIAL LINEUP</h2>   
+                <ul className="create-teams">
+                
+                {player && player.map(playerlineup => 
+                <li className="item-players-lineup"  key={playerlineup.id}>
+                
+                    <PlayerResultInitial player={playerlineup}/>
+                        
+                </li>)}
+                <a href="#" onClick={event => {
+                    event.preventDefault()
+                    history.push('/myleague')
+                }}>OK</a>
+            </ul>
+        {/* </section> */}
         </div>
 }
 

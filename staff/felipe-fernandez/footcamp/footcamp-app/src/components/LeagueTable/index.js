@@ -10,7 +10,7 @@ function MyLeagues (props) {
     const [error , setError] = useState(undefined) 
     // const [points, setPoints] = useState(null)
     // const { team, setTeam, leagueId, teamName, setTeamName, teamId, setTeamId, player, setPlayer } = useContext(Context)
-    const { history} = props
+    // const { history} = props
     
 
     useEffect(() => {
@@ -35,20 +35,21 @@ function MyLeagues (props) {
     
 
     return <div>
-           <Header />
-                <h2>MY TABLE</h2>
-              
-            <ul className="clasification">
-                 {table && table.map((tables ,i) => <li className="clasification__list" key={tables.id}> 
-                <a className="clasification__table" href={`/#/team/${tables.id}`}>
-                <p className="clasification__list__team">{tables.name}</p>
-                <p className="clasification__list__points">{tables.totalPoints} </p>
-                          
+            <section className="table">
+            <Header />
+                    <h2>MY TABLE</h2>
                 
-                 </a>
-                </li>)}
-            </ul>
-            
+                <ul className="table__clasification">
+                    {table && table.map((tables ,i) => <li className="table__clasification__list" key={tables.id}> 
+                    <a className="table__clasification__list__tables" href={`/#/team/${tables.id}`}>
+                    <p className="table__clasification__list__team">{tables.name}</p>
+                    <p className="table__clasification__list__points">{tables.totalPoints} </p>
+                            
+                    
+                    </a>
+                    </li>)}
+                </ul>
+            </section>
         </div>
 }
 

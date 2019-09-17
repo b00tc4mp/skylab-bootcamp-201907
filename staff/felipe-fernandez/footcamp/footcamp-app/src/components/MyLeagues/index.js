@@ -6,7 +6,7 @@ import InitialHeader from '../InitialHeader'
 
 
 function MyLeagues (props) {
-    const [leagues, setLeagues] = useState(null)
+    const [leagues, setLeagues] = useState()
     const [error , setError] = useState(undefined) 
     const { history} = props
     
@@ -37,25 +37,27 @@ function MyLeagues (props) {
 
 
     return <div>
-                <InitialHeader />
-                <h2 className="league-title">MY LEAGUES</h2>
+                <section className="league">
+                    <InitialHeader />
+                    <h2 className="league__title">MY LEAGUES</h2>
 
-                {leagues && 
-                <div className="league">
+                    {leagues && 
+                    <div className="league__content">
+                    
                 
-            
-                 <h3 className="league__name"> <p>Liga: {leagues.name}</p> </h3>
-                 <h3> {leagues.nameTeam}</h3>
-                
-                <a href="" onClick={event => {
-                    event.preventDefault()
-                                      
-                    history.push('/myteam')
-                }}><i class="fas fa-arrow-alt-circle-right fa-2x"></i></a>
+                    <h3 className="league__name"> <p>Liga: {leagues.name}</p> </h3>
+                    <h3> {leagues.nameTeam}</h3>
+                    
+                    <a href="" onClick={event => {
+                        event.preventDefault()
+                                        
+                        history.push('/myteam')
+                    }}><i class="fas fa-arrow-alt-circle-right fa-2x"></i></a>
 
-               
-               </div>
+                
+                    </div>
             }
+                </section>
             </div>
       
 }

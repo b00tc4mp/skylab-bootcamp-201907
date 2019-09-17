@@ -3,7 +3,7 @@ import  {validate} from 'footcamp-utils'
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
-export default function ( name, leagueId) {
+export default function (name, leagueId) {
     
     validate.string(name, 'name')
     validate.string(leagueId, 'league id')

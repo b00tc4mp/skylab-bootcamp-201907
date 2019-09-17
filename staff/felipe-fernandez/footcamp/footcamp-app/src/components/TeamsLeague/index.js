@@ -40,26 +40,28 @@ import PlayerResult from '../PlayerResult'
 }
 
     return <div>
-        <Header />
-          
-        <ul>
+         <section className="teamsleague">
+            <Header />
+        
+            <ul>
 
-            {player && player.map(teamplayer => <li 
+                {player && player.map(teamplayer => <li 
+                
             
-           
-            key={teamplayer.id}>
-                <a className ="players"  href={`/#/player/${teamplayer.id}`}>
-                 
-                 <PlayerResult player={teamplayer}/> 
-                 
-                 </a>
-                 </li>)}
-        </ul>
-            <a href="#" onClick={event => {
-            event.preventDefault()
-            handleBack()
-        }}>Go back</a>
-       
+                key={teamplayer.id}>
+                    <a className ="players"  href={`/#/player/${teamplayer.id}`}>
+                    
+                    <PlayerResult player={teamplayer}/> 
+                    
+                    </a>
+                    </li>)}
+            </ul>
+                <a href="#" onClick={event => {
+                event.preventDefault()
+                handleBack()
+            }}>Go back</a>
+        </section>
+     
     </div>
 }
 

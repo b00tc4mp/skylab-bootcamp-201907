@@ -52,5 +52,59 @@ describe.only('logic - join league', () => {
           
         })
 
+        it('should fail on incorrect user', async () => {
+            id = '5d772fb62bb54120d08d7a7b'
+            try {
+                await logic.joinLeague(code)
+                throw Error('should not reach this point') 
+            }
+            catch({message}){
+                expect(message).to.equal(`User with id ${id} does not exist.`)
+            }
+            
+        })
+    
+           
+        it('should fail if the code does not match', async () => {
+    
+            await League.create({ id, name: nameLeague, code })
+     
+            try {
+                 await logic.joinLeague('53534')
+            } catch(error) {
+                
+                 expect(error).toBeDefined()
+                 expect(error.message).toBe(`cannot find league with code 53534`)
+            }
+         })
+         
+             
+
+        
+
+        it('should fail on undefined code', () => 
+            expect(() => 
+                logic.joinLeague(undefined)
+        ).to.throw(`code with value undefined is not a string`)
+        )
+
+
+
+        it('should fail on non-string code', () => 
+            expect(() => 
+                logic.joinLeague(12345)
+        ).to.throw(`code with value 12345 is not a string`)
+        )
+
+
+
+        it('should fail on empty code', () => 
+            expect(() => 
+                logic.joinLeague('')
+        ).to.throw(`code is empty or blank`)
+        )
+
+        
+
     afterAll(() => database.disconnect())
 })

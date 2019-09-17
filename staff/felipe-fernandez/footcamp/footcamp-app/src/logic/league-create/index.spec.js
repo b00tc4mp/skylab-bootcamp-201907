@@ -49,5 +49,51 @@ describe('logic - create league', () => {
           
         })
 
+
+        it('should fail on undefined league name', () => 
+            expect(() => 
+                logic.createLeague(undefined, code)
+         ).to.throw(`name with value undefined is not a string`)
+        )
+
+       
+        it('should fail on undefined code', () => 
+            expect(() => 
+                logic.createLeague(nameLeague, undefined)
+        ).to.throw(`code with value undefined is not a string`)
+        )
+
+
+       
+   
+        it('should fail on non-string league name', () => 
+            expect(() => 
+                logic.createLeague(12345, code)
+         ).to.throw(`name with value 12345 is not a string`)
+        )
+
+
+
+        it('should fail on non-string code', () => 
+        expect(() => 
+            logic.createLeague(nameLeague, 12345)
+        ).to.throw(`code with value 12345 is not a string`)
+        )
+
+
+    
+        it('should fail on empty name', () => 
+        expect(() => 
+        logic.createLeague('', code)
+        ).to.throw(`name is empty or blank`)
+        )
+
+        it('should fail on empty code', () => 
+        expect(() => 
+        logic.createLeague(nameLeague, '')
+        ).to.throw(`code is empty or blank`)
+        )
+
+
     afterAll(() => database.disconnect())
 })

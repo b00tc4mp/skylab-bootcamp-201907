@@ -7,10 +7,10 @@ import InitialHeader from '../InitialHeader'
 function Register(props) {
     const { history } = props
     const [error , setError] = useState(undefined) 
-    const [name, setName] = useState(null)
-    const [surname, setSurname] = useState(null)
-    const [email, setEmail] = useState(null)
-    const [password, setPassword] = useState(null)
+    const [name, setName] = useState()
+    const [surname, setSurname] = useState()
+    const [email, setEmail] = useState()
+    const [password, setPassword] = useState()
 
     function handleRegister (name, surname, email, password) {
 
@@ -33,10 +33,24 @@ function Register(props) {
     }
 
 
-    const handleNameInput = event => setName(event.target.value)
-    const handleSurnameInput = event => setSurname(event.target.value)
-    const handleEmailInput = event => setEmail(event.target.value)
-    const handlePasswordInput = event => setPassword(event.target.value)
+    const handleNameInput = event =>{
+        event.preventDefault()
+        setName(event.target.value)
+    } 
+
+    const handleSurnameInput = event => {
+        event.preventDefault()
+        setSurname(event.target.value)
+    }
+    const handleEmailInput = event => {
+        event.preventDefault()
+        setEmail(event.target.value)
+    }
+
+    const handlePasswordInput = event =>{
+        event.preventDefault()
+        setPassword(event.target.value)
+    } 
 
     const handleBack = () => {
         
@@ -46,8 +60,9 @@ function Register(props) {
     
     return (
         <div >
+            <section className="register">
             <InitialHeader />
-            <div className="register">
+            <div className="register__content">
             <h2>REGISTER</h2>
             <form onSubmit={handleFormSubmit}>
             <div class="form-inputs">
@@ -98,9 +113,10 @@ function Register(props) {
             <a href="#" onClick={event => {
             event.preventDefault()
             handleBack()
-        }}><i className="fas fa-arrow-circle-left fa-2x"></i></a>
-        </div>
-        </div>
+            }}><i className="fas fa-arrow-circle-left fa-2x"></i></a>
+            </div>
+            </section>
+     </div>
     )
 }
 

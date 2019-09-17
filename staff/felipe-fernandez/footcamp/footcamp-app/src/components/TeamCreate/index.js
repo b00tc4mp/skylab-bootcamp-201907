@@ -23,9 +23,9 @@ function CreateTeam(props) {
         (async()=>{
             
             try {
-                
+                debugger
                 //call to logic and recveive 18 players and the id of the team
-                const result  = await logic.createTeam(name, leagueId)
+                const result  = await logic.createTeam(name, sessionStorage.league)
                 const players  = result.players.players.map(results=> results)
                 const teamId = result.players.id
                 setTeamId(teamId) 
@@ -56,34 +56,35 @@ function CreateTeam(props) {
     return (
     
     <div>
-        <InitialHeader />
+        <section className="create-teams">
+            <InitialHeader />
 
-            <h2 className="create__title">Create a team</h2>
-            <form className="form-create" onSubmit={handleFormSubmit}>
-                <div class="form-create-inputs">
-                    <input
-                        type="name"
-                        name="name"
-                        placeholder="name"
-                        onChange={handleNameInput}
-                        required
-                    />
-                </div>
-            </form>
-            {error && <Feedback message={error}/>}
-            {player && player.map(oneplayer => 
-                <li className="players-create" key={oneplayer.id}> 
-                
-                    <PlayerResultInitial player={oneplayer} />
-               </li>)}
-            {player && <a href="#" onClick={event => {
-                event.preventDefault()
-                
-                history.push('/create-lineup')
-            }}>OK</a>}
-         
+                <h2 className="create-teams__title">Create a team</h2>
+                <form className="create-teams__form" onSubmit={handleFormSubmit}>
+                    <div class="create-teams__form__inputs">
+                        <input
+                            type="name"
+                            name="name"
+                            placeholder="name"
+                            onChange={handleNameInput}
+                            required
+                        />
+                    </div>
+                </form>
+                {error && <Feedback message={error}/>}
+                {player && player.map(oneplayer => 
+                    <li className="players-create" key={oneplayer.id}> 
+                    
+                        <PlayerResultInitial player={oneplayer} />
+                </li>)}
+                {player && <a href="#" onClick={event => {
+                    event.preventDefault()
+                    
+                    history.push('/create-lineup')
+                }}>OK</a>}
+            
 
-
+         </section>
                 
            
     </div>
