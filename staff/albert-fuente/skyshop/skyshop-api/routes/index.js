@@ -10,7 +10,7 @@ const{placeOrder,listOrders, retrieveOrder, retrieveAllOrders}=require('./order'
 
 const {addToCart, removeProduct, listCart}= require('./cart')
 
-const{setProduct, retrieveAuction, updateAuction}=require('./auction')
+const{setProduct, retrieveAuction, updateAuction, retrieveAuctionProduct, insertDate}=require('./auction')
 
 const router = Router()
 const jsonBodyParser = bodyParser.json()
@@ -46,6 +46,10 @@ router.get('/users/:id/cart/',[tokenMiddleware, jsonBodyParser],listCart)
 router.post('/auction/:id/product/:productId',[tokenMiddleware, jsonBodyParser],setProduct)
 router.get('/auction/one/:auctionId',jsonBodyParser,retrieveAuction)
 router.patch('/auction/:userId/:auctionId',jsonBodyParser,updateAuction)
+router.get('/auction/product/:productId',jsonBodyParser,retrieveAuctionProduct)
+router.patch('/auction/product/:userId/:auctionId',jsonBodyParser,insertDate)
+
+
 
 
 
