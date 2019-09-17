@@ -14,16 +14,20 @@ module.exports = (name, surname, id) => {
     
     return ( async() => {
 
-        const student = await User.findOne({name, surname})
-        
-        if(!student) throw Error(`student with name ${name} don´t exists`)
-
+        const _student = await User.findOne({name, surname})
+        debugger
+        if(!_student) throw Error(`student with name ${name} don´t exists`)
+debugger
         let subject = await Subject.findById(id)
-
+debugger
         if(!subject) throw Error(`subject with id ${id} don´t exits`)
-
-        subject.students.push(student)
-        
+debugger
+        const stud = subject.students.find(student => student.id==_student._id.toString())
+debugger
+        if(stud) throw Error(`student with name ${name} alreay exits in the subject`)
+debugger
+        subject.students.push(_student._id.toString())
+        debugger
         await subject.save()
         
         

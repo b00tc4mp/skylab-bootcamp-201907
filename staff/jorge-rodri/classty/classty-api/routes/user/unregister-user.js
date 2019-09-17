@@ -1,11 +1,11 @@
 const { users } = require('../../logic')
 
 module.exports = async (req, res) => {
-    const { userId } = req
+    const { params:{id} } = req
 debugger
     try {
         debugger
-        await users.unregisterUser(userId)
+        await users.unregisterUser(id)
         res.status(201).json({ message: 'user correctly unregistered' })
             
     } catch ({ message }) {

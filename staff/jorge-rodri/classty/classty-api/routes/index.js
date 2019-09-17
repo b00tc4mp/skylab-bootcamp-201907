@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const tokenMiddleware = require('../helpers/token-middleware')
 const { registerUser, retrieveUser, unregisterUser, updateUser, authenticateUser, retrieveAll } = require('./user')
 const { registerClass, retrieveClasses, retrieveClass, addStudent, unregisterClass, unregisterType } = require('./class')
-const { registerSubject, retrieveSubjectTeacher, retrieveAllSubjectToStudent, addTeacher, addStudentSub, unregisterSubject, retrieveST } = require('./subject')
+const { registerSubject, retrieveStudents, retrieveSubjects, retrieveSubjectTeacher, retrieveAllSubjectToStudent, addTeacher, addStudentSub, unregisterSubject, retrieveST } = require('./subject')
 const { registerHomework, retrieveHomework, retrieveNotDeliv, delivery, notDelivery, unregisterHomework, retrieveDeliv } = require('./homework')
 const { registerExam, retrieveAllExam, retrieve, addNote, unregisterExam } = require('./exam')
 const { createPost, retrievePost, removePost } = require('./post')
@@ -26,7 +26,7 @@ router.get('/users-all/:type', [tokenMiddleware, jsonBodyParser], retrieveAll)
 
 router.patch('/users/', [tokenMiddleware, jsonBodyParser], updateUser)
 
-router.delete('/users', [tokenMiddleware, jsonBodyParser], unregisterUser)
+router.delete('/users/:id', [tokenMiddleware, jsonBodyParser], unregisterUser)
 
 //CLASSES
 router.post('/class', [tokenMiddleware, jsonBodyParser], registerClass)
@@ -44,17 +44,21 @@ router.delete('/classStu', [tokenMiddleware, jsonBodyParser], unregisterType)
 //SUBJECTS
 router.post('/subject', [tokenMiddleware, jsonBodyParser], registerSubject)
 
+router.get('/subjects', [tokenMiddleware, jsonBodyParser], retrieveSubjects)
+
+router.get('/subjects/:idSub', [tokenMiddleware, jsonBodyParser], retrieveStudents)
+
 router.get('/subjectTe', [tokenMiddleware, jsonBodyParser], retrieveSubjectTeacher)
 
 router.get('/subjectStu', [tokenMiddleware, jsonBodyParser], retrieveAllSubjectToStudent)
 
 router.get('/subjectT', [tokenMiddleware, jsonBodyParser], retrieveST)
 
-router.post('/addTeacher', [tokenMiddleware, jsonBodyParser], addTeacher)
+router.post('/addTeacher/:id', [tokenMiddleware, jsonBodyParser], addTeacher)
 
-router.post('/addSubStudent', [tokenMiddleware, jsonBodyParser], addStudentSub)
+router.post('/addSubStudent/:idSub', [tokenMiddleware, jsonBodyParser], addStudentSub)
 
-router.delete('/subject', [tokenMiddleware, jsonBodyParser], unregisterSubject)
+router.delete('/subject/:name', [tokenMiddleware, jsonBodyParser], unregisterSubject)
 
 //HOMEWORK
 router.post('/homeworks/:idSub', [tokenMiddleware, jsonBodyParser], registerHomework)

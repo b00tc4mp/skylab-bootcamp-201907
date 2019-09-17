@@ -5,5 +5,7 @@ module.exports = {
     addTeacher: require('./add-teacher'),
     retrieveSubjectTeacher: require('./retrieve-subject-teacher'),
     retrieveAllSubjectToStudent: require('./retrieve-subject-user'),
-    retrieveST: require('./retrieve-s-t')
+    retrieveST: require('./retrieve-s-t'),
+    retrieveSubjects: require('./retrieve-subjects'),
+    retrieveStudents: require('./retrieve-students')
 }
