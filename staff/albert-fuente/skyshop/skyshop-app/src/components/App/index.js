@@ -16,12 +16,10 @@ import ProductDetail from '../Product-detail'
 import ProductsCategory from '../Products-category'
 import ShowAllOrders from '../Admin-view-orders'
 import AdminUpdate from '../Admin-update'
-import Spinner from '../Spinner'
 import User from '../User'
 import UserUpdate from '../User-update'
 import ShowAllOrdersUser from '../User-orders'
 import UserRemove from '../User-remove'
-import SumButton from '../SumButton'
 import UserCart from '../User-cart'
 import Checkout from '../User-success'
 import Stock from '../Admin-Stock'
@@ -33,13 +31,9 @@ import RemoveProducts from '../Admin-product-remove'
 import Auctions from '../Auctions'
 import AuctionDetail from '../Auction-detail'
 
-
-
-
 import { withRouter, Route } from 'react-router-dom'
 
 import './index.sass'
-import updateProduct from '../../logic/update-product'
 
 function App() {
 
@@ -51,18 +45,18 @@ function App() {
   const[products,setProducts]=useState()
   const[product,setProduct]=useState()
   const[productQuery,setProductQuery]=useState()
-  const[spinner,setSpinner]=useState(false)
   const[orders,setOrders]=useState()
   const[cart,setCart]=useState() 
   const[css,setCss]=useState("productAvailable")
+  const[actualDate,setActualDate]=useState()
 
- 
+
   return(
   <div className="App">
     <Context.Provider value={{ view, setView, credentials, setCredentials, user, setUser, admin,setAdmin, 
       advancedSearch, setAdvancedSearch, products,setProducts,
-       product,setProduct, productQuery,setProductQuery, spinner,setSpinner, orders,setOrders, cart,setCart, css,setCss,
-       }} >
+       product,setProduct, productQuery,setProductQuery, orders,setOrders, cart,setCart, css,setCss,
+       actualDate,setActualDate}} >
 
       <Route path="/" render={() => <Landing /> } />
       {advancedSearch && < Route path="/" render={() => <AdvancedSearch /> } />}
@@ -74,7 +68,6 @@ function App() {
       <Route exact path="/productDetail" render={() => <ProductDetail /> } />
       <Route path="/cart" render={() => <Cart /> } />
       <Route path="/productsCategory" render={() => <ProductsCategory /> } />
-      <Route path="/spinner" render={() => <Spinner /> } />
 
       <Route exact path="/admin" render={() => <Admin /> } />
       <Route path="/admin/update-product" render={() => <UpdateProducts /> } />
@@ -91,7 +84,6 @@ function App() {
       <Route path="/profile/user-update" render={() => <UserUpdate /> } />
       <Route path="/profile/user-orders" render={() => <ShowAllOrdersUser /> } />
       <Route path="/profile/user-remove" render={() => <UserRemove /> } />
-      <Route path="/sum" render={() => <SumButton /> } />
       <Route path="/user-cart" render={() => <UserCart /> } />
       <Route path="/profile/success" render={() => <Checkout /> } />
 

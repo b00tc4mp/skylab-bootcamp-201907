@@ -66,7 +66,7 @@ function RemoveProducts() {
             </ul> 
             
     }
-        <a href='/#/admin'><i className="far fa-2x fa-arrow-alt-circle-left addCart-a backArrow"></i></a>      
+        <a href='/#/admin'><i className="far fa-2x fa-arrow-alt-circle-left backArrow"></i></a>      
     </>
 }
 

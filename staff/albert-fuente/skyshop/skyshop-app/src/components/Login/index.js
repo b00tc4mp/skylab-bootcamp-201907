@@ -5,6 +5,9 @@ import logic from '../../logic'
 import { Redirect , withRouter } from "react-router-dom"
 import Feedback from '../Feedback'
 
+import './index.sass'
+
+
 
 function Login({history}) {
     const[error,setError]=useState(undefined)
@@ -42,7 +45,7 @@ function Login({history}) {
                 <input type="password" name="password" ></input>
                 <button className="formPanel-submit">Submit</button>
             </form>
-            <a href='/#/' onClick=""><i className="far fa-2x fa-arrow-alt-circle-left addCart-a backArrow"></i></a>
+            <a href='/#/' onClick=""><i className="far fa-2x fa-arrow-alt-circle-left backArrow"></i></a>
 
         </div>
         <hr></hr>

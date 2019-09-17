@@ -2,6 +2,8 @@
 import React, { useContext } from 'react'
 import Context from '../Context'
 import logic from '../../logic'
+import './index.sass'
+
 
 
 function AdminUpdate() {
@@ -49,7 +51,7 @@ function AdminUpdate() {
                     <input type="password" name="password" ></input>
                     <button className="formPanel-submit">Submit</button>
                 </form>
-                <a href='/#/admin' onClick=""><i className="far fa-2x fa-arrow-alt-circle-left addCart-a backArrow"></i></a>
+                <a href='/#/admin' onClick=""><i className="far fa-2x fa-arrow-alt-circle-left backArrow"></i></a>
             </div>  
         }
   

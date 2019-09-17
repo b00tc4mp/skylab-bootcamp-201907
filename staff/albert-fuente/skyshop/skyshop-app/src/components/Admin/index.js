@@ -1,10 +1,7 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext } from 'react'
 import Context from '../Context'
-import logic from '../../logic'
 import { Redirect} from "react-router-dom"
-
-
+import './index.sass'
 
 function Admin() {
     
@@ -23,12 +20,12 @@ function Admin() {
         {admin===true &&
         <nav>
         <ul >
-            <li ><a className="nav-but" href='/#/admin/register-products'> Register products</a></li>
-            <li ><a className="nav-but" href='/#/admin/update-product'> Update product</a></li>
-            <li ><a className="nav-but" href='/#/admin/remove-product'> Remove product</a></li>
-            <li ><a className="nav-but" href='/#/admin/stock'> Stock control</a></li>
-            <li ><a className="nav-but" href='/#/admin/view-orders'> View orders</a></li>
-            <li ><a className="nav-but" onClick={event => {
+            <li ><a className="nav-but2" href='/#/admin/register-products'> Register products</a></li>
+            <li ><a className="nav-but2" href='/#/admin/update-product'> Update product</a></li>
+            <li ><a className="nav-but2" href='/#/admin/remove-product'> Remove product</a></li>
+            <li ><a className="nav-but2" href='/#/admin/stock'> Stock control</a></li>
+            <li ><a className="nav-but2" href='/#/admin/view-orders'> View orders</a></li>
+            <li ><a className="nav-but2" onClick={event => {
                 event.preventDefault()  
                 setCredentials(undefined)
                 setView("redirectLanding")
@@ -38,9 +35,6 @@ function Admin() {
                 //setUser()
                 console.log("no credentials")
             }}> Log out</a></li>
-           
-
-
         </ul> 
         </nav>}
         

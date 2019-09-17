@@ -1,24 +1,42 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext, useEffect, useState } from 'react'
 import Context from '../Context'
 import logic from '../../logic'
-import { Redirect} from "react-router-dom"
-import { debuggerStatement } from '@babel/types'
+import Countdown from 'react-countdown-now';
+import './index.sass'
 
-
-
+ 
 function AuctionDetail() {
+// Random component
+const Completionist = () => <span>Auction finished !!!</span>;
+// Renderer callback with condition
+const renderer = ({ minutes, seconds, completed }) => {
+  if (completed) {
+    return <Completionist />;
+  } else {
+    return <span>Remaining minutes: {minutes}:{seconds}</span>
+  }
+}
 
   const[counter,setCounter]=useState(1)
   const[success,setSuccess]=useState(false)
+  const[priceAuction,setPriceAuction]=useState(undefined)
+  const[owner,setOwner]=useState(undefined)
+  const[time,setTime]=useState(undefined)
+  const[finalTime,setFinalTime]=useState(undefined)
 
   let quantity=counter
   let price
   let auctionId
+  let remainingTime
+  let actualDate
+  let calcTime
   
     const {  setView, view, product, setProduct,productQuery,user } = useContext(Context)
     const productId=productQuery
 
+/*   xactualDate=Date()
+  console.log(xactualDate.toString().slice(19,21), 'actualdate')
+  setActualDate(xactualDate.toString().slice(19,21)) */
 
     useEffect(() => {
       (async () =>{
@@ -26,6 +44,37 @@ function AuctionDetail() {
           const product=await logic.retrieveProduct(productQuery)    
           setProduct(product)
           setCounter(product.price)
+
+          const isDefined=await logic.retrieveAuctionProduct(productId)
+          console.log(isDefined)
+          if(isDefined.auction===false){
+          const result=await logic.setAuction(productId)
+          setSuccess(true)
+          console.log("added to auction")
+      }
+      else{
+        auctionId=isDefined.auction._id
+        debugger
+        const res=await logic.setDate(auctionId)
+        console.log(res)
+        const response=await logic.retrieveAuction(auctionId)
+        console.log('auction retrieved')
+        setPriceAuction(response.auction.price)
+        setCounter(response.auction.price)
+        setOwner(response.auction.owner.name)
+        remainingTime=response.auction.date.slice(14,16)
+        actualDate=response.auction.date2.slice(14,16)
+
+        
+        if(actualDate<remainingTime){
+          calcTime=remainingTime- actualDate
+        }
+        if(actualDate>remainingTime){
+          calcTime=60-actualDate+remainingTime
+        }
+        setFinalTime(parseInt(calcTime*60000))        
+        }
+
         }catch(error){
           console.log(error.message)
         }
@@ -44,27 +93,57 @@ function AuctionDetail() {
   }
 
   async function handleAuction(productId){
-    try{
-      
-      const result=await logic.setAuction(productId)
-      setSuccess(true)
-      console.log("added to auction")
-      
-      auctionId=result
-      price=parseInt(counter)
-      await logic.updateAuction(auctionId,price)
-      console.log('product UPDATED')
-      debugger
-      const response=await logic.retrieveAuction(auctionId)
-      console.log('auction retrieved')
+    if(counter>priceAuction){
+      try{
+        const isDefined=await logic.retrieveAuctionProduct(productId)
+        console.log(isDefined)
+        if(isDefined.auction===false){
+            const result=await logic.setAuction(productId)
+            setSuccess(true)
+            console.log("added to auction")
+        }
+        else{
+          auctionId=isDefined.auction._id
 
-    }catch(error){
-      console.log(error.message)
+        await logic.setDate(auctionId)
+          /* const response=await logic.retrieveAuction(auctionId)      
+          console.log('auction retrieved')
+          setPriceAuction(response.auction.price) */
+          price=parseInt(counter)
+          await logic.updateAuction(auctionId,price)
+          const response=await logic.retrieveAuction(auctionId)
+          console.log('auction retrieved')
+          setPriceAuction(response.auction.price)
+        setCounter(response.auction.price)
+        setOwner(response.auction.owner.name)
+        remainingTime=response.auction.date.slice(14,16)
+        actualDate=response.auction.date2.slice(14,16)
+
+        
+        if(actualDate<remainingTime){
+          calcTime=remainingTime- actualDate
+        }
+        if(actualDate>remainingTime){
+          calcTime=60-actualDate+remainingTime
+        }
+        setFinalTime(parseInt(calcTime*60000)) 
+        
+        }
+            
+  
+      }catch(error){
+        console.log(error.message)
+      }
+      
     }
+
+  
+    
   }
     
 
     return <>
+
      { product && user && <div>
                     <ul className='detail'>
                     <li className="detail-title">{product.title}</li>
@@ -73,34 +152,102 @@ function AuctionDetail() {
                     <li className="detail-description">{product.description}</li>
                     </ul> 
                     <div className="detail-add-cart-container">
-                    <div className="detail-counter">         
+
+                    {priceAuction===undefined &&<div className="detail-counter">         
                             <button className="detail-operator" onClick={event => {
                         event.preventDefault()  
                         setCounter(counter-1)
+
                         if(counter==product.price) setCounter(product.price)
 
                         
-                    }}>-</button>
-                <p className="detail-result">{counter+ " €"}</p>
-                <button className="detail-operator" onClick={event => {
+                       }}>-</button>
+                        <p className="detail-result">{counter+ " €"}</p>
+                        <button className="detail-operator" onClick={event => {
                         event.preventDefault()  
                         setCounter(counter+1)
                         
-                    }}>+</button>
-                    </div> 
+                        }}>+</button>
+                    </div> }
 
-                    <button className="formPanel-reject"><a  onClick={handleSubmitAuction}>Push Auction !</a></button>
+
+                    {priceAuction &&<div className="detail-counter">  
+                            <button className="detail-operator" onClick={event => {
+                        event.preventDefault()  
+                        setCounter(counter-1)
+
+                        if(counter==priceAuction) setCounter(priceAuction)
+
+
+
+
+
+
+                        async function handleAuction(productId){
+                          if(counter>priceAuction){
+                            try{
+                              const isDefined=await logic.retrieveAuctionProduct(productId)
+                              console.log(isDefined)
+                              if(isDefined.auction===false){
+                                  const result=await logic.setAuction(productId)
+                                  setSuccess(true)
+                                  console.log("added to auction")
+                              }
+                              else{
+                                auctionId=isDefined.auction._id
+                      
+                              await logic.setDate(auctionId)
+                                /* const response=await logic.retrieveAuction(auctionId)      
+                                console.log('auction retrieved')
+                                setPriceAuction(response.auction.price) */
+                                price=parseInt(counter)
+                                await logic.updateAuction(auctionId,price)
+                                const response=await logic.retrieveAuction(auctionId)
+                                console.log('auction retrieved')
+                                setPriceAuction(response.auction.price)
+                              setCounter(response.auction.price)
+                              setOwner(response.auction.owner.name)
+                              remainingTime=response.auction.date.slice(14,16)
+                              actualDate=response.auction.date2.slice(14,16)
+                      
+                              
+                              if(actualDate<remainingTime){
+                                calcTime=remainingTime- actualDate
+                              }
+                              if(actualDate>remainingTime){
+                                calcTime=60-actualDate+remainingTime
+                              }
+                              setFinalTime(parseInt(calcTime*60000)) 
+                              
+                              }
+                                  
+                        
+                            }catch(error){
+                              console.log(error.message)
+                            }
+                            
+                          }}
+                        
+
+                        
+                       }}>-</button>
+                        <p className="detail-result">{counter+ " €"}</p>
+                        <button className="detail-operator" onClick={event => {
+                        event.preventDefault()  
+                        setCounter(counter+1)
+                        
+                        }}>+</button>
+
+                    </div> }
+
+                    <button className="formPanel-reject2"><a  onClick={handleSubmitAuction}>Push Auction !</a></button>
+                    <br></br>
+                    {finalTime &&<Countdown date={Date.now() + parseInt(finalTime)} renderer={renderer}/>}
+                    {priceAuction &&<p className="detail-owner">{'Last push: '+owner}</p>}  
+
                     </div>
-                    <a onClick={handleGoBack}><i className="far fa-2x fa-arrow-alt-circle-left addCart-a backFromDetail"></i></a>
-
-
+                    <a onClick={handleGoBack}><i className="far fa-2x fa-arrow-alt-circle-left backFromDetail"></i></a>
                     </div> 
-    }
-    {success==true &&
-      <div>
-      <p>Product added to cart</p>
-      </div>
-
     }
   
     </>

@@ -1,10 +1,7 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext } from 'react'
 import Context from '../Context'
-import logic from '../../logic'
 import { Redirect} from "react-router-dom"
-import { setUseProxies } from 'immer'
-
+import './index.sass'
 
 
 function User() {
@@ -17,9 +14,9 @@ function User() {
         <h2 className="formPanel">User</h2>
         <nav>
         <ul >
-            <li ><a className="nav-but" href='/#/profile/user-orders'> View orders</a></li>
-            <li ><a className="nav-but" href='/#/profile/user-update'> Update profile</a></li>
-            <li ><a className="nav-but" onClick={event => {
+            <li ><a className="nav-but2" href='/#/profile/user-orders'> View orders</a></li>
+            <li ><a className="nav-but2" href='/#/profile/user-update'> Update profile</a></li>
+            <li ><a className="nav-but2" onClick={event => {
                 event.preventDefault()  
                 setCredentials(undefined)
                 setView("redirectLanding")
@@ -28,7 +25,7 @@ function User() {
                 //setUser()
                 console.log("no credentials")
             }}> Log out</a></li>
-             <li ><a className="nav-but" href='/#/profile/user-remove' > Remove profile</a></li>
+             <li ><a className="nav-but2" href='/#/profile/user-remove' > Remove profile</a></li>
 
         </ul> 
         </nav>

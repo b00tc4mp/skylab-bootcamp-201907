@@ -4,6 +4,9 @@ import Context from '../Context'
 import logic from '../../logic'
 import { Redirect} from "react-router-dom"
 
+import './index.sass'
+
+
 
 
 function Products() {
@@ -58,7 +61,7 @@ function Products() {
             }} >
                   <li className="product-description">{item.title}</li>
                   <li className="product-image"><img src={item.image}/></li>
-                  <li className="product-price">{item.price+" J"}</li>
+                  <li className="product-price">{item.price+" €"}</li>
                     </ul>
                    </>
                  }
@@ -84,7 +87,7 @@ function Products() {
                 }} >
                   <li className="product-description">{item.title}</li>
                   <li className="product-image"><img src={item.image}/></li>
-                  <li className="product-price">{item.price+" J"}</li>
+                  <li className="product-price">{item.price+" €"}</li>
                   </ul>
                 </>
                 }

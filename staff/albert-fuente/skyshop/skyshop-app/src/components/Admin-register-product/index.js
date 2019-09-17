@@ -3,8 +3,7 @@ import React, { useContext } from 'react'
 import Context from '../Context'
 import logic from '../../logic'
 import { Redirect} from "react-router-dom"
-
-
+import './index.sass'
 
 function AdminRegisterProduct() {
     
@@ -54,7 +53,7 @@ function AdminRegisterProduct() {
             <input type="number" name="price" ></input>
             <button className="formPanel-submit">Submit</button>
         </form>
-        <a href='/#/admin'><i className="far fa-2x fa-arrow-alt-circle-left addCart-a backArrow"></i></a>
+        <a href='/#/admin'><i className="far fa-2x fa-arrow-alt-circle-left backArrow"></i></a>
     </div>
         }
         

@@ -2,11 +2,13 @@ import React, { useContext, useEffect } from 'react'
 import Context from '../Context'
 import logic from '../../logic'
 import { Redirect, withRouter} from "react-router-dom"
+import './index.sass'
 
 function Landing({history}){
 
-    const {  view, setView, user, setUser, admin,setAdmin , advancedSearch, setAdvancedSearch,product, setProduct, productQuery,setProductQuery, cart,setCart} = useContext(Context)
+    const {  view, setView, user, setUser, admin,setAdmin , advancedSearch, setAdvancedSearch,setCart} = useContext(Context)
 
+    
     useEffect(() => {
 
         if (logic.isUserLoggedIn()) {
@@ -85,16 +87,6 @@ function Landing({history}){
                 event.preventDefault()
                 setView("auctions")
             }} >Auctions</a></li>
-                {/* <li><a className="nav2-but" onClick={event => {
-                event.preventDefault()
-                setView("productCategory")
-                setProductQuery("Mug")
-            }}>mugs</a></li>
-                <li><a className="nav2-but" onClick={event => {
-                event.preventDefault()
-                setView("productCategory")
-                setProductQuery("Duck")
-            }}>ducks</a></li> */}
                 <li><a className="nav2-but--small"  onClick={handleGoAdvancedSearch}  ><i className="fas fa-search"></i></a></li>
             </ul>
     </nav>

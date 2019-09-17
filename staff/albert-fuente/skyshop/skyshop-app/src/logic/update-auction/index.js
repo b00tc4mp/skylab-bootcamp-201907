@@ -4,7 +4,6 @@ export default function ( auctionId,price) {
 
     const { id, token } = this.__credentials__
 
-    debugger
     return (async () => {
         const response = await fetch(
             `${REACT_APP_API_URL}/auction/${id}/${auctionId}`, { 

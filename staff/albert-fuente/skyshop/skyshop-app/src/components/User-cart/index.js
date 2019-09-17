@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import Context from '../Context'
 import logic from '../../logic'
 import { Redirect} from "react-router-dom"
-
+import './index.sass'
 
 function UserCart() {
   const { cart, setCart,setView,view, setFromCart,fromCart } = useContext(Context)
@@ -83,7 +83,7 @@ function UserCart() {
         
 
         {cart!=""&& cart!=undefined && <button className="formPanel-submit-buy" onClick={handleCheckout} >Checkout</button>}
-        <p><a href="/#/"><i className="far fa-2x fa-arrow-alt-circle-left addCart-a userCart-backArrow"></i></a></p>
+        <p><a href="/#/"><i className="far fa-2x fa-arrow-alt-circle-left userCart-backArrow"></i></a></p>
 
       </div>
     }
