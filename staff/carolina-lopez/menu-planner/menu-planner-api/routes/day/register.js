@@ -1,7 +1,7 @@
 const { registerDay } = require('../../logic')
 
 module.exports = function(req, res) {
-
+    debugger
     const { userId , body: { day, breakfast, lunch, snack, dinner } } = req
 
     

@@ -13,7 +13,7 @@ module.exports = function (id) {
     validate.string(id, 'id')
 
     return (async () => {
-        const recipe = await Recipe.findOne({_id: id}).lean()
+        const recipe = await Recipe.findOne({_id: id}).populate('items.ingredient').lean()
 
         if (!recipe) throw Error(`No recipes found with id ${id}`)
 
