@@ -1,5 +1,3 @@
-import { validate } from 'utils'
-
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 export default function () {

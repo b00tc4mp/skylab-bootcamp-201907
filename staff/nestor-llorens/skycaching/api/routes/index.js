@@ -1,12 +1,14 @@
 const { Router } = require('express')
 const tokenMiddleware = require('../helpers/token-middleware')
-const { registerUser, authenticateUser, retrieveUser, updateUser, unregisterUser, addLocation } = require('./user')
+const { registerUser, authenticateUser, retrieveUser, updateUser, unregisterUser, addLocation, retrieveUserById } = require('./user')
 const { registerCache, retrieveCache, unregisterCache, logCache, updateCache, retrieveAllCaches,
 retrieveAllOwnedCaches, toggleFavorite, retrieveFavorites, retrieveLog, retrieveNear } = require('./cache')
 
 const router = Router()
 
 // user routes
+
+router.get('/users/:userId', tokenMiddleware, retrieveUserById)
 
 router.get('/users/favorites', tokenMiddleware, retrieveFavorites)
 
@@ -23,6 +25,8 @@ router.get('/users', tokenMiddleware, retrieveUser)
 router.patch('/users', tokenMiddleware, updateUser)
 
 router.delete('/users', tokenMiddleware, unregisterUser)
+
+router.get('/users/:id', tokenMiddleware, unregisterUser)
 
 
 

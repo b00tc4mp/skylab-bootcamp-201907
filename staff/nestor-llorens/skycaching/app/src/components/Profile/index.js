@@ -6,7 +6,7 @@ import L from 'leaflet'
 import logic from '../../logic'
 import './index.css';
 
-function Profile({ history }) {
+function Profile({ history, setUser }) {
 
     const [position, setPosition] = useState([0, 0])
     const [zoom, setZoom] = useState(2)
@@ -27,6 +27,14 @@ function Profile({ history }) {
         iconAnchor: [25, 82],
         popupAnchor: [0, -82],
     })
+
+    useEffect(() => {
+        (async () => {
+            const user = await logic.retrieveUser()
+
+            setUser(user)
+        })()
+    }, [history.location])
     useEffect(() => {
         (async function () {
             const allCaches = await logic.retrieveAllCaches()
@@ -85,16 +93,13 @@ function Profile({ history }) {
     }
 
     return (<>
+
         <h2>Profile</h2>
 
-        <h3>Owned Caches</h3>
+        {ownCaches.length > 0 && <h3>Owned Caches</h3>}
         {ownCaches.map((item) => (<ul>
-            <li ><p>Name: {item.name}</p></li>
-            {/* <li ><p>Description: {item.description}</p></li>
-            <li ><p>Difficulty: {item.difficulty}</p></li>
-            <li ><p>Terrain: {item.terrain}</p></li>
-            <li ><p>Size: {item.size}</p></li>
-            <li ><p>Hints: {item.hints}</p></li> */}
+            <li><p>Name: {item.name}</p></li>
+            
             <form onSubmit={event => {
                 event.preventDefault()
                 handleDeleteCache(event.target.cacheId.value)
@@ -110,6 +115,8 @@ function Profile({ history }) {
                 <button>Details</button>
             </form>
         </ul>))}
+
+        <h3>Create Cache</h3>
         <form onSubmit={event => {
             event.preventDefault()
 
@@ -118,20 +125,33 @@ function Profile({ history }) {
 
             handleRegisterCache(name, description, loc, Number(difficulty), Number(terrain), size, hints)
         }}>
-
-            <h3>Create Cache</h3>
             <label htmlFor="name">Name</label>
             <input type="name" name="name" />
             <label htmlFor="description">Description</label>
             <input type="description" name="description" />
             <label htmlFor="difficulty">Difficulty</label>
-            <input type="difficulty" name="difficulty" />
+            {/* <input type="difficulty" name="difficulty" /> */}
+            <select type='difficulty' name='difficulty'>
+                <option value='1'>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
             <label htmlFor="terrain">Terrain</label>
-            <input type="terrain" name="terrain" />
+            <select type='terrain' name='terrain'>
+                <option value='1'>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
             <label htmlFor="size">Size</label>
-            <input type="size" name="size" />
+            <select type='size' name='size'>
+                <option value='small'>small</option>
+                <option value="medium">medium</option>
+                <option value="large">large</option>
+            </select>
             <label htmlFor="hints">Hints</label>
-            <input type="hints" name="hints" />
+            <textarea rows="4" cols="50" name='hints' />
+            
+            {/* <input type="hints" name="hints" /> */}
 
             <button>Proceed</button>
         </form>
@@ -143,11 +163,8 @@ function Profile({ history }) {
             />
             {
                 haveUsersLocation ?
-                    <Marker position={position} icon={myIcon2} draggable={true} onDragend={updatePosition} ref={refmarker}>
-                        <Popup minWidth={90}>
-
-                        </Popup>
-                    </Marker> : ''
+                    <Marker position={position} icon={myIcon2} draggable={true} onDragend={updatePosition} ref={refmarker} />
+                    : ''
 
             }
             {allCaches && allCaches.length && allCaches.map(cache => <Marker key={cache._id} draggable={false}

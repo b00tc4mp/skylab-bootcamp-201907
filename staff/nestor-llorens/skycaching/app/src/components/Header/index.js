@@ -54,7 +54,7 @@ function Header({ view, setView, history, user }) {
                     <ul>
                         <li>Hello, {user && user.username}!
                 <button onClick={handleOnLogout}>Logout</button></li>
-                        {view !== 'profile' && <li><button onClick={handleGoToProfile}>Profile</button></li>}
+                        <li><button onClick={handleGoToProfile}>Profile</button></li>
                         <li><button onClick={handleGoToHome}>Home</button></li>
 
                     </ul>}

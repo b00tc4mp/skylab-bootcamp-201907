@@ -11,6 +11,8 @@ import registerCache from './register-cache'
 import retrieveOwnCaches from './retrieve-own-caches'
 import unregisterCache from './unregister-cache'
 import retrieveCache from './retrieve-cache'
+import logCache from './log-cache'
+import retrieveUserById from './retrieve-user-by-id'
 
 export default {
     set __token__(token) {
@@ -33,5 +35,7 @@ export default {
     registerCache,
     retrieveOwnCaches,
     unregisterCache,
-    retrieveCache
+    retrieveCache,
+    logCache,
+    retrieveUserById
 }

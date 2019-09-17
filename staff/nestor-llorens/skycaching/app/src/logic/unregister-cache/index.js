@@ -3,6 +3,9 @@ import { validate } from 'utils'
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 export default function (cacheId) {
+
+    validate.string(cacheId, 'user id')
+
     return (async () => {
         const response = await fetch(`${REACT_APP_API_URL}/caches/${cacheId}`, {
             method: 'DELETE',

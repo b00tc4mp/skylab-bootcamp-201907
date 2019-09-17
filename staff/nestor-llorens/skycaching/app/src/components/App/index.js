@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 // import './index.sass'
-import { Favorites, Header, Home, Landing, Login, Details, Profile, Register } from '../index.js'
+import { Header, Home, Landing, Login, Details, Profile, Register } from '../index.js'
 import logic from '../../logic'
 import { Route, withRouter } from 'react-router-dom'
 
@@ -35,15 +35,18 @@ function App({ history }) {
     }
   }
 
+
   return (<>
 
     <div className="App">
-      <Header view={view} setView={setView} user={user} />
+      <Header view={view} setView={setView} user={user} setUser={setUser} />
       <Route exact path='/' render={() => logic.isUserLoggedIn() ? <Home setUser={setUser} /> : <Landing />} />
       <Route path="/register" render={() => <Register onRegister={handleRegister} />} />
       <Route path="/login" render={() => <Login onLogin={handleLogin} />} />
-      <Route path="/profile" render={() => logic.isUserLoggedIn() ? <Profile setView={setView} user={user} /> : <Landing />} />
+      <Route path="/profile" render={() => logic.isUserLoggedIn() ? <Profile setView={setView} user={user} setUser={setUser} /> : <Landing />} />
+      {/* <Route path='/details/:id' component={Details}  /> */}
       <Route path='/details/:id' component={Details}  />
+
     </div>
   </>)
 }

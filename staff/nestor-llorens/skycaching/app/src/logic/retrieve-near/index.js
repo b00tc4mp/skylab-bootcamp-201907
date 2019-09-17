@@ -4,6 +4,8 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 export default function (distance) {
 
+    validate.number(distance, 'distance')
+
     return (async () => {
         const response = await fetch(`${REACT_APP_API_URL}/caches/${distance}`, {
             method: 'GET',
