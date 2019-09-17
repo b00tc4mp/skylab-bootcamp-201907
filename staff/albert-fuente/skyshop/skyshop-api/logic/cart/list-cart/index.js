@@ -2,10 +2,9 @@ const { models: { User, Item } } = require('skyshop-data')
 const { validate } = require('skyshop-utils')
 
 /**
+ * Retrieves the cart
  * 
  * @param {*} userId 
- * @param {*} productId 
- * @param {*} quantity 
  * 
  * 
  * @returns {Promise}

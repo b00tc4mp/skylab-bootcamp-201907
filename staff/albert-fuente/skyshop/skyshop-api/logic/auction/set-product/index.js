@@ -2,15 +2,11 @@ const { models: { User, Product, Auction } } = require('skyshop-data')
 const { validate } = require('skyshop-utils')
 
 /**
+ * Sets an auction
  * 
  * @param {*} userId 
  * @param {*} productId 
- * @param {*} title
- * @param {*} image
- * @param {*} description
- * @param {*} size
- * @param {*} color
- * @param {*} price
+ * 
  * 
  * 
  * @returns {Promise}

@@ -1,9 +1,10 @@
 const {validate} = require('skyshop-utils')
 const { models:{Product} } = require('skyshop-data')
+
 /**
+ * Retrieves all products based on a query
  * 
- * 
- * @param {*} title 
+ * @param {*} query 
  * @returns {Promise}
  * 
 */

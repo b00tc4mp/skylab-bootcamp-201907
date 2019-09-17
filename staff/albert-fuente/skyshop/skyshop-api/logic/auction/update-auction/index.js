@@ -2,9 +2,11 @@ const {validate} = require('skyshop-utils')
 const {models:{Auction, User}}=require('skyshop-data')
 
 /**
+ * Updates the auction with price
+ * 
  * @param {*} auctionId
  * @param {*} userId
- * @param {*} fieldsToUpdate
+ * @param {*} price
  * 
  * @returns {Promise}
  */
@@ -23,10 +25,6 @@ const {models:{Auction, User}}=require('skyshop-data')
     auction.price = price
     auction.owner = userId    
     auction.save()
-
-    /* 
-    const auction=await Auction.findOneAndUpdate(auctionId, { $set: {price: price} })
-    if (!auction) throw Error(`Auction with id ${auctionId} does not exist.`) */
 
 
     })()

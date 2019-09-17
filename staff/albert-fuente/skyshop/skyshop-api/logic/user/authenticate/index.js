@@ -3,6 +3,7 @@ const { models:{User} } = require('skyshop-data')
 const bcrypt = require('bcryptjs')
 
  /**
+ * Authenticates a user 
  * 
  * @param {*} email 
  * @param {*} password 

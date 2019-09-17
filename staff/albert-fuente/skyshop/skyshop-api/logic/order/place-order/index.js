@@ -2,6 +2,7 @@ const { models: { User, Order } } = require('skyshop-data')
 const { validate } = require('skyshop-utils')
 
 /**
+ * Places the order
  * 
  * @param {*} userId 
  * 

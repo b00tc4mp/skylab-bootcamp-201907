@@ -2,6 +2,7 @@ const { models: { Product, User, Order, Item } } = require('skyshop-data')
 const { validate } = require('skyshop-utils')
 
 /**
+ * Removes one product from the cart
  * 
  * @param {*} userId 
  * @param {*} productId 

@@ -1,6 +1,7 @@
 const { models:{Product} } = require('skyshop-data')
+
 /**
- * 
+ * Retrieves all products
  * 
  * @returns {Promise}
  * 
