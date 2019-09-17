@@ -11,7 +11,7 @@ export default function (title, body) {
     if(title.length > 100) throw Error('title body is too long (max. 100 characters)')
     
     return (async () => {
-        debugger
+        
         const response = await fetch(`${REACT_APP_API_URL}/posts`, {
             method: 'post',
             headers: {

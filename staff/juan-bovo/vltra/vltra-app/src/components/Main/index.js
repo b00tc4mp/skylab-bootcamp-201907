@@ -1,84 +1,47 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { HashRouter as Router, Link, Route, withRouter } from 'react-router-dom'
+import logic from '../../logic'
+import MainCard from './MainCard'
+import FeedbackMini from '../FeedbackMini'
+
 import './style.sass'
 import 'font-awesome/css/font-awesome.min.css'
+import retrievePost from '../../logic/retrieve-post'
 
-function Main(){
+function Main({ history }) {
+    const [posts, setPosts] = useState()
+    const [user, setUser] = useState()
+    const [error, setError] = useState(undefined)
+
+    useEffect(() => {
+        (async () => {
+            try {
+                await retrievePosts()
+                await retrieveUser()
+            } catch (error) {
+                console.log(error.message)
+            }
+
+        })()
+    }, [])
+
+    async function retrieveUser() {
+        const _user = await logic.retrieveUser()
+        setUser(_user)
+    }
+
+    async function retrievePosts() {
+        const _posts = await logic.retrieveAllPosts()
+        setPosts(_posts)
+    }
+
     return <main className="mosaic-grid">
-        <div className="mosaic-grid__container">
-            {/* first block is different due testing overflow on grid :) */}
-            <h3 className="mosaic-grid__title">La convulsión de los albinos</h3>
-            <button className="mosaic-grid__bookmark-button"><i class="far fa-bookmark"></i></button>
-            <div className="mosaic-grid__preview">
-            <p className="mosaic-grid__preview--content">Francisco es albino. Un día sufre una convulsión, cae al piso y al despertar sólo es capaz de pronunciar la palabra: cenáculo. Los médicos, desorientados, no pueden explicar el fenómeno. Más tarde, Horacio, otro albino, también sufre convulsiones. Al despertar sólo es capaz de pronunciar “abril”.  Muy pronto, todos los albinos del mundo sólo pueden pronunciar una palabra. El desafío será ordenar el mensaje antes de que sea demasiado tarde.
-            </p>
-            </div>
-            <span className="mosaic-grid__rank">Puntos: <i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i></span>
-            <a href="#" className="mosaic-grid__read-more">Leer +</a>
-        </div>        
-        <div className="mosaic-grid__container">
-            <h3 className="mosaic-grid__title">La convulsión de los albinos</h3>
-            <p className="mosaic-grid__preview--content">Francisco es albino. Un día sufre una convulsión, cae al piso y al despertar sólo es capaz de pronunciar la palabra: cenáculo. Los médicos, desorientados, no pueden explicar el fenómeno. Más tarde, Horacio, otro albino, también sufre convulsiones. Al despertar sólo es capaz de pronunciar “abril”.  Muy pronto, todos los albinos del mundo sólo pueden pronunciar una palabra. El desafío será ordenar el mensaje antes de que sea demasiado tarde.
-            </p>
-            <span className="mosaic-grid__rank">Puntos: <i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i></span>
-            <a href="#" className="mosaic-grid__read-more">Leer +</a>
-        </div>
-        <div className="mosaic-grid__container">
-            <h3 className="mosaic-grid__title">La convulsión de los albinos</h3>
-            <p className="mosaic-grid__preview--content">Francisco es albino. Un día sufre una convulsión, cae al piso y al despertar sólo es capaz de pronunciar la palabra: cenáculo. Los médicos, desorientados, no pueden explicar el fenómeno. Más tarde, Horacio, otro albino, también sufre convulsiones. Al despertar sólo es capaz de pronunciar “abril”.  Muy pronto, todos los albinos del mundo sólo pueden pronunciar una palabra. El desafío será ordenar el mensaje antes de que sea demasiado tarde.
-            </p>
-            <span className="mosaic-grid__rank">Puntos: <i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i></span>
-            <a href="#" className="mosaic-grid__read-more">Leer +</a>
-        </div>
-        <div className="mosaic-grid__container">
-            <h3 className="mosaic-grid__title">La convulsión de los albinos</h3>
-            <p className="mosaic-grid__preview--content">Francisco es albino. Un día sufre una convulsión, cae al piso y al despertar sólo es capaz de pronunciar la palabra: cenáculo. Los médicos, desorientados, no pueden explicar el fenómeno. Más tarde, Horacio, otro albino, también sufre convulsiones. Al despertar sólo es capaz de pronunciar “abril”.  Muy pronto, todos los albinos del mundo sólo pueden pronunciar una palabra. El desafío será ordenar el mensaje antes de que sea demasiado tarde.
-            </p>
-            <span className="mosaic-grid__rank">Puntos: <i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i></span>
-            <a href="#" className="mosaic-grid__read-more">Leer +</a>
-        </div>
-        <div className="mosaic-grid__container">
-            <h3 className="mosaic-grid__title">La convulsión de los albinos</h3>
-            <p className="mosaic-grid__preview--content">Francisco es albino. Un día sufre una convulsión, cae al piso y al despertar sólo es capaz de pronunciar la palabra: cenáculo. Los médicos, desorientados, no pueden explicar el fenómeno. Más tarde, Horacio, otro albino, también sufre convulsiones. Al despertar sólo es capaz de pronunciar “abril”.  Muy pronto, todos los albinos del mundo sólo pueden pronunciar una palabra. El desafío será ordenar el mensaje antes de que sea demasiado tarde.
-            </p>
-            <span className="mosaic-grid__rank">Puntos: <i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i></span>
-            <a href="#" className="mosaic-grid__read-more">Leer +</a>
-        </div>
-        <div className="mosaic-grid__container">
-            <h3 className="mosaic-grid__title">La convulsión de los albinos</h3>
-            <p className="mosaic-grid__preview--content">Francisco es albino. Un día sufre una convulsión, cae al piso y al despertar sólo es capaz de pronunciar la palabra: cenáculo. Los médicos, desorientados, no pueden explicar el fenómeno. Más tarde, Horacio, otro albino, también sufre convulsiones. Al despertar sólo es capaz de pronunciar “abril”.  Muy pronto, todos los albinos del mundo sólo pueden pronunciar una palabra. El desafío será ordenar el mensaje antes de que sea demasiado tarde.
-            </p>
-            <span className="mosaic-grid__rank">Puntos: <i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i></span>
-            <a href="#" className="mosaic-grid__read-more">Leer +</a>
-        </div>
-        <div className="mosaic-grid__container">
-            <h3 className="mosaic-grid__title">La convulsión de los albinos</h3>
-            <p className="mosaic-grid__preview--content">Francisco es albino. Un día sufre una convulsión, cae al piso y al despertar sólo es capaz de pronunciar la palabra: cenáculo. Los médicos, desorientados, no pueden explicar el fenómeno. Más tarde, Horacio, otro albino, también sufre convulsiones. Al despertar sólo es capaz de pronunciar “abril”.  Muy pronto, todos los albinos del mundo sólo pueden pronunciar una palabra. El desafío será ordenar el mensaje antes de que sea demasiado tarde.
-            </p>
-            <span className="mosaic-grid__rank">Puntos: <i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i></span>
-            <a href="#" className="mosaic-grid__read-more">Leer +</a>
-        </div>
-        <div className="mosaic-grid__container">
-            <h3 className="mosaic-grid__title">La convulsión de los albinos</h3>
-            <p className="mosaic-grid__preview--content">Francisco es albino. Un día sufre una convulsión, cae al piso y al despertar sólo es capaz de pronunciar la palabra: cenáculo. Los médicos, desorientados, no pueden explicar el fenómeno. Más tarde, Horacio, otro albino, también sufre convulsiones. Al despertar sólo es capaz de pronunciar “abril”.  Muy pronto, todos los albinos del mundo sólo pueden pronunciar una palabra. El desafío será ordenar el mensaje antes de que sea demasiado tarde.
-            </p>
-            <span className="mosaic-grid__rank">Puntos: <i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i></span>
-            <a href="#" className="mosaic-grid__read-more">Leer +</a>
-        </div>
-        <div className="mosaic-grid__container">
-            <h3 className="mosaic-grid__title">La convulsión de los albinos</h3>
-            <p className="mosaic-grid__preview--content">Francisco es albino. Un día sufre una convulsión, cae al piso y al despertar sólo es capaz de pronunciar la palabra: cenáculo. Los médicos, desorientados, no pueden explicar el fenómeno. Más tarde, Horacio, otro albino, también sufre convulsiones. Al despertar sólo es capaz de pronunciar “abril”.  Muy pronto, todos los albinos del mundo sólo pueden pronunciar una palabra. El desafío será ordenar el mensaje antes de que sea demasiado tarde.
-            </p>
-            <span className="mosaic-grid__rank">Puntos: <i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i></span>
-            <a href="#" className="mosaic-grid__read-more">Leer +</a>
-        </div>
-        <div className="mosaic-grid__container">
-            <h3 className="mosaic-grid__title">La convulsión de los albinos</h3>
-            <p className="mosaic-grid__preview--content">Francisco es albino. Un día sufre una convulsión, cae al piso y al despertar sólo es capaz de pronunciar la palabra: cenáculo. Los médicos, desorientados, no pueden explicar el fenómeno. Más tarde, Horacio, otro albino, también sufre convulsiones. Al despertar sólo es capaz de pronunciar “abril”.  Muy pronto, todos los albinos del mundo sólo pueden pronunciar una palabra. El desafío será ordenar el mensaje antes de que sea demasiado tarde.
-            </p>
-            <span className="mosaic-grid__rank">Puntos: <i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i></span>
-            <a href="#" className="mosaic-grid__read-more">Leer +</a>
-        </div>
+        <h2>Contenido fresco en Vltra</h2>
+        {/* Acá iría un compo para cambiar de vista */}
+        <ul>
+            {user && posts && posts.posts.length && posts.posts.map(item => <MainCard item={item} user={user} refreshUser={retrieveUser} refreshPosts={retrievePosts}/>)}
+        </ul>
     </main>
 }
 
-export default Main
+export default withRouter(Main)

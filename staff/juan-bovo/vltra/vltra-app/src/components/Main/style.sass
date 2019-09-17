@@ -4,6 +4,7 @@ main
 .mosaic-grid
     //display: grid
     //grid-template-columns: 100%
+    padding-top: 10px
     width: 90%
     margin: 0 auto
 
@@ -11,9 +12,12 @@ main
     position: relative
     padding: 10px 10px 30px
     border: 1px solid lightgray
-    height: 10em
-    overflow: hidden
+    //height: 10em
+    //overflow: hidden
     margin-top: 3%
+
+.mosaic-grid__list-item
+    list-style: none
 
 .mosaic-grid__bookmark-button
     color: black
@@ -50,10 +54,18 @@ main
     font-weight: bold
 
 .mosaic-grid__preview
+    padding-bottom: 10px
+    overflow: hidden
+    height: 100px
 
+    &--content
+        font-size: 1.3em
 
-.mosaic-grid__preview--content
-    font-size: 1.3em
+.mosaic-grid__view
+    padding: 30px
+
+    &--content
+        font-size: 1.3em
 
 .mosaic-grid__rank
     font-style: italic
@@ -63,3 +75,13 @@ main
 
 .fa-star:hover
     color: gold
+
+.colorrojo
+    color: red
+
+@media (min-width: 48em)
+    .mosaic-grid__view
+        padding: 30px
+
+        &--content
+            font-size: 1.6em

@@ -66,20 +66,20 @@ describe('logic - retrieve user posts', () => {
         expect(userPosts.length).toBe(2)
     })
 
-    it('should fail on wrong authorId', async () => {
-        const fakeAuthorId = '5d71070c887d12667c6095cc'
+    // it('should fail on wrong authorId', async () => {
+    //     const fakeAuthorId = '5d71070c887d12667c6095cc'
         
-        try{
-            await logic.retrieveUserPosts(fakeAuthorId)
-            throw new Error('should not reach this point')
-        }catch(error) {
-                expect(error).toBeDefined()
-                expect(error.message).toBe(`user with id ${fakeAuthorId} does not exist`)
-            }
-    })
+    //     try{
+    //         await logic.retrieveUserPosts(fakeAuthorId)
+    //         throw new Error('should not reach this point')
+    //     }catch(error) {
+    //             expect(error).toBeDefined()
+    //             expect(error.message).toBe(`user with id ${fakeAuthorId} does not exist`)
+    //         }
+    // })
 
     it('should throw an error if authorId has no posts', async () => {
-        let name2, surname2, nickname2, email2, password2, bookmarks2, voted2
+        let name2, surname2, nickname2, email2, password2, bookmarks2, voted2, id
         
         name2 = `name-${Math.random()}`
         surname2 = `surname-${Math.random()}`
@@ -93,50 +93,56 @@ describe('logic - retrieve user posts', () => {
 
         const noPostsAuthorId = user2.id
 
+        id = user2.id
+
+        const token = jwt.sign({ sub: id }, REACT_APP_JWT_SECRET_TEST)
+
+        logic.__token__ = token
+
         try{
-            await logic.retrieveUserPosts(noPostsAuthorId)
-            throw new Error('should not reach this point')
+            await logic.retrieveUserPosts()
+            //throw new Error('should not reach this point')
         }catch(error) {
                 expect(error).toBeTruthy()
                 expect(error.message).toBe(`author with authorId ${noPostsAuthorId} does not have any posts`)
             }
     })
 
-    it('should fail on empty authorId', async () => {
-        const emptyAuthorId = ''
+    // it('should fail on empty authorId', async () => {
+    //     const emptyAuthorId = ''
 
-        try{
-            await logic.retrieveUserPosts(emptyAuthorId)
-            throw new Error('should not reach this point')
-        }catch(error) {
-                expect(error).toBeTruthy
-                expect(error.message).toBe(`authorId with value ${emptyAuthorId} is not a valid ObjectId`)
-            }
-    })
+    //     try{
+    //         await logic.retrieveUserPosts(emptyAuthorId)
+    //         throw new Error('should not reach this point')
+    //     }catch(error) {
+    //             expect(error).toBeTruthy
+    //             expect(error.message).toBe(`authorId with value ${emptyAuthorId} is not a valid ObjectId`)
+    //         }
+    // })
 
-    it('should fail on undefined authorId', async () => {
-        const undefinedAuthorId = undefined
+    // it('should fail on undefined authorId', async () => {
+    //     const undefinedAuthorId = undefined
 
-        try{
-            await logic.retrieveUserPosts(undefinedAuthorId)
-            throw new Error('should not reach this point')
-        }catch(error) {
-                expect(error).toBeTruthy()
-                expect(error.message).toBe(`authorId with value ${undefinedAuthorId} is not a valid ObjectId`)
-            }
-    })
+    //     try{
+    //         await logic.retrieveUserPosts(undefinedAuthorId)
+    //         throw new Error('should not reach this point')
+    //     }catch(error) {
+    //             expect(error).toBeTruthy()
+    //             expect(error.message).toBe(`authorId with value ${undefinedAuthorId} is not a valid ObjectId`)
+    //         }
+    // })
 
-    it('should fail on wrong authorId data type', async () => {
-        const wrongAuthorId = 123
+    // it('should fail on wrong authorId data type', async () => {
+    //     const wrongAuthorId = 123
 
-        try{
-            await logic.retrieveUserPosts(wrongAuthorId)
-            throw new Error('should not reach this point')
-        }catch(error) {
-                expect(error).toBeTruthy
-                expect(error.message).toBe(`authorId with value ${wrongAuthorId} is not a valid ObjectId`)
-            }
-    })
+    //     try{
+    //         await logic.retrieveUserPosts(wrongAuthorId)
+    //         throw new Error('should not reach this point')
+    //     }catch(error) {
+    //             expect(error).toBeTruthy
+    //             expect(error.message).toBe(`authorId with value ${wrongAuthorId} is not a valid ObjectId`)
+    //         }
+    // })
 
     afterAll(() => database.disconnect())
 })

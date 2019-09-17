@@ -28,21 +28,29 @@ function Header({ history }) {
         history.push('/create-post')
     }
 
+    const handleGoToUserProfile = () => {
+        history.push('/my-profile')
+    }
+
     return <>
         <header className="header">
-            <Link to="/" className="header__logo"><img className="header__logo--image" src="./img/logo.jpg" alt="VLTRA" /></Link>
+            <Link to="/" className="header__logo"><img className="header__logo--image" src="./img/vltra-rectangle-orange.png" alt="VLTRA" /></Link>
 
             <nav>
                 {!logic.isUserLoggedIn() ?
                     <ul className="user-menu">
-                        <li className="user-menu__auth-option" ><Link to="/register" className="user-menu__auth-option-link" href="">Registro</Link></li>
-                        <li className="user-menu__auth-option" ><Link to="/login" className="user-menu__auth-option-link" href="">Inicia sesión</Link></li>
+                        <li className="user-menu__auth-option" ><p>¿Nuevo en Vltra?</p><Link to="/register" className="user-menu__auth-option-link" href="">¡Regístrate!</Link></li>
+                        <li className="user-menu__auth-option" ><p>¿Ya eres usuario?</p><Link to="/login" className="user-menu__auth-option-link" href="">Inicia sesión</Link></li>
                     </ul> :
                     <ul className="user-menu">
                         <div className="user-menu__avatar-container">
-                            <img className="user-menu__avatar-img" src={user && user.avatar}></img>
+                            <a onClick={event => {
+                                event.preventDefault()
+                                handleGoToUserProfile()}}>
+                                <img className="user-menu__avatar-img" src={user && user.avatar}></img>
+                                <p className="user-menu__user-option">{user && user.nickname}</p>
+                            </a>
                         </div>
-                        <p className="user-menu__user-option">{user && user.nickname}</p>
                         <li className="user-menu__auth-option" >
                             <a className="user-menu__auth-option-link" href="" onClick={event => {
                                 event.preventDefault()

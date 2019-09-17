@@ -12,7 +12,7 @@ import Login from '../Login'
 function Home() {
   return <>
   {/* <Header/> */}
-  <Main/>
+  {/* <Main/> */}
   {/* <Footer/> */}
   </>
 }
