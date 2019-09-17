@@ -23,11 +23,11 @@ function Subject({ history }) {
 
         try {
 
-            const user = await logic.retrieveUser()
+            const user = await logic.user.retrieveUser()
             setUser(user)
-            await logic.createPost(id, value, user.name, user.surname, user.id)
+            await logic.post.createPost(id, value, user.name, user.surname, user.id)
             document.getElementById('area').value = ""
-            const posts = await logic.retrievePost(id)
+            const posts = await logic.post.retrievePost(id)
             setPosts(posts)
             setUpdate(!update)
         } catch (error) {
@@ -36,20 +36,23 @@ function Subject({ history }) {
         }
     }
 
-        useEffect(async() => {
-            const posts = await logic.retrievePost(id);
-            debugger
-            setPosts(posts)
+        useEffect(() => {
+            async function posts(){
+                const posts = await logic.post.retrievePost(id);
+                debugger
+                setPosts(posts)
+            }
+            posts()
             async function autoUpdate() {
                 debugger
-                const posts = await logic.retrievePost(id);
+                const posts = await logic.post.retrievePost(id);
                 debugger
                 setPosts(posts) 
             }
-                interval = setInterval(function(){
+            /*     interval = setInterval(function(){
                     autoUpdate()
                 }, 3000)
-                return () => clearInterval(interval)
+                return () => clearInterval(interval) */
     
         }, [update])
 

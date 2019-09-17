@@ -15,12 +15,12 @@ function Login({ history }) {
 
     async function handleLogin(email, password) {
         try {
-debugger
-            const token = await logic.authenticateUser(email, password)
-debugger
+
+            const token = await logic.user.authenticateUser(email, password)
+ 
             logic.__userCredentials__ = token
 
-            const user = await logic.retrieveUser(token)
+            const user = await logic.user.retrieveUser(token)
             
             logic.__userType__ = user.type
             setUser(user)

@@ -1,12 +1,13 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import logic from '../../logic'
 import Context from '../Context'
 import Header from '../Header'
 import { withRouter, Link } from 'react-router-dom'
 
-function ClassList({ history }) {
+function RemoveClass({ history }) {
     const { classes, setClasses } = useContext(Context)
-    
+    const [update, setUpdate] = useState(false)
+
     function handleSubmit(event){
         event.stopPropagation()
         const {target:{ value: nameClass } }= event
@@ -15,7 +16,8 @@ function ClassList({ history }) {
     }
     async function handleRemoveClass(nameClass){
         try{
-            await logic.removeClass(nameClass)
+            await logic.classes.removeClass(nameClass)
+            setUpdate(!update)
         }catch(error){
             console.log(error.message)
         }
@@ -25,11 +27,11 @@ function ClassList({ history }) {
     useEffect(() => {
         (async () => {
             
-            const classes = await logic.retrieveClasses();
+            const classes = await logic.classes.retrieveClasses();
             setClasses(classes)
 
         })()
-    }, [classes])
+    }, [update])
 
     return <>
         <Header />
@@ -52,4 +54,4 @@ function ClassList({ history }) {
         </main>
     </>
 }
-export default withRouter(ClassList)
+export default withRouter(RemoveClass)
