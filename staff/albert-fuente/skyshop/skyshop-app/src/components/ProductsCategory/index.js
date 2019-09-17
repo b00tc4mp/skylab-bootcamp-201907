@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext , useEffect} from 'react'
 import Context from '../Context'
 import logic from '../../logic'

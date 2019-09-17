@@ -21,7 +21,6 @@ function ShowAllOrders() {
              
     }, [])
 
-
     return <>
     {view==="productDetail" && <Redirect to="/productDetail"/>}
     <h4>All orders:</h4>

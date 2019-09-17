@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import Context from '../Context'
 import logic from '../../logic'
 import { Redirect} from "react-router-dom"
-import { debuggerStatement } from '@babel/types'
 
 import './index.sass'
 
@@ -42,8 +41,6 @@ function ProductDetail() {
     try{
       await logic.addToCart(productId,quantity)
       setSuccess(true)
-      console.log("added to cart")
-
     }catch(error){
       console.log(error.message)
     }

@@ -1,10 +1,7 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext } from 'react'
 import Context from '../Context'
 import logic from '../../logic'
 import './index.sass'
-
-
 
 function AdminUpdate() {
 
@@ -23,8 +20,7 @@ function AdminUpdate() {
         handleUpdate(id,token,body)
     }
     
-    async function handleUpdate(id, token,body) {
-        
+    async function handleUpdate(id, token,body) {       
           try {
               await logic.updateUser(id, token, body)
               setView('registerSuccess')

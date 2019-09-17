@@ -1,13 +1,9 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext, useState } from 'react'
 import Context from '../Context'
 import logic from '../../logic'
 import { Redirect} from "react-router-dom"
 import Feedback from '../Feedback'
-
 import './index.sass'
-
-
 
 function Register() {
     const[error,setError]=useState(undefined)
@@ -28,7 +24,6 @@ function Register() {
               setView('registerSuccess')
               setError(undefined)
              
-              console.log("registered")
           } catch(error) {
               setError(error.message)
               console.log("error",error.message)
@@ -56,8 +51,7 @@ function Register() {
             <a href='/#/' onClick=""><i className="far fa-2x fa-arrow-alt-circle-left backArrow"></i></a>
         </div>
         {error!=undefined && <Feedback message={error} />} 
-
-        
+       
     </>
     )
 }
