@@ -15,6 +15,6 @@ module.exports = new Schema({
     },
     note:{
         type: Number,
-        required: true
+       
     }
 })
