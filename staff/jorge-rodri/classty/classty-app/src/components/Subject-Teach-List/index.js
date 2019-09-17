@@ -11,7 +11,7 @@ function SubjectTeacherList({ history }) {
     useEffect(() => {
         (async () => {
             debugger
-            const teachers = await logic.retrieveTeachersSubjects();
+            const teachers = await logic.subject.retrieveTeachersSubjects();
             setTeachers(teachers)
             debugger
         })()

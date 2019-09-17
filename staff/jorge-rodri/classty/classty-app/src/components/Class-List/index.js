@@ -7,11 +7,29 @@ import { withRouter, Link } from 'react-router-dom'
 function ClassList({ history }) {
     const { classes, setClasses, user } = useContext(Context)
 
+ function handleSubmit(event){
+        event.preventDefault()
+        debugger
+        const {target:{ nameClass: { value: nameClass } } } = event
+        handleRegister(nameClass)
+    }
+    
+    async function handleRegister(nameClass){
 
+        try{
+            
+            await logic.classes.registerClass(nameClass)
+            
+            document.getElementById('a').value = ''
+        }catch(error){
+            
+            console.log(error.message)
+        }
+    }
     useEffect(() => {
         (async () => {
 
-            const classes = await logic.retrieveClasses();
+            const classes = await logic.classes.retrieveClasses();
             setClasses(classes)
 
         })()
@@ -20,7 +38,13 @@ function ClassList({ history }) {
     return <>
         <Header />
         <main>
-
+        <section>
+        <h2>Create Class</h2>
+        <form onSubmit={handleSubmit}>
+            <input type="name" id='a' name="nameClass" placeholder="name subject"/>
+            <button>Submit</button>
+        </form>
+        </section>
             <section>
                 <ul>
 

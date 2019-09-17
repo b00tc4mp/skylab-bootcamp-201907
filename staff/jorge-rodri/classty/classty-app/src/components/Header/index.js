@@ -10,7 +10,7 @@ import { withRouter, Link } from 'react-router-dom'
     function handleLogaut(event) {
         event.preventDefault()
 
-       logic.logUserOut()
+       logic.user.logUserOut()
 
         setView(undefined)
         setUser(undefined)

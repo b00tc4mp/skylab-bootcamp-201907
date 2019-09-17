@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import logic from '../../logic'
 import Context from '../Context'
 import Header from '../Header'
@@ -6,7 +6,8 @@ import { withRouter, Link } from 'react-router-dom'
 
 function RemoveTeacher({ history }) {
     const { teachers, setTeachers } = useContext(Context)
-    
+    const [update, setUpdate] = useState(false)
+
     function handleSubmit(event){
         event.stopPropagation()
         const {target:{ value: id } }= event
@@ -15,7 +16,8 @@ function RemoveTeacher({ history }) {
     }
     async function handleRemoveClass(id){
         try{
-            await logic.unregisterUser(id)
+            await logic.user.unregisterUser(id)
+            setUpdate(!update)
         }catch(error){
             console.log(error.message)
         }
@@ -29,7 +31,7 @@ function RemoveTeacher({ history }) {
             setTeachers(teachers)
 debugger
         })()
-    }, [teachers])
+    }, [update])
 debugger
     return <>
         <Header />
