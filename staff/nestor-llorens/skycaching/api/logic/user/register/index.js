@@ -2,13 +2,12 @@ const validate = require('utils/validate')
 const { models: { User } } = require('data')
 const bcrypt = require('bcryptjs')
 
-function registerUser (username, password, email, avatar) {
+function registerUser (username, password, email) {
 
     validate.string(username, 'username')
     validate.string(email, 'email')
     validate.email(email, 'email')
     validate.string(password, 'password')
-    validate.string(avatar, 'avatar')
 
     favorites = []
     owned = []
@@ -23,7 +22,7 @@ function registerUser (username, password, email, avatar) {
 
         const hash = await bcrypt.hash(password, 10)
 
-        user = await User.create({ username, password: hash, email, avatar, favorites, owned, found })
+        user = await User.create({ username, password: hash, email, favorites, owned, found })
         
         return user.id
         

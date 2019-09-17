@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 let connection
 
 function connect (url) {
-    return connection ? connection : connection = mongoose.connect(url, { useNewUrlParser: true, useFindAndModify: false })
+    return connection ? connection : connection = mongoose.connect(url, { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true })
 }
 function disconnect() {
     connection = undefined

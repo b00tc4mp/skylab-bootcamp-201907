@@ -2,10 +2,10 @@ const logic = require('../../logic/cache')
 
 async function retrieveNear (req, res) {
     
-    const { userId } = req
-
+    const { userId, params: { distance } } = req
+    
     try {
-        const caches = await logic.retrieveNear(userId)
+        const caches = await logic.retrieveNear(userId, distance)
         res.json({ message: 'near caches retrieved correctly', caches })
 
     } catch ({ message }) {

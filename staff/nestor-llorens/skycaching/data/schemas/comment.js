@@ -5,10 +5,6 @@ const commentSchema = new Schema({
         type: String,
         required: true
     },
-    found: {
-        type: Boolean,
-        required: true
-    },
     date: {
         type: Date,
         required: true

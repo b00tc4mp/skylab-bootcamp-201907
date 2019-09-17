@@ -21,7 +21,7 @@ describe('logic - log cache', () => {
         username = `username-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}@domain.com`
-        avatar = `path-${Math.random()}`
+        comment = `comment-${Math.random()}`
 
         name = `name-${Math.random()}`
         description = `description-${Math.random()}`
@@ -43,7 +43,7 @@ describe('logic - log cache', () => {
 
     it('should succeed on correct data', async() => {
         
-        const result = await logic.logCache(id, cacheId)
+        const result = await logic.logCache(id, cacheId, comment)
 
         const user = await User.findById(id)
     
