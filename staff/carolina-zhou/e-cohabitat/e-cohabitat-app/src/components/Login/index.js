@@ -22,6 +22,12 @@ function Login({ history }) {
         }
     }
 
+    function handleBack(event) {
+        event.preventDefault()
+
+        history.push(`/`)
+    }
+
     return <>
 
             <section className="login">
@@ -40,7 +46,7 @@ function Login({ history }) {
                     <button className="login__form-button" type="submit">Log in</button>
                 </form>
                 
-                <a href={`/`} className="login__back-link"><i className="fas fa-arrow-left"></i> Go back</a>
+                <a href="#" className="login__back-link"><i className="fas fa-arrow-left" onClick={handleBack}></i> Go back</a>
             </section>
 
     </>

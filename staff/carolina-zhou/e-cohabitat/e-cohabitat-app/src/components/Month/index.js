@@ -41,6 +41,7 @@ function Month({ history, match }) {
     function handleDay(event) {
         event.preventDefault()
 
+        setThisDay(moment())
         history.push(`/${spaceId}/day`)
     }
 
@@ -194,7 +195,7 @@ debugger
             </div>
 
             <div className="month__act">
-                <Chores />
+                <Chores spaceId={match.params.spaceId}/>
                 
                 <div className="calendar">
                     <div>{week()}</div>

@@ -1,7 +1,20 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 
-export default function() {
+function Landing ({ history }) {
     
+    function handleGoToRegister(event) {
+        event.preventDefault()
+
+        history.push(`/sign-up`)
+    }
+
+    function handleGoToLogin(event) {
+        event.preventDefault()
+
+        history.push(`/sign-in`)
+    }
+
     return <>
 
         <img src={require('../../img/logo.svg')} alt="e-cohabitat project logo" className="main__logo"/>
@@ -11,10 +24,12 @@ export default function() {
 
         <nav className="main__mobile-menu">
             <ul>
-                <li className="main__item"><a className="main__link" href={`/#/sign-up`} title="Sign up">Sign up</a></li>
-                <li className="main__item"><a className="main__link" href={`/#/sign-in`} title="Sign in">Sign in</a></li>
+                <li className="main__item"><a className="main__link" href="#" title="Sign up" onClick={handleGoToRegister}>Sign up</a></li>
+                <li className="main__item"><a className="main__link" href="#" title="Sign in" onClick={handleGoToLogin}>Sign in</a></li>
             </ul>
         </nav>
 
     </>
 }
+
+export default withRouter(Landing)

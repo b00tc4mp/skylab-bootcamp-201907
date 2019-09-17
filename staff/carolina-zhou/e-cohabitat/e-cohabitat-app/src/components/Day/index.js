@@ -88,7 +88,7 @@ function Day({ history, match }) {
                 return <>
                 <div className="timetable__task-intro">
                    <p className="timetable__task-user">{task.companionNames}</p> 
-                   <p className="timetable__task-name">({task.taskName})</p>
+                   <p className="timetable__task-name">({task.taskName} {moment(task.date).format('HH:mm')}h)</p>
                    <i class="fas fa-minus-circle" onClick={() => handleDeleteTask(task._id)}></i>
                 </div>
                 <p className="timetable__task-description">- {task.description}</p>
@@ -115,7 +115,7 @@ function Day({ history, match }) {
             </div>
 
             <div className="day__act">
-                <Chores />
+                <Chores spaceId={match.params.spaceId}/>
 
                 <table className="timetable">
                     <tbody>

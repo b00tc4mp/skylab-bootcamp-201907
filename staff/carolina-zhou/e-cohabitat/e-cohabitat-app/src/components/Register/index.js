@@ -25,6 +25,12 @@ function Register({ history }) {
 
     }
 
+    function handleBack(event) {
+        event.preventDefault()
+
+        history.push(`/`)
+    }
+
     return <>
 
             <section className="register">
@@ -52,7 +58,7 @@ function Register({ history }) {
                         <button className="register__form-button">Register</button>
                     </ul>
                 </form>
-                <a href={`/`} className="register__back-link"><i className="fas fa-arrow-left"></i> Go back</a>
+                <a href="#" className="register__back-link" onClick={handleBack}><i className="fas fa-arrow-left"></i> Go back</a>
             </section>
 
     </>

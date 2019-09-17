@@ -3,10 +3,25 @@
     &__activity
         display: flex
         flex-direction: column
-        width: 20%
+        min-width: 20%
+        margin: 1em 2em 0 0
+    &__space
+        text-align: left
+        padding: 1em
+        border: 1px solid lightgrey
+    &__space:hover
+        border: 2px solid deeppink
+    &__space-title
+        font-weight: bold
+    &__space-type
+        color: grey
+        margin: .5em 0
+    &__space-address
+        color: darkgrey
+        font-size: 13px
     &__maintenance, &__tags
         text-align: left
-        margin-bottom: 2em
+        margin: 1em 0 2em 0
     &__list-title
         font-size: 2rem
     &__list

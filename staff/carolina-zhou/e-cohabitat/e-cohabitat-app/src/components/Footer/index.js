@@ -11,10 +11,10 @@ export default function() {
               <li className="footer__item"><a className="footer__link" href="#" title="Privacy Policy">Privacy Policy</a></li>
           </ul>  
           <ul className="footer__menu">
-              <li className="footer__item"><a href="" className="fab fa-twitter" title="twitter"></a></li>
-              <li className="footer__item"><a href="" className="fab fa-facebook-f" title="facebook"></a></li>
-              <li className="footer__item"><a href="" className="fab fa-instagram" title="instagram"></a></li>
-              <li className="footer__item"><a href="" className="fab fa-youtube" title="youtube"></a></li>
+              <li className="footer__item"><a href="#" className="fab fa-twitter" title="twitter"></a></li>
+              <li className="footer__item"><a href="#" className="fab fa-facebook-f" title="facebook"></a></li>
+              <li className="footer__item"><a href="#" className="fab fa-instagram" title="instagram"></a></li>
+              <li className="footer__item"><a href="#" className="fab fa-youtube" title="youtube"></a></li>
           </ul>      
       </footer>
     </>

@@ -142,7 +142,7 @@ function Week({ history, match }) {
             </div>
 
             <div className="week__act">
-                <Chores />
+                <Chores history spaceId={match.params.spaceId}/>
 
                 <div className="weekly">
                     <div>{week()}</div>

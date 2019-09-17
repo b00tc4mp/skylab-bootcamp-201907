@@ -25,7 +25,7 @@ function CouserRegister({ history, match }) {
         }
     }
 
-    function goBack(event) {
+    function handleBack(event) {
         event.preventDefault()
 
         history.push(`/spaces/${spaceId}`)
@@ -48,7 +48,7 @@ function CouserRegister({ history, match }) {
                         </li>
                     </ul>
                 </form>
-                <a href="." className="couserRegister__back-link"><i className="fas fa-arrow-left" onClick={goBack}></i> Go back</a>
+                <a href="#" className="couserRegister__back-link" onClick={handleBack}><i className="fas fa-arrow-left" ></i> Go back</a>
             </section>
 
     </>
