@@ -6,7 +6,7 @@ function call(url, method = "get", headers, body) {
       "patch",
       "delete"
     ]);
-  
+
     return fetch(url, {
       method,
       headers,

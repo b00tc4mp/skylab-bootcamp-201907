@@ -22,7 +22,11 @@ class App extends Component {
     this.handleRegister = this.handleRegister.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.handleGoToDrumkit = this.handleGoToDrumkit.bind(this);
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChange = this.handleChange.bind(this);
+    this.handleRetrieve = this.handleRetrieve.bind(this);
+    this.handleUpdateDrumkit = this.handleUpdateDrumkit.bind(this);
+    this.handleDrumkitEdit = this.handleDrumkitEdit.bind(this);
+
   }
 
   handleGoToRegister() {
@@ -65,9 +69,7 @@ class App extends Component {
   handleGoToLogin() {
     this.setState({ view: "login" });
   }
-  handleGoToDrumkit() {
-    this.setState({ view: "drumkit" });
-  }
+
 
   handleLogin(email, password) {
     try {
@@ -85,12 +87,51 @@ class App extends Component {
     }
   }
 
+  handleRetrieve(id,token){
+    try{
+      logic
+      .retrieveUser(id,token)
+      .then(user => {
+        this.setState({ view: "drumkit", user: user.user });
+      })
+      .catch(({ message }) => this.setState({ error: message }));
+    }catch({message}) {
+      this.setState({ error: message });
+    }
+  }
+  
+  handleUpdateDrumkit(data){
+    try{
+      logic.updateUser(data)
+        .then(user => {
+          this.setState({ view: "drumkit", user: user.user });
+        })
+        .catch(({ message }) => this.setState({ error: message }));
+    }catch({message}) {
+      this.setState({ error: message });
+    }
+  }
+
+  handleGoToDrumkit() {
+    const {id, token} = this.state.credentials
+    this.handleRetrieve(id,token)
+    this.setState({ view: "drumkit", user: null, drumkit: null });
+  }
+
+  
+  
   handleLogout() {
     delete sessionStorage.id;
     delete sessionStorage.token;
 
     this.setState({ credentials: undefined });
   }
+
+  handleDrumkitEdit(kit) {
+    console.log('kit from app :', kit);
+    this.setState({ view: "drumkit", drumkit: kit });
+  }
+
   handleChange() {
   
 
@@ -104,7 +145,7 @@ class App extends Component {
 
   render() {
     const {
-      state: { view, credentials, error },
+      state: { view, credentials, error, user, drumkit },
       handleGoToRegister,
       handleRegister,
       handleBackToLanding,
@@ -112,7 +153,11 @@ class App extends Component {
       handleLogin,
       handleLogout,
       handleGoToDrumkit,
-      handleChange
+      handleChange,
+      handleRetrieve,
+      handleUpdateDrumkit,
+      handleDrumkitEdit
+      
     } = this;
 
     return (
@@ -124,6 +169,7 @@ class App extends Component {
             credentials={credentials}
             onLogout={handleLogout}
             onDrumkit={handleGoToDrumkit}
+            onEditDrumkit={handleDrumkitEdit}
           />
         )}
         {view === "register" && (
@@ -148,8 +194,13 @@ class App extends Component {
           onBack={handleBackToLanding}
           onChange={handleChange}
           error={error}
+          onRetrieve={handleRetrieve}
+          user={user}
+          onUpdate={handleUpdateDrumkit}
+          drumkit={drumkit}
           />
         )}
+  
       </>
     );
   }

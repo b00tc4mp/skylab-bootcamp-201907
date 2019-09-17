@@ -4,6 +4,7 @@ function Sequence({ beats, instrument, doValues, error }) {
     const [thebeats, setTheBeats] = React.useState(null)
         
     React.useEffect( () => {
+        console.log('beats :', beats);
         if (beats) {
             setTheBeats(beats)
         } else {

@@ -4,7 +4,7 @@ class Landing extends Component {
     constructor() {
         super()
 
-        this.state = { view: 'search',  error: undefined, user: undefined, }
+        this.state = { view: 'search', error: undefined, user: undefined, }
 
 
         this.handleRegister = this.handleRegister.bind(this)
@@ -12,8 +12,7 @@ class Landing extends Component {
         this.handleLogout = this.handleLogout.bind(this)
         this.handleAcceptError = this.handleAcceptError.bind(this)
         this.handleDrumkit = this.handleDrumkit.bind(this)
-        this.handleCheck = this.handleCheck.bind(this)
-         }
+    }
 
     componentWillMount() {
         const { props: { credentials } } = this
@@ -24,7 +23,7 @@ class Landing extends Component {
             try {
                 logic.retrieveUser(id, token)
                     .then(user => {
-                        this.setState({user: user.user })
+                        this.setState({ user: user.user })
                     })
                     .catch(({ message }) => this.setState({ error: message }))
             } catch ({ message }) {
@@ -34,7 +33,7 @@ class Landing extends Component {
     }
 
 
-  
+
 
     handleRegister(event) {
         event.preventDefault()
@@ -58,7 +57,7 @@ class Landing extends Component {
         this.setState({ user: undefined, view: 'search' }, () => onLogout())
     }
 
- 
+
 
     handleAcceptError() {
         this.setState({ error: undefined })
@@ -70,60 +69,49 @@ class Landing extends Component {
         this.props.onDrumkit()
     }
 
-    handleCheck(event)  {
-        event.preventDefault()
-        console.log('called')
-    }
 
-   
+    // handleMyDrumkits(event) {
+    //     event.preventDefault()
 
-   
+    //     onMyDrumkits()
+    // }
+
+
+
+
 
     render() {
         const {
             state: { view, error, user, favs },
             handleRegister,
             handleLogin, handleLogout,
-            handleDrumkit
+            handleDrumkit,
         } = this
 
         return (
-        <>
-            <header>
-                {user && <p>Hello, {user.name}</p>}
-                <nav>
+            <>
+                <header>
 
-                    {!user ? <ul>
-                        <li><a href="" onClick={handleRegister}>Register</a></li>
-                        <li><a href="" onClick={handleLogin}>Login</a></li>
-                    </ul> : <ul>
-                            {view === 'search' && <li><a href="" onClick={event => {
-                                event.preventDefault()
+                    <nav>
 
-                                handleFavorites()
-                            }}>Favorites</a></li>}
-                            <a href="" onClick={handleDrumkit}>Drumkit</a>
-                            {view === 'favorites' && <li><a href="" onClick={handleGoToSearch}>Search</a></li>}
-                            <li><a href="" onClick={handleLogout}>Logout</a></li>
-                        </ul>}
+                        {!user ? <ul>
+                            <li><a href="" onClick={handleRegister}>Register</a></li>
+                            <li><a href="" onClick={handleLogin}>Login</a></li>
+                        </ul> : <ul>
+                                {user && <p>{user.name}</p>  }
+                                <li><a href="" onClick={handleDrumkit}>Drumkit</a></li>
+                                <li><a href="" onClick={handleLogout}>Logout</a></li>
+                            </ul>}
 
-                </nav>
-            </header>
-            <img src="../imgs/logo.png" alt="" />
-            
-            
+                    </nav>
+                </header>
+                <img src="../imgs/logo.png" alt="" />
+                {user && <Mydrumkits drumkits={user.drumkits} onEditDrumkit={this.props.onEditDrumkit} />}
+                
 
 
-            
 
-            
-            {view === 'favorites' && <>
-                <h3>Favorites</h3>
-                <Results items={favs} paintItem={duck => {
-                    return <DuckDetail duck={duck} onToggle={handleToggleFavDuckFromFavorites} />
-                }} onItem={handleRetrieveDuck} />
-            </>}
-        </>
+            </>
         )
     }
 }

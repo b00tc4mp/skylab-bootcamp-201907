@@ -21,15 +21,15 @@ const router = Router()
 const jsonBodyParser = bodyParser.json()
 
 /* USER */
-router.post('/users', jsonBodyParser, registerUser)
 router.post('/auth', jsonBodyParser, authenticateUser)
+router.post('/users', jsonBodyParser, registerUser)
 router.get('/users/:id', [tokenMiddleware, jsonBodyParser], retrieveUser)
-router.patch ('/users/:id', [tokenMiddleware, jsonBodyParser], updateUser)
-router.delete ('/users/:id', [tokenMiddleware, jsonBodyParser], unregisterUser)
+router.put('/users/:id', [tokenMiddleware, jsonBodyParser], updateUser)
+router.delete('/users/:id', [tokenMiddleware, jsonBodyParser], unregisterUser)
 
 /* INSTRUMENT */
 router.post('/instruments', jsonBodyParser, registerInstrument)
 router.get('/instruments/:id',  jsonBodyParser, retrieveInstrument)
 router.delete ('/instruments/:id',  jsonBodyParser, unregisterInstrument)
-router.patch ('/instruments/:id', jsonBodyParser, updateInstrument)
+router.patch('/instruments/:id', jsonBodyParser, updateInstrument)
 module.exports = router

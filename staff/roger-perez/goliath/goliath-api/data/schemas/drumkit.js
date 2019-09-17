@@ -5,7 +5,7 @@ const { Schema, Schema: { Types: { ObjectId } } } = mongoose
 
 
 module.exports = new Schema({
-    drumkitName: {
+    name: {
         type: String,
         required: true
     },

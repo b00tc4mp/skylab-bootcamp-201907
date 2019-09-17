@@ -5,12 +5,10 @@ const mongoose = require('mongoose')
 
 const { name, version } = require('./package')
 
+const cors = require('./utils/cors')
 const routes = require('./routes')
 
-const cors = require('./utils/cors')
-
 const { env: { PORT, DB_URL } } = process
-
 
 
 mongoose.connect(DB_URL, { useNewUrlParser: true })
