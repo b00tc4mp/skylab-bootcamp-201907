@@ -25,9 +25,9 @@ function handleGoToTeacher(event){
     history.push()
 }
     async function retrieveSubId() {
-        const user = await logic.retrieveUser()
+        const user = await logic.user.retrieveUser()
         debugger
-        const subject = await logic.retrieveTeacherHome(user.id);
+        const subject = await logic.subject.retrieveTeacherHome(user.id);
         return subject._id
     }
     const handleGoToExam=async(event) => {
@@ -48,15 +48,15 @@ function handleGoToTeacher(event){
 
         try {
             debugger
-            const user = await logic.retrieveUser()
+            const user = await logic.user.retrieveUser()
             debugger
-            const subject = await logic.retrieveTeacherHome(user.id);
+            const subject = await logic.teacher.retrieveTeacherHome(user.id);
             debugger
-            await logic.createPost(subject._id, value, user.name, user.surname, user.id)
+            await logic.post.createPost(subject._id, value, user.name, user.surname, user.id)
             debugger
 
             document.getElementById('area').value = ""
-            const posts = await logic.retrievePost(subject._id)
+            const posts = await logic.post.retrievePost(subject._id)
             setPosts(posts)
             setUpdate(!update)
         } catch (error) {
@@ -66,20 +66,22 @@ function handleGoToTeacher(event){
     }
 
     useEffect(() => {
+       autoUpdate()
+        
         async function autoUpdate() {
             debugger
-            const user = await logic.retrieveUser()
+            const user = await logic.user.retrieveUser()
             debugger
-            const _subject = await logic.retrieveTeacherHome(user.id);
+            const _subject = await logic.subject.retrieveTeacherHome(user.id);
         
             debugger
-            const posts = await logic.retrievePost(_subject._id);
+            const posts = await logic.post.retrievePost(_subject._id);
             setPosts(posts)
         }
-            interval = setInterval(function(){
+           /*  interval = setInterval(function(){
                 autoUpdate()
             }, 1000)
-            return () => clearInterval(interval)
+            return () => clearInterval(interval) */
 
     }, [update])
  

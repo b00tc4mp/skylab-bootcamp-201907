@@ -1,4 +1,4 @@
-import logic from '..'
+import logic from '../'
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 export default function (type) {
 debugger

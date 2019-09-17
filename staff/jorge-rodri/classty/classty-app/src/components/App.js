@@ -8,12 +8,12 @@ import Mentor from './Mentor'
 import Subject from './Subject'
 import Exams from './Exams'
 import Homeworks from './Homeworks'
-import CreateClass from './Create-Class'
+import SubjectList from './Subject-List'
 import RemoveClass from './Remove-Class'
 import RemoveTeacher from './Remove-Teacher'
+import RemoveSubject from './RemoveSubject'
 import TeacherList from './Teacher-List'
 import StudentList from './Student-List'
-import CreateTeacher from './Create-Teacher'
 import SubjectTeacherList from './Subject-Teach-List'
 import StudentHome from './Student-Home'
 import TeacherHome from './Teacher-Home'
@@ -67,7 +67,7 @@ function App({ history }) {
       <Context.Provider value={{ posts, setPosts, exams, setExams , students, setStudents, classes, setClasses, view, setView, user, setUser, subjects, setSubjects, teachers, setTeachers }} >
 
         <header>
-          {view !== 'home' && !logic.isUserLoggedIn() && <nav>
+          {view !== 'home' && !logic.user.isUserLoggedIn() && <nav>
             <ul>
               {view !== 'login' && <li><a href="" onClick={handleGoToLogin}>Login</a></li>}
               {view !== 'register' && <li><a href="" onClick={handleGoToRegister}>Register</a></li>}
@@ -76,30 +76,31 @@ function App({ history }) {
           }
         </header>
 
-        {logic.isStudent() && <Redirect to="/student-home" />}
-        {logic.isMentor() && <Redirect to="/admin" />}
-        {logic.isTeacher() && <Redirect to="/teacher-home" />}
+        {logic.user.isStudent() && <Redirect to="/student-home" />}
+        {logic.user.isMentor() && <Redirect to="/admin" />}
+        {logic.user.isTeacher() && <Redirect to="/teacher-home" />}
 
 
         <Route path="/register" render={() => <Register />} />
         <Route path="/login" render={() => <Login />} />
 
         {/* <Route path="/subject/:id" render={() => !logic.isUserLoggedIn() ? history.push('/') : <StudentHome /> } />       */}
-        <Route path="/student-home" render={() => logic.isUserLoggedIn()  ? <StudentHome /> : history.push('/')} />
-        <Route path="/admin" render={() => logic.isUserLoggedIn() ? <Mentor /> : history.push('/')} />
-        <Route path="/class-list" render={() => logic.isUserLoggedIn() ? <ClassList /> : history.push('/')} />
-        <Route path="/create-class" render={() => logic.isUserLoggedIn() ? <CreateClass /> : history.push('/')} />
-        <Route path="/remove-class" render={() => logic.isUserLoggedIn() ? <RemoveClass /> : history.push('/')} />
-        <Route path="/teacher-list" render={() => logic.isUserLoggedIn() ? <TeacherList /> : history.push('/')} />
-        <Route path="/create-teacher" render={() => logic.isUserLoggedIn() ? <CreateTeacher /> : history.push('/')} />
-        <Route path="/remove-teacher" render={() => logic.isUserLoggedIn() ? <RemoveTeacher /> : history.push('/')} />
-        <Route path='/teacher-list-subject' render={() => logic.isUserLoggedIn() ? <SubjectTeacherList /> : history.push('/')} />
-        <Route path='/student-list' render={() => logic.isUserLoggedIn() ? <StudentList /> : history.push('/')} />
-        <Route exact path='/subject/:id' render={() => logic.isUserLoggedIn() ? <Subject  /> : history.push('/')} />
-        <Route path='/subject/exams/:id' render={() => logic.isUserLoggedIn() ? <Exams /> : history.push('/')} />
-        <Route path='/subject/homeworks/:id' render={() => logic.isUserLoggedIn() ? <Homeworks /> : history.push('/')} />
-        <Route path='/teacher-home' render={() => logic.isUserLoggedIn() ? <TeacherHome  /> : history.push('/')} />
-        <Route path='/profile/:id' render={() => logic.isUserLoggedIn() ? <Profile control /> : history.push('/')} />
+        <Route path="/student-home" render={() => logic.user.isUserLoggedIn()  ? <StudentHome /> : history.push('/')} />
+        <Route path="/admin" render={() => logic.user.isUserLoggedIn() ? <Mentor /> : history.push('/')} />
+        <Route path="/class-list" render={() => logic.user.isUserLoggedIn() ? <ClassList /> : history.push('/')} />
+        <Route path="/remove-class" render={() => logic.user.isUserLoggedIn() ? <RemoveClass /> : history.push('/')} />
+        <Route path="/teacher-list" render={() => logic.user.isUserLoggedIn() ? <TeacherList /> : history.push('/')} />
+        <Route path="/remove-teacher" render={() => logic.user.isUserLoggedIn() ? <RemoveTeacher /> : history.push('/')} />
+        <Route path='/teacher-list-subject' render={() => logic.user.isUserLoggedIn() ? <SubjectTeacherList /> : history.push('/')} />
+        <Route path='/student-list' render={() => logic.user.isUserLoggedIn() ? <StudentList /> : history.push('/')} />
+        <Route exact path='/subject/:id' render={() => logic.user.isUserLoggedIn() ? <Subject  /> : history.push('/')} />
+        <Route path='/subject/exams/:id' render={() => logic.user.isUserLoggedIn() ? <Exams /> : history.push('/')} />
+        <Route path='/subject/homeworks/:id' render={() => logic.user.isUserLoggedIn() ? <Homeworks /> : history.push('/')} />
+        <Route path='/teacher-home' render={() => logic.user.isUserLoggedIn() ? <TeacherHome  /> : history.push('/')} />
+        <Route path='/profile/:id' render={() => logic.user.isUserLoggedIn() ? <Profile /> : history.push('/')} />
+        <Route path='/subject-list' render={() => logic.user.isUserLoggedIn() ? <SubjectList /> : history.push('/')} />
+        <Route path='/remove-subject' render={() => logic.user.isUserLoggedIn() ? <RemoveSubject /> : history.push('/')} />
+
 
       </Context.Provider>
     </>

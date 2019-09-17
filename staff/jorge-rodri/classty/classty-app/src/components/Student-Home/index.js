@@ -19,8 +19,8 @@ function StudentHome({ history }) {
 debugger
     useEffect(() => {
         (async () => {
-
-                const subjects = await logic.listSubjects();
+debugger
+                const subjects = await logic.subject.listSubjects();
                 setSubjects(subjects)
 
         })()

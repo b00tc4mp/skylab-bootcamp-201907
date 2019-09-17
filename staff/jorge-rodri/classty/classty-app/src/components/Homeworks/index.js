@@ -31,9 +31,9 @@ function Homeworks({ history }) {
     async function handleCreateHomeWork(id,title, comment, date){
         try {
 
-            await logic.createHomework(id,title, comment, date)
+            await logic.homework.createHomework(id,title, comment, date)
             debugger
-            const del = await logic.retrieveHomeworks(id)
+            const del = await logic.homework.retrieveHomeworks(id)
             debugger
             setDel(del)
             setUpdate(!update)
@@ -57,10 +57,10 @@ function Homeworks({ history }) {
 
             await logic.notDelivery(id, idH)
             debugger
-            const notDel = await logic.retrieveNotDel(id);
+            const notDel = await logic.homework.retrieveNotDel(id);
             debugger
             setNotDel(notDel)
-            const del = await logic.retrieveDel(id)
+            const del = await logic.homework.retrieveDel(id)
             debugger
             setDel(del)
 
@@ -80,12 +80,12 @@ function Homeworks({ history }) {
 
         try {
 
-            await logic.delivery(id, idH)
+            await logic.homework.delivery(id, idH)
             debugger
-            const notDel = await logic.retrieveNotDel(id);
+            const notDel = await logic.homework.retrieveNotDel(id);
             debugger
             setNotDel(notDel)
-            const del = await logic.retrieveDel(id)
+            const del = await logic.homework.retrieveDel(id)
             debugger
             setDel(del)
 
@@ -97,24 +97,24 @@ function Homeworks({ history }) {
 
     useEffect(() => {
         (async () => {
-            const user = await logic.retrieveUser()
+            const user = await logic.user.retrieveUser()
             setUser(user)
             if (user && user.type == 'student') {
                 debugger
-                const notDel = await logic.retrieveNotDel(id);
+                const notDel = await logic.homework.retrieveNotDel(id);
                 debugger
                 setNotDel(notDel)
-                const del = await logic.retrieveDel(id)
+                const del = await logic.homework.retrieveDel(id)
                 debugger
                 setDel(del)
-            } else {
-                const del = await logic.retrieveHomeworks(id)
+            } else {debugger
+                const del = await logic.homework.retrieveHomeworks(id)
                 debugger
                 setDel(del)
             }
         })()
     }, [update])
-
+debugger
     return <>
         <Header />
         <main>
