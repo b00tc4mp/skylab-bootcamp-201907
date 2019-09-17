@@ -1,9 +1,7 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext } from 'react'
 import Context from '../Context'
-import logic from '../../logic'
+import './index.sass'
 import { Redirect} from "react-router-dom"
-
 
 
 function AdvancedSearch() {
@@ -19,9 +17,7 @@ function AdvancedSearch() {
                 event.preventDefault()
                 setProductQuery(value1)
                 setView("productCategory")
-                
-                console.log("go to categories")
-            }} >
+                            }} >
         
         <select className="select" onChange={event=>{
         event.preventDefault()
@@ -34,8 +30,13 @@ function AdvancedSearch() {
            <option value="Duck">Duck</option>
            <option value="Pig">Pig</option>
            <option value="Full equip">team</option>
-           <option value="mug">Mugs</option>
-           <option value="Frame">Frames</option>
+           <option value="Mug">Mugs</option>
+           <option value="Frame First">Frame First</option>
+           <option value="Frame Trek">Frame Trek</option>
+           <option value="Carlos">Carlos</option>
+           <option value="Mentors">Mentors</option>
+           <option value="Full equip">Full equip</option>
+
        </select>
    
                <button type="submit" className="select-submit" >Search </button>

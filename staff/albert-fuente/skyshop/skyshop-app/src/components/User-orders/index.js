@@ -1,11 +1,8 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext, useEffect, useState } from 'react'
 import Context from '../Context'
 import logic from '../../logic'
-import { Redirect} from "react-router-dom"
 import Feedback from '../Feedback'
-
-
+import './index.sass'
 
 
 function ShowAllOrdersUser() {
@@ -18,6 +15,9 @@ function ShowAllOrdersUser() {
           (async ()=> {
             try {              
               const orderId = await logic.retrieveAllOrdersUser()
+              if(!orderId) {
+                setOrders(undefined)      
+              }
               setOrders(orderId)      
               setError(undefined)                 
               console.log('is order? '+orderId)
@@ -61,6 +61,7 @@ function ShowAllOrdersUser() {
                     </ul>
                     <li className="userCart-hidden">{item.items.map(prod=> 'Total: '+(total+=(prod.product.price*prod.quantity))+ " €")}</li>  
                     <p>{"Total: "+total+ " €"}</p>
+                    <p className="userCart-hidden">{total=0}</p>
        
 
                     </ul>
@@ -68,7 +69,7 @@ function ShowAllOrdersUser() {
                  }
                  
                   )} 
-                  <a href='/#/profile'><i className="far fa-2x fa-arrow-alt-circle-left addCart-a backArrow"></i></a>
+                  <a href='/#/profile'><i className="far fa-2x fa-arrow-alt-circle-left backArrow"></i></a>
 
             </ul> 
             

@@ -20,6 +20,8 @@ import removeProduct from './remove-product'
 import updateAuction from './update-auction'
 import setAuction from './set-auction'
 import retrieveAuction from './retrieve-auction'
+import retrieveAuctionProduct from './retrieve-auction-product'
+import setDate from './auction-set-date'
 
 export default {
     set __credentials__({ id, token }) {
@@ -52,5 +54,7 @@ export default {
     removeProduct,
     setAuction,
     updateAuction,
-    retrieveAuction
+    retrieveAuction,
+    retrieveAuctionProduct,
+    setDate
 }

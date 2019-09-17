@@ -4,28 +4,20 @@ import Context from '../Context'
 import logic from '../../logic'
 import { Redirect} from "react-router-dom"
     
-
+import './index.sass'
 
 function Checkout() {
-    const { setView,view,cart } = useContext(Context)
-
-    
+    const { setView,view,cart } = useContext(Context) 
   
-    return <>
-
-        
+    return <>    
         <div>
         <p className="formPanel">{'Thanks for shopping :)' }</p>
-        <p className="formPanel">Continue shopping:</p>
-
-        
+        <p className="formPanel">Continue shopping:</p>  
         <div>
             <a className="formPanel-submit-explore" onClick={
                 event=>{
                     event.preventDefault()
                     setView('golanding')
-                    
-
                 }
             }>Explore</a>
         </div>

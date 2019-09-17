@@ -1,32 +1,24 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext, useEffect } from 'react'
 import Context from '../Context'
 import logic from '../../logic'
 import { Redirect} from "react-router-dom"
-
-
+import './index.sass'
 
 function ShowAllOrders() {
     
-    const { view, products, setProducts,productQuery,setProductQuery , orders,setOrders} = useContext(Context)
+    const { view, orders,setOrders} = useContext(Context)
 
-    useEffect(() => {
-
-      
-          
+    useEffect(() => {   
           (async ()=> {
             try {
               const orderId = await logic.retrieveAllOrders()
 
               setOrders(orderId)           
-              console.log('is order? '+orderId)
             } catch(error) {
-              console.log(error.message)
-              
+             
             }
           })()
-        
-        
+             
     }, [])
 
 
@@ -57,14 +49,13 @@ function ShowAllOrders() {
                         </>
                       })}
                     </ul>
-{/*                     <li className="">{item.items.map(prod=>"Product: "+prod.product.title+ " Description: "+prod.product.description + " Price: " + prod.product.price + "        Quantity: \n"+prod.quantity + "   || ")}</li>
- */}
+
                     </ul>
                    </>
                  }
                  
                   )} 
-                  <a href='/#/admin' onClick=""><i className="far fa-2x fa-arrow-alt-circle-left addCart-a backArrow"></i></a>
+                  <a href='/#/admin' onClick=""><i className="far fa-2x fa-arrow-alt-circle-left  backArrow"></i></a>
 
             </ul> 
             

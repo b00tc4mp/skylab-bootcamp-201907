@@ -3,7 +3,7 @@ import React, { useContext , useEffect} from 'react'
 import Context from '../Context'
 import logic from '../../logic'
 import { Redirect} from "react-router-dom"
-
+import './index.sass'
 
 function UpdateSelectedProduct() {
     
@@ -51,7 +51,7 @@ function UpdateSelectedProduct() {
         {view==="success" && <Redirect to="/admin/update-selected/success"/>}
         {view==="select" && <Redirect to="/admin"/>}
 
-        <h2 className="formPanel">{'Update selected product'+productQuery}}</h2>
+        <h2 className="formPanel">{'Update product:'}</h2>
         <hr></hr>
         {admin===true && product &&
         <div className="formPanel-form">

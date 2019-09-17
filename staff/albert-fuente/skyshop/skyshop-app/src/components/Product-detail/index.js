@@ -5,7 +5,7 @@ import logic from '../../logic'
 import { Redirect} from "react-router-dom"
 import { debuggerStatement } from '@babel/types'
 
-
+import './index.sass'
 
 function ProductDetail() {
 
@@ -77,18 +77,17 @@ function ProductDetail() {
                     </div> 
 
                     <button className="addCart"><a className="addCart-a" onClick={handleAdd}>Add to Cart</a></button>
+                    {success==true &&
+      <div>
+      <p className="detail-success">Product added to cart</p>
+      </div>  }
                     </div>
-                    <a onClick={handleGoBack}><i className="far fa-2x fa-arrow-alt-circle-left addCart-a backFromDetail"></i></a>
+                    <a onClick={handleGoBack}><i className="far fa-2x fa-arrow-alt-circle-left backFromDetail"></i></a>
 
 
                     </div> 
     }
-    {success==true &&
-      <div>
-      <p>Product added to cart</p>
-      </div>
-
-    }
+    
   
     </>
 }

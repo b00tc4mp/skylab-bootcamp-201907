@@ -2,13 +2,11 @@
 import React, { useContext , useState} from 'react'
 import Context from '../Context'
 import logic from '../../logic'
-import { Redirect} from "react-router-dom"
-
-
+import './index.sass'
 
 function UserRemove() {
     const[remove,setRemove]=useState(false)
-    const { user,setView,view,setCredentials,credentials,setUser } = useContext(Context)
+    const { user,setView } = useContext(Context)
 
     function handleSubmit(event) {
         event.preventDefault()
@@ -16,8 +14,7 @@ function UserRemove() {
         handleRemove( password)
     }
     
-    async function handleRemove( password) {
-    
+    async function handleRemove( password) {   
           try {
               await logic.removeUser(password)
               setView('registerSuccess')
@@ -37,10 +34,7 @@ function UserRemove() {
             <li><a className="formPanel-submit" onClick={event => {
                 event.preventDefault()  
                 setRemove(true)
-                //setView("redirectLanding")
-                //sessionStorage.clear()
-                //setUser()
-               
+ 
             }}>Confirm</a></li>
             <li><a className="formPanel-reject" href="/#/profile">Cancel</a></li>
         </ul>

@@ -1,11 +1,8 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext , useEffect} from 'react'
 import Context from '../Context'
 import logic from '../../logic'
 import { Redirect} from "react-router-dom"
-
-
-
+import './index.sass'
 
 function UpdateProducts() {
     
@@ -26,8 +23,6 @@ function UpdateProducts() {
 
     let productId=""
 
-    
-    
     return <>
         {view==="selectedProduct" && <Redirect to="/admin/update-selected"/>}
 
@@ -53,7 +48,7 @@ function UpdateProducts() {
             </ul> 
             
     }
-        <a href='/#/admin'><i className="far fa-2x fa-arrow-alt-circle-left addCart-a backArrow"></i></a>      
+        <a href='/#/admin'><i className="far fa-2x fa-arrow-alt-circle-left backArrow"></i></a>      
     </>
 }
 

@@ -5,6 +5,9 @@ import logic from '../../logic'
 import { Redirect} from "react-router-dom"
 import Feedback from '../Feedback'
 
+import './index.sass'
+
+
 
 function Register() {
     const[error,setError]=useState(undefined)
@@ -50,7 +53,7 @@ function Register() {
                 <input type="password" name="password" ></input>
                 <button className="formPanel-submit">Submit</button>
             </form>
-            <a href='/#/' onClick=""><i className="far fa-2x fa-arrow-alt-circle-left addCart-a backArrow"></i></a>
+            <a href='/#/' onClick=""><i className="far fa-2x fa-arrow-alt-circle-left backArrow"></i></a>
         </div>
         {error!=undefined && <Feedback message={error} />} 
 

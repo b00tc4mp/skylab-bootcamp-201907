@@ -3,6 +3,7 @@ import React, { useContext , useEffect} from 'react'
 import Context from '../Context'
 import logic from '../../logic'
 import { Redirect} from "react-router-dom"
+import './index.sass'
 
 
 function ProductsCategory() {
@@ -36,7 +37,7 @@ function ProductsCategory() {
             }} >
                     <li className="product-description">{item.title}</li>
                   <li className="product-image"><img src={item.image}/></li>
-                  <li className="product-price">{item.price+" J"}</li>
+                  <li className="product-price">{item.price+" €"}</li>
                     </ul>
                    </>
                  }
