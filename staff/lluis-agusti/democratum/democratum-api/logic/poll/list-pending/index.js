@@ -4,13 +4,13 @@ const { models } = require('democratum-data')
 const { Poll, User } = models
 
 /**
+ * Lists all pending polls of the citizen's city.
  * 
- * @param {String} userId
- * @param {String} targetCityId
- * @param {String} status
- *
+ * @param {String} userId The id of the user.
+ * @param {String} pollId The id of the poll.
+ * @param {String} targetCityId The id of the city.
  * 
- * @returns {Promise}
+ * @returns {Promise} An array of polls.
  */
 
 module.exports = function(userId, targetCityId, status) {

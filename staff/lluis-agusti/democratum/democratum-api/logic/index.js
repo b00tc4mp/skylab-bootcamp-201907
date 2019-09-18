@@ -11,5 +11,7 @@ module.exports = {
     listExpired: require('./poll/list-pending'),
     listPending: require('./poll/list-rejected'),
     votePoll: require('./poll/vote-poll'),
-    changeStatus: require('./poll/change-status')
+    changeStatus: require('./poll/change-status'),
+    singlePoll: require('./poll/single-poll')
+    //newestFifty: require('./poll/newest-fifty')
 }

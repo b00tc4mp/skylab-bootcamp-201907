@@ -1,12 +1,14 @@
-const logic = require('../../.')
+require('dotenv').config()
+const{ env : { DB_URL_TEST } } = process
+const logic = require('../..')
 const { expect } = require('chai')
-const { models , mongoose } = require('democratum-data')
+const { models , mongoose, database } = require('democratum-data')
+const { User, Poll } = models
 const bcrypt = require('bcryptjs')
-const { Poll, User } = models
 
 describe('logic - list all expired of a city', () => {
 
-    before(() => mongoose.connect('mongodb://localhost/democratum-test', {
+    before(() => mongoose.connect(DB_URL_TEST, {
         useNewUrlParser: true
     }))
 
@@ -73,7 +75,6 @@ describe('logic - list all expired of a city', () => {
         const polls = await logic.listExpired(userId, '5d70f41b7d4edc12334851db', 'expired')
   
                 expect(polls).to.exist
-                //expect(polls.length).to.equal(2)
                 expect(polls[0]).to.exist
                 debugger
                 expect(polls[0].cityId).to.equal(cityId1)
@@ -82,13 +83,11 @@ describe('logic - list all expired of a city', () => {
                 expect(polls[0].optionA).to.equal(optionA1)
                 expect(polls[0].optionB).to.equal(optionB1)
                 expect(polls[0].description).to.equal(description1)
-                //expect(polls[0].expiryDate).to.equal(expiryDate1)
+                expect(polls[0].expiryDate.toDateString()).to.equal(expiryDate1.toDateString())
                 expect(polls[0].imagePoll).to.equal(imagePoll1)
                 expect(polls[0].positives).to.equal(positives1)
                 expect(polls[0].negatives).to.equal(negatives1)
                 expect(polls[0].pollStatus).to.equal(pollStatus1)
-
-                // no ho entenc!!!
 
                 expect(polls[1]).to.exist
                 expect(polls[1].cityId).to.equal(cityId2)
@@ -97,7 +96,7 @@ describe('logic - list all expired of a city', () => {
                 expect(polls[1].optionA).to.equal(optionA2)
                 expect(polls[1].optionB).to.equal(optionB2)
                 expect(polls[1].description).to.equal(description2)
-                //expect(polls[1].expiryDate).to.equal(expiryDate)
+                expect(polls[1].expiryDate.toDateString()).to.equal(expiryDate2.toDateString())
                 expect(polls[1].imagePoll).to.equal(imagePoll2)
                 expect(polls[1].positives).to.equal(positives2)
                 expect(polls[1].negatives).to.equal(negatives2)

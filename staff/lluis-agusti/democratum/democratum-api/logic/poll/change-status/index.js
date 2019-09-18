@@ -3,13 +3,14 @@ const { models } = require('democratum-data')
 const { Poll, User } = models
 
 /**
+ * Changes the status of a poll within pending, approved, expired and rejeceted.
  * 
- * @param {String} userId
- * @param {String} pollId
- * @param {String} newStatus
+ * @param {String} userId The id of the user.
+ * @param {String} pollId The id of the poll.
+ * @param {String} newStatus The new status of the poll.
  *
  * 
- * @returns {Promise}
+ * @returns {Promise} The poll with the new status.
  */
 
 module.exports = function(userId, pollId, newStatus) {

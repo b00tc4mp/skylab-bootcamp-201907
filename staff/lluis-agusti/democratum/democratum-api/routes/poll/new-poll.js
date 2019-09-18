@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 
 module.exports = function(req, res) {
 
-    const { body: { cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, negatives, pollStatus }, params: { id } } = req
+    const { body: { cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, negatives, pollStatus } } = req
 
     try {
         logic.newPoll(cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, negatives, pollStatus)

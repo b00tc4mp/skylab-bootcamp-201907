@@ -4,9 +4,10 @@ const bcrypt = require('bcryptjs')
 const { User } = models
 
 /**
+* Logs in an existing user.
 * 
-* @param {string} email
-* @param {string} password
+* @param {string} email email of the user.
+* @param {string} password password of the user
 * 
 * @returns {Promise}
 */

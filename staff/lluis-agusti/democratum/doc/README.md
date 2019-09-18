@@ -33,8 +33,7 @@ City Halls can:
 
 * Log In.
 * Create polls.
-* Edit and update their profile.
-* Edit and approve polls proposed by citizens.
+* Edit, approve or reject polls proposed by citizens.
 * Retrieve citizen's info: name, address, ID, email and participated polls.
 
 

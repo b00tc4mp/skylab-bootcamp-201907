@@ -1,11 +1,13 @@
-const logic = require('../../.')
+require('dotenv').config()
+const{ env : { DB_URL_TEST } } = process
+const logic = require('../..')
 const { expect } = require('chai')
-const { models , mongoose } = require('democratum-data')
-const { Citizen } = models
+const { models , mongoose, database } = require('democratum-data')
+const { User, Poll } = models
 
-describe('logic - update citizen', () => {
+describe.skip('logic - list current', () => {
 
-    before(() =>  mongoose.connect('mongodb://localhost/democratum-test', { useNewUrlParser: true }))
+    before(() =>  mongoose.connect(DB_URL_TEST, { useNewUrlParser: true }))
 
     let fullname, address, documentId, email, imgDocId, password, participatedPolls, id
 

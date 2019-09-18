@@ -1,12 +1,11 @@
-const validate = require('../../../utils/validate')
-const { models } = require('democratum-data')
-const bcrypt = require('bcryptjs')
-const { User } = models
+const { models: { User } } = require('democratum-data')
+const { validate } = require('../../../utils/validate')
 
 /**
+ * Retrieves a poll.
 * 
-*
-* 
+* @param {String} userId The id of the user.
+* @returns {}}
 *
 */
 

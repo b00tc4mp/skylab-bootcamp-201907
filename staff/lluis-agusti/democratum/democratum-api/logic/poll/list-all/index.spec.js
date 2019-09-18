@@ -1,14 +1,14 @@
-const logic = require('../../.')
+require('dotenv').config()
+const{ env : { DB_URL_TEST } } = process
+const logic = require('../..')
 const { expect } = require('chai')
-const { models , mongoose } = require('democratum-data')
+const { models , mongoose, database } = require('democratum-data')
+const { User, Poll } = models
 const bcrypt = require('bcryptjs')
-const { Poll, User } = models
 
 describe('logic - list all polls of a city', () => {
 
-    before(() => mongoose.connect('mongodb://localhost/democratum-test', {
-        useNewUrlParser: true
-    }))
+    before(() => mongoose.connect(DB_URL_TEST,  { useNewUrlParser: true }))
 
     let cityId0, fullname0, address0, documentId0, email0, imgDocId0, password0, participatedPolls0, proposedPolls0, userRole0    
 
@@ -31,8 +31,8 @@ describe('logic - list all polls of a city', () => {
         description1 = `LISTALL1-${Math.random()}`
         expiryDate1 = new Date
         imagePoll1 = `LISTALL1-${Math.random()}`
-        positives1 = 1000
-        negatives1 = 1000
+        positives1 = Math.random()
+        negatives1 = Math.random()
         pollStatus1 = 'approved'
 
         cityId2 = '5d70f41b7d4edc12334851db'
@@ -43,11 +43,11 @@ describe('logic - list all polls of a city', () => {
         description2 = `LISTALL1-${Math.random()}`
         expiryDate2 = new Date
         imagePoll2 = `LISTALL1-${Math.random()}`
-        positives2 = 2000
-        negatives2 = 2000
-        pollStatus2 = 'approved'
+        positives2 = Math.random()
+        negatives2 = Math.random()
+        pollStatus2 = 'rejected'
 
-        //crear user
+        
         cityId0 = '5d70f41b7d4edc12334851db'
         fullname0 = `listall-${Math.random()}`
         address0 = `LISTALL1-${Math.random()}`
@@ -85,14 +85,11 @@ describe('logic - list all polls of a city', () => {
                 expect(polls[0].optionA).to.equal(optionA1)
                 expect(polls[0].optionB).to.equal(optionB1)
                 expect(polls[0].description).to.equal(description1)
-                //expect(polls[0].expiryDate).to.equal(expiryDate1)
+                expect(polls[0].expiryDate.toDateString()).to.equal(expiryDate1.toDateString())
                 expect(polls[0].imagePoll).to.equal(imagePoll1)
-                expect(polls[0].positives).to.equal(positives1)
+                expect(polls[0].positives).to.deep.equal(positives1)
                 expect(polls[0].negatives).to.equal(negatives1)
                 expect(polls[0].pollStatus).to.equal(pollStatus1)
-
-
-                // no ho entenc!!!
 
                 expect(polls[1]).to.exist
                 expect(polls[1].cityId).to.equal(cityId2)
@@ -101,7 +98,7 @@ describe('logic - list all polls of a city', () => {
                 expect(polls[1].optionA).to.equal(optionA2)
                 expect(polls[1].optionB).to.equal(optionB2)
                 expect(polls[1].description).to.equal(description2)
-                //expect(polls[1].expiryDate).to.equal(expiryDate)
+                expect(polls[1].expiryDate.toDateString()).to.equal(expiryDate2.toDateString())
                 expect(polls[1].imagePoll).to.equal(imagePoll2)
                 expect(polls[1].positives).to.equal(positives2)
                 expect(polls[1].negatives).to.equal(negatives2)

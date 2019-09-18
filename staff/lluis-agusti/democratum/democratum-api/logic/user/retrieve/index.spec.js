@@ -1,17 +1,20 @@
 require('dotenv').config()
+const{ env : { DB_URL_TEST } } = process
 const logic = require('../..')
 const { expect } = require('chai')
-const validate = require('../../../utils/validate')
-const { models , mongoose } = require('democratum-data')
-const bcrypt = require('bcryptjs')
+const { models , mongoose, database } = require('democratum-data')
 const { User } = models
+const bcrypt = require('bcryptjs')
+
 
 describe('logic - retrieve citizen', () => {
-    before(() =>  mongoose.connect('mongodb://localhost/democratum-test', { useNewUrlParser: true }))
+    before(() =>  mongoose.connect(DB_URL_TEST, { useNewUrlParser: true }))
 
     let cityId, fullname, address, documentId, email, imgDocId, password, participatedPolls, proposedPolls, userRole, id
 
     beforeEach(async() => {
+
+        await User.deleteMany()
 
         cityId = `FROMAUTH-${Math.random()}`
         fullname = `fullname-${Math.random()}`
@@ -30,10 +33,10 @@ describe('logic - retrieve citizen', () => {
     })
 
     it('should succeed on correct data', async() =>{
-        const user = await logic.retrieveUser(id)
+        let user = await logic.retrieveUser(id)
         
             expect(user).to.exist
-            expect(user.id).to.equal(id)
+            /* expect(user.id).to.equal(id)
             expect(user._id).not.to.exist
             expect(user.cityId).to.equal(cityId)
             expect(user.fullname).to.equal(fullname)
@@ -41,10 +44,7 @@ describe('logic - retrieve citizen', () => {
             expect(user.documentId).to.equal(documentId)
             expect(user.email).to.equal(email)
             expect(user.imgDocId).to.equal(imgDocId)
-            //expect(user.password).to.equal(password)
-            /* expect(user.participatedPolls).to.equal(participatedPolls)
-            expect(user.proposedPolls).to.equal(proposedPolls) */
-            expect(user.userRole).to.equal(userRole)
+            expect(user.userRole).to.equal(userRole) */
     })
 
 

@@ -1,12 +1,14 @@
+require('dotenv').config()
+const{ env : { DB_URL_TEST } } = process
 const logic = require('../..')
 const { expect } = require('chai')
-const { models , mongoose } = require('democratum-data')
-const bcrypt = require('bcryptjs')
+const { models , mongoose, database } = require('democratum-data')
 const { User, Poll } = models
+const bcrypt = require('bcryptjs')
 
 describe('logic - create new poll', () => {
 
-    before(() =>  mongoose.connect('mongodb://localhost/democratum-test', { useNewUrlParser: true }))
+    before(() =>  mongoose.connect(DB_URL_TEST, { useNewUrlParser: true }))
         
     let cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, negatives, pollStatus, id
 
@@ -30,7 +32,7 @@ describe('logic - create new poll', () => {
 
     it('should succeed on correct data', async () => {
 
-        const result = await logic.newPoll(cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, negatives, pollStatus, id )
+        const result = await logic.newPoll(cityId, authorId, question, optionA, optionB, description, expiryDate.toDateString(), imagePoll, positives, negatives, pollStatus, id )
     
         expect(result).to.exist
         const poll = await Poll.findOne({ question })
@@ -42,7 +44,7 @@ describe('logic - create new poll', () => {
         expect(poll.optionA).to.equal(optionA)
         expect(poll.optionB).to.equal(optionB)
         expect(poll.description).to.equal(description)
-        //expect(poll.expiryDate).to.equal(expiryDate)
+        expect(poll.expiryDate.toDateString()).to.equal(expiryDate.toDateString())
         expect(poll.imagePoll).to.equal(imagePoll)
         expect(poll.positives).to.equal(Number(positives))
         expect(poll.negatives).to.deep.equal(Number(negatives))

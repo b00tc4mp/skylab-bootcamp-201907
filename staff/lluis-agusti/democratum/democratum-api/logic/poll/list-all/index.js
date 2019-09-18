@@ -4,11 +4,13 @@ const bcrypt = require('bcryptjs')
 const { Poll, User } = models
 
 /**
+ * Lists all polls of the citizen's city.
  * 
- * @param {String} userId
- * @param {String} cityId
+ * @param {String} userId The id of the user.
+ * @param {String} pollId The id of the poll.
+ * @param {String} targetCityId The id of the city.
  * 
- * @returns {Promise}
+ * @returns {Promise} An array of polls.
  */
 
 module.exports = function(userId, targetCityId) {
@@ -20,6 +22,8 @@ module.exports = function(userId, targetCityId) {
 
         const user = await User.findById(userId)
         if (!user) throw Error(`The user is not logged in`)
+
+        //if (user.cityId !== targetCityId) throw Error('you have no permission to access')
 
         const polls = await Poll.find({cityId : targetCityId})
         if (!polls) throw Error(`There are no polls to show`)

@@ -4,13 +4,13 @@ const { models } = require('democratum-data')
 const { Poll, User } = models
 
 /**
+ * Lists all approved polls of the citizen's city.
  * 
- * @param {String} userId
- * @param {String} targetCityId
- * @param {String} status
- *
+ * @param {String} userId The id of the user.
+ * @param {String} pollId The id of the poll.
+ * @param {String} targetCityId The id of the city.
  * 
- * @returns {Promise}
+ * @returns {Promise} An array of polls.
  */
 
 module.exports = function(userId, targetCityId, status) {
@@ -23,6 +23,8 @@ module.exports = function(userId, targetCityId, status) {
 
         const user = await User.findById(userId, targetCityId)
         if (!user) throw Error(`You have to log in to list polls`)
+
+        //if (user.cityId !== targetCityId) throw Error('you have no permission to access')
         
         const polls = await Poll.find({ pollStatus : status })
         if (!polls) throw Error(`There are no approved polls to show`)

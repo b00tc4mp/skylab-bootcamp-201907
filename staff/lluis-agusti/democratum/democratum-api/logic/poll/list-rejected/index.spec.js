@@ -1,12 +1,14 @@
-const logic = require('../../.')
+require('dotenv').config()
+const{ env : { DB_URL_TEST } } = process
+const logic = require('../..')
 const { expect } = require('chai')
-const { models , mongoose } = require('democratum-data')
+const { models , mongoose, database } = require('democratum-data')
+const { User, Poll } = models
 const bcrypt = require('bcryptjs')
-const { Poll, User } = models
 
-describe.only('logic - list all rejected of a city', () => {
+describe('logic - list all rejected of a city', () => {
 
-    before(() => mongoose.connect('mongodb://localhost/democratum-test', {
+    before(() => mongoose.connect(DB_URL_TEST, {
         useNewUrlParser: true
     }))
 
@@ -19,6 +21,7 @@ describe.only('logic - list all rejected of a city', () => {
     beforeEach(async () => {
 
         await Poll.deleteMany()
+        await User.deleteMany()
 
         cityId1 = '5d70f41b7d4edc12334851db'
         authorId1 = `REJE-${Math.random()}`
@@ -30,7 +33,7 @@ describe.only('logic - list all rejected of a city', () => {
         imagePoll1 = `REJE-${Math.random()}`
         positives1 = 1000
         negatives1 = 1000
-        pollStatus1 = 'pending'
+        pollStatus1 = 'rejected'
 
         cityId2 = '5d70f41b7d4edc12334851db'
         authorId2 = `REJE-${Math.random()}`
@@ -42,7 +45,7 @@ describe.only('logic - list all rejected of a city', () => {
         imagePoll2 = `REJE-${Math.random()}`
         positives2 = 2000
         negatives2 = 2000
-        pollStatus2 = 'pending'
+        pollStatus2 = 'rejected'
 
         //crear user
         cityId0 = '5d70f41b7d4edc12334851db'
@@ -73,18 +76,18 @@ describe.only('logic - list all rejected of a city', () => {
         const polls = await logic.listRejected(userId, '5d70f41b7d4edc12334851db', 'rejected')
   
                 expect(polls).to.exist
-                expect(polls[0]).to.not.exist
+                expect(polls[0]).to.exist
                 expect(polls[0].cityId).to.equal(cityId1)
                 expect(polls[0].authorId).to.equal(authorId1)
                 expect(polls[0].question).to.equal(question1)
                 expect(polls[0].optionA).to.equal(optionA1)
                 expect(polls[0].optionB).to.equal(optionB1)
                 expect(polls[0].description).to.equal(description1)
+                expect(polls[0].expiryDate.toDateString()).to.equal(expiryDate1.toDateString())
                 expect(polls[0].imagePoll).to.equal(imagePoll1)
                 expect(polls[0].positives).to.equal(positives1)
                 expect(polls[0].negatives).to.equal(negatives1)
                 expect(polls[0].pollStatus).to.equal('rejected')
-
 
                 expect(polls[1]).to.exist
                 expect(polls[1].cityId).to.equal(cityId2)
@@ -93,6 +96,7 @@ describe.only('logic - list all rejected of a city', () => {
                 expect(polls[1].optionA).to.equal(optionA2)
                 expect(polls[1].optionB).to.equal(optionB2)
                 expect(polls[1].description).to.equal(description2)
+                expect(polls[1].expiryDate.toDateString()).to.equal(expiryDate2.toDateString())
                 expect(polls[1].imagePoll).to.equal(imagePoll2)
                 expect(polls[1].positives).to.equal(positives2)
                 expect(polls[1].negatives).to.equal(negatives2)
@@ -101,37 +105,37 @@ describe.only('logic - list all rejected of a city', () => {
 
  it('should fail on empty userId', () =>
     expect(() =>
-        logic.listPending('', '5d70f41b7d4edc12334851db', 'rejected')
+        logic.listRejected('', '5d70f41b7d4edc12334851db', 'rejected')
     ).to.throw('userId is empty or blank')
 )
 
 it('should fail on undefined userId', () =>
     expect(() =>
-        logic.listPending(undefined, '5d70f41b7d4edc12334851db', 'rejected')
+        logic.listRejected(undefined, '5d70f41b7d4edc12334851db', 'rejected')
     ).to.throw(`userId with value undefined is not a string`)
 )
 
 it('should fail on wrong data type', () =>
     expect(() =>
-        logic.listPending(123, '5d70f41b7d4edc12334851db', 'rejected')
+        logic.listRejected(123, '5d70f41b7d4edc12334851db', 'rejected')
     ).to.throw(`userId with value 123 is not a string`)
 )
 
  it('should fail on empty targetCityId', () =>
     expect(() =>
-        logic.listPending(userId, '', 'rejected')
+        logic.listRejected(userId, '', 'rejected')
     ).to.throw('targetCityId is empty or blank')
 )
 
 it('should fail on undefined targetCityId', () =>
     expect(() =>
-        logic.listPending(userId, undefined, 'rejected')
+        logic.listRejected(userId, undefined, 'rejected')
     ).to.throw(`targetCityId with value undefined is not a string`)
 )
 
 it('should fail on wrong data type', () =>
     expect(() =>
-        logic.listPending(userId, 123, 'rejected')
+        logic.listRejected(userId, 123, 'rejected')
     ).to.throw(`targetCityId with value 123 is not a string`)
 )
 

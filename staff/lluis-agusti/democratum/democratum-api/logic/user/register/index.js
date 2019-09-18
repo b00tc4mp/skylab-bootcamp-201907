@@ -4,18 +4,18 @@ const bcrypt = require('bcryptjs')
 const { User } = models
 
 /**
+ * Registers a new user.
  *
- * @param {String} cityId
- * @param {String} fullname
- * @param {String} address
- * @param {String} documentId
- * @param {String} email
- * @param {String} imgDocId
- * @param {String} password
- * @param {String} passwordConfirm
- * @param {Array} participatedPolls
- * @param {Array} proposedPolls
- * @param {String} userRole
+ * @param {String} cityId The id of the city.
+ * @param {String} name Name of the citizen.
+ * @param {String} surname Surname of the citizen.
+ * @param {String} address Address of the citizen.
+ * @param {String} documentId id of the citizen.
+ * @param {String} email email of the citizen.
+ * @param {String} password Password.
+ * @param {Array} participatedPolls ids of the polls where the user has participated.
+ * @param {Array} proposedPolls ids of the polls that the citizen has proposed.
+ * @param {String} userRole role: citizen or admin.
  *
  * @returns {Promise}
  */

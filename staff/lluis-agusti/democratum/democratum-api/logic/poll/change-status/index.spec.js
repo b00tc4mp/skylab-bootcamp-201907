@@ -1,13 +1,15 @@
+require('dotenv').config()
+const{ env : { DB_URL_TEST } } = process
 const logic = require('../..')
 const { expect } = require('chai')
-const { models , mongoose } = require('democratum-data')
+const { models , mongoose, database } = require('democratum-data')
 const { User, Poll } = models
 
 describe('logic - change status', () => {
-    before(() => mongoose.connect('mongodb://localhost/democratum-test',  { useNewUrlParser: true }))
+    before(() => mongoose.connect(DB_URL_TEST,  { useNewUrlParser: true }))
 
-    let cityPollId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, negatives, pollStatus, pollId
-    let cityUserId, fullname, address, documentId, email, imgDocId, password, participatedPolls, proposedPolls, userRole, userId
+    let cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, negatives, pollStatus, pollId
+    let cityId2, fullname, address, documentId, email, imgDocId, password, participatedPolls, proposedPolls, userRole, userId
 
     let newStatus
 
@@ -28,17 +30,18 @@ describe('logic - change status', () => {
         negatives = 1
         pollStatus = 'pending'
 
+        cityId2 = `CHANGER-${Math.random()}`
         fullname = `lluis.agusti-${Math.random()}`
         address = `address-${Math.random()}`
         documentId = `documentid-${Math.random()}@domain.com`
         email = `email@-${Math.random()}.com`
         imgDocId = `imgdocid-${Math.random()}`
-        password= `password-${Math.random()}`
+        password = `password-${Math.random()}`
         participatedPolls = `partipolls-${Math.random()}`
         proposedPolls = ['k89236423894y2348', '12323']
         userRole = 'citizen'
 
-        const user = await User.create({cityId, fullname, address, documentId, email, imgDocId, password, participatedPolls, proposedPolls, userRole})
+        const user = await User.create({cityId : cityId2, fullname, address, documentId, email, imgDocId, password, participatedPolls, proposedPolls, userRole})
         userId = user.id
 
         /* const poll = await Poll.create({ cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, negatives, pollStatus })

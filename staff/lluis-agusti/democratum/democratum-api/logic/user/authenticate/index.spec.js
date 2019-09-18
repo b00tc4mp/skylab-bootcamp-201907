@@ -1,12 +1,14 @@
+require('dotenv').config()
+const{ env : { DB_URL_TEST } } = process
 const logic = require('../..')
 const { expect } = require('chai')
-const { models , mongoose } = require('democratum-data')
+const { models , mongoose, database } = require('democratum-data')
+const { User, Poll } = models
 const bcrypt = require('bcryptjs')
-const { User } = models
 
 describe('logic - authenticate citizen', () => {
 
-    before(() =>  mongoose.connect('mongodb://localhost/democratum-test', { useNewUrlParser: true }))
+    before(() =>  mongoose.connect(DB_URL_TEST, { useNewUrlParser: true }))
 
     let cityId, fullname, address, documentId, email, imgDocId, password, participatedPolls, proposedPolls, userRole, id
 

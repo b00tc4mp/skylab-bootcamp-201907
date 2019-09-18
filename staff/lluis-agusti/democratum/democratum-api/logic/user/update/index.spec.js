@@ -1,16 +1,20 @@
+require('dotenv').config()
+const{ env : { DB_URL_TEST } } = process
 const logic = require('../..')
 const { expect } = require('chai')
-const { models , mongoose } = require('democratum-data')
-const bcrypt = require ('bcryptjs')
-const { User } = models
+const { models , mongoose, database } = require('democratum-data')
+const { User, Poll } = models
+const bcrypt = require('bcryptjs')
 
 describe('logic - update citizen', () => {
 
-    before(() =>  mongoose.connect('mongodb://localhost/democratum-test', { useNewUrlParser: true }))
+    before(() =>  mongoose.connect(DB_URL_TEST, { useNewUrlParser: true }))
 
     let cityId, fullname, address, documentId, email, imgDocId, password, participatedPolls, proposedPolls, userRole
 
     beforeEach(async () => {
+
+        await User.deleteMany()
 
         cityId = `city-${Math.random()}`
         fullname = `fullname-${Math.random()}`
@@ -28,7 +32,7 @@ describe('logic - update citizen', () => {
             fullname1: `UPDATEEEEEED-${Math.random()}`,
             address1: `UPDATEEEEEED-${Math.random()}`,
             documentId1: `UPDATEEEEEED-${Math.random()}`,
-            //email1: `updated@-${Math.random()}.com`,
+            email1: `updated@-${Math.random()}.com`,
             imgDocId1: `UPDATEEEEEED-${Math.random()}`,
             password1: `UPDATEEEEEED-${Math.random()}`,
             participatedPolls1: `UPDATEEEEEED-${Math.random()}`,

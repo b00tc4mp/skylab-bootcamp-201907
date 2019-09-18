@@ -1,11 +1,14 @@
-const logic = require('../../.')
+require('dotenv').config()
+const{ env : { DB_URL_TEST } } = process
+const logic = require('../..')
 const { expect } = require('chai')
-const { models , mongoose } = require('democratum-data')
-const { Poll } = models
+const { models , mongoose, database } = require('democratum-data')
+const { User, Poll } = models
+const bcrypt = require('bcryptjs')
 
 describe('logic - update poll', () => {
 
-    before(() => mongoose.connect('mongodb://localhost/democratum-test', {
+    before(() => mongoose.connect(DB_URL_TEST, {
         useNewUrlParser: true
     }))
 
@@ -43,21 +46,8 @@ describe('logic - update poll', () => {
             pollStatus1: 'approved'
         }
 
-        await Poll.deleteMany()
-        const poll = await Poll.create({
-            cityId,
-            authorId,
-            question,
-            optionA,
-            optionB,
-            description,
-            expiryDate,
-            imagePoll,
-            positives,
-            negatives,
-            pollStatus,
-            id
-        })
+        
+        const poll = await Poll.create({ cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives,negatives, pollStatus, id })
 
         id = poll.id
     })
@@ -79,7 +69,7 @@ describe('logic - update poll', () => {
             expect(poll.optionA).to.equal(body.optionA1)
             expect(poll.optionB).to.equal(body.optionB1)
             expect(poll.description).to.equal(body.description1)
-            // expect(poll.expiryDate).to.equal(body.expiryDate1)
+            expect(poll.expiryDate.toDateString()).to.equal(body.expiryDate1.toDateString())
             expect(poll.imagePoll).to.equal(body.imagePoll1)
             expect(poll.positives).to.equal(body.positives1)
             expect(poll.negatives).to.equal(body.negatives1)
@@ -270,6 +260,24 @@ describe('logic - update poll', () => {
     // pollStatus
 
     it('should fail on empty pollStatus', () =>
+        expect(() =>
+            logic.newPoll(cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, negatives, '')
+        ).to.throw('pollStatus is empty or blank')
+    )
+
+    it('should fail on undefined imagePoll', () =>
+        expect(() =>
+            logic.newPoll(cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, negatives, undefined)
+        ).to.throw(`pollStatus with value undefined is not a string`)
+    )
+
+    it('should fail on wrong data type', () =>
+        expect(() =>
+            logic.newPoll(cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, negatives, 123)
+        ).to.throw(`pollStatus with value 123 is not a string`)
+    )
+
+        it('should fail on empty pollStatus', () =>
         expect(() =>
             logic.newPoll(cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, negatives, '')
         ).to.throw('pollStatus is empty or blank')

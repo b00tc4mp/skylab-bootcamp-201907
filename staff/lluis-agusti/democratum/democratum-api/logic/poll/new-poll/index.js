@@ -6,34 +6,34 @@ const { User, Poll } = models
  * Creates a new poll. Users with the role 'citizen' only can create polls with status 'pending'.
  * 
  *  
- * @param {String} cityId
- * @param {String} authorId
- * @param {String} question
- * @param {String} optionA
- * @param {String} optionB
- * @param {String} description
- * @param {Date} expiryDate
- * @param {String} imagePoll
- * @param {Number} positives
- * @param {Number} negatives
- * @param {String} pollStatus
+ * @param {String} cityId The id of the city.
+ * @param {String} authorId The id of the author.
+ * @param {String} question Question of the poll.
+ * @param {String} optionA First choice.
+ * @param {String} optionB Second choice.
+ * @param {String} description Detailed description of the question.
+ * @param {Date} expiryDate Expiry date of the poll.
+ * @param {String} imagePoll Image of the poll.
+ * @param {Number} positives Positive votes.
+ * @param {Number} negatives Negative votes.
+ * @param {String} pollStatus Publiching status of the poll.
  *
- * @returns {Promise}
+ * @returns {Promise} The created poll.
  */
-
-    // quiero que el userId se pushee al authorId
 
 
 
 module.exports = function(cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, negatives, pollStatus) {
-
+    
+    positives = parseFloat(positives)
+    negatives = parseFloat(negatives)
+        
     validate.string(cityId, 'cityId')
     validate.string(authorId, 'authorId')
     validate.string(question, 'question')
     validate.string(optionA, 'optionA')
     validate.string(optionB, 'optionB')
     validate.string(description, 'description')
-    //validate.date(expiryDate, 'expiryDate')
     validate.string(imagePoll, 'imagePoll')
     validate.number(positives, 'positives')
     validate.number(negatives, 'negatives')
@@ -41,13 +41,15 @@ module.exports = function(cityId, authorId, question, optionA, optionB, descript
     
     return (async () => {
 
+        //let user = await User.findOne({ _id: userId }, { _id: 0, password: 0 }).lean()
+        //if (!user) throw Error('User does not exists')
+
         let poll = await Poll.findOne({ question })
         if (poll) throw Error('Poll already exists.')
 
-        // Hauria de buscar l'usuari i verificar que es admin --> status approved
-        // Si no es admin el pollStatus queda amb pending
+        poll = new Poll ({ cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, negatives, pollStatus: 'pending' })
 
-        poll = new Poll ({ cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, negatives, pollStatus })
+        //poll.authorId = userId
 
         await poll.save()
 
