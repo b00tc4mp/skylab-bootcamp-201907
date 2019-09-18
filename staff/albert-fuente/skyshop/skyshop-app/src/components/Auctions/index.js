@@ -79,7 +79,7 @@ function Auctions() {
                 }} >
                   <li className="product-description">{item.title}</li>
                   <li className="product-image"><img src={item.image}/></li>
-                  <li className="product-price">{item.price+" €"}</li>
+                  <li className="product-price2">{'Base price: '+item.price+" €"}</li>
                   </ul>
                 </>
                 }

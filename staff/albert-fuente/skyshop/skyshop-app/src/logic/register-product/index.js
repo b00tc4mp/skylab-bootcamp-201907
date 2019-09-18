@@ -5,7 +5,7 @@ export default function (title,{name},description,size,color,price) {
     const image=name
 
     validate.string(title,'title')
-     validate.string(image,'image')
+     //validate.string(image,'image')
      validate.string(description,'description')
      validate.string(size,'size')
      validate.string(color,'color')
