@@ -27,15 +27,31 @@ Users, once registered and logged in, will be able to:
 - Create a functional panel/module for each shared space.
 - Add other users to the space-module created and be added to others created by other users.
 - Access the calendar-timetable of said spaces, consult the general and particular activities and add their own tasks to it.
-- Leave daily comments according to what has been experienced in a particular shared space.
-- Control periodic activities such as cleaning or re-stocking by facilitating the assignation of tasks and turns amongst users, and providing a history of said activities.
+- [_work in progress_] Leave daily comments according to what has been experienced in a particular shared space. 
+- [_work in progress_] Control periodic activities such as cleaning or re-stocking by facilitating the assignation of tasks and turns amongst users, and providing a history of said activities.
 
 ### Use cases
 
 ![use cases](./img/use-cases.jpg)
 
 ### Flow charts
-...
+![flow chart 1](./img/flow-chart-1.jpg)
+![flow chart 2](./img/flow-chart-2.jpg)
 
 ## Technical description
-...
+### Blocks
+![blocks](./img/technical-1.jpg)
+### Components
+![components](./img/technical-2.jpg)
+### Data model
+![data model](./img/technical-3.jpg)
+
+## Code coverage
+![code coverage](./img/coverage.jpg)
+
+## "Mea culpa"
+- Edit and delete spaces.
+- Set periodic tasks.
+- Create tags for tasks.
+- View history of specific tasks (to facilitate the space maintenance).
+- Post and delete comments.

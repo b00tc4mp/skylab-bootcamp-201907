@@ -19,7 +19,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test:inspect": "react-scripts --inspect-brk=9230 test --runInBand --no-cache"
+    "test:inspect": "react-scripts --inspect-brk=9230 test --runInBand --no-cache",
+    "test:coverage": "react-scripts test --coverage --watchAll"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -39,5 +40,19 @@
   "devDependencies": {
     "jsonwebtoken": "^8.5.1",
     "data": "file:../e-cohabitat-data"
+  },
+  "jest": {
+    "watchPathIgnorePatterns": [
+      "src/common"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/components/**/*.js",
+      "!src/index.js",
+      "!src/serviceWorker.js",
+      "!<rootDir>/node_modules/",
+      "!<rootDir>/path/to/dir/"
+    ]
   }
+  
 }
