@@ -2,10 +2,10 @@ const http = require('http')
 const url = require('url')
 
 const { argv: [, , port] } = process
-debugger
+
 const server = http.createServer((req, res) => {
     const { pathname, query: { iso } } = url.parse(req.url, true)
-    debugger
+    
     const date = new Date(iso)
     let output, json
 
