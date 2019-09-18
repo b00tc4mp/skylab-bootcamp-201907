@@ -1,93 +1,183 @@
-.module
-    margin: 0
-    &__title
-        display: initial
-        font-family: Helvetica, Roboto, sans-serif
-        font-size: 2rem
-        border-bottom: 1px solid
-    &__type
-        font-size: 1.2rem
-        font-weight: normal
-        margin-top: 1em
-    &__address
-        font-size: .9rem
-        margin-top: .5em
-        color: grey
-    &__users
-        font-size: .9rem
-        font-weight: normal
-        margin: 1.75em 0 .5em 0
-    &__users-link
-        font-size: .8rem
-        text-decoration: none
-        color: grey
-    &__users-link:hover
-        color: deeppink
-    &__users-list
-        display: flex
-        flex-direction: column
-        align-items: center
-        margin: 1em auto
-        border: 1px solid grey
-        padding: 2em
-        width: 60%
-        color: grey
-        font-weight: normal
-    &__users-list-title
-        margin-bottom: 2em
-        color: black
-    &__add-users
-        background-color: black
-        color: white
-        margin-top: 2em
-        border: none
-        padding: .5em
-        font-size: .9rem
-        width: 30%
-    &__close
-        background-color: lightgrey
-        color: white
-        margin-top: 1em
-        border: none
-        padding: 2px 5px
-        font-size: .9rem
-        width: 30%
-    &__logo, &__mobile-menu
-        display: none
-    &__figure 
-        margin-top: 2em
-        padding: 0
-    &__img 
-        width: 60%
-    &__form
-        display: flex
-        flex-direction: column
-        align-items: center
-        margin: 2em 0 4em 0
-    &__calendar, &__today
-        background-color: black
-        color: white
-        text-align: center
-        font-size: 1.25rem
-        margin-bottom: 1em
-        border: none
-        padding: .5em
-        width: 60%
-    &__today
-        background-color: white
-        border: 1px solid black
-        color: black
-    &__back-link
-        text-decoration: none
-        color: grey
-    &__calendar:hover, &__today:hover, &__back-link:hover
-        color: deeppink
-.fa-eye
-    font-size: .8rem
-
-@media screen and (min-width: 840px) 
+@media (max-width: 840px) 
     .module
-        padding: 2em 7em
+        margin: 0
         text-align: center
+
+        &__title
+            display: initial
+            font-family: Helvetica, Roboto, sans-serif
+            font-size: 1.5rem
+            border-bottom: 1px solid
+        &__type
+            font-size: 1rem
+            font-weight: normal
+            margin-top: .5em
+        &__address
+            font-size: .8rem
+            margin-top: .5em
+            color: grey
+        &__users
+            font-size: .8rem
+            font-weight: normal
+            margin: 1.75em 0 .5em 0
+        &__users-link
+            margin-top: 0
+            font-size: .8rem
+            text-decoration: none
+            color: grey
+        &__users-link:hover
+            color: deeppink
+        &__users-list
+            display: flex
+            flex-direction: column
+            align-items: center
+            margin: 1em auto
+            border: 1px solid grey
+            padding: 1em
+            color: grey
+            font-weight: normal
+        &__users-list-title
+            margin-bottom: 1em
+            color: black
+            font-size: .8rem
+        &__user-name
+            font-size: .6rem
+        &__add-users
+            background-color: black
+            color: white
+            margin-top: 2em
+            border: none
+            padding: .5em
+            font-size: .7rem
+            width: 75%
+        &__close
+            background-color: lightgrey
+            color: white
+            margin-top: 1em
+            border: none
+            padding: 2px 5px
+            font-size: .7rem
+            width: 75%
         &__logo, &__mobile-menu
             display: none
+        &__figure 
+            margin-top: 2em
+            padding: 0
+        &__img 
+            width: 100%
+        &__form
+            display: flex
+            flex-direction: column
+            align-items: center
+            margin: 2em 0 4em 0
+        &__calendar, &__today
+            background-color: black
+            color: white
+            text-align: center
+            font-size: 1rem
+            margin-bottom: 1em
+            border: none
+            padding: .5em
+            width: 100%
+        &__today
+            background-color: white
+            border: 1px solid black
+            color: black
+        &__back-link
+            text-decoration: none
+            color: grey
+        &__calendar:hover, &__today:hover, &__back-link:hover
+            color: deeppink
+            
+    .fa-eye
+        font-size: .8rem
+
+
+@media (min-width: 840px) 
+    .module
+        margin: 0
+        &__title
+            display: initial
+            font-family: Helvetica, Roboto, sans-serif
+            font-size: 2rem
+            border-bottom: 1px solid
+        &__type
+            font-size: 1.2rem
+            font-weight: normal
+            margin-top: 1em
+        &__address
+            font-size: .9rem
+            margin-top: .5em
+            color: grey
+        &__users
+            font-size: .9rem
+            font-weight: normal
+            margin: 1.75em 0 .5em 0
+        &__users-link
+            font-size: .8rem
+            text-decoration: none
+            color: grey
+        &__users-link:hover
+            color: deeppink
+        &__users-list
+            display: flex
+            flex-direction: column
+            align-items: center
+            margin: 1em auto
+            border: 1px solid grey
+            padding: 2em
+            width: 60%
+            color: grey
+            font-weight: normal
+        &__users-list-title
+            margin-bottom: 2em
+            color: black
+        &__add-users
+            background-color: black
+            color: white
+            margin-top: 2em
+            border: none
+            padding: .5em
+            font-size: .9rem
+            width: 30%
+        &__close
+            background-color: lightgrey
+            color: white
+            margin-top: 1em
+            border: none
+            padding: 2px 5px
+            font-size: .9rem
+            width: 30%
+        &__logo, &__mobile-menu
+            display: none
+        &__figure 
+            margin-top: 2em
+            padding: 0
+        &__img 
+            width: 60%
+        &__form
+            display: flex
+            flex-direction: column
+            align-items: center
+            margin: 2em 0 4em 0
+        &__calendar, &__today
+            background-color: black
+            color: white
+            text-align: center
+            font-size: 1.25rem
+            margin-bottom: 1em
+            border: none
+            padding: .5em
+            width: 60%
+        &__today
+            background-color: white
+            border: 1px solid black
+            color: black
+        &__back-link
+            text-decoration: none
+            color: grey
+        &__calendar:hover, &__today:hover, &__back-link:hover
+            color: deeppink
+
+    .fa-eye
+        font-size: .8rem

@@ -33,6 +33,7 @@ function Home({ history }) {
     return <>
 
             <section className="home">
+
                 <h1 className="home__title"><span className="home__e">e-</span>cohabitat</h1>
                 <h2 className="home__subtitle">Sharing spaces, building communities</h2>
 

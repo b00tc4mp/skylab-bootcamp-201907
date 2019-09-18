@@ -1,9 +1,31 @@
-.hidden
-    display: none
+@media (max-width: 840px) 
+    .hidden
+        display: none
 
-@media screen and (min-width: 840px) 
+    .mobile-menu
+        padding: 2em 2em 0 2em
+        &__list
+            display: flex
+            justify-content: space-between
+            list-style: none
+        &__logo
+            width: 30%
+        &__logout-button
+            background-color: white
+            border: none
+            padding: none
+            color: grey
+            font-size: 10px
+        &__logout-button:hover
+            color: deeppink
+
+
+@media (min-width: 840px) 
     .hidden
         display: initial
+    
+    .mobile-menu
+        display: none
 
     .header
         display: flex

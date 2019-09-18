@@ -69,7 +69,7 @@ function Space({ history, match }) {
             <div className="module__users-list">
                 <h2 className="module__users-list-title">Users</h2>
                 {mySpace.cousers.map(user => {
-                return <><p>{user.username} / {user.name} {user.surname}</p></>
+                return <><p className="module__user-name">{user.username} / {user.name} {user.surname}</p></>
                 })}
                 <button className="module__add-users" onClick={handleAdd}>+ add companions!</button>
                 <button className="module__close" onClick={handleClose}>close</button>
