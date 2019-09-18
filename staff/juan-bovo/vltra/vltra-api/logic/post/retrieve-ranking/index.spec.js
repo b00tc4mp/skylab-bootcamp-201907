@@ -89,7 +89,7 @@ describe('logic - retrieve ranking', () => {
 
     it('should succeed on correct id', async () => {
         const ranking = await retrieveRanking()
-        debugger
+        
         expect(ranking).to.exist
         expect(ranking.length).to.equal(3)
         expect(ranking[0].id.toString()).to.equal(postId2)

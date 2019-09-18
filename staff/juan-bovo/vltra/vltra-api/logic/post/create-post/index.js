@@ -43,7 +43,7 @@ module.exports = function(author, title, body) {
         
         //if (!response) throw new Error(`post with content ${body} does not exist`)
         newPostId = response._id.toString()
-        debugger
+        
         return newPostId
 
     })()

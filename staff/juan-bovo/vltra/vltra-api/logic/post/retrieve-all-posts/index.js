@@ -13,12 +13,12 @@ module.exports = function(){
         const posts = await Post.find({ }, { __v: 0 }).sort({date: -1}).lean()
         
         if(posts.length === 0) throw Error(`there are no post to retrieve`)
-        // debugger
+        
         posts.forEach(post => {
             post.id = post._id
             delete post._id
         })
-        // debugger
+        
         return posts
     })()
 }

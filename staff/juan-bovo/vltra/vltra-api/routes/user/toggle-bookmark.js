@@ -3,7 +3,7 @@ const { toggleBookmark } = require('../../logic')
 module.exports = function (req, res) {
     // const { params: { id }, body  } = req
     const { id, body: { postId } } = req
-    debugger
+    
     try {
         toggleBookmark(id, postId)
             .then(() => res.json({ message: 'bookmark correctly toggled' }))

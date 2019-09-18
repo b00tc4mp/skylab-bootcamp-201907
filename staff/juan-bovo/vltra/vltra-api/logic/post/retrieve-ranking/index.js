@@ -23,13 +23,13 @@ module.exports = function(){
                 const totalvotes = post.votes.reduce((accum, current) => accum + current)
 
                 post.totalvotes = Math.floor(totalvotes / post.votes.length)
-                
+
                 ranking.push(post)
             }
         }
 
         if(ranking.length === 0) throw Error(`there are no post with votes to retrieve`)
-        debugger
+        
         ranking.forEach(post => {
             post.id = post._id
             delete post._id
