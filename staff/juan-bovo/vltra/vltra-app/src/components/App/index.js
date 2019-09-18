@@ -4,7 +4,6 @@ import logic from '../../logic'
 import Context from '../ProviderContext'
 import './style.sass'
 
-import Home from '../Home'
 import Header from '../Header'
 import Footer from '../Footer'
 import Main from '../Main'

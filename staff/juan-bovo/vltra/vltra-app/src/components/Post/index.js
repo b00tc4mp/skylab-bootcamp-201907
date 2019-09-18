@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import logic from '../../logic'
-import Feedback from '../Feedback'
+import FeedbackMini from '../FeedbackMini'
 
 import './style.sass'
 
@@ -35,6 +35,7 @@ function Post({history, postId}){
                 setPostDetails(_postDetails)
                 // Algo que me permita recargar la página!!
             }catch(error){
+                setError(error.message)
                 console.log(error.message)
             }
         })()
@@ -62,7 +63,7 @@ function Post({history, postId}){
                 <div className="mosaic-grid__container">
                     <button className="mosaic-grid__bookmark-button" onClick={()=>handleBookmark(postDetails.id)}><i className="far fa-bookmark"></i></button>
                     <div className="mosaic-grid__view">
-                        {/* <p className="mosaic-grid__view--content">Posteado por: {postDetails.author.name}</p> */}
+                        <p className="mosaic-grid__view--content">Posteado por: {postDetails.author.name}</p>
                         <p className="mosaic-grid__view--content">{postDetails.body}</p>
                         <p className="colorrojo">{postDetails.votes}</p>
                         <span className="mosaic-grid__rank">
@@ -74,11 +75,12 @@ function Post({history, postId}){
                         </span>
                         <p>Publicado en {postDetails.date}</p>
                     </div>
-                        <a href="#" onClick={event => {
-                            event.preventDefault()
-                            handleGoBack(history)
-                        }}> Atrás </a>
                 </div>
+                {error && <FeedbackMini message={error} />}
+            <a href="#" onClick={event => {
+                event.preventDefault()
+                handleGoBack(history)
+            }}> Atrás </a>
             
         </>}
     </section>

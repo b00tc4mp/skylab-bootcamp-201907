@@ -32,25 +32,24 @@ function Header({ history }) {
         history.push('/my-profile')
     }
 
-    return <>
-        <header className="header">
+    return <header className="header">
             <Link to="/" className="header__logo"><img className="header__logo--image" src="./img/vltra-rectangle-orange.png" alt="VLTRA" /></Link>
 
             <nav>
                 {!logic.isUserLoggedIn() ?
                     <ul className="user-menu">
-                        <li className="user-menu__auth-option" ><p>¿Nuevo en Vltra?</p><Link to="/register" className="user-menu__auth-option-link" href="">¡Regístrate!</Link></li>
-                        <li className="user-menu__auth-option" ><p>¿Ya eres usuario?</p><Link to="/login" className="user-menu__auth-option-link" href="">Inicia sesión</Link></li>
+                        <li className="user-menu__auth-option" ><p>¿Eres nuevo?</p><Link to="/register" className="user-menu__auth-option-link" href="">¡Regístrate!</Link></li>
+                        <li className="user-menu__auth-option" ><p>¿Vuelves?</p><Link to="/login" className="user-menu__auth-option-link" href="">Inicia sesión</Link></li>
                     </ul> :
                     <ul className="user-menu">
-                        <div className="user-menu__avatar-container">
+                        <li className="user-menu__avatar-container">
                             <a onClick={event => {
                                 event.preventDefault()
                                 handleGoToUserProfile()}}>
                                 <img className="user-menu__avatar-img" src={user && user.avatar}></img>
-                                <p className="user-menu__user-option">{user && user.nickname}</p>
+                                <p className="user-menu__avatar-name">{user && user.nickname}</p>
                             </a>
-                        </div>
+                        </li>
                         <li className="user-menu__auth-option" >
                             <a className="user-menu__auth-option-link" href="" onClick={event => {
                                 event.preventDefault()
@@ -64,7 +63,6 @@ function Header({ history }) {
                     </ul>}
             </nav>
         </header>
-    </>
 }
 
 export default withRouter(Header)

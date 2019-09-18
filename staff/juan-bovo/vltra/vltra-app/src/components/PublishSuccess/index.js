@@ -1,8 +1,10 @@
 import React from 'react'
 import { withRouter, Link } from 'react-router-dom'
 
+import './style.sass'
+
 function PublishSuccess(){
-    return <section>
+    return <section className="publish-success">
         <h2 className="form__title">¡Tu post se ha publicado! :)</h2>
 
         <p className="form__info">Ahora ya puedes verlo en la pantalla principal de Vltra.</p>

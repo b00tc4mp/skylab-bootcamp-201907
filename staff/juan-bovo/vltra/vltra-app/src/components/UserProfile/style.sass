@@ -2,9 +2,16 @@
 
 .profile
     clear: both
+    margin: 0 auto
+
+    &__container
+        position: sticky
+        top: 43px
+        z-index: 1
+        background-color: rgb(113, 80, 147)
 
     &__avatar-container
-        padding: 15px
+        padding: 1em 2em
 
     &__avatar-img
         display: block
@@ -12,22 +19,45 @@
         border: 5px solid black
 
     &__title
-        display: inline-block
-        padding: 10px
+        display: inline-blocks
+        padding: 1em
         color: white
-        background-color: rgba(113, 80, 147, 0.8)
-    
+
     &__name
         display: block
-        padding: 10px
-        margin-top: 10px
+        padding: 0.5em 1em
+        margin-top: 1em
+        
+    &__name-container
+        background-color: white
+        position: sticky
+        top: 0
+        z-index: 2
     
     &__email
         display: block
-        padding: 10px
+        padding: 1em
+        background-color: rgb(244, 154, 94)
 
     &__bookmark-own
+        font-size: 16px
         display: inline-block
-        background-color: black
+        float: right
+        margin-right: 3%
+        padding: 10px
         color: white
-        font-size: xx-large
+        border: none
+        background-color: black
+
+@media (min-width: 48em)
+    .profile
+        width: 80%
+        &__view
+            padding: 30px
+
+            &--content
+                font-size: 1.6em
+
+@media (min-width: 60em)
+    .profile
+        width: 70%

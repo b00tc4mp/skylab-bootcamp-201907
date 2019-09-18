@@ -11,7 +11,7 @@ import retrievePost from '../../logic/retrieve-post'
 function Main({ history }) {
     const [posts, setPosts] = useState()
     const [user, setUser] = useState()
-    const [error, setError] = useState(undefined)
+    const [freshRankDisplay, setFreshRankDisplay] = useState(true)
 
     useEffect(() => {
         (async () => {
@@ -35,11 +35,22 @@ function Main({ history }) {
         setPosts(_posts)
     }
 
+    function onFreshRankDisplay(){
+        setFreshRankDisplay(!freshRankDisplay)
+    }
+
     return <main className="mosaic-grid">
-        <h2>Contenido fresco en Vltra</h2>
+        <div className="mosaic-grid__sticky-section">
+            <h2 className="mosaic-grid__sticky-section--title">{freshRankDisplay ? "Contenido nuevo" : "Clasificación"} en Vltra</h2>
+            <button className="mosaic-grid__sticky-section__button" onClick={event => {
+                event.stopPropagation()
+
+                onFreshRankDisplay()
+            }}>{freshRankDisplay ? "Clasificación" : "Contenido nuevo"}</button>
+        </div>
         {/* Acá iría un compo para cambiar de vista */}
         <ul>
-            {user && posts && posts.posts.length && posts.posts.map(item => <MainCard item={item} user={user} refreshUser={retrieveUser} refreshPosts={retrievePosts}/>)}
+            {user && posts && posts.posts.length && posts.posts.map(item => <MainCard key={item.id} item={item} user={user} refreshUser={retrieveUser} refreshPosts={retrievePosts}/>)}
         </ul>
     </main>
 }
