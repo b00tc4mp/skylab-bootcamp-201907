@@ -7,6 +7,7 @@ import Profile from './Profile'
 import Register from './Register'
 import Details from './Details'
 import Feedback from './Feedback'
+import Footer from './Footer'
 
 export {
     Header,
@@ -17,7 +18,8 @@ export {
     Profile,
     Register,
     Details, 
-    Feedback
+    Feedback,
+    Footer
 }
 
 

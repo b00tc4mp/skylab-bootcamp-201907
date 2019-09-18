@@ -1,10 +1,14 @@
 import React from 'react'
 
-function Footer () {
+function Footer() {
 
-    return(
-    
-    <h2>Footer</h2>
+    return (
+
+        <footer className='footer'>
+            {/* <div className='line'></div> */}
+            <p className='footer__paragraph'>SkyCaching Corp · All rights reserved </p>
+        </footer>
+
     )
 }
 

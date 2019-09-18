@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 import { withRouter } from 'react-router-dom'
+import girl from '../../img/girl.png'
+import chest from '../../img/chest.png'
 
 import L from 'leaflet'
 import logic from '../../logic'
-import './index.css';
 
 function Profile({ history, setUser }) {
 
@@ -15,17 +16,17 @@ function Profile({ history, setUser }) {
     const [ownCaches, setOwnCaches] = useState([])
 
     var myIcon = L.icon({
-        iconUrl: 'https://cdn3.iconfinder.com/data/icons/cash-coin-essentials-glyph/48/Sed-19-512.png',
-        iconSize: [25, 41],
-        iconAnchor: [12.5, 41],
+        iconUrl: chest,
+        iconSize: [25, 25],
+        iconAnchor: [12.5, 25],
         popupAnchor: [0, -41],
-    })
+    });
 
     var myIcon2 = L.icon({
-        iconUrl: 'https://image.flaticon.com/icons/png/512/97/97895.png',
-        iconSize: [50, 82],
-        iconAnchor: [25, 82],
-        popupAnchor: [0, -82],
+        iconUrl: girl,
+        iconSize: [50, 50],
+        iconAnchor: [25, 50],
+        popupAnchor: [0, -41],
     })
 
     useEffect(() => {
@@ -93,88 +94,91 @@ function Profile({ history, setUser }) {
     }
 
     return (<>
+        <main className="profile">
+            <section className="profile__caches">
+                {ownCaches.length > 0 && <h3 className='profile__caches-header'>Owned Caches</h3>}
+                {ownCaches.map((item) => (<ul className='profile__caches-list'>
+                    <section className='buttons'>
+                    <li className='profile__caches-item'><p className='profile__caches-paragraph'>Name: {item.name}</p></li>
 
-        <h2>Profile</h2>
+                    <form className='profile__caches-detailsForm' onSubmit={event => {
+                        event.preventDefault()
+                        handleGoToDetails(event.target.cacheId.value)
+                    }}>
+                        <input type='hidden' name="cacheId" value={item._id} />
+                        <button className='profile__caches-detailsCache'>Details</button>
+                    </form>
+                    
+                    <form className='profile__caches-deleteForm' onSubmit={event => {
+                        event.preventDefault()
+                        handleDeleteCache(event.target.cacheId.value)
+                    }}>
+                        <input type='hidden' name="cacheId" value={item._id} />
+                        <button className='profile__caches-deleteCache'>Delete</button>
+                    </form>
+                    </section>
+                    
+                </ul>))}
+            </section>
 
-        {ownCaches.length > 0 && <h3>Owned Caches</h3>}
-        {ownCaches.map((item) => (<ul>
-            <li><p>Name: {item.name}</p></li>
-            
-            <form onSubmit={event => {
-                event.preventDefault()
-                handleDeleteCache(event.target.cacheId.value)
-            }}>
-                <input type='hidden' name="cacheId" value={item._id} />
-                <button>Delete</button>
-            </form>
-            <form onSubmit={event => {
-                event.preventDefault()
-                handleGoToDetails(event.target.cacheId.value)
-            }}>
-                <input type='hidden' name="cacheId" value={item._id} />
-                <button>Details</button>
-            </form>
-        </ul>))}
+            <section className="create__cache">
+                <h3 className='create__cache-header'>Create Cache</h3>
+                <form className='create__cache-form' onSubmit={event => {
+                    event.preventDefault()
 
-        <h3>Create Cache</h3>
-        <form onSubmit={event => {
-            event.preventDefault()
+                    const { target: { name: { value: name }, description: { value: description }, difficulty: { value: difficulty }, terrain: { value: terrain }, size: { value: size }, hints: { value: hints } } } = event
+                    const loc = { type: 'Point', coordinates: [position[1], position[0]] }
 
-            const { target: { name: { value: name }, description: { value: description }, difficulty: { value: difficulty }, terrain: { value: terrain }, size: { value: size }, hints: { value: hints } } } = event
-            const loc = { type: 'Point', coordinates: [position[1], position[0]] }
+                    handleRegisterCache(name, description, loc, Number(difficulty), Number(terrain), size, hints)
+                }}>
+                    <label className='create__cache-label' htmlFor="name">Name</label>
+                    <input className='create__cache-input' type="name" name="name" />
+                    <label className='create__cache-label' htmlFor="description">Description</label>
+                    <input className='create__cache-input' type="description" name="description" />
+                    <label className='create__cache-label' htmlFor="difficulty">Difficulty</label>
+                    <select type='difficulty' name='difficulty'>
+                        <option value='1'>1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <label className='create__cache-label' htmlFor="terrain">Terrain</label>
+                    <select type='terrain' name='terrain'>
+                        <option value='1'>1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <label className='create__cache-label' htmlFor="size">Size</label>
+                    <select type='size' name='size'>
+                        <option value='small'>small</option>
+                        <option value="medium">medium</option>
+                        <option value="large">large</option>
+                    </select>
+                    <label className='create__cache-label' htmlFor="hints">Hints</label>
+                    <textarea rows="4" cols="20" name='hints' />
+                    <button className='create_cache-create'>Proceed</button>
+                </form>
 
-            handleRegisterCache(name, description, loc, Number(difficulty), Number(terrain), size, hints)
-        }}>
-            <label htmlFor="name">Name</label>
-            <input type="name" name="name" />
-            <label htmlFor="description">Description</label>
-            <input type="description" name="description" />
-            <label htmlFor="difficulty">Difficulty</label>
-            {/* <input type="difficulty" name="difficulty" /> */}
-            <select type='difficulty' name='difficulty'>
-                <option value='1'>1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-            </select>
-            <label htmlFor="terrain">Terrain</label>
-            <select type='terrain' name='terrain'>
-                <option value='1'>1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-            </select>
-            <label htmlFor="size">Size</label>
-            <select type='size' name='size'>
-                <option value='small'>small</option>
-                <option value="medium">medium</option>
-                <option value="large">large</option>
-            </select>
-            <label htmlFor="hints">Hints</label>
-            <textarea rows="4" cols="50" name='hints' />
-            
-            {/* <input type="hints" name="hints" /> */}
+                <Map className="map" center={position} zoom={zoom}>
+                    <TileLayer
+                        attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url='https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}' ext='jpg'
+                    />
+                    {
+                        haveUsersLocation ?
+                            <Marker position={position} icon={myIcon2} draggable={true} onDragend={updatePosition} ref={refmarker} />
+                            : ''
 
-            <button>Proceed</button>
-        </form>
+                    }
+                    {allCaches && allCaches.length && allCaches.map(cache => <Marker key={cache._id} draggable={false}
+                        position={[cache.location.coordinates[1], cache.location.coordinates[0]]} icon={myIcon}>
+                        <Popup>
+                            <p>{cache.name}</p>
+                        </Popup>
+                    </Marker>)}
 
-        <Map className="map" center={position} zoom={zoom}>
-            <TileLayer
-                attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            {
-                haveUsersLocation ?
-                    <Marker position={position} icon={myIcon2} draggable={true} onDragend={updatePosition} ref={refmarker} />
-                    : ''
-
-            }
-            {allCaches && allCaches.length && allCaches.map(cache => <Marker key={cache._id} draggable={false}
-                position={[cache.location.coordinates[1], cache.location.coordinates[0]]} icon={myIcon}>
-                <Popup>
-                    <p>{cache.name}</p>
-                </Popup>
-            </Marker>)}
-
-        </Map>
+                </Map>
+            </section>
+        </main>
     </>
     )
 }
