@@ -7,16 +7,17 @@ import './style.sass'
 
 function Post({history, postId}){
     const [postDetails, setPostDetails] = useState()
-    // const [bookmark, setBookmark] = useState()
     const [error, setError] = useState()
+    const [user, setUser] = useState()
     
     useEffect(() => {
         (async () => {
             try{
                 
                 const _postDetails = await logic.retrievePost(postId)
-                
                 setPostDetails(_postDetails)
+                const _user = await logic.retrieveUser()
+                setUser(_user)
             }catch(error){
                 console.log(error.message)
             }
@@ -25,31 +26,72 @@ function Post({history, postId}){
     }, [])
 
     function handleVote(postId, userVote){
-        (async () => {
-            try{
-                const response = await logic.votePost(postId, userVote)
-                console.log(response)
+        if(user){
+            (async () => {
+                try{
+                    const response = await logic.votePost(postId, userVote)
+                    retrievePost()
+                    console.log(response)
+                }catch(error){
+                    setError(error.message)
+                    console.log(error.message)
+                }
+            })()
+        }
+        else{
+            history.push('/login')
+        }
+    }
 
-                const _postDetails = await logic.retrievePost(postId)
-                
-                setPostDetails(_postDetails)
-                // Algo que me permita recargar la página!!
-            }catch(error){
-                setError(error.message)
-                console.log(error.message)
+    function generateStars(post) {
+        const { votes, id } = post
+        const stars = []
+        let rate = 0
+        if (votes.length) {
+            const totalvotes = votes.reduce((accum, current) => accum + current)
+            rate = Math.floor(totalvotes / votes.length)
+        }
+        for (let i = 0; i < 5; i++) {
+            if (rate) {
+                --rate
+                stars.push(<i key={i} className="fas fa-star" onClick={() => handleVote(id, i+1)}></i>)
+            } else {
+                stars.push(<i key={i} className="far fa-star" onClick={() => handleVote(id, i+1)}></i>)
             }
-        })()
+        }
+        return stars
     }
 
     function handleBookmark(postId){
-        (async () => {
-            try{
-                const response = await logic.toggleBookmark(postId)
-                console.log(response.message)
-            }catch(error){
-                console.log(error.message)
-            }
-        })()
+        if(user){
+            (async () => {
+                try{
+                    const response = await logic.toggleBookmark(postId)
+                    retrieveUser()
+                    console.log(response.message)
+                }catch(error){
+                    console.log(error.message)
+                }
+            })()
+        }
+        else{
+            history.push('/login')
+        }
+    }
+
+    function isBookmarkToggled(bookmarkId) {
+        if(!user) return false
+        return user.bookmarks.find(bookmark => bookmark._id === bookmarkId)
+    }
+
+    async function retrieveUser() {
+        const _user = await logic.retrieveUser()
+        setUser(_user)
+    }
+
+    async function retrievePost() {
+        const _postDetails = await logic.retrievePost(postId)
+        setPostDetails(_postDetails)
     }
 
     function handleGoBack(history){
@@ -61,18 +103,20 @@ function Post({history, postId}){
         <h1 className="post-detail__title">{postDetails.title}</h1>
         
                 <div className="post-detail__container">
-                    <button className="mosaic-grid__bookmark-button" onClick={()=>handleBookmark(postDetails.id)}><i className="far fa-bookmark"></i></button>
+                    <button className="mosaic-grid__bookmark-button" onClick={() => handleBookmark(postDetails.id)}>
+                        {isBookmarkToggled(postDetails.id) ?
+                            <i className="fas fa-bookmark"></i>
+                            :
+                            <i className="far fa-bookmark"></i>}
+                    </button>
                     <div className="post-detail__view">
                         <p className="post-detail__content-date">Posteado por: <span className="post-detail__content-author"> {postDetails.author.nickname} </span></p>
                         <p className="post-detail__content">{postDetails.body}</p>
                         <p className="colorrojo">{postDetails.votes}</p>
                         <p className="post-detail__content-date">Publicado en {postDetails.date}</p>
                         <span className="mosaic-grid__rank">
-                            Puntos: <i className="fas fa-star" onClick={()=> handleVote(postDetails.id, 1)}></i>
-                            <i className="fas fa-star" onClick={()=> handleVote(postDetails.id, 2)}></i>
-                            <i className="fas fa-star" onClick={()=> handleVote(postDetails.id, 3)}></i>
-                            <i className="fas fa-star" onClick={()=> handleVote(postDetails.id, 4)}></i>
-                            <i className="far fa-star" onClick={()=> handleVote(postDetails.id, 5)}></i>
+                            <p>Puntos:</p>
+                            {generateStars(postDetails)}
                         </span>
                     </div>
                 {error && <FeedbackMini message={error} />}

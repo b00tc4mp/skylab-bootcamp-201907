@@ -23,8 +23,8 @@ export default function (postId, userVote) {
             throw Error(error)
         }
 
-        const {statusText} = await response.json()
+        const status = await response.json()
         
-        return statusText
+        return status
      })()
 }

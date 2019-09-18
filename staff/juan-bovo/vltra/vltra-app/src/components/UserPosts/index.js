@@ -38,7 +38,6 @@ function UserPost({history}){
 
                 <p className="mosaic-grid__preview--content">{item.body}</p>
 
-                {/* Colocar link en el título e ir al detalle del post */}
             </div>
         </li>)|| <li className="mosaic-grid__list-item">
             <div className="mosaic-grid__container">

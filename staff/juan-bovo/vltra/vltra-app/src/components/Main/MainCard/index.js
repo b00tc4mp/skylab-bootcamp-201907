@@ -67,13 +67,6 @@ function MainCard({ item, refreshUser, refreshPosts, user, history }) {
             }
         }
         return stars
-
-
-        {/* <i className="fas fa-star" onClick={() => handleVote(item.id, 1)}></i>
-        <i className="fas fa-star" onClick={() => handleVote(item.id, 2)}></i>
-        <i className="fas fa-star" onClick={() => handleVote(item.id, 4)}></i>
-        <i className="fas fa-star" onClick={() => handleVote(item.id, 3)}></i>
-        <i className="far fa-star" onClick={() => handleVote(item.id, 5)}></i> */}
     }
 
 
