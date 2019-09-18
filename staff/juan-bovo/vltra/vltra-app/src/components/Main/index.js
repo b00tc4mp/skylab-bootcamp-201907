@@ -30,6 +30,11 @@ function Main({ history }) {
         setUser(_user)
     }
 
+    // async function retrievePosts() {
+    //     const _posts = await logic.retrieveAllPosts()
+    //     setPosts(_posts)
+    // }
+
     async function retrievePosts() {
         const _posts = await logic.retrieveAllPosts()
         setPosts(_posts)
@@ -41,16 +46,15 @@ function Main({ history }) {
 
     return <main className="mosaic-grid">
         <div className="mosaic-grid__sticky-section">
-            <h2 className="mosaic-grid__sticky-section--title">{freshRankDisplay ? "Contenido nuevo" : "Clasificación"} en Vltra</h2>
+            <h2 className="mosaic-grid__sticky-section--title">{freshRankDisplay ? "Contenido nuevo" : "Más votados"} en Vltra</h2>
             <button className="mosaic-grid__sticky-section__button" onClick={event => {
                 event.stopPropagation()
 
                 onFreshRankDisplay()
-            }}>{freshRankDisplay ? "Clasificación" : "Contenido nuevo"}</button>
+            }}>{freshRankDisplay ? "Más votados" : "Contenido nuevo"}</button>
         </div>
-        {/* Acá iría un compo para cambiar de vista */}
         <ul>
-            {user && posts && posts.posts.length && posts.posts.map(item => <MainCard key={item.id} item={item} user={user} refreshUser={retrieveUser} refreshPosts={retrievePosts}/>)}
+            {user && posts && posts.length && posts.map(item => <MainCard key={item.id} item={item} user={user} refreshUser={retrieveUser} refreshPosts={retrievePosts}/>)}
         </ul>
     </main>
 }

@@ -1,10 +1,9 @@
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 export default function () {
-    // validate fields
 
     return (async () => {
-        const response = await fetch(`${REACT_APP_API_URL}/posts`, {
+        const response = await fetch(`${REACT_APP_API_URL}/ranking`, {
             method: 'get',
             headers: {}
         })
@@ -14,8 +13,8 @@ export default function () {
             throw Error(error)
         }
 
-        const {posts} = await response.json()
-        
-        return posts
+        const {ranking} = await response.json()
+    
+        return ranking
      })()
 }

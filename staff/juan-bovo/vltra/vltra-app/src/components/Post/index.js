@@ -58,14 +58,15 @@ function Post({history, postId}){
 
     return <section className="post-detail">
         {postDetails&&<>
-        <h1 className="mosaic-grid__title">{postDetails.title}</h1>
+        <h1 className="post-detail__title">{postDetails.title}</h1>
         
-                <div className="mosaic-grid__container">
+                <div className="post-detail__container">
                     <button className="mosaic-grid__bookmark-button" onClick={()=>handleBookmark(postDetails.id)}><i className="far fa-bookmark"></i></button>
-                    <div className="mosaic-grid__view">
-                        <p className="mosaic-grid__view--content">Posteado por: {postDetails.author.name}</p>
-                        <p className="mosaic-grid__view--content">{postDetails.body}</p>
+                    <div className="post-detail__view">
+                        <p className="post-detail__content-date">Posteado por: <span className="post-detail__content-author"> {postDetails.author.nickname} </span></p>
+                        <p className="post-detail__content">{postDetails.body}</p>
                         <p className="colorrojo">{postDetails.votes}</p>
+                        <p className="post-detail__content-date">Publicado en {postDetails.date}</p>
                         <span className="mosaic-grid__rank">
                             Puntos: <i className="fas fa-star" onClick={()=> handleVote(postDetails.id, 1)}></i>
                             <i className="fas fa-star" onClick={()=> handleVote(postDetails.id, 2)}></i>
@@ -73,14 +74,13 @@ function Post({history, postId}){
                             <i className="fas fa-star" onClick={()=> handleVote(postDetails.id, 4)}></i>
                             <i className="far fa-star" onClick={()=> handleVote(postDetails.id, 5)}></i>
                         </span>
-                        <p>Publicado en {postDetails.date}</p>
                     </div>
-                </div>
                 {error && <FeedbackMini message={error} />}
-            <a href="#" onClick={event => {
+            <a className="post-detail__on-back" href="#" onClick={event => {
                 event.preventDefault()
                 handleGoBack(history)
-            }}> Atrás </a>
+            }}> Volver </a>
+                </div>
             
         </>}
     </section>

@@ -1,4 +1,4 @@
-import retrieveAllPosts from '.'
+import retrieveRanking from '.'
 
 const { random } = Math
 const { database, models: { User, Post } } = require('vltra-data')
@@ -6,7 +6,7 @@ const { database, models: { User, Post } } = require('vltra-data')
 // const { env: { DB_URL_TEST }} = process // WARN this destructuring doesn't work in react-app :(
 const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
 
-describe('logic - retrieve all posts', () => {
+describe('logic - retrieve ranking', () => {
     beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
 
     let title, body, author, date, comments, votes, postId,
@@ -49,21 +49,21 @@ describe('logic - retrieve all posts', () => {
         //author = authorId
         date = new Date
         comments = []
-        votes = []
+        votes = [1, 1, 2]
 
         title2 = `title-${Math.random()}`
         body2 = `body-${Math.random()}`
         //author2 = authorId
         date2 = new Date
         comments2 = []
-        votes2 = []
+        votes2 = [5, 5, 5, 4, 4]
 
         title3 = `title-${Math.random()}`
         body3 = `body-${Math.random()}`
         //author3 = authorId2
         date3 = new Date
         comments3 = []
-        votes3 = []
+        votes3 = [1, 3, 2]
 
         title4 = `title-${Math.random()}`
         body4 = `body-${Math.random()}`
@@ -87,22 +87,73 @@ describe('logic - retrieve all posts', () => {
         postId4 = post4.id
     })
 
-    it('should succeed on correct id', async () => {
-        const posts = await retrieveAllPosts()
-        
-        expect(posts).toBeDefined()
-        expect(posts.length).toBe(4)
+    it('should succeed on correct call', async () => {
+        const ranking = await retrieveRanking()
+
+        expect(ranking).toBeDefined()
+        expect(ranking.length).toBe(3)
+        expect(ranking[0].id.toString()).toBe(postId2)
+        expect(ranking[1].id.toString()).toBe(postId3)
+        expect(ranking[2].id.toString()).toBe(postId)
     })
 
     it('should fail if there are no posts', async () => {
         await Post.deleteMany()
         
         try {
-            const allPosts = await retrieveAllPosts()
+            const ranking = await retrieveRanking()
             throw new Error('should not reach this point')
         }catch(error){
             expect(error).toBeTruthy()
             expect(error.message).toBe(`there are no post to retrieve`)
+    }
+    })
+
+    it('should fail if there are no posts with votes to retrieve', async () => {
+        await Post.deleteMany()
+
+        title = `title-${Math.random()}`
+        body = `body-${Math.random()}`
+        date = new Date
+        comments = []
+        votes = []
+
+        title2 = `title-${Math.random()}`
+        body2 = `body-${Math.random()}`
+        date2 = new Date
+        comments2 = []
+        votes2 = []
+
+        title3 = `title-${Math.random()}`
+        body3 = `body-${Math.random()}`
+        date3 = new Date
+        comments3 = []
+        votes3 = []
+
+        title4 = `title-${Math.random()}`
+        body4 = `body-${Math.random()}`
+        date4 = new Date
+        comments4 = []
+        votes4 = []
+
+        const post = await Post.create({title , body, author: authorId, date, comments, votes})
+        postId = post.id
+
+        const post2 = await Post.create({ title : title2 , body : body2, author : authorId, date : date2, comments : comments2, votes : votes2 })
+        postId2 = post2.id
+
+        const post3 = await Post.create({ title : title3 , body : body3, author : authorId2, date : date3, comments : comments3, votes : votes3 })
+        postId3 = post3.id
+
+        const post4 = await Post.create({ title : title4 , body : body4, author : authorId2, date : date4, comments : comments4, votes : votes4 })
+        postId4 = post4.id
+        
+        try {
+            const ranking = await retrieveRanking()
+            throw new Error('should not reach this point')
+        }catch(error){
+            expect(error).toBeTruthy()
+            expect(error.message).toBe(`there are no post with votes to retrieve`)
     }
     })
 
