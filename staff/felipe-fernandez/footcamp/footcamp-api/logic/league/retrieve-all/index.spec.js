@@ -73,7 +73,7 @@ describe('logic - retrieve all league teams ', () => {
             id2 = users.id
            
           
-            debugger
+            
             const league= new League({id, name: nameLeague, code})
 
             users.leagues.push(league)

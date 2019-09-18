@@ -2,7 +2,7 @@ const {validate} = require('footcamp-utils')
 const { models: { User,  League, Team } } = require('footcamp-data')
 
  /**
- * Updates the team received by parameters
+ * Updates the player received by parameters
  *
  * @param {*} id 
  * @param {*} leagueId 
@@ -13,7 +13,7 @@ const { models: { User,  League, Team } } = require('footcamp-data')
 */
 
 module.exports = function( id, leagueId, teamId, id1, id2) {
-   debugger
+   
     validate.string(id, 'id')
     validate.string(leagueId, 'league Id')
     validate.string(id1, 'id1')

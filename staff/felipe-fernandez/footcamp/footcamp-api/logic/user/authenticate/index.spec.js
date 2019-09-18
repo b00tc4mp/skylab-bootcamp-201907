@@ -15,7 +15,7 @@ describe('logic-authentication user', ()=>{
         let name, surname, email, password, id
 
         beforeEach(()=> {
-            debugger
+            
             name = `name-${Math.random()}`
             surname = `surname-${Math.random()}`
             email = `email-${Math.random()}@mail.com`

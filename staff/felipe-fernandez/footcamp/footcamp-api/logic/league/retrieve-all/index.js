@@ -2,7 +2,7 @@ const {validate} = require('footcamp-utils')
 const { models: { User,  League, Team } } = require('footcamp-data')
 
  /**
- * Retrieves all the leagues of the user where he's a participant
+ * Retrieves the first league where the user participates
 
  * @param {*} id 
  * 

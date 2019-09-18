@@ -60,12 +60,10 @@ module.exports = function(id, name, leagueId) {
             
             do {
                 keeper = goalkeepers[Math.floor(Math.random() * goalkeepers.length)]
-                //match = league.playersUsed.includes(keeper)
                 match = league.playersUsed.find(player => player.name === keeper.name)
             } while(match)
                 goalkeeper.push(keeper)
-                debugger
-                //playersUsed.push(keeper)
+                
                 league.playersUsed.push(keeper)
                 match = false
         }
@@ -75,11 +73,9 @@ module.exports = function(id, name, leagueId) {
         for (let i=0; i<6; i++){
             do {
                 def = defenders[Math.floor(Math.random() * defenders.length)]
-                //match2 = league.playersUsed.includes(def)
                 match2 = league.playersUsed.find(player => player.name === def.name)
             }while(match2)
                 defender.push(def)
-                //playersUsed.push(def)
                 league.playersUsed.push(def)
                 match2 = false
 
@@ -91,11 +87,9 @@ module.exports = function(id, name, leagueId) {
             do {
               
               mid = midfielders[Math.floor(Math.random() * midfielders.length)]
-              //match3 = league.playersUsed.includes(mid)
               match3 = league.playersUsed.find(player => player.name === mid.name)
             }while(match3)
                 midfielder.push(mid)
-               // playersUsed.push(mid)
                 league.playersUsed.push(mid)
                 match3 = false
         }
@@ -104,11 +98,9 @@ module.exports = function(id, name, leagueId) {
          for (let i=0; i<4; i++){
             do {
                  strike = strikers[Math.floor(Math.random() * strikers.length)]
-                 //match4 = league.playersUsed.includes(strike)
                  match4 = league.playersUsed.find(player => player.name === strike.name)
             }while(match4)
                 striker.push(strike)
-               // playersUsed.push(strike)
                 league.playersUsed.push(strike)
                 match4 = false
 
@@ -147,7 +139,7 @@ module.exports = function(id, name, leagueId) {
     
         }
         return teamCreated
-        // return initialTeam
+        
    
 
     })()

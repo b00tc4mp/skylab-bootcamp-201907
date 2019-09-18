@@ -2,7 +2,7 @@ const {validate} = require('footcamp-utils')
 const { models: { User,  League, Team , Player } } = require('footcamp-data')
 
  /**
- * Retrieves a static lineup for the user's team
+ * Creates a static lineup for the user's team
  *
  * @param {*} id 
  * @param {*} leagueId 
@@ -60,10 +60,11 @@ module.exports = function(id, leagueId, teamId) {
         lineups.forEach((element, i) => {
             team.lineup.push(element)
         })
+
+        // await team.save()
+        // league.team.push(team)
         
-        
-        
-        await team.save()
+        Promise.all([await team.save(), await league.save()])
  
         return lineups
 

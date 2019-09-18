@@ -2,7 +2,7 @@ const {validate} = require('footcamp-utils')
 const { models: { User,  League, Team , Player } } = require('footcamp-data')
 
  /**
- * Retrieves a static lineup for the user's team
+ * Retrieves the lineup of the user
  *
  * @param {*} id 
  * @param {*} leagueId 
@@ -31,9 +31,7 @@ module.exports = function(id, leagueId, teamId) {
         const team = await Team.findOne({_id: teamId })
 
         if (!team) throw Error(`Team with name ${ teamId } does not exist`)
-
-          
-        
+ 
         await team.save()
  
         return team.lineup
