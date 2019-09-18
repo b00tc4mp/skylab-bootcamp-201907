@@ -68,7 +68,7 @@ function Week({ history, match }) {
             let taskDay = moment(task.date).format('YYYY MMMM D')
             let currentDay = moment(date).format('YYYY MMMM D')
             if (taskDay === currentDay) {
-                return <div className="weekly__task"><i class="far fa-circle"></i> <p className="weekly__task-name">{task.taskName}</p></div>                 
+                return <div className="weekly__task"><i className="far fa-circle"></i> <p className="weekly__task-name">{task.taskName}</p></div>                 
             }
         })
     }

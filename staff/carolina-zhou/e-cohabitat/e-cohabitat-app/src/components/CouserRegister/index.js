@@ -1,8 +1,11 @@
-import React from 'react'
-import logic from '../../logic'
+import React, { useState } from 'react'
+import logic from '../../logic/'
+import Feedback from '../Feedback'
 import { withRouter } from 'react-router-dom'
 
+
 function CouserRegister({ history, match }) {
+    const  [error, setError]  = useState()
 
     const { params: { spaceId } } = match
     
@@ -20,8 +23,8 @@ function CouserRegister({ history, match }) {
             await logic.registerSpaceCouser(email, passcode, spaceId)
 
             history.push(`/spaces/${spaceId}`)
-        } catch(error) {
-            console.log(error.message)
+        } catch({ message }) {
+            setError(message)
         }
     }
 
@@ -43,6 +46,10 @@ function CouserRegister({ history, match }) {
                         <li className="couserRegister__form-item">
                             <label htmlFor="spacePasscodeInput"><input className="couserRegister__form-input" id="spacePasscodeInput" type="password" name="passcode" placeholder="enter space passcode"/></label>
                         </li>
+                        {error &&
+                        <li className="couserRegister__form-item">
+                            <Feedback message={error}/>
+                        </li> }
                         <li className="couserRegister__form-item">
                             <button className="couserRegister__form-button">Add user</button>
                         </li>

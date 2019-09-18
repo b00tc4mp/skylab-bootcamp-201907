@@ -2,13 +2,13 @@ import React, { useContext, useEffect, useState } from 'react'
 import Context from '../context'
 import logic from '../../logic'
 import { withRouter } from 'react-router-dom'
-
+import moment from 'moment'
 
 function Space({ history, match }) {
     
     const { params: { spaceId } } = match
     const [ view, setView ] = useState(false)
-    const { mySpace, setMySpace } = useContext(Context)
+    const { mySpace, setMySpace, setThisDay } = useContext(Context)
     
     useEffect(() => {
         (async () =>{
@@ -32,6 +32,7 @@ function Space({ history, match }) {
     function handleDay(event) {
         event.preventDefault()
 
+        setThisDay(moment())
         history.push(`/${spaceId}/day`)
     }
     

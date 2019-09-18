@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import logic from '../../logic'
+import Feedback from '../Feedback'
 import { withRouter } from 'react-router-dom'
 
 function SpaceRegister({ history }) {
 
     const { id } = logic.__userCredentials__
     const [type, setType] = useState("")
+    const  [error, setError]  = useState()
 
     function handleSubmit(event) {
         event.preventDefault()
@@ -30,8 +32,8 @@ function SpaceRegister({ history }) {
             await logic.registerSpace(title, type, picture, address, passcode, id)
 
             history.push('/home')
-        } catch(error) {
-            console.log(error.message)
+        } catch({ message }) {
+            setError(message)
         }
     }
 
@@ -68,7 +70,13 @@ function SpaceRegister({ history }) {
                         <li className="register__form-item">
                             <label htmlFor="repasscodeInput"><input className="register__form-input" id="repasscodeInput" type="password" name="repasscode" placeholder="repeat passcode"/></label>
                         </li>
-                        <button className="register__form-button">Register space</button>
+                        {error &&
+                        <li className="register__form-item">
+                            <Feedback message={error}/>
+                        </li> }
+                        <li className="register__form-item">
+                            <button className="register__form-button">Register space</button>
+                        </li>
                     </ul>
                 </form>
                 <a href="#" className="register__back-link"><i className="fas fa-arrow-left" onClick={() => { history.push('/home') }}></i> Go back</a>

@@ -13,15 +13,13 @@ function Chores({ history, spaceId }) {
             try {
                 const mySpace = await logic.retrieveSpace(spaceId) 
                 setMySpace(mySpace) 
-
-                const chores = mySpace.maintenance
-                setChores(chores)
                 
+                setChores(mySpace.maintenance)
             } catch(error) {
                 console.log(error.message)
             }
             })()
-    },[spaceId])
+    },[spaceId, mySpace])
 
     
     function handleAdd(event) {
@@ -34,6 +32,7 @@ function Chores({ history, spaceId }) {
 
     async function addChores(chore) {
         chores.push(chore)
+        setChores(chores)
         const newChores = { maintenance: chores }
 
         try {
@@ -79,13 +78,13 @@ function Chores({ history, spaceId }) {
             </div>
             <div className="chores__maintenance">
                 <p className="chores__list-title"><strong>Maintenance</strong></p>
-                {chores &&
+                {mySpace &&
                 <ul className="chores__list">
-                    {chores.map(chore => {
+                    {mySpace.maintenance.map(chore => {
                     return <>    
                         <li className="chores__item">
                             <div><i className="fas fa-list-ul"></i> {chore}</div>
-                            <button class="far fa-trash-alt" onClick={() => handleDelete(chore)}></button>
+                            <button className="far fa-trash-alt" onClick={() => handleDelete(chore)}></button>
                         </li>
                     </>
                     }

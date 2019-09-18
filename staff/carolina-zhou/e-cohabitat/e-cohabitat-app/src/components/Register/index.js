@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logic from '../../logic/'
+import Feedback from '../Feedback'
 import { withRouter } from 'react-router-dom'
 
 function Register({ history }) {
+    const  [error, setError]  = useState()
 
     function handleSubmit(event) {
             event.preventDefault()
@@ -19,8 +21,8 @@ function Register({ history }) {
             await logic.registerUser(username, name, surname, email, password)
 
             history.push('/sign-up-success')
-        } catch(error) {
-            console.log(error.message)
+        } catch({ message }) {
+            setError(message)
         }
 
     }
@@ -55,7 +57,14 @@ function Register({ history }) {
                         <li className="register__form-item">
                             <label><input className="register__form-input" type="password" name="repassword" placeholder="repeat password"/></label>
                         </li>
-                        <button className="register__form-button">Register</button>
+                        {error &&
+                        <li className="register__form-item">
+                            <Feedback message={error}/>
+                        </li> }
+                        <li className="register__form-item">
+                           <button className="register__form-button">Register</button> 
+                        </li>
+                        
                     </ul>
                 </form>
                 <a href="#" className="register__back-link" onClick={handleBack}><i className="fas fa-arrow-left"></i> Go back</a>

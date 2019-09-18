@@ -1,7 +1,8 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import Context from '../context'
+import Feedback from '../Feedback'
 import logic from '../../logic'
 import moment from 'moment'
 
@@ -10,6 +11,7 @@ function TaskRegister({ history, match }) {
 
     const { params: { spaceId }} = match
     const { thisDay, thisHour, setMyTask } = useContext(Context)
+    const  [error, setError]  = useState()
 
     function handleSubmit(event) {
             event.preventDefault()
@@ -28,8 +30,8 @@ function TaskRegister({ history, match }) {
 
             setMyTask(myTask)
             history.push(`/${spaceId}/day`)
-        } catch(error) {
-            console.log(error.message)
+        } catch({ message }) {
+            setError(message)
         }
     }  
 
@@ -70,7 +72,12 @@ function TaskRegister({ history, match }) {
                         <li className="register__form-item">
                             <label htmlFor="tagsInput"><input className="register__form-input" id="tagsInput" type="text" name="tags" placeholder="tags"/></label>
                         </li>
-                        <button className="register__form-button">Add task</button>
+                        <li className="register__form-item">
+                            <Feedback message={error}/>
+                        </li> }
+                        <li className="register__form-item">
+                            <button className="register__form-button">Add task</button>
+                        </li>
                     </ul>
                 </form>
                 <a href="#" className="register__back-link" onClick={goBack}><i className="fas fa-arrow-left"></i> Go back</a>

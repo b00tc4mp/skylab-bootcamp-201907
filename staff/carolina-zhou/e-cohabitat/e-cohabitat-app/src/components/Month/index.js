@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import Context from '../context'
 import { withRouter } from 'react-router-dom'
-import moment from "moment"
+import moment from 'moment'
 import Chores from '../Chores'
 import logic from '../../logic/'
 
@@ -68,7 +68,7 @@ function Month({ history, match }) {
             let taskDay = moment(task.date).format('YYYY MMMM D')
             let currentDay = moment(dataDate).format('YYYY MMMM D')
             if (taskDay === currentDay) {
-                return <i class="fas fa-circle">{task.name}</i>                 
+                return <i className="fas fa-circle">{task.name}</i>                 
             }
         })
     }

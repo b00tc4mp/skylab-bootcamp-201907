@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logic from '../../logic/'
+import Feedback from '../Feedback'
 import { withRouter } from 'react-router-dom'
 
 function Login({ history }) {
+    const  [error, setError]  = useState()
 
     function handleSubmit(event) {
             event.preventDefault()
@@ -17,8 +19,8 @@ function Login({ history }) {
             await logic.authenticateUser(email, password)
         
             history.push('/home')
-        } catch(error) {
-            console.log(error.message)
+        } catch({ message }) {
+            setError(message)
         }
     }
 
@@ -41,10 +43,19 @@ function Login({ history }) {
                         <li className="login__form-item">
                             <label htmlFor="password"></label>
                             <input className="login__form-input" type="password" name="password" id="password" placeholder="password"/>
+                        </li >
+                        {error &&
+                        <li className="login__form-item">
+                            <Feedback message={error}/>
+                        </li> }
+                        <li className="login__form-item">
+                            <button className="login__form-button" type="submit">Log in</button>
                         </li>
                     </ul>
-                    <button className="login__form-button" type="submit">Log in</button>
+                    
+                    
                 </form>
+                
                 
                 <a href="#" className="login__back-link"><i className="fas fa-arrow-left" onClick={handleBack}></i> Go back</a>
             </section>
