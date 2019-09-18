@@ -70,6 +70,7 @@ function CreateTeam(props) {
                             required
                         />
                     </div>
+                    <button>Create!</button>
                 </form>
                 {error && <Feedback message={error}/>}
                 {player && player.map(oneplayer => 
@@ -77,7 +78,7 @@ function CreateTeam(props) {
                     
                         <PlayerResultInitial player={oneplayer} />
                 </li>)}
-                {player && <a href="#" onClick={event => {
+                {player && <a className="create-teams__link" href="#" onClick={event => {
                     event.preventDefault()
                     
                     history.push('/create-lineup')

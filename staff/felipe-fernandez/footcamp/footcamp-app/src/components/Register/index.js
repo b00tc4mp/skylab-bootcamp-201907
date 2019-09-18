@@ -3,14 +3,16 @@ import logic from '../../logic'
 import { withRouter} from 'react-router-dom'
 import Feedback from '../Feedback'
 import InitialHeader from '../InitialHeader'
+import backimage from '../../style/img/pitch-blur.jpeg'
+
 
 function Register(props) {
     const { history } = props
     const [error , setError] = useState(undefined) 
-    const [name, setName] = useState()
-    const [surname, setSurname] = useState()
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
+    const [name, setName] = useState('')
+    const [surname, setSurname] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     function handleRegister (name, surname, email, password) {
 
@@ -61,6 +63,7 @@ function Register(props) {
     return (
         <div >
             <section className="register">
+            <img className="register__image" src={backimage}/>
             <InitialHeader />
             <div className="register__content">
             <h2>REGISTER</h2>

@@ -44,9 +44,9 @@ function MyLeagues (props) {
                     {leagues && 
                     <div className="league__content">
                     
-                
-                    <h3 className="league__name"> <p>Liga: {leagues.name}</p> </h3>
-                    <h3> {leagues.nameTeam}</h3>
+                    <p className="league__content__title">League</p>
+                    <p className="league__content__name"> {leagues.name} </p>
+                    <p> {leagues.nameTeam}</p>
                     
                     <a href="" onClick={event => {
                         event.preventDefault()

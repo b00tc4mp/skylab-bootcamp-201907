@@ -1,6 +1,7 @@
 import React from 'react'
 import { withRouter } from "react-router-dom"
 import InitialHeader from '../InitialHeader'
+import backimage from '../../style/img/pitch-blur.jpeg'
 
 function RegisterSuccess(props){
     
@@ -9,13 +10,15 @@ function RegisterSuccess(props){
     return (
         <div>
           <section className="register-successful">
+          <img className="register-successful__image" src={backimage}/>
             <InitialHeader />
-
-            <div className="register-successful__content">
+            
             <h2>REGISTER SUCCESS</h2>
+            <div className="register-successful__content">
+            
 
             
-            <a href="#" onClick={event => {
+            <a className="register-successful__link"href="#" onClick={event => {
                 event.preventDefault()
                 history.push('/login')
             }}>Go to Login</a>

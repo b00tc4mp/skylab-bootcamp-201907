@@ -9,8 +9,8 @@ function CreateLeagues(props) {
 
     const { history } = props
     const {leagueId, setLeagueId} = useContext(Context)
-    const [name, setName] = useState(null)
-    const [code, setCode] = useState(null)
+    const [name, setName] = useState('')
+    const [code, setCode] = useState('')
     const [error , setError] = useState(undefined) 
       
     const handleNameInput = event => setName(event.target.value)
@@ -22,7 +22,7 @@ function CreateLeagues(props) {
             debugger
             try {
                
-                const {leagueId} = await logic.createLeague(name, code)
+                const leagueId = await logic.createLeague(name, code)
                 
                 if(leagueId) {
                 setLeagueId(leagueId)               

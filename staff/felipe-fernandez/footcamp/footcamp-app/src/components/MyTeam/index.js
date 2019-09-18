@@ -10,6 +10,7 @@ function MyTeam (props) {
   
     const { teams, setTeams,  } = useContext(Context)
     const [player, setPlayer] = useState()
+    
        
 
     useEffect(() => {
@@ -18,6 +19,7 @@ function MyTeam (props) {
             const leagueId  = await logic.retrieveAllLeagues()
             const result  = await logic.retrieveTeam(leagueId, sessionStorage.team)
             
+
             const teams  = result.team.players.map(results=> results)
            
             setTeams(teams)
@@ -31,7 +33,7 @@ function MyTeam (props) {
                 
             
         })()
-    }, [])
+    }, [player])
 
    
 
@@ -40,6 +42,7 @@ function MyTeam (props) {
             <section className="myteam">
             <Header />
             <h2>MY TEAM</h2>
+               
              <ul>
 
                  {player && player.map(teamplayer => <li 

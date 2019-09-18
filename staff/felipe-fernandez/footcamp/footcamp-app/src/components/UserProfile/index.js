@@ -35,8 +35,8 @@ function UserProfile({history}) {
             
                 {user && <div className="user-profile__card__content" >
                         <p className="user-profile__card__content__user">Name: {user.name}</p>
-                        <p className="user-profile__card__ontent__surname">Surname: {user.surname}</p>
-                        <p clasclassNames="user-profile__card__content__email">E-mail: {user.email}</p>
+                        <p className="user-profile__card__content__surname">Surname: {user.surname}</p>
+                        <p className="user-profile__card__content__email">E-mail: {user.email}</p>
                     </div> }
                     <a href="#" onClick={event => {
                         event.preventDefault()

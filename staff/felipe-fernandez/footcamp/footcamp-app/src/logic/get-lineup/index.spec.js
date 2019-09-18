@@ -27,7 +27,7 @@ describe('logic - create lineup', () => {
         code = `code-${Math.random()}`
         points= 0
 
-             await User.deleteMany()
+            await User.deleteMany()
             await League.deleteMany()
             await Team.deleteMany()
             await Player.deleteMany()

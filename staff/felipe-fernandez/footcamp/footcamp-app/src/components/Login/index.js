@@ -4,14 +4,15 @@ import { withRouter } from "react-router-dom"
 import Context from '../Context'
 import Feedback from '../Feedback'
 import InitialHeader from '../InitialHeader'
+import backimage from '../../style/img/pitch-blur.jpeg'
 
 function Login(props) {
 
 
   // const { target: { email: { value: email }, password: { value: password } } } = event
   
-  const [email, setEmail] = useState()
-  const [password, setPassword] = useState()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const { user, setUser } = useContext(Context)
   const [error , setError] = useState(undefined) 
   const [league , setLeague] = useState(undefined) 
@@ -68,6 +69,7 @@ function Login(props) {
     return (
         <div >
           <section className="login">
+          <img className="login__image" src={backimage}/>
           <InitialHeader />
           <div className="login__content">
           <h2>LOGIN</h2>

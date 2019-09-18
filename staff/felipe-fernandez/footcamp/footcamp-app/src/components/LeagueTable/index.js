@@ -30,7 +30,7 @@ function MyLeagues (props) {
         }
                  
         })()
-    }, [])
+    }, [table])
 
     
 

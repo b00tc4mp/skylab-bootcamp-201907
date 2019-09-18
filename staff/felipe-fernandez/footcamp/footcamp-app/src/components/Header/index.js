@@ -72,15 +72,11 @@ return (
     
           <div className="title">    
 
-            <h2 className="title__name" onClick={event => {
-            
-                goToMain()
-
-              }}>FOOTCAMP FANTASY</h2>
+            <h2 className="title__name">FOOTCAMP FANTASY</h2>
           </div>  
-          <div>
+          <div className="title__user">
             
-              {user && <p className="title__user">{user.name} <i class="fas fa-user"></i></p>} 
+              {user && <p className="title__user--paragraph">{user.name} <i class="fas fa-user"></i></p>} 
            </div>              
          
       

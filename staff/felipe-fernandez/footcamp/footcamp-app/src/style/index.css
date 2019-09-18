@@ -52,25 +52,26 @@ table {
   border-spacing: 0;
 }
 
-.body-landing {
-  background: url("./img/pitch.jpeg");
-  height: 100vh;
-  width: 100vw;
+.body-landing__content {
+  width: 100%;
+  margin: 20% auto;
+}
+.body-landing__image {
   background-size: cover;
   background-color: white;
-}
-.body-landing__content {
-  width: 90%;
-  padding: 20px;
-  margin: 20% auto;
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 .body-landing__links {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  color: black;
+  color: white;
   text-decoration: none;
-  background-color: white;
+  background-color: black;
   font-size: 14px;
   display: block;
   padding: 3%;
@@ -81,7 +82,7 @@ table {
 }
 
 .feedback__text {
-  color: #F77754;
+  color: #ed3833;
   text-align: center;
   width: 80%;
   margin: 5% auto;
@@ -90,17 +91,19 @@ table {
   font-size: 1rem;
 }
 
-.login {
-  background: url("./img/pitch-blur.jpeg");
-  height: 100vh;
-  width: 100vw;
-  background-size: cover;
-  background-color: white;
-}
 .login__content {
   width: 80%;
   margin: 20% auto;
   border: 1px solid white;
+}
+.login__image {
+  background-size: cover;
+  background-color: white;
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 .links {
@@ -119,7 +122,6 @@ table {
 }
 
 form {
-  padding: 10%;
   text-align: center;
 }
 form__form--inputs {
@@ -137,17 +139,19 @@ input {
   margin: 2%;
 }
 
-.register {
-  background: url("./img/pitch-blur.jpeg");
-  height: 100vh;
-  width: 100vw;
-  background-size: cover;
-  background-color: white;
-}
 .register__content {
   width: 80%;
   margin: 20% auto;
   border: 1px solid white;
+}
+.register__image {
+  background-size: cover;
+  background-color: white;
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 .links {
@@ -166,7 +170,6 @@ input {
 }
 
 form {
-  padding: 10%;
   text-align: center;
 }
 form__form-inputs {
@@ -184,12 +187,28 @@ input {
   margin: 2%;
 }
 
-.register-successful {
-  background: url("./img/pitch-blur.jpeg");
-  height: 100vh;
-  width: 100vw;
+.register-successful__content {
+  font-size: 18px;
+  margin: 20%;
+}
+.register-successful__image {
   background-size: cover;
   background-color: white;
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.register-successful__link {
+  color: white;
+  text-decoration: none;
+  background-color: black;
+  font-size: 14px;
+  display: block;
+  padding: 3%;
+  width: 40%;
+  margin: 5px auto;
 }
 
 .league {
@@ -203,10 +222,14 @@ input {
   border: 1px solid white;
   background-color: rgba(0, 0, 0, 0.4);
 }
-.league__name {
-  margin: 5%;
+.league__content__title {
+  margin-top: 2%;
 }
-.league__title {
+.league__content__name {
+  margin: 5%;
+  color: black;
+}
+.league__content__title {
   text-align: center;
 }
 
@@ -331,7 +354,10 @@ input {
   text-align: left;
 }
 
-.title__user {
+.title__name {
+  margin: 5%;
+}
+.title__user--paragraph {
   font-size: 14px;
 }
 .title__name {
@@ -363,7 +389,6 @@ input {
 }
 
 .card-initial {
-  margin: 15%;
   padding: 0.5em;
   display: flex;
   justify-content: center;
@@ -371,10 +396,15 @@ input {
   background-color: #394a6d;
 }
 .card-initial__image {
-  width: 90%;
+  width: 80%;
+  margin: 10%;
+}
+.card-initial__info {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .card-initial__info__name {
   padding-right: 0.5em;
+  font-size: 18px;
 }
 .card-initial__info__surname {
   padding-right: 0.5em;
@@ -442,11 +472,20 @@ input {
   justify-content: center;
   margin: 0 auto;
 }
-
-p {
-  text-align: center;
-  color: white;
-  font-size: 15px;
+.player-detail__content__name {
+  font-size: 18px;
+}
+.player-detail__content__position {
+  font-size: 18px;
+}
+.player-detail__content__points {
+  font-size: 18px;
+}
+.player-detail__content__goals {
+  font-size: 18px;
+}
+.player-detail__content__cost {
+  font-size: 18px;
 }
 
 .initial-header {
@@ -458,7 +497,6 @@ p {
 .table {
   background-color: #394a6d;
   width: 100vw;
-  height: 100vh;
 }
 .table__clasification {
   display: flex;
@@ -475,6 +513,12 @@ p {
 .table__clasification__list__tables {
   background-color: rgba(0, 0, 0, 0.4);
   width: 100%;
+}
+.table__clasification__list__team {
+  font-size: 16px;
+}
+.table__clasification__list__points {
+  font-size: 16px;
 }
 
 .user-profile {
@@ -494,17 +538,34 @@ p {
   justify-content: center;
   flex-direction: column;
 }
-.user-profile__card__user {
+.user-profile__card__content__user {
   padding-right: 0.5em;
+  font-size: 16px;
 }
-.user-profile__card__surname {
+.user-profile__card__content__surname {
   padding-right: 0.5em;
+  font-size: 16px;
+}
+.user-profile__card__content__email {
+  padding-right: 0.5em;
+  font-size: 16px;
 }
 
 .create-teams {
   background-color: #394a6d;
   width: 100vw;
   height: 100vh;
+}
+.create-teams__link {
+  color: white;
+  text-decoration: none;
+  background-color: black;
+  font-size: 18px;
+  display: block;
+  padding: 3%;
+  width: 25%;
+  margin: 5% auto;
+  text-align: center;
 }
 
 .players-create {
@@ -520,10 +581,27 @@ li {
   width: 100vw;
 }
 
+.create-lineups {
+  background-color: #394a6d;
+  width: 100vw;
+  height: 100vh;
+}
+.create-lineups__title {
+  font-size: 18px;
+}
+.create-lineups__link {
+  color: white;
+  text-decoration: none;
+  background-color: black;
+  font-size: 18px;
+  display: block;
+  padding: 3%;
+  width: 25%;
+  margin: 5% auto;
+}
+
 .item-players-lineup {
   background-color: #394a6d;
-  width: 75%;
-  margin: 0 5%;
 }
 
 li {
@@ -621,6 +699,12 @@ button button:hover {
   background-color: white;
   color: #D7D9DA;
   font-weight: bold;
+}
+
+body {
+  background-color: #394a6d;
+  height: 100vh;
+  width: 100vw;
 }
 
 /*# sourceMappingURL=index.css.map */

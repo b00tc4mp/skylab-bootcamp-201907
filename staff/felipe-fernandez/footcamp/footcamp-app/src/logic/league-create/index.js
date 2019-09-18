@@ -7,7 +7,7 @@ export default function ( name, code) {
     
     validate.string(name, 'name')
     validate.string(code, 'code')
-    
+    debugger
     return (async () => {
         const response = await fetch(`${REACT_APP_API_URL}/users/leagues`, {
     
@@ -22,14 +22,14 @@ export default function ( name, code) {
                
             body: JSON.stringify({ name, code })
         })
-        const responseJson =await response.json()
         if (response.status !== 200) {
             const { error } = await response.json()
             throw Error(error)
         }
         else {
             
-            return  responseJson
+            const { leagueId } = await response.json()
+            return leagueId
         }
     })()
 }
