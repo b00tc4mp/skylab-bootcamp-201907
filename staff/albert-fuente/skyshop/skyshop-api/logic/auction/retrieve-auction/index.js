@@ -13,7 +13,7 @@ module.exports = function ( auctionId) {
     validate.string(auctionId, 'Product ID')
     return (async () => {
 
-        const auction = await Auction.findOne({_id:auctionId}, { _id: 0, password: 0 }).populate('owner')
+        const auction = await Auction.findOne({_id:auctionId}, { _id: 0, password: 0, __v:0 }).populate('owner')
         if (!auction) throw Error(`Auction with id ${auctionId} does not exist.`)
         return auction
     })()

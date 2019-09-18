@@ -17,7 +17,7 @@ module.exports = function(userId) {
         const user = await User.findById(userId)
         debugger
         if (!user) throw Error(`User with id ${userId} does not exist`)
-        const { cart } = await User.findById(userId).populate('cart.product').lean()
+        const { cart } = await User.findById(userId, { __v: 0 }).populate('cart.product').lean()
 
         return cart
 
