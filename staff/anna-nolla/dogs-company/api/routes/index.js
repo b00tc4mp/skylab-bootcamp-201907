@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const tokenMiddleware = require('../helpers/token-middleware')
 
-const { registerUser, authenticateUser, retrieveUser, updateUser, unregisterUser } = require('./user')
+const { registerUser, authenticateUser, retrieveUser, updateUser, unregisterUser, retrieveUserId} = require('./user')
 
 const { registerPet, retrieveAllPets, unregisterPet, retrievePet, updatePet } = require('./pets')
 
@@ -15,6 +15,7 @@ const router = Router()
 router.post('/user', registerUser)
 router.post('/auth', authenticateUser)
 router.get('/user', [tokenMiddleware], retrieveUser)
+router.get('/user/detail/:id', retrieveUserId)
 router.patch ('/user', [tokenMiddleware], updateUser)
 router.delete ('/user', [tokenMiddleware], unregisterUser)
 

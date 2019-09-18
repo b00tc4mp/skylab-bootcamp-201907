@@ -13,7 +13,6 @@ database.connect(DB_URL)
         const app = express()
 
         app.use((req, res, next) => {
-            debugger
 
             next()
         })

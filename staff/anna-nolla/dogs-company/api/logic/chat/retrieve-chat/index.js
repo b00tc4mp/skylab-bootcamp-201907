@@ -21,9 +21,9 @@ module.exports = function(id, chatId) {
         const user = await User.findById(id)
             if (!user) throw Error('This user does not exist')
         
-        const chat = await Chat.findById(chatId, { __v: 0 }).lean()
+        const chat = await Chat.findById(chatId, { __v: 0 }).populate("messages.from", "name").lean()
             if (!chat) throw Error(`This chat does not exist`)
-            
+            debugger
         chat.participants.forEach((item , index) => {
             return chat.participants[index] = item.toString()
         })

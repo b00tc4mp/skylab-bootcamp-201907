@@ -4,5 +4,6 @@ module.exports = {
     authenticateUser: require('./authenticate-user'),
     retrieveUser: require('./retrieve-user'),
     unregisterUser: require('./unregister-user'),
-    updateUser: require('./update-user')
+    updateUser: require('./update-user'),
+    retrieveUserId: require('./retrieve-id-user')
 }

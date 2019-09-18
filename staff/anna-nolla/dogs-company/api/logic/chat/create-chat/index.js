@@ -22,7 +22,7 @@ module.exports = function (id, participantId) {
         if (!participantUser) throw Error('User does not exists.')
 
         const chat_ = await Chat.findOne({ participants: [id, participantId] })
-        if (chat_) throw Error('chat already exists')
+        if (chat_) throw Error(`${chat_._id}, chat already exists`)
 
         const chat = await Chat.create({ participants: [id, participantId] })
                     

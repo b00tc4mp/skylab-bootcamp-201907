@@ -12,7 +12,7 @@ const { validate } = require('utils')
 module.exports = function (id, distance){
 
     validate.string(id,'user id')
-    validate.number(distance, 'distance')   
+    // validate.number(distance, 'distance')   
         
     return (async () => {   
 

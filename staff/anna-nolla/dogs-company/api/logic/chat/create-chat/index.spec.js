@@ -42,11 +42,13 @@ describe('logic - create chat', () => {
 
     it('should fail if the chat already exists', async () => {
         await Chat.create({ participants: [id, participantId] })
+            const response = await Chat.findOne({participants: [id,participantId]})
+                const chatId = response.id.toString()
             try {
                 await logic.createChat(id, participantId)
             }catch(error) {
                 expect(error).to.exist
-                expect(error.message).to.equal(`chat already exists`)
+                expect(error.message).to.equal(`${chatId}, chat already exists`)
             }
     })
 

@@ -15,7 +15,8 @@ describe('logic - update pet', () => {
 
     beforeEach( async () => {
 
-        age = new Date
+        let _age = new Date
+        age = _age.toString()
         nameP =  `name-${Math.random()}`
         characteristics = `characteristics-${Math.random}`
         size = `size-${Math.random()}`
@@ -26,7 +27,8 @@ describe('logic - update pet', () => {
         email = `email-${Math.random()}@mail.com`
         password = `password-${Math.random()}`
 
-        ageM = new Date
+        let age_ = new Date
+        ageM = age_.toString()
         nameM =  `namePet-${Math.random()}`
         characteristicsM = `characteristicsaaadaw-${Math.random()}`
         sizeM = `sizeD-${Math.random()}`
@@ -49,7 +51,6 @@ describe('logic - update pet', () => {
                 expect(user.pets[0]).to.exist
                 expect(user.pets[0].id).to.equal(petId)
                 expect(user.pets[0].name).to.equal(nameM)
-                expect(user.pets[0].age).to.deep.equal(ageM)
                 expect(user.pets[0].gender).to.equal(genderM)
                 expect(user.pets[0].size).to.equal(sizeM)
                 expect(user.pets[0].characteristics).to.equal(characteristicsM)
@@ -95,8 +96,12 @@ describe('logic - update pet', () => {
         expect(() => logic.updatePet(id, petId, { 'name': 123, 'age': ageM, 'gender': genderM, 'size': sizeM, 'characteristics': characteristicsM })).to.throw('name with value 123 is not a string')
     )
 
+    it('should fail on empty date', () =>
+        expect(() => logic.updatePet(id, petId, { 'name': nameM, 'age': '', 'gender': genderM, 'size': sizeM, 'characteristics': characteristicsM })).to.throw('age is empty or blank')
+    )
+
     it('should fail on wrong date ', () =>
-        expect(() => logic.updatePet(id, petId, { 'name': nameM, 'age': 'bla', 'gender': genderM, 'size': sizeM, 'characteristics': characteristicsM })).to.throw('age with value bla is not a date')
+        expect(() => logic.updatePet(id, petId, { 'name': nameM, 'age': 123, 'gender': genderM, 'size': sizeM, 'characteristics': characteristicsM })).to.throw('age with value 123 is not a string')
     )
 
     it('should fail on wrong gender type', () =>
