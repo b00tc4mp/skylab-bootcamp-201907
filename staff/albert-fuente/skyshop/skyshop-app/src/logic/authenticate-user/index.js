@@ -13,6 +13,7 @@ export default function (email, password) {
             body: JSON.stringify({email, password})
         })
         
+        
         if (response.status !== 200) {
             const { error } = await response.json()
             throw Error(error)
@@ -22,5 +23,6 @@ export default function (email, password) {
             
             this.__credentials__ = { id, token }
         }
+        
     })()
 }
