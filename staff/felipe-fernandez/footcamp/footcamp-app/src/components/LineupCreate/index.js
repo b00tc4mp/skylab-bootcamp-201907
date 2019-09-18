@@ -46,7 +46,7 @@ function MyLineup (props) {
           <section className="create-lineups">
             <InitialHeader />
 
-                    <h2  className="create-lineups__title">THIS IS YOUR INITIAL LINEUP</h2>   
+                    <h2  className="create-lineups__title">THIS IS YOUR STARTING LINEUP</h2>   
                 <ul className="create-teams__list">
                 
                 {player && player.map(playerlineup => 
