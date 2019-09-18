@@ -82,7 +82,7 @@ table {
 }
 
 .feedback__text {
-  color: #ed3833;
+  color: white;
   text-align: center;
   width: 80%;
   margin: 5% auto;
@@ -226,8 +226,9 @@ input {
   margin-top: 2%;
 }
 .league__content__name {
+  font-size: 16px;
   margin: 5%;
-  color: black;
+  color: white;
 }
 .league__content__title {
   text-align: center;
@@ -354,14 +355,20 @@ input {
   text-align: left;
 }
 
+.title {
+  width: 50%;
+}
 .title__name {
   margin: 5%;
+}
+.title__image {
+  width: 30%;
 }
 .title__user--paragraph {
   font-size: 14px;
 }
 .title__name {
-  font-size: 25px;
+  font-size: 1.5rem;
 }
 
 .fa-user {
@@ -489,9 +496,16 @@ input {
 }
 
 .initial-header {
-  text-align: center;
-  font-size: 25px;
+  display: flex;
   border: 1px solid white;
+  padding: 5%;
+}
+.initial-header__image {
+  width: 30%;
+}
+.initial-header__text {
+  text-align: center;
+  font-size: 1.5rem;
 }
 
 .table {
@@ -641,20 +655,6 @@ p {
   text-align: center;
   color: white;
   font-size: 20px;
-}
-
-.mainfooter {
-  display: flex;
-  padding: 5px;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: #eae9e9;
-}
-.mainfooter__title {
-  color: #394a6d;
-  text-align: center;
 }
 
 h1 {

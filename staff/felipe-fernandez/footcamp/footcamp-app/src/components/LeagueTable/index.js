@@ -8,9 +8,6 @@ import Header from '../Header'
 function MyLeagues (props) {
     const [table, setTable] = useState(null)
     const [error , setError] = useState(undefined) 
-    // const [points, setPoints] = useState(null)
-    // const { team, setTeam, leagueId, teamName, setTeamName, teamId, setTeamId, player, setPlayer } = useContext(Context)
-    // const { history} = props
     
 
     useEffect(() => {
@@ -30,7 +27,7 @@ function MyLeagues (props) {
         }
                  
         })()
-    }, [table])
+    }, [])
 
     
 

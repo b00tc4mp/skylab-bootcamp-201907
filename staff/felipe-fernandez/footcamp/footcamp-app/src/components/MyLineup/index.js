@@ -41,7 +41,7 @@ function MyLineup (props) {
           }
             
         })()
-    }, [player])
+    }, [])
 
     return <div>
             <section className="mylineup">

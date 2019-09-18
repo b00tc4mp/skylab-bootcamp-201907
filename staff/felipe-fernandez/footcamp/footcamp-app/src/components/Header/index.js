@@ -1,7 +1,7 @@
 import React, {  useState, useEffect } from 'react'
 import { withRouter, Link } from "react-router-dom"
-import Context from '../Context'
 import logic from '../../logic'
+import logo from '../../style/img/logo-white.png'
 
 
 function Header(props) {
@@ -9,6 +9,7 @@ function Header(props) {
   const { history } = props
   const [user, setUser] = useState()
   const [code, setCode] = useState()
+  const [error, setError] = useState()
     
   useEffect(() => {
     
@@ -18,7 +19,7 @@ function Header(props) {
           setUser(user)
       }
       catch({message}) {
-        console.log('fail login', message)
+       
       } 
       debugger
       try {  
@@ -28,7 +29,7 @@ function Header(props) {
         
       }
       catch({message}) {
-        console.log('fail login', message)
+        setError(message)
       }   
 
         
@@ -71,7 +72,7 @@ return (
       
     
           <div className="title">    
-
+          <img className="title__image" src={logo} />
             <h2 className="title__name">FOOTCAMP FANTASY</h2>
           </div>  
           <div className="title__user">

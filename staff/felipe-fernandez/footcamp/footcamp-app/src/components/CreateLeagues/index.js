@@ -101,7 +101,7 @@ function CreateLeagues(props) {
                     <button>Submit</button>
                 </form>
 
-                <h2 className="create__content__create__title">JOIN A lEAGUE</h2>
+                <h2 className="create__content__create__title">JOIN A LEAGUE</h2>
                 <form className="create__content__form-create" onSubmit={handleFormSubmitJoin}>
                 <div class="create__content__form-create-inputs">
                     <input

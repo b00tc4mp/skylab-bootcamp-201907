@@ -1,4 +1,5 @@
 import React from 'react'
+import logo from '../../style/img/logo-white.png'
 
 
 function InitialHeader() {
@@ -8,9 +9,9 @@ function InitialHeader() {
     
       <div className="initial-header">
        
-        <h1>FANTASY FOOTBALL SKYLAB</h1>
-        
-   
+       
+        <img className="initial-header__image" src={logo} />
+        <h1 className="initial-header__text">FANTASY FOOTBALL FOOTCAMP</h1>
        
       </div>
 

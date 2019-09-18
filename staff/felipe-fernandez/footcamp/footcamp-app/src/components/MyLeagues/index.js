@@ -1,7 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import logic from '../../logic'
 import { withRouter} from 'react-router-dom'
-
 import InitialHeader from '../InitialHeader'
 
 
