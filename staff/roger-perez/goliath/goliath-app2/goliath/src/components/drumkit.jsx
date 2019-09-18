@@ -4,12 +4,12 @@ import Sequence from './sequence'
 /*global Tone*/
 
 const initailSequences = [
-    { beats: null, sound: null, instrument: { name: 'Kick', style: 'rock', audio: '../tones/kick-acoustic01.wav' } },
-    { beats: null, sound: null, instrument: { name: 'Snare', style: 'rock', audio: '../tones/snare-acoustic01.wav' } },
-    { beats: null, sound: null, instrument: { name: 'HiHat', style: 'rock', audio: '../tones/hihat-acoustic01.wav' } },
-    { beats: null, sound: null, instrument: { name: 'Crash', style: 'rock', audio: '../tones/crash-acoustic.wav' } },
-    { beats: null, sound: null, instrument: { name: 'Tom1', style: 'rock', audio: '../tones/tom-acoustic01.wav' } },
-    { beats: null, sound: null, instrument: { name: 'Tom2', style: 'rock', audio: '../tones/tom-acoustic02.wav' } }
+    { beats: null, sound: null, instrument: { name: 'Kick', style: 'rock', audio: './tones/kick-acoustic01.wav' } },
+    { beats: null, sound: null, instrument: { name: 'Snare', style: 'rock', audio: './tones/snare-acoustic01.wav' } },
+    { beats: null, sound: null, instrument: { name: 'HiHat', style: 'rock', audio: './tones/hihat-acoustic01.wav' } },
+    { beats: null, sound: null, instrument: { name: 'Crash', style: 'rock', audio: './tones/crash-acoustic.wav' } },
+    { beats: null, sound: null, instrument: { name: 'Tom1', style: 'rock', audio: './tones/tom-acoustic01.wav' } },
+    { beats: null, sound: null, instrument: { name: 'Tom2', style: 'rock', audio: './tones/tom-acoustic02.wav' } }
 ]
 
 
