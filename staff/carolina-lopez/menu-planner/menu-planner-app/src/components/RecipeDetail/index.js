@@ -10,13 +10,13 @@ export default withRouter(function ({ match, onLogout }) {
     async function _retrieveRecipe(){
       try {
         const { params: { recipeId } } = match
-        debugger
+        
         const res = await logic.retrieveRecipe(recipeId)
 
         const { id, title, image, items, description, category } = res
 
         setRecipe({id, title, image, items, description, category})
-        debugger
+
       } catch ({ message }) {
         console.log('fail retrieve recipe', message)
       }
@@ -25,31 +25,35 @@ export default withRouter(function ({ match, onLogout }) {
   }, [])
 
   return <section className='body'>
-    <header>
-      <nav className="nav">
-        <a className="nav__h2" href="#"><h2 className="nav__h2">MenuPlanner</h2></a>
-        <div className="dropdown">
-          <button className="nav__icon dropdown__dropbtn">
-            <i className="far fa-user-circle"></i>
-          </button>
-          <div className="nav__a dropdown__content">
-            <Link className="nav__a dropdown__button" href="#" to="/home">Home</Link>
-            <Link className="nav__a dropdown__button" href="#" to="/user-profile">User profile</Link>
-            <Link className="nav__a dropdown__button" href="#" to="/current-week">Current week</Link>
-            <Link className="nav__a dropdown__button" href="#" to="/create-menu">Create Menu</Link>
-            <a className="nav__a dropdown__button" href="#" onClick={onLogout}>Logout</a>
-          </div>
-        </div>
-      </nav>
-    </header>
+  <header class="navbar">
+  <div class="dropdown dropdown-left">
+    <button class="dropbtn">MenuPlanner 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <Link className="nav__a dropdown__button a" href="#" to="/home">Home</Link>
+      <Link className="nav__a dropdown__button a" href="#" to="/current-week">Current Week</Link>
+      <Link className="nav__a dropdown__button a" href="#" to="/create-menu">Create Menu</Link>
+    </div>
+  </div> 
+  <div class="dropdown dropdown-right">
+    <button class="dropbtn"><i className="far fa-user-circle"></i>
+    </button>
+    <div class="dropdown-content">
+      <Link className="nav__a dropdown__button" href="#" to="/user-profile">User Profile</Link>
+      <a className="nav__a dropdown__button" href="#" onClick={onLogout}>Logout</a>
+    </div>
+  </div>
+</header>
 
     {recipe &&
-      <section className="week">
-        <section className="week__day">
+      <section className="recipe">
+        <section className="recipe__title">
           <h2>{recipe.title}</h2>
           <img className="recipe__photo" src={`http://localhost:8080/${recipe.image}`} alt="recipe"/>
-          <ul className="recipe__ul">Ingredients{recipe.items.map(item => <li key={Math.random()} className="recipe__li"> - {item.ingredient.title} {item.quantity} {item.ingredient.unit} <p>{item.description}</p> </li>)}</ul>
-          <p>{recipe.description}</p>
+          <h3>Ingredients</h3>
+          <ul className="recipe__ul">{recipe.items.map(item => <li key={Math.random()} className="recipe__li"> - {item.ingredient.title} {item.quantity} {item.ingredient.unit} <p>{item.description}</p> </li>)}</ul>
+          <p className="recipe__text">{recipe.description}</p>
         </section>
       </section>}
   </section>

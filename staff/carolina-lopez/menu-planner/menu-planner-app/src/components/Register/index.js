@@ -3,10 +3,11 @@ import { withRouter } from 'react-router-dom'
 
 export default withRouter (function ({ history , onRegister }) {
   return <section className="body">
-    <header>
-      <nav className="nav">
-        <a className="nav__h2" href="index.html"><h2 className="nav__h2">MenuPlanner</h2></a>        
-      </nav>
+    <header class="navbar">
+      <div class="dropdown dropdown-left">
+        <button class="dropbtn-sh">MenuPlanner 
+        </button>
+      </div> 
     </header>
     <main className="main">
       <section className="form-section">

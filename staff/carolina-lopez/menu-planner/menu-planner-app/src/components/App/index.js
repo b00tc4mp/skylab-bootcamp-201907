@@ -64,7 +64,6 @@ export default withRouter(function ({ history }) {
     }
   }
 
-
   const handleLogout = () => {
     logic.logUserOut()
 
@@ -73,7 +72,6 @@ export default withRouter(function ({ history }) {
   }
 
   return <>
-
     <Route exact path="/" render={() => <Landing />} />
     <Route path="/login" render={() => <Login onLogin={handleLogin} />} />
     <Route path="/register" render={() => <Register onRegister={handleRegister} />} />
@@ -87,21 +85,3 @@ export default withRouter(function ({ history }) {
 
 
 
-{/* <div className="body">
-  {view !== 'home' && 
-  <header>
-      <nav className="nav">
-        <a className="nav__h2" href="index.html"><h2 className="nav__h2">MenuPlanner</h2></a>
-      </nav>
-    </header>}
-      {view !== 'home' && <main className="main">
-      {view !== 'home' && view !== 'login' && view !== 'register' && <h3 className="main__h3">Create Menu</h3>}
-      {view !== 'login' && <a className="main__login main__button" href="" onClick={handleGoToLogin}>Login</a>}
-      {view !== 'register' && <a className="main__register main__button" href="" onClick={handleGoToRegister}>Register</a>}
-    </main>}
-    <Route path="/register" render={() => <Register onBack={handleBack} onRegister={handleRegister} />} />
-    <Route path="/login" render={() => <Login onBack={handleBack} onLogin={handleLogin} />} />
-    {<Route path="/home" render={() => <Home onLogout={handleLogout}/>} />}
-    {<Route path="/current-week" render={() => <CurrentWeek onGoHome={handleGoHome} onRetrieveWeek={handleGoToCurrentWeek}onRetrieveDay={handleRetrieveDay} onRetrieveRecipe={handleRetrieveRecipe} onLogout={handleLogout}/>} />}
-    {<Route path="/create-menu" render={() => <CreateMenu onCreate={handleGoToCreateMenu} onRegisterDay={handleRegisterDay} onRetrieveRecipe={handleRetrieveRecipeDay}/>} />}
-  </div> */}
