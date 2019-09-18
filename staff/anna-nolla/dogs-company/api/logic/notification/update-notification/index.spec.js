@@ -35,7 +35,7 @@ describe('logic - update notification', () => {
     it('should succeed on correct data', async () =>{
         const notId = await logic.updateNotification(id, notificationId, { 'title': titlep, 'text': textp } )
             expect(notId).not.to.exist
-            debugger
+             
             const user = await User.findOne({ "notification._id": notificationId })
                 expect(user).to.exist
                 expect(user.notification[0].title).to.equal(titlep)

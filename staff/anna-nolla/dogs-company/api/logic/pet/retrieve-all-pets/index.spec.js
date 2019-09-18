@@ -30,7 +30,7 @@ describe('logic - retrieve pets', () => {
             const user = await User.create({ name, surname, email, password, pets: pet })
             petId = user.pets[0]._id.toString()
             id = user.id
-            debugger
+             
     })      
     
     it('should succeed on correct data', async () =>{ 

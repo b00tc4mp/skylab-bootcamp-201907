@@ -37,7 +37,7 @@ describe('logic - update pet', () => {
         await Pet.deleteMany()
         await User.deleteMany()
             const pet = await new Pet({ name: nameP, age, gender, size, characteristics })
-            debugger
+             
             const user = await User.create({ name, surname, email, password, pets: pet })
                 petId = user.pets[0]._id.toString()
                 id = user.id
@@ -46,7 +46,7 @@ describe('logic - update pet', () => {
     it('should succeed on correct data', async () =>{
         const pet_Id = await logic.updatePet(id, petId, { 'name': nameM, 'age': ageM, 'gender': genderM, 'size': sizeM, 'characteristics': characteristicsM } )
             expect(pet_Id).not.to.exist
-            debugger
+             
             const user = await User.findOne({ "pets._id": petId })
                 expect(user.pets[0]).to.exist
                 expect(user.pets[0].id).to.equal(petId)

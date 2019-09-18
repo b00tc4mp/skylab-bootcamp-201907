@@ -4,7 +4,7 @@ const logic = require('../../logic')
 module.exports = (req, res) => {
 
     const { userId, body } = req
-debugger
+ 
     try {
         logic.updateUser(userId, body)
             .then(() => res.header('Access-Control-Allow-Origin', '*'))

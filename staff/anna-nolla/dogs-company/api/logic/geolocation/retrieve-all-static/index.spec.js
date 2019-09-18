@@ -86,7 +86,7 @@ describe('logic - retrieve users by static geolocation', () => {
 
     //         try{
     //             const res = await logic.retrieveAllStatic(id3, distance)
-    //             debugger
+    //              
     //                 expect(res).to.exist
     //         }catch(error) {
     //             expect(error).to.exist
