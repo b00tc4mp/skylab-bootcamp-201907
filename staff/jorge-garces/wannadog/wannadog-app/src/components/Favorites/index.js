@@ -21,13 +21,13 @@ export default withRouter(function ({ history }) {
 
     return <>
 
-        {favorites && <>
-            <Link to="/profile">Go Back</Link>
-            <h3>Favorites</h3>
+        {favorites && <section className="body">
+            <Link className="back" to="/profile"><i class="fas fa-arrow-left"></i></Link>
+            <h2 className="container__title">Favorites</h2>
             <ul>
                 {favorites.map(dog => <DogShowcase dog={dog} />)}
             </ul>
-        </>}
+        </section>}
     </>
 })
 

@@ -3,11 +3,11 @@ import { withRouter } from 'react-router-dom'
 
 export default withRouter(function DogResult({ dog }) {
 
-    const { name, gender, id } = dog
+    let { name, gender, id, image } = dog
+    gender === "male" ? gender = <i class="fas fa-mars"></i> : gender = <i class="fas fa-venus"></i>
 
     return <li className="results__li">
-        <a href={`/#/dog/${id}`}><img className="results__img" src="/img/resultTest.jpg"></img></a>
-        <h3 className="">{name}</h3>
-        <p className="">{gender}</p>
+        <a href={`/#/dog/${id}`}><img className="results__img" src={image}></img></a>
+        <h3 className="results__name">{name}<span>{gender}</span></h3>
     </li>
 })

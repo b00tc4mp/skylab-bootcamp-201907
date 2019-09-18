@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import DogResult from '../DogResult'
 
-export default withRouter(function SearchResults({ dogs, history }) {
+export default withRouter(function ({ dogs, history }) {
 
     return <>
         <section className="navi">
@@ -13,6 +13,11 @@ export default withRouter(function SearchResults({ dogs, history }) {
             }}
                 type="text" placeholder="Find your dog ..."></input>
         </section>
+        <section className="noresults">
+            {!dogs.length && <> <i class="noresults__sign fas fa-exclamation-triangle"></i>
+                <h3 className="noresults__text">No dogs found</h3></>}
+        </section>
+
         <section className="results">
             <ul className="results__ul">
                 {dogs.map(dog => <li className="results__li"><DogResult dog={dog} /></li>)}

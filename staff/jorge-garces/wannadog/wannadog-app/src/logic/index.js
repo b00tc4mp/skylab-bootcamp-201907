@@ -15,6 +15,7 @@ import updateChat from './update-chat'
 import retrieveChat from './retrieve-chat'
 import retrieveAllChats from './retrieve-all-chats'
 import getUserId from './geUserID'
+import upload from './upload'
 
 export default {
     set __token__(token) {
@@ -41,5 +42,6 @@ export default {
     updateChat,
     retrieveChat,
     retrieveAllChats,
-    getUserId
+    getUserId,
+    upload
 }

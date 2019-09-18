@@ -6,21 +6,25 @@ export default withRouter(function ({ onLogin, history }) {
 
 
     { logic.isUserLoggedIn() && history.push('/profile') }
-    return <>
-        <Link to="/">Back</Link>
+    return <section className="body-form">
+        <Link className="back" to="/"><i className="fas fa-arrow-left"></i></Link>
 
-        <form onSubmit={event => {
+
+        <form className="form-section" onSubmit={event => {
             event.preventDefault()
 
             const { target: { email: { value: email }, password: { value: password } } } = event
 
             onLogin(email, password)
         }}>
-            <input type="email" name="email" />
-            <input type="password" name="password" />
-            <button>LOGIN</button>
+            <h1 className="sign-logo">LOGIN</h1>
+            <input type="email" name="email" placeholder="email" />
+            <input type="password" name="password" placeholder="password" />
+            <button className="button__sign button">PROCEED</button>
+            <p className="signup">don't have an account? <Link to="/register">Sign-up!</Link></p>
         </form>
 
-        <p>don't have an account? <Link to="/register">Sign-up!</Link></p>
-    </>
+
+
+    </section>
 })

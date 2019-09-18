@@ -7,7 +7,7 @@ export default function () {
             <section className="body-landing__container">
                 <Link className="button" to="/sign">LOGIN</Link>
                 <Link className="button" to="/search">GUEST</Link>
-                <h1>wannaDOG</h1>
+                <h1 className="body-landing__logo">wannaDOG</h1>
             </section>
         </section>
     </>

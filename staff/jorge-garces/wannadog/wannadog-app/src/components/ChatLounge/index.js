@@ -19,9 +19,9 @@ export default withRouter(function ({ history }) {
         })()
     }, [history.location])
 
-    return <>
-        <Link to="/profile">Go Back</Link>
-        <h3>Messages</h3>
+    return <section className="body">
+        <Link className="back" to="/profile"><i class="fas fa-arrow-left"></i></Link>
+        <h2 className="container__title">Messages</h2>
         {chatList && <ul>{chatList.map(chat => <ChatShowcase chat={chat} />)}</ul>}
-    </>
+    </section>
 })

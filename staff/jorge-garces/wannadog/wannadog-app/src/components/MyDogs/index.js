@@ -19,16 +19,15 @@ export default withRouter(function ({ history }) {
 
     }, [history.location])
 
-    return <>
-
+    return <section className="body">
         {myDogs && <>
-            <Link to="/profile">Go Back</Link>
-            <h3>My Dogs</h3>
+            <Link className="back" to="/profile"><i class="fas fa-arrow-left"></i></Link>
+            <h2 className="container__title">My Dogs</h2>
             <ul>
                 {myDogs.map(dog => <DogShowcase dog={dog} />)}
             </ul>
         </>}
 
-        <button onClick={() => history.push('/add')}>ADD DOG</button >
-    </>
+        <button className="add button" onClick={() => history.push('/add')}>ADD DOG</button >
+    </section>
 })

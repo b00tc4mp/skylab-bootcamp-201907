@@ -1,20 +1,26 @@
 import logic from '../../logic'
 
-export default function (name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, chip) {
+export default function (name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, chip, callback, image) {
 
     let latitude, longitude
 
     navigator.geolocation.getCurrentPosition(function (position) {
         latitude = position.coords.latitude
         longitude = position.coords.longitude
-        return registerDog(name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, longitude, latitude, chip)
+        return (async () => {
+            const dogId = await registerDog(name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, longitude, latitude, chip)
+            callback(dogId, image)
+        })()
     },
         function (error) {
             if (error.code === error.PERMISSION_DENIED) {
                 alert('Not using geolocation heavily limits wannadogs functionality, please relaunch the application if you want to activate it')
                 latitude = 0
                 longitude = 0
-                return registerDog(name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, longitude, latitude, chip)
+                return (async () => {
+                    const dogId = await registerDog(name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, longitude, latitude, chip)
+                    callback(dogId, image)
+                })()
             }
         })
 }
@@ -31,4 +37,6 @@ async function registerDog(name, breed, gender, size, age, notes, neutered, with
         const { error } = await response.json()
         throw Error(error)
     }
+    const { dogId } = await response.json()
+    return dogId
 }

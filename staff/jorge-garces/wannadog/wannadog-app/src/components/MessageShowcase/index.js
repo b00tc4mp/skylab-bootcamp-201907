@@ -9,9 +9,17 @@ export default withRouter(function ({ message }) {
     let date2 = date
     date2 = moment(date2).utc().format('DD-MM-YY HH:mm')
 
-    return <ul>
-        <li>{date2}</li>
-        <li>{user.name}</li>
-        <li>{body}</li>
+    return <ul className="chat-message">
+        <div className="chat-message__top">
+            <div className="chat-message__date">
+                <li >{date2}</li>
+            </div>
+            <div className="chat-message__name">
+                <li>{user.name}></li>
+            </div>
+            <div className="chat-message__body">
+                <li>{body}</li>
+            </div>
+        </div>
     </ul>
 })

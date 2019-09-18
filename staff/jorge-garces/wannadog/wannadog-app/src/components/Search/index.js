@@ -3,20 +3,21 @@ import { Link } from 'react-router-dom'
 
 export default function ({ onSearch }) {
 
-    return <>
-        <Link to="/sign">Back</Link>
-        <h2>Find your Dog</h2>
-        <form onSubmit={event => {
+    return <section className="body">
+        <Link className="back" to="/sign"><i className="fas fa-arrow-left"></i></Link>
+        <h2 className="container__title title-search">Find your Dog</h2>
+        <form className="form-search form-section" onSubmit={event => {
             event.preventDefault()
 
             const { target: { distance: { value: distance }, breed: { value: breed }, gender: { value: gender }, size: { value: size }, age: { value: age }, neutered: { value: neutered }, withDogs: { value: withDogs }, withCats: { value: withCats }, withChildren: { value: withChildren } } } = event
 
             onSearch(Number(distance), breed, gender, size, Number(age), neutered, withDogs, withCats, withChildren)
+
         }}>
 
-            <label htmlFor="distance">Distance</label>
+            <label className="search-label" htmlFor="distance">Distance</label>
             <select name="distance">
-                <option value="0"> I don't mind</option>
+                <option value="10000000"> I don't mind</option>
                 <option value="10000"> Up to 10km</option>
                 <option value="50000"> Up to 50km</option>
                 <option value="100000"> Up to 100km</option>
@@ -24,7 +25,7 @@ export default function ({ onSearch }) {
                 <option value="500000"> Up to 500km</option>
             </select>
 
-            <label htmlFor="breed">Breed</label>
+            <label className="search-label" htmlFor="breed">Breed</label>
             <select name="breed">
                 <option value="other"> other / mix</option>
                 <option value="developer"> developer</option>
@@ -237,13 +238,13 @@ export default function ({ onSearch }) {
                 <option value="Yorkshire Terrier"> Yorkshire Terrier</option>
             </select>
 
-            <label htmlFor="gender">Gender</label>
+            <label className="search-label" htmlFor="gender">Gender</label>
             <select name="gender">
                 <option value="true"> Male</option>
                 <option value="false"> Female</option>
             </select>
 
-            <label htmlFor="size">Size</label>
+            <label className="search-label" htmlFor="size">Size</label>
             <select name="size">
                 <option value="small"> Small</option>
                 <option value="medium"> Medium</option>
@@ -251,7 +252,7 @@ export default function ({ onSearch }) {
                 <option value="xl"> XL</option>
             </select>
 
-            <label htmlFor="age">Age</label>
+            <label className="search-label" htmlFor="age">Age</label>
             <select name="age">
                 <option value="0"> I don't mind</option>
                 <option value="1"> Puppy</option>
@@ -261,31 +262,31 @@ export default function ({ onSearch }) {
                 <option value="5"> Senior</option>
             </select>
 
-            <label htmlFor="neutered">Neutered</label>
+            <label className="search-label" htmlFor="neutered">Neutered</label>
             <select name="neutered">
                 <option value="true" defaultValue> Yes</option>
                 <option value="false"> No</option>
             </select>
 
-            <label htmlFor="withDogs">Good with dogs</label>
+            <label className="search-label" htmlFor="withDogs">Good with dogs</label>
             <select name="withDogs">
                 <option value="true" defaultValue> Yes</option>
                 <option value="false"> No / Not tested</option>
             </select>
 
-            <label htmlFor="withCats">Good with cats</label>
+            <label className="search-label" htmlFor="withCats">Good with cats</label>
             <select name="withCats">
                 <option value="true" defaultValue> Yes</option>
                 <option value="false"> No / Not tested</option>
             </select>
 
-            <label htmlFor="withChildren">Good with children</label>
+            <label className="search-label" htmlFor="withChildren">Good with children</label>
             <select name="withChildren">
                 <option value="true" defaultValue> Yes</option>
                 <option value="false"> No / Not tested</option>
             </select>
 
-            <button>FETCH!</button>
+            <button className="fetch button">FETCH!</button>
         </form>
-    </>
+    </section>
 }

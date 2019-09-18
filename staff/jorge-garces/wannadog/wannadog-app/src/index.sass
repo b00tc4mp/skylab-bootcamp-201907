@@ -2,6 +2,7 @@
     padding: 0
     margin: 0
     box-sizing: border-box
+    font-family: 'Open Sans', sans-serif
 
 .body
     width: 100vw
@@ -19,22 +20,30 @@
 .to-profile
     color: rgb(50,50,50)
 
+// LANDING
+
 .body-landing
     width: 100vw
-    min-height: 100vh
+    height: 100vh
     font-family: 'Open Sans', sans-serif
     background-image: url("/img/landing.jpg")
     background-size: cover
+    
 
     &__container
-        width: 60vw
-        height: 100vh
+        width: 100vw
+        height: 90vh
         margin: auto
         padding-bottom: 1rem
         display: flex
         flex-direction: column
         justify-content: flex-end
         text-align: center
+
+    &__logo
+        margin-top: 2rem
+        font-size: 3rem
+        width: 100vw
 
 .body-form
     width: 100vw
@@ -43,6 +52,15 @@
     background-size: cover
     display: flex
     flex-direction: column
+
+.sign-logo
+    align-self: center
+    justify-content: center
+    font-size: 3rem
+    margin-bottom: 1rem
+
+.signup
+
 
 .form-section
     width: 60vw
@@ -59,41 +77,49 @@ input
     border: 0.05rem solid gray
     padding: 0.5rem
 
-
 .button
+    font-size: 1rem
     display: flex
     width: 50vw
     height: 6vh
-    margin: 1rem auto
-    padding: 0.6rem
-    border: 0.5px solid black
+    margin: 0.3rem auto
     background-color: white
     color: black
     text-decoration: none
     justify-content: center
-    align-items: center
+    align-items: center  
+    border: 1px solid black  
+    &__sign
+        margin-top: 0.5rem
+    &:active
+        background-color: #347F93
+        color: white
 
-.body-profile
-    font-family: 'Open Sans', sans-serif
+
+
+.signup
+    margin-top:1rem
 
 .container
     &__title
         text-align: center
         padding: 3rem
-        font-size: 3rem
+        font-size: 2.5rem
+        border-bottom: 1px solid black
 
 // PROFILE
 
 .body-profile
-    // background-image: url("/img/profile.jpg")
-    // background-size: auto
+    font-family: 'Open Sans', sans-serif
+    background-image: url("/img/profile.jpg")
+    background-size: cover
 
 .body-profile__nav
     display: flex
     flex-direction: column
     padding: 1rem
     border-bottom: 1px solid black
-    border-top: 1px solid black
+    background-color: rgba(255,255,255,0.7)
 
 .body-profile__link
     text-decoration: none
@@ -107,6 +133,7 @@ input
     padding: 0.5rem
     border-top: 1px solid black
     border-bottom: 1px solid black
+    background-color: rgba(255,255,255,0.7)
 
 .logout
     margin-top: 3.5rem
@@ -137,6 +164,37 @@ input
     &__skills
         margin-bottom: 1rem
 
+// DOG SHOWCASE
+
+.dog-showcase
+    width: 100vw
+    display: flex
+    flex-wrap: wrap
+    border-bottom: 1px solid black
+    border-top: 1px solid black
+    margin-top: 1rem
+    &__left
+        width: 28vw
+    &__right
+        display: flex
+        flex-direction: column
+        justify-content: center
+        width: 68vw
+        padding-left: 1rem
+    &__img
+        display: flex
+        justify-content: center
+        width: 28vw
+        width: 87px
+        height: 87px
+        object-fit: cover
+.links
+     text-decoration: none
+     color: rgb(50,50,50)
+
+.add
+    margin-top: 4rem
+
 // SEARCH RESULTS
 
 .navi
@@ -153,19 +211,104 @@ input
 
 .results
     width: 100vw
-    margin: 0
-    display: flex
-    flex-flow: column nowrap
+    padding: 0 0.5rem 0 0.5rem
     &__ul
+        display: grid
+        grid-template-columns: 1fr 1fr
         margin: auto
         columns: 2
         grid-gap: 0.5rem
         list-style-type: none
         width: 100%
-       
     &__li
         width: 100%
-        border: 0.05rem solid rgb(70,70,70) 
+        border: 0.1px solid rgb(70,70,70)
+        box-shadow: 3px 4px 5px 0px rgba(140,140,140,1) 
         
     &__img
-        width: 100%
+        width: 172px
+        height: 172px
+        object-fit: cover
+        border: 1px solid black
+    &__name
+        display: flex
+        justify-content: space-between
+        padding: 0 0.5rem
+        font-size: 0.9rem
+        padding: 0 10px 6px
+
+.noresults
+    text-align: center
+    justify-self: center
+    color: rgba(0,0,0,0.4)
+    &__sign
+        margin-top: 10rem
+        font-size: 10rem
+    &__text
+        margin-top: 2rem
+        font-size: 2rem
+
+// Search
+
+.title-search
+    font-size: 1.5rem
+    padding: 1.5rem
+
+.form-search
+    width: 80vw
+    margin: 1rem auto
+.fetch
+    margin-top: 1.5rem
+select
+    background-color: white
+    border: none
+    padding-left: 0.2rem
+    border-bottom: 0.5px solid rgba(50,50,50,0.5)
+.search-label
+    margin-top: 0.5rem
+
+.notes
+    margin: 0.7rem 0
+    height: 4rem
+
+// Chat Messages
+
+.chat-message
+    font-family: 'Open Sans', sans-serif
+    flex-direction: column
+    align: center
+    &__top
+        list-style: none
+        align-self: center
+        margin: auto
+        width: 90vw 
+        display: flex
+        flex-wrap: wrap
+        border-bottom: 1px solid rgba(50,50,50, 0.5)
+        padding: 0.1rem
+    &__date
+        font-size: 0.7rem
+        width: 99vw
+    &__name
+        width: 49vw
+    &__body
+        width: 49vw
+
+// Dog Success
+
+.success-container
+    height: 80vh
+    width: 80vw
+    display: flex
+    flex-direction: column
+    justify-content: center
+    text-align: center
+    margin: auto
+    background-image: url(#)
+    &__register
+        margin-bottom: 3rem
+
+
+
+        
+

@@ -7,6 +7,7 @@ import SearchResults from '../SearchResults'
 function App({ history }) {
 
   const [dogs, setDogs] = useState([])
+  const [dogId, setDogId] = useState()
 
   async function handleRegister(name, surname, email, password) {
     try {
@@ -30,29 +31,37 @@ function App({ history }) {
 
   const handleLogout = () => {
     logic.logUserOut()
-    // setView(undefined)
     history.push('/')
   }
 
-  const callback = dogs => {
+  const searchCallback = dogs => {
     setDogs(dogs)
     history.push('/searchResults')
   }
 
   async function handleSearch(distance, breed, gender, size, age, neutered, withDogs, withCats, withChildren) {
     try {
-      await logic.search(distance, breed, gender, size, age, neutered, withDogs, withCats, withChildren, callback)
+      await logic.search(distance, breed, gender, size, age, neutered, withDogs, withCats, withChildren, searchCallback)
     } catch ({ message }) {
       console.log('something went wrong with search', message)
     }
 
   }
 
-  async function handleRegisterDog(image, name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, chip) {
+  const registerCallback = async (doge, image) => {
+    try {
+      await logic.upload(doge, image)
+      history.push('/dogsuccess')
+    } catch ({ message }) {
+      console.log('something went wrong with registry', message)
+    }
+
+  }
+
+  async function handleRegisterDog(name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, chip, image) {
 
     try {
-      const response = await logic.registerDog(image, name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, chip, setDogs)
-      history.push('/dogsuccess')
+      await logic.registerDog(name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, chip, registerCallback, image)
     } catch ({ message }) {
       console.log('something went wrong with registry', message)
     }
@@ -67,7 +76,7 @@ function App({ history }) {
       <Route path="/dogsuccess" render={() => <DogSuccess />} />
       <Route path="/confirm" render={() => <Confirm />} />
       <Route path="/search" render={() => <Search onSearch={handleSearch} />} />
-      <Route path="/searchResults" render={() => dogs.length > 0 && <SearchResults dogs={dogs} />} />
+      <Route path="/searchResults" render={() => <SearchResults dogs={dogs} />} />
       <Route path="/profile" render={() => logic.isUserLoggedIn() ? <Profile onLogout={handleLogout} /> : history.push('/sign')} />
       <Route path="/dog/:id" render={() => <DogDetail />} />
       <Route path="/favorites" render={() => logic.isUserLoggedIn() ? <Favorites /> : history.push('/sign')} />

@@ -19,6 +19,7 @@ export default function (distance, breed, gender, size, age, neutered, withDogs,
                 })()
             }
         })
+
     return dogs
 }
 
