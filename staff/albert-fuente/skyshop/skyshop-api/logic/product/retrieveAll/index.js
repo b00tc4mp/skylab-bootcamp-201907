@@ -10,7 +10,7 @@ const { models:{Product} } = require('skyshop-data')
 module.exports = function () {
     
     return (async () => {
-        const product = await Product.find({}, {password: 0 }).lean()
+        const product = await Product.find({}, {password: 0, __v: 0} ).lean()
 
         if (!product) throw Error(`No products available`)
         return await product
