@@ -58,6 +58,14 @@ module.exports = function (searchParams) {
         dogs.map(dog => {
             dog.id = dog._id.toString()
             delete dog._id
+            dog.gender === true ? dog.gender = "Male" : dog.gender === "Female"
+
+            dog.age === 1 ? dog.age = "Puppy" : {}
+            dog.age === 2 ? dog.age = "Less than a year old" : {}
+            dog.age === 3 ? dog.age = "1 to 5 years old" : {}
+            dog.age === 4 ? dog.age = "5 to 10 years old" : {}
+            dog.age === 5 ? dog.age = "Senior" : {}
+
         })
         return dogs
     })()

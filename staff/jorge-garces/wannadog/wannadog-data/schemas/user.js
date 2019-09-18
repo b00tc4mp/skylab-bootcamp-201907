@@ -35,6 +35,6 @@ module.exports = new Schema({
     favorites: [{ type: ObjectId, ref: 'Dog' }],
 
     wishes: [Wish],
-    dogs: [{ type: ObjectId, ref: 'Dog' }]
-    // chats: [{ type: ObjectId, ref: 'Conversation' }]
+    dogs: [{ type: ObjectId, ref: 'Dog' }],
+    chats: [{ type: ObjectId, ref: 'Conversation' }]
 })

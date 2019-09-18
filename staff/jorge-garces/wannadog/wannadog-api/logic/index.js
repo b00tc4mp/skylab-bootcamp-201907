@@ -16,5 +16,6 @@ module.exports = {
     createChat: require('./chat/create-chat'),
     updateChat: require('./chat/update-chat'),
     retrieveAllChats: require('./chat/retrieve-all-chats'),
-    retrieveChat: require('./chat/retrieve-chat')
+    retrieveChat: require('./chat/retrieve-chat'),
+    uploadImage: require('./user/upload-photo')
 }

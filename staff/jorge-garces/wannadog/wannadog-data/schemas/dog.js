@@ -64,5 +64,8 @@ module.exports = new Schema({
             default: [0, 0]
         }
     },
+    image: {
+        type: String
+    },
     owner: { type: ObjectId, ref: 'User' }
 })

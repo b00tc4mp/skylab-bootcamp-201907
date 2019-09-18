@@ -20,7 +20,8 @@ module.exports = function (id) {
         const user = await User.findById(id)
         if (!user) throw Error(`This user does not exist.`)
 
-        const chats = await Chat.find({ 'members': id }, { __v: 0 }).lean()
+        const chats = await Chat.find({ 'members': id }, { __v: 0 }).populate("messages.user", "name").lean()
+
         if (chats.length === 0) throw Error(`This user does not own any chats`)
 
         chats.forEach((chat, index) => {

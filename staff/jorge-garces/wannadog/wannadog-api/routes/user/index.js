@@ -6,5 +6,6 @@ module.exports = {
     unregisterUser: require('./unregister-user'),
     retrieveFavorites: require('./retrieve-favorites'),
     toggleFavorite: require('./toggle-favorite'),
-    registerWish: require('./register-wish')
+    registerWish: require('./register-wish'),
+    uploadImage: require('./upload-image')
 }
