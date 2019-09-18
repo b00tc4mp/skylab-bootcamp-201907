@@ -43,10 +43,10 @@ describe('logic - retrieve post', () => {
         const post = await retrievePost(postId)
 
         expect(post).to.exist
-        expect(post.id).to.equal(postId)
+        expect(post.id.toString()).to.equal(postId)
         expect(post.title).to.equal(title)
         expect(post.body).to.equal(body)
-        expect(post.author.toString()).to.equal(author)
+        expect(post.author._id.toString()).to.equal(author)
         expect(post.date).to.exist
         expect(post.comments).to.be.an('array')
         expect(post.votes).to.be.an('array')

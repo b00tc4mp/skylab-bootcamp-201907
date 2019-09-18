@@ -12,7 +12,7 @@ module.exports = function(id){
     validate.string(id, 'postId')
 
     return( async () => {
-        const post = await Post.findOne({_id: id }, {_id: 0, __v: 0 }).lean()
+        const post = await Post.findOne({_id: id }, {_id: 0, __v: 0 }).lean().populate('author')
 
         if(!post) throw Error(`post with id ${id} does not exist`)
         

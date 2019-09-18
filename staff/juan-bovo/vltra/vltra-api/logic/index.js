@@ -12,6 +12,7 @@ module.exports = {
     retrieveUserPosts: require('./post/retrieve-user-posts'),
     deletePost: require('./post/delete-post'),
     votePost: require('./post/vote-post'),
+    retrieveRanking: require('./post/retrieve-ranking'),
 
     addComment: require('./comment/add-comment'),
     retrievePostComments: require('./comment/retrieve-post-comments'),

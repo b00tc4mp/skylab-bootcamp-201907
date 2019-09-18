@@ -15,6 +15,7 @@ const retrieveAllPosts = require('./post/retrieve-all-posts')
 const retrieveUserPosts = require('./post/retrieve-user-posts')
 const deletePost = require('./post/delete-post')
 const votePost = require('./post/vote-post')
+const retrieveRanking = require('./post/retrieve-ranking')
 
 const addComment = require('./comment/add-comment')
 const retrievePostComments = require('./comment/retrieve-post-comments')
@@ -34,9 +35,9 @@ router.post('/bookmark', [tokenMiddleware, jsonBodyParser], toggleBookmarks) //r
 
 /* POST */
 router.post('/posts', [tokenMiddleware, jsonBodyParser], createPost) //router.post('/posts', jsonBodyParser, createPost)
-//router.post('/posts', jsonBodyParser, createPost)
 router.get('/post/:postId', jsonBodyParser, retrievePost) //router.get('/post', [tokenMiddleware, jsonBodyParser], retrievePost)
 router.get('/posts', [] , retrieveAllPosts) // router.get('/posts', [tokenMiddleware, jsonBodyParser], retrieveAllPosts)
+router.get('/ranking', [] , retrieveRanking)
 router.get('/posts/author/', [tokenMiddleware], retrieveUserPosts) //router.get('/posts/author', [tokenMiddleware, jsonBodyParser], retrieveUserPosts)
 router.delete ('/posts', [tokenMiddleware, jsonBodyParser], deletePost)
 router.post('/post/vote', [tokenMiddleware, jsonBodyParser], votePost) //router.post('/post/vote', jsonBodyParser, votePost)
