@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import logic from "../../logic"
 import { Link } from 'react-router-dom'
 
-
 export default function ({ onLogout, onRegisterDay }) {
 
   // const [day, setDay] = useState(undefined)
@@ -91,24 +90,28 @@ export default function ({ onLogout, onRegisterDay }) {
   }
 
   return <section className='body'>
-   <header>
-    <nav className="nav">
-      <a className="nav__h2" href="#"><h2 className="nav__h2">MenuPlanner</h2></a>
-      <div className="dropdown">
-        <button className="nav__icon dropdown__dropbtn">
-          <i className="far fa-user-circle"></i>
-        </button>
-        <div className="nav__a dropdown__content">
-          <Link className="nav__a dropdown__button" href="#" to="/home">Home</Link>
-          <Link className="nav__a dropdown__button" href="#" to="/user-profile">User profile</Link>
-          <Link className="nav__a dropdown__button" href="#" to="/current-week">Current week</Link>
-          <a className="nav__a dropdown__button" href="#" onClick={onLogout}>Logout</a>
-        </div>
-      </div>  
-    </nav>
-  </header>
+<header class="navbar">
+  <div class="dropdown dropdown-left">
+    <button class="dropbtn">MenuPlanner 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    {/* <img src='mpbco.png'></img> */}
+    <div class="dropdown-content">
+      <Link className="nav__a dropdown__button a" href="#" to="/home">Home</Link>
+      <Link className="nav__a dropdown__button a" href="#" to="/current-week">Current Week</Link>
+    </div>
+  </div> 
+  <div class="dropdown dropdown-right">
+    <button class="dropbtn"><i className="far fa-user-circle"></i>
+    </button>
+    <div class="dropdown-content">
+      <Link className="nav__a dropdown__button a" href="#" to="/user-profile">User Profile</Link>
+      <a className="nav__a dropdown__button a" href="#" onClick={onLogout}>Logout</a>
+    </div>
+  </div>
+</header>
     <main className="main-create">
-      <h3 className="main-create__h3">Create menu</h3>
+      <h3 className="main-create__h3">Create your delicious menu</h3>
 
       {recipesBr && recipesLn && recipesSn && recipesDn &&
         <form onSubmit={event => {
@@ -122,7 +125,7 @@ export default function ({ onLogout, onRegisterDay }) {
           onRegisterDay(selectedDay, breakfastId, lunchId, snackId, dinnerId)
         }}>
           <select onChange={handleStateDay} name="day" className="selector">
-            <option value="default">Pick a day</option>
+            <option value="default">Choose a day</option>
             <option value="monday">Monday</option>
             <option value="tuesday">Tuesday</option>
             <option value="wednesday">Wednesday</option>
@@ -152,7 +155,7 @@ export default function ({ onLogout, onRegisterDay }) {
             {recipesDn.map(recipe => <option  value={recipe.id}>{recipe.title}</option>)}
           </select>
 
-          <button className="main__button">Select</button>
+          <button className="main__button">Create</button>
         </form>
 
       }

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import '../../../src/index.css'
 import logic from '../../logic'
 import { Link, withRouter } from 'react-router-dom'
 
@@ -46,29 +45,33 @@ export default withRouter(function ({ history, onLogout }) {
   }
 
   return <div className="body">
-    <header>
-      <nav className="nav">
-        <a className="nav__h2" href="#"><h2 className="nav__h2">MenuPlanner</h2></a>
-        <div className="dropdown">
-          <button className="nav__icon dropdown__dropbtn">
-            <i className="far fa-user-circle"></i>
-          </button>
-          <div className="nav__a dropdown__content">
-            <Link className="nav__a dropdown__button" href="#" to="/user-profile">User profile</Link>
-            <Link className="nav__a dropdown__button" href="#" to="/current-week">Current week</Link>
-            <Link className="nav__a dropdown__button" href="#" to="/create-menu">Create Menu</Link>
-            <a className="nav__a dropdown__button" href="#" onClick={onLogout}>Logout</a>
-          </div>
-        </div>
-      </nav>
-    </header>
+<header class="navbar">
+  <div class="dropdown dropdown-left">
+    <button class="dropbtn">MenuPlanner 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <Link className="nav__a dropdown__button a" href="#" to="/home">Home</Link>
+      <Link className="nav__a dropdown__button a" href="#" to="/current-week">Current Week</Link>
+      <Link className="nav__a dropdown__button a" href="#" to="/create-menu">Create Menu</Link>
+    </div>
+  </div> 
+  <div class="dropdown dropdown-right">
+    <button class="dropbtn"><i className="far fa-user-circle"></i>
+    </button>
+    <div class="dropdown-content">
+      <Link className="nav__a dropdown__button a" href="#" to="/user-profile">User Profile</Link>
+      <a className="nav__a dropdown__button a" href="#" onClick={onLogout}>Logout</a>
+    </div>
+  </div>
+</header>
 
     <main className="main">
       <p className="main__menu-default main__hello">Hello, {user && user.name}</p>
-      <a className="main__menu-default main__button-week" href="" onClick={handleGoToCurrentWeek}>Current Week</a>
-      <a className="main__menu-default main__button-week" href="" onClick={handleGoToCreateMenu}>Create your week menu</a>
+      <a className="main__menu-default main__button" href="" onClick={handleGoToCurrentWeek}>Current Week</a>
+      <a className="main__menu-default main__button" href="" onClick={handleGoToCreateMenu}>Create your weekly menu</a>
     </main>
-    <h3 className="examples__title">Some Recipes</h3>
+    <h3 className="examples__title">Some delicious recipes</h3>
     <section className="examples">
       <ul className="examples__ul">
         {someRecipes && someRecipes.map(recipe => 
