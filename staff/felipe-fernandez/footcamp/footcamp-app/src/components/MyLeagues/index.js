@@ -36,8 +36,7 @@ function MyLeagues (props) {
      
 
 
-    return <div>
-                <section className="league">
+    return  <section className="league">
                     <InitialHeader />
                     <h2 className="league__title">MY LEAGUES</h2>
 
@@ -58,7 +57,7 @@ function MyLeagues (props) {
                     </div>
             }
                 </section>
-            </div>
+            
       
 }
 
