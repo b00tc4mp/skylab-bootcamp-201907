@@ -10,29 +10,34 @@ function MainCard({ item, refreshUser, refreshPosts, user, history }) {
     const [error, setError] = useState(undefined)
 
     function handleVote(postId, userVote) {
-        (async () => {
-            try {
-                const response = await logic.votePost(postId, userVote)
-                await refreshPosts()
-                console.log(response)
-                // Algo que me permita recargar la página!!
-            } catch (error) {
-                setError(error.message)
-                console.log(error.message)
-            }
-        })()
+        if(user){
+            (async () => {
+                try {
+                    const response = await logic.votePost(postId, userVote)
+                    await refreshPosts()
+                    console.log(response.message)
+                } catch (error) {
+                    setError(error.message)
+                    console.log(error.message)
+                }
+            })()
+        }
+        else{history.push('/login')}
     }
 
     function handleBookmark(postId) {
-        (async () => {
-            try {
-                const response = await logic.toggleBookmark(postId)
-                await refreshUser(refreshPosts)
-                console.log(response.message)
-            } catch (error) {
-                console.log(error.message)
-            }
-        })()
+        if(user){
+            (async () => {
+                try {
+                    const response = await logic.toggleBookmark(postId)
+                    await refreshUser(refreshPosts)
+                    console.log(response.message)
+                } catch (error) {
+                    console.log(error.message)
+                }
+            })()
+        }
+        else{history.push('/login')}
     }
 
     function handleDetail(postId) {
@@ -41,9 +46,8 @@ function MainCard({ item, refreshUser, refreshPosts, user, history }) {
     }
 
     function isBookmarkToggled(bookmarkId) {
-        const { bookmarks } = user
-        
-        return bookmarks.find(bookmark => bookmark._id === bookmarkId)
+        if(!user) return false  
+        return user.bookmarks.find(bookmark => bookmark._id === bookmarkId)
     }
 
     function generateStars(post) {

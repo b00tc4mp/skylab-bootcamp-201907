@@ -30,31 +30,42 @@ function Main({ history }) {
         setUser(_user)
     }
 
-    // async function retrievePosts() {
-    //     const _posts = await logic.retrieveAllPosts()
-    //     setPosts(_posts)
-    // }
-
     async function retrievePosts() {
         const _posts = await logic.retrieveAllPosts()
         setPosts(_posts)
     }
 
-    function onFreshRankDisplay(){
+    async function retrieveRanking() {
+        const _posts = await logic.retrieveRanking()
+        setPosts(_posts)
+    }
+
+    function onRankDisplay(){
+        retrieveRanking()
+        setFreshRankDisplay(!freshRankDisplay)
+    }
+
+    function onFreshDisplay(){
+        retrievePosts()
         setFreshRankDisplay(!freshRankDisplay)
     }
 
     return <main className="mosaic-grid">
         <div className="mosaic-grid__sticky-section">
             <h2 className="mosaic-grid__sticky-section--title">{freshRankDisplay ? "Contenido nuevo" : "Más votados"} en Vltra</h2>
+            {!freshRankDisplay ? <button className="mosaic-grid__sticky-section__button" onClick={event => {
+                event.stopPropagation()
+
+                onFreshDisplay()
+            }}>Contenido nuevo</button> :
             <button className="mosaic-grid__sticky-section__button" onClick={event => {
                 event.stopPropagation()
 
-                onFreshRankDisplay()
-            }}>{freshRankDisplay ? "Más votados" : "Contenido nuevo"}</button>
+                onRankDisplay()
+            }}>Más votados</button>}
         </div>
         <ul>
-            {user && posts && posts.length && posts.map(item => <MainCard key={item.id} item={item} user={user} refreshUser={retrieveUser} refreshPosts={retrievePosts}/>)}
+            { posts && posts.length && posts.map(item => <MainCard key={item.id} item={item} user={user} refreshUser={retrieveUser} refreshPosts={retrievePosts}/>)}
         </ul>
     </main>
 }
