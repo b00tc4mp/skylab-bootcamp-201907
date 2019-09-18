@@ -16,9 +16,8 @@ module.exports = new Schema({
 
     players: [{ type: ObjectId, ref: 'Player'}], 
     
-    lineup: {
-        type: Array,
-        default : []
-    }
+    lineup: [{ type: ObjectId, ref: 'Player'}]
+
+    
 })
 
