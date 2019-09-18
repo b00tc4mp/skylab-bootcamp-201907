@@ -24,7 +24,7 @@ module.exports = function(id) {
         
                 
         await user.save()
-        debugger
+        
         return leagues[0]
 
     })()

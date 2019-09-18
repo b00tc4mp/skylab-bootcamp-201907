@@ -1,4 +1,3 @@
-//TODO
 
 require('dotenv').config()
 
@@ -116,7 +115,7 @@ describe('logic - retrieve all league teams ', () => {
 
     it('should succeed on correct data', async () => {
         
-        debugger
+        
         const result = await logic.retrieveAllLeagues(id)
         
             expect(result).to.exist

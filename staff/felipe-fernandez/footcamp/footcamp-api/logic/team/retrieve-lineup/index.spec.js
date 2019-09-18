@@ -7,11 +7,11 @@ const {  random : { number }  } = require('footcamp-utils')
 
 const { env: { DB_URL_TEST }} = process
 
-describe('logic - create lineup', () => {
+describe('logic - retrieve lineup', () => {
     
     before(() =>  database.connect(DB_URL_TEST))
 
-    let name, surname, email, password, nameTeam, nameLeague, points, code
+    let name, surname, email, password, nameTeam, nameLeague, points, code 
     let namePlayer, surnamePlayer, playerId, realTeam, position, pointsPerGame,  totalPoints,  yellowCards,  redCards,  goals,  minutes,  cost
     
     beforeEach(() => {
@@ -24,6 +24,7 @@ describe('logic - create lineup', () => {
         nameTeam = `nameTeam-${Math.random()}`
         code = `code-${Math.random()}`
         points= 0
+       
   
          return (async () => {
             await User.deleteMany()
@@ -42,7 +43,7 @@ describe('logic - create lineup', () => {
             team.owner = id
             teamId= team.id
              
-            for(let i = 0; i < 50; i++){
+            for(let i = 0; i < 11; i++){
                 let min =1
                 let max= 4
                 let random = Math.random()
@@ -61,6 +62,7 @@ describe('logic - create lineup', () => {
                 cost = number(1111,2241111)
                 const player = new Player({name: namePlayer, surname: surnamePlayer, playerId, realTeam, position, pointsPerGame, totalPoints, yellowCards, redCards,  goals, minutes, cost  })
                 team.players.push(player.id)
+                team.lineup.push(player.id)
                 await player.save()
             }
             await users.save()
@@ -76,15 +78,12 @@ describe('logic - create lineup', () => {
 
     it('should succeed on correct data', async () => {
         
-        const result = await logic.lineUpTeam(id, leagueId, teamId)
-        
-        
+        const result = await logic.retrievelineUpTeam(id, leagueId, teamId)
+                
             expect(result).to.exist
             expect(result.length).to.equal(11)
            
-           
-
-        
+                   
     })
 
 
@@ -93,7 +92,7 @@ describe('logic - create lineup', () => {
         await League.create({ id, name: nameLeague, code })
         await League.deleteMany()
         try {
-             await logic.lineUpTeam(id, leagueId, teamId)
+             await logic.retrievelineUpTeam(id, leagueId, teamId)
         } catch(error) {
             
              expect(error).to.exist
@@ -104,7 +103,7 @@ describe('logic - create lineup', () => {
     it('should fail on incorrect user id', async () => {
         id = '5d772fb62bb54120d08d7a7b'
         try {
-            await logic.lineUpTeam(id, leagueId, teamId)
+            await logic.retrievelineUpTeam(id, leagueId, teamId)
             throw Error('should not reach this point') 
         }
         catch({message}){
@@ -120,7 +119,7 @@ describe('logic - create lineup', () => {
 
        
         try {
-            await logic.lineUpTeam(id, leagueId, teamId)
+            await logic.retrievelineUpTeam(id, leagueId, teamId)
             throw Error('should not reach this point') 
         }
         catch({message}){
@@ -133,19 +132,19 @@ describe('logic - create lineup', () => {
 
     it('should fail on undefined league team Id', () => 
         expect(() => 
-            logic.lineUpTeam(id, leagueId, undefined)
+            logic.retrievelineUpTeam(id, leagueId, undefined)
      ).to.throw(`team id with value undefined is not a string`)
     )
 
     it('should fail on undefined user id', () => 
         expect(() => 
-            logic.lineUpTeam(undefined, leagueId, teamId)
+            logic.retrievelineUpTeam(undefined, leagueId, teamId)
     ).to.throw(`id with value undefined is not a string`)
     )
 
     it('should fail on undefined leagueId', () => 
         expect(() => 
-            logic.lineUpTeam(id, undefined, teamId)
+            logic.retrievelineUpTeam(id, undefined, teamId)
     ).to.throw(`league Id with value undefined is not a string`)
     )
     
@@ -153,19 +152,19 @@ describe('logic - create lineup', () => {
 
     it('should fail on non-string team id', () => 
         expect(() => 
-            logic.lineUpTeam(id, leagueId, 12345)
+            logic.retrievelineUpTeam(id, leagueId, 12345)
     ).to.throw(`team id with value 12345 is not a string`)
     )
 
     it('should fail on non-string user id', () => 
         expect(() => 
-            logic.lineUpTeam(12345, leagueId, teamId)
+            logic.retrievelineUpTeam(12345, leagueId, teamId)
     ).to.throw(`id with value 12345 is not a string`)
     )
 
     it('should fail on non-string leagueId', () => 
         expect(() => 
-            logic.lineUpTeam(id, 12345, teamId)
+            logic.retrievelineUpTeam(id, 12345, teamId)
     ).to.throw(`league Id with value 12345 is not a string`)
     )
 
@@ -173,19 +172,19 @@ describe('logic - create lineup', () => {
             
      it('should fail on empty id', () => 
         expect(() => 
-                logic.lineUpTeam('', leagueId, teamId)
+                logic.retrievelineUpTeam('', leagueId, teamId)
         ).to.throw(`id is empty or blank`)
         )
 
     it('should fail on empty leagueId', () => 
         expect(() => 
-                logic.lineUpTeam(id, '', teamId)
+                logic.retrievelineUpTeam(id, '', teamId)
     ).to.throw(`league Id is empty or blank`)
         )
 
     it('should fail on empty team id', () => 
          expect(() => 
-                logic.lineUpTeam(id, leagueId, '')
+                logic.retrievelineUpTeam(id, leagueId, '')
     ).to.throw(`team id is empty or blank`)
         )
 

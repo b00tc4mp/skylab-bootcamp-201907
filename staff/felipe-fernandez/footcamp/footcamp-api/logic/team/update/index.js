@@ -2,7 +2,7 @@ const {validate} = require('footcamp-utils')
 const { models: { User,  League, Team } } = require('footcamp-data')
 
  /**
- * Retrieves a team by name within the league and linked to the user 
+ * Updates the team received by parameters
  *
  * @param {*} id 
  * @param {*} leagueId 
@@ -12,11 +12,12 @@ const { models: { User,  League, Team } } = require('footcamp-data')
  * @returns {Promise}
 */
 
-module.exports = function( id, leagueId, teamId) {
-   
+module.exports = function( id, leagueId, teamId, id1, id2) {
+   debugger
     validate.string(id, 'id')
     validate.string(leagueId, 'league Id')
-    validate.string(teamId, 'team id')
+    validate.string(id1, 'id1')
+    validate.string(id2, 'id2')
    
     return (async () => {
     
@@ -32,21 +33,10 @@ module.exports = function( id, leagueId, teamId) {
 
         if (!findTeam) throw Error(`Team with id ${ teamId } does not exist`)
 
-         //check the team in the database and select name, owner and players ids
-        let name_team, points, owner
-        let players = []
-       
-        name_team= findTeam.name
-        points = findTeam.points
-        owner = findTeam.owner.toString()
-        findTeam.players.forEach(element => {
-            players.push(element.toString())
-            
-        })
-        
-        let team = { name_team, points, owner, players}
+        findTeam.lineup.splice(id1, 1, id2)
+        await findTeam.save()
 
-        return team
+
 
     })()
 }

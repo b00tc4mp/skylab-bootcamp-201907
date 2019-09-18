@@ -32,7 +32,13 @@ module.exports = function(id, leagueId) {
         
         if(!participantExist) throw Error(`User with id ${id} do not play in this league`)
         league.participants.splice(participantExistIndex, 1)
+
+        const leagueExist = user.leagues.findIndex(league=> league.id===leagueId)
+        
+        if(!leagueExist) throw Error(`League with id ${id} do not exist`)
+        user.leagues.splice(leagueExist, 1)
     
+        await user.save()
         await league.save()
        
     })()

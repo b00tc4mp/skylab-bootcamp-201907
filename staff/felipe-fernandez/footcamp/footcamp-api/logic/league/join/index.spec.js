@@ -63,18 +63,7 @@ describe('logic - join league', () => {
         
     })
 
-    it('should fail if the league already exists', async () => {
-
-        await League.create({ id, name: nameLeague, code})
- 
-        try {
-             await logic.joinLeague(id, 'hola')
-        } catch(error) {
-            
-             expect(error).to.exist
-             expect(error.message).to.equal(`cannot find league with code hola`)
-        }
-     })
+   
 
     it('should fail if the code does not match', async () => {
 

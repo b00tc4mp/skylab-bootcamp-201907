@@ -94,7 +94,7 @@ describe('logic - retrieve league', () => {
             } catch(error) {
                 
                  expect(error).to.exist
-                 expect(error.message).to.equal(`league with code 5d772fb62bb54120d08d7a7b does not exist`)
+                 expect(error.message).to.equal(`league with id 5d772fb62bb54120d08d7a7b does not exist`)
             }
          })
     

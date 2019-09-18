@@ -89,7 +89,7 @@ describe('logic - delete team', () => {
    })
 
     it('should succeed on correct data', async () => {
-        debugger
+        
         const result = await logic.deleteTeam(id, leagueId, teamId)
         
             expect(result).not.to.exist

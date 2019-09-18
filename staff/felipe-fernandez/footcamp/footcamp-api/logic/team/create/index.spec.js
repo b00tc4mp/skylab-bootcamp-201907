@@ -15,8 +15,6 @@ describe('logic - create team', () => {
 
 
     let name, surname, email, password, nameTeam, nameLeague, points, code, leagueId
-    let namePlayer, namePlayer2,  surnamePlayer, surnamePlayer2, playerId, playerId2, realTeam, realTeam2, position, position2, pointsPerGame, pointsPerGame2
-    let totalPoints, totalPoints2, yellowCards, yellowCards2, redCards, redCards2, goals, goals2, minutes, minutes2, photo, cost, cost2
 
     beforeEach(() => {
 
@@ -53,8 +51,8 @@ describe('logic - create team', () => {
    })
 
     it('should succeed on correct data', async () => {
-        debugger
-        const result = await logic.createTeam(id, leagueId, nameTeam)
+        
+        const result = await logic.createTeam(id, nameTeam, leagueId)
             expect(result).to.exist
 
         const league = await League.findOne({_id: leagueId})
@@ -74,7 +72,7 @@ describe('logic - create team', () => {
             await League.create({ id, name: leagueId, code })
             await League.deleteMany()
             try {
-                await logic.createTeam(id, leagueId, nameTeam)
+                await logic.createTeam(id, nameTeam, leagueId)
             } catch(error) {
                 
                 expect(error).to.exist
@@ -85,7 +83,7 @@ describe('logic - create team', () => {
          it('should fail on incorrect user id', async () => {
             id = '5d772fb62bb54120d08d7a7b'
             try {
-                await logic.createTeam(id, leagueId, nameTeam)
+                await logic.createTeam(id, nameTeam, leagueId)
                 throw Error('should not reach this point') 
             }
             catch({message}){
@@ -94,26 +92,7 @@ describe('logic - create team', () => {
             
         })
 
-        // it('should fail if the user does not join before to the league', async () => {
-
-        //     const user = await User.create({ name, surname, email, password })
-
-        //     const league = await League.create({ id, name: nameLeague,code  })
-        //     leagueId = league.id
-
-        //     league.participants.includes(user.id)
-           
-        //     await Team.create({ id, leagueId, name: nameTeam})
-
-        //     try {
-        //         await logic.createTeam(id, code, nameTeam)
-        //         throw Error('should not reach this point') 
-        //     }
-        //     catch({message}){
-        //         expect(message).to.equal(`Team with name ${nameTeam} already exist`)
-        //     }
-            
-        // })
+       
 
         it('should fail if the team name exist', async () => {
 
@@ -122,7 +101,7 @@ describe('logic - create team', () => {
             await Team.create({ id, name: nameTeam  })
 
             try {
-                await logic.createTeam(id, leagueId, nameTeam)
+                await logic.createTeam(id, nameTeam, leagueId)
                 throw Error('should not reach this point') 
             }
             catch({message}){
@@ -135,19 +114,19 @@ describe('logic - create team', () => {
    
         it('should fail on undefined league name', () => 
             expect(() => 
-                logic.createTeam(id, leagueId, undefined)
+                logic.createTeam(id, undefined, leagueId)
          ).to.throw(`name with value undefined is not a string`)
         )
 
         it('should fail on undefined user id', () => 
             expect(() => 
-                logic.createTeam(undefined, leagueId, nameTeam )
+                logic.createTeam(undefined, nameTeam, leagueId )
         ).to.throw(`id with value undefined is not a string`)
         )
 
         it('should fail on undefined leagueId', () => 
             expect(() => 
-                logic.createTeam(id, undefined, nameTeam)
+                logic.createTeam(id, nameTeam, undefined)
         ).to.throw(`leagueId with value undefined is not a string`)
         )
         
@@ -155,19 +134,19 @@ describe('logic - create team', () => {
 
         it('should fail on non-string team name', () => 
             expect(() => 
-                logic.createTeam(id, leagueId, 12345)
+                logic.createTeam(id, 12345,  leagueId)
         ).to.throw(`name with value 12345 is not a string`)
         )
 
         it('should fail on non-string user id', () => 
             expect(() => 
-                logic.createTeam(12345, leagueId, nameTeam )
+                logic.createTeam(12345, nameTeam, leagueId )
         ).to.throw(`id with value 12345 is not a string`)
         )
 
         it('should fail on non-string leagueId', () => 
             expect(() => 
-                logic.createTeam(id, 12345, nameTeam)
+                logic.createTeam(id, nameTeam, 12345)
         ).to.throw(`leagueId with value 12345 is not a string`)
         )
 
@@ -175,19 +154,19 @@ describe('logic - create team', () => {
                 
          it('should fail on empty id', () => 
             expect(() => 
-                    logic.createTeam('', leagueId, nameTeam)
+                    logic.createTeam('', nameTeam, leagueId)
             ).to.throw(`id is empty or blank`)
             )
 
         it('should fail on empty leagueId', () => 
             expect(() => 
-                    logic.createTeam(id, '', nameTeam )
+                    logic.createTeam(id, nameTeam,  '' )
         ).to.throw(`leagueId is empty or blank`)
             )
 
         it('should fail on empty name team', () => 
              expect(() => 
-                    logic.createTeam(id, leagueId, '')
+                    logic.createTeam(id, '', leagueId)
         ).to.throw(`name is empty or blank`)
             )
 

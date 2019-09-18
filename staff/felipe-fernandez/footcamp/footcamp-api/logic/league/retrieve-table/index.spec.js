@@ -7,7 +7,7 @@ const {  random : { number }  } = require('footcamp-utils')
 
 const { env: { DB_URL_TEST }} = process
 
-describe('logic - retrieve all league teams ', () => {
+describe.only('logic - retrieve all league teams ', () => {
     
     before(() =>  database.connect(DB_URL_TEST))
 
@@ -37,7 +37,7 @@ describe('logic - retrieve all league teams ', () => {
         realTeam = `realTeam-${Math.random()}`
         position = 1
         pointsPerGame = number(1111,2241111)
-        totalPoints = number(1111,2241111)
+        totalPoints = 10
         yellowCards = number(1111,2241111)
         redCards = number(1111,2241111)
         goals = number(1111,2241111)
@@ -50,7 +50,7 @@ describe('logic - retrieve all league teams ', () => {
         realTeam2 = `realTeam-${Math.random()}`
         position2 = 2
         pointsPerGame2 = number(1111,2241111)
-        totalPoints2 = number(1111,2241111)
+        totalPoints2 = 14
         yellowCards2 = number(1111,2241111)
         redCards2 = number(1111,2241111)
         goals2 = number(1111,2241111)
@@ -84,16 +84,21 @@ describe('logic - retrieve all league teams ', () => {
             id_player = player.id
             id_player2 = player2.id
 
+
             const team1 = new Team({id, name: nameTeam, points})
             const team2 = new Team({id: id2, name: nameTeam2, points})
             team1.owner = id
             team2.owner = id2
             
-            
+            team1.lineup.push(id_player)
+            team1.lineup.push(id_player2)   
+            team2.lineup.push(id_player)   
+             
+             
             team1.players.push(id_player)
             team2.players.push(id_player2)
-            team1.players.push(id_player)
-            team2.players.push(id_player2)
+            team1.players.push(id_player2)
+         
 
             league.team.push(team1)
             league.team.push(team2)

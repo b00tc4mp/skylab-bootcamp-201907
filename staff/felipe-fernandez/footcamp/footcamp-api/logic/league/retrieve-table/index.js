@@ -1,5 +1,5 @@
 const {validate} = require('footcamp-utils')
-const { models: { User,  League, Team } } = require('footcamp-data')
+const { models: { User,  League, Player } } = require('footcamp-data')
 
  /**
  * Retrieves all the leagues of the user where he's a participant
@@ -24,22 +24,42 @@ module.exports = function(id, leagueId) {
 
         const league = await League.findOne({ _id: leagueId })
 
+        //const teams = await League.findOne({ _id: leagueId }).populate("team.players", "totalPoints").lean()
+        
+        const teams = await League.findOne({ _id: leagueId }).populate("team.lineup", "totalPoints").lean()
+
         if (!league) throw Error(`League with id ${ leagueId } does not exist`)
-
-        const teams = await Promise.all(league.team.map(team => team))
-
+        
         let allTeams = []
 
+        let points = 0
+        
         //create an array of objects with the properties of the teams to return
-        teams.forEach(element => {
-          let  team = {
-            name :  element.name,
-            points : element.points ? element.points: 0,
-            owner : element.owner.toString()
-            }
-            allTeams.push(team)
-        })
-       
+        debugger
+
+        teams.team.forEach(element => {
+            let  team = {
+              id : element._id.toString(),
+              name :  element.name,
+              sumPoints :  element.lineup.forEach(point => {
+                  
+                      points += point.totalPoints
+              
+              }),
+             
+              totalPoints:  points,
+              
+              owner : element.owner.toString()
+              }
+              points=0
+              allTeams.push(team)
+          }
+
+          )
+          
+
+
+          
         return allTeams
 
     })()

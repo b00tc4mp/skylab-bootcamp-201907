@@ -13,8 +13,10 @@ module.exports = {
     createTeam: require('./team/create'),
     retrieveTeam: require('./team/retrieve'),
     lineUpTeam: require('./team/team-lineup'),
+    retrievelineUpTeam: require('./team/retrieve-lineup'),
     deleteTeam: require('./team/delete'),
-    retrievePlayer: require('./player/retrieve')
+    retrievePlayer: require('./player/retrieve'),
+    updateTeam: require('./team/update')
     
     
 }

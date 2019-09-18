@@ -17,7 +17,9 @@ const retrieveTable = require('./league/retrieve-table')
 const createTeam = require('./team/create')
 const retrieveTeam = require('./team/retrieve')
 const lineUpTeam = require('./team/lineup')
+const retrievelineUpTeam = require('./team/retrieve-lineup')
 const deleteTeam = require('./team/delete')
+const updateTeam = require('./team/update')
 
 const retrievePlayer = require('./player/retrieve')
 
@@ -44,7 +46,9 @@ router.get ('/users/leagues/:leagueId/table', [tokenMiddleware, jsonBodyParser],
 router.post('/users/leagues/:leagueId/team', [tokenMiddleware, jsonBodyParser], createTeam)
 router.get ('/users/leagues/:leagueId/team/:teamId', [tokenMiddleware, jsonBodyParser], retrieveTeam)
 router.get ('/users/leagues/:leagueId/team/:teamId/lineup', [tokenMiddleware, jsonBodyParser], lineUpTeam)
+router.get ('/users/leagues/:leagueId/team/:teamId/lineups', [tokenMiddleware, jsonBodyParser], retrievelineUpTeam)
 router.delete ('/users/leagues/:leagueId/team/:teamId', [tokenMiddleware, jsonBodyParser], deleteTeam)
+router.post ('/users/leagues/:leagueId/team/:teamId', [tokenMiddleware, jsonBodyParser], updateTeam)
 
 
 /**PLAYER**/

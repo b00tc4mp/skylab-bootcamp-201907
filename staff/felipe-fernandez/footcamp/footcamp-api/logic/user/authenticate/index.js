@@ -20,7 +20,7 @@ module.exports = function(email, password) {
     return (async () => {
         
         const user = await User.findOne({ email })
-        if (!user) throw Error('Wrong credentials.')
+        if (!user) throw Error('Wrong credentials')
 
         const match = await bcrypt.compare(password , user.password)
         if(!match) throw new Error ('Wrong credentials')

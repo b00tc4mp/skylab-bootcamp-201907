@@ -24,7 +24,7 @@ module.exports = function(id, leagueId) {
 
         const leagues = await League.findOne({_id: leagueId})
         
-        if (!leagues) throw Error(`league with code ${ leagueId } does not exist`)
+        if (!leagues) throw Error(`league with id ${ leagueId } does not exist`)
         debugger
         //check the team in the database and select name, participants and teams
         let name, codes, teams
