@@ -3,7 +3,7 @@ const logic = require('../../')
 const { User } = require('../../../data')
 const mongoose = require('mongoose')
 
-describe('logic - authenticate user', () => {
+describe.only('logic - authenticate user', () => {
     before(() => mongoose.connect('mongodb://localhost/goliath-api-test', { useNewUrlParser: true }))
 
     let name, surname, instrument, descritpion, email, password, id

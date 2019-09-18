@@ -12,6 +12,7 @@ class Landing extends Component {
         this.handleLogout = this.handleLogout.bind(this)
         this.handleAcceptError = this.handleAcceptError.bind(this)
         this.handleDrumkit = this.handleDrumkit.bind(this)
+        this.handleJamtrack = this.handleJamtrack.bind(this)
     }
 
     componentWillMount() {
@@ -68,13 +69,14 @@ class Landing extends Component {
 
         this.props.onDrumkit()
     }
+    handleJamtrack(event) {
+        event.preventDefault()
+
+        this.props.onJamtrack()
+    }
 
 
-    // handleMyDrumkits(event) {
-    //     event.preventDefault()
 
-    //     onMyDrumkits()
-    // }
 
 
 
@@ -85,7 +87,7 @@ class Landing extends Component {
             state: { view, error, user, favs },
             handleRegister,
             handleLogin, handleLogout,
-            handleDrumkit,
+            handleDrumkit,handleJamtrack
         } = this
 
         return (
@@ -100,17 +102,18 @@ class Landing extends Component {
                         </ul> : <ul>
                                 {user && <p>{user.name}</p>  }
                                 <li><a href="" onClick={handleDrumkit}>Drumkit</a></li>
+                                <li><a href="" onClick={handleJamtrack}>Jamtrack</a></li>
                                 <li><a href="" onClick={handleLogout}>Logout</a></li>
                             </ul>}
 
                     </nav>
                 </header>
-                <img src="../imgs/logo.png" alt="" />
-                {user && <Mydrumkits drumkits={user.drumkits} onEditDrumkit={this.props.onEditDrumkit} />}
                 
-
-
-
+                 {user && <Mydrumkits drumkits={user.drumkits} onEditDrumkit={this.props.onEditDrumkit} />}     
+                
+            
+              
+                
             </>
         )
     }

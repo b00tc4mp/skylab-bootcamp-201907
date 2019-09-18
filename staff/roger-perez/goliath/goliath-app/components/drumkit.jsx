@@ -110,9 +110,9 @@ function Drumkit({ user, drumkit, onBack, onUpdate, error }) {
             index++
         }
     }
-
+    
     const handleSave = () => {
-        console.log('myUser :', myUser);
+        console.log('myUser :', user);
 
         const obj = {
             name,
@@ -121,8 +121,8 @@ function Drumkit({ user, drumkit, onBack, onUpdate, error }) {
         }
 
         const { id, token } = sessionStorage
-        myUser.drumkits.push(obj)
-        onUpdate(myUser)
+        user.drumkits.push(obj)
+        onUpdate(user)
 
     }
 
@@ -161,7 +161,6 @@ function Drumkit({ user, drumkit, onBack, onUpdate, error }) {
             event.preventDefault()
             handleClearAll()
             setTimeout( () => onBack(), 200)
-            // onBack()
         }}>Go back</a>
 
     </>

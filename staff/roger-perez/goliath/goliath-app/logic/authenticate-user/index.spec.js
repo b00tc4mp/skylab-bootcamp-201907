@@ -13,9 +13,9 @@
                 favorites: []
             }
 
-            return call('https://skylabcoders.herokuapp.com/api/user', 'post', { 'content-type': 'application/json' }, user)
+            return call('http://localhost:8080/api/auth', 'post', { 'content-type': 'application/json' }, user)
                 .then(response => {
-                    if (response.status === 'KO') throw new Error(response.error)
+                    if (response.status !== 200) throw new Error(response.error)
                 })
         })
 
@@ -42,6 +42,5 @@
             ).toThrowError(Error, 'username with value manuelbarzi#gmail.com is not a valid e-mail')
         )
 
-        // TODO test more cases
     })
 }

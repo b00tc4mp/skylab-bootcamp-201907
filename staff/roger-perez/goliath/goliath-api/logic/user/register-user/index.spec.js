@@ -16,13 +16,15 @@ describe('logic - register user', () => {
         description = `description-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
-
+        drumkits = [],
+        admin = false
+        
        
         return User.deleteMany()
     })
 
     it('should succeed on correct data', () =>
-        logic.registerUser(name, surname, instrument, description, email, password)
+        logic.registerUser(name, surname, instrument, description, email, password,drumkits,admin)
             .then(result => {
                 expect(result).not.to.exist
 
@@ -36,6 +38,8 @@ describe('logic - register user', () => {
                 expect(user.description).to.equal(description)
                 expect(user.email).to.equal(email)
                 expect(user.password).to.equal(password)
+                expect(user.drumkits).to.deep.equal(drumkits)
+                expect(user.admin).to.equal(admin)
             })
     )
 

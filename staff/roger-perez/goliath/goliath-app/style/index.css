@@ -2,7 +2,12 @@
   border: 1px solid black;
   padding: 10px;
   margin: 10px;
+  
+
 }
+
+
+
 
 .feedback--error {
   color: red;
@@ -28,4 +33,4 @@
   text-align: center;
 }
 
-/*# sourceMappingURL=index.css.map */
+

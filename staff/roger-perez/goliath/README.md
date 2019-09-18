@@ -7,9 +7,10 @@ Goliath es una app, pensada como herramienta para poder practicar tu instumento 
 * Register a user.
 * Sign in.
 * Drumkit
-* Generate Backing tracks.
-* Voice orders
-* Save/delete your stuff
+* Save/delete your drumkits
+* Open your drumkits
+* Edit your drumkits
+
 
 ## Build status 
 

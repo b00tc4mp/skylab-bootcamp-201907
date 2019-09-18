@@ -26,6 +26,7 @@ class App extends Component {
     this.handleRetrieve = this.handleRetrieve.bind(this);
     this.handleUpdateDrumkit = this.handleUpdateDrumkit.bind(this);
     this.handleDrumkitEdit = this.handleDrumkitEdit.bind(this);
+    this.handleGoToJamtrack = this.handleGoToJamtrack.bind(this);
 
   }
 
@@ -118,7 +119,11 @@ class App extends Component {
     this.setState({ view: "drumkit", user: null, drumkit: null });
   }
 
-  
+
+  handleGoToJamtrack() {
+    
+    this.setState({ view: "jamtrack"});
+  }  
   
   handleLogout() {
     delete sessionStorage.id;
@@ -156,7 +161,8 @@ class App extends Component {
       handleChange,
       handleRetrieve,
       handleUpdateDrumkit,
-      handleDrumkitEdit
+      handleDrumkitEdit,
+      handleGoToJamtrack
       
     } = this;
 
@@ -170,6 +176,7 @@ class App extends Component {
             onLogout={handleLogout}
             onDrumkit={handleGoToDrumkit}
             onEditDrumkit={handleDrumkitEdit}
+            onJamtrack={handleGoToJamtrack}
           />
         )}
         {view === "register" && (
@@ -198,6 +205,11 @@ class App extends Component {
           user={user}
           onUpdate={handleUpdateDrumkit}
           drumkit={drumkit}
+          />
+        )}
+          {view === "jamtrack" && (
+          <Jamtrack
+          
           />
         )}
   

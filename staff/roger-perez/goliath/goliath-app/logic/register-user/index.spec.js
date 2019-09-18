@@ -16,7 +16,7 @@
 
         it('should succeed on correct data', () =>
             logic.registerUser(user.name, user.surname, user.username, user.password, user.password)
-                .then(() => call('https://skylabcoders.herokuapp.com/api/auth', 'post', { 'content-type': 'application/json' }, { username: user.username, password: user.password }))
+                .then(() => call('http://localhost:8080/api/auth', 'post', { 'content-type': 'application/json' }, { username: user.username, password: user.password }))
                 .then(response => {
                     if (response.status === 'KO') throw new Error(response.error)
                     else {

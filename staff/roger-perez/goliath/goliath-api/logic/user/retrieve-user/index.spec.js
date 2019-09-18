@@ -55,6 +55,5 @@ describe('logic - retrieve user', () => {
     ).to.throw(`id with value 123 is not a string`)
     )
 
-    // after(() => client.close())
     after(() => mongoose.disconnect())
 })

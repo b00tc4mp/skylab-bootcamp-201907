@@ -8,7 +8,7 @@ describe('logic - update user', () => {
  
    before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
 
-    let name, surname,instrument,description, email, password, id, body
+    let name, surname,instrument,description, email, password, id, body,drumkit
 
     beforeEach(() => {
         name = `name-${Math.random()}`
@@ -17,6 +17,8 @@ describe('logic - update user', () => {
         description = `description-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
+        drumkit = []
+        admin = false
 
         body = {
             name: `name-${Math.random()}`,
@@ -28,10 +30,10 @@ describe('logic - update user', () => {
             extra: `extra-${Math.random()}`
         }
 
-        // users --> User
+       
         return User.deleteMany()
            
-            .then(() => User.create({ name, surname,instrument,description, email, password }))
+            .then(() => User.create({ name, surname,instrument,description, email, password,drumkit,admin }))
           
             .then(user => id = user.id)
     })
@@ -53,6 +55,7 @@ describe('logic - update user', () => {
                 expect(user.email).to.equal(body.email)
                 expect(user.password).to.equal(body.password)
                 expect(user.extra).not.to.exist
+                expect
             })
     )
 

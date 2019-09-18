@@ -10,7 +10,7 @@ function Sequence({ beats, instrument, doValues, error }) {
         } else {
             setTheBeats([ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ])
         }
-    }, [beats])
+    }, [])
 
     React.useEffect( () => {
         doValues(thebeats)
