@@ -7,13 +7,14 @@ import chest from '../../img/chest.png'
 import L from 'leaflet'
 import logic from '../../logic'
 
-function Profile({ history, setUser }) {
+function Profile({ history, setUser, user }) {
 
     const [position, setPosition] = useState([0, 0])
     const [zoom, setZoom] = useState(2)
     const [haveUsersLocation, setHaveUsersLocation] = useState(false)
     const [allCaches, setAllCaches] = useState([])
     const [ownCaches, setOwnCaches] = useState([])
+    const [foundCaches, setFoundCaches] = useState([])
 
     var myIcon = L.icon({
         iconUrl: chest,
@@ -34,6 +35,9 @@ function Profile({ history, setUser }) {
             const user = await logic.retrieveUser()
 
             setUser(user)
+
+            const foundCaches = user.found
+            setFoundCaches(foundCaches)
         })()
     }, [history.location])
     useEffect(() => {
@@ -96,31 +100,57 @@ function Profile({ history, setUser }) {
     return (<>
         <main className="profile">
             <section className="profile__caches">
+
+                
                 {ownCaches.length > 0 && <h3 className='profile__caches-header'>Owned Caches</h3>}
                 {ownCaches.map((item) => (<ul className='profile__caches-list'>
-                    <section className='buttons'>
-                    <li className='profile__caches-item'><p className='profile__caches-paragraph'>Name: {item.name}</p></li>
+                    <li className='profile__caches-item'><p className='profile__caches-paragraph'>{item.name}</p></li>
+                    <section className='profile__caches-buttons'>
+                        <form className='profile__caches-detailsForm' onSubmit={event => {
+                            event.preventDefault()
+                            handleGoToDetails(event.target.cacheId.value)
+                        }}>
+                            <input type='hidden' name="cacheId" value={item._id} />
+                            <button className='profile__caches-detailsCache'>Details</button>
+                        </form>
 
-                    <form className='profile__caches-detailsForm' onSubmit={event => {
-                        event.preventDefault()
-                        handleGoToDetails(event.target.cacheId.value)
-                    }}>
-                        <input type='hidden' name="cacheId" value={item._id} />
-                        <button className='profile__caches-detailsCache'>Details</button>
-                    </form>
-                    
-                    <form className='profile__caches-deleteForm' onSubmit={event => {
-                        event.preventDefault()
-                        handleDeleteCache(event.target.cacheId.value)
-                    }}>
-                        <input type='hidden' name="cacheId" value={item._id} />
-                        <button className='profile__caches-deleteCache'>Delete</button>
-                    </form>
+                        <form className='profile__caches-deleteForm' onSubmit={event => {
+                            event.preventDefault()
+                            handleDeleteCache(event.target.cacheId.value)
+                        }}>
+                            <input type='hidden' name="cacheId" value={item._id} />
+                            <button className='profile__caches-deleteCache'>Delete</button>
+                        </form>
                     </section>
-                    
+
                 </ul>))}
             </section>
 
+            <Map className="map-profile" center={position} zoom={zoom}>
+                <TileLayer
+                    attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url='https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}' ext='jpg'
+                />
+                {
+                    haveUsersLocation ?
+                        <Marker position={position} icon={myIcon2} draggable={true} onDragend={updatePosition} ref={refmarker} />
+                        : ''
+
+                }
+                {allCaches && allCaches.length && allCaches.map(cache => <Marker key={cache._id} draggable={false}
+                    position={[cache.location.coordinates[1], cache.location.coordinates[0]]} icon={myIcon}>
+                    <Popup>
+                        <form onSubmit={event => {
+                            event.preventDefault()
+                            handleGoToDetails(event.target.cacheId.value)
+                        }}>
+                            <input type='hidden' name="cacheId" value={cache._id} />
+                            <button className='popup__button'>{cache.name}</button></form>
+                    </Popup>
+                </Marker>)}
+
+            </Map>
+            
             <section className="create__cache">
                 <h3 className='create__cache-header'>Create Cache</h3>
                 <form className='create__cache-form' onSubmit={event => {
@@ -135,48 +165,30 @@ function Profile({ history, setUser }) {
                     <input className='create__cache-input' type="name" name="name" />
                     <label className='create__cache-label' htmlFor="description">Description</label>
                     <input className='create__cache-input' type="description" name="description" />
-                    <label className='create__cache-label' htmlFor="difficulty">Difficulty</label>
-                    <select type='difficulty' name='difficulty'>
-                        <option value='1'>1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                    <label className='create__cache-label' htmlFor="terrain">Terrain</label>
-                    <select type='terrain' name='terrain'>
-                        <option value='1'>1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                    <label className='create__cache-label' htmlFor="size">Size</label>
-                    <select type='size' name='size'>
-                        <option value='small'>small</option>
-                        <option value="medium">medium</option>
-                        <option value="large">large</option>
-                    </select>
+                    <div className='create__cache-div'>
+                        <label className='create__cache-label' htmlFor="difficulty">Difficulty</label>
+                        <select type='difficulty' name='difficulty'>
+                            <option value='1'>1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        <label className='create__cache-label' htmlFor="terrain">Terrain</label>
+                        <select type='terrain' name='terrain'>
+                            <option value='1'>1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        <label className='create__cache-label' htmlFor="size">Size</label>
+                        <select type='size' name='size'>
+                            <option value='small'>small</option>
+                            <option value="medium">medium</option>
+                            <option value="large">large</option>
+                        </select>
+                    </div>
                     <label className='create__cache-label' htmlFor="hints">Hints</label>
                     <textarea rows="4" cols="20" name='hints' />
-                    <button className='create_cache-create'>Proceed</button>
+                    <button className='create__cache-create'>Create cache</button>
                 </form>
-
-                <Map className="map" center={position} zoom={zoom}>
-                    <TileLayer
-                        attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        url='https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}' ext='jpg'
-                    />
-                    {
-                        haveUsersLocation ?
-                            <Marker position={position} icon={myIcon2} draggable={true} onDragend={updatePosition} ref={refmarker} />
-                            : ''
-
-                    }
-                    {allCaches && allCaches.length && allCaches.map(cache => <Marker key={cache._id} draggable={false}
-                        position={[cache.location.coordinates[1], cache.location.coordinates[0]]} icon={myIcon}>
-                        <Popup>
-                            <p>{cache.name}</p>
-                        </Popup>
-                    </Marker>)}
-
-                </Map>
             </section>
         </main>
     </>

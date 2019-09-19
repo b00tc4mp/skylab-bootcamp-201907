@@ -15,7 +15,7 @@ function Landing({ history, setView }) {
         <main className='landing'>
             <section className='landing__section'>
                 <h2 className='landing__section-h'>Join the world's largest treasure hunt!</h2>
-                <p className='landing__section-p'>Track down hidden treasures in the real world and capture them for points.
+                <p className='landing__section-p'>Track down hidden treasures in the real world and capture them.
                     Whether you are a casual player, an avid explorer, or a hardcore competition enthusiast,
                 SkyCaching helps you rediscover the world around you.</p>
 

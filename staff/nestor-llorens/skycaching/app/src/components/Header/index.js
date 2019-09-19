@@ -43,7 +43,7 @@ function Header({ view, setView, history, user }) {
 
     return (
         <header className='header'>
-            <a onClick={handleGoToHome}><h1 className='header__title'>SkyCaching</h1></a>
+            <a className = "header_a" onClick={handleGoToHome}><h1 className='header__title'>SkyCaching</h1></a>
             <nav className='header__navbar'>
                 {!logic.isUserLoggedIn() ?
                     <ul className='header__navbar-ul'>

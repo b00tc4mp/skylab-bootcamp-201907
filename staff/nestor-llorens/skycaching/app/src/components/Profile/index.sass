@@ -1,87 +1,86 @@
 $base-color: #05386b
 $fontFamily: Lato, sans-serif
 
+
 .profile
-    display: flex
-    // flex-direction: column
-    // justify-content: center
-    border: 1px $base-color black
+    heigth: 80vh
     font-family: $fontFamily
     color: $base-color
-    margin-bottom: 2em
-    margin-top: 1em
 
     &__caches
-        
-
-        &-paragraph
-            margin: 0
-            padding-right: 2em
-
-
-        &-item
-            display: inline
+        margin: 2vh
+        &-header
+            font-size: 14px
+            margin-bottom: 0.5vh
         &-list
-            padding: 0
+            padding: 0.6vh
+            border: 1px solid #05386b
+            font-size: 12px
             list-style: none
             display: flex
             flex-direction: row
+            justify-content: space-between
+            margin-bottom: 0.7vh
+        &-buttons
+            display: flex
 
-        &-header
-
-        &-detailsForm
-            padding-right: 2em
-        
         &-detailsCache
-            font-size: 16px
+            font-size: 12px
+            margin-right: 1vh
             text-align: center
             border: none
             background: none
             padding: 0
             color: #05386b
             font-weight: 700
-            // border: 2px solid #05386b
-            
 
-        &-deleteForm
-
-        
         &-deleteCache
-            font-size: 16px
-            text-align: center
+            font-size: 12px
+            text-align: end
             border: none
             background: none
             padding: 0
             color: Crimson
             font-weight: 700
-            // border: 2px solid #05386b 
+    
+.create__cache
+    margin: 2vh
 
-            
-
-    &__form
+    &-header
+        font-size: 14px
+        margin-bottom: 0.5vh
+    &-form
+        border: 1.3px solid black
+        margin-bottom: 0.5vh
+        font-size: 12px
+        padding: 0.6vh
         display: flex
         flex-direction: column
-        justify-content: center
-        width: 20%
-        margin: 0 auto
 
-    &__form-button
-        font-size: 15px
+    &-div
+        margin-top: 0.7vh
+        display: flex
+        flex-direction: row
+        justify-content: center
+        align-items: center
+    &-label
+        margin-bottom: 0.5vh
+        margin-top: 0.7vh
+        margin-right: 0.6vh
+        margin-left: 0.8vh
+
+    &-create
+        font-size: 12px
         text-align: center
         margin: 0 auto  
-        margin-top: 4vh
+        margin-top: 1.5vh
         border: 2px solid #05386b
         background: none
         padding: 1em
         color: #05386b
         font-weight: 700
-        max-width: 50%
-        
+        margin-bottom: 1.5vh
 
-    &__header
-        text-align: center
-
-    &__form-label
-        font-weight: 700
-        margin-top: 0.5vh
-        margin-bottom: 0.5vh
+.popup__button
+    background: none
+    border: none

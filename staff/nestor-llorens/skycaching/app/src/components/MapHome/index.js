@@ -31,6 +31,18 @@ function MapHome({ history }) {
 
   useEffect(() => {
 
+    (async function () {
+
+      // const loc = { location: { type: 'Point', coordinates: [position[1], position[0]] } }
+      // await logic.updateUser(loc)
+      const caches = await logic.retrieveAllCaches()
+      setAllCaches(caches)
+    })()
+
+  }, [])
+  
+  useEffect(() => {
+
     const interval = setInterval(() => {
       navigator.geolocation.getCurrentPosition(position => {
         setZoom(17)
@@ -38,21 +50,13 @@ function MapHome({ history }) {
         setHaveUsersLocation(true)
 
       }, error => console.log(error.message))
+
     }, 3000);
     return () => clearInterval(interval);
+    
   }, [])
 
-  useEffect(() => {
-
-    (async function () {
-
-      const loc = { location: { type: 'Point', coordinates: [position[1], position[0]] } }
-      await logic.updateUser(loc)
-      const caches = await logic.retrieveAllCaches()
-      setAllCaches(caches)
-    })()
-
-  }, [])
+  
 
   const handleGoToDetails = async (cacheId) => {
     history.push(`/details/${cacheId}`)
@@ -68,7 +72,7 @@ function MapHome({ history }) {
         />
         {
           haveUsersLocation ?
-            <Marker position={position} icon={myIcon2} >
+            <Marker position={position} icon={myIcon2} draggable={true} >
             </Marker> : ''
         }
         {allCaches && allCaches.length && allCaches.map(cache => <Marker key={cache._id} draggable={false}
@@ -79,7 +83,7 @@ function MapHome({ history }) {
               handleGoToDetails(event.target.cacheId.value)
             }}>
               <input type='hidden' name="cacheId" value={cache._id} />
-              <button>{cache.name}</button></form>
+              <button className='popup__button'>{cache.name}</button></form>
           </Popup>
         </Marker>)}
       </Map>
