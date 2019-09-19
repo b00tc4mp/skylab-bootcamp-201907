@@ -2,6 +2,12 @@
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * returns an user form db
+ * No params, user's id on token
+ * 
+ * @returns {Object} user's info.
+ */
 export default function () {
     // validate fields
 

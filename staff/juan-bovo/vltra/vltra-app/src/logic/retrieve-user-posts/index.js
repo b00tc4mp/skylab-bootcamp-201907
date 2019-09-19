@@ -1,6 +1,13 @@
 const { validate} = require('vltra-utils')
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * returns an array of posts created by the user
+ * No params, user's id on token
+ * 
+ * @returns {Array} user's posts.
+ */
+
 export default function () {
     //validate.objectId(authorId, 'authorId')
 

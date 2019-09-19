@@ -1,5 +1,13 @@
 const { validate} = require('vltra-utils')
 
+/**
+ * Creates a new post on database
+ * @param {string} title post's title
+ * @param {string} body post's content
+ * 
+ * @returns {Promise} 
+ */
+
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 export default function (title, body) {

@@ -1,6 +1,15 @@
 // const { env: { REACT_APP_API_URL } } = process
 import { validate } from 'vltra-utils'
 
+/**
+ * Authenticates a user by its credentials.
+ * 
+ * @param {string} email user's email
+ * @param {string} password user's password
+ * 
+ * @returns {undefined}
+ */
+
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 export default function (email, password) {

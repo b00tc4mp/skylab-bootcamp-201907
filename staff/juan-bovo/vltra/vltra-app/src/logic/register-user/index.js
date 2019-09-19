@@ -1,7 +1,17 @@
 // const { env: { REACT_APP_API_URL } } = process
 const { validate} = require('vltra-utils')
-
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
+
+/**
+ * Sends info to api to create a user on db.
+ * 
+ * @param {string} name user's name
+ * @param {string} surname user's surname
+ * @param {string} nickname user's nickname
+ * @param {string} email user's email
+ * @param {string} password user's password (get crypt on api).
+ * @param {string} repassword user's password confirmation
+ */
 
 export default function (name, surname, nickname, email, password, repassword) {
     validate.string(name, 'name')

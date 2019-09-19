@@ -1,6 +1,14 @@
 const { validate} = require('vltra-utils')
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * Returns a post from db
+ * 
+ * @param {string} postId post's id
+ * 
+ * @returns {Object} post's info.
+ */
+
 export default function (postId) {
     validate.string(postId, 'postId')
 
