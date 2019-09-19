@@ -2,25 +2,25 @@ import React, { useState, useEffect } from 'react'
 import Context from './Context'
 import logic from '../logic'
 import Login from './Login'
-import ClassList from './Class-List'
+import ClassList from './ClassList'
 import Register from './Register'
 import Mentor from './Mentor'
 import Subject from './Subject'
 import Exams from './Exams'
-import Homeworks from './Homeworks'
-import SubjectList from './Subject-List'
-import RemoveClass from './Remove-Class'
-import RemoveTeacher from './Remove-Teacher'
+import Homeworks from './Homework'
+import SubjectList from './SubjectList'
+import RemoveClass from './RemoveClass'
+import RemoveTeacher from './RemoveTeacher'
 import RemoveSubject from './RemoveSubject'
-import TeacherList from './Teacher-List'
-import StudentList from './Student-List'
-import SubjectTeacherList from './Subject-Teach-List'
-import StudentHome from './Student-Home'
-import TeacherHome from './Teacher-Home'
+import TeacherList from './TeacherList'
+import StudentList from './StudentList'
+import SubjectTeacherList from './SubjectTeachList'
+import StudentHome from './StudentHome'
+import TeacherHome from './TeacherHome'
 import Profile from './Profile'
 import { withRouter, Route, Redirect } from 'react-router-dom'
 
-//import './App.sass';
+import './App.sass';
 
 function App({ history }) {
   
@@ -39,23 +39,10 @@ function App({ history }) {
    const [posts, setPosts] = useState(undefined)
    
   const [exams, setExams] = useState(undefined)
+
+  const [error, setError] = useState(undefined)
+
     
-
-  const handleGoToRegister = event => {
-    event.preventDefault()
-
-    setView('register')
-
-    history.push('/register')
-  }
-
-  const handleGoToLogin = event => {
-    event.preventDefault()
-
-    setView('login')
-
-    history.push('/login')
-  }
 
   useEffect(() => {
     if (history.location.pathname === '/') setView(undefined)
@@ -63,28 +50,27 @@ function App({ history }) {
 
   return (
 
-    <>
-      <Context.Provider value={{ posts, setPosts, exams, setExams , students, setStudents, classes, setClasses, view, setView, user, setUser, subjects, setSubjects, teachers, setTeachers }} >
+    <div className='app'>
+      <Context.Provider value={{error, setError, posts, setPosts, exams, setExams , students, setStudents, classes, setClasses, view, setView, user, setUser, subjects, setSubjects, teachers, setTeachers }} >
 
-        <header>
+{/*         <header className='home' >
           {view !== 'home' && !logic.user.isUserLoggedIn() && <nav>
-            <ul>
-              {view !== 'login' && <li><a href="" onClick={handleGoToLogin}>Login</a></li>}
-              {view !== 'register' && <li><a href="" onClick={handleGoToRegister}>Register</a></li>}
+            <ul className='home__ul'>
+              {view !== 'login' && <Redirect to='/login'/>}
+              {view !== 'register' && <Redirect to='/register'/>}
             </ul>
           </nav>
           }
-        </header>
-
+        </header> */}
+        {!logic.user.isUserLoggedIn() && <Redirect to='/login' />}
         {logic.user.isStudent() && <Redirect to="/student-home" />}
         {logic.user.isMentor() && <Redirect to="/admin" />}
         {logic.user.isTeacher() && <Redirect to="/teacher-home" />}
 
 
-        <Route path="/register" render={() => <Register />} />
-        <Route path="/login" render={() => <Login />} />
+        <Route exact path="/login" render={() => !logic.user.isUserLoggedIn()  ? <Login /> : null} />
+        <Route exact path="/register" render={() => !logic.user.isUserLoggedIn() ? <Register /> : null} />
 
-        {/* <Route path="/subject/:id" render={() => !logic.isUserLoggedIn() ? history.push('/') : <StudentHome /> } />       */}
         <Route path="/student-home" render={() => logic.user.isUserLoggedIn()  ? <StudentHome /> : history.push('/')} />
         <Route path="/admin" render={() => logic.user.isUserLoggedIn() ? <Mentor /> : history.push('/')} />
         <Route path="/class-list" render={() => logic.user.isUserLoggedIn() ? <ClassList /> : history.push('/')} />
@@ -103,7 +89,7 @@ function App({ history }) {
 
 
       </Context.Provider>
-    </>
+    </div>
   );
 }
 

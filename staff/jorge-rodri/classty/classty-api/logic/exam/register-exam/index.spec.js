@@ -72,7 +72,7 @@ describe('logic - register exam', () => {
 
         exam = {
             title: `title-${Math.random()}`,
-            date: `1${Math.random()}/2${Math.random()}/200${Math.random()}`,
+            date: `1${Math.random()}-2${Math.random()}-200${Math.random()}`,
             presented:[],
             note: [note]
 
@@ -81,7 +81,7 @@ describe('logic - register exam', () => {
 
     it('should succeed on correct data', async () => {
 
-        const _subject = await resgisterExam(idSub, exam)
+        const _subject = await resgisterExam(idSub, exam.title, exam.date, exam.note)
 
         expect(_subject).to.exist
         expect(_subject.exams[0].title).to.equal(exam.title)

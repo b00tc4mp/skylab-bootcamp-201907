@@ -5,9 +5,10 @@ import Header from '../Header'
 import { withRouter, Link } from 'react-router-dom'
 
 function Exams({ history }) {
-    const { exams, setExams, user, setUser } = useContext(Context)
+    const {  user, setUser } = useContext(Context)
     const [update, setUpdate] = useState(false)
     const [students, setStudents] = useState(undefined)
+    const [ exams, setExams ] = useState('')
 
     const _id = history.location.pathname.split('/').pop()
 
@@ -52,7 +53,7 @@ function Exams({ history }) {
                 debugger
                 const exams = await logic.exam.retrieveAllExams(_id);
                 setExams(exams)
-            } else {
+            } else if(user && user.type == 'teacher'){
                 debugger
                 const exams = await logic.exam.retrieveAllExamsTeacher(_id);
                 setExams(exams)
@@ -67,63 +68,65 @@ function Exams({ history }) {
 
     return <>
         <Header />
-        <main>
-            <section>
-                <h2>Exams</h2>
-                {user && user.type == 'student' && <ul>
+        <main className='exam'>
+            <section className='exam__section'>
+                {user && user.type == 'student' && <>
+                <h3 className='exam__h4'>Exams</h3>
+                
+                <ul className='exam__ul--pos'>
                     {exams && exams.length > 0 && exams.map(({ _exam }) =>
 
-                        <li>
-                            <h4>{_exam.title}</h4>
-                            <time>{reverse(_exam.date.slice(0, 9))}</time>
-                            {_exam.notes && <h3>{_exam.notes[0].note}</h3>}
+                        _exam.title&&<li key={_exam.title} className='exam__li'>
+                            <h4 className='exam__h4--padding'>{_exam.title}</h4>
+                            {_exam.date&&_exam.date!==undefined&&<time className='exam__time--position'>{reverse(_exam.date.slice(0, 9))}</time>}
+                            {_exam.notes && <h3 className='exam__h3'>{_exam.notes[0].note}</h3>}
                         </li>
                     )}
 
-                </ul>}
-                {user && user.type == 'teacher' &&
-                    <form onSubmit={handleSubmit}>
-                        <input type='text' id='ex' name='title' placeholder='title' />
-                        <input type='date' id='ex' name='date' placeholder='date' />
-                        <button>Create</button>
+                </ul> </>}
+                {user && user.type == 'teacher' && <>
+                <h3 className='exam__h4'>Create exam</h3>
+                    <form className='exam__form' onSubmit={handleSubmit}>
+                        <input className='exam__input' type='text' id='ex' name='title' placeholder='title' />
+                        <input className='exam__input' type='date' id='ex' name='date' placeholder='date' />
+                        <button className='exam__button'>Create</button>
                     </form>
-                }
+                </>}
                 {user && user.type == 'teacher' &&
-                    <ul>
+                    <ul className='exam__ul--size'>
                         {exams && exams.length > 0 && exams.map((_exam) =>
-                            <li>
-                                <h4>{_exam.title}</h4>
-                                <time>{reverse(_exam.date.slice(0, 9))}</time>
-                                <h5>Add Notes</h5>
-                                <form onSubmit={handleNote}>
-                                    <select name="select">
+                            <li key={_exam.title}>
+                                <div className='exam__div'>
+                                <h4 className='exam__h4--size'>{_exam.title}</h4>
+                                {_exam.date&&_exam.date!==undefined&&<time className='exam__time--position'>{reverse(_exam.date.slice(0, 9))}</time>}
+                                </div>
+                                <form className='exam__form' onSubmit={handleNote}>
+                                    <select className='exam__select' name="select">
                                         {students && students.length > 0 && students.map(student =>{debugger
 
                                             return student.id == _exam._id&&
 
                                             student.user && student.user.length > 0 && student.user.map(({name, surname, id})=>
                                             
-                                                <option value={name+" "+surname}>{name + " " + surname}</option>
+                                                <option key={id} value={name+" "+surname}>{name + " " + surname}</option>
     
                                             )
                                         })}
                                     </select>
-                                    <input type='text' id='ex' name="note" placeholder='note' />
+                                    <input className='exam__input' type='text' id='ex' name="note" placeholder='note' />
                                     <input type='hidden' name='id' value={_exam._id} />
-                                    <button>Add</button>
+                                    <button className='exam__button--size'>Add</button>
                                 </form>
-                                <h5>Notes</h5>
-                                <ul>{_exam.notes && _exam.notes.length > 0 && _exam.notes.map(({ name, surname, note }) => {
-                                    return <li>
-                                        <h7>{name + " " + surname}</h7>
+                                <h5 className='exam__h5'>Notes</h5>
+                                <ul className='exam__ul'>{_exam.notes && _exam.notes.length > 0 && _exam.notes.map(({ name, surname, note }) => {
+                                    return <li key={surname+name}>
+                                        <h5>{name + " " + surname}</h5>
                                         <p>{note}</p>
                                     </li>
                                 })}</ul>
                             </li>)}
-
                     </ul>}
             </section>
-            <Link to={`/subject/${_id}`}>Go back</Link >
         </main>
     </>
 }

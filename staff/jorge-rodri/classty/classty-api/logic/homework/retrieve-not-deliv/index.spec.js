@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const { expect } = require('chai')
-const retrieveAllHomeWorks = require('.')
+const retrieveNotDeliv = require('.')
 const { database, models: { User, Subject, Homework } } = require('classty-data')
 const { convertDate } = require('classty-utils')
 
@@ -84,7 +84,7 @@ describe('logic - retrieve all', () => {
 
     it('should succeed on correct data', async () => {
 
-        const hw = await retrieveAllHomeWorks(idSub)
+        const hw = await retrieveNotDeliv(idSub, idS11)
 
         expect(hw).to.exist
         expect(hw.length).to.equal(2)

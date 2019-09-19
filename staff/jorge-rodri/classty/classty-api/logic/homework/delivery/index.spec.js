@@ -78,9 +78,9 @@ describe('logic - delivery homework', () => {
 
         const _subject = await addDelivery(idSub, idHo, idS22)
 
-
-        expect(_subject).to.exist
-        expect(_subject.homeworks[0].delivery.length).to.equal(2)
+        const sub = await Subject.findOne({_id: idSub})
+        expect(_subject).to.undefined
+        expect(sub.homeworks[0].delivery.length).to.equal(1)
 
     })
 

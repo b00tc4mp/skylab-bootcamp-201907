@@ -1,4 +1,4 @@
-require('dotenv').config()
+/* require('dotenv').config()
 
 const { expect } = require('chai')
 const addMessage = require('.')
@@ -88,4 +88,4 @@ describe('logic - add message', () => {
     })
 
     after(() => database.disconnect())
-})
+}) */

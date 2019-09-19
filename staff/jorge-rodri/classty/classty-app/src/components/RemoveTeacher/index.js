@@ -35,22 +35,23 @@ debugger
 debugger
     return <>
         <Header />
-        <main>
+        <main className='remove-teacher'>
+        <h2 className='remove-teacher__h2'>Click to remove teacher</h2>
 
             <section>
-                <form onChange={handleSubmit}> 
+                <form className='remove-teacher__form' onChange={handleSubmit}> 
                     {teachers && teachers.length > 0 && teachers.map(({ name, surname, id }) => {debugger
                             
-                            return<>
-                            <label>{name+" "+surname}</label>
-                            <input type="radio" name="nameClass" value={id}/>
-                            </>
+                            return<div key={id} className='remove-div'>
+                            <label className='remove-teacher__label'>{name+" "+surname}</label>
+                            <input className='remove-teacher__input'type="radio" name="nameClass" value={id}/>
+                            </div>
 
                     })}
 
                  </form>
             </section>
-            <Link to={`/admin`}>Go back</Link >
+            <Link className='remove-teacher__link' to={`/admin`}>Go back</Link >
         </main>
     </>
 }

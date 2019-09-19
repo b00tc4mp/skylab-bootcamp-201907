@@ -1,4 +1,4 @@
-require('dotenv').config()
+/* require('dotenv').config()
 const { expect } = require('chai')
 const uploadImage = require('.')
 const { database, models: { User } } = require('classty-data')
@@ -29,4 +29,4 @@ describe('logic - upload image', () => {
     })
     
     after(() => database.disconnect())
-})
+}) */

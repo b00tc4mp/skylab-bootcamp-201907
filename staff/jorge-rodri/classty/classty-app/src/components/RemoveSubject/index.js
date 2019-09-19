@@ -36,22 +36,22 @@ debugger
 debugger
     return <>
         <Header />
-        <main>
-
+        <main className='remove-subject'>
+        <h2 className='remove-subject__h2'>Click to remove class</h2>
             <section>
-                <form onChange={handleSubmit}> 
+                <form className='remove-subject__form' onChange={handleSubmit}> 
                     {subjects && subjects.length > 0 && subjects.map(({ name }) => {debugger
                             
-                            return<>
-                            <label>{name}</label>
-                            <input type="radio" name="nameClass" value={name}/>
-                            </>
+                            return<div key={name+Math.random()} className='remove-subject__div'>
+                            <label className='remove-subject__label'>{name}</label>
+                            <input className='remove-subject__input' type="radio" name="nameClass" value={name}/>
+                            </div>
 
                     })}
 
                  </form>
             </section>
-            <Link to={`/admin`}>Go back</Link >
+            <Link className='remove-subject__link' to={`/admin`}>Go back</Link >
         </main>
     </>
 }

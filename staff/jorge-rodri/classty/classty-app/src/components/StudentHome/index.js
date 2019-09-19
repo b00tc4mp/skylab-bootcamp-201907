@@ -19,7 +19,7 @@ function StudentHome({ history }) {
 debugger
     useEffect(() => {
         (async () => {
-debugger
+debugger        
                 const subjects = await logic.subject.listSubjects();
                 setSubjects(subjects)
 
@@ -28,22 +28,22 @@ debugger
 
     return <>
         <Header />
-        <main>
-            <nav>
-                <ul>
-                <li><a href='' onClick ={handleGoToTeacherList}>Teachers</a></li>
-                <li><a href='' onClick ={handleGoToStudentList}>Students</a></li>
+        <main className='student-home'>
+            <nav className='student-home__nav'>
+                <ul className='student-home__ul'>
+                <li><a className='student-home__a' href='' onClick ={handleGoToTeacherList}>Teachers</a></li>
+                <li><a className='student-home__a' href='' onClick ={handleGoToStudentList}>Students</a></li>
                 </ul>
             </nav>
-            <section>
+            <section className='student-home__section'>
+                <div className='student-home__div'>
+                {subjects && subjects.length>0 && subjects.map(({ id, title }) =>
+                    <ul key={id} className='student-home__ul--size'>
 
-                {subjects && subjects.length && subjects.map(({ id, title }) =>
-                    <ul>
-
-                        <li><Link to={`/subject/${id}`}>{title}</Link ></li>
+                        <li key={id} className='student-home__li'><Link className='student-home__link' to={`/subject/${id}`}>{title}</Link ></li>
 
                     </ul>)}
-
+                </div>
             </section>
         </main>
     </>

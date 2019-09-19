@@ -24,15 +24,14 @@ debugger
 
             <section>
                 <h2>Students</h2>
-                <ul>
+                <ul className='student-list'>
                     {students && students.length > 0 && students.map(({id, name, surname }) =>
               
-                        <li><Link to={`/profile/${id}`} >{name + " " + surname}</Link></li>
+                        <li key={id}><Link className='student-list__li' to={`/profile/${id}`} >{name + " " + surname}</Link></li>
                     )}
 
                 </ul>
             </section>
-            <Link to={`/student-home`}>Go back</Link >
         </main>
     </>
 }

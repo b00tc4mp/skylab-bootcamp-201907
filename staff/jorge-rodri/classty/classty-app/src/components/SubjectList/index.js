@@ -14,12 +14,15 @@ function SubjectList({ history }) {
     function handleSubmit(event) {
         event.preventDefault()
         debugger
-        const { target: { idSub: { value: id }, student: { opt }, select: { value: naSur } } } = event
+        const { target: { idSub: { value: id }, student: {value: opt} , select: { value: naSur } } } = event
         debugger
         const arr = naSur.split(" ")
         debugger
-        if (opt) handleAddStudent(id, arr[0], arr[1])
-        else handleAddTeacher(id, arr[0], arr[1])
+        if (opt=='1'){ 
+            handleAddStudent(id, arr[0], arr[1])
+        }else{ 
+            handleAddTeacher(id, arr[0], arr[1])
+        }
     }
 
     async function handleAddStudent(name, surname, idSub) {
@@ -59,43 +62,44 @@ function SubjectList({ history }) {
 
     return <>
         <Header />
-        <main>
+        <main className='subject-list'>
 
-            <section>
+            <section className='subject-list__section'>
 
+                <h2 className='subject-list__h2'>Add user to subject</h2>
 
-                <ul>
+                <ul className='subject-list__ul'>
 
                     {user && user.length > 0 && user.map(({ title, id, teacher, student }) =>
 
 
 
-                        <li>
-                            <h3>{title}</h3>
+                        <li key={id} className='subject-list__li'>
+                            <h3 className='subject-list__h3'>{title}</h3>
 
                             {
-                                <form onSubmit={handleSubmit}>
-                                    <select name="select">
+                                <form className='subject-list__form' onSubmit={handleSubmit}>
+                                    <select className='subject-list__select' name="select">
                                         {student && student.length > 0 && student.map(({ name, surname }) =>
 
-                                            <option value={name + " " + surname}>{name + " " + surname}</option>
+                                            <option key={surname+name} className='subject-list__option'  value={name + " " + surname}>{name + " " + surname}</option>
 
                                         )}
 
                                     </select>
                                     <input type='hidden' name='idSub' value={id} />
                                     <input type='hidden' name='student' value='1' />
-                                    <button>Add</button>
+                                    <button className='subject-list__button'>Add</button>
                                 </form>
 
                             }
                             {
-                                <form onSubmit={handleSubmit}>
-                                    <select name="select">
+                                <form className='subject-list__form' onSubmit={handleSubmit}>
+                                    <select className='subject-list__select' name="select">
                                     
                                         {teacher && teacher.length > 0 && teacher.map(({ name, surname }) =>
 
-                                            <option value={name + " " + surname}>{name + " " + surname}</option>
+                                            <option key={surname+name} value={name + " " + surname}>{name + " " + surname}</option>
 
                                         )
                                         
@@ -103,9 +107,9 @@ function SubjectList({ history }) {
 
                                     </select>
                                     <input type='hidden' name='idSub' value={id} />
-                                    <input type='hidden' name='student' />
+                                    <input type='hidden' name='student' value='0' />
 
-                                    <button>Add</button>
+                                    <button className='subject-list__button'>Add</button>
                                 </form>
 
                             }
@@ -119,7 +123,7 @@ function SubjectList({ history }) {
 
 
             </section>
-            <Link to={`/admin`}>Go back</Link >
+            <Link className='subject-list__link' to={`/admin`}>Go back</Link >
         </main>
     </>
 }

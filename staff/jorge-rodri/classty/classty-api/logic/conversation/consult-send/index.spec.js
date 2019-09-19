@@ -60,9 +60,7 @@ describe('logic - consult message', () => {
         conversation = {
             sender: idS11,
             reciver: idS22,
-            deliveries: [ _participant11, _participant22 ],
             message: [_message],
-            date: convertDate('22/09/2019')
         }
 
         const _conversation0 =  new Conversation(conversation)
@@ -72,11 +70,11 @@ describe('logic - consult message', () => {
 
     it('should succeed on correct data', async () => {
 
-        const conversations = await consultMessage(idS11)
+        const conversations = await consultMessage(idConv)
 
         
         expect(conversations).to.exist
-        expect(conversations.length).to.equal(1)
+        expect(conversations.length).to.equal(0)
 
     })
 

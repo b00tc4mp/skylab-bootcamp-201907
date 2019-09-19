@@ -11,8 +11,8 @@ debugger
             method: 'GET',
             headers: {'authorization': `bearer ${token}` }
         })
-        
-        if (response.status !== 201) {
+        debugger
+        if (response.status !== 201) {debugger
             const { error } = await response.json()
             throw Error(error)
         }

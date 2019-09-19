@@ -91,7 +91,7 @@ describe('logic - retireve all exams', () => {
 
     it('should succeed on correct data', async () => {
 
-        const ex = await retrieveAllHomeWorks(idSub)
+        const ex = await retrieveAllHomeWorks(idSub, idS11)
 
         expect(ex).to.exist
         expect(ex.length).to.equal(2)

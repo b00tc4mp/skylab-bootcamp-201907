@@ -1,5 +1,6 @@
 const { models: { User } } = require('classty-data')
 const { validate } = require('classty-utils')
+const bcrypt = require('bcryptjs')
 
 /**
  * Authenticates a user by its credentials.
@@ -19,8 +20,10 @@ module.exports = function (email, password) {
 
         if (!user) throw  Error(`user with e-mail ${email} does not exist`)
 
-        if (user.password !== password) throw  Error('wrong credentials')
-        
+        const match = await bcrypt.compare(password , user.password)
+
+        if(!match) throw new Error ('wrong credentials')
+
         return user.id
     })()
 }

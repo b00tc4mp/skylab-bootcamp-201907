@@ -1,4 +1,5 @@
 require('dotenv').config()
+const bcrypt = require('bcryptjs')
 
 const { expect } = require('chai')
 const registerUser = require('.')
@@ -31,7 +32,6 @@ describe('logic - register user', () => {
         expect(user.name).to.equal(name)
         expect(user.surname).to.equal(surname)
         expect(user.email).to.equal(email)
-        expect(user.password).to.equal(password)
         expect(user.type).to.equal(type)
 
     })

@@ -37,14 +37,14 @@ export default function (idSub) {
             const { result } = await students.json()
             debugger
 
-            return exam.map(_exam => {
+            return exam.map(_exam => {debugger
                 const student = []
-                result.forEach(res => {
+                result.forEach(res => {debugger
                     let _users = _exam.notes.find(note => note.student == res.id)
-                    
+                    debugger
                     if(!_users)
                     student.push({ name: res.name, surname: res.surname, id: res.id })
-                
+                debugger
                     })
                 
                 return { title: _exam.title, id: _exam._id, user: student }

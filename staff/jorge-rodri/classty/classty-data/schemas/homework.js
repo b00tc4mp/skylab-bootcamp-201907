@@ -14,8 +14,7 @@ module.exports = new Schema({
         required: true
     },
     expiry:{
-        type: Date,
-        required: true
+        type: Date
     },
     delivery:[ Delivery ]
 })

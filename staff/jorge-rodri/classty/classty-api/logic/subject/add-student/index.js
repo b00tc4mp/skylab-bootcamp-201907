@@ -14,7 +14,7 @@ module.exports = (name, surname, id) => {
     
     return ( async() => {
 
-        const _student = await User.findOne({name, surname})
+        const _student = await User.findOne({name, surname, type: 'student'})
         debugger
         if(!_student) throw Error(`student with name ${name} don´t exists`)
 debugger

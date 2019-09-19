@@ -1,4 +1,5 @@
 require('dotenv').config()
+const bcrypt = require('bcryptjs')
 
 const { expect } = require('chai')
 const authenticateUser = require('.')
@@ -18,7 +19,7 @@ describe('logic - authenticate user', () => {
         type = 'teacher'
 
         await User.deleteMany()
-        const user = await User.create({ name, surname, email, password, teacher })
+        const user = await User.create({ name, surname, email, password : await bcrypt.hash(password,10), teacher })
         id = user.id
     })
 

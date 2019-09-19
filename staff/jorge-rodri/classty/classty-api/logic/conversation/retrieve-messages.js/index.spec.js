@@ -80,10 +80,10 @@ describe('logic - retrieve post', () => {
 
     it('should succeed on correct data', async () => {
 
-        const _subject = await retrieveMessages(idS11)
+        const _subject = await retrieveMessages(idS11, idS22)
 
-        expect(_subject).to.exist
-        expect(_subject.length).to.equal(2)
+        expect(_subject).to.undefined
+      
 
     })
 

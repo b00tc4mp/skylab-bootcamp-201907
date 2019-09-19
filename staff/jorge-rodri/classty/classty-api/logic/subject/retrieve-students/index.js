@@ -15,14 +15,19 @@ module.exports = function (idSub) {
         debugger
         let students = await User.find({ type: 'student' }, { password: 0 }).lean()
 debugger
-        if (!subject) throw Error(`Not subject definedS`)
+        if (!subject) throw Error(`Not subject defined`)
         debugger
         return subject.students.map(student => {debugger
             const find = students.find(_student => _student._id.toString() == student.toString())
             debugger
-            find.id = find._id.toString()
-            const { email, name, surname, id  } = find
-            if (find) { return { email, name, surname, id } }
+
+            
+            debugger
+            debugger
+            if (find) { find.id = find._id.toString()
+                
+                const { email, name, surname, id  } = find
+                return { email, name, surname, id } }
         })
     })()
 }

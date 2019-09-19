@@ -4,38 +4,38 @@ import Context from '../Context'
 import Header from '../Header'
 import { withRouter, Link } from 'react-router-dom'
 
-function SubjectTeacherList({ history }) {
+function SubjectTeacherList() {
     const { teachers, setTeachers, user } = useContext(Context)
 
-    debugger
+    
     useEffect(() => {
         (async () => {
             debugger
             const teachers = await logic.subject.retrieveTeachersSubjects();
             setTeachers(teachers)
-            debugger
+            
         })()
-    }, [user])
-    debugger
+    }, [])
+    
     return <>
         <Header />
-        <main>
+        <main className='stl'>
 
             <section>
-                <ul>
+                <ul className='stl__ul'>
                     {teachers && teachers.length > 0 && teachers.map(teacher => {debugger
-                        return<>
-                        <li key={teacher.title}>
-                            <h3>{teacher.title}</h3>
-                            {teacher.teachers.map(t => <p key={t.name + t.surname}>{t.name} {t.surname}</p>)}
-                        </li>
-                        </>
+                        return<div key={teacher.title}>
+                       {teacher.title && <li key={teacher.title} className='stl__li'>
+                           {teacher.title && <h3 className='stl__h3'>{teacher.title}</h3>}
+                            {teacher.teachers.map(t => <Link key={t.id} className='stl__link' to={`/profile/${t.id}`} >{t.name + " " + t.surname}</Link>
+)}
+                        </li>}
+                        </div>
                     }
                     )}
 
                 </ul>
             </section>
-            <Link to={`/student-home`}>Go back</Link >
         </main>
     </>
 }

@@ -49,40 +49,39 @@ function Subject({ history }) {
                 debugger
                 setPosts(posts) 
             }
-            /*     interval = setInterval(function(){
+                 interval = setInterval(function(){
                     autoUpdate()
-                }, 3000)
-                return () => clearInterval(interval) */
+                }, 1000)
+                return () => clearInterval(interval) 
     
         }, [update])
 
     return <>
         <Header />
-        <main>
+        <main className='subject'>
             <nav>
-                <ul>
-                    <li><Link to={`/subject/exams/${id}`}>Exams</Link ></li>
-                    <li><Link to={`/subject/homeworks/${id}`}>Homeworks</Link ></li>
+                <ul className='subject__ul'>
+                    <li><Link className='subject__a' to={`/subject/exams/${id}`}>Exams</Link ></li>
+                    <li><Link className='subject__a' to={`/subject/homeworks/${id}`}>Homeworks</Link ></li>
                 </ul>
             </nav>
-            <Link to="/student-home">Go Back</Link >
             <section>
-                <form onSubmit={handleSubmit}>
-                    <textarea name="postid" id="area" cols="30" rows="10" placeholder="That you thinking..."></textarea>
-                    <button>Publish</button>
-                </form>
-            </section>
-            <section>
-                <ul>
+                <ul className='subject__ul--many'>
                     {posts && posts.length > 0 && posts.map(post =>
-                        <li key={post._id}>
-                            <h3>{post.name} {post.surname}</h3>
-                            <p key={post.message.id}>{post.message.body}</p>
+                        <li className='subject__li' key={post._id}>
+                            <h3 className='subject__h3'>{post.name+" "+post.surname} => </h3>
+                            <p className='subject__p' key={post.message.id}>{post.message.body}</p>
 
                         </li>
                     )}
 
                 </ul>
+            </section>
+            <section>
+                <form className='subject__form' onSubmit={handleSubmit}>
+                    <textarea name="postid" id="area" cols="40" rows="4" placeholder="That you thinking..."></textarea>
+                    <button className='subject__button'><img src='../img/paper-plane (2).png'></img></button>
+                </form>
             </section>
         </main>
     </>

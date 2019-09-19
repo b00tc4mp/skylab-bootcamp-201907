@@ -14,10 +14,12 @@ module.exports = function (userId) {
 debugger
         if (!subjects) throw Error(`user with id ${subjects.id} not found`)
         
-        const result =subjects.map(subject => { debugger
+        let result
+
+        subjects.forEach(subject => { debugger
             const sub = subject.teachers.findIndex(teacher => {debugger;return teacher.toString()==userId;debugger})
             debugger
-            if(sub>-1) {debugger;return subject}
+            if(sub>-1) {debugger;result = subject;return}
         });
         debugger
         return result

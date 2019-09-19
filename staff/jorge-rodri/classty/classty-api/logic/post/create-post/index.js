@@ -25,7 +25,7 @@ debugger
         
         const _post = new Post(post)
 debugger
-        subject.post.unshift(_post)
+        subject.post.push(_post)
         
         await subject.save()
         

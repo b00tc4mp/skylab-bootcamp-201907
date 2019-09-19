@@ -12,11 +12,13 @@ const retrieveT = require('../retrieve-subject-user')
 module.exports = function (id) {
     return (async () => {
         const subjects = await retrieveT(id)
+        debugger
         const users = await User.find({ type: 'teacher' })
-        return subjects.map(subject => {
-            const teachers = subject.teachers.map( teacher => {
+        debugger
+        return subjects.map(subject => {debugger
+            const teachers = subject.teachers.map( teacher => {debugger
                 let _users = users.find(user => user.id == teacher.toString())
-                return { name: _users.name, surname: _users.surname }
+                return { name: _users.name, surname: _users.surname, id: _users._id.toString() }
             })
             return { title:subject.title, teachers }
         })

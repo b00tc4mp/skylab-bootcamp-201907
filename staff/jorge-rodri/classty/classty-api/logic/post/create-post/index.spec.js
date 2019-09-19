@@ -82,8 +82,9 @@ describe('logic - create post', () => {
 
         const _subject = await createPost(idSub, post)
 
-        expect(_subject).to.exist
-        expect(_subject.post[0].title).to.equal(post.title)
+        expect(_subject).to.undefined
+        const _post = await Subject.findOne({_id: idSub})
+        expect(_post.post[0].title).to.equal(post.title)
 
     })
 

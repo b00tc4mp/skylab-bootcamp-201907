@@ -11,6 +11,9 @@ function Profile({ history }) {
 
     const [control, setControl] = useState(false)
 
+    const [update, setUpdate] = useState(false)
+
+
     /*     function handleSubmit(event){
             event.preventDefault()
             const {target:{ name: { value: name }, surname: { value: surname }, email: { value: email }, password: { value: password } } } = event
@@ -27,6 +30,7 @@ function Profile({ history }) {
     async function onPublish(image) {
         try {
             await logic.uploadPhoto(image)
+            setUpdate(!update)
         } catch (error) {
             console.log(error.message)
         }
@@ -37,19 +41,6 @@ function Profile({ history }) {
         setControl(!control)
     }
 
-    /*     async function handleRegister(name, surname, email, password){
-    
-            try{
-                
-                await logic.registerUser(name, surname, email, password)
-                
-                history.push('/login')
-            }catch(error){
-                
-                console.log(error.message)
-            }
-        } */
-
     useEffect(() => {
         (async () => {
             debugger
@@ -59,31 +50,33 @@ function Profile({ history }) {
                 const user = await logic.user.retrieveUser()
                 setProfile(user)
                 setUp(true)
-            } else {
+            } else if (_id.length==24) {
                 const user = await logic.user.retrieveOther(_id);
                 setProfile(user)
-
             }
 
         })()
-    }, [])
+    }, [update])
 
     return <>
         <Header />
-        <main>
-            <img src={profile.image}/>
-            <h3>{profile.name}</h3>
-            <h3>{profile.surname}</h3>
-            <h3>{profile.email}</h3>
+        <main className='profile'>
+            <h2 className='profile__h2'>Profile</h2>
+            <div className='profile__div'>
+                <img className='profile__img'src={profile.image} />
+                <h3 className='profile__h3'>{profile.name}</h3>
+                <h3 className='profile__h3'>{profile.surname}</h3>
+                <h3 className='profile__h3'>{profile.email}</h3>
+            </div>
         </main>
-        {up && <a href="" onClick={handleEdit}>Edit profile</a>}
+        {up && <a className='profile__a' href="" onClick={handleEdit}>Edit profile</a>}
         {control &&
-            <section>
-                <h2>Add Photo</h2>
-                <form onSubmit={handleSubmit} method="post" enctype="multipart/form-data" >
-                    <label htmlFor="">Image</label>
-                    <input type="file" name="image" id="" />
-                    <button >Add Photo</button>
+            <section className='profile__section'>
+                <h4 className='profile__h4'>Add Photo</h4>
+                <form className='profile__form--photo' onSubmit={handleSubmit} method="post" enctype="multipart/form-data" >
+                    <label htmlFor=""></label>
+                    <input className='profile__form--input' type="file" name="image" id="" />
+                    <button className='profile__for--button'>Add Photo</button>
                 </form>
             </section>
         }

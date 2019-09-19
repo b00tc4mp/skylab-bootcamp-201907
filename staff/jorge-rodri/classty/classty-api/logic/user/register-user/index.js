@@ -1,6 +1,8 @@
 const { models } = require('classty-data')
 const { User } = models
 const { validate } = require('classty-utils')
+const bcrypt = require('bcryptjs')
+
 /**
  * Registers a user.
  * 
@@ -23,7 +25,9 @@ module.exports = function (name, surname, email, password, type) {
 
         if (user) throw Error(`user with e-mail ${email} already exists`)
 
-        await User.create({ name, surname, email, password, type })
+        const hash = await bcrypt.hash(password,10)
+
+        await User.create({ name, surname, email, password: hash, type })
     
     })()
 }

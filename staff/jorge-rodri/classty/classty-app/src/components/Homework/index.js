@@ -4,7 +4,7 @@ import Context from '../Context'
 import Header from '../Header'
 import { withRouter, Link } from 'react-router-dom'
 
-function Homeworks({ history }) {
+function Homework({ history }) {
 
     const { user, setUser } = useContext(Context)
 
@@ -25,6 +25,8 @@ function Homeworks({ history }) {
         event.preventDefault()
         const { target: { title: { value: title }, comment: { value: comment }, date: { value: date } } } = event 
         debugger
+        document.getElementById('area').value = ""
+        document.getElementById('ex').value = ""
         handleCreateHomeWork(id, title, comment, date)
     }
 
@@ -55,7 +57,7 @@ function Homeworks({ history }) {
 
         try {
 
-            await logic.notDelivery(id, idH)
+            await logic.homework.notDelivery(id, idH)
             debugger
             const notDel = await logic.homework.retrieveNotDel(id);
             debugger
@@ -117,69 +119,77 @@ function Homeworks({ history }) {
 debugger
     return <>
         <Header />
-        <main>
+        <main className='homework'>
+            <div className='ho'>
             {user && user.type == 'student' &&
-                <ul>
-                    <h2>To-Do</h2>
+                <ul className='ho__ul'>
+                    <h2 className='ho__h2'>To-Do</h2>
+                    <div className='ho__div--overflow'>
                     {notDel && notDel.length > 0 && notDel.map(({ comment, title, expiry, _id }) => {
                         debugger
-                        return <li>
-                            <h3>{title}</h3>
-                            <p>{comment}</p>
-                            <time>expiry: {reverse(expiry.slice(0, 9))}</time>
+                        return <li className='ho__li' key={_id}>
+                            <h3 className='ho__h3'>{title}</h3>
+                            <p className='ho__p'>{comment}</p>
+                            <time className='ho__time'>expiry: {reverse(expiry.slice(0, 9))}</time>
                             <form onSubmit={handleDone}>
-                                <button name="done" type="submit" value={_id}>Done</button>
+                                <button className='ho__button' name="done" type="submit" value={_id}>Done</button>
                             </form>
                         </li>
-                    }) ||
-                        <p>You don´t have homeworks</p>}
+                    })
+                        }
+                        </div>
                 </ul>}
-            {user && user.type == 'student' && <ul>
-                <h2>Done</h2>
+                
+            {user && user.type == 'student' && 
+            <ul className='ho__ul'>
+                <h2 className='ho__h2'>Done</h2>
+                <div className='ho__div--overflow'>                
                 {del && del.length > 0 && del.map(({ comment, title, expiry, _id }) => {
                     debugger
-                    return <li>
-                        <h3>{title}</h3>
-                        <p>{comment}</p>
-                        <time>expiry: {reverse(expiry.slice(0, 9))}</time>
+                    return <li className='ho__li' key={_id}>
+                        <h3 className='ho__h3'>{title}</h3>
+                        <p className='ho__p'>{comment}</p>
+                        <time className='ho__time'>expiry: {reverse(expiry.slice(0, 9))}</time>
                         <form onSubmit={handleNotDone}>
-                            <button name="done" type="submit" value={_id}>Done</button>
+                            <button className='ho__button--red' name="done" type="submit" value={_id}>Rewiev</button>
                         </form>
                     </li>
-                }) ||
-                    <p>This field is empty</p>}
-            </ul>}
-            {user && user.type == 'teacher' &&
-                <h2>Create Homework</h2> &&
-                <form onSubmit={handleSubmit}>
-                    <input type='text' id='ex' name='title' placeholder='title' />
-                    <textarea name="comment" id="area" cols="30" rows="5" placeholder="Comment" />
-                    <input type='date' id='ex' name='date' placeholder='date' />
-                    <button>Create</button>
-                </form>}
-
-            {user && user.type == 'teacher' &&
-                <ul>
-                    <h2>Homeworks</h2>
+                }) }
+       </div>     </ul>}</div>
+            {user && user.type == 'teacher' &&<> 
+                <h2 className='homework__h2'>Create Homework</h2> 
+                <form className='homework__form' onSubmit={handleSubmit}>
+                    <input className='homework__input' type='text' id='ex' name='title' placeholder='title' />
+                    <textarea className='homework__textarea' name="comment" id="area" cols="30" rows="5" placeholder="Comment" />
+                    <input className='homework__input' type='date' id='ex' name='date' placeholder='date' />
+                    <button className='homework__button'>Create</button>
+                </form>
+                </>}
+            {user && user.type == 'teacher' &&<>
+             <h2 className='homework__h2'>Homeworks</h2>
+                 <ul className='homework__ul'>
+                    
                     {del && del.length > 0 && del.map(({ comment, title, expiry, delivery }) => {
                         debugger
-                        return <li>
-                            <h3>{title}</h3>
-                            <p>{comment}</p>
-                            <time>expiry: {reverse(expiry.slice(0, 9))}</time>
-                           <ul>
+                        return <li key={expiry+title} className='homework__li'>
+                            <h3 className='homework__h3'>{title}</h3>
+                            <p className='homework__p'>{comment}</p>
+                            <time className='homework__time'>expiry: {reverse(expiry.slice(0, 9))}</time>
+                           <ul className='homework__ul--list' >
                                {delivery && delivery.length > 0 && delivery.map(({name, surname})=>
-                               <li>
+                               <li key={surname+name} className='homework__li'>
                                    <h4>{name+" "+surname}</h4>
                                </li>
                                )}
                            </ul>
                         </li>
-                    })}
-                </ul>}
+                    })
+                    ||
+                        <p>There are not any tasks registered</p>}
+                </ul></>}
 
 
         </main>
     </>
 }
-export default withRouter(Homeworks)
+export default withRouter(Homework)

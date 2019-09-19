@@ -1,5 +1,6 @@
 const { models: { User } } = require('classty-data')
 const { validate } = require('classty-utils')
+
 /**
  * Unregisters a user.
  * 

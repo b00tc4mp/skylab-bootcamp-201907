@@ -19,7 +19,7 @@ debugger
         else {
             const a = await response.json()
             debugger
-            const result = a.result[0]
+            const result = a.result
             debugger
             return result
         }

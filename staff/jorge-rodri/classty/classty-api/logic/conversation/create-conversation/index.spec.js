@@ -69,7 +69,6 @@ describe('logic - create conversation', () => {
         const _conversation = await Conversation.findOne({ sender: idS11})
 
         expect(_conversation).to.exist
-        expect(_conversation.message[0].title).to.equal(conversation.message.title)
 
 
     })

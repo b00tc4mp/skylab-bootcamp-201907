@@ -21,7 +21,7 @@ module.exports = function (id, body) {
         
         const homework = new Homework(body)
 
-        subject.homeworks.push(homework)
+        subject.homeworks.unshift(homework)
         
         await subject.save()
         

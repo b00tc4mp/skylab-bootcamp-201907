@@ -77,10 +77,10 @@ describe('logic - retrieve homework', () => {
 
     it('should succeed on correct data', async () => {
 
-        const hw = await retrieveHomework(idSub, idHo)
+        const hw = await retrieveHomework(idSub)
 
         expect(hw).to.exist
-        expect(hw.title).to.equal(homework.title)
+        expect(hw[0].title).to.equal(homework.title)
 
     })
 

@@ -24,7 +24,7 @@ module.exports = function (id, title, date, notes) {
         }
         const exam = new Exam(body)
 
-        subject.exams.push(exam)
+        subject.exams.unshift(exam)
         
         await subject.save()
         
