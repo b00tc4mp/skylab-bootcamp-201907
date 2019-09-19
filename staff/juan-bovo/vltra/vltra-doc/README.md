@@ -50,9 +50,5 @@ At this point, Vltra help writers to easily share their short stories. Further d
 #### api
 ![Code coverage api](images/code-coverage-api.png)
 
-#### app
-![Code coverage app](images/code-coverage-app.png)
-Explanation: Jest has been experiencing some issues to show full test coverage.
-
 ### Technologies
 Javascript, ReactJS, Node.js, Express, MongoDB & Mongoose.
