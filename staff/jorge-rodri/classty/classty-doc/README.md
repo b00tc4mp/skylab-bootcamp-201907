@@ -64,7 +64,10 @@ Students can:
 ![data](schema.png)
 
 ### API coverage
-![data](coverage-api.png)
+![data](test-1.png)
 
-## Planing
-[Trello](https://trello.com/b/FvQn0fqt/classty)
+![data](test2.png)
+
+![data](test3.png)
+## 
+## 
