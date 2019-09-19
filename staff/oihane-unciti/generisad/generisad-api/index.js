@@ -2,18 +2,18 @@ require('dotenv').config()
 
 const express = require('express')
 const { name, version } = require('./package')
-//const routes = require('./routes')
+const routes = require('./routes')
 const cors = require('cors')
 const { database } = require('generisad-data')
 
-const { env: { PORT, DB_URL, DB_URL_TEST } } = process
+const { env: { PORT, DB_URL } } = process
 
-database.connect(DB_URL_TEST, { useNewUrlParser: true })
+database.connect(DB_URL, { useNewUrlParser: true })
     .then(() => {
         const app = express()
 
         app.use(cors())
-        //app.use('/api', routes)
+        app.use('/api', routes)
 
         app.listen(PORT, () => console.log(`${name} ${version} up and running on port ${PORT}`))
     })

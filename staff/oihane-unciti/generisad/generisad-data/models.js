@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
-const { user, advertisement, conversation, mail } = require('./schemas')
+const { user, advertisement, merchant, mail } = require('./schemas')
 
 module.exports = {
     User: mongoose.model('User', user),
     Advertisement: mongoose.model('Advertisement', advertisement),
-    Conversation: mongoose.model('Conversation', conversation),
+    Merchant: mongoose.model('Merchant', merchant),
     Mail: mongoose.model('Mail', mail)
 }

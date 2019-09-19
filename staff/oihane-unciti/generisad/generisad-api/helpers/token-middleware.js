@@ -4,7 +4,7 @@ const { env: { JWT_SECRET } } = process
 
 module.exports = (req, res, next) => {
     try {
-        const { params: { id }, headers: { authorization } } = req
+        const { headers: { authorization } } = req
 
         if (!authorization) throw new Error('no authorization token received')
 
@@ -12,8 +12,8 @@ module.exports = (req, res, next) => {
 
         const { sub } = jwt.verify(token, JWT_SECRET)
 
-        if (sub !== id) throw new Error(`token id ${sub} does not match user id ${id}`)
-
+        req.userId = sub
+        
         next()
     } catch ({ message }) {
         res.status(401).json({ error: message })

@@ -3,21 +3,25 @@ require('dotenv').config()
 
 const { expect } = require('chai')
 const registerAd = require('.')
-const { database, models: { User, Advertisement } } = require('generisad-data')
+const { database, models: { User, Advertisement, Merchant } } = require('generisad-data')
 
 const { env: { DB_URL_TEST }} = process
 
-describe.only('logic - register ad', () => {
+describe('logic - register ad', () => {
     before(() => database.connect(DB_URL_TEST))
-    //before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
 
-    let img, title, description, location
+    let name, surname, email, password, userId ,domain, name_domain, merchant, id
+    
+    
+    let image, title, description, price, location
 
     beforeEach(async () => {
-        img = `img-${Math.random()}`
+        image = `image-${Math.random()}`
         title = `title-${Math.random()}`
         description = `description-${Math.random()}`
+        price = `price-${Math.random()}`
         location = `location-${Math.random()}`
+        date = new Date()
 
         await Advertisement.deleteMany()
         name = `name-${Math.random()}`
@@ -25,103 +29,131 @@ describe.only('logic - register ad', () => {
         email = `email-${Math.random()}@email.com`
         password = `123-${Math.random()}`
 
+        name_domain = `name_domain-${Math.random()}`
+        domain = `domain-${Math.random()}`
+
+        await Merchant.deleteMany()
+        const _merchant = await Merchant.create({ name: name_domain, domain })
+        merchant = _merchant.id
+
         await User.deleteMany()
-            const user = await User.create({ name, surname, email, password })
-                id = user.id
+        const user = await User.create({ name, surname, email, password : password, merchant_owner: merchant })
+        id = user.id
     })
 
-    it('should succeed on correct data', async () =>{debugger
-        const result = await registerAd(img, title, description, location)
-            adId = result
-            expect(adId).to.exist
+    it('should succeed on correct data', async () =>{
+        const idAdvertisement = await registerAd(image, title, description, price, location, id, domain)
+        const result = await Advertisement.findById(idAdvertisement) 
+    
+            expect(result).to.exist
+            expect(result.id).to.equal(idAdvertisement)
+            expect(result.title).to.equal(title)
+            expect(result.description).to.equal(description)
+            expect(result.price).to.equal(price)
+            expect(result.location).to.equal(location)
+            expect(result.owner.toString()).to.equal(id)
+            expect(result.merchant_owner.toString()).to.equal(merchant)
 
-            const ad = await Advertisement.findOne({ img })
-                expect(ad).to.exist
-                expect(ad.id).to.equal(adId)
-                expect(ad.img).to.equal(img)
-                expect(ad.title).to.equal(title)
-                expect(ad.description).to.equal(description)
-                expect(ad.location).to.equal(location)
-    })
-    it('should fail if the vehicle already exists', async () => {
-        await Vehicle.create({ img, title, description, location })
-            try{
-                await registerAd(id, img, title, description, location)
-            }catch(error) {
-                    expect(error).to.exist
-                    expect(error.message).to.equal(`Vehicle already exists.`)
-            }    
     })
 
-    it('should fail on empty img', () =>
+    it('should fail on incorrect user id', async () =>{
+        let wrongUserId = "5d74a0957005f2ab0c8d5645"
+        try{
+            await registerAd(image, title, description, price, location, wrongUserId, domain)
+            throw new Error('should not reach this point')
+        } catch(error) {
+            expect(error).to.exist
+            expect(error.message).to.equal(`user with id 5d74a0957005f2ab0c8d5645 not found`)
+        }
+    })
+
+    it('should fail on empty image', () =>
         expect(() =>
-            registerAd(id, '', model, year, type, color, electric, plate)
-        ).to.throw('img is empty or blank')
+            registerAd('',title, description, price, location, domain)
+        ).to.throw('image is empty or blank')
     )
 
-    it('should fail on undefined img', () =>
+    it('should fail on undefined image', () =>
         expect(() =>
-            registerAd(id, undefined,title, description, location)
-        ).to.throw(`img with value undefined is not a string`)
+            registerAd(undefined, title, description, price,location, domain)
+        ).to.throw(`image with value undefined is not a string`)
     )
 
     it('should fail on wrong data type', () =>
         expect(() =>
-            registerAd(id, 123, title, description, location)
-        ).to.throw(`img with value 123 is not a string`)
+            registerAd(123, title, description, price, location, domain)
+        ).to.throw(`image with value 123 is not a string`)
     )
 
     it('should fail on empty title', () =>
         expect(() =>
-            registerAd(id, img, "", description, location)
+            registerAd( image, "", description, price, location, domain)
         ).to.throw('title is empty or blank')
     )
 
     it('should fail on undefined title', () =>
         expect(() =>
-            registerAd(id, img, undefined, description, location)
+            registerAd(image, undefined, description, price, location, domain)
         ).to.throw(`title with value undefined is not a string`)
     )
 
     it('should fail on wrong data type', () =>
         expect(() =>
-            registerAd(id, img, 123, description, location)
+            registerAd(image, 123, description, price, location, domain)
         ).to.throw(`title with value 123 is not a string`)
     )
 
     it('should fail on empty description', () =>
         expect(() =>
-            registerAd(img, title, "", location)
-        ).to.throw(`year with value  is not a description`)
+            registerAd( image, title, "", price, location, domain )
+        ).to.throw(`description is empty or blank`)
     )
 
     it('should fail on undefined description', () =>
         expect(() =>
-            registerAd(id, img, title, undefined, location)
+            registerAd( image, title, undefined, price, location, domain)
         ).to.throw(`description with value undefined is not a string`)
     )
 
     it('should fail on wrong data type', () =>
         expect(() =>
-            registerAd(id, img, title, 123, location)
-        ).to.throw(`title with value 123 is not a string`)
+            registerAd(image, title, 123, price, location, domain)
+        ).to.throw(`description with value 123 is not a string`)
+    )
+
+    it('should fail on empty price', () =>
+        expect(() =>
+            registerAd(image, title, description, "", location, domain)
+        ).to.throw(`price is empty or blank`)
+    )
+
+    it('should fail on undefined price', () =>
+        expect(() =>
+            registerAd( image, title, description, undefined, location, domain)
+        ).to.throw(`price with value undefined is not a string`)
+    )
+
+    it('should fail on wrong data type', () =>
+        expect(() =>
+            registerAd(image, title, description, 123, location, domain)
+        ).to.throw(`price with value 123 is not a string`)
     )
 
     it('should fail on empty location', () =>
         expect(() =>
-            registerAd(img, title, description, "")
-        ).to.throw(`year with value  is not a location`)
+            registerAd(image, title, description, price, "", domain)
+        ).to.throw(`location is empty or blank`)
     )
 
     it('should fail on undefined location', () =>
         expect(() =>
-            registerAd(id, img, title, description, undefined)
+            registerAd( image, title, description, price, undefined, domain)
         ).to.throw(`location with value undefined is not a string`)
     )
 
     it('should fail on wrong data type', () =>
         expect(() =>
-            registerAd(id, img, title, description, 123)
+            registerAd(image, title, description, price,  123, domain)
     ).to.throw(`location with value 123 is not a string`)
 
     )
