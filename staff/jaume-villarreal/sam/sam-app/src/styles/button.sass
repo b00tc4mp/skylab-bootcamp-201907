@@ -1,0 +1,75 @@
+@import "./base-settings.sass"
+
+.btn
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    height: 2rem
+    border-radius: .5rem
+    border: 0 none
+    outline: none
+    font-family: 'Raleway', sans-serif
+    text-align: center
+    text-decoration: none
+    &:hover
+        cursor: pointer
+    &--submit
+        width: 48.5%
+        margin-bottom: .75rem
+        background-color: $medium-blue-100
+        color: white
+        font-size: 1rem
+        &:hover
+            background-color: $deep-blue-100
+        &:active
+            background-color: $medium-blue-100
+    &--enrollment
+        width: 90%
+    &--link
+        width: 15%
+        border: 1px solid $deep-blue-100
+        color: $deep-blue-100
+        margin: .75rem
+        &:hover
+            background-color: $medium-blue-50
+            border: none
+            font-weight: bold
+        &:active
+            background-color: $medium-blue-100
+    &--success
+        margin-top: .75rem
+        color: white
+        background-color: $medium-blue-100
+        width: 30%
+        &:hover
+            background-color: $deep-blue-100
+        &:active
+            background-color: $medium-blue-100
+    &--logout
+        background: url('./img/logout-icon-24.png') transparent no-repeat 0 0
+        width: 10%
+    &__card
+        width: 30%
+        margin-bottom: .5rem
+        color: black
+        width: 5rem
+        height: 3rem
+        &--update
+            background: url('./img/update-icon-white-32.png') $medium-blue-100 no-repeat center center
+            &:hover
+                background: url('./img/update-icon-white-32.png') $deep-blue-100 no-repeat center center
+        &--enrollment
+            background: url('./img/file-icon-white-32.png') $medium-blue-100 no-repeat center center
+            &:hover
+                background: url('./img/file-icon-white-32.png') $deep-blue-100 no-repeat center center
+        &--check
+            background: url('./img/search-icon-white-32.png') $medium-blue-100 no-repeat center center
+            &:hover
+                background: url('./img/search-icon-white-32.png') $deep-blue-100 no-repeat center center
+
+
+    
+
+    
+

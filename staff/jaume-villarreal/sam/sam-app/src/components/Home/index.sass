@@ -1,0 +1,78 @@
+@import '../../styles/base-settings.sass'
+
+.panel-wrapper
+    margin-top: .25rem
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    .home-header
+        width: 100%
+        text-align: center
+        font-size: 3rem
+        font-family: Monda, Helvetica , Arial , sans-serif
+        color: $deep-blue-100
+    .cards-wrapper
+        margin-top: 1rem
+        width: 75%
+        list-style: none
+        .cards-container
+            list-style: none
+            display: flex
+            flex-direction: column
+            // flex-wrap: wrap
+            justify-content: space-evenly
+            align-items: center
+            .card
+                width: 40%
+                margin-bottom: 2rem
+                &__info
+                    margin-bottom: .5rem
+                    border: 1px solid $deep-blue-50
+                    border-radius: .5rem
+                    background-color: $light-blue-10
+                    padding: 1rem
+                    line-height: 2.5rem
+                    font-family: Roboto
+                    font-size: 1.25rem
+                    text-align: center
+                    color: $deep-blue-100
+                    &--label
+                        border-radius: .5rem .5rem 0 0
+                        font-size: 1rem
+                        font-weight: bold
+                        margin-bottom: .1rem
+                        background-color: $light-blue-75
+                    &--content
+                        border-radius: 0 0 .5rem .5rem 
+                        background-color: $light-blue-50
+                        margin-bottom: 1.25rem
+                        &:last-child                           
+                            margin-bottom: 0
+                    &--name
+                        font-size: 1.5rem
+                        font-weight: bold
+                        background-color: $orange-75
+                    &--label-name
+                        background-color: $orange-50
+                &__button-set
+                    width: 100%
+                    display: flex
+                    justify-content: space-around
+                    align-items: center
+
+.btn--register-card
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    margin-bottom: 2rem
+    text-decoration: none
+    color: white
+    width: 40%
+    height: 7.5rem
+    border-radius: .5rem
+    background: url('../../styles/img/plus-icon-white-100.png') $orange-75 no-repeat center center
+    &:hover
+        background: url('../../styles/img/plus-icon-white-100.png') $orange-100 no-repeat center center
+

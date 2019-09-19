@@ -1,0 +1,105 @@
+@import '../../styles/base-settings.sass'
+@import '../../styles/form.sass'
+
+.home-header , .home-header2 , .home-header3
+    width: 100%
+    text-align: center
+    font-size: 3rem
+    font-family: Monda, Helvetica , Arial , sans-serif
+    color: $deep-blue-100
+.home-header2
+    font-size: 2rem
+.home-header3
+    font-size: 1.5rem
+
+.detail-wrapper
+    width: 100%
+    margin-top: 1rem
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    font-family: Roboto, sans-serif
+
+.detail-panel
+    width: 75%
+    &__table
+        width: 100%
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+    &__observations
+        padding: 1rem 2rem
+        margin-top: 1rem
+        color: $deep-blue-100
+        width: 100%
+        list-style-type: none
+        li
+            margin-bottom: 1.5rem
+        li .info-label
+            text-align: center
+            margin-bottom: 1rem
+            border-top: 1px solid $deep-blue-75
+            background-color: $light-blue-50
+            border-bottom: 1px solid $deep-blue-75
+            font-size: 1.25rem
+            font-weight: bold
+            display: block
+        li .info-text
+            padding: 0 1.5rem
+            text-align: justify
+            font-size: 1.15rem
+            display: block
+            &--center
+                text-align: center
+                    
+.detail-table
+    &__row
+        width: 100%
+        display: flex
+        justify-content: space-around   
+        align-items: center
+        .cell
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            text-align: center
+            border: 1px solid $medium-blue-100
+            width: 20%
+            height: 5rem
+    &__header
+        color: $deep-blue-100
+        font-weight: bold
+        background-color: $medium-blue-50
+
+.warning-panel
+    font-family: Roboto , Helvetica , Arial , sans-serif
+    margin-top: 5rem
+    width: 100%
+    display: flex
+    flex-direction: columm
+    justify-content: center
+    align-items: center
+    &__wrapper
+        width: 50%
+        .warning-text
+            display: flex
+            flex-direction: columm
+            justify-content: center
+            align-items: center
+            width: 100%
+            height: 20vh
+            padding: 0 1rem
+            font-size: 1.5rem
+            color: $alert-high
+            background-color: $yellow-25
+            border-radius: .5rem 
+            border-left: 2rem solid $yellow-50
+        .button-set
+            width: 100%
+            display: flex
+            flex-direction: columm
+            justify-content: center
+            align-items: center

@@ -1,0 +1,48 @@
+@import "../../styles/base-settings.sass"
+.header
+    display: flex
+    justify-content: space-between
+    align-items: center
+    width: 98%
+    padding: 1rem 1rem 1rem 0
+    margin: 0 0 .25rem
+    border-radius: .5rem
+    background: linear-gradient(to right , $medium-blue-25, $medium-blue-50, $medium-blue-75)
+    background-color: $medium-blue-25
+    color: $deep-blue-100
+    font-family: Monda , Helvetica , Trebuchet , Arial , sans-serif
+    &__logo
+        width: 25%
+        display: flex
+        justify-content: center
+        align-items: flex-start
+        .legend
+            margin-left: 1rem
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: flex-start
+            &__brand
+                margin-bottom: .25rem
+                display: flex
+                flex-direction: column
+                justify-content: center
+                align-items: center
+                font-weight: bold
+                padding: 0
+                font-size: 3rem
+                line-height: 2.5rem
+    &__user
+        width: 25%
+        display: flex
+        justify-content: space-between
+        align-items: base-line
+        .user-name
+            background: url('../../styles/img/user-icon-25.png') transparent no-repeat 0 0 
+            color: $deep-blue-100
+            min-width: 85%
+            font-weight: bold
+            text-align: left
+            padding: 0 0 0 2rem
+
+        
