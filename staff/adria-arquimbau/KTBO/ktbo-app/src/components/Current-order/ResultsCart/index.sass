@@ -1,0 +1,54 @@
+@import ../../../style/config.sass
+
+.currentOrder
+    display: flex
+    flex-direction: column-reverse
+    justify-content: center
+
+    li
+        list-style: none
+
+    &__articles
+        width: 100vw
+   
+        input
+            font-size: 1rem
+            height: 1rem
+            width: 6rem
+            color: $secondary-color
+
+    &__article
+        grid-template-columns: 100px 250px 100px 150px 200px 150px 190px 103px
+        grid-row-gap: 1px
+        grid-column-gap: 9px
+        display: grid
+        justify-content: center
+
+        input
+            width: 100px
+       
+    &__article--param
+        margin-right: 0.5rem
+        color: $secondary-color
+
+    &__title
+        width: 100vw
+        margin: 1rem 0 0 0 
+        text-align: center
+        color: $secondary-color
+    
+    &__placeOrder
+        margin: 2rem 2rem 0 2rem
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+
+    &__totalPrice
+        color: $secondary-color
+        margin: 2rem
+
+
+
+
+

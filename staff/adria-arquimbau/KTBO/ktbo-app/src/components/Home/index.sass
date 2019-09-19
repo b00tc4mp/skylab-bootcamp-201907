@@ -1,0 +1,76 @@
+@import ../../style/config.sass
+
+.header
+    width: 100vw
+
+    &__sticky-nav
+        position: -webkit-sticky
+        position: sticky
+        top: 0
+        z-index: 10
+
+.superior
+    background-color: $secondary-color
+    display: flex
+    align-items: center
+    justify-content: center
+
+    &__container
+        display: flex
+        justify-content: space-between
+        align-items: center
+        width: 65%
+
+    &__conditions
+        display: flex
+        align-items: center
+        flex-direction: column
+        margin-left: 10rem
+
+    &__conditions--privacy, &__conditions--terms
+        color: white
+        text-decoration: none
+        font-size: 0.8rem
+
+    &__conditions--privacy:hover, &__conditions--terms:hover
+        color: $primary-color
+
+    &__image
+        max-width: 100px
+        margin: 0.5rem 0 0.5rem 0
+
+.footer
+    flex-direction: column
+    justify-content: center
+    text-align: center
+    left: 0
+    bottom: 0
+    width: 100%
+    background-color: $primary-color
+    color: $secondary-color
+    position: fixed
+    padding-bottom: 0.5rem
+
+    &__cont
+        margin: 0.3rem
+        width: 100%
+
+        a
+            text-decoration: none
+            color: $secondary-color
+
+    &__cont--privacity, &__cont--terms
+        margin: 0 1rem 0 1rem
+        font-size: 0.8rem
+
+    &__rights
+        margin-top: 0.1rem
+
+    &__rights--a
+        margin: 0
+        text-decoration: none
+        color: $secondary-color
+        font-size: 0.8rem
+
+    &__cont--privacity:hover, &__cont--terms:hover, &__rights--a:hover
+        color: white

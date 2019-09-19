@@ -1,0 +1,88 @@
+@import ../../style/config.sass
+
+.categoriesCont
+    background-color: white
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    margin-bottom: 2rem
+
+    &__ul
+        display: flex
+        justify-content: center
+        align-items: center
+
+    &__otherProducts
+        color: $secondary-color
+        text-decoration: none
+        margin-right: 5px
+
+    &__otherProducts:hover
+        color: $primary-color
+
+
+//HAMBURGUER
+
+/* Navbar container */
+.navbarCat
+  overflow: hidden
+  background-color: #333
+  font-family: Arial
+
+/* Links inside the navbar */
+.navbarCat a 
+  float: left
+  font-size: 16px
+  color: white
+  text-align: center
+  padding: 14px 16px
+  text-decoration: none
+
+/* The dropdown container */
+.dropdownCat 
+  float: center
+  overflow: hidden
+
+/* Dropdown button */
+.dropdownCat .dropbtnCat 
+  font-size: 16px
+  border: none
+  outline: none
+  color: $secondary-color
+  padding: 14px 16px
+  background-color: inherit
+  /* Important for vertical align on mobile phones */
+  font-family: inherit 
+  /* Important for vertical align on mobile phones */
+  margin: 0 
+
+/* Add a red background color to navbar links on hover */
+.navbarCat a:hover, .dropdownCat:hover .dropbtnCat 
+  color: $primary-color
+
+/* Dropdown content (hidden by default) */
+.dropdown-contentCat 
+  display: none
+  position: absolute
+  background-color: white
+  min-width: 160px
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2)
+  z-index: 1
+
+/* Links inside the dropdown */
+.dropdown-contentCat a 
+  float: none
+  color: $secondary-color
+  padding: 12px 16px
+  text-decoration: none
+  display: block
+  text-align: center
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-contentCat a:hover 
+  color: $primary-color
+
+/* Show the dropdown menu on hover */
+.dropdownCat:hover .dropdown-contentCat 
+  display: block       
