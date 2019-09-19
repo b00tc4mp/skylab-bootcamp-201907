@@ -109,8 +109,6 @@ describe('logic - deal hand', () => {
         expect(retrievedGame.hands[0].pot).to.equal(75)
         expect(retrievedGame.hands[0].dealerPos).to.equal(0)
         expect(retrievedGame.hands[0].bbPos).to.equal(2)
-        expect(retrievedGame.hands[0].sbPos).to.equal(1)
-        expect(retrievedGame.hands[0].turnPos).to.equal(1)
         expect(retrievedGame.hands[0].usedCards.length).to.equal(9)
         expect(retrievedGame.hands[0].tableCards.length).to.equal(3)
         expect(retrievedGame.players[0].inHand).to.equal(true)

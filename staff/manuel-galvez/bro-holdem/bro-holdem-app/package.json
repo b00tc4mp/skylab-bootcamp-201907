@@ -18,7 +18,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test-debug": "react-scripts --inspect-brk=3030 test --runInBand --no-cache",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test:coverage": "react-scripts test --coverage --watchAll"
   },
   "jest": {
     "watchPathIgnorePatterns": [

@@ -5,7 +5,6 @@ export default function (gameId, raise) {
 
     const raiseTo = Number(raise)
     validate.objectId(gameId, 'Game ID')
-    validate.number(raiseTo, 'Raise amount')
 
     return (async () => {
         const response = await fetch(`${REACT_APP_API_URL}/games/${gameId}/actions/raise`, {

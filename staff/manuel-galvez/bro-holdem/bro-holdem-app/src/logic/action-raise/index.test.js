@@ -183,24 +183,5 @@ describe('logic - action raise', () => {
         ).toThrow('Game ID with value 123 is not a valid ObjectId')
     )
 
-    /* Raise TO */
-    it('should fail on empty RaiseTo', () =>
-        expect(() =>
-            logic.actionRaise(gameId, '')
-        ).toThrow('Raise amount is empty or blank')
-    )
-
-    it('should fail on undefined RaiseTo', () =>
-        expect(() =>
-            logic.actionRaise(gameId, undefined)
-        ).toThrow('Raise amount with value undefined is not a number')
-    )
-
-    it('should fail on undefined RaiseTo', () =>
-        expect(() =>
-            logic.actionRaise(gameId, 'aaa')
-        ).toThrow('Raise amount with value aaa is not a number')
-    )
-
     afterAll(() => database.disconnect())
 })

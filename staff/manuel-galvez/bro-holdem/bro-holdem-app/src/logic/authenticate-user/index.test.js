@@ -44,10 +44,7 @@ describe('logic - authenticate user', () => {
     })
 
     it('should fail on wrong password ', async () => {
-
-
         const wrongPassword = 'blablabla'
-
         try {
             await logic.authenticateUser(email, wrongPassword)
         } catch (error) {

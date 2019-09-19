@@ -16,7 +16,6 @@ export default function (gameId) {
         } else {
             await response.json()
             this.__gameId__ = gameId
-            return
         }
     })()
 }
