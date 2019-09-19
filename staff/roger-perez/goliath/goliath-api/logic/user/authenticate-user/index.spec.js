@@ -3,7 +3,7 @@ const logic = require('../../')
 const { User } = require('../../../data')
 const mongoose = require('mongoose')
 
-describe('logic - authenticate user', () => {
+describe.only('logic - authenticate user', () => {
     before(() => mongoose.connect('mongodb://localhost/goliath-api-test', { useNewUrlParser: true }))
 
     let name, surname, instrument, descritpion, email, password, id
@@ -15,9 +15,11 @@ describe('logic - authenticate user', () => {
         description = `description-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
+        drumkits= [],
+        admin=false
 
         await User.deleteMany()
-        const user = await User.create({ name, surname, instrument,description, email, password })
+        const user = await User.create({ name, surname, instrument,description, email, password,drumkits,admin })
         id = user.id
     })
 

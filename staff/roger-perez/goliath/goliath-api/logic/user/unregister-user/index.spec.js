@@ -7,7 +7,7 @@ describe('logic - unregister user', () => {
 
     before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
 
-    let name, surname,instrument,description, email, password, id
+    let name, surname,instrument,description, email, password, id,drumkits,admin
 
     beforeEach(() => {
         name = `name-${Math.random()}`
@@ -16,10 +16,13 @@ describe('logic - unregister user', () => {
         description = `description-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
+        drumkits = [],
+        admin = false
 
-        // users --> User
+
+        
         return User.deleteMany()
-            .then(() => User.create({ name, surname,instrument,description, email, password }))
+            .then(() => User.create({ name, surname,instrument,description, email, password,drumkits,admin }))
             .then(user => id = user.id)
     })
 

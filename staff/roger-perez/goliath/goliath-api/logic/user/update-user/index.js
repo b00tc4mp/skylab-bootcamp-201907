@@ -1,6 +1,5 @@
 const validate = require('../../../utils/validate')
-// const { ObjectId } = require('mongodb')
-/*Add:*/ const { User } = require('../../../data')
+ const { User } = require('../../../data')
 
 /**
  * Updates a user.
@@ -17,6 +16,7 @@ module.exports = function (id, data) {
         return User.findByIdAndUpdate(id, { $set: data })
         .then(user => {
             if (!user) throw new Error(`user with id ${id} does not exist`)
+            return user
         })
 }
 

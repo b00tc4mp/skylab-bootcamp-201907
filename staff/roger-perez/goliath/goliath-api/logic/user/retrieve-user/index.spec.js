@@ -16,9 +16,11 @@ describe('logic - retrieve user', () => {
         description = `description-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
+        drumkits= [],
+        admin=false
 
         await User.deleteMany()
-        const user = await User.create({ name, surname,instrument,description, email, password })
+        const user = await User.create({ name, surname,instrument,description, email, password,drumkits,admin })
         id = user.id
     })
 
@@ -28,13 +30,13 @@ describe('logic - retrieve user', () => {
         const user = await logic.retrieveUser(id)
         expect(user).to.exist
         expect(user.id).to.equal(id)
-        expect(user._id).not.to.exist
         expect(user.name).to.equal(name)
         expect(user.instrument).to.equal(instrument)
         expect(user.descrption).to.equal(descrption)
-        expect(user.surname).to.equal(surname)
+        expect(user.email).to.equal(email)
         expect(user.email).to.equal(email)
         expect(user.password).not.to.exist
+        expect(user.admin).to.equal(false)
     })
 
     it('should fail on empty id', () => 
@@ -55,6 +57,5 @@ describe('logic - retrieve user', () => {
     ).to.throw(`id with value 123 is not a string`)
     )
 
-    // after(() => client.close())
     after(() => mongoose.disconnect())
 })
