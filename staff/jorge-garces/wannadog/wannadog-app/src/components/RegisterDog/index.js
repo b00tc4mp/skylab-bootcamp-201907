@@ -285,7 +285,7 @@ export default function ({ onRegisterDog }) {
                 <option value="false"> No / Not tested</option>
             </select>
 
-            <textarea className="body-form notes" name="notes" placeholder="Notes ..."></textarea>
+            <textarea className="notes" name="notes" placeholder="Notes ..."></textarea>
 
             <button className="button">SAVE</button>
         </form>
