@@ -10,8 +10,8 @@ describe('logic - retrieve task', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
-    let taskName, taskType, description, date, taskSpace, companions, taskId
-    let title, type, address, passcode, cousers, spaceId
+    let taskName, taskType, description, date, companions, taskId
+    let title, type, picture, address, passcode, cousers, spaceId
     let username, name, surname, email, password, spaces, tasks, userId
 
     beforeEach(async() => {
@@ -26,6 +26,7 @@ describe('logic - retrieve task', () => {
         await Task.deleteMany()
         title = `name-${Math.random()}`
         type = `${spaceTypeArray[Math.floor(Math.random() * spaceTypeArray.length)]}`
+        picture = `picture-${Math.random()}`
         address = `address-${Math.random()}`
         passcode = `123-${Math.random()}`
 
@@ -38,10 +39,10 @@ describe('logic - retrieve task', () => {
         const user = await User.create({ username, name, surname, email, password, spaces, tasks })
         userId = user._id.toString()
 
-        const space = await Space.create({ title, type, address, passcode, cousers })
+        const space = await Space.create({ title, type, picture, address, passcode, cousers })
         spaceId = space._id.toString()
 
-        const task = await Task.create({ taskName, taskType, description, date, taskSpace, companions })
+        const task = await Task.create({ taskName, taskType, description, date, taskSpace: space._id, companions })
         taskId = task._id.toString()
 
         user.spaces.push(spaceId)
@@ -51,19 +52,20 @@ describe('logic - retrieve task', () => {
         space.cousers.push(userId)
         await space.save()
 
-        task.taskSpace.push(spaceId)
         task.companions.push(userId)
         await task.save()
     })
 
     it('should succeed on correct data', async () => {
         const task = await logic.retrieveTask(userId, spaceId, taskId)
+
         expect(task).to.exist
         expect(task.id).to.equal(taskId)
         expect(task.taskName).to.equal(taskName)
         expect(task.taskType).to.equal(taskType)
         expect(task.description).to.equal(description)
         expect(task.date).to.deep.equal(date)
+        expect(task.taskSpace.toString()).to.equal(spaceId)
     })
 
     it('should fail on empty user id', async () => {

@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const { expect } = require('chai')
 const logic = require('../..')
-const { database, models: { User, Task, Comment } } = require('data')
+const { database, models: { User, Space, Task, Comment } } = require('data')
 
 const { env: { DB_URL_TEST }} = process
 
@@ -11,6 +11,7 @@ describe('logic - post comment', () => {
     before(() => database.connect(DB_URL_TEST))
     
     let author, posted, text, taskId
+    let title, type, picture, address, passcode
     let username, name, surname, email, password, userId
     let taskName, taskType, description, date, taskSpace, companions, comments
 
@@ -24,11 +25,22 @@ describe('logic - post comment', () => {
         const user = await User.create({ username, name, surname, email, password })
         userId = user._id.toString()
 
+        const spaceTypeArray = ['kitchen', 'bathroom', 'living room', 'coworking', 'garden', 'rooftop', 'other']
+        title = `name-${Math.random()}`
+        type = `${spaceTypeArray[Math.floor(Math.random() * spaceTypeArray.length)]}`
+        picture = `picture-${Math.random()}`
+        address = `address-${Math.random()}`
+        passcode = `123-${Math.random()}`
+
+        const space = await Space.create({ title, type, picture, address, passcode })
+        spaceId = space.id.toString()
+
         const taskTypeArray = ['particular', 'collective', 'maintenance']
         taskName = `taskName-${Math.random()}`
         taskType =  `${taskTypeArray[Math.floor(Math.random() * taskTypeArray.length)]}`
         description = `description-${Math.random()}`
         date = new Date
+        taskSpace = space.id
 
         const task = await Task.create({ taskName, taskType, description, date, taskSpace, companions, comments })
 

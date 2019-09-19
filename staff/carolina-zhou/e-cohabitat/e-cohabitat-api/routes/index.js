@@ -17,7 +17,8 @@ const unregisterSpaceCouser = require('./space/unregister-couser')
 
 const addTask = require('./task/add-task')
 const addTaskCompanion = require('./task/add-companion')
-const retrieveAllTasks = require('./task/retrieve-all-tasks')
+const retrieveAllUserTasks = require('./task/retrieve-all-user-tasks')
+const retrieveAllSpaceTasks = require('./task/retrieve-all-space-tasks')
 const retrieveTask = require('./task/retrieve-task')
 const editTask = require('./task/edit-task')
 const deleteTask = require('./task/delete-task')
@@ -38,7 +39,7 @@ router.delete ('/users/:id', [tokenMiddleware], unregisterUser)
 
 /* SPACE */ 
 router.post('/users/:id/spaces', [tokenMiddleware], registerSpace)
-router.patch ('/users/:id/spaces/:spaceId/cousers/:coUserId', [tokenMiddleware], registerSpaceCouser)
+router.patch ('/users/:id/spaces/:spaceId/cousers', [tokenMiddleware], registerSpaceCouser)
 router.get('/users/:id/spaces/', [tokenMiddleware], retrieveAllSpaces)
 router.get('/users/:id/spaces/:spaceId', [tokenMiddleware], retrieveSpace)
 router.patch ('/users/:id/spaces/:spaceId', [tokenMiddleware], updateSpace)
@@ -48,7 +49,8 @@ router.delete ('/users/:id/spaces/:spaceId/cousers/:coUserId', [tokenMiddleware]
 /* TASK */
 router.post('/users/:id/spaces/:spaceId/tasks', [tokenMiddleware], addTask)
 router.patch ('/users/:id/spaces/:spaceId/tasks/:taskId/companions/:companionId', [tokenMiddleware], addTaskCompanion)
-router.get('/users/:id/spaces/:spaceId/tasks', [tokenMiddleware], retrieveAllTasks)
+router.get('/users/:id/tasks', [tokenMiddleware], retrieveAllUserTasks)
+router.get('/users/:id/spaces/:spaceId/tasks', [tokenMiddleware], retrieveAllSpaceTasks)
 router.get('/users/:id/spaces/:spaceId/tasks/:taskId', [tokenMiddleware], retrieveTask)
 router.patch ('/users/:id/spaces/:spaceId/tasks/:taskId', [tokenMiddleware], editTask)
 router.delete ('/users/:id/spaces/:spaceId/tasks/:taskId', [tokenMiddleware], deleteTask)

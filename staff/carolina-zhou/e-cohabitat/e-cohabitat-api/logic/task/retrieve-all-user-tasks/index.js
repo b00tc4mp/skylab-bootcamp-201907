@@ -4,9 +4,12 @@ const { models: { User } } = require('data')
 /**
  * Retrieves all the tasks added by a particular user
  * 
- * @param {*} userId 
+ * @param {*} userId user id
  * 
- * @returns {Promise}
+ * @throws {TypeError} - if user id is not a string.
+ * @throws {Error} - if user id is empty or undefined, if user is not found.
+ * 
+ * @returns {Array} task id array
 */
 
 module.exports = function(userId) {
@@ -15,17 +18,9 @@ module.exports = function(userId) {
 
     return (async() => {
 
-        const user = await User.findById(userId)
+        const user = await User.findById(userId).populate('tasks')
         if (!user) throw Error(`user with id ${userId} does not exist`)
 
-        const userTasks = user.tasks
-
-        if (userTasks.length === 0) throw Error(`this user does not have any tasks`) 
-
-        userTasks.forEach(task => {
-            return task.id.toString()        
-        })
-
-        return userTasks
+        return user.tasks
     })()
 }

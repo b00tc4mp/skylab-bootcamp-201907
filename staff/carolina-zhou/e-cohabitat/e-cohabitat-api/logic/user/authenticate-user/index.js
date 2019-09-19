@@ -1,13 +1,17 @@
 const { validate } = require('utils')
 const { models: { User } } = require('data')
+const bcrypt = require('bcryptjs')
 
 /**
  * Authenticates a user by its credentials.
  * 
- * @param {string} email 
- * @param {string} password 
+ * @param {string} email user's email
+ * @param {string} password user's password
  * 
- * @returns {Promise}
+ * @throws {TypeError} - if any parameter is not a string.
+ * @throws {Error} - if any parameter is empty/undefined, if email is not found or password does not match.
+ * 
+ * @returns {String} user id string.
  */
 
 module.exports = function (email, password) {
@@ -20,7 +24,11 @@ module.exports = function (email, password) {
         const user = await User.findOne({ email })
         if (!user) throw new Error(`wrong credentials`)
     
-        if (user.password !== password) throw new Error('wrong credentials')
+        const match = await bcrypt.compare(password, user.password)
+        if (!match) throw Error('wrong credentials')
+
+        user.id = user._id.toString()
+        delete user._id
     
         return user.id
     })()

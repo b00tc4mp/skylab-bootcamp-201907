@@ -10,7 +10,7 @@ describe('logic - register space co-user', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
-    let title, type, address, passcode, cousers
+    let title, type, picture, address, passcode, cousers
     let username, name, surname, email, password, spaces
     let username2, name2, surname2, email2, password2
     let spaceId, coUserId, existentUserId
@@ -20,6 +20,7 @@ describe('logic - register space co-user', () => {
         
         title = `name-${Math.random()}`
         type = `${spaceTypeArray[Math.floor(Math.random() * spaceTypeArray.length)]}`
+        picture = `picture-${Math.random()}`
         address = `address-${Math.random()}`
         passcode = `123-${Math.random()}`
 
@@ -39,7 +40,7 @@ describe('logic - register space co-user', () => {
         const user = await User.create({ username, name, surname, email, password, spaces })
         coUserId = user._id.toString()
 
-        const space = await Space.create({ title, type, address, passcode, cousers })
+        const space = await Space.create({ title, type, picture, address, passcode, cousers })
         spaceId = space._id.toString()
 
         const existentUser = await User.create({ username: username2, name: name2, surname: surname2, email: email2, password: password2, spaces })
@@ -53,12 +54,13 @@ describe('logic - register space co-user', () => {
     })
 
     it('should succeed on correct data', async () => {
-        const space = await logic.registerSpaceCouser(spaceId, coUserId)
+        const space = await logic.registerSpaceCouser(email, passcode, spaceId, existentUserId)
 
         expect(space).to.exist
         expect(space.id).to.equal(spaceId)
         expect(space.title).to.equal(title)
         expect(space.type).to.equal(type)
+        expect(space.picture).to.equal(picture)
         expect(space.address).to.equal(address)
         expect(space.passcode).to.equal(passcode)
         expect(space.cousers).to.include(existentUserId, coUserId)
@@ -68,19 +70,82 @@ describe('logic - register space co-user', () => {
 
     it('should fail if the co-user is already registered', async () => {
         try {
-            await logic.registerSpaceCouser(spaceId, existentUserId)
+            await logic.registerSpaceCouser(email2, passcode, spaceId, existentUserId)
+
         } catch({error}) {
             expect(error).to.exist
             expect(error.message).to.equal(`user already registered in space with id ${spaceId}`)
         }
     })
 
-    // space
+    // co-user email
+    it('should fail on empty co-user email', async () => {
+        email = ''
+
+        try {
+            await logic.registerSpaceCouser(email, passcode, spaceId, existentUserId)
+        } catch({message}) {
+            expect(message).to.equal('co-user email is empty or blank')
+        }
+    })
+
+    it('should fail on undefined co-user email', async () => {
+        email = undefined
+
+        try {
+            await logic.registerSpaceCouser(email, passcode, spaceId, existentUserId)
+        } catch({message}) {
+            expect(message).to.equal('co-user email with value undefined is not a string')
+        }
+    })
+
+    it('should fail on wrong co-user email data type', async () => {
+        email = 123
+
+        try {
+            await logic.registerSpaceCouser(email, passcode, spaceId, existentUserId)
+        } catch({message}) {
+            expect(message).to.equal('co-user email with value 123 is not a string')
+        }
+    })
+
+    // space passcode
+    it('should fail on empty space passcode', async () => {
+        passcode = ''
+
+        try {
+            await logic.registerSpaceCouser(email, passcode, spaceId, existentUserId)
+        } catch({message}) {
+            expect(message).to.equal('space passcode is empty or blank')
+        }
+    })
+
+    it('should fail on undefined space passcode', async () => {
+        passcode = undefined
+
+        try {
+            await logic.registerSpaceCouser(email, passcode, spaceId, existentUserId)
+        } catch({message}) {
+            expect(message).to.equal('space passcode with value undefined is not a string')
+        }
+    })
+
+    it('should fail on wrong space passcode data type', async () => {
+        passcode = 123
+
+        try {
+            await logic.registerSpaceCouser(email, passcode, spaceId, existentUserId)
+        } catch({message}) {
+            expect(message).to.equal('space passcode with value 123 is not a string')
+        }
+    })
+
+    // space id
     it('should fail on empty space id', async () => {
         spaceId = ''
 
         try {
-            await logic.registerSpaceCouser(spaceId, coUserId)
+            await logic.registerSpaceCouser(email, passcode, spaceId, existentUserId)
         } catch({message}) {
             expect(message).to.equal('space id is empty or blank')
         }
@@ -90,7 +155,7 @@ describe('logic - register space co-user', () => {
         spaceId = undefined
 
         try {
-            await logic.registerSpaceCouser(spaceId, coUserId)
+            await logic.registerSpaceCouser(email, passcode, spaceId, existentUserId)
         } catch({message}) {
             expect(message).to.equal('space id with value undefined is not a string')
         }
@@ -100,40 +165,40 @@ describe('logic - register space co-user', () => {
         spaceId = 123
 
         try {
-            await logic.registerSpaceCouser(spaceId, coUserId)
+            await logic.registerSpaceCouser(email, passcode, spaceId, existentUserId)
         } catch({message}) {
             expect(message).to.equal('space id with value 123 is not a string')
         }
     })
 
-    // co-user
-    it('should fail on empty user', async () => {
-        coUserId = ''
+    // existent user id
+    it('should fail on empty existent user id', async () => {
+        existentUserId = ''
 
         try {
-            await logic.registerSpaceCouser(spaceId, coUserId)
+            await logic.registerSpaceCouser(email, passcode, spaceId, existentUserId)
         } catch({message}) {
-            expect(message).to.equal('co-user id is empty or blank')
+            expect(message).to.equal('existent user id is empty or blank')
         }
     })
 
-    it('should fail on undefined owner', async () => {
-        coUserId = undefined
+    it('should fail on undefined existent user id', async () => {
+        existentUserId = undefined
 
         try {
-            await logic.registerSpaceCouser(spaceId, coUserId)
+            await logic.registerSpaceCouser(email, passcode, spaceId, existentUserId)
         } catch({message}) {
-            expect(message).to.equal('co-user id with value undefined is not a string')
+            expect(message).to.equal('existent user id with value undefined is not a string')
         }
     })
 
-    it('should fail on wrong user data type', async () => {
-        coUserId = 123
+    it('should fail on wrong existent user id data type', async () => {
+        existentUserId = 123
 
         try {
-            await logic.registerSpaceCouser(spaceId, coUserId)
+            await logic.registerSpaceCouser(email, passcode, spaceId, existentUserId)
         } catch({message}) {
-            expect(message).to.equal('co-user id with value 123 is not a string')
+            expect(message).to.equal('existent user id with value 123 is not a string')
         }
     })
 

@@ -6,12 +6,12 @@ const { database, models: { User, Space, Task } } = require('data')
 
 const { env: { DB_URL_TEST }} = process
 
-describe('logic - retrieve all tasks', () => {
+describe('logic - retrieve all user tasks', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
     let taskName, taskType, description, date, taskSpace, companions, taskId
-    let title, type, address, passcode, cousers, spaceId
+    let title, type, picture, address, passcode, cousers, spaceId
     let username, name, surname, email, password, spaces, tasks, userId   
 
     beforeEach(async() => {
@@ -20,6 +20,7 @@ describe('logic - retrieve all tasks', () => {
         
         taskName = `taskName-${Math.random()}`
         taskType =  `${taskTypeArray[Math.floor(Math.random() * taskTypeArray.length)]}`
+        picture = `picture-${Math.random()}`
         description = `description-${Math.random()}`
         date = new Date
 
@@ -38,10 +39,10 @@ describe('logic - retrieve all tasks', () => {
         const user = await User.create({ username, name, surname, email, password, spaces, tasks })
         userId = user._id.toString()
 
-        const space = await Space.create({ title, type, address, passcode, cousers })
+        const space = await Space.create({ title, type, picture, address, passcode, cousers })
         spaceId = space._id.toString()
 
-        const task = await Task.create({ taskName, taskType, description, date, taskSpace, companions })
+        const task = await Task.create({ taskName, taskType, description, date, taskSpace: space._id, companions })
         taskId = task._id.toString()
 
         user.spaces.push(spaceId)
@@ -51,22 +52,27 @@ describe('logic - retrieve all tasks', () => {
         space.cousers.push(userId)
         await space.save()
 
-        task.taskSpace.push(spaceId)
         task.companions.push(userId)
         await task.save()
     })
 
     it('should succeed on correct data', async() => {
-        const tasks = await logic.retrieveAllTasks(userId)
+        const tasks = await logic.retrieveAllUserTasks(userId)
         expect(tasks).to.exist
         expect(tasks).not.to.be.empty
 
-        expect(tasks.toString()).to.equal(taskId)
+        expect(tasks[0].taskName).to.equal(taskName)
+        expect(tasks[0].taskType).to.equal(taskType)
+        expect(tasks[0].description).to.equal(description)
+        expect(tasks[0].date).to.deep.equal(date)
+        expect(tasks[0].taskSpace.toString()).to.equal(spaceId)
+        expect(tasks[0].companions).to.include(userId)
+        expect(tasks[0].id).to.equal(taskId)
     })
 
     it('should fail on empty id', async () => {
         try{
-            await logic.retrieveAllSpaces(' ')
+            await logic.retrieveAllUserTasks(' ')
         } catch({ message }) {
             expect(message).to.equal('user id is empty or blank')
         }
@@ -74,7 +80,7 @@ describe('logic - retrieve all tasks', () => {
 
     it('should fail on undefined id', async () => {
           try{
-            await logic.retrieveAllSpaces(undefined)
+            await logic.retrieveAllUserTasks(undefined)
         } catch({ message }) {
             expect(message).to.equal("user id with value undefined is not a string")
         }
@@ -82,7 +88,7 @@ describe('logic - retrieve all tasks', () => {
      
     it('should fail on wrong id data type', async() => {
          try{
-            await logic.retrieveAllSpaces(123)
+            await logic.retrieveAllUserTasks(123)
         } catch({ message }) {
                 expect(message).to.equal("user id with value 123 is not a string")
         }

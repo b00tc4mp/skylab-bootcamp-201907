@@ -2,11 +2,14 @@ const { validate } = require('utils')
 const { models: { User, Space } } = require('data')
 
 /**
- * Unregisters a space
+ * Unregisters a space.
  * 
- * @param {string} userId
- * @param {string} spaceId 
- * @param {string} passcode 
+ * @param {string} userId user id
+ * @param {string} spaceId space id
+ * @param {string} passcode space passcode
+ * 
+ * @throws {TypeError} - if any of the parameters is not a string.
+ * @throws {Error} - if any of the parameters id empty or undefined, if user or space is not found, if user is not a co-user of the provided space, if wrong passcode is provided.
  * 
  * @returns {Promise}
 */
@@ -31,6 +34,6 @@ module.exports = function(userId, spaceId, passcode) {
         if (!result.deletedCount) throw Error('wrong data provided')
 
         user.spaces.splice(user.spaces.indexOf(space), 1)
-        user.save()
+        await user.save()
     })()
 }

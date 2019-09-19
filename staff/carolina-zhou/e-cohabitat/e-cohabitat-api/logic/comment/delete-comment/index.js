@@ -2,10 +2,13 @@ const { validate } = require('utils')
 const { models: { User, Task, Comment } } = require('data')
 
 /**
- * Unregisters a space
+ * Deletes a comment made on a specific task
  * 
- * @param {string} userId
- * @param {string} commentId 
+ * @param {string} userId user id
+ * @param {string} commentId comment id
+ * 
+ * @throws {TypeError} - if user id or comment id is not a string.
+ * @throws {Error} - if any parameter is empty or undefined, if user/task/comment is not found, if comment and task do not match, if user is not the author of the comment.
  * 
  * @returns {Promise}
 */
@@ -33,7 +36,16 @@ module.exports = function(userId, taskId, commentId) {
         const result = await Comment.deleteOne({ _id: commentId })
         if (!result.deletedCount) throw Error('wrong data provided')
 
+        user.id = user._id.toString()
+        delete user._id
+
+        task.id = task._id.toString()
+        delete task._id
+
+        searchComment.id = searchComment._id.toString()
+        delete searchComment._id
+
         task.comments.splice(task.comments.indexOf(comment), 1)
-        task.save()
+        await task.save()
     })()
 }

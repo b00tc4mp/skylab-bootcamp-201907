@@ -8,14 +8,15 @@
     "watch": "npx nodemon .",
     "debug": "node debug .",
     "test": "npx mocha logic/**/**/*.spec.js --timeout 10000",
-    "test-debug": "npx mocha debug logic/**/**/*.spec.js",
+    "test-debug": "npx mocha debug logic/**/**/*.spec.js --timeout 10000",
     "test-inspect": "npx mocha --inspect-brk logic/**/**/*.spec.js",
-    "coverage": "nyc --reporter=html --reporter=text mocha logic/**/**/*.spec.js --timeout 10000 --runInBand"
+    "test:coverage": "npx nyc --reporter=html --reporter=text mocha logic/**/**/*.spec.js --timeout 10000 --runInBand"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",

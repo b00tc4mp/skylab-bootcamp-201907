@@ -11,7 +11,7 @@ describe('logic - remove task companion', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let taskName, taskType, description, date, taskSpace, companions, taskId
-    let title, type, address, passcode, cousers, spaceId
+    let title, type, picture, address, passcode, cousers, spaceId
     let username, name, surname, email, password, companionIdOne
     let username2, name2, surname2, email2, password2, companionIdTwo
     let username3, name3, surname3, email3, password3, companionIdThree
@@ -28,6 +28,7 @@ describe('logic - remove task companion', () => {
         await Task.deleteMany()
         title = `name-${Math.random()}`
         type = `${spaceTypeArray[Math.floor(Math.random() * spaceTypeArray.length)]}`
+        picture = `picture-${Math.random()}`
         address = `address-${Math.random()}`
         passcode = `123-${Math.random()}`
 
@@ -49,13 +50,12 @@ describe('logic - remove task companion', () => {
         const newUserTwo = await User.create({ username: username2, name: name2, surname: surname2, email: email2, password :password2 })
         companionIdTwo = newUserTwo.id
 
-        const newSpace = await Space.create({ title, type, address, passcode, cousers })
+        const newSpace = await Space.create({ title, type, picture, address, passcode, cousers })
         newSpace.cousers.push(companionIdOne, companionIdTwo)
         spaceId = newSpace.id
         await newSpace.save()
 
-        const newTask = await Task.create({ taskName, taskType, description, date, taskSpace, companions })
-        newTask.taskSpace.push(spaceId)
+        const newTask = await Task.create({ taskName, taskType, description, date, taskSpace: newSpace._id, companions })
         newTask.companions.push(companionIdOne, companionIdTwo)
         taskId = newTask._id.toString()
         await newTask.save()

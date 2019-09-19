@@ -1,12 +1,12 @@
 const logic = require('../../logic')
 
 module.exports = (req, res) => {
-
-    const { params: { spaceId, coUserId } } = req
-
+    
+    const { params: { id, spaceId }, body: { email, passcode } } = req
+    
     try {
-        logic.registerSpaceCouser(spaceId, coUserId)
-            .then(() => res.json({ message: `user with id ${coUserId} added to space ${spaceId} successfully`}))
+        logic.registerSpaceCouser(email, passcode, spaceId, id)
+            .then(() => res.json({ message: `user with email ${email} added to space ${spaceId} successfully`}))
             .catch(({ message }) => res.status(404).json({ error: message }))
     } catch({ message }) {
         res.status(404).json({ error: message })

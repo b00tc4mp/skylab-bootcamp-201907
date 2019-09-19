@@ -11,7 +11,7 @@ describe('logic - add task companion', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let taskName, taskType, description, date, taskSpace, companions
-    let title, type, address, passcode, cousers
+    let title, type, picture, address, passcode, cousers
     let username, name, surname, email, password, spaces, tasks
     let username2, name2, surname2, email2, password2
     let spaceId, companionId, existentUserId
@@ -24,12 +24,12 @@ describe('logic - add task companion', () => {
         taskType =  `${taskTypeArray[Math.floor(Math.random() * taskTypeArray.length)]}`
         description = `description-${Math.random()}`
         date = new Date
-        taskSpace = []
         companions = []
 
         await Task.deleteMany()
         title = `title-${Math.random()}`
         type = `${spaceTypeArray[Math.floor(Math.random() * spaceTypeArray.length)]}`
+        picture = `picture-${Math.random()}`
         address = `address-${Math.random()}`
         passcode = `123-${Math.random()}`
         cousers = []
@@ -54,8 +54,9 @@ describe('logic - add task companion', () => {
         const existentUser = await User.create({ username: username2, name: name2, surname: surname2, email: email2, password: password2, spaces, tasks })
         existentUserId = existentUser._id.toString()
 
-        const space = await Space.create({ title, type, address, passcode, cousers })
+        const space = await Space.create({ title, type, picture, address, passcode, cousers })
         spaceId = space._id.toString()
+        taskSpace = space._id
 
         const task = await Task.create({ taskName, taskType, description, date, taskSpace, companions })
         taskId = task._id.toString()
@@ -70,7 +71,6 @@ describe('logic - add task companion', () => {
         space.cousers.push(existentUserId, companionId)
         await space.save()
 
-        task.taskSpace.push(spaceId)
         task.companions.push(existentUserId)
         await task.save()
     })
@@ -84,7 +84,7 @@ describe('logic - add task companion', () => {
         expect(result.taskType).to.equal(taskType)
         expect(result.description).to.equal(description)
         expect(result.date).to.deep.equal(date)
-        expect(result.taskSpace).to.include(spaceId)
+        expect(result.taskSpace.toString()).to.equal(spaceId)
         expect(result.companions).to.include(existentUserId, companionId)
 
     })

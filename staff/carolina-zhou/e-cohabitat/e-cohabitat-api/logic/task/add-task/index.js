@@ -4,14 +4,17 @@ const { models: { User, Space, Task } } = require('data')
 /**
  * Adds a task
  * 
- * @param {*} taskName 
- * @param {*} taskType 
- * @param {*} description 
- * @param {*} date 
- * @param {*} spaceId 
- * @param {*} userId 
+ * @param {*} taskName task name
+ * @param {*} taskType task type
+ * @param {*} description task description
+ * @param {*} date task date
+ * @param {*} spaceId space id
+ * @param {*} userId user id
  * 
- * @returns {Promise}
+ * @throws {TypeError} - if any of the parameters is not a string (except the date parameter), if date is not a date.
+ * @throws {Error} - if any of the parameters is empty or undefined, if user/space is not found.
+ * 
+ * @returns {String} task id
  */
 
 module.exports = function(taskName, taskType, description, date, spaceId, userId) {
@@ -30,14 +33,19 @@ module.exports = function(taskName, taskType, description, date, spaceId, userId
         const space = await Space.findById(spaceId)
         if (!space) throw Error('space does not exist') 
         
-        const task = new Task({ taskName, taskType, description, date })
-        task.taskSpace.push(spaceId)
+        const task = new Task({ taskName, taskType, description, date, taskSpace: spaceId })
         task.companions.push(userId)
+        task.companionNames.push(user.username)
         await task.save()
         
         const taskId = task._id.toString()
+        delete task._id
+
         user.tasks.push(taskId)
         await user.save()
+        
+        space.spaceTasks.push(taskId)
+        await space.save()
     
         return taskId
     })()

@@ -1,0 +1,46 @@
+@media (max-width: 840px) 
+    .main
+        padding: 2em
+        &__title
+            display: none
+        &__subtitle
+            text-align: center
+            font-size: 1.2rem
+            font-weight: normal
+        &__logo
+            margin: 2em 0 2em 0
+        &__mobile-menu
+            margin: 5em 0 
+        &__item
+            list-style: none
+            margin: 1em auto
+            padding: 1em
+            width: 50%
+            background-color: black
+            text-align: center
+        &__item:hover
+            background-color: deeppink
+        &__link
+            text-decoration: none
+            color: white
+
+@media (min-width: 840px) 
+    .main
+        min-height: calc(100vh - 317px)
+        padding: 0 7em
+        text-align: center
+
+        &__title
+            display: block
+            font-family: Helvetica, Roboto, sans-serif
+            font-size: 2rem
+            padding-top: 3em
+        &__e
+            font-weight: lighter
+            font-size: 1.9rem
+        &__subtitle
+            font-weight: normal
+            margin-top: 3em
+        &__logo, &__mobile-menu
+            display: none
+            

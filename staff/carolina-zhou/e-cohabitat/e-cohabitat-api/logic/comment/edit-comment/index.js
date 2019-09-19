@@ -2,13 +2,16 @@ const { validate } = require('utils')
 const { models: { Comment, Task } } = require('data')
 
 /**
- * Edits a comment
+ * Edits a comment made on a specific task.
  * 
- * @param {*} commentId
- * @param {*} text 
- * @param {*} taskId
+ * @param {*} commentId comment id
+ * @param {*} text comment text to update
+ * @param {*} taskId task id
  * 
-* @returns {Promise}
+ @throws {TypeError} - if comment id or task id is not a string, if text to update is not an object.
+ * @throws {Error} - if any parameter is empty or undefined, if task or comment is not found, if comment and task do not match.
+ * 
+* @returns {Object} comment object.
 */
 
 module.exports = function(commentId, text, taskId) {

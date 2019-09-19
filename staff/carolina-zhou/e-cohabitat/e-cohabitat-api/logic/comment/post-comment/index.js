@@ -4,13 +4,16 @@ const { models: { User, Task, Comment } } = require('data')
 /**
  * Posts a comment
  * 
- * @param {*} authorId 
- * @param {*} author 
- * @param {*} posted 
- * @param {*} text 
- * @param {*} taskId 
+ * @param {*} authorId author id
+ * @param {*} author author username
+ * @param {*} posted comment post date
+ * @param {*} text comment text
+ * @param {*} taskId task id
  * 
- * @returns {Promise}
+ * @throws {TypeError} - if date is not a date, if any of the other parameters is not a string.
+ * @throws {Error} - if any parameter is empty or undefined, if user or task is not found.
+ * 
+ * @returns {String} comment id
  */
 
 module.exports = function(authorId, author, posted, text, taskId) {
@@ -34,6 +37,7 @@ module.exports = function(authorId, author, posted, text, taskId) {
         await task.save()
         
         const commentId = comment._id.toString()
+        delete comment._id
     
         return commentId
     })()

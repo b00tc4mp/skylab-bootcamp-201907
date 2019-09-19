@@ -2,12 +2,15 @@ const { validate } = require('utils')
 const { models: { Space } } = require('data')
 
 /**
- * Updates a space
+ * Updates a space.
  * 
- * @param {*} spaceId
- * @param {*} dataToUpdate 
+ * @param {*} spaceId space id
+ * @param {*} dataToUpdate data to update
  * 
-* @returns {Promise}
+ * @throws {TypeError} - if space id is not a string, if data to update is not an object.
+ * @throws {Error} - if space id is empty or undefined, if space is not found.
+ * 
+ * @returns {Promise}
 */
 
 module.exports = function(spaceId, dataToUpdate) {

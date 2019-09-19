@@ -1,15 +1,19 @@
 const { validate } = require('utils')
 const { models: { User } } = require('data')
+const bcrypt = require('bcryptjs')
 
 /**
  * Registers a user.
  * 
- * @param {string} username 
- * @param {string} name 
- * @param {string} surname 
- * @param {string} email 
- * @param {string} password
+ * @param {string} username user's username
+ * @param {string} name user's real name
+ * @param {string} surname user's real surname
+ * @param {string} email user's email
+ * @param {string} password user's password
  * 
+ * @throws {TypeError} - if any parameter is not a string
+ * @throws {Error} - if any parameter is empty/undefined. if there is already a user registered under the same email or username.
+
  * @returns {Promise}
  */
 
@@ -23,10 +27,14 @@ module.exports = function (username, name, surname, email, password) {
     validate.string(password, 'password')
 
     return (async () => {
-        const user = await User.findOne({ email })
+        const userEmail = await User.findOne({ email })
+        const userUsername = await User.findOne({ username })
 
-        if (user) throw new Error(`user with e-mail ${email} already exists`)
+        if (userEmail) throw new Error(`user with e-mail ${email} already exists`)
+        if (userUsername) throw new Error(`user with username ${username} already exists`)
 
-        await User.create({ username, name, surname, email, password })
+        const hash = await bcrypt.hash(password, 10)
+
+        await User.create({ username, name, surname, email, password: hash })
     })()
 }

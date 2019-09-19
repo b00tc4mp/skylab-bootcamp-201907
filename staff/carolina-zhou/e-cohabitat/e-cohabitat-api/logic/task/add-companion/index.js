@@ -2,13 +2,16 @@ const { validate } = require('utils')
 const { models: { User, Space, Task } } = require('data')
 
 /**
- * Adds a task companion
+ * Adds a task companion.
  * 
- * @param {string} taskId
- * @param {string} spaceId
- * @param {string} companionId 
+ * @param {string} taskId task id
+ * @param {string} spaceId space id
+ * @param {string} companionId companion id
  * 
- * @returns {Promise}
+ * @throws {TypeError} - if any of the parameters is not a string.
+ * @throws {Error} - if any of the parameters is empty or undefined, if user/space/task is not found, if task and space do not match, if user to add is already a companion.
+ * 
+ * @returns {Object} task object
 */
 
 module.exports = function(taskId, spaceId, companionId) {
@@ -27,13 +30,13 @@ module.exports = function(taskId, spaceId, companionId) {
         const task = await Task.findOne({ _id: taskId })
         if (!task) throw Error('wrong task id provided')
 
-        const matchSpace = task.taskSpace.find(location => location.toString() === spaceId)
-        if (!matchSpace) throw Error(`task with id ${taskId} does not match space with id ${spaceId}`)
+        if (task.taskSpace.toString() != spaceId) throw Error(`task with id ${taskId} does not match space with id ${spaceId}`)
 
         const matchUser = task.companions.find(companion => companion.toString() === companionId)
         if (matchUser === companionId) throw Error(`user already added to task with id ${taskId}`)
         
         task.companions.push(companionId)
+        task.companionNames.push(user.username)
         await task.save()
 
         user.tasks.push(taskId)

@@ -10,13 +10,14 @@ describe('logic - register space', () => {
 
     before(() => database.connect(DB_URL_TEST))
     
-    let title, type, address, passcode, id, username, name, surname, email, password
+    let title, type, picture, address, passcode, cousers, id, username, name, surname, email, password
 
     beforeEach(async() => {
         const spaceTypeArray = ['kitchen', 'bathroom', 'living room', 'coworking', 'garden', 'rooftop', 'other']
         
         title = `name-${Math.random()}`
         type = `${spaceTypeArray[Math.floor(Math.random() * spaceTypeArray.length)]}`
+        picture = `picture-${Math.random()}`
         address = `address-${Math.random()}`
         passcode = `123-${Math.random()}`
 
@@ -32,7 +33,7 @@ describe('logic - register space', () => {
     })
 
     it('should succeed on correct data', async () => {
-        const spaceId = await logic.registerSpace(title, type, address, passcode, id)
+        const spaceId = await logic.registerSpace(title, type, picture, address, passcode, id)
         expect(spaceId).to.exist
 
         const space = await Space.findOne({ passcode })
@@ -42,12 +43,13 @@ describe('logic - register space', () => {
         expect(space.type).to.equal(type)
         expect(space.address).to.equal(address)
         expect(space.passcode).to.equal(passcode)
+        expect(space.cousers).to.include(id)
     })
 
     it('should fail if the space already exists', async () => {
         try {
-            Space.create({ title, type, address, passcode, id })
-            await logic.registerSpace(title, type, address, passcode, id)
+            Space.create({ title, type, picture, address, passcode })
+            await logic.registerSpace(title, type, picture, address, passcode, id)
         } catch({error}) {
             expect(error).to.exist
             expect(error.message).to.equal(`space already exists`)
@@ -59,7 +61,7 @@ describe('logic - register space', () => {
         title = ''
 
         try {
-            await logic.registerSpace(title, type, address, passcode, id)
+            await logic.registerSpace(title, type, picture, address, passcode, id)
         } catch({message}) {
             expect(message).to.equal('space name is empty or blank')
         }
@@ -69,7 +71,7 @@ describe('logic - register space', () => {
         title = undefined
 
         try {
-            await logic.registerSpace(title, type, address, passcode, id)
+            await logic.registerSpace(title, type, picture, address, passcode, id)
         } catch({message}) {
             expect(message).to.equal('space name with value undefined is not a string')
         }
@@ -79,7 +81,7 @@ describe('logic - register space', () => {
         title = 123
 
         try {
-            await logic.registerSpace(title, type, address, passcode, id)
+            await logic.registerSpace(title, type, picture, address, passcode, id)
         } catch({message}) {
             expect(message).to.equal('space name with value 123 is not a string')
         }
@@ -90,7 +92,7 @@ describe('logic - register space', () => {
         type = ''
 
         try {
-            await logic.registerSpace(title, type, address, passcode, id)
+            await logic.registerSpace(title, type, picture, address, passcode, id)
         } catch({message}) {
             expect(message).to.equal('space type is empty or blank')
         }
@@ -100,7 +102,7 @@ describe('logic - register space', () => {
         type = undefined
 
         try {
-            await logic.registerSpace(title, type, address, passcode, id)
+            await logic.registerSpace(title, type, picture, address, passcode, id)
         } catch({message}) {
             expect(message).to.equal('space type with value undefined is not a string')
         }
@@ -110,9 +112,40 @@ describe('logic - register space', () => {
         type = 123
 
         try {
-            await logic.registerSpace(title, type, address, passcode, id)
+            await logic.registerSpace(title, type, picture, address, passcode, id)
         } catch({message}) {
             expect(message).to.equal('space type with value 123 is not a string')
+        }
+    })
+
+    // picture
+    it('should fail on empty picture', async () => {
+        picture = ''
+
+        try {
+            await logic.registerSpace(title, type, picture, address, passcode, id)
+        } catch({message}) {
+            expect(message).to.equal('picture is empty or blank')
+        }
+    })
+
+    it('should fail on undefined picture', async () => {
+        picture = undefined
+
+        try {
+            await logic.registerSpace(title, type, picture, address, passcode, id)
+        } catch({message}) {
+            expect(message).to.equal('picture with value undefined is not a string')
+        }
+    })
+
+    it('should fail on wrong picture data type', async () => {
+        picture = 123
+
+        try {
+            await logic.registerSpace(title, type, picture, address, passcode, id)
+        } catch({message}) {
+            expect(message).to.equal('picture with value 123 is not a string')
         }
     })
 
@@ -121,7 +154,7 @@ describe('logic - register space', () => {
         address = ''
 
         try {
-            await logic.registerSpace(title, type, address, passcode, id)
+            await logic.registerSpace(title, type, picture, address, passcode, id)
         } catch({message}) {
             expect(message).to.equal('space address is empty or blank')
         }
@@ -131,7 +164,7 @@ describe('logic - register space', () => {
         address = undefined
 
         try {
-            await logic.registerSpace(title, type, address, passcode, id)
+            await logic.registerSpace(title, type, picture, address, passcode, id)
         } catch({message}) {
             expect(message).to.equal('space address with value undefined is not a string')
         }
@@ -141,7 +174,7 @@ describe('logic - register space', () => {
         address = 123
 
         try {
-            await logic.registerSpace(title, type, address, passcode, id)
+            await logic.registerSpace(title, type, picture, address, passcode, id)
         } catch({message}) {
             expect(message).to.equal('space address with value 123 is not a string')
         }
@@ -152,7 +185,7 @@ describe('logic - register space', () => {
         passcode = ''
 
         try {
-            await logic.registerSpace(title, type, address, passcode, id)
+            await logic.registerSpace(title, type, picture, address, passcode, id)
         } catch({message}) {
             expect(message).to.equal('space passcode is empty or blank')
         }
@@ -162,7 +195,7 @@ describe('logic - register space', () => {
         passcode = undefined
 
         try {
-            await logic.registerSpace(title, type, address, passcode, id)
+            await logic.registerSpace(title, type, picture, address, passcode, id)
         } catch({message}) {
             expect(message).to.equal('space passcode with value undefined is not a string')
         }
@@ -172,7 +205,7 @@ describe('logic - register space', () => {
         passcode = 123
 
         try {
-            await logic.registerSpace(title, type, address, passcode, id)
+            await logic.registerSpace(title, type, picture, address, passcode, id)
         } catch({message}) {
             expect(message).to.equal('space passcode with value 123 is not a string')
         }
@@ -183,7 +216,7 @@ describe('logic - register space', () => {
         id = ''
 
         try {
-            await logic.registerSpace(title, type, address, passcode, id)
+            await logic.registerSpace(title, type, picture, address, passcode, id)
         } catch({message}) {
             expect(message).to.equal('creator-user id is empty or blank')
         }
@@ -193,7 +226,7 @@ describe('logic - register space', () => {
         id = undefined
 
         try {
-            await logic.registerSpace(title, type, address, passcode, id)
+            await logic.registerSpace(title, type, picture, address, passcode, id)
         } catch({message}) {
             expect(message).to.equal('creator-user id with value undefined is not a string')
         }
@@ -203,7 +236,7 @@ describe('logic - register space', () => {
         id = 123
 
         try {
-            await logic.registerSpace(title, type, address, passcode, id)
+            await logic.registerSpace(title, type, picture, address, passcode, id)
         } catch({message}) {
             expect(message).to.equal('creator-user id with value 123 is not a string')
         }

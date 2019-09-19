@@ -2,11 +2,14 @@ const { validate } = require('utils')
 const { models: { User } } = require('data')
 
 /**
- * Retrieves a user by its id.
+ * Retrieves a user by the user id.
  * 
- * @param {string} id 
+ * @param {string} id user id
  * 
- * @returns {Promise}
+ * @throws {TypeError} - if id is not a string.
+ * @throws {Error} - if id is empty, undefined or if user is not found.
+ * 
+ * @returns {Object} user object.
  */
 
 module.exports = function (id) {
@@ -17,7 +20,6 @@ module.exports = function (id) {
         const user = await User.findOne({ _id: id }, { _id: 0, password: 0 }).lean()
         if (!user) throw new Error(`user with id ${id} not found`)
 
-        user.id = id
         return user
     })()
 }
