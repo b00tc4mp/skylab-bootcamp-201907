@@ -3,7 +3,6 @@ A project by:
 
 **Lluís Agustí Sanés @ Skylab Coders Academy**
 
-
 ![](https://media.giphy.com/media/l0NgSlYECv58uTfbO/source.gif)
 
 ## **Introduction**
