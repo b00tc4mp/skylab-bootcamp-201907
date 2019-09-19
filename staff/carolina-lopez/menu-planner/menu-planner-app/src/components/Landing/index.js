@@ -10,6 +10,7 @@ export default function () {
   </div> 
 </header>
     <main className="main">
+          <img className="main__image" src="../../mpgrey.png"/>
           <h3 className="main__h3">Create your delicious weekly menu</h3>
         
           <Link className="main__login main__button" to="/login">Login</Link>
