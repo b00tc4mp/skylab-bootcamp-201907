@@ -9,7 +9,7 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
  * @throws {TypeError} - if space id or user id is not a string.
  * @throws {Error} - if space id or user id is empty or undefined, if space is not found.
  * 
- * @returns {} 
+ * @returns {Array} space tasks array.
 */
 
 export default function(spaceId) {

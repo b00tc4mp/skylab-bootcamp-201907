@@ -10,7 +10,7 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
  * @throws {TypeError} - if space id is not a string, if data to update is not an object.
  * @throws {Error} - if space id is empty or undefined, if space is not found.
  * 
- * @returns {}
+ * @returns {Object} updated space object.
 */
 
 export default function(spaceId, dataToUpdate) {

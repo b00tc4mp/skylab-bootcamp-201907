@@ -13,7 +13,7 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
  * @throws {Error} - if any parameter is empty or undefined, if co-user or space is not found, if a wrong passcode is provided, if co-user is already registered in the space.
  * 
  * 
- * @returns {} 
+ * @returns {Object} space object.
 */
 
 export default function(email, passcode, spaceId) {

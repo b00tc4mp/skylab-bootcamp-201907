@@ -13,7 +13,6 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
  * @throws {TypeError} - if any parameter is not a string
  * @throws {Error} - if any parameter is empty/undefined. if there is already a user registered under the same email or username.
 
- * @returns {}
  */
 
 export default function (username, name, surname, email, password) {
