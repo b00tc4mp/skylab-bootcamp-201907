@@ -1,8 +1,10 @@
-// const {validate} = require('footcamp-utils')
 import {validate} from 'footcamp-utils'
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
-
+/**
+ * User joins to an existent league
+ * @param {*} code 
+ */
 export default function ( code) {
       
     validate.string(code, 'code')

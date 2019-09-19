@@ -1,8 +1,15 @@
-// const {validate} = require('footcamp-utils')
+
 import  {validate} from 'footcamp-utils'
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * Updates the player received by parameters
+ * @param {*} leagueId 
+ * @param {*} teamId 
+ * @param {*} id1 
+ * @param {*} id2 
+ */
 export default function ( leagueId ,teamId, id1, id2) {
     
     

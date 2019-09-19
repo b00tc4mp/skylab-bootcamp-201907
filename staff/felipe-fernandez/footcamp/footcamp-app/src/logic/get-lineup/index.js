@@ -1,8 +1,12 @@
-// const {validate} = require('footcamp-utils')
 import  {validate} from 'footcamp-utils'
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * Create a league with name and code and it relates to the user
+ * @param {*} leagueId 
+ * @param {*} teamId 
+ */
 export default function (leagueId, teamId) {
     
 

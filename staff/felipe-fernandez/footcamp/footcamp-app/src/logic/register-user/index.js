@@ -3,6 +3,14 @@ import {validate} from 'footcamp-utils'
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * Register a user 
+
+ * @param {*} name 
+ * @param {*} surname 
+ * @param {*} email 
+ * @param {*} password 
+ */
 export default function (name, surname, email, password) {
     
     validate.string(name, 'name')

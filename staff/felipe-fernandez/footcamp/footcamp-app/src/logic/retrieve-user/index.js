@@ -1,8 +1,9 @@
-// const {validate} = require('footcamp-utils')
-
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * Retrieves a user by his id
+ */
 export default function () {
 
 
