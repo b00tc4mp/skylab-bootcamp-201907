@@ -1,29 +1,54 @@
 # SKYSHOP
 
-![](images/skylab.PNG)
 
-## TRELLO
-[link](https://trello.com/b/2O243NBC/skyshop)
+![Alt Text](https://media.giphy.com/media/CIJsP7PsWvZM4/giphy.gif)
+
+A project by: 
+*Albet Fuente*
 
 ## INTRODUCTION
-The following app is an e-commerce app which enables you to search and buy different products from Skylab Coders Acemy.
-You can search based on button-search input type or advanced search.
+The following e-commerce app enables you to search and buy different products from Skylab Coders Acemy.
 
-The products can be clicked allowing you to access more details from the article itself.
+After registration a user can log in and apart from searching products he can go to the product detail, add the product to the cart and do the checkout.
 
-After registration a user can log in and apart from searching news he can add the product to the cart.
+In the cart section the user can remove items or go directly to the checkout button in order to execute the payment.
 
-When going to the cart page the user can remove items or go directly to the checkout button in order to execute the payment.
+Apart from buying products the app also alows you to do auctions.
+You can select a product and start an auction which finishes in 24 hours after, the other users can login and push the auction.
+
+## Functional description
+Admin can:
+* Register, update, remove, search products.
+* Check orders, view ordered stock.
+* Enter in auctions and push them.
+
+Users can:
+* Search products, normal and advanced search.
+* Enter in product detail, add product and quantity to cart, go to cart and checkout.
+* Enter in auctions and push them.
 
 
 **USE CASES**
 
-![](images/Usecases.PNG)
+Admin case
 
-**FLOW DIAGRAM**
+![](images/admin-usecases.PNG)
 
-![](images/flowDiagram.jpg)
+User case
 
+![](images/user-usecases.PNG)
+
+**FLOW CHART**
+
+Admin
+
+![](images/flow-chart-admin.PNG)
+
+User
+
+![](images/flow-chart-user.PNG)
+
+## Technical description
 
 **BLOCK DIAGRAM**
 
@@ -31,14 +56,19 @@ When going to the cart page the user can remove items or go directly to the chec
 
 **COMPONENTS**
 
-![](images/Components.PNG)
+![](images/components-final.PNG)
 
 **DATA MODEL**
 
 ![](images/dataModelUpdate.PNG)
 
-### CODE COVERAGE
+**CODE COVERAGE**
+
+![Coverage](https://img.shields.io/badge/Coverage-96%25-green.svg)
 
 
+![](images/test-coverage-api.PNG)
 
+**TECHNOLOGIES**
 
+Javascript, ReactJS, Node.js, Express, MongoDB & Mongoose.
