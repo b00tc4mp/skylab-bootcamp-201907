@@ -1,6 +1,8 @@
 # SAM (Summer Activity Manager)
 ![summer img](https://blogs.haverford.edu/ccpa/files/2019/04/04-summer-hacks-flip-flops-1080x675.jpg "logo")
 
+## [Demo: sam-app.surge.sh](http://sam-app.surge.sh/#/) 
+
 ## Planification 
 You can follow project planification in this [trello board](https://trello.com/b/ZPLJAILD/personal)
 ## Abstract
