@@ -2,7 +2,7 @@
 
 ![logo](./images/logo.png)
 
-
+![gif](https://media.giphy.com/media/htFUXJH5vjgIw/giphy.gif)
 ## Why WODY?
 
 The idea of ​​WODY arises from the need to find a solution to a personal problem, the adaptation of daily workouts or [WOD](https://openboxmagazine.com/que-es-un-wod-entrenamiento-del-dia/)'s to personal goals. When you sign up for a functional training Box or gym, daily workouts are designed for a group of people with the goal of having a good time, letting off steam and getting fit. When the goal goes further, how to gain more muscle mass. Those generalized workouts fall short. This is where WODY will help us.
