@@ -14,29 +14,29 @@ Hide and seek caches all over the world using the latest GPS and real time posit
 
 ### Use cases
 
-![cases](img/use_cases.png)
+![cases](/doc/img/use_cases.png)
 
 ### Flowchart
 
-![use](img/flow_chart.png)
+![use](/doc/img/flow_chart.png)
 
 ## Technical Description
 
 ### Blocks
 
-![blocks](img/blocks.png)
+![blocks](/doc/img/blocks.png)
 
 ### React Components
 
-![compos](img/react_components.png)
+![compos](/doc/img/react_components.png)
 
 ### Data Model
 
-![data](img/data_model.png)
+![data](doc/img/data_model.png)
 
 ## Coverage API 
 
-![coverage](img/coverage.png)
+![coverage](doc/img/coverage.png)
 
 ## Technologies
 
