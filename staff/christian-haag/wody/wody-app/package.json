@@ -1,0 +1,45 @@
+{
+  "name": "wody-app",
+  "version": "2.0.0",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.22",
+    "@fortawesome/free-brands-svg-icons": "^5.10.2",
+    "@fortawesome/free-solid-svg-icons": "^5.10.2",
+    "@fortawesome/react-fontawesome": "^0.1.4",
+    "node-sass": "^4.12.0",
+    "react": "^16.9.0",
+    "react-countdown-now": "^2.1.1",
+    "react-dom": "^16.9.0",
+    "react-player": "^1.12.0",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "3.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "test:inspect": "react-scripts --inspect-brk=9230 test --runInBand --no-cache"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.1",
+    "resolve-url-loader": "^3.1.0"
+  }
+}
