@@ -2,13 +2,19 @@ const { models: { Advertisement } } = require('generisad-data')
 const { validate } = require('generisad-utils')
 
 /**
+  * Delete a Advertisement by userId.
  * 
- * @param {String} userId
+ * 
+ * @param {String} userId 
  * @param {String} adId 
- *
+ * 
+ * @throws {TypeError} - if id is not a string.
+ * @throws {Error} - if adId is not found.
  * 
  * @returns {Promise}
- */
+ * @returns {Object}  message.
+*/
+
 
 module.exports = function(userId, adId) {
     validate.string(userId, 'user id')

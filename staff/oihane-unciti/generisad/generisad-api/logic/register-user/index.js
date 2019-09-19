@@ -3,15 +3,21 @@ const { validate } = require('generisad-utils')
 const bcrypt = require('bcryptjs')
 
 /**
+  * Register user by the email and by domain.
  * 
- * @param {*} name 
- * @param {*} surname 
- * @param {*} email 
- * @param {*} password 
- * @param {*} favorites 
+ * 
+ * @param {String} name 
+ * @param {String} surname 
+ *  @param {String} email 
+ * @param {String} password 
+ * @param {String} domain
+ * 
+ * @throws {TypeError} - if id is not a string.
+ * @throws {Error} - if user already exist in this domain .
  * 
  * @returns {Promise}
- */
+ * @returns {} empty object
+*/
 
 module.exports = function(name, surname, email, password, domain) {
     

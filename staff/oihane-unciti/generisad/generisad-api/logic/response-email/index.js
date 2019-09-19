@@ -2,14 +2,22 @@ const { models: { User, Mail, Merchant } } = require('generisad-data')
 const { validate } = require('generisad-utils')
 
 /**
+  * Response an email that already exist.
  * 
- * @param {String} userId
+ * 
+ * @param {String} userId 
  * @param {String} mailId 
- * @param {String} title 
+ *  @param {String} title 
  * @param {String} body 
+ * @param {String} domain
+ * 
+ * @throws {TypeError} - if id is not a string.
+ * @throws {Error} - if user, and mail,  already exist in this domain .
  * 
  * @returns {Promise}
- */
+ * @returns {Object} conversation id
+*/
+
 
  module.exports = function(userId, mailId, title, body, domain ) {
 
@@ -45,4 +53,3 @@ const { validate } = require('generisad-utils')
     })()    
 }
 
-// //schema Mail add destinatario y titulo

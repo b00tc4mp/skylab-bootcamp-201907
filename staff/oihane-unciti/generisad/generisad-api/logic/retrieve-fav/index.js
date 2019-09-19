@@ -2,12 +2,18 @@ const { models: { User, Merchant } } = require('generisad-data')
 const { validate } = require('generisad-utils')
 
 /**
+  * Retrieve favorites by the userId and domain.
  * 
- * @param {String} userId
- *
+ * 
+ * @param {String} userId  
+ * @param {String} domain
+ * 
+ * @throws {TypeError} - if userId and domain is not a string.
+ * @throws {Error} - if user already exist in this domain .
  * 
  * @returns {Promise}
- */
+*/
+
 
 module.exports = function(userId, domain) {
 

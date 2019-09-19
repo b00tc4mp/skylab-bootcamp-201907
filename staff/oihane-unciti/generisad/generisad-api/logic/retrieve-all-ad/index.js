@@ -2,14 +2,17 @@ const { models: { Advertisement, Merchant } } = require('generisad-data')
 const { validate } = require('generisad-utils')
 
 /**
+  * Retrieve all ads.
  * 
- * @param 
  *
+ * @param {String} domain
+ * 
+ * @throws {TypeError} - if domain is not a string.
+ * @throws {Error} - if domain not found and there are not ads .
  * 
  * @returns {Promise}
- */
+*/
 
- //idowner
  module.exports = function(domain) {
 
     validate.string(domain, "domain")

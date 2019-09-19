@@ -2,12 +2,19 @@ const { models: { User,Mail, Merchant } } = require('generisad-data')
 const { validate } = require('generisad-utils')
 
 /**
+  * Retrieve  user message.
  * 
- * @param {String} userId
- *
+ * 
+ * @param {String} userId 
+ * @param {String} domain
+ * 
+ * @throws {TypeError} - if id is not a string.
+ * @throws {Error} - if user and mail already exist in this domain .
  * 
  * @returns {Promise}
- */
+ *
+*/
+
 
 module.exports = function(userId, domain) {
 

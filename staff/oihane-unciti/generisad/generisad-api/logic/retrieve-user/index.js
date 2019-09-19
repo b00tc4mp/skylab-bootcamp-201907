@@ -2,11 +2,18 @@ const { models: { User } } = require('generisad-data')
 const { validate } = require('generisad-utils')
 
 /**
+  * Retrieve user.
  * 
- * @param {*} id 
+ * 
+ * @param {String} userId
+ * 
+ * @throws {TypeError} - if id is not a string.
+ * @throws {Error} - if user already not found .
  * 
  * @returns {Promise}
+ * @returns {} empty object
 */
+
 
 module.exports = function(id) {
     

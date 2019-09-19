@@ -2,15 +2,23 @@ const { models: { Advertisement, User, Merchant } } = require('generisad-data')
 const { validate } = require('generisad-utils')
 
 /**
+  * Register advertisement by the userId and by domain.
  * 
- * @param {String} image
+ * 
+ * @param {String} image 
  * @param {String} title 
- * @param {String} description 
+ * @param {String} description
+ * @param {String} price 
  * @param {String} location 
- * @param {String} userId 
+ * @param {String} userId
+ * @param {String} domain 
+ * 
+ * @throws {TypeError} - if id is not a string.
+ * @throws {Error} - if userId and/or domain is not found.
  * 
  * @returns {Promise}
- */
+ * @returns {Object} advertisement id being a string.
+*/
 
 module.exports = function(image, title, description, price, location, userId, domain) {
 

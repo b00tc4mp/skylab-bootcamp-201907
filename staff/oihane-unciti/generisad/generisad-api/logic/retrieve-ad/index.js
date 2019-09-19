@@ -2,12 +2,18 @@ const { models: { Advertisement } } = require('generisad-data')
 const { validate } = require('generisad-utils')
 
 /**
+  * Retrieve advertisement
  * 
- * @param {String} adId
- *
+ * 
+ * @param {String} - advertisement id
+ * 
+ * @throws {TypeError} - if id is not a string.
+ * @throws {Error} - if advertisement does not exist .
  * 
  * @returns {Promise}
- */
+ * @returns {Object} advertisement object
+*/
+
 
 module.exports = function(adId) {
     

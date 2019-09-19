@@ -3,11 +3,18 @@ const bcrypt = require('bcryptjs')
 const { validate } = require('generisad-utils')
 
  /**
+  * Athenticate  a user by the email and by domain.
  * 
- * @param {*} email 
- * @param {*} password 
+ * 
+ * @param {String} email 
+ * @param {String} password 
+ * @param {String} domain
+ * 
+ * @throws {TypeError} - if id is not a string.
+ * @throws {Error} - if id is empty, undefined or if user is not found.
  * 
  * @returns {Promise}
+ * @returns {Object} user object.
 */
 
 module.exports = function(email, password, domain) {
