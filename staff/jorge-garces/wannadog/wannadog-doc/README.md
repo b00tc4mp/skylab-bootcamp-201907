@@ -4,6 +4,8 @@
 
 Create an app to help people who are looking for a dog to adopt connect with others who need to give theirs in adoption.
 
+<p align="center"><img src="images/terieh.gif"></p>
+
 ## Functional description
 
 Guests can:
@@ -21,21 +23,22 @@ Registered Users can:
 
 ## Use cases
 
-useCases.png
-
-useCase2.png
+![cases1](images/useCases.png)
+![cases2](images/useCase2.png)
 
 ## Flowchart
 
-flowchart.png
+![flow](images/flowchart.png)
 
 ## Data model
 
-datamodel.png
+![model](images/datamodel.png)
 
 ## Code Coverage
 
-coverage.png
+![Coverage](https://img.shields.io/badge/Coverage-98%25-green.svg)
+
+![cover](images/coverage.png)
 
 ## Technologies
 
