@@ -1,7 +1,8 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
+import { Feedback } from '../../components'
 
-export default withRouter (function ({ history, onLogin }) {
+export default withRouter (function ({ history, onLogin, error }) {
   return <section className="body">
   <header class="navbar">
     <div class="dropdown dropdown-left">
@@ -25,6 +26,7 @@ export default withRouter (function ({ history, onLogin }) {
           </form>
         <a className="go-back" href="#" onClick={() => history.go(-1)}>Go back</a>
       </section>
+      {error && <Feedback message={error} />}
     </main>
   </section>
 })

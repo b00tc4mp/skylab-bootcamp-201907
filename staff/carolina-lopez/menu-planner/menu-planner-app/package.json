@@ -3,8 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "jsonwebtoken": "^8.5.1",
     "menu-planner-data": "file:../menu-planner-data",
     "menu-planner-utils": "file:../menu-planner-utils",
     "node-sass": "^4.12.0",
@@ -18,7 +16,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test:inspect": "react-scripts --inspect-brk=9230 test --runInBand --no-cache"
+    "test:inspect": "react-scripts --inspect-brk=9230 test --runInBand --no-cache",
+    "test:coverage": "react-scripts test --coverage --watchAll"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -33,6 +32,24 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.1",
+    "momentjs": "^2.0.0"
+  },
+  "jest": {
+    "watchPathIgnorePatterns": [
+      "src/common"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/components/**/*.js",
+      "!src/index.js",
+      "!src/serviceWorker.js",
+      "!<rootDir>/node_modules/",
+      "!<rootDir>/path/to/dir/"
     ]
   }
 }
