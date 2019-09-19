@@ -8,14 +8,14 @@ export default function () {
             method: 'get',
             headers: {}
         })
-        debugger
+        
         if (response.status !== 200) {
             const { error } = await response.json()
             throw Error(error)
         }
 
-        const posts = await response.json()
-        debugger
+        const {posts} = await response.json()
+        
         return posts
      })()
 }

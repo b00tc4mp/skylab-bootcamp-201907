@@ -43,7 +43,7 @@ describe('logic - retrieve post', () => {
         const post = await retrievePost(postId)
 
         expect(post).toBeTruthy
-        debugger
+        
         expect(post.id).toBe(postId)
         expect(post.title).toBe(title)
         expect(post.body).toBe(body)

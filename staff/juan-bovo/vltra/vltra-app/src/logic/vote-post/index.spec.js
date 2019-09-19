@@ -80,7 +80,6 @@ describe('logic - vote post', () => {
             await logic.votePost(postId, userVote)
             throw new Error('should not reach this point')
         }catch(error){
-            debugger
             expect(error).toBeTruthy()
             expect(error.message).toBe(`userVote min value = 1, max value = 5`)
         }

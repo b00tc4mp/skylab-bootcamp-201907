@@ -21,7 +21,6 @@ export default function () {
         const { user } = await response.json()
 
         user.avatar = `https://api.adorable.io/avatars/285/${user.nickname}.png`
-        // user.avatar = `https://ui-avatars.com/api/?size=200&font-size=0.6&length=1&name=${user.nickname}%bold=true`
 
         return user
      })()

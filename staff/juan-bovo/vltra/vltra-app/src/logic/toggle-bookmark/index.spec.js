@@ -46,7 +46,7 @@ describe('logic - toggle bookmarks', ()=>{
 
     it('should succeed on correct push', async () => {
         const result = await logic.toggleBookmark(postId)
-        debugger
+        
         expect(result).toBeTruthy()
         expect(result.message).toBe('bookmark correctly toggled')
 

@@ -88,10 +88,10 @@ describe('logic - retrieve all posts', () => {
     })
 
     it('should succeed on correct id', async () => {
-        const allPosts = await retrieveAllPosts()
-        debugger
-        expect(allPosts.posts).toBeDefined()
-        expect(allPosts.posts.length).toBe(4)
+        const posts = await retrieveAllPosts()
+        
+        expect(posts).toBeDefined()
+        expect(posts.length).toBe(4)
     })
 
     it('should fail if there are no posts', async () => {

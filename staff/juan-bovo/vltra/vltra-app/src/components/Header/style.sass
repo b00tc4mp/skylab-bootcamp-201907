@@ -1,16 +1,19 @@
 .header 
-  width: 90%
-  height: 33vh
+  width: 100%
+  height: 33%
   margin: 0 auto
-  border: 5px solid black
+  //border: 1px solid black
+  // position: fixed
+  clear: both
 
-nav
-  height: 100%
-.user-menu 
-  margin: auto 0
+.user-menu
+  display: flex
+  flex-direction: column
+  //background-image: url("../../style/vltra-barradas-1.png")
+  margin: 3% 1%
   padding: 0
   height: 100%
-  width: 33%
+  width: 30%
   float: right
   list-style: none
   overflow: hidden
@@ -20,45 +23,69 @@ nav
   display: block
   padding: 5% 0
   text-decoration: none
-  border: 1px solid lightgray
-  color: rgb(60, 60, 60)
+  border: 1px solid white
+  color: white
+  background-color: #935067
+  font-size: 0.8em
   text-align: center
 
-.user-menu__user-option
-  font-style: italic
-  font-weight: bold
-
-
 .user-menu__auth-option-link:hover
-  background-color: rgba(180, 180, 180, 0.4)
+  background-color: rgb(244, 154, 94)
 
-.header__logo, .user-menu
-  border: 5px solid black
+.user-menu__auth-option--to-post
+  display: block
+  padding: 5% 0
+  text-decoration: none
+  border: 1px solid white
+  background-color: #325526
+  color: white
+  font-size: 0.8em
+  text-align: center
+
 
 .header .header__logo 
   display: block
   float: left
   text-decoration: none
 
-.user-menu__avatar-container
+.header__logo
+  width: 45%
+  margin: 1em
+
+.header__logo--image
   width: 100%
+
+.user-menu__avatar-container
+  margin: 0 auto
+  width: 70%
 
 .user-menu__avatar-img
   display: block
   border-radius: 15%
   margin: 0 auto
-  border: 5px solid black
+  border: 2px solid black
   width: 50%
 
+.user-menu__avatar-name
+  font-style: italic
+  font-weight: bold
+  text-align: center
 
 @media (min-width: 48em)
+  .header
+    width: 90%
+    height:
+  
   .user-menu__auth-option-link
-    //padding: 20px 30px
+    font-size: 1vw
 
   .header .user-menu
     clear: none
     float: right
-    max-height: none
+    max-height: 100%
 
   .header .hamburguer-menu__icon
     display: none
+
+  .header__logo
+    width: 30%

@@ -11,14 +11,14 @@ export default function (postId) {
                 // authorization: `bearer ${this.__token__}`
             }
         })
-        debugger
+        
         if (response.status !== 200) {
             const { error } = await response.json()
             throw Error(error)
         }
 
         const { post } = await response.json()
-        debugger
+        
         return post
      })()
 }

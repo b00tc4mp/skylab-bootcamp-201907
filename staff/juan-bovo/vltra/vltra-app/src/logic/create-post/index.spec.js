@@ -5,7 +5,7 @@ const { random } = Math
 const { database, models: { User, Post } } = require('vltra-data')
 const jwt = require('jsonwebtoken')
 const REACT_APP_JWT_SECRET_TEST = process.env.REACT_APP_JWT_SECRET_TEST
-debugger
+
 // const { env: { DB_URL_TEST }} = process // WARN this destructuring doesn't work in react-app :(
 const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
 
@@ -29,8 +29,6 @@ describe('logic - create post', () => {
         await Post.deleteMany()
         await User.deleteMany()
 
-        const pipo = logic
-
         const user = await User.create({ name, surname, nickname, email, password })
 
         id = user.id
@@ -39,8 +37,6 @@ describe('logic - create post', () => {
 
         logic.__token__ = token
         
-        debugger
-
         title = `title-${Math.random()}`
         body = `body-${Math.random()}`
         // author = user.id
@@ -51,7 +47,6 @@ describe('logic - create post', () => {
 
         const post = await Post.findOne({body})
         
-        debugger
         expect(post.title).toBe(title)
         expect(post.body).toBe(body)
         expect(post.author.toString()).toBe(author)
