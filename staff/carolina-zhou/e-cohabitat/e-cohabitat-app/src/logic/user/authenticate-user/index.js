@@ -11,7 +11,6 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
  * @throws {TypeError} - if any parameter is not a string.
  * @throws {Error} - if any parameter is empty/undefined, if email is not found or password does not match.
  * 
- * @returns {} 
  */
 
 export default function (email, password) {

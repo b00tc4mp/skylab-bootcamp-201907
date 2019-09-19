@@ -14,7 +14,6 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
  * @throws {TypeError} - if any of the parameters is not a string (except the date parameter), if date is not a date.
  * @throws {Error} - if any of the parameters is empty or undefined, if user/space is not found.
  * 
- * @returns {}
  */
 
 export default function (taskName, taskType, description, date, spaceId) {

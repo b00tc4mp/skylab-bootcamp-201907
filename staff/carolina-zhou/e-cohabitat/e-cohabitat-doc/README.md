@@ -47,6 +47,8 @@ Users, once registered and logged in, will be able to:
 ![data model](./img/technical-3.jpg)
 
 ## Code coverage
+![Coverage](https://img.shields.io/badge/Coverage-97%25-green.svg)
+
 ![code coverage](./img/coverage.jpg)
 
 ## "Mea culpa"

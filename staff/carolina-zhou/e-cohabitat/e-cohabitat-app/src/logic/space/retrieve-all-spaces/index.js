@@ -3,7 +3,7 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 /**
  * Retrieves all the spaces shared by a particular user
  * 
- * @returns {} 
+ * @returns {Array} spaces array.
 */
 
 export default function() {
