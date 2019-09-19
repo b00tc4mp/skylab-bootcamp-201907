@@ -1,0 +1,124 @@
+main
+    clear: both
+    
+.mosaic-grid
+    //display: grid
+    //grid-template-columns: 100%
+    padding-bottom: 30px
+    width: 100%
+    margin: 0 auto
+    background-color: rgba(113, 80, 147, 0.1)
+
+.mosaic-grid__sticky-section
+    position: sticky
+    top: 0
+    z-index: 1
+    background-color: black
+
+.mosaic-grid__sticky-section--title
+    display: inline-blocks
+    padding: 10px
+    color: white
+
+.mosaic-grid__sticky-section__button
+    font-size: 16px
+    display: inline-block
+    float: right
+    margin-right: 3%
+    padding: 10px
+    color: white
+    border: none
+    background-color: rgb(113, 80, 147)
+
+.mosaic-grid__container
+    position: relative
+    padding: 1rem 1rem 0
+    border: 1px solid lightgray
+    border-radius: 10px
+    margin: 10% auto
+    background-color: white
+    width: 90%
+
+.mosaic-grid__list-item
+    list-style: none
+
+.mosaic-grid__bookmark-button
+    color: rgb(113, 80, 147)
+    background-color: transparent
+    border: none
+    font-size: 2em
+    width: 10%
+    position: absolute
+    right: 0%
+    top: 1%
+
+.mosaic-grid__bookmark-button:hover
+    color: gold
+
+.fas
+    color: rgb(244, 154, 94)
+
+.mosaic-grid__read-more, .mosaic-grid__rank
+    position: absolute
+    display: inline-block
+    bottom: -15px
+    padding: 5px
+    border: 1px solid lightgray
+    border-radius: 10%
+    background-color: rgb(246, 246, 246)
+
+.mosaic-grid__read-more
+    color: black
+    right: 20px
+    text-decoration: none
+    font-size: 1.3rem
+    font-style: italic
+
+
+.mosaic-grid__read-more:hover
+    background-color: #325526
+    color: white
+
+.mosaic-grid__title
+    font-size: 1.3em
+    font-weight: bold
+
+.mosaic-grid__preview
+    padding-bottom: 10px
+    overflow: hidden
+    height: 120px
+
+    &--content
+        font-size: 1.15em
+        margin-top: 0.4rem
+
+.mosaic-grid__view
+    padding: 30px
+
+    &--content
+        font-size: 1.3em
+
+.mosaic-grid__rank
+    font-style: italic
+
+.fa-star
+    color: #d3bb1d
+
+.fa-star:hover
+    color: gold
+
+@media (min-width: 48em)
+    .mosaic-grid
+        width: 80%
+        &__view
+            padding: 30px
+
+            &--content
+                font-size: 1.6em
+        
+        &__container
+            margin: 3% auto
+
+@media (min-width: 60em)
+    .mosaic-grid
+        width: 70%
