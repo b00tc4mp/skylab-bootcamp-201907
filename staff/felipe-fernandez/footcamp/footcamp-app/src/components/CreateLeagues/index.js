@@ -91,7 +91,7 @@ function CreateLeagues(props) {
                 <div class="create__content__form-create-inputs">
                 <input
                     
-                        type="code"
+                        type="password"
                         name="code"
                         placeholder="Code"
                         onChange={handleCodeInput}
@@ -106,7 +106,7 @@ function CreateLeagues(props) {
                 <div class="create__content__form-create-inputs">
                     <input
                     
-                        type="code"
+                        type="password"
                         name="code"
                         placeholder="Code"
                         onChange={handleCodeInput}

@@ -24,7 +24,7 @@ function Landing(props) {
         <section className="body-landing">
         <img className="body-landing__image" src={backimage}/>
         <InitialHeader />
-          <h2>The soccer fantasy game for all football enthusiastics</h2>
+          <h2>The soccer fantasy game for all the football enthusiastics</h2>
           
           <div className="body-landing__content">  
             <ul>
