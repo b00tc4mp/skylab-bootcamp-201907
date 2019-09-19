@@ -6,7 +6,7 @@ const { models , mongoose, database } = require('democratum-data')
 const { User, Poll } = models
 const bcrypt = require('bcryptjs')
 
-describe.only('logic - list all approved of a city', () => {
+describe('logic - list all approved of a city', () => {
 
     before(() => mongoose.connect(DB_URL_TEST,  { useNewUrlParser: true }))
 
@@ -34,7 +34,7 @@ describe.only('logic - list all approved of a city', () => {
 
     beforeEach(async () => {
 
-        //await Poll.deleteMany()
+        await Poll.deleteMany()
 
         cityId1 = '5d70f41b7d4edc12334851db'
         authorId1 = 'Lluis Agusti'

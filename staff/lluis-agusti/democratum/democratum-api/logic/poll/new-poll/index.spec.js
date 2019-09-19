@@ -14,7 +14,7 @@ describe('logic - create new poll', () => {
 
     beforeEach(async () => {
 
-        // await Poll.deleteMany()
+        await Poll.deleteMany()
 
         cityId = `NEWPOOOOOOLL-${Math.random()}`
         authorId = `authorid-${Math.random()}`
@@ -189,34 +189,6 @@ it('should fail on wrong data type', () =>
     expect(() =>
         logic.newPoll(cityId, authorId, question, optionA, optionB, description, expiryDate, 123, positives, negatives, pollStatus)
     ).to.throw(`imagePoll with value 123 is not a string`)
-)
-
-// positives
-
-it('should fail on undefined positives', () =>
-    expect(() =>
-        logic.newPoll(cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, undefined, negatives, pollStatus)
-    ).to.throw(`positives with value undefined is not a number`)
-)
-
-it('should fail on wrong data type', () =>
-    expect(() =>
-        logic.newPoll(cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, '123', negatives, pollStatus)
-    ).to.throw(`positives with value 123 is not a number`)
-)
-
-// positives
-
-it('should fail on undefined positives', () =>
-    expect(() =>
-        logic.newPoll(cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, undefined, pollStatus)
-    ).to.throw(`negatives with value undefined is not a number`)
-)
-
-it('should fail on wrong data type', () =>
-    expect(() =>
-        logic.newPoll(cityId, authorId, question, optionA, optionB, description, expiryDate, imagePoll, positives, '123', pollStatus)
-    ).to.throw(`negatives with value 123 is not a number`)
 )
 
 // pollStatus
