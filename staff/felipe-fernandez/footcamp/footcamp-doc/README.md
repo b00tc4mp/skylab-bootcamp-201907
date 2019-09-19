@@ -1,4 +1,4 @@
-# Fantasy Football Skylab
+# Fantasy Football Footcamp
 
 ## Introduction
 
