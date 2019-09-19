@@ -217,6 +217,11 @@ input {
   text-justify: inter-word;
 }
 
+.inlove {
+  text-align: center;
+  padding: 2rem;
+}
+
 .dog-showcase {
   width: 100vw;
   display: flex;
