@@ -14,4 +14,6 @@ You can follow project planification in this [trello board](https://trello.com/b
 
 ![Technical description - React comoponents](sam-doc/assets/technical/components.png)
 
+![Functional description - flow diagram](sam-doc/assets/functional/flow.png)
+![Functional description - user cases](sam-doc/assets/functional/user-cases.png)
 
