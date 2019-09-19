@@ -4,7 +4,7 @@ Go outside! Enjoy discovery, exploration and adventure in the real-world.
 
 Hide and seek caches all over the world using the latest GPS and real time positioning technologies right from your mobile device.
 
-![intro](/doc/img/introduction.png)
+![intro](doc/img/introduction.png)
 
 ## Functional Description
 
