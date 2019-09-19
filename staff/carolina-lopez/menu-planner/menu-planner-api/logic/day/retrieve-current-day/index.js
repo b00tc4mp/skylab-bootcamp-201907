@@ -14,7 +14,7 @@ module.exports = function (userId) {
 
     return (async () => {
         let user = await User.findById(userId)
-        if (!user) throw new Error(`user whith id ${userId} not found`)
+        if (!user) throw new Error(`user with id ${userId} not found`)
 
         // calculate current week monday exact date
         const _day = moment().date() - moment().day() + 1,

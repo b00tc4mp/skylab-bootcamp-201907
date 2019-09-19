@@ -169,31 +169,31 @@ describe('logic - retrieve day', () => {
         expect(day.dinner.id.toString()).to.equal(id4)
     })
 
-    // it("should fail on non existant id", async () => {
-    //   id = "5d740a810a6041a5ae918901"
-    //   try {
-    //     await retrieveRecipe(id)
-    //   } catch({message}) {
-    //     expect(message).to.exist
-    //     expect(message).to.equal(`No recipes found with id ${id}`)
-    //   }
-    // })
+    it("should fail on non existant id", async () => {
+      id = "5d740a810a6041a5ae918901"
+      try {
+        await retrieveCurrentDay(id)
+      } catch({message}) {
+        expect(message).to.exist
+        expect(message).to.equal(`user with id ${id} not found`)
+      }
+    })
 
-    // it("should fail if query is not a string", () => {
-    //      expect(() => retrieveRecipe(123)).to.throw(Error, "id with value 123 is not a string")
-    // })
+    it("should fail if query is not a string", () => {
+        expect(() => retrieveCurrentDay(123)).to.throw(Error, "userId with value 123 is not a string")
+    })
 
-    // it('should fail on empty id', () => 
-    //     expect(() => 
-    //         retrieveRecipe('')
-    //     ).to.throw('id is empty or blank')
-    // )
+    it('should fail on empty id', () =>
+        expect(() =>
+            retrieveCurrentDay('')
+        ).to.throw('userId is empty or blank')
+    )
 
-    // it('should fail on undefined id', () => 
-    //     expect(() => 
-    //         retrieveRecipe(undefined)
-    //     ).to.throw(`id with value undefined is not a string`)
-    // )
+    it('should fail on undefined id', () =>
+        expect(() =>
+            retrieveCurrentDay(undefined)
+        ).to.throw(`userId with value undefined is not a string`)
+    )
 
     after(() => database.disconnect())
 })
