@@ -1,20 +1,19 @@
-import React, { Component } from 'react'
-import Landing from './components/landing'
-import Register from './components/register'
-import RegisterSuccess from './components/register-success'
-import Login from './components/login'
-import Drumkit from './components/drumkit'
-import Jamtrack from './components/jamtrack'
-import logic from '../src/logic/index'
+import React, { Component } from "react";
+import Landing from "./components/Landing/Landing";
+import Register from "./components/Register/Register";
+import RegisterSuccess from "./components/RegisterSuccess/RegisterSuccess";
+import Login from "./components/Login/Login";
+import Drumkit from "./components/Drumkit/Drumkit";
+import Jamtrack from "./components/Jamtrack";
+import logic from "../src/logic/index";
 
-let sequence = []
+let sequence = [];
 
 class App extends Component {
   constructor() {
     super();
 
     let credentials;
-    
 
     const { id, token } = sessionStorage;
 
@@ -34,7 +33,6 @@ class App extends Component {
     this.handleUpdateDrumkit = this.handleUpdateDrumkit.bind(this);
     this.handleDrumkitEdit = this.handleDrumkitEdit.bind(this);
     this.handleGoToJamtrack = this.handleGoToJamtrack.bind(this);
-
   }
 
   handleGoToRegister() {
@@ -78,7 +76,6 @@ class App extends Component {
     this.setState({ view: "login" });
   }
 
-
   handleLogin(email, password) {
     try {
       logic
@@ -95,43 +92,42 @@ class App extends Component {
     }
   }
 
-  handleRetrieve(id,token){
-    try{
+  handleRetrieve(id, token) {
+    try {
       logic
-      .retrieveUser(id,token)
-      .then(user => {
-        this.setState({ view: "drumkit", user: user.user });
-      })
-      .catch(({ message }) => this.setState({ error: message }));
-    }catch({message}) {
-      this.setState({ error: message });
-    }
-  }
-  
-  handleUpdateDrumkit(data){
-    try{
-      logic.updateUser(data)
+        .retrieveUser(id, token)
         .then(user => {
           this.setState({ view: "drumkit", user: user.user });
         })
         .catch(({ message }) => this.setState({ error: message }));
-    }catch({message}) {
+    } catch ({ message }) {
+      this.setState({ error: message });
+    }
+  }
+
+  handleUpdateDrumkit(data) {
+    try {
+      logic
+        .updateUser(data)
+        .then(user => {
+          this.setState({ view: "drumkit", user: user.user });
+        })
+        .catch(({ message }) => this.setState({ error: message }));
+    } catch ({ message }) {
       this.setState({ error: message });
     }
   }
 
   handleGoToDrumkit() {
-    const {id, token} = this.state.credentials
-    this.handleRetrieve(id,token)
+    const { id, token } = this.state.credentials;
+    this.handleRetrieve(id, token);
     this.setState({ view: "drumkit", user: null, drumkit: null });
   }
 
-
   handleGoToJamtrack() {
-    
-    this.setState({ view: "jamtrack"});
-  }  
-  
+    this.setState({ view: "jamtrack" });
+  }
+
   handleLogout() {
     delete sessionStorage.id;
     delete sessionStorage.token;
@@ -140,20 +136,30 @@ class App extends Component {
   }
 
   handleDrumkitEdit(kit) {
-    console.log('kit from app :', kit);
-    this.setState({ view: "drumkit", drumkit: kit });
+    console.log("kit from app :", kit);
+    const { id, token } = this.state.credentials;
+    try {
+      logic
+        .retrieveUser(id, token)
+        .then(user => {
+          this.setState({ view: "drumkit", drumkit: kit, user: user.user });
+        })
+        .catch(({ message }) => this.setState({ error: message }));
+    } catch ({ message }) {
+      this.setState({ error: message });
+    }
+    // this.setState({ view: "drumkit", drumkit: kit, user: credentials.user });
   }
 
   handleChange() {
-  
+    if (sequence === 0) {
+      sequence = 1;
+    } else {
+      sequence = 0;
+    }
 
-    if(sequence === 0 ){
-      sequence = 1
-    }
-    else{ sequence = 0}
-   
-    console.log(sequence)
-    }
+    console.log(sequence);
+  }
 
   render() {
     const {
@@ -170,7 +176,6 @@ class App extends Component {
       handleUpdateDrumkit,
       handleDrumkitEdit,
       handleGoToJamtrack
-      
     } = this;
 
     return (
@@ -203,26 +208,21 @@ class App extends Component {
             error={error}
           />
         )}
-         {view === "drumkit" && (
+        {view === "drumkit" && (
           <Drumkit
-          onBack={handleBackToLanding}
-          onChange={handleChange}
-          error={error}
-          onRetrieve={handleRetrieve}
-          user={user}
-          onUpdate={handleUpdateDrumkit}
-          drumkit={drumkit}
+            onBack={handleBackToLanding}
+            onChange={handleChange}
+            error={error}
+            onRetrieve={handleRetrieve}
+            user={user}
+            onUpdate={handleUpdateDrumkit}
+            drumkit={drumkit}
           />
         )}
-          {view === "jamtrack" && (
-          <Jamtrack
-          
-          />
-        )}
-  
+        {view === "jamtrack" && <Jamtrack />}
       </>
     );
   }
 }
 
-export default App
+export default App;
