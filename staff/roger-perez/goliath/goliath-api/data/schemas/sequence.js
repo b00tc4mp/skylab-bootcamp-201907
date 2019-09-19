@@ -9,7 +9,6 @@ module.exports = new Schema({
         required: true
     },
     
-    // instrument: [{ type: ObjectId, ref: 'Instrument' }]
     instrument: [instrument]
 
 })
