@@ -30,11 +30,7 @@ function MapHome({ history }) {
   const [allCaches, setAllCaches] = useState()
 
   useEffect(() => {
-
     (async function () {
-
-      // const loc = { location: { type: 'Point', coordinates: [position[1], position[0]] } }
-      // await logic.updateUser(loc)
       const caches = await logic.retrieveAllCaches()
       setAllCaches(caches)
     })()
@@ -45,7 +41,7 @@ function MapHome({ history }) {
 
     const interval = setInterval(() => {
       navigator.geolocation.getCurrentPosition(position => {
-        setZoom(17)
+        setZoom(15)
         setPosition([position.coords.latitude, position.coords.longitude])
         setHaveUsersLocation(true)
 
@@ -55,8 +51,6 @@ function MapHome({ history }) {
     return () => clearInterval(interval);
     
   }, [])
-
-  
 
   const handleGoToDetails = async (cacheId) => {
     history.push(`/details/${cacheId}`)

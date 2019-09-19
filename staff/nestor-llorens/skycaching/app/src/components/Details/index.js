@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react'
+import Feedback from '../Feedback'
 import logic from '../../logic'
 import { withRouter } from 'react-router-dom'
 import moment from 'moment'
 
 function Details(props) {
 
+    const [error, setError] = useState()
     const [cache, setCache] = useState({})
     const [comments, setComments] = useState([])
     const [logged, setLogged] = useState(false)
     const [owned, setOwned] = useState(false)
     const [user, setUser] = useState({})
     const [owner, setOwner] = useState({})
-
+    
     useEffect(() => {
         (async function () {
             const cache = await logic.retrieveCache(props.match.params.id)
@@ -35,9 +37,10 @@ function Details(props) {
 
         try {
             await logic.logCache(cacheId, comment)
+            props.history.goBack()
 
-        } catch (error) {
-            console.log(error.message)
+        } catch ({message}) {
+            setError(message)
 
         }
     }
@@ -55,11 +58,12 @@ function Details(props) {
                 {logged || owned ? '' : (<form classname = 'details__form' onSubmit={event => {
                     event.preventDefault()
                     handleLogCache(event.target.cacheId.value, event.target.comment.value)
-                    props.history.push('/')
+                    props.history.goBack()
 
                 }}>
                     <input type='hidden' name="cacheId" value={cache._id} />
-                    <textarea rows="4" cols="39" name='comment' />
+                    <textarea rows="4" cols="39" name='comment' placeholder='Write a comment to be able to log the cache...' />
+                    {error && <Feedback message={error}/>}
                     <button className='details__comment-button'>Log cache</button>
                 </form>)}
             </ul>

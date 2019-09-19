@@ -3,12 +3,14 @@ import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 import { withRouter } from 'react-router-dom'
 import girl from '../../img/girl.png'
 import chest from '../../img/chest.png'
+import Feedback from '../Feedback'
 
 import L from 'leaflet'
 import logic from '../../logic'
 
 function Profile({ history, setUser, user }) {
 
+    const [error, setError] = useState()
     const [position, setPosition] = useState([0, 0])
     const [zoom, setZoom] = useState(2)
     const [haveUsersLocation, setHaveUsersLocation] = useState(false)
@@ -40,6 +42,7 @@ function Profile({ history, setUser, user }) {
             setFoundCaches(foundCaches)
         })()
     }, [history.location])
+
     useEffect(() => {
         (async function () {
             const allCaches = await logic.retrieveAllCaches()
@@ -49,10 +52,11 @@ function Profile({ history, setUser, user }) {
         }
         )()
     }, [])
+
     useEffect(() => {
 
         navigator.geolocation.getCurrentPosition(position => {
-            setZoom(17)
+            setZoom(15)
             setPosition([position.coords.latitude, position.coords.longitude])
             setHaveUsersLocation(true)
         }, error => console.log(error.message))
@@ -75,7 +79,8 @@ function Profile({ history, setUser, user }) {
             setAllCaches(allCaches)
             const ownCaches = await logic.retrieveOwnCaches()
             setOwnCaches(ownCaches)
-        } catch{
+        } catch({ message }){
+            setError(message)
 
         }
     }
@@ -187,6 +192,7 @@ function Profile({ history, setUser, user }) {
                     </div>
                     <label className='create__cache-label' htmlFor="hints">Hints</label>
                     <textarea rows="4" cols="20" name='hints' />
+                    {error && <Feedback message={error}/>}
                     <button className='create__cache-create'>Create cache</button>
                 </form>
             </section>
