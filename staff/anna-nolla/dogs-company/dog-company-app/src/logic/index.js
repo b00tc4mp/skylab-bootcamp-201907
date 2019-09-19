@@ -21,6 +21,7 @@ import retrieveNotification from './notifications/retrieve-notification'
 import updateStaticLocation from './geo/update-static'
 import updateDinamicLocation from './geo/update-dinamic'
 import retrieveAllUsers from './geo/retrieve-all-users'
+import retrieveUserId from './user/retrieve-id-user'
 
 export default {
 
@@ -53,5 +54,6 @@ export default {
     retrieveNotification,
     updateStaticLocation,
     updateDinamicLocation,
-    retrieveAllUsers
+    retrieveAllUsers,
+    retrieveUserId
 }

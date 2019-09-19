@@ -16,7 +16,7 @@ export default function (participantId) {
     validate.string(participantId, 'participant id')
     
     return (async () => {
-        const response = await call(`${REACT_APP_API_URL}/user/chat` , 'post' , { 'authorization': `bearer ${this.__token__}` }, { participantId })
+        const response = await call(`${REACT_APP_API_URL}/user/chat` , 'post' , { 'authorization': `bearer ${this.__token__}`, 'content-type': 'application/json' }, { participantId })
     
         if (response.error) {
             const { error } = response

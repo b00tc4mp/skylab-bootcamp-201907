@@ -17,12 +17,11 @@ export default function (chatId, text) {
     validate.string(text, 'message')
     
     return (async () => {
-        const response = await call(`${REACT_APP_API_URL}/user/chat/${chatId}` , 'patch' , { 'authorization': `bearer ${this.__token__}` }, { text } )
+        const response = await call(`${REACT_APP_API_URL}/user/chat/${chatId}` , 'patch' , { 'authorization': `bearer ${this.__token__}`, 'content-type': 'application/json' }, { text } )
     
         if (response.error) {
             const { error } = response
                 throw Error(error)
         }
-        return 
     })()
 }

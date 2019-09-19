@@ -15,29 +15,28 @@ function RegisterUser ({ history }) {
         }
     }
 
-    return <>
-        <h2>Register</h2>
-        <form onSubmit={event => {
+    return <main className = 'register'>
+        <h2 className= 'register_title'>Register</h2>
+        <form className = 'register_form' onSubmit={event => {
             event.preventDefault()
-
             const { target: { name: { value: name }, surname: { value: surname }, email: { value: email }, password: { value: password },  repassword: { value: repassword } } } = event
             onRegister(name, surname, email, password, repassword)
         }}>
-            <label>Name</label>
-                <input type="text" name="name" />
-            <label>Surame</label>
-                <input type="text" name="surname" />
-            <label>Email</label>
-                <input type="email" name="email" />
-            <label>Password</label>
-                <input type="password" name="password" />
-            <label>Repeat Password</label>
-                <input type="password" name="repassword" />
-            <button>Proceed</button>
-        </form>
-        <button><Link to="/">Go back</Link></button>
-
+            <label className = 'register_text'>Name</label>
+                <input className = 'register_input' type="text" name="name" />
+            <label className = 'register_text'>Surame</label>
+                <input className = 'register_input' type="text" name="surname" />
+            <label className = 'register_text' >Email</label>
+                <input className = 'register_input' type="email" name="email" />
+            <label className = 'register_text' >Password</label>
+                <input className = 'register_input' type="password" name="password" />
+            <label className = 'register_text' >Repeat Password</label>
+                <input className = 'register_input' type="password" name="repassword" />
         {error && <Feedback message ={error}/>}
-    </>
+            <button className = 'register_button'>Proceed</button>
+        </form>
+        <button className = 'register_back' ><Link className = 'register_back-text' to="/">Go back</Link></button>
+
+    </main>
 }
 export default withRouter(RegisterUser)

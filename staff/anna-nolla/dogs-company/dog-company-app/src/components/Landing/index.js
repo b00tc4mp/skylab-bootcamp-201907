@@ -2,11 +2,14 @@ import React from 'react'
 
 export default function(){
     return  <>
-        <h1>landing</h1>
-        <p>landing page</p>
-        <nav>
-            <a href = '/#/register'>Register</a>
-            <a href = '/#/login'>Log In</a>
-        </nav>
+        <header>
+            <h1 className = 'landing-header'>Dogs && Company</h1>
+        </header>
+        <main className = 'landing'>
+            <nav className = 'landing_navigation'>
+                <a className = 'landing_button' href = '/#/register'>Register</a>
+                <a className = 'landing_button' href = '/#/login'>Log In</a>
+            </nav>
+        </main>
     </>
 }

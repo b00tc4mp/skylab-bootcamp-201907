@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Feedback({ message }){
-    return  <div>
+    return  <div className = 'feedback'>
                 <p className = "feedback__text">{message}</p>
             </div>
  }

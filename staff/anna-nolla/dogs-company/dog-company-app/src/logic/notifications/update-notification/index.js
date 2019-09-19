@@ -19,7 +19,7 @@ export default function (notificationId, title, text) {
     validate.string(text, 'text')
     
     return (async () => {
-        const response = await call(`${REACT_APP_API_URL}/user/notification/${notificationId}` , 'patch' , { 'authorization': `bearer ${this.__token__}` }, { title, text })
+        const response = await call(`${REACT_APP_API_URL}/user/notification/${notificationId}` , 'patch' , { 'authorization': `bearer ${this.__token__}`, 'content-type':'application/json' }, { title, text })
     
         if (response.error) {
             const { error } = response

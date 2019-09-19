@@ -22,6 +22,7 @@ export default function (chatId) {
             const { error } = response
                 throw Error(error)
         }
-        return response 
+        const {chat: { messages } } = response
+        return messages 
     })()
 }

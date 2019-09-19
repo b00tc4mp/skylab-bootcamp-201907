@@ -8,14 +8,12 @@ import walkingDog from '../../img/walking-dog.png'
 
 function MapUpdatePosition() {
 
-  const paws = paw
-  const blueMarker = walkingDog
   const [draggable, setDraggable] = useState(true)
   const [position, setPosition] = useState([0, 0])
   const [zoom, setZoom] = useState(2)
   const [haveUsersLocation, setHaveUsersLocation] = useState(false)
   
-  const mark = (draggable ? paws : walkingDog)
+  const mark = (draggable ? paw : walkingDog)
   var myIcon = L.icon({
     iconUrl: mark,
     iconSize: [40, 40],
