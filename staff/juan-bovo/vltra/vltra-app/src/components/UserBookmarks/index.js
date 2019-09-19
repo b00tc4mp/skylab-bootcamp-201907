@@ -26,14 +26,18 @@ function UserBookmarks({history}){
 
     return <div>
         {bookmarks && bookmarks.length && bookmarks.map(item => <li className="mosaic-grid__list-item" key={item._id}>
-            <div className="mosaic-grid__container">
-                <a onClick={event => {
-                    event.preventDefault()
-                    handleDetail(item._id)
-                }}><h3 className="mosaic-grid__title">{item.title}</h3></a>
+            <a onClick={event => {
+                event.preventDefault()
+                handleDetail(item._id)
+            }}>
+                <div className="bookmarks__container">
 
-                <p className="mosaic-grid__preview--content">{item.body}</p>
-            </div>
+                    <h3 className="mosaic-grid__title">{item.title}</h3>
+
+                    <p className="mosaic-grid__preview--content">{item.body}</p>
+                </div>
+            </a>
+
         </li>) || <li className="mosaic-grid__list-item">
             <div className="mosaic-grid__container">
                 <h3 className="mosaic-grid__preview--title">No tienes ningún marcador</h3>

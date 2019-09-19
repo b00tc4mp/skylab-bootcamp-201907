@@ -99,33 +99,32 @@ function Post({history, postId}){
     }
 
     return <section className="post-detail">
-        {postDetails&&<>
-        <h1 className="post-detail__title">{postDetails.title}</h1>
-        
-                <div className="post-detail__container">
-                    <button className="mosaic-grid__bookmark-button" onClick={() => handleBookmark(postDetails.id)}>
-                        {isBookmarkToggled(postDetails.id) ?
-                            <i className="fas fa-bookmark"></i>
-                            :
-                            <i className="far fa-bookmark"></i>}
-                    </button>
-                    <div className="post-detail__view">
-                        <p className="post-detail__content-date">Posteado por: <span className="post-detail__content-author"> {postDetails.author.nickname} </span></p>
-                        <p className="post-detail__content">{postDetails.body}</p>
-                        <p className="colorrojo">{postDetails.votes}</p>
-                        <p className="post-detail__content-date">Publicado en {postDetails.date}</p>
-                        <span className="mosaic-grid__rank">
-                            <p>Puntos:</p>
-                            {generateStars(postDetails)}
-                        </span>
-                    </div>
-                {error && <FeedbackMini message={error} />}
-            <a className="post-detail__on-back" href="#" onClick={event => {
-                event.preventDefault()
-                handleGoBack(history)
-            }}> Volver </a>
+        {postDetails && <>
+            <h1 className="post-detail__title">{postDetails.title}</h1>
+            <button className="post-detail__bookmark-button" onClick={() => handleBookmark(postDetails.id)}>
+                {isBookmarkToggled(postDetails.id) ?
+                    <i className="fas fa-bookmark"></i>
+                    :
+                    <i className="far fa-bookmark"></i>}
+            </button>
+
+            <div className="post-detail__container">
+                <p className="post-detail__content-date">Posteado por: <span className="post-detail__content-author"> {postDetails.author.nickname} </span></p>
+                <div className="post-detail__view">
+                    <p className="post-detail__content">{postDetails.body}</p>
+                    {/* <p className="post-detail__content-date">Publicado en {postDetails.date}</p> */}
                 </div>
-            
+                <span className="post-detail__rank">
+                    <p>Puntos:</p>
+                    {generateStars(postDetails)}
+                </span>
+                {error && <FeedbackMini message={error} />}
+                <a className="post-detail__on-back" href="#" onClick={event => {
+                    event.preventDefault()
+                    handleGoBack(history)
+                }}> Volver </a>
+            </div>
+
         </>}
     </section>
 }

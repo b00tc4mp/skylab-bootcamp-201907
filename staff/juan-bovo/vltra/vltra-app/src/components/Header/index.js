@@ -51,7 +51,7 @@ function Header({ history }) {
                             </a>
                         </li>
                         <li className="user-menu__auth-option" >
-                            <a className="user-menu__auth-option-link" href="" onClick={event => {
+                            <a className="user-menu__auth-option-link user-menu__auth-option--to-post" href="" onClick={event => {
                                 event.preventDefault()
                                 handleGoToCreatePost()
                                 }}>¡Escribir post!</a></li>

@@ -4,6 +4,9 @@
   display: flex
   flex-direction: column
   background-color: rgba(113, 80, 147, 0.1)
+  padding-top: 1rem
+  margin: 0 auto
+  max-width: 800px
 
 .form__title
   padding: 1rem 1rem 0
@@ -61,3 +64,16 @@
 
 .anchor__link
   color: black
+
+@media (min-width: 48em)
+    .form
+        width: 80%
+        &__view
+            padding: 30px
+
+            &--content
+                font-size: 1.6em
+
+@media (min-width: 60em)
+    .form
+        width: 70%

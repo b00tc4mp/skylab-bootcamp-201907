@@ -30,15 +30,15 @@ function UserPost({history}){
 
     return <div>
         {userPosts && userPosts.length && userPosts.map(item => <li className="mosaic-grid__list-item" key={item.id}>
-            <div className="mosaic-grid__container">
-                <a onClick={event => {
-                    event.preventDefault()
-                    handleDetail(item.id)
-                }}><h3 className="mosaic-grid__title">{item.title}</h3></a>
-
-                <p className="mosaic-grid__preview--content">{item.body}</p>
-
-            </div>
+            <a onClick={event => {
+                event.preventDefault()
+                handleDetail(item.id)
+            }}>
+                <div className="user-posts__container">
+                    <h3 className="mosaic-grid__title">{item.title}</h3>
+                    <p className="mosaic-grid__preview--content">{item.body}</p>
+                </div>
+            </a>
         </li>)|| <li className="mosaic-grid__list-item">
             <div className="mosaic-grid__container">
                 <h3 className="mosaic-grid__preview--title">Aún no has posteado nada en Vltra</h3>

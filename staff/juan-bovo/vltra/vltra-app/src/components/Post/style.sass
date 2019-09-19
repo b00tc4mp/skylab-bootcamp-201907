@@ -2,13 +2,13 @@
 
 .post-detail
     clear: both
-    width: 90%
+    //width: 90%
     margin: 0 auto
 
 .post-detail__title
     position: sticky
     top: 0
-    z-index: 1
+    z-index: 2
     display: block
     background-color: black
     color: white
@@ -19,9 +19,10 @@
 .post-detail__container
     position: relative
     padding: 1rem 0
-    margin: 10% auto 100px
+    margin: 0% auto 100px
     background-color: white
     width: 90%
+    z-index: -1
 
 .post-detail__view
     padding: 30px
@@ -37,9 +38,34 @@
 
 .post-detail__on-back
     position: absolute
-    right: 10%
+    left: 5%
     padding: 10px
     background-color: #935067
     color: white
     font-size: 1.3rem
     text-decoration: none
+
+.post-detail__bookmark-button
+    color: rgb(113, 80, 147)
+    background-color: transparent
+    z-index: 1
+    border: none
+    font-size: 2em
+    width: 10%
+    float: right
+    left: 10%
+    top: 1%
+
+.post-detail__bookmark-button:hover
+    color: gold
+
+.post-detail__rank
+    display: inline-block
+    position: relative
+    float: right
+    bottom: 1.5rem
+    padding: 5px
+    border: 1px solid lightgray
+    border-radius: 10%
+    background-color: rgb(246, 246, 246)
+    font-style: italic

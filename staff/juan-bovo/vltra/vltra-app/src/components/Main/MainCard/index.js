@@ -85,7 +85,6 @@ function MainCard({ item, refreshUser, refreshPosts, user, history }) {
             {error && <FeedbackMini message={error} />}
             <div className="mosaic-grid__preview">
                 <p className="mosaic-grid__preview--content">{item.body}</p>
-                <p className="colorrojo">{item.votes}</p>
                 <span className="mosaic-grid__rank">
                     <p>Puntos: </p>
                     {generateStars(item)}
