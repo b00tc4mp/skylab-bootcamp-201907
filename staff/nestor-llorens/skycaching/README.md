@@ -14,21 +14,21 @@ Hide and seek caches all over the world using the latest GPS and real time posit
 
 ### Use cases
 
-![cases](/doc/img/use_cases.png)
+![cases](doc/img/use_cases.png)
 
 ### Flowchart
 
-![use](/doc/img/flow_chart.png)
+![use](doc/img/flow_chart.png)
 
 ## Technical Description
 
 ### Blocks
 
-![blocks](/doc/img/blocks.png)
+![blocks](doc/img/blocks.png)
 
 ### React Components
 
-![compos](/doc/img/react_components.png)
+![compos](doc/img/react_components.png)
 
 ### Data Model
 
