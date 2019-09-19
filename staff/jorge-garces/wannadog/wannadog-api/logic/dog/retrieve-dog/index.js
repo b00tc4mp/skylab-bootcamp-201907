@@ -16,7 +16,7 @@ module.exports = function (id) {
 
     return (async () => {
 
-        const dog = await Dog.findOne({ _id: id }, { _id: 0, __v: 0 }).lean()
+        const dog = await Dog.findOne({ _id: id }, { _id: 0, __v: 0 }).populate("owner", "name").lean()
         if (!dog) throw Error(`dog with id ${id} does not exist.`)
         dog.id = id
 

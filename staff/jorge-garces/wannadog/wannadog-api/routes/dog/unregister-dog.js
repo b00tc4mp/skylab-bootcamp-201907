@@ -6,7 +6,7 @@ module.exports = async function (req, res) {
     const { userId, params: { dogId }, body: { email, password } } = req
 
     try {
-        debugger
+
         await unregisterDog(userId, email, password, dogId)
         res.json({ message: 'dog unregistered successfully' })
     } catch ({ message }) {

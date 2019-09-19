@@ -3,7 +3,7 @@ const { expect } = require('chai')
 const { database, models } = require('wannadog-data')
 const { Dog } = models
 
-describe.only('logic - search dogs', () => {
+describe('logic - search dogs', () => {
 
     before(() => database.connect('mongodb://172.17.0.2/wannadog-test'))
 
@@ -48,7 +48,7 @@ describe.only('logic - search dogs', () => {
         const filteredDogs = await Dog.find({ gender, distance })
 
         const result = await logic.searchDogs(searchParams)
-        debugger
+
         expect(result).to.exist
         expect(result.length).to.equal(filteredDogs.length)
         expect(result[0].breed).to.equal(breed)

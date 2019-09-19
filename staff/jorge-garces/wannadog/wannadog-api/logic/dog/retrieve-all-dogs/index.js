@@ -23,7 +23,7 @@ module.exports = function (id) {
             dog.id = dog._id.toString()
             delete dog._id
             delete dog.__v
-            dog.gender === true ? dog.gender = "Male" : dog.gender === "Female"
+            dog.gender === true ? dog.gender = "Male" : dog.gender = "Female"
         })
         return dogs
     })()

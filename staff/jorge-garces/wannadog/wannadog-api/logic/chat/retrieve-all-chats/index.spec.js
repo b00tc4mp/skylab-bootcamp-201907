@@ -60,7 +60,7 @@ describe('logic - update chat', () => {
 
     it('should succeed on correct data', async () => {
         const chat = await logic.retrieveAllChats(id)
-        debugger
+
         expect(chat).to.exist
         expect(chat[0].id).to.equal(chatId)
         expect(chat[0].members[0]).to.deep.equal(id)

@@ -6,7 +6,7 @@ module.exports = async function (req, res) {
 
     try {
         const chatId = await createChat(userId, participantId)
-        debugger
+
         res.status(201).json({ message: 'Chat created successfully', chatId })
     } catch ({ message }) {
         res.status(400).json({ error: message })

@@ -6,18 +6,11 @@ const routes = require('./routes')
 const cors = require('cors')
 const { database } = require('wannadog-data')
 
-const { env: { PORT, DB_URL_TEST } } = process
+const { env: { PORT, DB_URL } } = process
 
-database.connect(DB_URL_TEST)
+database.connect(DB_URL)
     .then(() => {
         const app = express()
-
-        // app.use(function (req, res, next) {
-        //     res.header("Access-Control-Allow-Origin", "*");
-        //     res.header("Access-Control-Allow-Methods", "GET, PUT, POST, PATCH, DELETE, OPTIONS")
-        //     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-        //     next()
-        // })
 
         app.use(cors())
         app.use('/api', routes)

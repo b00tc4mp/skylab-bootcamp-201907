@@ -100,7 +100,7 @@ describe('logic - retrieve all dogs', () => {
         expect(dogOne.withCats).to.equal(withCats)
         expect(dogOne.withChildren).to.equal(withChildren)
         expect(dogOne.chip).to.equal(chip)
-        debugger
+
         expect(dogOne.location.coordinates[0]).to.equal(longitude)
         expect(dogOne.location.coordinates[1]).to.equal(latitude)
         expect(dogTwo.name).to.equal(name2)

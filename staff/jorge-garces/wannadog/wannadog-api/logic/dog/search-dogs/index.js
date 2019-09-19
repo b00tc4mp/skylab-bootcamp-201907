@@ -29,9 +29,9 @@ module.exports = function (searchParams) {
 
     Object.keys(searchParams).forEach(key => {
 
-        (searchParams[key] === undefined || searchParams[key] === 0) ? delete searchParams[key] : ''
-        searchParams[key] == 'true' ? searchParams[key] = true : ''
-        searchParams[key] == 'false' ? searchParams[key] = false : ''
+        (searchParams[key] === undefined || searchParams[key] === 0 || searchParams[key] == 'nope') ? delete searchParams[key] : {}
+        searchParams[key] == 'true' ? searchParams[key] = true : {}
+        searchParams[key] == 'false' ? searchParams[key] = false : {}
     })
 
     if (searchParams.breed) validate.string(searchParams.breed, 'breed')
@@ -58,7 +58,7 @@ module.exports = function (searchParams) {
         dogs.map(dog => {
             dog.id = dog._id.toString()
             delete dog._id
-            dog.gender === true ? dog.gender = "Male" : dog.gender === "Female"
+            dog.gender === true ? dog.gender = "Male" : dog.gender = "Female"
 
             dog.age === 1 ? dog.age = "Puppy" : {}
             dog.age === 2 ? dog.age = "Less than a year old" : {}
