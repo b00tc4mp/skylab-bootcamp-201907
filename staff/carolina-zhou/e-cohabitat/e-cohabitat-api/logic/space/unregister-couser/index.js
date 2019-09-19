@@ -2,12 +2,15 @@ const { validate } = require('utils')
 const { models: { User, Space } } = require('data')
 
 /**
- * Unregisters a space co-user
+ * Unregisters a space co-user.
  * 
- * @param {string} spaceId
- * @param {string} coUserId 
+ * @param {string} spaceId space id
+ * @param {string} coUserId co-user id
  * 
- * @returns {Promise}
+ * @throws {TypeError} - if space id or co-user id is not a string.
+ * @throws {Error} - if space id or co-user id is empty or undefined, if co-user is not an actual co-user of the space.
+ * 
+ * @returns {Object} space object
 */
 
 module.exports = function(spaceId, coUserId) {

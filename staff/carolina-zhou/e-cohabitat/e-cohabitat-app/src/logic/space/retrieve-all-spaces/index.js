@@ -3,8 +3,9 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 /**
  * Retrieves all the spaces shared by a particular user
  * 
- * @returns {}
- */
+ * @returns {} 
+*/
+
 export default function() {
     
     const { id, token } = this.__userCredentials__

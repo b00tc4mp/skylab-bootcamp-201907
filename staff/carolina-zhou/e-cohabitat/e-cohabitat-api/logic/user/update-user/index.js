@@ -3,12 +3,15 @@ const { models: { User } } = require('data')
 const bcrypt = require('bcryptjs')
 
 /**
- * Updates a user.
+ * Updates user information
  * 
- * @param {string} id
- * @param {Object} dataToUpdate
+ * @param {string} id user id
+ * @param {Object} dataToUpdate data to update
  * 
- * @returns {Promise}
+ * @throws {TypeError} - if user id is not a string, if data to update is not an object.
+ * @throws {Error} - if any parameter is empty, undefined or user is not found.
+ * 
+ * @returns {Promise} user object.
  */
 
 module.exports = function (id, dataToUpdate) {

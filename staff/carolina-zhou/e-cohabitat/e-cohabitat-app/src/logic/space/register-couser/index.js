@@ -1,14 +1,19 @@
 import { validate } from 'utils'
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
+
 /**
- * Registers a space co-user
+ * Registers a space co-user.
  * 
- * @param {string} email
- * @param {string} passcode 
- * @param {string} spaceId
+ * @param {string} email co-user email
+ * @param {string} passcode space passcode
+ * @param {string} spaceId space id
  * 
- * @returns {}
+ * @throws {TypeError} - if any of the parameters is not a string.
+ * @throws {Error} - if any parameter is empty or undefined, if co-user or space is not found, if a wrong passcode is provided, if co-user is already registered in the space.
+ * 
+ * 
+ * @returns {} 
 */
 
 export default function(email, passcode, spaceId) {

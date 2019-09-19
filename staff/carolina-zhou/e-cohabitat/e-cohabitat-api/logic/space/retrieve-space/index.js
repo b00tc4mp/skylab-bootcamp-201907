@@ -4,9 +4,12 @@ const { models: { Space } } = require('data')
 /**
  * Retrieves a space by its id
  * 
- * @param {*} id
+ * @param {*} id space id
  * 
- * @returns {Promise}
+ * @throws {TypeError} - if space id is not a string.
+ * @throws {Error} - if space id is empty or undefined, if space is not found.
+ * 
+ * @returns {Object} space object
 */
 
 module.exports = function(id) {

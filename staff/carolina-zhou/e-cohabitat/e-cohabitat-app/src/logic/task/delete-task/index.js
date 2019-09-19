@@ -1,11 +1,15 @@
 import { validate } from 'utils'
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
+
 /**
- * Deletes a task
+ * Deletes a task.
  * 
- * @param {string} spaceId 
- * @param {string} taskId 
+ * @param {string} spaceId space id
+ * @param {string} taskId task id
+ * 
+  * @throws {TypeError} - if any of the parameters is not a string.
+ * @throws {Error} - if any of the parameters is empty or undefined, if user/space/task is not found, if user did not register the provided task, if space does not include the provided task.
  * 
  * @returns {}
 */

@@ -2,14 +2,18 @@ const { validate } = require('utils')
 const { models: { User, Space } } = require('data')
 
 /**
- * Registers a space co-user
+ * Registers a space co-user.
  * 
- * @param {string} email 
- * @param {string} passcode
- * @param {string} spaceId
- * @param {string} id
+ * @param {string} email co-user email
+ * @param {string} passcode space passcode
+ * @param {string} spaceId space id
+ * @param {string} id existent user id
  * 
- * @returns {Promise}
+ * @throws {TypeError} - if any of the parameters is not a string.
+ * @throws {Error} - if any parameter is empty or undefined, if co-user or space is not found, if a wrong passcode is provided, if co-user is already registered in the space.
+ * 
+ * 
+ * @returns {Object} space object
 */
 
 module.exports = function(email, passcode, spaceId, id) {
@@ -29,6 +33,9 @@ module.exports = function(email, passcode, spaceId, id) {
 
         const user = await User.findOne({ email })
         if (!user) throw Error('wrong user email provided')
+
+        user.id = user._id.toString()
+        delete user._id
 
         const coUserId = user.id
 

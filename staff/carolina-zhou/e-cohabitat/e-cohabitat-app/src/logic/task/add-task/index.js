@@ -1,14 +1,18 @@
 import { validate } from 'utils'
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
+
 /**
  * Adds a task
  * 
- * @param {*} taskName 
- * @param {*} taskType 
- * @param {*} description 
- * @param {*} date 
- * @param {*} spaceId 
+ * @param {*} taskName task name
+ * @param {*} taskType task type
+ * @param {*} description task description
+ * @param {*} date task date
+ * @param {*} spaceId space id
+ * 
+ * @throws {TypeError} - if any of the parameters is not a string (except the date parameter), if date is not a date.
+ * @throws {Error} - if any of the parameters is empty or undefined, if user/space is not found.
  * 
  * @returns {}
  */

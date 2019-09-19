@@ -2,11 +2,14 @@ const { validate } = require('utils')
 const { models: { User, Space, Task } } = require('data')
 
 /**
- * Deletes a task
+ * Deletes a task.
  * 
- * @param {string} userId 
- * @param {string} spaceId 
- * @param {string} taskId 
+ * @param {string} userId user id
+ * @param {string} spaceId space id
+ * @param {string} taskId task id
+ * 
+  * @throws {TypeError} - if any of the parameters is not a string.
+ * @throws {Error} - if any of the parameters is empty or undefined, if user/space/task is not found, if user did not register the provided task, if space does not include the provided task.
  * 
  * @returns {Promise}
 */
@@ -31,7 +34,7 @@ module.exports = function(userId, spaceId, taskId) {
         if(task === undefined) throw Error('this user did not register the task introduced')
 
         const spaceTask = space.spaceTasks.find(task => task.toString() === taskId)
-        if(spaceTask === undefined) throw Error('this user did not register the task introduced')
+        if(spaceTask === undefined) throw Error('this task is not being carried out in the provided space')
 
         const result = await Task.deleteOne({ _id: taskId })
         if (!result.deletedCount) throw Error('wrong data provided')

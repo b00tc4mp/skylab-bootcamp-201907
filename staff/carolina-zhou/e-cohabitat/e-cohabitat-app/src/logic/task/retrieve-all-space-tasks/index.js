@@ -4,9 +4,12 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 /**
  * Retrieves all the tasks added in a particular space
  * 
- * @param {*} spaceId 
+ * @param {*} spaceId space id
  * 
- * @returns {}
+ * @throws {TypeError} - if space id or user id is not a string.
+ * @throws {Error} - if space id or user id is empty or undefined, if space is not found.
+ * 
+ * @returns {} 
 */
 
 export default function(spaceId) {

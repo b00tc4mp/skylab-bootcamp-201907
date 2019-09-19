@@ -2,12 +2,15 @@ import { validate } from 'utils'
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 /**
- * Updates a space
+ * Updates a space.
  * 
- * @param {*} spaceId
- * @param {*} dataToUpdate 
+ * @param {*} spaceId space id
+ * @param {*} dataToUpdate data to update
  * 
-* @returns {}
+ * @throws {TypeError} - if space id is not a string, if data to update is not an object.
+ * @throws {Error} - if space id is empty or undefined, if space is not found.
+ * 
+ * @returns {}
 */
 
 export default function(spaceId, dataToUpdate) {

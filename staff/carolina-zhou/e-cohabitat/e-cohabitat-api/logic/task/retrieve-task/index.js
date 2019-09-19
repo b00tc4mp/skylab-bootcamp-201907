@@ -4,9 +4,14 @@ const { models: { User, Space, Task } } = require('data')
 /**
  * Retrieves a task by its id
  * 
- * @param {*} taskId
+ * @param {*} userId user id
+ * @param {*} spaceId space id
+ * @param {*} taskId task id
  * 
- * @returns {Promise}
+ * @throws {TypeError} - if any of the parameters is not a string.
+ * @throws {Error} - if any of the parameters is empty or undefined, if user/space/task is not found, if space and task do not match, if user and task do not match.
+ * 
+ * @returns {Object} task object
 */
 
 module.exports = function(userId, spaceId, taskId) {

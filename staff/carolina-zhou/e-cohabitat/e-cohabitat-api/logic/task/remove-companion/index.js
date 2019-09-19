@@ -2,12 +2,16 @@ const { validate } = require('utils')
 const { models: { User, Task } } = require('data')
 
 /**
- * Unregisters a task companion
+ * Unregisters a task companion.
  * 
- * @param {string} taskId
- * @param {string} companionId 
+ * @param {string} taskId task id
+ * @param {string} companionId companion id
  * 
- * @returns {Promise}
+ * @throws {TypeError} - if space id or companion id is not a string.
+ * @throws {Error} - if space id or companion id is empty or undefined, if space or companion is not found, if user to remove is not a task companion.
+ * 
+ * 
+ * @returns {Object} task object
 */
 
 module.exports = function(taskId, companionId) {

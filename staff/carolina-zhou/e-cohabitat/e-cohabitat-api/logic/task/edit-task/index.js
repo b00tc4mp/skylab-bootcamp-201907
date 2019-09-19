@@ -2,10 +2,13 @@ const { validate } = require('utils')
 const { models: { Task } } = require('data')
 
 /**
- * Edits a task
+ * Edits a task.
  * 
- * @param {*} id
- * @param {*} dataToUpdate 
+ * @param {*} id task id
+ * @param {*} dataToUpdate data to update.
+ * 
+ * @throws {TypeError} - if task id is not a string, if data to update is not an object.
+ * @throws {Error} - if task id is empty or undefined, if task is not found.
  * 
 * @returns {Promise}
 */

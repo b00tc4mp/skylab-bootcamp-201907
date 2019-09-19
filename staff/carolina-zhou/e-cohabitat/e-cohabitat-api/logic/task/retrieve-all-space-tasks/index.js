@@ -4,10 +4,13 @@ const { models: { Space } } = require('data')
 /**
  * Retrieves all the tasks added in a particular space
  * 
- * @param {*} id 
- * @param {*} spaceId 
+ * @param {*} id user id
+ * @param {*} spaceId space id
  * 
- * @returns {Promise}
+ * @throws {TypeError} - if space id or user id is not a string.
+ * @throws {Error} - if space id or user id is empty or undefined, if space is not found.
+ * 
+ * @returns {Array} task id array
 */
 
 module.exports = function(id, spaceId) {

@@ -4,12 +4,15 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 /**
  * Registers a user.
  * 
- * @param {string} username 
- * @param {string} name 
- * @param {string} surname 
- * @param {string} email 
- * @param {string} password
+ * @param {string} username user's username
+ * @param {string} name user's real name
+ * @param {string} surname user's real surname
+ * @param {string} email user's email
+ * @param {string} password user's password
  * 
+ * @throws {TypeError} - if any parameter is not a string
+ * @throws {Error} - if any parameter is empty/undefined. if there is already a user registered under the same email or username.
+
  * @returns {}
  */
 

@@ -4,9 +4,12 @@ const { models: { User } } = require('data')
 /**
  * Retrieves all the tasks added by a particular user
  * 
- * @param {*} userId 
+ * @param {*} userId user id
  * 
- * @returns {Promise}
+ * @throws {TypeError} - if user id is not a string.
+ * @throws {Error} - if user id is empty or undefined, if user is not found.
+ * 
+ * @returns {Array} task id array
 */
 
 module.exports = function(userId) {

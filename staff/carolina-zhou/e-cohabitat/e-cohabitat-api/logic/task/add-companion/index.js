@@ -2,13 +2,16 @@ const { validate } = require('utils')
 const { models: { User, Space, Task } } = require('data')
 
 /**
- * Adds a task companion
+ * Adds a task companion.
  * 
- * @param {string} taskId
- * @param {string} spaceId
- * @param {string} companionId 
+ * @param {string} taskId task id
+ * @param {string} spaceId space id
+ * @param {string} companionId companion id
  * 
- * @returns {Promise}
+ * @throws {TypeError} - if any of the parameters is not a string.
+ * @throws {Error} - if any of the parameters is empty or undefined, if user/space/task is not found, if task and space do not match, if user to add is already a companion.
+ * 
+ * @returns {Object} task object
 */
 
 module.exports = function(taskId, spaceId, companionId) {
