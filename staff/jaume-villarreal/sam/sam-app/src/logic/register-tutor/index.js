@@ -2,7 +2,7 @@ import utils from 'utils'
 
 const { validate } = utils
 
-const REACT_APP_DB_URL = process.env.REACT_APP_DB_URL
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 /**
  * Retrieves all students by tutor id.
@@ -34,7 +34,7 @@ export default function (name , surname , dni , phone1 , email, password , repas
     if(password !== repassword) throw new Error ("passwords don't match")
 
     return (async () => {
-        const response = await fetch(`${REACT_APP_DB_URL}/tutors`, {
+        const response = await fetch(`${REACT_APP_API_URL}/tutors`, {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({ name , surname , dni , phone1 , email, password })

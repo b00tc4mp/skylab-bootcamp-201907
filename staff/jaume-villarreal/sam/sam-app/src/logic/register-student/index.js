@@ -2,7 +2,7 @@ import utils from 'utils'
 
 const { validate } = utils
 
-const REACT_APP_DB_URL = process.env.REACT_APP_DB_URL
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 /**
  * Retrieves all students by tutor id.
@@ -28,7 +28,7 @@ export default function (name , surname , birthdate , healthcard) {
     validate.string(healthcard, 'healthcard')
     
     return (async () => {
-        const response = await fetch(`${REACT_APP_DB_URL}/students`, {
+        const response = await fetch(`${REACT_APP_API_URL}/students`, {
             method: 'POST',
             headers: {'authorization' : `bearer ${this.__token__}` , 'content-type': 'application/json'},
             body: JSON.stringify({ name , surname , birthdate , healthcard })

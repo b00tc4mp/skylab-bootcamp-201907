@@ -1,7 +1,7 @@
 import utils from 'utils'
 
 const { validate } = utils
-const REACT_APP_DB_URL = process.env.REACT_APP_DB_URL
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 /**
  * Retrieves all students by tutor id.
@@ -22,7 +22,7 @@ export default function (email, password) {
         const headers = { "content-type" : "application/json" }
         const body = JSON.stringify({ email, password })
 
-        const response = await fetch(`${REACT_APP_DB_URL}/tutors/auth`, {
+        const response = await fetch(`${REACT_APP_API_URL}/tutors/auth`, {
             method: 'POST',
             headers: headers,
             body: body

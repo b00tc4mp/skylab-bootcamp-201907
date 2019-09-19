@@ -1,9 +1,9 @@
-const REACT_APP_DB_URL = process.env.REACT_APP_DB_URL
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 export default function(id){
     return(async () => {
         const headers = {'content-type' : 'application/json'}
-        const response = await fetch(`${REACT_APP_DB_URL}/students/${id}` , {
+        const response = await fetch(`${REACT_APP_API_URL}/students/${id}` , {
             method : 'GET',
             headers: headers
         })

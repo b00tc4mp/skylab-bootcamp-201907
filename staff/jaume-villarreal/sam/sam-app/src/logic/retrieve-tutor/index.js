@@ -1,9 +1,9 @@
-const REACT_APP_DB_URL = process.env.REACT_APP_DB_URL
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 export default function(){
     return(async () => {
         const headers = {'authorization' : `bearer ${this.__token__}`}
-        const tutor = await fetch(`${REACT_APP_DB_URL}/tutors` , {
+        const tutor = await fetch(`${REACT_APP_API_URL}/tutors` , {
             method : 'GET',
             headers: headers
         })

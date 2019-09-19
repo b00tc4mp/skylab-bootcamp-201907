@@ -2,7 +2,7 @@ import utils from 'utils'
 
 const { validate } = utils
 
-const REACT_APP_DB_URL = process.env.REACT_APP_DB_URL
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 /**
  * Register a enrollment
@@ -73,7 +73,7 @@ export default function(school , group , shirt , allergy , illness , medication 
     validate.string( lunch4 , "lunch 4")
     
     return(async () => {
-        const response = await fetch(`${REACT_APP_DB_URL}/enrollments` , {
+        const response = await fetch(`${REACT_APP_API_URL}/enrollments` , {
             method: 'POST',
             headers: {'content-type' : 'application/json'},
             body: JSON.stringify({ school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4 })
