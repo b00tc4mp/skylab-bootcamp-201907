@@ -51,7 +51,7 @@ Users can:
 
 ### Code Coverage
 ![A short story](./img/coverage-test-api.JPG)
-![A short story](./img/api-test.JPG)
+![A short story](./img/Api-test.JPG)
 
 
 
