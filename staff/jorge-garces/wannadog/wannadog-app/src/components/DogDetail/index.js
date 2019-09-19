@@ -122,7 +122,8 @@ export default withRouter(function ({ history, match }) {
         </>}
 
         {dog && !user && <>
-            <p>In love with {dog.name}? <Link to="/sign">Log-in</Link> to contact the owner
-            </p></>}
+            <section className="inlove">
+                <p>In love with {dog.name}? <Link to="/sign">Log-in</Link> to contact the owner
+            </p></section></>}
     </>
 })

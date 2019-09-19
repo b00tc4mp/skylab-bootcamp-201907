@@ -34,6 +34,10 @@ Registered Users can:
 
 ![model](images/datamodel.png)
 
+## Blocks
+
+![blocks](images/components.png)
+
 ## Code Coverage
 
 ![Coverage](https://img.shields.io/badge/Coverage-98%25-green.svg)
@@ -43,3 +47,8 @@ Registered Users can:
 ## Technologies
 
 Javascript, ReactJS, Node.js, Express, MongoDB & Mongoose.
+
+## TODO
+
+- react unit testing
+- alert system
