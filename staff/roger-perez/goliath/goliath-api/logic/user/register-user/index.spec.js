@@ -39,7 +39,7 @@ describe('logic - register user', () => {
                 expect(user.email).to.equal(email)
                 expect(user.password).to.equal(password)
                 expect(user.drumkits).to.deep.equal(drumkits)
-                expect(user.admin).to.equal(admin)
+                expect(user.admin).to.equal(false)
             })
     )
 
