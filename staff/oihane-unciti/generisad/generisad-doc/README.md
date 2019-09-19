@@ -25,33 +25,33 @@ Users can:
 - Contact with other users.
 
 ### Use case
-![A short story](./img\use-case.png)
+![A short story](./img/use-case.png)
 
 ###Flowcharts
 
-![A short story](./img\flow-chart.png)
+![A short story](./img/flow-chart.png)
 
 
 ## Technical description
 
 ### Blocks
-![A short story](./img\block.png)
+![A short story](./img/block.png)
 
 ### Components
-![A short story](./img\component-react.png)
+![A short story](./img/component-react.png)
 
 
 ### React Components
-![A short story](./img\component.png)
+![A short story](./img/component.png)
 
 
 ### Data Model
-![A short story](./img\baseDatos.png)
+![A short story](./img/baseDatos.png)
 
 
 ### Code Coverage
-![A short story](./img\coverage-test-api.JPG)
-![A short story](./img\api-test.JPG)
+![A short story](./img/coverage-test-api.JPG)
+![A short story](./img/api-test.JPG)
 
 
 
