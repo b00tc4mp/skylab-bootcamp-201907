@@ -12,10 +12,10 @@ export default withRouter(function ({ message }) {
     return <ul className="chat-message">
         <div className="chat-message__top">
             <div className="chat-message__date">
-                <li >{date2}</li>
+                <li>{date2}</li>
             </div>
             <div className="chat-message__name">
-                <li>{user.name}></li>
+                <li className="chat-message__user">{user.name}</li>
             </div>
             <div className="chat-message__body">
                 <li>{body}</li>

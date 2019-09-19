@@ -18,9 +18,10 @@ export default withRouter(function ({ history, match }) {
         (async () => {
 
             const dog = await logic.retrieveDog(params.id)
+
             setDog(dog)
             setDogId(dog.id)
-            setOwnerId(dog.owner)
+            setOwnerId(dog.owner._id)
 
             if (logic.isUserLoggedIn()) {
                 const user = await logic.retrieveUser()
@@ -49,7 +50,7 @@ export default withRouter(function ({ history, match }) {
     const deleteDog = (userPassword) => {
         try {
             logic.unregisterDog(userEmail, userPassword, dogId)
-            console.log('dog unregistered successfully')
+            history.push("/mydogs")
         } catch (error) {
             console.log(error.message)
         }
@@ -69,7 +70,7 @@ export default withRouter(function ({ history, match }) {
         {dog && <>
             <section className="body detail">
                 <Link className="back" onClick={goBack}><i class="fas fa-arrow-left"></i></Link>
-                <img className="detail__image" src="/img/testDog.jpg"></img>
+                <img className="detail__image" src={dog.image}></img>
                 <section className="detail__main">
                     <h2 className="detail__name">{dog.name}</h2>
                     <h4>Breed</h4>
@@ -89,12 +90,12 @@ export default withRouter(function ({ history, match }) {
                         {dog.withChildren ? <p>{dog.withChildren}</p> : {}}
                     </article>
                     <h4>Notes</h4>
-                    <p>{dog.notes}</p>
+                    <p className="detail__notes">{dog.notes}</p>
                 </section>
             </section>
         </>}
 
-        {user === "owner" && <button className="button" onClick={deleteForm}>DELETE DOG</button>}
+        {user === "owner" && <button className="button__delete button" onClick={deleteForm}>DELETE DOG</button>}
         {deletion && <>
 
             <form onSubmit={event => {
@@ -115,9 +116,9 @@ export default withRouter(function ({ history, match }) {
 
 
         {user === "notOwner" && <>
-            <button className="button" onClick={handleCreatChat}>CONTACT</button>
-            {!isFavorite && <button className="button" onClick={handleToggleDog}>ADD FAVORITE</button>}
-            {isFavorite && <button className="button" onClick={handleToggleDog}>REMOVE FAVORITE</button>}
+            <button className="button__contact button" onClick={handleCreatChat}>CONTACT</button>
+            {!isFavorite && <button className="button__fav button" onClick={handleToggleDog}>ADD FAVORITE</button>}
+            {isFavorite && <button className="button__fav  button" onClick={handleToggleDog}>REMOVE FAVORITE</button>}
         </>}
 
         {dog && !user && <>

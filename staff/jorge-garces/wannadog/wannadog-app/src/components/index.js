@@ -18,5 +18,7 @@ import ChatLounge from './ChatLounge'
 import Chat from './Chat'
 import MessageShowcase from './MessageShowcase'
 import ChatShowcase from './ChatShowcase'
+import Alerts from './Alerts'
+import Feedback from './Feedback'
 
-export { Landing, Sign, Register, Success, Confirm, Search, Profile, RegisterDog, SearchResults, DogResult, DogShowcase, Favorites, DogDetail, MyDogs, DogSuccess, About, ChatLounge, Chat, MessageShowcase, ChatShowcase }
+export { Landing, Sign, Register, Success, Confirm, Search, Profile, RegisterDog, SearchResults, DogResult, DogShowcase, Favorites, DogDetail, MyDogs, DogSuccess, About, ChatLounge, Chat, MessageShowcase, ChatShowcase, Alerts, Feedback }

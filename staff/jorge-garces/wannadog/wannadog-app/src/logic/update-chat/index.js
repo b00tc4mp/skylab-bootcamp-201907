@@ -1,5 +1,6 @@
 import { validate } from 'wannadog-utils'
 import logic from '../../logic'
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 export default function (chatId, _message) {
     validate.string(chatId, 'chatId')
@@ -7,7 +8,7 @@ export default function (chatId, _message) {
 
     return (async () => {
 
-        const response = await fetch(`http://localhost:8080/api/user/chat/${chatId}`, {
+        const response = await fetch(`${REACT_APP_API_URL}/user/chat/${chatId}`, {
             method: 'post',
             headers: { 'content-type': 'application/json', 'authorization': `bearer ${logic.__token__}` },
             body: JSON.stringify({ _message })

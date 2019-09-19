@@ -1,4 +1,5 @@
 import { validate } from 'wannadog-utils'
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 export default function (name, surname, email, password) {
     validate.string(name, 'name')
@@ -8,7 +9,7 @@ export default function (name, surname, email, password) {
     validate.string(password, 'password')
 
     return (async () => {
-        const response = await fetch(`http://localhost:8080/api/users`, {
+        const response = await fetch(`${REACT_APP_API_URL}/users`, {
             method: 'post',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({ name, surname, email, password })

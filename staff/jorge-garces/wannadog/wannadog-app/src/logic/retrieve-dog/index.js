@@ -1,8 +1,10 @@
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL
+
 export default function (id) {
     // validate fields
 
     return (async () => {
-        const response = await fetch(`http://localhost:8080/api/dog/${id}`, {
+        const response = await fetch(`${REACT_APP_API_URL}/dog/${id}`, {
             method: 'get'
         })
 

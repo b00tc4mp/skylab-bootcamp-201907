@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Feedback } from '../../components'
 
-export default function ({ onRegister }) {
+export default function ({ onRegister, error }) {
 
     return <>
         <section className="body-form">
@@ -24,7 +25,7 @@ export default function ({ onRegister }) {
 
                 <button className="button__sign button">SUBMIT</button>
             </form>
-
+            {error && <Feedback message={error} />}
         </section>
     </>
 }

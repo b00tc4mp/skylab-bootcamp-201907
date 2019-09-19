@@ -11,17 +11,19 @@ export default withRouter(function ({ chatId, history }) {
 
     let interval
 
+
+
+    useEffect(() => {
+        var objDiv = document.querySelector(".message_showcase");
+        if (objDiv) objDiv.scrollTop = objDiv.scrollHeight;
+    }, [messages])
+
+
     useEffect(() => {
         async function autoUpdate() {
             try {
-
                 const response = await logic.retrieveChat(chatId)
                 setMessages(response)
-
-                response.forEach(element => {
-                    if (element.user._id != logic.getUserId()) setFriendName(element.user.name)
-
-                })
             } catch ({ message }) {
                 console.log(message)
             }
@@ -40,27 +42,29 @@ export default withRouter(function ({ chatId, history }) {
         try {
             await logic.updateChat(chatId, message)
             setMessage('')
+
         } catch ({ message }) {
             console.log('error', message)
         }
     }
 
     return <>
-        <Link onClick={() => history.go(-1)} className="back"><i class="fas fa-arrow-left"></i></Link>
+        <Link onClick={() => history.go(-1)} className="back"><i className="fas fa-arrow-left"></i></Link>
 
-        {messages && friendName && <><h2 className="container__title title-search">{friendName}</h2>
-            <ul>
-                {messages.map(message => <MessageShowcase message={message} friendName={friendName} />)}
+        {messages && <><h2 className="container__title title-search">{friendName}</h2>
+
+            <ul className="message_showcase">
+                {messages.map(message => <MessageShowcase message={message} />)}
             </ul>
         </>}
 
-        <form onSubmit={event => {
+        <form className="chatbar" onSubmit={event => {
             event.preventDefault()
 
             onChatMessage(message)
         }}>
-            <input type="text" name="message" placeholder="Enter your message ..." value={message} onChange={event => setMessage(event.target.value)}></input>
-            <button>Send</button>
+            <input autocomplete="off" type="text" name="message" placeholder="Enter your message ..." value={message} onChange={event => setMessage(event.target.value)}></input>
+            <button className="button__chat button">Send</button>
         </form>
     </>
 })

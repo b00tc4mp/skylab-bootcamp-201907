@@ -1,3 +1,5 @@
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL
+
 export default function (distance, breed, gender, size, age, neutered, withDogs, withCats, withChildren, callback) {
 
     let latitude, longitude, dogs
@@ -25,7 +27,7 @@ export default function (distance, breed, gender, size, age, neutered, withDogs,
 
 async function search(distance, breed, gender, size, age, neutered, withDogs, withCats, withChildren, longitude, latitude) {
 
-    let response = await fetch(`http://localhost:8080/api/dogs`, {
+    let response = await fetch(`${REACT_APP_API_URL}/dogs`, {
         method: 'post',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ distance, breed, gender, size, age, neutered, withDogs, withCats, withChildren, location: { coordinates: [longitude, latitude] } }),

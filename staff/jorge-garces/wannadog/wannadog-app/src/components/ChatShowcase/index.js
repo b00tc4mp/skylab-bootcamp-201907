@@ -1,15 +1,11 @@
 import React from 'react'
-import logic from '../../logic'
 import moment from 'moment'
 import { withRouter } from 'react-router-dom'
+import logic from '../../logic'
 
-export default withRouter(function ({ chat, history, friendName }) {
+export default withRouter(function ({ chat, history }) {
 
-    let lastMessage, date
-
-    // chat.messages.forEach(element => {
-    //     if (element.user._id != logic.getUserId()) friendName = element.user.name
-    // })
+    let lastMessage, date, friendName
 
     if (chat.messages.length) {
         lastMessage = chat.messages[chat.messages.length - 1].body
@@ -17,16 +13,25 @@ export default withRouter(function ({ chat, history, friendName }) {
         date = moment(date).utc().format('DD-MM-YY HH:mm')
     }
 
-    return <>
-        <a href="#" onClick={event => {
+    chat.members.forEach(element => {
+        if (element._id !== logic.getUserId()) friendName = (element.name)
+    })
+
+    return <section className="lounge">
+        <a className="lounge" href="#" onClick={event => {
             event.preventDefault()
             history.push(`/chat/${chat.id}`)
-        }}>
-
-            <p>{date}</p>
-            <p>{friendName}</p>
-            <img className="dog-showcase__img" src="/img/square.jpg"></img>
-            <p>{lastMessage}</p>
+        }}> <div className="lounge__icon">
+                <li><i class="lounge__icon fas fa-user"></i></li>
+            </div>
+            <div className="lounge__text">
+                <li className="lounge__date">{date}</li>
+                <li className="lounge__name">{friendName}</li>
+                <li className="lounge__message">{lastMessage}</li>
+            </div>
         </a>
-    </>
+    </section>
 })
+
+{/* <img alt="dog-face" className="dog-showcase__img" src="/img/square.jpg"></img> */ }
+

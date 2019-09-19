@@ -13,8 +13,11 @@ export default function ({ onRegisterDog }) {
 
             onRegisterDog(name, breed, gender, size, Number(age), notes, neutered, withDogs, withCats, withChildren, chip, image)
         }}>
+
+
+            <i class="fas fa-camera-retro"></i>
             <label htmlFor="image"></label>
-            <input type="file" name="image" ></input>
+            <input className="upload" type="file" name="image"></input>
 
             <label className="search-label" htmlFor="name">Name</label>
             <input type="text" name="name"></input>
@@ -24,8 +27,8 @@ export default function ({ onRegisterDog }) {
 
             <label className="search-label" htmlFor="breed">Breed</label>
             <select name="breed">
-                <option value="other"> other / mix</option>
-                <option value="developer"> developer</option>
+                <option value="other"> Other / mutt</option>
+                <option value="Skylabrador"> Skylabrador</option>
                 <option value="Blue Lacy"> Blue Lacy</option>
                 <option value="Queensland Heeler"> Queensland Heeler</option>
                 <option value="Rhod Ridgeback"> Rhod Ridgeback</option>
@@ -282,7 +285,7 @@ export default function ({ onRegisterDog }) {
                 <option value="false"> No / Not tested</option>
             </select>
 
-            <textarea className="notes" name="notes" placeholder="Notes ..."></textarea>
+            <textarea className="body-form notes" name="notes" placeholder="Notes ..."></textarea>
 
             <button className="button">SAVE</button>
         </form>

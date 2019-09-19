@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 export default function ({ onSearch }) {
 
     return <section className="body">
-        <Link className="back" to="/sign"><i className="fas fa-arrow-left"></i></Link>
-        <h2 className="container__title title-search">Find your Dog</h2>
+        <Link className="back" to="/sign"><i class="fas fa-sliders-h"></i></Link>
+        <h2 className="container__title title-search">Find your dog</h2>
         <form className="form-search form-section" onSubmit={event => {
             event.preventDefault()
 
@@ -27,8 +27,9 @@ export default function ({ onSearch }) {
 
             <label className="search-label" htmlFor="breed">Breed</label>
             <select name="breed">
-                <option value="other"> other / mix</option>
-                <option value="developer"> developer</option>
+                <option value="nope"> I don't mind</option>
+                <option value="other"> Other / mutt</option>
+                <option value="Skylabrador"> Skylabrador</option>
                 <option value="Blue Lacy"> Blue Lacy</option>
                 <option value="Queensland Heeler"> Queensland Heeler</option>
                 <option value="Rhod Ridgeback"> Rhod Ridgeback</option>
@@ -240,12 +241,14 @@ export default function ({ onSearch }) {
 
             <label className="search-label" htmlFor="gender">Gender</label>
             <select name="gender">
+                <option value="nope"> I don't mind</option>
                 <option value="true"> Male</option>
                 <option value="false"> Female</option>
             </select>
 
             <label className="search-label" htmlFor="size">Size</label>
             <select name="size">
+                <option value="nope"> I don't mind</option>
                 <option value="small"> Small</option>
                 <option value="medium"> Medium</option>
                 <option value="large"> Large</option>
@@ -264,6 +267,7 @@ export default function ({ onSearch }) {
 
             <label className="search-label" htmlFor="neutered">Neutered</label>
             <select name="neutered">
+                <option value="nope"> I don't mind</option>
                 <option value="true" defaultValue> Yes</option>
                 <option value="false"> No</option>
             </select>

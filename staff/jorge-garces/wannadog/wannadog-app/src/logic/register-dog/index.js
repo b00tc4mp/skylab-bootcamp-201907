@@ -1,4 +1,6 @@
 import logic from '../../logic'
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL
+
 
 export default function (name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, chip, callback, image) {
 
@@ -27,7 +29,7 @@ export default function (name, breed, gender, size, age, notes, neutered, withDo
 
 async function registerDog(name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, longitude, latitude, chip) {
 
-    let response = await fetch(`http://localhost:8080/api/user/dog`, {
+    let response = await fetch(`${REACT_APP_API_URL}/user/dog`, {
         method: 'post',
         headers: { 'content-type': 'application/json', 'authorization': `bearer ${logic.__token__}` },
         body: JSON.stringify({ name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, location: { coordinates: [longitude, latitude] }, chip })

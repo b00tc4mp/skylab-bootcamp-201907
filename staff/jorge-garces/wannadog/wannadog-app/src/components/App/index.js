@@ -1,13 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { withRouter, Route, Switch } from 'react-router-dom'
-import { Landing, Sign, Register, Success, DogSuccess, Confirm, Search, Profile, RegisterDog, Favorites, DogDetail, MyDogs, About, ChatLounge, Chat } from '../../components'
+import { Landing, Sign, Register, Success, DogSuccess, Confirm, Search, Profile, RegisterDog, Favorites, DogDetail, MyDogs, About, ChatLounge, Chat, Alerts, Feedback } from '../../components'
 import logic from '../../logic'
 import SearchResults from '../SearchResults'
 
 function App({ history }) {
 
   const [dogs, setDogs] = useState([])
-  const [dogId, setDogId] = useState()
+  const [error, setError] = useState(undefined)
+
+  useEffect(() => {
+    setError()
+  }, [history.location])
 
   async function handleRegister(name, surname, email, password) {
     try {
@@ -15,7 +19,7 @@ function App({ history }) {
       history.push('/success')
 
     } catch ({ message }) {
-      console.log('fail register', message)
+      setError(message)
     }
   }
 
@@ -25,7 +29,7 @@ function App({ history }) {
 
       history.push('/profile')
     } catch ({ message }) {
-      console.log('fail authenticate', message)
+      setError(message)
     }
   }
 
@@ -59,7 +63,6 @@ function App({ history }) {
   }
 
   async function handleRegisterDog(name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, chip, image) {
-
     try {
       await logic.registerDog(name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, chip, registerCallback, image)
     } catch ({ message }) {
@@ -70,8 +73,8 @@ function App({ history }) {
   return (
     <Switch>
       <Route exact path="/" render={() => <Landing />} />
-      <Route path="/sign" render={() => <Sign onLogin={handleLogin} />} />
-      <Route path="/register" render={() => <Register onRegister={handleRegister} />} />
+      <Route path="/sign" render={() => <Sign onLogin={handleLogin} error={error} />} />
+      <Route path="/register" render={() => <Register onRegister={handleRegister} error={error} />} />
       <Route path="/success" render={() => <Success />} />
       <Route path="/dogsuccess" render={() => <DogSuccess />} />
       <Route path="/confirm" render={() => <Confirm />} />
@@ -85,8 +88,9 @@ function App({ history }) {
       <Route path="/add" render={() => logic.isUserLoggedIn() ? <RegisterDog onRegisterDog={handleRegisterDog} /> : history.push('/sign')} />
       <Route path="/chats" render={() => logic.isUserLoggedIn() ? <ChatLounge /> : {}} />
       <Route path="/chat/:id" render={props => logic.isUserLoggedIn() ? <Chat chatId={props.match.params.id} /> : {}} />
+      <Route exact path="/alerts" render={() => <Alerts />} />
     </Switch>
   )
 }
 
-export default withRouter(App);
+export default withRouter(App)

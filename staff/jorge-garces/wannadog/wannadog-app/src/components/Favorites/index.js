@@ -19,15 +19,16 @@ export default withRouter(function ({ history }) {
 
     }, [history.location])
 
-    return <>
+    return <section className="body">
+        <Link className="back" to="/profile"><i class="fas fa-arrow-left"></i></Link>
+        <h2 className="container__title">Favorites</h2>
+        {favorites && favorites.length === 0 && <section className="noresults"> <i className="noresults__sign fas fa-heart-broken"></i><h3 className="noresults__text">No favorites yet</h3></section>}
 
-        {favorites && <section className="body">
-            <Link className="back" to="/profile"><i class="fas fa-arrow-left"></i></Link>
-            <h2 className="container__title">Favorites</h2>
+        {favorites && <>
             <ul>
                 {favorites.map(dog => <DogShowcase dog={dog} />)}
             </ul>
-        </section>}
-    </>
+        </>}
+    </section>
 })
 

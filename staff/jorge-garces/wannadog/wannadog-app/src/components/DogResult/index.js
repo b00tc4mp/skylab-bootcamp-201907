@@ -7,7 +7,7 @@ export default withRouter(function DogResult({ dog }) {
     gender === "male" ? gender = <i class="fas fa-mars"></i> : gender = <i class="fas fa-venus"></i>
 
     return <li className="results__li">
-        <a href={`/#/dog/${id}`}><img className="results__img" src={image}></img></a>
+        <a href={`/#/dog/${id}`}><img alt="dog-face" className="results__img" src={image}></img></a>
         <h3 className="results__name">{name}<span>{gender}</span></h3>
     </li>
 })

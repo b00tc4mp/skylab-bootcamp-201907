@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import logic from '../../logic'
+import { Feedback } from '../../components'
 
-export default withRouter(function ({ onLogin, history }) {
+export default withRouter(function ({ onLogin, error, history }) {
 
-
-    { logic.isUserLoggedIn() && history.push('/profile') }
+    logic.isUserLoggedIn() && history.push('/profile')
     return <section className="body-form">
         <Link className="back" to="/"><i className="fas fa-arrow-left"></i></Link>
 
@@ -22,8 +22,10 @@ export default withRouter(function ({ onLogin, history }) {
             <input type="password" name="password" placeholder="password" />
             <button className="button__sign button">PROCEED</button>
             <p className="signup">don't have an account? <Link to="/register">Sign-up!</Link></p>
+
         </form>
 
+        {error && <Feedback message={error} />}
 
 
     </section>

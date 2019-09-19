@@ -17,10 +17,10 @@ export default withRouter(function ({ history, onLogout }) {
 
     return <>
         <section className="body-profile">
-            <Link className="back" to="/search"><i class="fas fa-arrow-left"></i></Link>
-            <h2 className="container__title">{user && user.name}</h2>
+            <Link className="back" to="/search"><i className="fas fa-arrow-left"></i></Link>
+            {user && <h2 className="container__title">{user.name}</h2>}
             <section className="body-profile__nav">
-                <Link className="body-profile__link" to="/mydogs">My Dogs</Link>
+                <Link className="body-profile__link" to="/mydogs">My dogs</Link>
                 <Link className="body-profile__link" to="/favorites">Favorites</Link>
                 <Link className="body-profile__link" to="/alerts">Alerts</Link>
                 <Link className="body-profile__link" to="/chats">Messages</Link>
@@ -28,7 +28,7 @@ export default withRouter(function ({ history, onLogout }) {
             <div className="about">
                 <Link className="body-profile__link" to="/about">About WannaDOG</Link>
             </div>
-            <button class="logout button" Name onClick={onLogout}>Logout</button>
+            <button class="logout button" onClick={onLogout}>Logout</button>
         </section>
     </>
 })
