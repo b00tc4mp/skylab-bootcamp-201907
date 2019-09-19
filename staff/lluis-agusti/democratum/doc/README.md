@@ -3,74 +3,74 @@ A project by:
 
 **Lluís Agustí Sanés @ Skylab Coders Academy**
 
-
-**Trello Link**
-https://trello.com/invite/b/ttVfxbI3/adb73360223318d66c2a73b8c28e28db/democratum
-
-
-
 ![](https://media.giphy.com/media/l0NgSlYECv58uTfbO/source.gif)
 
 ## **Introduction**
-Democratum is a MERN application that allows an afordable and scalable direct democracy voting system for municipalities to improve local governance quality and transparency.
+Democratum is a MERN single page application that allows an affordable and scalable direct democracy voting system for municipalities to improve governance quality and transparency.
 
 
-## Functional description
+# **Functional Description**
 
 Citizens can:
 
-* View open polls.
-* Vote on open polls.
-* View past polls.
-* Propose a new poll (city hall will evaluate and publish the poll).
-* Edit and update their profile. Email and ID are not be updated.
+* Sign up and log in.
+* View available polls.
+* Vote once on available polls.
+* View current results of already voted polls.
+* Propose a new poll (poll will take the status pending).
 
-* Result of participated polls once polls are finished. ---> (count++)
-* Individual poll opinions are not saved. Logic check if the user has already participated on the poll. Then allows to vote, counts++ the vote and pushes the poll ID to the user account.
-
-
-City Halls can:
+Admins (city halls) can:
 
 * Log In.
 * Create polls.
-* Edit and update their profile.
-* Edit and approve polls proposed by citizens.
-* Retrieve citizen's info: name, address, ID, email and participated polls.
+* Approve or reject polls proposed by citizens.
 
 
-Super Admin (me):
+Super Admins can:
 
 * Create City Halls.
-* List of City Halls.
-* Retrieve City Hall info: city name, address, documentation files and email.
 
 
-City Halls or their representatives should contact Democratum and, after check the documentation that accredits them as a public authority they will recieve an email letting them know that they have been signed up.
+City Halls or their representatives should contact Democratum and, after check the documentation that accredits them as a public authority, they will recieve an email letting them know that they have been signed up.
 
 
 
-## **Functional Description**
+# **Functional Description**
 
 
-### Use cases
+## Use cases
 ![](images/user-cases.png)
 ![](images/admin-cases.png)
 
 
-### Flows
+## Flows
 ![](images/admin-flowchart.png)
 ![](images/user-flowchart.png)
 
 
-## **Technical Description**
 
-### Blocks
+# **Technical Description**
+
+## Blocks
 ![](images/tech-blocks.png)
 
 
-### Components
-Non
+## Components
+![](images/components.png)
 
 
-### Code Coverage
-Non
+## Code Coverage
+![Coverage](https://img.shields.io/badge/Coverage-96%25-green.svg)
+
+![](images/coverage.png) 
+
+
+## Technologies
+Javascript, ReactJS, Node.js, Express, MongoDB & Mongoose.
+
+
+## TODO
+
+* Citizen: profile, update and picture upload.
+* Admin: retrieve citizens profiles.
+* Poll creation: upload image at Cloudinary.
