@@ -41,6 +41,7 @@ function Week({ history, match }) {
     function handleDay(event) {
         event.preventDefault()
 
+        setThisDay(moment())
         history.push(`/${spaceId}/day`)
     }
 

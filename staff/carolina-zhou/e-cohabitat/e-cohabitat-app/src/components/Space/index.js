@@ -8,7 +8,7 @@ function Space({ history, match }) {
     
     const { params: { spaceId } } = match
     const [ view, setView ] = useState(false)
-    const { mySpace, setMySpace, setThisDay } = useContext(Context)
+    const { mySpace, setMySpace, setThisDay, setCurrentDate } = useContext(Context)
     
     useEffect(() => {
         (async () =>{
@@ -26,6 +26,7 @@ function Space({ history, match }) {
     function handleMonth(event) {
         event.preventDefault()
 
+        setCurrentDate(moment())
         history.push(`/${spaceId}/month`)
     }
 

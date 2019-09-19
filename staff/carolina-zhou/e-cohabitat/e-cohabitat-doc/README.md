@@ -50,8 +50,14 @@ Users, once registered and logged in, will be able to:
 ![code coverage](./img/coverage.jpg)
 
 ## "Mea culpa"
+To do:
 - Edit and delete spaces.
-- Set periodic tasks.
+- Schedule periodic tasks.
 - Create tags for tasks.
 - View history of specific tasks (to facilitate the space maintenance).
 - Post and delete comments.
+
+## Future versions
+- Search users to add.
+- Search spaces to be part of and require space passcode to allow access.
+- Search tasks by key word, tags or user in space calendar.

@@ -9,7 +9,7 @@ import Chores from '../Chores'
 function Day({ history, match }) {
 
     const { params: { spaceId } } = match
-    const { thisDay, setThisDay, setThisHour } = useContext(Context)
+    const { thisDay, setThisDay, setThisHour, setCurrentDate } = useContext(Context)
     const [ dayTasks, setDayTasks ] = useState()
     const [ update, setUpdate ] = useState(false)
 
@@ -38,6 +38,7 @@ function Day({ history, match }) {
     function handleWeek(event) {
         event.preventDefault()
 
+        setCurrentDate(moment(thisDay))
         history.push(`/${spaceId}/week`)
     }
 

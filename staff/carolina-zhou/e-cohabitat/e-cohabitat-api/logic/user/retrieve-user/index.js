@@ -20,9 +20,6 @@ module.exports = function (id) {
         const user = await User.findOne({ _id: id }, { _id: 0, password: 0 }).lean()
         if (!user) throw new Error(`user with id ${id} not found`)
 
-        user.id = user._id.toString()
-        delete user._id
-
         return user
     })()
 }

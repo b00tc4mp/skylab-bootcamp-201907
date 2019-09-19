@@ -35,6 +35,7 @@ function Month({ history, match }) {
     function handleWeek(event) {
         event.preventDefault()
 
+        setCurrentDate(moment())
         history.push(`/${spaceId}/week`)
     }
 
