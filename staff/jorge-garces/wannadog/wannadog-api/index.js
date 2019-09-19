@@ -6,9 +6,9 @@ const routes = require('./routes')
 const cors = require('cors')
 const { database } = require('wannadog-data')
 
-const { env: { PORT, DB_URL_TEST } } = process
+const { env: { PORT, DB_URL } } = process
 
-database.connect(DB_URL_TEST)
+database.connect(DB_URL)
     .then(() => {
         const app = express()
 

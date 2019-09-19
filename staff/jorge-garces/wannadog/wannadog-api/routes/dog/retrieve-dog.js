@@ -5,7 +5,6 @@ module.exports = async function (req, res) {
     const { params: { dogId } } = req
 
     try {
-        debugger
         const dog = await retrieveDog(dogId)
         res.json({ message: 'dog retrieved correctly', dog })
 

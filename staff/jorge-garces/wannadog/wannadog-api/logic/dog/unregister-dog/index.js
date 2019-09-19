@@ -20,7 +20,7 @@ module.exports = function (id, email, password, dogId) {
     let response
 
     return (async () => {
-        const confirmUser = await User.findOne({ email, password, dogs: dogId })
+        const confirmUser = await User.findOne({ email, dogs: dogId })
         if (confirmUser) response = await Dog.deleteOne({ _id: dogId })
         else throw Error(`There was an error unregistering the dog`)
         if (!response.deletedCount) throw Error(`There was an error unregistering the dog`)

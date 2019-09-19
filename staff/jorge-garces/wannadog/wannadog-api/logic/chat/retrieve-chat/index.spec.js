@@ -3,7 +3,7 @@ const { expect } = require('chai')
 const { database, models } = require('wannadog-data')
 const { User, Chat, Message } = models
 
-describe.only('logic - update chat', () => {
+describe('logic - update chat', () => {
 
     before(() => database.connect('mongodb://172.17.0.2/wannadog-test'))
 

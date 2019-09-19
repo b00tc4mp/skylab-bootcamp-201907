@@ -21,6 +21,7 @@ module.exports = function (id) {
             favorite.id = favorite._id.toString()
             delete favorite._id
             delete favorite.__v
+            favorite.gender === true ? favorite.gender = "Male" : favorite.gender === "Female"
         })
 
         return favorites

@@ -20,7 +20,7 @@ describe('logic - retrieve vehicle', () => {
         breed = `${breedArray[Math.floor(Math.random() * breedArray.length)]}`
         gender = Boolean(Math.round(Math.random()))
         size = `${sizeArray[Math.floor(Math.random() * sizeArray.length)]}`
-        age = '2019/01'
+        age = Math.floor(Math.random() * 4)
         notes = `notes - ${Math.random()}`
         neutered = Boolean(Math.round(Math.random()))
         withDogs = Boolean(Math.round(Math.random()))
@@ -46,7 +46,7 @@ describe('logic - retrieve vehicle', () => {
 
             const dogAge = new Date(age)
             const dog = new Dog({
-                name, breed, gender, size, age: dogAge, notes, neutered, withDogs, withCats, withChildren, chip, longitude, latitude
+                name, breed, gender, size, age, notes, neutered, withDogs, withCats, withChildren, chip, longitude, latitude
             })
             dog.location.coordinates.push(longitude, latitude)
             dogId = dog.id
@@ -67,7 +67,7 @@ describe('logic - retrieve vehicle', () => {
         expect(doggie.breed).to.equal(breed)
         expect(doggie.gender).to.equal(gender)
         expect(doggie.size).to.equal(size)
-        expect(doggie.age).to.deep.equal(new Date(age))
+        expect(doggie.age).to.deep.equal(age)
         expect(doggie.neutered).to.equal(neutered)
         expect(doggie.withDogs).to.equal(withDogs)
         expect(doggie.withCats).to.equal(withCats)

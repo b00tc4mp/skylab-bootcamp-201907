@@ -16,8 +16,6 @@ const { User, Wish } = models
  * @param {boolean} withCats
  * @param {boolean} withChildren
  * @param {number} distance
- * @param {number} months
- * @param {number} years
  * 
  * @returns {Promise}
 */
@@ -33,8 +31,7 @@ module.exports = function (id, wishParams) {
     if (wishParams.breed) validate.string(wishParams.breed, 'breed')
     if (wishParams.gender) validate.boolean(wishParams.gender, 'gender')
     if (wishParams.size) validate.string(wishParams.size, 'size')
-    if (wishParams.months) validate.number(wishParams.months, 'months')
-    if (wishParams.years) validate.number(wishParams.years, 'years')
+    if (wishParams.age) validate.number(wishParams.age, 'age')
     if (wishParams.neutered) validate.boolean(wishParams.neutered, 'neutered')
     if (wishParams.withDogs) validate.boolean(wishParams.withDogs, 'withDogs')
     if (wishParams.withCats) validate.boolean(wishParams.withCats, 'withCats')
