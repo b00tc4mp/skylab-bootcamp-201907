@@ -6,5 +6,6 @@ import CreateMenu from './CreateMenu'
 import CurrentWeek from './CurrentWeek'
 import UserProfile from './UserProfile'
 import RecipeDetail from './RecipeDetail'
+import Feedback from './Feedback'
 
-export { Landing, Home, Login, Register, CreateMenu, CurrentWeek, UserProfile, RecipeDetail }
+export { Landing, Home, Login, Register, CreateMenu, CurrentWeek, UserProfile, RecipeDetail, Feedback }

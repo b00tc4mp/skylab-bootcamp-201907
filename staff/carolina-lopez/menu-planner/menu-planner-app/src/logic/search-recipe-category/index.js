@@ -1,6 +1,17 @@
+import { validate } from 'menu-planner-utils'
+
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
+/**Function that retrieve a day
+ * @param {category} category Category of meal
+ * @throws {Error}  Error of user credentials
+ * @return recipes of the selected category
+ */
+
 export default function (category) {
+
+  validate.string(category, 'category')
+
   return (async () => {
     
     const response = await fetch(`${REACT_APP_API_URL}/recipes/search/${category}`, {

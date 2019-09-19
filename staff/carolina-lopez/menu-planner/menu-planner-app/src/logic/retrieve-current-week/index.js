@@ -1,6 +1,12 @@
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
+/**Function that retrieve a week
+ * @throws {Error}  Error 
+ * @return a weekly menu planner
+ */
+
 export default function () {
+
     return (async () => { 
         const response = await fetch(`${REACT_APP_API_URL}/weeks/current`, {
             method: 'get',
