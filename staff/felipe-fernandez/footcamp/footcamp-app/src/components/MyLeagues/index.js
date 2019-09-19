@@ -21,10 +21,15 @@ function MyLeagues (props) {
 
             setLeagues(leagues)
        
-            const teamId = leagues.teams.find(team => { 
+            const _teamId = leagues.teams.find(team => { 
                 if (team.owner === sessionStorage.id) return team._id
             })
-            sessionStorage.team = teamId._id
+             if (!sessionStorage.team) history.push('/create-teams')
+             else {
+                 sessionStorage.team = _teamId._id
+                 history.push('/myleague')
+                }
+            
            
          } catch({message}) {
             setError(message)

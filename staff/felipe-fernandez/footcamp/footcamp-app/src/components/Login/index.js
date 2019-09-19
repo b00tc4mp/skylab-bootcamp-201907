@@ -9,7 +9,6 @@ import backimage from '../../style/img/pitch-blur.jpeg'
 function Login(props) {
 
 
-  // const { target: { email: { value: email }, password: { value: password } } } = event
   
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')

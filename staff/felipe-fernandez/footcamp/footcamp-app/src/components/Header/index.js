@@ -50,7 +50,7 @@ function Header(props) {
 
 return (
   <div>
-      <nav className="header">
+      {user &&  <nav className="header">
 
         <div className="navbar">
       
@@ -77,16 +77,17 @@ return (
           </div>  
           <div className="title__user">
             
-              {user && <p className="title__user--paragraph">{user.name} <i class="fas fa-user"></i></p>} 
+             <p className="title__user--paragraph">{user.name}   <i class="fas fa-user"></i></p>
            </div>              
          
       
-   </nav>    
-           <div>
+          </nav>    }
+          
+          {user && <div>
              <ul className="low-menu">
                 <li className="low-menu__items">
-                  <Link to="/"><i class="fas fa-futbol fa-2x"></i></Link>
-                </li>
+                      <Link to="/"><i class="fas fa-futbol fa-2x"></i></Link>
+                   </li>
                 <li className="low-menu__items">
                   <Link to="/mylineup/"><i class="far fa-thumbs-up fa-2x"></i></Link>
                 </li>
@@ -98,7 +99,7 @@ return (
                 </li>
               </ul>
       
-         </div>
+         </div>}
         
 
 

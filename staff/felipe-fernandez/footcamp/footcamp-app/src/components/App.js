@@ -19,7 +19,7 @@ import LineupUpdate from './LineupUpdate'
 
 import logic from '../logic'
 
-import { withRouter, Route, Redirect } from 'react-router-dom'
+import { withRouter, Route } from 'react-router-dom'
 
 const { token } = sessionStorage
 

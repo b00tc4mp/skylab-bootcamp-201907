@@ -29,7 +29,7 @@ function CreateTeam(props) {
                 const players  = result.players.players.map(results=> results)
                 const teamId = result.players.id
                 setTeamId(teamId) 
-                
+                sessionStorage.team = teamId
                 
                 const res = await Promise.all(players.map((playerId) => 
                      logic.retrievePlayer(playerId)
@@ -41,7 +41,7 @@ function CreateTeam(props) {
                  
             } catch ({ message }) {
                 
-                setError(message)
+                setError("There has been an error creating the team")
             }
         })()
       }

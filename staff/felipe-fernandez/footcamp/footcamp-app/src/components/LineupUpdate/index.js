@@ -8,7 +8,7 @@ function LineupUpdate({match ,history}) {
     const [lineupChanges, setLineupChanges] = useState()
     const [playerLineup, setPlayerLineup] = useState()
     const [error , setError] = useState(undefined) 
-    // const [idPlayerToChange, setIdPlayerToChange] = useState()
+  
 
     useEffect(() => {
         (async () => {

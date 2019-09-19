@@ -7,7 +7,7 @@ import Header from '../Header'
 function UserProfile({history}) {
 
     const [user, setUser] = useState(null)
-    // const { user, setUser } = useContext(Context)
+   
     debugger
     useEffect(() => {
         (async () => {
