@@ -72,3 +72,4 @@ Javascript, ReactJS, Node.js, Express, MongoDB & Mongoose.
 
 ### To do 
 App testing
+Setting panels
