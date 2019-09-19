@@ -9,15 +9,13 @@ const bcrypt = require('bcryptjs')
 
 /**
  * 
- * @param {*} name 
- * @param {*} surname 
- * @param {*} nickname
- * @param {*} email 
- * @param {*} password 
- * @param {*} bookmarks 
- * @param {*} voted 
+ * @param {*} name user's name
+ * @param {*} surname user's surname
+ * @param {*} nickname user's nickname
+ * @param {*} email user's email
+ * @param {*} password user's password to crypt
  * 
- * @returns {Promise}
+ * @returns {undefined}
  */
 
 module.exports = function(name, surname, nickname, email, password) {

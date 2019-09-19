@@ -2,9 +2,9 @@ const { models: { User, Post } } = require('vltra-data')
 // const { validate} = require('vltra-utils')
 
 /**
- * retrieves all posts from db
+ * retrieves ranking posts from db
  * 
- * @returns {Array} array with posts from db.
+ * @returns {Array} array with posts from db sorted by ranking.
  */
 
 module.exports = function(){

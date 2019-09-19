@@ -1,6 +1,13 @@
 const { models: { User, Post } } = require('vltra-data')
 const { validate} = require('vltra-utils')
 
+/**
+ * Retrieves an array of post with a certain author
+ * @param {objectId} authorId author's id on db
+ * 
+ * @returns {string} generated post's id
+ */
+
 module.exports = async function(authorId){
     validate.objectId(authorId, 'authorId')
     

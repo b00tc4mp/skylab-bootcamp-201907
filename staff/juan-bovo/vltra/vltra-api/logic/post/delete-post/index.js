@@ -6,7 +6,7 @@ const { validate} = require('vltra-utils')
  * @param {objectId} postId mongoose post id to delete
  * @param {objectId} userId mongoose user id to check post ownership
  * 
- * @returns {Promise} post deletion on db
+ * @returns {undefined} 
  */
 
 module.exports = function(userId, postId) {

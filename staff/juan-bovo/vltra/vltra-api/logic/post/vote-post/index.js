@@ -1,6 +1,15 @@
 const { models: { User, Post } } = require('vltra-data')
 const { validate} = require('vltra-utils')
 
+/**
+ * Adds a vote to a post's votes array, and ads post's id to user's voted array.
+ * (user can't vote twice on a post)
+ * @param {objectId} userId user's id on db
+ * @param {objectId} postId post's id on db
+ * @param {Number} userVote number expressing user's valoration on a post id on db (min 1, max 5)
+ * 
+ * @returns {string} message confirmation
+ */
 
 module.exports = function(userId, postId, userVote) {
     

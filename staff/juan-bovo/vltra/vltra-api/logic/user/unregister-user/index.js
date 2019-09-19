@@ -6,9 +6,9 @@ const bcrypt = require('bcryptjs')
 /**
  * Unregisters a user by their id
  * 
- * @param {string} id 
- * @param {string} email
- * @param {string} password 
+ * @param {string} id user's id on db. It comes from a token.
+ * @param {string} email user's email
+ * @param {string} password user password to compare with hash (user.password)
  * 
  * @returns {Promise}
 */

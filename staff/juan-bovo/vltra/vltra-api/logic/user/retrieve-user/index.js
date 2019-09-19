@@ -4,9 +4,9 @@ const { validate} = require('vltra-utils')
 /**
  * Retrieves a user by its id.
  * 
- * @param {string} id 
+ * @param {string} id user's id on db. It comes from a token.
  * 
- * @returns {Promise}
+ * @returns {Promise} user data
  */
 module.exports = function (id) {
     

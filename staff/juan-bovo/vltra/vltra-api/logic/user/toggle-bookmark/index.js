@@ -1,6 +1,14 @@
 const { models: { User, Post } } = require('vltra-data')
 const { validate} = require('vltra-utils')
 
+/**
+ * Retrieves a user by its id.
+ * 
+ * @param {string} userId user's id on db. It comes from a token.
+ * @param {string} postId post's id on db.
+ * 
+ * @returns {Promise} user data
+ */
 
 module.exports = function(userId, postId ) {
     validate.objectId(userId, 'userId')

@@ -6,7 +6,7 @@ const { validate} = require('vltra-utils')
  * @param {objectId} commentId mongoose embedded comment id to delete
  * @param {objectId} postId mongoose post id where comment should be embedded
  * 
- * @returns {Promise}
+ * @returns {undefined}
  */
 
 module.exports = function(commentId, postId) { //(commentId, postId, email, password)
