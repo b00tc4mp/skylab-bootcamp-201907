@@ -31,7 +31,7 @@ function CheckEnrollment({ history }){
             }
         }
         retrieveStudent(studentId)
-    } , [] )    
+    } , [setStudent , history , studentId] )    
 
     useEffect(() => {
         async function retrieveEnrollment(id){
@@ -43,7 +43,7 @@ function CheckEnrollment({ history }){
             }
         }
         retrieveEnrollment(studentId)
-    } , [])
+    } , [setEnrollment , studentId])
 
 
     return  <div className="detail-wrapper">

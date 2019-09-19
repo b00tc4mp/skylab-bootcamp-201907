@@ -5,7 +5,6 @@ import logic from "../../logic"
 import Feedback from "../Feedback"
 import './index.sass'
 import "../../styles/form.sass"
-import translateMessage from '../../logic/translate-message'
 
 function UpdateStudent({ history }){
     const { studentId } = useContext(MyContext)
@@ -34,9 +33,8 @@ function UpdateStudent({ history }){
                 history.push("./home")
             }
         }
-        
         retrieveStudent(studentId)
-    } , [])
+    } , [setStudent , setName , setSurname , setBirthdate , setHealthcard , history , studentId])
     
     function handleSubmit(event){
         event.preventDefault()
@@ -45,7 +43,7 @@ function UpdateStudent({ history }){
 
     async function handleUpdate(studentId , _name , _surname , birthdate , healthcard){
         try{
-            const response = await logic.updateStudent(studentId , _name , _surname , birthdate , healthcard)
+            await logic.updateStudent(studentId , _name , _surname , birthdate , healthcard)
             history.push("/update-success")
         }catch({ message }){
             console.log(message)

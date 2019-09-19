@@ -8,7 +8,7 @@ const { formatDate } = require('utils')
 const registerStudent = require('.')
 
 
-describe.only('logic - register student' , ()=>{
+describe('logic - register student' , ()=>{
     before( () => database.connect(DB_URL_TEST))
 
     let studentName , studentSurname , birthdate , healthcard
@@ -36,9 +36,6 @@ describe.only('logic - register student' , ()=>{
     })
     
     it("should succeed on correct data" , async ()=> {
-        // const result = await registerStudent(studentName , studentSurname , birthdate , healthcard , tutorId )
-        // studentId = result.id
-        
         const result = await registerStudent(studentName , studentSurname , birthdate , healthcard , tutorId )
         expect(result).to.exist
 

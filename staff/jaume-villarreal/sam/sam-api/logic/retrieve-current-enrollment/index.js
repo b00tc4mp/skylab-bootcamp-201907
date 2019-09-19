@@ -2,7 +2,7 @@ const {validate} = require('utils')
 const { models : { Enrollment , Student } } = require('data')
 
 /**
- * Retrieves an enrollment by its id.
+ * Retrieves an enrollment by its id. and curretn year
  * 
  * @param {string} studentId 
  * 

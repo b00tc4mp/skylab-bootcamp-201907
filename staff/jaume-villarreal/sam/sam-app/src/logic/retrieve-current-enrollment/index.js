@@ -3,7 +3,7 @@ const { validate } = utils
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 /**
- * Retrieves all students by tutor id.
+ * Retrieves an enrollment for the current year
  * 
  * @param {string} studentId 
  * 

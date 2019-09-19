@@ -1,3 +1,11 @@
+/**
+ * Translates feedback messages
+ * 
+ * @param {string} message 
+ * @param {string} email 
+ * 
+ * @returns {String}
+ */
 function translateMessage(message , email ){
     let translatedMessage = ""
     switch(message){

@@ -1,5 +1,5 @@
 import React , { useEffect , useState , useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link , withRouter } from 'react-router-dom'
 import MyContext from '../ProviderContext'
 import logic from "../../logic"
 
@@ -7,7 +7,7 @@ import Feedback from "../Feedback"
 
 import "./index.sass"
 
-function Home(){
+function Home({ history }){
     const { setTutor , setStudentId } = useContext(MyContext)
     const [ students , setStudents ] = useState(undefined)
     const [ error , setError ] = useState(undefined)
@@ -24,7 +24,7 @@ function Home(){
             }
         }
         retrieveUsers()
-    },[])
+    },[setTutor , setStudents])
 
     return  <div className="panel-wrapper">
                 {students && <h1 className="home-header">Usuaris registrats</h1>}
@@ -64,4 +64,4 @@ function Home(){
             </div>
 }
             
-export default Home
+export default withRouter(Home)

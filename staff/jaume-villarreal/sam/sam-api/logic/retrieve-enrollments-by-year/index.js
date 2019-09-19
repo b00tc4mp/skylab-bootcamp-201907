@@ -1,6 +1,15 @@
 const { validate } = require('utils')
 const { models : { Enrollment , Course } } = require('data')
 
+/**
+ * Retrieves all enrollments by year
+ * 
+ * @param {string} year 
+ * 
+ * @returns {Promise}
+ * 
+ */
+
 module.exports = function(year){
     validate.number(year , 'course')
 

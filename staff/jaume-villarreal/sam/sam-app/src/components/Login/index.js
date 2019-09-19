@@ -37,8 +37,8 @@ function Login({ history }){
                                     <input className="input-block__input" type="text" name="email"  />
                             </div>
                             <div className="input-block">
-                                <label className="input-block__label" htmlFor="password">Contrassenya</label>
-                                    <input className="input-block__input" type="password" name="password"  />
+                                <label className="input-block__label" htmlFor="password" autoComplete="username">Contrassenya</label>
+                                    <input className="input-block__input" type="password" name="password" autoComplete="current-password"  />
                             </div>
                         <button className="btn btn--submit">Accedeix</button>
                         </section>

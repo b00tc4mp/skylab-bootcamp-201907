@@ -9,7 +9,7 @@ import "./index.sass"
 
 function RegisterEnrollment({ history }){
 
-    const { studentId , setStudentId} = useContext(MyContext)
+    const { studentId } = useContext(MyContext)
     const [student , setStudent] = useState(undefined)
     const [enrollment , setEnrollment] = useState(undefined)
     const [year , setYear] = useState(undefined)
@@ -30,19 +30,19 @@ function RegisterEnrollment({ history }){
             }
         }
         retrieveStudent(studentId)
-    } , [] )
+    } , [setStudent , history , studentId] )
 
     useEffect( () => {
         async function retrieveCurrentEnrollment(id){
             try{
-                const retrievedCurrentEnrollment = await logic.retrieveCurrentEnrollment(studentId)
+                await logic.retrieveCurrentEnrollment(studentId)
                 setEnrollment(true)
             }catch({ message }){
                 setEnrollment(false)
             }
         }
         retrieveCurrentEnrollment(studentId)
-    } , [] )
+    } , [setEnrollment , studentId] )
 
     useEffect( () => {
         function getYear(date){
@@ -51,7 +51,7 @@ function RegisterEnrollment({ history }){
         }
         const currentDate = new Date()
         getYear(currentDate)
-    } , [])
+    } , [setYear])
 
     function handleSubmit(event){
         event.preventDefault()

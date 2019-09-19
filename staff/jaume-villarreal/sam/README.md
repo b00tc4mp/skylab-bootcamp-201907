@@ -40,5 +40,5 @@ Tutors can:
 ## Technologies
 Javascript, ReactJS, Node.js, Express, MongoDB & Mongoose.
 
-## To do
-* React testing (done: 50%)
+## TODO
+* React testing (50% complete)

@@ -1,5 +1,11 @@
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * Retrieves a tutor
+ * 
+ * @returns {Promise}
+ */
+
 export default function(){
     return(async () => {
         const headers = {'authorization' : `bearer ${this.__token__}`}
