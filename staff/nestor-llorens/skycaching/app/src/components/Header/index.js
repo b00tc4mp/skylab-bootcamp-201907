@@ -1,5 +1,6 @@
 import React from 'react'
 import logic from '../../logic'
+import './index.sass'
 
 import { withRouter } from 'react-router-dom'
 
@@ -40,23 +41,19 @@ function Header({ view, setView, history, user }) {
         setView('home')
     }
 
-
-
     return (
-        <header className='Header'>
-            <nav>
+        <header className='header'>
+            <a className = "header_a" onClick={handleGoToHome}><h1 className='header__title'>SkyCaching</h1></a>
+            <nav className='header__navbar'>
                 {!logic.isUserLoggedIn() ?
-                    <ul>
-                        {view !== 'register' && <li><button onClick={handleGoToRegister}>Register</button></li>}
-                        {view !== 'login' && <li><button onClick={handleGoToLogin}>Login</button></li>}
+                    <ul className='header__navbar-ul'>
+                        {view !== 'register' && <li className='header__item'><button className='header__button' onClick={handleGoToRegister}>Create account</button></li>}
+                        {view !== 'login' && <li className='header__item'><button className='header__button' onClick={handleGoToLogin}>Sign in</button></li>}
                     </ul>
                     :
-                    <ul>
-                        <li>Hello, {user && user.username}!
-                <button onClick={handleOnLogout}>Logout</button></li>
-                        <li><button onClick={handleGoToProfile}>Profile</button></li>
-                        <li><button onClick={handleGoToHome}>Home</button></li>
-
+                    <ul className='header__list'>
+                        <li className='header__item'><button className='header__button' onClick={handleGoToProfile}>Profile</button></li>
+                        <li className='header__item-logout'><button className='header__button' onClick={handleOnLogout}>Logout</button>Hello, {user && user.username}!</li>
                     </ul>}
             </nav>
         </header>
