@@ -57,8 +57,8 @@ function Mentor({ history }) {
             <ul className='mentor__ul'>
                 <h3 className='mentor__h3'>Teacher Operative</h3>
                 <li className='mentor__li'><a className='mentor__a' href='' onClick={handleGoToTeacherList}>Teacher list</a></li>
-                <li className='mentor__li'><a className='mentor__a' href='' onClick={handleGoToRemoveTeacher}>Remove teacher</a></li>
-            </ul>
+{/*                 <li className='mentor__li'><a className='mentor__a' href='' onClick={handleGoToRemoveTeacher}>Remove teacher</a></li>
+ */}            </ul>
             <ul className='mentor__ul--margin'>
                 <h3 className='mentor__h3'>Subject Operative</h3>
                 <li className='mentor__li'><a className='mentor__a'href='' onClick={handleGoToSubjectList}>Subject list</a></li>

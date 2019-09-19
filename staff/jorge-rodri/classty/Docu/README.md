@@ -14,38 +14,54 @@ Mentors can:
 
 Teachers recieve for email the credentials for access its users.
 
+Mentor can:
+
+- Register student for subjects
+- Register teacher for subjects
+- Remove teacher
+- Add teachers and student to subject
+
 Teachers can:
 
-- Register student for its class
 - Create homeworks
 - Create exams
-- Create Groups of works
-- Add documentation
-- Add post in the subject profile
+- Add note in exam
+- Check performed homework 
+- Add message in the subject profile
 
 Students can:
-- Add post in the subject profile
+- Add message in the subject profile
 - Move its homeworks to kanban
-- Asigns itselves to group of workd
 - Consult its notes and dates of exams
 
-Teachers and Students can send messages among themselves
+## Use cases
+### Mentor
+![Mentor](mentor-case.png)
+
+### Teacher
+![Teacher](teacher-user.png)
+
+### Mentor
+![Student](student-use.png)
 
 ## Flowcharts
-### Admin
-![Admin](admin.jpg)
+### Mentor
+![Mentor](mentor.png)
 ### Teacher
-![Teacher](teacher.jpg)
+![Teacher](teacher.png)
 ### Student
-![Student](student.jpg)
+![Student](student.png)
 
 ## Technical Description
 
 ### Blocks
-![blocks](blocks.jpg)
+![blocks](blocks.png)
 
 ### Data Model
-![data](Schema.jpg)
+![data](schema.png)
+
+### API coverage
+![data](coverage-api.png)
 
 ## Planing
 [Trello](https://trello.com/b/FvQn0fqt/classty)
