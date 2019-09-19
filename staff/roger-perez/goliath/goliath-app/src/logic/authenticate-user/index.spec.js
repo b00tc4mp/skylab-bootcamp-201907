@@ -42,6 +42,5 @@
             ).toThrowError(Error, 'username with value manuelbarzi#gmail.com is not a valid e-mail')
         )
 
-        // TODO test more cases
     })
 }

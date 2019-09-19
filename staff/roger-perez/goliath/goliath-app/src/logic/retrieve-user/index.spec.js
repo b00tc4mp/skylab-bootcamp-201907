@@ -13,10 +13,10 @@
                 favorites: []
             }
 
-            return call('https://skylabcoders.herokuapp.com/api/user', 'post', { 'content-type': 'application/json' }, user)
+            return call('http://localhost:8080/api/user', 'post', { 'content-type': 'application/json' }, user)
                 .then(response => {
                     if (response.status === 'KO') throw new Error(response.error)
-                    else return call('https://skylabcoders.herokuapp.com/api/auth', 'post', { 'content-type': 'application/json' }, { username: user.username, password: user.password })
+                    else return call('http://localhost:8080/api/auth', 'post', { 'content-type': 'application/json' }, { username: user.username, password: user.password })
                 })
                 .then(response => {
                     if (response.status === 'KO') throw new Error(response.error)
@@ -43,7 +43,5 @@
                 logic.retrieveUser('', 'a-token')
             ).toThrowError(Error, 'id is empty or blank')
         )
-
-        // TODO test more cases
     })
 }
