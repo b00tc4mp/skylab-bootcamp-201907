@@ -24,11 +24,9 @@ module.exports = function(id) {
 
             chats.forEach((chat, index) => {
                 chats[index].id = chat._id.toString()
-                    delete chat._id
+                
                 chat.participants.forEach((item , numb) => {
                     chat.participants[numb].id = item._id.toString()
-                     
-                    delete item._id
                 })   
                 chat.messages.forEach((item, numb) => {
                     delete chat.messages[numb]._id 
