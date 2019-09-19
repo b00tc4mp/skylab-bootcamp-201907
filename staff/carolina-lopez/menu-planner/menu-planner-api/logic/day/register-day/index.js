@@ -40,7 +40,7 @@ module.exports = function (userId, day, breakfast, lunch, snack, dinner) {
         if (!week) {
             week = new Week({ date: currentWeekMondayDate })
             user.weeks.push(week)
-        }
+        } 
 
         const _breakfast = await Recipe.findById(breakfast)
         if (!_breakfast) throw Error(`recipe with id ${breakfast} not found`)

@@ -62,10 +62,10 @@ describe('logic - retrieve recipe', () => {
         expect(recipe).to.exist
         expect(recipe.id).to.equal(id)
         expect(recipe.image).to.equal(image)
-        expect(recipe.items[0].ingredient.toString()).to.deep.include(items[0].ingredient)
-        expect(recipe.items[1].ingredient.toString()).to.deep.include(items[1].ingredient)
-        expect(recipe.items[2].ingredient.toString()).to.deep.include(items[2].ingredient)
-        expect(recipe.items[3].ingredient.toString()).to.deep.include(items[3].ingredient)
+        expect(recipe.items[0].ingredient._id.toString()).to.deep.include(items[0].ingredient)
+        expect(recipe.items[1].ingredient._id.toString()).to.deep.include(items[1].ingredient)
+        expect(recipe.items[2].ingredient._id.toString()).to.deep.include(items[2].ingredient)
+        expect(recipe.items[3].ingredient._id.toString()).to.deep.include(items[3].ingredient)
         expect(recipe.description).to.equal(description)
         expect(recipe.category).to.equal(category)
     })
@@ -76,7 +76,7 @@ describe('logic - retrieve recipe', () => {
             await retrieveRecipe(id)
         } catch ({ message }) {
             expect(message).to.exist
-            expect(message).to.equal(`No recipes found with id ${id}`)
+            expect(message).to.equal(`no recipes found with id ${id}`)
         }
     })
 

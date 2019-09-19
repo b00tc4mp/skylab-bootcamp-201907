@@ -15,7 +15,7 @@ module.exports = function (id) {
     return (async () => {
         const recipe = await Recipe.findOne({_id: id}).populate('items.ingredient').lean()
 
-        if (!recipe) throw Error(`No recipes found with id ${id}`)
+        if (!recipe) throw Error(`no recipes found with id ${id}`)
 
         recipe.id = recipe._id.toString()
         delete recipe._id

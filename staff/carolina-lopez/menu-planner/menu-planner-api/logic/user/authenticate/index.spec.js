@@ -30,7 +30,7 @@ describe('logic - authenticate user', () => {
     
             expect(_id).to.exist
             expect(_id).to.be.a('string')
-            expect(_id).to.equal(id)    
+            expect(_id).to.equal(id)  
     })
     
     it('should fail on empty email', () => 
