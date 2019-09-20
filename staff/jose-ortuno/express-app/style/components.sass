@@ -1,0 +1,52 @@
+%form
+    & label
+        display: none
+    & input
+        width: 80%
+        text-align: center
+        margin-bottom: 10px
+        padding: 10px
+        border: 1px solid #bdc3c7
+        border-radius: 1rem
+        cursor: pointer
+        transition: 0.5s
+        &:focus
+            border: 1px solid #e74c3c
+            border-radius: 1rem
+            box-shadow: none
+            outline: 0px
+        &::placeholder
+            color: #bdc3c7
+    & button
+        width: 80%
+        border-radius: 1rem
+        padding: 10px
+        background-color: #bdc3c7
+        color: #ecf0f1
+        transition: 0.5s
+        &:hover
+            opacity: 0.6
+
+%buttons
+    border-radius: 1rem
+    padding: 10px
+    background-color: #95a5a6
+    color: #ecf0f1
+    transition: 0.5s
+    &:hover
+        opacity: 0.6
+
+%panel
+    max-width: 400px
+    min-width: 300px
+    text-align: center
+    border: 1px solid #ecf0f1
+    border-radius: 1rem
+    padding: 25px
+    margin: 20px auto
+    &--feedback
+        background: #e74c3c
+        border-radius: 1rem
+        padding: 15px
+        color: #ecf0f1
+        margin: 10px 0

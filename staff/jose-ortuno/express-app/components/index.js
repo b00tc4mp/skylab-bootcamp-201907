@@ -7,5 +7,6 @@ module.exports = {
     Register: require('./register'),
     RegisterSuccess: require('./register-success'),
     Login: require('./login'),
-    DuckFavorites: require('./duck-favorites')
+    DuckFavorites: require('./duck-favorites'),
+    Feedback: require('./feedback')
 }
