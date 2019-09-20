@@ -1,0 +1,169 @@
+body {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  color: #D3D3D3;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  width: 100vw;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  display: flex;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border-bottom: 0.05rem solid #D3D3D3;
+  justify-content: space-between;
+}
+.header__img--logo {
+  margin-left: 10px;
+}
+.header__nav--tab {
+  display: none;
+}
+.header__button {
+  width: 70px;
+  height: 70px;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+}
+.header__inferior {
+  display: inline-flex;
+  width: 100%;
+  height: auto;
+  margin: 2px;
+  padding: 0;
+  justify-content: space-between;
+  border-bottom: 2px solid #D3D3D3;
+}
+.header__desplegable {
+  width: 49%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+.header__inferior--tab {
+  display: none;
+}
+
+.arrowDown {
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  padding: 0;
+}
+
+.container {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  display: inline-block;
+}
+.container__imagenes {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.container__principal {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+.container__texto1 {
+  position: absolute;
+  top: 20px;
+  visibility: hidden;
+}
+.container__texto2 {
+  position: absolute;
+  top: 40px;
+  visibility: hidden;
+}
+
+.container__imagenes:hover {
+  opacity: 0.5;
+  transition: opacity 500ms;
+}
+
+.container__imagenes:hover .container__texto1 {
+  visibility: visible;
+  color: black;
+}
+
+.container__imagenes:hover .container__texto2 {
+  visibility: visible;
+}
+
+h5 {
+  color: black;
+  font-size: 1.3rem;
+}
+
+.footer {
+  width: 100%;
+  height: auto;
+  margin: 1rem;
+  padding: 0;
+}
+.footer__adress {
+  width: 100%;
+  height: auto;
+  margin: 2re;
+  padding: 0;
+}
+
+h4 {
+  color: red;
+}
+
+@media (min-width: 600px) {
+  .header {
+    display: flex;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    border-bottom: 0.05rem solid #D3D3D3;
+    justify-content: space-between;
+  }
+  .header__img--logo {
+    width: 175px;
+    height: auto;
+    margin: 10px;
+    padding: 0;
+  }
+  .header__nav--tab {
+    display: block;
+  }
+  .header__menu--tab li {
+    display: inline-block;
+    margin: 10px;
+  }
+  .header__button {
+    display: none;
+  }
+
+  .container {
+    display: flex;
+  }
+  .container__imagenes {
+    width: 50%;
+    justify-content: space-around;
+  }
+}
+
+/*# sourceMappingURL=output.css.map */

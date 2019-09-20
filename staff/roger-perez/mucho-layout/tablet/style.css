@@ -1,0 +1,107 @@
+body{
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    color: #D3D3D3;
+
+}
+.principal{
+    width: 100%;
+    height: 300px;
+border: 1px solid black;
+
+}
+
+#primera{
+    margin-top: 8px;
+}
+header{
+    z-index: 9999;
+    height: 50px;
+    border-bottom: 1px solid #E5E5E5 ;
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    top:0px;
+    background-color: white;
+}
+button{
+    align-self: center;
+    margin-right: 5px;
+    max-width: 50px;
+}
+.logo{
+    max-width: 25%;
+    margin-left: 20px;
+    
+}
+.button{
+    max-width: 10%;
+}
+div{
+    border-bottom: 1px solid #E5E5E5 ;
+    display: flex;
+   justify-content: space-between;
+}
+.arrowDown{
+    width: 30px;
+    height: 30px;
+    align-self: center;
+    margin-right: 5px;
+   
+}
+h3 {
+    margin-left: 10px;
+}
+h3:hover{
+    color: black;
+}
+.imagenes,.principal {
+    display: block;
+}
+h5, .hover {
+    display: block;
+    position: absolute;
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 16px;
+    width: 300px;
+    color: black;
+    
+    
+}
+.hover{
+    margin-top: 50px;
+    width: 300px;
+    color: rgb(170, 170, 170)
+}
+
+
+.footerAdress{
+    flex-direction: column;
+    margin-left: 20px;
+}
+.footerAdress h4{
+    color: red;
+}
+
+
+
+.imagenes {
+    display:inline-block;
+    position:relative;
+  }
+  
+  .imagenes > div {
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:-1;
+    padding:10px;
+    margin:0;
+  }
+  
+  .principal:hover {
+    opacity: 0.09;
+    transition: opacity 500ms;
+  }

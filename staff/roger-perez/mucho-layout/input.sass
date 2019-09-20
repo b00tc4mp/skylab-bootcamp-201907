@@ -1,0 +1,111 @@
+=sizes($width,$height,$margin,$padding)
+    width:$width
+    height:$height
+    margin:$margin
+    padding:$padding
+
+=borders($border,$borderRadius)
+    border: $border
+    border-radius: $borderRadius
+%font
+    font-family:'Montserrat', sans-serif
+    font-weight: 400
+    color: #D3D3D3
+*
+    margin:0
+
+body
+    +sizes(100vw,0,0,0) 
+    @extend %font
+    
+.header
+    display: flex
+    +sizes(100%,auto,0,0)
+    border-bottom: 0.05rem solid #D3D3D3
+    justify-content: space-between
+    &__img--logo
+        margin-left: 10px
+
+    &__nav--tab
+        display: none
+    &__button
+        +sizes(70px,70px,0,0)
+        text-align: right
+        
+    &__inferior
+        display: inline-flex
+        +sizes(100%,auto,2px,0)
+        justify-content: space-between
+        border-bottom: 2px solid #D3D3D3
+    &__desplegable
+        +sizes(49%,auto,0,0)
+        
+    &__inferior--tab
+        display: none
+
+.arrowDown
+    +sizes(30px, 30px, 5px,0)
+.container
+    +sizes(100%,auto,0,0)
+    position: relative
+    display: inline-block
+    &__imagenes
+        +sizes(100%,100%,0,0)
+    &__principal
+        +sizes(100%,auto,0,0)
+    &__texto1
+        position: absolute
+        top: 20px
+        visibility: hidden
+    &__texto2
+        position: absolute
+        top: 40px
+        visibility: hidden
+.container__imagenes:hover 
+    opacity: 0.5
+    transition: opacity 500ms
+.container__imagenes:hover .container__texto1 
+    visibility: visible
+    color: black
+.container__imagenes:hover .container__texto2
+    visibility: visible
+
+h5
+    color: black
+    font-size: 1.3rem
+
+.footer
+    +sizes(100%,auto,1rem,0)
+    &__adress  
+        +sizes(100%,auto,2re,0)
+        
+        
+h4
+    color: red
+
+@media (min-width: 600px)
+    .header
+        display: flex
+        +sizes(100%,auto,0,0)
+        border-bottom: 0.05rem solid #D3D3D3
+        justify-content: space-between
+        
+        &__img--logo
+            +sizes(175px,auto,10px,0)
+
+        &__nav--tab
+            display: block
+        &__menu--tab li
+            display: inline-block
+            margin: 10px
+        &__button
+            display: none
+
+    .container
+        display: flex
+        
+        &__imagenes
+            width: 50%
+            justify-content: space-around
+
+
