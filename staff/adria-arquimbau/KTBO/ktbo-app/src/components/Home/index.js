@@ -13,7 +13,7 @@ import CurrentOrder from '../Current-order'
 import MyAccount from '../My-account'
 import Results from '../Results'
 import AdminPanel from '../Admin-panel'
-//import PatchNotes from './PatchNotes'
+//import PatchNotes from './Patch-notes'
 
 function Home({history}) {
 
