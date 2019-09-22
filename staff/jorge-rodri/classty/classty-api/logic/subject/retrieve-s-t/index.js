@@ -1,20 +1,21 @@
-const { models: { Subject, User } } = require('classty-data')
+const { models: {  User } } = require('classty-data')
 const { validate } = require('classty-utils')
 const retrieveT = require('../retrieve-subject-user')
 
 /**
- * Retrieves a user by its id.
+ * Retrieves a teachers with subjects.
  * 
- * @param {string} id 
+ * @param {string} id of student
  * 
  * @returns {Promise}
  */
 module.exports = function (id) {
+    validate.string(id)
     return (async () => {
         const subjects = await retrieveT(id)
-        debugger
+        
         const users = await User.find({ type: 'teacher' })
-        debugger
+        
         return subjects.map(subject => {debugger
             const teachers = subject.teachers.map( teacher => {debugger
                 let _users = users.find(user => user.id == teacher.toString())
