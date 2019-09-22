@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter, Route, Switch } from 'react-router-dom'
-import { Landing, Sign, Register, Success, DogSuccess, Confirm, Search, Profile, RegisterDog, Favorites, DogDetail, MyDogs, About, ChatLounge, Chat, Alerts, Feedback } from '../../components'
+import { Landing, Sign, Register, Success, DogSuccess, Confirm, Search, Profile, RegisterDog, Favorites, DogDetail, MyDogs, About, ChatLounge, Chat, Alerts } from '../../components'
 import logic from '../../logic'
 import SearchResults from '../SearchResults'
 
@@ -47,7 +47,7 @@ function App({ history }) {
     try {
       await logic.search(distance, breed, gender, size, age, neutered, withDogs, withCats, withChildren, searchCallback)
     } catch ({ message }) {
-      console.log('something went wrong with search', message)
+
     }
 
   }
@@ -57,7 +57,7 @@ function App({ history }) {
       await logic.upload(doge, image)
       history.push('/dogsuccess')
     } catch ({ message }) {
-      console.log('something went wrong with registry', message)
+
     }
 
   }

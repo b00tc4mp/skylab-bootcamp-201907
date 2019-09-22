@@ -22,7 +22,7 @@ export default function (distance, breed, gender, size, age, neutered, withDogs,
             }
         })
 
-    return dogs
+
 }
 
 async function search(distance, breed, gender, size, age, neutered, withDogs, withCats, withChildren, longitude, latitude) {
@@ -37,6 +37,6 @@ async function search(distance, breed, gender, size, age, neutered, withDogs, wi
         const { error } = await response.json()
         throw Error(error)
     }
-    const _response = await response.json()
-    return _response
+    return await response.json()
+    // return _response
 }
