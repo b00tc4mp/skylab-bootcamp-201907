@@ -1,5 +1,15 @@
 import validate from '../../utils/validate'
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
+
+/**
+ *
+ *
+ * @export
+ * @param {*} email
+ * @param {*} password
+ * @returns
+ */
+
 export default function (email, password) {
 
     validate.string(email, 'email')

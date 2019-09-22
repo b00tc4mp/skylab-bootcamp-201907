@@ -9,6 +9,4 @@ module.exports = (req, res) => {
     } catch ({ message }) {
         res.status(404).json({ error: message })
     }
-
 } 
-

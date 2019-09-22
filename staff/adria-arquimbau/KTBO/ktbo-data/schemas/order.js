@@ -1,9 +1,6 @@
 const { Schema, ObjectId } = require('mongoose')
 const itemSchema = require('./item')
 
-/* const mongoose = require('mongoose')
-const { Schema } = mongoose */
-
 module.exports = new Schema({
     date: {
         type: Date,
