@@ -2,13 +2,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 
-
-
 function Documents() {
-    
-
- 
-
 
     return <>
         <section>
