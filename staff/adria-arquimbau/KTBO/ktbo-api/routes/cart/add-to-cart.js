@@ -4,7 +4,6 @@ module.exports = function(req, res) {
 
     const { userId, body: { articleId, quantity } } = req
     
-    
     try {
         addToCart(userId, articleId, quantity)
             .then((cart) => res.status(201).json({ message: 'Article added to cart successfully', cart}))

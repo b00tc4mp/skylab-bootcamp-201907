@@ -3,9 +3,10 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 export default function () {
 
-const { token } = sessionStorage
-
     return (async () => {
+
+        const { token } = sessionStorage
+
         const response = await fetch(`${REACT_APP_API_URL}/user/pendingOrders`, {
             method: 'GET',
             headers: {'authorization': `bearer ${token}` }

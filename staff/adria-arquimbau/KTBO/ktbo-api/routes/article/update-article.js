@@ -8,9 +8,7 @@ module.exports = (req, res) => {
         updateArticle(articleId, body)
             .then(() => res.json({ message: `Article with id ${id} updated successfully`}))
             .catch(({ message }) => res.status(400).json({ error: message }))
-        } catch({ message }) {
-                res.status(404).json({ error: message })
-        }
+    } catch({ message }) {
+        res.status(404).json({ error: message })
+    }
 }
-
-

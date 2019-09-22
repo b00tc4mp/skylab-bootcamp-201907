@@ -5,16 +5,13 @@ import { withRouter } from 'react-router-dom'
 import logic from '../../logic'
 import Context from '../Context'
 
-
 function Navigation({ history, onSearch }) {
 
     const [admin, setAdmin] = useState()
     const {user} = useContext(Context)
 
-
     useEffect(() => {
         handleAdmin()
-       
     },[])
     
     function handleHome() {
@@ -59,49 +56,34 @@ function Navigation({ history, onSearch }) {
         }
       }
 
-    
-
-
     return <>
  
         <section className="navigation">
-
             <ul className="navigation__ul sticky">
-
                 <li className="navigation__li"><a className="navigation__li--anchor" href="#" onClick={event => { event.preventDefault() 
                     handleHome() }}>Home</a></li>
-                
                 {/* <li className="navigation__li"><a href="#" onClick={event => { event.preventDefault() 
                     handleDocuments() }}>Documents</a></li> */}
-
                 <li className="navigation__li"><Search onSearch={onSearch} /></li>
-
                 <li className="navigation__li"><a className="navigation__li--anchor" href="#" onClick={event => { event.preventDefault() 
                     handleCategories() }}>Categories</a></li>
-
                 <li className="navigation__li"><a className="navigation__li--anchor" href="#" onClick={event => { event.preventDefault() 
                     handleMyOrders() }}>My Orders</a></li>
-
                 <li className="navigation__li"><a className="navigation__li--anchor" href="#" onClick={event => { event.preventDefault() 
                     handleCurrentOrder() }}>Current Order</a></li>
-
                 {user &&<div className="dropdown">
                     <button className="dropbtn" >Hello, {user.company}<i className="fa fa-caret-down"></i></button>
-                        <div className="dropdown-content">
-                            <a className="navigation__li--anchor" href="#" onClick={event => { event.preventDefault() 
-                                    handleMyAccount() }}>My Account</a>
-                            {admin && <a className="navigation__li--anchor" href="#" onClick={event => { event.preventDefault() 
-                                    handleAdminPanel() }}>Admin Panel</a>}
-                            <a className="navigation__li--anchor" href="" onClick={handleLogout}>Logout</a>
-                        </div>
+                    <div className="dropdown-content">
+                        <a className="navigation__li--anchor" href="#" onClick={event => { event.preventDefault() 
+                                handleMyAccount() }}>My Account</a>
+                        {admin && <a className="navigation__li--anchor" href="#" onClick={event => { event.preventDefault() 
+                                handleAdminPanel() }}>Admin Panel</a>}
+                        <a className="navigation__li--anchor" href="" onClick={handleLogout}>Logout</a>
+                    </div>
                 </div>}
-
             </ul>  
-
         </section>
-        
     </>
-
 }
 
 export default withRouter(Navigation)

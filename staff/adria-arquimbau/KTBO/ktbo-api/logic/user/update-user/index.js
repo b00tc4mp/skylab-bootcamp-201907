@@ -5,42 +5,37 @@ const bcrypt = require('bcryptjs')
 /**
  * Updates a user.
  * 
- * @param {string} id
- * @param {Object} data
+ * @param {string} id - Identifier of the user.
+ * @param {Object} data - Object with the update data.
  * 
- * @returns {Promise}
  */
+
 module.exports = function (id, data) {
+    
     validate.string(id, 'id')
     
     return (async () => {
 
-        if(data.password.length == 0) throw Error ('New password required')
+        if(!data.oldPassword) throw Error(`Old password is required`)
 
         const user = await User.findById( id )
         if(!user) throw Error(`user with id ${id} does not exist`)
-        
-        if(!data.oldPassword) throw Error(`Old password is required`)
-        const match = await bcrypt.compare(data.oldPassword, user.password)
 
+        const match = await bcrypt.compare(data.oldPassword, user.password)
         if (!match) throw new Error('wrong credentials')
 
+        if(data.password.length == 0) throw Error ('New password required')
+
         if(data.password){
-
         const hash = await bcrypt.hash(data.password, 10)
-        
         data.password = hash
-
         }
 
         if(data.role){
-
             if(user.role != "admin") throw Error('Not ADMIN user to will change the role')
-
         }
-        const res = await User.findByIdAndUpdate(id, { $set: data })
-
-        if (!res) throw new Error(`user with id ${id} does not exist`)
+        
+        await User.findByIdAndUpdate(id, { $set: data })
 
     })()
 }

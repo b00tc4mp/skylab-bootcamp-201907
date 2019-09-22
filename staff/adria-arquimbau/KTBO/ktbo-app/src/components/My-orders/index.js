@@ -5,20 +5,15 @@ import logic from '../../logic'
 
 import ResultOrders from '../../components/My-orders/Result-orders'
 
-
-
-
 function MyOrders() {
 
   //const [error, setError] = useState(null)
   const [orders, setOrders] = useState(null)
 
   async function handleOrders() {
-  
     try {
       const { orders } = await logic.retrieveAllUserOrders()  
-      setOrders(orders)
-      
+      setOrders(orders)  
     } catch (error) {
       //setError(error)
       //TODO MODAL
@@ -26,23 +21,19 @@ function MyOrders() {
   }
 
   useEffect(() => {
-    
     handleOrders()
   },[])
 
-
-    return <>
+  return <>
     <main className="myOrdersMain">
-        <section className="myOrders">
-          
-          <h1 className="myOrders__title">My Orders</h1>
-
-          {orders && orders.map(element => {
-            return <ResultOrders key={element.id} element={element} />
-          })}
-        </section>
-        </main>
-    </>
+      <section className="myOrders">
+        <h1 className="myOrders__title">My Orders</h1>
+        {orders && orders.map(element => {
+          return <ResultOrders key={element.id} element={element} />
+        })}
+      </section>
+    </main>
+  </>
 }
 
 export default withRouter(MyOrders)

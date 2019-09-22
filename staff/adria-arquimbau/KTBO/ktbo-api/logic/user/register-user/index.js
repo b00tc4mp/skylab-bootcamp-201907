@@ -3,17 +3,21 @@ const { validate } = require('ktbo-utils')
 const bcrypt = require('bcryptjs')
 
 /**
- * Registers a user.
+ *  Register a new User / Company.
+ *  Required a is of an admin for formalize the register.
+ *
+ * @param {String} id - Identifier of the admin user performing the register.
+ * @param {String} company - Name of the Company
+ * @param {String} country - Country of the Company
+ * @param {String} email
+ * @param {String} password
+ * @param {String} role - Role for the functionality of the new User - enum = ('admin', 'regular').
  * 
- * @param {string} company 
- * @param {string} country 
- * @param {string} email 
- * @param {string} password
- * @param {string} role
- * 
- * @returns {Promise}
+ * @returns {Promise} - Returns a Promise with the created user.
  */
+
 module.exports = function (id, company, country, email, password, role) {
+
     validate.string(company, 'company')
     validate.string(country, 'country')
     validate.string(email, 'e-mail')
@@ -25,20 +29,16 @@ module.exports = function (id, company, country, email, password, role) {
     return (async () => {
 
         const res = await User.findOne({_id: id})
-        
         if (!res) throw new Error(`TODO`)
 
         const hash = await bcrypt.hash(password, 10)
 
             if(res.role === 'admin'){
-            
                 const result = await User.findOne({ email })
-        
                 if (result) throw new Error(`user with e-mail ${email} already exists`)
 
                 const user = await User.create({ company, country, email, password: hash, role })
                 user._id = user.id
-                
                 return user
 
             } else {

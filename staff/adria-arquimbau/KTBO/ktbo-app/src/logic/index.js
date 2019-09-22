@@ -16,10 +16,6 @@ import changeStateOrder from './change-state-order'
 import removePendingOrder from './remove-pending-order'
 import retrieveAllOrders from './retrieve-all-orders'
 
-
-
-
-
 export default {
     set userCredentials({id,token}){
         sessionStorage.token = token

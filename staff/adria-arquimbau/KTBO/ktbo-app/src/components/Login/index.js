@@ -7,8 +7,6 @@ import { withRouter } from 'react-router-dom'
 
 import Modal from '../Modal'
 
-
-
 function Login({ history }) {
     
     const [message, setMessage] = useState(null)
@@ -46,17 +44,15 @@ function Login({ history }) {
     return <>
         <main className="login">
             <section className="login__content">
-            <h2 className="login__title">Login</h2>
-            <form className="login__form" onSubmit={handleSubmit}>
-                <input className="login__form--email" placeholder="e-mail" type="email" name="email" />
-                <input className="login__form--password" placeholder="password" type="password" name="password" />
-                <button className="login__form--button">Submit</button>
-            </form>
-            {message && <Modal message={message} showModal={handleModal}/>}
+                <h2 className="login__title">Login</h2>
+                <form className="login__form" onSubmit={handleSubmit}>
+                    <input className="login__form--email" placeholder="e-mail" type="email" name="email" />
+                    <input className="login__form--password" placeholder="password" type="password" name="password" />
+                    <button className="login__form--button">Submit</button>
+                </form>
+                {message && <Modal message={message} showModal={handleModal}/>}
             </section>
-        </main>
-
-        
+        </main>  
     </>
 }
 

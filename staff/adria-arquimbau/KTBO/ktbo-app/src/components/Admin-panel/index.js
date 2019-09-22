@@ -6,65 +6,59 @@ import ResultOrders from './Result-orders'
 import ResultAllADminOrders from './Result-all-admin-orders'
 import './index.sass'
 
-
-
-
 function AdminPanel() {
 
   //const [error, setError] = useState()
   const [orders, setOrders] = useState()
   const [allOrders, setAllOrders] = useState()
 
-    
   async function handlePendingOrders() {
-    (async () => {
-      try {
 
+    (async () => {
+
+      try {
         const {orders} = await logic.retrievePendingOrders()
         setAllOrders()
-          setOrders(orders)
+        setOrders(orders)
+      } catch (error) {
+        //setError(error)
+      }
 
-        } catch (error) {
-            //setError(error)
-        }
-
-      })()
+    })()
   }
 
   async function handleAllOrders() {
+
     (async () => {
       try {
-
-        debugger
         const orders = await logic.retrieveAllOrders()
           setOrders()
           setAllOrders(orders)
-        } catch (error) {
-          //setError(error)
-        }
-      })()
+      } catch (error) {
+        //setError(error)
+      }
+    })()
   }
  
-  
-    return <>
-      <section className="adminMain">
-        <section className="adminPanel">
-          <h1>ADMIN PANEL</h1>
-          <div className="adminPanel__buttons">
-            <button onClick={handlePendingOrders}>Retrieve all PENDING orders</button>
-            <button onClick={handleAllOrders}>Retrieve all ORDERS</button>
-          </div>
-        </section>
+  return <>
 
-        <section>
-          <ul>          
-            {orders && <ResultOrders orders={orders}   retrievePendingOrders={handlePendingOrders}/>}
-            {allOrders  && <ResultAllADminOrders orders={allOrders} />}
+    <section className="adminMain">
+      <section className="adminPanel">
+        <h1>ADMIN PANEL</h1>
+        <div className="adminPanel__buttons">
+          <button onClick={handlePendingOrders}>Retrieve all PENDING orders</button>
+          <button onClick={handleAllOrders}>Retrieve all ORDERS</button>
+        </div>
+      </section>
+      <section>
+        <ul>          
+          {orders && <ResultOrders orders={orders}   retrievePendingOrders={handlePendingOrders}/>}
+          {allOrders  && <ResultAllADminOrders orders={allOrders} />}
+        </ul>
+      </section>
+    </section>
 
-          </ul>
-        </section>
-        </section>
-    </>
+  </>
 }
 
 export default withRouter(AdminPanel)

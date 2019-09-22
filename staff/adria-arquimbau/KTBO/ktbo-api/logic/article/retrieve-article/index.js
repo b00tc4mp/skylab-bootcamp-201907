@@ -2,10 +2,11 @@ const { models: { Article } } = require('ktbo-data')
 const { validate } = require('ktbo-utils')
 
 /**
+ * Retrieve all information of an article.
  * 
- * @param {*} ref 
+ * @param {String} id - Indentifier of an article.
  * 
- * @returns {Promise}
+ * @returns {Promise} - Return a Promise with all params of an article.
 */
 
 module.exports = function(id) {
@@ -20,5 +21,6 @@ module.exports = function(id) {
         article.id = id
 
         return article
+
     })()
 }

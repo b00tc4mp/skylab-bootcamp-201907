@@ -24,7 +24,7 @@ Admin can:
 + Remove pending orders
 + Update your user profile
 
-1.0 (Actual Version)
+1.0 
 + Update orders
 + Add new client account
 + Update client account
@@ -34,7 +34,7 @@ Admin can:
 
 Users can:
 
-0.5
+0.5 (Actual Version)
 + Place online orders for each product with real stock.
 + Check your current order 
 + Update your user profile.
@@ -71,7 +71,7 @@ Users can:
 ### **Components**
 ![](./images/components.png)
 
-<!-- ### **React Components**
+<!-- ### **React Components** TODO
  -->
 
 ## **Data Model**
@@ -87,3 +87,7 @@ Users can:
 ---
 
 Javascript, ReactJS, Node.js, Express, MongoDB & Mongoose.
+
+## **TODO**
+---
+React Testing
