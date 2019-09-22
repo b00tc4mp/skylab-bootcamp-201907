@@ -1,10 +1,10 @@
+import validate from '../../utils/validate'
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
-function removeToCart (articleId)  {
+export default function (articleId)  {
      
-    //TODO validate
+    validate.string(articleId, 'articleId')
 
-    
     return(async () => {
 
         const { token } = sessionStorage
@@ -14,10 +14,6 @@ function removeToCart (articleId)  {
             headers: { 'content-type': 'application/json', 'authorization': `bearer ${token}`},
             body: JSON.stringify({articleId})
         })
-        //No queremso respuesta ??
-        /* const {articles} = await response.json()
-        return articles */
 
     })()
 }
-export default removeToCart

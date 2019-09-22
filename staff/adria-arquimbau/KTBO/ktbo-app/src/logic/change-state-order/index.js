@@ -1,10 +1,10 @@
+import validate from '../../utils/validate'
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
-function changeStateOrder(orderId)  {
+export default function (orderId)  {
      
-    //TODO validate
+    validate.string(orderId, 'orderId')
 
-    
     return(async () => {
         
         const { token } = sessionStorage
@@ -17,11 +17,9 @@ function changeStateOrder(orderId)  {
         if (response.status !== 201) {
             const { error } = await response.json()
             throw Error(error)
-        }
-        else {
+        } else {
             return await response.json()
         }
 
     })()
 }
-export default changeStateOrder

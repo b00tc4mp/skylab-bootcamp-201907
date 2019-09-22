@@ -1,7 +1,10 @@
+import validate from '../../utils/validate'
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
-function searchArticles (query)  {
+export default function (query)  {
      
+    validate.string(query, 'query')
+
     return(async () => {
 
         const { token } = sessionStorage
@@ -17,4 +20,3 @@ function searchArticles (query)  {
 
     })()
 }
-export default searchArticles

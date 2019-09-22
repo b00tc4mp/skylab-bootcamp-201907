@@ -1,15 +1,6 @@
 import validate from '../../utils/validate'
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
-/**
- *
- *
- * @export 
- * @param {*} articleId
- * @param {*} quantity
- * @returns
- */
-
 export default function (articleId, quantity)  {
     
     quantity = Number(quantity)

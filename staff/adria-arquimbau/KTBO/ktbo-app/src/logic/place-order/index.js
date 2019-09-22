@@ -1,10 +1,7 @@
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
-function placeOrder()  {
+export default function ()  {
      
-    //TODO validate
-
-    
     return(async () => {
         
         const { token } = sessionStorage
@@ -16,13 +13,10 @@ function placeOrder()  {
 
         if (response.status !== 201) {
             const { error } = await response.json()
-            
             throw Error(error)
-        }
-        else {
+        } else {
             return await response.json()
         }
 
     })()
 }
-export default placeOrder
