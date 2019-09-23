@@ -22,25 +22,21 @@ export default function ({ onLogout, onRegisterDay, error }) {
         setRecipesBr(recipesBr)
 
       } catch ({ message }) {
-        console.log('fail search recipe', message)
       }
       try {
         const recipesLn = await logic.searchRecipe("lunch")
         setRecipesLn(recipesLn)
       } catch ({ message }) {
-        console.log('fail search recipe', message)
       }
       try {
         const recipesSn = await logic.searchRecipe("snack")
         setRecipesSn(recipesSn)
       } catch ({ message }) {
-        console.log('fail search recipe', message)
       }
       try {
         const recipesDn = await logic.searchRecipe("dinner")
         setRecipesDn(recipesDn)
       } catch ({ message }) {
-        console.log('fail search recipe', message)
       }
     })()
   }, [])
@@ -50,10 +46,6 @@ export default function ({ onLogout, onRegisterDay, error }) {
     const { target: { value: day } } = event
 
     setSelectedDay(day)
-
-    /*}  catch ({ message }) {
-      console.log('fail register day', message)
-    }  */
 
   }
 
@@ -94,7 +86,6 @@ export default function ({ onLogout, onRegisterDay, error }) {
         <button class="dropbtn">MenuPlanner
       <i class="fa fa-caret-down"></i>
         </button>
-        {/* <img src='mpbco.png'></img> */}
         <div class="dropdown-content">
           <Link className="nav__a dropdown__button a" href="#" to="/home">Home</Link>
           <Link className="nav__a dropdown__button a" href="#" to="/current-week">Current Week</Link>
