@@ -1,5 +1,4 @@
 const { models: { User, Post } } = require('vltra-data')
-// const { validate} = require('vltra-utils')
 
 /**
  * retrieves all posts from db

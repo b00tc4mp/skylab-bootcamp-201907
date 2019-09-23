@@ -116,7 +116,7 @@ describe('logic - retrieve user posts', () => {
 
         try{
             const postComments = await retrievePostsComments(wrongPostId)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`post with id ${wrongPostId} does not exist`)
@@ -127,7 +127,7 @@ describe('logic - retrieve user posts', () => {
         
         try{
             const comment = await retrievePostsComments('')
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`postId with value  is not a valid ObjectId`)
@@ -138,7 +138,7 @@ describe('logic - retrieve user posts', () => {
         
         try{
             const comment = await retrievePostsComments(undefined)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`postId with value undefined is not a valid ObjectId`)
@@ -149,7 +149,7 @@ describe('logic - retrieve user posts', () => {
         
         try{
             const comment = await retrievePostsComments(123)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`postId with value 123 is not a valid ObjectId`)

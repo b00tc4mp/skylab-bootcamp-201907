@@ -22,9 +22,6 @@ module.exports = function(userId, postId) {
         if (post.author.toString() !== userId) throw Error(`postId ${postId} does not belong to userId ${userId}`)
 
         await Post.deleteOne({ _id : postId })
-        //const postToDelete = await Post.deleteOne({ _id : postId })
-
-        //if (!postToDelete.deletedCount) throw Error(`post with id ${postId} does not exist`)
 
     })()
 }

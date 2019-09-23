@@ -15,11 +15,6 @@ module.exports = function(commentId, postId) { //(commentId, postId, email, pass
     validate.objectId(postId, 'postId')
     
     return( async () => {
-        //Problema: el punto aquí es que un usuario no pueda borrar comentarios de otro usuario.
-        //Hipotética solución: habría que buscar el comentario por su id, extraer el commentAuthor de allí, buscarlo, ¿verificar email y password?, y recién allí hacer un splice de ese commentId del array post.comments y, además, eliminar el comentario en DB.
-
-        //Por ahora, solo lo voy a implementar para que elimine el commentId del array post.comments, como hacíamos con las tarjetas.
-
         const post = await Post.findById(postId)
 
         if (!post) throw Error(`post with id ${postId} does not exists`)

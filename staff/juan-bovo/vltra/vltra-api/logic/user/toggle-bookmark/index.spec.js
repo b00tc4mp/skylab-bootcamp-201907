@@ -60,7 +60,7 @@ describe('logic - toggle bookmark', () => {
         const wrongUserId = "5d73b6051b33294ec553d343"
         try{
             const comment = await toggleBookmark(wrongUserId, postId)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`user with id ${wrongUserId} not found`)
@@ -71,7 +71,7 @@ describe('logic - toggle bookmark', () => {
         const wrongPostId = "5d73952803f75b35e0b8d85e"
         try{
             const comment = await toggleBookmark(userId, wrongPostId)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`post with id ${wrongPostId} not found`)
@@ -82,7 +82,7 @@ describe('logic - toggle bookmark', () => {
         
         try{
             await toggleBookmark('', postId)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`userId with value  is not a valid ObjectId`)
@@ -92,7 +92,7 @@ describe('logic - toggle bookmark', () => {
         
         try{
             await toggleBookmark(undefined, postId)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`userId with value undefined is not a valid ObjectId`)
@@ -102,7 +102,7 @@ describe('logic - toggle bookmark', () => {
         
         try{
             await toggleBookmark(123, postId)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`userId with value 123 is not a valid ObjectId`)
@@ -113,7 +113,7 @@ describe('logic - toggle bookmark', () => {
         
         try{
             await toggleBookmark(userId, '')
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`postId with value  is not a valid ObjectId`)
@@ -123,7 +123,7 @@ describe('logic - toggle bookmark', () => {
         
         try{
             await toggleBookmark(userId, undefined)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`postId with value undefined is not a valid ObjectId`)
@@ -133,7 +133,7 @@ describe('logic - toggle bookmark', () => {
         
         try{
             await toggleBookmark(userId, 123)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`postId with value 123 is not a valid ObjectId`)

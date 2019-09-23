@@ -95,23 +95,23 @@ describe('logic - retrieve user posts', () => {
         const commentToDelete = await deleteComment(commentId2, postId)
         expect(commentToDelete).not.to.exist
 
-        const post = await Post.findById(postId)//findOne({ _id : postId }, { _id: 0, __v: 0 })
+        const post = await Post.findById(postId)
         expect(post.comments.length).to.be.equal(2)
         expect(post.comments[0].id).to.be.equal(commentId1)
         expect(post.comments[1].id).to.be.equal(commentId3)
         expect(post.comments[2]).not.to.exist
         
-        const commentDeleted = await Comment.findById(commentId2)//.findOne({ _id : commentId2 }, { _id: 0, __v: 0 })
+        const commentDeleted = await Comment.findById(commentId2)
         
         expect(commentDeleted).not.to.exist        
     })
 
     it('should fail unexistant postId', async () => {
-        const wrongPostId = '5d72794a24912c10b5c089e1' //--> 5d72794a24914c10b5c089e1
+        const wrongPostId = '5d72794a24912c10b5c089e1'
         
         try{
             const comment = await deleteComment(commentId1, wrongPostId)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`post with id ${wrongPostId} does not exists`)
@@ -119,11 +119,11 @@ describe('logic - retrieve user posts', () => {
     })
 
     it('should fail on wrong wrongCommentId', async () => {
-        const wrongCommentId = '5d72794a24912c10b5c089e1' //--> 5d72794a24914c10b5c089e1
+        const wrongCommentId = '5d72794a24912c10b5c089e1'
         
         try{
             const comment = await deleteComment(wrongCommentId, postId)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`commentId with value ${wrongCommentId} not found`)
@@ -134,7 +134,7 @@ describe('logic - retrieve user posts', () => {
         
         try{
             const comment = await deleteComment(commentId1, '')
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`postId with value  is not a valid ObjectId`)
@@ -145,7 +145,7 @@ describe('logic - retrieve user posts', () => {
         
         try{
             const comment = await deleteComment(commentId1, undefined)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`postId with value undefined is not a valid ObjectId`)
@@ -156,7 +156,7 @@ describe('logic - retrieve user posts', () => {
         
         try{
             const comment = await deleteComment(commentId1, 123456)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`postId with value 123456 is not a valid ObjectId`)
@@ -167,7 +167,7 @@ describe('logic - retrieve user posts', () => {
         
         try{
             const comment = await deleteComment('', postId)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`commentId with value  is not a valid ObjectId`)
@@ -178,7 +178,7 @@ describe('logic - retrieve user posts', () => {
         
         try{
             const comment = await deleteComment(undefined, postId)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`commentId with value undefined is not a valid ObjectId`)
@@ -189,7 +189,7 @@ describe('logic - retrieve user posts', () => {
         
         try{
             const comment = await deleteComment(123456, postId)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`commentId with value 123456 is not a valid ObjectId`)

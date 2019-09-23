@@ -66,7 +66,7 @@ describe('logic - add comment to a post', () => {
         
         try{
             const comment = await addComment(postId, commentAuthor, largerBody)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal('comments larger than 500 chars are not allowed')
@@ -78,7 +78,7 @@ describe('logic - add comment to a post', () => {
         
         try{
             const comment = await addComment(wrongPostId, commentAuthor, commentBody)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`post with id ${wrongPostId} does not exists`)
@@ -89,7 +89,7 @@ describe('logic - add comment to a post', () => {
         
         try{
             const comment = await addComment(postId, '', commentBody)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`commentAuthor with value  is not a valid ObjectId`)
@@ -100,7 +100,7 @@ describe('logic - add comment to a post', () => {
         
         try{
             const comment = await addComment(postId, undefined, commentBody)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`commentAuthor with value undefined is not a valid ObjectId`)
@@ -111,7 +111,7 @@ describe('logic - add comment to a post', () => {
         
         try{
             const comment = await addComment(postId, 123, commentBody)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`commentAuthor with value 123 is not a valid ObjectId`)
@@ -122,7 +122,7 @@ describe('logic - add comment to a post', () => {
         
         try{
             const comment = await addComment(postId, commentAuthor, '')
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`commentBody is empty or blank`)
@@ -133,7 +133,7 @@ describe('logic - add comment to a post', () => {
         
         try{
             const comment = await addComment(postId, commentAuthor, undefined)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`commentBody with value undefined is not a string`)
@@ -144,7 +144,7 @@ describe('logic - add comment to a post', () => {
         
         try{
             const comment = await addComment(postId, commentAuthor, 123)
-            throw new Error('should not reach this point')
+            //throw new Error('should not reach this point')
         }catch(error){
             expect(error).to.exist
             expect(error.message).to.equal(`commentBody with value 123 is not a string`)

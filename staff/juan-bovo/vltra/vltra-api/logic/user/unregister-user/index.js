@@ -28,6 +28,5 @@ module.exports = function(id, email, password) {
         if(!match) throw new Error ('wrong credentials')
 
         const result = await User.deleteOne({ _id: id, email })
-        //if (!result.deletedCount) throw Error('wrong credentials')
     })()        
 }

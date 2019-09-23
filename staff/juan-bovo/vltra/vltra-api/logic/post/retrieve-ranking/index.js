@@ -1,5 +1,4 @@
 const { models: { User, Post } } = require('vltra-data')
-// const { validate} = require('vltra-utils')
 
 /**
  * retrieves ranking posts from db

@@ -1,18 +1,24 @@
 # Vltra
 
+A project by:
+- **Juan Pablo Bovo**
+
+Developed at:
+- **Skylab Coders Academy**
+
 ## Introduction
 
-Vltra is an online short-stories magazine which aims to encourage writers to write and share their stories. It focuses on short stories, so each post can't be longer than 2000 chars.
+*Vltra* is an online short-stories magazine which aims to encourage writers to write and share their stories. It focuses on short stories, so each post can't be longer than 2000 chars.
 
-Anyone is able to read stories on Vltra, but only registered users can post, vote and bookmark posts.
+Anyone is able to read stories on *Vltra*, but only registered users can post, vote and bookmark posts.
 
-Stories are sorted from new to old by default, so users can see the newest stories every time they enter Vltra. Besides, there's a easy-access ranking with stories sorted by average ranking.
+Stories are sorted from new to old by default, so users can see the newest stories every time they enter *Vltra*. Besides, there's a easy-access ranking with stories sorted by average ranking.
 
 ![A short story](https://media.giphy.com/media/6PH7zMHkS7lu0/giphy.gif)
 
 ## Planning
-You can see Vltra's project status here:
-[Vltra's Trello board](https://trello.com/b/EJmGr6bH/vltra-juampi)
+You can see *Vltra*'s project status here:
+[Vltra's Trello board](https://trello.com/b/EJmGr6bH/vltra)
 
 ## Functional description
 Unregistered users can:
@@ -47,8 +53,20 @@ At this point, Vltra help writers to easily share their short stories. Further d
 
 
 ### Code Coverage
-#### api
-![Code coverage api](images/code-coverage-api.png)
+![Code coverage](images/code-coverage.png)
 
 ### Technologies
 Javascript, ReactJS, Node.js, Express, MongoDB & Mongoose.
+
+### To-do:
+Due some schedule issues, some *Vltra*'s initial features wasn't fully implemented on app side:
+- Comments (post & delete).
+- Posts deletion.
+- User deletion.
+- User profile editing.
+
+Besides, some new features are scheduled for future releases:
+- Follow users.
+- Notifications.
+- Search posts.
+- Add tags on posts.
