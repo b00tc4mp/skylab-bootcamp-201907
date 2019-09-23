@@ -28,7 +28,7 @@ export default withRouter(function ({ history, onLogout }) {
             <div className="about">
                 <Link className="body-profile__link" to="/about">About WannaDOG</Link>
             </div>
-            <button class="logout button" onClick={onLogout}>Logout</button>
+            <button className="logout button" onClick={onLogout}>Logout</button>
         </section>
     </>
 })

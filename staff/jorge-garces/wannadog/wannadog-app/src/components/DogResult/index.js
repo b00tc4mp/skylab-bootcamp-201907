@@ -11,6 +11,3 @@ export default withRouter(function DogResult({ dog }) {
         <h3 className="results__name">{name}<span>{gender === 'Male' ? <i class="fas fa-mars"></i> : <i class="fas fa-venus"></i>}</span></h3>
     </>
 })
-
-{/* <li className="results__li">
-</li> */}

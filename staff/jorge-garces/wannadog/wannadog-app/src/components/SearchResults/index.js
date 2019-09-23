@@ -14,7 +14,7 @@ export default withRouter(function ({ dogs, history }) {
                 type="text" placeholder="Find your dog ..."></input>
         </section>
         <section className="noresults">
-            {!dogs.length && <> <i class="noresults__sign fas fa-exclamation-triangle"></i>
+            {!dogs.length && <> <i className="noresults__sign fas fa-exclamation-triangle"></i>
                 <h3 className="noresults__text">No dogs found</h3></>}
         </section>
 
