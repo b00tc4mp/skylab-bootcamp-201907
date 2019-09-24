@@ -6,10 +6,12 @@ import moment from 'moment'
 
 function Space({ history, match }) {
     
+
     const { params: { spaceId } } = match
     const [ view, setView ] = useState(false)
     const { mySpace, setMySpace, setThisDay, setCurrentDate } = useContext(Context)
     
+
     useEffect(() => {
         (async () =>{
             
@@ -23,6 +25,7 @@ function Space({ history, match }) {
             })()
     })
 
+
     function handleMonth(event) {
         event.preventDefault()
 
@@ -30,12 +33,14 @@ function Space({ history, match }) {
         history.push(`/${spaceId}/month`)
     }
 
+
     function handleDay(event) {
         event.preventDefault()
 
         setThisDay(moment())
         history.push(`/${spaceId}/day`)
     }
+
     
     function showCousers(event) {
         event.preventDefault()
@@ -43,11 +48,13 @@ function Space({ history, match }) {
         setView(true)
     }
 
+
     function handleClose(event) {
         event.preventDefault()
 
         setView(false)
     }
+
 
     function handleAdd(event) {
         event.preventDefault()
@@ -55,9 +62,10 @@ function Space({ history, match }) {
         history.push(`/${spaceId}/couser-register`)
     }
 
+
     return <>
 
-    { mySpace && <> 
+    { mySpace && 
         <div className="module">
            
             <h1 className="module__title">{mySpace.title}</h1>
@@ -88,7 +96,8 @@ function Space({ history, match }) {
                 <a href="#" className="module__back-link" onClick={() => { history.push('/home') }}><i className="fas fa-arrow-left"></i> Back to your spaces</a>
             </div>
         </div>
-    </>}
+    }
+
     {!mySpace && <p>Space not found</p>}
 
     </>

@@ -9,14 +9,11 @@ function RegisterSuccess({ history }) {
         history.push(`/sign-in`)
     }
 
+    return <section className="register-success"> 
 
-    return <>
-
-        <section className="register-success">
-            <p>User successfully registered! You can now proceed to <a className="register-success__link" href="#" onClick={handleGoToLogin}>Sign in</a></p>
-        </section>
-
-    </>
+        <p>User successfully registered! You can now proceed to <a className="register-success__link" href="#" onClick={handleGoToLogin}>Sign in</a></p>
+    
+    </section>
 }
 
 export default withRouter(RegisterSuccess)

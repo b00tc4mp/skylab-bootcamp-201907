@@ -8,9 +8,11 @@ import logic from '../../logic/'
 
 function Week({ history, match }) {
 
+
     const { params: { spaceId } } = match
     const { currentDate, setCurrentDate, setThisDay } = useContext(Context)
     const [ weekTasks, setWeekTasks ] = useState([])
+
 
     useEffect(() => {
         (async () =>{
@@ -26,17 +28,20 @@ function Week({ history, match }) {
         })()
     },[spaceId, currentDate])
 
+
     function handleMonth(event) {
         event.preventDefault()
 
         history.push(`/${spaceId}/month`)
     }
 
+
     function handleWeek(event) {
         event.preventDefault()
 
         setCurrentDate(moment())
     }
+
 
     function handleDay(event) {
         event.preventDefault()
@@ -45,6 +50,7 @@ function Week({ history, match }) {
         history.push(`/${spaceId}/day`)
     }
 
+
     function handleGoToDay(day) {
         
         day = moment(day).add(1, 'days')
@@ -52,17 +58,20 @@ function Week({ history, match }) {
         history.push(`/${spaceId}/day`)
     }
 
+
     function handleGoToNextWeek(event) {
         event.preventDefault()
 
         setCurrentDate(moment(currentDate).add(1, 'weeks'))
     }
 
+
     function handleGoToPreviousWeek(event) {
         event.preventDefault()
           
         setCurrentDate(moment(currentDate).subtract(1, 'weeks')) 
     }
+
 
     function handleDayTasks(date){
         return weekTasks.map(task => {
@@ -76,7 +85,6 @@ function Week({ history, match }) {
     
     
     const header = () => {
-
         return (
         <>
             <div className="week__header">
@@ -86,6 +94,7 @@ function Week({ history, match }) {
         </>
         )
     }
+
 
     const week = () => {
         const days = []
@@ -100,6 +109,7 @@ function Week({ history, match }) {
         }
         return <div className="weekly__header">{days}</div>
     }
+
 
     const days = () => {
         const startDate = moment(currentDate).startOf('week')
@@ -124,10 +134,7 @@ function Week({ history, match }) {
     }
 
 
-
-    return <>
-
-        <div className="week">
+    return <div className="week">
 
             <div>{header()}</div>
 
@@ -138,7 +145,7 @@ function Week({ history, match }) {
                   <div className="month__toggle-option" onClick={handleMonth}>month</div>
                 </div>
                 <form>
-                  <input className="week__search-input" type="text" placeholder="Search"/> <i className="fa fa-search"></i>
+                  <input className="week__search-input" type="text" placeholder="Search [in progress]"/> <i className="fa fa-search"></i>
                 </form>
             </div>
 
@@ -152,9 +159,7 @@ function Week({ history, match }) {
 
             </div>
 
-        </div>
-
-    </>
+    </div>
 }
 
 export default withRouter(Week)

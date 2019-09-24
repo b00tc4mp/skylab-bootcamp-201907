@@ -1,103 +1,69 @@
-@media (max-width: 840px) 
-    .chores
-        margin: 0
-        &__activity
-            display: flex
-            flex-direction: column
-            width: 100%
-            margin: .1em 0
-        &__space
-            text-align: left
-            padding: 1em
-            border: 1px solid lightgrey
-        &__space:hover
-            border: 2px solid deeppink
-        &__space-title
-            font-weight: bold
-        &__space-type
-            color: grey
-            margin: .5em 0
-        &__space-address
-            color: darkgrey
-            font-size: 13px
-        &__maintenance
-            text-align: left
-            margin: 1em 0
-        &__list-title
-            font-size: rem
-        &__list
-            list-style: none
-        &__item
-            display: flex
-            justify-content: space-between
-            width: 99%
-        &__add
-            margin-top: 1em
-            list-style: none
-            display: flex
-            flex-direction: row
-            align-items: center
-        &__input
-            padding: .1em
-            font-size: .75rem
-            width: 90%
+.chores
+    margin: 0
+    &__activity
+        display: flex
+        flex-direction: column
+        width: 100%
+        margin: .1em 0
+    &__space
+        text-align: left
+        padding: 1em
+        border: 1px solid lightgrey
+    &__space:hover
+        border: 2px solid $primary-hover-color
+    &__space-title
+        font-weight: bold
+    &__space-type
+        color: grey
+        margin: .5em 0
+    &__space-address
+        color: darkgrey
+        font-size: 13px
+    &__maintenance
+        text-align: left
+        margin: 1em 0
+    &__list-title
+        font-size: .6rem
+    &__list
+        list-style: none
+    &__item
+        display: flex
+        justify-content: space-between
+        width: 99%
+    &__add
+        margin-top: 1em
+        list-style: none
+        display: flex
+        flex-direction: row
+        align-items: center
+    &__input
+        padding: .1em
+        font-size: .75rem
+        width: 90%
+
+.fa-plus
+    background-color: white
+    margin: 0 .5em 0 0 
+    border: none
+
+.fa-trash-alt
+    background-color: white
+    color: $secondary-button-color
+    border: none
+    
+.fa-trash-alt:hover
+    color: $secondary-hover-color
+
+.fa-plus:hover, .fa-search:hover
+    color: $primary-hover-color
 
 @media (min-width: 840px) 
     .chores
-        margin: 0
         &__activity
-            display: flex
-            flex-direction: column
-            min-width: 20%
+            width: 20%
             margin: 1em 2em 0 0
-        &__space
-            text-align: left
-            padding: 1em
-            border: 1px solid lightgrey
-        &__space:hover
-            border: 2px solid deeppink
-        &__space-title
-            font-weight: bold
-        &__space-type
-            color: grey
-            margin: .5em 0
-        &__space-address
-            color: darkgrey
-            font-size: 13px
         &__maintenance, &__tags
             text-align: left
             margin: 1em 0 2em 0
         &__list-title
             font-size: 2rem
-        &__list
-            list-style: none
-        &__item
-            display: flex
-            justify-content: space-between
-            width: 99%
-        &__add
-            margin-top: 1em
-            list-style: none
-            display: flex
-            flex-direction: row
-            align-items: center
-        &__input
-            padding: .1em
-            font-size: .75rem
-            width: 90%
-
-    .fa-plus
-        background-color: white
-        margin: 0 .5em 0 0 
-        border: none
-
-    .fa-trash-alt
-        background-color: white
-        color: lightgrey
-        border: none
-        
-    .fa-trash-alt:hover
-        color: grey
-
-    .fa-plus:hover, .fa-search:hover
-        color: deeppink

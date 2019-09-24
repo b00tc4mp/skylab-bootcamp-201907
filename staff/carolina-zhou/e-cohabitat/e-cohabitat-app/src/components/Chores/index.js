@@ -20,8 +20,8 @@ function Chores({ history, spaceId }) {
             }
             })()
     },[spaceId, mySpace])
-
     
+
     function handleAdd(event) {
         event.preventDefault()
 
@@ -29,6 +29,7 @@ function Chores({ history, spaceId }) {
 
         addChores(chore)
     }
+
 
     async function addChores(chore) {
         chores.push(chore)
@@ -42,6 +43,7 @@ function Chores({ history, spaceId }) {
             console.log(error.message)
         }
     }
+
 
     function handleDelete(chore) {
         deleteChores(chore)
@@ -61,14 +63,18 @@ function Chores({ history, spaceId }) {
         }
     }
 
+
     function handleGoToSpace(event) {
         event.preventDefault()
 
         history.push(`/spaces/${spaceId}`)
     }
 
+
     return <>
+
         <div className="chores__activity">
+
             <div className="chores__space" onClick={handleGoToSpace}>
             {mySpace && <>
                 <p className="chores__space-title">{mySpace.title}</p>
@@ -76,17 +82,16 @@ function Chores({ history, spaceId }) {
                 <p className="chores__space-address">{mySpace.address}</p>
             </>}
             </div>
+
             <div className="chores__maintenance">
-                <p className="chores__list-title"><strong>Maintenance</strong></p>
+                <p className="chores__list-title"><strong>Maintenance</strong> [work in progress]</p>
                 {mySpace &&
                 <ul className="chores__list">
                     {mySpace.maintenance.map(chore => {
-                    return <>    
-                        <li className="chores__item">
-                            <div><i className="fas fa-list-ul"></i> {chore}</div>
-                            <button className="far fa-trash-alt" onClick={() => handleDelete(chore)}></button>
-                        </li>
-                    </>
+                    return <li className="chores__item">
+                        <div><i className="fas fa-list-ul"></i> {chore}</div>
+                        <button className="far fa-trash-alt" onClick={() => handleDelete(chore)}></button>
+                    </li>
                     }
                     )}
                 </ul>
@@ -104,7 +109,9 @@ function Chores({ history, spaceId }) {
                     </ul>
                 </form> 
             </div>
+
         </div>
+
     </>
 }
 

@@ -27,7 +27,6 @@ function SpaceRegister({ history }) {
     }
 
     async function handleRegister(title, type, picture, address, passcode, id) {
-
         try {
             await logic.registerSpace(title, type, picture, address, passcode, id)
 
@@ -37,52 +36,53 @@ function SpaceRegister({ history }) {
         }
     }
 
-    return <>
+    return <section className="space-register">
 
-            <section className="space-register">
-                <h1 className="space-register__title">Add a space to cohabit!</h1>
-                <form onSubmit={ handleSubmit }>
-                    <ul>
-                        <li className="space-register__form-item">
-                            <select name="type" form="space type" id="typeSelector" className="space-register__typeSelector" onChange={e => {
-                                setType(e.target.value)
-                            }}>
-                                <option selected disabled>What type of space is it?</option>
-                                <option value="kitchen">kitchen</option>
-                                <option value="bathroom">bathroom</option>
-                                <option value="living room">living room</option>
-                                <option value="coworking">coworking</option>
-                                <option value="garden">garden</option>
-                                <option value="rooftop">rooftop</option>
-                                <option value="other">other</option>
-                            </select>
-                            {type === 'other' && <input type="text" name="type" className="space-register__otherOption" id="otherInputOption" placeholder="tell us what type of space it is"/>}
-                        </li>                        
-                        <li className="space-register__form-item">
-                            <label htmlFor="titleInput"><input className="space-register__form-input" id="titleInput" type="text" name="title" placeholder="name your space!"/></label>
-                        </li>
-                        <li className="space-register__form-item">
-                            <label htmlFor="addressInput"><input className="space-register__form-input" id="addressInput" type="address" name="address" placeholder="address"/></label>
-                        </li>
-                        <li className="space-register__form-item">
-                            <label htmlFor="passcodeInput"><input className="space-register__form-input" id="passcodeInput" type="password" name="passcode" placeholder="passcode"/></label>
-                        </li>
-                        <li className="space-register__form-item">
-                            <label htmlFor="repasscodeInput"><input className="space-register__form-input" id="repasscodeInput" type="password" name="repasscode" placeholder="repeat passcode"/></label>
-                        </li>
-                        {error &&
-                        <li className="space-register__form-item">
-                            <Feedback message={error}/>
-                        </li> }
-                        <li className="space-register__form-item">
-                            <button className="space-register__form-button">Register space</button>
-                        </li>
-                    </ul>
-                </form>
-                <a href="#" className="space-register__back-link"><i className="fas fa-arrow-left" onClick={() => { history.push('/home') }}></i> Go back</a>
-            </section>
+            <h1 className="space-register__title">Add a space to cohabit!</h1>
 
-    </>
+            <form onSubmit={ handleSubmit }>
+                <ul>
+                    <li className="space-register__form-item">
+                        <select name="type" form="space type" id="typeSelector" className="space-register__typeSelector" onChange={e => {
+                            setType(e.target.value)
+                        }}>
+                            <option selected disabled>What type of space is it?</option>
+                            <option value="kitchen">kitchen</option>
+                            <option value="bathroom">bathroom</option>
+                            <option value="living room">living room</option>
+                            <option value="coworking">coworking</option>
+                            <option value="garden">garden</option>
+                            <option value="rooftop">rooftop</option>
+                            <option value="other">other</option>
+                        </select>
+                        {type === 'other' && <input type="text" name="type" className="space-register__otherOption" id="otherInputOption" placeholder="tell us what type of space it is"/>}
+                    </li>                        
+                    <li className="space-register__form-item">
+                        <label htmlFor="titleInput"><input className="space-register__form-input" id="titleInput" type="text" name="title" placeholder="name your space!"/></label>
+                    </li>
+                    <li className="space-register__form-item">
+                        <label htmlFor="addressInput"><input className="space-register__form-input" id="addressInput" type="address" name="address" placeholder="address"/></label>
+                    </li>
+                    <li className="space-register__form-item">
+                        <label htmlFor="passcodeInput"><input className="space-register__form-input" id="passcodeInput" type="password" name="passcode" placeholder="passcode"/></label>
+                    </li>
+                    <li className="space-register__form-item">
+                        <label htmlFor="repasscodeInput"><input className="space-register__form-input" id="repasscodeInput" type="password" name="repasscode" placeholder="repeat passcode"/></label>
+                    </li>
+                    {error &&
+                    <li className="space-register__form-item">
+                        <Feedback message={error}/>
+                    </li> }
+                    <li className="space-register__form-item">
+                        <button className="space-register__form-button">Register space</button>
+                    </li>
+                </ul>
+            </form>
+            
+            <a href="#" className="space-register__back-link"><i className="fas fa-arrow-left" onClick={() => { history.push('/home') }}></i> Go back</a>
+        
+    </section>
+
 }
 
 export default withRouter(SpaceRegister)

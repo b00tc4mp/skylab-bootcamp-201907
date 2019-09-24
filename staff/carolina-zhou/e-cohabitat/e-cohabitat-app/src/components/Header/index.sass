@@ -1,23 +1,22 @@
-@media (max-width: 840px) 
-    .hidden
-        display: none
+.hidden
+    display: none
 
-    .mobile-menu
-        padding: 2em 2em 0 2em
-        &__list
-            display: flex
-            justify-content: space-between
-            list-style: none
-        &__logo
-            width: 30%
-        &__logout-button
-            background-color: white
-            border: none
-            padding: none
-            color: grey
-            font-size: 10px
-        &__logout-button:hover
-            color: deeppink
+.mobile-menu
+    padding: 2em 2em 0 2em
+    &__list
+        display: flex
+        justify-content: space-between
+        list-style: none
+    &__logo
+        width: 30%
+    &__logout-button
+        background-color: white
+        border: none
+        padding: none
+        color: $terciary-text-color
+        font-size: 10px
+    &__logout-button:hover
+        color: $primary-hover-color
 
 
 @media (min-width: 840px) 
@@ -52,10 +51,10 @@
             color: black
         &__secondary-link
             text-decoration: none
-            color: grey
+            color: $link-text-color
         &__logout-button
             background-color: white
             border: none
-            color: grey
+            color: $terciary-text-color
         &__main-link:hover, &__secondary-link:hover, &__logout-button:hover
-            color: deeppink
+            color: $primary-hover-color

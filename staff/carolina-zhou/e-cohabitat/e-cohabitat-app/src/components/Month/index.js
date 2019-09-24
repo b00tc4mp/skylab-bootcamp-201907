@@ -8,9 +8,11 @@ import logic from '../../logic/'
 
 function Month({ history, match }) {
 
+
     const { params: { spaceId } } = match
     const { setThisDay, currentDate, setCurrentDate } = useContext(Context)
     const [ monthTasks, setMonthTasks ] = useState([])
+
 
     useEffect(() => {
         (async () =>{
@@ -26,11 +28,13 @@ function Month({ history, match }) {
         })()
     },[spaceId, currentDate])
 
+
     function handleMonth(event) {
         event.preventDefault()
 
         setCurrentDate(moment())
     }
+
 
     function handleWeek(event) {
         event.preventDefault()
@@ -39,6 +43,7 @@ function Month({ history, match }) {
         history.push(`/${spaceId}/week`)
     }
 
+
     function handleDay(event) {
         event.preventDefault()
 
@@ -46,11 +51,13 @@ function Month({ history, match }) {
         history.push(`/${spaceId}/day`)
     }
 
+
     function handleGoToDay(day) {
         
         setThisDay(moment(day))
         history.push(`/${spaceId}/day`)
     }
+
 
     function handleGoToNextMonth(event) {
         event.preventDefault()
@@ -58,12 +65,14 @@ function Month({ history, match }) {
         setCurrentDate(moment(currentDate).add(1, 'months'))
     }
 
+
     function handleGoToPreviousMonth(event) {
         event.preventDefault()
           
         setCurrentDate(moment(currentDate).subtract(1, 'months')) 
     }
 
+    
     function handleDayTasks(dataDate){
         return monthTasks.map(task => {
             let taskDay = moment(task.date).format('YYYY MMMM D')
@@ -74,8 +83,8 @@ function Month({ history, match }) {
         })
     }
     
-    const header = () => {
 
+    const header = () => {
         return (
         <>
             <div className="month__header">
@@ -86,8 +95,8 @@ function Month({ history, match }) {
         )
     }
 
-    const week = () => {
 
+    const week = () => {
         const days = []
         const startDate = moment(currentDate).startOf('week')
         
@@ -101,8 +110,8 @@ function Month({ history, match }) {
         return <div className="calendar__header">{days}</div>
     }
 
-    const days = () => {
 
+    const days = () => {
         const monthStart = moment(currentDate).startOf('month'),
         monthEnd = moment(currentDate).endOf('month'),
         endDate = moment(monthEnd).endOf('week'),
@@ -164,7 +173,7 @@ function Month({ history, match }) {
                             ? "calendar__disabled"
                             : moment().isSame(dataDate, 'day')
                             ? "calendar__selected"
-                            : "calendar__day day"}`} >
+                            : "calendar__day"}`} >
                        {formattedDate}
                        {monthTasks && <div className="calendar__tasks">{handleDayTasks(dataDate)}</div>}
                     </div>
@@ -177,6 +186,7 @@ function Month({ history, match }) {
 
         return <div>{rows}</div>
     }
+
 
     return <>
     
@@ -191,18 +201,16 @@ function Month({ history, match }) {
                   <div className="month__toggle-option month__toggle-option--selected" onClick={handleMonth}>month</div>
                 </div>
                 <form>
-                  <input className="month__search-input" type="text" placeholder="Search"/> <i className="fa fa-search"></i>
+                  <input className="month__search-input" type="text" placeholder="Search [in progress]"/> <i className="fa fa-search"></i>
                 </form>
             </div>
 
             <div className="month__act">
                 <Chores spaceId={match.params.spaceId}/>
-                
                 <div className="calendar">
                     <div>{week()}</div>
                     <div>{days()}</div>
                 </div>                 
-
             </div>
 
         </div> 
