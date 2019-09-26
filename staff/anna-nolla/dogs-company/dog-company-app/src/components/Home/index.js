@@ -11,7 +11,7 @@ function Home() {
     const { setUser, user, setView, userId } = useContext(MyContext)
     const [notification, setNotification] = useState(false)
     const [addNotification, setAddNotification] = useState(false)
-    const [error, setError] = useState()
+    const [error, setError] = useState(undefined)
     
     useEffect(()=> {
         async function retrieveUser(){
@@ -20,8 +20,7 @@ function Home() {
                 setUser(user)
                 user.notification[0] === undefined ? setNotification(false) : setNotification(true)
                 setView('home')
-            }catch({ message }){
-                    setError(message)
+            }catch(error){ 
             }
         }
         retrieveUser()
@@ -35,7 +34,7 @@ function Home() {
             (!notification) ? await logic.createNotification(title, text)
             : await logic.updateNotification(user.notification[0]._id, title, text)
         }catch({ message }){
-            console.log(message)
+            setError(message)
         }
     }
    
