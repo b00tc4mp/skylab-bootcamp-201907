@@ -32,7 +32,6 @@ function Home() {
     }
     async function onNotification(title, text){
         try{
-            debugger
             (!notification) ? await logic.createNotification(title, text)
             : await logic.updateNotification(user.notification[0]._id, title, text)
         }catch({ message }){
