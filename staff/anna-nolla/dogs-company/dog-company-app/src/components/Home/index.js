@@ -32,11 +32,11 @@ function Home() {
     }
     async function onNotification(title, text){
         try{
-            (!notification) ? await logic.createNotification(title, text):
-            await logic.updateNotification(user.notification[0]._id, title, text)
-            const { user } = await logic.retrieveUser()
-                setUser(user)
+            debugger
+            (!notification) ? await logic.createNotification(title, text)
+            : await logic.updateNotification(user.notification[0]._id, title, text)
         }catch({ message }){
+            console.log(message)
         }
     }
    
@@ -53,7 +53,7 @@ function Home() {
                         <input className = 'home_form_input' type = "text" name = "title"/>
                     <label className = 'home_form_text'>Text </label>
                         <input className = 'home_form_input' type = "text" name = "text" /> 
-                        {error && <Feedback message ={error}/>}
+                        {error && <Feedback message = {error}/>}
                     <button className = 'home_form_button'>Update</button>
                 </form>}
                 <section className = 'map-home'>
