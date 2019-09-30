@@ -7,7 +7,7 @@ const {registerUser, authenticateUser, retrieveUser, updateUser, unregisterUser}
 const {registerVehicle, retrieveVehicle, retrieveAll,updateVehicle,unregisterVehicle}= require('./vehicle')
 const { registerProperty, retrieveAllProperty,retrieveProperty, updateProperty, unregisterProperty,registerPropertyOwner, unregisterPropertyOwner } = require('./property')
 
-const { registerCard, retrieveAll, retrieveCard, unregisterCard } = require('./card')
+const { registerCard, retrieveAllCard, retrieveCard, unregisterCard } = require('./card')
 
 const router = Router()
 
@@ -41,7 +41,7 @@ router.delete ('/users/:id/properties/:propertyId', [tokenMiddleware, jsonBodyPa
 
 //CARD
 router.post('/users/:id/cards', [tokenMiddleware, jsonBodyParser], registerCard)
-router.get('/users/:id/cards/', [tokenMiddleware, jsonBodyParser], retrieveAll)
+router.get('/users/:id/cards/', [tokenMiddleware, jsonBodyParser], retrieveAllCard)
 router.get('/users/:id/cards/:cardId', [tokenMiddleware, jsonBodyParser], retrieveCard)
 router.delete ('/users/:id/cards/:cardId', [tokenMiddleware, jsonBodyParser], unregisterCard)
 
