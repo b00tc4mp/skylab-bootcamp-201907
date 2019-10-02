@@ -1,6 +1,17 @@
 const validate = require('utils/validate')
 const { models: { User, Cache } } = require('data')
 
+/**
+ * creates a cache
+ * @param {string} userId 
+ * @param {string} name 
+ * @param {string} description 
+ * @param {*} location 
+ * @param {number} difficulty 
+ * @param {number} terrain 
+ * @param {hints} hints 
+ */
+
 function registerCache(userId, name, description, location, difficulty, terrain, hints) {
     
     validate.string(userId, 'user id')

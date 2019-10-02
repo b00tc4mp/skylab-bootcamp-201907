@@ -19,8 +19,8 @@ function Landing({ history, setView }) {
                     Whether you are a casual player, an avid explorer, or a hardcore competition enthusiast,
                 SkyCaching helps you rediscover the world around you.</p>
 
-                <a className='landing__section-a' href='' onClick={handleGoToRegister}><button className='landing__section-button'>START HERE!</button></a>
-                <img className='landing__section-img' src={treasure} alt="treasure image"/>
+                <a className='landing__section-a' href='#0' onClick={handleGoToRegister}><button className='landing__section-button'>START HERE!</button></a>
+                <img className='landing__section-img' src={treasure} alt="treasure"/>
             </section>
         </main>
     )

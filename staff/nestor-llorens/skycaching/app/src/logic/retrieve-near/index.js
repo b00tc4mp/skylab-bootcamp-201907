@@ -2,6 +2,11 @@ import { validate } from 'utils'
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * retrieves near caches limited by distance
+ * @param {number} distance 
+ */
+
 export default function (distance) {
 
     validate.number(distance, 'distance')

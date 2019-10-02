@@ -6,6 +6,8 @@ Hide and seek caches all over the world using the latest GPS and real time posit
 
 ![intro](doc/img/introduction.png)
 
+A demo is available on [surge](https://skycaching.surge.sh).
+
 ## Functional Description
 
 - Users can create new caches on real-world locations and log caches from other users when found.

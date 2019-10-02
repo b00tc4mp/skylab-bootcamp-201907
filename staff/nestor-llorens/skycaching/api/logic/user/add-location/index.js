@@ -1,8 +1,14 @@
 const validate = require('utils/validate')
 const { models: { User } } = require('data')
 
+/**
+ * adds user's location to db
+ * @param {string} id 
+ * @param {*} location 
+ */
+
 function addLocation (id, location) {
-    
+
     validate.string(id, 'id')
 
     return (async () => {
@@ -13,7 +19,7 @@ function addLocation (id, location) {
         const _location = { type: 'Point', coordinates: location } 
 
         user.location = _location
-        debugger
+        
         await user.save()
     })()
 }

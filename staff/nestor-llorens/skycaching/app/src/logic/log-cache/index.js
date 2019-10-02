@@ -2,6 +2,12 @@ import { validate } from 'utils'
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * user logs a cache leaving a comment
+ * @param {string} cacheId 
+ * @param {string} comment 
+ */
+
 export default function (cacheId, comment) {
 
     if (comment === '') throw Error('comment is empty')

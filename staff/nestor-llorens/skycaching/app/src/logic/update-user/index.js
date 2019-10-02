@@ -1,5 +1,10 @@
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * updates user's info
+ * @param {*} data 
+ */
+
 export default function (data){
 
     return (async () => {

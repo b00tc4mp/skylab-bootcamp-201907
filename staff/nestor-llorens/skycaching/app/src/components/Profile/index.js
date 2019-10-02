@@ -8,7 +8,7 @@ import Feedback from '../Feedback'
 import L from 'leaflet'
 import logic from '../../logic'
 
-function Profile({ history, setUser, user }) {
+function Profile({ history, setUser }) {
 
     const [error, setError] = useState()
     const [position, setPosition] = useState([0, 0])
@@ -16,7 +16,7 @@ function Profile({ history, setUser, user }) {
     const [haveUsersLocation, setHaveUsersLocation] = useState(false)
     const [allCaches, setAllCaches] = useState([])
     const [ownCaches, setOwnCaches] = useState([])
-    const [foundCaches, setFoundCaches] = useState([])
+    const [, setFoundCaches] = useState([])
 
     var myIcon = L.icon({
         iconUrl: chest,
@@ -41,7 +41,7 @@ function Profile({ history, setUser, user }) {
             const foundCaches = user.found
             setFoundCaches(foundCaches)
         })()
-    }, [history.location])
+    }, [history.location, setUser])
 
     useEffect(() => {
         (async function () {
@@ -108,8 +108,8 @@ function Profile({ history, setUser, user }) {
 
                 
                 {ownCaches.length > 0 && <h3 className='profile__caches-header'>Owned Caches</h3>}
-                {ownCaches.map((item) => (<ul className='profile__caches-list'>
-                    <li className='profile__caches-item'><p className='profile__caches-paragraph'>{item.name}</p></li>
+                {ownCaches.map((item, key) => (<ul className='profile__caches-list'>
+                    <li key={key} className='profile__caches-item'><p className='profile__caches-paragraph'>{item.name}</p></li>
                     <section className='profile__caches-buttons'>
                         <form className='profile__caches-detailsForm' onSubmit={event => {
                             event.preventDefault()

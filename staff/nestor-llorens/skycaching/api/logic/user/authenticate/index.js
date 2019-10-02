@@ -2,6 +2,11 @@ const validate = require('utils/validate')
 const { models: { User } } = require('data')
 const bcrypt = require('bcryptjs')
 
+/**
+ * authenticates user
+ * @param {string} username 
+ * @param {string} password 
+ */
 
 function authenticateUser (username, password) {
     

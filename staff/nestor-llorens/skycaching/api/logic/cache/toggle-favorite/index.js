@@ -1,6 +1,11 @@
 const validate = require('utils/validate')
 const { models: { User, Cache } } = require('data')
 
+/**
+ * favorite or unfavorite a cache
+ * @param {string} userId 
+ * @param {string} cacheId 
+ */
 
 function toggleFavorite(userId, cacheId ) {
     validate.string(userId, 'user idd')

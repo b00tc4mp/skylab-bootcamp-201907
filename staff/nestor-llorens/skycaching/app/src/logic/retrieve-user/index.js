@@ -1,5 +1,9 @@
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * retrieves logged in user's info
+ */
+
 export default function () {
 
     return (async () => {

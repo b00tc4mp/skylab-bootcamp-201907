@@ -1,6 +1,12 @@
 const validate = require('utils/validate')
 const { models: { User, Cache } } = require('data')
 
+/**
+ * updates a cache's info
+ * @param {string} userId 
+ * @param {string} cacheId 
+ * @param {*} data 
+ */
 
 function updateCache (userId, cacheId, data) {
 

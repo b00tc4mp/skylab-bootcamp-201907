@@ -2,6 +2,17 @@ import { validate } from 'utils'
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * creates a new cache
+ * @param {*} name 
+ * @param {string} description 
+ * @param {*} location 
+ * @param {number} difficulty 
+ * @param {number} terrain 
+ * @param {string} size 
+ * @param {string} hints 
+ */
+
 export default function (name, description, location, difficulty, terrain, size, hints) {
 
     validate.string(name, 'name')

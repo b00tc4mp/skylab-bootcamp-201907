@@ -1,6 +1,11 @@
 const validate = require('utils/validate')
 const { models: { User } } = require('data')
 
+/**
+ * updates a user's info
+ * @param {string} id 
+ * @param {*} data 
+ */
 
 function updateUser (id, data) {
 

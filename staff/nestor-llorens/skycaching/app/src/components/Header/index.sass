@@ -5,8 +5,9 @@ $base-color: #05386b
     height: 10vh
     display: flex
     justify-content: space-between
-    width: 100vw
+    // width: 100vw
     margin-bottom: 2vh
+    border-bottom: 3px solid #05386b
 
     &__navbar
         display: flex
@@ -20,19 +21,17 @@ $base-color: #05386b
         align-content: center
         list-style: none
 
-    &__item
-        display: inline
+    &__item    
         color: $base-color
-        font-family: Lato, sans-serif
-        font-weight: 700
-        font-size: 12px
+        display: inline
     
-        &-logout
+        &__logout
             color: Crimson
             font-family: Lato, sans-serif
             font-weight: 700
-            font-size: 12px
+            font-size: 16px
             margin-right: 1vh
+            overflow: hidden
 
     &__button
             background: none
@@ -40,14 +39,19 @@ $base-color: #05386b
             color: $base-color
             font-family: Lato, sans-serif
             font-weight: 700
-            font-size: 12px
+            font-size: 16px
             padding-right: 1.5vh
             button: focus {outline:0}
+            
 
     &__title
         diplay: flex
         font-family: 'Dancing Script', cursive  
-        font-size: 24px
+        font-size: 30px
         color: $base-color
-        padding-top: 2.5vh 
+        padding-top: 1vh 
         padding-left: 1vh
+
+    &_a
+        background: none
+        border: none

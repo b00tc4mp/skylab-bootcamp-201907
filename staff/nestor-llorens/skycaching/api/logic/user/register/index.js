@@ -2,6 +2,13 @@ const validate = require('utils/validate')
 const { models: { User } } = require('data')
 const bcrypt = require('bcryptjs')
 
+/**
+ * creates a new user
+ * @param {string} username 
+ * @param {string} password 
+ * @param {string} email 
+ */
+
 function registerUser (username, password, email) {
 
     validate.string(username, 'username')

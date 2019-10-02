@@ -2,6 +2,11 @@ import { validate } from 'utils'
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * retrieves user's info by passing an id
+ * @param {string} userId 
+ */
+
 export default function (userId) {
     validate.string(userId, 'user id')
 

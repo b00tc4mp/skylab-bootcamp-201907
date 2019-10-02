@@ -11,7 +11,7 @@ function Details(props) {
     const [comments, setComments] = useState([])
     const [logged, setLogged] = useState(false)
     const [owned, setOwned] = useState(false)
-    const [user, setUser] = useState({})
+    const [, setUser] = useState({})
     const [owner, setOwner] = useState({})
     
     useEffect(() => {
@@ -30,7 +30,7 @@ function Details(props) {
             setOwner(owner)
         }
         )()
-    }, [])
+    }, [props.match.params.id])
 
 
     const handleLogCache = async (cacheId, comment) => {
@@ -55,7 +55,7 @@ function Details(props) {
                 <li className='details__list-item'><p className='details__list-p'>Size: {cache.size}</p></li>
                 <li className='details__list-item'><p className='details__list-p'>Hints: {cache.hints}</p></li>
                 <li className='details__list-item'><p className='details__list-p'>Owner: {owner.username}</p></li>
-                {logged || owned ? '' : (<form classname = 'details__form' onSubmit={event => {
+                {logged || owned ? '' : (<form className = 'details__form' onSubmit={event => {
                     event.preventDefault()
                     handleLogCache(event.target.cacheId.value, event.target.comment.value)
                     props.history.goBack()

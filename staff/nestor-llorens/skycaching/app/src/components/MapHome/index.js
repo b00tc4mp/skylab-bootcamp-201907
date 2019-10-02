@@ -47,7 +47,7 @@ function MapHome({ history }) {
 
       }, error => console.log(error.message))
 
-    }, 3000);
+    }, 5000);
     return () => clearInterval(interval);
     
   }, [])
@@ -59,28 +59,30 @@ function MapHome({ history }) {
 
   return (<>
     <main className='mapHome'>
-      <Map className="map" center={position} zoom={zoom}>
-        <TileLayer
-          attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url='https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}' ext= 'jpg'
-        />
-        {
-          haveUsersLocation ?
-            <Marker position={position} icon={myIcon2} draggable={true} >
-            </Marker> : ''
-        }
-        {allCaches && allCaches.length && allCaches.map(cache => <Marker key={cache._id} draggable={false}
-          position={[cache.location.coordinates[1], cache.location.coordinates[0]]} icon={myIcon}>
-          <Popup>
-            <form onSubmit={event => {
-              event.preventDefault()
-              handleGoToDetails(event.target.cacheId.value)
-            }}>
-              <input type='hidden' name="cacheId" value={cache._id} />
-              <button className='popup__button'>{cache.name}</button></form>
-          </Popup>
-        </Marker>)}
-      </Map>
+    <Map className="map" center={position} zoom={zoom}>
+                <TileLayer
+                    attribution='Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url='https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}' ext='jpg'
+                />
+                {
+                    haveUsersLocation ?
+                        <Marker position={position} icon={myIcon2} draggable={true} />
+                        : ''
+
+                }
+                {allCaches && allCaches.length && allCaches.map(cache => <Marker key={cache._id} draggable={false}
+                    position={[cache.location.coordinates[1], cache.location.coordinates[0]]} icon={myIcon}>
+                    <Popup>
+                        <form onSubmit={event => {
+                            event.preventDefault()
+                            handleGoToDetails(event.target.cacheId.value)
+                        }}>
+                            <input type='hidden' name="cacheId" value={cache._id} />
+                            <button className='popup__button'>{cache.name}</button></form>
+                    </Popup>
+                </Marker>)}
+
+            </Map>
     </main>
   </>)
 }

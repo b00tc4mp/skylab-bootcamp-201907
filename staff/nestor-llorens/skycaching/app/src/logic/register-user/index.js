@@ -2,6 +2,13 @@ import { validate } from 'utils'
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * registers a new user
+ * @param {string} username 
+ * @param {string} password 
+ * @param {string} email 
+ */
+
 export default function (username, password, email) {
     validate.string(username, 'username')
     validate.string(password, 'password')

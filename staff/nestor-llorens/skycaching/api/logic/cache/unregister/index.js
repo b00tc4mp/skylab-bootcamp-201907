@@ -1,6 +1,12 @@
 const validate = require('utils/validate')
 const { models: { User, Cache } } = require('data')
 
+/**
+ * deletes a cache
+ * @param {string} userId 
+ * @param {string} cacheId 
+ */
+
 function unregisterCache (userId, cacheId) {
     
     validate.string(userId, 'user id')

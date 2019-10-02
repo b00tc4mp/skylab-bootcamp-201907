@@ -1,6 +1,10 @@
 const validate = require('utils/validate')
 const { models: { User } } = require('data')
 
+/**
+ * retrieves user favoreites caches
+ * @param {string} userId 
+ */
 
 function retrieveFavorites(userId) {
     validate.string(userId, 'userId')

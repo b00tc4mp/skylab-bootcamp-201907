@@ -2,6 +2,12 @@ const validate = require('utils/validate')
 const { models: { User, Cache } } = require('data')
 const bcrypt = require('bcryptjs')
 
+/**
+ * deletes a user
+ * @param {string} id 
+ * @param {string} password 
+ */
+
 function unregisterUser (id, password) {
     
     validate.string(id, 'id')

@@ -12,11 +12,11 @@ function Home ({ history, setUser}) {
 
             setUser(user)
         })()
-    }, [history.location])
+    }, [history.location, setUser])
 
     return (
     <main className="home">
-        <section classname='home__map'><MapHome/></section>
+        <section className='home__map'><MapHome/></section>
     </main>
     )
 }

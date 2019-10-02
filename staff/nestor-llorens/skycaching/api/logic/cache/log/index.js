@@ -1,6 +1,13 @@
 const validate = require('utils/validate')
 const { models: { User, Cache, Comment } } = require('data')
 
+/**
+ * Logs the cache on a user and leaves a comment on the chache details
+ * @param {string} userId 
+ * @param {string} cacheId 
+ * @param {string} commentString 
+ */
+
 function logCache(userId, cacheId, commentString ) {
     
     validate.string(userId, 'user id')

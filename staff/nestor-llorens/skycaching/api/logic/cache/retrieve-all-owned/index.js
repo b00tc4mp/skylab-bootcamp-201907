@@ -1,6 +1,11 @@
 const validate = require('utils/validate')
 const { models: { User, Cache } } = require('data')
 
+/**
+ * retrieves all caches owned by the user
+ * @param {string} userId 
+ */
+
 function retrieveAllUserCaches(userId) {
     
     validate.string(userId, 'user id')

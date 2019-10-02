@@ -43,7 +43,7 @@ function Header({ view, setView, history, user }) {
 
     return (
         <header className='header'>
-            <a className = "header_a" onClick={handleGoToHome}><h1 className='header__title'>SkyCaching</h1></a>
+            <button className = "header_a"  onClick={handleGoToHome}><h1 className='header__title'>SkyCaching</h1></button>
             <nav className='header__navbar'>
                 {!logic.isUserLoggedIn() ?
                     <ul className='header__navbar-ul'>
@@ -53,7 +53,7 @@ function Header({ view, setView, history, user }) {
                     :
                     <ul className='header__list'>
                         <li className='header__item'><button className='header__button' onClick={handleGoToProfile}>Profile</button></li>
-                        <li className='header__item-logout'><button className='header__button' onClick={handleOnLogout}>Logout</button>Hello, {user && user.username}!</li>
+                        <li className='header__item__logout'><button className='header__button' onClick={handleOnLogout}>Logout</button>Hello, {user && user.username}!</li>
                     </ul>}
             </nav>
         </header>

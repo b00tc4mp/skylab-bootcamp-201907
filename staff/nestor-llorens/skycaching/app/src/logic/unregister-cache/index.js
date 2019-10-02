@@ -2,6 +2,11 @@ import { validate } from 'utils'
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * deletes a cache
+ * @param {string} cacheId 
+ */
+
 export default function (cacheId) {
 
     validate.string(cacheId, 'user id')

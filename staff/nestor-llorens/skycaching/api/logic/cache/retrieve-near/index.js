@@ -4,22 +4,28 @@
 const validate = require('utils/validate')
 const { models: { User, Cache } } = require('data')
 
+/**
+ * retrieves near caches limited by distance
+ * @param {string} userId 
+ * @param {number} distance 
+ */
+
 function retrieveNear(userId, distance) {
-    
+
     validate.string(userId, 'user id')
-debugger
+    
     return (async () => {
         const user = await User.findById(userId)
 
         if (!user) throw new Error(`user does not exist`)
-        
+
         const location = user.location
         // if (user.location.coordinates[0] === 0 & user.location.coordinates[1] === 0 ) throw new Error(`User location not found`)
 
-        response = await Cache.find({ location: { $near: { $geometry: location, $maxDistance: distance} } })
+        response = await Cache.find({ location: { $near: { $geometry: location, $maxDistance: distance } } })
 
-        return response    
-         
+        return response
+
     })()
 }
 
