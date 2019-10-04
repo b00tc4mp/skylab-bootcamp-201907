@@ -6,7 +6,6 @@ import retrieveUser from './retrieve-user'
 import searchRecipe from './search-recipe-category'
 import retrieveRecipe from './retrieve-recipe'
 import registerDay from './register-day'
-import retrieveDay from './retrieve-day'
 import retrieveCurrentWeek from './retrieve-current-week'
 
 export default {
@@ -26,6 +25,5 @@ export default {
   searchRecipe,
   retrieveRecipe,
   registerDay,
-  retrieveDay,
   retrieveCurrentWeek
 }

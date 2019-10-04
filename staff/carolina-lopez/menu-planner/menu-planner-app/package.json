@@ -5,6 +5,7 @@
   "dependencies": {
     "menu-planner-data": "file:../menu-planner-data",
     "menu-planner-utils": "file:../menu-planner-utils",
+    "moment": "^2.24.0",
     "node-sass": "^4.12.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",

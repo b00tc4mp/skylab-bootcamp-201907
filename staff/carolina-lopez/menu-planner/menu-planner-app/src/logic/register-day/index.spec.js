@@ -1,14 +1,15 @@
 import logic from '..'
 import { database, models } from 'menu-planner-data'
-import bcrypt from 'bcryptjs'
-// import moment from 'momentjs'
+//const moment = require('momentjs')
+import moment from 'moment'
+const {random } = require ('menu-planner-utils')
+import jwt from 'jsonwebtoken'
 
 const { Recipe, Day, Week, Ingredient, User } = models
 
 // const { env: { DB_URL_TEST }} = process // WARN this destructuring doesn't work in react-app :(
 const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
-
-// const { random } = Math
+const REACT_APP_JWT_SECRET_TEST = process.env.REACT_APP_JWT_SECRET_TEST
 
 describe('logic - register day', () => {
 
@@ -155,19 +156,20 @@ describe('logic - register day', () => {
         const surname = `surname-${Math.random()}`
         const email = `email-${Math.random()}@mail.com`
         const password = `password-${Math.random()}`
-
+        
         await User.deleteMany()
         
-
         const { id } = await User.create({ name, surname, email, password, weeks: [currentWeek, pastWeek1, pastWeek2, pastWeek3, pastWeek4] })
         userId = id
+        const token = jwt.sign({ sub: userId }, REACT_APP_JWT_SECRET_TEST)
+        logic.__token__ = token
     })
 
     it("should succeed on correct data", async () => { 
         
         const _day = random.value('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday')
 
-        const res = await logic.registerDay(userId, _day, id4, id3, id2, id1)
+        const res = await logic.registerDay(_day, id4, id3, id2, id1)
 
         expect(res).toBeUndefined()
 
@@ -190,33 +192,10 @@ describe('logic - register day', () => {
       const _day = random.value('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday')
 
       try {
-        await logic.registerDay(userId, _day, id4, id3, id2, id1)
+        await logic.registerDay(_day, id4, id3, id2, id1)
       } catch({message}) {
-        expect(message).toBe()
         expect(message).toBe(`recipe with id ${id1} not found`)
       }
-    })
-
-    it("should fail if query is not a string", () => {
-        const _day = random.value('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday')
-
-         expect(() => logic.registerDay(123, _day, id4, id3, id2, id1 )).toThrow(Error, "userId with value 123 is not a string")
-    })
-
-    it('should fail on empty id', () => {
-        const _day = random.value('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday')
-        
-        expect(() => 
-            logic.registerDay('', _day, id4, id3, id2, id1)
-        ).toThrow('userId is empty or blank')
-    })
-
-    it('should fail on undefined id', () => {
-        const _day = random.value('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday')
-
-        expect(() => 
-            logic.registerDay(undefined, _day, id4, id3, id2, id1)
-        ).toThrow(`userId with value undefined is not a string`)
     })
 
     afterAll(() => database.disconnect())

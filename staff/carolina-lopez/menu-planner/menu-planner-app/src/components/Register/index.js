@@ -4,9 +4,9 @@ import {Feedback} from '../../components'
 
 export default withRouter (function ({ history , onRegister, error }) {
   return <section className="body">
-    <header class="navbar">
-      <div class="dropdown dropdown-left">
-        <button class="dropbtn-sh">MenuPlanner 
+    <header className="navbar">
+      <div className="dropdown dropdown-left">
+        <button className="dropbtn-sh">MenuPlanner 
         </button>
       </div> 
     </header>
