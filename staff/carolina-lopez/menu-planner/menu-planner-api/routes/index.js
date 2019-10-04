@@ -7,9 +7,9 @@ const { registerUser, authenticateUser,
 
 const { retrieveRecipe, searchRecipe } = require('./recipe')
 
-//const { registerDay, retrieveDay } = require('./day')
+const { registerDay, retrieveCurrentDay } = require('./day')
 
-//const { registerWeek, retrieveWeek } = require('./week')
+const { retrieveCurrentWeek } = require('./week')
 
 const router = Router()
 const jsonBodyParser = bodyParser.json()
@@ -22,15 +22,15 @@ router.patch ('/users', [tokenMiddleware, jsonBodyParser], updateUser)
 router.delete ('/users', [tokenMiddleware, jsonBodyParser], unregisterUser)
 
 /* RECIPE */
-router.get('/recipe/:id', jsonBodyParser, retrieveRecipe)
-router.get('/recipes/:category', jsonBodyParser, searchRecipe)
+router.get('/recipes/:id', jsonBodyParser, retrieveRecipe)
+router.get('/recipes/search/:category', jsonBodyParser, searchRecipe)
 
 /* DAY */
-//router.post('/users/week/:id/days', jsonBodyParser, registerDay)
-//router.get('/users/week/:id/days', jsonBodyParser, retrieveDay) 
+router.post('/days', [tokenMiddleware, jsonBodyParser ] , registerDay)
+router.get('/days/:id', [tokenMiddleware, jsonBodyParser ], retrieveCurrentDay) 
 
 /* WEEK */ 
-//router.post('/weeks', jsonBodyParser, registerWeek)
-//router.get('/weeks/:id', [tokenMiddleware, jsonBodyParser], retrieveWeek)
+
+router.get('/weeks/current', tokenMiddleware, retrieveCurrentWeek)
 
 module.exports = router

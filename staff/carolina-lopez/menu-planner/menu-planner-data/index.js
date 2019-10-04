@@ -1,4 +1,5 @@
 module.exports = {
     models: require('./models'),
-    database: require('./database')
+    database: require('./database'),
+    sanitize: require('./sanitize')
 }

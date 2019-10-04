@@ -180,7 +180,21 @@ describe('logic - retrieve current week', () => {
         expect(week.monday.breakfast.id).to.have.lengthOf(24)
         expect(week.monday.breakfast._id).not.to.exist
         expect(week.monday.breakfast.title).to.be.a('string')
-        expect(week.monday.breakfast.id).to.have.length.above(0)
+        expect(week.monday.breakfast.id).to.have.lengthOf(24)
+
+        let items = week.monday.breakfast.items
+        items.forEach(item => {
+            expect(item._id).not.to.exist
+            expect(item.id).to.be.a('string')
+            expect(item.id).to.have.lengthOf(24)
+
+            expect(item.ingredient).to.be.a('string')
+            expect(item.ingredient).to.have.lengthOf(24)
+
+            expect(item.quantity).to.be.a('number')
+
+            expect(item.description).to.be.a('string')
+        })
 
         expect(week.tuesday).to.exist
         expect(week.tuesday.id).to.be.a('string')
@@ -191,7 +205,7 @@ describe('logic - retrieve current week', () => {
         expect(week.tuesday.breakfast.id).to.have.lengthOf(24)
         expect(week.tuesday.breakfast._id).not.to.exist
         expect(week.tuesday.breakfast.title).to.be.a('string')
-        expect(week.tuesday.breakfast.id).to.have.length.above(0)
+        expect(week.tuesday.breakfast.id).to.have.lengthOf(24)
 
         expect(week.wednesday).to.exist
         expect(week.wednesday.id).to.be.a('string')
@@ -202,7 +216,7 @@ describe('logic - retrieve current week', () => {
         expect(week.wednesday.breakfast.id).to.have.lengthOf(24)
         expect(week.wednesday.breakfast._id).not.to.exist
         expect(week.wednesday.breakfast.title).to.be.a('string')
-        expect(week.wednesday.breakfast.id).to.have.length.above(0)
+        expect(week.wednesday.breakfast.id).to.have.lengthOf(24)
 
         expect(week.thursday).to.exist
         expect(week.thursday.id).to.be.a('string')
@@ -213,7 +227,7 @@ describe('logic - retrieve current week', () => {
         expect(week.thursday.breakfast.id).to.have.lengthOf(24)
         expect(week.thursday.breakfast._id).not.to.exist
         expect(week.thursday.breakfast.title).to.be.a('string')
-        expect(week.thursday.breakfast.id).to.have.length.above(0)
+        expect(week.thursday.breakfast.id).to.have.lengthOf(24)
 
         expect(week.friday).to.exist
         expect(week.friday.id).to.be.a('string')
@@ -224,7 +238,7 @@ describe('logic - retrieve current week', () => {
         expect(week.friday.breakfast.id).to.have.lengthOf(24)
         expect(week.friday.breakfast._id).not.to.exist
         expect(week.friday.breakfast.title).to.be.a('string')
-        expect(week.friday.breakfast.id).to.have.length.above(0)
+        expect(week.friday.breakfast.id).to.have.lengthOf(24)
 
         expect(week.saturday).to.exist
         expect(week.saturday.id).to.be.a('string')
@@ -235,7 +249,7 @@ describe('logic - retrieve current week', () => {
         expect(week.saturday.breakfast.id).to.have.lengthOf(24)
         expect(week.saturday.breakfast._id).not.to.exist
         expect(week.saturday.breakfast.title).to.be.a('string')
-        expect(week.saturday.breakfast.id).to.have.length.above(0)
+        expect(week.saturday.breakfast.id).to.have.lengthOf(24)
 
         expect(week.sunday).to.exist
         expect(week.sunday.id).to.be.a('string')
@@ -246,7 +260,7 @@ describe('logic - retrieve current week', () => {
         expect(week.sunday.breakfast.id).to.have.lengthOf(24)
         expect(week.sunday.breakfast._id).not.to.exist
         expect(week.sunday.breakfast.title).to.be.a('string')
-        expect(week.sunday.breakfast.id).to.have.length.above(0)
+        expect(week.sunday.breakfast.id).to.have.lengthOf(24)
     })
 
     it("should fail on non existant id", async () => {

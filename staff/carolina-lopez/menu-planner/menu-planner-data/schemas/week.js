@@ -14,5 +14,3 @@ module.exports = new Schema({
     saturday: Day,
     sunday: Day
 })
-
-

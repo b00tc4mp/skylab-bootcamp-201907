@@ -51,6 +51,7 @@ export default function ({ onLogout, onRegisterDay, error }) {
       setSelectedDay(day)
     } catch ({ message }){
     }
+
   }
 
   function handleStateBr(event) {

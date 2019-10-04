@@ -1,5 +1,5 @@
 {
-  "name": "my-api-mongoose",
+  "name": "menu-planner-api",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,8 @@
     "debug": "node debug .",
     "test": "npx mocha logic/**/*.spec.js",
     "test-debug": "npx mocha debug logic/**/**/*.spec.js",
-    "test-inspect": "npx mocha --inspect-brk logic/**/*.spec.js"
+    "test-inspect": "npx mocha --inspect-brk logic/**/*.spec.js",
+    "test:coverage": "nyc --reporter=html --reporter=text mocha logic/**/**/*.spec.js --runInBand"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "coverage": "^0.4.1",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
@@ -25,6 +27,7 @@
     "moment": "^2.24.0",
     "mongodb": "^3.3.2",
     "mongoose": "^5.6.10",
+    "nyc": "^14.1.1",
     "react-router-dom": "^5.0.1"
   },
   "devDependencies": {
