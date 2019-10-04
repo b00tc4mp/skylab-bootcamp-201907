@@ -3,6 +3,8 @@ import logic from "../../logic"
 import { Link } from 'react-router-dom'
 import { Feedback } from '../../components'
 
+const REACT_APP_URL = process.env.REACT_APP_URL
+
 export default function ({ onLogout, onRegisterDay, error }) {
 
   const [selectedDay, setSelectedDay] = useState('')
@@ -22,39 +24,33 @@ export default function ({ onLogout, onRegisterDay, error }) {
         setRecipesBr(recipesBr)
 
       } catch ({ message }) {
-        console.log('fail search recipe', message)
       }
       try {
         const recipesLn = await logic.searchRecipe("lunch")
         setRecipesLn(recipesLn)
       } catch ({ message }) {
-        console.log('fail search recipe', message)
       }
       try {
         const recipesSn = await logic.searchRecipe("snack")
         setRecipesSn(recipesSn)
       } catch ({ message }) {
-        console.log('fail search recipe', message)
       }
       try {
         const recipesDn = await logic.searchRecipe("dinner")
         setRecipesDn(recipesDn)
       } catch ({ message }) {
-        console.log('fail search recipe', message)
       }
     })()
   }, [])
 
 
   function handleStateDay(event) {
-    const { target: { value: day } } = event
-
-    setSelectedDay(day)
-
-    /*}  catch ({ message }) {
-      console.log('fail register day', message)
-    }  */
-
+    try {
+      const { target: { value: day } } = event
+  
+      setSelectedDay(day)
+    } catch ({ message }){
+    }
   }
 
   function handleStateBr(event) {
@@ -89,21 +85,20 @@ export default function ({ onLogout, onRegisterDay, error }) {
   }
 
   return <section className='body'>
-    <header class="navbar">
-      <div class="dropdown dropdown-left">
-        <button class="dropbtn">MenuPlanner
-      <i class="fa fa-caret-down"></i>
+    <header className="navbar">
+      <div className="dropdown dropdown-left">
+        <button className="dropbtn">MenuPlanner
+      <i className="fa fa-caret-down"></i>
         </button>
-        {/* <img src='mpbco.png'></img> */}
-        <div class="dropdown-content">
+        <div className="dropdown-content">
           <Link className="nav__a dropdown__button a" href="#" to="/home">Home</Link>
           <Link className="nav__a dropdown__button a" href="#" to="/current-week">Current Week</Link>
         </div>
       </div>
-      <div class="dropdown dropdown-right">
-        <button class="dropbtn"><i className="far fa-user-circle"></i>
+      <div className="dropdown dropdown-right">
+        <button className="dropbtn"><i className="far fa-user-circle"></i>
         </button>
-        <div class="dropdown-content">
+        <div className="dropdown-content">
           <Link className="nav__a dropdown__button a" href="#" to="/user-profile">User Profile</Link>
           <a className="nav__a dropdown__button a" href="#" onClick={onLogout}>Logout</a>
         </div>
@@ -145,7 +140,7 @@ export default function ({ onLogout, onRegisterDay, error }) {
 
           <select onChange={handleStateDn} name="snack" className="selector">
             <option value="default">Select your dinner</option>
-            {recipesDn.map(recipe => <option value={recipe.id}>{recipe.title}</option>)}
+            {recipesDn.map(recipe => <option key={recipe.id} value={recipe.id}>{recipe.title}</option>)}
           </select>
 
           <button className="main__button">Create</button>
@@ -157,7 +152,7 @@ export default function ({ onLogout, onRegisterDay, error }) {
       <section className="recipe">
         {selectedBreakfast && <h2 className="recipe__meal">Breakfast</h2>}
         {selectedBreakfast && <h2 className="recipe__title">{selectedBreakfast.title}</h2>}
-        {selectedBreakfast && <img className="recipe__photo" src={`http://localhost:8080/${selectedBreakfast.image}`} alt="recipe" />}
+        {selectedBreakfast && <img className="recipe__photo" src={`${REACT_APP_URL}${selectedBreakfast.image}`} alt="recipe" />}
         {selectedBreakfast && <ul className="recipe__ul">Ingredients{selectedBreakfast.items.map(item => <li key={Math.random()} className="recipe__li"> - {item.ingredient.title} {item.quantity} {item.ingredient.unit} <p>{item.description}</p> </li>)}</ul>}
         {selectedBreakfast && <div className="recipe__text">{selectedBreakfast.description}</div>}
       </section>
@@ -166,7 +161,7 @@ export default function ({ onLogout, onRegisterDay, error }) {
       <section className="recipe">
         {selectedLunch && <h2 className="recipe__meal">Lunch</h2>}
         {selectedLunch && <h2 className="recipe__title">{selectedLunch.title}</h2>}
-        {selectedLunch && <img className="recipe__photo" src={`http://localhost:8080/${selectedLunch.image}`} alt="recipe" />}
+        {selectedLunch && <img className="recipe__photo" src={`${REACT_APP_URL}${selectedLunch.image}`} alt="recipe" />}
         {selectedLunch && <ul className="recipe__ul">Ingredients{selectedLunch.items.map(item => <li key={Math.random()} className="recipe__li"> - {item.ingredient.title} {item.quantity} {item.ingredient.unit} <p>{item.description}</p> </li>)}</ul>}
         {selectedLunch && <div className="recipe__text">{selectedLunch.description}</div>}
       </section>
@@ -175,7 +170,7 @@ export default function ({ onLogout, onRegisterDay, error }) {
       <section className="recipe">
         {selectedSnack && <h2 className="recipe__meal">Snack</h2>}
         {selectedSnack && <h2 className="recipe__title">{selectedSnack.title}</h2>}
-        {selectedSnack && <img className="recipe__photo" src={`http://localhost:8080/${selectedSnack.image}`} alt="recipe" />}
+        {selectedSnack && <img className="recipe__photo" src={`${REACT_APP_URL}${selectedSnack.image}`} alt="recipe" />}
         {selectedSnack && <ul className="recipe__ul">Ingredients{selectedSnack.items.map(item => <li key={Math.random()} className="recipe__li"> - {item.ingredient.title} {item.quantity} {item.ingredient.unit} <p>{item.description}</p> </li>)}</ul>}
         {selectedSnack && <div className="recipe__text">{selectedSnack.description}</div>}
       </section>
@@ -184,7 +179,7 @@ export default function ({ onLogout, onRegisterDay, error }) {
       <section className="recipe">
         {selectedDinner && <h2 className="recipe__meal">Dinner</h2>}
         {selectedDinner && <h2 className="recipe__title">{selectedDinner.title}</h2>}
-        {selectedDinner && <img className="recipe__photo" src={`http://localhost:8080/${selectedDinner.image}`} alt="recipe" />}
+        {selectedDinner && <img className="recipe__photo" src={`${REACT_APP_URL}${selectedDinner.image}`} alt="recipe" />}
         {selectedDinner && <ul className="recipe__ul">Ingredients{selectedDinner.items.map(item => <li key={Math.random()} className="recipe__li"> - {item.ingredient.title} {item.quantity} {item.ingredient.unit} <p>{item.description}</p> </li>)}</ul>}
         {selectedDinner && <div className="recipe__text">{selectedDinner.description}</div>}
       </section>

@@ -11,8 +11,9 @@ export default function () {
         const response = await fetch(`${REACT_APP_API_URL}/weeks/current`, {
             method: 'get',
             headers: {
+                'content-type': 'application/json',
                 authorization: `bearer ${this.__token__}`
-            }
+              }
         })
 
         if (response.status !== 200) {

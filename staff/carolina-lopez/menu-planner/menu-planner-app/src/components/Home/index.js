@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react'
 import logic from '../../logic'
 import { Link, withRouter } from 'react-router-dom'
 
+const REACT_APP_URL = process.env.REACT_APP_URL
+
 export default withRouter(function ({ history, onLogout }) {
   const [user, setUser] = useState()
-  const [view, setView] = useState()
   const [someRecipes, setSomeRecipes] = useState()
   
   useEffect(() => {
@@ -23,21 +24,16 @@ export default withRouter(function ({ history, onLogout }) {
   const handleGoToCreateMenu = event => {
     event.preventDefault()
 
-    setView('create-menu')
-
     history.push('/create-menu')
   }
 
   const handleGoToCurrentWeek = event => {
     event.preventDefault()
 
-    setView('current-week')
-
     history.push('/current-week')
   }
 
   const handleGoHome = () => {
-    setView('home')
 
     history.push('/home')
   }
@@ -61,7 +57,7 @@ export default withRouter(function ({ history, onLogout }) {
   <div className="dropdown dropdown-right">
     <button className="dropbtn"><i className="far fa-user-circle"></i>
     </button>
-    <div class="dropdown-content">
+    <div className="dropdown-content">
       <Link className="nav__a dropdown__button a" href="#" to="/user-profile">User Profile</Link>
       <a className="nav__a dropdown__button a" href="#" onClick={onLogout}>Logout</a>
     </div>
@@ -76,10 +72,10 @@ export default withRouter(function ({ history, onLogout }) {
     <h3 className="examples__title">Some delicious recipes</h3>
     <section className="examples">
       <ul className="examples__ul">
-        {someRecipes && someRecipes.map(recipe => 
-          <li className="examples__li" onClick={() => handleRecipeDetail(recipe.id)}>
+        {someRecipes && someRecipes.map((recipe, index) => 
+          <li className="examples__li" key={index} onClick={() => handleRecipeDetail(recipe.id)}>
             <h4 className="examples__h4">{recipe.title}</h4>
-            <img className="examples__photo" src={`http://localhost:8080/${recipe.image}`}alt={recipe.title}></img>
+            <img className="examples__photo" src={`${REACT_APP_URL}${recipe.image}`}alt={recipe.title}></img>
           </li>
         )}
       </ul>

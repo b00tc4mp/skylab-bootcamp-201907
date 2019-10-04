@@ -1,6 +1,7 @@
 import logic from '..'
 import { database, models } from 'menu-planner-data'
 import bcrypt from 'bcryptjs'
+//const {random } = require ('menu-planner-utils')
 
 const { User } = models
 
@@ -24,11 +25,9 @@ describe('logic - register user', () => {
 
     it('should succeed on correct data', async () => {
         const response = await logic.registerUser(name, surname, email, password)
-
         expect(response).toBeUndefined()
 
         const user = await User.findOne({ email })
-    
         expect(user).toBeDefined()
         expect(user.name).toBe(name)
         expect(user.surname).toBe(surname)

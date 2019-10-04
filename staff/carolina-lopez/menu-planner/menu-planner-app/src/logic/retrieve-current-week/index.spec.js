@@ -1,18 +1,20 @@
 import logic from '..'
 import { database, models } from 'menu-planner-data'
-import bcrypt from 'bcryptjs'
-import moment from 'momentjs'
+import moment from 'moment'
+import jwt from 'jsonwebtoken'
+const { random } = require ('menu-planner-utils')
 
 const { Recipe, Day, Week, Ingredient, User } = models
 
 // const { env: { DB_URL_TEST }} = process // WARN this destructuring doesn't work in react-app :(
 const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
+const REACT_APP_JWT_SECRET_TEST = process.env.REACT_APP_JWT_SECRET_TEST
 
-const { random } = Math
+//const { random } = Math
 
 describe('logic - retrieve current week', () => {
 
-    beforeAll(() => database.connect(DREACT_APP_DB_URL_TEST))
+    beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
 
     let currentWeek, userId
 
@@ -160,137 +162,104 @@ describe('logic - retrieve current week', () => {
 
             const { id } = await User.create({ name, surname, email, password, weeks: [currentWeek, pastWeek1, pastWeek2, pastWeek3, pastWeek4] })
             userId = id
+            const token = jwt.sign({ sub: userId }, REACT_APP_JWT_SECRET_TEST)
+            logic.__token__ = token
         })()
     })
 
     it("should succeed on correct data", async () => {
 
-        const week = await logic.retrieveCurrentWeek(userId)
+        const week = await logic.retrieveCurrentWeek()
 
-        expect(week).toBe()
-        expect(week.id).toBe('string')
+        expect(week.id).toBe(currentWeek.id)
         expect(week.id).toHaveLength(24)
         expect(week.id).toBe(currentWeek.id)
-        expect(week._id).not.toBe()
+        expect(week._id).toBeUndefined()
         
-        expect(week.monday).toBe()
-        expect(week.monday.id).toBe('string')
+        expect(week.monday.id).toBe(currentWeek.monday.id)
         expect(week.monday.id).toHaveLength(24)
-        expect(week.monday._id).not.toBe()
-        expect(week.monday.breakfast).toBe('object')
-        expect(week.monday.breakfast.id).toBe('string')
+        expect(week.monday._id).toBeUndefined()
+        expect(week.monday.breakfast).toBeInstanceOf(Object)
+        expect(typeof week.monday.breakfast.id).toBe('string')
         expect(week.monday.breakfast.id).toHaveLength(24)
-        expect(week.monday.breakfast._id).not.toBe()
-        expect(week.monday.breakfast.title).toBe('string')
+        expect(week.monday.breakfast._id).toBeUndefined()
+        expect(typeof week.monday.breakfast.title).toBe('string')
         expect(week.monday.breakfast.id).toHaveLength(24)
 
         let items = week.monday.breakfast.items
         items.forEach(item => {
-            expect(item._id).not.toBe()
-            expect(item.id).toBe('string')
+            expect(item._id).toBeUndefined()
+            expect(typeof item.id).toBe('string') 
             expect(item.id).toHaveLength(24)
 
-            expect(item.ingredient).toBe('string')
-            expect(item.ingredient).to.have.lengthOf(24)
+            expect(typeof item.ingredient).toBe('string')
+            expect(item.ingredient).toHaveLength(24)
 
-            expect(item.quantity).toBe('number')
+            expect(typeof item.quantity).toBe('number')
 
-            expect(item.description).toBe('string')
+            expect(typeof item.description).toBe('string')
         })
 
-        expect(week.tuesday).toBe()
-        expect(week.tuesday.id).toBe('string')
+        expect(week.tuesday.id).toBe(currentWeek.tuesday.id)
         expect(week.tuesday.id).toHaveLength(24)
-        expect(week.tuesday._id).not.toBe()
-        expect(week.tuesday.breakfast).toBe('object')
-        expect(week.tuesday.breakfast.id).toBe('string')
-        expect(week.tuesday.breakfast.id).to.have.lengthOf(24)
-        expect(week.tuesday.breakfast._id).not.toBe()
-        expect(week.tuesday.breakfast.title).toBe('string')
+        expect(week.tuesday._id).toBeUndefined()
+        expect(week.tuesday.breakfast).toBeInstanceOf(Object)
+        expect(typeof week.tuesday.breakfast.id).toBe('string')
+        expect(week.tuesday.breakfast.id).toHaveLength(24)
+        expect(week.tuesday.breakfast._id).toBeUndefined()
+        expect(typeof week.tuesday.breakfast.title).toBe('string')
         expect(week.tuesday.breakfast.id).toHaveLength(24)
 
-        expect(week.wednesday).toBe()
-        expect(week.wednesday.id).toBe('string')
+        expect(typeof week.wednesday.id).toBe('string')
         expect(week.wednesday.id).toHaveLength(24)
-        expect(week.wednesday._id).not.toBe()
-        expect(week.wednesday.breakfast).toBe('object')
-        expect(week.wednesday.breakfast.id).toBe('string')
+        expect(week.wednesday._id).toBeUndefined()
+        expect(typeof week.wednesday.breakfast).toBe('object')
+        expect(typeof week.wednesday.breakfast.id).toBe('string')
         expect(week.wednesday.breakfast.id).toHaveLength(24)
-        expect(week.wednesday.breakfast._id).not.toBe
-        expect(week.wednesday.breakfast.title).toBe('string')
+        expect(week.wednesday.breakfast._id).toBeUndefined()
+        expect(typeof week.wednesday.breakfast.title).toBe('string')
         expect(week.wednesday.breakfast.id).toHaveLength(24)
 
-        expect(week.thursday).toBe()
-        expect(week.thursday.id).toBe('string')
+        expect(typeof week.thursday.id).toBe('string')
         expect(week.thursday.id).toHaveLength(24)
-        expect(week.thursday._id).not.toBe()
-        expect(week.thursday.breakfast).toBe('object')
-        expect(week.thursday.breakfast.id).toBe('string')
+        expect(week.thursday._id).toBeUndefined()
+        expect(week.thursday.breakfast).toBeInstanceOf(Object)
+        expect(typeof week.thursday.breakfast.id).toBe('string')
         expect(week.thursday.breakfast.id).toHaveLength(24)
-        expect(week.thursday.breakfast._id).not.toBe()
-        expect(week.thursday.breakfast.title).toBe('string')
+        expect(week.thursday.breakfast._id).toBeUndefined()
+        expect(typeof week.thursday.breakfast.title).toBe('string')
         expect(week.thursday.breakfast.id).toHaveLength(24)
 
-        expect(week.friday).toBe()
-        expect(week.friday.id).toBe('string')
+        expect(typeof week.friday.id).toBe('string')
         expect(week.friday.id).toHaveLength(24)
-        expect(week.friday._id).not.toBe()
-        expect(week.friday.breakfast).toBe('object')
-        expect(week.friday.breakfast.id).toBe('string')
+        expect(week.friday._id).toBeUndefined()
+        expect(week.friday.breakfast).toBeInstanceOf(Object)
+        expect(typeof week.friday.breakfast.id).toBe('string')
         expect(week.friday.breakfast.id).toHaveLength(24)
-        expect(week.friday.breakfast._id).not.toBe()
-        expect(week.friday.breakfast.title).toBe('string')
+        expect(week.friday.breakfast._id).toBeUndefined()
+        expect(typeof week.friday.breakfast.title).toBe('string')
         expect(week.friday.breakfast.id).toHaveLength(24)
 
-        expect(week.saturday).toBe()
-        expect(week.saturday.id).toBe('string')
+        expect(typeof week.saturday.id).toBe('string')
         expect(week.saturday.id).toHaveLength(24)
-        expect(week.saturday._id).not.toBe()
-        expect(week.saturday.breakfast).toBe('object')
-        expect(week.saturday.breakfast.id).toBe('string')
+        expect(week.saturday._id).toBeUndefined()
+        expect(week.saturday.breakfast).toBeInstanceOf(Object)
+        expect(typeof week.saturday.breakfast.id).toBe('string')
         expect(week.saturday.breakfast.id).toHaveLength(24)
-        expect(week.saturday.breakfast._id).not.toBe()
-        expect(week.saturday.breakfast.title).toBe('string')
+        expect(week.saturday.breakfast._id).toBeUndefined()
+        expect(typeof week.saturday.breakfast.title).toBe('string')
         expect(week.saturday.breakfast.id).toHaveLength(24)
 
-        expect(week.sunday).toBe()
-        expect(week.sunday.id).toBe('string')
+        expect(typeof week.sunday.id).toBe('string')
         expect(week.sunday.id).toHaveLength(24)
-        expect(week.sunday._id).not.toBe()
-        expect(week.sunday.breakfast).toBe('object')
-        expect(week.sunday.breakfast.id).toBe('string')
+        expect(week.sunday._id).toBeUndefined()
+        expect(week.sunday.breakfast).toBeInstanceOf(Object)
+        expect(typeof week.sunday.breakfast.id).toBe('string')
         expect(week.sunday.breakfast.id).toHaveLength(24)
-        expect(week.sunday.breakfast._id).not.toBe()
-        expect(week.sunday.breakfast.title).toBe('string')
+        expect(week.sunday.breakfast._id).toBeUndefined()
+        expect(typeof week.sunday.breakfast.title).toBe('string')
         expect(week.sunday.breakfast.id).toHaveLength(24)
     })
-
-    it("should fail on non existant id", async () => {
-        id = "5d740a810a6041a5ae918901"
-        
-        try {
-            await logic.retrieveCurrentWeek(userId)
-        } catch ({ message }) {
-            expect(message).toBe()
-            expect(message).toBe(`no weeks found with id ${id}`)
-        }
-    })
-
-    it("should fail if query is not a string", () => {
-        expect(() => logic.retrieveCurrentWeek(123)).toThrow(Error, "userId with value 123 is not a string")
-    })
-
-    it('should fail on empty id', () =>
-        expect(() =>
-            logic.retrieveCurrentWeek('')
-        ).toThrow('userId is empty or blank')
-    )
-
-    it('should fail on undefined id', () =>
-        expect(() =>
-            logic.retrieveCurrentWeek(undefined)
-        ).toThrow(`userId with value undefined is not a string`)
-    )
 
     afterAll(() => database.disconnect())
 })

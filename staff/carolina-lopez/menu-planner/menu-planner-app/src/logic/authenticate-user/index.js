@@ -2,7 +2,7 @@ import { validate } from 'menu-planner-utils'
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
-/**Function that authenticate an user
+/**Function that authenticates a user
 * @param {string} email  email of user
 * @param {string} password  password of user
 * @throws {Error} incorrect params value

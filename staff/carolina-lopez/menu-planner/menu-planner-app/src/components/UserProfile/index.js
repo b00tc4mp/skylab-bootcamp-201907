@@ -14,21 +14,21 @@ export default withRouter(function({history, onLogout}){
   }, [history.location])
   
   return <section className='body'>
- <header class="navbar">
-  <div class="dropdown dropdown-left">
-    <button class="dropbtn">MenuPlanner 
-      <i class="fa fa-caret-down"></i>
+ <header className="navbar">
+  <div className="dropdown dropdown-left">
+    <button className="dropbtn">MenuPlanner 
+      <i className="fa fa-caret-down"></i>
     </button>
-    <div class="dropdown-content">
+    <div className="dropdown-content">
       <Link className="nav__a dropdown__button a" href="#" to="/home">Home</Link>
       <Link className="nav__a dropdown__button a" href="#" to="/current-week">Current Week</Link>
       <Link className="nav__a dropdown__button a" href="#" to="/create-menu">Create Menu</Link>
     </div>
   </div> 
-  <div class="dropdown dropdown-right">
-    <button class="dropbtn"><i className="far fa-user-circle"></i>
+  <div className="dropdown dropdown-right">
+    <button className="dropbtn"><i className="far fa-user-circle"></i>
     </button>
-    <div class="dropdown-content">
+    <div className="dropdown-content">
       <a className="nav__a dropdown__button a"href="#" onClick={onLogout}>Logout</a>
     </div>
   </div>
