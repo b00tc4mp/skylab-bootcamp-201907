@@ -7,7 +7,7 @@ module.exports = function (id, title, date, notes) {
     validate.string(id, 'id')
     // validate.object(body, 'body')
     return (async () => {
-        debugger
+        
         const subject = await Subject.findById(id)
 
         if (!subject) throw new Error(`subject with id ${id} not exists.`)

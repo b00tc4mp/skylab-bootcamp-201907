@@ -8,9 +8,9 @@ module.exports = function (id) {
     return (async () => {
         
         const subject = await Subject.findById(id)
-debugger
+
         if (!subject) throw new Error(`subject with id ${id} not exists.`)
-debugger
+
         return subject.post
     })()
 }

@@ -11,17 +11,17 @@ module.exports = function (userId) {
     return (async () => {
         
         const subjects = await Subject.find({}).lean()
-debugger
+
         if (!subjects) throw Error(`user with id ${subjects.id} not found`)
         
         let result
 
-        subjects.forEach(subject => { debugger
-            const sub = subject.teachers.findIndex(teacher => {debugger;return teacher.toString()==userId;debugger})
-            debugger
-            if(sub>-1) {debugger;result = subject;return}
+        subjects.forEach(subject => { 
+            const sub = subject.teachers.findIndex(teacher => {;return teacher.toString()==userId;})
+            
+            if(sub>-1) {;result = subject;return}
         });
-        debugger
+        
         return result
     })()
 }

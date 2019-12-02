@@ -8,22 +8,18 @@ const { validate } = require('classty-utils')
  * @returns {Promise}
  */
 module.exports = function (idSub) {
-    debugger
+    
     return (async () => {
-        debugger
+        
         const subject = await Subject.findOne({ _id: idSub })
-        debugger
+        
         let students = await User.find({ type: 'student' }, { password: 0 }).lean()
-debugger
-        if (!subject) throw Error(`Not subject defined`)
-        debugger
-        return subject.students.map(student => {debugger
-            const find = students.find(_student => _student._id.toString() == student.toString())
-            debugger
 
-            
-            debugger
-            debugger
+        if (!subject) throw Error(`Not subject defined`)
+        
+        return subject.students.map(student => {
+            const find = students.find(_student => _student._id.toString() == student.toString())
+
             if (find) { find.id = find._id.toString()
                 
                 const { email, name, surname, id  } = find
