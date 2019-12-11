@@ -1,0 +1,31 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx mocha logic/**/**/*.spec.js",
+    "debug": "node debug .",
+    "test-debug": "npx mocha debug logic/**/**/*.spec.js",
+    "test:coverage": "nyc --reporter=html --reporter=text mocha logic/**/**/*.spec.js --runInBand"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "coverage": "^0.4.1",
+    "data": "file:../data",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "utils": "file:../utils"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
+    "nodemon": "^1.19.2",
+    "nyc": "^14.1.1"
+  }
+}

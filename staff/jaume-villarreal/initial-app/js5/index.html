@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link href="https://fonts.googleapis.com/css?family=Darker+Grotesque|Play:400,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
+        <title>🦁Initial App</title>
+    </head>
+    <body>
+        <main class="wrapper">
+            <h1 class="header-1">INITIAL APP</h1>
+            
+            <!-- Landing -->
+            <section class="panel panel--show initial-panel">
+                    <div class="btn-set">
+                        <a href="" class="btn">Register</a>
+                        <a href="#" class="btn">Login</a>
+                    </div>
+            </section>
+            
+            <!-- Register -->
+            <section class="panel panel--hide form">
+                <h2 class="header-2">Register form</h2>
+                <form class="form__input">
+                    <label for="name">Name</label>
+                        <input type="text" id="name">
+                    <label for="surname">Surname</label>
+                        <input type="text" id="surname">
+                    <label for="mail">E-mail</label>
+                        <input type="email" id="mail">
+                    <label for="password">Password</label>
+                        <input type="password" id="password">
+                    <div class="btn-set">
+                        <button type="submit" class="btn btn--form">Register</button>
+                    </div>
+                </form>
+                <p class="panel__feedback panel--hide"></p>
+                <a class="btn btn--back" href="">Back</a>
+            </section>
+            
+            <!-- Register Success -->
+            <section class="panel panel--hide successRegister">
+                <h2 class="header-2">Registered</h2>
+                <p class="text-box">Registered succeeded</p>
+                <div class="btn-set">
+                    <a href="" class="btn">Back</a>
+                    <a href="#" class="btn">Login</a>
+                </div>
+            </section>
+            
+            <!-- Login -->
+            <section class="panel panel--hide form">
+                <h2 class="header-2">Login form</h2>
+                <form class="form__input">
+                    <label for="mailLogin">E-mail</label>
+                        <input type="email" id="logMail">
+                    <label for="passwordLogin">Password</label>
+                        <input type="password" id="logPassword">
+                    <div class="btn-set">
+                        <button type="submit" class="btn btn--form">Login</button>
+                    </div>
+                </form>
+                <p class="panel__feedback panel--hide"></p>
+                <a class="btn btn--back" href="">Back</a>
+            </section>
+            
+            <!-- Home -->
+            <section class="panel _panel--hide home">
+                <h2 class="header-2">Welcome!</h2>
+                <a class="btn" href="">Logout</a>
+
+                <!-- Search -->
+                <section class="panel panel--show">
+                    <h3>Search your duck</h3>
+                    <form class="panel--show form form__search">
+                        <input type="text" id="query">
+                        <button type="submit" class="btn btn--query">Search</button>
+                        <p class="panel__feedback panel--hide"></p>
+                    </form>
+                </section>
+
+                    <!-- Gallery -->
+                <section class="panel panel--hide">
+                    <ul class="panel _gallery"></ul>
+                </section>
+
+                <!-- Duck Detail -->
+                <section class="panel panel--hide">
+                    <h3>Title</h3>
+                    <img src="whatever.jpg" alt="duck image">
+                    <span>price</span>
+                    <p>description</p>
+                    <a href="#">duck link</a>
+                    <a class="btn" href="">Back</a>
+                </section>
+            </section>
+        </main>
+
+        <script src="js/curray.js"></script>
+        <script src="js/components.js"></script>
+        <script src="js/components-custom.js"></script>
+        <script src="js/call.js"></script>
+        <script src="js/data.js"></script>
+        <script src="js/logic.js"></script>
+        <script src="js/presentation.js"></script>
+    </body>
+</html>

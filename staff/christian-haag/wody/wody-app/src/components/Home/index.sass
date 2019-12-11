@@ -1,0 +1,264 @@
+%toFlex
+    display: flex
+    flex-direction: row
+    justify-content: space-around
+
+$grey: #373636
+$red: #D63E3E
+$font: Arial, Helvetica, sans-serif
+
+
+body
+    margin: 0
+    padding: 0
+        
+.home-header
+    @extend %toFlex
+    background-color: #373636
+    height: 3.5rem
+    align-items: center
+    
+    &--user-name
+        color: white
+        
+    &--icon
+        font-size: 2rem
+        padding-left: 4rem
+        color: white
+
+    &--logo
+        background-image: url('../../resources/logowhite.png')
+        background-size: cover
+        width: 45px
+        height: 45px
+        
+.wody-bttn
+    color: white
+    margin-left: 18%
+    margin-top: 1rem
+    border: none
+    background-color: $red
+    padding: 0.4rem 4rem
+    border-radius: 5px
+   
+      
+.nav-container
+    position: absolute
+    margin-top: 109px
+    width: 100%
+    z-index: 1
+    border-top: 1px solid black
+  
+    &__ul
+        margin-top: 0
+        background-color: #4E4C4C
+        padding: 0.5rem
+        border-bottom: 1px solid $grey
+
+    &__ul-li
+        list-style: none
+        text-align: left
+        padding: 0.5rem
+        
+
+        &--style
+            color: whitesmoke
+            font-size: 1.5rem
+            text-decoration: none
+           
+
+.mid
+    border-bottom: 1px solid grey
+    border-top: 1px solid grey
+
+          
+.mid-container
+    display: flex
+    align-items: center
+    flex-direction: column
+    justify-content: center
+    height: 40vh
+    background-image: url('../../resources/timer-img.png')
+    object-fit: fit
+    background-repeat: no-repeat
+    background-size: cover
+
+
+   
+.timer-container
+    text-align: left
+    border-radius: 5px
+    padding: 0.2rem
+    width: 50vw
+    background-color: rgba(0,0,0,0.6)
+    color: white
+
+
+.time
+    transition: 1s ease-out
+    text-align: center
+    font-weight: bold
+    font-size: 4rem
+    color: white
+    border: 3px solid white
+    border-radius: 20px
+    padding: 0.6rem
+    background-color: rgba(0,0,0,0.6)
+
+.time-go
+    transition: 0.5s ease-in
+    font-weight: bold
+    color: white
+    font-size: 6rem
+
+.time-red
+    transition: 0.5s ease-in
+    font-weight: bold
+    font-size: 4rem
+    color: white
+    border-radius: 50px
+    border: 3px solid red
+    background-color: rgba(0,0,0,0.6)
+
+.left-stripe
+    border-left: 5px solid $red
+
+    &--text
+        padding: 0.4rem
+       
+.home
+    margin: 1rem 
+
+
+.start-container
+    width: 95%
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: center
+    color: black
+    padding-left: 5%
+    font-size: 2rem
+
+.workout-bttn
+    color: white
+    border: none
+    background-color: $red
+    padding: 0.4rem 3rem
+    border-radius: 5px
+    margin-bottom: 1rem
+
+.done-bttn
+    color: white
+    border: 2px solid $grey
+    background-color: $red
+    padding: 0.4rem 3rem
+    border-radius: 5px
+    margin-bottom: 1rem
+
+.save-bttn
+    color: $red
+    font-weight: bold
+    border: none
+    background-color: $grey
+    padding: 0.4rem 1rem
+    border-radius: 5px
+    margin-bottom: 1rem
+
+
+.saved-mssg
+    color: $grey
+    font-weight: bold
+    font-size: 0.8rem
+    border: 2px solid $red
+    padding: 0.4rem 1rem
+    border-radius: 5px
+    background-color: white
+    margin-bottom: 1.5rem
+    margin-right: 1rem
+
+.workout-header
+    @extend %toFlex
+    border-top: 4px solid $grey
+    border-bottom: 4px solid $grey
+    
+    align-items: center
+   
+    &__info
+        display: flex
+        border-radius: 5px
+        height: 2rem
+        width:  60%
+        justify-content: space-between
+        align-items: center
+        background-color: $grey
+        color: white
+
+.itext
+    margin-left: 0.5rem
+    font-size: 0.8rem
+
+.set
+    margin-right: 1rem
+    font-weight: bold
+    font-size: 0.8rem
+        
+.info-description
+    @extend %toFlex
+    font-weight: bold
+    margin-bottom: -1.5rem
+
+    &--style3
+        margin-right: 1.5rem
+        width: 15%
+
+    &--style2
+        text-align: center
+        width: 35%
+
+    &--style1
+        margin-left: 2rem
+        width: 50%
+
+.movement-container
+    @extend %toFlex
+    border-radius: 8px
+    margin: 1rem
+    background-color: $grey
+    color: white
+    border-left: 4px solid $red
+
+    &--reps
+        margin-left: 0.4rem
+        width: 15%
+
+    &--type
+        text-align: center
+        font-size: 0.8rem
+        width: 35%
+
+    &--mov
+        margin-left: 0.4rem
+        width: 50%
+
+.footer-container
+    background-color: #373636
+    height: 3rem
+
+.no-video
+    text-align: center
+    color: $red
+
+
+
+.cross
+    font-size: 2rem
+    margin-left: 90%
+    padding-top: 0.5rem
+
+    
+
+
+
+   
+   

@@ -1,0 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.body {
+  display: grid;
+  grid-template-rows: 10vh 80vh 10vh;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.logo {
+  background-image: url("./styles/img/dog-human1.jpeg");
+  background-attachment: fixed;
+  width: 100%;
+}
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  background-image: url("./styles/img/dog-walkers1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+.main__compo {
+  display: flex;
+  margin-top: 35%;
+  box-shadow: 0 4px 6px #bbb;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 5px 5px 5px 5px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+.main__compo__list {
+  display: flex;
+  list-style-type: none;
+  flex-direction: column;
+}
+.main__compo__list__link {
+  text-decoration: none;
+  display: flex;
+  margin: 0.5em;
+  text-align: center;
+  color: #533a3ad8;
+  font-size: 1.5em;
+  font-weight: bolder;
+  box-shadow: 0 4px 6px #92919100;
+  background-color: rgba(228, 225, 225, 0.6);
+  padding: 5px 5px 5px 5px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+/*# sourceMappingURL=index.css.map */

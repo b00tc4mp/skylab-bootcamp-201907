@@ -1,4 +1,0 @@
-staff
-- jaume
-- christian
-- josep
