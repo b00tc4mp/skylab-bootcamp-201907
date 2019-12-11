@@ -1,0 +1,59 @@
+.home
+    margin: 0
+    &__e
+        font-weight: lighter
+        font-size: 1.5rem
+    &__title
+        display: initial
+        font-family: Helvetica, Roboto, sans-serif
+        font-size: 2rem
+    &__subtitle
+        font-size: 1.2rem
+        font-weight: normal
+        margin-top: 1em
+    &__logo, &__mobile-menu
+        display: none
+    &__space
+        margin: 4em 0 2em 0
+    &__spaces
+        margin: 0 0 5em 0
+        display: flex
+        justify-content: space-between
+        flex-wrap: wrap
+    &__space-image
+        display: flex
+        justify-content: space-between
+        display: block
+        position: relative
+        margin-bottom: 1em
+        width: 100%
+    &__space-reveal 
+        position: absolute
+        top: 0
+        left: 0
+        z-index: -1
+    &__space-title 
+        position: absolute
+        margin: 1em 0 0 1em
+        font-size: 1rem
+    &__space-subtitle 
+        position: absolute
+        margin: 3em 0 0 1em
+        font-size: 1rem
+    &__space-figure 
+        margin: 0 0 5px 0
+    &__space-img 
+        display: block
+        width: 100%
+    &__space-img:hover 
+        opacity: 0.01
+        transition: opacity 500ms
+
+@media screen and (min-width: 840px) 
+    .home
+        text-align: center
+        &__logo, &__mobile-menu
+            display: none
+        &__space-image
+            width: 45%
+            

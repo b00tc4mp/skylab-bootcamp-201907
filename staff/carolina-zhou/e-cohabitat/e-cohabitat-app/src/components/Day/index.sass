@@ -1,0 +1,128 @@
+.day
+    margin: 0
+    text-align: center
+    &__header
+        display: flex
+        justify-content: center
+    &__title
+        display: initial
+        font-family: Helvetica, Roboto, sans-serif
+        font-size: 1.2rem
+    &__month-year
+        font-size: 1rem
+        font-weight: normal
+        margin-top: 1em
+    &__act
+        display: flex
+        flex-direction: column
+    &__toolbar
+        display: flex
+        justify-content: center
+        flex-direction: column
+        align-items: stretch
+        margin: 24px 0
+    &__toggle
+        display: grid
+        grid-template-columns: 1fr 1fr 1fr
+        text-align: center
+        font-size: 0.9em
+    &__toggle-option
+        border: 1px solid lightgrey
+        border-radius: 0
+        padding: .75em
+        cursor: pointer
+    &__toggle-option:first-child
+        border-right: none
+    &__toggle-option:last-child
+        border-left: none
+    &__toggle-option--selected
+        font-weight: bold
+        color: $primary-hover-color
+    &__search-input, .fa-search
+        display: none
+
+.timetable
+    margin: 1em 0 5em 0
+    border: 1px solid lightgrey
+    width: 100%
+    text-align-last: justify
+    border-collapse: collapse
+    &__tr
+        border: 1px solid lightgrey
+    &__th
+        border: 1px solid lightgrey
+        padding: .5em
+        font-weight: normal
+        font-size: .7rem
+        color: grey
+        width: 30%
+    &__td
+        padding: .75em
+        width: 90%
+        text-align: left
+    &__task-intro
+        display: flex
+        align-items: center
+    &__task-user
+        color: hotpink
+        margin-right: .25em
+    &__task-name
+        color: $terciary-text-color
+        margin-right: .25em
+    &__task-description
+        text-align-last: left
+        margin: .25em 0 1em 0
+
+.fa-plus-circle
+    background-color: white
+    color: $secondary-button-color
+    border: none
+    padding: 0
+    font-size: .7rem
+
+.fa-plus-circle:hover
+    color: $terciary-hover-color
+
+.fa-minus-circle
+    background-color: white
+    color: $secondary-button-color
+    margin-left: .5em
+    border: none
+
+.fa-minus-circle:hover
+    color: $secondary-hover-color
+
+
+@media (min-width: 840px) 
+    .day
+        &__header
+            margin: auto
+            display: flex
+            justify-content: space-between
+            width: 30%
+        &__title
+            font-size: 2rem
+        &__month-year
+            font-size: 1.2rem
+        &__act
+            display: flex
+            flex-direction: row
+            padding: 0
+        &__toolbar
+            display: flex
+            flex-direction: row
+            justify-content: space-between
+            align-items: center
+            margin-bottom: 24px
+        &__search-input
+            display: initial
+            font-size: .75rem
+            padding: .75em
+        .fa-search
+            display: initial
+
+    .timetable
+        &__th
+            padding: .75em
+            width: 13%
+    

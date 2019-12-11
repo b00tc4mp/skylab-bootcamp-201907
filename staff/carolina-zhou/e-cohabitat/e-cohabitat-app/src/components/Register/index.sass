@@ -1,0 +1,36 @@
+.register
+    padding: 4em 0
+    text-align: center
+
+    &__title
+        font-family: Helvetica, Roboto, sans-serif
+        font-size: 2rem
+        text-align: center
+        margin-bottom: 2em
+    &__form-item
+        list-style: none
+        margin: 1em auto
+    &__form-input
+        padding: .5em
+        width: 100%
+    &__form-button
+        background-color: $primary-button-color
+        color: white
+        text-align: center
+        margin: 1em auto 3em auto
+        border: none
+        padding: .5em
+    &__back-link
+        text-decoration: none
+        color: $link-text-color
+        margin: auto
+    &__back-link:hover
+        color: $primary-hover-color
+
+
+@media (min-width: 840px) 
+    .register
+        padding: 1em 4em
+
+        &__form-input
+            width: 65%

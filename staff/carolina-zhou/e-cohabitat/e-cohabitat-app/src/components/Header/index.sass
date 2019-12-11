@@ -1,0 +1,60 @@
+.hidden
+    display: none
+
+.mobile-menu
+    padding: 2em 2em 0 2em
+    &__list
+        display: flex
+        justify-content: space-between
+        list-style: none
+    &__logo
+        width: 30%
+    &__logout-button
+        background-color: white
+        border: none
+        padding: none
+        color: $terciary-text-color
+        font-size: 10px
+    &__logout-button:hover
+        color: $primary-hover-color
+
+
+@media (min-width: 840px) 
+    .hidden
+        display: initial
+    
+    .mobile-menu
+        display: none
+
+    .header
+        display: flex
+        justify-content: space-between
+        padding: 1em 2em
+        &__logo
+            width: 100px
+            margin-left: 2em
+        &__main-menu
+            margin-top: 1em
+            padding: 0
+            font-weight: bold
+        &__secondary-menu
+            position: absolute
+            top: 0
+            right: 0
+            margin: 2em 2em
+            display: flex
+        &__item
+            list-style: none
+            padding: 0 0 1em 2em
+        &__main-link
+            text-decoration: none
+            color: black
+        &__secondary-link
+            text-decoration: none
+            color: $link-text-color
+        &__logout-button
+            background-color: white
+            border: none
+            color: $terciary-text-color
+        &__main-link:hover, &__secondary-link:hover, &__logout-button:hover
+            color: $primary-hover-color
