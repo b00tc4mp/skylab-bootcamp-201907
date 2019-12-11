@@ -1,0 +1,710 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
+/* http://meyerweb.com/eric/tools/css/reset/ 
+ * v2.0 | 20110126
+ * License: none (public domain) */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.body-landing__content {
+  width: 100%;
+  margin: 20% auto;
+}
+.body-landing__image {
+  background-color: white;
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.body-landing__links {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  color: white;
+  text-decoration: none;
+  background-color: black;
+  font-size: 14px;
+  display: block;
+  padding: 3%;
+  width: 20%;
+  margin: 5px auto;
+  text-align: center;
+  border: 1px solid black;
+}
+
+.feedback__text {
+  color: white;
+  text-align: center;
+  width: 80%;
+  margin: 5% auto;
+  padding: 5%;
+  border: 1px solid white;
+  font-size: 1rem;
+}
+
+.login__content {
+  width: 80%;
+  margin: 20% auto;
+  border: 1px solid white;
+}
+.login__image {
+  background-size: cover;
+  background-color: white;
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  color: black;
+  text-decoration: none;
+  background-color: white;
+  font-size: 14px;
+  display: block;
+  padding: 3%;
+  width: 20%;
+  margin: 5px auto;
+  text-align: center;
+}
+
+form {
+  text-align: center;
+}
+form__form--inputs {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+label {
+  font-size: 18px;
+}
+
+input {
+  padding: 2%;
+  margin: 2%;
+}
+
+.register__content {
+  width: 80%;
+  margin: 20% auto;
+  border: 1px solid white;
+}
+.register__image {
+  background-size: cover;
+  background-color: white;
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  color: black;
+  text-decoration: none;
+  background-color: white;
+  font-size: 18px;
+  display: block;
+  padding: 3%;
+  width: 25%;
+  margin: 5px auto;
+  text-align: center;
+}
+
+form {
+  text-align: center;
+}
+form__form-inputs {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+label {
+  font-size: 18px;
+}
+
+input {
+  padding: 2%;
+  margin: 2%;
+}
+
+.register-successful__content {
+  font-size: 18px;
+  margin: 20%;
+}
+.register-successful__image {
+  background-size: cover;
+  background-color: white;
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.register-successful__link {
+  color: white;
+  text-decoration: none;
+  background-color: black;
+  font-size: 14px;
+  display: block;
+  padding: 3%;
+  width: 40%;
+  margin: 5px auto;
+}
+
+.league {
+  background-color: #394a6d;
+  height: 100vh;
+  width: 100vw;
+}
+.league__content {
+  width: 80%;
+  margin: 10% auto;
+  border: 1px solid white;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.league__content__title {
+  margin-top: 2%;
+}
+.league__content__name {
+  font-size: 16px;
+  margin: 5%;
+  color: white;
+}
+.league__content__title {
+  text-align: center;
+}
+
+.create {
+  background-color: #394a6d;
+  width: 100vw;
+  height: 100vh;
+}
+.create__content__form-create {
+  text-align: center;
+}
+.create__content__form-create__inputs {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+label {
+  font-size: 18px;
+}
+
+input {
+  padding: 2%;
+  margin: 2%;
+}
+
+.header {
+  display: flex;
+  padding: 5%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Navbar container */
+.navbar {
+  overflow: hidden;
+  background-color: #394a6d;
+}
+
+/* Links inside the navbar */
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* The dropdown container */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: "Monda", sans-serif;
+  margin: 0;
+}
+
+/* Add a red background color to navbar links on hover */
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: #394a6d;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.title__name {
+  text-align: center;
+}
+
+.low-menu {
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.code {
+  color: black;
+  font-size: 16px;
+  text-align: left;
+}
+
+.title {
+  width: 50%;
+}
+.title__name {
+  margin: 5%;
+}
+.title__image {
+  width: 30%;
+}
+.title__user--paragraph {
+  font-size: 14px;
+}
+.title__name {
+  font-size: 1.5rem;
+}
+
+.fa-user {
+  margin: 5px 5px;
+}
+
+.myteam {
+  background-color: #394a6d;
+  width: 100vw;
+}
+
+.players {
+  background-color: #394a6d;
+  width: 70%;
+}
+
+.mylineup {
+  background-color: #394a6d;
+  width: 100vw;
+}
+
+.item-players {
+  background-color: #394a6d;
+  width: 70%;
+}
+
+.card-initial {
+  padding: 0.5em;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #394a6d;
+}
+.card-initial__image {
+  width: 80%;
+  margin: 10%;
+}
+.card-initial__info {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.card-initial__info__name {
+  padding-right: 0.5em;
+  font-size: 18px;
+}
+.card-initial__info__surname {
+  padding-right: 0.5em;
+}
+.card-initial__info__points {
+  padding-right: 0.5em;
+}
+
+.card-players {
+  margin: auto;
+  width: 100%;
+  border: 1px solid white;
+}
+.card-players p {
+  text-align: center;
+  color: white;
+  font-size: 15px;
+}
+.card-players a {
+  font-size: 1px;
+}
+.card-players__image {
+  width: 90%;
+}
+.card-players__content {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.5em;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.card-players__content__name {
+  padding-right: 0.5em;
+}
+.card-players__content__surname {
+  padding-right: 0.5em;
+}
+
+.detail {
+  background-color: #394a6d;
+  width: 100vw;
+}
+
+.player-detail {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 100%;
+}
+.player-detail__image {
+  justify-content: center;
+  width: 89%;
+  margin: 0 auto;
+  margin-top: 5%;
+  border: 1px solid white;
+}
+.player-detail__content {
+  display: flex;
+  width: 85%;
+  background-color: rgba(0, 0, 0, 0.5);
+  flex-direction: column;
+  border: 0.5px solid white;
+  padding: 0.5em;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+.player-detail__content__name {
+  font-size: 18px;
+}
+.player-detail__content__position {
+  font-size: 18px;
+}
+.player-detail__content__points {
+  font-size: 18px;
+}
+.player-detail__content__goals {
+  font-size: 18px;
+}
+.player-detail__content__cost {
+  font-size: 18px;
+}
+
+.initial-header {
+  display: flex;
+  border: 1px solid white;
+  padding: 5%;
+}
+.initial-header__image {
+  width: 30%;
+}
+.initial-header__text {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.table {
+  background-color: #394a6d;
+  width: 100vw;
+}
+.table__clasification {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: auto;
+  width: 50%;
+  border: 1px solid #45454d;
+  padding: 5px;
+}
+.table__clasification__list {
+  margin: 10%;
+}
+.table__clasification__list__tables {
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+}
+.table__clasification__list__team {
+  font-size: 16px;
+}
+.table__clasification__list__points {
+  font-size: 16px;
+}
+
+.user-profile {
+  background-color: #394a6d;
+  width: 100vw;
+  height: 100vh;
+}
+.user-profile__card {
+  margin: 10% auto;
+  padding: 5px;
+  width: 80%;
+}
+.user-profile__card__content {
+  border: 0.5px solid white;
+  padding: 0.5em;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.user-profile__card__content__user {
+  padding-right: 0.5em;
+  font-size: 16px;
+}
+.user-profile__card__content__surname {
+  padding-right: 0.5em;
+  font-size: 16px;
+}
+.user-profile__card__content__email {
+  padding-right: 0.5em;
+  font-size: 16px;
+}
+
+.create-teams {
+  background-color: #394a6d;
+  width: 100vw;
+  height: 100vh;
+}
+.create-teams__link {
+  color: white;
+  text-decoration: none;
+  background-color: black;
+  font-size: 18px;
+  display: block;
+  padding: 3%;
+  width: 25%;
+  margin: 5% auto;
+  text-align: center;
+}
+
+.players-create {
+  background-color: #394a6d;
+}
+
+li {
+  list-style: none;
+}
+
+.teamsleague {
+  background-color: #394a6d;
+  width: 100vw;
+}
+
+.create-lineups {
+  background-color: #394a6d;
+  width: 100vw;
+  height: 100vh;
+}
+.create-lineups__title {
+  font-size: 18px;
+}
+.create-lineups__link {
+  color: white;
+  text-decoration: none;
+  background-color: black;
+  font-size: 18px;
+  display: block;
+  padding: 3%;
+  width: 25%;
+  margin: 5% auto;
+}
+
+.item-players-lineup {
+  background-color: #394a6d;
+}
+
+li {
+  list-style: none;
+}
+
+.lineupdate {
+  background-color: #394a6d;
+  width: 100vw;
+}
+
+.player-lineup {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 100%;
+}
+.player-lineup__image {
+  justify-content: center;
+  width: 89%;
+  margin: 0% auto;
+  margin-top: 5%;
+  border: 1px solid white;
+}
+.player-lineup__content {
+  display: flex;
+  width: 85%;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.5em;
+  display: flex;
+  justify-content: center;
+  margin: 0% auto;
+}
+
+p {
+  text-align: center;
+  color: white;
+  font-size: 20px;
+}
+
+h1 {
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  margin: 5%;
+  font-family: "Monda", sans-serif;
+}
+
+h2 {
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  margin: 5%;
+  font-family: "Monda", sans-serif;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+  font-size: 1rem;
+  display: block;
+  padding: 3%;
+  margin: 5px auto;
+  text-align: center;
+  font-family: "Monda", sans-serif;
+}
+
+p {
+  font-family: "Monda", sans-serif;
+}
+
+button {
+  margin: 5%;
+  font-family: "Monda", sans-serif;
+  font-size: 14px;
+  background-color: white;
+  border-radius: 8px;
+}
+button button:hover {
+  background-color: white;
+  color: #D7D9DA;
+  font-weight: bold;
+}
+
+body {
+  background-color: #394a6d;
+  height: 100vh;
+  width: 100vw;
+}
+
+/*# sourceMappingURL=index.css.map */

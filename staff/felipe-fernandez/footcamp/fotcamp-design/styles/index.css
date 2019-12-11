@@ -1,0 +1,254 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
+/* http://meyerweb.com/eric/tools/css/reset/ 
+ * v2.0 | 20110126
+ * License: none (public domain) */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+body {
+  background-color: #216583;
+}
+
+h1 {
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  margin: 5%;
+}
+
+h2 {
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  margin: 10%;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+  background-color: white;
+  font-size: 18px;
+  display: block;
+  padding: 3%;
+  width: 25%;
+  margin: 5px auto;
+  text-align: center;
+}
+
+form {
+  padding: 10%;
+  text-align: center;
+}
+
+.form-inputs {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+label {
+  font-size: 18px;
+}
+
+input {
+  padding: 2%;
+  margin: 2%;
+}
+
+.register-successful {
+  margin: 20%;
+  text-align: center;
+}
+.register-successful a {
+  margin-top: 5%;
+}
+
+.header-app {
+  background-color: white;
+  padding: 10px;
+  text-align: center;
+  font-size: 25px;
+}
+
+.header-access {
+  padding: 10%;
+}
+
+button {
+  margin: 0 auto;
+}
+
+.navigation {
+  display: flex;
+}
+.navigation a {
+  font-size: 14px;
+  padding: 3%;
+}
+
+.profile {
+  text-align: center;
+}
+
+.invite {
+  text-align: center;
+  margin: 20% auto;
+}
+
+.players {
+  margin: auto;
+  width: 50%;
+  border: 1px solid #f7be16;
+  padding: 5px;
+}
+.players p {
+  text-align: center;
+}
+.players a {
+  font-size: 12px;
+}
+
+.player {
+  margin: auto;
+  width: 50%;
+  border: 1px solid #f7be16;
+  padding: 20px;
+}
+
+.clasification {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  width: 50%;
+  border: 1px solid #f7be16;
+  padding: 5px;
+}
+
+.mainfooter {
+  display: flex;
+  padding: 5px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  color: black;
+  text-align: center;
+}
+.mainfooter a {
+  color: black;
+  text-decoration: none;
+  background-color: white;
+  font-size: 16px;
+  padding: 3%;
+  margin: 5px auto;
+  text-align: center;
+}
+
+.titleApp {
+  margin: 5%;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  background-color: #00818a;
+  padding: 10px;
+  border-radius: 10px;
+  grid-gap: 25px 10px;
+}
+
+.item {
+  background-color: #293462;
+  border: 1px solid #fff;
+  padding: 20px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.item1 {
+  width: 10%;
+  margin: 0 auto;
+  grid-column-start: 1;
+  grid-column-end: 5;
+}
+
+.item10 {
+  width: 20%;
+  margin: 0 auto;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.item11 {
+  width: 20%;
+  margin: 0 auto;
+  grid-column-start: 3;
+  grid-column-end: 5;
+}
+
+button {
+  color: black;
+  background-color: white;
+  font-size: 16px;
+  display: block;
+  padding: 5px;
+  width: 30%;
+  margin: 10px auto;
+  text-align: center;
+}
+
+/*# sourceMappingURL=index.css.map */
