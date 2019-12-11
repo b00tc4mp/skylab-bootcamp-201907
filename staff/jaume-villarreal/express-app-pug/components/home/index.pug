@@ -1,0 +1,37 @@
+extends ../html/index
+
+include ../lang-selector/index
+include ../search/index
+include ../duck-results/index
+include ../duck-detail/index
+
+
+block content
+    header.header
+      h1.header__title Express Duck
+      div.header__lang
+        +lang-selector(selectLangPath)
+      
+      if(name)
+        nav.header__nav
+          ul.header__nav--logged
+            li.form__logged
+              a.btn.btn--logged(href=favoritePath)= favorite
+            li.form__logged
+              form.form__logged(method="post" action=signOutPath)
+                button.btn.btn--logged= signOut
+        h2.header__title--username
+            | #{hello}, #{name}!
+      else
+        nav.header__nav
+          ul  
+            li.form__logged
+                a.btn.btn--logged(href=signUpPath)= signUp
+            li.form__logged
+                a.btn.btn--logged(href=signInPath)= signIn
+      div.header__search
+        +search(searchPath, search)
+      if (ducks)
+        +duck-results(ducks)
+      if (duck)
+        +duck-detail(duck , searchFromDetailPath , query)

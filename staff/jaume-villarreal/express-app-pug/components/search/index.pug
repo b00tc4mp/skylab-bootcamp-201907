@@ -1,0 +1,4 @@
+mixin search(path, search)
+    form(action=path)
+        input.search-box(type="text" name="q" value="")
+        button.btn.btn--search= search
