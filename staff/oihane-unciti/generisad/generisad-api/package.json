@@ -1,0 +1,37 @@
+{
+  "name": "generisad-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "watch": "npx nodemon .",
+    "debug": "node debug .",
+    "test": "npx mocha logic/**/*.spec.js --timeout 10000",
+    "test-debug": "npx mocha debug logic/**/*.spec.js --timeout 10000",
+    "test-inspect": "npx mocha --inspect-brk logic/**/*.spec.js --timeout 10000",
+    "test:coverage": "nyc --reporter=html --reporter=text mocha logic/**/*.spec.js --runInBand --timeout 10000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "busboy": "^0.3.1",
+    "cloudinary": "^1.15.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "generisad-data": "file:../generisad-data",
+    "generisad-utils": "file:../generisad-utils",
+    "jsonwebtoken": "^8.5.1",
+    "streamifier": "^0.1.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
+    "nodemon": "^1.19.1",
+    "nyc": "^14.1.1"
+  }
+}
