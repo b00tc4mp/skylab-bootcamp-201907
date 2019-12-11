@@ -1,0 +1,30 @@
+@import '../../styles/base-settings.sass'
+
+.success-panel
+    font-family: Roboto , Helvetica , Arial , sans-serif
+    margin-top: 8rem
+    width: 100%
+    display: flex
+    flex-direction: columm
+    justify-content: center
+    align-items: center
+    &__wrapper
+        width: 50%
+        .success-text
+            display: flex
+            flex-direction: columm
+            justify-content: center
+            align-items: center
+            width: 100%
+            height: 20vh
+            padding: 0 1rem
+            font-size: 1.5rem
+            color: $success-high
+            background-color: $success-low
+            border-radius: .5rem 
+            border-left: 2rem solid $success-high
+        .button-set
+            width: 100%
+            display: flex
+            justify-content: space-around
+            align-items: center

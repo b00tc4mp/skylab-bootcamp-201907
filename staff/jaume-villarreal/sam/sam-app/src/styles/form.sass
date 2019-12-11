@@ -1,0 +1,84 @@
+@import "./base-settings.sass"
+
+.fieldset
+    padding-left: 1rem
+    border-radius: .5rem
+    border: 1px solid $deep-blue-75
+    background: url("./img/logo-medium-blue-500-blur.png") $light-blue-25 no-repeat -150px -50px
+    &__legend
+        padding: 0 .5rem
+        border-radius: .25rem
+        font-size: 1.25rem
+        font-family: Monda , Helvetica , Trebuchet , Arial , sans-serif
+        font-weight: bold
+        background-color: $orange-100
+        color: white
+    &__body
+        padding-right: 1rem
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: flex-end
+        .input-block
+            width: 75%
+            display: flex
+            justify-content: space-between
+            align-items: center
+            margin-bottom: $margin-bottom-narrow
+            &__label
+                width: 35%
+                padding-right: 1.5rem
+                font-family: Roboto, sans-serif
+                text-align: right
+                font-size: 1.15rem
+                font-weight: bold
+                color: $deep-blue-100
+            &__input
+                padding: .5rem
+                width: 65%
+                height: $height-box
+                font-family: 'Roboto', sans-serif
+                font-size: 1.25rem
+                color: $deep-blue-100
+                border: 1px solid $light-blue-100
+                border-radius: $border-radius
+                background-color: white
+                outline: none
+                &:focus
+                    border: 1px solid $border-box
+        
+    
+    &__observations
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        >label
+            padding-left: 1.5rem
+            margin-bottom: .5rem
+            align-self: flex-start
+        &--text-area
+            display: block
+            margin-bottom: $margin-bottom-wide
+            width: 80%
+            border: 1px solid $border-box
+            border-radius: $border-radius
+            background-color: $box-color
+    &--wider
+        width: 90%
+    &__modality
+        .availability-table
+            width: 100%
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            text-align: center
+            >table
+                width: 100%
+                border-collapse: collapse
+                .caption th
+                    padding: .75rem
+                td
+                    border-bottom: 1px solid $border-box
+                    padding: .25rem

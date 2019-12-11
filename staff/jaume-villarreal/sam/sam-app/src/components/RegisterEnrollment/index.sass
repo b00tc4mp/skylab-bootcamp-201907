@@ -1,0 +1,264 @@
+@import '../../styles/base-settings.sass'
+@import '../../styles/form.sass'
+
+.home-header , .home-subheader
+    width: 100%
+    text-align: center
+    font-size: 3rem
+    font-family: Monda, Helvetica , Arial , sans-serif
+    color: $deep-blue-100
+.home-subheader
+    font-size: 2rem
+
+.form-wrapper
+    width: 100%
+    margin-top: 1rem
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+.form-enrollment
+    width: 75%
+                    
+.fieldset__enrollment
+    padding-left: 1rem
+    border-radius: .5rem
+    border: 1px solid $deep-blue-75
+    background: linear-gradient(to right , $medium-blue-25, $medium-blue-50)
+    margin-bottom: 1.5rem
+    
+.input-block
+    width: 50%
+    margin-bottom: $margin-bottom-narrow
+    // display: flex
+    // flex-direction: column
+    // justify-content: center
+    // align-items: center
+    .select__box
+        margin: 0
+        width: $width-box
+        max-width: 65% 
+        height: $height-box
+        display: block
+        font-size: 1.25rem
+        font-family: sans-serif
+        color: $deep-blue-100
+        line-height: 1.3
+        padding: .6em 1.4em .5em .8em
+        box-sizing: border-box
+        box-shadow: 0 1px 0 1px rgba(0,0,0,.04)
+        border: 1px solid $border-box
+        border-radius: $border-radius
+        -moz-appearance: none
+        -webkit-appearance: none
+        appearance: none
+        outline: none
+        &::-ms-expand 
+            display: none
+        &:hover
+            border-color: $border-box
+        &:focus
+            border-color: $border-box
+            box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7)
+            box-shadow: 0 0 0 3px -moz-mac-focusring
+            color: #222
+            outline: none
+
+
+.fieldset__enrollment--radio
+    width: 100%
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-content: flex-end
+    .table__radio-block
+        padding-right: 2rem
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: flex-end
+        .radio-block
+            width: 75%
+            display: flex
+            justify-content: space-between
+            align-items: center
+            margin-bottom: $margin-bottom-narrow
+            &__label
+                width: 90%
+                padding-right: 1.5rem
+                font-family: Roboto, sans-serif
+                text-align: right
+                font-size: 1.15rem
+                font-weight: bold
+                color: $deep-blue-100
+            &__input
+                padding: .5rem
+                width: 5%
+                height: $height-box
+                font-family: 'Roboto', sans-serif
+                font-size: 1rem
+                color: $deep-blue-100
+                border: 1px solid $light-blue-100
+                border-radius: $border-radius
+                background-color: white
+                outline: none
+
+.fieldset__schedule
+    width: 100% 
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    font-family: 'Roboto', sans-serif
+    .schedule
+        width: 90%
+        margin: 1rem 0
+        border-collapse: collapse
+        text-align: center
+        tr th:first-child
+            background-color: transparent
+        .row-head
+            font-size: 1.15rem
+            font-weight: bold
+            color: $deep-blue-100
+            background-color: $box-color
+        tr th
+            font-size: 1.15rem
+            font-weight: bold
+            color: $deep-blue-100
+            background-color: $box-color
+            background-color: $box-color
+            height: $height-box
+        tr td
+            padding: 1.25rem 0
+            .input-check
+                width: 3rem
+                height: 3rem
+            .select--wrapper
+                width: 100%
+                display: flex
+                flex-direction: column
+                justify-content: center
+                align-items: center
+                >label
+                    width: 100%
+                    padding-left: 1.5rem
+                    margin-bottom: .5rem
+                .select__box
+                    margin: 0
+                    width: $width-box
+                    max-width: 100% 
+                    display: block
+                    font-size: 1rem
+                    font-family: sans-serif
+                    font-weight: 700
+                    color: #444
+                    line-height: 1.3
+                    padding: .6em 1.4em .5em .8em
+                    box-sizing: border-box
+                    box-shadow: 0 1px 0 1px rgba(0,0,0,.04)
+                    border: 1px solid $border-box
+                    border-radius: $border-radius
+                    -moz-appearance: none
+                    -webkit-appearance: none
+                    appearance: none
+                    background-color: $box-color
+                    outline: none
+                    &::-ms-expand 
+                        display: none
+                    &:hover
+                        border-color: $border-box
+                    &:focus
+                        border-color: $border-box
+                        box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7)
+                        box-shadow: 0 0 0 3px -moz-mac-focusring
+                        color: #222
+                        outline: none
+
+.radio-block
+    display: flex
+    justify-context: flex-start
+    align-itmes: center
+
+.radio-block__text
+    width: 85%
+    padding-right: 1.5rem
+    font-family: Roboto, sans-serif
+    text-align: right
+    font-size: 1.15rem
+    font-weight: bold
+    color: $deep-blue-100
+
+.radio-block__auth
+    width: 20%
+    display: flex
+    justify-context: space-around
+    align-itmes: flex-end
+
+.radio-auths
+    margin-right: 1rem
+    width: 45%
+    display: flex
+    justify-context: space-around
+    align-itmes: flex-end
+
+.radio-auth__input
+    border: 1px solid
+    display: flex
+    justify-context: center
+    align-itmes: center
+
+
+.filedset__observations
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+.observations__label
+    width: 90%
+    padding-right: 1.5rem
+    font-family: Roboto, sans-serif
+    text-align: right
+    font-size: 1 rem
+    font-weight: bold
+    color: $deep-blue-100
+
+.text-area
+    width: 90%
+    padding: 1rem
+    margin-bottom: .5rem
+    font-family: Roboto , Helvetica , Arial , sans-serif
+    font-size: 1rem
+    color: $deep-blue-100
+    outline: none
+
+.success-panel
+    font-family: Roboto , Helvetica , Arial , sans-serif
+    margin-top: 5rem
+    width: 100%
+    display: flex
+    flex-direction: columm
+    justify-content: center
+    align-items: center
+    &__wrapper
+        width: 50%
+        .success-text
+            display: flex
+            flex-direction: columm
+            justify-content: center
+            align-items: center
+            width: 100%
+            height: 20vh
+            padding: 0 1rem
+            font-size: 1.5rem
+            color: $success-high
+            background-color: $success-low
+            border-radius: .5rem 
+            border-left: 2rem solid $success-high
+        .button-set
+            width: 100%
+            display: flex
+            justify-content: space-around
+            align-items: center
