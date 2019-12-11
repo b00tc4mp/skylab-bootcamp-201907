@@ -1,0 +1,64 @@
+*
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+    font-family: Arial, Helvetica, sans-serif
+
+.header-wrapper
+    //border-bottom: 1px solid
+    width: 100%
+    display: flex
+    flex-direction: column 
+    justify-content: center
+    align-content: center
+    position: absolute
+    top: 0
+    left: 0
+    z-index: 1
+    .nav-container
+        background-color: rgba(255, 255, 255, 0.75)
+        
+.menu
+    list-style: none
+    display: flex
+    justify-content: center
+    align-content: center
+    padding: .5rem
+
+.manager-menu
+    li
+        margin: 0
+    .headerback
+        width: 10%
+    .user-name
+        width: 80%
+        text-align: center
+    .logout
+        width: 10%
+
+.managerimg
+    width: 100%
+    height: auto
+
+.citizen-menu , .manager-menu
+    width: 100%
+    display: flex
+    justify-content: space-between
+    align-items: center
+    .wrapper-image
+        width: 80%
+        .header-image
+            width: 50%
+        .user-name
+            text-align: left
+    .button-set
+        width: 20%
+        display: flex
+        justify-content: space-between
+        align-items: center
+        list-style: none
+        &__element
+            width: 50%
+            .managerimg
+                width: 95%
+
