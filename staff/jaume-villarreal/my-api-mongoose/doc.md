@@ -1,0 +1,1 @@
+./bin/mongod --dbpath data
