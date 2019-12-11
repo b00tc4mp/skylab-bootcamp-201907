@@ -1,0 +1,21 @@
+module.exports = {
+    registerUser: require('./user/register-user'),
+    authenticateUser: require('./user/authenticate-user'),
+    retrieveUser: require('./user/retrieve-user'),
+    updateUser: require('./user/update-user'),
+    unregisterUser: require('./user/unregister-user'),
+    toggleFavDog: require('./user/toggle-favorite'),
+    retrieveFavorites: require('./user/retrieve-favorites'),
+    registerDog: require('./dog/register-dog'),
+    retrieveDog: require('./dog/retrieve-dog'),
+    retrieveAllDogs: require('./dog/retrieve-all-dogs'),
+    unregisterDog: require('./dog/unregister-dog'),
+    searchDogs: require('./dog/search-dogs'),
+    registerWish: require('./wishes/register-wish'),
+    unregisterWish: require('./wishes/unregister-wish'),
+    createChat: require('./chat/create-chat'),
+    updateChat: require('./chat/update-chat'),
+    retrieveAllChats: require('./chat/retrieve-all-chats'),
+    retrieveChat: require('./chat/retrieve-chat'),
+    uploadImage: require('./user/upload-photo')
+}
