@@ -1,0 +1,46 @@
+@import ../../style/config.sass
+
+.login
+    background-image: url("athlete-landing.jpg")
+    background-size: cover
+    display: flex
+    justify-content: center
+    align-items: flex-start
+    height: 91.5vh
+
+    &__content
+        display: flex
+        flex-direction: column
+        justify-content: center
+        height: 20%
+        padding: 1rem
+        margin-top: 3rem
+        color: $secondary-color
+
+    &__title
+        display: flex
+        justify-content: center
+        color: $secondary-color
+
+    &__form
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+
+    &__form--button
+        width: 3rem
+        background-color: $primary-color
+        border: 0
+
+    &__form--button:hover
+        background-color: rgba($primary-color,0.5)
+
+    &__form--email, &__form--password
+        margin: 1rem
+        outline: none
+        background-color: rgba(255,255,255,0.1)
+        color: $secondary-color
+        text-align: center
+        border: 0
+        width: 10rem

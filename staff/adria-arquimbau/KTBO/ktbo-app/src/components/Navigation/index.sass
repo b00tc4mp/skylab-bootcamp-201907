@@ -1,0 +1,118 @@
+@import ../../style/config.sass
+
+.navigation
+    width: 100vw
+    background-color: $primary-color
+
+    form
+        display: flex
+        justify-content: center
+        align-content: center
+
+    &__search--input
+        background-color: $primary-color-hover
+        border: 0
+        text-align: right
+        font-size: 0.9rem
+        width: 6rem
+        color: $secondary-color
+        height: 10px
+        margin-top: 0.55rem
+
+    &__search--button
+        border: 0
+        color: $secondary-color
+        font-size: 15px
+
+    &__search--button:hover
+        
+    ul
+        display: flex
+        justify-content: center
+        align-items: center
+        height: 2rem
+        list-style: none
+
+    &__li
+        margin: 0 0.5rem 0 0.5rem
+        height: 100%
+        display: flex
+        justify-content: center
+        align-items: center
+        color: $secondary-color
+    
+    &__li--anchor
+        color: $secondary-color
+        text-decoration: none
+
+    &__li--anchor:hover
+        color: white
+
+    &__li--hello
+        color: $secondary-color
+        font-size: 10px
+
+//HAMBURGUER
+
+/* Navbar container */
+.navbar
+  overflow: hidden
+  background-color: #333
+  font-family: Arial
+
+/* Links inside the navbar */
+.navbar a 
+  float: left
+  font-size: 16px
+  color: white
+  text-align: center
+  padding: 14px 16px
+  text-decoration: none
+
+/* The dropdown container */
+.dropdown 
+  float: center
+  overflow: hidden
+
+/* Dropdown button */
+.dropdown .dropbtn 
+  font-size: 16px
+  border: none
+  outline: none
+  color: $secondary-color
+  padding: 10px 10px
+  background-color: inherit
+  /* Important for vertical align on mobile phones */
+  font-family: inherit 
+  /* Important for vertical align on mobile phones */
+  margin: 0 
+
+/* Add a red background color to navbar links on hover */
+.navbar a:hover, .dropdown:hover .dropbtn 
+  color: white
+
+/* Dropdown content (hidden by default) */
+.dropdown-content 
+  display: none
+  position: absolute
+  background-color: white
+  min-width: 160px
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2)
+  z-index: 1
+
+/* Links inside the dropdown */
+.dropdown-content a 
+  float: none
+  color: $secondary-color
+  padding: 12px 16px
+  text-decoration: none
+  display: block
+  text-align: center
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover 
+  color: $primary-color
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content 
+  display: block
